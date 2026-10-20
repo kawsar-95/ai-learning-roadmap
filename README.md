@@ -7,7 +7,7 @@ resources. Each topic has three voices: Technical (diagrams, code, cited
 sources), Layman's (plain English with analogies), and বাংলা (Bangla
 explanation).
 
-Live site: https://kawsar-95.github.io/All-Necessary-Topics-Related-to-AI-Engineering/
+Live site: https://kawsar-95.github.io/ai-learning-roadmap/
 
 ## Stack
 
@@ -39,7 +39,7 @@ every push to `main`, and you can also start it from the Actions tab. It:
 
 1. Installs dependencies and runs the tests.
 2. Builds the static site with `PAGES_BASE_PATH` set to
-   `/All-Necessary-Topics-Related-to-AI-Engineering`.
+   `/ai-learning-roadmap`.
 3. Publishes `out/` to GitHub Pages.
 
 `next.config.ts` reads `PAGES_BASE_PATH` as the `basePath`. Local builds do
