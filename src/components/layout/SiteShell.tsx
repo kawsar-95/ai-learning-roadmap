@@ -25,18 +25,18 @@ export function SiteShell({ lang, children }: { lang: Lang; children: ReactNode 
         {ui.skipLink}
       </a>
       <SiteHeader items={items} lang={lang} searchSlot={<SearchPalette lang={lang} />} />
-      <div className="lg:grid lg:grid-cols-[260px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-border lg:sticky lg:top-14 lg:block lg:h-[calc(100vh-3.5rem)] lg:self-start lg:overflow-y-auto">
+      <div className="lg:grid lg:grid-cols-[232px_minmax(0,1fr)]">
+        <aside className="hidden border-r border-border lg:sticky lg:top-12 lg:block lg:h-[calc(100vh-3rem)] lg:self-start lg:overflow-y-auto">
           <Suspense fallback={<SidebarList items={items} lang={lang} activeSlug={null} />}>
             <Sidebar items={items} lang={lang} />
           </Suspense>
         </aside>
-        <div className="flex min-h-[calc(100vh-3.5rem)] min-w-0 flex-col">
+        <div className="flex min-h-[calc(100vh-3rem)] min-w-0 flex-col">
           {/* The inline style beats the global :focus-visible rule for the skip-link target. */}
           <main id="content" tabIndex={-1} style={{ outline: "none" }} className="flex-1">
             {children}
           </main>
-          <footer className="mt-24 border-t border-border px-6 py-8 text-xs leading-relaxed text-text-faint">
+          <footer className="mt-12 border-t border-border px-4 py-5 sm:px-6 text-xs leading-relaxed text-text-faint">
             <p className="mx-auto max-w-3xl">{ui.footer}</p>
           </footer>
         </div>

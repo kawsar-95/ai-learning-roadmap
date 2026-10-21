@@ -30,8 +30,8 @@ export function SidebarList({
   onNavigate?: () => void;
 }) {
   return (
-    <nav aria-label={UI[lang].partsNav} className="px-3 py-6">
-      <p className="mb-3 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-text-faint">
+    <nav aria-label={UI[lang].partsNav} className="px-2 py-4">
+      <p className="mb-2 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-text-faint">
         {UI[lang].partsNav}
       </p>
       <ol className="m-0 list-none space-y-px p-0">
@@ -44,7 +44,7 @@ export function SidebarList({
                 aria-current={active ? "page" : undefined}
                 onClick={onNavigate}
                 className={
-                  "group block rounded-r-md border-l-2 px-3 py-2 no-underline transition-colors " +
+                  "group block rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
                   (active
                     ? "border-accent bg-bg-raised"
                     : "border-transparent hover:border-border-strong hover:bg-bg-raised/60")
@@ -52,7 +52,7 @@ export function SidebarList({
               >
                 <span
                   className={
-                    "block font-mono text-[10.5px] uppercase tracking-[0.12em] " +
+                    "block font-mono text-[10px] uppercase tracking-[0.12em] " +
                     (active ? "text-accent" : "text-text-faint")
                   }
                 >
@@ -60,7 +60,7 @@ export function SidebarList({
                 </span>
                 <span
                   className={
-                    "mt-0.5 block text-[13.5px] leading-snug " +
+                    "block text-[13px] leading-snug " +
                     (active ? "text-text" : "text-text-dim group-hover:text-text")
                   }
                 >

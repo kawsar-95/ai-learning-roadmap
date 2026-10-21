@@ -36,15 +36,15 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
   const neighbor = (t?: typeof topic) => t && { slug: t.slug, part: t.part, title: topicText(t, lang).title };
 
   return (
-    <div className="mx-auto w-full max-w-[728px] px-4 py-12 sm:px-6 sm:py-16 xl:grid xl:max-w-[1012px] xl:grid-cols-[minmax(0,680px)_220px] xl:gap-16">
+    <div className="mx-auto w-full max-w-[728px] px-4 py-6 sm:px-6 sm:py-10 xl:grid xl:max-w-[1000px] xl:grid-cols-[minmax(0,680px)_220px] xl:gap-12">
       <article className="min-w-0">
         <TopicHeader topic={topic} lang={lang} />
-        <div className="space-y-24">
+        <div className="space-y-14 sm:space-y-16">
           {topic.sections.map((s) => (
             <SectionView key={s.id} section={s} lang={lang} />
           ))}
         </div>
-        <div className="mt-28 space-y-20">
+        <div className="mt-14 space-y-10">
           <Sources sources={topic.sources} lang={lang} />
           <PrevNext prev={neighbor(prev)} next={neighbor(next)} lang={lang} />
         </div>

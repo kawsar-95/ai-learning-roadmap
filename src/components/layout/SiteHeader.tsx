@@ -13,7 +13,7 @@ import { ThemeToggle } from "./ThemeToggle";
 function MenuButtonPlaceholder() {
   return (
     <div className="lg:hidden">
-      <span aria-hidden="true" className="-ml-2 grid size-9 place-items-center text-text-faint">
+      <span aria-hidden="true" className="-ml-1.5 grid size-8 place-items-center text-text-faint">
         <svg viewBox="0 0 20 20" className="size-5" fill="none">
           <path d="M3 5.5h14M3 10h14M3 14.5h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
@@ -37,26 +37,26 @@ export function SiteHeader({
   searchSlot?: ReactNode;
 }) {
   return (
-    <header className="sticky top-0 z-40 h-14 border-b border-border">
+    <header className="sticky top-0 z-40 h-12 border-b border-border">
       {/* The blur sits on its own layer. A backdrop-filter on the header
           itself would trap the fixed-position drawer inside the header. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-bg/85 backdrop-blur-md" />
-      <div className="flex h-full items-center gap-3 px-4 sm:px-6">
+      <div className="flex h-full items-center gap-2 px-3 sm:px-5">
         <Suspense fallback={<MenuButtonPlaceholder />}>
           <MobileNav items={items} lang={lang} />
         </Suspense>
         <Link href={homeHref(lang)} className="flex min-w-0 items-center gap-2.5 text-text no-underline">
           <span
             aria-hidden="true"
-            className="grid size-7 shrink-0 place-items-center rounded-md border border-border-strong bg-bg-raised font-display text-[15px] font-semibold italic leading-none text-accent"
+            className="grid size-6 shrink-0 place-items-center rounded-md border border-border-strong bg-bg-raised font-display text-[13px] font-semibold italic leading-none text-accent"
           >
             Ai
           </span>
-          <span className="truncate font-display text-[17px] font-semibold tracking-tight">
+          <span className="truncate font-display text-[15px] font-semibold tracking-tight">
             {UI[lang].siteName}
           </span>
         </Link>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-1.5">
           {searchSlot}
           <Suspense fallback={<LanguageSwitchFallback lang={lang} />}>
             <LanguageSwitch lang={lang} />

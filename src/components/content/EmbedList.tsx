@@ -15,7 +15,7 @@ export function EmbedList({ embeds, sectionId, lang }: { embeds: Embed[]; sectio
       >
         {UI[lang].liveHeading(embeds.length)}
       </h3>
-      <ul className="mt-4 flex list-none flex-col gap-5 p-0">
+      <ul className="mt-3 flex list-none flex-col gap-4 p-0">
         {embeds.map((embed) => (
           <li key={embed.url} className="min-w-0">
             <EmbedFrame embed={embed} lang={lang} />

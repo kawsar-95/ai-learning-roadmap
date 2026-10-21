@@ -171,14 +171,14 @@ body {
 .code-block {
   position: relative;
   overflow-x: auto;
-  margin: 16px 0 22px;
+  margin: 12px 0 16px;
   background: #22272e;
   border: 1px solid var(--border);
   border-radius: 10px;
 }
 .code-block .shiki {
   margin: 0;
-  padding: 16px 18px;
+  padding: 12px 14px;
   font-family: var(--font-mono-jb), var(--font-noto-bengali), ui-monospace, monospace;
   font-size: 13px;
   line-height: 1.6;

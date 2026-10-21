@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 /**
- * Registers public/sw.js, which makes opened pages work offline. Only in
+ * Registers public/sw.js, which saves the whole site for offline use. Only in
  * production: in development the worker would keep stale dev files.
  */
 export function ServiceWorker() {
@@ -16,6 +16,8 @@ export function ServiceWorker() {
       .catch(() => {
         // No worker: the site still works online.
       });
+    // Ask the browser not to delete the saved site when storage is low.
+    navigator.storage?.persist?.().catch(() => {});
   }, []);
 
   return null;

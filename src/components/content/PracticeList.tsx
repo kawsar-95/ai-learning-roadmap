@@ -79,7 +79,7 @@ function bnNum(n: number): string {
 
 const LABEL =
   "practice-label font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-text-faint";
-const BODY = "text-[15px] leading-relaxed";
+const BODY = "text-[14.5px] leading-relaxed";
 
 function PromptBox({ text, label, lang }: { text: string; label: string; lang: Lang }) {
   const textRef = useRef<HTMLPreElement>(null);
@@ -110,7 +110,7 @@ function StepItem({ step, n, lang }: { step: PracticeStep; n: number; lang: Lang
   const ui = UI[lang];
   const isNew = step.chat === "new";
   return (
-    <li className="relative border-l-2 border-border pb-6 pl-5 last:pb-0">
+    <li className="relative border-l-2 border-border pb-4 pl-4 last:pb-0">
       <span
         aria-hidden="true"
         className="absolute -left-[5px] top-1.5 size-2 rounded-full bg-accent"
@@ -157,24 +157,24 @@ function StepItem({ step, n, lang }: { step: PracticeStep; n: number; lang: Lang
 function PracticeCard({ text, index, lang }: { text: PracticeText; index: number; lang: Lang }) {
   const ui = UI[lang];
   return (
-    <article className="rounded-2xl border border-border bg-bg-raised px-4 py-6 sm:px-7">
+    <article className="rounded-2xl border border-border bg-bg-raised px-4 py-4 sm:px-5">
       <header>
         <p className={LABEL}>{ui.task(index + 1)}</p>
-        <h4 className="mt-2 font-display text-xl font-medium leading-snug text-text">
+        <h4 className="mt-1 font-display text-lg font-medium leading-snug text-text">
           {text.title}
         </h4>
       </header>
 
-      <h5 className={`${LABEL} mt-5`}>{ui.why}</h5>
+      <h5 className={`${LABEL} mt-4`}>{ui.why}</h5>
       <Inline as="p" html={text.why} className={`mt-2 text-text-dim ${BODY}`} />
 
-      <ol className="mt-6 list-none p-0">
+      <ol className="mt-4 list-none p-0">
         {text.steps.map((step, i) => (
           <StepItem key={i} step={step} n={i + 1} lang={lang} />
         ))}
       </ol>
 
-      <div className="mt-7 rounded-lg border border-border bg-bg px-4 py-3.5">
+      <div className="mt-5 rounded-lg border border-border bg-bg px-3.5 py-3">
         <h5 className={LABEL}>{ui.learned}</h5>
         <Inline as="p" html={text.learned} className={`mt-2 text-text ${BODY}`} />
       </div>
@@ -185,7 +185,7 @@ function PracticeCard({ text, index, lang }: { text: PracticeText; index: number
         <Inline html={text.done} className="text-text-dim" />
       </p>
 
-      <details className="group mt-5 rounded-lg border border-border px-4 py-3">
+      <details className="group mt-4 rounded-lg border border-border px-3.5 py-2.5">
         <summary className={`cursor-pointer list-none ${BODY} [&::-webkit-details-marker]:hidden`}>
           <span className={`${LABEL} mr-2`}>{ui.check}</span>
           <Inline html={text.check.question} className="text-text" />
@@ -199,7 +199,7 @@ function PracticeCard({ text, index, lang }: { text: PracticeText; index: number
       </details>
 
       <div
-        className={`mt-3 rounded-lg border-l-[3px] border-l-warn px-4 py-3 ${BODY}`}
+        className={`mt-3 rounded-lg border-l-[3px] border-l-warn px-3.5 py-2.5 ${BODY}`}
         style={{ backgroundColor: "color-mix(in srgb, var(--warn) 8%, transparent)" }}
       >
         <span className={`${LABEL} mr-2`}>{ui.challenge}</span>
@@ -226,7 +226,7 @@ export function PracticeList({
     <section
       aria-labelledby={headingId}
       lang={lang}
-      className={"border-t border-border pt-8 " + (lang === "bn" ? "font-bengali" : "")}
+      className={"border-t border-border pt-6 " + (lang === "bn" ? "font-bengali" : "")}
     >
       <h3 id={headingId} className={LABEL}>
         {ui.heading(practice.length)}
@@ -250,7 +250,7 @@ export function PracticeList({
           ))}
         </ul>
       </details>
-      <div className="mt-5 space-y-5">
+      <div className="mt-4 space-y-4">
         {practice.map((p, i) => (
           <PracticeCard key={p.en.title} text={p[lang]} index={i} lang={lang} />
         ))}

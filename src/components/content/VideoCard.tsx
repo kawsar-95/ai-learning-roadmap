@@ -51,20 +51,20 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
           </button>
         )}
       </div>
-      <figcaption className="px-4 py-3">
+      <figcaption className="px-3 py-2.5">
         <a
           href={watchUrl}
           target="_blank"
           rel="noreferrer noopener"
           lang={video.lang === "bn" ? "bn" : undefined}
           className={
-            "line-clamp-2 text-[15px] leading-snug text-text no-underline hover:text-accent " +
+            "line-clamp-2 text-[14px] leading-snug text-text no-underline hover:text-accent " +
             (video.lang === "bn" ? "font-bengali" : "")
           }
         >
           {video.title}
         </a>
-        <p className="mt-1.5 flex items-center gap-2 text-[13px] text-text-faint">
+        <p className="mt-1 flex items-center gap-2 text-[12.5px] text-text-faint">
           <span className="truncate">{video.channel}</span>
           {video.lang === "bn" && (
             <span className="shrink-0 rounded border border-voice-bangla/40 px-1.5 font-bengali text-[11px] text-voice-bangla">

@@ -83,7 +83,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen(true)}
-        className="-ml-2 grid size-9 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
+        className="-ml-1.5 grid size-8 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
       >
         <span className="sr-only">{ui.openParts}</span>
         <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5" fill="none">
@@ -120,15 +120,15 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             (open ? "translate-x-0" : "-translate-x-full")
           }
         >
-          <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4">
-            <span id={titleId} className="font-display text-[17px] font-semibold tracking-tight text-text">
+          <div className="flex h-12 shrink-0 items-center justify-between border-b border-border px-4">
+            <span id={titleId} className="font-display text-[15px] font-semibold tracking-tight text-text">
               {ui.siteName}
             </span>
             <button
               ref={closeRef}
               type="button"
               onClick={() => setOpen(false)}
-              className="-mr-2 grid size-9 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
+              className="-mr-1.5 grid size-8 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
             >
               <span className="sr-only">{ui.closeParts}</span>
               <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5" fill="none">

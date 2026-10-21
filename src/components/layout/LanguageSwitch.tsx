@@ -8,7 +8,7 @@ import type { Lang } from "@/lib/i18n";
 const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const CLASS =
-  "grid h-9 shrink-0 place-items-center rounded-md border border-border bg-bg-raised/60 px-2.5 text-[13px] font-medium text-text-dim no-underline transition-colors hover:border-border-strong hover:text-text";
+  "grid h-8 shrink-0 place-items-center rounded-md border border-border bg-bg-raised/60 px-2 text-[13px] font-medium text-text-dim no-underline transition-colors hover:border-border-strong hover:text-text";
 
 function save(lang: Lang) {
   try {

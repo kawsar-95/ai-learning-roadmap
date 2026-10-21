@@ -75,7 +75,7 @@ export function ThemeToggle({ lang }: { lang: Lang }) {
       onClick={toggle}
       aria-label={label}
       title={label}
-      className="grid size-9 shrink-0 place-items-center rounded-md border border-border bg-bg-raised/60 text-text-dim transition-colors hover:border-border-strong hover:text-text"
+      className="grid size-8 shrink-0 place-items-center rounded-md border border-border bg-bg-raised/60 text-text-dim transition-colors hover:border-border-strong hover:text-text"
     >
       {/* Sun: shown in the dark theme (switches to light). */}
       <svg viewBox="0 0 20 20" className="size-[18px] light:hidden" fill="none" aria-hidden="true">

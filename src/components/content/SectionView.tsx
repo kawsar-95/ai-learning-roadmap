@@ -76,11 +76,11 @@ function VoicePanel({
       aria-label={title}
       style={style}
       className={
-        "rounded-2xl border border-border border-l-[3px] border-l-[var(--voice)] px-4 py-6 sm:px-7 [&>:last-child]:mb-0 " +
+        "rounded-2xl border border-border border-l-[3px] border-l-[var(--voice)] px-4 py-4 sm:px-5 [&>:last-child]:mb-0 " +
         (bangla ? "font-bengali" : "")
       }
     >
-      <header className="mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-4">
+      <header className="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-3">
         <span
           className={
             bangla ? "text-[15px] font-semibold" : "font-display text-lg font-medium italic"
@@ -175,32 +175,32 @@ export function SectionView({ section, lang }: { section: Section; lang: Lang })
         </p>
         <h2
           id={`${section.id}-title`}
-          className="mt-3 font-display text-[clamp(1.75rem,4.2vw,2.375rem)] font-medium leading-[1.12] tracking-[-0.015em] text-balance text-text"
+          className="mt-2 font-display text-[clamp(1.5rem,3.4vw,2rem)] font-medium leading-[1.12] tracking-[-0.015em] text-balance text-text"
         >
           {text.title}
         </h2>
         <Inline
           as="p"
           html={text.sub}
-          className="mt-4 text-lg leading-relaxed text-pretty text-text-dim sm:text-[1.1875rem]"
+          className="mt-3 text-base leading-relaxed text-pretty text-text-dim sm:text-[17px]"
         />
       </header>
 
       {section.embeds && section.embeds.length > 0 && (
-        <div className="mt-8">
+        <div className="mt-5">
           <EmbedList sectionId={section.id} embeds={section.embeds} lang={lang} />
         </div>
       )}
 
       {available.length > 1 && (
-        <div className="mt-8">
+        <div className="mt-5">
           <VoiceSwitcher value={voice} onChange={setVoice} available={available} lang={lang} />
         </div>
       )}
 
       <div
         key={voice}
-        className="voice-fade mt-8 space-y-8 text-[16.5px] leading-[1.75] sm:text-[17px]"
+        className="voice-fade mt-5 space-y-6 text-[15.5px] leading-[1.7] sm:text-base"
       >
         {show("main") && (
           <div className="[&>:last-child]:mb-0">

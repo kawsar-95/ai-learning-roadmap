@@ -69,7 +69,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
   return (
     <nav
       aria-label={UI[lang].onThisPage}
-      className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pb-6"
+      className="sticky top-20 max-h-[calc(100vh-7rem)] overflow-y-auto pb-6"
     >
       <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-faint">
         {UI[lang].onThisPage}
@@ -83,7 +83,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
                 href={`#${item.id}`}
                 aria-current={isActive ? "location" : undefined}
                 className={
-                  "-ml-px block border-l-2 py-1.5 pr-2 leading-snug no-underline transition-colors " +
+                  "-ml-px block border-l-2 py-1 pr-2 leading-snug no-underline transition-colors " +
                   (item.level === 3 ? "pl-7 text-[12.5px] " : "pl-4 text-[13.5px] ") +
                   (isActive
                     ? "border-accent text-text"

@@ -10,7 +10,7 @@ export function Heading(block: Extract<Block, { type: "heading" }>) {
       html={block.html}
       className={
         "scroll-mt-24 font-semibold text-[var(--text)] " +
-        (isH3 ? "mt-8 mb-2.5 text-[19px]" : "mt-6 mb-2 text-base")
+        (isH3 ? "mt-6 mb-2 text-[18px]" : "mt-5 mb-1.5 text-base")
       }
     />
   );
