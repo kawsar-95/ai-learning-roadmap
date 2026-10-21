@@ -11,11 +11,13 @@ import { fileURLToPath } from "node:url";
 
 export const PLACEHOLDER = "/* PRECACHE_MANIFEST */ []";
 
-// Pages and the files they need. Not included: sw.js itself, the RSC .txt
-// files (the worker saves them when the router asks for them), and the
-// unused Next.js starter SVGs.
+// Pages and the files they need. index.txt is the RSC payload the router
+// fetches on a link click; without it, offline navigation waits forever.
+// Not included: sw.js itself, the __next.* segment .txt files (prefetch
+// only, and Next does not prefetch offline), and the unused starter SVGs.
 const KEEP = [
   /\.html$/,
+  /(^|\/)index\.txt$/,
   /^_next\/static\//,
   /^icons\//,
   /(^|\/)search-index\.json$/,

@@ -52,9 +52,9 @@ function makeOut() {
   return dir;
 }
 
-test("precache: lists pages as their folder URL and the files they need, not RSC or sw.js", () => {
+test("precache: lists pages as their folder URL, their RSC index.txt and the files they need, not sw.js", () => {
   const urls = buildManifest(makeOut()).map((e: { url: string }) => e.url);
-  assert.deepEqual(urls, ["", "_next/static/chunks/app.js", "search-index.json", "topics/inference/"]);
+  assert.deepEqual(urls, ["", "_next/static/chunks/app.js", "search-index.json", "topics/inference/", "topics/inference/index.txt"]);
 });
 
 test("precache: the revision changes only when the file changes", () => {

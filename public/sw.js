@@ -4,7 +4,7 @@
 //
 // - Saved files (the build list): cache first. A new build installs a new
 //   worker, which downloads only the files that changed.
-// - Other files (RSC .txt for client navigation): network first, then the
+// - Other files (RSC segment .txt for prefetch): network first, then the
 //   saved copy.
 //
 // scripts/precache.mjs replaces the placeholder below after `next build`.
