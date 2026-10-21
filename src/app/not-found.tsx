@@ -10,7 +10,7 @@ export default function NotFound() {
   const { en, bn } = UI;
   return (
     <SiteShell lang="en">
-      <div className="mx-auto max-w-2xl px-5 pt-20 pb-8 sm:px-8 sm:pt-28">
+      <div className="mx-auto max-w-2xl px-5 pt-20 pb-20 sm:px-8 sm:pt-28">
         <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           {en.notFoundEyebrow}
         </p>

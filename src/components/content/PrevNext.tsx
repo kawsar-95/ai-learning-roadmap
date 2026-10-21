@@ -6,7 +6,7 @@ import type { Lang } from "@/lib/i18n";
 export type Neighbor = { slug: string; part: number; title: string };
 
 const CARD =
-  "group block rounded-2xl border border-border bg-bg-raised px-4 py-3.5 no-underline transition-colors hover:border-border-strong hover:bg-bg-raised-2";
+  "group block rounded-2xl border border-border bg-bg-raised px-5 py-4 no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:shadow-card-hover motion-reduce:transition-none";
 
 /** Cards that link to the previous and the next Part. */
 export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbor; lang: Lang }) {

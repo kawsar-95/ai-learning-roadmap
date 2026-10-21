@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SidebarList, activeSlugFromPath, type NavItem } from "./SidebarList";
-import { UI } from "@/lib/i18n";
+import { UI, contentsHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -120,7 +121,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             (open ? "translate-x-0" : "-translate-x-full")
           }
         >
-          <div className="flex h-12 shrink-0 items-center justify-between border-b border-border px-4">
+          <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4">
             <span id={titleId} className="font-display text-[15px] font-semibold tracking-tight text-text">
               {ui.siteName}
             </span>
@@ -137,6 +138,14 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             </button>
           </div>
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+            <Link
+              href={contentsHref(lang)}
+              onClick={() => setOpen(false)}
+              className="mx-2 mt-4 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+            >
+              {ui.contentsTitle}
+              <span aria-hidden="true" className="text-accent">→</span>
+            </Link>
             <SidebarList
               items={items}
               lang={lang}

@@ -13,7 +13,7 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
       <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
         {ui.part(fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0)))}
       </p>
-      <h1 className="mt-3 font-display text-[clamp(2rem,5.5vw,3rem)] font-medium leading-[1.03] tracking-[-0.025em] text-balance text-text">
+      <h1 className="mt-3 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
         {text.title}
       </h1>
       {text.tagline && (
@@ -24,9 +24,9 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
       <Inline
         as="p"
         html={text.lede}
-        className="mt-5 text-base leading-relaxed text-pretty text-text-dim sm:text-lg"
+        className="mt-5 text-[17px] leading-[1.75] text-pretty text-text-dim sm:text-[19px]"
       />
-      <p className="mt-6 border-t border-border pt-3 font-mono text-xs text-text-faint">
+      <p className="mt-6 inline-flex rounded-full border border-border bg-bg-raised px-3 py-1 font-mono text-xs text-text-faint shadow-card">
         {ui.topicMeta(topic.sections.length, topic.sources.length)}
       </p>
     </header>

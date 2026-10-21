@@ -12,6 +12,7 @@ import { Inline } from "./Inline";
 import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
 import { VideoList } from "./VideoList";
+import { SectionDoneButton } from "@/components/progress/ProgressWidgets";
 import { VOICE_COLOR, VoiceSwitcher } from "./VoiceSwitcher";
 import type { Voice } from "./VoiceSwitcher";
 
@@ -76,7 +77,7 @@ function VoicePanel({
       aria-label={title}
       style={style}
       className={
-        "rounded-2xl border border-border border-l-[3px] border-l-[var(--voice)] px-4 py-4 sm:px-5 [&>:last-child]:mb-0 " +
+        "rounded-2xl border border-border border-l-[3px] border-l-[var(--voice)] px-4 py-4 shadow-card sm:px-6 sm:py-5 [&>:last-child]:mb-0 " +
         (bangla ? "font-bengali" : "")
       }
     >
@@ -101,9 +102,10 @@ function VoicePanel({
  * The Technical voice renders as plain prose. The Layman's and Bangla voices
  * render in panels. "All three" stacks them in that order. The choice is
  * local to the section. On the Bangla site, a section opens in বাংলা and
- * its title, intro, practice tasks, and labels are in Bangla.
+ * its title, intro, practice tasks, and labels are in Bangla. The section
+ * ends with a "Mark as done" toggle for the reading progress (`doneKey`).
  */
-export function SectionView({ section, lang }: { section: Section; lang: Lang }) {
+export function SectionView({ section, lang, doneKey }: { section: Section; lang: Lang; doneKey: string }) {
   const ui = UI[lang];
   const text = lang === "bn" ? section.bn : section;
   const available = availableVoices(section, lang);
@@ -170,19 +172,19 @@ export function SectionView({ section, lang }: { section: Section; lang: Lang })
       className="scroll-mt-24"
     >
       <header>
-        <p className="font-mono text-xs font-medium tracking-[0.14em] text-accent">
+        <p className="font-display text-[28px] font-bold leading-none text-accent">
           {section.num.padStart(2, "0")}
         </p>
         <h2
           id={`${section.id}-title`}
-          className="mt-2 font-display text-[clamp(1.5rem,3.4vw,2rem)] font-medium leading-[1.12] tracking-[-0.015em] text-balance text-text"
+          className="mt-2 font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-balance text-text"
         >
           {text.title}
         </h2>
         <Inline
           as="p"
           html={text.sub}
-          className="mt-3 text-base leading-relaxed text-pretty text-text-dim sm:text-[17px]"
+          className="mt-3 text-[17px] leading-[1.75] text-pretty text-text-dim sm:text-[18px]"
         />
       </header>
 
@@ -200,7 +202,7 @@ export function SectionView({ section, lang }: { section: Section; lang: Lang })
 
       <div
         key={voice}
-        className="voice-fade mt-5 space-y-6 text-[15.5px] leading-[1.7] sm:text-base"
+        className="voice-fade mt-5 space-y-6 text-[16px] leading-[1.8] sm:text-[17px]"
       >
         {show("main") && (
           <div className="[&>:last-child]:mb-0">
@@ -225,6 +227,10 @@ export function SectionView({ section, lang }: { section: Section; lang: Lang })
         )}
         <PracticeList sectionId={section.id} practice={section.practice} lang={practiceLang(voice, lang)} />
         <VideoList sectionId={section.id} videos={videosForVoice(section.videos, voice, lang)} lang={lang} />
+      </div>
+
+      <div className="mt-8 flex justify-end border-t border-border pt-5">
+        <SectionDoneButton sectionKey={doneKey} lang={lang} />
       </div>
     </section>
   );
