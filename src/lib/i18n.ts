@@ -27,6 +27,15 @@ export function homeHref(lang: Lang): string {
 export function topicHref(slug: string, lang: Lang): string {
   return `${lang === "bn" ? "/bn" : ""}/topics/${slug}`;
 }
+export function contentsHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/contents/" : "/contents/";
+}
+
+/** The source code of the site. */
+export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
+
+/** A feature card on the home page. */
+type Feature = { icon: string; title: string; text: string };
 
 /** A number in the digits of `lang`. */
 export function fmtNum(lang: Lang, n: number): string {
@@ -85,6 +94,80 @@ const en = {
   homeIntro:
     "A dense, citation-backed reference for the fundamentals every applied AI engineer needs — from tokens and tool use to retrieval, context, and agent loops. Each topic ships in three voices: the engineer's version (with code and diagrams), the layman's version (plain English with analogies), and <span lang=\"bn\" class=\"text-voice-bangla\">বাংলা ব্যাখ্যা</span>.",
   contents: "Contents",
+  heroLine1: "All necessary topics",
+  heroLine2: "of AI engineering,",
+  heroAccent: "in three voices",
+  startReading: "Start reading",
+  seeContents: "See all contents →",
+  statParts: "Parts",
+  statSections: "Sections",
+  statSources: "Sources",
+  statVoices: "Voices",
+  coverTag: "AI ENGINEERING · REFERENCE",
+  coverTitle: ["Applied", "AI", "Engineering"] as [string, string, string],
+  coverSub: "From tokens to agents · English + বাংলা",
+  coverLabel: "INSIDE",
+  coverValue: (parts: string, sections: string) => `${parts} parts · ${sections} sections`,
+  whyEyebrow: "Features",
+  whyTitle: "Why this reference?",
+  features: [
+    {
+      icon: "🗣️",
+      title: "Three voices",
+      text: "Each section has a technical version with code, a plain-English version, and a বাংলা ব্যাখ্যা. Switch any time.",
+    },
+    {
+      icon: "📚",
+      title: "Every claim cited",
+      text: "Citations go to the primary papers, vendor docs, and team blogs. Each one was checked against the publisher.",
+    },
+    {
+      icon: "🛠️",
+      title: "Practice tasks",
+      text: "Sections end with hands-on tasks, so you build the idea instead of only reading about it.",
+    },
+    {
+      icon: "✅",
+      title: "Progress tracking",
+      text: "Mark each section as done. Your progress stays in this browser. No account, no login.",
+    },
+    {
+      icon: "📴",
+      title: "Works offline",
+      text: "Install the site as an app. It saves every page, so you can read on a train or a plane.",
+    },
+    {
+      icon: "🌗",
+      title: "Dark and light",
+      text: "A warm paper theme for the day and a dark theme for the night. It follows your device.",
+    },
+  ] as Feature[],
+  partsEyebrow: "Structure",
+  partsTitle: "The 14 parts",
+  partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
+  sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
+
+  // Contents page.
+  contentsTitle: "All contents",
+  contentsIntro: "Every part and section in reading order. A check mark shows a section you marked as done.",
+  doneLabel: "Sections done",
+  totalLabel: "Total sections",
+  percentLabel: "Complete",
+  continueReading: "Continue reading →",
+  startOver: "Start over",
+  startOverConfirm: "Clear the progress of all sections?",
+  allDone: "You finished every section.",
+  doneMark: "Done",
+
+  // Progress on a topic page.
+  markDone: "Mark as done",
+  markedDone: "Done · click to undo",
+  sectionDone: "Section done",
+
+  // Footer.
+  footerSite: "Site",
+  footerSource: "Source on GitHub",
+  footerCopy: "AI Engineering reference",
 
   // Topic page.
   topicMeta: (sections: number, sources: number) =>
@@ -162,6 +245,77 @@ const bn: Dict = {
   homeIntro:
     "একজন AI engineer-এর যা যা জানা দরকার, সব এক জায়গায়: token আর tool use থেকে শুরু করে retrieval, context আর agent loop পর্যন্ত। প্রতিটি বিষয়ে আছে সহজ <span class=\"text-voice-bangla\">বাংলা ব্যাখ্যা</span>, হাতে-কলমে practice task আর video। চাইলে technical English version আর সহজ English version-ও পড়তে পারো।",
   contents: "সূচিপত্র",
+  heroLine1: "AI Engineering-এর",
+  heroLine2: "দরকারি সব বিষয়,",
+  heroAccent: "সহজ বাংলায়",
+  startReading: "পড়া শুরু করো",
+  seeContents: "পুরো সূচিপত্র দেখো →",
+  statParts: "Part",
+  statSections: "Section",
+  statSources: "Source",
+  statVoices: "ব্যাখ্যার ধরন",
+  coverTag: "AI ENGINEERING · REFERENCE",
+  coverTitle: ["Applied", "AI", "Engineering"],
+  coverSub: "Token থেকে agent পর্যন্ত · বাংলা + English",
+  coverLabel: "ভেতরে আছে",
+  coverValue: (parts: string, sections: string) => `${parts}টি part · ${sections}টি section`,
+  whyEyebrow: "বৈশিষ্ট্য",
+  whyTitle: "কেন এই reference?",
+  features: [
+    {
+      icon: "🗣️",
+      title: "তিনভাবে ব্যাখ্যা",
+      text: "প্রতিটি section-এ আছে code সহ technical version, সহজ English version আর সহজ বাংলা ব্যাখ্যা। যখন খুশি বদলাও।",
+    },
+    {
+      icon: "📚",
+      title: "প্রতিটি তথ্যের source",
+      text: "Citation-গুলো মূল paper, vendor docs আর team blog-এ যায়। প্রতিটি প্রকাশকের তথ্যের সাথে মিলিয়ে দেখা।",
+    },
+    {
+      icon: "🛠️",
+      title: "Practice task",
+      text: "Section-এর শেষে হাতে-কলমে কাজ আছে, যাতে শুধু পড়া না, নিজে বানিয়ে শেখো।",
+    },
+    {
+      icon: "✅",
+      title: "Progress tracking",
+      text: "প্রতিটি section শেষ হলে done চিহ্ন দাও। Progress এই browser-এই থাকে। Account বা login লাগে না।",
+    },
+    {
+      icon: "📴",
+      title: "Offline-এও চলে",
+      text: "Site-টা app হিসেবে install করো। সব পাতা save হয়ে থাকে, তাই internet ছাড়াও পড়া যায়।",
+    },
+    {
+      icon: "🌗",
+      title: "Dark আর light",
+      text: "দিনের জন্য কাগজের মতো light theme, রাতের জন্য dark theme। তোমার device-এর setting মেনে চলে।",
+    },
+  ],
+  partsEyebrow: "কাঠামো",
+  partsTitle: "১৪টি part",
+  partsIntro: "ক্রম অনুযায়ী পড়ো, অথবা যে part দরকার সেখানে যাও। প্রতিটি part নিজে নিজেই সম্পূর্ণ।",
+  sectionCount: (n: number) => `${fmtNum("bn", n)}টি section`,
+
+  contentsTitle: "সম্পূর্ণ সূচিপত্র",
+  contentsIntro: "সব part আর section পড়ার ক্রমে। যে section done করেছ, তার পাশে টিক চিহ্ন থাকে।",
+  doneLabel: "শেষ করা section",
+  totalLabel: "মোট section",
+  percentLabel: "সম্পূর্ণ",
+  continueReading: "পড়া চালিয়ে যাও →",
+  startOver: "আবার শুরু করো",
+  startOverConfirm: "সব section-এর progress মুছে ফেলবে?",
+  allDone: "তুমি সব section শেষ করেছ।",
+  doneMark: "শেষ",
+
+  markDone: "শেষ হয়েছে, চিহ্ন দাও",
+  markedDone: "শেষ · বাতিল করতে click করো",
+  sectionDone: "Section শেষ",
+
+  footerSite: "Site",
+  footerSource: "GitHub-এ source code",
+  footerCopy: "AI Engineering reference",
 
   topicMeta: (sections: number, sources: number) =>
     `${fmtNum("bn", sections)}টি section · ${fmtNum("bn", sources)}টি source · তিনভাবে ব্যাখ্যা`,

@@ -22,8 +22,8 @@ const KEYS = new Map(PRECACHE_MANIFEST.map((e) => [SCOPE + e.url, `${SCOPE}${e.u
 
 const OFFLINE_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Offline — AI Engineering</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0f1013;color:#ebe8e2;font:16px/1.6 system-ui,sans-serif;padding:24px;text-align:center}
-a{color:#5ec8d8}@media (prefers-color-scheme:light){body{background:#fbfaf7;color:#1d1c1a}a{color:#0e6f86}}</style></head>
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0e1115;color:#e6e6e6;font:16px/1.6 system-ui,sans-serif;padding:24px;text-align:center}
+a{color:#2dd4bf}@media (prefers-color-scheme:light){body{background:#faf7f2;color:#1a1d1f}a{color:#0f766e}}</style></head>
 <body><main><h1>You are offline</h1><p>This page is not saved on this device.</p>
 <p><a href="${SCOPE}">Go to the home page</a></p></main></body></html>`;
 

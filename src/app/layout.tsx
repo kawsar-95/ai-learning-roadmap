@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono, Noto_Sans_Bengali } from "next/font/google";
+import { Crimson_Pro, Inter, JetBrains_Mono, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { langInitScript } from "@/lib/i18n";
@@ -7,12 +7,11 @@ import { ServiceWorker } from "@/components/layout/ServiceWorker";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const crimson = Crimson_Pro({
+  variable: "--font-crimson",
   subsets: ["latin"],
   display: "swap",
   style: ["normal", "italic"],
-  axes: ["opsz"],
 });
 
 const inter = Inter({
@@ -51,8 +50,8 @@ export const metadata: Metadata = {
 // The browser colors its title bar to match the page background (globals.css).
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0f1013" },
-    { media: "(prefers-color-scheme: light)", color: "#fbfaf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1115" },
+    { media: "(prefers-color-scheme: light)", color: "#faf7f2" },
   ],
 };
 
@@ -65,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoBengali.variable} h-full antialiased`}
+      className={`${crimson.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoBengali.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
