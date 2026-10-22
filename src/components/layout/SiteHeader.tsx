@@ -77,7 +77,7 @@ export function SiteHeader({
           <ThemeToggle lang={lang} />
           <Link
             href={topicHref(TOPICS[0].slug, lang)}
-            className="ml-1 hidden items-center rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 sm:inline-flex"
+            className="ml-1 hidden items-center whitespace-nowrap rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 md:inline-flex"
           >
             {UI[lang].startReading}
           </Link>
