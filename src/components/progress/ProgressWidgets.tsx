@@ -4,7 +4,7 @@ import Link from "next/link";
 import { firstUndone, summarize } from "@/lib/progress";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
-import { resetProgress, setDone, toggleDone, useProgress } from "./useProgress";
+import { resetProgress, setDone, toggleBookmark, toggleDone, useBookmarks, useProgress } from "./useProgress";
 
 /** A section key and the page address of that section. */
 export type SectionLink = { key: string; href: string };
@@ -61,6 +61,29 @@ export function SectionDoneButton({ sectionKey, lang }: { sectionKey: string; la
     >
       <span aria-hidden="true">{done ? "✓" : "○"}</span>
       {done ? ui.markedDone : ui.markDone}
+    </button>
+  );
+}
+
+/** The Bookmark toggle at the end of a section. The label stays the same; the state is in aria-pressed. */
+export function BookmarkButton({ sectionKey, lang }: { sectionKey: string; lang: Lang }) {
+  const on = useBookmarks().has(sectionKey);
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      onClick={() => toggleBookmark(sectionKey)}
+      className={
+        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
+        (on
+          ? "border-accent bg-bg-raised text-accent hover:opacity-90"
+          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
+      }
+    >
+      <span aria-hidden="true" className={on ? "" : "opacity-40"}>
+        🔖
+      </span>
+      {UI[lang].bookmark}
     </button>
   );
 }

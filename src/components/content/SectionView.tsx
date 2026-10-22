@@ -12,7 +12,7 @@ import { Inline } from "./Inline";
 import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
 import { VideoList } from "./VideoList";
-import { SectionDoneButton } from "@/components/progress/ProgressWidgets";
+import { BookmarkButton, SectionDoneButton } from "@/components/progress/ProgressWidgets";
 import { VOICE_COLOR, VoiceSwitcher } from "./VoiceSwitcher";
 import type { Voice } from "./VoiceSwitcher";
 
@@ -226,7 +226,8 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
         <VideoList sectionId={section.id} videos={videosForVoice(section.videos, voice, lang)} lang={lang} />
       </div>
 
-      <div className="mt-8 flex justify-end border-t border-border pt-5">
+      <div className="mt-8 flex flex-wrap items-center justify-end gap-2 border-t border-border pt-5">
+        <BookmarkButton sectionKey={doneKey} lang={lang} />
         <SectionDoneButton sectionKey={doneKey} lang={lang} />
       </div>
     </section>

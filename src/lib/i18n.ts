@@ -167,6 +167,7 @@ const en = {
   markedDone: "Done · click to undo",
   markRead: "Mark as read",
   markedRead: "Read",
+  bookmark: "Bookmark",
   sectionDone: "Section done",
 
   // Footer.
@@ -317,6 +318,7 @@ const bn: Dict = {
   markedDone: "শেষ · বাতিল করতে click করো",
   markRead: "পড়া হয়েছে, চিহ্ন দাও",
   markedRead: "পড়া হয়েছে",
+  bookmark: "বুকমার্ক",
   sectionDone: "Section শেষ",
 
   footerSite: "Site",
