@@ -302,12 +302,18 @@ const SourceSchema = z.strictObject({
   text: z.string(),
 });
 
-const McqTextSchema = z.strictObject({
-  q: PlainTextSchema,
-  options: z.array(PlainTextSchema).min(2).max(6),
-  why: PlainTextSchema,
+/** Quiz text is plain text. A tag would show as literal characters, so the build rejects it. */
+// A tag is `<` then a letter or `/`, so "3 < 5 and 7 > 6" is allowed. Not `TAG`: it has the `g` flag,
+// and `test` with that flag keeps state between calls.
+const QuizTextSchema = PlainTextSchema.refine((text) => !/<\/?[a-zA-Z][^>]*>/.test(text), {
+  message: "quiz text must be plain text, with no HTML tags",
 });
-const TfTextSchema = z.strictObject({ q: PlainTextSchema, why: PlainTextSchema });
+const McqTextSchema = z.strictObject({
+  q: QuizTextSchema,
+  options: z.array(QuizTextSchema).min(2).max(6),
+  why: QuizTextSchema,
+});
+const TfTextSchema = z.strictObject({ q: QuizTextSchema, why: QuizTextSchema });
 
 const QuizQuestionSchema: z.ZodType<QuizQuestion> = z
   .discriminatedUnion("kind", [

@@ -87,6 +87,9 @@ test("TopicFileSchema rejects a bad quiz", () => {
     ["tf with a number answer", [tf("q1", { answer: 1 })]],
     ["unknown key", [mcq("q1", { tag: "oops" })]],
     ["empty question text", [mcq("q1", { en: { q: " ", options: ["a", "b", "c"], why: "w" } })]],
+    ["a tag in the question", [mcq("q1", { en: { q: "Is <b>this</b> bold?", options: ["a", "b", "c"], why: "w" } })]],
+    ["a tag in an option", [mcq("q1", { en: { q: "Q?", options: ["a", "<i>b</i>", "c"], why: "w" } })]],
+    ["a tag in the why text", [tf("q1", { bn: { q: "সত্য?", why: "<a href='x'>লিংক</a>" } })]],
   ];
   for (const [name, quiz] of bad) {
     // The failure must be about the quiz, not a rejected unknown key at the root.
@@ -96,4 +99,9 @@ test("TopicFileSchema rejects a bad quiz", () => {
       name,
     );
   }
+});
+
+test("TopicFileSchema accepts quiz text with a less-than sign that is not a tag", () => {
+  const file = topicWithQuiz([tf("q1", { en: { q: "Is 3 < 5 and 7 > 6?", why: "Yes: a < b is not a tag." } })]);
+  assert.doesNotThrow(() => TopicFileSchema.parse(file));
 });
