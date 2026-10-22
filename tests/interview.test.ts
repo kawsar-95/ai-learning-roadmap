@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { InterviewFileSchema, interviewProblems } from "../src/lib/interview.ts";
 import type { InterviewFile } from "../src/lib/interview.ts";
 
@@ -83,4 +84,32 @@ test("InterviewFileSchema rejects an empty question", () => {
 test("InterviewFileSchema rejects an unknown key", () => {
   const file = { ...good(), extra: 1 };
   assert.throws(() => InterviewFileSchema.parse(file));
+});
+
+// The Part order of the site (TOPIC_ORDER in src/lib/topics.ts).
+const PART_ORDER = [
+  "llm-fundamentals",
+  "prompt-engineering",
+  "context-engineering",
+  "rag-knowledge-systems",
+  "agents-and-agentic-systems",
+  "tool-use-and-integrations",
+  "inference",
+  "llmops-and-observability",
+  "evaluation-engineering",
+  "cost-and-performance-optimization",
+  "safety-security-and-guardrails",
+  "multimodal-engineering",
+  "ai-application-architecture",
+  "visual-learning-resources",
+];
+
+test("the real interview file has no problems", () => {
+  const read = (name: string) => JSON.parse(readFileSync(new URL(`../src/content/${name}.json`, import.meta.url), "utf8"));
+  const file = InterviewFileSchema.parse(read("interview"));
+  const realTopics = PART_ORDER.map((slug) => ({
+    slug,
+    sectionIds: (read(slug).sections as { id: string }[]).map((s) => s.id),
+  }));
+  assert.deepEqual(interviewProblems(file, realTopics), []);
 });
