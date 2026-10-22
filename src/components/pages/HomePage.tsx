@@ -2,7 +2,7 @@ import Link from "next/link";
 import { TOPICS, getOutline, topicText } from "@/lib/topics";
 import type { Topic } from "@/lib/topics";
 import { progressKey } from "@/lib/progress";
-import { UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
+import { AUTHOR_GITHUB_URL, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { Inline } from "@/components/content/Inline";
 import { PartProgress } from "@/components/progress/ProgressWidgets";
@@ -247,13 +247,37 @@ function Parts({ lang }: { lang: Lang }) {
   );
 }
 
-/** The landing page: hero, features, and the 14 Parts, in one language. */
+function Author({ lang }: { lang: Lang }) {
+  const ui = UI[lang];
+  return (
+    <section aria-labelledby="author-heading" className="py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <p className={EYEBROW}>{ui.authorEyebrow}</p>
+        <h2 id="author-heading" className={SECTION_TITLE}>
+          Nuruddin Kawsar
+        </h2>
+        <p className="mt-3 text-[17px] text-text-dim">{ui.authorBy}</p>
+        <a
+          href={AUTHOR_GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-block text-[16px] font-medium text-accent no-underline hover:underline"
+        >
+          {ui.authorGithub}
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/** The landing page: hero, features, the 14 Parts, and the author, in one language. */
 export function HomePage({ lang }: { lang: Lang }) {
   return (
     <>
       <Hero lang={lang} />
       <Features lang={lang} />
       <Parts lang={lang} />
+      <Author lang={lang} />
     </>
   );
 }
