@@ -30,6 +30,9 @@ export function topicHref(slug: string, lang: Lang): string {
 export function contentsHref(lang: Lang): string {
   return lang === "bn" ? "/bn/contents/" : "/contents/";
 }
+export function dashboardHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/dashboard/" : "/dashboard/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
@@ -157,6 +160,12 @@ const en = {
   startOver: "Start over",
   startOverConfirm: "Clear the progress of all sections?",
   allDone: "You finished every section.",
+  dashboard: "Dashboard",
+  dashboardTitle: "Your dashboard",
+  dashboardIntro: "Where you stopped, how far each part is, and the sections you saved.",
+  bookmarksTitle: "Bookmarks",
+  bookmarksEmpty: "No bookmarks yet. Use the Bookmark button at the end of a section.",
+  removeBookmark: "Remove",
   doneMark: "Done",
 
   // Progress on a topic page.
@@ -164,6 +173,7 @@ const en = {
   markedDone: "Done · click to undo",
   markRead: "Mark as read",
   markedRead: "Read",
+  bookmark: "Bookmark",
   sectionDone: "Section done",
 
   // Footer.
@@ -308,12 +318,19 @@ const bn: Dict = {
   startOver: "আবার শুরু করো",
   startOverConfirm: "সব section-এর progress মুছে ফেলবে?",
   allDone: "তুমি সব section শেষ করেছ।",
+  dashboard: "ড্যাশবোর্ড",
+  dashboardTitle: "তোমার ড্যাশবোর্ড",
+  dashboardIntro: "কোথায় থেমেছ, প্রতিটি part কতদূর, আর কোন section save করেছ।",
+  bookmarksTitle: "বুকমার্ক",
+  bookmarksEmpty: "এখনো কোনো বুকমার্ক নেই। কোনো section-এর শেষে Bookmark বোতাম চাপো।",
+  removeBookmark: "সরাও",
   doneMark: "শেষ",
 
   markDone: "শেষ হয়েছে, চিহ্ন দাও",
   markedDone: "শেষ · বাতিল করতে click করো",
   markRead: "পড়া হয়েছে, চিহ্ন দাও",
   markedRead: "পড়া হয়েছে",
+  bookmark: "বুকমার্ক",
   sectionDone: "Section শেষ",
 
   footerSite: "Site",

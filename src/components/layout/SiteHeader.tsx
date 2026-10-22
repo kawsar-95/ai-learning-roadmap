@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { TOPICS } from "@/lib/topics";
 import type { NavItem } from "@/lib/topics";
-import { UI, contentsHref, homeHref, topicHref } from "@/lib/i18n";
+import { UI, contentsHref, dashboardHref, homeHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { LanguageSwitch, LanguageSwitchFallback } from "./LanguageSwitch";
 import { MobileNav } from "./MobileNav";
@@ -66,6 +66,9 @@ export function SiteHeader({
           </Link>
           <Link href={contentsHref(lang)} className={NAV_LINK}>
             {UI[lang].contents}
+          </Link>
+          <Link href={dashboardHref(lang)} className={NAV_LINK}>
+            {UI[lang].dashboard}
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-1.5">

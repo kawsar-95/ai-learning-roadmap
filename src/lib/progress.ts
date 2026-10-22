@@ -6,6 +6,9 @@
 /** The localStorage key that holds the done sections. */
 export const PROGRESS_STORAGE_KEY = "progress";
 
+/** The localStorage key of the bookmarked sections. Same key format as progress. */
+export const BOOKMARKS_STORAGE_KEY = "bookmarks";
+
 export type ProgressSummary = { done: number; total: number; percent: number };
 
 export function progressKey(slug: string, sectionId: string): string {
@@ -62,4 +65,9 @@ export function summarize(done: ReadonlySet<string>, all: readonly string[]): Pr
 /** The first key of `all`, in reading order, that is not done. */
 export function firstUndone(done: ReadonlySet<string>, all: readonly string[]): string | null {
   return all.find((key) => !done.has(key)) ?? null;
+}
+
+/** The keys of `order`, in reading order, that are bookmarked. Unknown stored keys are dropped. */
+export function resolveBookmarks(stored: ReadonlySet<string>, order: readonly string[]): string[] {
+  return order.filter((key) => stored.has(key));
 }
