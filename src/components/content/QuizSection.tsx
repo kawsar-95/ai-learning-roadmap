@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { QuizQuestion } from "@/lib/content-schema";
 import { scoreQuiz } from "@/lib/quiz";
 import type { QuizAnswers } from "@/lib/quiz";
@@ -27,6 +27,9 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
   const ui = UI[lang];
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [checked, setChecked] = useState(false);
+  // The button that was pressed disappears, so focus goes to the next useful place.
+  const retryRef = useRef<HTMLButtonElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const saved = useQuizScores()[slug];
   const best = saved && saved.total === questions.length ? saved : null;
   const allAnswered = questions.every((q) => q.id in answers);
@@ -35,17 +38,21 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
   function check() {
     setChecked(true);
     saveQuizScore(slug, correct, total);
+    requestAnimationFrame(() => retryRef.current?.focus());
   }
 
   function retry() {
     setAnswers({});
     setChecked(false);
+    requestAnimationFrame(() => titleRef.current?.focus());
   }
 
   return (
     <section id="quiz" aria-labelledby="quiz-title" className="scroll-mt-24">
       <h2
         id="quiz-title"
+        ref={titleRef}
+        tabIndex={-1}
         className="font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-text"
       >
         {ui.quizTitle}
@@ -114,15 +121,15 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
       </div>
 
       <div className="mt-6 flex flex-wrap items-center gap-4">
+        {/* Always in the page and never display:none, so screen readers announce the score when it
+            appears. While empty it is absolute, so it takes no space in the row. */}
+        <p role="status" className="m-0 font-display text-[22px] font-bold text-text empty:absolute">
+          {checked ? ui.quizScore(fmtNum(lang, correct), fmtNum(lang, total)) : null}
+        </p>
         {checked ? (
-          <>
-            <p role="status" className="m-0 font-display text-[22px] font-bold text-text">
-              {ui.quizScore(fmtNum(lang, correct), fmtNum(lang, total))}
-            </p>
-            <button type="button" onClick={retry} className={`${BUTTON} border border-border-strong bg-bg-raised text-text hover:border-accent`}>
-              {ui.quizRetry}
-            </button>
-          </>
+          <button type="button" ref={retryRef} onClick={retry} className={`${BUTTON} border border-border-strong bg-bg-raised text-text hover:border-accent`}>
+            {ui.quizRetry}
+          </button>
         ) : (
           <>
             <button type="button" onClick={check} disabled={!allAnswered} className={`${BUTTON} bg-accent text-on-accent shadow-card`}>
