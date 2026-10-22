@@ -172,12 +172,9 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
       className="scroll-mt-24"
     >
       <header>
-        <p className="font-display text-[28px] font-bold leading-none text-accent">
-          {section.num.padStart(2, "0")}
-        </p>
         <h2
           id={`${section.id}-title`}
-          className="mt-2 font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-balance text-text"
+          className="font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-balance text-text"
         >
           {text.title}
         </h2>
