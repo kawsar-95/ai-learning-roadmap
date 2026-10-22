@@ -3,8 +3,8 @@
   "title": "LLMOps and Observability",
   "lede": "Tracing with Langfuse / LangSmith / Helicone / Arize Phoenix / Braintrust; per-request token, cost, and latency tracking; prompt and agent versioning; A/B testing; replay and debugging; drift detection when model upgrades silently change behaviour; feedback loops that grow your eval dataset. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "LLMOps আর Observability",
-    "lede": "Langfuse / LangSmith / Helicone / Arize Phoenix / Braintrust দিয়ে tracing; প্রতিটা request-এর token, খরচ আর latency মাপা; prompt আর agent-এর versioning; A/B testing; replay করে debug করা; model upgrade-এ চুপচাপ আচরণ বদলে গেলে সেই drift ধরা; আর feedback loop, যা আপনার eval dataset বড় করে। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "LLMOps আর অবজারভেবিলিটি",
+    "lede": "Langfuse / LangSmith / Helicone / Arize Phoenix / Braintrust দিয়ে ট্রেসিং; প্রতিটা রিকোয়েস্টের টোকেন, খরচ আর ল্যাটেন্সি মাপা; প্রম্পট আর এজেন্টের ভার্সনিং; A/B টেস্টিং; রিপ্লে করে ডিবাগ করা; মডেল আপগ্রেডে চুপচাপ আচরণ বদলে গেলে সেই ড্রিফট ধরা; আর ফিডব্যাক লুপ, যা আপনার ইভ্যাল ডেটাসেট বড় করে। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "LLMOps & observability",
       "sub": "Traditional DevOps answers \"did the request return 200?\" LLM apps need richer questions: <em>did the model return the right answer, at the right cost, in the right tone, with no leakage?</em> The discipline of answering those is <strong>LLMOps</strong>, and it has its own toolchain.",
       "bn": {
-        "title": "LLMOps আর observability",
-        "sub": "পুরোনো DevOps জিজ্ঞেস করে, \"request কি 200 ফেরত দিয়েছে?\" LLM app-এ আরও গভীর প্রশ্ন লাগে: <em>model কি সঠিক উত্তর দিয়েছে, ঠিক খরচে, ঠিক সুরে, কোনো তথ্য ফাঁস না করে?</em> এই প্রশ্নগুলোর উত্তর খোঁজার কাজকে বলে <strong>LLMOps</strong>, আর এর নিজস্ব toolchain আছে।"
+        "title": "LLMOps আর অবজারভেবিলিটি",
+        "sub": "পুরোনো DevOps জিজ্ঞেস করে, \"রিকোয়েস্ট কি ২০০ ফেরত দিয়েছে?\" LLM অ্যাপে আরও গভীর প্রশ্ন লাগে: <em>মডেল কি সঠিক উত্তর দিয়েছে, ঠিক খরচে, ঠিক সুরে, কোনো তথ্য ফাঁস না করে?</em> এই প্রশ্নগুলোর উত্তর খোঁজার কাজকে বলে <strong>LLMOps</strong>, আর এর নিজস্ব টুলচেইন আছে।"
       },
       "body": [
         {
@@ -60,7 +60,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Agent run as a tree of traced spans\">\n      <text x=\"40\" y=\"36\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">trace_id: 7f2c… | agent_run_id: 91 | user: u_8421</text>\n      <line x1=\"0\" y1=\"48\" x2=\"1100\" y2=\"48\" stroke=\"#1f2937\"></line>\n      \n      <rect x=\"40\" y=\"64\" width=\"280\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">POST /agent/run (1.8 s)</text>\n      <text x=\"56\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">user: \"plan my Tokyo trip\"</text>\n      \n      <rect x=\"360\" y=\"64\" width=\"220\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"376\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a78bfa\">llm.plan (0.6 s, 412 tok)</text>\n      <text x=\"376\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">plan: [search, weather, fx]</text>\n      <rect x=\"600\" y=\"64\" width=\"180\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"616\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#34d399\">tool.weather (0.2 s)</text>\n      <text x=\"616\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">cached ✓</text>\n      <rect x=\"800\" y=\"64\" width=\"220\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"816\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fbbf24\">tool.fx_rates (0.4 s)</text>\n      <text x=\"816\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">usd_jpy: 154.2</text>\n      <rect x=\"360\" y=\"130\" width=\"220\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"376\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a78bfa\">llm.synthesize (0.9 s)</text>\n      <text x=\"376\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">487 tok out · cached prefix 80%</text>\n      <rect x=\"600\" y=\"130\" width=\"180\" height=\"42\" rx=\"6\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"616\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#34d399\">tool.email.send (0.3 s)</text>\n      <text x=\"616\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">user approved ✓</text>\n      \n      <line x1=\"320\" y1=\"86\" x2=\"360\" y2=\"86\" stroke=\"#94a3b8\"></line>\n      <line x1=\"580\" y1=\"76\" x2=\"600\" y2=\"76\" stroke=\"#94a3b8\"></line>\n      <line x1=\"780\" y1=\"86\" x2=\"800\" y2=\"86\" stroke=\"#94a3b8\"></line>\n      <line x1=\"180\" y1=\"106\" x2=\"470\" y2=\"130\" stroke=\"#94a3b8\"></line>\n      <line x1=\"470\" y1=\"172\" x2=\"690\" y2=\"172\" stroke=\"#94a3b8\"></line>\n      \n      <rect x=\"40\" y=\"200\" width=\"1020\" height=\"48\" rx=\"6\" fill=\"#111827\" stroke=\"#334155\"></rect>\n      <text x=\"60\" y=\"220\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">cost: $0.0042 · input 812 tok · output 487 tok · latency p50 1.6 s · p99 4.1 s</text>\n      <text x=\"60\" y=\"240\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">evals: faithfulness 0.91 · task_success 1.00 · no_pii_leak ✓</text>\n    </svg>",
           "caption": "A single agent run as a traced tree: parent (POST), LLM calls (in violet), tool calls (in green/yellow), approval gate, plus a cost and latency footer.",
-          "captionBn": "একটি এজেন্ট রান traced tree হিসেবে: parent POST, LLM calls (বেগুনি), tool calls (সবুজ/হলুদ), approval gate, এবং খরচ ও latency ফুটার।"
+          "captionBn": "একটি এজেন্ট রান ট্রেস করা ট্রি হিসেবে: প্যারেন্ট POST, LLM কল (বেগুনি), টুল কল (সবুজ/হলুদ), অনুমোদন গেট, এবং খরচ ও ল্যাটেন্সি ফুটার।"
         },
         {
           "type": "heading",
@@ -165,42 +165,42 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>LLMOps</strong> হলো \"DevOps for AI apps\"। সাধারণ ওয়েব অ্যাপে আপনি জানেন এটি ক্র্যাশ করেছে কারণ ড্যাশবোর্ডে লাল ত্রুটি দেখেন। AI অ্যাপে কল 200 OK ফেরত দিতে পারে, অথচ মডেল ভুল, ব্যয়বহুল বা পক্ষপাতদুষ্ট উত্তর দিতে পারে। তাই এই বিষয়গুলো দেখার নতুন সরঞ্জাম দরকার।"
+          "html": "<strong>LLMOps</strong> হলো \"DevOps for AI apps\"। সাধারণ ওয়েব অ্যাপে আপনি জানেন এটি ক্র্যাশ করেছে কারণ ড্যাশবোর্ডে লাল এরর দেখেন। AI অ্যাপে কল ২০০ OK ফেরত দিতে পারে, অথচ মডেল ভুল, ব্যয়বহুল বা পক্ষপাতদুষ্ট উত্তর দিতে পারে। তাই এই বিষয়গুলো দেখার নতুন টুল দরকার।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Tracing = প্রতিটি request-এর জন্য flight recorder:</strong> ব্যবহারকারী বললে \"আপনার AI গতকাল আমাকে অদ্ভুত উত্তর দিয়েছে,\" আপনি সেই নির্দিষ্ট request টেনে এনে প্রতিটি prompt, প্রতিটি model call, প্রতিটি ব্যবহৃত tool, খরচ ও latency এক দৃশ্যে দেখতে পারবেন। প্রধান tracing tools: Langfuse (open-source, OpenTelemetry-native, self-hostable), LangSmith (LangChain ইন্টিগ্রেশন), Helicone (একটি env-var দিয়ে সব ক্যাপচার), Arize Phoenix (evaluation-first), Braintrust (eval + trace এক জায়গায়)।"
+          "html": "<strong>ট্রেসিং = প্রতিটি রিকোয়েস্টের জন্য ফ্লাইট রেকর্ডার:</strong> ইউজার বললে \"আপনার AI গতকাল আমাকে অদ্ভুত উত্তর দিয়েছে,\" আপনি সেই নির্দিষ্ট রিকোয়েস্ট টেনে এনে প্রতিটি প্রম্পট, প্রতিটি মডেল কল, প্রতিটি ব্যবহৃত টুল, খরচ ও ল্যাটেন্সি এক দৃশ্যে দেখতে পারবেন। প্রধান ট্রেসিং টুল: Langfuse (ওপেন-সোর্স, OpenTelemetry-নেটিভ, সেলফ-হোস্ট করা যায়), LangSmith (LangChain ইন্টিগ্রেশন), Helicone (একটি এনভায়রনমেন্ট ভ্যারিয়েবল দিয়ে সব ক্যাপচার), Arize Phoenix (ইভ্যালুয়েশন-ফার্স্ট), Braintrust (ইভ্যাল + ট্রেস এক জায়গায়)।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Token, cost ও latency tracking:</strong> প্রতিটি request রেকর্ড করুক: <strong>input tokens</strong>, <strong>output tokens</strong>, <strong>model</strong>, <strong>cost</strong> (vendor-এর pricing থেকে হিসাব), <strong>latency</strong> (TTFT, total), ও <strong>cache hit</strong>। <code>user_id</code>, <code>feature</code>, <code>experiment</code> দিয়ে tag করুন। এই ডেটাই প্রতিটি অন্য LLMOps প্রশ্নের ভিত্তি।"
+          "html": "<strong>টোকেন, খরচ ও ল্যাটেন্সি ট্র্যাকিং:</strong> প্রতিটি রিকোয়েস্ট রেকর্ড করুক: <strong>ইনপুট টোকেন</strong>, <strong>আউটপুট টোকেন</strong>, <strong>মডেল</strong>, <strong>খরচ</strong> (ভেন্ডরের প্রাইসিং থেকে হিসাব), <strong>ল্যাটেন্সি</strong> (TTFT, মোট), ও <strong>ক্যাশ হিট</strong>। <code>user_id</code>, <code>feature</code>, <code>experiment</code> দিয়ে ট্যাগ করুন। এই ডেটাই প্রতিটি অন্য LLMOps প্রশ্নের ভিত্তি।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Prompt ও agent versioning:</strong> prompt হলো কোড। কোডের মতোই git-এ রাখুন, ভার্সন করুন, PR-এ review করুন, CI দিয়ে deploy করুন। প্রতিটি prompt version-এর একটি স্থিত ID থাকবে; প্রতিটি trace সেই prompt ID বহন করবে।"
+          "html": "<strong>প্রম্পট ও এজেন্টের ভার্সনিং:</strong> প্রম্পট হলো কোড। কোডের মতোই git-এ রাখুন, ভার্সন করুন, PR-এ রিভিউ করুন, CI দিয়ে ডিপ্লয় করুন। প্রতিটি প্রম্পট ভার্সনের একটি স্থিত ID থাকবে; প্রতিটি ট্রেস সেই প্রম্পট ID বহন করবে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>A/B testing prompts ও models:</strong> <code>user_id</code> hash দিয়ে দুটি prompt version (বা দুটি model)-এর মধ্যে traffic রাউট করুন। Cost, latency, output-এ চালানো eval, ব্যবহারকারীর প্রতিক্রিয়া মাপুন। নির্বাচিত মেট্রিকে একটি ভ্যারিয়েন্ট জিতলে পরীক্ষা বন্ধ করুন।"
+          "html": "<strong>প্রম্পট ও মডেলের A/B টেস্টিং:</strong> <code>user_id</code> হ্যাশ দিয়ে দুটি প্রম্পট ভার্সন (বা দুটি মডেল)-এর মধ্যে ট্র্যাফিক রাউট করুন। খরচ, ল্যাটেন্সি, আউটপুটে চালানো ইভ্যাল, ইউজারের প্রতিক্রিয়া মাপুন। নির্বাচিত মেট্রিকে একটি ভ্যারিয়েন্ট জিতলে পরীক্ষা বন্ধ করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Replay ও debugging:</strong> ব্যবহারকারী অভিযোগ করলে trace টেনে এনে প্রতিটি prompt ও প্রতিটি model reply দেখুন, ব্যর্থতা চিহ্নিত করুন, এবং সেই exact request ভিন্ন model বা prompt-এ <strong>replay</strong> করে fix যাচাই করুন।"
+          "html": "<strong>রিপ্লে ও ডিবাগিং:</strong> ইউজার অভিযোগ করলে ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন, ব্যর্থতা চিহ্নিত করুন, এবং সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে <strong>রিপ্লে</strong> করে ফিক্স যাচাই করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Drift detection (silent behaviour changes):</strong> OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic \"same-named\" মডেলের weights আপডেট করলে, আপনার output-গুলো আপনার offline eval ধরতে পারবে না এমনভাবে drift করে। সমাধান: production traffic-এর একটি ছোট অংশ (১–৫%) একই সাথে পুরোনো ও নতুন মডেলের মধ্য দিয়ে চালান, eval তুলনা করুন, delta-তে সতর্কতা দিন। Arize Phoenix ও Braintrust এটি স্বয়ংক্রিয় করে।"
+          "html": "<strong>ড্রিফট ডিটেকশন (চুপচাপ আচরণের বদল):</strong> OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic \"একই নামের\" মডেলের ওয়েটস আপডেট করলে, আপনার আউটপুটগুলো আপনার অফলাইন ইভ্যাল ধরতে পারবে না এমনভাবে ড্রিফট করে। সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) একই সাথে পুরোনো ও নতুন মডেলের মধ্য দিয়ে চালান, ইভ্যাল তুলনা করুন, ডেল্টাতে সতর্কতা দিন। Arize Phoenix ও Braintrust এটি স্বয়ংক্রিয় করে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Feedback loops:</strong> thumbs-up / thumbs-down (বা সমৃদ্ধ সংকেত) ক্যাপচার করুন এবং ব্যর্থতাগুলো আপনার eval dataset-এ ফিড করুন। তিন মাস পর আপনার কাছে এক হাজার বাস্তব ব্যর্থতা থাকবে, যা দশ হাজার synthetic-এর চেয়ে বেশি মূল্যবান।"
+          "html": "<strong>ফিডব্যাক লুপ:</strong> থাম্বস-আপ / থাম্বস-ডাউন (বা সমৃদ্ধ সংকেত) ক্যাপচার করুন এবং ব্যর্থতাগুলো আপনার ইভ্যাল ডেটাসেটে ফিড করুন। তিন মাস পর আপনার কাছে এক হাজার বাস্তব ব্যর্থতা থাকবে, যা দশ হাজার সিনথেটিকের চেয়ে বেশি মূল্যবান।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Black-box flight recorder উপমা:</strong> প্রতিটি LLM কল একটি black-box flight recorder রেখে আসা উচিত। Recorder prompt, model reply, খরচ, latency, কোন ব্যবহারকারী, কোন feature, কোন experiment — সব লিখে রাখুক, যাতে কিছু ভুল হলে (বা নীরবে খারাপ হলে) আপনি সেই মুহূর্তটি replay করে বুঝতে পারেন কেন।"
+              "html": "<strong>ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার উপমা:</strong> প্রতিটি LLM কল একটি ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার রেখে আসা উচিত। রেকর্ডার প্রম্পট, মডেল উত্তর, খরচ, ল্যাটেন্সি, কোন ইউজার, কোন ফিচার, কোন এক্সপেরিমেন্ট — সব লিখে রাখুক, যাতে কিছু ভুল হলে (বা নীরবে খারাপ হলে) আপনি সেই মুহূর্তটি রিপ্লে করে বুঝতে পারেন কেন।"
             }
           ]
         }
@@ -284,36 +284,36 @@
             "challenge": "Change the log so that a second tool call starts at the same time as the first one. Ask the model to redraw the tree. How does the total time change?"
           },
           "bn": {
-            "title": "Flat log থেকে trace বানাও",
-            "why": "কোনো user যখন বলে \"তোমার chatbot খারাপ উত্তর দিয়েছে\", তখন একসারি flat log পড়া কঠিন। Trace প্রতিটা ধাপ আর তার সময় দেখায়, তাই ভাঙা ধাপটা তাড়াতাড়ি খুঁজে পাওয়া যায়।",
+            "title": "ফ্ল্যাট লগ থেকে ট্রেস বানান",
+            "why": "কোনো ইউজার যখন বলে \"আপনার চ্যাটবট খারাপ উত্তর দিয়েছে\", তখন একসারি ফ্ল্যাট লগ পড়া কঠিন। ট্রেস প্রতিটা ধাপ আর তার সময় দেখায়, তাই ভাঙা ধাপটা তাড়াতাড়ি খুঁজে পাওয়া যায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর log দেখো। আন্দাজ করো কোন ধাপে সবচেয়ে বেশি সময় লেগেছে। তারপর prompt টা copy করো, paste করে Enter চাপো।",
+                "do": "এই প্রম্পটের লগ দেখুন। আন্দাজ করুন কোন ধাপে সবচেয়ে বেশি সময় লেগেছে। তারপর প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "এখানে একটা agent run-এর flat log আছে (বানানো data)। Span হলো run-এর একটা ধাপ, যার একটা শুরু আর একটা শেষ আছে।\n\n10:02:11.000 REQUEST_START POST /chat user=u_204 prompt_id=support-v7\n10:02:11.020 SPAN_START build_system_prompt\n10:02:11.040 SPAN_END   build_system_prompt\n10:02:11.040 SPAN_START llm_call_1 model=model-x\n10:02:12.440 SPAN_END   llm_call_1 in_tokens=1200 out_tokens=60 decision=\"call tool search_orders\"\n10:02:12.440 SPAN_START tool_search_orders args={\"customer\":\"u_204\"}\n10:02:16.940 SPAN_END   tool_search_orders status=timeout\n10:02:16.940 SPAN_START llm_call_2 model=model-x\n10:02:18.140 SPAN_END   llm_call_2 in_tokens=1350 out_tokens=80\n10:02:18.150 REQUEST_END status=200 answer=\"Sorry, I could not check your order right now.\"\n\nকাজ:\n1. এই run-টাকে trace হিসেবে আঁকো: span-এর একটা tree, indentation দিয়ে। প্রতিটা span-এর সময় সেকেন্ডে দেখাও।\n2. সবচেয়ে ধীর span-এর নাম বলো, আর মোট সময়ের কত ভাগ সেটা নিয়েছে বলো।\n3. আসল সমস্যা কোন span-এ শুরু হয়েছে, বলো।",
-                "expect": "একটা tree, উপরে request আর নিচে চারটা ধাপ। সবচেয়ে ধীর span হলো <code>tool_search_orders</code>, প্রায় <strong>4.5 s</strong>, যা মোট <strong>7.15 s</strong>-এর প্রায় <strong>63%</strong>। সমস্যা ওখানেই শুরু (timeout)।",
+                "expect": "একটা ট্রি, উপরে রিকোয়েস্ট আর নিচে চারটা ধাপ। সবচেয়ে ধীর স্প্যান হলো <code>tool_search_orders</code>, প্রায় <strong>৪.৫ s</strong>, যা মোট <strong>৭.১৫ s</strong>-এর প্রায় <strong>৬৩%</strong>। সমস্যা ওখানেই শুরু (টাইমআউট)।",
                 "example": "REQUEST POST /chat (7.15 s)\n  build_system_prompt (0.02 s)\n  llm_call_1 (1.4 s)\n  tool_search_orders (4.5 s) status=timeout\n  llm_call_2 (1.2 s)\nসবচেয়ে ধীর span: tool_search_orders, 4.5 s, 7.15 s-এর প্রায় 63%।\nআসল সমস্যা শুরু হয়েছে tool_search_orders-এ, যেটা timeout হয়েছে।"
               },
               {
                 "chat": "same",
-                "do": "একটা সময় নিজে হাতে মিলিয়ে দেখো: tool span-এর শেষের সময় (16.940) থেকে শুরুর সময় (12.440) বিয়োগ করো।",
-                "expect": "<strong>4.5</strong> সেকেন্ড। এটা model-এর tree-র সাথে মেলে।"
+                "do": "একটা সময় নিজে হাতে মিলিয়ে দেখুন: টুল স্প্যানের শেষের সময় (১৬.৯৪০) থেকে শুরুর সময় (১২.৪৪০) বিয়োগ করুন।",
+                "expect": "<strong>৪.৫</strong> সেকেন্ড। এটা মডেলের ট্রির সাথে মেলে।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। 200 status নিয়ে model কী বলে, পড়ো।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। ২০০ স্ট্যাটাস নিয়ে মডেল কী বলে, পড়ুন।",
                 "prompt": "Request-টা status 200 ফেরত দিয়েছে। পুরনো ধরনের DevOps dashboard এটার জন্য সবুজ দেখায়। ৩টা ছোট বাক্যে বলো, শুধু 200 দেখলে এই run-এর কোন জিনিসটা ধরা পড়ে না। তারপর trace-এ কোন ৪টা field রাখা উচিত তার list দাও, যাতে পরে এই failure খুঁজে পাওয়া যায়।",
-                "expect": "Model বলবে 200 শুধু বোঝায় server সাড়া দিয়েছে। উত্তরটা তবুও user-এর কোনো কাজে লাগেনি। সে prompt version, model, token সংখ্যা, cost, latency আর tool status-এর মতো field-এর list দেবে।",
+                "expect": "মডেল বলবে ২০০ শুধু বোঝায় সার্ভার সাড়া দিয়েছে। উত্তরটা তবুও ইউজারের কোনো কাজে লাগেনি। সে প্রম্পট ভার্সন, মডেল, টোকেন সংখ্যা, খরচ, ল্যাটেন্সি আর টুল স্ট্যাটাসের মতো ফিল্ডের তালিকা দেবে।",
                 "example": "200 শুধু বলে server সাড়া দিয়েছে। উত্তর ভালো ছিল কি না, সেটা বলে না। এখানে tool timeout হয়েছে, তাই user পেয়েছে \"Sorry, I could not check your order\"। Dashboard সবুজই থাকে, অথচ user ব্যর্থ হয়।\nField: prompt_id, model-এর নাম, token সংখ্যা ও cost, tool status ও latency।"
               }
             ],
-            "learned": "<strong>Trace</strong> হলো <strong>span</strong>-এর একটা tree। Span হলো একটা ধাপ, যেমন LLM call বা tool call, তার সময়সহ। Tree দেখাচ্ছে tool call মোট সময়ের 63% নিয়েছে আর fail করেছে। Server তবুও 200 ফেরত দিয়েছে, তাই শুধু status দেখলে কিছু ধরা পড়ত না। LLM app-এ উত্তর কোথায় ভেঙেছে দেখতে trace লাগে।",
-            "done": "তোমার কাছে ৪ ধাপের একটা span tree আছে, তুমি সবচেয়ে ধীর ধাপটা (4.5 s) জানো, আর log-এ রাখার ৪টা field-এর list আছে।",
+            "learned": "<strong>ট্রেস</strong> হলো <strong>স্প্যান</strong>-এর একটা ট্রি। স্প্যান হলো একটা ধাপ, যেমন LLM কল বা টুল কল, তার সময়সহ। ট্রি দেখাচ্ছে টুল কল মোট সময়ের ৬৩% নিয়েছে আর ফেইল করেছে। সার্ভার তবুও ২০০ ফেরত দিয়েছে, তাই শুধু স্ট্যাটাস দেখলে কিছু ধরা পড়ত না। LLM অ্যাপে উত্তর কোথায় ভেঙেছে দেখতে ট্রেস লাগে।",
+            "done": "আপনার কাছে ৪ ধাপের একটা স্প্যান ট্রি আছে, আপনি সবচেয়ে ধীর ধাপটা (৪.৫ s) জানেন, আর লগে রাখার ৪টা ফিল্ডের তালিকা আছে।",
             "check": {
-              "question": "Status 200 দেখেই এই request-কে সুস্থ বলা যায় না কেন?",
-              "answer": "Server সাড়া দিয়েছে, কিন্তু tool timeout হওয়ায় user-এর জন্য উত্তরটা ভুল ছিল। LLMOps জানতে চায় উত্তরটা ঠিক ছিল কি না। Span-এর trace দেখায় কোথায় ভেঙেছে।"
+              "question": "স্ট্যাটাস ২০০ দেখেই এই রিকোয়েস্টকে সুস্থ বলা যায় না কেন?",
+              "answer": "সার্ভার সাড়া দিয়েছে, কিন্তু টুল টাইমআউট হওয়ায় ইউজারের জন্য উত্তরটা ভুল ছিল। LLMOps জানতে চায় উত্তরটা ঠিক ছিল কি না। স্প্যানের ট্রেস দেখায় কোথায় ভেঙেছে।"
             },
-            "challenge": "Log বদলে এমন করো যাতে দ্বিতীয় একটা tool call প্রথমটার সাথে একই সময়ে শুরু হয়। Model-কে tree আবার আঁকতে বলো। মোট সময় কীভাবে বদলায়?"
+            "challenge": "লগ বদলে এমন করুন যাতে দ্বিতীয় একটা টুল কল প্রথমটার সাথে একই সময়ে শুরু হয়। মডেলকে ট্রি আবার আঁকতে বলুন। মোট সময় কীভাবে বদলায়?"
           }
         },
         {
@@ -350,36 +350,36 @@
             "challenge": "Add a rule: half of the large-model input tokens are cached, and cached tokens cost 10% of the normal price. Ask the model to recompute. Does report_writer still lose money?"
           },
           "bn": {
-            "title": "কোন feature লোকসানে চলছে, খুঁজে বের করো",
-            "why": "তোমার app-এ কয়েকটা AI feature থাকলে মাসের bill একটাই বড় সংখ্যা। কোন feature আয়ের চেয়ে বেশি খরচ করছে, সেটা না জানলে তুমি তা ঠিক করতে পারবে না।",
+            "title": "কোন ফিচার লোকসানে চলছে, খুঁজে বের করুন",
+            "why": "আপনার অ্যাপে কয়েকটা AI ফিচার থাকলে মাসের বিল একটাই বড় সংখ্যা। কোন ফিচার আয়ের চেয়ে বেশি খরচ করছে, সেটা না জানলে আপনি তা ঠিক করতে পারবেন না।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর ৬টা log সারি দেখো। আন্দাজ করো কোন feature লোকসানে। তারপর prompt টা copy করো, paste করে Enter চাপো।",
+                "do": "এই প্রম্পটের ৬টা লগ সারি দেখুন। আন্দাজ করুন কোন ফিচার লোকসানে। তারপর প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "এখানে log করা কয়েকটা LLM request আছে (বানানো data)। প্রতি 1 million token-এর দাম: small model = input 0.20 USD আর output 0.80 USD। Large model = input 3.00 USD আর output 15.00 USD।\n\nid | feature       | user | model | in_tokens | out_tokens | latency_s\n1  | autocomplete  | u1   | small | 300       | 20         | 0.4\n2  | autocomplete  | u2   | small | 280       | 25         | 0.5\n3  | autocomplete  | u1   | small | 310       | 18         | 0.4\n4  | report_writer | u3   | large | 12000     | 1500       | 14.2\n5  | report_writer | u4   | large | 9000      | 1200       | 11.8\n6  | report_writer | u3   | large | 15000     | 2000       | 18.5\n\nআয়: প্রতিটা autocomplete request 0.001 USD আয় করে। প্রতিটা report_writer request 0.04 USD আয় করে।\n\nকাজ:\n1. প্রতিটা request-এর cost USD-তে বের করো। Formula একবার দেখাও, তারপর একটা table দাও।\n2. প্রতিটা feature-এর cost আর আয় যোগ করো।\n3. কোন feature লোকসানে আছে আর গড়ে প্রতি request-এ কত লোকসান, বলো।",
-                "expect": "Autocomplete-এর খরচ এক পয়সার ভগ্নাংশ, আর সেটা লাভে। <strong>report_writer লোকসানে</strong>: তার গড় cost প্রতি request-এ প্রায় <strong>0.0595 USD</strong>, কিন্তু আয় 0.04 USD। গড় লোকসান প্রায় <strong>0.0195 USD</strong>।",
+                "expect": "অটোকমপ্লিটের খরচ এক পয়সার ভগ্নাংশ, আর সেটা লাভে। <strong>report_writer লোকসানে</strong>: তার গড় খরচ প্রতি রিকোয়েস্টে প্রায় <strong>০.০৫৯৫ USD</strong>, কিন্তু আয় ০.০৪ USD। গড় লোকসান প্রায় <strong>০.০১৯৫ USD</strong>।",
                 "example": "Cost = in_tokens × in_price ÷ 1,000,000 + out_tokens × out_price ÷ 1,000,000\n1: 0.000076  2: 0.000076  3: 0.0000764\n4: 0.0585  5: 0.045  6: 0.075\nautocomplete: cost প্রায় 0.00023 USD, আয় 0.003 USD। লাভ।\nreport_writer: cost 0.1785 USD, আয় 0.12 USD। লোকসান 0.0585 USD, প্রতি request-এ প্রায় 0.0195 USD।\nreport_writer লোকসানে চলছে।"
               },
               {
                 "chat": "same",
-                "do": "Calculator দিয়ে 4 নম্বর request নিজে হাতে মিলাও: 12,000 × 3 ÷ 1,000,000, সাথে 1,500 × 15 ÷ 1,000,000।",
-                "expect": "0.036 + 0.0225 = <strong>0.0585 USD</strong>। এটা table-এর সাথে মেলে, আর এই request-এর আয় 0.04 USD-এর চেয়ে বেশি।"
+                "do": "ক্যালকুলেটর দিয়ে ৪ নম্বর রিকোয়েস্ট নিজে হাতে মিলান: ১২,০০০ × ৩ ÷ ১,০০০,০০০, সাথে ১,৫০০ × ১৫ ÷ ১,০০০,০০০।",
+                "expect": "০.০৩৬ + ০.০২২৫ = <strong>০.০৫৮৫ USD</strong>। এটা টেবিলের সাথে মেলে, আর এই রিকোয়েস্টের আয় ০.০৪ USD-এর চেয়ে বেশি।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। নতুন cost আর সতর্কবার্তাটা পড়ো।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। নতুন খরচ আর সতর্কবার্তাটা পড়ুন।",
                 "prompt": "এবার ধরো আমরা report_writer-কে small model-এ নিয়ে যাচ্ছি। 4, 5 আর 6 নম্বর request-এ একই token সংখ্যা ধরো। প্রতি request-এর নতুন গড় cost কত? Production-এ এই বদল করার আগে আমাদের কী মেপে দেখতে হবে? 100 শব্দের কম লিখে উত্তর দাও।",
-                "expect": "প্রতি request-এ নতুন গড় cost প্রায় <strong>0.0037 USD</strong>। ভালো উত্তরে এটাও থাকবে যে আগে উত্তরের মান যাচাই করতে হবে, যেমন eval দিয়ে (যে test উত্তরের নম্বর দেয়)।",
+                "expect": "প্রতি রিকোয়েস্টে নতুন গড় খরচ প্রায় <strong>০.০০৩৭ USD</strong>। ভালো উত্তরে এটাও থাকবে যে আগে উত্তরের মান যাচাই করতে হবে, যেমন ইভ্যাল দিয়ে (যে টেস্ট উত্তরের নম্বর দেয়)।",
                 "example": "Small model-এ গড় cost প্রতি request-এ প্রায় 0.0037 USD (4, 5, 6 নম্বর request-এ 0.0036, 0.0028 আর 0.0046)। এটা 0.04 USD আয়ের অনেক নিচে।\nবদলের আগে আসল report request-এ eval দিয়ে উত্তরের মান মাপো। সস্তা model খারাপ report লিখতে পারে, তাই user feedback আর latency-ও দেখো।"
               }
             ],
-            "learned": "প্রতিটা request-এ input token আর output token থাকে। Model-এর দাম দিয়ে গুণ করলে সেই request-এর cost পাওয়া যায়। Log-এ <strong>tag</strong> (লেবেল) থাকলে, যেমন feature আর model, তুমি feature ধরে cost ভাগ করতে পারো। Feature tag না থাকলে \"কোন feature লোকসানে?\" প্রশ্নের উত্তর দেওয়া যেত না। সস্তা model cost কমায়, কিন্তু মানও যাচাই করতে হয়।",
-            "done": "তোমার কাছে ৬টা request-এর প্রত্যেকটার cost আছে, কোন feature লোকসানে তুমি জানো, আর 4 নম্বর request তুমি হাতে মিলিয়েছ।",
+            "learned": "প্রতিটা রিকোয়েস্টে ইনপুট টোকেন আর আউটপুট টোকেন থাকে। মডেলের দাম দিয়ে গুণ করলে সেই রিকোয়েস্টের খরচ পাওয়া যায়। লগে <strong>ট্যাগ</strong> (লেবেল) থাকলে, যেমন ফিচার আর মডেল, আপনি ফিচার ধরে খরচ ভাগ করতে পারেন। ফিচার ট্যাগ না থাকলে \"কোন ফিচার লোকসানে?\" প্রশ্নের উত্তর দেওয়া যেত না। সস্তা মডেল খরচ কমায়, কিন্তু মানও যাচাই করতে হয়।",
+            "done": "আপনার কাছে ৬টা রিকোয়েস্টের প্রত্যেকটার খরচ আছে, কোন ফিচার লোকসানে আপনি জানেন, আর ৪ নম্বর রিকোয়েস্ট আপনি হাতে মিলিয়েছেন।",
             "check": {
-              "question": "\"এই feature কি লোকসানে?\" প্রশ্নের উত্তর দিতে log-এর কোন field লাগে?",
-              "answer": "Input token, output token আর model থেকে vendor-এর দাম দিয়ে cost পাওয়া যায়। Feature tag request-গুলোকে ভাগ করে। এই field না থাকলে data দিয়ে প্রশ্নটার উত্তর দেওয়া যায় না।"
+              "question": "\"এই ফিচার কি লোকসানে?\" প্রশ্নের উত্তর দিতে লগের কোন ফিল্ড লাগে?",
+              "answer": "ইনপুট টোকেন, আউটপুট টোকেন আর মডেল থেকে ভেন্ডরের দাম দিয়ে খরচ পাওয়া যায়। ফিচার ট্যাগ রিকোয়েস্টগুলোকে ভাগ করে। এই ফিল্ড না থাকলে ডেটা দিয়ে প্রশ্নটার উত্তর দেওয়া যায় না।"
             },
-            "challenge": "একটা নিয়ম যোগ করো: large model-এর input token-এর অর্ধেক cache করা, আর cache করা token-এর দাম স্বাভাবিক দামের 10%। Model-কে আবার হিসাব করতে বলো। report_writer কি এখনো লোকসানে?"
+            "challenge": "একটা নিয়ম যোগ করুন: বড় মডেলের ইনপুট টোকেনের অর্ধেক ক্যাশ করা, আর ক্যাশ করা টোকেনের দাম স্বাভাবিক দামের ১০%। মডেলকে আবার হিসাব করতে বলুন। report_writer কি এখনো লোকসানে?"
           }
         },
         {
@@ -411,31 +411,31 @@
             "challenge": "Change the day 7 numbers so that v8 wins on thumbs-up by 8 points but costs 40% more. Ask the model to help you decide. What extra information do you want?"
           },
           "bn": {
-            "title": "A/B test কখন থামাবে, ঠিক করো",
-            "why": "তুমি যখন production-এ নতুন prompt test করবে, শুরুর একটা ভালো result লোভ দেখায়। খুব তাড়াতাড়ি ship করলে তুমি এমন prompt-এর জন্য বেশি টাকা দিতে পারো, যা আসলে ভালো না।",
+            "title": "A/B টেস্ট কখন থামাবেন, ঠিক করুন",
+            "why": "আপনি যখন প্রোডাকশনে নতুন প্রম্পট টেস্ট করবেন, শুরুর একটা ভালো ফলাফল লোভ দেখায়। খুব তাড়াতাড়ি শিপ করলে আপনি এমন প্রম্পটের জন্য বেশি টাকা দিতে পারেন, যা আসলে ভালো না।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর সংখ্যাগুলো পড়ো। ঠিক করো: ১ম দিনের পরই v8 ship করবে, না ৭ম দিন পর্যন্ত অপেক্ষা করবে? কারণ লিখে রাখো। তারপর prompt টা copy করো, paste করে Enter চাপো।",
+                "do": "এই প্রম্পটের সংখ্যাগুলো পড়ুন। ঠিক করুন: ১ম দিনের পরই v8 শিপ করবেন, না ৭ম দিন পর্যন্ত অপেক্ষা করবেন? কারণ লিখে রাখুন। তারপর প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "আমরা production-এ আমাদের support-bot-এর prompt-এর দুটো version test করছি (বানানো data)। Traffic ভাগ করা হয়েছে user_id-র hash দিয়ে। Version support-v7 হলো এখনকার prompt। Version support-v8 একটা নতুন, লম্বা prompt।\n\n১ম দিনের বিকেল পর:\n- v7: 60টা rate করা উত্তরের মধ্যে 40টা thumbs-up\n- v8: 60টা rate করা উত্তরের মধ্যে 45টা thumbs-up\n\n৭ম দিন পর:\n- v7: 420টা rate করা উত্তরের মধ্যে 290টা thumbs-up, প্রতি উত্তরে গড় cost 0.8 cent, গড় latency 2.1 s\n- v8: 420টা rate করা উত্তরের মধ্যে 292টা thumbs-up, প্রতি উত্তরে গড় cost 1.1 cent, গড় latency 3.3 s\n\nকাজ:\n1. ১ম দিনে আর ৭ম দিনে প্রতিটা version-এর thumbs-up হার বের করো।\n2. ১ম দিনের পর কি আমাদের থেমে v8 ship করা উচিত? কেন বা কেন নয়?\n3. ৭ম দিনে আমাদের কী করা উচিত?\n4. Test শুরুর আগে আমাদের কোন metric বেছে নেওয়া উচিত ছিল?\nছোট আর সরাসরি উত্তর দাও।",
-                "expect": "১ম দিন: v7 <strong>66.7%</strong>, v8 <strong>75.0%</strong>। ৭ম দিন: v7 <strong>69.0%</strong>, v8 <strong>69.5%</strong>। শুরুর ব্যবধান প্রায় মিলিয়ে গেছে। ৭ম দিনে v8-এর মান প্রায় সমান, কিন্তু cost বেশি আর ধীর। বেশিরভাগ model বলবে v7 রাখো।",
+                "expect": "১ম দিন: v7 <strong>৬৬.৭%</strong>, v8 <strong>৭৫.০%</strong>। ৭ম দিন: v7 <strong>৬৯.০%</strong>, v8 <strong>৬৯.৫%</strong>। শুরুর ব্যবধান প্রায় মিলিয়ে গেছে। ৭ম দিনে v8-এর মান প্রায় সমান, কিন্তু খরচ বেশি আর ধীর। বেশিরভাগ মডেল বলবে v7 রাখুন।",
                 "example": "1. ১ম দিন: v7 40/60 = 66.7%, v8 45/60 = 75.0%। ৭ম দিন: v7 290/420 = 69.0%, v8 292/420 = 69.5%।\n2. না। প্রতি version-এ মাত্র 60টা rating নিয়ে একটা বিকেল অনেক কম data। Chance-এর কারণে v8 ভালো দেখাতে পারে।\n3. v7 রাখো। v8-এর মান প্রায় একই, কিন্তু তার cost 0.8 cent-এর বদলে 1.1 cent আর সে ধীর (2.1 s-এর বদলে 3.3 s)।\n4. Test শুরুর আগেই মূল metric, cost-এর সীমা, latency-র সীমা আর test কত দিন চলবে, ঠিক করা উচিত ছিল।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। পড়ো, ভাগ করতে user_id-র hash কেন ব্যবহার করা হয়।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। পড়ুন, ভাগ করতে user_id-র হ্যাশ কেন ব্যবহার করা হয়।",
                 "prompt": "আমরা user_id-র hash দিয়ে traffic ভাগ করি (একটা স্থির নিয়ম, যা প্রতিটা user-কে সবসময় একই version-এ পাঠায়)। আমরা এটা করি কেন, প্রতিটা message-এ random বাছি না কেন? আর প্রতিটা trace-এ support-v8-এর মতো prompt version ID রাখা উচিত কেন? ৪টা ছোট বাক্যে উত্তর দাও।",
-                "expect": "চারটা ছোট বাক্য। Hash প্রতিটা user-কে একটা version-এই রাখে, তাই user দুটো আলাদা bot দেখে না। প্রতিটা trace-এ version ID থাকলে বোঝা যায় কোন prompt কোন উত্তর বানিয়েছে।",
+                "expect": "চারটা ছোট বাক্য। হ্যাশ প্রতিটা ইউজারকে একটা ভার্সনেই রাখে, তাই ইউজার দুটো আলাদা বট দেখে না। প্রতিটা ট্রেসে ভার্সন ID থাকলে বোঝা যায় কোন প্রম্পট কোন উত্তর বানিয়েছে।",
                 "example": "Hash প্রতিটা user-কে সবসময় একই version-এ পাঠায়। প্রতি message-এ random বাছলে এক user একই chat-এ দুটো আলাদা bot দেখতে পারে। প্রতিটা trace-এ version ID থাকলে বোঝা যায় কোন prompt কোন উত্তর বানিয়েছে। তখন তুমি বলতে পারো \"support-v8-এর user-রা বেশি timeout পেয়েছে\" আর খারাপ version তাড়াতাড়ি খুঁজে পাও।"
               }
             ],
-            "learned": "Rating কম হলে <strong>chance</strong>-এর কারণে একটা version ভালো দেখাতে পারে। 60টা rating-এ v8 এগিয়ে ছিল 8 পয়েন্ট। 420টা rating-এ এগিয়ে থাকা নেমে এল 0.5 পয়েন্টে। Metric (আর cost ও latency-র সীমা) তুমি test-এর <strong>আগে</strong> ঠিক করো, আর থামো শুধু তখন, যখন একটা version সেই metric-এ পরিষ্কারভাবে জেতে। কোনো prompt feedback-এ জিতেও খারাপ লেনদেন হতে পারে, যদি সে ধীর হয় আর বেশি cost করে।",
-            "done": "তোমার কাছে ১ম দিনের (66.7% আর 75.0%) আর ৭ম দিনের (69.0% আর 69.5%) thumbs-up হার আছে, আর প্রতিটা দিনের জন্য একটা সিদ্ধান্ত আছে।",
+            "learned": "রেটিং কম হলে <strong>চান্স</strong>-এর কারণে একটা ভার্সন ভালো দেখাতে পারে। ৬০টা রেটিংয়ে v8 এগিয়ে ছিল ৮ পয়েন্ট। ৪২০টা রেটিংয়ে এগিয়ে থাকা নেমে এল ০.৫ পয়েন্টে। মেট্রিক (আর খরচ ও ল্যাটেন্সির সীমা) আপনি টেস্টের <strong>আগে</strong> ঠিক করুন, আর থামুন শুধু তখন, যখন একটা ভার্সন সেই মেট্রিকে পরিষ্কারভাবে জেতে। কোনো প্রম্পট ফিডব্যাকে জিতেও খারাপ লেনদেন হতে পারে, যদি সে ধীর হয় আর বেশি খরচ করে।",
+            "done": "আপনার কাছে ১ম দিনের (৬৬.৭% আর ৭৫.০%) আর ৭ম দিনের (৬৯.০% আর ৬৯.৫%) থাম্বস-আপ হার আছে, আর প্রতিটা দিনের জন্য একটা সিদ্ধান্ত আছে।",
             "check": {
-              "question": "একটা ভালো বিকেল দেখেই test থামিয়ে দেওয়া ভুল কেন?",
-              "answer": "Rating কম হলে chance-এর কারণে একটা version ভালো দেখাতে পারে। আগে metric ঠিক করো, আর থামো শুধু যখন একটা version সেই metric-এ পরিষ্কারভাবে জেতে। Cost আর latency-ও গোনায় ধরতে হয়।"
+              "question": "একটা ভালো বিকেল দেখেই টেস্ট থামিয়ে দেওয়া ভুল কেন?",
+              "answer": "রেটিং কম হলে চান্সের কারণে একটা ভার্সন ভালো দেখাতে পারে। আগে মেট্রিক ঠিক করুন, আর থামুন শুধু যখন একটা ভার্সন সেই মেট্রিকে পরিষ্কারভাবে জেতে। খরচ আর ল্যাটেন্সিও গোনায় ধরতে হয়।"
             },
-            "challenge": "৭ম দিনের সংখ্যা এমন বদলাও যাতে v8 thumbs-up-এ 8 পয়েন্টে জেতে কিন্তু cost 40% বেশি। Model-কে সিদ্ধান্ত নিতে সাহায্য করতে বলো। তুমি আর কোন তথ্য চাইবে?"
+            "challenge": "৭ম দিনের সংখ্যা এমন বদলান যাতে v8 থাম্বস-আপে ৮ পয়েন্টে জেতে কিন্তু খরচ ৪০% বেশি। মডেলকে সিদ্ধান্ত নিতে সাহায্য করতে বলুন। সে আর কোন তথ্য চাইবে?"
           }
         },
         {
@@ -467,31 +467,31 @@
             "challenge": "Add a 6th case where the new model does better than the old one. Ask the model to separate regressions (got worse) from improvements. Why is an alert for one direction only not enough?"
           },
           "bn": {
-            "title": "নীরবে model বদলে যাওয়া ধরো",
-            "why": "Vendor নাম না বদলেই একটা model আপডেট করতে পারে। তোমার code একই থাকে, কিন্তু তোমার JSON ভেঙে যেতে পারে। User ধরার আগে তুমি যেন এটা ধরতে পারো, তার একটা উপায় দরকার।",
+            "title": "নীরবে মডেল বদল ধরুন",
+            "why": "ভেন্ডর নাম না বদলেই একটা মডেল আপডেট করতে পারে। আপনার কোড একই থাকে, কিন্তু আপনার JSON ভেঙে যেতে পারে। ইউজার ধরার আগে আপনি যেন এটা ধরতে পারেন, তার একটা উপায় দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর ৫টা case পড়ো। কোনগুলো বদলেছে, দাগ দাও। তারপর prompt টা copy করো, paste করে Enter চাপো। Model-এর list-এর সাথে নিজেরটা মেলাও।",
+                "do": "এই প্রম্পটের ৫টা কেস পড়ুন। কোনগুলো বদলেছে, দাগ দিন। তারপর প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। মডেলের তালিকার সাথে নিজেরটা মেলান।",
                 "prompt": "আমাদের app একটা model-কে দিয়ে message থেকে {\"name\": ..., \"amount_bdt\": ...}-এর মতো JSON বের করায়। Vendor একই model নামের পেছনের model আপডেট করেছে। আমরা 5টা production input পুরনো আর নতুন version দিয়ে চালিয়েছি (বানানো data)।\n\n1. Input: \"Rahim paid 1,200 taka\"\n   OLD: {\"name\":\"Rahim\",\"amount_bdt\":1200}\n   NEW: {\"name\":\"Rahim\",\"amount_bdt\":1200}\n2. Input: \"Sumi sent 5k BDT\"\n   OLD: {\"name\":\"Sumi\",\"amount_bdt\":5000}\n   NEW: {\"name\":\"Sumi\",\"amount_bdt\":\"5k\"}\n3. Input: \"Tanvir paid 300 taka and Mina paid 450 taka\"\n   OLD: [{\"name\":\"Tanvir\",\"amount_bdt\":300},{\"name\":\"Mina\",\"amount_bdt\":450}]\n   NEW: {\"name\":\"Tanvir\",\"amount_bdt\":300}\n4. Input: \"Lina paid 75 taka\"\n   OLD: {\"name\":\"Lina\",\"amount_bdt\":75}\n   NEW: Sure! Here is the JSON: {\"name\":\"Lina\",\"amount_bdt\":75}\n5. Input: \"Arif paid 2,000 taka\"\n   OLD: {\"name\":\"Arif\",\"amount_bdt\":2000}\n   NEW: {\"name\":\"Arif\",\"amount_bdt\":2000}\n\nকাজ:\n1. প্রতিটা case-এর জন্য বলো SAME না CHANGED, আর বদলের ধরন কী।\n2. প্রতিটা বদলের জন্য একটা automatic check লেখো (এমন নিয়ম যা একটা program পরীক্ষা করতে পারে)।\n3. Live traffic-এর কত অংশ দুই model দিয়েই চালানো উচিত, আর কিসের উপর alert দেওয়া উচিত, বলো।",
-                "expect": "১ আর ৫ নম্বর case <strong>SAME</strong>। ২, ৩ আর ৪ নম্বর <strong>CHANGED</strong>: ভুল type (সংখ্যার বদলে লেখা), দ্বিতীয় মানুষটা হারিয়ে যাওয়া, আর JSON-এর চারপাশে বাড়তি লেখা।",
+                "expect": "১ আর ৫ নম্বর কেস <strong>SAME</strong>। ২, ৩ আর ৪ নম্বর <strong>CHANGED</strong>: ভুল টাইপ (সংখ্যার বদলে লেখা), দ্বিতীয় মানুষটা বাদ পড়া, আর JSON-এর চারপাশে বাড়তি লেখা।",
                 "example": "1 SAME\n2 CHANGED: amount_bdt এখন \"5k\" নামের লেখা, সংখ্যা নয়। Check: amount_bdt অবশ্যই সংখ্যা হতে হবে।\n3 CHANGED: list একটা object হয়ে গেছে, Mina হারিয়ে গেছে। Check: output-এ মানুষের সংখ্যা input-এর সংখ্যার সমান হতে হবে।\n4 CHANGED: JSON-এর চারপাশে বাড়তি লেখা। Check: পুরো উত্তরটা JSON হিসেবে parse হতে হবে।\n5 SAME\nLive traffic-এর 1-5% দুই model দিয়েই চালাও। Check-এর pass rate আলাদা হলে alert দাও।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। দেখো, expected output টা ঠিক মনে হচ্ছে কি না।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। দেখুন, এক্সপেক্টেড আউটপুটটা ঠিক মনে হচ্ছে কি না।",
                 "prompt": "একজন user এই উত্তরে thumbs-down দিয়েছে।\nInput: \"Karim paid 1.5 lakh taka\" (1 lakh = 100,000)\nOutput: {\"name\":\"Karim\",\"amount_bdt\":1.5}\n\nএই failure-টাকে আমাদের eval dataset-এর জন্য একটা test case বানাও। Input, expected output আর যে নিয়ম দিয়ে এটা পরীক্ষা হবে, তা দাও। তারপর ২ বাক্যে বলো, এই রকম হাজারটা আসল failure বানানো test-এর চেয়ে বেশি কাজের কেন।",
-                "expect": "একটা test case। Input হলো Karim-এর বাক্য, expected output-এ <code>\"amount_bdt\": 150000</code> আছে, আর নিয়ম বলে amount অবশ্যই 150000 হতে হবে। তারপর আসল failure নিয়ে ২টা বাক্য।",
+                "expect": "একটা টেস্ট কেস। ইনপুট হলো Karim-এর বাক্য, এক্সপেক্টেড আউটপুটে <code>\"amount_bdt\": 150000</code> আছে, আর নিয়ম বলে amount অবশ্যই ১৫০০০০ হতে হবে। তারপর আসল ফেইলিউর নিয়ে ২টা বাক্য।",
                 "example": "Input: \"Karim paid 1.5 lakh taka\"\nExpected output: {\"name\":\"Karim\",\"amount_bdt\":150000}\nনিয়ম: JSON parse হয়, আর amount_bdt একটা সংখ্যা এবং সেটা 150000।\nআসল failure আসে আসল user-দের কাছ থেকে, তাই সেগুলো দেখায় কোন case তোমার app ভাঙে। বানানো test শুধু সেটাই ধরে, যা তুমি আগে ভেবেছ।"
               }
             ],
-            "learned": "<strong>Drift</strong> মানে model-এর নাম একই থেকে যায়, কিন্তু তার আচরণ বদলে যায়। ১ আর ৫ নম্বর case ঠিক দেখাচ্ছে, তাই শুধু সহজ input-এর test কিছুই ধরত না। কঠিন case-গুলো ভেঙেছে। Drift ধরতে live traffic-এর অল্প অংশ (1-5%) পুরনো আর নতুন model দিয়ে চালাও, check-এর result মেলাও, আর পার্থক্যে alert দাও। User-দের আসল failure নতুন test case হয়ে যায়।",
-            "done": "তোমার কাছে ৩টা বদলে যাওয়া case-এর list আছে, প্রতিটার একটা করে check সহ, আর Karim-এর জন্য একটা নতুন test case আছে।",
+            "learned": "<strong>ড্রিফট</strong> মানে মডেলের নাম একই থেকে যায়, কিন্তু তার আচরণ বদলে যায়। ১ আর ৫ নম্বর কেস ঠিক দেখাচ্ছে, তাই শুধু সহজ ইনপুটের টেস্ট কিছুই ধরত না। কঠিন কেসগুলো ভেঙেছে। ড্রিফট ধরতে লাইভ ট্র্যাফিকের অল্প অংশ (1-5%) পুরোনো আর নতুন মডেল দিয়ে চালান, চেকের ফলাফল মেলান, আর পার্থক্যে অ্যালার্ট দিন। ইউজারদের আসল ফেইলিউর নতুন টেস্ট কেস হয়ে যায়।",
+            "done": "আপনার কাছে ৩টা বদলানো কেসের তালিকা আছে, প্রতিটার একটা করে চেক সহ, আর Karim-এর জন্য একটা নতুন টেস্ট কেস আছে।",
             "check": {
-              "question": "Offline eval এই ধরনের বদল মিস করতে পারে কেন?",
-              "answer": "Model-এর নাম একই ছিল, তাই তোমার code-এ কিছু বদলায়নি। একটা স্থির test set-এ হয়তো ভেঙে যাওয়া case-গুলোই নেই। আসল traffic-এর একটা ছোট অংশ দুই model দিয়েই চালালে পার্থক্য ধরা পড়ে।"
+              "question": "অফলাইন ইভ্যাল এই ধরনের বদল মিস করতে পারে কেন?",
+              "answer": "মডেলের নাম একই ছিল, তাই আপনার কোডে কিছু বদলায়নি। একটা স্থির টেস্ট সেটে হয়তো ভাঙা কেসগুলোই নেই। আসল ট্র্যাফিকের একটা ছোট অংশ দুই মডেল দিয়েই চালালে পার্থক্য ধরা পড়ে।"
             },
-            "challenge": "৬ নম্বর একটা case যোগ করো, যেখানে নতুন model পুরনোর চেয়ে ভালো করে। Model-কে regression (খারাপ হওয়া) আর improvement আলাদা করতে বলো। শুধু এক দিকের alert যথেষ্ট নয় কেন?"
+            "challenge": "৬ নম্বর একটা কেস যোগ করুন, যেখানে নতুন মডেল পুরোনোর চেয়ে ভালো করে। মডেলকে রিগ্রেশন (খারাপ হওয়া) আর ইমপ্রুভমেন্ট আলাদা করতে বলুন। শুধু এক দিকের অ্যালার্ট যথেষ্ট নয় কেন?"
           }
         }
       ]
@@ -664,13 +664,13 @@
         "why": "A trace is a tree of spans that shows one request from the user input through each LLM call and tool call to the result. This is why you can replay and debug it."
       },
       "bn": {
-        "q": "এই Part অনুযায়ী LLM trace কী?",
+        "q": "এই পার্ট অনুযায়ী LLM ট্রেস কী?",
         "options": [
-          "একটি log line, যাতে HTTP status code লেখা থাকে",
-          "Span-এর একটি tree: user request, prompt assembly, LLM call, প্রতিটি tool invocation আর result",
-          "প্রতি token-এ vendor-এর দামের একটি table"
+          "একটি লগ লাইন, যাতে HTTP স্ট্যাটাস কোড লেখা থাকে",
+          "স্প্যানের একটি ট্রি: ইউজার রিকোয়েস্ট, প্রম্পট অ্যাসেম্বলি, LLM কল, প্রতিটি টুল ইনভোকেশন আর ফলাফল",
+          "প্রতি টোকেনে ভেন্ডরের দামের একটি টেবিল"
         ],
-        "why": "Trace হলো span-এর একটি tree, যা user input থেকে শুরু করে প্রতিটি LLM call ও tool call পেরিয়ে result পর্যন্ত একটি request দেখায়। তাই তুমি সেটি replay আর debug করতে পারো।"
+        "why": "ট্রেস হলো স্প্যানের একটি ট্রি, যা ইউজার ইনপুট থেকে শুরু করে প্রতিটি LLM কল ও টুল কল পেরিয়ে ফলাফল পর্যন্ত একটি রিকোয়েস্ট দেখায়। তাই আপনি সেটি রিপ্লে আর ডিবাগ করতে পারেন।"
       }
     },
     {
@@ -687,13 +687,13 @@
         "why": "This Part says prompts are code: store them in git, review them by PR, and deploy them through CI. Each prompt version gets a stable ID and every trace carries that ID, so you can tell which prompt version users were on."
       },
       "bn": {
-        "q": "এই Part অনুযায়ী একটি দলের prompt কীভাবে সামলানো উচিত?",
+        "q": "এই পার্ট অনুযায়ী একটি দলের প্রম্পট কীভাবে সামলানো উচিত?",
         "options": [
-          "Model vendor-এর dashboard-এ রাখো, কোনো version ID ছাড়া",
-          "Admin panel-এ সরাসরি edit করো, যাতে fix সাথে সাথে চালু হয়",
-          "কোডের মতো: git-এ রাখো, PR দিয়ে review করো, আর CI দিয়ে deploy করো"
+          "মডেল ভেন্ডরের ড্যাশবোর্ডে রাখুন, কোনো ভার্সন ID ছাড়া",
+          "অ্যাডমিন প্যানেলে সরাসরি এডিট করুন, যাতে ফিক্স সাথে সাথে চালু হয়",
+          "কোডের মতো: git-এ রাখুন, PR দিয়ে রিভিউ করুন, আর CI দিয়ে ডিপ্লয় করুন"
         ],
-        "why": "এই Part বলছে prompt হলো কোড: git-এ রাখো, PR দিয়ে review করো, আর CI দিয়ে deploy করো। প্রতিটি prompt version-এর একটি স্থির ID থাকে আর প্রতিটি trace সেই ID বহন করে, তাই তুমি জানতে পারো user-রা কোন prompt version-এ ছিল।"
+        "why": "এই পার্ট বলছে প্রম্পট হলো কোড: git-এ রাখুন, PR দিয়ে রিভিউ করুন, আর CI দিয়ে ডিপ্লয় করুন। প্রতিটি প্রম্পট ভার্সনের একটি স্থির ID থাকে আর প্রতিটি ট্রেস সেই ID বহন করে, তাই আপনি জানতে পারেন ইউজাররা কোন প্রম্পট ভার্সনে ছিল।"
       }
     },
     {
@@ -705,8 +705,8 @@
         "why": "LLM apps need richer questions: did the model return the right answer, at the right cost, in the right tone, with no leakage? LLMOps is the discipline of answering them."
       },
       "bn": {
-        "q": "একটি request 200 ফেরত দিয়েছে কি না, এমন চিরাচরিত DevOps check-ই জানার জন্য যথেষ্ট যে LLM app সঠিক, সাশ্রয়ী ও নিরাপদ উত্তর দিচ্ছে কি না।",
-        "why": "LLM app-এ আরও গভীর প্রশ্ন লাগে: মডেল কি সঠিক উত্তর দিয়েছে, সঠিক খরচে, সঠিক tone-এ, কোনো leakage ছাড়া? এই প্রশ্নের উত্তর খোঁজার বিদ্যাই LLMOps।"
+        "q": "একটি রিকোয়েস্ট ২০০ ফেরত দিয়েছে কি না, এমন চিরাচরিত DevOps চেকই জানার জন্য যথেষ্ট যে LLM অ্যাপ সঠিক, সাশ্রয়ী ও নিরাপদ উত্তর দিচ্ছে কি না।",
+        "why": "LLM অ্যাপে আরও গভীর প্রশ্ন লাগে: মডেল কি সঠিক উত্তর দিয়েছে, সঠিক খরচে, সঠিক টোনে, কোনো লিকেজ ছাড়া? এই প্রশ্নের উত্তর খোঁজার বিদ্যাই LLMOps।"
       }
     },
     {
@@ -724,14 +724,14 @@
         "why": "Drift changes outputs in ways offline evals will not catch. The fix is to run a small share of production traffic through both models, compare evals, and alert on the delta."
       },
       "bn": {
-        "q": "Vendor একই নামের মডেল চুপচাপ বদলে দিলে drift ধরার জন্য text কী পরামর্শ দেয়?",
+        "q": "ভেন্ডর একই নামের মডেল চুপচাপ বদলে দিলে ড্রিফট ধরার জন্য টেক্সট কী পরামর্শ দেয়?",
         "options": [
-          "User অভিযোগ করা পর্যন্ত অপেক্ষা করো, তারপর prompt বদলাও",
-          "তোমার offline eval-এর উপর ভরসা করো, ওগুলোই ধরবে",
-          "Production traffic-এর 1-5% পুরোনো ও নতুন দুই মডেলেই চালাও, eval তুলনা করো, আর পার্থক্য দেখা দিলে alert দাও",
-          "Hosted মডেল ব্যবহারই বন্ধ করো"
+          "ইউজার অভিযোগ করা পর্যন্ত অপেক্ষা করুন, তারপর প্রম্পট বদলান",
+          "আপনার অফলাইন ইভ্যালের উপর ভরসা করুন, ওগুলোই ধরবে",
+          "প্রোডাকশন ট্র্যাফিকের 1-5% পুরোনো ও নতুন দুই মডেলেই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য দেখা দিলে অ্যালার্ট দিন",
+          "হোস্টেড মডেল ব্যবহারই বন্ধ করুন"
         ],
-        "why": "Drift এমনভাবে output বদলায় যা offline eval ধরতে পারে না। সমাধান হলো production traffic-এর ছোট একটি অংশ দুই মডেলেই চালানো, eval তুলনা করা, আর delta দেখা দিলে alert দেওয়া।"
+        "why": "ড্রিফট এমনভাবে আউটপুট বদলায় যা অফলাইন ইভ্যাল ধরতে পারে না। সমাধান হলো প্রোডাকশন ট্র্যাফিকের ছোট একটি অংশ দুই মডেলেই চালানো, ইভ্যাল তুলনা করা, আর ডেল্টা দেখা দিলে অ্যালার্ট দেওয়া।"
       }
     },
     {
@@ -743,8 +743,8 @@
         "why": "This Part says to route traffic between two prompt versions (or two models) by user_id hash, then measure cost, latency, evals, and user feedback."
       },
       "bn": {
-        "q": "এই Part বলছে, দুটি prompt version A/B test করতে user_id-এর hash দিয়ে তাদের মধ্যে traffic ভাগ করে দিতে হবে।",
-        "why": "এই Part বলছে user_id hash দিয়ে দুটি prompt version (বা দুটি model)-এর মধ্যে traffic রাউট করো, তারপর cost, latency, eval আর user feedback মাপো।"
+        "q": "এই পার্ট বলছে, দুটি প্রম্পট ভার্সন A/B টেস্ট করতে user_id-এর হ্যাশ দিয়ে তাদের মধ্যে ট্র্যাফিক ভাগ করে দিতে হবে।",
+        "why": "এই পার্ট বলছে user_id হ্যাশ দিয়ে দুটি প্রম্পট ভার্সন (বা দুটি মডেল)-এর মধ্যে ট্র্যাফিক রাউট করুন, তারপর খরচ, ল্যাটেন্সি, ইভ্যাল আর ইউজার ফিডব্যাক মাপুন।"
       }
     }
   ]

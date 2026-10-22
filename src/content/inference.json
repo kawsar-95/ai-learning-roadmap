@@ -3,8 +3,8 @@
   "title": "Inference",
   "lede": "API-based vs self-hosted inference; vLLM, TGI, SGLang, Ollama, llama.cpp; GGUF/AWQ/GPTQ/INT4-INT8 quantisation; KV cache, prefix caching, speculative decoding; continuous batching; TTFT vs TPS; GPU economics, edge inference, and the major hosted providers (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "Inference (model চালানো)",
-    "lede": "API-ভিত্তিক বনাম নিজে host করা inference; vLLM, TGI, SGLang, Ollama, llama.cpp; GGUF/AWQ/GPTQ/INT4-INT8 quantisation; KV cache, prefix caching, speculative decoding; continuous batching; TTFT বনাম TPS; GPU-র অর্থনীতি, edge inference, আর বড় বড় hosted provider (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "ইনফারেন্স (মডেল চালানো)",
+    "lede": "API-ভিত্তিক বনাম নিজে হোস্ট করা ইনফারেন্স; vLLM, TGI, SGLang, Ollama, llama.cpp; GGUF/AWQ/GPTQ/INT4-INT8 কোয়ান্টাইজেশন; KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং; কন্টিনিউয়াস ব্যাচিং; TTFT বনাম TPS; GPU-র অর্থনীতি, এজ ইনফারেন্স, আর বড় বড় হোস্টেড প্রোভাইডার (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "Inference (servers, quantization, providers)",
       "sub": "Every LLM call has two sides: the <strong>request</strong> you send and the <strong>inference</strong> that serves it. Most teams start by renting (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock). Once usage justifies it, you self-host with vLLM, TGI, SGLang, Ollama, or llama.cpp — and learn a different optimization vocabulary: KV cache, prefix caching, speculative decoding, continuous batching.",
       "bn": {
-        "title": "Inference: server, quantization আর provider",
-        "sub": "প্রতিটা LLM call-এর দুই দিক: আপনার পাঠানো <strong>request</strong>, আর সেটা যে <strong>inference</strong> সামলায়। বেশিরভাগ team শুরুতে ভাড়া নেয় (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। ব্যবহার যথেষ্ট বাড়লে তারা vLLM, TGI, SGLang, Ollama বা llama.cpp দিয়ে নিজে host করে। তখন optimization-এর একদম নতুন শব্দভান্ডার শিখতে হয়: KV cache, prefix caching, speculative decoding, continuous batching।"
+        "title": "ইনফারেন্স: সার্ভার, কোয়ান্টাইজেশন আর প্রোভাইডার",
+        "sub": "প্রতিটা LLM কলের দুই দিক: আপনার পাঠানো <strong>রিকোয়েস্ট</strong>, আর সেটা যে <strong>ইনফারেন্স</strong> সামলায়। বেশিরভাগ টিম শুরুতে ভাড়া নেয় (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। ব্যবহার যথেষ্ট বাড়লে তারা vLLM, TGI, SGLang, Ollama বা llama.cpp দিয়ে নিজে হোস্ট করে। তখন অপ্টিমাইজেশনের একদম নতুন শব্দভান্ডার শিখতে হয়: KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং, কন্টিনিউয়াস ব্যাচিং।"
       },
       "body": [
         {
@@ -167,7 +167,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Throughput vs quality trade-off for quantisation\">\n      <text x=\"40\" y=\"30\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">quality (y) vs memory (x) — right is smaller, up is better</text>\n      \n      <line x1=\"60\" y1=\"240\" x2=\"1060\" y2=\"240\" stroke=\"#334155\"></line>\n      <line x1=\"60\" y1=\"240\" x2=\"60\" y2=\"50\" stroke=\"#334155\"></line>\n      \n      <g><circle cx=\"120\" cy=\"80\" r=\"10\" fill=\"#22d3ee\"></circle><text x=\"120\" y=\"58\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">FP16</text><text x=\"120\" y=\"262\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">16 GB @ 7B</text></g>\n      <g><circle cx=\"320\" cy=\"105\" r=\"10\" fill=\"#34d399\"></circle><text x=\"320\" y=\"83\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#34d399\">FP8</text><text x=\"320\" y=\"262\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">8 GB</text></g>\n      <g><circle cx=\"520\" cy=\"125\" r=\"10\" fill=\"#fbbf24\"></circle><text x=\"520\" y=\"103\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fbbf24\">INT8</text><text x=\"520\" y=\"262\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">8 GB</text></g>\n      <g><circle cx=\"720\" cy=\"160\" r=\"10\" fill=\"#a78bfa\"></circle><text x=\"720\" y=\"138\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a78bfa\">AWQ-4bit</text><text x=\"720\" y=\"262\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">4 GB</text></g>\n      <g><circle cx=\"920\" cy=\"195\" r=\"10\" fill=\"#fb7185\"></circle><text x=\"920\" y=\"173\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">GGUF Q4_K_M</text><text x=\"920\" y=\"262\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">4.1 GB</text></g>\n    </svg>",
           "caption": "Quantisation trade-off (illustrative, not benchmark-exact). Going from FP16 to AWQ-4bit cuts memory 4× with small quality loss for most workloads.",
-          "captionBn": "কোয়ান্টাইজেশন ট্রেড-অফ (চিত্রলিখিত, benchmark-সঠিক নয়)। FP16 থেকে AWQ-4bit-এ গেলে বেশিরভাগ কাজে মানের সামান্য ক্ষতিতে মেমরি ৪× কমে।"
+          "captionBn": "কোয়ান্টাইজেশন ট্রেড-অফ (চিত্রলিখিত, বেঞ্চমার্ক-সঠিক নয়)। FP16 থেকে AWQ-4bit-এ গেলে বেশিরভাগ কাজে মানের সামান্য ক্ষতিতে মেমরি ৪× কমে।"
         },
         {
           "type": "heading",
@@ -350,74 +350,74 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>দুটি পথ:</strong> API-ভিত্তিক inference (Together, Fireworks, Groq, Cerebras, Replicate, OpenAI, Anthropic) অথবা স্ব-হোস্টেড inference (vLLM, TGI, SGLang, Ollama, llama.cpp দিয়ে)। বেশিরভাগ দল আগে host করা API দিয়ে শুরু করে; বিল যথেষ্ট বড় হলে স্ব-হোস্টে যায়। সেই ক্ষেত্রে KV cache, prefix caching, speculative decoding, continuous batching — এই vocabulary শিখতে হয়।"
+          "html": "<strong>দুটি পথ:</strong> API-ভিত্তিক ইনফারেন্স (Together, Fireworks, Groq, Cerebras, Replicate, OpenAI, Anthropic) অথবা সেলফ-হোস্টেড ইনফারেন্স (vLLM, TGI, SGLang, Ollama, llama.cpp দিয়ে)। বেশিরভাগ টিম আগে হোস্ট করা API দিয়ে শুরু করে; বিল যথেষ্ট বড় হলে সেলফ-হোস্টে যায়। সেই ক্ষেত্রে KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং, কন্টিনিউয়াস ব্যাচিং — এই শব্দভান্ডার শিখতে হয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Self-host-এর servers:</strong>"
+          "html": "<strong>সেলফ-হোস্টের সার্ভার:</strong>"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>vLLM</strong> — throughput চ্যাম্পিয়ন; PagedAttention + continuous batching সাধারণত ১০–২৪× উচ্চতর throughput দেয়।<a class=\"cite\" href=\"#src13\">[13]</a>",
-            "<strong>TGI</strong> — Hugging Face-এর Rust+Python server।",
-            "<strong>SGLang</strong> — structured-output ও multi-call program-এর জন্য অপ্টিমাইজড; RadixAttention prefix caching।<a class=\"cite\" href=\"#src14\">[14]</a>",
-            "<strong>Ollama</strong> — লোকাল ল্যাপটপ ও ছোট server-এর জন্য এক-লাইনের CLI।",
-            "<strong>llama.cpp</strong> — CPU-first, GGUF-native, ফোন ও Raspberry Pi-তেও চলে।<a class=\"cite\" href=\"#src15\">[15]</a>",
-            "<strong>TensorRT-LLM / Triton</strong> — NVIDIA-র compiled kernel; সর্বোচ্চ H100 throughput, সবচেয়ে বেশি ops প্রচেষ্টা।"
+            "<strong>vLLM</strong> — থ্রুপুট চ্যাম্পিয়ন; PagedAttention + কন্টিনিউয়াস ব্যাচিং সাধারণত ১০–২৪× উচ্চতর থ্রুপুট দেয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>",
+            "<strong>TGI</strong> — Hugging Face-এর Rust+Python সার্ভার।",
+            "<strong>SGLang</strong> — স্ট্রাকচার্ড আউটপুট ও মাল্টি-কল প্রোগ্রামের জন্য অপ্টিমাইজড; RadixAttention প্রিফিক্স ক্যাশিং।<a class=\"cite\" href=\"#src14\">[১৪]</a>",
+            "<strong>Ollama</strong> — লোকাল ল্যাপটপ ও ছোট সার্ভারের জন্য এক-লাইনের CLI।",
+            "<strong>llama.cpp</strong> — CPU-first, GGUF-native, ফোন ও Raspberry Pi-তেও চলে।<a class=\"cite\" href=\"#src15\">[১৫]</a>",
+            "<strong>TensorRT-LLM / Triton</strong> — NVIDIA-র কম্পাইলড কার্নেল; সর্বোচ্চ H100 থ্রুপুট, সবচেয়ে বেশি অপস প্রচেষ্টা।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Quantisation:</strong> weight precision ১৬-বিট থেকে ৮ বা ৪ বিটে নামানো, যাতে GPU memory ২–৪× কমে এবং inference আনুপাতিকভাবে দ্রুত হয়, সামান্য মান কমে। সাধারণ ফর্ম্যাট:"
+          "html": "<strong>কোয়ান্টাইজেশন:</strong> ওয়েটের প্রিসিশন ১৬-বিট থেকে ৮ বা ৪ বিটে নামানো, যাতে GPU মেমরি ২–৪× কমে এবং ইনফারেন্স আনুপাতিকভাবে দ্রুত হয়, সামান্য মান কমে। সাধারণ ফরম্যাট:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>GGUF</strong> — llama.cpp-এর ফর্ম্যাট, single file, CPU+GPU hybrid, open-weight লোকাল inference-এর মানদণ্ড।<a class=\"cite\" href=\"#src15\">[15]</a>",
-            "<strong>AWQ</strong> — ৪-বিটে FP16-এর কাছাকাছি মান; vLLM/SGLang-এ জনপ্রিয়।<a class=\"cite\" href=\"#src16\">[16]</a>",
-            "<strong>GPTQ</strong> — পুরোনো, GPU serving-এ এখনও প্রচলিত।",
-            "<strong>INT8 / FP8</strong> — H100-এ নেটিভ hardware support সহ সর্বনিম্ন মান-ক্ষতি।",
-            "<strong>INT4 / NF4</strong> — bitsandbytes (QLoRA) প্রশিক্ষণে; inference-এও ব্যবহৃত।"
+            "<strong>GGUF</strong> — llama.cpp-এর ফরম্যাট, সিঙ্গেল ফাইল, CPU+GPU হাইব্রিড, ওপেন-ওয়েট লোকাল ইনফারেন্সের মানদণ্ড।<a class=\"cite\" href=\"#src15\">[১৫]</a>",
+            "<strong>AWQ</strong> — ৪-বিটে FP16-এর কাছাকাছি মান; vLLM/SGLang-এ জনপ্রিয়।<a class=\"cite\" href=\"#src16\">[১৬]</a>",
+            "<strong>GPTQ</strong> — পুরোনো, GPU সার্ভিংয়ে এখনও প্রচলিত।",
+            "<strong>INT8 / FP8</strong> — H100-এ নেটিভ হার্ডওয়্যার সাপোর্ট সহ সর্বনিম্ন মান-ক্ষতি।",
+            "<strong>INT4 / NF4</strong> — bitsandbytes (QLoRA) ট্রেনিংয়ে; ইনফারেন্সেও ব্যবহৃত।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>তিনটি মন্ত্র যা প্রতিটি আধুনিক server-এ থাকে:</strong>"
+          "html": "<strong>তিনটি মন্ত্র যা প্রতিটি আধুনিক সার্ভারে থাকে:</strong>"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Paged KV cache:</strong> প্রতিটি request-এর জন্য একটি contiguous buffer-এর বদলে KV cache memory পেজে (OS virtual memory-র মতো) বরাদ্দ করা হয়।<a class=\"cite\" href=\"#src13\">[13]</a>",
-            "<strong>Prefix caching:</strong> অনেক request একই দীর্ঘ system prompt শেয়ার করলে server prefix hash করে KV পুনরায় ব্যবহার করে। Anthropic-এর <code>prompt_caching</code> ও OpenAI-র <code>cached_prompt</code> cached অংশে ৮০–৯০% খরচ বাঁচায়।<a class=\"cite\" href=\"#src17\">[17]</a>",
-            "<strong>Speculative decoding:</strong> একটি ছোট draft model পরবর্তী ৫–১০ token প্রস্তাব করে; বড় model সেগুলো সমান্তরালে যাচাই করে। গুণমান না কমিয়ে throughput ২–৩×।"
+            "<strong>পেজড KV ক্যাশ:</strong> প্রতিটি রিকোয়েস্টের জন্য একটি কন্টিগুয়াস বাফারের বদলে KV ক্যাশ মেমরি পেজে (OS ভার্চুয়াল মেমরির মতো) বরাদ্দ করা হয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>",
+            "<strong>প্রিফিক্স ক্যাশিং:</strong> অনেক রিকোয়েস্ট একই দীর্ঘ সিস্টেম প্রম্পট শেয়ার করলে সার্ভার প্রিফিক্স হ্যাশ করে KV পুনরায় ব্যবহার করে। Anthropic-এর <code>prompt_caching</code> ও OpenAI-র <code>cached_prompt</code> ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।<a class=\"cite\" href=\"#src17\">[১৭]</a>",
+            "<strong>স্পেকুলেটিভ ডিকোডিং:</strong> একটি ছোট ড্রাফট মডেল পরবর্তী ৫–১০ টোকেন প্রস্তাব করে; বড় মডেল সেগুলো সমান্তরালে যাচাই করে। গুণমান না কমিয়ে থ্রুপুট ২–৩×।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Continuous batching:</strong> naive serving GPU-তে একবারে একটি request প্রক্রিয়া করে। Continuous batching (vLLM, TGI, SGLang) অনেক request-এর token আন্তঃপ্রবিষ্ট করে যাতে একটি slow request-এর জন্য GPU কখনো নিষ্ক্রিয় না হয়। এটাই এককভাবে ৫–২০× বেশি throughput দেয়।<a class=\"cite\" href=\"#src13\">[13]</a>"
+          "html": "<strong>কন্টিনিউয়াস ব্যাচিং:</strong> নেইভ সার্ভিং GPU-তে একবারে একটি রিকোয়েস্ট প্রক্রিয়া করে। কন্টিনিউয়াস ব্যাচিং (vLLM, TGI, SGLang) অনেক রিকোয়েস্টের টোকেন আন্তঃপ্রবিষ্ট করে যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো নিষ্ক্রিয় না হয়। এটাই এককভাবে ৫–২০× বেশি থ্রুপুট দেয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Latency বনাম throughput (TTFT, TPS):</strong> TTFT (time to first token) হলো ব্যবহারকারী কত তাড়াতাড়ি প্রথম শব্দ দেখে। TPS (tokens per second, per request) হলো generation-এর গতি যা ব্যবহারকারী দেখে। Aggregate throughput হলো server মোট কত token নিঃসরণ করে। p99 latency হলো সবচেয়ে খারাপ ১%।"
+          "html": "<strong>ল্যাটেন্সি বনাম থ্রুপুট (TTFT, TPS):</strong> TTFT (টাইম টু ফার্স্ট টোকেন) হলো ইউজার কত তাড়াতাড়ি প্রথম শব্দ দেখে। TPS (টোকেন পার সেকেন্ড, প্রতি রিকোয়েস্টে) হলো জেনারেশনের গতি যা ইউজার দেখে। অ্যাগ্রিগেট থ্রুপুট হলো সার্ভার মোট কত টোকেন নিঃসরণ করে। p99 ল্যাটেন্সি হলো সবচেয়ে খারাপ ১%।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>GPU economics, edge inference, on-device models:</strong> H100 প্রধান cloud-এ ঘণ্টায় $2–$4-এ ভাড়া নেওয়া যায়, কিন্তু কেনা ~$30k। ৭০B মডেলে এটি latency ভেঙে পড়ার আগে প্রায় ৩০ সমকালীন request সার্ভ করে — পুরো লোডে প্রায় $0.10/১k generated token। Edge inference ছোট মডেল (৩B–৮B) ব্যবহারকারীর ডিভাইসে ঠেলে দেয় (MLX, llama.cpp বা vendor SDK দিয়ে)।<a class=\"cite\" href=\"#src15\">[15]</a>"
+          "html": "<strong>GPU-র অর্থনীতি, এজ ইনফারেন্স, অন-ডিভাইস মডেল:</strong> H100 প্রধান ক্লাউডে ঘণ্টায় $২–$4-এ ভাড়া নেওয়া যায়, কিন্তু কেনা ~$৩০k। ৭০B মডেলে এটি ল্যাটেন্সি ভেঙে পড়ার আগে প্রায় ৩০ সমকালীন রিকোয়েস্ট সার্ভ করে — পুরো লোডে প্রায় $০.10/১k জেনারেটেড টোকেন। এজ ইনফারেন্স ছোট মডেল (৩B–৮B) ইউজারের ডিভাইসে ঠেলে দেয় (MLX, llama.cpp বা ভেন্ডর SDK দিয়ে)।<a class=\"cite\" href=\"#src15\">[১৫]</a>"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Inference providers (২০২৫):</strong> Together (open-weight catalogue, ভালো default), Fireworks (দ্রুত, function-calling-optimised), Groq (LPU hardware, ultra-low latency), Cerebras (wafer-scale chip), Replicate (pay-per-second, model marketplace), AWS Bedrock / Azure AI Foundry (enterprise compliance), OpenRouter (aggregator)।"
+          "html": "<strong>ইনফারেন্স প্রোভাইডার (২০২৫):</strong> Together (ওপেন-ওয়েট ক্যাটালগ, ভালো ডিফল্ট), Fireworks (দ্রুত, ফাংশন-কলিং-অপ্টিমাইজড), Groq (LPU হার্ডওয়্যার, অতি-কম ল্যাটেন্সি), Cerebras (ওয়েফার-স্কেল চিপ), Replicate (প্রতি সেকেন্ডে পে, মডেল মার্কেটপ্লেস), AWS Bedrock / Azure AI Foundry (এন্টারপ্রাইজ কমপ্লায়েন্স), OpenRouter (অ্যাগ্রিগেটর)।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>বাস বনাম গাড়ির উপমা:</strong> API inference হলো বাসে যাতায়াত (OpenAI, Anthropic, Together)। আপনি একজন যাত্রী হলে সস্তা। স্ব-হোস্ট (vLLM) হলো গাড়ি কেনা। ট্যাক্সি চালক হলে গাড়ি সস্তা, কিন্তু জ্বালানি (GPU), মেইনটেন্যান্স (ops ইঞ্জিনিয়ার) ও পার্কিং (server room) লাগে। কোয়ান্টাইজেশন হলো ইঞ্জিন খুলে প্রতি চতুর্থ পিস্টন বাদ দেওয়া — গাড়ি এখনও চলে, শুধু কম শক্তিতে। KV caching হলো বাড়ি ফেরার রাস্তা মনে রাখা, যাতে প্রতিটি মোড়ে আবার ম্যাপ না দেখতে হয়।"
+              "html": "<strong>বাস বনাম গাড়ির উপমা:</strong> API ইনফারেন্স হলো বাসে যাতায়াত (OpenAI, Anthropic, Together)। আপনি একজন যাত্রী হলে সস্তা। সেলফ-হোস্ট (vLLM) হলো গাড়ি কেনা। ট্যাক্সি চালক হলে গাড়ি সস্তা, কিন্তু জ্বালানি (GPU), মেইনটেন্যান্স (অপস ইঞ্জিনিয়ার) ও পার্কিং (সার্ভার রুম) লাগে। কোয়ান্টাইজেশন হলো ইঞ্জিন খুলে প্রতি চতুর্থ পিস্টন বাদ দেওয়া — গাড়ি এখনও চলে, শুধু কম শক্তিতে। KV ক্যাশিং হলো বাড়ি ফেরার রাস্তা মনে রাখা, যাতে প্রতিটি মোড়ে আবার ম্যাপ না দেখতে হয়।"
             }
           ]
         }
@@ -507,36 +507,36 @@
             "challenge": "In the first prompt, change one number, for example a hosted price of 5 USD per 1 million tokens. Predict first: does the break-even go up or down? Then check with the model."
           },
           "bn": {
-            "title": "ঠিক করো: hosted API, না self-host",
-            "why": "তোমার chatbot জনপ্রিয় হলে কেউ একসময় প্রশ্ন করবে: আমরা কি hosted API-তে টাকা দিতে থাকব, না নিজেদের GPU-তে model চালাব? উত্তর দেওয়ার আগে খরচের অঙ্ক কষতে হবে।",
+            "title": "ঠিক করুন: হোস্টেড API, না সেলফ-হোস্ট",
+            "why": "আপনার চ্যাটবট জনপ্রিয় হলে কেউ একসময় প্রশ্ন করবে: আমরা কি হোস্টেড API-তে টাকা দিতে থাকব, না নিজেদের GPU-তে মডেল চালাব? উত্তর দেওয়ার আগে খরচের অঙ্ক কষতে হবে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। এটা দুই option-এর মাসিক খরচ জানতে চায়।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এটা দুই অপশনের মাসিক খরচ জানতে চায়।",
                 "prompt": "Scenario (সব সংখ্যা বানানো):\nShopLink নামে একটা ছোট কোম্পানি একটা customer-support chatbot চালায়। প্রতি মাসে সেটা 2 billion token ব্যবহার করে।\n\nOption 1, hosted API: প্রতি 1 million token-এ 0.50 USD।\nOption 2, self-host: প্রতি ঘণ্টায় 3 USD দরে 2টা GPU ভাড়া, মাসে 730 ঘণ্টা, সাথে অর্ধেক সময়ের একজন ML engineer, মাসে 3,000 USD। বিদ্যুৎ আর storage-এর ছোট খরচ ধরবে না।\n\nকাজ:\n1. প্রতিটা option-এর মাসিক খরচ বের করো। হিসাব দেখাও।\n2. Break-even বের করো: মাসে কত token হলে দুটো option-এর খরচ সমান হয়?\nএকটা ছোট table দিয়ে উত্তর দাও, তারপর এক বাক্যে বলো এখন কোনটা সস্তা।",
-                "expect": "Hosted-এ মাসে প্রায় <strong>1,000 USD</strong> লাগে। Self-host-এ প্রায় <strong>7,380 USD</strong>। Break-even মাসে প্রায় <strong>14.8 billion</strong> token। 2 billion token-এ hosted সস্তা।",
+                "expect": "হোস্টেডে মাসে প্রায় <strong>১,০০০ USD</strong> লাগে। সেলফ-হোস্টে প্রায় <strong>৭,৩৮০ USD</strong>। ব্রেক-ইভেন মাসে প্রায় <strong>১৪.৮ বিলিয়ন</strong> টোকেন। ২ বিলিয়ন টোকেনে হোস্টেড সস্তা।",
                 "example": "Hosted: 2,000 million token × 0.50 USD = মাসে 1,000 USD।\nSelf-host: GPU 2 × 3 × 730 = 4,380 USD, সাথে engineer 3,000 USD = মাসে 7,380 USD।\nBreak-even: 7,380 ÷ 0.50 = 14,760 million token, অর্থাৎ মাসে প্রায় 14.8 billion।\n2 billion token-এ hosted API সস্তা।"
               },
               {
                 "chat": "same",
-                "do": "একটা সংখ্যা নিজে calculator-এ মিলিয়ে দেখো: 2 × 3 × 730। উত্তরের GPU খরচের সাথে মেলাও।",
-                "expect": "<strong>4,380</strong> USD। এটা model-এর উত্তরের GPU খরচের সাথে মেলে।"
+                "do": "একটা সংখ্যা নিজে ক্যালকুলেটরে মিলিয়ে দেখুন: ২ × ৩ × ৭৩০। উত্তরের GPU খরচের সাথে মেলান।",
+                "expect": "<strong>৪,৩৮০</strong> USD। এটা মডেলের উত্তরের GPU খরচের সাথে মেলে।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। কোম্পানি বড় হয়েছে, আর একটা privacy নিয়ম এসেছে।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। কোম্পানি বড় হয়েছে, আর একটা প্রাইভেসি নিয়ম এসেছে।",
                 "prompt": "এবার অবস্থা বদলেছে। ShopLink-এর ব্যবহার বেড়ে মাসে 20 billion token হয়েছে। একজন নতুন customer আরও বলেছে, chat-এর লেখা কখনো ShopLink-এর নিজের server-এর বাইরে যেতে পারবে না। আগের দামই ধরো। ধরে নাও ওই 2টা GPU-ই এই load সামলাতে পারে। এখন তুমি কী recommend করবে, আর কেন? দুই option-এর মাসিক খরচ দাও, আর 120 শব্দের কম লিখে উত্তর দাও।",
-                "expect": "Hosted-এ এখন প্রায় <strong>10,000 USD</strong>। Self-host থাকে <strong>7,380 USD</strong>। বেশিরভাগ model খরচ আর privacy, দুই কারণেই self-host recommend করে।",
+                "expect": "হোস্টেডে এখন প্রায় <strong>১০,০০০ USD</strong>। সেলফ-হোস্ট থাকে <strong>৭,৩৮০ USD</strong>। বেশিরভাগ মডেল খরচ আর প্রাইভেসি, দুই কারণেই সেলফ-হোস্ট সুপারিশ করে।",
                 "example": "আমি self-host recommend করব।\nHosted: 20,000 million token × 0.50 USD = মাসে 10,000 USD।\nSelf-host: মাসে 7,380 USD, আগের মতোই।\nএখন self-host সস্তা, আর এতে chat-এর লেখা ShopLink-এর নিজের server-এই থাকে, যা নতুন customer চেয়েছে।"
               }
             ],
-            "learned": "Token বাড়লে hosted API-র খরচও বাড়ে (<strong>token</strong> হলো লেখার ছোট একটা টুকরো, প্রায় একটা শব্দের মতো)। Self-host-এ খরচ স্থির: GPU আর একজন engineer, traffic যা-ই হোক। 2 billion token-এ এই স্থির খরচ অনেক বড়। 20 billion token-এ সেটা API-র bill-এর চেয়ে ছোট। Privacy-র নিয়মও তোমাকে self-host করতে বাধ্য করতে পারে।",
-            "done": "তোমার কাছে দুই অবস্থার জন্য দুই option-এর মাসিক খরচ আছে, আর GPU খরচ তুমি নিজে হাতে মিলিয়েছ।",
+            "learned": "টোকেন বাড়লে হোস্টেড API-র খরচও বাড়ে (<strong>টোকেন</strong> হলো লেখার ছোট একটা টুকরো, প্রায় একটা শব্দের মতো)। সেলফ-হোস্টে খরচ স্থির: GPU আর একজন ইঞ্জিনিয়ার, ট্রাফিক যা-ই হোক। ২ বিলিয়ন টোকেনে এই স্থির খরচ অনেক বড়। ২০ বিলিয়ন টোকেনে সেটা API-র বিলের চেয়ে ছোট। প্রাইভেসির নিয়মও আপনাকে সেলফ-হোস্ট করতে বাধ্য করতে পারে।",
+            "done": "আপনার কাছে দুই অবস্থার জন্য দুই অপশনের মাসিক খরচ আছে, আর GPU খরচ আপনি নিজে হাতে মিলিয়েছেন।",
             "check": {
-              "question": "বেশিরভাগ team প্রথমে hosted API দিয়ে শুরু করে, পরে self-host-এ যায় কেন?",
-              "answer": "Hosted API দিয়ে দ্রুত শুরু করা যায়, আর load সামলানো vendor-এর কাজ। Self-host-এ স্থির খরচ আছে, তাই এটা লাভজনক হয় শুধু যখন token-এর bill অনেক বড়, অথবা privacy বা পুরো নিয়ন্ত্রণ দরকার।"
+              "question": "বেশিরভাগ টিম প্রথমে হোস্টেড API দিয়ে শুরু করে, পরে সেলফ-হোস্টে যায় কেন?",
+              "answer": "হোস্টেড API দিয়ে দ্রুত শুরু করা যায়, আর লোড সামলানো ভেন্ডরের কাজ। সেলফ-হোস্টে স্থির খরচ আছে, তাই এটা লাভজনক হয় শুধু যখন টোকেনের বিল অনেক বড়, অথবা প্রাইভেসি বা পুরো নিয়ন্ত্রণ দরকার।"
             },
-            "challenge": "প্রথম prompt-এ একটা সংখ্যা বদলাও, যেমন hosted-এর দাম 1 million token-এ 5 USD করো। আগে আন্দাজ করো: break-even কি বাড়বে, না কমবে? তারপর model-কে দিয়ে মিলিয়ে দেখো।"
+            "challenge": "প্রথম প্রম্পটে একটা সংখ্যা বদলান, যেমন হোস্টেডের দাম ১ মিলিয়ন টোকেনে ৫ USD করুন। আগে আন্দাজ করুন: ব্রেক-ইভেন কি বাড়বে, না কমবে? তারপর মডেলকে দিয়ে মিলিয়ে দেখুন।"
           }
         },
         {
@@ -568,31 +568,31 @@
             "challenge": "Ask the model for a test of 5 questions that compares a 16-bit and a 4-bit version of the same model. Which kinds of questions would show a quality drop first?"
           },
           "bn": {
-            "title": "16, 8, 4 bit-এ model-এর memory হিসাব করো",
-            "why": "একটা model চালানোর জন্য বাছার সময় প্রথম প্রশ্ন: এটা কি আমার GPU বা laptop-এর memory-তে ধরবে? 140 GB-এর file download করার আগেই একটা সহজ হিসাবে কয়েক সেকেন্ডে এর উত্তর পাওয়া যায়।",
+            "title": "১৬, ৮, ৪ বিটে মডেলের মেমরি হিসাব করুন",
+            "why": "একটা মডেল চালানোর জন্য বাছার সময় প্রথম প্রশ্ন: এটা কি আমার GPU বা ল্যাপটপের মেমরিতে ধরবে? ১৪০ GB-এর ফাইল ডাউনলোড করার আগেই একটা সহজ হিসাবে কয়েক সেকেন্ডে এর উত্তর পাওয়া যায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। Model 70 billion parameter-এর model-এর জন্য একটা memory table বানাবে।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। মডেল ৭০ বিলিয়ন প্যারামিটারের মডেলের জন্য একটা মেমরি টেবিল বানাবে।",
                 "prompt": "একটা language model-এর 70 billion parameter আছে। এই নিয়মটা ব্যবহার করো: weight-এর memory (GB) = billion-এ parameter সংখ্যা × প্রতি weight-এর bit ÷ 8।\n\n16-bit, 8-bit আর 4-bit-এ weight-এর memory-র একটা table বানাও। তারপর বলো এর মধ্যে কোনগুলো 80 GB memory-র একটা GPU-তে ধরে। শেষে এক বাক্যে বলো, weight ছাড়া server-এর run করার সময় আর কী ধরনের memory লাগে।",
-                "expect": "16-bit-এ <strong>140 GB</strong>, 8-bit-এ <strong>70 GB</strong>, 4-bit-এ <strong>35 GB</strong>। 80 GB-তে শুধু 8-bit আর 4-bit ধরে, আর 8-bit-এ জায়গা খুব কম থাকে।",
+                "expect": "16-বিটে <strong>১৪০ GB</strong>, 8-বিটে <strong>৭০ GB</strong>, 4-বিটে <strong>৩৫ GB</strong>। ৮০ GB-তে শুধু 8-বিট আর 4-বিট ধরে, আর 8-বিটে জায়গা খুব কম থাকে।",
                 "example": "Weight memory = 70 × bit ÷ 8\n16-bit: 70 × 16 ÷ 8 = 140 GB\n8-bit: 70 × 8 ÷ 8 = 70 GB\n4-bit: 70 × 4 ÷ 8 = 35 GB\n80 GB-র একটা GPU-তে ধরে: 8-bit (তবে জায়গা খুব কম বাকি থাকে) আর 4-bit। 16-bit ধরে না।\nWeight ছাড়াও server-এর KV cache-এর জন্য memory লাগে, যা এ পর্যন্ত পড়া লেখার model-এর স্বল্পমেয়াদি স্মৃতি।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। এবার লক্ষ্য 8 GB খালি জায়গার একটা laptop।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। এবার লক্ষ্য ৮ GB খালি জায়গার একটা ল্যাপটপ।",
                 "prompt": "আমি আমার laptop-এ 8 billion parameter-এর একটা model চালাতে চাই। Laptop-এ 16 GB RAM আছে, তার প্রায় 8 GB model-এর জন্য খালি। একই নিয়ম ব্যবহার করে বলো, কোন precision (16-bit, 8-bit, না 4-bit) আমি ব্যবহার করতে পারব? প্রতিটার memory দাও। তারপর সবচেয়ে ছোট precision ব্যবহারের একটা ঝুঁকি বলো।",
-                "expect": "8B model: <strong>16 GB</strong>, <strong>8 GB</strong>, <strong>4 GB</strong>। শুধু 4-bit আরামে ধরে। 8-bit পুরো 8 GB নিয়ে নেয়, তাই সেটা খুব টানাটানি।",
+                "expect": "৮B মডেল: <strong>১৬ GB</strong>, <strong>৮ GB</strong>, <strong>৪ GB</strong>। শুধু 4-বিট আরামে ধরে। 8-বিট পুরো ৮ GB নিয়ে নেয়, তাই সেটা খুব টানাটানি।",
                 "example": "16-bit: 8 × 16 ÷ 8 = 16 GB। অনেক বড়।\n8-bit: 8 × 8 ÷ 8 = 8 GB। তোমার পুরো খালি memory লাগবে, তাই খুব টানাটানি।\n4-bit: 8 × 4 ÷ 8 = 4 GB। এটা ধরে।\n4-bit ব্যবহার করো। একটা ঝুঁকি: উত্তরের মান একটু খারাপ হতে পারে, যেমন কঠিন প্রশ্নে ভুল বাড়তে পারে।"
               }
             ],
-            "learned": "একটা model আসলে অনেক বড় একটা সংখ্যার list, যাকে বলে <strong>weight</strong>। 16 bit-এ প্রতিটা সংখ্যা 2 byte নেয়। Quantization প্রতিটা সংখ্যা কম bit-এ (8 বা 4) রাখে, তাই model-এর 2 থেকে 4 গুণ কম memory লাগে। দাম হলো মানে সামান্য কমতি। Weight-ই পুরো memory না: server-এর KV cache-এর জন্যও memory লাগে (এ পর্যন্ত পড়া লেখার স্বল্পমেয়াদি স্মৃতি)।",
-            "done": "তোমার কাছে 70B model-এর memory table (140, 70, 35 GB) আর 8B model-এর table (16, 8, 4 GB) আছে।",
+            "learned": "একটা মডেল আসলে অনেক বড় একটা সংখ্যার তালিকা, যাকে বলে <strong>ওয়েট</strong>। ১৬ বিটে প্রতিটা সংখ্যা ২ বাইট নেয়। কোয়ান্টাইজেশন প্রতিটা সংখ্যা কম বিটে (৮ বা ৪) রাখে, তাই মডেলের ২ থেকে ৪ গুণ কম মেমরি লাগে। দাম হলো মানে সামান্য কমতি। ওয়েটই পুরো মেমরি না: সার্ভারের KV ক্যাশের জন্যও মেমরি লাগে (এ পর্যন্ত পড়া লেখার স্বল্পমেয়াদি স্মৃতি)।",
+            "done": "আপনার কাছে ৭০B মডেলের মেমরি টেবিল (১৪০, ৭০, ৩৫ GB) আর ৮B মডেলের টেবিল (১৬, ৮, ৪ GB) আছে।",
             "check": {
-              "question": "Quantization কী বদলায়, আর তার trade-off কী?",
-              "answer": "এটা weight-কে কম bit-এ রাখে, যেমন 16-এর বদলে 4, তাই model-এর প্রায় 2 থেকে 4 গুণ কম memory লাগে আর সেটা দ্রুত চলে। বেশিরভাগ কাজে এর দাম হলো মানে সামান্য কমতি।"
+              "question": "কোয়ান্টাইজেশন কী বদলায়, আর তার ট্রেড-অফ কী?",
+              "answer": "এটা ওয়েটকে কম বিটে রাখে, যেমন 16-এর বদলে ৪, তাই মডেলের প্রায় ২ থেকে ৪ গুণ কম মেমরি লাগে আর সেটা দ্রুত চলে। বেশিরভাগ কাজে এর দাম হলো মানে সামান্য কমতি।"
             },
-            "challenge": "Model-কে বলো একই model-এর 16-bit আর 4-bit version তুলনা করার জন্য 5টা প্রশ্নের একটা test বানাতে। কোন ধরনের প্রশ্নে মানের পতন আগে ধরা পড়বে?"
+            "challenge": "মডেলকে বলুন একই মডেলের 16-বিট আর 4-বিট ভার্সন তুলনা করার জন্য ৫টা প্রশ্নের একটা টেস্ট বানাতে। কোন ধরনের প্রশ্নে মানের পতন আগে ধরা পড়বে?"
           }
         },
         {
@@ -624,31 +624,31 @@
             "challenge": "Try 1,000 requests per day instead of 10,000. How many USD do you save per day now? When is prefix caching not worth the effort?"
           },
           "bn": {
-            "title": "Prefix caching-এ কত সাশ্রয়, হিসাব করো",
-            "why": "তুমি যখন একটা support bot বানাবে, প্রতিটা request-এ একই লম্বা instruction বারবার যায়। সেই token-গুলোর দাম তুমি বারবার দাও। Prompt সঠিক ক্রমে লিখলে caching এই bill অনেক কমাতে পারে।",
+            "title": "প্রিফিক্স ক্যাশিংয়ে কত সাশ্রয়, হিসাব করুন",
+            "why": "আপনি যখন একটা সাপোর্ট বট বানাবেন, প্রতিটা রিকোয়েস্টে একই লম্বা ইনস্ট্রাকশন বারবার যায়। সেই টোকেনগুলোর দাম আপনি বারবার দেন। প্রম্পট সঠিক ক্রমে লিখলে ক্যাশিং এই বিল অনেক কমাতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "আগে আন্দাজ করো: caching কি খরচের অর্ধেকের বেশি বাঁচাবে? তারপর এই prompt টা copy করো, paste করে Enter চাপো।",
+                "do": "আগে আন্দাজ করুন: ক্যাশিং কি খরচের অর্ধেকের বেশি বাঁচাবে? তারপর এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "একটা support bot দিনে 10,000টা request পায় (সব সংখ্যা বানানো)। প্রতিটা request একই 3,000 token-এর system prompt দিয়ে শুরু হয়। User-এর message আরও 100 token যোগ করে। Input token-এর দাম 1 million-এ 1 USD। Cached input token-এর দাম 1 million-এ 0.10 USD (90% ছাড়)।\n\nদিনের input খরচ বের করো: (1) prefix caching ছাড়া, আর (2) prefix caching-সহ, যেখানে system prompt cache করা। হিসাব দেখাও। তারপর সাশ্রয়টা শতাংশে দাও।",
-                "expect": "Caching ছাড়া: দিনে <strong>31 USD</strong>। Caching-সহ: দিনে <strong>4 USD</strong>। সাশ্রয় প্রায় <strong>87%</strong>। তুমি 'অর্ধেকের বেশি' বললে তোমার আন্দাজ ঠিক ছিল।",
+                "expect": "ক্যাশিং ছাড়া: দিনে <strong>৩১ USD</strong>। ক্যাশিং-সহ: দিনে <strong>৪ USD</strong>। সাশ্রয় প্রায় <strong>৮৭%</strong>। আপনি 'অর্ধেকের বেশি' বললে আপনার আন্দাজ ঠিক ছিল।",
                 "example": "Caching ছাড়া: 3,100 token × 10,000 = 31 million token × 1 USD = দিনে 31 USD।\nCaching-সহ: cache করা অংশ 3,000 × 10,000 = 30 million token × 0.10 USD = 3 USD। নতুন অংশ 100 × 10,000 = 1 million token × 1 USD = 1 USD। মোট 4 USD।\nসাশ্রয়: 27 USD, প্রায় 87%।"
               },
               {
                 "chat": "same",
-                "do": "ভাবো: prompt আজকের তারিখ আর user-এর নাম দিয়ে শুরু হলে কী সমস্যা হবে? তারপর এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো।",
+                "do": "ভাবুন: প্রম্পট আজকের তারিখ আর ইউজারের নাম দিয়ে শুরু হলে কী সমস্যা হবে? তারপর এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন।",
                 "prompt": "Team এখন system prompt বদলেছে। প্রথম লাইন হয়েছে: \"Today is {current date and time}. The user's name is {name}.\"। বাকি 3,000 token আগের মতোই আছে। এখন prefix caching ভালো কাজ করছে না। 3টা ছোট বাক্যে কারণটা বুঝিয়ে বলো, আর prompt কীভাবে বদলালে cache আবার কাজ করবে, সেটা দেখাও।",
-                "expect": "তারিখ আর নাম প্রতিটা request-এ বদলায়, তাই prompt-এর শুরুটা কখনো একই থাকে না। Cache আর ব্যবহার করা যায় না। সমাধান: স্থির লেখা আগে, বদলানো লেখা শেষে রাখো।",
+                "expect": "তারিখ আর নাম প্রতিটা রিকোয়েস্টে বদলায়, তাই প্রম্পটের শুরুটা কখনো একই থাকে না। ক্যাশ আর ব্যবহার করা যায় না। সমাধান: স্থির লেখা আগে, বদলানো লেখা শেষে রাখুন।",
                 "example": "তারিখ, সময় আর নাম প্রতিটা request-এ বদলায়। Prompt-এর শুরু হুবহু এক থাকলেই শুধু cache কাজ করে, তাই server-কে প্রতিবার শূন্য থেকে কাজ করতে হয়। সমাধান: আগে 3,000 token-এর স্থির অংশ রাখো, তারপর শেষে তারিখ, সময় আর নাম যোগ করো:\n[fixed system prompt]\nToday is {date}. The user's name is {name}."
               }
             ],
-            "learned": "Server তোমার prompt-এর শুরুর অংশে অনেক কাজ করে আর সেটা জমিয়ে রাখে। এই জমানো কাজের নাম <strong>KV cache</strong>। <strong>Prefix caching</strong> থাকলে একই লেখা দিয়ে শুরু হওয়া নতুন request সেটা আবার ব্যবহার করে, আর ওই অংশের জন্য তুমি প্রায় 90% কম দাও। কিন্তু মিল হতে হবে প্রথম অক্ষর থেকে হুবহু। উপরের একটা বদলানো লাইনই এটা ভেঙে দেয়।",
-            "done": "তোমার কাছে দিনের খরচ 31 USD আর 4 USD আছে, আর স্থির লেখা আগে রাখা একটা নতুন prompt আছে।",
+            "learned": "সার্ভার আপনার প্রম্পটের শুরুর অংশে অনেক কাজ করে আর সেটা জমিয়ে রাখে। এই জমানো কাজের নাম <strong>KV ক্যাশ</strong>। <strong>প্রিফিক্স ক্যাশিং</strong> থাকলে একই লেখা দিয়ে শুরু হওয়া নতুন রিকোয়েস্ট সেটা আবার ব্যবহার করে, আর ওই অংশের জন্য আপনি প্রায় ৯০% কম দেন। কিন্তু মিল হতে হবে প্রথম অক্ষর থেকে হুবহু। উপরের একটা বদলানো লাইনই এটা ভেঙে দেয়।",
+            "done": "আপনার কাছে দিনের খরচ ৩১ USD আর ৪ USD আছে, আর স্থির লেখা আগে রাখা একটা নতুন প্রম্পট আছে।",
             "check": {
-              "question": "Prompt-এর সবার জন্য এক রকম অংশ কেন আগে রাখতে হয়?",
-              "answer": "Prompt-এর শুরু হুবহু মিললেই server cache আবার ব্যবহার করে। শুরুর দিকে কিছু বদলালে পুরো prompt নতুন মনে হয়, তাই cache hit হয় না।"
+              "question": "প্রম্পটের সবার জন্য এক রকম অংশ কেন আগে রাখতে হয়?",
+              "answer": "প্রম্পটের শুরু হুবহু মিললেই সার্ভার ক্যাশ আবার ব্যবহার করে। শুরুর দিকে কিছু বদলালে পুরো প্রম্পট নতুন মনে হয়, তাই ক্যাশ হিট হয় না।"
             },
-            "challenge": "দিনে 10,000-এর বদলে 1,000 request ধরে দেখো। এখন দিনে কত USD বাঁচে? কখন prefix caching-এর পেছনে সময় দেওয়া লাভজনক নয়?"
+            "challenge": "দিনে ১০,000-এর বদলে ১,০০০ রিকোয়েস্ট ধরে দেখুন। এখন দিনে কত USD বাঁচে? কখন প্রিফিক্স ক্যাশিংয়ের পেছনে সময় দেওয়া লাভজনক নয়?"
           }
         },
         {
@@ -680,31 +680,31 @@
             "challenge": "Make up a 5th symptom that has two possible fixes. Ask the model which fix to try first and why. Do you agree with the order?"
           },
           "bn": {
-            "title": "Symptom দেখে inference metric চিনে নাও",
-            "why": "তুমি যখন নিজের model server চালাবে, user বলবে \"এটা ধীর\"। কিন্তু \"ধীর\" মানে চার রকম হতে পারে। আগে সঠিক metric চিনতে হবে, নইলে ভুল fix বাছবে।",
+            "title": "সিম্পটম দেখে ইনফারেন্স মেট্রিক চিনে নিন",
+            "why": "আপনি যখন নিজের মডেল সার্ভার চালাবেন, ইউজার বলবে \"এটা ধীর\"। কিন্তু \"ধীর\" মানে চার রকম হতে পারে। আগে সঠিক মেট্রিক চিনতে হবে, নইলে ভুল ফিক্স বাছবেন।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। উত্তর পড়ার আগে ৩ নম্বর symptom-এর metric কী হবে, আন্দাজ করো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তর পড়ার আগে ৩ নম্বর সিম্পটমের মেট্রিক কী হবে, আন্দাজ করুন।",
                 "prompt": "আমি একটা LLM inference server চালাই। প্রতিটা symptom-এর জন্য বলো কোন মূল metric খারাপ, আর ১টা সবচেয়ে ভালো fix বাছো।\n\nMetric:\n- TTFT: প্রথম শব্দ দেখা যাওয়া পর্যন্ত সময়।\n- TPS per request: একজন user-এর জন্য শব্দ কত দ্রুত আসে।\n- Aggregate throughput: সব user মিলিয়ে প্রতি সেকেন্ডে মোট token।\n- p99 latency: সবচেয়ে ধীর 1% request-এর সময় কত লাগে।\n\nFix-এর list থেকে বাছো: prefix caching, continuous batching (server GPU-তে একসাথে অনেক request মিশিয়ে চালায়), speculative decoding (একটা ছোট model শব্দ আন্দাজ করে, বড় model সেগুলো যাচাই করে), ছোট prompt, ছোট বা quantized model, অথবা আরও GPU।\n\nSymptom:\n1. User-রা 20,000 token-এর একটা document পাঠায়। প্রথম শব্দ আসার আগে তারা 6 সেকেন্ড অপেক্ষা করে। এরপর লেখা দ্রুত আসে।\n2. Server-এ মাত্র একজন user থাকলেও লেখা আসে প্রতি সেকেন্ডে 8 token, যা ধীর লাগে।\n3. GPU প্রায় 60% সময় বসে থাকে। Server একটা request পুরোপুরি শেষ করে তারপর পরেরটা শুরু করে। সব user মিলিয়ে প্রতি সেকেন্ডে token কম।\n4. বেশিরভাগ request দ্রুত, কিন্তু queue লম্বা হলে সবচেয়ে ধীর 1% request-এ 40 সেকেন্ড লাগে।\n\nএকটা table দিয়ে উত্তর দাও: symptom নম্বর, metric, fix, আর 12 শব্দ বা কম শব্দে কারণ।",
-                "expect": "৪ সারির একটা table। মোটামুটি: ১ হলো <strong>TTFT</strong>, ২ হলো <strong>TPS per request</strong>, ৩ হলো <strong>aggregate throughput</strong>, ৪ হলো <strong>p99 latency</strong>। কিছু symptom-এর একাধিক ভালো fix থাকতে পারে।",
+                "expect": "৪ সারির একটা টেবিল। মোটামুটি: ১ হলো <strong>TTFT</strong>, ২ হলো <strong>TPS per request</strong>, ৩ হলো <strong>অ্যাগ্রিগেট থ্রুপুট</strong>, ৪ হলো <strong>p99 ল্যাটেন্সি</strong>। কিছু সিম্পটমের একাধিক ভালো ফিক্স থাকতে পারে।",
                 "example": "1 | TTFT | ছোট prompt | লম্বা prompt-এ প্রথম শব্দ দেরিতে আসে\n2 | TPS per request | speculative decoding | আন্দাজ করা শব্দে এক user-এর stream দ্রুত হয়\n3 | Aggregate throughput | continuous batching | request মিশিয়ে চালায়, GPU বসে থাকে না\n4 | p99 latency | আরও GPU | লম্বা queue ধীরতম request-কে কষ্ট দেয়"
               },
               {
                 "chat": "same",
-                "do": "এই প্রশ্নটা copy করো, একই chat-এ paste করে Enter চাপো। উত্তরটা table-এর সাথে মেলাও।",
+                "do": "এই প্রশ্নটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। উত্তরটা টেবিলের সাথে মেলান।",
                 "prompt": "একটা server-এর aggregate throughput বেশি হয়েও কি একজন user-এর কাছে ধীর লাগতে পারে? ২টা ছোট বাক্যে উত্তর দাও।",
-                "expect": "হ্যাঁ। Throughput সব user মিলিয়ে গোনে, কিন্তু একজন user শুধু নিজের অপেক্ষা আর নিজের গতি টের পায়।",
+                "expect": "হ্যাঁ। থ্রুপুট সব ইউজার মিলিয়ে গোনে, কিন্তু একজন ইউজার শুধু নিজের অপেক্ষা আর নিজের গতি টের পায়।",
                 "example": "হ্যাঁ। Throughput সব user-এর token একসাথে গোনে, তাই ব্যস্ত server-এর স্কোর বেশি হতে পারে। তবুও একজন user শুধু প্রথম শব্দের জন্য নিজের অপেক্ষা আর নিজের গতি টের পায়, আর লম্বা queue হলে সেই অপেক্ষা বড় হতে পারে।"
               }
             ],
-            "learned": "\"ধীর\"-এর চারটা চেহারা আছে। <strong>TTFT</strong> (প্রথম শব্দ আসার সময়) হলো অপেক্ষা। <strong>TPS per request</strong> হলো এক user-এর stream-এর গতি। <strong>Aggregate throughput</strong> হলো server-এর মোট কাজ। <strong>p99 latency</strong> হলো সবচেয়ে ধীর 1% user-এর অপেক্ষা। প্রতিটার fix আলাদা।",
-            "done": "তোমার কাছে ৪টা symptom-এর metric আর fix-সহ একটা table আছে, আর throughput বনাম এক user-এর অনুভূতি নিয়ে একটা পরিষ্কার উত্তর আছে।",
+            "learned": "\"ধীর\"-এর চারটা চেহারা আছে। <strong>TTFT</strong> (প্রথম শব্দ আসার সময়) হলো অপেক্ষা। <strong>TPS per request</strong> হলো এক ইউজারের স্ট্রিমের গতি। <strong>অ্যাগ্রিগেট থ্রুপুট</strong> হলো সার্ভারের মোট কাজ। <strong>p99 ল্যাটেন্সি</strong> হলো সবচেয়ে ধীর ১% ইউজারের অপেক্ষা। প্রতিটার ফিক্স আলাদা।",
+            "done": "আপনার কাছে ৪টা সিম্পটমের মেট্রিক আর ফিক্স-সহ একটা টেবিল আছে, আর থ্রুপুট বনাম এক ইউজারের অনুভূতি নিয়ে একটা পরিষ্কার উত্তর আছে।",
             "check": {
-              "question": "২ নম্বর symptom-টা মাত্র একজন user থাকলেও হয়। Continuous batching এটা ঠিক করতে পারে না কেন?",
-              "answer": "Continuous batching তখনই কাজে লাগে যখন অনেক user একটা GPU ভাগ করে, তাই এটা মোট throughput বাড়ায়। একজন user থাকলে GPU আগে থেকেই শুধু তার জন্যই কাজ করছে। ওই এক stream দ্রুত করতে ছোট বা quantized model, অথবা speculative decoding লাগে।"
+              "question": "২ নম্বর সিম্পটমটা মাত্র একজন ইউজার থাকলেও হয়। কন্টিনিউয়াস ব্যাচিং এটা ঠিক করতে পারে না কেন?",
+              "answer": "কন্টিনিউয়াস ব্যাচিং তখনই কাজে লাগে যখন অনেক ইউজার একটা GPU ভাগ করে, তাই এটা মোট থ্রুপুট বাড়ায়। একজন ইউজার থাকলে GPU আগে থেকেই শুধু তার জন্যই কাজ করছে। ওই এক স্ট্রিম দ্রুত করতে ছোট বা কোয়ান্টাইজড মডেল, অথবা স্পেকুলেটিভ ডিকোডিং লাগে।"
             },
-            "challenge": "৫ নম্বর একটা symptom বানাও, যার দুটো সম্ভাব্য fix আছে। Model-কে জিজ্ঞেস করো কোন fix আগে চেষ্টা করা উচিত আর কেন। তুমি কি ক্রমটার সাথে একমত?"
+            "challenge": "৫ নম্বর একটা সিম্পটম বানান, যার দুটো সম্ভাব্য ফিক্স আছে। মডেলকে জিজ্ঞেস করুন কোন ফিক্স আগে চেষ্টা করা উচিত আর কেন। আপনি কি ক্রমটার সাথে একমত?"
           }
         }
       ]
@@ -877,13 +877,13 @@
         "why": "The rule of thumb is to start hosted. Move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s."
       },
       "bn": {
-        "q": "Rule of thumb অনুযায়ী কখন একটি দলের hosted API থেকে self-hosting-এ যাওয়া উচিত?",
+        "q": "রুল অব থাম্ব অনুযায়ী কখন একটি টিমের হোস্টেড API থেকে সেলফ-হোস্টিংয়ে যাওয়া উচিত?",
         "options": [
-          "প্রথম দিন থেকেই, কারণ self-hosted মডেলে প্রথম token আরও আগে আসে",
-          "যে মুহূর্তে দলটি কোনো open-weight মডেল ব্যবহার করতে চায়",
-          "যখন bill একজন half-time ML engineer আর দুটি H100-এর খরচ ছাড়িয়ে যায়"
+          "প্রথম দিন থেকেই, কারণ সেলফ-হোস্টেড মডেলে প্রথম টোকেন আরও আগে আসে",
+          "যে মুহূর্তে টিমটি কোনো ওপেন-ওয়েট মডেল ব্যবহার করতে চায়",
+          "যখন বিল একজন হাফ-টাইম ML ইঞ্জিনিয়ার আর দুটি H100-এর খরচ ছাড়িয়ে যায়"
         ],
-        "why": "Rule of thumb হলো আগে hosted দিয়ে শুরু করা। Bill একজন half-time ML engineer আর দুটি H100-এর খরচ ছাড়ালে তখন self-hosting-এ যাও।"
+        "why": "রুল অব থাম্ব হলো আগে হোস্টেড দিয়ে শুরু করা। বিল একজন হাফ-টাইম ML ইঞ্জিনিয়ার আর দুটি H100-এর খরচ ছাড়ালে তখন সেলফ-হোস্টিংয়ে যান।"
       }
     },
     {
@@ -901,14 +901,14 @@
         "why": "vLLM is described as the throughput champion. Its PagedAttention and continuous batching typically deliver 10-24x the throughput of naive Hugging Face."
       },
       "bn": {
-        "q": "PagedAttention আর continuous batching-এর কারণে এই Part কোন inference server-কে throughput champion বলেছে?",
+        "q": "PagedAttention আর কন্টিনিউয়াস ব্যাচিংয়ের কারণে এই পার্ট কোন ইনফারেন্স সার্ভারকে থ্রুপুট চ্যাম্পিয়ন বলেছে?",
         "options": [
           "vLLM",
           "Ollama",
           "TGI",
           "llama.cpp"
         ],
-        "why": "vLLM-কে throughput champion বলা হয়েছে। এর PagedAttention আর continuous batching সাধারণত naive Hugging Face-এর চেয়ে 10-24 গুণ বেশি throughput দেয়।"
+        "why": "vLLM-কে থ্রুপুট চ্যাম্পিয়ন বলা হয়েছে। এর PagedAttention আর কন্টিনিউয়াস ব্যাচিং সাধারণত নেইভ Hugging Face-এর চেয়ে 10-24 গুণ বেশি থ্রুপুট দেয়।"
       }
     },
     {
@@ -925,13 +925,13 @@
         "why": "With prefix caching, the server hashes the shared prefix and reuses its cached KV instead of computing it again for every request."
       },
       "bn": {
-        "q": "Prefix caching কী করে?",
+        "q": "প্রিফিক্স ক্যাশিং কী করে?",
         "options": [
-          "অনেক request একই লম্বা system prompt শেয়ার করলে server সেই prefix-এর cached KV আবার ব্যবহার করে",
-          "KV cache memory page আকারে allocate হয়, OS virtual memory-র মতো",
-          "একটি ছোট draft model পরের 5-10 টি token প্রস্তাব করে, বড় মডেল সেগুলো যাচাই করে"
+          "অনেক রিকোয়েস্ট একই লম্বা সিস্টেম প্রম্পট শেয়ার করলে সার্ভার সেই প্রিফিক্সের ক্যাশ করা KV আবার ব্যবহার করে",
+          "KV ক্যাশ মেমরি পেজ আকারে অ্যালোকেট হয়, OS ভার্চুয়াল মেমরির মতো",
+          "একটি ছোট ড্রাফট মডেল পরের 5-10 টি টোকেন প্রস্তাব করে, বড় মডেল সেগুলো যাচাই করে"
         ],
-        "why": "Prefix caching-এ server শেয়ার করা prefix-এর hash রাখে এবং প্রতিটি request-এর জন্য আবার হিসাব না করে তার cached KV পুনরায় ব্যবহার করে।"
+        "why": "প্রিফিক্স ক্যাশিংয়ে সার্ভার শেয়ার করা প্রিফিক্সের হ্যাশ রাখে এবং প্রতিটি রিকোয়েস্টের জন্য আবার হিসাব না করে তার ক্যাশ করা KV পুনরায় ব্যবহার করে।"
       }
     },
     {
@@ -943,8 +943,8 @@
         "why": "In speculative decoding a tiny draft model proposes tokens and the big model verifies them in parallel. This Part says the gain comes with no quality loss."
       },
       "bn": {
-        "q": "Speculative decoding 2-3 গুণ throughput বাড়ায়, কিন্তু output-এর মান কমিয়ে দেয়।",
-        "why": "Speculative decoding-এ একটি ছোট draft model token প্রস্তাব করে আর বড় মডেল সেগুলো parallel-এ যাচাই করে। এই Part বলছে এই লাভ আসে মান না কমিয়েই।"
+        "q": "স্পেকুলেটিভ ডিকোডিং 2-3 গুণ থ্রুপুট বাড়ায়, কিন্তু আউটপুটের মান কমিয়ে দেয়।",
+        "why": "স্পেকুলেটিভ ডিকোডিংয়ে একটি ছোট ড্রাফট মডেল টোকেন প্রস্তাব করে আর বড় মডেল সেগুলো প্যারালালে যাচাই করে। এই পার্ট বলছে এই লাভ আসে মান না কমিয়েই।"
       }
     },
     {
@@ -956,8 +956,8 @@
         "why": "That is how this Part defines quantization: less precision per weight, so less GPU memory and faster inference, for a small loss in quality."
       },
       "bn": {
-        "q": "Quantization মডেলের weight 16-বিট থেকে 8-বিট বা 4-বিটে নামায়, যাতে মানের সামান্য ক্ষতিতে GPU memory 2-4 গুণ কমে।",
-        "why": "এই Part এভাবেই quantization-কে সংজ্ঞায়িত করেছে: প্রতি weight-এ precision কম, ফলে GPU memory কম ও inference দ্রুত, আর মানের ক্ষতি সামান্য।"
+        "q": "কোয়ান্টাইজেশন মডেলের ওয়েট 16-বিট থেকে 8-বিট বা 4-বিটে নামায়, যাতে মানের সামান্য ক্ষতিতে GPU মেমরি 2-4 গুণ কমে।",
+        "why": "এই পার্ট এভাবেই কোয়ান্টাইজেশনকে সংজ্ঞায়িত করেছে: প্রতি ওয়েটে প্রিসিশন কম, ফলে GPU মেমরি কম ও ইনফারেন্স দ্রুত, আর মানের ক্ষতি সামান্য।"
       }
     }
   ]

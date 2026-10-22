@@ -21,10 +21,15 @@ test("every topic has a quiz of 5 questions", () => {
   for (const { slug, quiz } of topics) assert.equal(quiz.length, 5, slug);
 });
 
-test("Bangla quiz text uses Latin digits", () => {
+test("Bangla quiz text uses Bangla digits for plain numbers", () => {
+  // Like systemdesignbangla.com. Digits inside a name or a code word (GPT-4o, H100, top_p) stay Latin.
+  const plainNumber = /(?<![A-Za-z0-9_\-/.:#@%+])[0-9]+(?:[.,][0-9]+)*(?![A-Za-z0-9_\-/])/;
   for (const { slug, quiz } of topics) {
     for (const q of quiz) {
-      for (const text of banglaText(q)) assert.doesNotMatch(text, /[০-৯]/, `${slug} ${q.id}: ${text}`);
+      for (const text of banglaText(q)) {
+        const outsideCode = text.replace(/<code[^>]*>.*?<\/code>/g, "");
+        assert.doesNotMatch(outsideCode, plainNumber, `${slug} ${q.id}: ${text}`);
+      }
     }
   }
 });

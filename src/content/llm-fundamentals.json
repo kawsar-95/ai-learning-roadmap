@@ -5,8 +5,8 @@
   "lede": "A dense, citation-backed reference for ten topics every ML engineer, applied researcher, and platform builder needs to internalise — tokens, families, sampling, structured outputs, tool use, multimodal, embeddings, reasoning, and the trade-offs that decide which model runs in production. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies) at the bottom of each topic. প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
     "title": "LLM-এর মূল ভিত্তি",
-    "tagline": "একজন engineer-এর চোখে",
-    "lede": "দশটি বিষয়ের একটি ঘন, citation-সহ রেফারেন্স। প্রত্যেক ML engineer, applied researcher আর platform builder-এর এগুলো ভালোভাবে বোঝা দরকার: token, model family, sampling, structured output, tool use, multimodal, embedding, reasoning, আর production-এ কোন model চলবে তা ঠিক করে দেওয়া trade-off। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর ভার্সন (technical, code আর diagram-সহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
+    "tagline": "একজন ইঞ্জিনিয়ারের চোখে",
+    "lede": "দশটি বিষয়ের একটি ঘন, সাইটেশন-সহ রেফারেন্স। প্রত্যেক ML ইঞ্জিনিয়ার, অ্যাপ্লাইড রিসার্চার আর প্ল্যাটফর্ম বিল্ডারের এগুলো ভালোভাবে বোঝা দরকার: টোকেন, মডেল ফ্যামিলি, স্যাম্পলিং, স্ট্রাকচার্ড আউটপুট, টুল ইউজ, মাল্টিমোডাল, এমবেডিং, রিজনিং, আর প্রোডাকশনে কোন মডেল চলবে তা ঠিক করে দেওয়া ট্রেড-অফ। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (টেকনিক্যাল, কোড আর ডায়াগ্রাম-সহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। প্রতিটি টপিকের শেষে বাংলায় বুঝিয়েও বলা আছে।"
   },
   "sections": [
     {
@@ -15,8 +15,8 @@
       "title": "Tokens, tokenization & context cost",
       "sub": "Everything a model does — attention, generation, cost — is denominated in <strong>tokens</strong>, not characters or words. If your prompt shrinks from 800 to 200 tokens, you just cut cost by 75% and latency by a meaningful fraction. This is the single biggest engineering lever you have.",
       "bn": {
-        "title": "Token, tokenization আর context-এর খরচ",
-        "sub": "Model যা কিছু করে — attention, generation, খরচ — সবকিছুর হিসাব হয় <strong>token</strong> দিয়ে, অক্ষর বা শব্দ দিয়ে নয়। আপনার prompt যদি 800 token থেকে কমে 200 token হয়, তাহলে খরচ কমল 75%, আর latencyও উল্লেখযোগ্যভাবে কমল। আপনার হাতে থাকা সবচেয়ে বড় engineering সুবিধা এটাই।"
+        "title": "টোকেন, টোকেনাইজেশন আর কনটেক্সটের খরচ",
+        "sub": "মডেল যা কিছু করে — অ্যাটেনশন, জেনারেশন, খরচ — সবকিছুর হিসাব হয় <strong>টোকেন</strong> দিয়ে, অক্ষর বা শব্দ দিয়ে নয়। আপনার প্রম্পট যদি ৮০০ টোকেন থেকে কমে ২০০ টোকেন হয়, তাহলে খরচ কমল ৭৫%, আর ল্যাটেন্সিও উল্লেখযোগ্যভাবে কমল। আপনার হাতে থাকা সবচেয়ে বড় ইঞ্জিনিয়ারিং সুবিধা এটাই।"
       },
       "body": [
         {
@@ -33,7 +33,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tokenization of a sample sentence\">\n      <defs>\n        <marker id=\"arr1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <text x=\"40\" y=\"36\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">raw input</text>\n      <rect x=\"40\" y=\"50\" width=\"1020\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">unbelievable</text>\n      <text x=\"232\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n      <text x=\"252\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_tokenization</text>\n      <text x=\"430\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_</text>\n      <text x=\"446\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">helps</text>\n      <text x=\"540\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_compression</text>\n      <text x=\"712\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n\n      \n      <line x1=\"550\" y1=\"110\" x2=\"550\" y2=\"135\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr1)\"></line>\n      <text x=\"568\" y=\"125\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">BPE merges (low→high freq)</text>\n\n      \n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">token IDs (vocab index)</text>\n      <g font-family=\"JetBrains Mono, monospace\" font-size=\"14\" font-weight=\"600\" text-anchor=\"middle\">\n        <rect x=\"40\"   y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"99\"  y=\"200\" fill=\"#22d3ee\">un</text>\n        <rect x=\"166\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"225\" y=\"200\" fill=\"#22d3ee\">believ</text>\n        <rect x=\"292\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"351\" y=\"200\" fill=\"#22d3ee\">able</text>\n        <rect x=\"418\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"441\" y=\"200\" fill=\"#a78bfa\">.</text>\n        <rect x=\"472\"  y=\"172\" width=\"148\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"546\" y=\"200\" fill=\"#22d3ee\">_token</text>\n        <rect x=\"628\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"687\" y=\"200\" fill=\"#22d3ee\">ization</text>\n        <rect x=\"754\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"777\" y=\"200\" fill=\"#a78bfa\">_</text>\n        <rect x=\"808\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"867\" y=\"200\" fill=\"#22d3ee\">helps</text>\n        <rect x=\"934\"  y=\"172\" width=\"124\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"996\" y=\"200\" fill=\"#22d3ee\">_comp</text>\n      </g>\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ 11 subword pieces (vs 33 raw chars). Frequent runs = single tokens; rare substrings split into 2–3.</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ The model never sees characters — only these integer IDs feed the embedding table.</text>\n    </svg>",
           "caption": "BPE tokenization in practice: English byte-runs merge into common pieces; punctuation and whitespace often become standalone tokens.",
-          "captionBn": "এই diagram-এ দেখানো হয়েছে raw input টেক্সট কীভাবে BPE merges-এর মাধ্যমে subword pieces-এ ভাগ হয় এবং প্রতিটি piece একটি token ID পায়। উপর থেকে নিচে পড়ুন: মডেল কখনো characters দেখে না, শুধু এই integer IDs-ই embedding table-এ যায়।"
+          "captionBn": "এই ডায়াগ্রামে দেখানো হয়েছে র ইনপুট টেক্সট কীভাবে BPE মার্জের মাধ্যমে সাবওয়ার্ড পিসে ভাগ হয় এবং প্রতিটি পিস একটি টোকেন ID পায়। উপর থেকে নিচে পড়ুন: মডেল কখনো ক্যারেক্টার দেখে না, শুধু এই ইন্টিজার ID-ই এমবেডিং টেবিলে যায়।"
         },
         {
           "type": "heading",
@@ -163,26 +163,26 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>Token</strong> হলো LLM-এর ভোকাবুলারির একেকটি টুকরো। মডেল অক্ষর বা পুরো শব্দ পড়ে না; একটি subword tokenizer শব্দকে ভেঙে ছোট ছোট অংশে পরিণত করে, যার জনপ্রিয় পদ্ধতি <code>BPE</code> (Byte-Pair Encoding)। এটি corpus-এর সবচেয়ে ঘন ঘন পাশাপাশি আসা জোড়াগুলো বারবার মিলিয়ে নেয়, যতক্ষণ না নির্দিষ্ট vocabulary size (প্রায়ই 32k–200k) হয়। বহুভাষিক ও কোডের কাজে <code>SentencePiece</code> বেশি ব্যবহৃত হয়। মডেল শেষ পর্যন্ত শুধু token ID (পূর্ণসংখ্যা) দেখে, যা embedding table-এ যায়।"
+          "html": "<strong>টোকেন</strong> হলো LLM-এর ভোকাবুলারির একেকটি অংশ। মডেল অক্ষর বা পুরো শব্দ পড়ে না; একটি সাবওয়ার্ড টোকেনাইজার শব্দকে ভেঙে ছোট ছোট অংশে পরিণত করে, যার জনপ্রিয় পদ্ধতি <code>BPE</code> (Byte-Pair Encoding)। এটি কর্পাসের সবচেয়ে ঘন ঘন পাশাপাশি আসা জোড়াগুলো বারবার মিলিয়ে নেয়, যতক্ষণ না নির্দিষ্ট ভোকাবুলারি সাইজ (প্রায়ই ৩২k–২০০k) হয়। বহুভাষিক ও কোডের কাজে <code>SentencePiece</code> বেশি ব্যবহৃত হয়। মডেল শেষ পর্যন্ত শুধু টোকেন ID (পূর্ণসংখ্যা) দেখে, যা এমবেডিং টেবিলে যায়।"
         },
         {
           "type": "paragraph",
-          "html": "খরচের হিসাব হয় token দিয়ে, অক্ষর দিয়ে নয়। ইংরেজিতে মোটামুটি 1 token ≈ 4 অক্ষর, কিন্তু ভাষাভেদে এটি অনেক বদলায়: চীনা ভাষায় 1 অক্ষর ≈ 1.5 token, কোডে 1 token ≈ 3.5 অক্ষর। তাই prompt 800 থেকে 200 token-এ নামালে খরচ 75% কমে এবং latency-ও কমে। এটাই সবচেয়ে বড় engineering lever।"
+          "html": "খরচের হিসাব হয় টোকেন দিয়ে, অক্ষর দিয়ে নয়। ইংরেজিতে মোটামুটি ১ টোকেন ≈ ৪ অক্ষর, কিন্তু ভাষাভেদে এটি অনেক বদলায়: চীনা ভাষায় ১ অক্ষর ≈ ১.৫ টোকেন, কোডে ১ টোকেন ≈ ৩.৫ অক্ষর। তাই প্রম্পট ৮০০ থেকে ২০০ টোকেনে নামালে খরচ ৭৫% কমে এবং ল্যাটেন্সিও কমে। এটাই সবচেয়ে বড় ইঞ্জিনিয়ারিং লিভার।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Context window</strong> হলো এক কলে মডেল সর্বোচ্চ কত token (input + output মিলিয়ে) দেখতে পারে। এটি GPT-3-এর 2K থেকে বেড়ে এখন 1M+ পর্যন্ত গেছে। খরচ ও গতির দিক থেকে: prefill (prompt প্রসেসিং) এর খরচ input token অনুযায়ী, আর decode (লেখা তৈরি) ধাপে ধাপে হয় এবং output token সাধারণত input-এর চেয়ে 3–5 গুণ দামি। <code>Prompt caching</code> বারবার আসা prefix-এর খরচ প্রায় 80–90% কমায়।"
+          "html": "<strong>কনটেক্সট উইন্ডো</strong> হলো এক কলে মডেল সর্বোচ্চ কত টোকেন (ইনপুট + আউটপুট মিলিয়ে) দেখতে পারে। এটি GPT-3-এর ২K থেকে বেড়ে এখন ১M+ পর্যন্ত গেছে। খরচ ও গতির দিক থেকে: প্রিফিল (প্রম্পট প্রসেসিং) এর খরচ ইনপুট টোকেন অনুযায়ী, আর ডিকোড (লেখা তৈরি) ধাপে ধাপে হয় এবং আউটপুট টোকেন সাধারণত ইনপুটের চেয়ে ৩–৫ গুণ দামি। <code>Prompt caching</code> বারবার আসা প্রিফিক্সের খরচ প্রায় ৮০–৯০% কমায়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> বড় context মানে নিখুঁত পারফরম্যান্স নয়। 800K token ঢেলে দেওয়ার চেয়ে RAG বা summarisation প্রায়ই ভালো, কারণ লম্বা context-এ multi-hop reasoning দ্রুত খারাপ হয়। নিজের workload-এ মেপে দেখুন।"
+          "html": "<strong>সতর্কতা:</strong> বড় কনটেক্সট মানে নিখুঁত পারফরম্যান্স নয়। ৮০০K টোকেন ঢেলে দেওয়ার চেয়ে RAG বা সামারাইজেশন প্রায়ই ভালো, কারণ লম্বা কনটেক্সটে মাল্টি-হপ রিজনিং দ্রুত খারাপ হয়। নিজের ওয়ার্কলোডে মেপে দেখুন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দর্জির দোকানের উপমা:</strong> কাপড়ের থান (পুরো লেখা) দর্জি আগে ছোট ছোট টুকরোয় কেটে নেয় (token), আর মজুরি হয় টুকরোর সংখ্যা ধরে। Context window হলো দর্জির কাটিং টেবিলের মাপ: টেবিল যত বড়, একসাথে তত কাপড় ছড়িয়ে কাজ করা যায়। কিন্তু টেবিল বড় হলেই জামা সুন্দর হয় না; আর অকারণে বেশি কাপড় ছড়ালে খরচ ও সময় দুটোই বাড়ে।"
+              "html": "<strong>দর্জির দোকানের উপমা:</strong> কাপড়ের থান (পুরো লেখা) দর্জি আগে ছোট ছোট খণ্ডে কেটে নেয় (টোকেন), আর মজুরি হয় খণ্ডের সংখ্যা ধরে। কনটেক্সট উইন্ডো হলো দর্জির কাটিং টেবিলের মাপ: টেবিল যত বড়, একসাথে তত কাপড় ছড়িয়ে কাজ করা যায়। কিন্তু টেবিল বড় হলেই জামা সুন্দর হয় না; আর অকারণে বেশি কাপড় ছড়ালে খরচ ও সময় দুটোই বাড়ে।"
             }
           ]
         }
@@ -250,38 +250,38 @@
             "challenge": "Make the short prompt even shorter without changing the answer. Then ask the AI: <em>Does the same sentence use more tokens in Bangla than in English?</em>"
           },
           "bn": {
-            "title": "Prompt ছোট করো, উত্তর একই রাখো",
-            "why": "একটা support bot যখন মাসে লাখ লাখ ticket পড়ে, prompt-এর প্রতিটা বাড়তি শব্দের দাম প্রতি call-এ আবার দিতে হয়। ছোট prompt দিয়ে সত্যিকারের টাকা বাঁচানো যায়।",
+            "title": "প্রম্পট ছোট করুন, উত্তর একই রাখুন",
+            "why": "একটা সাপোর্ট বট যখন মাসে লাখ লাখ টিকেট পড়ে, প্রম্পটের প্রতিটা বাড়তি শব্দের দাম প্রতি কলে আবার দিতে হয়। ছোট প্রম্পট দিয়ে সত্যিকারের টাকা বাঁচানো যায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই লম্বা prompt টা copy করো, paste করে Enter চাপো। উত্তরটা লিখে রাখো। (prompt টা English-এ রাখা হয়েছে, কারণ এখানে English শব্দের দৈর্ঘ্য তুলনা হচ্ছে।)",
+                "do": "এই লম্বা প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা লিখে রাখুন। (প্রম্পটটা English-এ রাখা হয়েছে, কারণ এখানে English শব্দের দৈর্ঘ্য তুলনা হচ্ছে।)",
                 "prompt": "Hello! I hope you are having a wonderful day. I am working on a customer support system and I would really appreciate your kind help with a small task. Below you will find a customer ticket. Could you please read the ticket very carefully and then tell me which one of the following categories it belongs to? The categories are: billing, shipping, defect, account. Please choose only one category. When you answer, please do not write any explanation, any greeting, or any extra sentence. Just write the single category word. Thank you so much for your help!\n\nTicket: My order #48213 arrived yesterday and the screen is cracked. I want my money back.",
                 "expect": "একটা শব্দ, সম্ভবত <em>defect</em>।",
                 "example": "defect"
               },
               {
                 "chat": "new",
-                "do": "এই ছোট prompt টা copy করো, paste করে Enter চাপো। উত্তরটা লিখে রাখো।",
+                "do": "এই ছোট প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা লিখে রাখুন।",
                 "prompt": "Classify the ticket as one of: billing, shipping, defect, account. Reply with the category only.\n\nTicket: My order #48213 arrived yesterday and the screen is cracked. I want my money back.",
-                "expect": "একই শব্দ, <em>defect</em>, অথচ prompt টা ৩ গুণের বেশি ছোট।",
+                "expect": "একই শব্দ, <em>defect</em>, অথচ প্রম্পটটা ৩ গুণের বেশি ছোট।",
                 "example": "defect"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। calculator দিয়ে সংখ্যাগুলো মিলিয়ে নাও।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। ক্যালকুলেটর দিয়ে সংখ্যাগুলো মিলিয়ে নিন।",
                 "prompt": "একটা support bot প্রতি call-এ 800 input token পাঠায়। একটা ছোট prompt প্রতি call-এ পাঠায় 200 input token। দাম প্রতি 1 million input token-এ $0.50। bot মাসে 2 million বার call করে। দুই prompt-এর মাসিক input cost আলাদা করে বের করো, আর কত শতাংশ সাশ্রয় হলো তাও বলো। প্রতিটা ধাপ দেখাও।",
-                "expect": "লম্বা prompt-এর জন্য মাসে <strong>$800</strong>, ছোটটার জন্য <strong>$200</strong>, আর <strong>75%</strong> সাশ্রয়।",
+                "expect": "লম্বা প্রম্পটের জন্য মাসে <strong>$৮০০</strong>, ছোটটার জন্য <strong>$২০০</strong>, আর <strong>৭৫%</strong> সাশ্রয়।",
                 "example": "লম্বা prompt: 800 token x 2,000,000 call = 1,600,000,000 token (1,600 million)। 1,600 x $0.50 = মাসে $800।\nছোট prompt: 200 token x 2,000,000 call = 400,000,000 token (400 million)। 400 x $0.50 = মাসে $200।\nসাশ্রয়: $800 - $200 = মাসে $600।\nশতাংশ: $600 / $800 = 75%।"
               }
             ],
-            "learned": "AI তোমার লেখা পড়ে <strong>token</strong> হিসেবে (শব্দের ছোট ছোট টুকরো)। তুমি যত token পাঠাও, প্রতি call-এ তত token-এর দাম দিতে হয়। লম্বা prompt-এর ভদ্রতার বাড়তি শব্দগুলো উত্তর বদলায়নি, কিন্তু সেগুলো বাড়তি token ছিল। মাসে 2 million call হলে প্রতি call-এ 600 token কম মানে মাসে $600 সাশ্রয়।",
-            "done": "দুটো prompt থেকেই একই এক শব্দের উত্তর পেয়েছ, আর তোমার কাছে $800, $200 আর 75% সংখ্যাগুলো আছে।",
+            "learned": "AI আপনার লেখা পড়ে <strong>টোকেন</strong> হিসেবে (শব্দের ছোট ছোট অংশ)। আপনি যত টোকেন পাঠান, প্রতি কলে তত টোকেনের দাম দিতে হয়। লম্বা প্রম্পটের ভদ্রতার বাড়তি শব্দগুলো উত্তর বদলায়নি, কিন্তু সেগুলো বাড়তি টোকেন ছিল। মাসে ২ million কল হলে প্রতি কলে ৬০০ টোকেন কম মানে মাসে $৬০০ সাশ্রয়।",
+            "done": "দুটো প্রম্পট থেকেই একই এক শব্দের উত্তর পেয়েছেন, আর আপনার কাছে $৮০০, $২০০ আর ৭৫% সংখ্যাগুলো আছে।",
             "check": {
-              "question": "উত্তর একই থাকলে prompt ছোট করলে টাকা বাঁচে কেন?",
-              "answer": "API প্রতি token-এর হিসেবে টাকা নেয়, আর model প্রতি call-এ সব input token পড়ে। 75% কম token-এর prompt-এ input-এর খরচও 75% কম, আর পড়ার কাজ কম বলে উত্তরও দ্রুত আসতে পারে।"
+              "question": "উত্তর একই থাকলে প্রম্পট ছোট করলে টাকা বাঁচে কেন?",
+              "answer": "API প্রতি টোকেনের হিসেবে টাকা নেয়, আর মডেল প্রতি কলে সব ইনপুট টোকেন পড়ে। ৭৫% কম টোকেনের প্রম্পটে ইনপুটের খরচও ৭৫% কম, আর পড়ার কাজ কম বলে উত্তরও দ্রুত আসতে পারে।"
             },
-            "challenge": "ছোট prompt টা আরও ছোট করো, কিন্তু উত্তর যেন না বদলায়। তারপর AI-কে জিজ্ঞেস করো: <em>একই বাক্য কি Bangla-তে English-এর চেয়ে বেশি token নেয়?</em>"
+            "challenge": "ছোট প্রম্পটটা আরও ছোট করুন, কিন্তু উত্তর যেন না বদলায়। তারপর AI-কে জিজ্ঞেস করুন: <em>একই বাক্য কি Bangla-তে English-এর চেয়ে বেশি token নেয়?</em>"
           }
         }
       ]
@@ -292,15 +292,15 @@
       "title": "Model families & trade-offs",
       "sub": "The frontier in 2025 is dominated by five families, each with a distinct architectural and commercial philosophy. Picking \"the best model\" is a misframe — the right question is <em>which trade-off matches your workload's centre of gravity</em>.",
       "bn": {
-        "title": "Model family আর trade-off",
-        "sub": "2025 সালে frontier-এ পাঁচটি family-র দাপট। প্রতিটির architecture আর ব্যবসার দর্শন আলাদা। “সেরা model কোনটা” — এই প্রশ্নটাই ভুল। সঠিক প্রশ্ন হলো: <em>কোন trade-off আপনার workload-এর মূল চাহিদার সাথে মেলে</em>।"
+        "title": "মডেল ফ্যামিলি আর ট্রেড-অফ",
+        "sub": "২০২৫ সালে ফ্রন্টিয়ারে পাঁচটি ফ্যামিলির দাপট। প্রতিটির আর্কিটেকচার আর ব্যবসার দর্শন আলাদা। “সেরা মডেল কোনটা” — এই প্রশ্নটাই ভুল। সঠিক প্রশ্ন হলো: <em>কোন ট্রেড-অফ আপনার ওয়ার্কলোডের মূল চাহিদার সাথে মেলে</em>।"
       },
       "body": [
         {
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 360\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Model families landscape\">\n      <defs>\n        <marker id=\"arr2\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <text x=\"40\" y=\"34\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\" letter-spacing=\"1.5\">PRIVATE / PROPRIETARY</text>\n      <text x=\"990\" y=\"34\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\" letter-spacing=\"1.5\" text-anchor=\"end\">OPEN-WEIGHT</text>\n      <text x=\"40\" y=\"338\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\" letter-spacing=\"1.5\">CHEAPER ↓</text>\n      <text x=\"990\" y=\"338\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\" letter-spacing=\"1.5\" text-anchor=\"end\">CAPABLE ↑</text>\n      \n      <line x1=\"40\" y1=\"180\" x2=\"1060\" y2=\"180\" stroke=\"#334155\" stroke-dasharray=\"2 4\"></line>\n      <line x1=\"550\" y1=\"50\" x2=\"550\" y2=\"320\" stroke=\"#334155\" stroke-dasharray=\"2 4\"></line>\n\n      \n      <g>\n        <rect x=\"80\" y=\"80\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n        <text x=\"160\" y=\"106\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fb7185\">Anthropic</text>\n        <text x=\"160\" y=\"124\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#cfd8e6\">Claude Opus / Sonnet / Haiku</text>\n      </g>\n      \n      <g>\n        <rect x=\"80\" y=\"160\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#10a37f\"></rect>\n        <text x=\"160\" y=\"186\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#10a37f\">OpenAI</text>\n        <text x=\"160\" y=\"204\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">GPT-4o / o1 / o3 / GPT-5</text>\n      </g>\n      \n      <g>\n        <rect x=\"280\" y=\"160\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#4285f4\"></rect>\n        <text x=\"360\" y=\"186\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#4285f4\">Google DeepMind</text>\n        <text x=\"360\" y=\"204\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Gemini 2.5 Pro / Flash</text>\n      </g>\n      \n      <g>\n        <rect x=\"620\" y=\"120\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"700\" y=\"146\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#22d3ee\">Meta</text>\n        <text x=\"700\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Llama 3.1 (8B–405B)</text>\n      </g>\n      \n      <g>\n        <rect x=\"800\" y=\"200\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n        <text x=\"880\" y=\"226\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fbbf24\">Mistral AI</text>\n        <text x=\"880\" y=\"244\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Mistral / Mixtral (MoE)</text>\n      </g>\n      \n      <g>\n        <rect x=\"800\" y=\"100\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n        <text x=\"880\" y=\"126\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#34d399\">Alibaba</text>\n        <text x=\"880\" y=\"144\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Qwen3 (0.6B–235B-A22B)</text>\n      </g>\n      \n      <g>\n        <rect x=\"620\" y=\"200\" width=\"160\" height=\"56\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"700\" y=\"226\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#a78bfa\">DeepSeek</text>\n        <text x=\"700\" y=\"244\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">V3 / R1 (MoE + reasoning)</text>\n      </g>\n    </svg>",
           "caption": "Frontier model families plotted by openness (x) and capability/cost tier (y). Position is qualitative, not benchmark-exact.",
-          "captionBn": "এই চার্টে বিভিন্ন frontier model family-কে PRIVATE / PROPRIETARY থেকে OPEN-WEIGHT (অনুভূমিক অক্ষ) এবং CHEAPER থেকে CAPABLE (উল্লম্ব অক্ষ) হিসেবে সাজানো হয়েছে। Anthropic, OpenAI, Google DeepMind, Meta, Mistral AI, Alibaba ও DeepSeek-এর অবস্থান গুণগত, benchmark-এর হুবহু মান নয়।"
+          "captionBn": "এই চার্টে বিভিন্ন ফ্রন্টিয়ার মডেল ফ্যামিলিকে PRIVATE / PROPRIETARY থেকে OPEN-WEIGHT (অনুভূমিক অক্ষ) এবং CHEAPER থেকে CAPABLE (উল্লম্ব অক্ষ) হিসেবে সাজিয়ে দেখানো হয়েছে। Anthropic, OpenAI, Google DeepMind, Meta, Mistral AI, Alibaba ও DeepSeek-এর অবস্থান গুণগত, বেঞ্চমার্কের হুবহু মান নয়।"
         },
         {
           "type": "heading",
@@ -439,15 +439,15 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "\"সেরা মডেল\" বলে কিছু নেই, প্রশ্ন হলো আপনার workload-এর জন্য কোন trade-off মানানসই। প্রধান পরিবারগুলো: OpenAI (GPT-4o, o3, GPT-5) reasoning ও পরিণত ecosystem-এ ভালো; Anthropic (Claude 4) লম্বা context (200K), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো; Google (Gemini 2.5) native multimodal ও 1–2M context-এ এগিয়ে; Meta (Llama 3.1) open weights ও শক্তিশালী ছোট মডেল; Mistral ইউরোপীয় data residency ও edge deployment-এর জন্য; Alibaba Qwen3 সস্তা self-host ও বহুভাষিক কাজে; DeepSeek (V3, R1) কম training খরচে শক্তিশালী open-weight reasoning-এ।"
+          "html": "\"সেরা মডেল\" বলে কিছু নেই, প্রশ্ন হলো আপনার ওয়ার্কলোডের জন্য কোন ট্রেড-অফ মানানসই। প্রধান পরিবারগুলো: OpenAI (GPT-4o, o3, GPT-5) রিজনিং ও পরিণত ইকোসিস্টেমে ভালো; Anthropic (Claude 4) লম্বা কনটেক্সট (২০০K), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো; Google (Gemini 2.5) নেটিভ মাল্টিমোডাল ও ১–২M কনটেক্সটে এগিয়ে; Meta (Llama 3.1) ওপেন ওয়েটস ও শক্তিশালী ছোট মডেল; Mistral ইউরোপীয় ডেটা রেসিডেন্সি ও এজ ডিপ্লয়মেন্টের জন্য; Alibaba Qwen3 সস্তা সেলফ-হোস্ট ও বহুভাষিক কাজে; DeepSeek (V3, R1) কম ট্রেনিং খরচে শক্তিশালী ওপেন-ওয়েট রিজনিংয়ে।"
         },
         {
           "type": "paragraph",
-          "html": "স্থাপত্যগত পার্থক্যও গুরুত্বপূর্ণ। <strong>Dense transformer</strong>-এ প্রতিটি token-এর জন্য সব parameter ব্যবহার হয়, তাই compute অনুমানযোগ্য ও serving সহজ। <strong>Mixture-of-Experts (MoE)</strong>-এ প্রতিটি token শুধু কিছু \"expert\" FFN-এ যায়: মোট parameter বিশাল কিন্তু active parameter কম, ফলে inference সস্তা হলেও memory বেশি লাগে (যেমন DeepSeek-V3: 671B মোট, 37B active)। <code>MLA</code> (Multi-Head Latent Attention) KV cache-কে ছোট করে লম্বা context-এর memory বাঁচায়। Sliding-window বা hybrid attention সস্তা inference ও বিশাল context-এ সাহায্য করে।"
+          "html": "স্থাপত্যগত পার্থক্যও গুরুত্বপূর্ণ। <strong>ডেন্স ট্রান্সফর্মারে</strong> প্রতিটি টোকেনের জন্য সব প্যারামিটার ব্যবহার হয়, তাই কম্পিউট অনুমানযোগ্য ও সার্ভিং সহজ। <strong>Mixture-of-Experts (MoE)</strong>-এ প্রতিটি টোকেন শুধু কিছু \"এক্সপার্ট\" FFN-এ যায়: মোট প্যারামিটার বিশাল কিন্তু অ্যাকটিভ প্যারামিটার কম, ফলে ইনফারেন্স সস্তা হলেও মেমরি বেশি লাগে (যেমন DeepSeek-V3: ৬৭১B মোট, ৩৭B অ্যাকটিভ)। <code>MLA</code> (Multi-Head Latent Attention) KV ক্যাশকে ছোট করে লম্বা কনটেক্সটের মেমরি বাঁচায়। স্লাইডিং-উইন্ডো বা হাইব্রিড অ্যাটেনশন সস্তা ইনফারেন্স ও বিশাল কনটেক্সটে সাহায্য করে।"
         },
         {
           "type": "paragraph",
-          "html": "বাছাইয়ের নিয়ম: সর্বোচ্চ ক্ষমতা লাগলে closed মডেল, আর খরচ কমানো বা data নিজেদের কাছে রাখতে চাইলে open-weight।"
+          "html": "বাছাইয়ের নিয়ম: সর্বোচ্চ ক্ষমতা লাগলে ক্লোজড মডেল, আর খরচ কমানো বা ডেটা নিজেদের কাছে রাখতে চাইলে ওপেন-ওয়েট।"
         },
         {
           "type": "analogy",
@@ -514,36 +514,36 @@
             "challenge": "Change job 1 to only 500 tickets per month. Ask the AI whether its choice changes, and why."
           },
           "bn": {
-            "title": "প্রতিটা কাজের জন্য ঠিক model বাছো",
-            "why": "তোমার team যখন নতুন AI feature শুরু করে, তখন একটা model বাছতে হয়। ভুল model বাছলে মাসে হাজার হাজার dollar বেশি লাগতে পারে, বা privacy-র নিয়ম ভাঙতে পারে।",
+            "title": "প্রতিটা কাজের জন্য ঠিক মডেল বাছুন",
+            "why": "আপনার টিম যখন নতুন AI ফিচার শুরু করে, তখন একটা মডেল বাছতে হয়। ভুল মডেল বাছলে মাসে হাজার হাজার ডলার বেশি লাগতে পারে, বা প্রাইভেসির নিয়ম ভাঙতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "prompt-এর তিনটা কাজ পড়ো, আর প্রতিটার জন্য নিজের choice (X, Y বা Z) লিখে রাখো। তারপর prompt টা copy করে paste করো, Enter চাপো।",
+                "do": "প্রম্পটের তিনটা কাজ পড়ুন, আর প্রতিটার জন্য নিজের চয়েস (X, Y বা Z) লিখে রাখুন। তারপর প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন।",
                 "prompt": "আমাকে প্রতিটা কাজের জন্য একটা করে model বেছে নিতে হবে। তিনটা model-ই বানানো (কাল্পনিক)।\n\nModel X: বড়, reasoning-এ খুব শক্তিশালী, ধীর, প্রতি token-এ দামি, closed API।\nModel Y: ছোট, দ্রুত, প্রতি token-এ সস্তা, সহজ কাজে ভালো, closed API।\nModel Z: মাঝারি, open weights, তুমি নিজের server-এ চালাও, GPU আর পরিচালনার খরচ তোমার।\n\nকাজগুলো:\n1. একটা chat helper মাসে 5 million ছোট support ticket 4টা category-তে ভাগ করে।\n2. একটা coding agent অনেক file জুড়ে কঠিন bug ঠিক করে। দিনে মাত্র 200টা কাজ।\n3. এমন একটা দেশের হাসপাতাল, যেখানে রোগীর data কখনো ভবনের বাইরে যেতে পারে না। প্রশ্নগুলো মাঝারি কঠিন।\n\nপ্রতিটা কাজের জন্য X, Y বা Z বেছে নাও। trade-off নিয়ে একটা বাক্য লেখো। তারপর বলো, \"কোন model সবচেয়ে ভালো\" প্রশ্নটা কেন ভুল।",
-                "expect": "প্রতিটা কাজের জন্য একটা choice আর এক বাক্যের কারণ। বেশিরভাগ chat কাজ 1-এ <strong>Y</strong>, কাজ 2-এ <strong>X</strong>, আর কাজ 3-এ <strong>Z</strong> বাছে।",
+                "expect": "প্রতিটা কাজের জন্য একটা চয়েস আর এক বাক্যের কারণ। বেশিরভাগ চ্যাট কাজ 1-এ <strong>Y</strong>, কাজ 2-এ <strong>X</strong>, আর কাজ 3-এ <strong>Z</strong> বাছে।",
                 "example": "1. Model Y। এটা সহজ কাজ, কিন্তু volume অনেক বেশি। তাই সস্তা আর দ্রুত হওয়াটাই সবচেয়ে জরুরি।\n2. Model X। অনেক file জুড়ে কঠিন bug ঠিক করতে সবচেয়ে শক্তিশালী reasoning লাগে, আর দিনে 200টা কাজ মানে volume কম, তাই খরচ সমস্যা না।\n3. Model Z। রোগীর data ভবনের ভেতরেই থাকতে হবে, তাই শুধু নিজের server-এর model-ই চলে।\n\n\"কোন model সবচেয়ে ভালো\" প্রশ্নটা ভুল, কারণ প্রতিটা model আলাদা trade-off-এ জেতে: খরচ, মান, বা data-র নিয়ন্ত্রণ।"
               },
               {
                 "chat": "same",
-                "do": "AI-র choice তোমার choice-এর সাথে মেলাও। যে কাজে আলাদা বেছেছ, সেটা খুঁজে বের করো, আর ঠিক করো কে ঠিক।",
-                "expect": "বেশিরভাগ কাজ মিলবে। কোনোটা না মিললে AI-র কারণে অন্য একটা trade-off দেখা যাবে, সেটা সবসময় ভুল উত্তর না।"
+                "do": "AI-র চয়েস আপনার চয়েসের সাথে মেলান। যে কাজে আলাদা বেছেছেন, সেটা খুঁজে বের করুন, আর ঠিক করুন কে ঠিক।",
+                "expect": "বেশিরভাগ কাজ মিলবে। কোনোটা না মিললে AI-র কারণে অন্য একটা ট্রেড-অফ দেখা যাবে, সেটা সবসময় ভুল উত্তর না।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "একটা Mixture-of-Experts model-এ মোট 671B parameter, কিন্তু প্রতিটা token-এ active থাকে মাত্র 37B। একটা dense model-এ 70B parameter, আর প্রতিটা token-এ সবগুলোই active। কোন model load করতে বেশি GPU memory লাগে? কোন model প্রতি token-এ কম computing করে? 3টা ছোট বাক্যে উত্তর দাও।",
-                "expect": "<strong>MoE</strong>-তে বেশি memory লাগে (671B জমা রাখতে হয়), আর <strong>MoE</strong> প্রতি token-এ কম computing করে (37B ব্যবহার হয়)।",
+                "expect": "<strong>MoE</strong>-তে বেশি মেমরি লাগে (৬৭১B জমা রাখতে হয়), আর <strong>MoE</strong> প্রতি টোকেনে কম কম্পিউটিং করে (৩৭B ব্যবহার হয়)।",
                 "example": "Mixture-of-Experts model-এ বেশি GPU memory লাগে, কারণ মোট 671B parameter-ই load করতে হয়। dense model-এ কম memory লাগে, মাত্র 70B। প্রতি token-এ Mixture-of-Experts model কম computing করে, কারণ সে শুধু 37B parameter ব্যবহার করে, আর dense model ব্যবহার করে পুরো 70B।"
               }
             ],
-            "learned": "Model বাছা মানে মান, গতি, খরচ আর data-র নিয়ন্ত্রণের মধ্যে একটা trade-off। চারটাতেই সেরা, এমন model নেই, তাই \"সেরা model\" নির্ভর করে কাজের ওপর। <strong>MoE</strong> (mixture of experts) model অনেকগুলো expert অংশ দিয়ে তৈরি, আর প্রতিটা token মাত্র কয়েকটা অংশ ব্যবহার করে। সব অংশ GPU memory-তে রাখতে হয়, কিন্তু কাজ করে শুধু active অংশ, তাই MoE-তে memory বেশি লাগে আর প্রতি token-এ computing কম লাগে।",
-            "done": "৩টা কাজের প্রতিটার জন্য তোমার একটা model choice আছে, আর তুমি জানো দুটো বড় model-এর কোনটায় বেশি memory লাগে।",
+            "learned": "মডেল বাছা মানে মান, গতি, খরচ আর ডেটার নিয়ন্ত্রণের মধ্যে একটা ট্রেড-অফ। চারটাতেই সেরা, এমন মডেল নেই, তাই \"সেরা মডেল\" নির্ভর করে কাজের ওপর। <strong>MoE</strong> (mixture of experts) মডেল অনেকগুলো এক্সপার্ট অংশ দিয়ে তৈরি, আর প্রতিটা টোকেন মাত্র কয়েকটা অংশ ব্যবহার করে। সব অংশ GPU মেমরিতে রাখতে হয়, কিন্তু কাজ করে শুধু অ্যাকটিভ অংশ, তাই MoE-তে মেমরি বেশি লাগে আর প্রতি টোকেনে কম্পিউটিং কম লাগে।",
+            "done": "৩টা কাজের প্রতিটার জন্য আপনার একটা মডেল চয়েস আছে, আর আপনি জানেন দুটো বড় মডেলের কোনটায় বেশি মেমরি লাগে।",
             "check": {
-              "question": "MoE model 70B dense model-এর চেয়ে বেশি memory নেয়, কিন্তু প্রতি token-এ কম computing করে। কেন?",
-              "answer": "সব expert memory-তে load করতে হয়, তাই মোট parameter (671B) memory ঠিক করে। প্রতিটা token যায় মাত্র কয়েকটা expert-এর কাছে, তাই শুধু active parameter (37B) computing করে।"
+              "question": "MoE মডেল ৭০B ডেন্স মডেলের চেয়ে বেশি মেমরি নেয়, কিন্তু প্রতি টোকেনে কম কম্পিউটিং করে। কেন?",
+              "answer": "সব এক্সপার্ট মেমরিতে লোড করতে হয়, তাই মোট প্যারামিটার (৬৭১B) মেমরি ঠিক করে। প্রতিটা টোকেন যায় মাত্র কয়েকটা এক্সপার্টের কাছে, তাই শুধু অ্যাকটিভ প্যারামিটার (৩৭B) কম্পিউটিং করে।"
             },
-            "challenge": "কাজ 1 বদলে মাসে মাত্র 500টা ticket করো। AI-কে জিজ্ঞেস করো, তার choice বদলায় কি না, আর কেন।"
+            "challenge": "কাজ ১ বদলে মাসে মাত্র ৫০০টা টিকেট করুন। AI-কে জিজ্ঞেস করুন, তার চয়েস বদলায় কি না, আর কেন।"
           }
         }
       ]
@@ -554,8 +554,8 @@
       "title": "Closed vs open-weight models",
       "sub": "\"Open\" splits into two camps that engineers often confuse: <strong>open-weight</strong> (you can download and run the model) and <strong>open-source</strong> (you also have training code, data, and licence to modify and redistribute). Most \"open\" LLMs are open-weight.",
       "bn": {
-        "title": "Closed বনাম open-weight model",
-        "sub": "“Open” দুই দলে ভাগ হয়, আর engineer-রাও প্রায়ই দুটো গুলিয়ে ফেলেন: <strong>open-weight</strong> (model ডাউনলোড করে নিজে চালাতে পারবেন) আর <strong>open-source</strong> (এর সাথে training code, data, আর বদলে আবার বিলি করার licenseও পাবেন)। বেশিরভাগ “open” LLM আসলে open-weight।"
+        "title": "ক্লোজড বনাম ওপেন-ওয়েট মডেল",
+        "sub": "“Open” দুই দলে ভাগ হয়, আর ইঞ্জিনিয়াররাও প্রায়ই দুটো গুলিয়ে ফেলেন: <strong>ওপেন-ওয়েট</strong> (মডেল ডাউনলোড করে নিজে চালাতে পারবেন) আর <strong>ওপেন-সোর্স</strong> (এর সাথে ট্রেনিং কোড, ডেটা, আর বদলে আবার বিলি করার লাইসেন্সও পাবেন)। বেশিরভাগ “open” LLM আসলে ওপেন-ওয়েট।"
       },
       "body": [
         {
@@ -648,23 +648,23 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "\"Open\" শব্দটি দুই অর্থে ব্যবহৃত হয় এবং ইঞ্জিনিয়াররা প্রায়ই গুলিয়ে ফেলেন। <strong>Open-weight</strong> মানে মডেলের weights ডাউনলোড করে নিজে চালানো যায়। <strong>Open-source</strong> মানে এর সাথে training code, data এবং পরিবর্তন ও পুনর্বিতরণের লাইসেন্সও পাওয়া যায়। বেশিরভাগ \"open\" LLM আসলে শুধু open-weight।"
+          "html": "\"Open\" শব্দটি দুই অর্থে ব্যবহৃত হয় এবং ইঞ্জিনিয়াররা প্রায়ই গুলিয়ে ফেলেন। <strong>ওপেন-ওয়েট</strong> মানে মডেলের ওয়েটস ডাউনলোড করে নিজে চালানো যায়। <strong>ওপেন-সোর্স</strong> মানে এর সাথে ট্রেনিং কোড, ডেটা এবং পরিবর্তন ও পুনর্বিতরণের লাইসেন্সও পাওয়া যায়। বেশিরভাগ \"open\" LLM আসলে শুধু ওপেন-ওয়েট।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Closed/proprietary</strong> মডেল (GPT, Claude, Gemini) API-র পেছনে থাকে। সুবিধা: সর্বোচ্চ ক্ষমতা, দ্রুত hardware optimisation, তৈরি safety stack, নিজের infra চালাতে হয় না। অসুবিধা: vendor lock-in, weights যাচাই করা যায় না, data আপনার সীমানার বাইরে যায়, আর দাম তারা একতরফা বদলাতে পারে।"
+          "html": "<strong>ক্লোজড/প্রোপ্রাইটারি</strong> মডেল (GPT, Claude, Gemini) API-র পেছনে থাকে। সুবিধা: সর্বোচ্চ ক্ষমতা, দ্রুত হার্ডওয়্যার অপটিমাইজেশন, তৈরি সেফটি স্ট্যাক, নিজের ইনফ্রা চালাতে হয় না। অসুবিধা: ভেন্ডর লক-ইন, ওয়েটস যাচাই করা যায় না, ডেটা আপনার সীমানার বাইরে যায়, আর দাম তারা একতরফা বদলাতে পারে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Open-weight</strong> (Llama, Mistral, Qwen, DeepSeek) মডেলে আপনি নিজের হার্ডওয়্যারে চালাতে পারেন, private data-য় fine-tune করতে পারেন, weights audit করতে পারেন, per-token ফি লাগে না এবং data বাইরে যায় না। বিনিময়ে GPU, networking ও monitoring আপনাকেই চালাতে হবে, ক্ষমতা ফ্রন্টিয়ার থেকে প্রায় 3–9 মাস পিছিয়ে, আর safety-র দায়ও আপনার।"
+          "html": "<strong>ওপেন-ওয়েট</strong> (Llama, Mistral, Qwen, DeepSeek) মডেলে আপনি নিজের হার্ডওয়্যারে চালাতে পারেন, প্রাইভেট ডেটায় ফাইন-টিউন করতে পারেন, ওয়েটস অডিট করতে পারেন, পার-টোকেন ফি লাগে না এবং ডেটা বাইরে যায় না। বিনিময়ে GPU, নেটওয়ার্কিং ও মনিটরিং আপনাকেই চালাতে হবে, ক্ষমতা ফ্রন্টিয়ার থেকে প্রায় ৩–৯ মাস পিছিয়ে, আর সেফটির দায়ও আপনার।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Open-weight জেতে</strong> যখন scale-এ অনুমানযোগ্য খরচ, data residency/compliance, proprietary data-য় fine-tuning বা latency-সংবেদী serving দরকার।",
-            "<strong>Closed জেতে</strong> যখন ফ্রন্টিয়ার কোডিং/reasoning লাগে, query কম বলে self-host লাভজনক নয়, অথবা audio/video multimodal দরকার।",
-            "<strong>Hybrid</strong> প্যাটার্ন এখন সাধারণ: distillation, সহজ query ছোট লোকাল মডেলে ও কঠিনগুলো ফ্রন্টিয়ার API-তে পাঠানো (routing), এবং Together/Groq/Fireworks-এর মতো managed serving।"
+            "<strong>ওপেন-ওয়েট জেতে</strong> যখন স্কেলে অনুমানযোগ্য খরচ, ডেটা রেসিডেন্সি/কমপ্লায়েন্স, প্রোপ্রাইটারি ডেটায় ফাইন-টিউনিং বা ল্যাটেন্সি-সংবেদী সার্ভিং দরকার।",
+            "<strong>ক্লোজড জেতে</strong> যখন ফ্রন্টিয়ার কোডিং/রিজনিং লাগে, কুয়েরি কম বলে সেলফ-হোস্ট লাভজনক নয়, অথবা অডিও/ভিডিও মাল্টিমোডাল দরকার।",
+            "<strong>হাইব্রিড</strong> প্যাটার্ন এখন সাধারণ: ডিস্টিলেশন, সহজ কুয়েরি ছোট লোকাল মডেলে ও কঠিনগুলো ফ্রন্টিয়ার API-তে পাঠানো (রাউটিং), এবং Together/Groq/Fireworks-এর মতো ম্যানেজড সার্ভিং।"
           ]
         },
         {
@@ -672,7 +672,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>বাসা ভাড়া বনাম নিজের বাড়ির উপমা:</strong> Closed মডেল ভাড়া বাসার মতো: মালিক সব দেখভাল করে, কিন্তু ভাড়া বাড়ালে আপনার কিছু করার নেই, আর দেয়াল ভাঙার অনুমতি নেই। Open-weight হলো নিজের বাড়ি: ইচ্ছেমতো সাজাতে পারেন, কিন্তু মেরামত ও পাহারার ঝামেলা আপনার। আর Open-source হলো বাড়ির নকশা, ইট-সিমেন্টের হিসাব ও কারিগর সবকিছু পাওয়া, যা LLM-এর ক্ষেত্রে প্রায় দেখাই যায় না।"
+              "html": "<strong>বাসা ভাড়া বনাম নিজের বাড়ির উপমা:</strong> ক্লোজড মডেল ভাড়া বাসার মতো: মালিক সব দেখভাল করে, কিন্তু ভাড়া বাড়ালে আপনার কিছু করার নেই, আর দেয়াল ভাঙার অনুমতি নেই। ওপেন-ওয়েট হলো নিজের বাড়ি: ইচ্ছেমতো সাজাতে পারেন, কিন্তু মেরামত ও পাহারার ঝামেলা আপনার। আর ওপেন-সোর্স হলো বাড়ির নকশা, ইট-সিমেন্টের হিসাব ও কারিগর সবকিছু পাওয়া, যা LLM-এর ক্ষেত্রে প্রায় দেখাই যায় না।"
             }
           ]
         }
@@ -737,41 +737,41 @@
             "challenge": "Run the first prompt again, but with a server that costs $6,000 per month and serves up to 5 billion tokens. Keep the $1,500 for engineer time. Where is the new break-even, and is it inside the server limit?"
           },
           "bn": {
-            "title": "নিজের server কখন লাভজনক, বের করো",
-            "why": "তোমার team যখন জিজ্ঞেস করে \"আমরা কি নিজের model চালাব?\", উত্তর নির্ভর করে মাসে কত token ব্যবহার হয় তার ওপর। ভুল অনুমানে হাজার হাজার dollar নষ্ট হতে পারে।",
+            "title": "নিজের সার্ভার কখন লাভজনক, বের করুন",
+            "why": "আপনার টিম যখন জিজ্ঞেস করে \"আমরা কি নিজের মডেল চালাব?\", উত্তর নির্ভর করে মাসে কত টোকেন ব্যবহার হয় তার ওপর। ভুল অনুমানে হাজার হাজার ডলার নষ্ট হতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। break-even সংখ্যাটা (যেখানে দুই option-এর খরচ সমান) লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। ব্রেক-ইভেন সংখ্যাটা (যেখানে দুই অপশনের খরচ সমান) লিখে রাখুন।",
                 "prompt": "একই text কাজের জন্য দুটো option তুলনা করো।\n\nOption 1, closed API: প্রতি 1 million token-এ $3 (input আর output মিলিয়ে)। আর কোনো খরচ নেই।\nOption 2, নিজের server-এ open-weight model: GPU server-এর জন্য মাসে $2,200, আর engineer-এর সময়ের জন্য মাসে $1,500। এটা মাসে সর্বোচ্চ 2 billion token চালাতে পারে। প্রতি token-এ কোনো fee নেই।\n\nমাসে কত token হলে দুটো option-এর খরচ সমান হয়? formula আর ধাপগুলো দেখাও। মাসে 200 million token হলে কোন option সস্তা? 1.8 billion token হলে কোনটা?",
-                "expect": "মাসে প্রায় <strong>1.23 billion</strong> token-এ break-even। 200 million-এ API সস্তা, আর 1.8 billion-এ নিজের server সস্তা।",
+                "expect": "মাসে প্রায় <strong>১.২৩ বিলিয়ন</strong> টোকেনে ব্রেক-ইভেন। ২০০ মিলিয়নে API সস্তা, আর ১.৮ বিলিয়নে নিজের সার্ভার সস্তা।",
                 "example": "নিজের server-এর খরচ = $2,200 + $1,500 = মাসে $3,700, volume যা-ই হোক।\nAPI-র খরচ = প্রতি 1 million token-এ $3।\nদুটোর খরচ সমান হয় যখন (million-এ token) x $3 = $3,700, অর্থাৎ token = 3,700 / 3 = 1,233.3 million, মানে প্রায় 1.23 billion token প্রতি মাসে।\n200 million token-এ: API = 200 x $3 = $600। নিজের server = $3,700। API সস্তা।\n1.8 billion token-এ: API = 1,800 x $3 = $5,400। নিজের server = $3,700। নিজের server সস্তা।"
               },
               {
                 "chat": "same",
-                "do": "নিজে calculator দিয়ে হিসাবটা মিলিয়ে নাও: $2,200 আর $1,500 যোগ করো, তারপর $3 দিয়ে ভাগ করো। ফল লেখো million token-এ।",
-                "expect": "<strong>3,700 / 3 = 1,233.3</strong> million token। এটা AI-র সংখ্যার সাথে মেলে।"
+                "do": "নিজে ক্যালকুলেটর দিয়ে হিসাবটা মিলিয়ে নিন: $২,২০০ আর $১,৫০০ যোগ করুন, তারপর $৩ দিয়ে ভাগ করুন। ফল লিখুন মিলিয়ন টোকেনে।",
+                "expect": "<strong>৩,৭০০ / ৩ = ১,২৩৩.৩</strong> মিলিয়ন টোকেন। এটা AI-র সংখ্যার সাথে মেলে।"
               },
               {
                 "chat": "new",
-                "do": "চারটা company পড়ো আর প্রতিটার জন্য নিজের choice লিখে রাখো। তারপর prompt টা copy করে paste করো, Enter চাপো।",
+                "do": "চারটা কোম্পানি পড়ুন আর প্রতিটার জন্য নিজের চয়েস লিখে রাখুন। তারপর প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন।",
                 "prompt": "নিচের প্রতিটা company-র জন্য একটা বেছে নাও: closed API, open-weight self-host, বা hybrid (সহজ query যাবে ছোট local model-এ, কঠিন query যাবে সেরা API-তে)। প্রতিটার জন্য এক বাক্যে কারণ লেখো।\n\nCompany 1: একটা ছোট start-up, মাসে 50,000 query, কোনো ML engineer নেই।\nCompany 2: একটা bank, যাকে সব customer text নিজের data centre-এর ভেতরে রাখতে হয়। তাদের GPU চালানোর মতো team আছে।\nCompany 3: একটা shopping app, মাসে 100 million query। 80% সহজ, আর 20%-এ সেরা মান লাগে।\nCompany 4: একটা team, যাদের আজকের সবচেয়ে শক্তিশালী coding agent ব্যবহার করতেই হবে।",
-                "expect": "প্রতিটা company-র জন্য একটা choice আর একটা কারণ। বেশিরভাগ chat company 1 আর 4-এর জন্য closed API, company 2-এর জন্য open-weight, আর company 3-এর জন্য hybrid বাছে।",
+                "expect": "প্রতিটা কোম্পানির জন্য একটা চয়েস আর একটা কারণ। বেশিরভাগ চ্যাট কোম্পানি ১ আর 4-এর জন্য ক্লোজড API, কোম্পানি 2-এর জন্য ওপেন-ওয়েট, আর কোম্পানি 3-এর জন্য হাইব্রিড বাছে।",
                 "example": "Company 1: Closed API। 50,000 query খুব কম volume, আর server চালানোর মতো engineer তাদের নেই।\nCompany 2: Open-weight self-host। customer text data centre-এর ভেতরে থাকতে হবে, আর তারা GPU চালাতে পারে।\nCompany 3: Hybrid। 80% সহজ query ছোট local model-এ, আর 20% কঠিন query সেরা API-তে পাঠাও।\nCompany 4: Closed API। আজকের সবচেয়ে শক্তিশালী coding agent-গুলো closed model।"
               },
               {
                 "chat": "same",
-                "do": "AI-র choice তোমার choice-এর সাথে মেলাও। যে company-তে তোমার মত আলাদা, সেটা বেছে লেখো: <em>অন্য option কেন না?</em>",
-                "expect": "AI একটা কারণ দেবে, প্রায়ই volume, data-র নিয়ম বা লোকবল নিয়ে। কারণটা জোরালো কি না, নিজে ঠিক করো।"
+                "do": "AI-র চয়েস আপনার চয়েসের সাথে মেলান। যে কোম্পানিতে আপনার মত আলাদা, সেটা বেছে লিখুন: <em>অন্য option কেন না?</em>",
+                "expect": "AI একটা কারণ দেবে, প্রায়ই ভলিউম, ডেটার নিয়ম বা লোকবল নিয়ে। কারণটা জোরালো কি না, নিজে ঠিক করুন।"
               }
             ],
-            "learned": "Closed API প্রতি token-এ টাকা নেয়, আর কোনো fixed খরচ নেই। <strong>open-weight</strong> model (যে model-এর file তুমি download করে নিজে চালাতে পারো) চালাতে server আর লোকের জন্য মাসে একটা fixed খরচ লাগে, volume যা-ই হোক। <strong>break-even</strong> হলো সেই volume, যেখানে দুই option-এর খরচ সমান। তার নিচে API সস্তা। তার ওপরে নিজের server সস্তা।",
-            "done": "তোমার কাছে একটা break-even সংখ্যা (প্রায় 1.23 billion token) আর ৪টা company-র প্রতিটার জন্য একটা choice আছে।",
+            "learned": "ক্লোজড API প্রতি টোকেনে টাকা নেয়, আর কোনো ফিক্সড খরচ নেই। <strong>ওপেন-ওয়েট</strong> মডেল (যে মডেলের ফাইল আপনি ডাউনলোড করে নিজে চালাতে পারেন) চালাতে সার্ভার আর লোকের জন্য মাসে একটা ফিক্সড খরচ লাগে, ভলিউম যা-ই হোক। <strong>ব্রেক-ইভেন</strong> হলো সেই ভলিউম, যেখানে দুই অপশনের খরচ সমান। তার নিচে API সস্তা। তার ওপরে নিজের সার্ভার সস্তা।",
+            "done": "আপনার কাছে একটা ব্রেক-ইভেন সংখ্যা (প্রায় ১.২৩ বিলিয়ন টোকেন) আর ৪টা কোম্পানির প্রতিটার জন্য একটা চয়েস আছে।",
             "check": {
-              "question": "open-weight model-এ প্রতি token-এ fee নেই, তবু ছোট team-এর জন্য closed API সস্তা হতে পারে কেন?",
-              "answer": "open weights-এ server আর engineer-এর fixed খরচ দিতে হয়, volume কম হলেও। token কম হলে সেই fixed খরচ API-র bill-এর চেয়ে বেশি হয়। volume, data-র নিয়ম বা fine-tuning-এর দরকার বেশি হলে open-weight জেতে।"
+              "question": "ওপেন-ওয়েট মডেলে প্রতি টোকেনে ফি নেই, তবু ছোট টিমের জন্য ক্লোজড API সস্তা হতে পারে কেন?",
+              "answer": "ওপেন ওয়েটসে সার্ভার আর ইঞ্জিনিয়ারের ফিক্সড খরচ দিতে হয়, ভলিউম কম হলেও। টোকেন কম হলে সেই ফিক্সড খরচ API-র বিলের চেয়ে বেশি হয়। ভলিউম, ডেটার নিয়ম বা ফাইন-টিউনিংয়ের দরকার বেশি হলে ওপেন-ওয়েট জেতে।"
             },
-            "challenge": "প্রথম prompt আবার চালাও, কিন্তু এবার server-এর খরচ মাসে $6,000 আর সে মাসে 5 billion token পর্যন্ত চালাতে পারে। engineer-এর $1,500 একই রাখো। নতুন break-even কোথায়, আর সেটা কি server-এর limit-এর ভেতরে?"
+            "challenge": "প্রথম প্রম্পট আবার চালান, কিন্তু এবার সার্ভারের খরচ মাসে $৬,০০০ আর সে মাসে ৫ বিলিয়ন টোকেন পর্যন্ত চালাতে পারে। ইঞ্জিনিয়ারের $১,৫০০ একই রাখুন। নতুন ব্রেক-ইভেন কোথায়, আর সেটা কি সার্ভারের লিমিটের ভেতরে?"
           }
         }
       ]
@@ -782,8 +782,8 @@
       "title": "Sampling parameters",
       "sub": "A model outputs a probability distribution over every token in its vocabulary. <em>Sampling</em> is how you turn that distribution into text. The same logits can produce robotic lists, creative prose, or factual hallucinations depending on five knobs.",
       "bn": {
-        "title": "Sampling parameter-এর ব্যবহার",
-        "sub": "Model তার vocabulary-র প্রতিটি token-এর উপর একটি probability distribution দেয়। <em>Sampling</em> হলো সেই distribution থেকে text বানানোর উপায়। একই logits থেকে যান্ত্রিক তালিকা, সৃজনশীল গদ্য, কিংবা বানানো ভুল তথ্য (hallucination) — যেকোনোটি আসতে পারে, পাঁচটি knob কীভাবে ঘোরান তার উপর।"
+        "title": "স্যাম্পলিং প্যারামিটারের ব্যবহার",
+        "sub": "মডেল তার ভোকাবুলারির প্রতিটি টোকেনের উপর একটি প্রোবাবিলিটি ডিস্ট্রিবিউশন দেয়। <em>স্যাম্পলিং</em> হলো সেই ডিস্ট্রিবিউশন থেকে টেক্সট বানানোর উপায়। একই লজিটস থেকে যান্ত্রিক তালিকা, সৃজনশীল গদ্য, কিংবা বানানো ভুল তথ্য (হ্যালুসিনেশন) — যেকোনোটি আসতে পারে, পাঁচটি নব কীভাবে ঘোরান তার উপর।"
       },
       "body": [
         {
@@ -796,7 +796,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sampling knobs comparison\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">logits → softmax → temperature → top-k → top-p → penalties → sample</text>\n\n      \n      <g transform=\"translate(40,60)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">raw logits z</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"120\" fill=\"#22d3ee\" opacity=\"0.85\"></rect>\n        <rect x=\"48\"  y=\"40\" width=\"40\" height=\"100\" fill=\"#22d3ee\" opacity=\"0.7\"></rect>\n        <rect x=\"96\"  y=\"60\" width=\"40\" height=\"80\"  fill=\"#22d3ee\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"70\" width=\"40\" height=\"70\"  fill=\"#22d3ee\" opacity=\"0.55\"></rect>\n        <rect x=\"192\" y=\"85\" width=\"40\" height=\"55\"  fill=\"#22d3ee\" opacity=\"0.5\"></rect>\n        <rect x=\"240\" y=\"100\" width=\"40\" height=\"40\" fill=\"#22d3ee\" opacity=\"0.45\"></rect>\n        <rect x=\"288\" y=\"105\" width=\"40\" height=\"35\" fill=\"#22d3ee\" opacity=\"0.4\"></rect>\n        <rect x=\"336\" y=\"110\" width=\"40\" height=\"30\" fill=\"#22d3ee\" opacity=\"0.35\"></rect>\n        <rect x=\"384\" y=\"115\" width=\"40\" height=\"25\" fill=\"#22d3ee\" opacity=\"0.3\"></rect>\n        <rect x=\"432\" y=\"120\" width=\"40\" height=\"20\" fill=\"#22d3ee\" opacity=\"0.25\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(40,222)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">softmax → probs</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"80\"  fill=\"#a78bfa\" opacity=\"0.95\"></rect>\n        <rect x=\"48\"  y=\"60\" width=\"40\" height=\"40\"  fill=\"#a78bfa\" opacity=\"0.75\"></rect>\n        <rect x=\"96\"  y=\"78\" width=\"40\" height=\"22\"  fill=\"#a78bfa\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"86\" width=\"40\" height=\"14\"  fill=\"#a78bfa\" opacity=\"0.5\"></rect>\n        <rect x=\"192\" y=\"91\" width=\"40\" height=\"9\"   fill=\"#a78bfa\" opacity=\"0.4\"></rect>\n        <rect x=\"240\" y=\"95\" width=\"40\" height=\"5\"   fill=\"#a78bfa\" opacity=\"0.3\"></rect>\n        <rect x=\"288\" y=\"97\" width=\"40\" height=\"3\"   fill=\"#a78bfa\" opacity=\"0.2\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,40)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">temperature</text>\n        <text x=\"0\" y=\"20\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→0: greedy / deterministic</text>\n        <rect x=\"0\"   y=\"32\" width=\"280\" height=\"10\" fill=\"#fb7185\" opacity=\"0.85\"></rect>\n        <text x=\"0\" y=\"58\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T=1.0: native distribution</text>\n        <rect x=\"0\"   y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\"></rect>\n        <rect x=\"80\"  y=\"70\" width=\"50\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.75\"></rect>\n        <rect x=\"130\" y=\"70\" width=\"40\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.55\"></rect>\n        <rect x=\"170\" y=\"70\" width=\"30\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.4\"></rect>\n        <rect x=\"200\" y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.25\"></rect>\n        <text x=\"0\" y=\"96\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→∞: uniform / noise</text>\n        <rect x=\"0\"   y=\"108\" width=\"280\" height=\"10\" fill=\"#34d399\" opacity=\"0.5\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,170)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">truncation</text>\n        <text x=\"0\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_k</text>\n        <text x=\"60\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep only the k highest-prob tokens</text>\n        <text x=\"0\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_p</text>\n        <text x=\"60\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep smallest set whose sum ≥ k</text>\n        <text x=\"0\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">min_p</text>\n        <text x=\"60\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">drop tokens below p_min × top prob</text>\n\n        <text x=\"0\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">penalties</text>\n        <text x=\"0\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">freq</text>\n        <text x=\"60\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α · count(token)</text>\n        <text x=\"0\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">pres</text>\n        <text x=\"60\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α if token seen (any count)</text>\n      </g>\n    </svg>",
           "caption": "Visualising how temperature flattens or sharpens the distribution, and where truncation steps (top_k, top_p, min_p) cut the tail.",
-          "captionBn": "এখানে দেখা যায় raw logits কীভাবে softmax, temperature, top_k, top_p, min_p ও repetition penalties পেরিয়ে শেষে sample হয়। বাঁ থেকে ডানে পড়ুন: T কম হলে বণ্টন sharp (greedy), T বেশি হলে flat (noise), আর truncation ধাপগুলো কম-সম্ভাবনার tail কেটে দেয়।"
+          "captionBn": "এখানে দেখা যায় র লজিটস কীভাবে সফটম্যাক্স, টেম্পারেচার, top_k, top_p, min_p ও রিপিটিশন পেনাল্টি পেরিয়ে শেষে স্যাম্পল হয়। বাঁ থেকে ডানে পড়ুন: T কম হলে বণ্টন শার্প (গ্রিডি), T বেশি হলে ফ্ল্যাট (নয়েজ), আর ট্রানকেশন ধাপগুলো কম-সম্ভাবনার টেইল কেটে দেয়।"
         },
         {
           "type": "table",
@@ -889,30 +889,30 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "মডেল প্রতিটি ধাপে ভোকাবুলারির সব token-এর ওপর একটি সম্ভাবনা বণ্টন (probability distribution) তৈরি করে। <strong>Sampling</strong> হলো সেই বণ্টন থেকে একটি token বেছে নেওয়ার পদ্ধতি। একই logits থেকে এই knob-গুলোর কারণে কখনো রোবটিক তালিকা, কখনো সৃজনশীল লেখা বা hallucination বেরোতে পারে।"
+          "html": "মডেল প্রতিটি ধাপে ভোকাবুলারির সব টোকেনের ওপর একটি সম্ভাবনা বণ্টন (প্রোবাবিলিটি ডিস্ট্রিবিউশন) তৈরি করে। <strong>স্যাম্পলিং</strong> হলো সেই বণ্টন থেকে একটি টোকেন বেছে নেওয়ার পদ্ধতি। একই লজিটস থেকে এই নবগুলোর কারণে কখনো রোবটিক তালিকা, কখনো সৃজনশীল লেখা বা হ্যালুসিনেশন বেরোতে পারে।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<code>temperature</code>: softmax-এর আগে logits-কে T দিয়ে ভাগ করে। T&lt;1 হলে বণ্টন ধারালো (বেশি deterministic), T&gt;1 হলে সমতল (বেশি random)। কোড, JSON, classification, math-এর জন্য 0; chat-এর জন্য 0.7–1.0; সৃজনশীল লেখা ও brainstorming-এর জন্য 1.0–2.0।",
-            "<code>top_k</code>: শুধু সবচেয়ে সম্ভাব্য k-টি token থেকে বাছে। k=1 মানে greedy; সাধারণত k≈40–100। বেশি temperature-এর সাথে k&lt;10 এড়ানো ভালো।",
-            "<code>top_p</code> (nucleus): যে ক্ষুদ্রতম token-সেটের সম্মিলিত সম্ভাবনা ≥ p, শুধু সেটি রাখে। সাধারণত 0.9–0.95।",
-            "<code>min_p</code>: top token-এর সম্ভাবনার min_p গুণের চেয়ে কম সম্ভাবনার token বাদ দেয়; মডেলের আকার বদলালেও এটি ভালো কাজ করে।",
-            "<code>frequency_penalty</code>: token যতবার এসেছে তার সংখ্যা অনুযায়ী logit কমায়, ফলে পুনরাবৃত্তি কমে (সাধারণত 0.1–1.0)।",
-            "<code>presence_penalty</code>: token একবার এসে থাকলেই কমায়, ফলে বিষয়ের বৈচিত্র্য বাড়ে (সাধারণত 0–0.6)।"
+            "<code>temperature</code>: সফটম্যাক্সের আগে লজিটসকে T দিয়ে ভাগ করে। T&lt;১ হলে বণ্টন ধারালো (বেশি ডিটারমিনিস্টিক), T&gt;১ হলে সমতল (বেশি র‍্যান্ডম)। কোড, JSON, ক্লাসিফিকেশন, ম্যাথের জন্য ০; চ্যাটের জন্য ০.৭–১.০; সৃজনশীল লেখা ও ব্রেইনস্টর্মিংয়ের জন্য ১.০–২.০।",
+            "<code>top_k</code>: শুধু সবচেয়ে সম্ভাব্য k-টি টোকেন থেকে বাছে। k=১ মানে গ্রিডি; সাধারণত k≈৪০–১০০। বেশি টেম্পারেচারের সাথে k&lt;১০ এড়ানো ভালো।",
+            "<code>top_p</code> (নিউক্লিয়াস): যে ক্ষুদ্রতম টোকেন-সেটের সম্মিলিত সম্ভাবনা ≥ p, শুধু সেটি রাখে। সাধারণত ০.৯–০.৯৫।",
+            "<code>min_p</code>: শীর্ষ টোকেনের সম্ভাবনার min_p গুণের চেয়ে কম সম্ভাবনার টোকেন বাদ দেয়; মডেলের আকার বদলালেও এটি ভালো কাজ করে।",
+            "<code>frequency_penalty</code>: টোকেন যতবার এসেছে তার সংখ্যা অনুযায়ী লজিট কমায়, ফলে পুনরাবৃত্তি কমে (সাধারণত ০.১–১.০)।",
+            "<code>presence_penalty</code>: টোকেন একবার এসে থাকলেই কমায়, ফলে বিষয়ের বৈচিত্র্য বাড়ে (সাধারণত ০–০.৬)।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>সাধারণ ভুল:</strong> <code>top_k</code> ও <code>top_p</code> একসাথে কড়াভাবে দিলে tail দুইবার ছাঁটা হয়ে লেখা অসংলগ্ন (degeneration) হতে পারে। আধুনিক প্রোভাইডাররা <code>temperature</code> + <code>top_p</code> (অথবা <code>temperature</code> + <code>min_p</code>) ব্যবহারের পরামর্শ দেন।"
+          "html": "<strong>সাধারণ ভুল:</strong> <code>top_k</code> ও <code>top_p</code> একসাথে কড়াভাবে দিলে টেইল দুইবার ছাঁটা হয়ে লেখা অসংলগ্ন (ডিজেনারেশন) হতে পারে। আধুনিক প্রোভাইডাররা <code>temperature</code> + <code>top_p</code> (অথবা <code>temperature</code> + <code>min_p</code>) ব্যবহারের পরামর্শ দেন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>চায়ের দোকানের উপমা:</strong> আপনি চায়ের দোকানে গেছেন। Temperature 0 হলো রোজকার মতো সেই একই নিরাপদ চা অর্ডার করা। Temperature বাড়ালে আপনি নতুন কিছু চেখে দেখার ঝুঁকি নেন, আর খুব বেশি হলে যা-তা অর্ডার করে বসেন। top_p/top_k হলো আগেই ঠিক করা: মেনুর শেষের পাতার অদ্ভুত আইটেমগুলো দেখবই না।"
+              "html": "<strong>চায়ের দোকানের উপমা:</strong> আপনি চায়ের দোকানে গেছেন। টেম্পারেচার ০ হলো রোজকার মতো সেই একই নিরাপদ চা অর্ডার করা। টেম্পারেচার বাড়ালে আপনি নতুন কিছু চেখে দেখার ঝুঁকি নেন, আর খুব বেশি হলে যা-তা অর্ডার করে বসেন। top_p/top_k হলো আগেই ঠিক করা: মেনুর শেষের পাতার অদ্ভুত আইটেমগুলো দেখবই না।"
             }
           ]
         }
@@ -985,43 +985,43 @@
             "challenge": "Ask for the same list for the sentence start <em>2 + 2 equals</em>. Is it sharper than the Paris list, or flatter than the story list? Why?"
           },
           "bn": {
-            "title": "sharp আর flat word chance দেখো",
-            "why": "তুমি যখন chatbot বানাবে, তখন জানতে হবে AI কখন তার পরের শব্দ নিয়ে প্রায় নিশ্চিত (তথ্য), আর কখন অনেক শব্দই মানায় (গল্প)। এতে বোঝা যায় কোথায় উত্তর প্রতিবার বদলাবে।",
+            "title": "শার্প আর ফ্ল্যাট শব্দের চান্স দেখুন",
+            "why": "আপনি যখন চ্যাটবট বানাবেন, তখন জানতে হবে AI কখন তার পরের শব্দ নিয়ে প্রায় নিশ্চিত (তথ্য), আর কখন অনেক শব্দই মানায় (গল্প)। এতে বোঝা যায় কোথায় উত্তর প্রতিবার বদলাবে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। সবচেয়ে বড় percentage টা দেখো। (prompt টা English-এ রাখা হয়েছে, কারণ এখানে English বাক্যের পরের শব্দ দেখা হচ্ছে।)",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। সবচেয়ে বড় পার্সেন্টেজটা দেখুন। (প্রম্পটটা English-এ রাখা হয়েছে, কারণ এখানে English বাক্যের পরের শব্দ দেখা হচ্ছে।)",
                 "prompt": "Estimate the next-word probabilities for this sentence start. List the 5 most likely next words, each with a percentage. The percentages must add up to about 100%. Reply with the list only.\n\nThe capital of France is",
-                "expect": "একটা শব্দ, <em>Paris</em>, প্রায় পুরো chance নিয়ে, যেমন 90% বা তার বেশি।",
+                "expect": "একটা শব্দ, <em>Paris</em>, প্রায় পুরো চান্স নিয়ে, যেমন ৯০% বা তার বেশি।",
                 "example": "Paris - 97%\nLyon - 1%\nthe - 1%\nMarseille - 0.5%\na - 0.5%"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। এই list টা প্রথমটার সাথে তুলনা করো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এই তালিকাটা প্রথমটার সাথে তুলনা করুন।",
                 "prompt": "Estimate the next-word probabilities for this sentence start. List the 5 most likely next words, each with a percentage. The percentages must add up to about 100%. Reply with the list only.\n\nOnce upon a time, there was a little",
-                "expect": "chance কয়েকটা শব্দের মধ্যে ছড়িয়ে আছে, যেমন <em>girl</em>, <em>boy</em>, <em>fox</em>। কোনো একটা শব্দ প্রায় সবটা নেয়নি।",
+                "expect": "চান্স কয়েকটা শব্দের মধ্যে ছড়িয়ে আছে, যেমন <em>girl</em>, <em>boy</em>, <em>fox</em>। কোনো একটা শব্দ প্রায় সবটা নেয়নি।",
                 "example": "girl - 35%\nboy - 25%\nfox - 15%\nrabbit - 13%\nprincess - 12%"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। শব্দটা লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। শব্দটা লিখে রাখুন।",
                 "prompt": "Complete this sentence with one word only. Reply with the word and nothing else.\n\nOnce upon a time, there was a little",
                 "expect": "একটা শব্দ, যেমন <em>girl</em>।",
                 "example": "girl"
               },
               {
                 "chat": "new",
-                "do": "ধাপ 3 আরও দুইবার করো, প্রতিবার নতুন chat-এ। তিনটা শব্দই লিখে রাখো।",
-                "expect": "প্রায়ই 2টা বা 3টা আলাদা শব্দ, যেমন <em>girl</em>, <em>fox</em>, <em>boy</em>।"
+                "do": "ধাপ ৩ আরও দুইবার করুন, প্রতিবার নতুন চ্যাটে। তিনটা শব্দই লিখে রাখুন।",
+                "expect": "প্রায়ই ২টা বা ৩টা আলাদা শব্দ, যেমন <em>girl</em>, <em>fox</em>, <em>boy</em>।"
               }
             ],
-            "learned": "পরের শব্দের জন্য AI-র কাছে অনেক শব্দের chance থাকে। \"capital of France\"-এ একটা শব্দই প্রায় পুরো chance নেয়। গল্পে অনেক শব্দের chance কাছাকাছি। <strong>Sampling</strong> মানে এই chance ধরে পরের শব্দ বাছা, তাই গল্পের শব্দ chat-এ chat-এ বদলায়। তুমি যে percentage দেখলে, সেগুলো AI-র নিজের অনুমান, ভেতরের আসল সংখ্যা না।",
-            "done": "তোমার কাছে দুটো percentage list (একটা sharp, একটা flat) আর ৩টা গল্পের শব্দ আছে।",
+            "learned": "পরের শব্দের জন্য AI-র কাছে অনেক শব্দের চান্স থাকে। \"capital of France\"-এ একটা শব্দই প্রায় পুরো চান্স নেয়। গল্পে অনেক শব্দের চান্স কাছাকাছি। <strong>স্যাম্পলিং</strong> মানে এই চান্স ধরে পরের শব্দ বাছা, তাই গল্পের শব্দ চ্যাটে চ্যাটে বদলায়। আপনি যে পার্সেন্টেজ দেখলেন, সেগুলো AI-র নিজের অনুমান, ভেতরের আসল সংখ্যা না।",
+            "done": "আপনার কাছে দুটো পার্সেন্টেজ তালিকা (একটা শার্প, একটা ফ্ল্যাট) আর ৩টা গল্পের শব্দ আছে।",
             "check": {
               "question": "AI যদি সবসময় সবচেয়ে সম্ভাব্য একটা শব্দই বাছত, তাহলে গল্পের বাক্যে কী বদলে যেত?",
-              "answer": "প্রতিবার একই শব্দ আসত। একে বলে greedy decoding, আর এটা temperature প্রায় 0 করার মতো। Sampling সব শব্দ থেকে chance ধরে বাছে, তাই flat list-এ আলাদা আলাদা শব্দ আসে, আর temperature বাড়ালে list আরও flat হয়।"
+              "answer": "প্রতিবার একই শব্দ আসত। একে বলে গ্রিডি ডিকোডিং, আর এটা টেম্পারেচার প্রায় ০ করার মতো। স্যাম্পলিং সব শব্দ থেকে চান্স ধরে বাছে, তাই ফ্ল্যাট তালিকায় আলাদা আলাদা শব্দ আসে, আর টেম্পারেচার বাড়ালে তালিকা আরও ফ্ল্যাট হয়।"
             },
-            "challenge": "<em>2 + 2 equals</em> বাক্যের শুরুর জন্যও একই list চাও। এটা কি Paris list-এর চেয়ে বেশি sharp, নাকি গল্পের list-এর চেয়ে বেশি flat? কেন?"
+            "challenge": "<em>২ + ২ equals</em> বাক্যের শুরুর জন্যও একই তালিকা চান। এটা কি Paris তালিকার চেয়ে বেশি শার্প, নাকি গল্পের তালিকার চেয়ে বেশি ফ্ল্যাট? কেন?"
           }
         }
       ]
@@ -1032,15 +1032,15 @@
       "title": "Streaming vs non-streaming",
       "sub": "Generation is sequential — tokens come one at a time. Streaming returns them <em>as they're produced</em> via Server-Sent Events or chunked HTTP, so the UI can render the first word while the rest is still being decoded. Non-streaming waits for the full response.",
       "bn": {
-        "title": "Streaming বনাম non-streaming",
-        "sub": "Generation ধাপে ধাপে হয় — token আসে একটা একটা করে। Streaming মানে token তৈরি হওয়ার সাথে সাথেই <em>পাঠিয়ে দেওয়া</em>, Server-Sent Events বা chunked HTTP দিয়ে। ফলে বাকিটা তৈরি হতে থাকার মধ্যেই UI প্রথম শব্দটা দেখাতে পারে। Non-streaming পুরো response তৈরি হওয়া পর্যন্ত অপেক্ষা করে।"
+        "title": "স্ট্রিমিং বনাম নন-স্ট্রিমিং",
+        "sub": "জেনারেশন ধাপে ধাপে হয় — টোকেন আসে একটা একটা করে। স্ট্রিমিং মানে টোকেন তৈরি হওয়ার সাথে সাথেই <em>পাঠিয়ে দেওয়া</em>, Server-Sent Events বা chunked HTTP দিয়ে। ফলে বাকিটা তৈরি হতে থাকার মধ্যেই UI প্রথম শব্দটা দেখাতে পারে। নন-স্ট্রিমিং পুরো রেসপন্স তৈরি হওয়া পর্যন্ত অপেক্ষা করে।"
       },
       "body": [
         {
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Streaming vs non-streaming timeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">time →</text>\n\n      <text x=\"40\" y=\"76\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#fb7185\">non-streaming</text>\n      <rect x=\"40\" y=\"86\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill (compute)</text>\n      <rect x=\"200\" y=\"86\" width=\"800\" height=\"40\" fill=\"rgba(251,113,133,0.18)\" stroke=\"#fb7185\"></rect>\n      <text x=\"600\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\">waiting... TTFT = total time</text>\n      <rect x=\"1000\" y=\"86\" width=\"60\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"1030\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#0b0f17\" font-weight=\"700\">full text</text>\n\n      <text x=\"40\" y=\"166\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#22d3ee\">streaming</text>\n      <rect x=\"40\" y=\"176\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill</text>\n      <rect x=\"200\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"220\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t1</text>\n      <rect x=\"240\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.85\"></rect>\n      <text x=\"260\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t2</text>\n      <rect x=\"280\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.7\"></rect>\n      <text x=\"300\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t3</text>\n      <rect x=\"320\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.55\"></rect>\n      <text x=\"340\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t4</text>\n      <text x=\"420\" y=\"201\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">tokens stream back as decoded</text>\n\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">TTFT (time to first token) ≈ 100–500 ms · TPOT (time per output token) ≈ 30–80 ms</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">Total wall time is identical; only the perceived latency differs.</text>\n    </svg>",
           "caption": "Streaming shifts perceived latency from \"all-or-nothing\" to \"incremental\". Same compute, much better UX.",
-          "captionBn": "এই diagram-এ non-streaming ও streaming response-এর সময়রেখা তুলনা করা হয়েছে। Non-streaming-এ পুরো text একসাথে আসে, আর streaming-এ prefill-এর পর t1, t2, t3, t4 করে tokens ক্রমে আসে; মোট সময় একই, শুধু TTFT কমে বলে অনুভূত latency কম লাগে।"
+          "captionBn": "এই ডায়াগ্রামে নন-স্ট্রিমিং ও স্ট্রিমিং রেসপন্সের সময়রেখা তুলনা করা হয়েছে। নন-স্ট্রিমিংয়ে পুরো টেক্সট একসাথে আসে, আর স্ট্রিমিংয়ে প্রিফিলের পর t1, t2, t3, t4 করে টোকেন ক্রমে আসে; মোট সময় একই, শুধু TTFT কমে বলে অনুভূত ল্যাটেন্সি কম লাগে।"
         },
         {
           "type": "heading",
@@ -1118,30 +1118,30 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "LLM একটি একটি করে token তৈরি করে, অর্থাৎ generation ক্রমিক। <strong>Streaming</strong>-এ token তৈরি হওয়ার সাথে সাথে Server-Sent Events বা chunked HTTP দিয়ে পাঠানো হয়, ফলে বাকি অংশ তৈরি হওয়ার আগেই UI-তে প্রথম শব্দ দেখা যায়। <strong>Non-streaming</strong>-এ পুরো উত্তর তৈরি হওয়া পর্যন্ত অপেক্ষা করতে হয়।"
+          "html": "LLM একটি একটি করে টোকেন তৈরি করে, অর্থাৎ জেনারেশন ক্রমিক। <strong>স্ট্রিমিংয়ে</strong> টোকেন তৈরি হওয়ার সাথে সাথে Server-Sent Events বা chunked HTTP দিয়ে পাঠানো হয়, ফলে বাকি অংশ তৈরি হওয়ার আগেই UI-তে প্রথম শব্দ দেখা যায়। <strong>নন-স্ট্রিমিংয়ে</strong> পুরো উত্তর তৈরি হওয়া পর্যন্ত অপেক্ষা করতে হয়।"
         },
         {
           "type": "paragraph",
-          "html": "মূল কথা: compute একই, কিন্তু perceived latency \"সব-অথবা-কিছুই-না\" থেকে ক্রমবর্ধমান হয়ে যায়, ফলে UX অনেক ভালো লাগে।"
+          "html": "মূল কথা: কম্পিউট একই, কিন্তু পারসিভড ল্যাটেন্সি \"সব-অথবা-কিছুই-না\" থেকে ক্রমবর্ধমান হয়ে যায়, ফলে UX অনেক ভালো লাগে।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Streaming ব্যবহার করুন:</strong> ব্যবহারকারীর সামনে থাকা chat/completion UI-তে, লম্বা generation-এ যেখানে ব্যবহারকারীর জানা দরকার মডেল কাজ করছে, এবং Cursor, Claude.ai, ChatGPT-র মতো প্রোডাক্টে।",
-            "<strong>Streaming বাদ দিন:</strong> যখন আউটপুট pipeline-এ ফিরে যাচ্ছে (function-call result, structured extractor), পুরো response লাগে JSON parsing/validation-এর জন্য, অথবা UX-বিহীন batch job।"
+            "<strong>স্ট্রিমিং ব্যবহার করুন:</strong> ব্যবহারকারীর সামনে থাকা চ্যাট/কমপ্লিশন UI-তে, লম্বা জেনারেশনে যেখানে ব্যবহারকারীর জানা দরকার মডেল কাজ করছে, এবং Cursor, Claude.ai, ChatGPT-র মতো প্রোডাক্টে।",
+            "<strong>স্ট্রিমিং বাদ দিন:</strong> যখন আউটপুট পাইপলাইনে ফিরে যাচ্ছে (ফাংশন-কল রেজাল্ট, স্ট্রাকচার্ড এক্সট্র্যাক্টর), পুরো রেসপন্স লাগে JSON পার্সিং/ভ্যালিডেশনের জন্য, অথবা UX-বিহীন ব্যাচ জব।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "OpenAI SDK-তে <code>stream=True</code> দিয়ে প্রতিটি chunk-এর <code>delta</code> পড়তে হয়; Anthropic-এ <code>client.messages.stream(...)</code> থেকে <code>text_stream</code> পড়া যায়।"
+          "html": "OpenAI SDK-তে <code>stream=True</code> দিয়ে প্রতিটি চাঙ্কের <code>delta</code> পড়তে হয়; Anthropic-এ <code>client.messages.stream(...)</code> থেকে <code>text_stream</code> পড়া যায়।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>ক্রিকেট ম্যাচের উপমা:</strong> Non-streaming হলো খেলা শেষ হওয়ার পর শুধু চূড়ান্ত স্কোর জানা। Streaming হলো বল বাই বল লাইভ কমেন্ট্রি শোনা। খেলার সময় একই, কিন্তু অপেক্ষাটা অনেক সহনীয় লাগে।"
+              "html": "<strong>ক্রিকেট ম্যাচের উপমা:</strong> নন-স্ট্রিমিং হলো খেলা শেষ হওয়ার পর শুধু চূড়ান্ত স্কোর জানা। স্ট্রিমিং হলো বল বাই বল লাইভ কমেন্ট্রি শোনা। খেলার সময় একই, কিন্তু অপেক্ষাটা অনেক সহনীয় লাগে।"
             }
           ]
         }
@@ -1202,37 +1202,37 @@
             "challenge": "Ask for a 1,000 word story. Does the time to the first word change much, compared with the 400 word story? What does this tell you about how fast an app <em>feels</em>?"
           },
           "bn": {
-            "title": "প্রথম শব্দ আর শেষ শব্দের সময় মাপো",
-            "why": "chat window বানালে ফাঁকা screen দেখে user চলে যায়। streaming কোন সমস্যা মেটায়, আর কোন step-এ পুরো উত্তর লাগে বলে streaming সমস্যা করে, সেটা তোমার জানা দরকার।",
+            "title": "প্রথম শব্দ আর শেষ শব্দের সময় মাপুন",
+            "why": "চ্যাট উইন্ডো বানালে ফাঁকা স্ক্রিন দেখে ইউজার চলে যায়। স্ট্রিমিং কোন সমস্যা মেটায়, আর কোন ধাপে পুরো উত্তর লাগে বলে স্ট্রিমিং সমস্যা করে, সেটা আপনার জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "একটা stopwatch নাও (ফোনেরটাই চলবে)। এই prompt-এ Enter চাপার সাথে সাথে চালু করো। প্রথম শব্দ আসতে আর শেষ শব্দ আসতে কত সেকেন্ড লাগল, লিখে রাখো।",
+                "do": "একটা স্টপওয়াচ নিন (ফোনেরটাই চলবে)। এই প্রম্পটে Enter চাপার সাথে সাথে চালু করুন। প্রথম শব্দ আসতে আর শেষ শব্দ আসতে কত সেকেন্ড লাগল, লিখে রাখুন।",
                 "prompt": "ঢাকার একজন রিকশাচালক বর্ষাকালে একটা হারানো ছাতা খুঁজে পায়। এই নিয়ে প্রায় 400 শব্দের একটা গল্প লেখো।",
-                "expect": "বেশিরভাগ chat-এ প্রথম শব্দ আসে 1 থেকে 3 সেকেন্ডে। পুরো গল্প শেষ হতে তারপর আরও অনেক সেকেন্ড লাগে।"
+                "expect": "বেশিরভাগ চ্যাটে প্রথম শব্দ আসে ১ থেকে ৩ সেকেন্ডে। পুরো গল্প শেষ হতে তারপর আরও অনেক সেকেন্ড লাগে।"
               },
               {
                 "chat": "new",
-                "do": "stopwatch আবার চালু করো। এই prompt টা copy করো, paste করে Enter চাপো। উত্তর সম্পূর্ণ হতে কত সেকেন্ড লাগল, লিখে রাখো।",
+                "do": "স্টপওয়াচ আবার চালু করুন। এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তর সম্পূর্ণ হতে কত সেকেন্ড লাগল, লিখে রাখুন।",
                 "prompt": "শুধু OK শব্দটা লেখো, আর কিছু না।",
-                "expect": "প্রথম শব্দ আর পুরো উত্তর প্রায় একসাথে আসে, প্রায় 1 বা 2 সেকেন্ডে।",
+                "expect": "প্রথম শব্দ আর পুরো উত্তর প্রায় একসাথে আসে, প্রায় ১ বা ২ সেকেন্ডে।",
                 "example": "OK"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। প্রায় 2 সেকেন্ড পর Stop button চাপো। অসম্পূর্ণ text টা পড়ো। Stop button না থাকলে 2 সেকেন্ডে screen-এ যা আছে তা পড়ো। (prompt টা English-এ রাখা হয়েছে, কারণ JSON-এর field-এর নাম English।)",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। প্রায় ২ সেকেন্ড পর স্টপ বাটন চাপুন। অসম্পূর্ণ টেক্সটটা পড়ুন। স্টপ বাটন না থাকলে ২ সেকেন্ডে স্ক্রিনে যা আছে তা পড়ুন। (প্রম্পটটা English-এ রাখা হয়েছে, কারণ JSON-এর ফিল্ডের নাম English।)",
                 "prompt": "Return only a JSON object, with no other text and no code fence. The object has these fields: id, name, email, city, plan, signup_date, last_login, tags (an array of 5 strings), and notes (a 2 sentence string). Use made-up values.",
-                "expect": "মাঝপথে থেমে যাওয়া text, শেষে বন্ধ করার <code>}</code> নেই। কোনো program এটাকে এখনো JSON হিসেবে পড়তে পারবে না।",
+                "expect": "মাঝপথে থেমে যাওয়া টেক্সট, শেষে বন্ধ করার <code>}</code> নেই। কোনো প্রোগ্রাম এটাকে এখনো JSON হিসেবে পড়তে পারবে না।",
                 "example": "{\n  \"id\": 1042,\n  \"name\": \"Amina Rahman\",\n  \"email\": \"amina.rahman@example.com\",\n  \"city\": \"Chattogram\",\n  \"plan\": \"pro\",\n  \"signup_date\": \"2024-0"
               }
             ],
-            "learned": "<strong>Streaming</strong> মানে AI উত্তরটা কয়েকটা কয়েকটা শব্দ করে পাঠায়, তাই তুমি প্রথম শব্দ আগেই দেখতে পাও। এতে পুরো উত্তর দ্রুত হয় না: মোট সময় একই থাকে। chat window-এর জন্য এটা দারুণ, কারণ user সাথে সাথে অগ্রগতি দেখে। কিন্তু যে program-এর পুরো JSON লাগে, তার জন্য অর্ধেক উত্তর কোনো কাজের না, তাই সেই step-এ সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।",
-            "done": "গল্পের জন্য তোমার কাছে প্রথম শব্দের আর শেষ শব্দের সময় আছে, আর তুমি এমন একটা অর্ধেক JSON দেখেছ যেটা কোনো program ব্যবহার করতে পারে না।",
+            "learned": "<strong>স্ট্রিমিং</strong> মানে AI উত্তরটা কয়েকটা কয়েকটা শব্দ করে পাঠায়, তাই আপনি প্রথম শব্দ আগেই দেখতে পান। এতে পুরো উত্তর দ্রুত হয় না: মোট সময় একই থাকে। চ্যাট উইন্ডোর জন্য এটা দারুণ, কারণ ইউজার সাথে সাথে অগ্রগতি দেখে। কিন্তু যে প্রোগ্রামের পুরো JSON লাগে, তার জন্য অর্ধেক উত্তর কোনো কাজের না, তাই সেই ধাপে সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।",
+            "done": "গল্পের জন্য আপনার কাছে প্রথম শব্দের আর শেষ শব্দের সময় আছে, আর আপনি এমন একটা অর্ধেক JSON দেখেছেন যেটা কোনো প্রোগ্রাম ব্যবহার করতে পারে না।",
             "check": {
-              "question": "chat window-এর জন্য streaming ভালো, কিন্তু data pipeline-এর একটা step-এর জন্য প্রায়ই খারাপ। কেন?",
-              "answer": "Streaming AI-কে দ্রুত করে না। শব্দগুলো আসার সাথে সাথে দেখায় মাত্র, তাই মানুষ আগে অগ্রগতি দেখে। pipeline-এর যে step JSON পড়ে বা যাচাই করে, তার পুরো উত্তর লাগে, তাই তাকে সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।"
+              "question": "চ্যাট উইন্ডোর জন্য স্ট্রিমিং ভালো, কিন্তু ডেটা পাইপলাইনের একটা ধাপের জন্য প্রায়ই খারাপ। কেন?",
+              "answer": "স্ট্রিমিং AI-কে দ্রুত করে না। শব্দগুলো আসার সাথে সাথে দেখায় মাত্র, তাই মানুষ আগে অগ্রগতি দেখে। পাইপলাইনের যে ধাপ JSON পড়ে বা যাচাই করে, তার পুরো উত্তর লাগে, তাই তাকে সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।"
             },
-            "challenge": "1,000 শব্দের একটা গল্প চাও। 400 শব্দের গল্পের তুলনায় প্রথম শব্দ আসার সময় কি বেশি বদলায়? এ থেকে app কত দ্রুত <em>মনে হয়</em>, সে সম্পর্কে কী বোঝা যায়?"
+            "challenge": "১,০০০ শব্দের একটা গল্প চান। ৪০০ শব্দের গল্পের তুলনায় প্রথম শব্দ আসার সময় কি বেশি বদলায়? এ থেকে অ্যাপ কত দ্রুত <em>মনে হয়</em>, সে সম্পর্কে কী বোঝা যায়?"
           }
         }
       ]
@@ -1243,8 +1243,8 @@
       "title": "Structured outputs & JSON mode",
       "sub": "Forcing free-form text into a typed schema unlocks LLMs as reliable components in larger pipelines. There are three progressively stricter approaches.",
       "bn": {
-        "title": "Structured output আর JSON mode",
-        "sub": "ইচ্ছেমতো লেখা text-কে নির্দিষ্ট type-এর schema-য় বাঁধলে LLM বড় pipeline-এর একটি ভরসাযোগ্য অংশ হয়ে ওঠে। এর তিনটি উপায় আছে, একটার চেয়ে আরেকটা ধাপে ধাপে বেশি কঠোর।"
+        "title": "স্ট্রাকচার্ড আউটপুট আর JSON মোড",
+        "sub": "ইচ্ছেমতো লেখা টেক্সটকে নির্দিষ্ট টাইপের স্কিমায় বাঁধলে LLM বড় পাইপলাইনের একটি ভরসাযোগ্য অংশ হয়ে ওঠে। এর তিনটি উপায় আছে, একটার চেয়ে আরেকটা ধাপে ধাপে বেশি কঠোর।"
       },
       "body": [
         {
@@ -1257,7 +1257,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Structured outputs levels\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">strictness ↗</text>\n\n      <rect x=\"40\"   y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"60\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">1. JSON mode</text>\n      <text x=\"60\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">\"respond with valid JSON\"</text>\n      <text x=\"60\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">+ simple regex / json.loads</text>\n      <text x=\"60\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">↳ shape can drift; needs</text>\n      <text x=\"60\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">   defensive parsing</text>\n      <text x=\"60\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">~90% reliable</text>\n\n      <rect x=\"385\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"405\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">2. Schema-constrained decoding</text>\n      <text x=\"405\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pass JSON Schema; tokenizer</text>\n      <text x=\"405\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">masks invalid tokens at each</text>\n      <text x=\"405\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">step → guaranteed valid output</text>\n      <text x=\"405\" y=\"174\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">OpenAI Structured Outputs,</text>\n      <text x=\"405\" y=\"190\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Anthropic tool-use schemas</text>\n      <text x=\"405\" y=\"208\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">~99% reliable</text>\n\n      <rect x=\"730\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"750\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">3. Typed parsing</text>\n      <text x=\"750\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Parse the constrained output</text>\n      <text x=\"750\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">into typed objects in your code;</text>\n      <text x=\"750\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pydantic / Zod / Instructor /</text>\n      <text x=\"750\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Outlines / Guidance libraries</text>\n      <text x=\"750\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">100% by construction</text>\n    </svg>",
           "caption": "JSON mode, schema-constrained decoding, and typed parsing — three guarantees, three reliability tiers.",
-          "captionBn": "এখানে structured output পাওয়ার তিনটি স্তর strictness বাড়ার ক্রমে দেখানো হয়েছে: JSON mode (~90% reliable), schema-constrained decoding (~99%, invalid tokens mask হয়) এবং typed parsing (Pydantic, Zod ইত্যাদি দিয়ে 100% by construction)। বাঁ থেকে ডানে গেলে নিশ্চয়তা বাড়ে।"
+          "captionBn": "এখানে স্ট্রাকচার্ড আউটপুট পাওয়ার তিনটি স্তর স্ট্রিক্টনেস বাড়ার ক্রমে দেখানো হয়েছে: JSON mode (~৯০% রিলায়েবল), স্কিমা-কনস্ট্রেইন্ড ডিকোডিং (~৯৯%, ইনভ্যালিড টোকেন মাস্ক হয়) এবং টাইপড পার্সিং (Pydantic, Zod ইত্যাদি দিয়ে ১০০% বাই কনস্ট্রাকশন)। বাঁ থেকে ডানে গেলে নিশ্চয়তা বাড়ে।"
         },
         {
           "type": "heading",
@@ -1320,19 +1320,19 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "মডেলের মুক্ত-ভঙ্গির লেখাকে টাইপ-করা schema-তে বাধ্য করলে LLM বড় সিস্টেমের নির্ভরযোগ্য অংশ হয়ে ওঠে। এর তিনটি ক্রমশ কড়া স্তর আছে: <strong>JSON mode</strong>, <strong>schema-constrained decoding</strong> এবং <strong>typed parsing</strong>। প্রতিটি স্তরে নিশ্চয়তা ও নির্ভরযোগ্যতা বাড়ে।"
+          "html": "মডেলের মুক্ত-ভঙ্গির লেখাকে টাইপ-করা স্কিমায় বাধ্য করলে LLM বড় সিস্টেমের নির্ভরযোগ্য অংশ হয়ে ওঠে। এর তিনটি ক্রমশ কড়া স্তর আছে: <strong>JSON mode</strong>, <strong>স্কিমা-কনস্ট্রেইন্ড ডিকোডিং</strong> এবং <strong>টাইপড পার্সিং</strong>। প্রতিটি স্তরে নিশ্চয়তা ও নির্ভরযোগ্যতা বাড়ে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Schema-constrained generation</strong> কীভাবে কাজ করে: প্রোভাইডার <code>JSON schema</code>-কে একটি finite-state machine (বা grammar)-এ রূপ দেয়, এবং প্রতিটি ধাপে যে token schema ভাঙবে তার logit mask করে দেয়। ফলে আউটপুট নির্মাণগতভাবেই parse-যোগ্য, আলাদা <code>try/except</code> দরকার হয় না।"
+          "html": "<strong>স্কিমা-কনস্ট্রেইন্ড জেনারেশন</strong> কীভাবে কাজ করে: প্রোভাইডার <code>JSON schema</code>-কে একটি ফাইনাইট-স্টেট মেশিন (বা গ্রামার)-এ রূপ দেয়, এবং প্রতিটি ধাপে যে টোকেন স্কিমা ভাঙবে তার লজিট মাস্ক করে দেয়। ফলে আউটপুট নির্মাণগতভাবেই পার্স-যোগ্য, আলাদা <code>try/except</code> দরকার হয় না।"
         },
         {
           "type": "paragraph",
-          "html": "Python-এ সাধারণত <code>Pydantic</code> মডেল (যেমন <code>Person</code> ক্লাসে name, age, role) বানিয়ে <code>response_format=Person</code> দিলে ফলাফল টাইপসহ <code>parsed</code> অবজেক্ট হিসেবে পাওয়া যায়। এতে regex, <code>eval</code> বা retry loop লাগে না।"
+          "html": "Python-এ সাধারণত <code>Pydantic</code> মডেল (যেমন <code>Person</code> ক্লাসে name, age, role) বানিয়ে <code>response_format=Person</code> দিলে ফলাফল টাইপসহ <code>parsed</code> অবজেক্ট হিসেবে পাওয়া যায়। এতে রেজেক্স, <code>eval</code> বা রিট্রাই লুপ লাগে না।"
         },
         {
           "type": "paragraph",
-          "html": "সুতরাং সম্ভব হলেই structured outputs ব্যবহার করুন। FSM lookup-এর জন্য সামান্য latency বাড়ে, কিন্তু পরে validation-এর ঝামেলা বাঁচায় বলে সেটা সহজেই পুষিয়ে যায়।"
+          "html": "সুতরাং সম্ভব হলেই স্ট্রাকচার্ড আউটপুট ব্যবহার করুন। FSM লুকআপের জন্য সামান্য ল্যাটেন্সি বাড়ে, কিন্তু পরে ভ্যালিডেশনের ঝামেলা বাঁচায় বলে সেটা সহজেই পুষিয়ে যায়।"
         },
         {
           "type": "analogy",
@@ -1405,36 +1405,36 @@
             "challenge": "Add a third person to the note, and give them two roles, for example <em>designer and team lead</em>. The schema allows one role. Ask the AI to follow the schema, and see how it handles this."
           },
           "bn": {
-            "title": "ঢিলেঢালা আর কড়া JSON অনুরোধ তুলনা করো",
-            "why": "তোমার code যখন AI-র উত্তর পড়ে, তখন একটা বাড়তি বাক্য বা একটা ভুল field-এর নামেই program crash করতে পারে। code ব্যবহার করতে পারে এমন output কীভাবে চাইতে হয়, সেটা তোমার জানা দরকার।",
+            "title": "ঢিলেঢালা আর কড়া JSON অনুরোধ তুলনা করুন",
+            "why": "আপনার কোড যখন AI-র উত্তর পড়ে, তখন একটা বাড়তি বাক্য বা একটা ভুল ফিল্ডের নামেই প্রোগ্রাম ক্র্যাশ করতে পারে। কোড ব্যবহার করতে পারে এমন আউটপুট কীভাবে চাইতে হয়, সেটা আপনার জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই ঢিলেঢালা prompt টা copy করো, paste করে Enter চাপো। উত্তরটা দেখো: একটা program কি এটা যেমন আছে তেমন পড়তে পারবে? (JSON-এর key English-এ রাখা হয়েছে।)",
+                "do": "এই ঢিলেঢালা প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা দেখুন: একটা প্রোগ্রাম কি এটা যেমন আছে তেমন পড়তে পারবে? (JSON-এর কী English-এ রাখা হয়েছে।)",
                 "prompt": "এই note-এর মানুষদের তথ্য JSON-এ লেখো।\n\nNote: সবাইকে জানাচ্ছি, রহিম উদ্দিন গত সপ্তাহে আমাদের নতুন data engineer হিসেবে যোগ দিয়েছেন। তাঁর বয়স চৌত্রিশ। আর সাদিয়া আক্তার (QA lead) সোমবার থেকে শুরু করছেন। তাঁর বয়স আমি এখনো জানি না।",
-                "expect": "প্রায়ই JSON-এর আগে একটা বাড়তি বাক্য, একটা code fence, বানানো field-এর নাম, বা age শব্দ হিসেবে, যেমন <em>চৌত্রিশ</em>।",
+                "expect": "প্রায়ই JSON-এর আগে একটা বাড়তি বাক্য, একটা কোড ফেন্স, বানানো ফিল্ডের নাম, বা age শব্দ হিসেবে, যেমন <em>চৌত্রিশ</em>।",
                 "example": "অবশ্যই! এই নাও JSON:\n\n```json\n{\n  \"people\": [\n    {\"name\": \"রহিম উদ্দিন\", \"job\": \"data engineer\", \"age\": \"চৌত্রিশ\"},\n    {\"name\": \"সাদিয়া আক্তার\", \"job\": \"QA lead\", \"age\": \"অজানা\"}\n  ]\n}\n```"
               },
               {
                 "chat": "new",
-                "do": "এই কড়া prompt টা copy করো, paste করে Enter চাপো। উত্তরটা দেখো।",
+                "do": "এই কড়া প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা দেখুন।",
                 "prompt": "note থেকে মানুষদের তথ্য বের করো। শুধু JSON লেখো। JSON-এর আগে বা পরে কোনো text না। markdown code fence না।\n\nJSON একটা array হতে হবে। প্রতিটা item এই schema মানবে:\n{\"name\": string, \"age\": integer or null, \"role\": string}\nage সংখ্যা দিয়ে লেখো, শব্দ দিয়ে না। note-এ age না থাকলে null লেখো। আর কোনো field যোগ করো না।\n\nNote: সবাইকে জানাচ্ছি, রহিম উদ্দিন গত সপ্তাহে আমাদের নতুন data engineer হিসেবে যোগ দিয়েছেন। তাঁর বয়স চৌত্রিশ। আর সাদিয়া আক্তার (QA lead) সোমবার থেকে শুরু করছেন। তাঁর বয়স আমি এখনো জানি না।",
-                "expect": "শুধু JSON array। রহিমের age সংখ্যা হিসেবে <strong>34</strong>, আর সাদিয়ার age <code>null</code>।",
+                "expect": "শুধু JSON অ্যারে। রহিমের age সংখ্যা হিসেবে <strong>৩৪</strong>, আর সাদিয়ার age <code>null</code>।",
                 "example": "[\n  {\"name\": \"রহিম উদ্দিন\", \"age\": 34, \"role\": \"data engineer\"},\n  {\"name\": \"সাদিয়া আক্তার\", \"age\": null, \"role\": \"QA lead\"}\n]"
               },
               {
                 "chat": "same",
-                "do": "দুটো উত্তর মেলাও। প্রতিটার জন্য দেখো: শুধু JSON, বাড়তি বাক্য নেই? age সংখ্যা? সাদিয়ার age null?",
-                "expect": "কড়া উত্তরটা বেশিরভাগ check পাস করে। ঢিলেঢালা উত্তরটা প্রায়ই এক বা একাধিক check-এ ফেল করে।"
+                "do": "দুটো উত্তর মেলান। প্রতিটার জন্য দেখুন: শুধু JSON, বাড়তি বাক্য নেই? age সংখ্যা? সাদিয়ার age null?",
+                "expect": "কড়া উত্তরটা বেশিরভাগ চেক পাস করে। ঢিলেঢালা উত্তরটা প্রায়ই এক বা একাধিক চেকে ফেল করে।"
               }
             ],
-            "learned": "Program-এর একটা নির্দিষ্ট format লাগে। তুমি শুধু \"JSON\" বললে field-এর নাম, type আর বাড়তি text AI নিজে ঠিক করে। <strong>Schema</strong> (কোন field থাকবে আর তার type কী, তার বিবরণ) AI-কে বলে দেয় কী ফেরত দিতে হবে, আর উত্তর অনেক পরিষ্কার হয়। কিন্তু চাইলেই গ্যারান্টি পাওয়া যায় না। কিছু AI provider format জোর করে বসিয়ে দিতে পারে, তখন ভুল উত্তর আসাই সম্ভব না। একে বলে structured outputs।",
-            "done": "তোমার কাছে দুটো উত্তর আছে, আর তুমি দেখেছ কড়া উত্তরে age 34 সংখ্যা হিসেবে আছে এবং সাদিয়ার age null।",
+            "learned": "প্রোগ্রামের একটা নির্দিষ্ট ফরম্যাট লাগে। আপনি শুধু \"JSON\" বললে ফিল্ডের নাম, টাইপ আর বাড়তি টেক্সট AI নিজে ঠিক করে। <strong>স্কিমা</strong> (কোন ফিল্ড থাকবে আর তার টাইপ কী, তার বিবরণ) AI-কে বলে দেয় কী ফেরত দিতে হবে, আর উত্তর অনেক পরিষ্কার হয়। কিন্তু চাইলেই গ্যারান্টি পাওয়া যায় না। কিছু AI প্রোভাইডার ফরম্যাট জোর করে বসিয়ে দিতে পারে, তখন ভুল উত্তর আসাই সম্ভব না। একে বলে স্ট্রাকচার্ড আউটপুট।",
+            "done": "আপনার কাছে দুটো উত্তর আছে, আর আপনি দেখেছেন কড়া উত্তরে age ৩৪ সংখ্যা হিসেবে আছে এবং সাদিয়ার age null।",
             "check": {
-              "question": "format জোর করে বসানো আর prompt-এ JSON চাওয়ার মধ্যে পার্থক্য কী?",
-              "answer": "prompt শুধু AI-কে format মানতে বলে, তাই ভুল হতে পারে। provider যখন format জোর করে, তখন schema ভাঙবে এমন প্রতিটা শব্দ আটকে দেয়, তাই output-এর আকার সবসময় ঠিক থাকে।"
+              "question": "ফরম্যাট জোর করে বসানো আর প্রম্পটে JSON চাওয়ার মধ্যে পার্থক্য কী?",
+              "answer": "প্রম্পট শুধু AI-কে ফরম্যাট মানতে বলে, তাই ভুল হতে পারে। প্রোভাইডার যখন ফরম্যাট জোর করে, তখন স্কিমা ভাঙবে এমন প্রতিটা শব্দ আটকে দেয়, তাই আউটপুটের আকার সবসময় ঠিক থাকে।"
             },
-            "challenge": "note-এ তৃতীয় একজন মানুষ যোগ করো, যার দুটো role, যেমন <em>designer আর team lead</em>। schema-তে একটাই role-এর জায়গা। AI-কে schema মানতে বলো, আর দেখো সে এটা কীভাবে সামলায়।"
+            "challenge": "নোটে তৃতীয় একজন মানুষ যোগ করুন, যার দুটো রোল, যেমন <em>designer আর team lead</em>। স্কিমায় একটাই রোলের জায়গা। AI-কে স্কিমা মানতে বলুন, আর দেখুন সে এটা কীভাবে সামলায়।"
           }
         }
       ]
@@ -1445,8 +1445,8 @@
       "title": "Function calling & tool use",
       "sub": "Function calling lets the model emit a <em>structured</em> request to invoke a tool (a function, an API, a database query) instead of free-form prose. The model doesn't execute — it <strong>decides what to call and with what arguments</strong>, and your code runs the tool and feeds the result back. This is the basis of every LLM agent.",
       "bn": {
-        "title": "Function calling আর tool use",
-        "sub": "Function calling-এ model সাধারণ গদ্য না লিখে একটি <em>structured</em> অনুরোধ পাঠায়, যাতে একটি tool চালানো যায় (function, API, বা database query)। Model নিজে চালায় না — সে <strong>ঠিক করে কোনটা call করবে আর কী argument দিয়ে</strong>। আপনার code tool চালায় এবং ফলাফল model-কে ফেরত দেয়। প্রতিটি LLM agent-এর ভিত্তি এটাই।"
+        "title": "ফাংশন কলিং আর টুল ইউজ",
+        "sub": "ফাংশন কলিংয়ে মডেল সাধারণ গদ্য না লিখে একটি <em>স্ট্রাকচার্ড</em> অনুরোধ পাঠায়, যাতে একটি টুল চালানো যায় (ফাংশন, API, বা ডেটাবেস কুয়েরি)। মডেল নিজে চালায় না — সে <strong>ঠিক করে কোনটা কল করবে আর কী আর্গুমেন্ট দিয়ে</strong>। আপনার কোড টুল চালায় এবং ফলাফল মডেলকে ফেরত দেয়। প্রতিটি LLM এজেন্টের ভিত্তি এটাই।"
       },
       "body": [
         {
@@ -1459,7 +1459,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Function calling loop\">\n      <defs>\n        <marker id=\"arr7\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n\n      <rect x=\"40\"  y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(34,211,238,0.08)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">User prompt</text>\n      <text x=\"130\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">+ tools schema</text>\n\n      <rect x=\"260\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"350\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">LLM</text>\n      <text x=\"350\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">decides → emits JSON</text>\n\n      <rect x=\"480\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"570\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">Your code</text>\n      <text x=\"570\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">parses, runs tool</text>\n\n      <rect x=\"700\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.08)\" stroke=\"#34d399\"></rect>\n      <text x=\"790\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">Tool result</text>\n      <text x=\"790\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">appended to context</text>\n\n      <rect x=\"920\" y=\"60\" width=\"140\" height=\"80\" rx=\"10\" fill=\"rgba(251,113,133,0.08)\" stroke=\"#fb7185\"></rect>\n      <text x=\"990\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fb7185\">LLM</text>\n      <text x=\"990\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">final answer</text>\n\n      <line x1=\"220\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"440\" y1=\"100\" x2=\"480\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"660\" y1=\"100\" x2=\"700\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"880\" y1=\"100\" x2=\"920\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <text x=\"40\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">↑ loop repeats if LLM calls another tool (Anthropic: max_iterations; OpenAI: 'auto' parallel)</text>\n    </svg>",
           "caption": "Classic ReAct-style tool loop: model emits a tool-call JSON, your code runs it, the result is appended, repeat.",
-          "captionBn": "এই diagram-এ tool-calling loop দেখানো হয়েছে: User prompt ও tools schema থেকে LLM সিদ্ধান্ত নিয়ে JSON emit করে, আপনার code তা parse করে tool চালায়, আর Tool result context-এ যুক্ত হয়ে আবার LLM-এ যায়। LLM আরেকটি tool call করলে loop পুনরাবৃত্ত হয়, নইলে final answer আসে।"
+          "captionBn": "এই ডায়াগ্রামে টুল-কলিং লুপ দেখানো হয়েছে: ইউজার প্রম্পট ও টুলস স্কিমা থেকে LLM সিদ্ধান্ত নিয়ে JSON এমিট করে, আপনার কোড তা পার্স করে টুল চালায়, আর টুল রেজাল্ট কনটেক্সটে যুক্ত হয়ে আবার LLM-এ যায়। LLM আরেকটি টুল কল করলে লুপ পুনরাবৃত্ত হয়, নইলে চূড়ান্ত উত্তর আসে।"
         },
         {
           "type": "heading",
@@ -1537,23 +1537,23 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>Function calling</strong> মানে মডেল সরাসরি কিছু চালায় না; বরং কোন tool (ফাংশন, API, ডেটাবেস কোয়েরি) কোন argument দিয়ে ডাকতে হবে তা একটি structured অনুরোধ হিসেবে বের করে দেয়। আপনার কোড tool চালায় এবং ফলাফল মডেলকে ফেরত দেয়। প্রতিটি LLM agent এই ধারণার ওপর দাঁড়িয়ে।"
+          "html": "<strong>ফাংশন কলিং</strong> মানে মডেল সরাসরি কিছু চালায় না; বরং কোন টুল (ফাংশন, API, ডেটাবেস কুয়েরি) কোন আর্গুমেন্ট দিয়ে ডাকতে হবে তা একটি স্ট্রাকচার্ড অনুরোধ হিসেবে বের করে দেয়। আপনার কোড টুল চালায় এবং ফলাফল মডেলকে ফেরত দেয়। প্রতিটি LLM এজেন্ট এই ধারণার ওপর দাঁড়িয়ে।"
         },
         {
           "type": "paragraph",
-          "html": "লুপটি ReAct-ধাঁচের: মডেল tool-call JSON দেয়, কোড সেটি চালায়, ফলাফল কনভারসেশনে যোগ হয়, আর এভাবে চলতে থাকে। আপনি tool-এর তালিকা <code>JSON Schema</code> আকারে দেন (নাম, parameters, description), এবং মডেল prose-এর বদলে (বা সাথে) <code>tool_calls</code> ফিল্ড বের করতে fine-tuned। Schema constrained বলে arguments বৈধ হয়। Anthropic-এ <code>stop_reason == \"tool_use\"</code> হলে tool-use block থেকে <code>input</code> নিয়ে নিজের ফাংশন চালাতে হয়।"
+          "html": "লুপটি ReAct-ধাঁচের: মডেল টুল-কল JSON দেয়, কোড সেটি চালায়, ফলাফল কনভারসেশনে যোগ হয়, আর এভাবে চলতে থাকে। আপনি টুলের তালিকা <code>JSON Schema</code> আকারে দেন (নাম, প্যারামিটার, ডেসক্রিপশন), এবং মডেল প্রোজের বদলে (বা সাথে) <code>tool_calls</code> ফিল্ড বের করতে ফাইন-টিউন করা। স্কিমা কনস্ট্রেইন্ড বলে আর্গুমেন্ট বৈধ হয়। Anthropic-এ <code>stop_reason == \"tool_use\"</code> হলে টুল-ইউজ ব্লক থেকে <code>input</code> নিয়ে নিজের ফাংশন চালাতে হয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Tool design মডেল বাছাইয়ের মতোই গুরুত্বপূর্ণ।</strong> Tool-এর নাম ও description হুবহু prompt-এ ঢোকে। \"Retrieve flights\" অস্পষ্ট; কিন্তু <code>search_flights(origin, destination, depart_date, cabin_class)</code> এবং description-এ প্রতিটি parameter-এর ব্যাখ্যা থাকলে সঠিক কলের হার অনেক বাড়ে। Prompt-এর মতোই tool description বারবার উন্নত করুন।"
+          "html": "<strong>টুল ডিজাইন মডেল বাছাইয়ের মতোই গুরুত্বপূর্ণ।</strong> টুলের নাম ও ডেসক্রিপশন হুবহু প্রম্পটে ঢোকে। \"Retrieve flights\" অস্পষ্ট; কিন্তু <code>search_flights(origin, destination, depart_date, cabin_class)</code> এবং ডেসক্রিপশনে প্রতিটি প্যারামিটারের ব্যাখ্যা থাকলে সঠিক কলের হার অনেক বাড়ে। প্রম্পটের মতোই টুল ডেসক্রিপশন বারবার উন্নত করুন।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Parallel tool calls:</strong> একাধিক স্বাধীন কল এক turn-এ দেওয়া যায়।",
-            "<strong>Chain-of-Abstraction:</strong> মডেল ফলাফলের placeholder লিখে রাখে, পরে সমান্তরালে চালিয়ে পূরণ করা হয়, ফলে multi-step agent-এর সময় বাঁচে।",
-            "<strong>Computer use:</strong> screenshot ও mouse/keyboard দিয়ে ডেস্কটপ চালানো, যেন agent নিজেই API।"
+            "<strong>প্যারালাল টুল কল:</strong> একাধিক স্বাধীন কল এক টার্নে দেওয়া যায়।",
+            "<strong>Chain-of-Abstraction:</strong> মডেল ফলাফলের প্লেসহোল্ডার লিখে রাখে, পরে সমান্তরালে চালিয়ে পূরণ করা হয়, ফলে মাল্টি-স্টেপ এজেন্টের সময় বাঁচে।",
+            "<strong>কম্পিউটার ইউজ:</strong> স্ক্রিনশট ও মাউস/কীবোর্ড দিয়ে ডেস্কটপ চালানো, যেন এজেন্ট নিজেই API।"
           ]
         },
         {
@@ -1627,36 +1627,36 @@
             "challenge": "Change the <code>get_weather</code> description to just <em>Get data</em>, and run the first prompt in a new chat. Does the AI still pick the right tool? What does this tell you about tool descriptions?"
           },
           "bn": {
-            "title": "tool-calling loop-এ নিজে tool হও",
-            "why": "তুমি যখন আবহাওয়া, order বা booking দেখে এমন AI assistant বানাবে, AI একা সেটা পারবে না। তোমার code-কে tool চালাতে হবে। এখানে সেই কাজটা তুমি হাতে করে দেখবে।",
+            "title": "টুল-কলিং লুপে নিজে টুল হোন",
+            "why": "আপনি যখন আবহাওয়া, অর্ডার বা বুকিং দেখে এমন AI অ্যাসিস্ট্যান্ট বানাবেন, AI একা সেটা পারবে না। আপনার কোডকে টুল চালাতে হবে। এখানে সেই কাজটা আপনি হাতে করে দেখবেন।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। উত্তরটা দেখো। এটা শুধু একটা tool call হওয়া উচিত, কোনো উত্তর না। (prompt টা English-এ রাখা হয়েছে, কারণ JSON-এর key আর tool-এর নাম English।)",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা দেখুন। এটা শুধু একটা টুল কল হওয়া উচিত, কোনো উত্তর না। (প্রম্পটটা English-এ রাখা হয়েছে, কারণ JSON-এর কী আর টুলের নাম English।)",
                 "prompt": "You can use these tools. You cannot run them yourself. To use a tool, reply with ONLY a JSON object: {\"tool\": name, \"arguments\": {...}}. No other text.\n\nTools:\n[\n  {\"name\": \"get_weather\", \"description\": \"Get the current weather for a city.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"location\": {\"type\": \"string\"}, \"unit\": {\"type\": \"string\", \"enum\": [\"celsius\", \"fahrenheit\"]}}, \"required\": [\"location\"]}},\n  {\"name\": \"search_flights\", \"description\": \"Search flights between two airports.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"origin\": {\"type\": \"string\"}, \"destination\": {\"type\": \"string\"}, \"depart_date\": {\"type\": \"string\"}}, \"required\": [\"origin\", \"destination\", \"depart_date\"]}}\n]\n\nUser question: Is it hot in Dhaka right now? Should I wear a jacket?",
-                "expect": "উদাহরণের মতো ছোট একটা JSON text। এতে tool <code>get_weather</code> আর শহর <em>Dhaka</em> আছে। আবহাওয়ার কোনো উত্তর নেই।",
+                "expect": "উদাহরণের মতো ছোট একটা JSON টেক্সট। এতে টুল <code>get_weather</code> আর শহর <em>Dhaka</em> আছে। আবহাওয়ার কোনো উত্তর নেই।",
                 "example": "{\"tool\": \"get_weather\", \"arguments\": {\"location\": \"Dhaka\", \"unit\": \"celsius\"}}"
               },
               {
                 "chat": "same",
-                "do": "এবার তুমি tool। এই বানানো result টা copy করে একই chat-এ paste করো, Enter চাপো।",
+                "do": "এবার আপনি টুল। এই বানানো রেজাল্টটা কপি করে একই চ্যাটে পেস্ট করুন, Enter চাপুন।",
                 "prompt": "তোমার call-এর tool result:\n{\"location\": \"Dhaka\", \"temp_c\": 38, \"condition\": \"humid and sunny\"}\n\nএবার শুধু এই result ব্যবহার করে user-এর প্রশ্নের উত্তর দুই বাক্যে দাও। বাংলায় উত্তর দাও।",
-                "expect": "দুই বাক্যের একটা উত্তর, যাতে তোমার বানানো <strong>38</strong> ডিগ্রি ব্যবহার হয়েছে, আর বলা আছে জ্যাকেট লাগবে না।",
+                "expect": "দুই বাক্যের একটা উত্তর, যাতে আপনার বানানো <strong>৩৮</strong> ডিগ্রি ব্যবহার হয়েছে, আর বলা আছে জ্যাকেট লাগবে না।",
                 "example": "হ্যাঁ, ঢাকায় এখন খুব গরম: 38 ডিগ্রি সেলসিয়াস, আর আবহাওয়া আর্দ্র ও রৌদ্রোজ্জ্বল। তোমার জ্যাকেট পরার দরকার নেই।"
               },
               {
                 "chat": "same",
-                "do": "প্রথম উত্তরটা আবার দেখো। AI কোন tool বেছেছে আর কোন শহর দিয়েছে, লিখে রাখো।",
-                "expect": "tool হলো <code>get_weather</code>, <code>search_flights</code> না, আর শহর Dhaka।"
+                "do": "প্রথম উত্তরটা আবার দেখুন। AI কোন টুল বেছেছে আর কোন শহর দিয়েছে, লিখে রাখুন।",
+                "expect": "টুল হলো <code>get_weather</code>, <code>search_flights</code> না, আর শহর Dhaka।"
               }
             ],
-            "learned": "AI আবহাওয়া খুঁজে দেখেনি। সে শুধু একটা <strong>tool call</strong> লিখেছে (একটা ছোট JSON note, যাতে লেখা কোন tool কোন input দিয়ে চালাতে হবে)। আসল app-এ তোমার code tool চালায় আর result chat-এ যোগ করে। তুমি সেটা হাতে করলে, আর AI তোমার বানানো 38 ডিগ্রি ব্যবহার করল। AI <code>get_weather</code> বেছেছে, কারণ tool-এর নাম আর বিবরণ তার prompt-এরই অংশ।",
-            "done": "তুমি উত্তর ছাড়া একটা tool call দেখেছ, তারপর এমন একটা চূড়ান্ত উত্তর দেখেছ যেটা তোমার বানানো 38 ডিগ্রি ব্যবহার করেছে।",
+            "learned": "AI আবহাওয়া খুঁজে দেখেনি। সে শুধু একটা <strong>টুল কল</strong> লিখেছে (একটা ছোট JSON নোট, যাতে লেখা কোন টুল কোন ইনপুট দিয়ে চালাতে হবে)। আসল অ্যাপে আপনার কোড টুল চালায় আর রেজাল্ট চ্যাটে যোগ করে। আপনি সেটা হাতে করলেন, আর AI আপনার বানানো ৩৮ ডিগ্রি ব্যবহার করল। AI <code>get_weather</code> বেছেছে, কারণ টুলের নাম আর বিবরণ তার প্রম্পটেরই অংশ।",
+            "done": "আপনি উত্তর ছাড়া একটা টুল কল দেখেছেন, তারপর এমন একটা চূড়ান্ত উত্তর দেখেছেন যেটা আপনার বানানো ৩৮ ডিগ্রি ব্যবহার করেছে।",
             "check": {
-              "question": "function calling-এ tool কে চালায়: AI, নাকি তোমার code?",
-              "answer": "তোমার code tool চালায়। AI শুধু ঠিক করে কোন tool কোন input দিয়ে call হবে। তারপর সে chat-এ যোগ করা result পড়ে। call, চালানো, result যোগ করা আর আবার করা, এই loop-ই প্রতিটা AI agent-এর ভিত্তি।"
+              "question": "ফাংশন কলিংয়ে টুল কে চালায়: AI, নাকি আপনার কোড?",
+              "answer": "আপনার কোড টুল চালায়। AI শুধু ঠিক করে কোন টুল কোন ইনপুট দিয়ে কল হবে। তারপর সে চ্যাটে যোগ করা রেজাল্ট পড়ে। কল, চালানো, রেজাল্ট যোগ করা আর আবার করা, এই লুপই প্রতিটা AI এজেন্টের ভিত্তি।"
             },
-            "challenge": "<code>get_weather</code>-এর description বদলে শুধু <em>Get data</em> লেখো, আর নতুন chat-এ প্রথম prompt চালাও। AI কি এখনো ঠিক tool বাছে? tool-এর description নিয়ে এ থেকে কী বোঝা যায়?"
+            "challenge": "<code>get_weather</code>-এর ডেসক্রিপশন বদলে শুধু <em>Get data</em> লিখুন, আর নতুন চ্যাটে প্রথম প্রম্পট চালান। AI কি এখনো ঠিক টুল বাছে? টুলের ডেসক্রিপশন নিয়ে এ থেকে কী বোঝা যায়?"
           }
         }
       ]
@@ -1667,8 +1667,8 @@
       "title": "Multimodal inputs (vision, audio, PDFs)",
       "sub": "Modern frontier models ingest more than text: images, audio, video frames, and PDF pages become tokens the transformer can attend to. The unifying trick: <strong>any modality is converted into a sequence of embedding vectors</strong> and concatenated with the text sequence.",
       "bn": {
-        "title": "Multimodal input (ছবি, audio, PDF)",
-        "sub": "আধুনিক frontier model শুধু text নয়, আরও অনেক কিছু নেয়: ছবি, audio, video frame, আর PDF-এর পাতা। এগুলো token হয়ে যায়, যার উপর transformer attention দিতে পারে। মূল কৌশলটা এক: <strong>যেকোনো modality-কে embedding vector-এর একটি sequence-এ বদলে</strong> text sequence-এর সাথে জুড়ে দেওয়া হয়।"
+        "title": "মাল্টিমোডাল ইনপুট (ছবি, অডিও, PDF)",
+        "sub": "আধুনিক ফ্রন্টিয়ার মডেল শুধু টেক্সট নয়, আরও অনেক কিছু নেয়: ছবি, অডিও, ভিডিও ফ্রেম, আর PDF-এর পাতা। এগুলো টোকেন হয়ে যায়, যার উপর ট্রান্সফর্মার অ্যাটেনশন দিতে পারে। মূল কৌশলটা এক: <strong>যেকোনো মোডালিটিকে এমবেডিং ভেক্টরের একটি সিকোয়েন্সে বদলে</strong> টেক্সট সিকোয়েন্সের সাথে জুড়ে দেওয়া হয়।"
       },
       "body": [
         {
@@ -1681,7 +1681,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Multimodal encoding pipeline\">\n      <text x=\"40\" y=\"36\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">different inputs → different encoders → unified token sequence</text>\n\n      <rect x=\"40\" y=\"70\" width=\"140\" height=\"50\" rx=\"6\" fill=\"rgba(34,211,238,0.08)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"110\" y=\"100\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">image</text>\n\n      <rect x=\"40\" y=\"140\" width=\"140\" height=\"50\" rx=\"6\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"110\" y=\"170\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">audio waveform</text>\n\n      <rect x=\"40\" y=\"210\" width=\"140\" height=\"50\" rx=\"6\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"110\" y=\"240\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">PDF / doc page</text>\n\n      <line x1=\"180\" y1=\"95\"  x2=\"280\" y2=\"95\"  stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n      <line x1=\"180\" y1=\"165\" x2=\"280\" y2=\"165\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n      <line x1=\"180\" y1=\"235\" x2=\"280\" y2=\"235\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n\n      <rect x=\"280\" y=\"70\" width=\"180\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"370\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">ViT / CLIP-style vision enc</text>\n\n      <rect x=\"280\" y=\"140\" width=\"180\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"370\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">USM / Whisper-style audio enc</text>\n\n      <rect x=\"280\" y=\"210\" width=\"180\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"370\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">OCR + page render + layout</text>\n\n      <line x1=\"460\" y1=\"95\"  x2=\"560\" y2=\"160\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n      <line x1=\"460\" y1=\"165\" x2=\"560\" y2=\"160\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n      <line x1=\"460\" y1=\"235\" x2=\"560\" y2=\"160\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n\n      <rect x=\"560\" y=\"120\" width=\"220\" height=\"80\" rx=\"8\" fill=\"rgba(52,211,153,0.08)\" stroke=\"#34d399\"></rect>\n      <text x=\"670\" y=\"156\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">projection → token seq</text>\n      <text x=\"670\" y=\"178\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">concat with text tokens</text>\n\n      <line x1=\"780\" y1=\"160\" x2=\"880\" y2=\"160\" stroke=\"#334155\" stroke-dasharray=\"3 3\"></line>\n      <rect x=\"880\" y=\"120\" width=\"180\" height=\"80\" rx=\"8\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"970\" y=\"156\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">LLM core</text>\n      <text x=\"970\" y=\"178\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">joint attention</text>\n    </svg>",
           "caption": "Each modality has a specialised encoder; a learned projection maps them into the LLM's token space, where a single transformer attends over all of them.",
-          "captionBn": "এখানে দেখা যায় image, audio waveform ও PDF / doc page প্রতিটি আলাদা encoder দিয়ে প্রক্রিয়া হয়। এরপর projection দিয়ে token sequence-এ রূপান্তরিত হয়ে text tokens-এর সাথে concat হয় এবং LLM core-এর joint attention সবগুলোকে একসাথে প্রক্রিয়া করে।"
+          "captionBn": "এখানে দেখা যায় ছবি, অডিও ওয়েভফর্ম ও PDF / ডকুমেন্ট পাতা প্রতিটি আলাদা এনকোডার দিয়ে প্রক্রিয়া হয়। এরপর প্রজেকশন দিয়ে টোকেন সিকোয়েন্সে রূপান্তরিত হয়ে টেক্সট টোকেনের সাথে কনক্যাট হয় এবং LLM কোরের জয়েন্ট অ্যাটেনশন সবগুলোকে একসাথে প্রক্রিয়া করে।"
         },
         {
           "type": "heading",
@@ -1801,15 +1801,15 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "আধুনিক ফ্রন্টিয়ার মডেল শুধু টেক্সট নয়, ছবি, অডিও, ভিডিও ফ্রেম ও PDF পৃষ্ঠাও নেয়। মূল কৌশল: যেকোনো modality-কে embedding vector-এর ক্রমে রূপ দিয়ে টেক্সটের ক্রমের সাথে জুড়ে দেওয়া হয়। প্রতিটি modality-র নিজস্ব encoder থাকে, একটি শেখা projection সেগুলোকে LLM-এর token space-এ নিয়ে আসে, আর একটিই transformer সবকিছুর ওপর attention দেয়।"
+          "html": "আধুনিক ফ্রন্টিয়ার মডেল শুধু টেক্সট নয়, ছবি, অডিও, ভিডিও ফ্রেম ও PDF পৃষ্ঠাও নেয়। মূল কৌশল: যেকোনো মোডালিটিকে এমবেডিং ভেক্টরের ক্রমে রূপ দিয়ে টেক্সটের ক্রমের সাথে জুড়ে দেওয়া হয়। প্রতিটি মোডালিটির নিজস্ব এনকোডার থাকে, একটি শেখা প্রজেকশন সেগুলোকে LLM-এর টোকেন স্পেসে নিয়ে আসে, আর একটিই ট্রান্সফর্মার সবকিছুর ওপর অ্যাটেনশন দেয়।"
         },
         {
           "type": "paragraph",
-          "html": "ক্ষমতা মডেলভেদে আলাদা: Gemini 1.5/2.5 সবচেয়ে native multimodal (ছবি, অডিও in/out, ভিডিও, PDF); GPT-4o ছবিতে ভালো; Claude 4 চার্ট ও ডায়াগ্রাম পড়ায় ভালো; Qwen-VL ও Llama 3.2 Vision হলো open-weight vision মডেল।"
+          "html": "ক্ষমতা মডেলভেদে আলাদা: Gemini 1.5/2.5 সবচেয়ে নেটিভ মাল্টিমোডাল (ছবি, অডিও ইন/আউট, ভিডিও, PDF); GPT-4o ছবিতে ভালো; Claude 4 চার্ট ও ডায়াগ্রাম পড়ায় ভালো; Qwen-VL ও Llama 3.2 Vision হলো ওপেন-ওয়েট ভিশন মডেল।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> Vision মানেই নিখুঁত OCR নয়। মডেল গুনতে, হাতের লেখা পড়তে, চার্ট বুঝতে পারে, কিন্তু ছোট লেখা, সূক্ষ্ম সংখ্যা ও ঘোরানো পৃষ্ঠায় hallucinate করে। ইনভয়েস, ID বা বৈজ্ঞানিক নোটেশনের মতো নিখুঁত দরকারে আলাদা OCR engine ব্যবহার করে টেক্সটটি text LLM-কে দিন।"
+          "html": "<strong>সতর্কতা:</strong> ভিশন মানেই নিখুঁত OCR নয়। মডেল গুনতে, হাতের লেখা পড়তে, চার্ট বুঝতে পারে, কিন্তু ছোট লেখা, সূক্ষ্ম সংখ্যা ও ঘোরানো পৃষ্ঠায় হ্যালুসিনেট করে। ইনভয়েস, ID বা বৈজ্ঞানিক নোটেশনের মতো নিখুঁত দরকারে আলাদা OCR ইঞ্জিন ব্যবহার করে টেক্সটটি টেক্সট LLM-কে দিন।"
         },
         {
           "type": "paragraph",
@@ -1819,9 +1819,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Text-extract আগে</strong> (<code>pymupdf</code>, <code>pdfplumber</code>, <code>unstructured.io</code>): দ্রুত ও সস্তা, কিন্তু layout ও ভিজ্যুয়াল হারায়।",
-            "<strong>Vision path</strong> (পৃষ্ঠা render করে multimodal LLM-এ): ধীর ও ব্যয়বহুল, কিন্তু scanned ডকুমেন্ট, টেবিল ও চার্ট সামলায়।",
-            "<strong>Hybrid</strong>: টেক্সট extract এবং টেবিল/ফিগারের জন্য পৃষ্ঠার ছবি। প্রোডাকশনে এটিই বেশি চলে।"
+            "<strong>টেক্সট-এক্সট্র্যাক্ট আগে</strong> (<code>pymupdf</code>, <code>pdfplumber</code>, <code>unstructured.io</code>): দ্রুত ও সস্তা, কিন্তু লেআউট ও ভিজ্যুয়াল হারায়।",
+            "<strong>ভিশন পাথ</strong> (পৃষ্ঠা রেন্ডার করে মাল্টিমোডাল LLM-এ): ধীর ও ব্যয়বহুল, কিন্তু স্ক্যান করা ডকুমেন্ট, টেবিল ও চার্ট সামলায়।",
+            "<strong>হাইব্রিড</strong>: টেক্সট এক্সট্র্যাক্ট এবং টেবিল/ফিগারের জন্য পৃষ্ঠার ছবি। প্রোডাকশনে এটিই বেশি চলে।"
           ]
         },
         {
@@ -1894,41 +1894,41 @@
             "challenge": "Take a photo of a short handwritten note (or write one on paper). Send it with the same prompt and check which words the AI reads wrong."
           },
           "bn": {
-            "title": "স্পষ্ট আর ছোট text-এ AI-র vision পরীক্ষা করো",
-            "why": "তুমি যখন invoice, ID card বা screenshot পড়ে এমন app বানাবে, তখন জানতে হবে AI কখন image ভালো পড়তে পারে, আর কখন শুধু আন্দাজ করে।",
+            "title": "স্পষ্ট আর ছোট টেক্সটে AI-র ভিশন পরীক্ষা করুন",
+            "why": "আপনি যখন ইনভয়েস, ID কার্ড বা স্ক্রিনশট পড়ে এমন অ্যাপ বানাবেন, তখন জানতে হবে AI কখন ছবি ভালো পড়তে পারে, আর কখন শুধু আন্দাজ করে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই section-এর \"Capability comparison\" table টা খুঁজে বের করো। শুধু ওই table-এর screenshot নাও, স্বাভাবিক size-এ। কোনো private data রেখো না। তোমার chat-এ image upload করা যেতে হবে।",
-                "expect": "তোমার computer-এ table-এর একটা পরিষ্কার ছবি। এখনো কিছু পাঠানো হয়নি।"
+                "do": "এই সেকশনের \"Capability comparison\" টেবিলটা খুঁজে বের করুন। শুধু ওই টেবিলের স্ক্রিনশট নিন, স্বাভাবিক সাইজে। কোনো প্রাইভেট ডেটা রাখবেন না। আপনার চ্যাটে ছবি আপলোড করা যেতে হবে।",
+                "expect": "আপনার কম্পিউটারে টেবিলের একটা পরিষ্কার ছবি। এখনো কিছু পাঠানো হয়নি।"
               },
               {
                 "chat": "same",
-                "do": "screenshot টা chat-এ attach করো। তারপর এই prompt টা copy করে paste করো, Enter চাপো।",
+                "do": "স্ক্রিনশটটা চ্যাটে অ্যাটাচ করুন। তারপর এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন।",
                 "prompt": "সংযুক্ত image-টা দেখো। table-টা text-এ copy করো, প্রতি লাইনে একটা row, শব্দ আর চিহ্ন ঠিক যেমন আছে তেমন। copy করার পর যে cell-গুলোর text নিয়ে তুমি নিশ্চিত না, সেগুলোর তালিকা দাও।",
-                "expect": "table-এর text copy: একটা header আর 5টা row। সাধারণত ভুল কম বা নেই, আর অনিশ্চিত cell-এর ছোট একটা list।",
+                "expect": "টেবিলের টেক্সট কপি: একটা হেডার আর ৫টা রো। সাধারণত ভুল কম বা নেই, আর অনিশ্চিত সেলের ছোট একটা তালিকা।",
                 "example": "Model | Image | Audio in/out | Video | PDF | Notes\nGPT-4o / GPT-5 | native | input via Whisper, output TTS | frames | via vision | High-quality image reasoning\nClaude 4 | native | input only (transcribe) | frames | via vision | Best on chart/diagram reading\nGemini 1.5 / 2.5 | native | native in+out | native frames | native | Most natively multimodal\n...\nযে cell নিয়ে নিশ্চিত না: নেই।"
               },
               {
                 "chat": "new",
-                "do": "browser zoom কমিয়ে প্রায় 30% করো। একই table-এর নতুন screenshot নাও। সেটা attach করো, তারপর নিচের একই prompt paste করে Enter চাপো।",
+                "do": "ব্রাউজার জুম কমিয়ে প্রায় ৩০% করুন। একই টেবিলের নতুন স্ক্রিনশট নিন। সেটা অ্যাটাচ করুন, তারপর নিচের একই প্রম্পট পেস্ট করে Enter চাপুন।",
                 "prompt": "সংযুক্ত image-টা দেখো। table-টা text-এ copy করো, প্রতি লাইনে একটা row, শব্দ আর চিহ্ন ঠিক যেমন আছে তেমন। copy করার পর যে cell-গুলোর text নিয়ে তুমি নিশ্চিত না, সেগুলোর তালিকা দাও।",
-                "expect": "ভুল বেশি: row বাদ পড়া, ভুল শব্দ, বা আন্দাজ করা cell। অনেক chat অনিশ্চিত cell-ও বেশি দেখায়।",
+                "expect": "ভুল বেশি: রো বাদ পড়া, ভুল শব্দ, বা আন্দাজ করা সেল। অনেক চ্যাট অনিশ্চিত সেলও বেশি দেখায়।",
                 "example": "Model | Image | Audio | Video | PDF | Notes\nGPT-4o | native | Whisper | frames | vision | image reasoning\nClaude 4 | native | input only | ? | via vision | chart reading\nGemini 2.5 | native | native | native | native | multimodal\n...\nযে cell নিয়ে নিশ্চিত না: Claude 4-এর video, Notes column-এর বেশিরভাগ, শেষ দুটো row।"
               },
               {
                 "chat": "same",
-                "do": "দুটো copy-ই আসল table-এর সাথে মেলাও। প্রতিটা copy-তে কয়টা cell ভুল বা বাদ গেছে, গুনে দুটো সংখ্যা লিখে রাখো।",
-                "expect": "স্পষ্ট screenshot-এ সংখ্যা কম, ছোটটায় বেশি। chat ভেদে সংখ্যা আলাদা হবে।"
+                "do": "দুটো কপিই আসল টেবিলের সাথে মেলান। প্রতিটা কপিতে কয়টা সেল ভুল বা বাদ গেছে, গুনে দুটো সংখ্যা লিখে রাখুন।",
+                "expect": "স্পষ্ট স্ক্রিনশটে সংখ্যা কম, ছোটটায় বেশি। চ্যাটভেদে সংখ্যা আলাদা হবে।"
               }
             ],
-            "learned": "AI একটা image-কে অনেকগুলো সংখ্যার তালিকায় (যাদের বলে <strong>embedding</strong>) বদলে নেয়, আর সেগুলো text-এর মতো পড়ে। ছোট screenshot-এ অক্ষরের জন্য pixel খুব কম, তাই সংখ্যার তালিকায় details থাকে কম, আর AI আন্দাজ করে। আন্দাজও প্রায়ই সঠিক পড়ার মতোই নিশ্চিত শোনায়। invoice বা ID-র মতো নিখুঁত text-এর জন্য <strong>OCR</strong> tool (image থেকে শুধু text পড়ার জন্য বানানো software) ব্যবহার করো।",
-            "done": "তোমার কাছে table-এর দুটো copy আছে, প্রতিটার ভুলের সংখ্যা আছে, আর স্পষ্ট copy-তে ভুল কম।",
+            "learned": "AI একটা ছবিকে অনেকগুলো সংখ্যার তালিকায় (যাদের বলে <strong>এমবেডিং</strong>) বদলে নেয়, আর সেগুলো টেক্সটের মতো পড়ে। ছোট স্ক্রিনশটে অক্ষরের জন্য পিক্সেল খুব কম, তাই সংখ্যার তালিকায় ডিটেইলস থাকে কম, আর AI আন্দাজ করে। আন্দাজও প্রায়ই সঠিক পড়ার মতোই নিশ্চিত শোনায়। ইনভয়েস বা ID-র মতো নিখুঁত টেক্সটের জন্য <strong>OCR</strong> টুল (ছবি থেকে শুধু টেক্সট পড়ার জন্য বানানো সফটওয়্যার) ব্যবহার করুন।",
+            "done": "আপনার কাছে টেবিলের দুটো কপি আছে, প্রতিটার ভুলের সংখ্যা আছে, আর স্পষ্ট কপিতে ভুল কম।",
             "check": {
-              "question": "image-এর text ছোট হলে AI খারাপ করে কেন?",
-              "answer": "image সংখ্যার তালিকায় বদলায়, যেটা AI শব্দের মতো পড়ে। ছোট text-এর details ওই তালিকায় খুব কম থাকে, তাই AI আন্দাজ করে। invoice বা ID-র মতো নিখুঁত text-এর জন্য আলাদা OCR tool বেশি নির্ভরযোগ্য।"
+              "question": "ছবির টেক্সট ছোট হলে AI খারাপ করে কেন?",
+              "answer": "ছবি সংখ্যার তালিকায় বদলায়, যেটা AI শব্দের মতো পড়ে। ছোট টেক্সটের ডিটেইলস ওই তালিকায় খুব কম থাকে, তাই AI আন্দাজ করে। ইনভয়েস বা ID-র মতো নিখুঁত টেক্সটের জন্য আলাদা OCR টুল বেশি নির্ভরযোগ্য।"
             },
-            "challenge": "হাতে লেখা একটা ছোট note-এর ছবি তোলো (বা কাগজে লিখে নাও)। একই prompt দিয়ে পাঠাও, আর দেখো AI কোন শব্দগুলো ভুল পড়ে।"
+            "challenge": "হাতে লেখা একটা ছোট নোটের ছবি তুলুন (বা কাগজে লিখে নিন)। একই প্রম্পট দিয়ে পাঠান, আর দেখুন AI কোন শব্দগুলো ভুল পড়ে।"
           }
         }
       ]
@@ -1939,8 +1939,8 @@
       "title": "Embedding models & reranker models",
       "sub": "Two specialised model types that, together with an LLM, form the standard retrieval-augmented generation (RAG) stack. <strong>Embeddings</strong> compress text into a vector such that semantically similar items land near each other. <strong>Rerankers</strong> score (query, document) pairs with cross-attention for higher precision.",
       "bn": {
-        "title": "Embedding model আর reranker model",
-        "sub": "দুটি বিশেষ ধরনের model। LLM-এর সাথে মিলে এরা retrieval-augmented generation (RAG)-এর স্ট্যান্ডার্ড stack বানায়। <strong>Embedding</strong> text-কে একটি vector-এ চেপে আনে, যাতে একই অর্থের জিনিস কাছাকাছি থাকে। <strong>Reranker</strong> cross-attention দিয়ে (query, document) জোড়ার score দেয়, ফলে আরও নিখুঁত ফলাফল মেলে।"
+        "title": "এমবেডিং মডেল আর রিরেংকার মডেল",
+        "sub": "দুটি বিশেষ ধরনের মডেল। LLM-এর সাথে মিলে এরা রিট্রিভাল-অগমেন্টেড জেনারেশন (RAG)-এর স্ট্যান্ডার্ড স্ট্যাক বানায়। <strong>এমবেডিং</strong> টেক্সটকে একটি ভেক্টরে চেপে আনে, যাতে একই অর্থের জিনিস কাছাকাছি থাকে। <strong>রিরেংকার</strong> ক্রস-অ্যাটেনশন দিয়ে (কুয়েরি, ডকুমেন্ট) জোড়ার স্কোর দেয়, ফলে আরও নিখুঁত ফলাফল মেলে।"
       },
       "body": [
         {
@@ -1953,7 +1953,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Two-stage retrieval with embeddings and reranker\">\n      <defs>\n        <marker id=\"arr9\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n\n      <rect x=\"40\"  y=\"80\" width=\"120\" height=\"80\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"100\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#cfd8e6\">Corpus</text>\n      <text x=\"100\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">10M docs</text>\n\n      <rect x=\"200\" y=\"80\" width=\"140\" height=\"80\" rx=\"8\" fill=\"rgba(34,211,238,0.08)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"270\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">bi-encoder</text>\n      <text x=\"270\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#cfd8e6\">embed(query), embed(doc)</text>\n\n      <rect x=\"380\" y=\"80\" width=\"120\" height=\"80\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"440\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#cfd8e6\">ANN search</text>\n      <text x=\"440\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">cosine / dot</text>\n\n      <rect x=\"540\" y=\"80\" width=\"140\" height=\"80\" rx=\"8\" fill=\"rgba(52,211,153,0.08)\" stroke=\"#34d399\"></rect>\n      <text x=\"610\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">top-K ≈ 100</text>\n      <text x=\"610\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">candidates</text>\n\n      <rect x=\"720\" y=\"80\" width=\"140\" height=\"80\" rx=\"8\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"790\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\">cross-encoder reranker</text>\n      <text x=\"790\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">scores (q, d) jointly</text>\n\n      <rect x=\"900\" y=\"80\" width=\"160\" height=\"80\" rx=\"8\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"980\" y=\"112\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">top-K ≈ 5–10</text>\n      <text x=\"980\" y=\"134\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">→ LLM answer</text>\n\n      <line x1=\"160\" y1=\"120\" x2=\"200\" y2=\"120\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <line x1=\"340\" y1=\"120\" x2=\"380\" y2=\"120\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <line x1=\"500\" y1=\"120\" x2=\"540\" y2=\"120\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <line x1=\"680\" y1=\"120\" x2=\"720\" y2=\"120\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <line x1=\"860\" y1=\"120\" x2=\"900\" y2=\"120\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n\n      <text x=\"40\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">Stage 1: fast vector search over millions. Stage 2: expensive but accurate cross-attention over hundreds.</text>\n    </svg>",
           "caption": "Two-stage retrieval: cheap dense retrieval narrows millions to a few hundred, then an expensive reranker picks the best few.",
-          "captionBn": "এই diagram-এ দুই ধাপের retrieval দেখানো হয়েছে: ১০M docs-এর corpus থেকে bi-encoder ও ANN search দ্রুত top-K ≈ 100 candidates আনে। তারপর cross-encoder reranker (q, d) জোড়া একসাথে score করে top-K ≈ 5–10 বেছে LLM answer-এ পাঠায়।"
+          "captionBn": "এই ডায়াগ্রামে দুই ধাপের রিট্রিভাল দেখানো হয়েছে: ১০M ডকুমেন্টের কর্পাস থেকে বাই-এনকোডার ও ANN সার্চ দ্রুত টপ-K ≈ ১০০ ক্যান্ডিডেট আনে। তারপর ক্রস-এনকোডার রিরেংকার (q, d) জোড়া একসাথে স্কোর করে টপ-K ≈ ৫–১০ বেছে LLM-এর উত্তরে পাঠায়।"
         },
         {
           "type": "heading",
@@ -2060,34 +2060,34 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "RAG (retrieval-augmented generation) স্ট্যাকে LLM-এর সাথে দুই ধরনের বিশেষায়িত মডেল থাকে। <strong>Embedding model</strong> টেক্সটকে এমন একটি vector-এ সংকুচিত করে যাতে সমার্থক জিনিস কাছাকাছি পড়ে। <strong>Reranker</strong> (query, document) জোড়াকে cross-attention দিয়ে স্কোর করে বেশি নিখুঁত ফল দেয়।"
+          "html": "RAG (রিট্রিভাল-অগমেন্টেড জেনারেশন) স্ট্যাকে LLM-এর সাথে দুই ধরনের বিশেষায়িত মডেল থাকে। <strong>এমবেডিং মডেল</strong> টেক্সটকে এমন একটি ভেক্টরে সংকুচিত করে যাতে সমার্থক জিনিস কাছাকাছি পড়ে। <strong>রিরেংকার</strong> (কুয়েরি, ডকুমেন্ট) জোড়াকে ক্রস-অ্যাটেনশন দিয়ে স্কোর করে বেশি নিখুঁত ফল দেয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Embedding (bi-encoder):</strong> query ও document আলাদা আলাদা করে নির্দিষ্ট আকারের vector বানানো হয়। সাদৃশ্য মাপা হয় dot product বা cosine দিয়ে, প্রতি জোড়ায় O(1), তাই <code>FAISS</code>, <code>ScaNN</code> বা <code>HNSW</code> দিয়ে বিলিয়ন-স্কেল ANN সার্চ সম্ভব। উদাহরণ: <code>text-embedding-3-large</code>, <code>embed-v3</code>, <code>BGE-M3</code>, <code>E5-Mistral-7B</code>।"
+          "html": "<strong>এমবেডিং (বাই-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট আলাদা আলাদা করে নির্দিষ্ট আকারের ভেক্টর বানানো হয়। সাদৃশ্য মাপা হয় ডট প্রোডাক্ট বা কোসাইন দিয়ে, প্রতি জোড়ায় O(১), তাই <code>FAISS</code>, <code>ScaNN</code> বা <code>HNSW</code> দিয়ে বিলিয়ন-স্কেল ANN সার্চ সম্ভব। উদাহরণ: <code>text-embedding-3-large</code>, <code>embed-v3</code>, <code>BGE-M3</code>, <code>E5-Mistral-7B</code>।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Reranker (cross-encoder):</strong> query ও document জুড়ে পুরো transformer attention চালায়। অনেক নিখুঁত, কিন্তু প্রতি জোড়ায় O(n) এবং প্রায় 50–200 ms, তাই এটি দ্বিতীয় ধাপে, শীর্ষ প্রায় 100 candidate-এর ওপর ব্যবহার করা উচিত।"
+          "html": "<strong>রিরেংকার (ক্রস-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট জুড়ে পুরো ট্রান্সফর্মার অ্যাটেনশন চালায়। অনেক নিখুঁত, কিন্তু প্রতি জোড়ায় O(n) এবং প্রায় ৫০–২০০ ms, তাই এটি দ্বিতীয় ধাপে, শীর্ষ প্রায় ১০০ ক্যান্ডিডেটের ওপর ব্যবহার করা উচিত।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Stage 1 (bi-encoder):</strong> একবার encode করে মিলিসেকেন্ডে কোটি কোটির মধ্যে খোঁজা; recall ভালো, precision কম।",
-            "<strong>Stage 2 (cross-encoder):</strong> কোনো vector সংরক্ষণ নেই, টেক্সটের ওপর চলে; precision সেরা।"
+            "<strong>স্টেজ ১ (বাই-এনকোডার):</strong> একবার এনকোড করে মিলিসেকেন্ডে কোটি কোটির মধ্যে খোঁজা; রিকল ভালো, প্রিসিশন কম।",
+            "<strong>স্টেজ ২ (ক্রস-এনকোডার):</strong> কোনো ভেক্টর সংরক্ষণ নেই, টেক্সটের ওপর চলে; প্রিসিশন সেরা।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "2025-এর আধুনিক স্ট্যাক: open-weight-এ <code>E5-Mistral-7B-instruct</code> বা <code>BGE-M3</code> দিয়ে embed, <code>Qwen3-Reranker</code> বা <code>Cohere Rerank v3</code> দিয়ে rerank, তারপর পছন্দের LLM দিয়ে উত্তর তৈরি। Hybrid retrieval (sparse BM25 + dense) BEIR-এ প্রায় সবসময় একা কোনোটির চেয়ে ভালো ফল দেয়।"
+          "html": "2025-এর আধুনিক স্ট্যাক: ওপেন-ওয়েটে <code>E5-Mistral-7B-instruct</code> বা <code>BGE-M3</code> দিয়ে এমবেড, <code>Qwen3-Reranker</code> বা <code>Cohere Rerank v3</code> দিয়ে রিরেংক, তারপর পছন্দের LLM দিয়ে উত্তর তৈরি। হাইব্রিড রিট্রিভাল (স্পার্স BM25 + ডেন্স) BEIR-এ প্রায় সবসময় একা কোনোটির চেয়ে ভালো ফল দেয়।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>চাকরির নিয়োগের উপমা:</strong> হাজার হাজার সিভি এলে প্রথমে একটি কম্পিউটার কিওয়ার্ড মিলিয়ে ঝটপট একশোটি বেছে নেয় (embedding)। তারপর অভিজ্ঞ HR ম্যানেজার সেই একশোটি মন দিয়ে পড়ে সেরা কয়েকজনকে ইন্টারভিউয়ের জন্য ডাকেন (reranker)। শেষে সিদ্ধান্ত নেন বস (LLM)।"
+              "html": "<strong>চাকরির নিয়োগের উপমা:</strong> হাজার হাজার সিভি এলে প্রথমে একটি কম্পিউটার কিওয়ার্ড মিলিয়ে ঝটপট একশোটি বেছে নেয় (এমবেডিং)। তারপর অভিজ্ঞ HR ম্যানেজার সেই একশোটি মন দিয়ে পড়ে সেরা কয়েকজনকে ইন্টারভিউয়ের জন্য ডাকেন (রিরেংকার)। শেষে সিদ্ধান্ত নেন বস (LLM)।"
             }
           ]
         }
@@ -2153,36 +2153,36 @@
             "challenge": "Add a document D6 that answers the question perfectly but uses different words: <em>Items bought online may be sent back for a refund up to two weeks after arrival.</em> Where does it rank?"
           },
           "bn": {
-            "title": "শব্দ না, অর্থ দিয়ে বিচার করো",
-            "why": "তুমি যখন এমন search box বা support bot বানাবে, যেটা তোমার document থেকে উত্তর খোঁজে, তখন শুধু শব্দ মেলানো যথেষ্ট না। AI-কে এমন document খুঁজতে হবে, যার অর্থ প্রশ্নের অর্থের সাথে মেলে।",
+            "title": "শব্দ না, অর্থ দিয়ে বিচার করুন",
+            "why": "আপনি যখন এমন সার্চ বক্স বা সাপোর্ট বট বানাবেন, যেটা আপনার ডকুমেন্ট থেকে উত্তর খোঁজে, তখন শুধু শব্দ মেলানো যথেষ্ট না। AI-কে এমন ডকুমেন্ট খুঁজতে হবে, যার অর্থ প্রশ্নের অর্থের সাথে মেলে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। প্রতিটা pair-এর score দেখো। (prompt টা English-এ রাখা হয়েছে, কারণ bank শব্দের দুটো অর্থ English-এ ধরা পড়ে।)",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। প্রতিটা পেয়ারের স্কোর দেখুন। (প্রম্পটটা English-এ রাখা হয়েছে, কারণ bank শব্দের দুটো অর্থ English-এ ধরা পড়ে।)",
                 "prompt": "Rate how similar the meaning of each pair is, from 0 (unrelated) to 1 (same meaning). Reply with one line per pair: the pair number and the score only.\n\n1. 'How do I reset my password?' / 'Steps to recover access to my account when I forgot my login secret'\n2. 'The bank was flooded after heavy rain.' / 'I deposited money at the bank this morning.'\n3. 'How do I reset my password?' / 'How do I reset my router?'\n4. 'How do I reset my password?' / 'Best street food in Old Dhaka'",
-                "expect": "Pair 1-এ শব্দ কম মিললেও score বেশি। Pair 2 আর 3-এ শব্দ মিললেও score কম। Pair 4-এ প্রায় 0।",
+                "expect": "পেয়ার 1-এ শব্দ কম মিললেও স্কোর বেশি। পেয়ার ২ আর 3-এ শব্দ মিললেও স্কোর কম। পেয়ার 4-এ প্রায় ০।",
                 "example": "1. 0.92\n2. 0.10\n3. 0.30\n4. 0.00"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। কোন document সবচেয়ে বেশি score পায়, দেখো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। কোন ডকুমেন্ট সবচেয়ে বেশি স্কোর পায়, দেখুন।",
                 "prompt": "প্রশ্ন: 40 দিন পরে কি laptop ফেরত দেওয়া যায়?\n\nDocuments:\nD1: box খোলা না হলে delivery-র 14 দিনের মধ্যে laptop ফেরত দেওয়া যায়।\nD2: Laptop deals: এই সপ্তাহে laptop-এ 20% ছাড়, আর প্রতিটা laptop-এ free delivery।\nD3: সাধারণ জিনিস 30 দিনের মধ্যে ফেরত দেওয়া যায়। Electronics-এর সময় এর চেয়ে কম।\nD4: ফেরত পাঠানোর জন্য laptop কীভাবে pack করবে: আসল box ব্যবহার করো আর দুই স্তর tape দাও।\nD5: প্রতিটা laptop-এ 12 মাসের warranty আছে। ত্রুটিপূর্ণ laptop ওই সময়ের মধ্যে যেকোনো সময় মেরামত বা বদল করা যায়।\n\nপ্রশ্নের উত্তর দিতে প্রতিটা document কতটা কাজে লাগে, 0 থেকে 10 নম্বর দাও। তারপর document-গুলো সবচেয়ে ভালো থেকে সবচেয়ে খারাপ ক্রমে সাজাও। প্রতিটার জন্য একটা ছোট কারণ লেখো।",
-                "expect": "<strong>D1</strong> আর <strong>D3</strong> সবচেয়ে বেশি score পায়, কারণ তারা ফেরতের প্রশ্নের উত্তর দেয়। <strong>D2</strong> আর <strong>D4</strong> কম score পায়।",
+                "expect": "<strong>D1</strong> আর <strong>D3</strong> সবচেয়ে বেশি স্কোর পায়, কারণ তারা ফেরতের প্রশ্নের উত্তর দেয়। <strong>D2</strong> আর <strong>D4</strong> কম স্কোর পায়।",
                 "example": "D1: 9। ফেরতের সীমা (14 দিন) বলেছে, তাই 40 দিন দেরি হয়ে গেছে।\nD3: 8। বলেছে electronics-এর সময় 30 দিনের চেয়ে কম।\nD5: 4। শুধু laptop ত্রুটিপূর্ণ হলে কাজে লাগে।\nD4: 3। pack করা নিয়ে, সময়ের সীমা নিয়ে না।\nD2: 0। এটা বিজ্ঞাপন, ফেরতের সাথে সম্পর্ক নেই।\nসেরা থেকে খারাপ: D1, D3, D5, D4, D2।"
               },
               {
                 "chat": "same",
-                "do": "যে document-এ <em>laptop</em> শব্দটা সবচেয়ে বেশি আছে (D2), সেটা খুঁজে বের করো। তার score লেখো আর বলো কেন কম।",
-                "expect": "D2-তে <em>laptop</em> তিনবার আছে, তবু score 0 বা তার কাছাকাছি। এটা একটা বিজ্ঞাপন, প্রশ্নের উত্তর দেয় না।"
+                "do": "যে ডকুমেন্টে <em>laptop</em> শব্দটা সবচেয়ে বেশি আছে (D2), সেটা খুঁজে বের করুন। তার স্কোর লিখুন আর বলুন কেন কম।",
+                "expect": "D2-তে <em>laptop</em> তিনবার আছে, তবু স্কোর ০ বা তার কাছাকাছি। এটা একটা বিজ্ঞাপন, প্রশ্নের উত্তর দেয় না।"
               }
             ],
-            "learned": "দুটো text-এ অনেক শব্দ এক হলেও অর্থ আলাদা হতে পারে, যেমন নদীর <em>bank</em> আর টাকার <em>bank</em>। search system প্রথমে দ্রুত একটা পদ্ধতিতে অনেক সম্ভাব্য document বের করে, <strong>embedding</strong> দিয়ে (সংখ্যার একটা তালিকা, যেটা একই অর্থের জিনিসকে কাছাকাছি রাখে)। তারপর <strong>reranker</strong> (দ্বিতীয় একটা model, যে প্রশ্ন আর একটা document একসাথে পড়ে) সেরাগুলো বাছে। এখানে তোমার chat AI দুটোর কাজই করেছে, তাই তার score মোটামুটি আন্দাজ।",
-            "done": "তোমার কাছে ৪টা pair আর ৫টা document-এর score আছে, আর তুমি বলতে পারো D2 কেন কম পেল।",
+            "learned": "দুটো টেক্সটে অনেক শব্দ এক হলেও অর্থ আলাদা হতে পারে, যেমন নদীর <em>bank</em> আর টাকার <em>bank</em>। সার্চ সিস্টেম প্রথমে দ্রুত একটা পদ্ধতিতে অনেক সম্ভাব্য ডকুমেন্ট বের করে, <strong>এমবেডিং</strong> দিয়ে (সংখ্যার একটা তালিকা, যেটা একই অর্থের জিনিসকে কাছাকাছি রাখে)। তারপর <strong>রিরেংকার</strong> (দ্বিতীয় একটা মডেল, যে প্রশ্ন আর একটা ডকুমেন্ট একসাথে পড়ে) সেরাগুলো বাছে। এখানে আপনার চ্যাট AI দুটোর কাজই করেছে, তাই তার স্কোর মোটামুটি আন্দাজ।",
+            "done": "আপনার কাছে ৪টা পেয়ার আর ৫টা ডকুমেন্টের স্কোর আছে, আর আপনি বলতে পারেন D2 কেন কম পেল।",
             "check": {
-              "question": "search system কেন আগে embedding ধাপ আর পরে reranker ব্যবহার করে?",
-              "answer": "embedding প্রতিটা text-এর জন্য একবারই বানানো হয়, তাই system লাখ লাখ text খুব দ্রুত খুঁজতে পারে, কিন্তু মিলটা কম নিখুঁত। reranker প্রশ্ন আর একটা document একসাথে পড়ে, তাই বেশি নিখুঁত কিন্তু ধীর। তাই সে শুধু সেরা কয়েকটা document আবার score করে।"
+              "question": "সার্চ সিস্টেম কেন আগে এমবেডিং ধাপ আর পরে রিরেংকার ব্যবহার করে?",
+              "answer": "এমবেডিং প্রতিটা টেক্সটের জন্য একবারই বানানো হয়, তাই সিস্টেম লাখ লাখ টেক্সট খুব দ্রুত খুঁজতে পারে, কিন্তু মিলটা কম নিখুঁত। রিরেংকার প্রশ্ন আর একটা ডকুমেন্ট একসাথে পড়ে, তাই বেশি নিখুঁত কিন্তু ধীর। তাই সে শুধু সেরা কয়েকটা ডকুমেন্ট আবার স্কোর করে।"
             },
-            "challenge": "একটা D6 document যোগ করো, যেটা প্রশ্নের নিখুঁত উত্তর দেয় কিন্তু আলাদা শব্দ ব্যবহার করে: <em>অনলাইনে কেনা জিনিস পৌঁছানোর দুই সপ্তাহ পর্যন্ত refund-এর জন্য ফেরত পাঠানো যায়।</em> এটা কোথায় rank করে?"
+            "challenge": "একটা D6 ডকুমেন্ট যোগ করুন, যেটা প্রশ্নের নিখুঁত উত্তর দেয় কিন্তু আলাদা শব্দ ব্যবহার করে: <em>অনলাইনে কেনা জিনিস পৌঁছানোর দুই সপ্তাহ পর্যন্ত refund-এর জন্য ফেরত পাঠানো যায়।</em> এটা কোথায় র‍্যাংক করে?"
           }
         }
       ]
@@ -2193,8 +2193,8 @@
       "title": "Reasoning models & extended thinking",
       "sub": "A new class of models trained to spend <em>more compute at inference time</em> on hard problems. Instead of answering immediately, they emit a chain of internal reasoning (\"thinking tokens\"), then produce a final answer. This is the most important capability shift since GPT-4.",
       "bn": {
-        "title": "Reasoning model আর extended thinking",
-        "sub": "নতুন ধরনের model, যাদের শেখানো হয়েছে কঠিন সমস্যায় <em>inference-এর সময় বেশি compute</em> খরচ করতে। সাথে সাথে উত্তর না দিয়ে এরা ভেতরে একটি চিন্তার ধারা (“thinking token”) লেখে, তারপর চূড়ান্ত উত্তর দেয়। GPT-4-এর পর এটাই সবচেয়ে গুরুত্বপূর্ণ সক্ষমতার পরিবর্তন।"
+        "title": "রিজনিং মডেল আর এক্সটেন্ডেড থিংকিং",
+        "sub": "নতুন ধরনের মডেল, যাদের শেখানো হয়েছে কঠিন সমস্যায় <em>ইনফারেন্সের সময় বেশি কম্পিউট</em> খরচ করতে। সাথে সাথে উত্তর না দিয়ে এরা ভেতরে একটি চিন্তার ধারা (“থিংকিং টোকেন”) লেখে, তারপর চূড়ান্ত উত্তর দেয়। GPT-4-এর পর এটাই সবচেয়ে গুরুত্বপূর্ণ সক্ষমতার পরিবর্তন।"
       },
       "body": [
         {
@@ -2207,7 +2207,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Standard vs reasoning model\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">how the answer is produced</text>\n\n      <text x=\"40\" y=\"76\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">Standard (GPT-4o, Claude, Gemini)</text>\n      <rect x=\"40\"  y=\"90\" width=\"160\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"120\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">user prompt</text>\n      <line x1=\"200\" y1=\"115\" x2=\"280\" y2=\"115\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <rect x=\"280\" y=\"90\" width=\"320\" height=\"50\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"440\" y=\"120\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">answer</text>\n      <text x=\"590\" y=\"120\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">one shot, direct</text>\n\n      <text x=\"40\" y=\"180\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">Reasoning (o1/o3, DeepSeek-R1, Claude extended thinking)</text>\n      <rect x=\"40\"  y=\"194\" width=\"160\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"224\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">user prompt</text>\n      <line x1=\"200\" y1=\"219\" x2=\"280\" y2=\"219\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <rect x=\"280\" y=\"194\" width=\"500\" height=\"50\" rx=\"6\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"530\" y=\"218\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">thinking tokens (hidden / returned)</text>\n      <text x=\"530\" y=\"234\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">\"Let's think step by step…\"</text>\n      <line x1=\"780\" y1=\"219\" x2=\"860\" y2=\"219\" stroke=\"#94a3b8\" marker-end=\"url(#arr9)\"></line>\n      <rect x=\"860\" y=\"194\" width=\"200\" height=\"50\" rx=\"6\" fill=\"rgba(34,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"960\" y=\"224\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">final answer</text>\n    </svg>",
           "caption": "Reasoning models spend many more tokens on internal scratchpad, then answer.",
-          "captionBn": "এখানে Standard মডেল ও Reasoning মডেলের পার্থক্য দেখানো হয়েছে। Standard-এ user prompt থেকে সরাসরি one shot answer আসে; Reasoning মডেলে answer-এর আগে অনেক thinking tokens (\"Let's think step by step…\") খরচ হয়, তারপর final answer আসে।"
+          "captionBn": "এখানে স্ট্যান্ডার্ড মডেল ও রিজনিং মডেলের পার্থক্য দেখানো হয়েছে। স্ট্যান্ডার্ডে ইউজার প্রম্পট থেকে সরাসরি ওয়ান-শট উত্তর আসে; রিজনিং মডেলে উত্তরের আগে অনেক থিংকিং টোকেন (\"Let's think step by step…\") খরচ হয়, তারপর চূড়ান্ত উত্তর আসে।"
         },
         {
           "type": "heading",
@@ -2392,27 +2392,27 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>Reasoning model</strong> এমন একটি নতুন শ্রেণির মডেল যা কঠিন সমস্যায় inference-এর সময় বেশি compute খরচ করে। সরাসরি উত্তর না দিয়ে প্রথমে অভ্যন্তরীণ chain of reasoning (\"thinking tokens\") লেখে, তারপর চূড়ান্ত উত্তর দেয়। GPT-4-এর পর এটিকেই সবচেয়ে গুরুত্বপূর্ণ সক্ষমতার পরিবর্তন বলা হচ্ছে।"
+          "html": "<strong>রিজনিং মডেল</strong> এমন একটি নতুন শ্রেণির মডেল যা কঠিন সমস্যায় ইনফারেন্সের সময় বেশি কম্পিউট খরচ করে। সরাসরি উত্তর না দিয়ে প্রথমে অভ্যন্তরীণ চেইন অফ রিজনিং (\"থিংকিং টোকেন\") লেখে, তারপর চূড়ান্ত উত্তর দেয়। GPT-4-এর পর এটিকেই সবচেয়ে গুরুত্বপূর্ণ সক্ষমতার পরিবর্তন বলা হচ্ছে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রশিক্ষণের কৌশল:</strong> chain-of-thought-এর ওপর reinforcement learning (RL) প্রয়োগ করলে math, physics ও code reasoning অনেক ভালো হয়, কারণ মডেল কঠিন সমস্যায় বেশি ভাবতে শেখে। OpenAI-এর o1 এটি দেখিয়েছে; DeepSeek-R1 শুধু RL দিয়ে (SFT ছাড়া) open-weight আকারে তা পুনরায় করেছে; আর Anthropic-এ <code>extended thinking</code> একটি চালু/বন্ধ করার parameter। Process reward model-ও step-level পুরস্কার দিয়ে math-এ outcome-only supervision-কে ছাড়িয়ে গেছে।"
+          "html": "<strong>প্রশিক্ষণের কৌশল:</strong> চেইন-অফ-থটের ওপর রিইনফোর্সমেন্ট লার্নিং (RL) প্রয়োগ করলে ম্যাথ, ফিজিক্স ও কোড রিজনিং অনেক ভালো হয়, কারণ মডেল কঠিন সমস্যায় বেশি ভাবতে শেখে। OpenAI-এর o1 এটি দেখিয়েছে; DeepSeek-R1 শুধু RL দিয়ে (SFT ছাড়া) ওপেন-ওয়েট আকারে তা পুনরায় করেছে; আর Anthropic-এ <code>extended thinking</code> একটি চালু/বন্ধ করার প্যারামিটার। প্রসেস রিওয়ার্ড মডেলও ধাপ-স্তরের পুরস্কার দিয়ে ম্যাথে আউটকাম-অনলি সুপারভিশনকে ছাড়িয়ে গেছে।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>কখন কাজে লাগে:</strong> math/physics/proof, কঠিন multi-step কোডিং agent, planning ও tool orchestration।",
-            "<strong>কখন অপচয়:</strong> chat, summarisation, extraction, সহজ Q&amp;A ও classification; এসবে ছোট/দ্রুত মডেলই ভালো।"
+            "<strong>কখন কাজে লাগে:</strong> ম্যাথ/ফিজিক্স/প্রুফ, কঠিন মাল্টি-স্টেপ কোডিং এজেন্ট, প্ল্যানিং ও টুল অর্কেস্ট্রেশন।",
+            "<strong>কখন অপচয়:</strong> চ্যাট, সামারাইজেশন, এক্সট্র্যাকশন, সহজ Q&amp;A ও ক্লাসিফিকেশন; এসবে ছোট/দ্রুত মডেলই ভালো।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Engineering trade-off:</strong> প্রতি query-তে 5–50 গুণ বেশি token লাগতে পারে, তাই latency/খরচের সীমা অনুযায়ী <code>budget_tokens</code> (thinking budget) সীমা দেওয়া জরুরি। Prefill লম্বা হওয়ায় TTFT প্রায়ই ধীর হয়; thinking token stream করলে UX ভালো হয়। Distillation-এর মাধ্যমে R1-এর ক্ষমতা Qwen 1.5B–32B-এর মতো ছোট open মডেলে আনা গেছে।"
+          "html": "<strong>ইঞ্জিনিয়ারিং ট্রেড-অফ:</strong> প্রতি কুয়েরিতে ৫–৫০ গুণ বেশি টোকেন লাগতে পারে, তাই ল্যাটেন্সি/খরচের সীমা অনুযায়ী <code>budget_tokens</code> (থিংকিং বাজেট) সীমা দেওয়া জরুরি। প্রিফিল লম্বা হওয়ায় TTFT প্রায়ই ধীর হয়; থিংকিং টোকেন স্ট্রিম করলে UX ভালো হয়। ডিস্টিলেশনের মাধ্যমে R1-এর ক্ষমতা Qwen 1.5B–32B-এর মতো ছোট ওপেন মডেলে আনা গেছে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>অভ্যাসবশে reasoning মডেল নেবেন না।</strong> ব্যবহার করুন যখন (১) কাজটি math/code/agentic, (২) সাধারণ মডেল আপনার benchmark-এ আর এগোচ্ছে না, এবং (৩) latency সহ্য করা যায়। বেশিরভাগ chat/extraction/RAG-এ সাধারণ মডেল ও ভালো prompting-ই যথেষ্ট।"
+          "html": "<strong>অভ্যাসবশে রিজনিং মডেল নেবেন না।</strong> ব্যবহার করুন যখন (১) কাজটি ম্যাথ/কোড/এজেন্টিক, (২) সাধারণ মডেল আপনার বেঞ্চমার্কে আর এগোচ্ছে না, এবং (৩) ল্যাটেন্সি সহ্য করা যায়। বেশিরভাগ চ্যাট/এক্সট্র্যাকশন/RAG-এ সাধারণ মডেল ও ভালো প্রম্পটিংই যথেষ্ট।"
         },
         {
           "type": "analogy",
@@ -2486,43 +2486,43 @@
             "challenge": "If your chat has a Think or Reasoning mode, turn it on and send the step 1 prompt again in a new chat. Does the answer change? Does it take longer?"
           },
           "bn": {
-            "title": "দ্রুত উত্তর আর ধাপে ধাপে ভাবার তুলনা করো",
-            "why": "AI feature বানানোর সময় ধাপে ধাপে ভাবলে কঠিন সমস্যায় ভুল উত্তর ঠিক হতে পারে। কিন্তু সহজ প্রশ্নে এতে শুধু খরচ আর অপেক্ষা বাড়ে। কোনটা কখন, সেটা তোমার জানা দরকার।",
+            "title": "দ্রুত উত্তর আর ধাপে ধাপে ভাবার তুলনা করুন",
+            "why": "AI ফিচার বানানোর সময় ধাপে ধাপে ভাবলে কঠিন সমস্যায় ভুল উত্তর ঠিক হতে পারে। কিন্তু সহজ প্রশ্নে এতে শুধু খরচ আর অপেক্ষা বাড়ে। কোনটা কখন, সেটা আপনার জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। টাকার অঙ্কটা লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। টাকার অঙ্কটা লিখে রাখুন।",
                 "prompt": "একটা bakery 8টা tray-তে প্রতিটায় 25টা করে bun বানায়। সব bun-এর 12% পুড়ে যায়, আর ফেলে দেওয়া হয়। বাকিগুলো 6টার পুরো box-এ বিক্রি হয়, প্রতি box $4.50 দামে। যে bun দিয়ে একটা box পূর্ণ হয় না, সেগুলো বিনা পয়সায় দিয়ে দেওয়া হয়। bakery মোট কত টাকা আয় করে? শুধু শেষ অঙ্কটা লেখো। কোনো হিসাব দেখিও না।",
-                "expect": "শুধু টাকার একটা অঙ্ক, কোনো হিসাব ছাড়া। অনেক আধুনিক chat ঠিক উত্তর দেয়। হিসাব না দেখালে ভুল অঙ্ক আসার সম্ভাবনা বেশি।",
+                "expect": "শুধু টাকার একটা অঙ্ক, কোনো হিসাব ছাড়া। অনেক আধুনিক চ্যাট ঠিক উত্তর দেয়। হিসাব না দেখালে ভুল অঙ্ক আসার সম্ভাবনা বেশি।",
                 "example": "$130.50"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। উত্তরটা ধাপ 1-এর সাথে মেলাও, আর কত লম্বা হলো দেখো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। উত্তরটা ধাপ 1-এর সাথে মেলান, আর কত লম্বা হলো দেখুন।",
                 "prompt": "একটা bakery 8টা tray-তে প্রতিটায় 25টা করে bun বানায়। সব bun-এর 12% পুড়ে যায়, আর ফেলে দেওয়া হয়। বাকিগুলো 6টার পুরো box-এ বিক্রি হয়, প্রতি box $4.50 দামে। যে bun দিয়ে একটা box পূর্ণ হয় না, সেগুলো বিনা পয়সায় দিয়ে দেওয়া হয়। bakery মোট কত টাকা আয় করে? ধাপে ধাপে ভাবো। তারপর শেষ লাইনটা এভাবে লেখো: Answer: $amount",
-                "expect": "ধাপের একটা তালিকা (200 bun, 24 পোড়া, 176 বাকি, 29 পুরো box), তারপর <strong>Answer: $130.50</strong>। এটা ধাপ 1-এর চেয়ে অনেক লম্বা।",
+                "expect": "ধাপের একটা তালিকা (২০০ বান, ২৪ পোড়া, ১৭৬ বাকি, ২৯ পুরো বক্স), তারপর <strong>Answer: $১৩০.৫০</strong>। এটা ধাপ 1-এর চেয়ে অনেক লম্বা।",
                 "example": "ধাপ 1: মোট bun = 8 x 25 = 200।\nধাপ 2: পোড়া bun = 200-এর 12% = 24।\nধাপ 3: বাকি bun = 200 - 24 = 176।\nধাপ 4: পুরো box = 176 / 6 = 29টা (29 x 6 = 174), আর 2টা bun বাড়তি, সেগুলো বিনা পয়সায় যায়।\nধাপ 5: আয় = 29 x $4.50 = $130.50।\nAnswer: $130.50"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। এত সহজ প্রশ্নের জন্য কতটা text ফেরত এলো, খেয়াল করো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এত সহজ প্রশ্নের জন্য কতটা টেক্সট ফেরত এলো, খেয়াল করুন।",
                 "prompt": "ধাপে ধাপে ভাবো, তারপর উত্তর দাও: জাপানের রাজধানী কী?",
                 "expect": "প্রায়ই একটা এক-শব্দের প্রশ্নের জন্য কয়েক লাইনের ধাপ, উত্তর যেমন <em>টোকিও</em>। এটা বাড়তি কাজ, যেটা দরকার ছিল না।",
                 "example": "ধাপ 1: প্রশ্নে জাপানের রাজধানী শহর জানতে চাওয়া হয়েছে।\nধাপ 2: জাপানের সরকার আর সম্রাট টোকিওতে থাকেন।\nধাপ 3: তাই রাজধানী টোকিও।\nAnswer: টোকিও"
               },
               {
                 "chat": "same",
-                "do": "এবার calculator দিয়ে নিজে হিসাবটা করো। শুরু করো 8 x 25 দিয়ে। তোমার শেষ অঙ্ক ধাপ 1 আর 2-এর অঙ্কের সাথে মেলাও।",
-                "expect": "তোমার উত্তর <strong>$130.50</strong>। ধাপ 1-এ অন্য অঙ্ক এলে দ্রুত উত্তরটা ভুল ছিল।"
+                "do": "এবার ক্যালকুলেটর দিয়ে নিজে হিসাবটা করুন। শুরু করুন ৮ x ২৫ দিয়ে। আপনার শেষ অঙ্ক ধাপ ১ আর 2-এর অঙ্কের সাথে মেলান।",
+                "expect": "আপনার উত্তর <strong>$১৩০.৫০</strong>। ধাপ 1-এ অন্য অঙ্ক এলে দ্রুত উত্তরটা ভুল ছিল।"
               }
             ],
-            "learned": "ধাপ 2-এ AI আগে তার ভাবনা লিখেছে, তাই প্রতিটা ছোট ধাপ সহজ ছিল আর তুমি সেগুলো মিলিয়ে দেখতে পেরেছ। এটাই <strong>reasoning model</strong>-এর ধারণা (যে model শেষ উত্তরের আগে অনেক ভাবনার শব্দ লেখে)। ভাবনা লিখতে বেশি শব্দ লাগে, তাই খরচ আর সময়ও বেশি লাগে। বহু ধাপের সমস্যায় এটা কাজে লাগে, কিন্তু \"জাপানের রাজধানী\"-তে শুধু শব্দ নষ্ট হলো।",
-            "done": "তোমার কাছে bakery-র দুটো উত্তর আছে, আর calculator থেকে পাওয়া সঠিক অঙ্ক $130.50।",
+            "learned": "ধাপ 2-এ AI আগে তার ভাবনা লিখেছে, তাই প্রতিটা ছোট ধাপ সহজ ছিল আর আপনি সেগুলো মিলিয়ে দেখতে পেরেছেন। এটাই <strong>রিজনিং মডেলের</strong> ধারণা (যে মডেল শেষ উত্তরের আগে অনেক ভাবনার শব্দ লেখে)। ভাবনা লিখতে বেশি শব্দ লাগে, তাই খরচ আর সময়ও বেশি লাগে। বহু ধাপের সমস্যায় এটা কাজে লাগে, কিন্তু \"জাপানের রাজধানী\"-তে শুধু শব্দ নষ্ট হলো।",
+            "done": "আপনার কাছে বেকারির দুটো উত্তর আছে, আর ক্যালকুলেটর থেকে পাওয়া সঠিক অঙ্ক $১৩০.৫০।",
             "check": {
-              "question": "reasoning model কেন 5 থেকে 50 গুণ বেশি token ব্যবহার করে, আর কখন সেটা সার্থক?",
-              "answer": "শেষ উত্তরের আগে তারা thinking token লেখে, তাই প্রতিটা প্রশ্নে বেশি compute খরচ হয়। কঠিন অঙ্ক, code আর planning-এ এটা কাজে লাগে। এতে খরচ আর অপেক্ষা বাড়ে, তাই সহজ chat বা তথ্য বের করার কাজে সাধারণ model ভালো।"
+              "question": "রিজনিং মডেল কেন ৫ থেকে ৫০ গুণ বেশি টোকেন ব্যবহার করে, আর কখন সেটা সার্থক?",
+              "answer": "শেষ উত্তরের আগে তারা থিংকিং টোকেন লেখে, তাই প্রতিটা প্রশ্নে বেশি কম্পিউট খরচ হয়। কঠিন অঙ্ক, কোড আর প্ল্যানিংয়ে এটা কাজে লাগে। এতে খরচ আর অপেক্ষা বাড়ে, তাই সহজ চ্যাট বা তথ্য বের করার কাজে সাধারণ মডেল ভালো।"
             },
-            "challenge": "তোমার chat-এ Think বা Reasoning mode থাকলে সেটা চালু করো, আর নতুন chat-এ ধাপ 1-এর prompt আবার পাঠাও। উত্তর কি বদলায়? সময় কি বেশি লাগে?"
+            "challenge": "আপনার চ্যাটে Think বা Reasoning মোড থাকলে সেটা চালু করুন, আর নতুন চ্যাটে ধাপ 1-এর প্রম্পট আবার পাঠান। উত্তর কি বদলায়? সময় কি বেশি লাগে?"
           }
         }
       ]
@@ -2676,14 +2676,14 @@
         "why": "Everything a model does is denominated in tokens, and APIs charge per token. This Part says this cut lowers cost by 75% and also lowers latency."
       },
       "bn": {
-        "q": "একটি prompt 800 token থেকে কমে 200 token হলো। এই Part অনুযায়ী এতে কী হয়?",
+        "q": "একটি প্রম্পট ৮০০ টোকেন থেকে কমে ২০০ টোকেন হলো। এই পার্ট অনুযায়ী এতে কী হয়?",
         "options": [
-          "খরচ 75% কমে, আর latency-ও উল্লেখযোগ্য পরিমাণে কমে।",
-          "খরচ একই থাকে, কারণ API অক্ষর ধরে charge করে।",
-          "context window 75% বড় হয়।",
-          "খরচ 25% কমে, আর latency বদলায় না।"
+          "খরচ ৭৫% কমে, আর ল্যাটেন্সিও উল্লেখযোগ্য পরিমাণে কমে।",
+          "খরচ একই থাকে, কারণ API অক্ষর ধরে চার্জ করে।",
+          "কনটেক্সট উইন্ডো ৭৫% বড় হয়।",
+          "খরচ ২৫% কমে, আর ল্যাটেন্সি বদলায় না।"
         ],
-        "why": "মডেলের সবকিছু token দিয়ে মাপা হয়, আর API token ধরে charge করে। এই Part বলছে, এই কাটছাঁটে খরচ 75% কমে এবং latency-ও কমে।"
+        "why": "মডেলের সবকিছু টোকেন দিয়ে মাপা হয়, আর API টোকেন ধরে চার্জ করে। এই পার্ট বলছে, এই কাটছাঁটে খরচ ৭৫% কমে এবং ল্যাটেন্সিও কমে।"
       }
     },
     {
@@ -2695,8 +2695,8 @@
         "why": "This Part says the model only decides what to call and with what arguments. Your code runs the tool and returns the result."
       },
       "bn": {
-        "q": "Function calling-এ মডেল নিজে tool চালায় না। তোমার কোড tool চালায় এবং ফলাফল ফেরত দেয়।",
-        "why": "এই Part বলছে, মডেল শুধু ঠিক করে কোন tool কোন argument দিয়ে ডাকতে হবে। tool চালায় তোমার কোড, আর ফলাফল মডেলকে ফেরত দেয়।"
+        "q": "ফাংশন কলিংয়ে মডেল নিজে টুল চালায় না। আপনার কোড টুল চালায় এবং ফলাফল ফেরত দেয়।",
+        "why": "এই পার্ট বলছে, মডেল শুধু ঠিক করে কোন টুল কোন আর্গুমেন্ট দিয়ে ডাকতে হবে। টুল চালায় আপনার কোড, আর ফলাফল মডেলকে ফেরত দেয়।"
       }
     },
     {
@@ -2713,13 +2713,13 @@
         "why": "The sampling table says temperature 0 for code, JSON, classification and math. 0.7–1.0 is for chat, and 1.0–2.0 is for creative writing and brainstorming."
       },
       "bn": {
-        "q": "কোড, JSON, classification আর math-এর জন্য এই Part কোন temperature দেয়?",
+        "q": "কোড, JSON, ক্লাসিফিকেশন আর ম্যাথের জন্য এই পার্ট কোন টেম্পারেচার দেয়?",
         "options": [
-          "0",
-          "0.7–1.0",
-          "1.0–2.0"
+          "০",
+          "০.৭–১.০",
+          "১.০–২.০"
         ],
-        "why": "Sampling-এর টেবিলে code, JSON, classification ও math-এর জন্য temperature 0 বলা আছে। 0.7–1.0 chat-এর জন্য, আর 1.0–2.0 সৃজনশীল লেখা ও brainstorming-এর জন্য।"
+        "why": "স্যাম্পলিংয়ের টেবিলে কোড, JSON, ক্লাসিফিকেশন ও ম্যাথের জন্য টেম্পারেচার ০ বলা আছে। ০.৭–১.০ চ্যাটের জন্য, আর ১.০–২.০ সৃজনশীল লেখা ও ব্রেইনস্টর্মিংয়ের জন্য।"
       }
     },
     {
@@ -2737,14 +2737,14 @@
         "why": "The table marks reasoning models as best for math, physics and formal proofs. For chat, summarisation, extraction and simple Q&A they are overkill and waste tokens."
       },
       "bn": {
-        "q": "এই Part অনুযায়ী কোন কাজে reasoning model সবচেয়ে ভালো পছন্দ?",
+        "q": "এই পার্ট অনুযায়ী কোন কাজে রিজনিং মডেল সবচেয়ে ভালো পছন্দ?",
         "options": [
-          "Chat আর summarisation",
-          "Data extraction",
-          "Math, physics আর formal proof",
-          "সহজ Q&A আর classification"
+          "চ্যাট আর সামারাইজেশন",
+          "ডেটা এক্সট্র্যাকশন",
+          "ম্যাথ, ফিজিক্স আর ফর্মাল প্রুফ",
+          "সহজ Q&A আর ক্লাসিফিকেশন"
         ],
-        "why": "টেবিলে math, physics ও formal proof-এর জন্য reasoning model সবচেয়ে ভালো বলা আছে। Chat, summarisation, extraction আর সহজ Q&A-তে এগুলো overkill এবং token নষ্ট করে।"
+        "why": "টেবিলে ম্যাথ, ফিজিক্স ও ফর্মাল প্রুফের জন্য রিজনিং মডেল সবচেয়ে ভালো বলা আছে। চ্যাট, সামারাইজেশন, এক্সট্র্যাকশন আর সহজ Q&A-তে এগুলো ওভারকিল এবং টোকেন নষ্ট করে।"
       }
     },
     {
@@ -2756,8 +2756,8 @@
         "why": "This Part warns that long context is not free performance. Retrieval, summarisation, or hierarchical attention beats dumping 800K tokens in."
       },
       "bn": {
-        "q": "এই Part বলছে, 1M token-এর window থাকলে retrieval বা summarisation-এর বদলে prompt-এ 800K token ঢেলে দেওয়াই ভালো।",
-        "why": "এই Part সতর্ক করছে যে long context মানেই বিনামূল্যে ভালো performance নয়। 800K token ঢেলে দেওয়ার চেয়ে retrieval, summarisation বা hierarchical attention ভালো ফল দেয়।"
+        "q": "এই পার্ট বলছে, ১M টোকেনের উইন্ডো থাকলে রিট্রিভাল বা সামারাইজেশনের বদলে প্রম্পটে ৮০০K টোকেন ঢেলে দেওয়াই ভালো।",
+        "why": "এই পার্ট সতর্ক করছে যে লং কনটেক্সট মানেই বিনামূল্যে ভালো পারফরম্যান্স নয়। ৮০০K টোকেন ঢেলে দেওয়ার চেয়ে রিট্রিভাল, সামারাইজেশন বা হায়ারার্কিকাল অ্যাটেনশন ভালো ফল দেয়।"
       }
     }
   ]

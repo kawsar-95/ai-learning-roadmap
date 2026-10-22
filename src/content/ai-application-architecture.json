@@ -3,8 +3,8 @@
   "title": "AI Application Architecture",
   "lede": "Streaming over SSE / WebSockets / chunked HTTP, background jobs and queues for long agent runs, idempotency and resumability, multi-tenant prompt and key management, fallback chains across providers, feature flags for prompts and models, and API design patterns for AI features (cancel, retry, partial results). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "AI Application-এর Architecture",
-    "lede": "SSE / WebSocket / chunked HTTP-তে streaming, লম্বা agent run-এর জন্য background job আর queue, idempotency আর resumability, multi-tenant prompt আর key management, বিভিন্ন provider জুড়ে fallback chain, prompt আর model-এর জন্য feature flag, আর AI feature-এর API design pattern (cancel, retry, partial result)। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "AI অ্যাপ্লিকেশনের আর্কিটেকচার",
+    "lede": "SSE / ওয়েবসকেট / HTTP চাঙ্কডে স্ট্রিমিং, লম্বা এজেন্ট রানের জন্য ব্যাকগ্রাউন্ড জব আর কিউ, আইডেমপোটেন্সি আর রিজিউমেবিলিটি, মাল্টি-টেন্যান্ট প্রম্পট আর কী ম্যানেজমেন্ট, বিভিন্ন প্রোভাইডার জুড়ে ফলব্যাক চেইন, প্রম্পট আর মডেলের জন্য ফিচার ফ্ল্যাগ, আর AI ফিচারের API ডিজাইন প্যাটার্ন (ক্যানসেল, রিট্রাই, পার্শিয়াল রেজাল্ট)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে আরও আছে বাংলা ব্যাখ্যা।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "AI application architecture",
       "sub": "An LLM call is just one HTTP request. Building a <em>product</em> around it requires the same plumbing any modern app needs, plus a few new primitives: streaming, resumability, multi-tenancy, fallbacks, feature flags, and an API surface designed for partial results.",
       "bn": {
-        "title": "AI application-এর architecture",
-        "sub": "একটা LLM call আসলে শুধু একটা HTTP request। এর চারপাশে একটা <em>product</em> বানাতে আধুনিক যেকোনো app-এর মতো একই কাঠামো লাগে, সঙ্গে কয়েকটা নতুন জিনিস: streaming, resumability, multi-tenancy, fallback, feature flag, আর partial result-এর জন্য বানানো API।"
+        "title": "AI অ্যাপ্লিকেশনের আর্কিটেকচার",
+        "sub": "একটা LLM কল আসলে শুধু একটা HTTP রিকোয়েস্ট। এর চারপাশে একটা <em>প্রোডাক্ট</em> বানাতে আধুনিক যেকোনো অ্যাপের মতো একই কাঠামো লাগে, সঙ্গে কয়েকটা নতুন জিনিস: স্ট্রিমিং, রিজিউমেবিলিটি, মাল্টি-টেন্যান্সি, ফলব্যাক, ফিচার ফ্ল্যাগ, আর পার্শিয়াল রেজাল্টের জন্য বানানো API।"
       },
       "body": [
         {
@@ -173,45 +173,45 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>একটি LLM কল হলো একটি HTTP অনুরোধ।</strong> এর চারপাশে একটি <em>পণ্য</em> তৈরি করতে যেকোনো আধুনিক অ্যাপের প্রয়োজনীয় সাধারণ plumbing দরকার, সাথে কিছু নতুন primitive — streaming, resumability, multi-tenancy, fallbacks, feature flags, এবং partial results-এর জন্য ডিজাইন করা একটি API surface।"
+          "html": "<strong>একটি LLM কল হলো একটি HTTP রিকোয়েস্ট।</strong> এর চারপাশে একটি <em>প্রোডাক্ট</em> তৈরি করতে যেকোনো আধুনিক অ্যাপের দরকারি সাধারণ প্লাম্বিং লাগে, সঙ্গে কিছু নতুন প্রিমিটিভ — স্ট্রিমিং, রিজিউমেবিলিটি, মাল্টি-টেন্যান্সি, ফলব্যাক, ফিচার ফ্ল্যাগ, এবং পার্শিয়াল রেজাল্টের জন্য ডিজাইন করা একটি API সারফেস।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>SSE / WebSockets / HTTP chunked দিয়ে streaming:</strong> ব্যবহারকারীরা ৩ সেকেন্ডের বিরতির পরে নয়, মডেল যেভাবে লেখে সেভাবে শব্দ দেখতে চায়। তিনটি transport: <em>SSE</em> (সবচেয়ে সহজ, যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে, একমুখী), <em>WebSockets</em> (দ্বিমুখী; voice ও সহযোগী UI-এর জন্য দরকার), <em>HTTP chunked transfer</em> (SSE header strip করে proxy-র জন্য fallback)।"
+          "html": "<strong>SSE / ওয়েবসকেট / HTTP চাঙ্কড দিয়ে স্ট্রিমিং:</strong> ইউজাররা ৩ সেকেন্ডের বিরতির পরে নয়, মডেল যেভাবে লেখে সেভাবে শব্দ দেখতে চায়। তিনটি ট্রান্সপোর্ট: <em>SSE</em> (সবচেয়ে সহজ, যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে, একমুখী), <em>ওয়েবসকেট</em> (দ্বিমুখী; ভয়েস ও সহযোগী UI-এর জন্য দরকার), <em>HTTP চাঙ্কড ট্রান্সফার</em> (SSE হেডার স্ট্রিপ করে দেয় এমন প্রক্সির জন্য ফলব্যাক)।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>দীর্ঘ এজেন্ট রানের জন্য background jobs ও queues:</strong> ~১০ সেকেন্ডের বেশি যেকোনো কিছু HTTP request block করা উচিত নয়। একটি queue-তে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) push করুন এবং একটি <code>job_id</code> ফেরত দিন। ক্লায়েন্ট poll করে বা SSE/WebSocket দিয়ে update সাবস্ক্রাইব করে। \"এজেন্ট ৪ মিনিট নিয়েছে\" কাজের জন্য এটাই একমাত্র সবচেয়ে বড় UX জয়।"
+          "html": "<strong>দীর্ঘ এজেন্ট রানের জন্য ব্যাকগ্রাউন্ড জব ও কিউ:</strong> ~১০ সেকেন্ডের বেশি যেকোনো কিছুতে HTTP রিকোয়েস্ট ব্লক করা উচিত নয়। একটি কিউতে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) পুশ করুন এবং একটি <code>job_id</code> ফেরত দিন। ক্লায়েন্ট পোল করে বা SSE/ওয়েবসকেট দিয়ে আপডেট সাবস্ক্রাইব করে। \"এজেন্ট ৪ মিনিট নিয়েছে\" ধরনের কাজের জন্য এটাই একমাত্র সবচেয়ে বড় UX জয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Idempotency ও resumability:</strong> LLM কল ব্যর্থ হয়। নেটওয়ার্ক ড্রপ হয়। ব্যবহারকারী refresh করে। সর্বদা: প্রতিটি request-এর জন্য একটি <strong>idempotency key</strong> তৈরি করুন; duplicate প্রত্যাখ্যান করুন। এজেন্ট state-এর <strong>checkpoint</strong> সংরক্ষণ করুন যাতে resume শুধু ব্যর্থ ধাপগুলো replay করে। এক মিনিটের বেশি যেকোনো কিছুর জন্য durable execution (Temporal/Restate) ব্যবহার করুন।"
+          "html": "<strong>আইডেমপোটেন্সি ও রিজিউমেবিলিটি:</strong> LLM কল ব্যর্থ হয়। নেটওয়ার্ক ড্রপ হয়। ইউজার রিফ্রেশ করে। সবসময়: প্রতিটি রিকোয়েস্টের জন্য একটি <strong>আইডেমপোটেন্সি কী</strong> তৈরি করুন; ডুপ্লিকেট প্রত্যাখ্যান করুন। এজেন্ট স্টেটের <strong>চেকপয়েন্ট</strong> সংরক্ষণ করুন, যাতে রিজিউম করলে শুধু ব্যর্থ ধাপগুলো রিপ্লে হয়। এক মিনিটের বেশি যেকোনো কিছুর জন্য ডিউরেবল এক্সিকিউশন (Temporal/Restate) ব্যবহার করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Multi-tenant prompt ও key management:</strong> প্রতি-tenant prompt override, প্রতি-tenant API key, প্রতি-tenant rate limit, প্রতি-tenant tracing। সবচেয়ে পরিষ্কার প্যান্টার্ন: এগুলো সব একটি <code>tenant_config</code> row-তে সংরক্ষণ করুন, প্রতিটি request-এর edge-এ fetch করুন, trace-এ যুক্ত করুন। <strong>কখনোই</strong> একটি tenant-এর prompt তাদের codebase-এ hard-code করবেন না।"
+          "html": "<strong>মাল্টি-টেন্যান্ট প্রম্পট ও কী ম্যানেজমেন্ট:</strong> প্রতি-টেন্যান্ট প্রম্পট ওভাররাইড, প্রতি-টেন্যান্ট API কী, প্রতি-টেন্যান্ট রেট লিমিট, প্রতি-টেন্যান্ট ট্রেসিং। সবচেয়ে পরিষ্কার প্যাটার্ন: এগুলো সব একটি <code>tenant_config</code> রো-তে সংরক্ষণ করুন, প্রতিটি রিকোয়েস্টের এজে ফেচ করুন, ট্রেসে যুক্ত করুন। <strong>কখনোই</strong> একটি টেন্যান্টের প্রম্পট তাদের কোডবেসে হার্ড-কোড করবেন না।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Provider-জুড়ে fallback chains:</strong> OpenAI 503 দিলে? =&gt; Anthropic-এ route করুন। Anthropic 429 দিলে? =&gt; Together-এ route করুন। <em>Degraded</em> prompt সহ (প্রতি provider-এর জন্য \"আপনার tool use নেই; শুধু উত্তর দিন\")। LiteLLM ও Portkey এটি বাক্সের বাইরে করে; একটি model gateway মূলত একটি fallback router ও খরচ ট্র্যাকিং।"
+          "html": "<strong>প্রোভাইডার জুড়ে ফলব্যাক চেইন:</strong> OpenAI ৫০৩ দিলে? =&gt; Anthropic-এ রাউট করুন। Anthropic ৪২৯ দিলে? =&gt; Together-এ রাউট করুন। <em>ডিগ্রেডেড</em> প্রম্পট সহ (প্রতি প্রোভাইডারের জন্য \"আপনার tool use নেই; শুধু উত্তর দিন\")। LiteLLM ও Portkey এটি বাক্সের বাইরে করে; একটি মডেল গেটওয়ে মূলত একটি ফলব্যাক রাউটার ও খরচ ট্র্যাকিং।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Prompt ও model-এর জন্য feature flags:</strong> প্রতিটি prompt ও প্রতিটি model-কে flag হিসেবে দেখুন। \"শুধু premium ব্যবহারকারীদের জন্য GPT-5 ব্যবহার করুন\" ১%, তারপর ১০%, তারপর ১০০%-এ roll out করুন। Eval regress করলে তাৎক্ষণিকভাবে roll back করুন। LaunchDarkly, Statsig, PostHog, বা একটি সাধারণ DB column — একটি বেছে নিন এবং prompt-এর জন্য এটি ব্যবহার করুন।"
+          "html": "<strong>প্রম্পট ও মডেলের জন্য ফিচার ফ্ল্যাগ:</strong> প্রতিটি প্রম্পট ও প্রতিটি মডেলকে ফ্ল্যাগ হিসেবে দেখুন। \"শুধু প্রিমিয়াম ইউজারদের জন্য GPT-5 ব্যবহার করুন\" ১%, তারপর ১০%, তারপর ১০০%-এ রোল আউট করুন। ইভ্যাল রিগ্রেস করলে তাৎক্ষণিকভাবে রোল ব্যাক করুন। LaunchDarkly, Statsig, PostHog, বা একটি সাধারণ DB কলাম — একটি বেছে নিন এবং প্রম্পটের জন্য এটি ব্যবহার করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>AI feature-এর জন্য API design patterns:</strong> পাঁচটি নিয়ম যা একটি AI API-কে সাধারণ REST API থেকে আলাদা করে:<a class=\"cite\" href=\"#src30\">[30]</a>"
+          "html": "<strong>AI ফিচারের জন্য API ডিজাইন প্যাটার্ন:</strong> পাঁচটি নিয়ম যা একটি AI API-কে সাধারণ REST API থেকে আলাদা করে:<a class=\"cite\" href=\"#src30\">[৩০]</a>"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>মাঝ-উড়ানে cancel:</strong> ক্লায়েন্ট request abort করতে এবং বিল বন্ধ করতে সক্ষম হওয়া উচিত।",
-            "<strong>Idempotently retry:</strong> একই request + idempotency key → একই response, কোনো দ্বিগুণ billing নয়।",
-            "<strong>Partial results ফেরত দিন:</strong> token stream করুন, মধ্যবর্তী tool state ফেরত দিন, ক্লায়েন্টকে কখনো সম্পূর্ণ হওয়া পর্যন্ত অপেক্ষা করাবেন না।",
-            "<strong>Structured confidence:</strong> একটি self-reported confidence, logprobs, বা \"আমি কি এটি retry করব?\" ক্ষেত্র অন্তর্ভুক্ত করুন।",
-            "<strong>Request-এ cost/latency budget:</strong> ক্লায়েন্টকে বলতে দিন \"সর্বোচ্চ $0.05 ও 8s খরচ করুন\"; server সেটি মানে।"
+            "<strong>মাঝপথে ক্যানসেল:</strong> ক্লায়েন্ট রিকোয়েস্ট অ্যাবর্ট করতে এবং বিল বন্ধ করতে সক্ষম হওয়া উচিত।",
+            "<strong>আইডেমপোটেন্টলি রিট্রাই:</strong> একই রিকোয়েস্ট + আইডেমপোটেন্সি কী → একই রেসপন্স, কোনো দ্বিগুণ বিলিং নয়।",
+            "<strong>পার্শিয়াল রেজাল্ট ফেরত দিন:</strong> টোকেন স্ট্রিম করুন, মধ্যবর্তী টুল স্টেট ফেরত দিন, ক্লায়েন্টকে কখনো সম্পূর্ণ হওয়া পর্যন্ত অপেক্ষা করাবেন না।",
+            "<strong>স্ট্রাকচার্ড কনফিডেন্স:</strong> একটি সেলফ-রিপোর্টেড কনফিডেন্স, লগপ্রব, বা \"আমি কি এটি রিট্রাই করব?\" ফিল্ড অন্তর্ভুক্ত করুন।",
+            "<strong>রিকোয়েস্টে খরচ/ল্যাটেন্সি বাজেট:</strong> ক্লায়েন্টকে বলতে দিন \"সর্বোচ্চ $০.০৫ ও ৮s খরচ করুন\"; সার্ভার সেটি মানে।"
           ]
         },
         {
@@ -219,7 +219,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>রেস্তোরাঁ-রান্নাঘরের উপমা:</strong> AI অ্যাপ তৈরি করা একটি রেস্তোরাঁর রান্নাঘর চালানোর মতো। <em>Streaming</em> হলো সম্পূর্ণ টেবিল শেষ না হওয়া পর্যন্ত প্রতিটি প্লেট আটকে না রেখে প্রস্তুত হওয়ার সাথে সাথে course পরিবেশন করা। <em>Background jobs</em> হলো dinner service-এর আগে চলা prep কাজ। <em>Idempotency</em> হলো \"একই order দুইবার slip হলে আমরা দুইবার রান্না করি না।\" <em>Fallback chains</em> হলো \"মাছ supplier-এর কাছে নেই, দ্বিতীয় supplier থেকে নাও।\" <em>Feature flags</em> হলো \"সোমবার শুধু এই টেবিল নতুন menu পায়।\" <em>API design</em> হলো waiter-দের মধ্যে চুক্তি করা নিয়ম (\"dessert-এর আগে bill আনবেন না\", \"সর্বদা আগে পানি আনুন\")।"
+              "html": "<strong>রেস্তোরাঁ-রান্নাঘরের উপমা:</strong> AI অ্যাপ তৈরি করা একটি রেস্তোরাঁর রান্নাঘর চালানোর মতো। <em>স্ট্রিমিং</em> হলো সম্পূর্ণ টেবিল শেষ না হওয়া পর্যন্ত প্রতিটি প্লেট আটকে না রেখে প্রস্তুত হওয়ার সাথে সাথে কোর্স পরিবেশন করা। <em>ব্যাকগ্রাউন্ড জব</em> হলো ডিনার সার্ভিসের আগে চলা প্রেপ কাজ। <em>আইডেমপোটেন্সি</em> হলো \"একই অর্ডার দুইবার স্লিপ হলে আমরা দুইবার রান্না করি না।\" <em>ফলব্যাক চেইন</em> হলো \"মাছ সাপ্লায়ারের কাছে নেই, দ্বিতীয় সাপ্লায়ার থেকে আনুন।\" <em>ফিচার ফ্ল্যাগ</em> হলো \"সোমবার শুধু এই টেবিল নতুন মেনু পায়।\" <em>API ডিজাইন</em> হলো ওয়েটারদের মধ্যে চুক্তি করা নিয়ম (\"ডেজার্টের আগে বিল আনবেন না\", \"সবসময় আগে পানি আনুন\")।"
             }
           ]
         }
@@ -297,36 +297,36 @@
             "challenge": "Ask for a 1,000-word story and measure again. Does the time of the first word change much? What does that tell you?"
           },
           "bn": {
-            "title": "stream হওয়া উত্তরের প্রথম শব্দের সময় মাপো",
-            "why": "তুমি যখন chat feature বানাবে, স্ক্রিন অনেক সেকেন্ড খালি থাকলে user চলে যায়। streaming model যেমন যেমন লেখে, তেমন তেমন শব্দ দেখায়, তাই app দ্রুত মনে হয়।",
+            "title": "স্ট্রিম হওয়া উত্তরের প্রথম শব্দের সময় মাপুন",
+            "why": "আপনি যখন চ্যাট ফিচার বানাবেন, স্ক্রিন অনেক সেকেন্ড খালি থাকলে ইউজার চলে যায়। স্ট্রিমিং মডেল যেমন যেমন লেখে, তেমন তেমন শব্দ দেখায়, তাই অ্যাপ দ্রুত মনে হয়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো। Enter চাপার সঙ্গে সঙ্গে stopwatch চালু করো। প্রথম শব্দ আর শেষ শব্দ আসার সময় লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করুন। Enter চাপার সঙ্গে সঙ্গে স্টপওয়াচ চালু করুন। প্রথম শব্দ আর শেষ শব্দ আসার সময় লিখে রাখুন।",
                 "prompt": "প্রায় ৪০০ শব্দের একটা গল্প লেখো। চট্টগ্রামের একজন বাস ড্রাইভার রাতের শেষ ট্রিপে একটা হারানো ব্যাগ খুঁজে পায়। কোনো ভূমিকা ছাড়া সঙ্গে সঙ্গে গল্প শুরু করো।",
                 "expect": "প্রথম শব্দ তাড়াতাড়ি আসে, যেমন ১ বা ২ সেকেন্ড পরে। শেষ শব্দ আসে অনেক পরে, যেমন ১৫ থেকে ৩০ সেকেন্ড পরে।",
                 "example": "রাতের শেষ বাসটা রাত ১১টা ৪০-এ চট্টগ্রামের ডিপোতে ঢুকল। রফিক ইঞ্জিন বন্ধ করে, রোজকার মতো, সিটগুলো দেখতে করিডর ধরে হাঁটল। পেছনের সারির নিচে সে একটা ছোট কালো ব্যাগ দেখতে পেল..."
               },
               {
                 "chat": "same",
-                "do": "ধরো chat শেষ শব্দ পর্যন্ত কিছুই দেখায়নি। user কত সময় অপেক্ষা করত আর তার কেমন লাগত, লিখে রাখো।",
-                "expect": "তোমার লেখা পুরো সময়টা, যেমন ২০ সেকেন্ড, user একটা খালি স্ক্রিন দেখত। বেশিরভাগ মানুষ ভাবত app নষ্ট।"
+                "do": "ধরুন চ্যাট শেষ শব্দ পর্যন্ত কিছুই দেখায়নি। ইউজার কত সময় অপেক্ষা করত আর তার কেমন লাগত, লিখে রাখুন।",
+                "expect": "আপনার লেখা পুরো সময়টা, যেমন ২০ সেকেন্ড, ইউজার একটা খালি স্ক্রিন দেখত। বেশিরভাগ মানুষ ভাবত অ্যাপ নষ্ট।"
               },
               {
                 "chat": "new",
-                "do": "prompt পাঠানোর আগে তিনটা feature পড়ো। তারপর paste করে Enter চাপো।",
+                "do": "প্রম্পট পাঠানোর আগে তিনটা ফিচার পড়ুন। তারপর পেস্ট করে Enter চাপুন।",
                 "prompt": "এই তিনটার প্রতিটা এক সহজ বাক্যে বুঝিয়ে বলো: SSE (Server-Sent Events), WebSockets, আর HTTP chunked transfer।\nতারপর প্রতিটা feature-এর জন্য একটা বেছে নাও আর একটা কারণ দাও।\nFeature ১: একটা AI chat-এর উত্তর শব্দ শব্দ করে আসে। data শুধু server থেকে browser-এ যায়। পথটা একটা সাধারণ HTTP proxy।\nFeature ২: একটা voice call, যেখানে user আর AI একসঙ্গে কথা বলতে পারে।\nFeature ৩: একটা পুরনো company proxy-র জন্য fallback, যে proxy SSE header মুছে ফেলে।\nশেষে SSE-র তুলনায় WebSockets-এর একটা খরচ বা অসুবিধা বলো।",
-                "expect": "Feature ১-এর জন্য SSE, Feature ২-এর জন্য WebSockets, আর Feature ৩-এর জন্য HTTP chunked। WebSockets-এর খরচ হলো ভারী setup।",
+                "expect": "ফিচার ১-এর জন্য SSE, ফিচার ২-এর জন্য ওয়েবসকেট, আর ফিচার ৩-এর জন্য HTTP চাঙ্কড। ওয়েবসকেটের খরচ হলো ভারী সেটআপ।",
                 "example": "SSE: server একটা সাধারণ HTTP connection দিয়ে browser-এ text ঠেলে দেয়। এটা একমুখী।\nWebSockets: একটা খোলা connection, যেখানে দুই পক্ষই যেকোনো সময় পাঠাতে পারে।\nHTTP chunked: server একটা response অনেক ছোট টুকরোয় পাঠায়।\nFeature ১: SSE। data শুধু এক দিকে যায়, আর সাধারণ proxy দিয়েও চলে।\nFeature ২: WebSockets। দুই পক্ষকেই একসঙ্গে audio পাঠাতে হয়।\nFeature ৩: HTTP chunked। proxy SSE header মুছে ফেললেও এটা চলে।\nWebSockets-এর খরচ: ভারী handshake (শুরুর setup) আর চালাতে বেশি কাজ।"
               }
             ],
-            "learned": "model <strong>token</strong> (শব্দের ছোট টুকরো) একটা একটা করে লেখে। streaming থাকলে app প্রতিটা token সঙ্গে সঙ্গে দেখায়। মোট সময় বদলায় না, কিন্তু user প্রায় এক সেকেন্ড পরে প্রথম শব্দ দেখে আর পড়া শুরু করে। <strong>SSE</strong> stream করার সবচেয়ে সহজ উপায়, কারণ data শুধু এক দিকে যায়, server থেকে browser-এ।",
-            "done": "তোমার কাছে গল্পের দুটো সময় (প্রথম শব্দ আর শেষ শব্দ) আছে, আর ৩টা feature-এর প্রতিটার জন্য একটা transport আছে।",
+            "learned": "মডেল <strong>টোকেন</strong> (শব্দের ছোট অংশ) একটা একটা করে লেখে। স্ট্রিমিং থাকলে অ্যাপ প্রতিটা টোকেন সঙ্গে সঙ্গে দেখায়। মোট সময় বদলায় না, কিন্তু ইউজার প্রায় এক সেকেন্ড পরে প্রথম শব্দ দেখে আর পড়া শুরু করে। <strong>SSE</strong> স্ট্রিম করার সবচেয়ে সহজ উপায়, কারণ ডেটা শুধু এক দিকে যায়, সার্ভার থেকে ব্রাউজারে।",
+            "done": "আপনার কাছে গল্পের দুটো সময় (প্রথম শব্দ আর শেষ শব্দ) আছে, আর ৩টা ফিচারের প্রতিটার জন্য একটা ট্রান্সপোর্ট আছে।",
             "check": {
-              "question": "streaming-এ উত্তর লেখার মোট সময় বদলায় না। তবুও app কেন বেশি দ্রুত মনে হয়?",
-              "answer": "user অল্প সময় পরেই প্রথম শব্দ দেখে আর পড়া শুরু করতে পারে। streaming না থাকলে সে খালি স্ক্রিন নিয়ে পুরো উত্তরের জন্য অপেক্ষা করত।"
+              "question": "স্ট্রিমিংয়ে উত্তর লেখার মোট সময় বদলায় না। তবুও অ্যাপ কেন বেশি দ্রুত মনে হয়?",
+              "answer": "ইউজার অল্প সময় পরেই প্রথম শব্দ দেখে আর পড়া শুরু করতে পারে। স্ট্রিমিং না থাকলে সে খালি স্ক্রিন নিয়ে পুরো উত্তরের জন্য অপেক্ষা করত।"
             },
-            "challenge": "১,০০০ শব্দের গল্প চাও আর আবার মাপো। প্রথম শব্দের সময় কি বেশি বদলায়? এটা থেকে কী বোঝা যায়?"
+            "challenge": "১,০০০ শব্দের গল্প চান আর আবার মাপুন। প্রথম শব্দের সময় কি বেশি বদলায়? এটা থেকে কী বোঝা যায়?"
           }
         },
         {
@@ -378,51 +378,51 @@
             "challenge": "Add a rule: after 150 seconds, step 2 fails. Poll at 160 seconds. What status and message should the server return, and should the client retry?"
           },
           "bn": {
-            "title": "লম্বা job চালানো একটা server সাজো",
-            "why": "তুমি যখন ৪ মিনিট ধরে কাজ করা একটা AI agent বানাবে, তখন web request খুলে রাখা যাবে না। অনেক server এত লম্বা অপেক্ষার request কেটে দেয়, আর user কিছুই দেখে না।",
+            "title": "লম্বা জব চালানো একটা সার্ভার সাজান",
+            "why": "আপনি যখন ৪ মিনিট ধরে কাজ করা একটা AI এজেন্ট বানাবেন, তখন ওয়েব রিকোয়েস্ট খুলে রাখা যাবে না। অনেক সার্ভার এত লম্বা অপেক্ষার রিকোয়েস্ট কেটে দেয়, আর ইউজার কিছুই দেখে না।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। AI এখন একটা API server সাজবে। এই prompt-এ HTTP আর JSON-এর অংশ English-এ রাখা হয়েছে।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। AI এখন একটা API সার্ভার সাজবে। এই প্রম্পটে HTTP আর JSON-এর অংশ ইংরেজিতে রাখা হয়েছে।",
                 "prompt": "তুমি একটা research agent-এর API server হিসেবে কাজ করো। শুধু একটা HTTP status line আর একটা JSON body দিয়ে উত্তর দেবে। আর কোনো লেখা নয়।\nনিয়ম:\n- POST /jobs একটা job শুরু করে। সঙ্গে সঙ্গে 202 আর একটা JSON body দিয়ে উত্তর দাও, যাতে job_id আর status \"queued\" থাকবে। প্রথম job_id হলো job_001। job টা শেষ হতে 245 সেকেন্ড লাগে।\n- GET /jobs/{job_id} status দেয়। status হতে পারে queued, running, done আর failed।\n- আমি প্রতিটা GET request-এ কত সেকেন্ড পার হয়েছে (elapsed) বলব। এই table ব্যবহার করো:\n  0 থেকে 59 সেকেন্ড: running, step \"1 search sources\"\n  60 থেকে 179 সেকেন্ড: running, step \"2 read 12 sources\"\n  180 থেকে 244 সেকেন্ড: running, step \"3 write the report\"\n  245 সেকেন্ড বা বেশি: done, আর একটা result field, যাতে একটা ছোট বানানো report title থাকবে\n- running হলে progress-ও percent-এ দেখাও: elapsed ভাগ 245, কাছের পূর্ণ সংখ্যায় গোল করে।\nবুঝলে READY বলো।",
                 "expect": "AI <strong>READY</strong> বলে উত্তর দেয়।"
               },
               {
                 "chat": "same",
-                "do": "এই request টা copy করে paste করো, Enter চাপো। এটা job শুরু করে। request টা English-এ থাকবে, কারণ এটা HTTP আর JSON।",
+                "do": "এই রিকোয়েস্টটা কপি করে পেস্ট করুন, Enter চাপুন। এটা জব শুরু করে। রিকোয়েস্টটা ইংরেজিতে থাকবে, কারণ এটা HTTP আর JSON।",
                 "prompt": "POST /jobs\n{\"topic\": \"Mobile payment use in rural Bangladesh\"}",
-                "expect": "status 202 আর একটা <code>job_id</code> দিয়ে তাড়াতাড়ি উত্তর, যেমন <em>job_001</em>। এখনো কোনো result নেই।",
+                "expect": "স্ট্যাটাস ২০২ আর একটা <code>job_id</code> দিয়ে তাড়াতাড়ি উত্তর, যেমন <em>job_001</em>। এখনো কোনো রেজাল্ট নেই।",
                 "example": "HTTP/1.1 202 Accepted\n{\"job_id\": \"job_001\", \"status\": \"queued\"}"
               },
               {
                 "chat": "same",
-                "do": "এই request টা copy করে paste করো, Enter চাপো। এটা ৪০ সেকেন্ড পরের status চায়।",
+                "do": "এই রিকোয়েস্টটা কপি করে পেস্ট করুন, Enter চাপুন। এটা ৪০ সেকেন্ড পরের স্ট্যাটাস চায়।",
                 "prompt": "GET /jobs/job_001\nelapsed: 40 seconds",
-                "expect": "status <em>running</em>, step 1, আর প্রায় 16% progress।",
+                "expect": "স্ট্যাটাস <em>running</em>, ধাপ ১, আর প্রায় ১৬% প্রোগ্রেস।",
                 "example": "HTTP/1.1 200 OK\n{\"job_id\": \"job_001\", \"status\": \"running\", \"step\": \"1 search sources\", \"progress\": \"16%\"}"
               },
               {
                 "chat": "same",
-                "do": "এই request টা copy করে paste করো, Enter চাপো। এটা ১২০ সেকেন্ড পরের status চায়।",
+                "do": "এই রিকোয়েস্টটা কপি করে পেস্ট করুন, Enter চাপুন। এটা ১২০ সেকেন্ড পরের স্ট্যাটাস চায়।",
                 "prompt": "GET /jobs/job_001\nelapsed: 120 seconds",
-                "expect": "status <em>running</em>, step 2, আর প্রায় 49% progress।",
+                "expect": "স্ট্যাটাস <em>running</em>, ধাপ ২, আর প্রায় ৪৯% প্রোগ্রেস।",
                 "example": "HTTP/1.1 200 OK\n{\"job_id\": \"job_001\", \"status\": \"running\", \"step\": \"2 read 12 sources\", \"progress\": \"49%\"}"
               },
               {
                 "chat": "same",
-                "do": "এই request টা copy করে paste করো, Enter চাপো। এটা ২৪৫ সেকেন্ড পরের status চায়।",
+                "do": "এই রিকোয়েস্টটা কপি করে পেস্ট করুন, Enter চাপুন। এটা ২৪৫ সেকেন্ড পরের স্ট্যাটাস চায়।",
                 "prompt": "GET /jobs/job_001\nelapsed: 245 seconds",
-                "expect": "status <em>done</em>, আর একটা ছোট report title সহ result।",
+                "expect": "স্ট্যাটাস <em>done</em>, আর একটা ছোট রিপোর্ট টাইটেল সহ রেজাল্ট।",
                 "example": "HTTP/1.1 200 OK\n{\"job_id\": \"job_001\", \"status\": \"done\", \"result\": \"Mobile Payments in Rural Bangladesh: A Short Report\"}"
               }
             ],
-            "learned": "লম্বা কাজ web request খুলে রাখবে না। server সঙ্গে সঙ্গে একটা <strong>job_id</strong> দিয়ে উত্তর দেয়, যেটা অনেকটা টিকিট নম্বরের মতো, আর কাজটা background-এ করে। client তখন job_id দিয়ে বারবার জিজ্ঞেস করে। একে বলে <strong>polling</strong>। এখানে প্রথম উত্তর সঙ্গে সঙ্গে এসেছে, কিন্তু job টা শেষ হতে ২৪৫ সেকেন্ড লাগে, মানে প্রায় ৪ মিনিট।",
-            "done": "তোমার কাছে job_id সহ একটা দ্রুত উত্তর আছে, আর ৩টা poll, যেগুলোতে running, running আর done দেখা গেছে।",
+            "learned": "লম্বা কাজ ওয়েব রিকোয়েস্ট খুলে রাখবে না। সার্ভার সঙ্গে সঙ্গে একটা <strong>job_id</strong> দিয়ে উত্তর দেয়, যেটা অনেকটা টিকেট নম্বরের মতো, আর কাজটা ব্যাকগ্রাউন্ডে করে। ক্লায়েন্ট তখন job_id দিয়ে বারবার জিজ্ঞেস করে। একে বলে <strong>পোলিং</strong>। এখানে প্রথম উত্তর সঙ্গে সঙ্গে এসেছে, কিন্তু জবটা শেষ হতে ২৪৫ সেকেন্ড লাগে, মানে প্রায় ৪ মিনিট।",
+            "done": "আপনার কাছে job_id সহ একটা দ্রুত উত্তর আছে, আর ৩টা পোল, যেগুলোতে running, running আর done দেখা গেছে।",
             "check": {
-              "question": "প্রায় ১০ সেকেন্ডের বেশি লাগা কাজে result-এর বদলে job_id ফেরত দেওয়া উচিত কেন?",
-              "answer": "লম্বা কাজে connection time out হতে পারে, আর user কিছুই দেখে না। job_id থাকলে কাজ background-এ চলে, আর client progress দেখতে পারে বা পরে ফিরে আসতে পারে।"
+              "question": "প্রায় ১০ সেকেন্ডের বেশি লাগা কাজে রেজাল্টের বদলে job_id ফেরত দেওয়া উচিত কেন?",
+              "answer": "লম্বা কাজে কানেকশন টাইম আউট হতে পারে, আর ইউজার কিছুই দেখে না। job_id থাকলে কাজ ব্যাকগ্রাউন্ডে চলে, আর ক্লায়েন্ট প্রোগ্রেস দেখতে পারে বা পরে ফিরে আসতে পারে।"
             },
-            "challenge": "একটা নিয়ম যোগ করো: ১৫০ সেকেন্ড পরে step 2 fail করে। ১৬০ সেকেন্ডে poll করো। server কী status আর message দেবে, আর client কি আবার চেষ্টা করবে?"
+            "challenge": "একটা নিয়ম যোগ করুন: ১৫০ সেকেন্ড পরে ধাপ ২ ফেইল করে। ১৬০ সেকেন্ডে পোল করুন। সার্ভার কী স্ট্যাটাস আর মেসেজ দেবে, আর ক্লায়েন্ট কি আবার চেষ্টা করবে?"
           }
         },
         {
@@ -460,37 +460,37 @@
             "challenge": "Ask the AI what should happen if two requests with the same key arrive at the same moment, before the first one finishes."
           },
           "bn": {
-            "title": "retry-র পর দুইবার charge বন্ধ করো",
-            "why": "তোমার app যখন প্রতিটা AI run-এর জন্য টাকা নেবে, তখন যে user দুইবার Pay চাপে বা পেজ refresh করে, তাকে দুইবার টাকা দিতে হবে না। একটা লম্বা run fail করলেও আবার শূন্য থেকে শুরু হবে না।",
+            "title": "রিট্রাইয়ের পর দুইবার চার্জ বন্ধ করুন",
+            "why": "আপনার অ্যাপ যখন প্রতিটা AI রানের জন্য টাকা নেবে, তখন যে ইউজার দুইবার পে বাটন চাপে বা পাতা রিফ্রেশ করে, তাকে দুইবার টাকা দিতে হবে না। একটা লম্বা রান ফেইল করলেও আবার শূন্য থেকে শুরু হবে না।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। AI এখন একটা billing API সাজবে।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। AI এখন একটা বিলিং API সাজবে।",
                 "prompt": "তুমি report তৈরির একটা API server হিসেবে কাজ করো। প্রতিটা নতুন run-এর খরচ 0.40 USD। আমি যে request পাঠাব, প্রতিটার জন্য শুধু JSON দিয়ে উত্তর দেবে।\nনিয়ম:\n- প্রতিটা request-এ একটা idempotency_key আর একটা body থাকে।\n- নতুন key হলে নতুন run_id সহ নতুন run হয় (run_1, run_2, ...)। charged: 0.40 আর replayed: false দিয়ে উত্তর দাও।\n- একই key আর একই body হলে আগের সংরক্ষিত response আবার দাও, replayed: true আর charged: 0 সহ। নতুন run নয়।\n- একই key কিন্তু আলাদা body হলে error code 422 আর একটা ছোট message দাও।\nবুঝলে READY বলো।",
                 "expect": "AI <strong>READY</strong> বলে উত্তর দেয়।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। তিনটা request-এর পর মোট কত টাকা charge হলো, লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। তিনটা রিকোয়েস্টের পর মোট কত টাকা চার্জ হলো, লিখে রাখুন।",
                 "prompt": "এই তিনটা request ক্রমানুসারে সামলাও। তৃতীয়টার পরে মোট কত USD charge হলো, তার একটা লাইন যোগ করো।\n1. idempotency_key: k-1001, body: {\"report\": \"monthly sales\"}\n2. idempotency_key: k-1001, body: {\"report\": \"monthly sales\"} (user পেজ refresh করেছে)\n3. idempotency_key: k-1001, body: {\"report\": \"yearly sales\"}",
-                "expect": "তিনটা JSON উত্তর। request 1-এ charge 0.40। request 2 একটা replay, charge 0। request 3 একটা error 422। মোট <strong>0.40 USD</strong>।",
+                "expect": "তিনটা JSON উত্তর। রিকোয়েস্ট 1-এ চার্জ ০.৪০। রিকোয়েস্ট ২ একটা রিপ্লে, চার্জ ০। রিকোয়েস্ট ৩ একটা এরর ৪২২। মোট <strong>০.৪০ USD</strong>।",
                 "example": "{\"run_id\": \"run_1\", \"charged\": 0.40, \"replayed\": false}\n{\"run_id\": \"run_1\", \"charged\": 0, \"replayed\": true}\n{\"error\": 422, \"message\": \"Key k-1001 আগেই আলাদা body দিয়ে ব্যবহার হয়েছে।\"}\nমোট charge: 0.40 USD"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। checkpoint থাকলে খরচ কত, আর না থাকলে কত, লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। চেকপয়েন্ট থাকলে খরচ কত, আর না থাকলে কত, লিখে রাখুন।",
                 "prompt": "এখন একটা লম্বা run। run_77-এ ৫টা step আছে। প্রতিটা step-এর খরচ 0.10 USD, আর যে step fail করে তার খরচ নেই। step 1, 2 আর 3 শেষ হয়েছে এবং আগেই charge হয়েছে। server প্রতিটার পর একটা checkpoint সংরক্ষণ করেছে। step 4 একটা network error-এ fail করেছে। client একই idempotency_key দিয়ে আবার চেষ্টা করছে।\n১. এখন তুমি কোন কোন step চালাবে, আর কত charge করবে?\n২. checkpoint না থাকলে retry-র খরচ কত হতো?\n৩. checkpoint-এ অন্তত কী থাকতে হবে, একটা জিনিসের নাম বলো।",
-                "expect": "checkpoint থাকলে শুধু step 4 আর 5 চলে: <strong>0.20 USD</strong>। checkpoint না থাকলে ৫টা step-ই চলে: <strong>0.50 USD</strong>।",
+                "expect": "চেকপয়েন্ট থাকলে শুধু ধাপ ৪ আর ৫ চলে: <strong>০.২০ USD</strong>। চেকপয়েন্ট না থাকলে ৫টা ধাপই চলে: <strong>০.৫০ USD</strong>।",
                 "example": "১. শুধু step 4 আর 5 চালাব। step 1 থেকে 3 checkpoint-এ আছে। charge: 2 × 0.10 = 0.20 USD।\n২. checkpoint না থাকলে ৫টা step-ই আবার চলত: 5 × 0.10 = 0.50 USD।\n৩. checkpoint-এ থাকতে হবে step 1 থেকে 3-এর সংরক্ষিত result, আর শেষ যে step শেষ হয়েছে তার নম্বর।"
               }
             ],
-            "learned": "<strong>idempotency key</strong> হলো একটা অনন্য label, যেটা client একটা request-এ লাগায়। একই request আবার এলে server সংরক্ষিত উত্তরটাই ফেরত দেয়, আর আবার charge করে না। <strong>checkpoint</strong> হলো এ পর্যন্ত করা কাজের একটা সংরক্ষিত copy। fail করার পর server শুধু বাকি step গুলো চালায়: ৫টার বদলে ২টা step (0.20 USD, 0.50 USD-এর বদলে)।",
-            "done": "তিনটা request-এর মোট 0.40 USD তোমার কাছে আছে, আর retry-র দুটো খরচ আছে: 0.20 USD আর 0.50 USD।",
+            "learned": "<strong>আইডেমপোটেন্সি কী</strong> হলো একটা অনন্য লেবেল, যেটা ক্লায়েন্ট একটা রিকোয়েস্টে লাগায়। একই রিকোয়েস্ট আবার এলে সার্ভার সংরক্ষিত উত্তরটাই ফেরত দেয়, আর আবার চার্জ করে না। <strong>চেকপয়েন্ট</strong> হলো এ পর্যন্ত করা কাজের একটা সংরক্ষিত কপি। ফেইল করার পর সার্ভার শুধু বাকি ধাপগুলো চালায়: ৫টার বদলে ২টা ধাপ (০.২০ USD, ০.৫০ USD-এর বদলে)।",
+            "done": "তিনটা রিকোয়েস্টের মোট ০.৪০ USD আপনার কাছে আছে, আর রিট্রাইয়ের দুটো খরচ আছে: ০.২০ USD আর ০.৫০ USD।",
             "check": {
-              "question": "একজন user পেজ refresh করল, আর client একই request আবার পাঠাল। idempotency key কীভাবে user-কে বাঁচায়?",
-              "answer": "server key-র নামে response সংরক্ষণ করে রাখে। একই key দিয়ে দ্বিতীয় request এলে একই response যায়, নতুন run হয় না, আর নতুন charge হয় না।"
+              "question": "একজন ইউজার পাতা রিফ্রেশ করল, আর ক্লায়েন্ট একই রিকোয়েস্ট আবার পাঠাল। আইডেমপোটেন্সি কী কীভাবে ইউজারকে বাঁচায়?",
+              "answer": "সার্ভার কী-র নামে রেসপন্স সংরক্ষণ করে রাখে। একই কী দিয়ে দ্বিতীয় রিকোয়েস্ট এলে একই রেসপন্স যায়, নতুন রান হয় না, আর নতুন চার্জ হয় না।"
             },
-            "challenge": "AI-কে জিজ্ঞেস করো, একই key দিয়ে দুটো request যদি ঠিক একই সময়ে আসে, প্রথমটা শেষ হওয়ার আগেই, তাহলে কী হওয়া উচিত।"
+            "challenge": "AI-কে জিজ্ঞেস করুন, একই কী দিয়ে দুটো রিকোয়েস্ট যদি ঠিক একই সময়ে আসে, প্রথমটা শেষ হওয়ার আগেই, তাহলে কী হওয়া উচিত।"
           }
         },
         {
@@ -529,38 +529,38 @@
             "challenge": "Add a rule: if the user is on a free plan, skip Provider 1. Then ask how a feature flag could turn this rule on for 10 percent of users first."
           },
           "bn": {
-            "title": "backup provider চেষ্টা করা একটা gateway সাজো",
-            "why": "তুমি যখন কোনো AI provider-এর ওপর product বানাবে, সেই provider মাঝে মাঝে fail করবে। gateway তখন request টা backup provider-এ পাঠায়, তাই তোমার user তবুও উত্তর পায়।",
+            "title": "ব্যাকআপ প্রোভাইডার চেষ্টা করা একটা গেটওয়ে সাজান",
+            "why": "আপনি যখন কোনো AI প্রোভাইডারের ওপর প্রোডাক্ট বানাবেন, সেই প্রোভাইডার মাঝে মাঝে ফেইল করবে। গেটওয়ে তখন রিকোয়েস্টটা ব্যাকআপ প্রোভাইডারে পাঠায়, তাই আপনার ইউজার তবুও উত্তর পায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। এটা normal prompt, যে provider-এর tool আছে তার জন্য।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। এটা নরমাল প্রম্পট, যে প্রোভাইডারের টুল আছে তার জন্য।",
                 "prompt": "তুমি একটা tool ব্যবহার করতে পারো: get_weather(city: string), যেটা live আবহাওয়া দেয়।\nUser-এর প্রশ্ন: আজ সিলেটে কি ছাতা লাগবে?\nশুধু JSON আকারে tool call দিয়ে উত্তর দাও, এই form-এ: {\"tool\": ..., \"arguments\": {...}}। এখনই প্রশ্নের উত্তর দিয়ো না।",
-                "expect": "শুধু JSON আকারে একটা tool call, কোনো চূড়ান্ত উত্তর নেই। যেমন শহর Sylhet দিয়ে <code>get_weather</code>।",
+                "expect": "শুধু JSON আকারে একটা টুল কল, কোনো চূড়ান্ত উত্তর নেই। যেমন শহর Sylhet দিয়ে <code>get_weather</code>।",
                 "example": "{\"tool\": \"get_weather\", \"arguments\": {\"city\": \"Sylhet\"}}"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। এটা degraded prompt, যে provider-এর কোনো tool নেই তার জন্য।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। এটা ডিগ্রেডেড প্রম্পট, যে প্রোভাইডারের কোনো টুল নেই তার জন্য।",
                 "prompt": "তোমার কোনো tool নেই, আর কোনো live data নেই। শুধু সাধারণ জ্ঞান থেকে উত্তর দাও। পরিষ্কার বলো যে তুমি আজকের আবহাওয়া দেখতে পারছ না, আর যতটা কাজের পরামর্শ দেওয়া যায় দাও।\nUser-এর প্রশ্ন: আজ সিলেটে কি ছাতা লাগবে?",
                 "expect": "একটা সাধারণ উত্তর, যেখানে AI বলে যে সে আজকের আবহাওয়া দেখতে পারছে না, আর একটা কাজের পরামর্শ দেয়।",
                 "example": "আমি আজকের আবহাওয়া দেখতে পারছি না, তাই নিশ্চিত করে বলতে পারব না। সিলেট বাংলাদেশের সবচেয়ে বেশি বৃষ্টির জায়গাগুলোর একটা, বিশেষ করে বর্ষায়, তাই একটা ছোট ছাতা সঙ্গে রাখা নিরাপদ। বের হওয়ার আগে একটা আবহাওয়ার app দেখে নিয়ো।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। AI এখন একটা gateway সাজবে। table-এর প্রতিটা row নিয়মের সঙ্গে মিলিয়ে দেখো।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। AI এখন একটা গেটওয়ে সাজবে। টেবিলের প্রতিটা রো নিয়মের সঙ্গে মিলিয়ে দেখুন।",
                 "prompt": "তুমি একটা LLM gateway হিসেবে কাজ করো। fallback chain হলো: Provider 1 (tool আছে), তারপর Provider 2 (tool আছে), তারপর Provider 3 (tool নেই, তাই একটা degraded prompt ব্যবহার করো, যেটা বলে: তোমার কোনো tool নেই, সাধারণ জ্ঞান থেকে উত্তর দাও)।\nনিয়ম: 503 বা 429 error এলে পরের provider-এ যাও। সফল হলে থামো। কোন provider উত্তর দিল, কতবার চেষ্টা হলো, আর খরচ কত, লিখে রাখো।\nপ্রতি call-এর খরচ: Provider 1 0.010 USD, Provider 2 0.006 USD, Provider 3 0.002 USD। fail হওয়া call-এর খরচ 0।\nতিনটা request এসেছে:\nRequest X: Provider 1 দেয় 200।\nRequest Y: Provider 1 দেয় 503, Provider 2 দেয় 200।\nRequest Z: Provider 1 দেয় 503, Provider 2 দেয় 429, Provider 3 দেয় 200।\nএকটা table দাও, যাতে থাকবে: request, ব্যবহার হওয়া provider, attempts, ব্যবহার হওয়া prompt (normal বা degraded), খরচ। তারপর মোট খরচ যোগ করো।",
-                "expect": "একটা table, যেখানে X Provider 1 ব্যবহার করে, Y Provider 2, আর Z degraded prompt সহ Provider 3। মোট খরচ <strong>0.018 USD</strong>।",
+                "expect": "একটা টেবিল, যেখানে X প্রোভাইডার ১ ব্যবহার করে, Y প্রোভাইডার ২, আর Z ডিগ্রেডেড প্রম্পট সহ প্রোভাইডার ৩। মোট খরচ <strong>০.০১৮ USD</strong>।",
                 "example": "| Request | Provider | Attempts | Prompt | খরচ (USD) |\n| X | Provider 1 | 1 | normal | 0.010 |\n| Y | Provider 2 | 2 | normal | 0.006 |\n| Z | Provider 3 | 3 | degraded | 0.002 |\nমোট খরচ: 0.010 + 0.006 + 0.002 = 0.018 USD"
               }
             ],
-            "learned": "একটা provider নানা error দিয়ে fail করতে পারে, যেমন 503 (server তৈরি নেই) বা 429 (অনেক বেশি request)। আবার কোনো provider-এ একটা feature নাও থাকতে পারে, যেমন tool। <strong>gateway</strong> ঠিক করা ক্রমে পরের provider চেষ্টা করে। tool নেই এমন provider-এর জন্য সে একটা degraded prompt ব্যবহার করে, যেটা সহজ, কিন্তু তবুও কাজের। এখানে fail হওয়া call-এর খরচ নেই, তাই প্রতিটা request শুধু যে provider উত্তর দিয়েছে তার খরচ দেয়।",
-            "done": "তোমার কাছে একটা tool call, tool ছাড়া একটা সৎ উত্তর, আর মোট 0.018 USD সহ একটা gateway table আছে।",
+            "learned": "একটা প্রোভাইডার নানা এরর দিয়ে ফেইল করতে পারে, যেমন ৫০৩ (সার্ভার তৈরি নেই) বা ৪২৯ (অনেক বেশি রিকোয়েস্ট)। আবার কোনো প্রোভাইডারে একটা ফিচার হয়তো থাকে না, যেমন টুল। <strong>গেটওয়ে</strong> ঠিক করা ক্রমে পরের প্রোভাইডার চেষ্টা করে। টুল নেই এমন প্রোভাইডারের জন্য সে একটা ডিগ্রেডেড প্রম্পট ব্যবহার করে, যেটা সহজ, কিন্তু তবুও কাজের। এখানে ফেইল হওয়া কলের খরচ নেই, তাই প্রতিটা রিকোয়েস্ট শুধু যে প্রোভাইডার উত্তর দিয়েছে তার খরচ দেয়।",
+            "done": "আপনার কাছে একটা টুল কল, টুল ছাড়া একটা সৎ উত্তর, আর মোট ০.০১৮ USD সহ একটা গেটওয়ে টেবিল আছে।",
             "check": {
-              "question": "যে provider-এ tool use নেই, fallback chain তার জন্য আলাদা prompt ব্যবহার করে কেন?",
-              "answer": "tool ব্যবহার করতে না পারা provider normal prompt-এ fail করত। <em>তোমার tool নেই, তবুও উত্তর দাও</em> ধরনের degraded prompt উত্তরটাকে কাজের রাখে।"
+              "question": "যে প্রোভাইডারে টুল ইউজ নেই, ফলব্যাক চেইন তার জন্য আলাদা প্রম্পট ব্যবহার করে কেন?",
+              "answer": "টুল ব্যবহার করতে না পারা প্রোভাইডার নরমাল প্রম্পটে ফেইল করত। <em>আপনার tool নেই, তবুও উত্তর দিন</em> ধরনের ডিগ্রেডেড প্রম্পট উত্তরটাকে কাজের রাখে।"
             },
-            "challenge": "একটা নিয়ম যোগ করো: user free plan-এ থাকলে Provider 1 বাদ দাও। তারপর জিজ্ঞেস করো, একটা feature flag দিয়ে কীভাবে প্রথমে ১০ শতাংশ user-এর জন্য এই নিয়ম চালু করা যায়।"
+            "challenge": "একটা নিয়ম যোগ করুন: ইউজার ফ্রি প্ল্যানে থাকলে প্রোভাইডার ১ বাদ দিন। তারপর জিজ্ঞেস করুন, একটা ফিচার ফ্ল্যাগ দিয়ে কীভাবে প্রথমে ১০ শতাংশ ইউজারের জন্য এই নিয়ম চালু করা যায়।"
           }
         }
       ]
@@ -733,13 +733,13 @@
         "why": "Anything over about 10 seconds should not block an HTTP request. Push it to a queue and return a job_id, and the client polls or subscribes for updates."
       },
       "bn": {
-        "q": "একটা task প্রায় 10 সেকেন্ডের বেশি সময় নেয়। এই Part অনুযায়ী কী করা উচিত?",
+        "q": "একটা টাস্ক প্রায় ১০ সেকেন্ডের বেশি সময় নেয়। এই পার্ট অনুযায়ী কী করা উচিত?",
         "options": [
-          "Task শেষ না হওয়া পর্যন্ত HTTP request খোলা রাখো।",
-          "Task-টা queue-তে push করো আর একটা job_id ফেরত দাও।",
-          "Task cancel করে user-কে আবার চেষ্টা করতে বলো।"
+          "টাস্ক শেষ না হওয়া পর্যন্ত HTTP রিকোয়েস্ট খোলা রাখুন।",
+          "টাস্কটা কিউতে পুশ করুন আর একটা job_id ফেরত দিন।",
+          "টাস্ক ক্যানসেল করে ইউজারকে আবার চেষ্টা করতে বলুন।"
         ],
-        "why": "প্রায় 10 সেকেন্ডের বেশি লাগে এমন কিছু HTTP request block করা উচিত নয়। এটাকে queue-তে push করে job_id ফেরত দাও, আর client poll করে বা subscribe করে update নেয়।"
+        "why": "প্রায় ১০ সেকেন্ডের বেশি লাগে এমন কিছুতে HTTP রিকোয়েস্ট ব্লক করা উচিত নয়। এটাকে কিউতে পুশ করে job_id ফেরত দিন, আর ক্লায়েন্ট পোল করে বা সাবস্ক্রাইব করে আপডেট নেয়।"
       }
     },
     {
@@ -756,13 +756,13 @@
         "why": "SSE is the simplest transport, it is one-way, and it works through any HTTP proxy. WebSockets are bidirectional, and HTTP chunked transfer is a fallback."
       },
       "bn": {
-        "q": "কোন streaming transport সবচেয়ে সহজ, একমুখী (server থেকে client) আর যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে?",
+        "q": "কোন স্ট্রিমিং ট্রান্সপোর্ট সবচেয়ে সহজ, একমুখী (সার্ভার থেকে ক্লায়েন্ট) আর যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে?",
         "options": [
           "SSE (Server-Sent Events)",
-          "HTTP chunked transfer",
-          "WebSockets"
+          "HTTP চাঙ্কড ট্রান্সফার",
+          "ওয়েবসকেট"
         ],
-        "why": "SSE সবচেয়ে সহজ transport, একমুখী, আর যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে। WebSockets দ্বিমুখী, আর HTTP chunked transfer হলো fallback।"
+        "why": "SSE সবচেয়ে সহজ ট্রান্সপোর্ট, একমুখী, আর যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে। ওয়েবসকেট দ্বিমুখী, আর HTTP চাঙ্কড ট্রান্সফার হলো ফলব্যাক।"
       }
     },
     {
@@ -774,8 +774,8 @@
         "why": "This Part says never to hard-code a tenant's prompt in their codebase. Store prompts and keys in a tenant_config row and fetch it at the edge of every request."
       },
       "bn": {
-        "q": "Multi-tenant app-এর ক্ষেত্রে topic বলে, প্রতিটি tenant-এর prompt তার নিজের codebase-এ hard-code করতে হবে।",
-        "why": "এই Part বলে, কখনোই কোনো tenant-এর prompt তার codebase-এ hard-code কোরো না। Prompt আর key একটা tenant_config row-তে রাখো এবং প্রতিটি request-এর edge-এ fetch করো।"
+        "q": "মাল্টি-টেন্যান্ট অ্যাপের ক্ষেত্রে টপিক বলে, প্রতিটি টেন্যান্টের প্রম্পট তার নিজের কোডবেসে হার্ড-কোড করতে হবে।",
+        "why": "এই পার্ট বলে, কখনোই কোনো টেন্যান্টের প্রম্পট তার কোডবেসে হার্ড-কোড করবেন না। প্রম্পট আর কী একটা tenant_config রো-তে রাখুন এবং প্রতিটি রিকোয়েস্টের এজে ফেচ করুন।"
       }
     },
     {
@@ -792,13 +792,13 @@
         "why": "This Part says a model gateway is essentially a fallback router plus cost tracking. LiteLLM and Portkey do this out of the box."
       },
       "bn": {
-        "q": "এই Part অনুযায়ী model gateway মূলত কী?",
+        "q": "এই পার্ট অনুযায়ী মডেল গেটওয়ে মূলত কী?",
         "options": [
-          "Agent state-এর checkpoint রাখার জায়গা",
-          "একটা fallback router আর cost tracking",
-          "Prompt-এর জন্য একটা feature flag service"
+          "এজেন্ট স্টেটের চেকপয়েন্ট রাখার জায়গা",
+          "একটা ফলব্যাক রাউটার আর খরচ ট্র্যাকিং",
+          "প্রম্পটের জন্য একটা ফিচার ফ্ল্যাগ সার্ভিস"
         ],
-        "why": "এই Part বলে, model gateway মূলত একটা fallback router আর cost tracking। LiteLLM ও Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে।"
+        "why": "এই পার্ট বলে, মডেল গেটওয়ে মূলত একটা ফলব্যাক রাউটার আর খরচ ট্র্যাকিং। LiteLLM ও Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে।"
       }
     },
     {
@@ -810,8 +810,8 @@
         "why": "This is one of the five API rules in this Part. The client says how much to spend, and the server respects it."
       },
       "bn": {
-        "q": "একটা AI API-তে client যেন request-এর মধ্যেই cost আর latency budget দিতে পারে, যেমন $0.05 আর 8s।",
-        "why": "এই Part-এর পাঁচটি API নিয়মের একটা এটা। Client বলে দেয় কত খরচ করা যাবে, আর server সেটা মানে।"
+        "q": "একটা AI API-তে ক্লায়েন্ট যেন রিকোয়েস্টের মধ্যেই খরচ আর ল্যাটেন্সি বাজেট দিতে পারে, যেমন $০.০৫ আর ৮s।",
+        "why": "এই পার্টের পাঁচটি API নিয়মের একটা এটা। ক্লায়েন্ট বলে দেয় কত খরচ করা যাবে, আর সার্ভার সেটা মানে।"
       }
     }
   ]

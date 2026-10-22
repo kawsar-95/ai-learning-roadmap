@@ -3,8 +3,8 @@
   "title": "Multimodal Engineering",
   "lede": "Vision (OCR-via-LLM, document AI), voice (STT/TTS, realtime APIs from OpenAI / LiveKit / Vapi), image generation (Flux, SDXL, Imagen, DALL-E; ControlNet, LoRA, ComfyUI), and video generation (Sora, Veo, Runway, Kling). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "Multimodal Engineering (text-এর বাইরে)",
-    "lede": "Vision (LLM দিয়ে OCR, document AI), voice (STT/TTS, OpenAI / LiveKit / Vapi-র realtime API), image generation (Flux, SDXL, Imagen, DALL-E; ControlNet, LoRA, ComfyUI), আর video generation (Sora, Veo, Runway, Kling)। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "মাল্টিমোডাল ইঞ্জিনিয়ারিং (টেক্সটের বাইরে)",
+    "lede": "ভিশন (LLM দিয়ে OCR, ডকুমেন্ট AI), ভয়েস (STT/TTS, OpenAI / LiveKit / Vapi-র রিয়েলটাইম API), ইমেজ জেনারেশন (Flux, SDXL, Imagen, DALL-E; ControlNet, LoRA, ComfyUI), আর ভিডিও জেনারেশন (Sora, Veo, Runway, Kling)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে একটা বাংলা ব্যাখ্যা আছে।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "Multimodal engineering (vision, voice, video)",
       "sub": "Text was the first modality. In 2025, every production AI app combines at least two of <strong>vision</strong>, <strong>voice</strong>, <strong>image generation</strong>, and <strong>video generation</strong>. Multimodal engineering is the discipline of choosing models, latency budgets, and pipelines for each.",
       "bn": {
-        "title": "Multimodal engineering: vision, voice আর video",
-        "sub": "Text ছিল প্রথম modality। 2025 সালে প্রতিটা production AI app <strong>vision</strong>, <strong>voice</strong>, <strong>image generation</strong> আর <strong>video generation</strong>-এর অন্তত দুটো একসাথে ব্যবহার করে। Multimodal engineering হলো প্রতিটার জন্য model, latency budget আর pipeline বেছে নেওয়ার কাজ।"
+        "title": "মাল্টিমোডাল ইঞ্জিনিয়ারিং: ভিশন, ভয়েস আর ভিডিও",
+        "sub": "টেক্সট ছিল প্রথম মোডালিটি। ২০২৫ সালে প্রতিটা প্রোডাকশন AI অ্যাপ <strong>ভিশন</strong>, <strong>ভয়েস</strong>, <strong>ইমেজ জেনারেশন</strong> আর <strong>ভিডিও জেনারেশন</strong>-এর অন্তত দুটো একসাথে ব্যবহার করে। মাল্টিমোডাল ইঞ্জিনিয়ারিং হলো প্রতিটার জন্য মডেল, ল্যাটেন্সি বাজেট আর পাইপলাইন বেছে নেওয়ার কাজ।"
       },
       "body": [
         {
@@ -200,34 +200,34 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>এআই আর শুধু টেক্সট নয়।</strong> ২০২৫-এ প্রতিটি গুরুতর AI অ্যাপ অন্তত দুটির সমন্বয় করে — চিত্র দেখা, কণ্ঠ শোনা, চিত্র তৈরি, ভিডিও তৈরি। প্রতিটির নিজস্ব মডেল, ট্রেড-অফ ও সেরা-অনুশীলন পাইপলাইন আছে।"
+          "html": "<strong>AI আর শুধু টেক্সট নয়।</strong> ২০২৫-এ প্রতিটি গুরুতর AI অ্যাপ অন্তত দুটির সমন্বয় করে — ছবি দেখা, কণ্ঠ শোনা, ছবি তৈরি, ভিডিও তৈরি। প্রতিটির নিজস্ব মডেল, ট্রেড-অফ ও সেরা-অনুশীলন পাইপলাইন আছে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Vision (\"যে AI দেখে\"):</strong> GPT-4o, Claude 4, Gemini 2.5 এর মতো নেটিভ multimodal মডেলগুলো সরাসরি চিত্র নেয় — কোনো আলাদা OCR ধাপের দরকার নেই। তারা রসিদের ছবি পড়তে, স্ক্রিনশট দেখে বলতে এটি কী ভুল, চার্ট থেকে ডেটা বের করতে, বা PDF-এর layout বুঝতে পারে। তারা বাস্তব-বিশ্বের অগোছালো চিত্রে ঐতিহ্যবাহী OCR tools-কে ছাড়িয়ে যায়।<a class=\"cite\" href=\"#src28\">[28]</a>"
+          "html": "<strong>ভিশন (\"যে AI দেখে\"):</strong> GPT-4o, Claude 4, Gemini 2.5-এর মতো নেটিভ মাল্টিমোডাল মডেলগুলো সরাসরি ছবি নেয় — কোনো আলাদা OCR ধাপের দরকার নেই। তারা রসিদের ছবি পড়তে, স্ক্রিনশট দেখে বলতে এটি কী ভুল, চার্ট থেকে ডেটা বের করতে, বা PDF-এর লেআউট বুঝতে পারে। তারা বাস্তব-বিশ্বের অগোছালো ছবিতে ঐতিহ্যবাহী OCR টুলকে ছাড়িয়ে যায়।<a class=\"cite\" href=\"#src28\">[২৮]</a>"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Voice (\"যে AI শোনে ও কথা বলে\"):</strong> পুরোনো উপায় হলো ৩-ধাপের pipeline: speech-to-text → LLM → text-to-speech। প্রতিটি ধাপ latency যোগ করে। <em>STT</em> (speech-to-text) tools: Whisper, Deepgram, AssemblyAI। <em>TTS</em> (text-to-speech) tools: ElevenLabs, Cartesia, OpenAI TTS। <em>Realtime APIs</em> (OpenAI Realtime, LiveKit, Vapi) chunky ধাপে-ধাপে লুপ ছাড়াই উভয় দিকে audio stream করে — AI নিজেই নিজেকে interrupt করে, স্বাভাবিকভাবে pause নেয়, এবং আসল কথোপকথনের মতো অনুভূত হয়।<a class=\"cite\" href=\"#src29\">[29]</a>"
+          "html": "<strong>ভয়েস (\"যে AI শোনে ও কথা বলে\"):</strong> পুরোনো উপায় হলো ৩-ধাপের পাইপলাইন: স্পিচ-টু-টেক্সট → LLM → টেক্সট-টু-স্পিচ। প্রতিটি ধাপ ল্যাটেন্সি যোগ করে। <em>STT</em> (স্পিচ-টু-টেক্সট) টুল: Whisper, Deepgram, AssemblyAI। <em>TTS</em> (টেক্সট-টু-স্পিচ) টুল: ElevenLabs, Cartesia, OpenAI TTS। <em>রিয়েলটাইম API</em> (OpenAI Realtime, LiveKit, Vapi) চাঙ্কি ধাপে-ধাপে লুপ ছাড়াই উভয় দিকে অডিও স্ট্রিম করে — AI নিজেই নিজেকে ইন্টারাপ্ট করে, স্বাভাবিকভাবে পজ নেয়, এবং আসল কথোপকথনের মতো অনুভূত হয়।<a class=\"cite\" href=\"#src29\">[২৯]</a>"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Image generation (\"যে AI আঁকে\"):</strong> Flux, SDXL, Imagen, DALL-E — আপনার প্রয়োজন অনুযায়ী বেছে নিন: open weights ও fine-tunability (Flux, SDXL), photorealism (Imagen), instruction-following (DALL-E)। উন্নত: <em>ControlNet</em> আপনাকে বলতে দেয় \"এই চরিত্রটি <em>এই</em> pose-এ আঁক\"; <em>LoRA</em> আপনাকে আপনার পছন্দের স্টাইলে শেখায়; <em>inpainting</em> একটি চিত্রের অংশ সম্পাদনা করতে দেয়। <em>ComfyUI</em> হলো node-based UI যেখানে আপনি এগুলো reproducible pipeline-এ সংযুক্ত করেন।"
+          "html": "<strong>ইমেজ জেনারেশন (\"যে AI আঁকে\"):</strong> Flux, SDXL, Imagen, DALL-E — আপনার প্রয়োজন অনুযায়ী বেছে নিন: ওপেন ওয়েটস ও ফাইন-টিউন করার সুবিধা (Flux, SDXL), ফটোরিয়ালিজম (Imagen), ইনস্ট্রাকশন-ফলোয়িং (DALL-E)। উন্নত: <em>ControlNet</em> আপনাকে বলতে দেয় \"এই চরিত্রটি <em>এই</em> পোজে আঁক\"; <em>LoRA</em> আপনাকে আপনার পছন্দের স্টাইলে শেখায়; <em>ইনপেইন্টিং</em> একটি ছবির অংশ সম্পাদনা করতে দেয়। <em>ComfyUI</em> হলো নোড-ভিত্তিক UI যেখানে আপনি এগুলো রিপ্রোডিউসিবল পাইপলাইনে সংযুক্ত করেন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Video generation (\"যে AI চিত্রগ্রহণ করে\"):</strong> Sora (OpenAI), Veo 3 (Google, native audio সহ), Kling (Kuaishou, দীর্ঘ), Runway (চরিত্রের ধারাবাহিকতা), Pika/Luma/Hailuo (সস্তা, দ্রুত)। বেশিরভাগ ৫–২০ সেকেন্ডের ক্লিপ তৈরি করে। স্বল্প social-media কন্টেন্টের জন্য মান এখন broadcast-grade।"
+          "html": "<strong>ভিডিও জেনারেশন (\"যে AI চিত্রগ্রহণ করে\"):</strong> Sora (OpenAI), Veo 3 (Google, নেটিভ অডিও সহ), Kling (Kuaishou, দীর্ঘ), Runway (চরিত্রের ধারাবাহিকতা), Pika/Luma/Hailuo (সস্তা, দ্রুত)। বেশিরভাগ ৫–২০ সেকেন্ডের ক্লিপ তৈরি করে। স্বল্প সোশ্যাল মিডিয়া কনটেন্টের জন্য মান এখন ব্রডকাস্ট-গ্রেড।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Production plumbing:</strong> <em>Replicate</em> হলো \"আমাকে একটি ক্রেডিট কার্ড দাও এবং আমি যেকোনো open-source AI মডেল প্রতি সেকেন্ডে চালাব।\" <em>Fal</em> একই কিন্তু speed-optimised diffusion। <em>ComfyUI</em> হলো diffusion-এর জন্য Figma: node-based UI যা version-control ও headless চালানো যায়।"
+          "html": "<strong>প্রোডাকশন প্লাম্বিং:</strong> <em>Replicate</em> হলো \"আমাকে একটি ক্রেডিট কার্ড দিন এবং আমি যেকোনো ওপেন-সোর্স AI মডেল প্রতি সেকেন্ডে চালাব।\" <em>Fal</em> একই কিন্তু স্পিড-অপটিমাইজড ডিফিউশন। <em>ComfyUI</em> হলো ডিফিউশনের জন্য Figma: নোড-ভিত্তিক UI যা ভার্সন-কন্ট্রোল ও হেডলেস চালানো যায়।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>স্টুডিওর উপমা:</strong> ২০২৫-এর AI স্টুডিও ভাবুন। <em>Vision</em> মডেল হলো camera operator। <em>Voice</em> মডেল হলো dubbing artist। <em>Image-generation</em> মডেল হলো illustrator। <em>Video</em> মডেল হলো director of photography। <em>ComfyUI</em> হলো স্টুডিওর workflow tool — যেখানে camera, artist ও director-কে একটি pipeline-এ প্লাগ করা হয়। <em>Replicate/Fal</em> হলো \"নিজের GPU না কিনে ঘণ্টা ভাড়ায় ভাড়া নাও।\""
+              "html": "<strong>স্টুডিওর উপমা:</strong> ২০২৫-এর AI স্টুডিও ভাবুন। <em>ভিশন</em> মডেল হলো ক্যামেরা অপারেটর। <em>ভয়েস</em> মডেল হলো ডাবিং আর্টিস্ট। <em>ইমেজ-জেনারেশন</em> মডেল হলো ইলাস্ট্রেটর। <em>ভিডিও</em> মডেল হলো ডিরেক্টর অফ ফটোগ্রাফি। <em>ComfyUI</em> হলো স্টুডিওর ওয়ার্কফ্লো টুল — যেখানে ক্যামেরা, আর্টিস্ট ও ডিরেক্টরকে একটি পাইপলাইনে প্লাগ করা হয়। <em>Replicate/Fal</em> হলো \"নিজের GPU না কিনে ঘণ্টা ভাড়ায় ভাড়া নিন।\""
             }
           ]
         }
@@ -309,40 +309,40 @@
             "challenge": "In the receipt, the total is 815, rice is 450, and oil is 180. Ask the AI for the egg price. Check the maths: 815 − 450 − 180 = 185. Should you trust that guess?"
           },
           "bn": {
-            "title": "এলোমেলো ছবি থেকে JSON বানাও",
-            "why": "তুমি যখন receipt বা form পড়ার app বানাবে, ছবি প্রায়ই ঝাপসা হবে। তাই জানা দরকার, AI এগুলো পড়তে পারে, কিন্তু একটা অক্ষর ভুলও আন্দাজ করতে পারে।",
+            "title": "এলোমেলো ছবি থেকে JSON বানান",
+            "why": "আপনি যখন রসিদ বা ফর্ম পড়ার অ্যাপ বানাবেন, ছবি প্রায়ই ঝাপসা হবে। তাই জানা দরকার, AI এগুলো পড়তে পারে, কিন্তু একটা অক্ষর ভুলও আন্দাজ করতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "একটা receipt, sign, menu বা হাতে লেখা নোটের ছবি তোলো। chat-এ attach করো, এই prompt টা paste করো, আর Enter চাপো।",
+                "do": "একটা রসিদ, সাইনবোর্ড, মেনু বা হাতে লেখা নোটের ছবি তুলুন। চ্যাটে অ্যাটাচ করুন, এই প্রম্পটটা পেস্ট করুন, আর Enter চাপুন।",
                 "prompt": "সঙ্গে দেওয়া ছবিটা দেখো।\nধাপ ১: ছবিতে যত লেখা পড়তে পারো, ক্রমানুসারে লেখো।\nধাপ ২: নিচের key দিয়ে JSON দাও:\n- item_type (যেমন receipt, sign, menu, note)\n- title (মূল শিরোনাম, না থাকলে null)\n- dates (list)\n- numbers (যত সংখ্যা পড়তে পারো, ছবিতে যেভাবে লেখা সেভাবে, list)\n- unclear (যে অংশ ভালো করে পড়তে পারোনি, list)\nআন্দাজ করবে না। কোনো অংশ পড়তে কঠিন হলে সেটা unclear-এ রাখো, অন্য key-তে রেখো না।",
-                "expect": "AI আগে যা পড়তে পারে সেই লেখা দেয়। তারপর একটা JSON দেয়, যেখানে key গুলো <code>item_type</code>, <code>title</code>, <code>dates</code>, <code>numbers</code> আর <code>unclear</code>।"
+                "expect": "AI আগে যা পড়তে পারে সেই লেখা দেয়। তারপর একটা JSON দেয়, যেখানে কী গুলো <code>item_type</code>, <code>title</code>, <code>dates</code>, <code>numbers</code> আর <code>unclear</code>।"
               },
               {
                 "chat": "new",
-                "do": "তোমার chat-এ ছবি upload করা যায় না? ধাপ ১-এর বদলে এটা করো। এই prompt টা copy করে paste করো, Enter চাপো। এই prompt টা English-এ রাখা হয়েছে, কারণ এখানে exact English অক্ষর পড়া হবে।",
+                "do": "আপনার চ্যাটে ছবি আপলোড করা যায় না? ধাপ ১-এর বদলে এটা করুন। এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। এই প্রম্পটটা ইংরেজিতে রাখা হয়েছে, কারণ এখানে হুবহু ইংরেজি অক্ষর পড়া হবে।",
                 "prompt": "Below is the text that came from a blurry photo of a shop receipt. Some characters are wrong.\n\n---\nRAHIM GR0CERY STOR3\n12 Moy 2O25\nRice 5kg ....... 4SO\nOil 1L ......... 18O\nEggs (12) ...... ??5\nTotal .......... 8l5\n---\n\nReturn JSON with these keys:\n- item_type\n- title\n- dates (list)\n- numbers (list of every number, as written)\n- unclear (list of parts you could not read well)\nDo not guess. If a part is hard to read, put it in unclear and do not put it in the other keys.",
-                "expect": "একটা JSON। <code>item_type</code> হবে <em>receipt</em>। <code>unclear</code> list-এ ভাঙা অংশগুলোর নাম থাকবে, যেমন <em>??5</em>।",
+                "expect": "একটা JSON। <code>item_type</code> হবে <em>receipt</em>। <code>unclear</code> তালিকায় ভাঙা অংশগুলোর নাম থাকবে, যেমন <em>??৫</em>।",
                 "example": "{\n  \"item_type\": \"receipt\",\n  \"title\": \"RAHIM GR0CERY STOR3\",\n  \"dates\": [\"12 Moy 2O25\"],\n  \"numbers\": [\"5kg\", \"4SO\", \"1L\", \"18O\", \"12\", \"8l5\"],\n  \"unclear\": [\n    \"Shop name: 0 and 3 may be O and E\",\n    \"Date: Moy may be May, 2O25 may be 2025\",\n    \"Rice price 4SO may be 450\",\n    \"Oil price 18O may be 180\",\n    \"Eggs price ??5 has missing digits\",\n    \"Total 8l5 may be 815\"\n  ]\n}"
               },
               {
                 "chat": "same",
-                "do": "প্রতিটা JSON value তোমার ছবির সঙ্গে, বা receipt-এর লেখার সঙ্গে মিলিয়ে দেখো। যেগুলো ভুল, লিখে রাখো।",
-                "expect": "বেশিরভাগ value ঠিক থাকবে। একটা-দুটো ভুল হতে পারে, বা AI কোনো ভাঙা অক্ষর না বলেই ঠিক করে দিতে পারে।"
+                "do": "প্রতিটা JSON ভ্যালু আপনার ছবির সঙ্গে, বা রসিদের লেখার সঙ্গে মিলিয়ে দেখুন। যেগুলো ভুল, লিখে রাখুন।",
+                "expect": "বেশিরভাগ ভ্যালু ঠিক থাকবে। একটা-দুটো ভুল হতে পারে, বা AI কোনো ভাঙা অক্ষর না বলেই ঠিক করে দিতে পারে।"
               },
               {
                 "chat": "same",
-                "do": "<code>unclear</code> list টা পড়ো। যে অংশ পড়তে কঠিন ছিল, সেটা কি list-এ আছে? লিখে রাখো।",
-                "expect": "ভালো উত্তরে কঠিন অংশগুলো <code>unclear</code>-এ থাকে, অন্য key-তে থাকে না। typed receipt-এর ক্ষেত্রে ডিমের দাম <em>??5</em> তার মধ্যে থাকবে।"
+                "do": "<code>unclear</code> তালিকাটা পড়ুন। যে অংশ পড়তে কঠিন ছিল, সেটা কি তালিকায় আছে? লিখে রাখুন।",
+                "expect": "ভালো উত্তরে কঠিন অংশগুলো <code>unclear</code>-এ থাকে, অন্য কী-তে থাকে না। টাইপ করা রসিদের ক্ষেত্রে ডিমের দাম <em>??৫</em> তার মধ্যে থাকবে।"
               }
             ],
-            "learned": "AI আলাদা কোনো tool ছাড়াই ছবির লেখা পড়তে পারে। এটাকে বলে <strong>OCR</strong> (ছবির লেখা থেকে text বানানো)। তুমি JSON চাইলে একটা program সরাসরি উত্তরটা ব্যবহার করতে পারে। কিন্তু AI একটা খারাপ অক্ষর আন্দাজ করে ভুলও করতে পারে। <code>unclear</code> list তাকে বলতে বাধ্য করে কোথায় সে নিশ্চিত না, তাই তুমি শুধু সেই অংশগুলো দেখে নিলেই হয়।",
-            "done": "তোমার কাছে একটা JSON উত্তর আছে, আর তুমি প্রতিটা value এবং <code>unclear</code> list মিলিয়ে দেখেছ।",
+            "learned": "AI আলাদা কোনো টুল ছাড়াই ছবির লেখা পড়তে পারে। এটাকে বলে <strong>OCR</strong> (ছবির লেখা থেকে টেক্সট বানানো)। আপনি JSON চাইলে একটা প্রোগ্রাম সরাসরি উত্তরটা ব্যবহার করতে পারে। কিন্তু AI একটা খারাপ অক্ষর আন্দাজ করে ভুলও করতে পারে। <code>unclear</code> তালিকা তাকে বলতে বাধ্য করে কোথায় সে নিশ্চিত না, তাই আপনি শুধু সেই অংশগুলো দেখে নিলেই হয়।",
+            "done": "আপনার কাছে একটা JSON উত্তর আছে, আর আপনি প্রতিটা ভ্যালু এবং <code>unclear</code> তালিকা মিলিয়ে দেখেছেন।",
             "check": {
-              "question": "prompt-এ <code>unclear</code> list আর <em>আন্দাজ করবে না</em> নিয়মটা কেন দিতে হয়?",
-              "answer": "AI ঝাপসা অক্ষর ভুল পড়েও নিশ্চিতভাবে বলতে পারে। <code>unclear</code> list তাকে সন্দেহের কথা জানাতে বাধ্য করে, তাই তুমি বা তোমার program সেই অংশগুলো হাতে মিলিয়ে নিতে পারো।"
+              "question": "প্রম্পটে <code>unclear</code> তালিকা আর <em>আন্দাজ করবে না</em> নিয়মটা কেন দিতে হয়?",
+              "answer": "AI ঝাপসা অক্ষর ভুল পড়েও নিশ্চিতভাবে বলতে পারে। <code>unclear</code> তালিকা তাকে সন্দেহের কথা জানাতে বাধ্য করে, তাই আপনি বা আপনার প্রোগ্রাম সেই অংশগুলো হাতে মিলিয়ে নিতে পারেন।"
             },
-            "challenge": "receipt-এ total 815, চাল 450, আর তেল 180। AI-কে ডিমের দাম জিজ্ঞেস করো। অঙ্কটা মিলিয়ে দেখো: 815 − 450 − 180 = 185। এই আন্দাজ কি বিশ্বাস করা ঠিক?"
+            "challenge": "রসিদে মোট ৮১৫, চাল ৪৫০, আর তেল ১৮০। AI-কে ডিমের দাম জিজ্ঞেস করুন। অঙ্কটা মিলিয়ে দেখুন: ৮১৫ − ৪৫০ − ১৮০ = ১৮৫। এই আন্দাজ কি বিশ্বাস করা ঠিক?"
           }
         },
         {
@@ -392,49 +392,49 @@
             "challenge": "Add this to the precise prompt: <em>Return the problems as JSON with the keys problem, location, and severity.</em> Does your program now get an answer it can read?"
           },
           "bn": {
-            "title": "অস্পষ্ট আর নির্দিষ্ট প্রশ্নের তফাত দেখো",
-            "why": "তুমি যদি screenshot পরীক্ষা করার feature বানাও, যেমন QA team-এর জন্য, তাহলে অস্পষ্ট প্রশ্নে ভদ্র কিন্তু কাজে না লাগা উত্তর আসবে। আসল সমস্যা পেতে কীভাবে প্রশ্ন করতে হয়, সেটা জানা দরকার।",
+            "title": "অস্পষ্ট আর নির্দিষ্ট প্রশ্নের তফাত দেখুন",
+            "why": "আপনি যদি স্ক্রিনশট পরীক্ষা করার ফিচার বানান, যেমন QA টিমের জন্য, তাহলে অস্পষ্ট প্রশ্নে ভদ্র কিন্তু কাজে না লাগা উত্তর আসবে। আসল সমস্যা পেতে কীভাবে প্রশ্ন করতে হয়, সেটা জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "যেকোনো app বা web পেজের একটা screenshot নাও। attach করো, এই প্রশ্নটা paste করো, আর Enter চাপো। উত্তরটা রেখে দাও।",
+                "do": "যেকোনো অ্যাপ বা ওয়েব পাতার একটা স্ক্রিনশট নিন। অ্যাটাচ করুন, এই প্রশ্নটা পেস্ট করুন, আর Enter চাপুন। উত্তরটা রেখে দিন।",
                 "prompt": "এই ছবিটা সম্পর্কে তোমার কী মনে হয়?",
                 "expect": "স্ক্রিনের চেহারা নিয়ে একটা সাধারণ, ভদ্র উত্তর। কোনো পরিষ্কার সমস্যা দেখানো হয় না।",
                 "example": "দেখে মনে হচ্ছে এটা একটা সাধারণ checkout পেজ। layout পরিষ্কার, আর সবুজ button সহজে চোখে পড়ে। কিছু লেখা আরেকটু স্পষ্ট হলে ভালো হতো, আর form আরও পরিষ্কার feedback দিতে পারত। মোটের ওপর শুরুটা ভালো, তবে কয়েকটা ছোট উন্নতি দরকার।"
               },
               {
                 "chat": "new",
-                "do": "একই screenshot attach করো। এই prompt টা paste করে Enter চাপো।",
+                "do": "একই স্ক্রিনশট অ্যাটাচ করুন। এই প্রম্পটটা পেস্ট করে Enter চাপুন।",
                 "prompt": "এটা একটা app স্ক্রিনের screenshot।\n১. এক বাক্যে বলো স্ক্রিনটা কীসের জন্য।\n২. সর্বোচ্চ ৩টা জিনিস লেখো যেগুলো ভুল বা বিভ্রান্তিকর মনে হয়, যেমন কেটে যাওয়া লেখা, কম contrast, বা অস্পষ্ট button। প্রতিটার জন্য বলো স্ক্রিনের কোথায় আছে।\n৩. এই ছবি দেখে যা বিচার করা যায় না, তার list দাও।\nনির্দিষ্ট করে বলো। design-এর প্রশংসা করবে না।",
-                "expect": "এক বাক্যে স্ক্রিনের কাজ, স্ক্রিনের কোথায় আছে সেটাসহ সর্বোচ্চ ৩টা সমস্যা, আর AI যা বিচার করতে পারে না তার list।"
+                "expect": "এক বাক্যে স্ক্রিনের কাজ, স্ক্রিনের কোথায় আছে সেটাসহ সর্বোচ্চ ৩টা সমস্যা, আর AI যা বিচার করতে পারে না তার তালিকা।"
               },
               {
                 "chat": "new",
-                "do": "chat-এ ছবি upload করা যায় না? ধাপ ১ আর ২-এর বদলে এটা করো। এই লেখাটা paste করে Enter চাপো। উত্তরটা রেখে দাও।",
+                "do": "চ্যাটে ছবি আপলোড করা যায় না? ধাপ ১ আর ২-এর বদলে এটা করুন। এই লেখাটা পেস্ট করে Enter চাপুন। উত্তরটা রেখে দিন।",
                 "prompt": "নিচে একটা screenshot-এর বর্ণনা দিলাম, কারণ আমি ছবিটা upload করতে পারছি না।\nস্ক্রিনটা একটা ফোনের দোকানের checkout পেজ। উপরে \"Pay\" লেখা title সাদা background-এ হালকা ধূসর রঙে। মাঝখানে \"Phone numbr\" নামের একটা field-এর border লাল, কিন্তু কোনো message নেই। নিচে পাশাপাশি দুটো button: একটা বড় সবুজ button, লেখা \"OK\", আর একটা ছোট ধূসর button, লেখা \"Cancel\"। দাম \"BDT 12,4\" ডান দিকের কিনারায় কেটে গেছে।\n\nএই স্ক্রিন সম্পর্কে তোমার কী মনে হয়?",
-                "expect": "উদাহরণের মতো একটা সাধারণ, ভদ্র উত্তর। কেটে যাওয়া দাম বা না-থাকা message-এর কথা বলা হয় না।",
+                "expect": "উদাহরণের মতো একটা সাধারণ, ভদ্র উত্তর। কাটা পড়া দাম বা না-থাকা মেসেজের কথা বলা হয় না।",
                 "example": "দেখে মনে হচ্ছে এটা একটা সাধারণ checkout পেজ। layout পরিষ্কার, আর সবুজ button সহজে চোখে পড়ে। কিছু লেখা আরেকটু স্পষ্ট হলে ভালো হতো, আর form আরও পরিষ্কার feedback দিতে পারত। মোটের ওপর শুরুটা ভালো, তবে কয়েকটা ছোট উন্নতি দরকার।"
               },
               {
                 "chat": "new",
-                "do": "তবুও ছবি upload করা যায় না? নতুন chat খুলে এই prompt টা paste করো, আর Enter চাপো।",
+                "do": "তবুও ছবি আপলোড করা যায় না? নতুন চ্যাট খুলে এই প্রম্পটটা পেস্ট করুন, আর Enter চাপুন।",
                 "prompt": "নিচে একটা screenshot-এর বর্ণনা দিলাম, কারণ আমি ছবিটা upload করতে পারছি না।\nস্ক্রিনটা একটা ফোনের দোকানের checkout পেজ। উপরে \"Pay\" লেখা title সাদা background-এ হালকা ধূসর রঙে। মাঝখানে \"Phone numbr\" নামের একটা field-এর border লাল, কিন্তু কোনো message নেই। নিচে পাশাপাশি দুটো button: একটা বড় সবুজ button, লেখা \"OK\", আর একটা ছোট ধূসর button, লেখা \"Cancel\"। দাম \"BDT 12,4\" ডান দিকের কিনারায় কেটে গেছে।\n\n১. এক বাক্যে বলো স্ক্রিনটা কীসের জন্য।\n২. সর্বোচ্চ ৩টা জিনিস লেখো যেগুলো ভুল বা বিভ্রান্তিকর মনে হয়। প্রতিটার জন্য বলো স্ক্রিনের কোথায় আছে।\n৩. এই বর্ণনা থেকে যা বিচার করা যায় না, তার list দাও।\nনির্দিষ্ট করে বলো। design-এর প্রশংসা করবে না।",
-                "expect": "এক বাক্যে স্ক্রিনের কাজ, স্ক্রিনের কোথায় আছে সেটাসহ সর্বোচ্চ ৩টা সমস্যা, আর AI যা বিচার করতে পারে না। যেমন ডান কিনারায় কেটে যাওয়া দাম।",
+                "expect": "এক বাক্যে স্ক্রিনের কাজ, স্ক্রিনের কোথায় আছে সেটাসহ সর্বোচ্চ ৩টা সমস্যা, আর AI যা বিচার করতে পারে না। যেমন ডান কিনারায় কাটা পড়া দাম।",
                 "example": "১. এটা একটা checkout পেজ, যেখানে ব্যবহারকারী একটা ফোনের দাম দেয়।\n২. সমস্যা:\n- উপরে: \"Pay\" title সাদা background-এ হালকা ধূসর, তাই পড়া কঠিন।\n- মাঝখানে: \"Phone numbr\" field-এর border লাল, কিন্তু কোনো message নেই, আর label-এ বানান ভুল আছে।\n- ডান কিনারায়: দাম \"BDT 12,4\" কেটে গেছে, তাই পুরো দাম দেখা যায় না।\n৩. যা বিচার করতে পারছি না: button চাপলে কী হয়, অন্য স্ক্রিনে পেজটা কেমন দেখায়, আর আসল রং।"
               },
               {
                 "chat": "same",
-                "do": "দুটো উত্তর পাশাপাশি রাখো। কোনটা দিয়ে তুমি স্ক্রিন ঠিক করতে পারবে, আর কেন, লিখে রাখো।",
+                "do": "দুটো উত্তর পাশাপাশি রাখুন। কোনটা দিয়ে আপনি স্ক্রিন ঠিক করতে পারবেন, আর কেন, লিখে রাখুন।",
                 "expect": "দ্বিতীয় উত্তরটা। তাতে এমন সমস্যা আছে যেগুলো স্ক্রিনে খুঁজে একটা একটা করে ঠিক করা যায়।"
               }
             ],
-            "learned": "ছবি নিয়ে প্রশ্নও একটা prompt। অস্পষ্ট প্রশ্নে AI ছবিটার সাধারণ বর্ণনা দেয়। নির্দিষ্ট প্রশ্নে তার একটা কাজ থাকে: সমস্যা খোঁজো, কোথায় আছে বলো, আর কী বিচার করতে পারো না তাও বলো। প্রতিটা সমস্যার জায়গা দেওয়া থাকলে তুমি screenshot-এ উত্তরটা মিলিয়ে দেখতে পারো।",
-            "done": "একই স্ক্রিনের জন্য তোমার কাছে দুটো উত্তর আছে, একটা অস্পষ্ট আর একটা নির্দিষ্ট, আর তুমি জানো কোনটা বেশি কাজের।",
+            "learned": "ছবি নিয়ে প্রশ্নও একটা প্রম্পট। অস্পষ্ট প্রশ্নে AI ছবিটার সাধারণ বর্ণনা দেয়। নির্দিষ্ট প্রশ্নে তার একটা কাজ থাকে: সমস্যা খুঁজুন, কোথায় আছে বলুন, আর কী বিচার করতে পারেন না তাও বলুন। প্রতিটা সমস্যার জায়গা দেওয়া থাকলে আপনি স্ক্রিনশটে উত্তরটা মিলিয়ে দেখতে পারেন।",
+            "done": "একই স্ক্রিনের জন্য আপনার কাছে দুটো উত্তর আছে, একটা অস্পষ্ট আর একটা নির্দিষ্ট, আর আপনি জানেন কোনটা বেশি কাজের।",
             "check": {
-              "question": "ছবি একই। তাহলে নির্দিষ্ট prompt কেন বেশি কাজের উত্তর দেয়?",
-              "answer": "AI-এর একটা কাজ, একটা format, আর কী report করবে তার একটা সীমা দরকার। অস্পষ্ট প্রশ্নে সে ছবির বর্ণনা দিতে পারে। নির্দিষ্ট প্রশ্নে সে সমস্যা খোঁজে আর বলে কোথায় আছে।"
+              "question": "ছবি একই। তাহলে নির্দিষ্ট প্রম্পট কেন বেশি কাজের উত্তর দেয়?",
+              "answer": "AI-এর একটা কাজ, একটা ফরম্যাট, আর কী রিপোর্ট করবে তার একটা সীমা দরকার। অস্পষ্ট প্রশ্নে সে ছবির বর্ণনা দিতে পারে। নির্দিষ্ট প্রশ্নে সে সমস্যা খোঁজে আর বলে কোথায় আছে।"
             },
-            "challenge": "নির্দিষ্ট prompt-এর শেষে যোগ করো: <em>সমস্যাগুলো JSON-এ দাও, key হবে problem, location আর severity।</em> এখন কি তোমার program এমন উত্তর পায় যা সে পড়তে পারে?"
+            "challenge": "নির্দিষ্ট প্রম্পটের শেষে যোগ করুন: <em>সমস্যাগুলো JSON-এ দিন, key হবে problem, location আর severity।</em> এখন কি আপনার প্রোগ্রাম এমন উত্তর পায় যা সে পড়তে পারে?"
           }
         },
         {
@@ -471,36 +471,36 @@
             "challenge": "Change one number in the first prompt, for example make the LLM first token 1,500 ms. Send it in a new chat and ask which change now saves the most time."
           },
           "bn": {
-            "title": "voice agent-এর delay যোগ করে দেখো",
-            "why": "তুমি যখন ফোনে কথা বলা voice agent বানাবে, caller চুপচাপ অপেক্ষা করলে ভাববে call নষ্ট। কোন stage সবচেয়ে বেশি delay যোগ করছে, সেটা খুঁজে বের করা দরকার।",
+            "title": "ভয়েস এজেন্টের ডিলে যোগ করে দেখুন",
+            "why": "আপনি যখন ফোনে কথা বলা ভয়েস এজেন্ট বানাবেন, কলার চুপচাপ অপেক্ষা করলে ভাববে কল নষ্ট। কোন স্টেজ সবচেয়ে বেশি ডিলে যোগ করছে, সেটা খুঁজে বের করা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর ছয়টা delay পড়ো। মোট কত হবে, তোমার আন্দাজ লিখে রাখো। তারপর prompt টা paste করে Enter চাপো।",
+                "do": "এই প্রম্পটের ছয়টা ডিলে পড়ুন। মোট কত হবে, আপনার আন্দাজ লিখে রাখুন। তারপর প্রম্পটটা পেস্ট করে Enter চাপুন।",
                 "prompt": "আমি একটা bank help line-এর জন্য voice agent বানাচ্ছি। design হলো speech-to-text (STT), তারপর একটা LLM, তারপর text-to-speech (TTS)। caller কথা বলা থামানোর পর delay গুলো এরকম:\n- caller যে সত্যিই কথা শেষ করেছে, এটা নিশ্চিত হতে অপেক্ষা: 600 ms\n- STT চূড়ান্ত text বানায়: 400 ms\n- LLM তার প্রথম token পাঠায়: 700 ms\n- LLM পুরো একটা বাক্য শেষ না করা পর্যন্ত system অপেক্ষা করে, তারপর TTS-এ text পাঠায়: 300 ms\n- TTS প্রথম audio বানায়: 350 ms\n- caller পর্যন্ত network: 150 ms\n\n১. caller প্রথম শব্দ শোনার আগে মোট delay যোগ করে বলো।\n২. কোন stage সবচেয়ে বড়, আর কোনটা কমানো সবচেয়ে সহজ, নাম বলো।\n৩. দুটো পরিবর্তনের পরামর্শ দাও। প্রতিটার জন্য বলো কত ms বাঁচতে পারে আর কী ভুল হতে পারে।\nএকটা ছোট table ব্যবহার করো।",
-                "expect": "একটা ছোট table আর মোট <strong>2,500 ms</strong>। সবচেয়ে বড় stage হলো LLM-এর প্রথম token (700 ms)। তোমার আন্দাজ কাছাকাছি ছিল কি না দেখো।",
+                "expect": "একটা ছোট টেবিল আর মোট <strong>২,৫০০ ms</strong>। সবচেয়ে বড় স্টেজ হলো LLM-এর প্রথম টোকেন (৭০০ ms)। আপনার আন্দাজ কাছাকাছি ছিল কি না দেখুন।",
                 "example": "১. মোট: 600 + 400 + 700 + 300 + 350 + 150 = 2,500 ms (২.৫ সেকেন্ড)।\n২. সবচেয়ে বড়: LLM-এর প্রথম token (700 ms)। কমানো সবচেয়ে সহজ: পুরো বাক্যের জন্য অপেক্ষা (300 ms)।\n৩.\n| পরিবর্তন | বাঁচে | কী ভুল হতে পারে |\n| LLM-এর text ছোট ছোট টুকরোয় TTS-এ পাঠাও | প্রায় 300 ms | voice কেটে কেটে শোনাতে পারে |\n| কথা-শেষের অপেক্ষা 400 ms করো | প্রায় 200 ms | caller থামলে agent মাঝখানে কথা বলে ফেলতে পারে |"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। কয়টা stage চলে যায়, লিখে রাখো।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। কয়টা স্টেজ চলে যায়, লিখে রাখুন।",
                 "prompt": "এখন আমার team একটা realtime audio API নিয়ে ভাবছে। audio দুই দিকেই stream হয়, আর model মোট প্রায় 450 ms পরে কথা বলা শুরু করে।\n১. আমার পুরনো design-এর কোন কোন stage চলে যায়?\n২. আমি কী কী হারাতে পারি, এমন দুটো জিনিস বলো, যেমন control, logging, বা voice বেছে নেওয়া।\n৩. bank help line-এর জন্য দুই design-এর মধ্যে বেছে নেওয়ার একটা নিয়ম দাও।\nসর্বোচ্চ ৮ লাইনে উত্তর দাও।",
-                "expect": "প্রায় ৩টা stage চলে যায়: আলাদা STT, পুরো বাক্যের জন্য অপেক্ষা, আর আলাদা TTS। AI আরও ২টা জিনিস বলবে যা তুমি হারাতে পারো, যেমন control বা logging।",
+                "expect": "প্রায় ৩টা স্টেজ চলে যায়: আলাদা STT, পুরো বাক্যের জন্য অপেক্ষা, আর আলাদা TTS। AI আরও ২টা জিনিস বলবে যা আপনি হারাতে পারেন, যেমন কন্ট্রোল বা লগিং।",
                 "example": "১. আলাদা STT stage, পুরো বাক্যের জন্য অপেক্ষা, আর আলাদা TTS stage চলে যায়। একটাই model শোনে আর বলে।\n২. তুমি control হারাও (stage-এর মাঝে text পরীক্ষা করা যায় না)। logging কঠিন হয়, আর voice বেছে নেওয়ার সুযোগ কমে।\n৩. প্রতিটা call-এর transcript যদি পরীক্ষা করে সংরক্ষণ করতে হয়, pipeline ব্যবহার করো। স্বাভাবিক, দ্রুত কথাবার্তা সবচেয়ে জরুরি হলে realtime ব্যবহার করো।"
               },
               {
                 "chat": "same",
-                "do": "ধাপ ১-এর উত্তর থেকে সবচেয়ে কম কাজের পরিবর্তনটা বেছে নাও। সেটা আর একটা কারণসহ লিখে রাখো।",
-                "expect": "যেমন: <em>LLM-এর text TTS-এ stream করা</em>, কারণ শুধু stage গুলোর জোড়া লাগানোর উপায় বদলাতে হয়।"
+                "do": "ধাপ ১-এর উত্তর থেকে সবচেয়ে কম কাজের পরিবর্তনটা বেছে নিন। সেটা আর একটা কারণসহ লিখে রাখুন।",
+                "expect": "যেমন: <em>LLM-এর টেক্সট TTS-এ স্ট্রিম করা</em>, কারণ শুধু স্টেজ গুলোর জোড়া লাগানোর উপায় বদলাতে হয়।"
               }
             ],
-            "learned": "voice agent-এ তিনটা stage থাকে। <strong>STT</strong> কথা থেকে text বানায়, LLM উত্তর লেখে, আর <strong>TTS</strong> উত্তরটাকে কথায় বদলায়। প্রতিটা stage আগের stage-এর জন্য অপেক্ষা করে, তাই delay গুলো যোগ হয়: এখানে 2,500 ms। <strong>realtime API</strong> audio দুই দিকেই stream করে, তাই বেশিরভাগ অপেক্ষা চলে যায় (প্রায় 450 ms, মানে 2,050 ms কম)। বিনিময়ে প্রতিটা stage-এর ওপর control কমে।",
-            "done": "তোমার কাছে মোট delay (2,500 ms), সবচেয়ে বড় stage, আর প্রথমে যে পরিবর্তনটা করবে সেটা আছে।",
+            "learned": "ভয়েস এজেন্টে তিনটা স্টেজ থাকে। <strong>STT</strong> কথা থেকে টেক্সট বানায়, LLM উত্তর লেখে, আর <strong>TTS</strong> উত্তরটাকে কথায় বদলায়। প্রতিটা স্টেজ আগের স্টেজের জন্য অপেক্ষা করে, তাই ডিলে গুলো যোগ হয়: এখানে ২,৫০০ ms। <strong>রিয়েলটাইম API</strong> অডিও দুই দিকেই স্ট্রিম করে, তাই বেশিরভাগ অপেক্ষা চলে যায় (প্রায় ৪৫০ ms, মানে ২,০৫০ ms কম)। বিনিময়ে প্রতিটা স্টেজের ওপর কন্ট্রোল কমে।",
+            "done": "আপনার কাছে মোট ডিলে (২,৫০০ ms), সবচেয়ে বড় স্টেজ, আর প্রথমে যে পরিবর্তনটা করবেন সেটা আছে।",
             "check": {
-              "question": "STT, LLM আর TTS-এর pipeline কেন realtime audio API-র চেয়ে ধীর?",
-              "answer": "pipeline-এ প্রতিটা stage আগেরটা শেষ হওয়ার জন্য অপেক্ষা করে, তাই delay গুলো যোগ হয়। realtime API দুই দিকেই audio stream করে, তাই বেশিরভাগ অপেক্ষা চলে যায়।"
+              "question": "STT, LLM আর TTS-এর পাইপলাইন কেন রিয়েলটাইম অডিও API-র চেয়ে ধীর?",
+              "answer": "পাইপলাইনে প্রতিটা স্টেজ আগেরটা শেষ হওয়ার জন্য অপেক্ষা করে, তাই ডিলে গুলো যোগ হয়। রিয়েলটাইম API দুই দিকেই অডিও স্ট্রিম করে, তাই বেশিরভাগ অপেক্ষা চলে যায়।"
             },
-            "challenge": "প্রথম prompt-এর একটা সংখ্যা বদলাও, যেমন LLM-এর প্রথম token 1,500 ms করো। নতুন chat-এ পাঠিয়ে জিজ্ঞেস করো এখন কোন পরিবর্তনে সবচেয়ে বেশি সময় বাঁচে।"
+            "challenge": "প্রথম প্রম্পটের একটা সংখ্যা বদলান, যেমন LLM-এর প্রথম টোকেন ১,৫০০ ms করুন। নতুন চ্যাটে পাঠিয়ে জিজ্ঞেস করুন এখন কোন পরিবর্তনে সবচেয়ে বেশি সময় বাঁচে।"
           }
         },
         {
@@ -537,36 +537,36 @@
             "challenge": "Add job 5: put a person from a photo on a new background and keep the face the same. Ask which tools you need, and in what order."
           },
           "bn": {
-            "title": "চারটা কাজের জন্য ঠিক image tool বাছো",
-            "why": "তুমি যখন image feature বানাবে, যেমন একটা দোকানের poster, ভুল tool বেছে নিলে কয়েক দিন নষ্ট হয়। একটা tool pose ধরে রাখে, আরেকটা style ধরে রাখে। কোন কাজে কোনটা, সেটা জানা দরকার।",
+            "title": "চারটা কাজের জন্য ঠিক ইমেজ টুল বাছুন",
+            "why": "আপনি যখন ইমেজ ফিচার বানাবেন, যেমন একটা দোকানের পোস্টার, ভুল টুল বেছে নিলে কয়েক দিন নষ্ট হয়। একটা টুল পোজ ধরে রাখে, আরেকটা স্টাইল ধরে রাখে। কোন কাজে কোনটা, সেটা জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর চারটা কাজ পড়ো। কাগজে প্রতিটার জন্য তোমার নিজের tool লেখো। তারপর prompt টা paste করে Enter চাপো।",
+                "do": "এই প্রম্পটের চারটা কাজ পড়ুন। কাগজে প্রতিটার জন্য আপনার নিজের টুল লিখুন। তারপর প্রম্পটটা পেস্ট করে Enter চাপুন।",
                 "prompt": "আমি একটা diffusion image pipeline ব্যবহার করি। এই tool গুলো আছে: ControlNet (গঠন, যেমন pose, depth বা edge), LoRA (কোনো style বা character শেখানো একটা ছোট trained add-on), inpainting (mask করা একটা জায়গা edit করা), আর IP-Adapter (একটা reference ছবিকে guide হিসেবে ব্যবহার করা)।\n\nপ্রতিটা কাজের জন্য সেরা tool বেছে নাও, একটা কারণ দাও, আর বলো আমার কী input লাগবে।\nকাজ ১: একই কার্টুন মেয়েকে একই আঁকার style-এ রেখে ২০টা poster বানাও।\nকাজ ২: আমার ছবির মানুষটার ঠিক একই pose রেখে ছবিটাকে একটা painting বানাও।\nকাজ ৩: একটা product ছবির শুধু আকাশ বদলাও, product যেমন আছে তেমন রাখো।\nকাজ ৪: একটা reference ছবির রং আর mood নিয়ে একটা নতুন ছবি বানাও, কোনো training ছাড়া।\nদুটো tool কাজ করতে পারলে সেটাও বলো।",
-                "expect": "প্রতিটা কাজের জন্য একটা করে tool। বেশিরভাগ chat কাজ ২-এ ControlNet, কাজ ৩-এ inpainting, আর কাজ ৪-এ IP-Adapter বাছে। কাজ ১-এ LoRA, হয়তো IP-Adapter-ও।",
+                "expect": "প্রতিটা কাজের জন্য একটা করে টুল। বেশিরভাগ চ্যাট কাজ ২-এ ControlNet, কাজ ৩-এ ইনপেইন্টিং, আর কাজ ৪-এ IP-Adapter বাছে। কাজ ১-এ LoRA, হয়তো IP-Adapter-ও।",
                 "example": "কাজ ১: LoRA। এটা model-কে মেয়েটা আর style শেখায়, তাই সব poster মিলে যায়। Input: training-এর জন্য মেয়েটার কিছু ছবি। IP-Adapter-ও কাজ করতে পারে।\nকাজ ২: ControlNet। এটা pose ধরে রাখে। Input: তোমার ছবি (তা থেকে বানানো pose map) আর \"oil painting\"-এর মতো একটা লেখা।\nকাজ ৩: Inpainting। এটা শুধু mask করা জায়গা edit করে। Input: ছবি, আকাশের ওপর একটা mask, আর নতুন আকাশের লেখা।\nকাজ ৪: IP-Adapter। এটা reference-কে guide হিসেবে নেয়। Input: reference ছবি আর একটা লেখা।"
               },
               {
                 "chat": "same",
-                "do": "উত্তরটা তোমার কাগজের সঙ্গে মেলাও। যে কাজে তুমি আর AI আলাদা tool বেছেছ, সেগুলো লিখে রাখো।",
-                "expect": "তোমার বেশিরভাগ বাছাই AI-এর সঙ্গে মিলবে। যেটা মেলেনি, সেখানে AI-এর কারণ পড়ো আর ঠিক করো কে ঠিক।"
+                "do": "উত্তরটা আপনার কাগজের সঙ্গে মেলান। যে কাজে আপনি আর AI আলাদা টুল বেছেছেন, সেগুলো লিখে রাখুন।",
+                "expect": "আপনার বেশিরভাগ বাছাই AI-এর সঙ্গে মিলবে। যেটা মেলেনি, সেখানে AI-এর কারণ পড়ুন আর ঠিক করুন কে ঠিক।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করে paste করো, Enter চাপো। দেখো প্রতিটা node আগের node-এর output ব্যবহার করছে কি না।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন। দেখুন প্রতিটা নোড আগের নোডের আউটপুট ব্যবহার করছে কি না।",
                 "prompt": "কাজ ২ নাও, আর pipeline টা ComfyUI-এর মতো node-এর একটা ক্রমিক list হিসেবে লেখো। প্রতিটা node-এর নাম, input আর output লেখো। তারপর দুটো কারণ দাও, কেন একটা team-এর pipeline টা saved graph file হিসেবে version control-এ রাখা উচিত।",
-                "expect": "৫ থেকে ৭টা node-এর একটা ক্রমিক list, ছবি load করা থেকে নতুন ছবি save করা পর্যন্ত। প্রতিটা node-এর নাম, input আর output আছে।",
+                "expect": "৫ থেকে ৭টা নোডের একটা ক্রমিক তালিকা, ছবি লোড করা থেকে নতুন ছবি সেভ করা পর্যন্ত। প্রতিটা নোডের নাম, ইনপুট আর আউটপুট আছে।",
                 "example": "১. Load Image: in = ছবির file, out = image।\n২. Pose Detector: in = image, out = pose map।\n৩. Text Prompt: in = \"an oil painting of a person\", out = লেখার guide।\n৪. ControlNet Apply: in = লেখার guide + pose map, out = guided input।\n৫. Sampler: in = guided input, out = নতুন ছবি।\n৬. Save Image: in = নতুন ছবি, out = file।\nগ্রাফ file রাখার কারণ: team কোডের মতো পরিবর্তন review করতে পারে, আর পুরনো version-এ ফিরে যেতে পারে।"
               }
             ],
-            "learned": "প্রতিটা tool আলাদা সমস্যা মেটায়। <strong>ControlNet</strong> একটা ছবির গঠন ধরে রাখে, যেমন pose। <strong>LoRA</strong> একটা ছোট add-on, যাকে train করা হয় model-কে কোনো style বা character শেখানোর জন্য। Inpainting শুধু mask করা জায়গা edit করে, আর IP-Adapter কোনো training ছাড়াই একটা reference ছবিকে guide হিসেবে নেয়। ComfyUI-তে তুমি এগুলোকে node হিসেবে জোড়া দাও, আর পুরো graph একটা file, যেটা team কোডের মতো রাখতে পারে।",
-            "done": "তোমার কাছে ৪টা কাজের প্রতিটার জন্য একটা tool আছে, আর কাজ ২-এর একটা node list আছে।",
+            "learned": "প্রতিটা টুল আলাদা সমস্যা মেটায়। <strong>ControlNet</strong> একটা ছবির গঠন ধরে রাখে, যেমন পোজ। <strong>LoRA</strong> একটা ছোট অ্যাড-অন, যাকে ট্রেন করা হয় মডেলকে কোনো স্টাইল বা ক্যারেক্টার শেখানোর জন্য। ইনপেইন্টিং শুধু মাস্ক করা জায়গা এডিট করে, আর IP-Adapter কোনো ট্রেনিং ছাড়াই একটা রেফারেন্স ছবিকে গাইড হিসেবে নেয়। ComfyUI-তে আপনি এগুলোকে নোড হিসেবে জোড়া দেন, আর পুরো গ্রাফ একটা ফাইল, যেটা টিম কোডের মতো রাখতে পারে।",
+            "done": "আপনার কাছে ৪টা কাজের প্রতিটার জন্য একটা টুল আছে, আর কাজ ২-এর একটা নোড তালিকা আছে।",
             "check": {
               "question": "ControlNet আর LoRA-র মধ্যে তফাত কী?",
-              "answer": "ControlNet তুমি প্রতিবার যে input দাও, তা থেকে একটা ছবির গঠন ঠিক রাখে, যেমন pose বা edge। LoRA একটা ছোট trained add-on, যা model-কে একটা style বা character শেখায়, তাই সে অনেক ছবিতে সেটা বারবার আঁকতে পারে।"
+              "answer": "ControlNet আপনি প্রতিবার যে ইনপুট দেন, তা থেকে একটা ছবির গঠন ঠিক রাখে, যেমন পোজ বা এজ। LoRA একটা ছোট ট্রেন করা অ্যাড-অন, যা মডেলকে একটা স্টাইল বা ক্যারেক্টার শেখায়, তাই সে অনেক ছবিতে সেটা বারবার আঁকতে পারে।"
             },
-            "challenge": "কাজ ৫ যোগ করো: একটা ছবির মানুষকে নতুন background-এ বসাও, কিন্তু মুখ যেন একই থাকে। জিজ্ঞেস করো কোন কোন tool লাগবে, আর কোন ক্রমে।"
+            "challenge": "কাজ ৫ যোগ করুন: একটা ছবির মানুষকে নতুন ব্যাকগ্রাউন্ডে বসান, কিন্তু মুখ যেন একই থাকে। জিজ্ঞেস করুন কোন কোন টুল লাগবে, আর কোন ক্রমে।"
           }
         }
       ]
@@ -739,13 +739,13 @@
         "why": "This Part says an LLM beats Tesseract on messy photos, handwritten notes, and structured forms. Often you need no separate OCR step."
       },
       "bn": {
-        "q": "ছবির লেখা পড়ার ক্ষেত্রে LLM আর Tesseract নিয়ে topic-টা কী বলে?",
+        "q": "ছবির লেখা পড়ার ক্ষেত্রে LLM আর Tesseract নিয়ে টপিকটা কী বলে?",
         "options": [
           "অগোছালো ছবি আর হাতের লেখার নোটে Tesseract, LLM-কে ছাড়িয়ে যায়।",
-          "অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়।",
+          "অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM, Tesseract-কে ছাড়িয়ে যায়।",
           "LLM শুধু পরিষ্কার ছাপা লেখা পড়তে পারে।"
         ],
-        "why": "এই Part বলে, অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
+        "why": "এই পার্ট বলে, অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
       }
     },
     {
@@ -762,13 +762,13 @@
         "why": "A voice pipeline first turns speech into text (STT). The LLM then works on the text, and TTS turns the answer back into speech."
       },
       "bn": {
-        "q": "এই Part-এ voice pipeline কোনটা হিসেবে বলা হয়েছে?",
+        "q": "এই পার্টে ভয়েস পাইপলাইন কোনটা হিসেবে বলা হয়েছে?",
         "options": [
           "TTS → LLM → STT",
           "STT → LLM → TTS",
           "LLM → STT → TTS"
         ],
-        "why": "Voice pipeline আগে speech-কে text-এ বদলায় (STT)। তারপর LLM সেই text নিয়ে কাজ করে, আর TTS উত্তরটাকে আবার speech বানায়।"
+        "why": "ভয়েস পাইপলাইন আগে স্পিচকে টেক্সটে বদলায় (STT)। তারপর LLM সেই টেক্সট নিয়ে কাজ করে, আর TTS উত্তরটাকে আবার স্পিচ বানায়।"
       }
     },
     {
@@ -780,8 +780,8 @@
         "why": "This Part says realtime APIs stream audio bidirectionally, so they skip the chunky STT → LLM → TTS loop. Sub-500 ms turn-taking is now achievable."
       },
       "bn": {
-        "q": "Realtime API দুই দিকে audio stream করে বলে STT → LLM → TTS loop এড়িয়ে যায়।",
-        "why": "এই Part বলে, realtime API দুই দিকে audio stream করে, তাই chunky STT → LLM → TTS loop লাগে না। এখন 500 ms-এর কম সময়ে turn-taking সম্ভব।"
+        "q": "রিয়েলটাইম API দুই দিকে অডিও স্ট্রিম করে বলে STT → LLM → TTS লুপ এড়িয়ে যায়।",
+        "why": "এই পার্ট বলে, রিয়েলটাইম API দুই দিকে অডিও স্ট্রিম করে, তাই চাঙ্কি STT → LLM → TTS লুপ লাগে না। এখন ৫০০ ms-এর কম সময়ে টার্ন-টেকিং সম্ভব।"
       }
     },
     {
@@ -798,13 +798,13 @@
         "why": "This Part describes Replicate as a pay-per-second API for any open-source model. Fal is fast hosted inference for diffusion, and ComfyUI is a node-based UI."
       },
       "bn": {
-        "q": "কোন tool যেকোনো open-source model-এর জন্য pay-per-second API?",
+        "q": "কোন টুল যেকোনো ওপেন-সোর্স মডেলের জন্য পে-পার-সেকেন্ড API?",
         "options": [
           "Fal",
           "ComfyUI",
           "Replicate"
         ],
-        "why": "এই Part-এ Replicate-কে যেকোনো open-source model-এর pay-per-second API বলা হয়েছে। Fal হলো diffusion-এর জন্য দ্রুত hosted inference, আর ComfyUI একটা node-based UI।"
+        "why": "এই পার্টে Replicate-কে যেকোনো ওপেন-সোর্স মডেলের পে-পার-সেকেন্ড API বলা হয়েছে। Fal হলো ডিফিউশনের জন্য দ্রুত হোস্টেড ইনফারেন্স, আর ComfyUI একটা নোড-ভিত্তিক UI।"
       }
     },
     {
@@ -816,8 +816,8 @@
         "why": "This Part says ControlNet is for structure, such as pose, depth, and canny edges. LoRA is for style or character consistency."
       },
       "bn": {
-        "q": "Image workflow-তে ControlNet হলো সেই tool, যা style বা character consistency দেয়।",
-        "why": "এই Part বলে, ControlNet structure-এর জন্য, যেমন pose, depth আর canny edges। Style বা character consistency-র জন্য আছে LoRA।"
+        "q": "ইমেজ ওয়ার্কফ্লোতে ControlNet হলো সেই টুল, যা স্টাইল বা ক্যারেক্টার কনসিসটেন্সি দেয়।",
+        "why": "এই পার্ট বলে, ControlNet স্ট্রাকচারের জন্য, যেমন পোজ, ডেপথ আর ক্যানি এজ। স্টাইল বা ক্যারেক্টার কনসিসটেন্সির জন্য আছে LoRA।"
       }
     }
   ]

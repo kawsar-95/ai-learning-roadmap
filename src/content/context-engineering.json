@@ -4,9 +4,9 @@
   "tagline": "the new \"prompt engineering\"",
   "lede": "A dense, citation-backed reference for the seven techniques every production LLM system reaches for — context budgeting, summarization, caching, hierarchical memory, compression, tool-result truncation, and the \"lost in the middle\" failure mode. <strong>Each section ships in two voices:</strong> the engineer's version (with diagrams and papers) and a layman's version (plain English with analogies) at the bottom of each topic. <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>",
   "bn": {
-    "title": "Context Engineering-এর কৌশল",
-    "tagline": "নতুন “prompt engineering”",
-    "lede": "সাতটি কৌশলের একটি ঘন, citation-সহ রেফারেন্স, যা প্রতিটি production LLM system-এ লাগে: context budgeting, summarization, caching, hierarchical memory, compression, tool-result truncation, আর “lost in the middle” সমস্যা। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর ভার্সন (diagram আর paper-সহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>"
+    "title": "কনটেক্সট ইঞ্জিনিয়ারিংয়ের কৌশল",
+    "tagline": "নতুন “প্রম্পট ইঞ্জিনিয়ারিং”",
+    "lede": "সাতটি কৌশলের একটি ঘন, সাইটেশনসহ রেফারেন্স, যা প্রতিটি প্রোডাকশন LLM সিস্টেমে লাগে: কনটেক্সট বাজেটিং, সামারাইজেশন, ক্যাশিং, হায়ারার্কিক্যাল মেমরি, কমপ্রেশন, টুল-রেজাল্ট ট্রাঙ্কেশন, আর “lost in the middle” সমস্যা। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (ডায়াগ্রাম আর পেপারসহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>"
   },
   "sections": [
     {
@@ -15,8 +15,8 @@
       "title": "Context window budgeting",
       "sub": "A model has a fixed-size working memory. Every byte you allocate competes with every other byte. Context engineering is the discipline of <em>deciding what lives where</em> — system prompt, history, tool definitions, retrieved docs, prior outputs, the user's actual request.",
       "bn": {
-        "title": "Context window-এর budgeting",
-        "sub": "Model-এর কাজ করার স্মৃতির আকার নির্দিষ্ট। আপনি যে byte-ই বরাদ্দ করেন, সে অন্য সব byte-এর সাথে জায়গার জন্য প্রতিযোগিতা করে। Context engineering হলো <em>কী কোথায় থাকবে তা ঠিক করার</em> কৌশল — system prompt, history, tool-এর সংজ্ঞা, retrieve করা document, আগের output, আর user-এর আসল অনুরোধ।"
+        "title": "কনটেক্সট উইন্ডোর বাজেটিং",
+        "sub": "মডেলের কাজ করার স্মৃতির আকার নির্দিষ্ট। আপনি যে বাইটই বরাদ্দ করেন, সে অন্য সব বাইটের সাথে জায়গার জন্য প্রতিযোগিতা করে। কনটেক্সট ইঞ্জিনিয়ারিং হলো <em>কী কোথায় থাকবে তা ঠিক করার</em> কৌশল — সিস্টেম প্রম্পট, হিস্ট্রি, টুলের সংজ্ঞা, রিট্রিভ করা ডকুমেন্ট, আগের আউটপুট, আর ইউজারের আসল অনুরোধ।"
       },
       "body": [
         {
@@ -33,7 +33,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Context window budget pie\">\n      \n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">budgeting a 200K-token window — illustrative allocations</text>\n\n      <g transform=\"translate(220, 170)\">\n        \n        \n        <path d=\"M0 0 L0 -120 A120 120 0 0 1 112.8 -42.4 Z\" fill=\"#22d3ee\" fill-opacity=\"0.65\" stroke=\"#22d3ee\"></path>\n        \n        <path d=\"M0 0 L112.8 -42.4 A120 120 0 0 1 110.4 46.6 Z\" fill=\"#a78bfa\" fill-opacity=\"0.65\" stroke=\"#a78bfa\"></path>\n        \n        <path d=\"M0 0 L110.4 46.6 A120 120 0 0 1 -110.4 46.6 Z\" fill=\"#34d399\" fill-opacity=\"0.65\" stroke=\"#34d399\"></path>\n        \n        <path d=\"M0 0 L-110.4 46.6 A120 120 0 0 1 -112.8 -42.4 Z\" fill=\"#fbbf24\" fill-opacity=\"0.65\" stroke=\"#fbbf24\"></path>\n        \n        <path d=\"M0 0 L-112.8 -42.4 A120 120 0 0 1 0 -120 Z\" fill=\"#f472b6\" fill-opacity=\"0.65\" stroke=\"#f472b6\"></path>\n\n        <text x=\"60\" y=\"-90\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#0b0f17\" font-weight=\"700\">SYSTEM</text>\n        <text x=\"118\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#0b0f17\" font-weight=\"700\">TOOLS</text>\n        <text x=\"0\" y=\"90\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#0b0f17\" font-weight=\"700\">RETRIEVAL</text>\n        <text x=\"-90\" y=\"55\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#0b0f17\" font-weight=\"700\">HISTORY</text>\n        <text x=\"-72\" y=\"-30\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#0b0f17\" font-weight=\"700\">USER+OUTPUT</text>\n      </g>\n\n      \n      <g transform=\"translate(450, 80)\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\">\n        <g><rect x=\"0\" y=\"0\" width=\"14\" height=\"14\" fill=\"#22d3ee\" fill-opacity=\"0.65\" stroke=\"#22d3ee\"></rect>\n           <text x=\"22\" y=\"11\" fill=\"#e2e8f0\">SYSTEM — persona, rules, schema</text>\n           <text x=\"280\" y=\"11\" fill=\"#cfd8e6\">≈ 8% · 16K tokens</text></g>\n        <g transform=\"translate(0,28)\">\n           <rect x=\"0\" y=\"0\" width=\"14\" height=\"14\" fill=\"#a78bfa\" fill-opacity=\"0.65\" stroke=\"#a78bfa\"></rect>\n           <text x=\"22\" y=\"11\" fill=\"#e2e8f0\">TOOLS — schemas, definitions</text>\n           <text x=\"280\" y=\"11\" fill=\"#cfd8e6\">≈ 7% · 14K tokens</text></g>\n        <g transform=\"translate(0,56)\">\n           <rect x=\"0\" y=\"0\" width=\"14\" height=\"14\" fill=\"#34d399\" fill-opacity=\"0.65\" stroke=\"#34d399\"></rect>\n           <text x=\"22\" y=\"11\" fill=\"#e2e8f0\">RETRIEVAL — RAG chunks</text>\n           <text x=\"280\" y=\"11\" fill=\"#cfd8e6\">≈ 40% · 80K tokens</text></g>\n        <g transform=\"translate(0,84)\">\n           <rect x=\"0\" y=\"0\" width=\"14\" height=\"14\" fill=\"#fbbf24\" fill-opacity=\"0.65\" stroke=\"#fbbf24\"></rect>\n           <text x=\"22\" y=\"11\" fill=\"#e2e8f0\">HISTORY — prior turns</text>\n           <text x=\"280\" y=\"11\" fill=\"#cfd8e6\">≈ 30% · 60K tokens</text></g>\n        <g transform=\"translate(0,112)\">\n           <rect x=\"0\" y=\"0\" width=\"14\" height=\"14\" fill=\"#f472b6\" fill-opacity=\"0.65\" stroke=\"#f472b6\"></rect>\n           <text x=\"22\" y=\"11\" fill=\"#e2e8f0\">USER + OUTPUT — current turn</text>\n           <text x=\"280\" y=\"11\" fill=\"#cfd8e6\">≈ 15% · 30K tokens</text></g>\n      </g>\n\n      <text x=\"40\" y=\"288\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">retrieval usually dominates; reduce it first. system + tools are the floor.</text>\n    </svg>",
           "caption": "A 200K-token window broken into system + tools + retrieval + history + current turn. Percentages are typical for an agentic RAG app, not universal.",
-          "captionBn": "এই ডায়াগ্রামে একটি 200K-token context window-কে SYSTEM (≈8%), TOOLS (≈7%), RETRIEVAL (≈40%), HISTORY (≈30%) এবং USER+OUTPUT (≈15%) অংশে ভাগ করে দেখানো হয়েছে। প্রতিটি অংশের প্রস্থ তার token বাজেটের সমান; RETRIEVAL সবচেয়ে বড়, তাই আগে সেটাই কমানো উচিত।"
+          "captionBn": "এই ডায়াগ্রামে একটি 200K-টোকেন কনটেক্সট উইন্ডোকে SYSTEM (≈৮%), TOOLS (≈৭%), RETRIEVAL (≈৪০%), HISTORY (≈৩০%) এবং USER+OUTPUT (≈১৫%) অংশে ভাগ করে দেখানো হয়েছে। প্রতিটি অংশের প্রস্থ তার টোকেন বাজেটের সমান; RETRIEVAL সবচেয়ে বড়, তাই আগে সেটাই কমানো উচিত।"
         },
         {
           "type": "heading",
@@ -107,33 +107,33 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটি LLM একবারে যতটুকু লেখা পড়তে পারে, তার একটা নির্দিষ্ট সীমা আছে — এটাই <strong>context window</strong>। এই সীমার ভেতরেই system prompt, tool definitions, retrieved documents, আগের chat history, আর ইউজারের বর্তমান প্রশ্ন ও উত্তর — সবাইকে জায়গা ভাগ করে নিতে হয়। <strong>Context window budgeting</strong> মানে হলো কোন জিনিস কতটুকু জায়গা পাবে, তা আগে থেকে হিসাব করে ঠিক করা।"
+          "html": "একটি LLM একবারে যতটুকু লেখা পড়তে পারে, তার একটা নির্দিষ্ট সীমা আছে — এটাই <strong>কনটেক্সট উইন্ডো</strong>। এই সীমার ভেতরেই সিস্টেম প্রম্পট, টুল ডেফিনিশন, রিট্রিভ করা ডকুমেন্ট, আগের চ্যাট হিস্ট্রি, আর ইউজারের বর্তমান প্রশ্ন ও উত্তর — সবাইকে জায়গা ভাগ করে নিতে হয়। <strong>কনটেক্সট উইন্ডো বাজেটিং</strong> মানে হলো কোন জিনিস কতটুকু জায়গা পাবে, তা আগে থেকে হিসাব করে ঠিক করা।"
         },
         {
           "type": "paragraph",
-          "html": "উদাহরণ হিসেবে ২০০K টোকেনের একটি window-তে সাধারণ ভাগ হতে পারে: system ≈ ৮%, tools ≈ ৭%, retrieval ≈ ৪০%, history ≈ ৩০%, current turn ≈ ১৫%। মনে রাখবেন, এটি agentic RAG অ্যাপের জন্য একটি সাধারণ উদাহরণ, সব ক্ষেত্রে এক নয়।"
+          "html": "উদাহরণ হিসেবে ২০০K টোকেনের একটি উইন্ডোতে সাধারণ ভাগ হতে পারে: সিস্টেম ≈ ৮%, টুল ≈ ৭%, রিট্রিভাল ≈ ৪০%, হিস্ট্রি ≈ ৩০%, বর্তমান টার্ন ≈ ১৫%। মনে রাখবেন, এটি এজেন্টিক RAG অ্যাপের জন্য একটি সাধারণ উদাহরণ, সব ক্ষেত্রে এক নয়।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>System prompt:</strong> কমপক্ষে ~১–২K টোকেন লাগে (persona, নিয়ম, schema)। বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়।",
-            "<strong>Tool definitions:</strong> ~১–৩K টোকেন। শুধু সেই tool-ই রাখুন যা এই ধাপে লাগতে পারে; বিশেষ tool দরকারের সময় load করুন।",
-            "<strong>Retrieval:</strong> বাজেট = window − system − tools − current turn − reserved output। পরিমাণের চেয়ে মান বেশি গুরুত্বপূর্ণ।",
-            "<strong>History:</strong> কঠোরভাবে ছোট রাখুন — summarization (§2) ব্যবহার করুন।",
-            "<strong>Output reservation:</strong> উত্তরের জন্য টোকেন আগেই আলাদা করে রাখুন, নইলে উত্তর মাঝপথে কেটে গিয়ে নীরবে ব্যর্থ হয়।"
+            "<strong>সিস্টেম প্রম্পট:</strong> কমপক্ষে ~১–২K টোকেন লাগে (পারসোনা, নিয়ম, স্কিমা)। বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়।",
+            "<strong>টুল ডেফিনিশন:</strong> ~১–৩K টোকেন। শুধু সেই টুলই রাখুন যা এই ধাপে লাগতে পারে; বিশেষ টুল দরকারের সময় লোড করুন।",
+            "<strong>রিট্রিভাল:</strong> বাজেট = উইন্ডো − সিস্টেম − টুল − বর্তমান টার্ন − রিজার্ভ করা আউটপুট। পরিমাণের চেয়ে মান বেশি গুরুত্বপূর্ণ।",
+            "<strong>হিস্ট্রি:</strong> কঠোরভাবে ছোট রাখুন — সামারাইজেশন (§২) ব্যবহার করুন।",
+            "<strong>আউটপুট রিজার্ভেশন:</strong> উত্তরের জন্য টোকেন আগেই আলাদা করে রাখুন, নইলে উত্তর মাঝপথে কেটে গিয়ে নীরবে ব্যর্থ হয়।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "সবচেয়ে গুরুত্বপূর্ণ সতর্কতা হলো <strong>\"Lost in the Middle\"</strong> (Liu et al., 2023): মডেল লম্বা context-এর শুরু ও শেষের তথ্য ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে প্রায় random-এর কাছাকাছি ফল দেয়। তাই যা সবচেয়ে জরুরি, তা শুরুতে বা শেষে রাখুন। আর বাজেট ছাড়িয়ে গেলে আগে retrieval কমান — system prompt নয়, কারণ retrieval-ই সাধারণত সবচেয়ে বড় অংশ। (বিস্তারিত §7-এ।)"
+          "html": "সবচেয়ে গুরুত্বপূর্ণ সতর্কতা হলো <strong>\"Lost in the Middle\"</strong> (Liu et al., ২০২৩): মডেল লম্বা কনটেক্সটের শুরু ও শেষের তথ্য ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে প্রায় র‍্যান্ডমের কাছাকাছি ফল দেয়। তাই যা সবচেয়ে জরুরি, তা শুরুতে বা শেষে রাখুন। আর বাজেট ছাড়িয়ে গেলে আগে রিট্রিভাল কমান — সিস্টেম প্রম্পট নয়, কারণ রিট্রিভালই সাধারণত সবচেয়ে বড় অংশ। (বিস্তারিত §7-এ।)"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দর্জির কাপড় কাটার উদাহরণ:</strong> ধরুন আপনার কাছে নির্দিষ্ট মাপের এক থান কাপড় আছে, আর তা দিয়েই শার্ট, প্যান্ট ও টুপি বানাতে হবে। কাটার আগে কোনটায় কতটা কাপড় যাবে তার হিসাব না করলে শেষের জিনিসটার জন্য কাপড় কম পড়ে যায়। তেমনি context window-র \"কাপড়\" আগে ভাগ করে নিন, শেষ উত্তরের জন্য একটু জায়গা রাখুন, আর কাপড় কম পড়লে সবচেয়ে বেশি দখল করা অংশটা (retrieval) থেকেই ছাঁটুন।"
+              "html": "<strong>দর্জির কাপড় কাটার উদাহরণ:</strong> ধরুন আপনার কাছে নির্দিষ্ট মাপের এক থান কাপড় আছে, আর তা দিয়েই শার্ট, প্যান্ট ও টুপি বানাতে হবে। কাটার আগে কোনটায় কতটা কাপড় যাবে তার হিসাব না করলে শেষের জিনিসটার জন্য কাপড় কম পড়ে যায়। তেমনি কনটেক্সট উইন্ডোর \"কাপড়\" আগে ভাগ করে নিন, শেষ উত্তরের জন্য একটু জায়গা রাখুন, আর কাপড় কম পড়লে সবচেয়ে বেশি দখল করা অংশটা (রিট্রিভাল) থেকেই ছাঁটুন।"
             }
           ]
         }
@@ -192,41 +192,41 @@
             "challenge": "Change the window in the first prompt to 32,000 tokens and send it again. Does the plan fit now? Which part would you still limit first, and why?"
           },
           "bn": {
-            "title": "8,000 token-এর window-তে plan মেলাও",
-            "why": "তুমি যখন document search করে উত্তর দেয় এমন chat app বানাবে, তখন AI একসঙ্গে শুধু নির্দিষ্ট পরিমাণ text পড়তে পারে। সবকিছু আঁটছে কি না না দেখলে উত্তর মাঝপথে কেটে যায়।",
+            "title": "৮,০০০ টোকেনের উইন্ডোতে প্ল্যান মেলান",
+            "why": "আপনি যখন ডকুমেন্ট সার্চ করে উত্তর দেয় এমন চ্যাট অ্যাপ বানাবেন, তখন AI একসঙ্গে শুধু নির্দিষ্ট পরিমাণ টেক্সট পড়তে পারে। সবকিছু আঁটছে কি না না দেখলে উত্তর মাঝপথে কেটে যায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। AI সংখ্যাগুলো যোগ করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। AI সংখ্যাগুলো যোগ করবে।",
                 "prompt": "একটা chat app-এর context window 8,000 token।\nনির্দিষ্ট খরচ:\n- System prompt: 1,500 token\n- Tool definition: 2,000 token\n- ব্যবহারকারীর বর্তমান message: 300 token\n- উত্তরের জন্য আলাদা করে রাখা: 1,000 token\nটিম আরও যোগ করতে চায়:\n- Chat history: 2,500 token\n- Retrieved chunk (search করে পাওয়া document-এর ছোট ছোট অংশ): 6টা chunk, প্রতিটা 700 token\n\nকাজ:\n1. প্রতিটা item আর মোট সংখ্যা দিয়ে একটা table বানাও।\n2. Plan-টা window-তে আঁটে কি না বলো। কত token বেশি বা কম, সেটাও বলো।\n3. History 2,500 token-ই থাকলে 700 token-এর কয়টা chunk আঁটে?\nতোমার হিসাব দেখাও।",
-                "expect": "একটা table, মোট <strong>11,500</strong> token। Plan-টা আঁটে না: <strong>3,500</strong> token বেশি। শুধু <strong>1</strong>টা chunk আঁটে।",
+                "expect": "একটা টেবিল, মোট <strong>১১,৫০০</strong> টোকেন। প্ল্যানটা আঁটে না: <strong>৩,৫০০</strong> টোকেন বেশি। শুধু <strong>১</strong>টা চাঙ্ক আঁটে।",
                 "example": "Item | Token\nSystem prompt | 1,500\nTool definition | 2,000\nবর্তমান message | 300\nউত্তরের জন্য রাখা | 1,000\nChat history | 2,500\n6টা chunk x 700 | 4,200\nমোট | 11,500\n\nPlan-টা আঁটে না। 11,500 - 8,000 = 3,500 token বেশি।\nChunk বাদ দিলে মোট 7,300, তাই 700 token খালি থাকে। শুধু 700 token-এর 1টা chunk আঁটে।"
               },
               {
                 "chat": "same",
-                "do": "কাগজে ছয়টা সংখ্যা যোগ করো: 1,500 + 2,000 + 300 + 1,000 + 2,500 + 4,200। তোমার যোগফল AI-এর মোটের সঙ্গে মেলাও।",
-                "expect": "তোমার যোগফল <strong>11,500</strong>। AI-এর মোট অন্য হলে AI ভুল করেছে।"
+                "do": "কাগজে ছয়টা সংখ্যা যোগ করুন: ১,৫০০ + ২,০০০ + ৩০০ + ১,০০০ + ২,৫০০ + ৪,২০০। আপনার যোগফল AI-এর মোটের সঙ্গে মেলান।",
+                "expect": "আপনার যোগফল <strong>১১,৫০০</strong>। AI-এর মোট অন্য হলে AI ভুল করেছে।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। AI এবার ছোট একটা plan বানাবে, যেটা আঁটে।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। AI এবার ছোট একটা প্ল্যান বানাবে, যেটা আঁটে।",
                 "prompt": "এবার 8,000 token-এ আঁটে এমন একটা plan বানাও। নিয়ম: উত্তরের জন্য 1,000 token আলাদা রাখো, 700 token-এর 3টা chunk রাখো, আর এখন শুধু 1,000 token-এর tool definition load করো (বাকিগুলো পরে, দরকার হলে load হবে)। System prompt (1,500) আর বর্তমান message (300) রাখো। History summary করে ছোট করো। একটা নতুন table দাও: সবচেয়ে বড় কত token-এর history আঁটে, আর কত token বাকি থাকে।",
-                "expect": "একটা নতুন table। সবচেয়ে বড় history <strong>2,100</strong> token, আর বাকি থাকে প্রায় <strong>0</strong> token।",
+                "expect": "একটা নতুন টেবিল। সবচেয়ে বড় হিস্ট্রি <strong>২,১০০</strong> টোকেন, আর বাকি থাকে প্রায় <strong>০</strong> টোকেন।",
                 "example": "Item | Token\nSystem prompt | 1,500\nTool definition (এখন load হবে) | 1,000\nবর্তমান message | 300\nউত্তরের জন্য রাখা | 1,000\n3টা chunk x 700 | 2,100\nSummary করা history | 2,100\nমোট | 8,000\n\nসবচেয়ে বড় history 2,100 token। বাকি থাকে: 0 token।"
               },
               {
                 "chat": "same",
-                "do": "নতুন plan কাগজে মেলাও: 1,500 + 1,000 + 300 + 1,000 + 2,100। তারপর AI-এর দেওয়া history-র size যোগ করো। মোট 8,000 বা তার কম হতে হবে।",
-                "expect": "প্রথম যোগফল <strong>5,900</strong>। History 2,100 হলে মোট <strong>8,000</strong>। AI অন্য size দিলেও মোট 8,000 বা তার কম হতে হবে।"
+                "do": "নতুন প্ল্যান কাগজে মেলান: ১,৫০০ + ১,০০০ + ৩০০ + ১,০০০ + ২,১০০। তারপর AI-এর দেওয়া হিস্ট্রির সাইজ যোগ করুন। মোট ৮,০০০ বা তার কম হতে হবে।",
+                "expect": "প্রথম যোগফল <strong>৫,৯০০</strong>। হিস্ট্রি ২,১০০ হলে মোট <strong>৮,০০০</strong>। AI অন্য সাইজ দিলেও মোট ৮,০০০ বা তার কম হতে হবে।"
               }
             ],
-            "learned": "<strong>Context window</strong> হলো AI একসঙ্গে সবচেয়ে বেশি যতটুকু text পড়তে পারে, আর উত্তরটাকেও এর ভেতরেই আঁটতে হয়। প্রথম plan-এ নির্দিষ্ট অংশগুলো আর document মিলে window-র চেয়ে বড় হয়ে গিয়েছিল। ঠিক করতে একসঙ্গে কয়েকটা জিনিস কাটতে হলো: ছোট history, কম tool, কম chunk। উত্তরের জন্য সবসময় জায়গা রাখো, নইলে উত্তর কেটে যায়।",
-            "done": "তোমার কাছে প্রথম plan-এর মোট (11,500) আর একটা নতুন plan আছে, যার যোগফল 8,000 বা তার কম।",
+            "learned": "<strong>কনটেক্সট উইন্ডো</strong> হলো AI একসঙ্গে সবচেয়ে বেশি যতটুকু টেক্সট পড়তে পারে, আর উত্তরটাকেও এর ভেতরেই আঁটতে হয়। প্রথম প্ল্যানে নির্দিষ্ট অংশগুলো আর ডকুমেন্ট মিলে উইন্ডোর চেয়ে বড় হয়ে গিয়েছিল। ঠিক করতে একসঙ্গে কয়েকটা জিনিস কাটতে হলো: ছোট হিস্ট্রি, কম টুল, কম চাঙ্ক। উত্তরের জন্য সবসময় জায়গা রাখুন, নইলে উত্তর কেটে যায়।",
+            "done": "আপনার কাছে প্রথম প্ল্যানের মোট (১১,৫০০) আর একটা নতুন প্ল্যান আছে, যার যোগফল ৮,০০০ বা তার কম।",
             "check": {
               "question": "কী কী আঁটবে সেটা ঠিক করার সময় উত্তরের জন্য জায়গা রাখতে হয় কেন?",
-              "answer": "Window-তে input আর উত্তর একসঙ্গে থাকে। উত্তরের জন্য জায়গা না রাখলে উত্তর কেটে যায়, আর কেউ তোমাকে সতর্কও করে না।"
+              "answer": "উইন্ডোতে ইনপুট আর উত্তর একসঙ্গে থাকে। উত্তরের জন্য জায়গা না রাখলে উত্তর কেটে যায়, আর কেউ আপনাকে সতর্কও করে না।"
             },
-            "challenge": "প্রথম prompt-এ window বদলে 32,000 token করে আবার পাঠাও। Plan এখন আঁটে কি? কোন অংশটা তুমি তবুও আগে সীমিত করবে, আর কেন?"
+            "challenge": "প্রথম প্রম্পটে উইন্ডো বদলে ৩২,০০০ টোকেন করে আবার পাঠান। প্ল্যান এখন আঁটে কি? কোন অংশটা আপনি তবুও আগে সীমিত করবেন, আর কেন?"
           }
         }
       ]
@@ -237,8 +237,8 @@
       "title": "Conversation summarization & rolling memory",
       "sub": "A 50-turn chat is 50× the size of a 1-turn chat. Most of those tokens are <em>noise</em> — greetings, \"can you clarify,\" half-finished thoughts. Summarization trades raw history for compressed state, keeping the model coherent without the linear cost.",
       "bn": {
-        "title": "Conversation summarization আর rolling memory",
-        "sub": "50 বার কথা বলা chat-এর আকার 1 বারের chat-এর 50 গুণ। এই token-গুলোর বেশিরভাগই <em>অপ্রয়োজনীয়</em> — শুভেচ্ছা, “একটু বুঝিয়ে বলবেন?”, আধা-শেষ চিন্তা। Summarization কাঁচা history-র বদলে সংক্ষেপিত অবস্থা রাখে। এতে খরচ সমানে না বেড়েও model-এর কথার ধারা ঠিক থাকে।"
+        "title": "কনভার্সেশন সামারাইজেশন আর রোলিং মেমরি",
+        "sub": "৫০ বার কথা বলা চ্যাটের আকার ১ বারের চ্যাটের ৫০ গুণ। এই টোকেনগুলোর বেশিরভাগই <em>অপ্রয়োজনীয়</em> — শুভেচ্ছা, “একটু বুঝিয়ে বলবেন?”, আধা-শেষ চিন্তা। সামারাইজেশন কাঁচা হিস্ট্রির বদলে সংক্ষেপিত অবস্থা রাখে। এতে খরচ সমানে না বেড়েও মডেলের কথার ধারা ঠিক থাকে।"
       },
       "body": [
         {
@@ -270,7 +270,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Rolling memory pattern\">\n      <defs>\n        <marker id=\"arr2\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">rolling-window summarization — oldest chunk is condensed, recent is kept verbatim</text>\n\n      \n      <rect x=\"40\" y=\"60\" width=\"1020\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <g font-family=\"JetBrains Mono, monospace\" font-size=\"11\" text-anchor=\"middle\" fill=\"#94a3b8\">\n        <rect x=\"50\"  y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"80\" y=\"84\" fill=\"#22d3ee\">T-7</text>\n        <rect x=\"118\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"148\" y=\"84\" fill=\"#22d3ee\">T-6</text>\n        <rect x=\"186\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"216\" y=\"84\" fill=\"#22d3ee\">T-5</text>\n        <rect x=\"254\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#fbbf24\" fill-opacity=\"0.10\" stroke=\"#fbbf24\"></rect>\n        <text x=\"284\" y=\"84\" fill=\"#fbbf24\">T-4</text>\n        <rect x=\"322\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#fbbf24\" fill-opacity=\"0.10\" stroke=\"#fbbf24\"></rect>\n        <text x=\"352\" y=\"84\" fill=\"#fbbf24\">T-3</text>\n        <rect x=\"390\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#34d399\" fill-opacity=\"0.10\" stroke=\"#34d399\"></rect>\n        <text x=\"420\" y=\"84\" fill=\"#34d399\">T-2</text>\n        <rect x=\"458\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#34d399\" fill-opacity=\"0.10\" stroke=\"#34d399\"></rect>\n        <text x=\"488\" y=\"84\" fill=\"#34d399\">T-1</text>\n        <rect x=\"526\" y=\"68\" width=\"60\" height=\"24\" rx=\"4\" fill=\"#f472b6\" fill-opacity=\"0.10\" stroke=\"#f472b6\"></rect>\n        <text x=\"556\" y=\"84\" fill=\"#f472b6\">T0</text>\n      </g>\n\n      \n      <line x1=\"600\" y1=\"80\" x2=\"660\" y2=\"80\" stroke=\"#94a3b8\" marker-end=\"url(#arr2)\"></line>\n      <text x=\"610\" y=\"68\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">summarise</text>\n\n      \n      <rect x=\"680\" y=\"60\" width=\"380\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"690\" y=\"76\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">summary block (200 tokens)</text>\n      <rect x=\"690\" y=\"80\" width=\"180\" height=\"14\" rx=\"3\" fill=\"#fb7185\" fill-opacity=\"0.30\"></rect>\n      <text x=\"700\" y=\"91\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#e2e8f0\">T-7, T-6, T-5 condensed</text>\n\n      \n      <rect x=\"690\" y=\"100\" width=\"364\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <g font-family=\"JetBrains Mono, monospace\" font-size=\"11\" text-anchor=\"middle\" fill=\"#94a3b8\">\n        <rect x=\"700\" y=\"108\" width=\"50\" height=\"24\" rx=\"4\" fill=\"#fbbf24\" fill-opacity=\"0.10\" stroke=\"#fbbf24\"></rect>\n        <text x=\"725\" y=\"124\" fill=\"#fbbf24\">T-4</text>\n        <rect x=\"758\" y=\"108\" width=\"50\" height=\"24\" rx=\"4\" fill=\"#fbbf24\" fill-opacity=\"0.10\" stroke=\"#fbbf24\"></rect>\n        <text x=\"783\" y=\"124\" fill=\"#fbbf24\">T-3</text>\n        <rect x=\"816\" y=\"108\" width=\"50\" height=\"24\" rx=\"4\" fill=\"#34d399\" fill-opacity=\"0.10\" stroke=\"#34d399\"></rect>\n        <text x=\"841\" y=\"124\" fill=\"#34d399\">T-2</text>\n        <rect x=\"874\" y=\"108\" width=\"50\" height=\"24\" rx=\"4\" fill=\"#34d399\" fill-opacity=\"0.10\" stroke=\"#34d399\"></rect>\n        <text x=\"899\" y=\"124\" fill=\"#34d399\">T-1</text>\n        <rect x=\"932\" y=\"108\" width=\"50\" height=\"24\" rx=\"4\" fill=\"#f472b6\" fill-opacity=\"0.10\" stroke=\"#f472b6\"></rect>\n        <text x=\"957\" y=\"124\" fill=\"#f472b6\">T0</text>\n      </g>\n\n      <text x=\"40\" y=\"170\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">the summary block is written by the model itself, then injected as the earliest message(s)</text>\n      <text x=\"40\" y=\"190\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">compression ratio typically 5–20×; information loss is the cost</text>\n      <text x=\"40\" y=\"210\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ use a structured schema for summaries (\"key facts / open questions / decisions\")</text>\n    </svg>",
           "caption": "Rolling memory: oldest turns are condensed by the model into a summary block, recent turns stay verbatim. Sliding window plus summarization.",
-          "captionBn": "এখানে rolling-window summarization দেখানো হয়েছে: সবচেয়ে পুরনো turn (T-7, T-6, T-5) মডেল নিজে একটি ছোট summary block-এ (200 tokens) সংকুচিত করে, আর T-4 থেকে T0 পর্যন্ত সাম্প্রতিক turn গুলো হুবহু থাকে। বাঁ থেকে ডানে পড়লে আগে ও পরের অবস্থা বোঝা যায়।"
+          "captionBn": "এখানে রোলিং-উইন্ডো সামারাইজেশন দেখানো হয়েছে: সবচেয়ে পুরনো টার্ন (T-7, T-6, T-5) মডেল নিজে একটি ছোট সারসংক্ষেপ ব্লকে (২০০ টোকেন) সংকুচিত করে, আর T-4 থেকে T0 পর্যন্ত সাম্প্রতিক টার্নগুলো হুবহু থাকে। বাঁ থেকে ডানে পড়লে আগে ও পরের অবস্থা বোঝা যায়।"
         },
         {
           "type": "heading",
@@ -356,35 +356,35 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "৫০ টার্নের একটা chat মানে ১ টার্নের চেয়ে ৫০ গুণ বেশি টোকেন। কিন্তু এর বেশিরভাগই অপ্রয়োজনীয় — সম্ভাষণ, \"একটু বুঝিয়ে বলুন\", অসম্পূর্ণ কথা। <strong>Conversation summarization</strong> হলো পুরোনো কথোপকথনকে ছোট একটি সারাংশে (summary) চেপে ফেলা, যাতে মডেল প্রসঙ্গ না হারিয়েও কম টোকেনে কাজ চালাতে পারে। একে বলে <strong>rolling memory</strong>: সবচেয়ে পুরোনো অংশ সংক্ষেপ হয়, সাম্প্রতিক টার্নগুলো হুবহু থাকে।"
+          "html": "৫০ টার্নের একটা চ্যাট মানে ১ টার্নের চেয়ে ৫০ গুণ বেশি টোকেন। কিন্তু এর বেশিরভাগই অপ্রয়োজনীয় — সম্ভাষণ, \"একটু বুঝিয়ে বলুন\", অসম্পূর্ণ কথা। <strong>কনভার্সেশন সামারাইজেশন</strong> হলো পুরোনো কথোপকথনকে ছোট একটি সারসংক্ষেপে চেপে ফেলা, যাতে মডেল প্রসঙ্গ না হারিয়েও কম টোকেনে কাজ চালাতে পারে। একে বলে <strong>রোলিং মেমরি</strong>: সবচেয়ে পুরোনো অংশ সংক্ষেপ হয়, সাম্প্রতিক টার্নগুলো হুবহু থাকে।"
         },
         {
           "type": "paragraph",
-          "html": "কখন summarize করবেন, তার তিনটি trigger:"
+          "html": "কখন সামারাইজ করবেন, তার তিনটি ট্রিগার:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Token-budget triggered:</strong> history নির্দিষ্ট সীমা (যেমন 4K) পার হলে সবচেয়ে পুরোনো অংশ সংক্ষেপ করুন।",
-            "<strong>Turn-count triggered:</strong> প্রতি K টার্ন পরপর আগের K−1 টার্ন একটি block-এ নিন — সহজ ও অনুমানযোগ্য।",
-            "<strong>Semantic triggered:</strong> বিষয় বদলালে (embedding similarity কমে গেলে) summarize করুন।"
+            "<strong>টোকেন-বাজেট ট্রিগার:</strong> হিস্ট্রি নির্দিষ্ট সীমা (যেমন ৪K) পার হলে সবচেয়ে পুরোনো অংশ সংক্ষেপ করুন।",
+            "<strong>টার্ন-কাউন্ট ট্রিগার:</strong> প্রতি K টার্ন পরপর আগের K−১ টার্ন একটি ব্লকে নিন — সহজ ও অনুমানযোগ্য।",
+            "<strong>সেম্যান্টিক ট্রিগার:</strong> বিষয় বদলালে (এমবেডিং সিমিলারিটি কমে গেলে) সামারাইজ করুন।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "শুধু \"chat-টা সারাংশ করো\" বললে ঝাপসা ফল আসে। তাই একটি <strong>structured schema</strong> ব্যবহার করুন — যেমন <code>user_goal</code>, <code>decisions_made</code>, <code>open_questions</code>, <code>key_facts_learned</code>, <code>entities</code>, <code>user_preferences</code>, <code>tool_results_to_remember</code>। সাধারণত compression ratio ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
+          "html": "শুধু \"চ্যাটটা সারসংক্ষেপ করুন\" বললে ঝাপসা ফল আসে। তাই একটি <strong>স্ট্রাকচার্ড স্কিমা</strong> ব্যবহার করুন — যেমন <code>user_goal</code>, <code>decisions_made</code>, <code>open_questions</code>, <code>key_facts_learned</code>, <code>entities</code>, <code>user_preferences</code>, <code>tool_results_to_remember</code>। সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Hierarchical summarisation</strong> হলো সবচেয়ে ভালো কৌশল: একদম পুরোনো টার্নের rolling summary, মাঝের টার্নের mid-resolution summary, আর সাম্প্রতিক টার্ন হুবহু। আর সতর্ক থাকুন — summarization lossy; সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়। তাই গুরুত্বপূর্ণ তথ্য আলাদা structured slot-এ রাখুন, summary-কে \"সূচি\" ভাবুন (source of truth নয়), আর high-stakes কথোপকথনের পুরো transcript DB-তে সংরক্ষণ করুন।"
+          "html": "<strong>হায়ারার্কিক্যাল সামারাইজেশন</strong> হলো সবচেয়ে ভালো কৌশল: একদম পুরোনো টার্নের রোলিং সারসংক্ষেপ, মাঝের টার্নের মিড-রেজোলিউশন সারসংক্ষেপ, আর সাম্প্রতিক টার্ন হুবহু। আর সতর্ক থাকুন — সামারাইজেশন লসি; সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়। তাই গুরুত্বপূর্ণ তথ্য আলাদা স্ট্রাকচার্ড স্লটে রাখুন, সারসংক্ষেপকে \"সূচি\" ভাবুন (সোর্স অব ট্রুথ নয়), আর হাই-স্টেকসের কথোপকথনের পুরো ট্রান্সক্রিপ্ট DB-তে সংরক্ষণ করুন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>ক্লাসের খাতার উদাহরণ:</strong> পরীক্ষার আগে আপনি পুরো বছরের লেকচার আবার পড়েন না; আপনার হাতে থাকে নিজের গোছানো নোট — সূত্র, সিদ্ধান্ত আর গুরুত্বপূর্ণ উদাহরণ। কিন্তু কোনো সংজ্ঞা নিয়ে সন্দেহ হলে আপনি মূল বইয়ে ফিরে যান। এখানেও সারাংশ হলো নোট, আর মূল transcript হলো বই — নোট দিয়ে কাজ চলে, আর নির্ভুলতা দরকার হলে মূল উৎসে যাওয়া যায়।"
+              "html": "<strong>ক্লাসের খাতার উদাহরণ:</strong> পরীক্ষার আগে আপনি পুরো বছরের লেকচার আবার পড়েন না; আপনার হাতে থাকে নিজের গোছানো নোট — সূত্র, সিদ্ধান্ত আর গুরুত্বপূর্ণ উদাহরণ। কিন্তু কোনো সংজ্ঞা নিয়ে সন্দেহ হলে আপনি মূল বইয়ে ফিরে যান। এখানেও সারসংক্ষেপ হলো নোট, আর মূল ট্রান্সক্রিপ্ট হলো বই — নোট দিয়ে কাজ চলে, আর নির্ভুলতা দরকার হলে মূল উৎসে ফেরা যায়।"
             }
           ]
         }
@@ -449,41 +449,41 @@
             "challenge": "Add 4 more turns to the chat that change the budget to 90,000 tk. Make the JSON summary again. Does it show the new number and not the old one?"
           },
           "bn": {
-            "title": "অস্পষ্ট আর structured summary-র তুলনা করো",
-            "why": "তুমি যখন লম্বা chat-এর chatbot বানাবে, তখন পুরনো message ছোট একটা summary-তে আনতে হবে। খারাপ summary-তে budget বা ফোনের সময়ের মতো জিনিস হারিয়ে যেতে পারে, আর তখন bot ভুল সাহায্য দেয়।",
+            "title": "অস্পষ্ট আর স্ট্রাকচার্ড সারসংক্ষেপের তুলনা করুন",
+            "why": "আপনি যখন লম্বা চ্যাটের চ্যাটবট বানাবেন, তখন পুরনো মেসেজ ছোট একটা সারসংক্ষেপে আনতে হবে। খারাপ সারসংক্ষেপে বাজেট বা ফোনের সময়ের মতো জিনিস হারিয়ে যেতে পারে, আর তখন বট ভুল সাহায্য দেয়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। Summary-টা একটা note-এ copy করে রাখো।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। সারসংক্ষেপটা একটা নোটে কপি করে রাখুন।",
                 "prompt": "এই কথোপকথনটা 2টা বাক্যে summary করো।\n\nUser: আমি আমার ছেলের জন্য একটা laptop কিনতে চাই। সে চট্টগ্রামে computer science পড়ে।\nAssistant: আপনার budget কত?\nUser: সর্বোচ্চ 85,000 tk। আমি bKash-এ টাকা দেব, তাই দোকানকে bKash নিতে হবে।\nAssistant: নতুন laptop চান, না পুরনো?\nUser: শুধু নতুন। পুরনোগুলো নিয়ে আগে সমস্যা হয়েছে।\nAssistant: বড় screen লাগবে?\nUser: না। সে রোজ সঙ্গে নিয়ে যায়। 1.6 kg-র চেয়ে হালকা চাই।\nAssistant: আমি 16 GB RAM আর 512 GB SSD সুপারিশ করি।\nUser: ঠিক আছে, 16 GB RAM। 512 GB নিয়ে আমি নিশ্চিত না। পরে আবার জিজ্ঞেস করবেন।\nAssistant: ঠিক আছে। আমি আগ্রাবাদের দোকানগুলো দেখে আপনাকে একটা list পাঠাব।\nUser: ভালো। শুক্রবার বিকাল 5টার পরে আমাকে ফোন করবেন। আমার নম্বর 01700-000000।",
-                "expect": "2 বাক্যের একটা summary। সাধারণত মূল লক্ষ্য থাকে, কিন্তু কিছু সঠিক তথ্য প্রায়ই বাদ পড়ে।",
+                "expect": "২ বাক্যের একটা সারসংক্ষেপ। সাধারণত মূল লক্ষ্য থাকে, কিন্তু কিছু সঠিক তথ্য প্রায়ই বাদ পড়ে।",
                 "example": "একজন অভিভাবক চট্টগ্রামে computer science পড়া ছেলের জন্য 16 GB RAM-এর একটা নতুন laptop কিনতে চান। Assistant আগ্রাবাদের দোকান দেখে list পাঠাবে, আর অভিভাবক শুক্রবার ফোন করতে বলেছেন।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, নতুন chat-এ paste করে Enter চাপো। Summary-টা একটা note-এ copy করে রাখো। JSON-এর key গুলো English-এই থাকবে।",
+                "do": "এই প্রম্পটটা কপি করুন, নতুন চ্যাটে পেস্ট করে Enter চাপুন। সারসংক্ষেপটা একটা নোটে কপি করে রাখুন। JSON-এর কী গুলো ইংরেজিতেই থাকবে।",
                 "prompt": "এই কথোপকথনটা JSON আকারে summary করো। ঠিক এই key গুলো ব্যবহার করো: user_goal (এক বাক্য), decisions_made (list), open_questions (list), key_facts_learned (list), entities (নাম, id, সংখ্যার list), user_preferences (list), tool_results_to_remember (list)। সঠিক সংখ্যা রাখো। নতুন কোনো তথ্য যোগ কোরো না।\n\nUser: আমি আমার ছেলের জন্য একটা laptop কিনতে চাই। সে চট্টগ্রামে computer science পড়ে।\nAssistant: আপনার budget কত?\nUser: সর্বোচ্চ 85,000 tk। আমি bKash-এ টাকা দেব, তাই দোকানকে bKash নিতে হবে।\nAssistant: নতুন laptop চান, না পুরনো?\nUser: শুধু নতুন। পুরনোগুলো নিয়ে আগে সমস্যা হয়েছে।\nAssistant: বড় screen লাগবে?\nUser: না। সে রোজ সঙ্গে নিয়ে যায়। 1.6 kg-র চেয়ে হালকা চাই।\nAssistant: আমি 16 GB RAM আর 512 GB SSD সুপারিশ করি।\nUser: ঠিক আছে, 16 GB RAM। 512 GB নিয়ে আমি নিশ্চিত না। পরে আবার জিজ্ঞেস করবেন।\nAssistant: ঠিক আছে। আমি আগ্রাবাদের দোকানগুলো দেখে আপনাকে একটা list পাঠাব।\nUser: ভালো। শুক্রবার বিকাল 5টার পরে আমাকে ফোন করবেন। আমার নম্বর 01700-000000।",
-                "expect": "৭টা key-সহ একটা JSON text। <em>85,000 tk</em> আর <em>1.6 kg</em>-এর মতো সংখ্যা list-গুলোতে থাকে।",
+                "expect": "৭টা কী-সহ একটা JSON টেক্সট। <em>৮৫,০০০ tk</em> আর <em>১.৬ kg</em>-এর মতো সংখ্যা তালিকাগুলোতে থাকে।",
                 "example": "{\n  \"user_goal\": \"চট্টগ্রামে computer science পড়া ছেলের জন্য একটা laptop কেনা\",\n  \"decisions_made\": [\"শুধু নতুন laptop\", \"16 GB RAM\"],\n  \"open_questions\": [\"512 GB SSD নেওয়া হবে কি না\"],\n  \"key_facts_learned\": [\"Budget সর্বোচ্চ 85,000 tk\", \"bKash-এ টাকা দেবে\", \"1.6 kg-র চেয়ে হালকা\"],\n  \"entities\": [\"আগ্রাবাদ\", \"01700-000000\"],\n  \"user_preferences\": [\"শুধু নতুন\", \"হালকা laptop, রোজ সঙ্গে নেয়\", \"শুক্রবার বিকাল 5টার পরে ফোন\"],\n  \"tool_results_to_remember\": []\n}"
               },
               {
                 "chat": "same",
-                "do": "এই ৬টা তথ্যের কয়টা প্রতিটা summary-তে আছে, গুনো: 85,000 tk, bKash, শুধু নতুন, 1.6 kg-র কম, 16 GB RAM, শুক্রবার বিকাল 5টার পরে ফোন।",
-                "expect": "২ বাক্যের summary-তে কম তথ্য থাকে, প্রায়ই মাত্র ২ বা ৩টা। JSON summary-তে বেশিরভাগ থাকে, প্রায়ই ৬টাই।"
+                "do": "এই ৬টা তথ্যের কয়টা প্রতিটা সারসংক্ষেপে আছে, গুনুন: ৮৫,০০০ tk, bKash, শুধু নতুন, ১.৬ kg-র কম, ১৬ GB RAM, শুক্রবার বিকাল ৫টার পরে ফোন।",
+                "expect": "২ বাক্যের সারসংক্ষেপে কম তথ্য থাকে, প্রায়ই মাত্র ২ বা ৩টা। JSON সারসংক্ষেপে বেশিরভাগ থাকে, প্রায়ই ৬টাই।"
               },
               {
                 "chat": "same",
-                "do": "যে প্রশ্নের উত্তর ব্যবহারকারী এখনো দেয়নি, সেটা খোঁজো (SSD-র size)। দেখো প্রতিটা summary-তে সেটা আছে কি না।",
-                "expect": "JSON summary-তে সেটা <code>open_questions</code>-এ থাকে। ছোট summary-তে প্রায়ই সেটা বাদ পড়ে।"
+                "do": "যে প্রশ্নের উত্তর ব্যবহারকারী এখনো দেয়নি, সেটা খুঁজুন (SSD-র সাইজ)। দেখুন প্রতিটা সারসংক্ষেপে সেটা আছে কি না।",
+                "expect": "JSON সারসংক্ষেপে সেটা <code>open_questions</code>-এ থাকে। ছোট সারসংক্ষেপে প্রায়ই সেটা বাদ পড়ে।"
               }
             ],
-            "learned": "Summary হলো একটা <strong>lossy</strong> copy: text ছোট করতে AI কিছু তথ্য ফেলে দেয়। <em>2 বাক্যে</em>-র মতো অস্পষ্ট অনুরোধে সঠিক সংখ্যা সবার আগে হারায়। নির্দিষ্ট slot-এর list (JSON key গুলো) থাকলে AI প্রতিটা ধরনের তথ্যের জন্য জায়গা রাখে। লম্বা summary-তে token বেশি লাগে, কিন্তু হারায় কম।",
-            "done": "তোমার কাছে 2টা summary আছে, আর প্রতিটায় ৬টা তথ্যের কয়টা আছে তুমি গুনেছ।",
+            "learned": "সারসংক্ষেপ হলো একটা <strong>লসি</strong> কপি: টেক্সট ছোট করতে AI কিছু তথ্য ফেলে দেয়। <em>২ বাক্যে</em>-র মতো অস্পষ্ট অনুরোধে সঠিক সংখ্যা সবার আগে হারায়। নির্দিষ্ট স্লটের তালিকা (JSON-এর কী গুলো) থাকলে AI প্রতিটা ধরনের তথ্যের জন্য জায়গা রাখে। লম্বা সারসংক্ষেপে টোকেন বেশি লাগে, কিন্তু হারায় কম।",
+            "done": "আপনার কাছে ২টা সারসংক্ষেপ আছে, আর প্রতিটায় ৬টা তথ্যের কয়টা আছে আপনি গুনেছেন।",
             "check": {
-              "question": "Budget-এর মতো সঠিক সংখ্যার জন্য summary ভরসার উৎস না কেন?",
-              "answer": "Summary একটা lossy copy। সঠিক সংখ্যা, সিদ্ধান্ত আর উদ্ধৃতি সবার আগে হারায়। Summary-কে পথ দেখানোর জন্য ব্যবহার করো, আর জরুরি তথ্য নির্দিষ্ট slot-এ বা আসল chat log-এ রাখো।"
+              "question": "বাজেটের মতো সঠিক সংখ্যার জন্য সারসংক্ষেপ ভরসার উৎস না কেন?",
+              "answer": "সারসংক্ষেপ একটা লসি কপি। সঠিক সংখ্যা, সিদ্ধান্ত আর উদ্ধৃতি সবার আগে হারায়। সারসংক্ষেপকে পথ দেখানোর জন্য ব্যবহার করুন, আর জরুরি তথ্য নির্দিষ্ট স্লটে বা আসল চ্যাট লগে রাখুন।"
             },
-            "challenge": "Chat-এ আরও 4টা turn যোগ করো, যেখানে budget বদলে 90,000 tk হয়। আবার JSON summary বানাও। নতুন সংখ্যাটা কি আছে, পুরনোটা নেই?"
+            "challenge": "চ্যাটে আরও ৪টা টার্ন যোগ করুন, যেখানে বাজেট বদলে ৯০,০০০ tk হয়। আবার JSON সারসংক্ষেপ বানান। নতুন সংখ্যাটা কি আছে, পুরনোটা নেই?"
           }
         }
       ]
@@ -494,8 +494,8 @@
       "title": "Prompt caching strategies",
       "sub": "Frontier providers let you <strong>cache a prefix of your prompt</strong>: identical tokens at the start of a request cost dramatically less and run faster. Used well, caching drops 80–90% of the input bill for apps with stable system prompts and long retrieval sections.",
       "bn": {
-        "title": "Prompt caching-এর কৌশল",
-        "sub": "Frontier provider-রা আপনার <strong>prompt-এর শুরুর অংশ cache করতে</strong> দেয়: request-এর শুরুতে একই token থাকলে খরচ অনেক কম আর গতি বেশি। যে app-এর system prompt স্থির আর retrieval অংশ লম্বা, সেখানে ভালোভাবে করলে input-এর বিলের 80–90% কমে যায়।"
+        "title": "প্রম্পট ক্যাশিংয়ের কৌশল",
+        "sub": "ফ্রন্টিয়ার প্রোভাইডাররা আপনার <strong>প্রম্পটের শুরুর অংশ ক্যাশ করতে</strong> দেয়: রিকোয়েস্টের শুরুতে একই টোকেন থাকলে খরচ অনেক কম আর গতি বেশি। যে অ্যাপের সিস্টেম প্রম্পট স্থির আর রিট্রিভাল অংশ লম্বা, সেখানে ভালোভাবে করলে ইনপুটের বিলের ৮০–৯০% কমে যায়।"
       },
       "body": [
         {
@@ -551,7 +551,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cache layout\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">cache breakpoints — everything before the breakpoint is reused, everything after is rebuilt</text>\n\n      <rect x=\"40\"  y=\"60\" width=\"320\" height=\"50\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"200\" y=\"82\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">system prompt (cached)</text>\n      <text x=\"200\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">persona + rules + schema</text>\n\n      <rect x=\"370\" y=\"60\" width=\"240\" height=\"50\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"490\" y=\"82\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">tool schemas (cached)</text>\n      <text x=\"490\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">stable across calls</text>\n\n      <rect x=\"620\" y=\"60\" width=\"280\" height=\"50\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"760\" y=\"82\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\">retrieved docs (cached*)</text>\n      <text x=\"760\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">same docs as last call</text>\n\n      \n      <line x1=\"920\" y1=\"60\" x2=\"920\" y2=\"148\" stroke=\"#fb7185\" stroke-width=\"2\" stroke-dasharray=\"3 3\"></line>\n      <text x=\"912\" y=\"136\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">cache_control: { type: \"ephemeral\" }</text>\n\n      <rect x=\"940\" y=\"60\" width=\"120\" height=\"50\" rx=\"6\" fill=\"rgba(251,113,133,0.10)\" stroke=\"#fb7185\"></rect>\n      <text x=\"1000\" y=\"82\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\">user msg</text>\n      <text x=\"1000\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">rebuilt</text>\n\n      <rect x=\"40\" y=\"160\" width=\"900\" height=\"60\" rx=\"6\" fill=\"rgba(244,114,182,0.06)\" stroke=\"#f472b6\"></rect>\n      <text x=\"60\" y=\"182\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#f472b6\">★ Anthropic supports up to 4 breakpoints · put stable content first, dynamic content last</text>\n      <text x=\"60\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">*retrieval caching only works if the SAME documents are returned call after call — any change busts the cache</text>\n    </svg>",
           "caption": "Cache the prefix that doesn't change (system + tools + stable retrieval), pass only the new user message after the breakpoint.",
-          "captionBn": "ডায়াগ্রামে system prompt, tool schemas ও retrieved docs cached অংশ হিসেবে আর user msg প্রতিবার নতুন করে তৈরি হওয়া অংশ হিসেবে দেখানো হয়েছে। cache breakpoint-এর আগের সব কিছু আবার ব্যবহৃত হয়; তাই স্থির content আগে, পরিবর্তনশীল content শেষে রাখতে হয়।"
+          "captionBn": "ডায়াগ্রামে সিস্টেম প্রম্পট, টুল স্কিমা ও রিট্রিভ করা ডকুমেন্ট ক্যাশ করা অংশ হিসেবে আর ইউজার মেসেজ প্রতিবার নতুন করে তৈরি হওয়া অংশ হিসেবে দেখানো হয়েছে। ক্যাশ ব্রেকপয়েন্টের আগের সব কিছু আবার ব্যবহৃত হয়; তাই স্থির কনটেন্ট আগে, পরিবর্তনশীল কনটেন্ট শেষে রাখতে হয়।"
         },
         {
           "type": "heading",
@@ -673,28 +673,28 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "প্রতিবার API call-এ একই system prompt, tool schema আর retrieved document বারবার পাঠালে একই লেখা বারবার পড়ার জন্য টাকা দিতে হয়। <strong>Prompt caching</strong>-এ আপনি prompt-এর একটি <strong>prefix</strong> (শুরুর অংশ) cache করতে পারেন; পরের call-এ prefix হুবহু মিললে provider আগের কাজ পুনরায় ব্যবহার করে — খরচ কমে এবং গতি বাড়ে। স্থির system prompt ও দীর্ঘ retrieval আছে এমন অ্যাপে ইনপুট বিলের ৮০–৯০% পর্যন্ত কমতে পারে।"
+          "html": "প্রতিবার API কলে একই সিস্টেম প্রম্পট, টুল স্কিমা আর রিট্রিভ করা ডকুমেন্ট বারবার পাঠালে একই লেখা বারবার পড়ার জন্য টাকা দিতে হয়। <strong>প্রম্পট ক্যাশিংয়ে</strong> আপনি প্রম্পটের একটি <strong>প্রিফিক্স</strong> (শুরুর অংশ) ক্যাশ করতে পারেন; পরের কলে প্রিফিক্স হুবহু মিললে প্রোভাইডার আগের কাজ পুনরায় ব্যবহার করে — খরচ কমে এবং গতি বাড়ে। স্থির সিস্টেম প্রম্পট ও দীর্ঘ রিট্রিভাল আছে এমন অ্যাপে ইনপুট বিলের ৮০–৯০% পর্যন্ত কমতে পারে।"
         },
         {
           "type": "paragraph",
-          "html": "তিন provider-এর পদ্ধতি আলাদা:"
+          "html": "তিন প্রোভাইডারের পদ্ধতি আলাদা:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Anthropic:</strong> স্বয়ংক্রিয় cache এবং নিজের নিয়ন্ত্রণের জন্য <code>cache_control</code> breakpoint; একটি prompt-এ সর্বোচ্চ ৪টি <em>ephemeral</em> breakpoint। TTL ৫ মিনিট (hit হলে নতুন করে শুরু হয়)।",
-            "<strong>OpenAI:</strong> ১০২৪ টোকেনের বেশি prompt-এ recent prefix মিললে স্বয়ংক্রিয় cache; cached টোকেনে ৫০% ছাড়।",
-            "<strong>Gemini:</strong> স্পষ্টভাবে <code>cachedContent</code> resource তৈরি করতে হয়; TTL configurable (default ~৬০ মিনিট)।"
+            "<strong>Anthropic:</strong> স্বয়ংক্রিয় ক্যাশ এবং নিজের নিয়ন্ত্রণের জন্য <code>cache_control</code> ব্রেকপয়েন্ট; একটি প্রম্পটে সর্বোচ্চ ৪টি <em>এফেমেরাল</em> ব্রেকপয়েন্ট। TTL ৫ মিনিট (হিট হলে নতুন করে শুরু হয়)।",
+            "<strong>OpenAI:</strong> ১০২৪ টোকেনের বেশি প্রম্পটে রিসেন্ট প্রিফিক্স মিললে স্বয়ংক্রিয় ক্যাশ; ক্যাশ করা টোকেনে ৫০% ছাড়।",
+            "<strong>Gemini:</strong> স্পষ্টভাবে <code>cachedContent</code> রিসোর্স তৈরি করতে হয়; TTL কনফিগারেবল (ডিফল্ট ~৬০ মিনিট)।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "নিয়ম হলো <strong>স্থির জিনিস আগে, পরিবর্তনশীল জিনিস শেষে</strong>। Cache করুন: system prompt, স্থির tool schema, বারবার ব্যবহৃত বড় document, static few-shot উদাহরণ, style guide। Cache করবেন না: ইউজারের সর্বশেষ বার্তা, প্রতি call-এ বদলে যাওয়া retrieval (যেমন আজকের খবর), এবং যেখানে প্রতি call-এ freshness জরুরি। হিসাবের উদাহরণ: ৬০K টোকেনের prefix ও ৪K টোকেনের user message থাকলে cache ছাড়া ৬৪K টোকেনের পুরো দাম; cache থাকলে ৬০K প্রায় ১০ গুণ সস্তা ও ৪K সাধারণ দামে — steady state-এ ইনপুট খরচে প্রায় ~৮৫% সাশ্রয়।"
+          "html": "নিয়ম হলো <strong>স্থির জিনিস আগে, পরিবর্তনশীল জিনিস শেষে</strong>। ক্যাশ করুন: সিস্টেম প্রম্পট, স্থির টুল স্কিমা, বারবার ব্যবহৃত বড় ডকুমেন্ট, স্ট্যাটিক ফিউ-শট উদাহরণ, স্টাইল গাইড। ক্যাশ করবেন না: ইউজারের সর্বশেষ বার্তা, প্রতি কলে বদলে যাওয়া রিট্রিভাল (যেমন আজকের খবর), এবং যেখানে প্রতি কলে ফ্রেশনেস জরুরি। হিসাবের উদাহরণ: ৬০K টোকেনের প্রিফিক্স ও ৪K টোকেনের ইউজার মেসেজ থাকলে ক্যাশ ছাড়া ৬৪K টোকেনের পুরো দাম; ক্যাশ থাকলে ৬০K প্রায় ১০ গুণ সস্তা ও ৪K সাধারণ দামে — স্টেডি স্টেটে ইনপুট খরচে প্রায় ~৮৫% সাশ্রয়।"
         },
         {
           "type": "paragraph",
-          "html": "সবচেয়ে বড় ফাঁদ হলো <strong>cache invalidation</strong>: cached অংশে একটি অক্ষরও বদলালে (typo ঠিক করা, version number, timestamp) তার পরের সব cache বাতিল হয়। তাই prefix-কে <strong>byte-identical</strong> রাখুন, dynamic তথ্য breakpoint-এর পরে দিন, CI-তে system prompt-এর hash রাখুন, আর cache সত্যিই hit হচ্ছে কি না যাচাই করতে <code>response.usage.cache_read_input_tokens</code> দেখুন (০-এর বেশি মানে hit)।"
+          "html": "সবচেয়ে বড় ফাঁদ হলো <strong>ক্যাশ ইনভ্যালিডেশন</strong>: ক্যাশ করা অংশে একটি অক্ষরও বদলালে (টাইপো ঠিক করা, ভার্সন নম্বর, টাইমস্ট্যাম্প) তার পরের সব ক্যাশ বাতিল হয়। তাই প্রিফিক্সকে <strong>বাইট-টু-বাইট হুবহু</strong> রাখুন, ডায়নামিক তথ্য ব্রেকপয়েন্টের পরে দিন, CI-তে সিস্টেম প্রম্পটের হ্যাশ রাখুন, আর ক্যাশ সত্যিই হিট হচ্ছে কি না যাচাই করতে <code>response.usage.cache_read_input_tokens</code> দেখুন (০-এর বেশি মানে হিট)।"
         },
         {
           "type": "analogy",
@@ -761,36 +761,36 @@
             "challenge": "Ask the AI to rewrite Layout Y for an app that also loads new news articles on every call. Where should the articles go, and should the provider cache them?"
           },
           "bn": {
-            "title": "কোন prompt layout-এ খরচ কম, দেখো",
-            "why": "তোমার app যদি প্রতিটা call-এ একই লম্বা system prompt পাঠায়, provider সেটা cache করে কম দাম নিতে পারে। যে লাইন বদলায় সেটা উপরে রাখলে এই সাশ্রয় হারায়, আর তুমি পুরো দাম দাও।",
+            "title": "কোন প্রম্পট লেআউটে খরচ কম, দেখুন",
+            "why": "আপনার অ্যাপ যদি প্রতিটা কলে একই লম্বা সিস্টেম প্রম্পট পাঠায়, প্রোভাইডার সেটা ক্যাশ করে কম দাম নিতে পারে। যে লাইন বদলায় সেটা উপরে রাখলে এই সাশ্রয় হারায়, আর আপনি পুরো দাম দেন।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। AI দুটো layout-এর খরচ বের করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। AI দুটো লেআউটের খরচ বের করবে।",
                 "prompt": "Prefix caching-এর নিয়ম: cache শুধু prompt-এর উপর থেকে একই রকম লাইনের সবচেয়ে লম্বা ধারাকে ঢাকে। যে লাইনটা প্রথম আলাদা হয়, আর তার পরের সব লাইন, cache miss (পুরো দাম)। Cache করা token-এর দাম 0.1 unit। Cache না করা token-এর দাম 1 unit।\n\nLayout X। Request 1 আর Request 2-এর লাইন একই, শুধু CHANGES লেখা লাইনগুলো বদলায়:\nLine 1: বর্তমান সময় (15 token) - প্রতি request-এ CHANGES\nLine 2: System rules (1,800 token)\nLine 3: Tool schemas (2,200 token)\nLine 4: ব্যবহারকারীর প্রশ্ন (100 token) - প্রতি request-এ CHANGES\n\nLayout Y। একই নিয়ম:\nLine 1: System rules (1,800 token)\nLine 2: Tool schemas (2,200 token)\nLine 3: বর্তমান সময় (15 token) - প্রতি request-এ CHANGES\nLine 4: ব্যবহারকারীর প্রশ্ন (100 token) - প্রতি request-এ CHANGES\n\nপ্রতিটা layout-এর Request 2-এর জন্য একটা table দাও: cached token, uncached token, আর unit-এ খরচ। তারপর বলো কোন layout সস্তা, আর প্রায় কত শতাংশ।",
-                "expect": "Layout X: 0 cached, 4,115 uncached, খরচ <strong>4,115</strong> unit। Layout Y: 4,000 cached, 115 uncached, খরচ <strong>515</strong> unit। Layout Y প্রায় <strong>87%</strong> সস্তা।",
+                "expect": "Layout X: ০ ক্যাশ করা, ৪,১১৫ ক্যাশ-না-করা, খরচ <strong>৪,১১৫</strong> ইউনিট। Layout Y: ৪,০০০ ক্যাশ করা, ১১৫ ক্যাশ-না-করা, খরচ <strong>৫১৫</strong> ইউনিট। Layout Y প্রায় <strong>৮৭%</strong> সস্তা।",
                 "example": "Layout X: cached 0, uncached 4,115 (15 + 1,800 + 2,200 + 100)। খরচ: 4,115 unit।\nLayout Y: cached 4,000 (1,800 + 2,200), uncached 115 (15 + 100)। খরচ: 4,000 x 0.1 + 115 = 400 + 115 = 515 unit।\n\nLayout Y সস্তা। এতে 4,115 - 515 = 3,600 unit বাঁচে, যা প্রায় 87.5%।"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। দেখো একটা ছোট typo ঠিক করলে কী হয়।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। দেখুন একটা ছোট টাইপো ঠিক করলে কী হয়।",
                 "prompt": "এখন একজন developer Layout Y-এর System rules-এর ভেতরে একটা typo ঠিক করল। এটা Request 1 আর Request 2-এর মাঝখানে হয়, আর 1টা অক্ষর বদলায়। এখন Request 2-এর cached token, uncached token আর খরচ কত? 2 বাক্যে ব্যাখ্যা করো।",
-                "expect": "0 cached token, 4,115 uncached token, আর খরচ <strong>4,115</strong> unit। বদলে যাওয়া লাইন থেকে নিচের সবটাই cache হারায়।",
+                "expect": "০ ক্যাশ করা টোকেন, ৪,১১৫ ক্যাশ-না-করা টোকেন, আর খরচ <strong>৪,১১৫</strong> ইউনিট। বদলে যাওয়া লাইন থেকে নিচের সবটাই ক্যাশ হারায়।",
                 "example": "Cached token: 0। Uncached token: 4,115। খরচ: 4,115 unit।\nTypo-টা System rules-এ, যা প্রথম লাইন। তাই Request 2 আর cache করা শুরুর অংশের সঙ্গে মেলে না, আর তার পরের সব লাইনও miss হয়।"
               },
               {
                 "chat": "same",
-                "do": "কাগজে Layout Y-এর খরচ মেলাও: 4,000 x 0.1, তারপর 115 x 1 যোগ করো। AI-এর খরচের সঙ্গে মেলাও।",
-                "expect": "<strong>400</strong> + <strong>115</strong> = <strong>515</strong> unit।"
+                "do": "কাগজে Layout Y-এর খরচ মেলান: ৪,০০০ x ০.১, তারপর ১১৫ x ১ যোগ করুন। AI-এর খরচের সঙ্গে মেলান।",
+                "expect": "<strong>৪০০</strong> + <strong>১১৫</strong> = <strong>৫১৫</strong> ইউনিট।"
               }
             ],
-            "learned": "<strong>Prompt cache</strong> এমন prompt-এর শুরুর অংশ মনে রাখে, যেটা provider আগে পড়ে ফেলেছে। তাই একই শুরু পরেরবার সস্তা হয় (এখানে 1-এর বদলে 0.1)। Cache উপর থেকে মেলায়, আর যে লাইনটা প্রথম বদলেছে সেখানে থেমে যায়। Layout X-এ সময় ছিল line 1-এ, তাই কিছুই মেলেনি। Layout Y-এ যে লাইন বদলায় সেগুলো শেষে ছিল, তাই 4,000 token মিলেছে।",
-            "done": "তোমার কাছে Request 2-এর খরচ আছে: Layout X-এ (4,115), Layout Y-এ (515), আর typo-র পরে Layout Y-এ (4,115)।",
+            "learned": "<strong>প্রম্পট ক্যাশ</strong> এমন প্রম্পটের শুরুর অংশ মনে রাখে, যেটা প্রোভাইডার আগে পড়ে ফেলেছে। তাই একই শুরু পরেরবার সস্তা হয় (এখানে 1-এর বদলে ০.১)। ক্যাশ উপর থেকে মেলায়, আর যে লাইনটা প্রথম বদলেছে সেখানে থেমে যায়। Layout X-এ সময় ছিল লাইন 1-এ, তাই কিছুই মেলেনি। Layout Y-এ যে লাইন বদলায় সেগুলো শেষে ছিল, তাই ৪,০০০ টোকেন মিলেছে।",
+            "done": "আপনার কাছে Request 2-এর খরচ আছে: Layout X-এ (৪,১১৫), Layout Y-এ (৫১৫), আর টাইপোর পরে Layout Y-এ (৪,১১৫)।",
             "check": {
-              "question": "Caching ব্যবহার করা prompt-এ যে অংশ বদলায় সেটা কোথায় রাখতে হয়, আর কেন?",
-              "answer": "যে অংশ বদলায় না (system prompt, tool) সেটা আগে রাখো, আর যে অংশ বদলায় (সময়, user message) সেটা শেষে। Cache শুধু হুবহু একই শুরুর অংশ রাখে, আর 1টা অক্ষর বদলালে তার পরের সবকিছুর cache নষ্ট হয়।"
+              "question": "ক্যাশিং ব্যবহার করা প্রম্পটে যে অংশ বদলায় সেটা কোথায় রাখতে হয়, আর কেন?",
+              "answer": "যে অংশ বদলায় না (সিস্টেম প্রম্পট, টুল) সেটা আগে রাখুন, আর যে অংশ বদলায় (সময়, ইউজার মেসেজ) সেটা শেষে। ক্যাশ শুধু হুবহু একই শুরুর অংশ রাখে, আর ১টা অক্ষর বদলালে তার পরের সবকিছুর ক্যাশ নষ্ট হয়।"
             },
-            "challenge": "AI-কে Layout Y নতুন করে লিখতে বলো, এমন app-এর জন্য যেটা প্রতিটা call-এ নতুন খবরের article-ও load করে। Article গুলো কোথায় যাবে, আর provider-এর কি সেগুলো cache করা উচিত?"
+            "challenge": "AI-কে Layout Y নতুন করে লিখতে বলুন, এমন অ্যাপের জন্য যেটা প্রতিটা কলে নতুন খবরের আর্টিকেলও লোড করে। আর্টিকেলগুলো কোথায় যাবে, আর প্রোভাইডারের কি সেগুলো ক্যাশ করা উচিত?"
           }
         }
       ]
@@ -801,8 +801,8 @@
       "title": "Hierarchical memory",
       "sub": "Humans don't have one type of memory — they have working memory, short-term, episodic, and procedural layers. AI systems that aspire to long-running tasks need the same stratification. <strong>Hierarchical memory</strong> = store different kinds of state at different timescales, summarised at each layer.",
       "bn": {
-        "title": "Hierarchical memory (স্তরভাগ করা স্মৃতি)",
-        "sub": "মানুষের স্মৃতি একরকম নয় — working memory, short-term, episodic, আর procedural স্তর আছে। যে AI system দীর্ঘ সময়ের কাজ করতে চায়, তারও এমন স্তরভাগ দরকার। <strong>Hierarchical memory</strong> মানে বিভিন্ন ধরনের অবস্থা বিভিন্ন সময়সীমায় রাখা, আর প্রতিটি স্তরে সারাংশ করা।"
+        "title": "হায়ারার্কিক্যাল মেমরি (স্তরভাগ করা স্মৃতি)",
+        "sub": "মানুষের স্মৃতি একরকম নয় — ওয়ার্কিং মেমরি, শর্ট-টার্ম, এপিসোডিক, আর প্রসিডিউরাল স্তর আছে। যে AI সিস্টেম দীর্ঘ সময়ের কাজ করতে চায়, তারও এমন স্তরভাগ দরকার। <strong>হায়ারার্কিক্যাল মেমরি</strong> মানে বিভিন্ন ধরনের অবস্থা বিভিন্ন সময়সীমায় রাখা, আর প্রতিটি স্তরে সারসংক্ষেপ করা।"
       },
       "body": [
         {
@@ -815,7 +815,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Hierarchical memory layers\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">hierarchical memory — fast/small layers close to the model, slow/large layers in storage</text>\n\n      <rect x=\"40\"  y=\"60\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"160\" y=\"82\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">Working memory</text>\n      <text x=\"160\" y=\"100\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">in-context · current turn</text>\n\n      <rect x=\"40\"  y=\"130\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"160\" y=\"152\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">Short-term</text>\n      <text x=\"160\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">recent turns · this session</text>\n\n      <rect x=\"300\" y=\"130\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"420\" y=\"152\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">Long-term</text>\n      <text x=\"420\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">user prefs · known facts</text>\n\n      <rect x=\"560\" y=\"130\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"680\" y=\"152\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">Episodic</text>\n      <text x=\"680\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">past sessions · experiences</text>\n\n      <rect x=\"820\" y=\"130\" width=\"240\" height=\"50\" rx=\"8\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\"></rect>\n      <text x=\"940\" y=\"152\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#f472b6\">External / Tools</text>\n      <text x=\"940\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">RAG, databases, APIs</text>\n\n      <text x=\"40\"  y=\"220\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">size: small  ←————————————————→  unbounded</text>\n      <text x=\"40\"  y=\"240\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">latency: ns  ←————————————————→  ms–s</text>\n      <text x=\"40\"  y=\"260\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">\"attention\": always  ←—————————————→  only when retrieved</text>\n    </svg>",
           "caption": "Four-layer hierarchical memory. Each layer trades size for attention: working memory is small but always attended; external storage is unbounded but only retrieved on demand.",
-          "captionBn": "এই ডায়াগ্রামে Working memory থেকে Short-term, Long-term, Episodic ও External / Tools পর্যন্ত চার-পাঁচ স্তরের hierarchical memory দেখানো হয়েছে। নিচের অক্ষগুলো পড়লে বোঝা যায়, ওপরের স্তর ছোট, দ্রুত ও সবসময় attended; নিচের স্তর বড়, ধীর ও শুধু প্রয়োজনে retrieve করা হয়।"
+          "captionBn": "এই ডায়াগ্রামে Working memory থেকে Short-term, Long-term, Episodic ও External / Tools পর্যন্ত চার-পাঁচ স্তরের হায়ারার্কিক্যাল মেমরি দেখানো হয়েছে। নিচের অক্ষগুলো পড়লে বোঝা যায়, ওপরের স্তর ছোট, দ্রুত ও সবসময় অ্যাটেন্ডেড; নিচের স্তর বড়, ধীর ও শুধু প্রয়োজনে রিট্রিভ করা হয়।"
         },
         {
           "type": "table",
@@ -929,33 +929,33 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "মানুষের মনে একধরনের স্মৃতি নেই — আছে working, short-term, long-term, episodic ইত্যাদি স্তর। দীর্ঘ সময় ধরে চলা AI সিস্টেমেরও তেমন স্তরবিন্যাস দরকার। <strong>Hierarchical memory</strong> মানে ভিন্ন ধরনের তথ্য ভিন্ন সময়সীমায়, ভিন্ন জায়গায় রাখা এবং প্রতিটি স্তরে সংক্ষিপ্ত করা। মডেলের যত কাছে, স্তর তত ছোট কিন্তু সবসময় মনোযোগে থাকে; যত দূরে, তত বিশাল কিন্তু শুধু প্রয়োজনে retrieve হয়।"
+          "html": "মানুষের মনে একধরনের স্মৃতি নেই — আছে ওয়ার্কিং, শর্ট-টার্ম, লং-টার্ম, এপিসোডিক ইত্যাদি স্তর। দীর্ঘ সময় ধরে চলা AI সিস্টেমেরও তেমন স্তরবিন্যাস দরকার। <strong>হায়ারার্কিক্যাল মেমরি</strong> মানে ভিন্ন ধরনের তথ্য ভিন্ন সময়সীমায়, ভিন্ন জায়গায় রাখা এবং প্রতিটি স্তরে সংক্ষিপ্ত করা। মডেলের যত কাছে, স্তর তত ছোট কিন্তু সবসময় মনোযোগে থাকে; যত দূরে, তত বিশাল কিন্তু শুধু প্রয়োজনে রিট্রিভ হয়।"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Working memory:</strong> বর্তমান prompt (system + tools + retrieved + current request); প্রতি call-এ নতুন, ephemeral।",
-            "<strong>Short-term:</strong> এই session-এর সাম্প্রতিক টার্ন, tool result, সিদ্ধান্ত; session store-এ (<code>session_id</code> দিয়ে), rolling summarization সহ।",
-            "<strong>Long-term:</strong> ইউজারের পছন্দ, জানা তথ্য, প্রজেক্টের context; vector store + structured DB-তে (<code>user_id</code> দিয়ে), ধীরে আপডেট হয়।",
-            "<strong>Episodic:</strong> আগের session-এর সংক্ষিপ্ত \"স্মৃতি\", কী কাজ করেছিল তার শিক্ষা; session শেষে memory-update agent লেখে।",
-            "<strong>External / tools:</strong> RAG index, database, API, ডকুমেন্ট; প্রয়োজনমতো retrieve হয়।"
+            "<strong>ওয়ার্কিং মেমরি:</strong> বর্তমান প্রম্পট (সিস্টেম + টুল + রিট্রিভ করা + বর্তমান অনুরোধ); প্রতি কলে নতুন, এফেমেরাল।",
+            "<strong>শর্ট-টার্ম:</strong> এই সেশনের সাম্প্রতিক টার্ন, টুল রেজাল্ট, সিদ্ধান্ত; সেশন স্টোরে (<code>session_id</code> দিয়ে), রোলিং সামারাইজেশনসহ।",
+            "<strong>লং-টার্ম:</strong> ইউজারের পছন্দ, জানা তথ্য, প্রজেক্টের কনটেক্সট; ভেক্টর স্টোর + স্ট্রাকচার্ড DB-তে (<code>user_id</code> দিয়ে), ধীরে আপডেট হয়।",
+            "<strong>এপিসোডিক:</strong> আগের সেশনের সংক্ষিপ্ত \"স্মৃতি\", কী কাজ করেছিল তার শিক্ষা; সেশন শেষে মেমরি-আপডেট এজেন্ট লেখে।",
+            "<strong>এক্সটার্নাল / টুল:</strong> RAG ইনডেক্স, ডেটাবেস, API, ডকুমেন্ট; প্রয়োজনমতো রিট্রিভ হয়।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>MemGPT</strong> (Packer et al., 2023)-এর মূল ধারণা: LLM-এর context-কে virtual memory-র মতো দেখা। মডেল নিজেই ঠিক করে কখন তথ্য working memory থেকে external storage-এ <em>evict</em> করবে এবং কখন আবার <em>page in</em> করবে — এর জন্য সে <code>recall</code>, <code>archival_search</code>-এর মতো tool call ব্যবহার করে। দীর্ঘস্থায়ী agent-এর এটিই স্থাপত্য-নকশা। সাধারণ pattern হলো session শেষে একটি consolidation ধাপ: transcript থেকে <code>user_preferences</code>, <code>project_facts</code>, <code>episodic_lessons</code> বের করে vector store বা structured DB-তে লেখা।"
+          "html": "<strong>MemGPT</strong> (Packer et al., ২০২৩)-এর মূল ধারণা: LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখা। মডেল নিজেই ঠিক করে কখন তথ্য ওয়ার্কিং মেমরি থেকে এক্সটার্নাল স্টোরেজে <em>ইভিক্ট</em> করবে এবং কখন আবার <em>পেজ ইন</em> করবে — এর জন্য সে <code>recall</code>, <code>archival_search</code>-এর মতো টুল কল ব্যবহার করে। দীর্ঘস্থায়ী এজেন্টের এটিই স্থাপত্য-নকশা। সাধারণ প্যাটার্ন হলো সেশন শেষে একটি কনসোলিডেশন ধাপ: ট্রান্সক্রিপ্ট থেকে <code>user_preferences</code>, <code>project_facts</code>, <code>episodic_lessons</code> বের করে ভেক্টর স্টোর বা স্ট্রাকচার্ড DB-তে লেখা।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> long-term memory সময়ের সাথে পুরোনো বা স্ববিরোধী হয়ে যেতে পারে। তাই প্রতিটি memory-তে timestamp ও confidence score রাখুন, সন্দেহজনক পুরোনো memory ইউজারকে দিয়ে নিশ্চিত করান, অথবা retrieval-এর সময় recency অনুযায়ী ওজন দিন।"
+          "html": "<strong>সতর্কতা:</strong> লং-টার্ম মেমরি সময়ের সাথে পুরোনো বা স্ববিরোধী হয়ে যেতে পারে। তাই প্রতিটি মেমরিতে টাইমস্ট্যাম্প ও কনফিডেন্স স্কোর রাখুন, সন্দেহজনক পুরোনো মেমরি ইউজারকে দিয়ে নিশ্চিত করান, অথবা রিট্রিভালের সময় রিসেন্সি অনুযায়ী ওজন দিন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>অফিসের ফাইল-ব্যবস্থার উদাহরণ:</strong> আপনার টেবিলে যে কাগজটা খোলা, সেটা working memory। ড্রয়ারে রাখা এই সপ্তাহের ফাইল হলো short-term। আলমারির স্থায়ী রেকর্ড long-term, আর পুরোনো প্রজেক্টের শিক্ষা-নোট episodic। বাকি সবকিছু আছে কেন্দ্রীয় আর্কাইভে (external)। ভালো কর্মী জানে কোন তথ্য কোথায় খুঁজতে হবে — টেবিল ঠেসে না রেখে দরকারমতো আর্কাইভ থেকে আনে।"
+              "html": "<strong>অফিসের ফাইল-ব্যবস্থার উদাহরণ:</strong> আপনার টেবিলে যে কাগজটা খোলা, সেটা ওয়ার্কিং মেমরি। ড্রয়ারে রাখা এই সপ্তাহের ফাইল হলো শর্ট-টার্ম। আলমারির স্থায়ী রেকর্ড লং-টার্ম, আর পুরোনো প্রজেক্টের শিক্ষা-নোট এপিসোডিক। বাকি সবকিছু আছে কেন্দ্রীয় আর্কাইভে (এক্সটার্নাল)। ভালো কর্মী জানে কোন তথ্য কোথায় খুঁজতে হবে — টেবিল ঠেসে না রেখে দরকারমতো আর্কাইভ থেকে আনে।"
             }
           ]
         }
@@ -1009,36 +1009,36 @@
             "challenge": "Send the second prompt again in a new chat, but change the new message to: <em>I eat differently now.</em> Does the AI ask a question, or does it guess?"
           },
           "bn": {
-            "title": "৮টা memory-কে layer অনুযায়ী সাজাও",
-            "why": "তুমি যখন এমন একটা support agent বানাবে যে একই user-এর সঙ্গে সপ্তাহের পর সপ্তাহ কথা বলে, তখন তাকে জানতে হবে কী prompt-এ থাকবে, কী store হবে, আর কী পরে আনা হবে। আর পুরনো কোনো memory আর সত্য না থাকলে সেটাও ধরতে হবে।",
+            "title": "৮টা মেমরিকে লেয়ার অনুযায়ী সাজান",
+            "why": "আপনি যখন এমন একটা সাপোর্ট এজেন্ট বানাবেন যে একই ইউজারের সঙ্গে সপ্তাহের পর সপ্তাহ কথা বলে, তখন তাকে জানতে হবে কী প্রম্পটে থাকবে, কী স্টোর হবে, আর কী পরে আনা হবে। আর পুরনো কোনো মেমরি আর সত্য না থাকলে সেটাও ধরতে হবে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। AI ৮টা item-কে memory layer-এ সাজাবে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। AI ৮টা আইটেমকে মেমরি লেয়ারে সাজাবে।",
                 "prompt": "একটা AI support agent-এর পাঁচটা memory-র জায়গা আছে:\n- Working memory: বর্তমান prompt\n- Short-term: এই chat session, session store-এ রাখা\n- Long-term: user-এর তথ্য, database-এ রাখা\n- Episodic: আগের session থেকে পাওয়া শিক্ষা\n- External: document আর database, শুধু দরকারের সময় পড়া হয়\n\nনিচের প্রতিটা item-এর জন্য একটা জায়গা বেছে নাও, কোথায় store হয় বলো, আর কখন update হয় বলো:\n1. ব্যবহারকারীর বর্তমান প্রশ্ন: \"আমার router-এর আলো লাল।\"\n2. এই chat-এর শেষ ৬টা turn।\n3. ব্যবহারকারী বাংলায় উত্তর পছন্দ করে।\n4. PDF আকারে ৪০ পৃষ্ঠার একটা router manual।\n5. গত সপ্তাহের শিক্ষা: \"ছবিসহ ধাপে ধাপে উত্তর দিলে এই user-এর সমস্যা তাড়াতাড়ি মিটেছে।\"\n6. ২ turn আগের একটা tool call-এর ফল: line status = up।\n7. ব্যবহারকারীর নাম আর শহর।\n8. কোম্পানির দামের database।\nউত্তর একটা table-এ দাও। যে item দুই জায়গায় মানায়, সেটা চিহ্নিত করো।",
-                "expect": "৮টা সারির একটা table। যেমন, router manual যায় <em>External</em>-এ, আর লাল আলোর প্রশ্ন যায় <em>Working memory</em>-তে। কিছু সারি, যেমন tool-এর ফল, দুই জায়গায় মানাতে পারে।",
+                "expect": "৮টা সারির একটা টেবিল। যেমন, রাউটার ম্যানুয়াল যায় <em>External</em>-এ, আর লাল আলোর প্রশ্ন যায় <em>Working memory</em>-তে। কিছু সারি, যেমন টুলের ফল, দুই জায়গায় মানাতে পারে।",
                 "example": "1. বর্তমান প্রশ্ন: Working memory। Prompt-এ। প্রতি call-এ।\n2. শেষ ৬ turn: Short-term। Session store। প্রতি turn-এ।\n3. বাংলা পছন্দ: Long-term। User database। user বললে।\n4. ৪০ পৃষ্ঠার manual: External। Document index। দরকারে পড়া হয়।\n5. গত সপ্তাহের শিক্ষা: Episodic। Memory store। session শেষে।\n6. ২ turn আগের tool-এর ফল: Short-term (Working-ও হতে পারে)। Session store। প্রতি turn-এ।\n7. নাম আর শহর: Long-term। User database। প্রথম জানার সময়।\n8. দামের database: External। কোম্পানির database। দরকারে পড়া হয়।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, নতুন chat-এ paste করে Enter চাপো। AI পুরনো memory ঠিক করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, নতুন চ্যাটে পেস্ট করে Enter চাপুন। AI পুরনো মেমরি ঠিক করবে।",
                 "prompt": "তুমি একটা রান্নার assistant-এর memory manager। আজকের তারিখ 2026-06-01।\nStore করা memory:\nM1 (সংরক্ষণ 2025-01-10, confidence 0.9): ব্যবহারকারী নিরামিষভোজী।\nM2 (সংরক্ষণ 2025-02-02, confidence 0.9): ব্যবহারকারী সিলেটে থাকে।\nব্যবহারকারীর নতুন message: \"কাল আমার বন্ধুদের জন্য একটা রাতের খাবারের plan করো। আমি গত মাসে মাছ খাওয়া শুরু করেছি, আর এপ্রিলে ঢাকায় চলে এসেছি।\"\n\nM1 আর M2-এর জন্য বেছে নাও: রাখো, update করো, নাকি user-কে confirm করতে বলো। কারণ লেখো। তারপর তারিখ আর confidence-সহ নতুন memory record লেখো।",
-                "expect": "M2 ঢাকায় <strong>update</strong> হয়। M1 update হয় (এখন সে মাছ খায়), অথবা AI confirm করতে বলে। নতুন record-এ তারিখ আর confidence থাকে।",
+                "expect": "M2 ঢাকায় <strong>আপডেট</strong> হয়। M1 আপডেট হয় (এখন সে মাছ খায়), অথবা AI কনফার্ম করতে বলে। নতুন রেকর্ডে তারিখ আর কনফিডেন্স থাকে।",
                 "example": "M1: Update করো। ব্যবহারকারী এখন মাছ খায়, তাই \"নিরামিষভোজী\" পুরোপুরি সত্য না। মাংস এখনো এড়ায় কি না, AI জিজ্ঞেস করতে পারে।\nM2: Update করো। ব্যবহারকারী এপ্রিল 2026-এ ঢাকায় এসেছে, তাই সিলেট এখন পুরনো।\n\nনতুন record:\nN1 (সংরক্ষণ 2026-06-01, confidence 0.8): ব্যবহারকারী মে 2026 থেকে মাছ খায়, কিন্তু মাংস এখনো এড়াতে পারে।\nN2 (সংরক্ষণ 2026-06-01, confidence 0.9): ব্যবহারকারী এপ্রিল 2026 থেকে ঢাকায় থাকে।"
               },
               {
                 "chat": "same",
-                "do": "নতুন memory record গুলো দেখো। প্রতিটায় একটা তারিখ আর একটা confidence সংখ্যা আছে কি না, মিলিয়ে নাও।",
-                "expect": "প্রতিটা record-এ <em>2026-06-01</em>-এর মতো তারিখ আর <em>0.9</em>-এর মতো সংখ্যা থাকে। কোনোটায় না থাকলে AI-কে যোগ করতে বলো।"
+                "do": "নতুন মেমরি রেকর্ডগুলো দেখুন। প্রতিটায় একটা তারিখ আর একটা কনফিডেন্স সংখ্যা আছে কি না, মিলিয়ে নিন।",
+                "expect": "প্রতিটা রেকর্ডে <em>2026-06-01</em>-এর মতো তারিখ আর <em>০.৯</em>-এর মতো সংখ্যা থাকে। কোনোটায় না থাকলে AI-কে যোগ করতে বলুন।"
               }
             ],
-            "learned": "প্রতিটা ধরনের তথ্যের নিজের জায়গা আছে। Prompt (working memory) ছোট, কিন্তু AI সবসময় সেটা পড়ে। Manual-এর মতো বড় জিনিস বাইরে থাকে, আর শুধু দরকারে আনা হয়। Store করা memory ভুল হয়ে যেতে পারে, যেমন এখানে M2। তাই প্রতিটা memory-র একটা <strong>timestamp</strong> (কবে save হয়েছে) আর একটা <strong>confidence</strong> (কতটা নিশ্চিত, তার একটা সংখ্যা) দরকার।",
-            "done": "তোমার কাছে ৮টা item-এর সাজানো table আর ২টা নতুন memory record আছে, প্রতিটায় তারিখ আর confidence আছে।",
+            "learned": "প্রতিটা ধরনের তথ্যের নিজের জায়গা আছে। প্রম্পট (ওয়ার্কিং মেমরি) ছোট, কিন্তু AI সবসময় সেটা পড়ে। ম্যানুয়ালের মতো বড় জিনিস বাইরে থাকে, আর শুধু দরকারে আনা হয়। স্টোর করা মেমরি ভুল হয়ে যেতে পারে, যেমন এখানে M2। তাই প্রতিটা মেমরির একটা <strong>টাইমস্ট্যাম্প</strong> (কবে সেভ হয়েছে) আর একটা <strong>কনফিডেন্স</strong> (কতটা নিশ্চিত, তার একটা সংখ্যা) দরকার।",
+            "done": "আপনার কাছে ৮টা আইটেমের সাজানো টেবিল আর ২টা নতুন মেমরি রেকর্ড আছে, প্রতিটায় তারিখ আর কনফিডেন্স আছে।",
             "check": {
-              "question": "Store করা memory-র কেন তারিখ আর confidence সংখ্যা লাগে?",
-              "answer": "পুরনো session-এর কোনো তথ্য user নতুন কিছু বললে ভুল হয়ে যেতে পারে। তারিখ আর confidence থাকলে system নতুন তথ্যে বেশি ভরসা করতে পারে, বা পুরনোটা user-কে confirm করতে বলতে পারে।"
+              "question": "স্টোর করা মেমরির কেন তারিখ আর কনফিডেন্স সংখ্যা লাগে?",
+              "answer": "পুরনো সেশনের কোনো তথ্য ইউজার নতুন কিছু বললে ভুল হয়ে যেতে পারে। তারিখ আর কনফিডেন্স থাকলে সিস্টেম নতুন তথ্যে বেশি ভরসা করতে পারে, বা পুরনোটা ইউজারকে কনফার্ম করতে বলতে পারে।"
             },
-            "challenge": "দ্বিতীয় prompt আবার নতুন chat-এ পাঠাও, কিন্তু নতুন message বদলে লেখো: <em>আমি এখন অন্যভাবে খাই।</em> AI কি প্রশ্ন করে, নাকি আন্দাজ করে?"
+            "challenge": "দ্বিতীয় প্রম্পট আবার নতুন চ্যাটে পাঠান, কিন্তু নতুন মেসেজ বদলে লিখুন: <em>আমি এখন অন্যভাবে খাই।</em> AI কি প্রশ্ন করে, নাকি আন্দাজ করে?"
           }
         }
       ]
@@ -1049,8 +1049,8 @@
       "title": "Context compression & pruning",
       "sub": "When summarization is too lossy and you have no time to spare, <strong>compression</strong> removes redundancy and <strong>pruning</strong> drops irrelevant tokens. The goal: same information density, fewer tokens.",
       "bn": {
-        "title": "Context compression আর pruning",
-        "sub": "Summarization যখন বেশি তথ্য হারায় আর হাতে সময়ও নেই, তখন <strong>compression</strong> বাড়তি পুনরাবৃত্তি সরায় আর <strong>pruning</strong> অপ্রাসঙ্গিক token ফেলে দেয়। লক্ষ্য: তথ্যের ঘনত্ব একই থাকবে, token কমবে।"
+        "title": "কনটেক্সট কমপ্রেশন আর প্রুনিং",
+        "sub": "সামারাইজেশন যখন বেশি তথ্য হারায় আর হাতে সময়ও নেই, তখন <strong>কমপ্রেশন</strong> বাড়তি পুনরাবৃত্তি সরায় আর <strong>প্রুনিং</strong> অপ্রাসঙ্গিক টোকেন ফেলে দেয়। লক্ষ্য: তথ্যের ঘনত্ব একই থাকবে, টোকেন কমবে।"
       },
       "body": [
         {
@@ -1120,7 +1120,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"LLMLingua compression pipeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">LLMLingua pipeline: classifier marks low-info tokens for removal</text>\n\n      <rect x=\"40\" y=\"60\" width=\"600\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#e2e8f0\">\"The user is asking about the weather in Dhaka which is the capital of Bangladesh...\"</text>\n\n      <line x1=\"660\" y1=\"80\" x2=\"730\" y2=\"80\" stroke=\"#94a3b8\" marker-end=\"url(#arr2)\"></line>\n      <text x=\"670\" y=\"68\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">classify</text>\n\n      <rect x=\"750\" y=\"60\" width=\"300\" height=\"40\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"766\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">\"user asks Dhaka weather...\" (40% tokens)</text>\n\n      <text x=\"40\" y=\"140\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">compression done BEFORE the LLM call — saves input tokens &amp; latency</text>\n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">some lossiness is acceptable for simple Q&amp;A; not for factual lookups</text>\n    </svg>",
           "caption": "LLMLingua and similar tools identify low-information phrases (\"the capital of Bangladesh\") and drop them while preserving the meaning.",
-          "captionBn": "এখানে LLMLingua pipeline দেখানো হয়েছে: একটি classifier মূল prompt-এর কম-তথ্যপূর্ণ token চিহ্নিত করে, তারপর সংক্ষিপ্ত রূপ (প্রায় 40% tokens) তৈরি হয়। এই compression LLM call-এর আগেই হয়, ফলে input tokens ও latency কমে; তবে কিছু তথ্য হারাতে পারে।"
+          "captionBn": "এখানে LLMLingua পাইপলাইন দেখানো হয়েছে: একটি ক্লাসিফায়ার মূল প্রম্পটের কম-তথ্যপূর্ণ টোকেন চিহ্নিত করে, তারপর সংক্ষিপ্ত রূপ (প্রায় ৪০% টোকেন) তৈরি হয়। এই কমপ্রেশন LLM কলের আগেই হয়, ফলে ইনপুট টোকেন ও ল্যাটেন্সি কমে; তবে কিছু তথ্য হারাতে পারে।"
         },
         {
           "type": "heading",
@@ -1204,38 +1204,38 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "Summarization যখন বেশি lossy আর সময়ও কম, তখন <strong>compression</strong> (অপ্রয়োজনীয় পুনরাবৃত্তি সরিয়ে ছোট করা) এবং <strong>pruning</strong> (অপ্রাসঙ্গিক অংশ বাদ দেওয়া) কাজে লাগে। লক্ষ্য একটাই: তথ্যের ঘনত্ব একই রেখে টোকেন কমানো।"
+          "html": "সামারাইজেশন যখন বেশি লসি আর সময়ও কম, তখন <strong>কমপ্রেশন</strong> (অপ্রয়োজনীয় পুনরাবৃত্তি সরিয়ে ছোট করা) এবং <strong>প্রুনিং</strong> (অপ্রাসঙ্গিক অংশ বাদ দেওয়া) কাজে লাগে। লক্ষ্য একটাই: তথ্যের ঘনত্ব একই রেখে টোকেন কমানো।"
         },
         {
           "type": "paragraph",
-          "html": "প্রধান compression কৌশলগুলো:"
+          "html": "প্রধান কমপ্রেশন কৌশলগুলো:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>LLM summarisation:</strong> structured schema দিয়ে সারাংশ; ৫–২০×; chat history ও লম্বা document-এর জন্য।",
-            "<strong>LLMLingua:</strong> ছোট classifier কম-তথ্যবহ শব্দ/টোকেন ছেঁটে দেয়; ৫–২০×; latency ও খরচ কমাতে। এটি LLM call-এর <em>আগেই</em> চলে।",
-            "<strong>Selective context:</strong> self-information (perplexity) দিয়ে অপ্রয়োজনীয় বাক্যাংশ বাদ; প্রায় ৫×; RAG-এর জন্য।",
-            "<strong>Embedding-based filtering:</strong> query-র সাথে প্রাসঙ্গিকতার score দিয়ে কম-score chunk বাদ।",
-            "<strong>Token-budget knapsack:</strong> প্রাসঙ্গিকতার ক্রমে chunk নিতে থাকা, budget ভরলে থামা।",
-            "<strong>Deduplication:</strong> প্রায় একই chunk (cosine &gt; 0.95) থাকলে একটি রাখা; ১.৫–৩×।"
+            "<strong>LLM সামারাইজেশন:</strong> স্ট্রাকচার্ড স্কিমা দিয়ে সারসংক্ষেপ; ৫–২০×; চ্যাট হিস্ট্রি ও লম্বা ডকুমেন্টের জন্য।",
+            "<strong>LLMLingua:</strong> ছোট ক্লাসিফায়ার কম-তথ্যবহ শব্দ/টোকেন ছেঁটে দেয়; ৫–২০×; ল্যাটেন্সি ও খরচ কমাতে। এটি LLM কলের <em>আগেই</em> চলে।",
+            "<strong>সিলেক্টিভ কনটেক্সট:</strong> সেলফ-ইনফরমেশন (পারপ্লেক্সিটি) দিয়ে অপ্রয়োজনীয় বাক্যাংশ বাদ; প্রায় ৫×; RAG-এর জন্য।",
+            "<strong>এমবেডিং-বেসড ফিল্টারিং:</strong> কুয়েরির সাথে প্রাসঙ্গিকতার স্কোর দিয়ে কম-স্কোর চাঙ্ক বাদ।",
+            "<strong>টোকেন-বাজেট ন্যাপস্যাক:</strong> প্রাসঙ্গিকতার ক্রমে চাঙ্ক নিতে থাকা, বাজেট ভরলে থামা।",
+            "<strong>ডিডুপ্লিকেশন:</strong> প্রায় একই চাঙ্ক (কসাইন &gt; ০.৯৫) থাকলে একটি রাখা; ১.৫–৩×।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Pruning</strong> চার রকম: relevance pruning (প্রশ্নের সাথে মিল কম এমন নিচের chunk ফেলা), recency pruning (summary-তে ঢুকে যাওয়া পুরোনো টার্ন বাদ), task-aware pruning (বর্তমান ধাপে অপ্রয়োজনীয় tool definition বাদ), আর diversity pruning (একই তথ্যের একাধিক doc থেকে সবচেয়ে ভালোটি রাখা)। Compression সবকিছুকে ছোট করে; pruning শুধু অপ্রাসঙ্গিক অংশ কাটে — দুটো পরিপূরক।"
+          "html": "<strong>প্রুনিং</strong> চার রকম: রেলিভেন্স প্রুনিং (প্রশ্নের সাথে মিল কম এমন নিচের চাঙ্ক ফেলা), রিসেন্সি প্রুনিং (সারসংক্ষেপে ঢুকে যাওয়া পুরোনো টার্ন বাদ), টাস্ক-অ্যাওয়ার প্রুনিং (বর্তমান ধাপে অপ্রয়োজনীয় টুল ডেফিনিশন বাদ), আর ডাইভার্সিটি প্রুনিং (একই তথ্যের একাধিক ডকুমেন্ট থেকে সবচেয়ে ভালোটি রাখা)। কমপ্রেশন সবকিছুকে ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে — দুটো পরিপূরক।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রোডাকশনের সম্মিলিত পদ্ধতি:</strong> (১) K=20 candidate chunk retrieve করুন, (২) cross-encoder দিয়ে re-rank করুন, (৩) সেরা ৫টিতে prune করুন, (৪) তখনও বাজেটের বেশি হলে LLMLingua দিয়ে compress করুন, (৫) prompt-এর সঠিক জায়গায় (§7 মনে রেখে) চিহ্নিত section-এ বসান। মনে রাখবেন, দুটোই lossy — যে তথ্যটি compress হয়ে হারাল সেটিই হয়তো উত্তর ছিল, তাই noise ছাঁটুন, signal (তথ্য, সিদ্ধান্ত, নাম) যথাসম্ভব হুবহু রাখুন।"
+          "html": "<strong>প্রোডাকশনের সম্মিলিত পদ্ধতি:</strong> (১) K=২০ ক্যান্ডিডেট চাঙ্ক রিট্রিভ করুন, (২) ক্রস-এনকোডার দিয়ে রিরেংক করুন, (৩) সেরা ৫টিতে প্রুন করুন, (৪) তখনও বাজেটের বেশি হলে LLMLingua দিয়ে কমপ্রেস করুন, (৫) প্রম্পটের সঠিক জায়গায় (§৭ মনে রেখে) চিহ্নিত সেকশনে বসান। মনে রাখবেন, দুটোই লসি — যে তথ্যটি কমপ্রেস হয়ে হারাল সেটিই হয়তো উত্তর ছিল, তাই নয়েজ ছাঁটুন, সিগন্যাল (তথ্য, সিদ্ধান্ত, নাম) যথাসম্ভব হুবহু রাখুন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>ঈদের বাজারের ব্যাগ গোছানোর উদাহরণ:</strong> ছোট ব্যাগে সব ধরাতে হলে আপনি প্রথমে কাপড়গুলো ভাঁজ করে চেপে নেন (compression), তারপর যেগুলো এবার লাগবেই না সেগুলো একেবারে বাদ দেন (pruning)। শুধু ভাঁজ করলে ব্যাগ ভরে যায়, আবার শুধু বাদ দিলে দরকারি জিনিস ফেলে আসার ভয় থাকে। দুটো মিলিয়ে করলে ব্যাগ হালকা থাকে অথচ দরকারি কিছু বাদ পড়ে না।"
+              "html": "<strong>ঈদের বাজারের ব্যাগ গোছানোর উদাহরণ:</strong> ছোট ব্যাগে সব ধরাতে হলে আপনি প্রথমে কাপড়গুলো ভাঁজ করে চেপে নেন (কমপ্রেশন), তারপর যেগুলো এবার লাগবেই না সেগুলো একেবারে বাদ দেন (প্রুনিং)। শুধু ভাঁজ করলে ব্যাগ ভরে যায়, আবার শুধু বাদ দিলে দরকারি জিনিস ফেলে আসার ভয় থাকে। দুটো মিলিয়ে করলে ব্যাগ হালকা থাকে অথচ দরকারি কিছু বাদ পড়ে না।"
             }
           ]
         }
@@ -1294,41 +1294,41 @@
             "challenge": "In the first prompt, change the question to: <em>When is the office open?</em> Does the AI now keep C3? What does this show about choosing chunks for each question?"
           },
           "bn": {
-            "title": "Chunk বাদ দাও, তারপর paragraph ছোট করো",
-            "why": "তোমার RAG app যখন একটা প্রশ্নের জন্য 20টা text-এর টুকরো পায়, তখন অনেকগুলো পুনরাবৃত্তি বা অপ্রাসঙ্গিক হয়। সব পাঠালে কাজে না লাগা token-এর দাম দিতে হয়, আর উত্তরও খারাপ হতে পারে।",
+            "title": "চাঙ্ক বাদ দিন, তারপর প্যারাগ্রাফ ছোট করুন",
+            "why": "আপনার RAG অ্যাপ যখন একটা প্রশ্নের জন্য ২০টা টেক্সটের টুকরো পায়, তখন অনেকগুলো পুনরাবৃত্তি বা অপ্রাসঙ্গিক হয়। সব পাঠালে কাজে না লাগা টোকেনের দাম দিতে হয়, আর উত্তরও খারাপ হতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। AI chunk (text-এর টুকরো) গুলোতে score দেবে আর বাছাই করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। AI চাঙ্কগুলোতে (টেক্সটের টুকরো) স্কোর দেবে আর বাছাই করবে।",
                 "prompt": "প্রশ্ন: ঢাকায় standard delivery-তে কত সময় লাগে?\n\nপাওয়া chunk গুলো:\nC1: ঢাকায় standard delivery-তে 2 কার্যদিবস লাগে। বেলা 12:00-এর আগে order করলে express delivery একই দিনে পৌঁছায়।\nC2: ঢাকা শহরের ভেতরে standard delivery-তে 2 কার্যদিবস লাগে।\nC3: আমাদের অফিস শুক্রবার আর সরকারি ছুটির দিনে বন্ধ থাকে।\nC4: ঢাকার বাইরে delivery-তে 4 থেকে 6 কার্যদিবস লাগে।\nC5: কোম্পানি 2014 সালে শুরু হয়েছে আর এতে 120 জন কর্মী আছে।\nC6: বাক্স সিল করা থাকলে 7 দিনের মধ্যে return নেওয়া হয়।\n\nকাজ:\n1. প্রতিটা chunk-কে 0 থেকে 10 পর্যন্ত একটা relevance score দাও।\n2. যেসব chunk একই কথা বলে, সেগুলো খোঁজো। তাদের মধ্যে শুধু সেরাটা রাখো।\n3. Prompt-এ মাত্র 2টা chunk-এর জায়গা আছে। যেগুলো বাকি আছে, তার মধ্যে সেরা 2টা বেছে নাও।\n4. শুধু তোমার বাছা 2টা chunk ব্যবহার করে প্রশ্নের উত্তর দাও।",
-                "expect": "প্রতিটা chunk-এর score। <em>C1</em> আর <em>C2</em> বেশি score পায়, আর শুধু একটা রাখা হয়। <em>C5</em> আর <em>C6</em> পায় 0 বা 1। উত্তর হলো <strong>2 কার্যদিবস</strong>।",
+                "expect": "প্রতিটা চাঙ্কের স্কোর। <em>C1</em> আর <em>C2</em> বেশি স্কোর পায়, আর শুধু একটা রাখা হয়। <em>C5</em> আর <em>C6</em> পায় ০ বা ১। উত্তর হলো <strong>২ কার্যদিবস</strong>।",
                 "example": "Score: C1 = 10, C2 = 9, C3 = 1, C4 = 3, C5 = 0, C6 = 0।\nC2 হলো C1-এর পুনরাবৃত্তি, তাই C2 বাদ দিলাম।\nবাছা chunk: C1 আর C4।\nউত্তর: ঢাকায় standard delivery-তে 2 কার্যদিবস লাগে।"
               },
               {
                 "chat": "same",
-                "do": "AI-এর কাজ মিলিয়ে দেখো। C1 আর C2-এর একটা কি বাদ গেছে? C5 আর C6 কি কম score পেয়েছে?",
+                "do": "AI-এর কাজ মিলিয়ে দেখুন। C1 আর C2-এর একটা কি বাদ গেছে? C5 আর C6 কি কম স্কোর পেয়েছে?",
                 "expect": "দুটোরই উত্তর হ্যাঁ। AI C1 বা C2 যেকোনো একটা রাখতে পারে, দুটোই ঠিক, কারণ দুটো একই কথা বলে।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, নতুন chat-এ paste করে Enter চাপো। AI paragraph-টা ছোট করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, নতুন চ্যাটে পেস্ট করে Enter চাপুন। AI প্যারাগ্রাফটা ছোট করবে।",
                 "prompt": "নিচের paragraph-টা অর্ধেকের চেয়েও ছোট করো। কম তথ্যের শব্দ বাদ দাও। প্রতিটা সংখ্যা, প্রতিটা নাম আর \"না\"-এর মতো প্রতিটা নেতিবাচক কথা রাখো। তারপর শুধু তোমার ছোট text ব্যবহার করে প্রশ্নের উত্তর দাও।\n\nParagraph: আপনার order-এর জন্য ধন্যবাদ। আমরা আপনাকে জানাতে চাই যে Basic plan-এর দাম মাসে 500 tk, আর Pro plan-এর দাম মাসে 1,200 tk। আপনি যেকোনো সময় Pro plan বাতিল করতে পারেন, কিন্তু যে মাস শুরু হয়ে গেছে তার জন্য আমরা টাকা ফেরত দিই না। আপনি পুরো এক বছরের টাকা একসঙ্গে দিলে 2 মাস বিনা মূল্যে পাবেন।\n\nপ্রশ্ন: Pro plan-এর পুরো এক বছরের দাম কত, আর মাসের মাঝখানে কি টাকা ফেরত পাওয়া যায়?",
-                "expect": "সব সংখ্যাসহ একটা ছোট text। তারপর উত্তর: Pro-র এক বছরের জন্য <strong>12,000 tk</strong>, আর শুরু হয়ে যাওয়া মাসের টাকা ফেরত নেই।",
+                "expect": "সব সংখ্যাসহ একটা ছোট টেক্সট। তারপর উত্তর: Pro-র এক বছরের জন্য <strong>১২,০০০ tk</strong>, আর শুরু হয়ে যাওয়া মাসের টাকা ফেরত নেই।",
                 "example": "ছোট text: Basic 500 tk/মাস। Pro 1,200 tk/মাস। Pro যেকোনো সময় বাতিল, শুরু হওয়া মাসের টাকা ফেরত নেই। 1 বছর একসঙ্গে দিলে 2 মাস বিনা মূল্যে।\n\nউত্তর: Pro-র পুরো এক বছরের দাম 10 x 1,200 = 12,000 tk। না, মাসের মাঝখানে টাকা ফেরত পাওয়া যায় না।"
               },
               {
                 "chat": "same",
-                "do": "ছোট text মিলিয়ে দেখো: 500, 1,200, \"2 মাস বিনা মূল্যে\" আর \"ফেরত নেই\" আছে কি? আরও হিসাব করো: 10 মাস x 1,200 tk।",
-                "expect": "সবগুলো আছে। 10 x 1,200 = <strong>12,000</strong> tk।"
+                "do": "ছোট টেক্সট মিলিয়ে দেখুন: ৫০০, ১,২০০, \"২ মাস বিনা মূল্যে\" আর \"ফেরত নেই\" আছে কি? আরও হিসাব করুন: ১০ মাস x ১,২০০ tk।",
+                "expect": "সবগুলো আছে। ১০ x ১,২০০ = <strong>১২,০০০</strong> tk।"
               }
             ],
-            "learned": "<strong>Pruning</strong> মানে যে chunk কাজে লাগে না, তাকে পুরোটা বাদ দেওয়া, যেমন পুনরাবৃত্তি (C2) বা অপ্রাসঙ্গিক chunk (C5)। <strong>Compression</strong> মানে সব অংশ রেখে বাড়তি শব্দ কেটে text ছোট করা। দুটোতেই token বাঁচে। দুটোতেই সংখ্যা আর \"না\"-এর মতো শব্দ রাখতে হয়, নইলে উত্তর ভুল হয়ে যায়।",
-            "done": "তোমার কাছে রাখা আর বাদ দেওয়া chunk-এর list আছে, আর একটা ছোট paragraph আছে, যেটায় সব সংখ্যা আর \"ফেরত নেই\" নিয়মটা এখনো আছে।",
+            "learned": "<strong>প্রুনিং</strong> মানে যে চাঙ্ক কাজে লাগে না, তাকে পুরোটা বাদ দেওয়া, যেমন পুনরাবৃত্তি (C2) বা অপ্রাসঙ্গিক চাঙ্ক (C5)। <strong>কমপ্রেশন</strong> মানে সব অংশ রেখে বাড়তি শব্দ কেটে টেক্সট ছোট করা। দুটোতেই টোকেন বাঁচে। দুটোতেই সংখ্যা আর \"না\"-এর মতো শব্দ রাখতে হয়, নইলে উত্তর ভুল হয়ে যায়।",
+            "done": "আপনার কাছে রাখা আর বাদ দেওয়া চাঙ্কের তালিকা আছে, আর একটা ছোট প্যারাগ্রাফ আছে, যেটায় সব সংখ্যা আর \"ফেরত নেই\" নিয়মটা এখনো আছে।",
             "check": {
-              "question": "Pruning আর compression-এর পার্থক্য কী?",
-              "answer": "Pruning অপ্রাসঙ্গিক বা পুনরাবৃত্ত অংশ পুরোটা বাদ দেয়। Compression অংশগুলো রেখে বাড়তি শব্দ কেটে ছোট করে। দুটো একসঙ্গেও ব্যবহার করা যায়।"
+              "question": "প্রুনিং আর কমপ্রেশনের পার্থক্য কী?",
+              "answer": "প্রুনিং অপ্রাসঙ্গিক বা পুনরাবৃত্ত অংশ পুরোটা বাদ দেয়। কমপ্রেশন অংশগুলো রেখে বাড়তি শব্দ কেটে ছোট করে। দুটো একসঙ্গেও ব্যবহার করা যায়।"
             },
-            "challenge": "প্রথম prompt-এ প্রশ্ন বদলে লেখো: <em>অফিস কখন খোলা থাকে?</em> AI কি এখন C3 রাখে? প্রতিটা প্রশ্নের জন্য chunk বাছা নিয়ে এটা কী দেখায়?"
+            "challenge": "প্রথম প্রম্পটে প্রশ্ন বদলে লিখুন: <em>অফিস কখন খোলা থাকে?</em> AI কি এখন C3 রাখে? প্রতিটা প্রশ্নের জন্য চাঙ্ক বাছা নিয়ে এটা কী দেখায়?"
           }
         }
       ]
@@ -1339,8 +1339,8 @@
       "title": "Tool result truncation strategies",
       "sub": "A single tool call can return 100K tokens — a long code file, a thousand-row database result, a 50-page web page. Left unchecked, one tool result can fill your entire context window. Truncation is the discipline of keeping tool results <em>useful but bounded</em>.",
       "bn": {
-        "title": "Tool result truncation-এর কৌশল",
-        "sub": "একটি tool call 100K token ফেরত দিতে পারে — লম্বা code file, হাজার সারির database ফলাফল, 50 পাতার web page। আটকে না রাখলে একটি tool result-ই পুরো context window ভরে ফেলতে পারে। Truncation হলো tool result-কে <em>কাজের কিন্তু সীমিত</em> রাখার কৌশল।"
+        "title": "টুল রেজাল্ট ট্রাঙ্কেশনের কৌশল",
+        "sub": "একটি টুল কল ১০০K টোকেন ফেরত দিতে পারে — লম্বা কোড ফাইল, হাজার সারির ডেটাবেস ফলাফল, ৫০ পাতার ওয়েব পেজ। আটকে না রাখলে একটি টুল রেজাল্টই পুরো কনটেক্সট উইন্ডো ভরে ফেলতে পারে। ট্রাঙ্কেশন হলো টুল রেজাল্টকে <em>কাজের কিন্তু সীমিত</em> রাখার কৌশল।"
       },
       "body": [
         {
@@ -1436,7 +1436,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tool result anatomy\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">anatomy of a tool result — different regions, different value</text>\n\n      <rect x=\"40\" y=\"60\" width=\"1020\" height=\"80\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"60\" y=\"84\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">[tool: search_docs]</text>\n\n      <rect x=\"40\" y=\"100\" width=\"240\" height=\"40\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"160\" y=\"125\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\">summary header</text>\n      <text x=\"160\" y=\"139\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">\"5,234 results, top by relevance\"</text>\n\n      <rect x=\"290\" y=\"100\" width=\"320\" height=\"30\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"450\" y=\"121\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">key slice (top 5 results)</text>\n\n      <rect x=\"620\" y=\"100\" width=\"200\" height=\"30\" rx=\"6\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"720\" y=\"121\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\">schema + counts</text>\n\n      <rect x=\"830\" y=\"100\" width=\"230\" height=\"30\" rx=\"6\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\"></rect>\n      <text x=\"945\" y=\"121\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#f472b6\">cursor for more</text>\n    </svg>",
           "caption": "Return the high-signal bits (summary, top slice, schema) and a pointer for the rest. Let the agent pull more if needed.",
-          "captionBn": "এই ডায়াগ্রামে একটি tool result-এর গঠন দেখানো হয়েছে: ওপরে summary header, মাঝে key slice (top 5 results), তারপর schema + counts এবং শেষে আরও ডেটার জন্য cursor। অর্থাৎ বেশি সিগন্যালযুক্ত অংশ আগে দিয়ে বাকিটা pointer দিয়ে পরে আনা যায়।"
+          "captionBn": "এই ডায়াগ্রামে একটি টুল রেজাল্টের গঠন দেখানো হয়েছে: ওপরে সারসংক্ষেপ হেডার, মাঝে কী স্লাইস (টপ ৫ রেজাল্ট), তারপর স্কিমা + কাউন্ট এবং শেষে আরও ডেটার জন্য কার্সর। অর্থাৎ বেশি সিগন্যালযুক্ত অংশ আগে দিয়ে বাকিটা পয়েন্টার দিয়ে পরে আনা যায়।"
         },
         {
           "type": "callout",
@@ -1487,7 +1487,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটি tool call একাই ১০০K টোকেন ফেরত দিতে পারে — লম্বা কোড ফাইল, হাজার সারির database result বা ৫০ পাতার ওয়েব পেজ। সামলে না রাখলে একটি tool result-ই পুরো context window ভরে ফেলে। <strong>Tool result truncation</strong> মানে ফলাফল <em>কাজের উপযোগী কিন্তু সীমাবদ্ধ</em> রাখা।"
+          "html": "একটি টুল কল একাই ১০০K টোকেন ফেরত দিতে পারে — লম্বা কোড ফাইল, হাজার সারির ডেটাবেস রেজাল্ট বা ৫০ পাতার ওয়েব পেজ। সামলে না রাখলে একটি টুল রেজাল্টই পুরো কনটেক্সট উইন্ডো ভরে ফেলে। <strong>টুল রেজাল্ট ট্রাঙ্কেশন</strong> মানে ফলাফল <em>কাজের উপযোগী কিন্তু সীমাবদ্ধ</em> রাখা।"
         },
         {
           "type": "paragraph",
@@ -1497,26 +1497,26 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Length-based:</strong> hard cap (N টোকেনের পর <code>[...truncated...]</code>), head/tail (শুরু ও শেষ K টোকেন রেখে মাঝখান বাদ), অথবা প্রথম ও শেষ N লাইন।",
-            "<strong>Structure-based:</strong> database-এর জন্য schema + প্রথম ১০ সারি + মোট সংখ্যা; কোডের জন্য function signature ও type রেখে body বাদ; অথবা tool-কে বলা যেন শুধু যা চাওয়া হয়েছে তাই ফেরত দেয়।",
-            "<strong>Semantic:</strong> relevance অনুযায়ী top-K চিহ্নিত করা, ছোট মডেল দিয়ে আগেই সারাংশ, বা vector DB-তে রেখে শুধু pointer + summary ফেরত দেওয়া।",
-            "<strong>Smart bounds:</strong> বাজেটে tool-এর জন্য জায়গা আগেই রাখা (§1), page করে ফলাফল আনা, আর বড় ডেটা object store-এ রেখে reference দিয়ে <em>just-in-time</em> আনা।"
+            "<strong>লেংথ-বেসড:</strong> হার্ড ক্যাপ (N টোকেনের পর <code>[...truncated...]</code>), হেড/টেইল (শুরু ও শেষ K টোকেন রেখে মাঝখান বাদ), অথবা প্রথম ও শেষ N লাইন।",
+            "<strong>স্ট্রাকচার-বেসড:</strong> ডেটাবেসের জন্য স্কিমা + প্রথম ১০ সারি + মোট সংখ্যা; কোডের জন্য ফাংশন সিগনেচার ও টাইপ রেখে বডি বাদ; অথবা টুলকে বলা যেন শুধু যা চাওয়া হয়েছে তাই ফেরত দেয়।",
+            "<strong>সেম্যান্টিক:</strong> রেলিভেন্স অনুযায়ী টপ-K চিহ্নিত করা, ছোট মডেল দিয়ে আগেই সারসংক্ষেপ, বা ভেক্টর DB-তে রেখে শুধু পয়েন্টার + সারসংক্ষেপ ফেরত দেওয়া।",
+            "<strong>স্মার্ট বাউন্ডস:</strong> বাজেটে টুলের জন্য জায়গা আগেই রাখা (§১), পেজিনেশন করে ফলাফল আনা, আর বড় ডেটা অবজেক্ট স্টোরে রেখে রেফারেন্স দিয়ে <em>জাস্ট-ইন-টাইম</em> আনা।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "সবচেয়ে প্রোডাকশন-বান্ধব পদ্ধতি হলো <strong>\"page through\" pattern</strong>: পুরো ফলাফল একসাথে না দিয়ে ছোট একটি slice (যেমন ৫টি result, প্রায় &lt; 2K টোকেন) আর একটি <code>next_cursor</code> ও <code>total</code> ফেরত দিন। এজেন্ট দরকার মনে করলে cursor দিয়ে আরও চাইবে — খরচ সীমিত থাকে, অথচ অনুসন্ধান চালিয়ে যাওয়া যায়। একটি ভালো tool result-এ থাকে summary header, key slice, schema + counts এবং আরও আনার cursor।"
+          "html": "সবচেয়ে প্রোডাকশন-বান্ধব পদ্ধতি হলো <strong>\"পেজ থ্রু\" প্যাটার্ন</strong>: পুরো ফলাফল একসাথে না দিয়ে ছোট একটি স্লাইস (যেমন ৫টি রেজাল্ট, প্রায় &lt; ২K টোকেন) আর একটি <code>next_cursor</code> ও <code>total</code> ফেরত দিন। এজেন্ট দরকার মনে করলে কার্সর দিয়ে আরও চাইবে — খরচ সীমিত থাকে, অথচ অনুসন্ধান চালিয়ে যাওয়া যায়। একটি ভালো টুল রেজাল্টে থাকে সারসংক্ষেপ হেডার, কী স্লাইস, স্কিমা + কাউন্ট এবং আরও আনার কার্সর।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> কোড বা JSON মাঝপথে কেটে দেবেন না — function-এর body বা JSON object অর্ধেক কাটলে parser ভেঙে যায়। <em>Structure-aware</em> কাটুন (function-এর শেষ, বন্ধনী বন্ধ হওয়ার জায়গা, লাইনের শেষে), আর সম্ভব হলে উৎসেই tool-কে দিয়ে কাটিয়ে নিন।"
+          "html": "<strong>সতর্কতা:</strong> কোড বা JSON মাঝপথে কেটে দেবেন না — ফাংশনের বডি বা JSON অবজেক্ট অর্ধেক কাটলে পার্সার ভেঙে যায়। <em>স্ট্রাকচার-অ্যাওয়ার</em> কাটুন (ফাংশনের শেষ, বন্ধনী বন্ধ হওয়ার জায়গা, লাইনের শেষে), আর সম্ভব হলে উৎসেই টুলকে দিয়ে কাটিয়ে নিন।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>রেস্টুরেন্টের মেনু-কার্ডের উদাহরণ:</strong> ওয়েটার যদি আপনার সামনে রান্নাঘরের সব পদ একসাথে এনে টেবিলে ঠেসে দেয়, জায়গাই থাকবে না। ভালো ওয়েটার প্রথমে মেনু দেখায়, সেরা কয়েকটি পদ সুপারিশ করে, বলে \"আরও আছে, চাইলে বলবেন\" — আর আপনি চাইলে তবেই আনে। Tool result-ও ঠিক তেমন: দরকারি অংশ আগে দাও, বাকিটা চাইলে দেবে।"
+              "html": "<strong>রেস্টুরেন্টের মেনু-কার্ডের উদাহরণ:</strong> ওয়েটার যদি আপনার সামনে রান্নাঘরের সব পদ একসাথে এনে টেবিলে ঠেসে দেয়, জায়গাই থাকবে না। ভালো ওয়েটার প্রথমে মেনু দেখায়, সেরা কয়েকটি পদ সুপারিশ করে, বলে \"আরও আছে, চাইলে বলবেন\" — আর আপনি চাইলে তবেই আনে। টুল রেজাল্টও ঠিক তেমন: দরকারি অংশ আগে দিন, বাকিটা চাইলে পরে দিন।"
             }
           ]
         }
@@ -1570,36 +1570,36 @@
             "challenge": "Send the second prompt again in a new chat, but change the question to: <em>Which team handles a refund for a gift card?</em> Does the AI ask for the next page? Is that the right choice?"
           },
           "bn": {
-            "title": "কেটে ফেলা tool result কী লুকায়, দেখো",
-            "why": "তোমার AI agent যখন কোনো tool call করে, তার result অনেক বড় হতে পারে, তাই app প্রায়ই সেটা কেটে ছোট করে। কাটা যদি ভুল জায়গায় পড়ে, agent একটা ভুল সংখ্যা পড়তে পারে আর customer-কে ভুল উত্তর দিতে পারে।",
+            "title": "কেটে ফেলা টুল রেজাল্ট কী লুকায়, দেখুন",
+            "why": "আপনার AI এজেন্ট যখন কোনো টুল কল করে, তার রেজাল্ট অনেক বড় হতে পারে, তাই অ্যাপ প্রায়ই সেটা কেটে ছোট করে। কাটা যদি ভুল জায়গায় পড়ে, এজেন্ট একটা ভুল সংখ্যা পড়তে পারে আর কাস্টমারকে ভুল উত্তর দিতে পারে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। এর tool result একটা সংখ্যার মাঝখানে কেটে গেছে। Tool result-এর text English-এই আছে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। এর টুল রেজাল্ট একটা সংখ্যার মাঝখানে কেটে গেছে। টুল রেজাল্টের টেক্সট ইংরেজিতেই আছে।",
                 "prompt": "তুমি একজন support agent। তোমার কাছে search_docs(query, cursor) নামে একটা tool আছে। তুমি search_docs('refund policy') call করেছ। Tool result একটা hard cap দিয়ে কেটে গেছে, আর তুমি শুধু এটুকু পেয়েছ:\n\n{\"results\": [{\"id\": \"d1\", \"text\": \"Monthly plans can be refunded within 14 days of payment.\"}, {\"id\": \"d2\", \"text\": \"Annual plans can be refunded within 3\n[...truncated...]\n\nUser-এর প্রশ্ন: Annual plan-এ refund চাইতে আমার কত দিন সময় আছে? শুধু tool result থেকে উত্তর দাও। নিশ্চিত না হলে বলো পরে তুমি কী করবে।",
-                "expect": "ভালো AI বলে সে <strong>নিশ্চিত না</strong>, কারণ সংখ্যাটা \"3\"-তে থেমে গেছে। সে বলে আরও তথ্য আনবে। দুর্বল AI আন্দাজ করতে পারে।",
+                "expect": "ভালো AI বলে সে <strong>নিশ্চিত না</strong>, কারণ সংখ্যাটা \"৩\"-তে থেমে গেছে। সে বলে আরও তথ্য আনবে। দুর্বল AI আন্দাজ করতে পারে।",
                 "example": "আমি নিশ্চিত না। Tool result \"within 3\"-তে থেমে গেছে, তাই সংখ্যাটা 3, 30, বা অন্য কিছু হতে পারে। উত্তর দেওয়ার আগে আমি আবার search_docs call করব, বা d2-এর পুরো text চাইব।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, নতুন chat-এ paste করে Enter চাপো। এই tool result একটা ছোট, সম্পূর্ণ page। Tool result-এর text English-এই আছে।",
+                "do": "এই প্রম্পটটা কপি করুন, নতুন চ্যাটে পেস্ট করে Enter চাপুন। এই টুল রেজাল্ট একটা ছোট, সম্পূর্ণ পাতা। টুল রেজাল্টের টেক্সট ইংরেজিতেই আছে।",
                 "prompt": "তুমি একজন support agent। তোমার কাছে search_docs(query, cursor) নামে একটা tool আছে। তুমি search_docs('refund policy') call করেছ। Tool একটা page ফেরত দিয়েছে:\n\n{\"results\": [{\"id\": \"d1\", \"text\": \"Monthly plans can be refunded within 14 days of payment.\"}, {\"id\": \"d2\", \"text\": \"Annual plans can be refunded within 30 days of payment.\"}, {\"id\": \"d3\", \"text\": \"Refunds go back to the original payment method.\"}, {\"id\": \"d4\", \"text\": \"Gift cards cannot be refunded.\"}, {\"id\": \"d5\", \"text\": \"Refund requests are handled by the billing team.\"}], \"next_cursor\": \"c_02\", \"total\": 5234}\n\nUser-এর প্রশ্ন: Annual plan-এ refund চাইতে আমার কত দিন সময় আছে? শুধু tool result থেকে উত্তর দাও। পরের page লাগলে বলো।",
-                "expect": "একটা নিশ্চিত উত্তর: <strong>30 দিন</strong>। AI বলে তার পরের page লাগবে না।",
+                "expect": "একটা নিশ্চিত উত্তর: <strong>৩০ দিন</strong>। AI বলে তার পরের পাতা লাগবে না।",
                 "example": "Annual plan-এ refund চাইতে payment-এর তারিখ থেকে তোমার 30 দিন সময় আছে (document d2)। এই page-এই উত্তর আছে, তাই আমার পরের page লাগবে না।"
               },
               {
                 "chat": "same",
-                "do": "দুটো উত্তর মেলাও। প্রথম prompt-এ \"within 3\"-এর পরে বসতে পারে এমন 3টা সংখ্যা লিখে রাখো।",
-                "expect": "যেমন <em>3</em>, <em>30</em>, বা <em>365</em>। প্রথম উত্তর নিশ্চিত হতে পারেনি। দ্বিতীয় উত্তর নিশ্চিত: 30।"
+                "do": "দুটো উত্তর মেলান। প্রথম প্রম্পটে \"within ৩\"-এর পরে বসতে পারে এমন ৩টা সংখ্যা লিখে রাখুন।",
+                "expect": "যেমন <em>৩</em>, <em>৩০</em>, বা <em>৩৬৫</em>। প্রথম উত্তর নিশ্চিত হতে পারেনি। দ্বিতীয় উত্তর নিশ্চিত: ৩০।"
               }
             ],
-            "learned": "<strong>Hard cap</strong> text-কে একটা নির্দিষ্ট দৈর্ঘ্যে কেটে দেয়, সংখ্যার মাঝখানে হলেও। এখানে এটা \"30\"-কে কেটে \"3\" করে দিয়েছে, তাই AI নিশ্চিত হতে পারেনি। ভালো tool ছোট একটা page ফেরত দেয়, সঙ্গে একটা <strong>cursor</strong> (পরের page-এর bookmark) আর মোট সংখ্যা। AI পুরো তথ্য পায়, আর দরকার হলেই শুধু আরও চায়।",
-            "done": "তোমার কাছে একটা উত্তর আছে যেখানে AI নিশ্চিত না, আর একটা উত্তর আছে যেখানে সে 30 দিন বলেছে।",
+            "learned": "<strong>হার্ড ক্যাপ</strong> টেক্সটকে একটা নির্দিষ্ট দৈর্ঘ্যে কেটে দেয়, সংখ্যার মাঝখানে হলেও। এখানে এটা \"৩০\"-কে কেটে \"৩\" করে দিয়েছে, তাই AI নিশ্চিত হতে পারেনি। ভালো টুল ছোট একটা পাতা ফেরত দেয়, সঙ্গে একটা <strong>কার্সর</strong> (পরের পাতার বুকমার্ক) আর মোট সংখ্যা। AI পুরো তথ্য পায়, আর দরকার হলেই শুধু আরও চায়।",
+            "done": "আপনার কাছে একটা উত্তর আছে যেখানে AI নিশ্চিত না, আর একটা উত্তর আছে যেখানে সে ৩০ দিন বলেছে।",
             "check": {
-              "question": "Hard cap-এর চেয়ে paging ভালো কেন?",
-              "answer": "Hard cap একটা তথ্য বা JSON object-এর মাঝখানে কেটে দিতে পারে, যাতে parser ভেঙে যায় বা মানে বদলে যায়। Cursor-সহ ছোট page result পুরো রাখে, আর agent শুধু দরকার হলে আরও আনে।"
+              "question": "হার্ড ক্যাপের চেয়ে পেজিনেশন ভালো কেন?",
+              "answer": "হার্ড ক্যাপ একটা তথ্য বা JSON অবজেক্টের মাঝখানে কেটে দিতে পারে, যাতে পার্সার ভেঙে যায় বা মানে বদলে যায়। কার্সরসহ ছোট পাতার রেজাল্ট পুরো রাখে, আর এজেন্ট শুধু দরকার হলে আরও আনে।"
             },
-            "challenge": "দ্বিতীয় prompt আবার নতুন chat-এ পাঠাও, কিন্তু প্রশ্ন বদলে লেখো: <em>Gift card-এর refund কোন team দেখে?</em> AI কি পরের page চায়? সেটা কি সঠিক সিদ্ধান্ত?"
+            "challenge": "দ্বিতীয় প্রম্পট আবার নতুন চ্যাটে পাঠান, কিন্তু প্রশ্ন বদলে লিখুন: <em>Gift card-এর refund কোন team দেখে?</em> AI কি পরের পাতা চায়? সেটা কি সঠিক সিদ্ধান্ত?"
           }
         }
       ]
@@ -1611,7 +1611,7 @@
       "sub": "Liu et al. (2023) showed a robust phenomenon: language models attend strongly to information at the <em>beginning</em> and <em>end</em> of their input, and perform close to random for information buried in the <em>middle</em>. The longer the context, the worse the middle. This single finding reframes how you should structure prompts.",
       "bn": {
         "title": "Lost in the Middle আর তার সমাধান",
-        "sub": "Liu et al. (2023) একটি পাকা ঘটনা দেখিয়েছেন: language model input-এর <em>শুরু</em> আর <em>শেষ</em> অংশের তথ্যে জোরালো attention দেয়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় এলোমেলো উত্তর দেয়। Context যত লম্বা, মাঝখানের অবস্থা তত খারাপ। এই একটি আবিষ্কার prompt সাজানোর ধরনটাই বদলে দেয়।"
+        "sub": "Liu et al. (২০২৩) একটি পাকা ঘটনা দেখিয়েছেন: ল্যাঙ্গুয়েজ মডেল ইনপুটের <em>শুরু</em> আর <em>শেষ</em> অংশের তথ্যে জোরালো অ্যাটেনশন দেয়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় এলোমেলো উত্তর দেয়। কনটেক্সট যত লম্বা, মাঝখানের অবস্থা তত খারাপ। এই একটি আবিষ্কার প্রম্পট সাজানোর ধরনটাই বদলে দেয়।"
       },
       "body": [
         {
@@ -1628,7 +1628,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Lost in the middle U-curve\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">retrieval accuracy by position in context (illustrative U-curve)</text>\n\n      \n      <line x1=\"60\" y1=\"60\" x2=\"60\" y2=\"240\" stroke=\"#334155\"></line>\n      <line x1=\"60\" y1=\"240\" x2=\"1060\" y2=\"240\" stroke=\"#334155\"></line>\n      <text x=\"46\" y=\"150\" text-anchor=\"middle\" transform=\"rotate(-90 46 150)\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">accuracy</text>\n      <text x=\"1060\" y=\"258\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">position in context →</text>\n\n      \n      <path d=\"M 80 80 Q 200 78, 320 140 T 640 80 Q 800 78, 1000 90\" stroke=\"#fb7185\" stroke-width=\"2.5\" fill=\"none\"></path>\n      <text x=\"180\" y=\"70\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\" font-weight=\"600\">strong</text>\n      <text x=\"500\" y=\"170\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\" font-weight=\"600\">collapsed middle</text>\n      <text x=\"940\" y=\"68\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\" font-weight=\"600\">strong</text>\n\n      \n      <rect x=\"430\" y=\"60\" width=\"200\" height=\"180\" rx=\"8\" fill=\"rgba(244,114,182,0.05)\" stroke=\"#f472b6\" stroke-dasharray=\"3 3\"></rect>\n      <text x=\"530\" y=\"290\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#f472b6\">↓ danger zone: put NOTHING critical here</text>\n\n      \n      <rect x=\"80\" y=\"40\" width=\"980\" height=\"6\" rx=\"2\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <rect x=\"80\" y=\"40\" width=\"120\" height=\"6\" rx=\"2\" fill=\"#34d399\" fill-opacity=\"0.6\"></rect>\n      <rect x=\"940\" y=\"40\" width=\"120\" height=\"6\" rx=\"2\" fill=\"#34d399\" fill-opacity=\"0.6\"></rect>\n      <rect x=\"430\" y=\"40\" width=\"100\" height=\"6\" rx=\"2\" fill=\"#fb7185\" fill-opacity=\"0.4\"></rect>\n    </svg>",
           "caption": "The U-curve: retrieval accuracy vs. position. Endpoints are reliable; the middle is risky. Place critical information at start or end.",
-          "captionBn": "এখানে context-এর ভেতরে position অনুযায়ী retrieval accuracy-র একটি illustrative U-curve দেখানো হয়েছে। শুরু ও শেষে accuracy strong, কিন্তু মাঝের collapsed middle অংশে তা কমে যায়; তাই গুরুত্বপূর্ণ তথ্য মাঝের danger zone-এ রাখা উচিত নয়।"
+          "captionBn": "এখানে কনটেক্সটের ভেতরে পজিশন অনুযায়ী রিট্রিভাল অ্যাকুরেসির একটি ইলাস্ট্রেটিভ ইউ-কার্ভ দেখানো হয়েছে। শুরু ও শেষে অ্যাকুরেসি শক্তিশালী, কিন্তু মাঝের কোল্যাপসড মিডল অংশে তা কমে যায়; তাই গুরুত্বপূর্ণ তথ্য মাঝের ডেঞ্জার জোনে রাখা উচিত নয়।"
         },
         {
           "type": "heading",
@@ -1779,11 +1779,11 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "Liu et al. (2023) দেখিয়েছেন, ভাষা মডেল তার input-এর <em>শুরু</em> ও <em>শেষের</em> তথ্য খুব ভালো কাজে লাগায়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় random-এর কাছাকাছি ফল দেয়। এটিই <strong>\"Lost in the Middle\"</strong>। তাঁরা লম্বা context-এর বিভিন্ন অবস্থানে \"needle\" তথ্য বসিয়ে retrieval accuracy মেপেছিলেন — ফলে <strong>U-আকৃতির curve</strong>: শুরুতে উঁচু, মাঝখানে ধস, শেষে আবার উঠে আসে। context যত লম্বা বা মডেল যত দুর্বল, মাঝের সমস্যা তত বেশি; তবে ১০০K+ context-এর frontier মডেলেও এটি থেকে যায়।"
+          "html": "Liu et al. (২০২৩) দেখিয়েছেন, ভাষা মডেল তার ইনপুটের <em>শুরু</em> ও <em>শেষের</em> তথ্য খুব ভালো কাজে লাগায়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় র‍্যান্ডমের কাছাকাছি ফল দেয়। এটিই <strong>\"Lost in the Middle\"</strong>। তাঁরা লম্বা কনটেক্সটের বিভিন্ন অবস্থানে \"নিডল\" তথ্য বসিয়ে রিট্রিভাল অ্যাকুরেসি মেপেছিলেন — ফলে <strong>ইউ-আকৃতির কার্ভ</strong>: শুরুতে উঁচু, মাঝখানে ধস, শেষে আবার উঠে আসে। কনটেক্সট যত লম্বা বা মডেল যত দুর্বল, মাঝের সমস্যা তত বেশি; তবে ১০০K+ কনটেক্সটের ফ্রন্টিয়ার মডেলেও এটি থেকে যায়।"
         },
         {
           "type": "paragraph",
-          "html": "কেন হয়? (১) attention-এ অবস্থানগত পক্ষপাত আছে; RoPE, ALiBi, YaRN-এর মতো long-context extension সাহায্য করলেও পুরো সমাধান করে না। (২) pre-training ডেটায় বেশিরভাগ context ছোট ছিল, তাই মডেল দূরের তথ্য জোড়া দিতে শেখেনি। (৩) প্রথম ও শেষ অবস্থানকে বেশি গুরুত্ব দেওয়ার প্রবণতা (primacy ও recency) — মানুষের মধ্যেও দেখা যায়।"
+          "html": "কেন হয়? (১) অ্যাটেনশনে অবস্থানগত পক্ষপাত আছে; RoPE, ALiBi, YaRN-এর মতো লং-কনটেক্সট এক্সটেনশন সাহায্য করলেও পুরো সমাধান করে না। (২) প্রিট্রেনিং ডেটায় বেশিরভাগ কনটেক্সট ছোট ছিল, তাই মডেল দূরের তথ্য জোড়া দিতে শেখেনি। (৩) প্রথম ও শেষ অবস্থানকে বেশি গুরুত্ব দেওয়ার প্রবণতা (প্রাইমেসি ও রিসেন্সি) — মানুষের মধ্যেও দেখা যায়।"
         },
         {
           "type": "paragraph",
@@ -1793,17 +1793,17 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Sandwich:</strong> জরুরি নির্দেশ system message-এর শুরুতে দিন এবং user message-এর শেষে আবার বলুন।",
-            "<strong>Re-order docs:</strong> সবচেয়ে প্রাসঙ্গিক doc শুরুতে ও শেষে, মাঝারিগুলো মাঝখানে।",
-            "<strong>Trim aggressively:</strong> ছোট context-এ recall ভালো; ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
-            "<strong>Structured delimiters:</strong> জরুরি অংশ <code>&lt;important&gt;…&lt;/important&gt;</code> ট্যাগে মুড়ুন।",
-            "<strong>Re-query:</strong> উত্তর না পেলে আংশিক উত্তর নিয়ে আবার query করুন — দুটো ছোট query একটি লম্বা query-র চেয়ে ভালো।",
-            "<strong>\"Answer here\" marker:</strong> prompt শেষ করুন <code>\"Based on the above, your answer:\"</code> দিয়ে, যাতে মডেল উত্তরের আগে আবার পেছনে তাকায়।"
+            "<strong>স্যান্ডউইচ:</strong> জরুরি নির্দেশ সিস্টেম মেসেজের শুরুতে দিন এবং ইউজার মেসেজের শেষে আবার বলুন।",
+            "<strong>ডকুমেন্ট নতুন করে সাজানো:</strong> সবচেয়ে প্রাসঙ্গিক ডকুমেন্ট শুরুতে ও শেষে, মাঝারিগুলো মাঝখানে।",
+            "<strong>কঠোরভাবে ছাঁটা:</strong> ছোট কনটেক্সটে রিকল ভালো; ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
+            "<strong>স্ট্রাকচার্ড ডিলিমিটার:</strong> জরুরি অংশ <code>&lt;important&gt;…&lt;/important&gt;</code> ট্যাগে মুড়ুন।",
+            "<strong>রি-কুয়েরি:</strong> উত্তর না পেলে আংশিক উত্তর নিয়ে আবার কুয়েরি করুন — দুটো ছোট কুয়েরি একটি লম্বা কুয়েরির চেয়ে ভালো।",
+            "<strong>\"Answer here\" মার্কার:</strong> প্রম্পট শেষ করুন <code>\"Based on the above, your answer:\"</code> দিয়ে, যাতে মডেল উত্তরের আগে আবার পেছনে তাকায়।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "পরের গবেষণা (RULER, Summary-of-a-Haystack, BABILong, ২০২৪) বলছে: ভালো মডেলে U-curve চ্যাপ্টা হয় কিন্তু পুরোপুরি যায় না; পরিবর্তনশীল দৈর্ঘ্যের কাজ কঠিনতর; দীর্ঘ context জুড়ে multi-hop reasoning এখনও খোলা সমস্যা; আর RAG ও long-context একে অপরের পরিপূরক। <strong>ব্যবহারিক নিয়ম:</strong> যে তথ্য নির্ভরযোগ্যভাবে মনে রাখাতে চান, সেটি context-এর <strong>প্রথম ১০%</strong> বা <strong>শেষ ১০%</strong>-এ রাখুন; না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন; তাতেও না হলে ছোট context, external retrieval বা ভিন্ন architecture ব্যবহার করুন।"
+          "html": "পরের গবেষণা (RULER, Summary-of-a-Haystack, BABILong, ২০২৪) বলছে: ভালো মডেলে ইউ-কার্ভ চ্যাপ্টা হয় কিন্তু পুরোপুরি যায় না; পরিবর্তনশীল দৈর্ঘ্যের কাজ কঠিনতর; দীর্ঘ কনটেক্সট জুড়ে মাল্টি-হপ রিজনিং এখনও খোলা সমস্যা; আর RAG ও লং-কনটেক্সট একে অপরের পরিপূরক। <strong>ব্যবহারিক নিয়ম:</strong> যে তথ্য নির্ভরযোগ্যভাবে মনে রাখাতে চান, সেটি কনটেক্সটের <strong>প্রথম ১০%</strong> বা <strong>শেষ ১০%</strong>-এ রাখুন; না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন; তাতেও না হলে ছোট কনটেক্সট, এক্সটার্নাল রিট্রিভাল বা ভিন্ন আর্কিটেকচার ব্যবহার করুন।"
         },
         {
           "type": "analogy",
@@ -1880,46 +1880,46 @@
             "challenge": "Add 30 more filler rules to the middle of the first prompt and run it again. Does the model now miss more of the 3 rules? Does the second prompt still help?"
           },
           "bn": {
-            "title": "মাঝখানে লুকানো নিয়ম পরীক্ষা করো",
-            "why": "তুমি যখন কোনো AI agent-কে নিয়মের লম্বা list দাও, সে মাঝের নিয়মগুলো ভুলে যেতে পারে। একটা ভুলে যাওয়া নিয়মের মানে হতে পারে ভুল tone, নিষিদ্ধ প্রতিশ্রুতি, বা আসল customer email-এ ভাঙা format।",
+            "title": "মাঝখানে লুকানো নিয়ম পরীক্ষা করুন",
+            "why": "আপনি যখন কোনো AI এজেন্টকে নিয়মের লম্বা তালিকা দেন, সে মাঝের নিয়মগুলো ভুলে যেতে পারে। একটা নিয়ম ভুলে গেলে ফল হতে পারে ভুল টোন, নিষিদ্ধ প্রতিশ্রুতি, বা আসল কাস্টমার ইমেইলে ভাঙা ফরম্যাট।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। এটা English-এ রাখা হয়েছে, কারণ এখানে English শব্দ গোনা হবে আর শেষ লাইন হুবহু মিলবে।",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। এটা ইংরেজিতে রাখা হয়েছে, কারণ এখানে ইংরেজি শব্দ গোনা হবে আর শেষ লাইন হুবহু মিলবে।",
                 "prompt": "You write short customer emails. Follow ALL rules.\n\nRules:\n1. Write in English.\n2. Use a polite tone.\n3. Greet the customer by name.\n4. Say sorry one time only.\n5. Mention the order number.\n6. Do not promise a delivery date.\n7. Keep the email under 60 words.\n8. Never use exclamation marks.\n9. The last line of the email must be exactly: Ref: KX-482\n10. Do not use emojis.\n11. Do not mention other customers.\n12. Use plain words.\n13. Put the signature 'Support Team' before the Ref line.\n\nTask: Write an email to Mina Akter. Her order #5521 is 2 days late. Offer a 10% discount on her next order.",
-                "expect": "Mina Akter-এর জন্য একটা ছোট email। এটা 60 শব্দের কম হবে, কোনো exclamation mark থাকবে না, আর শেষে থাকবে <em>Ref: KX-482</em>।",
+                "expect": "Mina Akter-এর জন্য একটা ছোট ইমেইল। এটা ৬০ শব্দের কম হবে, কোনো এক্সক্ল্যামেশন মার্ক থাকবে না, আর শেষে থাকবে <em>Ref: KX-482</em>।",
                 "example": "Hello Mina Akter,\n\nI am sorry that your order #5521 is 2 days late. To thank you for your patience, we offer you 10% off your next order.\n\nSupport Team\nRef: KX-482"
               },
               {
                 "chat": "same",
-                "do": "Email-টা ৩টা নিয়মে মেলাও: 60 শব্দের কম, কোনো exclamation mark নেই, আর শেষ লাইন হুবহু Ref: KX-482। শব্দ গুনে দেখো।",
-                "expect": "বেশিরভাগ chat-এ ৩টা নিয়মই মেলে। মাঝের নিয়ম, যেমন শব্দসংখ্যা, সবচেয়ে বেশি ভুল হয়।"
+                "do": "ইমেইলটা ৩টা নিয়মে মেলান: ৬০ শব্দের কম, কোনো এক্সক্ল্যামেশন মার্ক নেই, আর শেষ লাইন হুবহু Ref: KX-482। শব্দ গুনে দেখুন।",
+                "expect": "বেশিরভাগ চ্যাটে ৩টা নিয়মই মেলে। মাঝের নিয়ম, যেমন শব্দসংখ্যা, সবচেয়ে বেশি ভুল হয়।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, নতুন chat-এ paste করে Enter চাপো। এবার ৩টা মূল নিয়ম শুরুতে আর শেষে আছে। Prompt টা English-এ রাখা হয়েছে, কারণ এখানেও English শব্দ গোনা হবে।",
+                "do": "এই প্রম্পটটা কপি করুন, নতুন চ্যাটে পেস্ট করে Enter চাপুন। এবার ৩টা মূল নিয়ম শুরুতে আর শেষে আছে। প্রম্পটটা ইংরেজিতে রাখা হয়েছে, কারণ এখানেও ইংরেজি শব্দ গোনা হবে।",
                 "prompt": "MOST IMPORTANT RULES: the email has under 60 words, has no exclamation marks, and its last line is exactly: Ref: KX-482\n\nYou write short customer emails. Follow ALL rules.\n\nRules:\n1. Write in English.\n2. Use a polite tone.\n3. Greet the customer by name.\n4. Say sorry one time only.\n5. Mention the order number.\n6. Do not promise a delivery date.\n7. Keep the email under 60 words.\n8. Never use exclamation marks.\n9. The last line of the email must be exactly: Ref: KX-482\n10. Do not use emojis.\n11. Do not mention other customers.\n12. Use plain words.\n13. Put the signature 'Support Team' before the Ref line.\n\nTask: Write an email to Mina Akter. Her order #5521 is 2 days late. Offer a 10% discount on her next order.\n\nBefore you answer, check again: under 60 words, no exclamation marks, last line exactly 'Ref: KX-482'.",
-                "expect": "আরেকটা ছোট email, যেখানে একই ৩টা নিয়ম মানা হয়েছে। বেশিরভাগ chat-এ মেলে।",
+                "expect": "আরেকটা ছোট ইমেইল, যেখানে একই ৩টা নিয়ম মানা হয়েছে। বেশিরভাগ চ্যাটে মেলে।",
                 "example": "Dear Mina Akter,\n\nI am sorry that your order #5521 is 2 days late. As a thank you for waiting, we give you 10% off your next order.\n\nSupport Team\nRef: KX-482"
               },
               {
                 "chat": "same",
-                "do": "এই দ্বিতীয় email-ও একই ৩টা নিয়মে মেলাও। শব্দ গুনে দেখো।",
-                "expect": "৩টা নিয়মই মেলে। প্রথম email কোনো নিয়ম ভাঙলে দুটো email তুলনা করো।"
+                "do": "এই দ্বিতীয় ইমেইলও একই ৩টা নিয়মে মেলান। শব্দ গুনে দেখুন।",
+                "expect": "৩টা নিয়মই মেলে। প্রথম ইমেইল কোনো নিয়ম ভাঙলে দুটো ইমেইল তুলনা করুন।"
               },
               {
                 "chat": "same",
-                "do": "ঐচ্ছিক: প্রতিটা chat-এ regenerate button (আবার করার button) থাকলে 2 বার চাপো। প্রতিবার ৩টা নিয়ম মেলাও আর কয়বার মিলল গুনো।",
-                "expect": "বেশিরভাগ ফলে ৩টা নিয়মই মেলে। ভাঙা নিয়ম প্রায়ই exclamation mark বা বেশি শব্দ।"
+                "do": "ঐচ্ছিক: প্রতিটা চ্যাটে রিজেনারেট বাটন (আবার করার বাটন) থাকলে ২ বার চাপুন। প্রতিবার ৩টা নিয়ম মেলান আর কয়বার মিলল গুনুন।",
+                "expect": "বেশিরভাগ ফলে ৩টা নিয়মই মেলে। ভাঙা নিয়ম প্রায়ই এক্সক্ল্যামেশন মার্ক বা বেশি শব্দ।"
               }
             ],
-            "learned": "অনেক AI model লম্বা prompt-এর শুরু আর শেষ সবচেয়ে ভালো পড়ে, আর মাঝখানটা কম ভালো পড়ে। একে বলে <strong>Lost in the Middle</strong>। দ্বিতীয় prompt-এ মূল নিয়মগুলো উপরে আছে আর শেষে আবার আছে, তাই model সেগুলো দুইবার শক্তিশালী জায়গায় দেখে। এখানে তোমার prompt ছোট, তাই বেশিরভাগ model দুটোতেই পাস করে। Prompt লম্বা হলে সমস্যা বাড়ে।",
-            "done": "তোমার কাছে 2টা email আছে, আর প্রতিটায় তুমি ৩টা নিয়ম মিলিয়েছ: 60 শব্দের কম, কোনো exclamation mark নেই, শেষ লাইন Ref: KX-482।",
+            "learned": "অনেক AI মডেল লম্বা প্রম্পটের শুরু আর শেষ সবচেয়ে ভালো পড়ে, আর মাঝখানটা কম ভালো পড়ে। একে বলে <strong>Lost in the Middle</strong>। দ্বিতীয় প্রম্পটে মূল নিয়মগুলো উপরে আছে আর শেষে আবার আছে, তাই মডেল সেগুলো দুইবার শক্তিশালী জায়গায় দেখে। এখানে আপনার প্রম্পট ছোট, তাই বেশিরভাগ মডেল দুটোতেই পাস করে। প্রম্পট লম্বা হলে সমস্যা বাড়ে।",
+            "done": "আপনার কাছে ২টা ইমেইল আছে, আর প্রতিটায় আপনি ৩টা নিয়ম মিলিয়েছেন: ৬০ শব্দের কম, কোনো এক্সক্ল্যামেশন মার্ক নেই, শেষ লাইন Ref: KX-482।",
             "check": {
-              "question": "যে নিয়ম model-এর ভুললে চলবে না, সেটা কোথায় রাখবে, আর কেন?",
-              "answer": "সেটা prompt-এর শুরুতে রাখো আর শেষে আবার লেখো। Model লম্বা prompt-এর শুরু আর শেষ সবচেয়ে ভালো মনে রাখে, আর মাঝখানে তুলনায় দুর্বল।"
+              "question": "যে নিয়ম মডেলের ভুললে চলবে না, সেটা কোথায় রাখবেন, আর কেন?",
+              "answer": "সেটা প্রম্পটের শুরুতে রাখুন আর শেষে আবার লিখুন। মডেল লম্বা প্রম্পটের শুরু আর শেষ সবচেয়ে ভালো মনে রাখে, আর মাঝখানে তুলনায় দুর্বল।"
             },
-            "challenge": "প্রথম prompt-এর মাঝখানে আরও 30টা বাড়তি নিয়ম যোগ করে আবার চালাও। Model কি এখন ৩টা নিয়মের আরও বেশি ভুল করে? দ্বিতীয় prompt কি তবুও সাহায্য করে?"
+            "challenge": "প্রথম প্রম্পটের মাঝখানে আরও ৩০টা বাড়তি নিয়ম যোগ করে আবার চালান। মডেল কি এখন ৩টা নিয়মের আরও বেশি ভুল করে? দ্বিতীয় প্রম্পট কি তবুও সাহায্য করে?"
           }
         }
       ]
@@ -1997,13 +1997,13 @@
         "why": "Liu et al. (2023) found that models recall the start and end well but perform close to random in the middle. So put critical facts at the start or the end, or repeat them at both."
       },
       "bn": {
-        "q": "যে তথ্য মডেলের সবচেয়ে বেশি মনে রাখা দরকার, এই Part অনুযায়ী তা কোথায় রাখবে?",
+        "q": "যে তথ্য মডেলের সবচেয়ে বেশি মনে রাখা দরকার, এই পার্ট অনুযায়ী তা কোথায় রাখবেন?",
         "options": [
           "যেকোনো জায়গায়, কারণ অবস্থান কোনো ব্যাপার নয়",
-          "context-এর মাঝখানে, যেখানে attention সবচেয়ে বেশি",
-          "context-এর শুরুতে বা শেষে"
+          "কনটেক্সটের মাঝখানে, যেখানে অ্যাটেনশন সবচেয়ে বেশি",
+          "কনটেক্সটের শুরুতে বা শেষে"
         ],
-        "why": "Liu et al. (2023) দেখিয়েছেন, মডেল শুরু ও শেষের তথ্য ভালো মনে রাখে কিন্তু মাঝখানের তথ্যে প্রায় random ফল দেয়। তাই জরুরি তথ্য শুরুতে বা শেষে রাখো, অথবা দুই প্রান্তেই বসাও।"
+        "why": "Liu et al. (২০২৩) দেখিয়েছেন, মডেল শুরু ও শেষের তথ্য ভালো মনে রাখে কিন্তু মাঝখানের তথ্যে প্রায় র‍্যান্ডম ফল দেয়। তাই জরুরি তথ্য শুরুতে বা শেষে রাখুন, অথবা দুই প্রান্তেই বসান।"
       }
     },
     {
@@ -2021,14 +2021,14 @@
         "why": "Even one new character in the cached region busts the cache for everything after it. So keep the prefix identical and put anything dynamic after the breakpoint."
       },
       "bn": {
-        "q": "Prompt caching যেন কাজ করে, তার জন্য কী করতে হবে?",
+        "q": "প্রম্পট ক্যাশিং যেন কাজ করে, তার জন্য কী করতে হবে?",
         "options": [
-          "প্রতিটি call-এ system prompt-এর শুরুতে নতুন timestamp বসাও।",
-          "cache করা prefix হুবহু একই রাখো, আর timestamp-এর মতো পরিবর্তনশীল অংশ cache breakpoint-এর পরে রাখো।",
-          "ইউজারের নতুন message prompt-এর শুরুতে রাখো।",
-          "cache তাজা রাখতে প্রতি call-এ system prompt একটু বদলাও।"
+          "প্রতিটি কলে সিস্টেম প্রম্পটের শুরুতে নতুন টাইমস্ট্যাম্প বসান।",
+          "ক্যাশ করা প্রিফিক্স হুবহু একই রাখুন, আর টাইমস্ট্যাম্পের মতো পরিবর্তনশীল অংশ ক্যাশ ব্রেকপয়েন্টের পরে রাখুন।",
+          "ইউজারের নতুন মেসেজ প্রম্পটের শুরুতে রাখুন।",
+          "ক্যাশ তাজা রাখতে প্রতি কলে সিস্টেম প্রম্পট একটু বদলান।"
         ],
-        "why": "cache করা অংশে মাত্র একটি নতুন অক্ষর এলেও তার পরের সবকিছুর cache নষ্ট হয়। তাই prefix একই রাখো আর পরিবর্তনশীল সবকিছু breakpoint-এর পরে দাও।"
+        "why": "ক্যাশ করা অংশে মাত্র একটি নতুন অক্ষর এলেও তার পরের সবকিছুর ক্যাশ নষ্ট হয়। তাই প্রিফিক্স একই রাখুন আর পরিবর্তনশীল সবকিছু ব্রেকপয়েন্টের পরে দিন।"
       }
     },
     {
@@ -2040,8 +2040,8 @@
         "why": "This Part calls paging through results the most production-friendly approach. It keeps cost bounded and stops one tool result from filling the context window."
       },
       "bn": {
-        "q": "যে tool বিশাল ফলাফল ফেরত দিতে পারে, তার জন্য ভালো পদ্ধতি হলো ছোট একটি অংশ আর একটি cursor ফেরত দেওয়া, এবং agent দরকার হলেই আরও আনবে।",
-        "why": "এই Part এই page-by-page পদ্ধতিকে production-এর জন্য সবচেয়ে সুবিধাজনক বলেছে। এতে খরচ সীমিত থাকে, আর একটি tool result পুরো context window ভরে ফেলতে পারে না।"
+        "q": "যে টুল বিশাল ফলাফল ফেরত দিতে পারে, তার জন্য ভালো পদ্ধতি হলো ছোট একটি অংশ আর একটি কার্সর ফেরত দেওয়া, এবং এজেন্ট দরকার হলেই আরও আনবে।",
+        "why": "এই পার্ট এই পেজ-বাই-পেজ পদ্ধতিকে প্রোডাকশনের জন্য সবচেয়ে সুবিধাজনক বলেছে। এতে খরচ সীমিত থাকে, আর একটি টুল রেজাল্ট পুরো কনটেক্সট উইন্ডো ভরে ফেলতে পারে না।"
       }
     },
     {
@@ -2058,13 +2058,13 @@
         "why": "MemGPT treats the LLM's context like virtual memory. The model itself evicts information to external storage and pages it back in, using tool calls such as recall and archival_search."
       },
       "bn": {
-        "q": "MemGPT ধারণায় (Packer et al., 2023) working memory আর external storage-এর মধ্যে তথ্য সরানোর সিদ্ধান্ত কে নেয়?",
+        "q": "MemGPT ধারণায় (Packer et al., ২০২৩) ওয়ার্কিং মেমরি আর এক্সটার্নাল স্টোরেজের মধ্যে তথ্য সরানোর সিদ্ধান্ত কে নেয়?",
         "options": [
-          "মডেল নিজেই, tool call ব্যবহার করে",
-          "5 মিনিটের TTL-এর একটি cache",
+          "মডেল নিজেই, টুল কল ব্যবহার করে",
+          "৫ মিনিটের TTL-এর একটি ক্যাশ",
           "ডেভেলপার, প্রতি টার্নে হাতে"
         ],
-        "why": "MemGPT LLM-এর context-কে virtual memory-র মতো দেখে। মডেল নিজেই recall ও archival_search-এর মতো tool call দিয়ে তথ্য external storage-এ সরায় এবং দরকারে আবার ফিরিয়ে আনে।"
+        "why": "MemGPT LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখে। মডেল নিজেই recall ও archival_search-এর মতো টুল কল দিয়ে তথ্য এক্সটার্নাল স্টোরেজে সরায় এবং দরকারে আবার ফিরিয়ে আনে।"
       }
     },
     {
@@ -2076,8 +2076,8 @@
         "why": "Summarisation is lossy, and decisions, exact numbers and quoted text disappear first. Use the summary as an index, and retrieve from the original log when a detail matters."
       },
       "bn": {
-        "q": "এই Part বলছে, কথোপকথনের summary নির্ভরযোগ্য source of truth, তাই আসল log ফেলে দেওয়া যায়।",
-        "why": "Summarisation-এ তথ্য হারায়, আর সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি আগে হারায়। summary-কে index হিসেবে ব্যবহার করো, আর কোনো খুঁটিনাটি জরুরি হলে আসল log থেকে retrieve করো।"
+        "q": "এই পার্ট বলছে, কথোপকথনের সারসংক্ষেপ নির্ভরযোগ্য সোর্স অব ট্রুথ, তাই আসল লগ ফেলে দেওয়া যায়।",
+        "why": "সামারাইজেশনে তথ্য হারায়, আর সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি আগে হারায়। সারসংক্ষেপকে ইনডেক্স হিসেবে ব্যবহার করুন, আর কোনো খুঁটিনাটি জরুরি হলে আসল লগ থেকে রিট্রিভ করুন।"
       }
     }
   ]
