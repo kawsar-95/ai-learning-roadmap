@@ -1,6 +1,5 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
 import {
   BOOKMARKS_STORAGE_KEY,
   PROGRESS_STORAGE_KEY,
@@ -9,64 +8,28 @@ import {
   setKeys,
   toggleKey,
 } from "@/lib/progress";
+import { QUIZ_SCORES_STORAGE_KEY, parseScores, recordBest } from "@/lib/quiz";
+import type { QuizScores } from "@/lib/quiz";
+import { createStore } from "./createStore";
 
 const EMPTY: ReadonlySet<string> = new Set();
+const NO_SCORES: QuizScores = {};
 
-/**
- * A set of section keys kept in localStorage under `storageKey`. Progress
- * and bookmarks each have one. `eventName` tells the components in this tab
- * that the list changed, because the "storage" event fires only in other tabs.
- */
+/** A set of section keys. Progress and bookmarks each have one. */
 function createKeyStore(storageKey: string, eventName: string) {
-  function readRaw(): string | null {
-    try {
-      return localStorage.getItem(storageKey);
-    } catch {
-      return null;
-    }
-  }
-
-  // useSyncExternalStore needs the same object while the stored text is the
-  // same, so the parsed set is cached by its source text.
-  let cachedRaw: string | null = null;
-  let cachedSet: ReadonlySet<string> = EMPTY;
-
-  function getSnapshot(): ReadonlySet<string> {
-    const raw = readRaw();
-    if (raw !== cachedRaw) {
-      cachedRaw = raw;
-      cachedSet = parseProgress(raw);
-    }
-    return cachedSet;
-  }
-
-  function subscribe(onChange: () => void) {
-    const onStorage = (event: StorageEvent) => {
-      if (event.key === storageKey || event.key === null) onChange();
-    };
-    window.addEventListener("storage", onStorage);
-    window.addEventListener(eventName, onChange);
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      window.removeEventListener(eventName, onChange);
-    };
-  }
-
-  function write(keys: ReadonlySet<string>) {
-    try {
-      if (keys.size) localStorage.setItem(storageKey, serializeProgress(keys));
-      else localStorage.removeItem(storageKey);
-    } catch {
-      // Storage is blocked: the list is not saved.
-    }
-    window.dispatchEvent(new Event(eventName));
-  }
-
+  const store = createStore<ReadonlySet<string>>({
+    storageKey,
+    eventName,
+    parse: parseProgress,
+    serialize: serializeProgress,
+    empty: EMPTY,
+    isEmpty: (keys) => keys.size === 0,
+  });
   return {
-    use: () => useSyncExternalStore(subscribe, getSnapshot, () => EMPTY),
-    toggle: (key: string) => write(toggleKey(getSnapshot(), key)),
-    set: (keys: string[], value: boolean) => write(setKeys(getSnapshot(), keys, value)),
-    reset: () => write(EMPTY),
+    use: store.use,
+    toggle: (key: string) => store.write(toggleKey(store.get(), key)),
+    set: (keys: string[], value: boolean) => store.write(setKeys(store.get(), keys, value)),
+    reset: () => store.write(EMPTY),
   };
 }
 
@@ -86,3 +49,20 @@ export const useProgress = progress.use;
 
 /** The set of bookmarked section keys. Same first-render rule as `useProgress`. */
 export const useBookmarks = bookmarks.use;
+
+const quizScores = createStore<QuizScores>({
+  storageKey: QUIZ_SCORES_STORAGE_KEY,
+  eventName: "quiz-scores-change",
+  parse: parseScores,
+  serialize: JSON.stringify,
+  empty: NO_SCORES,
+  isEmpty: (scores) => Object.keys(scores).length === 0,
+});
+
+/** The best quiz score of each topic. Same first-render rule as `useProgress`. */
+export const useQuizScores = quizScores.use;
+
+/** Records one quiz attempt. The best score stays unless this one is higher. */
+export function saveQuizScore(slug: string, correct: number, total: number) {
+  quizScores.write(recordBest(quizScores.get(), slug, correct, total));
+}
