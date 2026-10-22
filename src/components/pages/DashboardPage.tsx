@@ -4,7 +4,7 @@ import { progressKey } from "@/lib/progress";
 import { UI, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { PartProgress } from "@/components/progress/ProgressWidgets";
-import { BookmarkList, ContinueCard } from "@/components/progress/DashboardWidgets";
+import { BookmarkList, ContinueCard, QuizBest } from "@/components/progress/DashboardWidgets";
 import type { DashboardSection } from "@/components/progress/DashboardWidgets";
 
 const H2 = "mb-5 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text";
@@ -52,6 +52,7 @@ export function DashboardPage({ lang }: { lang: Lang }) {
                   {topicText(topic, lang).title}
                 </span>
                 <PartProgress keys={topic.sections.map((s) => progressKey(topic.slug, s.id))} lang={lang} />
+                {topic.quiz && <QuizBest slug={topic.slug} total={topic.quiz.length} lang={lang} />}
               </Link>
             </li>
           ))}
