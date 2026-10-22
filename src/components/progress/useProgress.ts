@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { PROGRESS_STORAGE_KEY, parseProgress, serializeProgress, toggleKey } from "@/lib/progress";
+import { PROGRESS_STORAGE_KEY, parseProgress, serializeProgress, setKeys, toggleKey } from "@/lib/progress";
 
 // The "storage" event fires only in other tabs. This event tells the
 // components in this tab that the list changed.
@@ -54,6 +54,10 @@ function write(done: ReadonlySet<string>) {
 
 export function toggleDone(key: string) {
   write(toggleKey(getSnapshot(), key));
+}
+
+export function setDone(keys: string[], value: boolean) {
+  write(setKeys(getSnapshot(), keys, value));
 }
 
 export function resetProgress() {

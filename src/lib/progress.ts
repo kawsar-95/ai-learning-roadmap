@@ -36,6 +36,16 @@ export function toggleKey(done: ReadonlySet<string>, key: string): Set<string> {
   return next;
 }
 
+/** A new set with every key in `keys` added (value true) or removed (value false). */
+export function setKeys(done: ReadonlySet<string>, keys: string[], value: boolean): Set<string> {
+  const next = new Set(done);
+  for (const key of keys) {
+    if (value) next.add(key);
+    else next.delete(key);
+  }
+  return next;
+}
+
 /**
  * Counts the keys in `all` that are done. Keys of sections that no longer
  * exist stay in storage but do not count.

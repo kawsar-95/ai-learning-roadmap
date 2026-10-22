@@ -162,6 +162,8 @@ const en = {
   // Progress on a topic page.
   markDone: "Mark as done",
   markedDone: "Done · click to undo",
+  markRead: "Mark as read",
+  markedRead: "Read",
   sectionDone: "Section done",
 
   // Footer.
@@ -170,8 +172,7 @@ const en = {
   footerCopy: "AI Engineering reference",
 
   // Topic page.
-  topicMeta: (sections: number, sources: number) =>
-    `${sections} ${sections === 1 ? "section" : "sections"} · ${sources} ${sources === 1 ? "source" : "sources"} · three voices`,
+  minRead: (n: string) => `${n} min read`,
   references: "References",
   sources: "Sources",
   sourcesNote:
@@ -311,14 +312,15 @@ const bn: Dict = {
 
   markDone: "শেষ হয়েছে, চিহ্ন দাও",
   markedDone: "শেষ · বাতিল করতে click করো",
+  markRead: "পড়া হয়েছে, চিহ্ন দাও",
+  markedRead: "পড়া হয়েছে",
   sectionDone: "Section শেষ",
 
   footerSite: "Site",
   footerSource: "GitHub-এ source code",
   footerCopy: "AI Engineering reference",
 
-  topicMeta: (sections: number, sources: number) =>
-    `${fmtNum("bn", sections)}টি section · ${fmtNum("bn", sources)}টি source · তিনভাবে ব্যাখ্যা`,
+  minRead: (n: string) => `${n} মিনিট পড়া`,
   references: "তথ্যসূত্র",
   sources: "Sources",
   sourcesNote:

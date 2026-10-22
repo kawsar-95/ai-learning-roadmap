@@ -46,8 +46,8 @@ export function SidebarList({
                 className={
                   "group block rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
                   (active
-                    ? "border-accent bg-bg-raised"
-                    : "border-transparent hover:border-border-strong hover:bg-bg-raised/60")
+                    ? "border-accent bg-bg-raised-2"
+                    : "border-transparent hover:border-border-strong hover:bg-bg-raised-2/60")
                 }
               >
                 <span

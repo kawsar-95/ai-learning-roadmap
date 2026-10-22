@@ -5,6 +5,7 @@ import {
   parseProgress,
   progressKey,
   serializeProgress,
+  setKeys,
   summarize,
   toggleKey,
 } from "../src/lib/progress.ts";
@@ -57,4 +58,14 @@ test("firstUndone gives the first key in order that is not done, or null", () =>
   assert.equal(firstUndone(new Set(), all), "a/s1");
   assert.equal(firstUndone(new Set(["a/s1"]), all), "a/s2");
   assert.equal(firstUndone(new Set(all), all), null);
+});
+
+test("setKeys adds every key and keeps other topics", () => {
+  const next = setKeys(new Set(["rag/s1", "inference/s1"]), ["inference/s1", "inference/s2"], true);
+  assert.deepEqual([...next].sort(), ["inference/s1", "inference/s2", "rag/s1"]);
+});
+
+test("setKeys removes every key and keeps other topics", () => {
+  const next = setKeys(new Set(["rag/s1", "inference/s1", "inference/s2"]), ["inference/s1", "inference/s2"], false);
+  assert.deepEqual([...next], ["rag/s1"]);
 });

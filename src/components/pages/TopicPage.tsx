@@ -49,14 +49,14 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
     <>
       <ReadingBar />
       <div className="mx-auto w-full max-w-[1400px] lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[240px_minmax(0,1fr)_260px]">
-        <aside className="hidden border-r border-border lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] lg:self-start lg:overflow-y-auto">
+        <aside className="hidden lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] lg:self-start lg:overflow-y-auto">
           <Suspense fallback={<SidebarList items={items} lang={lang} activeSlug={null} />}>
             <Sidebar items={items} lang={lang} />
           </Suspense>
         </aside>
         <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-8 pb-20 sm:px-6 sm:pt-12 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
-          <div className="space-y-16 sm:space-y-20">
+          <div className="divide-y divide-border [&>section]:py-12 sm:[&>section]:py-14 [&>section:first-child]:pt-0">
             {topic.sections.map((s) => (
               <SectionView key={s.id} section={s} lang={lang} doneKey={progressKey(topic.slug, s.id)} />
             ))}

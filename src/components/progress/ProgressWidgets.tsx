@@ -4,7 +4,7 @@ import Link from "next/link";
 import { firstUndone, summarize } from "@/lib/progress";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
-import { resetProgress, toggleDone, useProgress } from "./useProgress";
+import { resetProgress, setDone, toggleDone, useProgress } from "./useProgress";
 
 /** A section key and the page address of that section. */
 export type SectionLink = { key: string; href: string };
@@ -61,6 +61,29 @@ export function SectionDoneButton({ sectionKey, lang }: { sectionKey: string; la
     >
       <span aria-hidden="true">{done ? "✓" : "○"}</span>
       {done ? ui.markedDone : ui.markDone}
+    </button>
+  );
+}
+
+/** The "Mark as read" toggle in a topic header: sets every section of the topic. */
+export function TopicDoneButton({ keys, lang }: { keys: string[]; lang: Lang }) {
+  const ui = UI[lang];
+  const progress = useProgress();
+  const allDone = keys.every((key) => progress.has(key));
+  return (
+    <button
+      type="button"
+      aria-pressed={allDone}
+      onClick={() => setDone(keys, !allDone)}
+      className={
+        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
+        (allDone
+          ? "border-accent bg-bg-raised text-accent hover:opacity-90"
+          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
+      }
+    >
+      <span aria-hidden="true">✓</span>
+      {allDone ? ui.markedRead : ui.markRead}
     </button>
   );
 }

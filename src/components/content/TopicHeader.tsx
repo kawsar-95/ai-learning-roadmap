@@ -1,19 +1,34 @@
-import { topicText } from "@/lib/topics";
+import { stripTags, topicText } from "@/lib/topics";
 import type { Topic } from "@/lib/topics";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
+import { progressKey } from "@/lib/progress";
+import { readingMinutes } from "@/lib/search";
+import { TopicDoneButton } from "@/components/progress/ProgressWidgets";
 import { Inline } from "./Inline";
 
-/** The opening of a topic page: Part eyebrow, title, tagline, lede, meta. */
+const PILL = "rounded-full bg-bg-raised-2 px-3 py-1 text-[13px] font-medium text-text-dim";
+
+/** The opening of a topic page: Part and reading-time pills, title, tagline, lede, actions. */
 export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
   const ui = UI[lang];
   const text = topicText(topic, lang);
+  // The voice each language shows first: বাংলা on the Bangla site, the technical one in English.
+  const minutes = readingMinutes(
+    topic.sections.flatMap((s) => (lang === "bn" ? s.bangla : s.body)),
+    stripTags,
+  );
   return (
     <header className="mb-10 sm:mb-12">
-      <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
-        {ui.part(fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0)))}
-      </p>
-      <h1 className="mt-3 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className={PILL}>
+          {ui.part(fmtNum(lang, topic.part))} · {text.title}
+        </span>
+        <span className={PILL}>
+          <span aria-hidden="true">📖</span> {ui.minRead(fmtNum(lang, minutes))}
+        </span>
+      </div>
+      <h1 className="mt-4 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
         {text.title}
       </h1>
       {text.tagline && (
@@ -26,9 +41,9 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
         html={text.lede}
         className="mt-5 text-[17px] leading-[1.75] text-pretty text-text-dim sm:text-[19px]"
       />
-      <p className="mt-6 inline-flex rounded-full border border-border bg-bg-raised px-3 py-1 font-mono text-xs text-text-faint shadow-card">
-        {ui.topicMeta(topic.sections.length, topic.sources.length)}
-      </p>
+      <div className="mt-6 flex flex-wrap gap-2 border-y border-border py-4">
+        <TopicDoneButton keys={topic.sections.map((s) => progressKey(topic.slug, s.id))} lang={lang} />
+      </div>
     </header>
   );
 }
