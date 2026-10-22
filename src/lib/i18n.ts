@@ -172,8 +172,7 @@ const en = {
   footerCopy: "AI Engineering reference",
 
   // Topic page.
-  topicMeta: (sections: number, sources: number) =>
-    `${sections} ${sections === 1 ? "section" : "sections"} · ${sources} ${sources === 1 ? "source" : "sources"} · three voices`,
+  minRead: (n: string) => `${n} min read`,
   references: "References",
   sources: "Sources",
   sourcesNote:
@@ -321,8 +320,7 @@ const bn: Dict = {
   footerSource: "GitHub-এ source code",
   footerCopy: "AI Engineering reference",
 
-  topicMeta: (sections: number, sources: number) =>
-    `${fmtNum("bn", sections)}টি section · ${fmtNum("bn", sources)}টি source · তিনভাবে ব্যাখ্যা`,
+  minRead: (n: string) => `${n} মিনিট পড়া`,
   references: "তথ্যসূত্র",
   sources: "Sources",
   sourcesNote:
