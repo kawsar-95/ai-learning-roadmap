@@ -70,8 +70,7 @@ export function SiteHeader({
           <Link href={dashboardHref(lang)} className={NAV_LINK}>
             {UI[lang].dashboard}
           </Link>
-          {/* From xl only: with this link the bar is too tight at 1024px. The menu and footer always have it. */}
-          <Link href={interviewHref(lang)} className={`${NAV_LINK} hidden xl:block`}>
+          <Link href={interviewHref(lang)} className={NAV_LINK}>
             {UI[lang].interview}
           </Link>
         </nav>
@@ -82,9 +81,10 @@ export function SiteHeader({
           </Suspense>
           <InstallButton lang={lang} />
           <ThemeToggle lang={lang} />
+          {/* Hidden from 1024px to 1279px: the four nav links leave no room for it there. */}
           <Link
             href={topicHref(TOPICS[0].slug, lang)}
-            className="ml-1 hidden items-center whitespace-nowrap rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 md:inline-flex"
+            className="ml-1 hidden items-center whitespace-nowrap rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 md:inline-flex lg:hidden xl:inline-flex"
           >
             {UI[lang].startReading}
           </Link>
