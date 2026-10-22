@@ -10,8 +10,8 @@
             "a": "Everything a model does (attention, generation, cost) is denominated in tokens, not characters or words, and APIs charge per token. If a prompt shrinks from 800 to 200 tokens, you cut cost by 75% and also lower latency. Output tokens are 3–5× more expensive than input tokens on most APIs, and prompt caching cuts the cost of a repeated prefix by about 80–90%."
           },
           "bn": {
-            "q": "Engineer-রা token গুনে দেখে কেন, আর prompt-এর দৈর্ঘ্য কীভাবে cost ও latency বদলায়?",
-            "a": "Model যা কিছু করে (attention, generation, cost) সবকিছুর হিসাব হয় token দিয়ে, অক্ষর বা শব্দ দিয়ে নয়, আর API-ও token ধরে চার্জ করে। Prompt 800 token থেকে 200 token-এ নামালে cost 75% কমে এবং latency-ও কমে। বেশিরভাগ API-তে output token input token-এর চেয়ে 3–5 গুণ দামি, আর prompt caching বারবার আসা prefix-এর cost প্রায় 80–90% কমিয়ে দেয়।"
+            "q": "ইঞ্জিনিয়াররা টোকেন গুনে দেখে কেন, আর প্রম্পটের দৈর্ঘ্য কীভাবে খরচ ও ল্যাটেন্সি বদলায়?",
+            "a": "মডেল যা কিছু করে (অ্যাটেনশন, জেনারেশন, খরচ) সবকিছুর হিসাব হয় টোকেন দিয়ে, অক্ষর বা শব্দ দিয়ে নয়, আর API-ও টোকেন ধরে চার্জ করে। প্রম্পট ৮০০ টোকেন থেকে ২০০ টোকেনে নামালে খরচ ৭৫% কমে এবং ল্যাটেন্সিও কমে। বেশিরভাগ API-তে আউটপুট টোকেন ইনপুট টোকেনের চেয়ে ৩–৫ গুণ দামি, আর প্রম্পট ক্যাশিং বারবার আসা প্রিফিক্সের খরচ প্রায় ৮০–৯০% কমিয়ে দেয়।"
           }
         },
         {
@@ -21,8 +21,8 @@
             "a": "Temperature divides the logits by T before softmax. Use 0 for code, JSON, classification, and math, 0.7–1.0 for chat, and 1.0–2.0 for creative writing and brainstorming. Do not combine top_k and top_p aggressively: using both with tight values double-strips the tail and can cause degeneration. Modern providers recommend temperature + top_p (or temperature + min_p)."
           },
           "bn": {
-            "q": "JSON extraction আর creative writing-এর জন্য তুমি temperature কত রাখবে, আর top_k ও top_p নিয়ে কী করবে?",
-            "a": "Temperature softmax-এর আগে logits-কে T দিয়ে ভাগ করে। Code, JSON, classification আর math-এর জন্য 0, chat-এর জন্য 0.7–1.0, আর creative writing ও brainstorming-এর জন্য 1.0–2.0 ব্যবহার করো। top_k আর top_p একসাথে কড়াভাবে দিয়ো না: দুটোই tight মানে দিলে tail দুইবার ছাঁটা পড়ে এবং degeneration হতে পারে। আধুনিক provider-রা temperature + top_p (বা temperature + min_p) ব্যবহার করতে বলে।"
+            "q": "JSON এক্সট্র্যাকশন আর ক্রিয়েটিভ রাইটিংয়ের জন্য আপনি টেম্পারেচার কত রাখবেন, আর top_k ও top_p নিয়ে কী করবেন?",
+            "a": "টেম্পারেচার সফটম্যাক্সের আগে লজিটগুলোকে T দিয়ে ভাগ করে। কোড, JSON, ক্লাসিফিকেশন আর ম্যাথের জন্য ০, চ্যাটের জন্য ০.৭–১.০, আর ক্রিয়েটিভ রাইটিং ও ব্রেনস্টর্মিংয়ের জন্য ১.০–২.০ ব্যবহার করুন। top_k আর top_p একসাথে কড়াভাবে দেবেন না: দুটোই টাইট মানে দিলে টেইল দুইবার ছাঁটা পড়ে এবং ডিজেনারেশন হতে পারে। আধুনিক প্রোভাইডাররা টেম্পারেচার + top_p (বা টেম্পারেচার + min_p) ব্যবহার করতে বলে।"
           }
         },
         {
@@ -32,8 +32,8 @@
             "a": "Reasoning models spend more compute at inference time: they emit thinking tokens, then the final answer. Use them when the task is math, code, or agentic work, when standard models have plateaued on your benchmark, and when you can afford the latency. They use 5–50× more tokens per query, so set a thinking budget cap at your latency and cost ceiling. For most chat, extraction, and RAG, a standard model with careful prompting wins."
           },
           "bn": {
-            "q": "কখন standard model-এর বদলে reasoning model ব্যবহার করা উচিত?",
-            "a": "Reasoning model inference-এর সময় বেশি compute খরচ করে: আগে thinking token তৈরি করে, তারপর চূড়ান্ত উত্তর দেয়। কাজটা math, code বা agentic হলে, standard model তোমার benchmark-এ আটকে গেলে, আর latency সহ্য করতে পারলে এগুলো ব্যবহার করো। এরা প্রতি query-তে 5–50 গুণ বেশি token খরচ করে, তাই তোমার latency ও cost-এর সীমায় একটা thinking budget cap বসাও। বেশিরভাগ chat, extraction আর RAG-এর কাজে ভালো prompting-সহ standard model-ই জেতে।"
+            "q": "কখন স্ট্যান্ডার্ড মডেলের বদলে রিজনিং মডেল ব্যবহার করা উচিত?",
+            "a": "রিজনিং মডেল ইনফারেন্সের সময় বেশি কম্পিউট খরচ করে: আগে থিংকিং টোকেন তৈরি করে, তারপর চূড়ান্ত উত্তর দেয়। কাজটা ম্যাথ, কোড বা এজেন্টিক হলে, স্ট্যান্ডার্ড মডেল আপনার বেঞ্চমার্কে আটকে গেলে, আর ল্যাটেন্সি সহ্য করতে পারলে এগুলো ব্যবহার করুন। এরা প্রতি কুয়েরিতে ৫–৫০ গুণ বেশি টোকেন খরচ করে, তাই আপনার ল্যাটেন্সি ও খরচের সীমায় একটা থিংকিং বাজেট ক্যাপ বসান। বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এর কাজে ভালো প্রম্পটিং-সহ স্ট্যান্ডার্ড মডেলই জেতে।"
           }
         }
       ]
@@ -48,8 +48,8 @@
             "a": "Chain-of-thought (Wei et al., 2022) makes the model emit intermediate reasoning tokens before the answer, for example when you add \"Let's think step by step\". ReAct (Yao et al., 2022) interleaves reasoning with actions and observations, and it is the architectural pattern of every modern AI agent. Reflexion (Shinn et al., 2023) adds a loop in which the model reflects on what went wrong and writes that reflection into memory for the next attempt. A CoT trace can be 10–50× longer than a direct answer, so use it only for tasks like math, planning, debugging, and multi-hop reasoning."
           },
           "bn": {
-            "q": "chain-of-thought, ReAct আর Reflexion-এর মধ্যে পার্থক্য কী?",
-            "a": "Chain-of-thought (Wei et al., 2022) উত্তরের আগে model-কে মাঝের reasoning token তৈরি করায়, যেমন তুমি \"Let's think step by step\" যোগ করলে। ReAct (Yao et al., 2022) reasoning-কে action আর observation-এর সাথে পর্যায়ক্রমে মেশায়, আর এটাই প্রতিটি আধুনিক AI agent-এর architectural pattern। Reflexion (Shinn et al., 2023) আরেকটা loop যোগ করে: model কী ভুল হলো তা ভেবে দেখে এবং সেই reflection memory-তে লিখে রাখে, যাতে পরের attempt-এ কাজে লাগে। একটা CoT trace সরাসরি উত্তরের চেয়ে 10–50 গুণ লম্বা হতে পারে, তাই শুধু math, planning, debugging আর multi-hop reasoning-এর মতো কাজে এটা ব্যবহার করো।"
+            "q": "চেইন-অফ-থট, ReAct আর Reflexion-এর মধ্যে পার্থক্য কী?",
+            "a": "চেইন-অফ-থট (Wei et al., ২০২২) উত্তরের আগে মডেলকে মাঝের রিজনিং টোকেন তৈরি করায়, যেমন আপনি \"Let's think step by step\" যোগ করলে। ReAct (Yao et al., ২০২২) রিজনিংকে অ্যাকশন আর অবজারভেশনের সাথে পর্যায়ক্রমে মেশায়, আর এটাই প্রতিটি আধুনিক AI এজেন্টের আর্কিটেকচারাল প্যাটার্ন। Reflexion (Shinn et al., ২০২৩) আরেকটা লুপ যোগ করে: মডেল কী ভুল হলো তা ভেবে দেখে এবং সেই রিফ্লেকশন মেমরিতে লিখে রাখে, যাতে পরের অ্যাটেম্পটে কাজে লাগে। একটা CoT ট্রেস সরাসরি উত্তরের চেয়ে ১০–৫০ গুণ লম্বা হতে পারে, তাই শুধু ম্যাথ, প্ল্যানিং, ডিবাগিং আর মাল্টি-হপ রিজনিংয়ের মতো কাজে এটা ব্যবহার করুন।"
           }
         },
         {
@@ -59,8 +59,8 @@
             "a": "Use three layers. First, constrain the model with JSON mode or structured outputs, which is the cheapest insurance. Second, validate the output at runtime with Pydantic, Zod, or JSON Schema, because even constrained output can have a wrong field or a hallucinated value. Third, recover gracefully: retry with a stricter prompt, fall back to defaults, or surface \"I don't know\" to the user. Never use eval() on model output."
           },
           "bn": {
-            "q": "Model এমন output দিলে যা তোমার parser আশা করেনি, তখন তুমি কীভাবে সামলাবে?",
-            "a": "তিনটা স্তর ব্যবহার করো। প্রথমে JSON mode বা structured outputs দিয়ে model-কে constrain করো, এটাই সবচেয়ে সস্তা insurance। দ্বিতীয়ত, Pydantic, Zod বা JSON Schema দিয়ে runtime-এ output validate করো, কারণ constrained output-এও ভুল field বা hallucinated value থাকতে পারে। তৃতীয়ত, ব্যর্থতা সামলে নিয়ে নিরাপদে recover করো: আরও কড়া prompt দিয়ে retry করো, default-এ ফিরে যাও, অথবা user-কে \"I don't know\" দেখাও। Model output-এর ওপর কখনো eval() চালিয়ো না।"
+            "q": "মডেল এমন আউটপুট দিলে যা আপনার পার্সার আশা করেনি, তখন আপনি কীভাবে সামলাবেন?",
+            "a": "তিনটা স্তর ব্যবহার করুন। প্রথমে JSON মোড বা স্ট্রাকচার্ড আউটপুট দিয়ে মডেলকে কনস্ট্রেইন করুন, এটাই সবচেয়ে সস্তা ইনস্যুরেন্স। দ্বিতীয়ত, Pydantic, Zod বা JSON Schema দিয়ে রানটাইমে আউটপুট ভ্যালিডেট করুন, কারণ কনস্ট্রেইন্ড আউটপুটেও ভুল ফিল্ড বা হ্যালুসিনেটেড ভ্যালু থাকতে পারে। তৃতীয়ত, ব্যর্থতা সামলে নিয়ে নিরাপদে রিকভার করুন: আরও কড়া প্রম্পট দিয়ে রিট্রাই করুন, ডিফল্টে ফিরে যান, অথবা ইউজারকে \"I don't know\" দেখান। মডেল আউটপুটের ওপর কখনো eval() চালাবেন না।"
           }
         },
         {
@@ -70,8 +70,8 @@
             "a": "Wrap every piece of untrusted input in clearly labeled tags, and tell the model in the system prompt that content inside the tags is data, not instructions. Repeat the critical rules at the end of the prompt, cap the size of injected content, constrain the output to a strict schema, and keep a tool allowlist. No prompt-layer defense is bulletproof, so combine them with system-layer defenses: a separate classifier that flags suspicious outputs, rate limits per user, human review for high-risk actions, and a deny-by-default tool allowlist."
           },
           "bn": {
-            "q": "Prompt layer-এ prompt injection থেকে একটা LLM app-কে তুমি কীভাবে রক্ষা করবে, আর সেটা কি যথেষ্ট?",
-            "a": "প্রতিটি untrusted input স্পষ্ট label করা tag-এর ভেতরে রাখো, আর system prompt-এ model-কে বলে দাও tag-এর ভেতরের content হলো data, instruction নয়। গুরুত্বপূর্ণ নিয়মগুলো prompt-এর শেষে আবার লেখো, injected content-এর আকারে সীমা দাও, output-কে কড়া schema-য় বেঁধে দাও, আর একটা tool allowlist রাখো। কোনো prompt-layer defense-ই নিশ্ছিদ্র নয়, তাই এগুলোর সাথে system-layer defense মেলাও: সন্দেহজনক output চিহ্নিত করার আলাদা classifier, প্রতি user-এ rate limit, high-risk action-এ human review, আর deny-by-default tool allowlist।"
+            "q": "প্রম্পট লেয়ারে প্রম্পট ইনজেকশন থেকে একটা LLM অ্যাপকে আপনি কীভাবে রক্ষা করবেন, আর সেটা কি যথেষ্ট?",
+            "a": "প্রতিটি আনট্রাস্টেড ইনপুট স্পষ্ট লেবেল করা ট্যাগের ভেতরে রাখুন, আর সিস্টেম প্রম্পটে মডেলকে বলে দিন ট্যাগের ভেতরের কনটেন্ট হলো ডেটা, ইনস্ট্রাকশন নয়। গুরুত্বপূর্ণ নিয়মগুলো প্রম্পটের শেষে আবার লিখুন, ইনজেক্টেড কনটেন্টের আকারে সীমা দিন, আউটপুটকে কড়া স্কিমায় বেঁধে দিন, আর একটা টুল অ্যালাউলিস্ট রাখুন। কোনো প্রম্পট-লেয়ার ডিফেন্সই নিশ্ছিদ্র নয়, তাই এগুলোর সাথে সিস্টেম-লেয়ার ডিফেন্স মেলান: সন্দেহজনক আউটপুট চিহ্নিত করার আলাদা ক্লাসিফায়ার, প্রতি ইউজারে রেট লিমিট, হাই-রিস্ক অ্যাকশনে হিউম্যান রিভিউ, আর ডিনাই-বাই-ডিফল্ট টুল অ্যালাউলিস্ট।"
           }
         }
       ]
@@ -86,8 +86,8 @@
             "a": "Condense the oldest turns into a summary block written by the model, and keep the recent turns verbatim; the compression ratio is typically 5–20×. Trigger it by a token budget (for example when history is over 4K tokens), by turn count, or by a topic shift. Summarisation is lossy, and decisions, exact numbers, and quoted text disappear first, so use a structured summary schema and treat the summary as an index, not as the source of truth. For high-stakes conversations, persist the verbatim transcript to a DB."
           },
           "bn": {
-            "q": "Context window-এর ভেতরে একটা লম্বা chat রেখে গুরুত্বপূর্ণ তথ্য না হারানোর উপায় কী?",
-            "a": "সবচেয়ে পুরনো turn-গুলোকে model দিয়ে একটা summary block-এ সংকুচিত করো, আর সাম্প্রতিক turn-গুলো হুবহু রাখো; compression ratio সাধারণত 5–20×। এটা চালু করতে পারো token budget দিয়ে (যেমন history 4K token ছাড়ালে), turn-সংখ্যা দিয়ে, বা topic বদলালে। Summarisation lossy, আর decision, নিখুঁত সংখ্যা ও quoted text সবার আগে হারায়, তাই structured summary schema ব্যবহার করো এবং summary-কে index হিসেবে দেখো, source of truth হিসেবে নয়। High-stakes conversation-এ হুবহু transcript একটা DB-তে সংরক্ষণ করো।"
+            "q": "কনটেক্সট উইন্ডোর ভেতরে একটা লম্বা চ্যাট রেখে গুরুত্বপূর্ণ তথ্য না হারানোর উপায় কী?",
+            "a": "সবচেয়ে পুরনো টার্নগুলোকে মডেল দিয়ে একটা সারসংক্ষেপ ব্লকে সংকুচিত করুন, আর সাম্প্রতিক টার্নগুলো হুবহু রাখুন; কম্প্রেশন রেশিও সাধারণত ৫–২০×। এটা চালু করতে পারেন টোকেন বাজেট দিয়ে (যেমন হিস্ট্রি ৪K টোকেন ছাড়ালে), টার্ন-সংখ্যা দিয়ে, বা টপিক বদলালে। সামারাইজেশন লসি, আর সিদ্ধান্ত, নিখুঁত সংখ্যা ও কোট করা টেক্সট সবার আগে হারায়, তাই স্ট্রাকচার্ড সারসংক্ষেপ স্কিমা ব্যবহার করুন এবং সারসংক্ষেপকে ইনডেক্স হিসেবে দেখুন, সোর্স অফ ট্রুথ হিসেবে নয়। হাই-স্টেকস কনভার্সেশনে হুবহু ট্রান্সক্রিপ্ট একটা DB-তে সংরক্ষণ করুন।"
           }
         },
         {
@@ -97,8 +97,8 @@
             "a": "Providers let you cache a prefix of your prompt, so identical tokens at the start of a request cost much less and run faster; this can drop 80–90% of the input bill for apps with stable system prompts and long retrieval sections. Put stable content first (system prompt, tool schemas, stable retrieval) and dynamic content last, such as the new user message. Anthropic supports up to 4 cache breakpoints. Even a single new character in the cached region busts the cache for everything after it, so keep the cached prefix byte-identical and hash your system prompt in CI."
           },
           "bn": {
-            "q": "Prompt caching কীভাবে cost কমায়, আর কী সেটা নষ্ট করে দেয়?",
-            "a": "Provider-রা তোমার prompt-এর একটা prefix cache করতে দেয়, ফলে request-এর শুরুতে থাকা একই token অনেক কম খরচে এবং দ্রুত চলে; স্থির system prompt আর লম্বা retrieval অংশ থাকলে এতে input bill-এর 80–90% কমতে পারে। স্থির content আগে (system prompt, tool schema, স্থির retrieval) আর পরিবর্তনশীল content শেষে রাখো, যেমন নতুন user message। Anthropic সর্বোচ্চ 4টি cache breakpoint সমর্থন করে। Cache করা অংশে মাত্র একটা নতুন অক্ষর এলেই তার পরের সবকিছুর cache নষ্ট হয়ে যায়, তাই cached prefix byte-identical রাখো এবং CI-তে system prompt-এর hash করে রাখো।"
+            "q": "প্রম্পট ক্যাশিং কীভাবে খরচ কমায়, আর কী সেটা নষ্ট করে দেয়?",
+            "a": "প্রোভাইডাররা আপনার প্রম্পটের একটা প্রিফিক্স ক্যাশ করতে দেয়, ফলে রিকোয়েস্টের শুরুতে থাকা একই টোকেন অনেক কম খরচে এবং দ্রুত চলে; স্থির সিস্টেম প্রম্পট আর লম্বা রিট্রিভাল অংশ থাকলে এতে ইনপুট বিলের ৮০–৯০% কমতে পারে। স্থির কনটেন্ট আগে (সিস্টেম প্রম্পট, টুল স্কিমা, স্থির রিট্রিভাল) আর পরিবর্তনশীল কনটেন্ট শেষে রাখুন, যেমন নতুন ইউজার মেসেজ। Anthropic সর্বোচ্চ ৪টি ক্যাশ ব্রেকপয়েন্ট সমর্থন করে। ক্যাশ করা অংশে মাত্র একটা নতুন অক্ষর এলেই তার পরের সবকিছুর ক্যাশ নষ্ট হয়ে যায়, তাই ক্যাশড প্রিফিক্স বাইট-আইডেন্টিক্যাল রাখুন এবং CI-তে সিস্টেম প্রম্পটের হ্যাশ করে রাখুন।"
           }
         },
         {
@@ -108,8 +108,8 @@
             "a": "Liu et al. (2023) showed that models recall information at the beginning and end of a long context well, but perform close to random for information in the middle, which gives a U-shaped curve. The effect persists even in frontier models with 100K+ context windows. To mitigate it, put critical content at the start and repeat it at the end, place the most relevant document at both the start and the end in RAG, and trim the context. As a rule, put any fact that must be recalled in the first 10% or the last 10% of the context."
           },
           "bn": {
-            "q": "Lost in the Middle effect কী, আর এর প্রভাব তুমি কীভাবে কমাবে?",
-            "a": "Liu et al. (2023) দেখিয়েছেন, লম্বা context-এর শুরু ও শেষের তথ্য model ভালোভাবে মনে রাখে, কিন্তু মাঝের তথ্যে তার পারফরম্যান্স প্রায় random-এর কাছাকাছি নেমে যায়, ফলে একটা U-আকৃতির curve তৈরি হয়। 100K+ context window-এর frontier model-ও এই প্রভাব থেকে যায়। কমাতে হলে গুরুত্বপূর্ণ content শুরুতে রাখো এবং শেষে আবার লেখো, RAG-এ সবচেয়ে প্রাসঙ্গিক document শুরুতে ও শেষে দুই জায়গাতেই রাখো, আর context ছেঁটে ছোট করো। নিয়ম হিসেবে, যে তথ্য নিশ্চিতভাবে মনে রাখাতে চাও তা context-এর প্রথম 10% বা শেষ 10%-এ রাখো।"
+            "q": "Lost in the Middle ইফেক্ট কী, আর এর প্রভাব আপনি কীভাবে কমাবেন?",
+            "a": "Liu et al. (২০২৩) দেখিয়েছেন, লম্বা কনটেক্সটের শুরু ও শেষের তথ্য মডেল ভালোভাবে মনে রাখে, কিন্তু মাঝের তথ্যে তার পারফরম্যান্স প্রায় র‍্যান্ডমের কাছাকাছি নেমে যায়, ফলে একটা U-আকৃতির কার্ভ তৈরি হয়। ১০০K+ কনটেক্সট উইন্ডোর ফ্রন্টিয়ার মডেলও এই প্রভাব থেকে যায়। কমাতে হলে গুরুত্বপূর্ণ কনটেন্ট শুরুতে রাখুন এবং শেষে আবার লিখুন, RAG-এ সবচেয়ে প্রাসঙ্গিক ডকুমেন্ট শুরুতে ও শেষে দুই জায়গাতেই রাখুন, আর কনটেক্সট ছেঁটে ছোট করুন। নিয়ম হিসেবে, যে তথ্য নিশ্চিতভাবে মনে রাখাতে চান তা কনটেক্সটের প্রথম ১০% বা শেষ ১০%-এ রাখুন।"
           }
         }
       ]
@@ -124,8 +124,8 @@
             "a": "Retrieval works on pieces of documents, so how you cut the text decides what the retriever can ever return: a chunk that is too coarse buries the answer in noise, and one that is too fine strips away the context. Fixed-size chunking shares chunk_overlap between neighbours so a fact on a boundary lands whole in at least one chunk, and the recursive splitter tries separators in order: paragraph, line, word, character. Late chunking (Günther et al., 2024) runs a long-context embedding model over the whole text and splits after the transformer and just before mean pooling, so every chunk vector carries the surrounding context. It needs no extra training, but it requires an embedding model whose context window can hold the document."
           },
           "bn": {
-            "q": "RAG-এ chunking কেন গুরুত্বপূর্ণ, আর late chunking কী?",
-            "a": "Retrieval কাজ করে document-এর টুকরোর ওপর, তাই text কীভাবে কাটছ তার ওপরই নির্ভর করে retriever কী ফেরত দিতে পারবে: chunk খুব বড় হলে উত্তর noise-এ চাপা পড়ে, আর খুব ছোট হলে context হারিয়ে যায়। Fixed-size chunking-এ পাশাপাশি chunk-এর মধ্যে chunk_overlap ভাগ থাকে, যাতে সীমানার কোনো তথ্য অন্তত একটা chunk-এ পুরোটা থাকে, আর recursive splitter আগে paragraph, তারপর line, word এবং শেষে character দিয়ে কাটে। Late chunking (Günther et al., 2024) একটা long-context embedding model দিয়ে পুরো text-কে একবারে encode করে, তারপর transformer-এর পরে এবং mean pooling-এর ঠিক আগে কাটে, ফলে প্রতিটি chunk vector আশপাশের context বহন করে। এতে বাড়তি training লাগে না, তবে এমন একটা embedding model লাগে যার context window পুরো document ধরতে পারে।"
+            "q": "RAG-এ চাঙ্কিং কেন গুরুত্বপূর্ণ, আর লেট চাঙ্কিং কী?",
+            "a": "রিট্রিভাল কাজ করে ডকুমেন্টের ছোট ছোট অংশের ওপর, তাই টেক্সট কীভাবে কাটছেন তার ওপরই নির্ভর করে রিট্রিভার কী ফেরত দিতে পারবে: চাঙ্ক খুব বড় হলে উত্তর নয়েজে চাপা পড়ে, আর খুব ছোট হলে কনটেক্সট হারিয়ে যায়। ফিক্সড-সাইজ চাঙ্কিংয়ে পাশাপাশি চাঙ্কের মধ্যে chunk_overlap ভাগ থাকে, যাতে সীমানার কোনো তথ্য অন্তত একটা চাঙ্কে পুরোটা থাকে, আর রিকার্সিভ স্প্লিটার আগে প্যারাগ্রাফ, তারপর লাইন, ওয়ার্ড এবং শেষে ক্যারেক্টার দিয়ে কাটে। লেট চাঙ্কিং (Günther et al., ২০২৪) একটা লং-কনটেক্সট এমবেডিং মডেল দিয়ে পুরো টেক্সটকে একবারে এনকোড করে, তারপর ট্রান্সফর্মারের পরে এবং মিন পুলিংয়ের ঠিক আগে কাটে, ফলে প্রতিটি চাঙ্ক ভেক্টর আশপাশের কনটেক্সট বহন করে। এতে বাড়তি ট্রেনিং লাগে না, তবে এমন একটা এমবেডিং মডেল লাগে যার কনটেক্সট উইন্ডো পুরো ডকুমেন্ট ধরতে পারে।"
           }
         },
         {
@@ -135,8 +135,8 @@
             "a": "BM25 needs the query's exact words to appear, while dense vectors can blur rare identifiers, names, and codes, so hybrid search runs both and merges the results. RRF ignores raw scores and sums 1/(k + rank) over every ranking that contains the document, which sidesteps the problem that the two retrievers' scores are on different scales. A document that both lists rank well beats a document with only one strong rank. The paper fixed k = 60, and Elasticsearch and OpenSearch default to 60, but Qdrant's docs state a default of 2, so check the default of your engine."
           },
           "bn": {
-            "q": "Hybrid search কেন ব্যবহার করবে, আর reciprocal rank fusion (RRF) কীভাবে ফলাফল মেলায়?",
-            "a": "BM25-এ query-র হুবহু শব্দ থাকতে হয়, আর dense vector বিরল identifier, নাম ও code ঝাপসা করে ফেলতে পারে, তাই hybrid search দুটোই চালিয়ে ফলাফল মেলায়। RRF কাঁচা score উপেক্ষা করে এবং যে ranking-এ document আছে সেগুলোর সবকটি থেকে 1/(k + rank) যোগ করে, ফলে দুই retriever-এর score আলাদা scale-এ থাকার সমস্যা এড়ানো যায়। দুই তালিকাতেই ভালো rank পাওয়া document, একটামাত্র শক্তিশালী rank পাওয়া document-কে হারিয়ে দেয়। Paper-এ k = 60 ধরা হয়েছে, Elasticsearch ও OpenSearch-এর default-ও 60, কিন্তু Qdrant-এর docs-এ default 2 বলা আছে, তাই তোমার engine-এর default দেখে নিয়ো।"
+            "q": "হাইব্রিড সার্চ কেন ব্যবহার করবেন, আর রেসিপ্রোকাল র‍্যাংক ফিউশন (RRF) কীভাবে ফলাফল মেলায়?",
+            "a": "BM25-এ কুয়েরির হুবহু শব্দ থাকতে হয়, আর ডেন্স ভেক্টর বিরল আইডেন্টিফায়ার, নাম ও কোড ঝাপসা করে ফেলতে পারে, তাই হাইব্রিড সার্চ দুটোই চালিয়ে ফলাফল মেলায়। RRF কাঁচা স্কোর উপেক্ষা করে এবং যে র‍্যাংকিংয়ে ডকুমেন্ট আছে সেগুলোর সবকটি থেকে 1/(k + rank) যোগ করে, ফলে দুই রিট্রিভারের স্কোর আলাদা স্কেলে থাকার সমস্যা এড়ানো যায়। দুই তালিকাতেই ভালো র‍্যাংক পাওয়া ডকুমেন্ট, একটামাত্র শক্তিশালী র‍্যাংক পাওয়া ডকুমেন্টকে হারিয়ে দেয়। পেপারে k = ৬০ ধরা হয়েছে, Elasticsearch ও OpenSearch-এর ডিফল্টও ৬০, কিন্তু Qdrant-এর ডকসে ডিফল্ট ২ বলা আছে, তাই আপনার ইঞ্জিনের ডিফল্ট দেখে নেবেন।"
           }
         },
         {
@@ -146,8 +146,8 @@
             "a": "First-stage retrieval is built to be fast over a huge corpus, so it scores each document without looking at the query and the document together. A cross-encoder reranker processes the pair jointly, so it is more accurate but slower, and it produces no reusable embedding. So use a two-stage funnel: a cheap first stage for recall over the whole corpus, then the reranker on only the N survivors, and the top-k go to the LLM. A reranker can only re-order what stage 1 returned, so if the right passage is not in the top-N, no reranker can recover it."
           },
           "bn": {
-            "q": "First-stage retrieval-এর পরে reranker কেন যোগ করবে, আর এর সীমা কী?",
-            "a": "First-stage retrieval বিশাল corpus-এর ওপর দ্রুত চলার জন্য বানানো, তাই এটা query আর document-কে একসাথে না দেখেই প্রতিটি document-এর score দেয়। Cross-encoder reranker জোড়াটাকে একসাথে process করে, তাই এটা বেশি নিখুঁত কিন্তু ধীর, আর এটা কোনো পুনর্ব্যবহারযোগ্য embedding দেয় না। তাই দুই ধাপের funnel ব্যবহার করো: প্রথম ধাপ সস্তায় পুরো corpus থেকে recall-এর জন্য প্রার্থী আনে, তারপর reranker শুধু বেঁচে যাওয়া N-টির ওপর কাজ করে, আর সেরা top-k যায় LLM-এর কাছে। Reranker শুধু stage 1-এর ফেরত দেওয়া জিনিসই নতুন করে সাজাতে পারে, তাই ঠিক passage top-N-এ না থাকলে কোনো reranker তা ফিরিয়ে আনতে পারবে না।"
+            "q": "ফার্স্ট-স্টেজ রিট্রিভালের পরে রিরেংকার কেন যোগ করবেন, আর এর সীমা কী?",
+            "a": "ফার্স্ট-স্টেজ রিট্রিভাল বিশাল কর্পাসের ওপর দ্রুত চলার জন্য বানানো, তাই এটা কুয়েরি আর ডকুমেন্টকে একসাথে না দেখেই প্রতিটি ডকুমেন্টের স্কোর দেয়। ক্রস-এনকোডার রিরেংকার জোড়াটাকে একসাথে প্রসেস করে, তাই এটা বেশি নিখুঁত কিন্তু ধীর, আর এটা কোনো পুনর্ব্যবহারযোগ্য এমবেডিং দেয় না। তাই দুই ধাপের ফানেল ব্যবহার করুন: প্রথম ধাপ সস্তায় পুরো কর্পাস থেকে রিকলের জন্য প্রার্থী আনে, তারপর রিরেংকার শুধু টিকে থাকা N-টির ওপর কাজ করে, আর সেরা top-k যায় LLM-এর কাছে। রিরেংকার শুধু স্টেজ 1-এর ফেরত দেওয়া জিনিসই নতুন করে সাজাতে পারে, তাই ঠিক প্যাসেজ top-N-এ না থাকলে কোনো রিরেংকার তা ফিরিয়ে আনতে পারবে না।"
           }
         }
       ]
@@ -162,8 +162,8 @@
             "a": "ReAct interleaves a Thought, an Action, and an Observation, so its traces are human-readable and you can see why the model picked an action. That is why it is the default for short, tool-heavy tasks and for debugging. Choose ReWOO for retrieval-heavy tasks with fan-out tool graphs, where the model does not need the result of one tool to plan the next. It plans the whole tool graph upfront, the worker runs everything in parallel, and the solver reads the evidence and answers. It uses 4–6× fewer tokens than ReAct on retrieval benchmarks, but its debug-ability is weak."
           },
           "bn": {
-            "q": "ReWOO কখন ReAct-এর বদলে বেছে নেবে, আর ReAct কেন এখনও default loop?",
-            "a": "ReAct-এ Thought, Action আর Observation পালাক্রমে চলে, তাই তার trace মানুষ পড়তে পারে আর model কেন একটা action বেছেছে তা দেখা যায়। এই কারণেই short, tool-heavy কাজে আর debugging-এ এটাই default। Retrieval-heavy কাজে, যেখানে fan-out tool graph থাকে আর একটা tool-এর result না দেখেও পরের tool plan করা যায়, সেখানে ReWOO বেছে নাও। এটা পুরো tool graph আগে থেকেই plan করে, worker সব parallel-এ চালায়, তারপর solver evidence পড়ে উত্তর দেয়। Retrieval benchmark-এ এটা ReAct-এর চেয়ে 4–6× কম token ব্যবহার করে, কিন্তু এর debug-ability দুর্বল।"
+            "q": "ReWOO কখন ReAct-এর বদলে বেছে নেবেন, আর ReAct কেন এখনও ডিফল্ট লুপ?",
+            "a": "ReAct-এ থট, অ্যাকশন আর অবজারভেশন পালাক্রমে চলে, তাই তার ট্রেস মানুষ পড়তে পারে আর মডেল কেন একটা অ্যাকশন বেছেছে তা দেখা যায়। এই কারণেই শর্ট, টুল-হেভি কাজে আর ডিবাগিংয়ে এটাই ডিফল্ট। রিট্রিভাল-হেভি কাজে, যেখানে ফ্যান-আউট টুল গ্রাফ থাকে আর একটা টুলের রেজাল্ট না দেখেও পরের টুল প্ল্যান করা যায়, সেখানে ReWOO বেছে নিন। এটা পুরো টুল গ্রাফ আগে থেকেই প্ল্যান করে, ওয়ার্কার সব প্যারালাল চালায়, তারপর সলভার এভিডেন্স পড়ে উত্তর দেয়। রিট্রিভাল বেঞ্চমার্কে এটা ReAct-এর চেয়ে ৪–৬× কম টোকেন ব্যবহার করে, কিন্তু এর ডিবাগ-যোগ্যতা দুর্বল।"
           }
         },
         {
@@ -173,8 +173,8 @@
             "a": "Use three layers. Retry transient failures with exponential backoff (1s, 2s, 4s, 8s) plus jitter, capped at 3–5 attempts; fall back to a different tool or model when the failure is not transient; and feed the failure back to the model to revise when it was a reasoning error. Always bound retries with a hard cap, a wall-clock timeout, and a circuit breaker. After 5 consecutive failures of the same kind the breaker opens and calls fail fast for 60 seconds, then it half-opens with one test call."
           },
           "bn": {
-            "q": "Retry-র কারণে budget পুড়ে না গিয়ে agent-এর failure তুমি কীভাবে সামলাবে?",
-            "a": "তিনটা layer ব্যবহার করো। Transient failure-এ jitter-সহ exponential backoff (1s, 2s, 4s, 8s) দিয়ে retry করো, সর্বোচ্চ 3–5 বার; failure transient না হলে অন্য tool বা model-এ fallback করো; আর reasoning error হলে failure-টা model-কে ফিরিয়ে দিয়ে revise করতে বলো। Retry সবসময় hard cap, wall-clock timeout আর circuit breaker দিয়ে bounded রাখো। একই ধরনের টানা 5টা failure-এর পর breaker খুলে যায় এবং 60 সেকেন্ড call সঙ্গে সঙ্গে fail করে, তারপর breaker half-open হয়ে একটা test call পাঠায়।"
+            "q": "রিট্রাইয়ের কারণে বাজেট পুড়ে না গিয়ে এজেন্টের ফেইলিওর আপনি কীভাবে সামলাবেন?",
+            "a": "তিনটা লেয়ার ব্যবহার করুন। ট্রানজিয়েন্ট ফেইলিওরে জিটারসহ এক্সপোনেনশিয়াল ব্যাকঅফ (১s, ২s, ৪s, ৮s) দিয়ে রিট্রাই করুন, সর্বোচ্চ ৩–৫ বার; ফেইলিওর ট্রানজিয়েন্ট না হলে অন্য টুল বা মডেলে ফলব্যাক করুন; আর রিজনিং এরর হলে ফেইলিওরটা মডেলকে ফিরিয়ে দিয়ে রিভাইজ করতে বলুন। রিট্রাই সবসময় হার্ড ক্যাপ, ওয়াল-ক্লক টাইমআউট আর সার্কিট ব্রেকার দিয়ে বাউন্ডেড রাখুন। একই ধরনের টানা ৫টা ফেইলিওরের পর ব্রেকার খুলে যায় এবং ৬০ সেকেন্ড কল সঙ্গে সঙ্গে ফেইল করে, তারপর ব্রেকার হাফ-ওপেন হয়ে একটা টেস্ট কল পাঠায়।"
           }
         },
         {
@@ -184,8 +184,8 @@
             "a": "Use a risk ladder. Read-only actions are auto-approved, and local-write actions are auto-approved with a soft cap. External-write actions need approval per call, money actions need approval per call plus a daily cap, and destructive actions follow a two-person rule. The hard part is the UI, not the protocol, so budget at least 30% of agent project time for the human-facing surface."
           },
           "bn": {
-            "q": "কোন agent action-এ human approval লাগবে তা তুমি কীভাবে ঠিক করবে?",
-            "a": "একটা risk ladder ব্যবহার করো। Read-only action auto-approve হয়, আর local-write action soft cap-সহ auto-approve হয়। External-write action-এ প্রতি call-এ approval লাগে, money action-এ প্রতি call-এ approval আর সঙ্গে daily cap লাগে, আর destructive action-এ two-person rule চলে। কঠিন অংশ হলো UI, protocol নয়, তাই human-facing surface-এর জন্য agent project-এর সময়ের অন্তত 30% ধরে রাখো।"
+            "q": "কোন এজেন্ট অ্যাকশনে হিউম্যান অ্যাপ্রুভাল লাগবে তা আপনি কীভাবে ঠিক করবেন?",
+            "a": "একটা রিস্ক ল্যাডার ব্যবহার করুন। রিড-অনলি অ্যাকশন অটো-অ্যাপ্রুভ হয়, আর লোকাল-রাইট অ্যাকশন সফট ক্যাপসহ অটো-অ্যাপ্রুভ হয়। এক্সটার্নাল-রাইট অ্যাকশনে প্রতি কলে অ্যাপ্রুভাল লাগে, মানি অ্যাকশনে প্রতি কলে অ্যাপ্রুভাল আর সঙ্গে ডেইলি ক্যাপ লাগে, আর ডেস্ট্রাকটিভ অ্যাকশনে টু-পারসন রুল চলে। কঠিন অংশ হলো UI, প্রোটোকল নয়, তাই হিউম্যান-ফেসিং সারফেসের জন্য এজেন্ট প্রজেক্টের সময়ের অন্তত ৩০% ধরে রাখুন।"
           }
         }
       ]
@@ -200,8 +200,8 @@
             "a": "Name the tool verb_noun, for example search_documents, because names sit in the model's context window. Write a description with one sentence on what it does, one on when to use it, and one on what it returns. Use explicit types and enums, avoid any, and return an error field instead of a 500. More than about 20 tools in one prompt measurably degrades selection accuracy, so split into sub-agents by domain or use a router."
           },
           "bn": {
-            "q": "LLM-এর জন্য একটা ভালো tool schema তুমি কীভাবে design করবে?",
-            "a": "Tool-এর নাম verb_noun রাখো, যেমন search_documents, কারণ নাম model-এর context window-তে থাকে। Description-এ এক বাক্যে কী করে, এক বাক্যে কখন ব্যবহার করবে আর এক বাক্যে কী ফেরত দেয় লেখো। Explicit type আর enum দাও, any এড়িয়ে চলো, আর 500-এর বদলে error field ফেরত দাও। একটা prompt-এ প্রায় 20-এর বেশি tool থাকলে selection accuracy মাপার মতো কমে যায়, তাই domain অনুযায়ী sub-agent-এ ভাগ করো বা router ব্যবহার করো।"
+            "q": "LLM-এর জন্য একটা ভালো টুল স্কিমা আপনি কীভাবে ডিজাইন করবেন?",
+            "a": "টুলের নাম verb_noun রাখুন, যেমন search_documents, কারণ নাম মডেলের কনটেক্সট উইন্ডোতে থাকে। ডেসক্রিপশনে এক বাক্যে কী করে, এক বাক্যে কখন ব্যবহার করবেন আর এক বাক্যে কী ফেরত দেয় লিখুন। এক্সপ্লিসিট টাইপ আর enum দিন, any এড়িয়ে চলুন, আর 500-এর বদলে এরর ফিল্ড ফেরত দিন। একটা প্রম্পটে প্রায় 20-এর বেশি টুল থাকলে সিলেকশন অ্যাকুরেসি মাপার মতো কমে যায়, তাই ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করুন বা রাউটার ব্যবহার করুন।"
           }
         },
         {
@@ -211,8 +211,8 @@
             "a": "MCP, the Model Context Protocol, is an open standard introduced by Anthropic in late 2024 and now adopted by OpenAI, Google, and the major IDE vendors. The model is the client, and the data or tool provider runs an MCP server. The server exposes three primitives: Tools (functions the model can call), Resources (read-only data the client can fetch on demand), and Prompts (named prompt templates). You write one MCP server, for example for Postgres, and every MCP-compatible client can use it."
           },
           "bn": {
-            "q": "MCP কী, আর একটা MCP server কী কী expose করে?",
-            "a": "MCP, মানে Model Context Protocol, হলো একটা open standard যা Anthropic 2024-এর শেষে চালু করেছে এবং এখন OpenAI, Google আর প্রধান IDE vendor-রা গ্রহণ করেছে। Model হলো client, আর data বা tool provider একটা MCP server চালায়। Server তিনটা primitive expose করে: Tools (model যে function কল করতে পারে), Resources (client চাইলে যে read-only data fetch করতে পারে) আর Prompts (নামওয়ালা prompt template)। তুমি একটা MCP server লিখলে, যেমন Postgres-এর জন্য, সব MCP-compatible client সেটা ব্যবহার করতে পারে।"
+            "q": "MCP কী, আর একটা MCP সার্ভার কী কী এক্সপোজ করে?",
+            "a": "MCP, মানে Model Context Protocol, হলো একটা ওপেন স্ট্যান্ডার্ড যা Anthropic 2024-এর শেষে চালু করেছে এবং এখন OpenAI, Google আর প্রধান IDE ভেন্ডররা গ্রহণ করেছে। মডেল হলো ক্লায়েন্ট, আর ডেটা বা টুল প্রোভাইডার একটা MCP সার্ভার চালায়। সার্ভার তিনটা প্রিমিটিভ এক্সপোজ করে: টুলস (মডেল যে ফাংশন কল করতে পারে), রিসোর্সেস (ক্লায়েন্ট চাইলে যে রিড-অনলি ডেটা ফেচ করতে পারে) আর প্রম্পটস (নামওয়ালা প্রম্পট টেমপ্লেট)। আপনি একটা MCP সার্ভার লিখলে, যেমন Postgres-এর জন্য, সব MCP-কম্প্যাটিবল ক্লায়েন্ট সেটা ব্যবহার করতে পারে।"
           }
         },
         {
@@ -222,8 +222,8 @@
             "a": "Tool output is prompt content, because the model re-reads it on its next turn. A 10,000-row SQL result will blow your context window, so trim ruthlessly: return the top N and summarise the rest. Format for reading, not for storage, since Markdown tables beat JSON arrays for human-shaped reasoning. Add a \"what this means\" sentence when the result is non-obvious."
           },
           "bn": {
-            "q": "একটা tool 10,000-row-এর SQL result ফেরত দিলে model-এর জন্য সেটা তুমি কীভাবে format করবে?",
-            "a": "Tool-এর output হলো prompt content, কারণ model পরের turn-এ সেটা আবার পড়ে। 10,000-row-এর SQL result তোমার context window উড়িয়ে দেবে, তাই নির্মমভাবে ছাঁটাই করো: top N ফেরত দাও আর বাকিটার সারমর্ম দাও। সংরক্ষণের জন্য নয়, পড়ার জন্য format করো, কারণ মানুষের মতো reasoning-এর জন্য Markdown table JSON array-এর চেয়ে ভালো। ফলাফল স্পষ্ট না হলে একটা \"এটা কী বোঝায়\" বাক্য যোগ করো।"
+            "q": "একটা টুল ১০,০০০ সারির SQL রেজাল্ট ফেরত দিলে মডেলের জন্য সেটা আপনি কীভাবে ফরম্যাট করবেন?",
+            "a": "টুলের আউটপুট হলো প্রম্পট কনটেন্ট, কারণ মডেল পরের টার্নে সেটা আবার পড়ে। ১০,০০০ সারির SQL রেজাল্ট আপনার কনটেক্সট উইন্ডো উড়িয়ে দেবে, তাই নির্মমভাবে ছাঁটাই করুন: top N ফেরত দিন আর বাকিটার সারমর্ম দিন। সংরক্ষণের জন্য নয়, পড়ার জন্য ফরম্যাট করুন, কারণ মানুষের মতো রিজনিংয়ের জন্য Markdown টেবিল JSON অ্যারের চেয়ে ভালো। ফলাফল স্পষ্ট না হলে একটা \"এটা কী বোঝায়\" বাক্য যোগ করুন।"
           }
         }
       ]
@@ -238,8 +238,8 @@
             "a": "Start hosted: you can start in minutes, against weeks for self-hosting because of GPU procurement and ops. The rule of thumb is to move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s. Hosted cost is $0.10–$15 per 1M tokens, and self-hosted cost is $0.04–$2 at scale. Self-hosting also gives you control of data privacy and full customisation, but you must scale for peak traffic yourself."
           },
           "bn": {
-            "q": "কখন একটা team-এর hosted inference API ছেড়ে self-hosting-এ যাওয়া উচিত?",
-            "a": "Hosted দিয়ে শুরু করো: শুরু করতে লাগে কয়েক মিনিট, আর self-hosting-এ GPU procurement ও ops-এর কারণে লাগে কয়েক সপ্তাহ। Rule of thumb হলো, তোমার bill অর্ধেক সময়ের একজন ML engineer আর দুটো H100-এর খরচ ছাড়িয়ে গেলে self-hosting-এ যাও। Hosted-এর খরচ প্রতি 1M token-এ $0.10–$15, আর scale-এ self-hosted-এর খরচ $0.04–$2। Self-hosting-এ data privacy-র নিয়ন্ত্রণ আর পুরো customisation পাওয়া যায়, কিন্তু peak traffic-এর জন্য scale তোমাকেই করতে হয়।"
+            "q": "কখন একটা টিমের হোস্টেড ইনফারেন্স API ছেড়ে সেল্ফ-হোস্টিংয়ে যাওয়া উচিত?",
+            "a": "হোস্টেড দিয়ে শুরু করুন: শুরু করতে লাগে কয়েক মিনিট, আর সেল্ফ-হোস্টিংয়ে GPU প্রকিউরমেন্ট ও অপসের কারণে লাগে কয়েক সপ্তাহ। রুল অফ থাম্ব হলো, আপনার বিল অর্ধেক সময়ের একজন ML ইঞ্জিনিয়ার আর দুটো H100-এর খরচ ছাড়িয়ে গেলে সেল্ফ-হোস্টিংয়ে যান। হোস্টেডের খরচ প্রতি ১M টোকেনে $০.১০–$১৫, আর স্কেলে সেল্ফ-হোস্টেডের খরচ $০.০৪–$২। সেল্ফ-হোস্টিংয়ে ডেটা প্রাইভেসির নিয়ন্ত্রণ আর পুরো কাস্টমাইজেশন পাওয়া যায়, কিন্তু পিক ট্রাফিকের জন্য স্কেল আপনাকেই করতে হয়।"
           }
         },
         {
@@ -249,8 +249,8 @@
             "a": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference. GGUF is llama.cpp's single-file format with CPU+GPU hybrid support. AWQ gives 4-bit with near-FP16 quality and is popular for vLLM and SGLang."
           },
           "bn": {
-            "q": "Quantization কী, আর এর trade-off কী?",
-            "a": "Quantization model weight-এর precision 16-bit থেকে 8 বা 4-bit-এ নামায়। এতে সামান্য quality-র বদলে GPU memory 2–4× কমে এবং inference আনুপাতিকভাবে দ্রুত হয়। GGUF হলো llama.cpp-এর single-file format, যা CPU+GPU hybrid সাপোর্ট করে। AWQ 4-bit-এ FP16-এর কাছাকাছি quality দেয় এবং vLLM ও SGLang-এ জনপ্রিয়।"
+            "q": "কোয়ান্টাইজেশন কী, আর এর ট্রেড-অফ কী?",
+            "a": "কোয়ান্টাইজেশন মডেল ওয়েটের প্রিসিশন ১৬ বিট থেকে ৮ বা ৪ বিটে নামায়। এতে সামান্য মানের বদলে GPU মেমরি ২–৪× কমে এবং ইনফারেন্স আনুপাতিকভাবে দ্রুত হয়। GGUF হলো llama.cpp-এর সিঙ্গেল-ফাইল ফরম্যাট, যা CPU+GPU হাইব্রিড সাপোর্ট করে। AWQ ৪ বিটে FP16-এর কাছাকাছি মান দেয় এবং vLLM ও SGLang-এ জনপ্রিয়।"
           }
         },
         {
@@ -260,8 +260,8 @@
             "a": "Naive serving handles one request at a time per GPU. Continuous batching, used in vLLM, TGI, and SGLang, interleaves tokens from many requests so the GPU is never idle waiting for one slow request, and it typically delivers 5–20× higher throughput. Speculative decoding has a tiny draft model propose the next 5–10 tokens while the big model verifies them in parallel, for +2–3× throughput with no quality loss. vLLM adds a paged KV cache, allocated in pages like OS virtual memory."
           },
           "bn": {
-            "q": "Continuous batching আর speculative decoding কীভাবে serving performance বাড়ায়?",
-            "a": "Naive serving প্রতি GPU-তে একবারে একটা request সামলায়। vLLM, TGI আর SGLang-এ ব্যবহৃত continuous batching অনেক request-এর token পালা করে মিশিয়ে চালায়, ফলে একটা slow request-এর জন্য GPU কখনো idle থাকে না, আর এটা সাধারণত 5–20× বেশি throughput দেয়। Speculative decoding-এ একটা ছোট draft model পরের 5–10টা token প্রস্তাব করে আর বড় model সেগুলো parallel-এ verify করে, quality না কমিয়ে throughput +2–3×। vLLM আরও যোগ করে paged KV cache, যেটা OS virtual memory-র মতো page করে allocate হয়।"
+            "q": "কন্টিনিউয়াস ব্যাচিং আর স্পেকুলেটিভ ডিকোডিং কীভাবে সার্ভিং পারফরম্যান্স বাড়ায়?",
+            "a": "নেইভ সার্ভিং প্রতি GPU-তে একবারে একটা রিকোয়েস্ট সামলায়। vLLM, TGI আর SGLang-এ ব্যবহৃত কন্টিনিউয়াস ব্যাচিং অনেক রিকোয়েস্টের টোকেন পালা করে মিশিয়ে চালায়, ফলে একটা স্লো রিকোয়েস্টের জন্য GPU কখনো আইডল থাকে না, আর এটা সাধারণত ৫–২০× বেশি থ্রুপুট দেয়। স্পেকুলেটিভ ডিকোডিংয়ে একটা ছোট ড্রাফট মডেল পরের ৫–১০টা টোকেন প্রস্তাব করে আর বড় মডেল সেগুলো প্যারালালে ভেরিফাই করে, মান না কমিয়ে থ্রুপুট +2–৩×। vLLM আরও যোগ করে পেজড KV ক্যাশ, যেটা OS ভার্চুয়াল মেমরির মতো পেজ করে অ্যালোকেট হয়।"
           }
         }
       ]
@@ -276,8 +276,8 @@
             "a": "An LLM trace is a tree of spans: the user request, the system prompt assembly, the LLM call, every tool invocation, and the result. Every request must record input tokens, output tokens, model, cost computed from the vendor's pricing, latency (TTFT and total), and cache hit. Tag each one with user_id, feature, and experiment. This data lets you answer questions like \"is feature X losing money?\" and \"is the new model slower?\""
           },
           "bn": {
-            "q": "Production-এ প্রতিটা LLM request-এর জন্য তুমি কী record করবে?",
-            "a": "একটা LLM trace হলো span-এর tree: user request, system prompt assembly, LLM call, প্রতিটা tool invocation আর result। প্রতিটা request-এ input token, output token, model, vendor-এর pricing থেকে হিসাব করা cost, latency (TTFT ও total) আর cache hit record করতে হবে। প্রতিটাকে user_id, feature ও experiment দিয়ে tag করো। এই data দিয়ে তুমি \"feature X কি লোকসান করছে?\" বা \"নতুন model কি ধীর?\" ধরনের প্রশ্নের উত্তর দিতে পারবে।"
+            "q": "প্রোডাকশনে প্রতিটা LLM রিকোয়েস্টের জন্য আপনি কী রেকর্ড করবেন?",
+            "a": "একটা LLM ট্রেস হলো স্প্যানের ট্রি: ইউজার রিকোয়েস্ট, সিস্টেম প্রম্পট অ্যাসেম্বলি, LLM কল, প্রতিটা টুল ইনভোকেশন আর রেজাল্ট। প্রতিটা রিকোয়েস্টে ইনপুট টোকেন, আউটপুট টোকেন, মডেল, ভেন্ডরের প্রাইসিং থেকে হিসাব করা খরচ, ল্যাটেন্সি (TTFT ও total) আর ক্যাশ হিট রেকর্ড করতে হবে। প্রতিটাকে user_id, ফিচার ও এক্সপেরিমেন্ট দিয়ে ট্যাগ করুন। এই ডেটা দিয়ে আপনি \"ফিচার X কি লোকসান করছে?\" বা \"নতুন মডেল কি ধীর?\" ধরনের প্রশ্নের উত্তর দিতে পারবেন।"
           }
         },
         {
@@ -287,8 +287,8 @@
             "a": "Prompts are code: store them in git, version them, review them via PR, and deploy them via CI. Each prompt version gets a stable ID, and every trace carries that prompt ID, so you can instantly answer which prompt version users were on. For A/B tests, route traffic between two prompt versions or two models by user_id hash. Measure cost, latency, evals on the output, and user feedback, and stop when one variant wins on the metric you chose."
           },
           "bn": {
-            "q": "Production-এ তুমি prompt-এর version কীভাবে রাখবে আর prompt বা model-এর A/B test কীভাবে চালাবে?",
-            "a": "Prompt হলো কোড: git-এ রাখো, version করো, PR-এ review করো আর CI দিয়ে deploy করো। প্রতিটা prompt version একটা স্থিত ID পায়, আর প্রতিটা trace সেই prompt ID বহন করে, ফলে ব্যবহারকারীরা কোন prompt version-এ ছিল তা সঙ্গে সঙ্গে বলা যায়। A/B test-এর জন্য user_id hash দিয়ে দুটো prompt version বা দুটো model-এর মধ্যে traffic route করো। Cost, latency, output-এর eval আর user feedback মাপো, এবং তোমার বেছে নেওয়া metric-এ একটা variant জিতলে পরীক্ষা বন্ধ করো।"
+            "q": "প্রোডাকশনে আপনি প্রম্পটের ভার্সন কীভাবে রাখবেন আর প্রম্পট বা মডেলের A/B টেস্ট কীভাবে চালাবেন?",
+            "a": "প্রম্পট হলো কোড: git-এ রাখুন, ভার্সন করুন, PR-এ রিভিউ করুন আর CI দিয়ে ডিপ্লয় করুন। প্রতিটা প্রম্পট ভার্সন একটা স্থিত ID পায়, আর প্রতিটা ট্রেস সেই প্রম্পট ID বহন করে, ফলে ব্যবহারকারীরা কোন প্রম্পট ভার্সনে ছিল তা সঙ্গে সঙ্গে বলা যায়। A/B টেস্টের জন্য user_id হ্যাশ দিয়ে দুটো প্রম্পট ভার্সন বা দুটো মডেলের মধ্যে ট্রাফিক রাউট করুন। খরচ, ল্যাটেন্সি, আউটপুটের ইভ্যাল আর ইউজার ফিডব্যাক মাপুন, এবং আপনার বেছে নেওয়া মেট্রিকে একটা ভ্যারিয়েন্ট জিতলে পরীক্ষা বন্ধ করুন।"
           }
         },
         {
@@ -298,8 +298,8 @@
             "a": "When a vendor swaps or updates a same-named model, your outputs can drift in ways your offline evals will not catch. Run a small fraction of production traffic (1–5%) through both the old and new model, compare evals, and alert on the delta; Arize Phoenix and Braintrust automate this. Capture thumbs-up and thumbs-down signals and feed the failures into your eval dataset. After three months a thousand real failures are worth more than ten thousand synthetic ones."
           },
           "bn": {
-            "q": "Silent model drift তুমি কীভাবে ধরবে, আর user-এর অভিযোগ এতে কীভাবে কাজে লাগে?",
-            "a": "কোনো vendor একই নামের model বদলালে বা update করলে তোমার output এমনভাবে drift করতে পারে যা তোমার offline eval ধরতে পারবে না। Production traffic-এর একটা ছোট অংশ (1–5%) পুরোনো ও নতুন দুই model-এর মধ্য দিয়ে চালাও, eval তুলনা করো আর delta-তে alert দাও; Arize Phoenix ও Braintrust এটা automate করে। Thumbs-up আর thumbs-down signal capture করো এবং failure-গুলো তোমার eval dataset-এ ফিড করো। তিন মাস পর এক হাজার বাস্তব failure দশ হাজার synthetic-এর চেয়ে বেশি মূল্যবান।"
+            "q": "সাইলেন্ট মডেল ড্রিফট আপনি কীভাবে ধরবেন, আর ইউজারের অভিযোগ এতে কীভাবে কাজে লাগে?",
+            "a": "কোনো ভেন্ডর একই নামের মডেল বদলালে বা আপডেট করলে আপনার আউটপুট এমনভাবে ড্রিফট করতে পারে যা আপনার অফলাইন ইভ্যাল ধরতে পারবে না। প্রোডাকশন ট্রাফিকের একটা ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়ে চালান, ইভ্যাল তুলনা করুন আর ডেল্টায় অ্যালার্ট দিন; Arize Phoenix ও Braintrust এটা অটোমেট করে। থাম্বস-আপ আর থাম্বস-ডাউন সিগন্যাল ক্যাপচার করুন এবং ফেইলিওরগুলো আপনার ইভ্যাল ডেটাসেটে ফিড করুন। তিন মাস পর এক হাজার বাস্তব ফেইলিওর দশ হাজার সিনথেটিকের চেয়ে বেশি মূল্যবান।"
           }
         }
       ]
@@ -314,8 +314,8 @@
             "a": "A golden dataset is a fixed set of (input, expected_output) pairs that the model runs against on every change. You build it once, grow it from real failures, and never let it decay. You run it in CI and block the release if accuracy drops below the threshold."
           },
           "bn": {
-            "q": "Golden dataset কী, আর release সুরক্ষিত রাখতে তুমি এটা কীভাবে ব্যবহার করবে?",
-            "a": "Golden dataset হলো (input, expected_output) জোড়ার একটি নির্দিষ্ট সেট, যার বিপরীতে প্রতিটি পরিবর্তনের সময় model চালানো হয়। এটা একবার বানাবে, বাস্তব failure থেকে বাড়াবে, আর কখনো পুরোনো হতে দেবে না। এটা CI-তে চালাবে, আর accuracy threshold-এর নিচে নামলে release আটকে দেবে।"
+            "q": "গোল্ডেন ডেটাসেট কী, আর রিলিজ সুরক্ষিত রাখতে আপনি এটা কীভাবে ব্যবহার করবেন?",
+            "a": "গোল্ডেন ডেটাসেট হলো (input, expected_output) জোড়ার একটি নির্দিষ্ট সেট, যার বিপরীতে প্রতিটি পরিবর্তনের সময় মডেল চালানো হয়। এটা একবার বানাবেন, বাস্তব ফেইলিওর থেকে বাড়াবেন, আর কখনো পুরোনো হতে দেবেন না। এটা CI-তে চালাবেন, আর অ্যাকুরেসি থ্রেশহোল্ডের নিচে নামলে রিলিজ আটকে দেবেন।"
           }
         },
         {
@@ -325,8 +325,8 @@
             "a": "You use a strong LLM as a judge in one of two modes. Pairwise comparison shows the judge A and B and asks which is better, and it beats absolute scoring because relative judgements are easier than absolute ones. The other mode is rubric-based scoring with 4-6 criteria, each rated 0-5 with reasoning. Use a different, often stronger, model as the judge, rotate judge prompts, and periodically check the judge against human labels."
           },
           "bn": {
-            "q": "LLM-as-judge তুমি কীভাবে ব্যবহার করবে, আর কোন practice এটাকে নির্ভরযোগ্য করে?",
-            "a": "তুমি একটি শক্তিশালী LLM-কে judge হিসেবে ব্যবহার করবে, দুটি mode-এর একটিতে। Pairwise comparison-এ judge-কে A ও B দেখিয়ে জিজ্ঞেস করবে কোনটি ভালো, আর এটা absolute scoring-এর চেয়ে ভালো কাজ করে, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ। অন্য mode হলো rubric-based scoring, যেখানে 4–6টি criteria থাকে আর প্রতিটিতে যুক্তিসহ 0–5 রেটিং চাওয়া হয়। Judge হিসেবে আলাদা (প্রায়ই আরও শক্তিশালী) model নেবে, judge prompt rotate করবে, আর মাঝে মাঝে judge-কে human label-এর সাথে মিলিয়ে দেখবে।"
+            "q": "LLM-as-judge আপনি কীভাবে ব্যবহার করবেন, আর কোন প্র্যাকটিস এটাকে নির্ভরযোগ্য করে?",
+            "a": "আপনি একটি শক্তিশালী LLM-কে জাজ হিসেবে ব্যবহার করবেন, দুটি মোডের একটিতে। পেয়ারওয়াইজ কম্পেয়ারিজনে জাজকে A ও B দেখিয়ে জিজ্ঞেস করবেন কোনটি ভালো, আর এটা অ্যাবসোলিউট স্কোরিংয়ের চেয়ে ভালো কাজ করে, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ। অন্য মোড হলো রুব্রিক-ভিত্তিক স্কোরিং, যেখানে ৪–৬টি ক্রাইটেরিয়া থাকে আর প্রতিটিতে যুক্তিসহ ০–৫ রেটিং চাওয়া হয়। জাজ হিসেবে আলাদা (প্রায়ই আরও শক্তিশালী) মডেল নেবেন, জাজ প্রম্পট রোটেট করবেন, আর মাঝে মাঝে জাজকে হিউম্যান লেবেলের সাথে মিলিয়ে দেখবেন।"
           }
         },
         {
@@ -336,8 +336,8 @@
             "a": "The Ragas framework standardised four RAG metrics: faithfulness, answer relevance, context precision, and context recall. Faithfulness asks whether the answer sticks to the retrieved chunks or hallucinates. Context recall asks whether all the chunks needed to answer were retrieved. For an agent, the right answer is not enough, so you also track trajectory match, tool-call accuracy, and step efficiency, besides task success rate."
           },
           "bn": {
-            "q": "একটি RAG system-এর জন্য তুমি কোন metric track করবে, আর agent-এর ক্ষেত্রে বাড়তি কী দেখবে?",
-            "a": "Ragas framework চারটি RAG metric standard করেছে: faithfulness, answer relevance, context precision আর context recall। Faithfulness জিজ্ঞেস করে, উত্তর কি retrieved chunk-এর মধ্যে থেকেছে, নাকি hallucinate করেছে। Context recall জিজ্ঞেস করে, উত্তর দিতে দরকারি সব chunk কি retrieve হয়েছে। Agent-এর ক্ষেত্রে শুধু সঠিক উত্তর যথেষ্ট নয়, তাই task success rate-এর পাশাপাশি trajectory match, tool-call accuracy আর step efficiency-ও track করবে।"
+            "q": "একটি RAG সিস্টেমের জন্য আপনি কোন মেট্রিক ট্র্যাক করবেন, আর এজেন্টের ক্ষেত্রে বাড়তি কী দেখবেন?",
+            "a": "Ragas ফ্রেমওয়ার্ক চারটি RAG মেট্রিক স্ট্যান্ডার্ড করেছে: ফেইথফুলনেস, আনসার রিলেভেন্স, কনটেক্সট প্রিসিশন আর কনটেক্সট রিকল। ফেইথফুলনেস জিজ্ঞেস করে, উত্তর কি রিট্রিভ করা চাঙ্কের মধ্যে থেকেছে, নাকি হ্যালুসিনেট করেছে। কনটেক্সট রিকল জিজ্ঞেস করে, উত্তর দিতে দরকারি সব চাঙ্ক কি রিট্রিভ হয়েছে। এজেন্টের ক্ষেত্রে শুধু সঠিক উত্তর যথেষ্ট নয়, তাই টাস্ক সাকসেস রেটের পাশাপাশি ট্র্যাজেক্টরি ম্যাচ, টুল-কল অ্যাকুরেসি আর স্টেপ এফিশিয়েন্সিও ট্র্যাক করবেন।"
           }
         }
       ]
@@ -352,8 +352,8 @@
             "a": "You route easy requests to a small, cheap model and escalate to a large, expensive one only when the small model's confidence is low. You can measure confidence with logprobs, self-critique, or a separate classifier. A well-tuned cascade often reaches frontier quality at 30-70% of the cost."
           },
           "bn": {
-            "q": "Model cascading কীভাবে LLM-এর খরচ কমায়, আর কখন escalate করতে হবে তা তুমি কীভাবে ঠিক করবে?",
-            "a": "তুমি সহজ request ছোট, সস্তা model-এ পাঠাবে, আর ছোট model-এর confidence কম হলেই কেবল বড়, দামি model-এ escalate করবে। Confidence মাপতে logprobs, self-critique বা আলাদা classifier ব্যবহার করতে পারো। ভালোভাবে tune করা cascade প্রায়ই frontier quality-তে পৌঁছে যায় খরচের 30–70%-এ।"
+            "q": "মডেল ক্যাসকেডিং কীভাবে LLM-এর খরচ কমায়, আর কখন এসকেলেট করতে হবে তা আপনি কীভাবে ঠিক করবেন?",
+            "a": "আপনি সহজ রিকোয়েস্ট ছোট, সস্তা মডেলে পাঠাবেন, আর ছোট মডেলের কনফিডেন্স কম হলেই কেবল বড়, দামি মডেলে এসকেলেট করবেন। কনফিডেন্স মাপতে logprobs, সেল্ফ-ক্রিটিক বা আলাদা ক্লাসিফায়ার ব্যবহার করতে পারেন। ভালোভাবে টিউন করা ক্যাসকেড প্রায়ই ফ্রন্টিয়ার মানে পৌঁছে যায় খরচের ৩০–৭০%-এ।"
           }
         },
         {
@@ -363,8 +363,8 @@
             "a": "Caching is the single most powerful cost lever, and there are three kinds. A semantic cache returns a cached answer when a near-identical prompt was answered recently (cosine > 0.95). An output cache is a key-value cache keyed on the input, for deterministic tasks such as extraction or classification with temperature=0. A prompt cache is provider-level: it reuses the KV of the system prompt across calls, with an 80-90% discount on the cached prefix."
           },
           "bn": {
-            "q": "একটি LLM app-এ তুমি কী কী ধরনের caching ব্যবহার করতে পারো, আর প্রতিটি কী করে?",
-            "a": "Caching হলো খরচ কমানোর সবচেয়ে শক্তিশালী উপায়, আর এটা তিন ধরনের। Semantic cache কাজ করে এভাবে: প্রায় একই prompt-এর উত্তর সম্প্রতি দেওয়া হয়ে থাকলে (cosine > 0.95) cached উত্তর ফেরত দেয়। Output cache হলো input-কে key ধরে একটি key-value cache, যা deterministic কাজের জন্য, যেমন temperature=0 দিয়ে extraction বা classification। Prompt cache provider-level: এটা একাধিক call-এ system prompt-এর KV আবার ব্যবহার করে, আর cached prefix-এ 80–90% ছাড় পাওয়া যায়।"
+            "q": "একটি LLM অ্যাপে আপনি কী কী ধরনের ক্যাশিং ব্যবহার করতে পারেন, আর প্রতিটি কী করে?",
+            "a": "ক্যাশিং হলো খরচ কমানোর সবচেয়ে শক্তিশালী উপায়, আর এটা তিন ধরনের। সেম্যান্টিক ক্যাশ কাজ করে এভাবে: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হয়ে থাকলে (কোসাইন > ০.৯৫) ক্যাশ করা উত্তর ফেরত দেয়। আউটপুট ক্যাশ হলো ইনপুটকে কী ধরে একটি কী-ভ্যালু ক্যাশ, যা ডিটারমিনিস্টিক কাজের জন্য, যেমন temperature=০ দিয়ে এক্সট্র্যাকশন বা ক্লাসিফিকেশন। প্রম্পট ক্যাশ প্রোভাইডার-লেভেলের: এটা একাধিক কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে, আর ক্যাশ করা প্রিফিক্সে ৮০–৯০% ছাড় পাওয়া যায়।"
           }
         },
         {
@@ -374,8 +374,8 @@
             "a": "You allocate a monthly token budget per feature, alert at 80%, and throttle at 100%, which is the operational layer that prevents one runaway feature from blowing the company's bill. A model gateway sits between your app and every LLM provider. It gives you one API for many providers, per-key rate limits, cost tracking, retries, and fallbacks, and the three major options are LiteLLM, Portkey, and OpenRouter."
           },
           "bn": {
-            "q": "একটি feature যাতে LLM bill বাড়িয়ে না ফেলে, তুমি তা কীভাবে ঠেকাবে, আর model gateway এতে কী যোগ করে?",
-            "a": "তুমি প্রতিটি feature-এর জন্য মাসিক token budget ঠিক করবে, 80%-এ alert দেবে, আর 100%-এ throttle করবে। এটাই সেই operational layer, যা বেপরোয়াভাবে চলা একটি feature-কে কোম্পানির পুরো bill বাড়িয়ে ফেলা থেকে আটকায়। Model gateway তোমার app আর সব LLM provider-এর মাঝখানে বসে। এটা দেয় অনেক provider-এর জন্য একটি API, per-key rate limit, cost tracking, retry আর fallback, আর প্রধান তিনটি option হলো LiteLLM, Portkey আর OpenRouter।"
+            "q": "একটি ফিচার যাতে LLM বিল বাড়িয়ে না ফেলে, আপনি তা কীভাবে ঠেকাবেন, আর মডেল গেটওয়ে এতে কী যোগ করে?",
+            "a": "আপনি প্রতিটি ফিচারের জন্য মাসিক টোকেন বাজেট ঠিক করবেন, ৮০%-এ অ্যালার্ট দেবেন, আর ১০০%-এ থ্রটল করবেন। এটাই সেই অপারেশনাল লেয়ার, যা বেপরোয়াভাবে চলা একটি ফিচারকে কোম্পানির পুরো বিল বাড়িয়ে ফেলা থেকে আটকায়। মডেল গেটওয়ে আপনার অ্যাপ আর সব LLM প্রোভাইডারের মাঝখানে বসে। এটা দেয় অনেক প্রোভাইডারের জন্য একটি API, প্রতি-কী রেট লিমিট, খরচ ট্র্যাকিং, রিট্রাই আর ফলব্যাক, আর প্রধান তিনটি অপশন হলো LiteLLM, Portkey আর OpenRouter।"
           }
         }
       ]
@@ -390,8 +390,8 @@
             "a": "Prompt injection is when user-controlled text hijacks the model's behaviour. In direct injection, the user types instructions that override the previous instruction. In indirect injection, the user plants malicious text in a document that the model will read. Indirect injection is the harder one because the user does not even need to interact with your system."
           },
           "bn": {
-            "q": "Direct আর indirect prompt injection-এর পার্থক্য কী, আর কোনটা সামলানো বেশি কঠিন?",
-            "a": "Prompt injection হলো যখন user-নিয়ন্ত্রিত text model-এর আচরণ হাইজ্যাক করে। Direct injection-এ user এমন নির্দেশ টাইপ করে যা আগের নির্দেশ বাতিল করে দেয়। Indirect injection-এ user এমন একটি document-এ ক্ষতিকর text বসিয়ে রাখে, যা model পরে পড়বে। Indirect injection বেশি কঠিন, কারণ user-কে তোমার system-এর সাথে সরাসরি কথাই বলতে হয় না।"
+            "q": "ডিরেক্ট আর ইনডিরেক্ট প্রম্পট ইনজেকশনের পার্থক্য কী, আর কোনটা সামলানো বেশি কঠিন?",
+            "a": "প্রম্পট ইনজেকশন হলো যখন ইউজার-নিয়ন্ত্রিত টেক্সট মডেলের আচরণ হাইজ্যাক করে। ডিরেক্ট ইনজেকশনে ইউজার এমন নির্দেশ টাইপ করে যা আগের নির্দেশ বাতিল করে দেয়। ইনডিরেক্ট ইনজেকশনে ইউজার এমন একটি ডকুমেন্টে ক্ষতিকর টেক্সট বসিয়ে রাখে, যা মডেল পরে পড়বে। ইনডিরেক্ট ইনজেকশন বেশি কঠিন, কারণ ইউজারকে আপনার সিস্টেমের সাথে সরাসরি কথাই বলতে হয় না।"
           }
         },
         {
@@ -401,8 +401,8 @@
             "a": "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training, and they are a moving target because red-teams find new ones monthly. The defences are Constitutional AI fine-tuning, output classifiers, and robust system prompts. You also accept that 100% safety is unachievable."
           },
           "bn": {
-            "q": "Jailbreak থেকে তুমি কীভাবে রক্ষা পাবে, আর এ বিষয়ে কী মেনে নেবে?",
-            "a": "Jailbreak হলো নিষিদ্ধ prompt-এর এমন সৃজনশীল পুনর্লিখন যা safety training-এর পাশ কাটিয়ে যায়, আর এটা একটি চলমান লক্ষ্য, কারণ red-team প্রতি মাসে নতুন jailbreak খুঁজে পায়। প্রতিরক্ষা হলো Constitutional AI fine-tuning, output classifier আর robust system prompt। সাথে তুমি এটাও মেনে নেবে যে 100% safety অর্জনযোগ্য নয়।"
+            "q": "জেইলব্রেক থেকে আপনি কীভাবে রক্ষা পাবেন, আর এ বিষয়ে কী মেনে নেবেন?",
+            "a": "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়, আর এটা একটি চলমান লক্ষ্য, কারণ রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়। প্রতিরক্ষা হলো Constitutional AI ফাইন-টিউনিং, আউটপুট ক্লাসিফায়ার আর রোবাস্ট সিস্টেম প্রম্পট। সাথে আপনি এটাও মেনে নেবেন যে ১০০% সেফটি অর্জনযোগ্য নয়।"
           }
         },
         {
@@ -412,8 +412,8 @@
             "a": "You run a PII detector, such as Microsoft Presidio or spaCy, before you send user text to the model and before you render the model's reply. For compliance you often need both. Input redaction means you do not send PII to the vendor. Output redaction means you do not echo PII back to the wrong user."
           },
           "bn": {
-            "q": "একটি LLM pipeline-এ তুমি PII redaction কোথায় প্রয়োগ করবে, আর কেন?",
-            "a": "User-এর text model-এ পাঠানোর আগে এবং model-এর উত্তর render করার আগে তুমি একটি PII detector চালাবে, যেমন Microsoft Presidio বা spaCy। Compliance-এর জন্য প্রায়ই দুটিই দরকার হয়। Input redaction মানে PII vendor-এর কাছে পাঠাবে না। Output redaction মানে PII ভুল user-এর কাছে ফিরিয়ে দেবে না।"
+            "q": "একটি LLM পাইপলাইনে আপনি PII রিড্যাকশন কোথায় প্রয়োগ করবেন, আর কেন?",
+            "a": "ইউজারের টেক্সট মডেলে পাঠানোর আগে এবং মডেলের উত্তর রেন্ডার করার আগে আপনি একটি PII ডিটেক্টর চালাবেন, যেমন Microsoft Presidio বা spaCy। কমপ্লায়েন্সের জন্য প্রায়ই দুটিই দরকার হয়। ইনপুট রিড্যাকশন মানে PII ভেন্ডরের কাছে পাঠাবেন না। আউটপুট রিড্যাকশন মানে PII ভুল ইউজারের কাছে ফিরিয়ে দেবেন না।"
           }
         }
       ]
@@ -428,8 +428,8 @@
             "a": "A voice pipeline is STT → LLM → TTS. For STT the section lists Whisper, Deepgram, AssemblyAI, and ElevenLabs Scribe, and for TTS it lists ElevenLabs, Cartesia, OpenAI TTS, and PlayHT. Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio bidirectionally, and sub-500 ms turn-taking is now achievable. LiveKit and Vapi ship full agent frameworks on top of these."
           },
           "bn": {
-            "q": "তুমি একটা voice agent কীভাবে বানাবে, আর তার latency কীভাবে কমাবে?",
-            "a": "একটা voice pipeline হলো STT → LLM → TTS। STT-এর জন্য section-এ Whisper, Deepgram, AssemblyAI আর ElevenLabs Scribe আছে, আর TTS-এর জন্য ElevenLabs, Cartesia, OpenAI TTS আর PlayHT। Realtime API-গুলো audio দুই দিকে stream করে, তাই chunky STT→LLM→TTS loop-টা বাদ যায়, আর sub-500 ms turn-taking এখন সম্ভব। LiveKit আর Vapi এগুলোর উপরে পুরো agent framework দেয়।"
+            "q": "আপনি একটা ভয়েস এজেন্ট কীভাবে বানাবেন, আর তার ল্যাটেন্সি কীভাবে কমাবেন?",
+            "a": "একটা ভয়েস পাইপলাইন হলো STT → LLM → TTS। STT-এর জন্য সেকশনে Whisper, Deepgram, AssemblyAI আর ElevenLabs Scribe আছে, আর TTS-এর জন্য ElevenLabs, Cartesia, OpenAI TTS আর PlayHT। রিয়েলটাইম API-গুলো অডিও দুই দিকে স্ট্রিম করে, তাই চাঙ্কি STT→LLM→TTS লুপটা বাদ যায়, আর ৫০০ ms-এর নিচে টার্ন-টেকিং এখন সম্ভব। LiveKit আর Vapi এগুলোর উপরে পুরো এজেন্ট ফ্রেমওয়ার্ক দেয়।"
           }
         },
         {
@@ -439,8 +439,8 @@
             "a": "Native multimodal models like GPT-4o, Claude 4, Gemini 2.5, and Qwen3-VL take images directly. An LLM beats Tesseract on messy photos, handwritten notes, and structured forms, and often no separate OCR step is needed. The same models do document AI (PDF understanding with layout awareness, for example Claude, Mistral OCR, and Qwen2-VL), read a chart and emit JSON, and answer visual Q&A."
           },
           "bn": {
-            "q": "কখন Tesseract-এর বদলে OCR-এর জন্য LLM ব্যবহার করবে, আর vision model আর কী কী করতে পারে?",
-            "a": "GPT-4o, Claude 4, Gemini 2.5 আর Qwen3-VL-এর মতো native multimodal model সরাসরি image নেয়। অগোছালো photo, হাতের লেখা note আর structured form-এ LLM, Tesseract-এর চেয়ে ভালো করে, আর প্রায়ই আলাদা OCR step লাগে না। একই model দিয়ে document AI হয় (layout বুঝে PDF পড়া, যেমন Claude, Mistral OCR আর Qwen2-VL), chart পড়ে JSON বের করা যায়, আর visual Q&A-ও করা যায়।"
+            "q": "কখন Tesseract-এর বদলে OCR-এর জন্য LLM ব্যবহার করবেন, আর ভিশন মডেল আর কী কী করতে পারে?",
+            "a": "GPT-4o, Claude 4, Gemini 2.5 আর Qwen3-VL-এর মতো নেটিভ মাল্টিমোডাল মডেল সরাসরি ছবি নেয়। অগোছালো ফটো, হাতের লেখা নোট আর স্ট্রাকচার্ড ফর্মে LLM, Tesseract-এর চেয়ে ভালো করে, আর প্রায়ই আলাদা OCR ধাপ লাগে না। একই মডেল দিয়ে ডকুমেন্ট AI হয় (লেআউট বুঝে PDF পড়া, যেমন Claude, Mistral OCR আর Qwen2-VL), চার্ট পড়ে JSON বের করা যায়, আর ভিজ্যুয়াল Q&A-ও করা যায়।"
           }
         },
         {
@@ -450,8 +450,8 @@
             "a": "Flux has open-weights availability and strong prompt fidelity. SDXL / SD3 are open and fine-tuneable with LoRA, Imagen 3 gives photorealism via Vertex, and DALL-E 3 / GPT-Image-1 are polished and instruction-following. For control, use ControlNet for structure (pose, depth, canny edges), LoRA for style or character consistency, inpainting for edits, and IP-Adapter for reference images. ComfyUI lets you wire these into reproducible pipelines."
           },
           "bn": {
-            "q": "Image-generation model কীভাবে বাছবে, আর তার output কীভাবে নিয়ন্ত্রণ করবে?",
-            "a": "Flux-এর open-weights পাওয়া যায় আর prompt fidelity শক্তিশালী। SDXL / SD3 open আর LoRA দিয়ে fine-tune করা যায়, Imagen 3 Vertex-এর মাধ্যমে photorealism দেয়, আর DALL-E 3 / GPT-Image-1 polished ও instruction-following। নিয়ন্ত্রণের জন্য structure-এ (pose, depth, canny edges) ControlNet, style বা character consistency-তে LoRA, edit-এর জন্য inpainting, আর reference image-এর জন্য IP-Adapter ব্যবহার করো। ComfyUI দিয়ে এগুলো reproducible pipeline-এ জুড়ে নেওয়া যায়।"
+            "q": "ইমেজ-জেনারেশন মডেল কীভাবে বাছবেন, আর তার আউটপুট কীভাবে নিয়ন্ত্রণ করবেন?",
+            "a": "Flux-এর ওপেন-ওয়েট পাওয়া যায় আর প্রম্পট ফিডেলিটি শক্তিশালী। SDXL / SD3 ওপেন আর LoRA দিয়ে ফাইন-টিউন করা যায়, Imagen ৩ Vertex-এর মাধ্যমে ফটোরিয়ালিজম দেয়, আর DALL-E ৩ / GPT-Image-1 পলিশড ও ইনস্ট্রাকশন-ফলোয়িং। নিয়ন্ত্রণের জন্য স্ট্রাকচারে (পোজ, ডেপথ, ক্যানি এজ) ControlNet, স্টাইল বা ক্যারেক্টার কনসিস্টেন্সিতে LoRA, এডিটের জন্য ইনপেইন্টিং, আর রেফারেন্স ছবির জন্য IP-Adapter ব্যবহার করুন। ComfyUI দিয়ে এগুলো রিপ্রোডিউসিবল পাইপলাইনে জুড়ে নেওয়া যায়।"
           }
         }
       ]
@@ -466,8 +466,8 @@
             "a": "Users expect words to appear as the model writes them, not after a 3-second pause. SSE is the simplest, works through any HTTP proxy, and is one-way (server to client). WebSockets are bidirectional and needed for voice and collaborative UIs, but have a heavier handshake. HTTP chunked transfer is a fallback for proxies that strip SSE headers."
           },
           "bn": {
-            "q": "LLM-এর output কীভাবে user-এর কাছে stream করবে, আর কোন transport বাছবে?",
-            "a": "User চায় model যেমন লেখে তেমন করে শব্দ দেখতে, 3 সেকেন্ড থেমে থাকার পরে নয়। SSE সবচেয়ে সহজ, যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে, আর একমুখী (server থেকে client)। WebSockets দ্বিমুখী, voice আর collaborative UI-এর জন্য লাগে, কিন্তু handshake ভারী। SSE header strip করে এমন proxy-র জন্য HTTP chunked transfer হলো fallback।"
+            "q": "LLM-এর আউটপুট কীভাবে ইউজারের কাছে স্ট্রিম করবেন, আর কোন ট্রান্সপোর্ট বাছবেন?",
+            "a": "ইউজার চায় মডেল যেমন লেখে তেমন করে শব্দ দেখতে, ৩ সেকেন্ড থেমে থাকার পরে নয়। SSE সবচেয়ে সহজ, যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে, আর একমুখী (সার্ভার থেকে ক্লায়েন্ট)। WebSockets দ্বিমুখী, ভয়েস আর কোলাবরেটিভ UI-এর জন্য লাগে, কিন্তু হ্যান্ডশেক ভারী। SSE হেডার স্ট্রিপ করে এমন প্রক্সির জন্য HTTP চাঙ্কড ট্রান্সফার হলো ফলব্যাক।"
           }
         },
         {
@@ -477,8 +477,8 @@
             "a": "Anything over about 10 seconds should not block an HTTP request. Push it to a queue (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) and return a job_id, and the client polls or subscribes via SSE/WebSocket for updates. For failures, generate an idempotency key per request and reject duplicates, and store checkpoints of agent state so a resume replays only the failed steps. Use durable execution (Temporal/Restate) for anything longer than a minute."
           },
           "bn": {
-            "q": "যে agent run কয়েক মিনিট লাগে সেটা কীভাবে সামলাবে, আর call fail করলে কী করবে?",
-            "a": "প্রায় 10 সেকেন্ডের বেশি লাগে এমন কিছু HTTP request block করে রাখা উচিত না। সেটা queue-তে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) push করো আর একটা job_id ফেরত দাও, তারপর client poll করে বা SSE/WebSocket দিয়ে update subscribe করে। fail-এর জন্য প্রতিটি request-এ একটা idempotency key বানাও আর duplicate reject করো, আর agent state-এর checkpoint রাখো যাতে resume করলে শুধু fail হওয়া step-গুলো replay হয়। এক মিনিটের বেশি লাগে এমন কিছুর জন্য durable execution (Temporal/Restate) ব্যবহার করো।"
+            "q": "যে এজেন্ট রান কয়েক মিনিট লাগে সেটা কীভাবে সামলাবেন, আর কল ফেইল করলে কী করবেন?",
+            "a": "প্রায় ১০ সেকেন্ডের বেশি লাগে এমন কিছু HTTP রিকোয়েস্ট ব্লক করে রাখা উচিত না। সেটা কিউতে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) পুশ করুন আর একটা job_id ফেরত দিন, তারপর ক্লায়েন্ট পোল করে বা SSE/WebSocket দিয়ে আপডেট সাবস্ক্রাইব করে। ফেইলের জন্য প্রতিটি রিকোয়েস্টে একটা আইডেমপোটেন্সি কী বানান আর ডুপ্লিকেট রিজেক্ট করুন, আর এজেন্ট স্টেটের চেকপয়েন্ট রাখুন যাতে রিজিউম করলে শুধু ফেইল হওয়া ধাপগুলো রিপ্লে হয়। এক মিনিটের বেশি লাগে এমন কিছুর জন্য ডিউরেবল এক্সিকিউশন (Temporal/Restate) ব্যবহার করুন।"
           }
         },
         {
@@ -488,8 +488,8 @@
             "a": "Use fallback chains: if OpenAI returns 503, route to Anthropic, and if Anthropic returns 429, route to Together, with degraded prompts per provider. LiteLLM and Portkey do this out of the box, and a model gateway is essentially a fallback router plus cost tracking. Treat every prompt and every model as a feature flag, and roll out to 1%, then 10%, then 100%. Roll back instantly when evals regress."
           },
           "bn": {
-            "q": "Provider-এর outage কীভাবে সামলাবে, আর নতুন model নিরাপদে কীভাবে roll out করবে?",
-            "a": "Fallback chain ব্যবহার করো: OpenAI 503 দিলে Anthropic-এ route করো, আর Anthropic 429 দিলে Together-এ route করো, প্রতিটি provider-এর জন্য degraded prompt সহ। LiteLLM আর Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে, আর একটা model gateway মূলত একটা fallback router আর cost tracking। প্রতিটি prompt আর প্রতিটি model-কে feature flag হিসেবে দেখো, আর 1%, তারপর 10%, তারপর 100%-এ roll out করো। eval regress করলে সঙ্গে সঙ্গে roll back করো।"
+            "q": "প্রোভাইডারের আউটেজ কীভাবে সামলাবেন, আর নতুন মডেল নিরাপদে কীভাবে রোল আউট করবেন?",
+            "a": "ফলব্যাক চেইন ব্যবহার করুন: OpenAI ৫০৩ দিলে Anthropic-এ রাউট করুন, আর Anthropic ৪২৯ দিলে Together-এ রাউট করুন, প্রতিটি প্রোভাইডারের জন্য ডিগ্রেডেড প্রম্পট সহ। LiteLLM আর Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে, আর একটা মডেল গেটওয়ে মূলত একটা ফলব্যাক রাউটার আর খরচ ট্র্যাকিং। প্রতিটি প্রম্পট আর প্রতিটি মডেলকে ফিচার ফ্ল্যাগ হিসেবে দেখুন, আর ১%, তারপর ১০%, তারপর ১০০%-এ রোল আউট করুন। ইভ্যাল রিগ্রেস করলে সঙ্গে সঙ্গে রোল ব্যাক করুন।"
           }
         }
       ]
@@ -504,8 +504,8 @@
             "a": "Transformer Explainer, from the Polo Club of Data Science at Georgia Tech, runs a live GPT-2 (small) model inside your browser. It shows the stages tokenize, embed, attention, MLP, repeat, output, and sample, and it has sliders for temperature, top-k, and top-p. GPT-2 (small) has 124 million parameters and 12 blocks. It is from 2019, so it shows the shape of a transformer, not the quality of a modern model."
           },
           "bn": {
-            "q": "একজন junior engineer জিজ্ঞেস করল transformer কীভাবে পরের token বাছে। তুমি কোন free resource দেখাবে, আর সেটা কী দেখায়?",
-            "a": "Georgia Tech-এর Polo Club of Data Science-এর Transformer Explainer তোমার browser-এর ভেতরেই একটা live GPT-2 (small) model চালায়। এটা tokenize, embed, attention, MLP, repeat, output আর sample ধাপগুলো দেখায়, আর temperature, top-k ও top-p-র জন্য slider আছে। GPT-2 (small)-এর 124 million parameter আর 12টা block। এটা 2019 সালের, তাই এটা transformer-এর গঠন দেখায়, আধুনিক model-এর মান নয়।"
+            "q": "একজন জুনিয়র ইঞ্জিনিয়ার জিজ্ঞেস করল ট্রান্সফর্মার কীভাবে পরের টোকেন বাছে। আপনি কোন ফ্রি রিসোর্স দেখাবেন, আর সেটা কী দেখায়?",
+            "a": "Georgia Tech-এর Polo Club of Data Science-এর Transformer Explainer আপনার ব্রাউজারের ভেতরেই একটা লাইভ GPT-2 (small) মডেল চালায়। এটা টোকেনাইজ, এমবেড, অ্যাটেনশন, MLP, রিপিট, আউটপুট আর স্যাম্পল ধাপগুলো দেখায়, আর টেম্পারেচার, top-k ও top-p-র জন্য স্লাইডার আছে। GPT-2 (small)-এর ১২৪ মিলিয়ন প্যারামিটার আর ১২টা ব্লক। এটা ২০১৯ সালের, তাই এটা ট্রান্সফর্মারের গঠন দেখায়, আধুনিক মডেলের মান নয়।"
           }
         },
         {
@@ -515,8 +515,8 @@
             "a": "3Blue1Brown's Neural networks series is the best first stop if you want the idea before the code. Chapters 1 to 4 build one small network and teach how it learns, and chapters 5 to 7 apply the same ideas to the transformer in an LLM: transformers, attention step by step, and how an LLM may store facts. The videos teach ideas, not production code. They do not cover newer designs such as grouped-query attention or mixture of experts."
           },
           "bn": {
-            "q": "কেউ code-এর আগে LLM-এর পেছনের idea বুঝতে চায়। কোন resource মানাবে, আর তার কোন অংশগুলো?",
-            "a": "কেউ code-এর আগে idea চাইলে 3Blue1Brown-এর Neural networks series হলো সবচেয়ে ভালো প্রথম ধাপ। অধ্যায় 1 থেকে 4 একটা ছোট network বানায় আর শেখায় সেটা কীভাবে শেখে, আর অধ্যায় 5 থেকে 7 একই idea LLM-এর transformer-এ প্রয়োগ করে: transformers, attention ধাপে ধাপে, আর LLM কীভাবে fact জমা রাখতে পারে। ভিডিওগুলো idea শেখায়, production code নয়। grouped-query attention বা mixture of experts-এর মতো নতুন design এগুলোতে নেই।"
+            "q": "কেউ কোডের আগে LLM-এর পেছনের আইডিয়া বুঝতে চায়। কোন রিসোর্স মানাবে, আর তার কোন অংশগুলো?",
+            "a": "কেউ কোডের আগে আইডিয়া চাইলে 3Blue1Brown-এর Neural networks সিরিজ হলো সবচেয়ে ভালো প্রথম ধাপ। অধ্যায় ১ থেকে ৪ একটা ছোট নেটওয়ার্ক বানায় আর শেখায় সেটা কীভাবে শেখে, আর অধ্যায় ৫ থেকে ৭ একই আইডিয়া LLM-এর ট্রান্সফর্মারে প্রয়োগ করে: ট্রান্সফর্মার, ধাপে ধাপে অ্যাটেনশন, আর LLM কীভাবে ফ্যাক্ট জমা রাখতে পারে। ভিডিওগুলো আইডিয়া শেখায়, প্রোডাকশন কোড নয়। গ্রুপড-কুয়েরি অ্যাটেনশন বা মিক্সচার অফ এক্সপার্টসের মতো নতুন ডিজাইন এগুলোতে নেই।"
           }
         },
         {
@@ -526,8 +526,8 @@
             "a": "The LLM Inference Handbook is a free online guide to everything between your prompt and the answer. It separates four terms: inference, inference server or framework, serving, and inference optimization. It follows one request through tokenize, schedule, prefill, decode, and stream, and the two numbers to watch are TTFT (how long you wait for the first token) and TPOT (the gap between later tokens). Speed numbers depend on the model, the GPU, the batch size, and the prompt length, so measure your own system."
           },
           "bn": {
-            "q": "তোমাকে LLM serving কীভাবে কাজ করে শিখতে হবে। LLM Inference Handbook-এ কী আছে, আর তুমি কোন সংখ্যাগুলো দেখবে?",
-            "a": "LLM Inference Handbook হলো prompt থেকে উত্তর পর্যন্ত সবকিছু নিয়ে একটা free online guide। এটা চারটা term আলাদা করে: inference, inference server বা framework, serving আর inference optimization। এটা একটা request-কে tokenize, schedule, prefill, decode আর stream ধাপে অনুসরণ করে, আর দেখার মতো দুটো সংখ্যা হলো TTFT (প্রথম token-এর জন্য কতক্ষণ অপেক্ষা) আর TPOT (পরের token-গুলোর মধ্যে ফাঁক)। speed-এর সংখ্যা model, GPU, batch size আর prompt-এর দৈর্ঘ্যের উপর নির্ভর করে, তাই নিজের system মেপে দেখো।"
+            "q": "আপনাকে LLM সার্ভিং কীভাবে কাজ করে শিখতে হবে। LLM Inference Handbook-এ কী আছে, আর আপনি কোন সংখ্যাগুলো দেখবেন?",
+            "a": "LLM Inference Handbook হলো প্রম্পট থেকে উত্তর পর্যন্ত সবকিছু নিয়ে একটা ফ্রি অনলাইন গাইড। এটা চারটা টার্ম আলাদা করে: ইনফারেন্স, ইনফারেন্স সার্ভার বা ফ্রেমওয়ার্ক, সার্ভিং আর ইনফারেন্স অপ্টিমাইজেশন। এটা একটা রিকোয়েস্টকে টোকেনাইজ, শিডিউল, প্রিফিল, ডিকোড আর স্ট্রিম ধাপে অনুসরণ করে, আর দেখার মতো দুটো সংখ্যা হলো TTFT (প্রথম টোকেনের জন্য কতক্ষণ অপেক্ষা) আর TPOT (পরের টোকেনগুলোর মধ্যে ফাঁক)। স্পিডের সংখ্যা মডেল, GPU, ব্যাচ সাইজ আর প্রম্পটের দৈর্ঘ্যের উপর নির্ভর করে, তাই নিজের সিস্টেম মেপে দেখুন।"
           }
         }
       ]

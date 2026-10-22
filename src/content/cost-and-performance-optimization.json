@@ -3,8 +3,8 @@
   "title": "Cost and Performance Optimization",
   "lede": "Model cascading, semantic / output / prompt caching, batch APIs, distillation, LLMLingua-style prompt compression, per-feature token budgets, and model gateways (LiteLLM, Portkey, OpenRouter) — a five-tier stack that can cut LLM spend by 5–50× without losing quality. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "খরচ আর Performance Optimization",
-    "lede": "Model cascading, semantic / output / prompt caching, batch API, distillation, LLMLingua-ধরনের prompt compression, প্রতিটা feature-এর জন্য token budget, আর model gateway (LiteLLM, Portkey, OpenRouter)। এই পাঁচ স্তরের stack মান না কমিয়ে LLM-এর খরচ 5–50 গুণ কমাতে পারে। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "খরচ আর পারফরম্যান্স অপ্টিমাইজেশন",
+    "lede": "মডেল ক্যাসকেডিং, সেম্যান্টিক / আউটপুট / প্রম্পট ক্যাশিং, ব্যাচ API, ডিস্টিলেশন, LLMLingua-ধরনের প্রম্পট কম্প্রেশন, প্রতিটা ফিচারের জন্য টোকেন বাজেট, আর মডেল গেটওয়ে (LiteLLM, Portkey, OpenRouter)। এই পাঁচ স্তরের স্ট্যাক মান না কমিয়ে LLM-এর খরচ ৫–৫০ গুণ কমাতে পারে। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "Cost & performance optimisation",
       "sub": "LLM bills scale with usage. Three knobs let you cut cost by 5–50× without losing quality: <strong>cascade</strong> (cheap → expensive routing), <strong>cache</strong> (semantic, prefix, output), and <strong>compress</strong> (prompt compression, distillation).",
       "bn": {
-        "title": "খরচ আর performance optimisation",
-        "sub": "LLM-এর বিল ব্যবহারের সাথে বাড়ে। মান না কমিয়ে খরচ 5–50 গুণ কমানোর তিনটা উপায় আছে: <strong>cascade</strong> (সস্তা model থেকে দামি model-এ পাঠানো), <strong>cache</strong> (semantic, prefix, output), আর <strong>compress</strong> (prompt compression, distillation)।"
+        "title": "খরচ আর পারফরম্যান্স অপ্টিমাইজেশন",
+        "sub": "LLM-এর বিল ব্যবহারের সাথে বাড়ে। মান না কমিয়ে খরচ ৫–৫০ গুণ কমানোর তিনটা উপায় আছে: <strong>ক্যাসকেড</strong> (সস্তা মডেল থেকে দামি মডেলে পাঠানো), <strong>ক্যাশ</strong> (সেম্যান্টিক, প্রিফিক্স, আউটপুট), আর <strong>কম্প্রেস</strong> (প্রম্পট কম্প্রেশন, ডিস্টিলেশন)।"
       },
       "body": [
         {
@@ -106,7 +106,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 760\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Cost optimisation stack\">\n      <text x=\"40\" y=\"30\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Cost optimisation stack — top-down, highest impact first</text>\n\n      <g><rect x=\"40\" y=\"50\" width=\"1020\" height=\"100\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n        <text x=\"60\" y=\"78\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fb7185\">Tier 1 — Eliminate the call entirely</text>\n        <text x=\"60\" y=\"100\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">semantic cache · output cache · prompt cache · guardrail short-circuit</text>\n        <text x=\"60\" y=\"120\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">typical savings: 30–80% of total cost</text>\n        <text x=\"60\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">zero quality impact if cache key is correct</text></g>\n\n      <g><rect x=\"40\" y=\"170\" width=\"1020\" height=\"100\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n        <text x=\"60\" y=\"198\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fbbf24\">Tier 2 — Shrink the call</text>\n        <text x=\"60\" y=\"220\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">prompt compression (LLMLingua) · short system prompts · trim tool output · max_tokens caps</text>\n        <text x=\"60\" y=\"240\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">typical savings: 30–70% on remaining calls</text>\n        <text x=\"60\" y=\"258\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">minor quality risk; measure before/after</text></g>\n\n      <g><rect x=\"40\" y=\"290\" width=\"1020\" height=\"100\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"60\" y=\"318\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#22d3ee\">Tier 3 — Use a cheaper model</text>\n        <text x=\"60\" y=\"340\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">cascade (8B → 70B) · distillation · batch API (50% off) · self-host open weights</text>\n        <text x=\"60\" y=\"360\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">typical savings: 2–10× per remaining call</text>\n        <text x=\"60\" y=\"378\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">requires quality testing per workload</text></g>\n\n      <g><rect x=\"40\" y=\"410\" width=\"1020\" height=\"100\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n        <text x=\"60\" y=\"438\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#34d399\">Tier 4 — Discount the call</text>\n        <text x=\"60\" y=\"460\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">provider price matching · committed-use discounts · AWS / Azure credits</text>\n        <text x=\"60\" y=\"480\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">typical savings: 10–40% at scale</text>\n        <text x=\"60\" y=\"498\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">procurement play, not engineering</text></g>\n\n      <g><rect x=\"40\" y=\"530\" width=\"1020\" height=\"100\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"60\" y=\"558\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#a78bfa\">Tier 5 — Stop runaway usage</text>\n        <text x=\"60\" y=\"580\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">token budgets · per-user rate limits · loop detection · prompt-length caps</text>\n        <text x=\"60\" y=\"600\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">typical savings: unpredictable but bounded</text>\n        <text x=\"60\" y=\"618\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">prevents the $100k surprise on the 31st</text></g>\n\n      <text x=\"40\" y=\"700\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">work top-down; Tiers 1–3 are engineering, Tiers 4–5 are procurement / ops. Each tier compounds with the ones above.</text>\n      <text x=\"40\" y=\"720\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">gate each tier with an offline eval: measure quality before/after; refuse the optimisation if it breaks your golden dataset.</text>\n    </svg>",
           "caption": "The cost-optimisation stack. Each tier compounds with the ones above; work top-down. Tiers 1–3 are engineering, Tier 4 is procurement, Tier 5 is ops.",
-          "captionBn": "খরচ-অপ্টিমাইজেশন স্ট্যাক। প্রতিটি স্তর উপরের স্তরগুলোর সাথে মিলিত হয়; উপর থেকে নিচে কাজ করুন। স্তর 1–3 ইসলেব-ই, স্তর 4 procurement, স্তর 5 ops।"
+          "captionBn": "খরচ-অপ্টিমাইজেশন স্ট্যাক। প্রতিটি স্তর উপরের স্তরগুলোর সাথে মিলিত হয়; উপর থেকে নিচে কাজ করুন। স্তর ১–৩ শুধু ইঞ্জিনিয়ারিংয়ের কাজ, স্তর ৪ প্রকিউরমেন্ট, স্তর ৫ অপস।"
         }
       ],
       "layman": [
@@ -151,15 +151,15 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>১. Cascade (সহজ প্রসিঙ্গুলো সস্তায়, কঠিনগুলো ব্যয়বহুলায়)।</strong> প্রতিটি প্রশ্ন সবচেয়ে স্মার্ট AI-এ পাঠাবেন না। \"২+২ কত?\" ছোট মডেলে পাঠান, \"আমাকে একটি আইনি চুক্তি ড্রাফ্ট কর\" বড় মডেলে। একটি ছোট classifier (বা মডেলের নিজস্ব স্কোর) সিদ্ধান্ত নেয় কোনটি ব্যবহার করবে। প্রায় একই মান অনেক কম খরচে।"
+          "html": "<strong>১. ক্যাসকেড (সহজ প্রসিঙ্গুলো সস্তায়, কঠিনগুলো ব্যয়বহুলায়)।</strong> প্রতিটি প্রশ্ন সবচেয়ে স্মার্ট AI-এ পাঠাবেন না। \"২+২ কত?\" ছোট মডেলে পাঠান, \"আমাকে একটি আইনি চুক্তি ড্রাফ্ট কর\" বড় মডেলে। একটি ছোট ক্লাসিফায়ার (বা মডেলের নিজস্ব স্কোর) সিদ্ধান্ত নেয় কোনটি ব্যবহার করবে। প্রায় একই মান অনেক কম খরচে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>২. Cache (একই জিনিস আবার উত্তর দেবেন না)।</strong> ১,০০০ ব্যবহারকারী এক ঘণ্টার মধ্যে \"আপনার refund policy কী?\" জিজ্ঞেস করলে, আপনি একবার উত্তর দিন এবং ৯৯৯ বার cached উত্তর দিন। তিন ধরন: <em>semantic cache</em> (অর্থ দ্বারা অনুরূপ প্রশ্নের উত্তর), <em>output cache</em> (হুবহু একই input-এর উত্তর), এবং <em>prompt cache</em> (AI vendor আপনার prompt-এর শুরুটি মনে রাখে এবং পুনঃপড়া এড়িয়ে যায়)।"
+          "html": "<strong>২. ক্যাশ (একই জিনিস আবার উত্তর দেবেন না)।</strong> ১,০০০ ইউজার এক ঘণ্টার মধ্যে \"আপনার রিফান্ড পলিসি কী?\" জিজ্ঞেস করলে, আপনি একবার উত্তর দিন এবং ৯৯৯ বার ক্যাশ করা উত্তর দিন। তিন ধরন: <em>সেম্যান্টিক ক্যাশ</em> (অর্থ দ্বারা অনুরূপ প্রশ্নের উত্তর), <em>আউটপুট ক্যাশ</em> (হুবহু একই ইনপুটের উত্তর), এবং <em>প্রম্পট ক্যাশ</em> (AI ভেন্ডর আপনার প্রম্পটের শুরুটি মনে রাখে এবং পুনঃপড়া এড়িয়ে যায়)।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>৩. Compress ও distill (কম ব্যবহার করুন, অথবা ছোট ব্যবহার করুন)।</strong> <em>Prompt compression</em> আপনার prompt থেকে অর্থ না হারিয়ে ফিলার বাদ দেয়। <em>Distillation</em> একটি ছোট মডেল নিয়ে, বড় মডেলের দেওয়া ৫০,০০০ উত্তর দেখায়, এবং অনুরূপ উত্তর দিতে প্রশিক্ষণ দেয়। ছোট মডেল এখন বড়টির প্রায় কাছাকাছি — কিন্তু ১০× সস্তা এবং আপনার ল্যাপটপে চলে।"
+          "html": "<strong>৩. কম্প্রেস ও ডিস্টিল (কম ব্যবহার করুন, অথবা ছোট ব্যবহার করুন)।</strong> <em>প্রম্পট কম্প্রেশন</em> আপনার প্রম্পট থেকে অর্থ না হারিয়ে ফিলার বাদ দেয়। <em>ডিস্টিলেশন</em> একটি ছোট মডেল নিয়ে, বড় মডেলের দেওয়া ৫০,০০০ উত্তর দেখায়, এবং অনুরূপ উত্তর দিতে প্রশিক্ষণ দেয়। ছোট মডেল এখন বড়টির প্রায় কাছাকাছি — কিন্তু ১০× সস্তা এবং আপনার ল্যাপটপে চলে।"
         },
         {
           "type": "paragraph",
@@ -169,9 +169,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Batch API</strong> = \"আমাকে ১০,০০০ প্রশ্ন পাঠাও, কাল উত্তর দাও, অর্ধেক দামে।\" real-time নয় এমন সবকিছুর জন্য দারুণ।",
-            "<strong>Token budgets</strong> = \"feature Y-এর মাসে $500 বাজেট; ১০০%-এ কেটে দাও।\" যাতে কোনোকিছু দুর্ঘটনাবশত কোম্পানির ব্যাংক অ্যাকাউন্ট পুড়িয়ে না ফেলে।",
-            "<strong>Model gateways</strong> = \"OpenAI + Anthropic + আপনার স্ব-হোস্টেড মডেলের সাথে কথা বলে এমন একটি API।\" খরচ ট্র্যাক করে, retry করে, একটি provider down হলে fallback দেয়।"
+            "<strong>ব্যাচ API</strong> = \"আমাকে ১০,০০০ প্রশ্ন পাঠান, কাল উত্তর দিন, অর্ধেক দামে।\" রিয়েল-টাইম নয় এমন সবকিছুর জন্য দারুণ।",
+            "<strong>টোকেন বাজেট</strong> = \"ফিচার Y-এর মাসে $৫০০ বাজেট; ১০০%-এ কেটে দিন।\" যাতে কোনোকিছু দুর্ঘটনাবশত কোম্পানির ব্যাংক অ্যাকাউন্ট পুড়িয়ে না ফেলে।",
+            "<strong>মডেল গেটওয়ে</strong> = \"OpenAI + Anthropic + আপনার স্ব-হোস্টেড মডেলের সাথে কথা বলে এমন একটি API।\" খরচ ট্র্যাক করে, রিট্রাই করে, একটি প্রোভাইডার ডাউন হলে ফলব্যাক দেয়।"
           ]
         },
         {
@@ -179,7 +179,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>বিদ্যুৎ বিলের উপমা:</strong> আপনার AI বিল হলো বিদ্যুৎ বিলের মতো — প্রতিটি কল কিছু ব্যবহার করে। <em>Caching</em> হলো \"পূর্ববর্তী ব্যবহারকারী যার জন্য ইতিমধ্যে অর্থ দিয়েছেন তা মনে রাখুন এবং শেয়ার করুন।\" <em>Cascade</em> হলো \"স্পটলাইটের দরকার না হলে নাইটলাইট ব্যবহার করুন।\" <em>Compression</em> হলো \"বাড়িতে ভালো ইনসুলেশন — একই উষ্ণতা, কম শক্তি।\" <em>Distillation</em> হলো \"একটি ছোট, আরও দক্ষ ফ্রিজ কিনা।\" <em>Budgets</em> হলো \"সার্কিট ব্রেকার — দুর্ঘটনাবশত সব যন্ত্র একসাথে চালু রাখলে সেটি trip করে।\""
+              "html": "<strong>বিদ্যুৎ বিলের উপমা:</strong> আপনার AI বিল হলো বিদ্যুৎ বিলের মতো — প্রতিটি কল কিছু ব্যবহার করে। <em>ক্যাশিং</em> হলো \"পূর্ববর্তী ইউজার যার জন্য ইতিমধ্যে অর্থ দিয়েছেন তা মনে রাখুন এবং শেয়ার করুন।\" <em>ক্যাসকেড</em> হলো \"স্পটলাইটের দরকার না হলে নাইটলাইট ব্যবহার করুন।\" <em>কম্প্রেশন</em> হলো \"বাড়িতে ভালো ইনসুলেশন — একই উষ্ণতা, কম শক্তি।\" <em>ডিস্টিলেশন</em> হলো \"একটি ছোট, আরও দক্ষ ফ্রিজ কেনা।\" <em>বাজেট</em> হলো \"সার্কিট ব্রেকার — দুর্ঘটনাবশত সব যন্ত্র একসাথে চালু রাখলে সেটি ট্রিপ করে।\""
             }
           ]
         }
@@ -269,36 +269,36 @@
             "challenge": "Change the draft to: <em>The subtotal with delivery is 1,690 BDT. After the 10% coupon the total is 1,521 BDT.</em> The delivery was discounted by mistake. Does the checker now say ESCALATE?"
           },
           "bn": {
-            "title": "সহজ request সস্তা model-এ পাঠাও",
-            "why": "তুমি যখন একটা support chatbot বানাবে, তার বেশিরভাগ প্রশ্নই সহজ হবে। সবগুলোর উত্তর যদি বড় আর দামি model দেয়, তাহলে অনেক বেশি খরচ হয়। Router সহজ প্রশ্ন সস্তা model-এ আর কঠিন প্রশ্ন বড় model-এ পাঠায়।",
+            "title": "সহজ রিকোয়েস্ট সস্তা মডেলে পাঠান",
+            "why": "আপনি যখন একটা সাপোর্ট চ্যাটবট বানাবেন, তার বেশিরভাগ প্রশ্নই সহজ হবে। সবগুলোর উত্তর যদি বড় আর দামি মডেল দেয়, তাহলে অনেক বেশি খরচ হয়। রাউটার সহজ প্রশ্ন সস্তা মডেলে আর কঠিন প্রশ্ন বড় মডেলে পাঠায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। AI 10টা customer request-এর জন্য router-এর কাজ করবে।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। AI ১০টা কাস্টমার রিকোয়েস্টের জন্য রাউটারের কাজ করবে।",
                 "prompt": "তুমি একটা customer-support system-এর router। প্রতিটা request যায় SMALL model-এ (cost 1 credit) অথবা LARGE model-এ (cost 20 credit)। সহজ request-এ SMALL ব্যবহার করো। যে request-এ লম্বা চিন্তা, code, বা অনেক ধাপ লাগে, তাতে LARGE ব্যবহার করো।\nপ্রতিটা request-এর জন্য লেখো: নম্বর, SMALL বা LARGE, আর সর্বোচ্চ ৬ শব্দের একটা কারণ।\n\nRequests:\n1. আপনাদের return করার সময়সীমা কত দিন?\n2. আমার order #4471 কোথায়?\n3. Bangla-তে \"thank you\" এর মানে কী?\n4. আমার দুটো order একটা parcel-এ এসেছে। একটা জিনিস নষ্ট। আমি একটা coupon ব্যবহার করেছি, যেটা দুই order-এ refund ভাগ করে দিয়েছে। আমি কত টাকা ফেরত পাব?\n5. Password reset করব কীভাবে?\n6. তিনটা দেশের customer-দের জন্য আমাদের refund policy বদলালে আইনি ঝুঁকিগুলো সংক্ষেপে লেখো।\n7. আপনাদের ফোন নম্বর কত?\n8. এমন একটা Python script লেখো, যেটা আমাদের payment file-এর সাথে bank statement মেলায় আর যেগুলো মেলে না সেগুলো চিহ্নিত করে।\n9. নীল শার্টটা কি M size-এ stock-এ আছে?\n10. Checkout redesign-এর পর আমাদের conversion rate 12% কমল কেন? ব্যাখ্যা করো আর তিনটা test প্রস্তাব করো।",
-                "expect": "10 লাইনের একটা list। প্রায় 4টা request (লম্বা, অনেক ধাপের গুলো) LARGE-এ যায়, বাকিগুলো SMALL-এ।",
+                "expect": "১০ লাইনের একটা তালিকা। প্রায় ৪টা রিকোয়েস্ট (লম্বা, অনেক ধাপের গুলো) LARGE-এ যায়, বাকিগুলো SMALL-এ।",
                 "example": "1. SMALL - সহজ policy-র তথ্য\n2. SMALL - order status দেখা\n3. SMALL - ছোট অনুবাদ\n4. LARGE - অনেক ধাপের refund হিসাব\n5. SMALL - সাধারণ how-to\n6. LARGE - আইনি বিশ্লেষণ, তিনটা দেশ\n7. SMALL - নির্দিষ্ট তথ্য\n8. LARGE - code লিখতে হবে\n9. SMALL - সহজ stock check\n10. LARGE - বিশ্লেষণ আর test design"
               },
               {
                 "chat": "same",
-                "do": "LARGE লাইন কয়টা গোনো। তারপর cost হিসাব করো: SMALL-এর সংখ্যা x 1 + LARGE-এর সংখ্যা x 20। এটা 10 x 20 = 200 credit-এর সাথে তুলনা করো।",
-                "expect": "4টা LARGE আর 6টা SMALL হলে: 6 x 1 + 4 x 20 = <strong>86 credit</strong>, আর সবগুলো LARGE-এ গেলে 200 credit। মানে 114 credit বাঁচল, যা 57%।"
+                "do": "LARGE লাইন কয়টা গুনুন। তারপর খরচ হিসাব করুন: SMALL-এর সংখ্যা x ১ + LARGE-এর সংখ্যা x ২০। এটা ১০ x ২০ = ২০০ ক্রেডিটের সাথে তুলনা করুন।",
+                "expect": "৪টা LARGE আর ৬টা SMALL হলে: ৬ x ১ + ৪ x ২০ = <strong>৮৬ ক্রেডিট</strong>, আর সবগুলো LARGE-এ গেলে ২০০ ক্রেডিট। মানে ১১৪ ক্রেডিট বাঁচল, যা ৫৭%।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। এবার একটা checker small model-এর লেখা draft উত্তর দেখবে।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এবার একটা চেকার ছোট মডেলের লেখা ড্রাফট উত্তর দেখবে।",
                 "prompt": "একটা small model একটা draft উত্তর লিখেছে। ঠিক করো draft টা পাঠানোর মতো ভালো কিনা (KEEP), নাকি একটা large model-কে আবার করতে হবে (ESCALATE)। শুধু KEEP বা ESCALATE লেখো, সাথে এক বাক্যে কারণ।\n\nপ্রশ্ন: একজন customer 3টা শার্ট কিনেছে, প্রতিটা 450 BDT, আর 1টা টুপি 280 BDT। পুরো order-এ 10% coupon প্রযোজ্য। Delivery খরচ 60 BDT, এতে ছাড় নেই। মোট কত?\n\nDraft উত্তর: শার্টগুলোর দাম 1,350 BDT আর টুপির দাম 280 BDT। Subtotal 1,630 BDT। 10% coupon-এর পর দাম 1,467 BDT। Delivery 60 BDT, তাই মোট 1,527 BDT।",
-                "expect": "কারণসহ <strong>KEEP</strong>। Draft ঠিক: 3 x 450 = 1,350, সাথে 280 = 1,630, 10% (163) বাদ দিলে 1,467, সাথে 60 = 1,527।",
+                "expect": "কারণসহ <strong>KEEP</strong>। ড্রাফট ঠিক: ৩ x ৪৫০ = ১,৩৫০, সাথে ২৮০ = ১,৬৩০, ১০% (১৬৩) বাদ দিলে ১,৪৬৭, সাথে ৬০ = ১,৫২৭।",
                 "example": "KEEP। Draft জিনিসগুলো ঠিকভাবে যোগ করেছে (1,630 BDT), 10% ছাড় দিয়েছে (1,467 BDT), আর ছাড়ের পরে 60 BDT delivery যোগ করেছে, তাই 1,527 BDT ঠিক।"
               }
             ],
-            "learned": "<strong>Cascade</strong> মানে আগে সস্তা model দিয়ে চেষ্টা করা, আর দরকার হলেই শুধু দামি model ব্যবহার করা। এখানে 10টার মধ্যে 6টা request সস্তা model-এ গেছে, তাই cost 200 থেকে 86 credit-এ নেমেছে। দ্বিতীয় prompt-এ অন্য অর্ধেকটা দেখলে: একটা check, যে ঠিক করে সস্তা model-এর draft যথেষ্ট ভালো কিনা। ভুল KEEP মানে customer-এর কাছে খারাপ উত্তর যায়। ভুল ESCALATE মানে 20 credit নষ্ট।",
-            "done": "তোমার কাছে একটা router list, প্রায় 86 credit-এর cost (200-এর বিপরীতে), আর একটা KEEP বা ESCALATE সিদ্ধান্ত আছে।",
+            "learned": "<strong>ক্যাসকেড</strong> মানে আগে সস্তা মডেল দিয়ে চেষ্টা করা, আর দরকার হলেই শুধু দামি মডেল ব্যবহার করা। এখানে ১০টার মধ্যে ৬টা রিকোয়েস্ট সস্তা মডেলে গেছে, তাই খরচ ২০০ থেকে ৮৬ ক্রেডিটে নেমেছে। দ্বিতীয় প্রম্পটে অন্য অর্ধেকটা দেখলে: একটা চেক, যে ঠিক করে সস্তা মডেলের ড্রাফট যথেষ্ট ভালো কিনা। ভুল KEEP মানে কাস্টমারের কাছে খারাপ উত্তর যায়। ভুল ESCALATE মানে ২০ ক্রেডিট নষ্ট।",
+            "done": "আপনার কাছে একটা রাউটার তালিকা, প্রায় ৮৬ ক্রেডিটের খরচ (200-এর বিপরীতে), আর একটা KEEP বা ESCALATE সিদ্ধান্ত আছে।",
             "check": {
-              "question": "প্রতিটা request বড় model-এ পাঠানোর চেয়ে cascade-এ cost কম হয় কেন?",
-              "answer": "বেশিরভাগ request সহজ, তাই সস্তা model সেগুলো প্রতিটা 1 credit-এ উত্তর দেয়। শুধু কঠিনগুলো 20 credit-এর বড় model-এ যায়, তাই প্রতি request-এর গড় cost কমে যায়।"
+              "question": "প্রতিটা রিকোয়েস্ট বড় মডেলে পাঠানোর চেয়ে ক্যাসকেডে খরচ কম হয় কেন?",
+              "answer": "বেশিরভাগ রিকোয়েস্ট সহজ, তাই সস্তা মডেল সেগুলো প্রতিটা ১ ক্রেডিটে উত্তর দেয়। শুধু কঠিনগুলো ২০ ক্রেডিটের বড় মডেলে যায়, তাই প্রতি রিকোয়েস্টের গড় খরচ কমে যায়।"
             },
-            "challenge": "Draft বদলে লেখো: <em>Delivery-সহ subtotal 1,690 BDT। 10% coupon-এর পর মোট 1,521 BDT।</em> এখানে ভুল করে delivery-তেও ছাড় দেওয়া হয়েছে। Checker কি এখন ESCALATE বলে?"
+            "challenge": "ড্রাফট বদলে লিখুন: <em>Delivery-সহ subtotal ১,৬৯০ BDT। ১০% coupon-এর পর মোট ১,৫২১ BDT।</em> এখানে ভুল করে ডেলিভারিতেও ছাড় দেওয়া হয়েছে। চেকার কি এখন ESCALATE বলে?"
           }
         },
         {
@@ -335,36 +335,36 @@
             "challenge": "Write two new pairs: one safe HIT with very different words, and one wrong HIT with almost the same words. Paste them into step 1 to test them."
           },
           "bn": {
-            "title": "Cache থেকে আসা ভুল উত্তর ধরো",
-            "why": "তুমি যখন একটা chatbot বানাবে, অনেক user একই প্রশ্ন আলাদা আলাদা কথায় করবে। Cache পুরোনো উত্তর আবার ব্যবহার করে খরচ বাঁচাতে পারে। কিন্তু প্রশ্নটা শুধু দেখতে একই হলে আর উত্তর আসলে আলাদা হলে, user ভুল উত্তর পায়।",
+            "title": "ক্যাশ থেকে আসা ভুল উত্তর ধরুন",
+            "why": "আপনি যখন একটা চ্যাটবট বানাবেন, অনেক ইউজার একই প্রশ্ন আলাদা আলাদা কথায় করবে। ক্যাশ পুরোনো উত্তর আবার ব্যবহার করে খরচ বাঁচাতে পারে। কিন্তু প্রশ্নটা শুধু দেখতে একই হলে আর উত্তর আসলে আলাদা হলে, ইউজার ভুল উত্তর পায়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। এতে 6 জোড়া প্রশ্ন আছে। AI অনুমান করবে পুরোনো উত্তর নতুন প্রশ্নে এখনও মানায় কিনা।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এতে ৬ জোড়া প্রশ্ন আছে। AI অনুমান করবে পুরোনো উত্তর নতুন প্রশ্নে এখনও মানায় কিনা।",
                 "prompt": "Semantic cache পুরোনো প্রশ্নের উত্তর জমিয়ে রাখে। নতুন প্রশ্ন পুরোনো প্রশ্নের খুব কাছাকাছি দেখালে সে জমানো উত্তরটাই ফেরত দেয়।\nপ্রতিটা জোড়ার জন্য লেখো: 0 থেকে 1-এর মধ্যে একটা similarity score (তোমার সেরা অনুমান), HIT বা MISS (score 0.9-এর বেশি হলে HIT), আর পুরোনো উত্তরটা নতুন প্রশ্নের জন্য CORRECT হবে নাকি WRONG।\nপ্রতিটা জোড়ার জন্য ছোট এক লাইনে উত্তর দাও।\n\nজোড়া (পুরোনো প্রশ্ন | নতুন প্রশ্ন):\n1. আমি আমার password reset করব কীভাবে? | আমি কীভাবে আমার password reset করতে পারি?\n2. Order 1001-এর refund-এর অবস্থা কী? | Order 1002-এর refund-এর অবস্থা কী?\n3. আপনাদের return policy কী? | জিনিস ফেরত পাঠাতে আমার কত সময় আছে?\n4. আজ ঢাকার আবহাওয়া কেমন? | কাল ঢাকার আবহাওয়া কেমন?\n5. আমার subscription cancel করুন। | আমার subscription cancel করবেন না।\n6. রাতে আপনারা কয়টায় বন্ধ করেন? | সন্ধ্যায় আপনারা কখন দোকান বন্ধ করেন?",
-                "expect": "6টা ছোট লাইন। Pair 2, 4 আর 5 সাধারণত বেশি score (HIT) পায় আর WRONG চিহ্ন পায়। Score এক chat থেকে আরেক chat-এ আলাদা হয়।",
+                "expect": "৬টা ছোট লাইন। জোড়া ২, ৪ আর ৫ সাধারণত বেশি স্কোর (HIT) পায় আর WRONG চিহ্ন পায়। স্কোর এক চ্যাট থেকে আরেক চ্যাটে আলাদা হয়।",
                 "example": "1. 0.97 HIT CORRECT\n2. 0.96 HIT WRONG (অন্য order)\n3. 0.78 MISS CORRECT\n4. 0.94 HIT WRONG (আজ আর কাল আলাদা)\n5. 0.93 HIT WRONG (উল্টো মানে)\n6. 0.80 MISS CORRECT"
               },
               {
                 "chat": "same",
-                "do": "কোন pair-গুলো HIT আর WRONG দুটোই, সেগুলোর নম্বর লিখে রাখো। প্রতিটা pair-এ কী বদলেছে, নিজের ভাষায় লেখো।",
-                "expect": "সাধারণত pair <strong>2, 4 আর 5</strong>: আলাদা order নম্বর, <em>আজ</em> বনাম <em>কাল</em>, আর <em>cancel করুন</em> বনাম <em>cancel করবেন না</em>।"
+                "do": "কোন জোড়াগুলো HIT আর WRONG দুটোই, সেগুলোর নম্বর লিখে রাখুন। প্রতিটা জোড়ায় কী বদলেছে, নিজের ভাষায় লিখুন।",
+                "expect": "সাধারণত জোড়া <strong>২, ৪ আর ৫</strong>: আলাদা অর্ডার নম্বর, <em>আজ</em> বনাম <em>কাল</em>, আর <em>cancel করুন</em> বনাম <em>cancel করবেন না</em>।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। AI এমন নিয়ম লিখবে, যা ভুল cache hit আটকায়।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। AI এমন নিয়ম লিখবে, যা ভুল ক্যাশ হিট আটকায়।",
                 "prompt": "আমি একটা support chatbot-এর জন্য semantic cache চালাই। আমাকে 4টা ছোট নিয়ম দাও, যেগুলো ঠিক করে কখন cache-এর উত্তর ব্যবহার করা যাবে না, similarity score খুব বেশি হলেও। প্রতিটা নিয়মের জন্য একটা করে উদাহরণ প্রশ্ন-জোড়া দাও। প্রতিটা নিয়ম এক বাক্যে লেখো।",
-                "expect": "4টা ছোট নিয়ম, যেমন: আলাদা ID, সময়ের শব্দ, নেতিবাচক কথা (<em>না</em>), বা ব্যক্তিগত তথ্য থাকলে cache ব্যবহার করবে না।",
+                "expect": "৪টা ছোট নিয়ম, যেমন: আলাদা ID, সময়ের শব্দ, নেতিবাচক কথা (<em>না</em>), বা ব্যক্তিগত তথ্য থাকলে ক্যাশ ব্যবহার করবে না।",
                 "example": "1. ID বা সংখ্যা আলাদা হলে উত্তর আবার ব্যবহার কোরো না। উদাহরণ: order 1001 | order 1002।\n2. সময়ের শব্দ আলাদা হলে উত্তর আবার ব্যবহার কোরো না। উদাহরণ: আজ | কাল।\n3. একটা প্রশ্নে নেতিবাচক কথা থাকলে উত্তর আবার ব্যবহার কোরো না। উদাহরণ: cancel করুন | cancel করবেন না।\n4. ব্যক্তিগত তথ্য থাকা উত্তর আবার ব্যবহার কোরো না। উদাহরণ: আমার balance কত?"
               }
             ],
-            "learned": "<strong>Semantic cache</strong> প্রশ্নের হুবহু শব্দ নয়, মানে তুলনা করে। Pair 1, 3 আর 6-এ শুধু শব্দ বদলেছে, তাই পুরোনো উত্তর ঠিক, আর সেটা আবার ব্যবহার করলে টাকা বাঁচে। Pair 2, 4 আর 5-এ ছোট একটা জিনিস বদলেছে, তাই পুরোনো উত্তর ভুল। এখানে AI শুধু score অনুমান করেছে। আসল cache সেটা মাপে <strong>embedding</strong> দিয়ে, যা লেখাকে সংখ্যায় বদলে দেয়।",
-            "done": "তোমার কাছে HIT আর WRONG pair-গুলোর list (সাধারণত 2, 4 আর 5) আছে, আর সেগুলো আটকানোর 4টা নিয়ম আছে।",
+            "learned": "<strong>সেম্যান্টিক ক্যাশ</strong> প্রশ্নের হুবহু শব্দ নয়, মানে তুলনা করে। জোড়া ১, ৩ আর 6-এ শুধু শব্দ বদলেছে, তাই পুরোনো উত্তর ঠিক, আর সেটা আবার ব্যবহার করলে টাকা বাঁচে। জোড়া ২, ৪ আর 5-এ ছোট একটা জিনিস বদলেছে, তাই পুরোনো উত্তর ভুল। এখানে AI শুধু স্কোর অনুমান করেছে। আসল ক্যাশ সেটা মাপে <strong>এমবেডিং</strong> দিয়ে, যা লেখাকে সংখ্যায় বদলে দেয়।",
+            "done": "আপনার কাছে HIT আর WRONG জোড়াগুলোর তালিকা (সাধারণত ২, ৪ আর ৫) আছে, আর সেগুলো আটকানোর ৪টা নিয়ম আছে।",
             "check": {
-              "question": "Cache-এর উত্তর ফেরত দেওয়ার জন্য বেশি similarity score কেন যথেষ্ট নয়?",
-              "answer": "Order নম্বর, দিন, বা <em>না</em> শব্দের মতো ছোট বদলও ঠিক উত্তর বদলে দিতে পারে। শব্দ প্রায় একই থাকে, তাই score বেশি থাকে। বাড়তি নিয়ম আর কড়া threshold ভুল hit-এর ঝুঁকি কমায়।"
+              "question": "ক্যাশের উত্তর ফেরত দেওয়ার জন্য বেশি সিমিলারিটি স্কোর কেন যথেষ্ট নয়?",
+              "answer": "অর্ডার নম্বর, দিন, বা <em>না</em> শব্দের মতো ছোট বদলও ঠিক উত্তর বদলে দিতে পারে। শব্দ প্রায় একই থাকে, তাই স্কোর বেশি থাকে। বাড়তি নিয়ম আর কড়া থ্রেশহোল্ড ভুল হিটের ঝুঁকি কমায়।"
             },
-            "challenge": "দুটো নতুন pair লেখো: একটা নিরাপদ HIT, যেখানে শব্দ একেবারে আলাদা, আর একটা ভুল HIT, যেখানে শব্দ প্রায় একই। পরীক্ষা করতে ধাপ ১-এর prompt-এ বসাও।"
+            "challenge": "দুটো নতুন জোড়া লিখুন: একটা নিরাপদ HIT, যেখানে শব্দ একেবারে আলাদা, আর একটা ভুল HIT, যেখানে শব্দ প্রায় একই। পরীক্ষা করতে ধাপ ১-এর প্রম্পটে বসান।"
           }
         },
         {
@@ -408,43 +408,43 @@
             "challenge": "Ask for compression to one sixth of the length. Run step 3 again. At what length does the first fact get lost?"
           },
           "bn": {
-            "title": "লম্বা লেখা ছোট করো আর test করো",
-            "why": "তুমি যখন লম্বা document নিয়ে একটা chatbot বানাবে, AI-কে পাঠানো প্রতিটা শব্দের জন্য তোমাকে টাকা দিতে হবে। ফাঁকা শব্দ কেটে দিলে খরচ কমে। কিন্তু ছোট লেখাটা যে একই উত্তর দেয়, সেটা তোমাকে যাচাই করতে হবে।",
+            "title": "লম্বা লেখা ছোট করুন আর টেস্ট করুন",
+            "why": "আপনি যখন লম্বা ডকুমেন্ট নিয়ে একটা চ্যাটবট বানাবেন, AI-কে পাঠানো প্রতিটা শব্দের জন্য আপনাকে টাকা দিতে হবে। ফাঁকা শব্দ কেটে দিলে খরচ কমে। কিন্তু ছোট লেখাটা যে একই উত্তর দেয়, সেটা আপনাকে যাচাই করতে হবে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। 3টা উত্তর লিখে রাখো। এটা তোমার baseline।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। ৩টা উত্তর লিখে রাখুন। এটা আপনার বেসলাইন।",
                 "prompt": "শুধু context ব্যবহার করে তিনটা প্রশ্নের উত্তর দাও।\n\nContext:\nPadma Mart বেছে নেওয়ার জন্য ধন্যবাদ। আমাদের shipping policy নিয়ে জানাতে পেরে আমরা খুব খুশি। সাধারণভাবে, কাজের দিনে দুপুর 2টার আগে দেওয়া order সাধারণত সেদিনই packing হয়, আর দুপুর 2টার পরে দেওয়া order সাধারণত পরের কাজের দিনে packing হয়। দয়া করে মনে রাখবেন, আমরা শুক্রবার আর সরকারি ছুটির দিনে কাজ করি না। ঢাকার ভেতরে delivery সাধারণত এক থেকে দুই দিন লাগে, আর অন্য শহরে সাধারণত তিন থেকে পাঁচ দিন লাগে। ঢাকার ভেতরে shipping খরচ 60 BDT, আর অন্য শহরে shipping খরচ 120 BDT। আমরা আরও জানাতে পেরে খুশি যে 2,000 BDT-র বেশি order-এ শুধু ঢাকার ভেতরে shipping ফ্রি। আপনি বাসায় না থাকলে আমাদের courier parcel দুইবার পৌঁছে দেওয়ার চেষ্টা করবে, আর দ্বিতীয়বার ব্যর্থ হলে parcel আমাদের warehouse-এ ফিরে আসে। আমাদের সাথে কেনাকাটা উপভোগ করবেন, এই আশা করি!\n\nপ্রশ্ন:\n1. 1,500 BDT-র একটা order চট্টগ্রামে পাঠাতে shipping কত?\n2. বৃহস্পতিবার বিকেল 3টায় দেওয়া order কবে packing হয়?\n3. Courier কয়বার delivery-র চেষ্টা করে?",
-                "expect": "তিনটা উত্তর: shipping <strong>120 BDT</strong>, packing হবে <strong>শনিবার</strong>, আর <strong>2</strong> বার delivery চেষ্টা।",
+                "expect": "তিনটা উত্তর: শিপিং <strong>১২০ BDT</strong>, প্যাকিং হবে <strong>শনিবার</strong>, আর <strong>২</strong> বার ডেলিভারি চেষ্টা।",
                 "example": "1. 120 BDT। অন্য শহরে shipping 120 BDT, আর ফ্রি shipping শুধু ঢাকার ভেতরে 2,000 BDT-র বেশি order-এ।\n2. শনিবার। বৃহস্পতিবার 2টার পরে দেওয়া order পরের কাজের দিনে packing হয়, আর শুক্রবার কাজের দিন নয়।\n3. 2 বার।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। তারপর AI-র দেওয়া ছোট লেখাটা copy করো।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। তারপর AI-র দেওয়া ছোট লেখাটা কপি করুন।",
                 "prompt": "নিচের লেখাটা তার দৈর্ঘ্যের প্রায় এক-তৃতীয়াংশে ছোট করো। ফাঁকা শব্দ আর শুভেচ্ছা বাদ দাও। প্রতিটা সংখ্যা, দাম, সময় আর নিয়ম রাখো। ছোট note-এর মতো বাক্যাংশ ব্যবহার করো। শুধু ছোট করা লেখাটা পাঠাও।\n\nলেখা:\nPadma Mart বেছে নেওয়ার জন্য ধন্যবাদ। আমাদের shipping policy নিয়ে জানাতে পেরে আমরা খুব খুশি। সাধারণভাবে, কাজের দিনে দুপুর 2টার আগে দেওয়া order সাধারণত সেদিনই packing হয়, আর দুপুর 2টার পরে দেওয়া order সাধারণত পরের কাজের দিনে packing হয়। দয়া করে মনে রাখবেন, আমরা শুক্রবার আর সরকারি ছুটির দিনে কাজ করি না। ঢাকার ভেতরে delivery সাধারণত এক থেকে দুই দিন লাগে, আর অন্য শহরে সাধারণত তিন থেকে পাঁচ দিন লাগে। ঢাকার ভেতরে shipping খরচ 60 BDT, আর অন্য শহরে shipping খরচ 120 BDT। আমরা আরও জানাতে পেরে খুশি যে 2,000 BDT-র বেশি order-এ শুধু ঢাকার ভেতরে shipping ফ্রি। আপনি বাসায় না থাকলে আমাদের courier parcel দুইবার পৌঁছে দেওয়ার চেষ্টা করবে, আর দ্বিতীয়বার ব্যর্থ হলে parcel আমাদের warehouse-এ ফিরে আসে। আমাদের সাথে কেনাকাটা উপভোগ করবেন, এই আশা করি!",
-                "expect": "Note-এর মতো অনেক ছোট একটা লেখা, মূল লেখার প্রায় এক-তৃতীয়াংশ থেকে অর্ধেক, কিন্তু সব সংখ্যা আছে।",
+                "expect": "নোটের মতো অনেক ছোট একটা লেখা, মূল লেখার প্রায় এক-তৃতীয়াংশ থেকে অর্ধেক, কিন্তু সব সংখ্যা আছে।",
                 "example": "Padma Mart shipping। কাজের দিনে দুপুর 2টার আগে order: একই দিনে packing। 2টার পরে: পরের কাজের দিনে। শুক্রবার, সরকারি ছুটিতে কাজ বন্ধ। Delivery: ঢাকা 1-2 দিন, অন্য শহর 3-5 দিন। Shipping: ঢাকা 60 BDT, অন্য শহর 120 BDT। ফ্রি shipping: শুধু ঢাকা, 2,000 BDT-র বেশি order। Courier 2 বার চেষ্টা করে, তারপর parcel warehouse-এ ফেরত।"
               },
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করে paste করো। \"এখানে তোমার ছোট করা লেখা paste করো\" লাইনটার জায়গায় ধাপ ২-এর ছোট লেখাটা বসাও। তারপর Enter চাপো।",
+                "do": "এই প্রম্পটটা কপি করে পেস্ট করুন। \"এখানে তোমার ছোট করা লেখা paste করো\" লাইনটার জায়গায় ধাপ ২-এর ছোট লেখাটা বসান। তারপর Enter চাপুন।",
                 "prompt": "শুধু context ব্যবহার করে তিনটা প্রশ্নের উত্তর দাও।\n\nContext:\nএখানে তোমার ছোট করা লেখা paste করো\n\nপ্রশ্ন:\n1. 1,500 BDT-র একটা order চট্টগ্রামে পাঠাতে shipping কত?\n2. বৃহস্পতিবার বিকেল 3টায় দেওয়া order কবে packing হয়?\n3. Courier কয়বার delivery-র চেষ্টা করে?",
-                "expect": "আবার তিনটা উত্তর। ধাপ ১-এর সাথে মেলার কথা: <strong>120 BDT</strong>, <strong>শনিবার</strong>, আর <strong>2</strong> বার।",
+                "expect": "আবার তিনটা উত্তর। ধাপ ১-এর সাথে মেলার কথা: <strong>১২০ BDT</strong>, <strong>শনিবার</strong>, আর <strong>২</strong> বার।",
                 "example": "1. 120 BDT। অন্য শহরে shipping 120 BDT, আর ফ্রি shipping শুধু ঢাকার ভেতরে 2,000 BDT-র বেশি order-এ।\n2. শনিবার। বৃহস্পতিবার 2টার পরে দেওয়া order পরের কাজের দিনে packing হয়, আর শুক্রবার কাজের দিন নয়।\n3. 2 বার।"
               },
               {
                 "chat": "same",
-                "do": "তিনটা উত্তর ধাপ ১-এর সাথে মেলাও। যে উত্তর আলাদা, সেটা লিখে রাখো।",
-                "expect": "প্রায়ই তিনটা উত্তরই এক হয়। একটা আলাদা হলে বুঝবে ছোট লেখায় একটা তথ্য হারিয়ে গেছে।"
+                "do": "তিনটা উত্তর ধাপ ১-এর সাথে মেলান। যে উত্তর আলাদা, সেটা লিখে রাখুন।",
+                "expect": "প্রায়ই তিনটা উত্তরই এক হয়। একটা আলাদা হলে বুঝবেন ছোট লেখায় একটা তথ্য হারিয়ে গেছে।"
               }
             ],
-            "learned": "AI-কে তুমি যে <strong>token</strong> (শব্দের ছোট টুকরো) পাঠাও, তার জন্যই টাকা দিতে হয়। শুভেচ্ছা আর ফাঁকা শব্দ token খরচ করে, কিন্তু কোনো তথ্য যোগ করে না। ছোট লেখায় সব সংখ্যা আর নিয়ম ছিল, তাই কম খরচে AI একই উত্তর দিয়েছে। ছোট করার পর সবসময় এই test চালাও। একটা তথ্য হারালে AI ভুল উত্তর দেবে।",
-            "done": "তোমার কাছে 3টা উত্তরের দুটো সেট আছে, আর তুমি জানো সেগুলো মিলেছে কিনা।",
+            "learned": "AI-কে আপনি যে <strong>টোকেন</strong> (শব্দের ছোট অংশ) পাঠান, তার জন্যই টাকা দিতে হয়। শুভেচ্ছা আর ফাঁকা শব্দ টোকেন খরচ করে, কিন্তু কোনো তথ্য যোগ করে না। ছোট লেখায় সব সংখ্যা আর নিয়ম ছিল, তাই কম খরচে AI একই উত্তর দিয়েছে। ছোট করার পর সবসময় এই টেস্ট চালান। একটা তথ্য হারালে AI ভুল উত্তর দেবে।",
+            "done": "আপনার কাছে ৩টা উত্তরের দুটো সেট আছে, আর আপনি জানেন সেগুলো মিলেছে কিনা।",
             "check": {
-              "question": "Prompt ছোট করলে টাকা বাঁচে কেন, আর এরপর কী যাচাই করতে হবে?",
-              "answer": "Cost নির্ভর করে তুমি কয়টা token পাঠাও তার ওপর। ফাঁকা লেখা token খরচ করে কিন্তু তথ্য যোগ করে না, তাই সেটা বাদ দিলে টাকা বাঁচে। এরপর যাচাই করো AI একই উত্তর দিচ্ছে কিনা, কারণ একটা তথ্য হারালে উত্তর ভুল হয়।"
+              "question": "প্রম্পট ছোট করলে টাকা বাঁচে কেন, আর এরপর কী যাচাই করতে হবে?",
+              "answer": "খরচ নির্ভর করে আপনি কয়টা টোকেন পাঠান তার ওপর। ফাঁকা লেখা টোকেন খরচ করে কিন্তু তথ্য যোগ করে না, তাই সেটা বাদ দিলে টাকা বাঁচে। এরপর যাচাই করুন AI একই উত্তর দিচ্ছে কিনা, কারণ একটা তথ্য হারালে উত্তর ভুল হয়।"
             },
-            "challenge": "দৈর্ঘ্যের এক-ষষ্ঠাংশে ছোট করতে বলো। ধাপ ৩ আবার চালাও। কত ছোট করলে প্রথম তথ্য হারিয়ে যায়?"
+            "challenge": "দৈর্ঘ্যের এক-ষষ্ঠাংশে ছোট করতে বলুন। ধাপ ৩ আবার চালান। কত ছোট করলে প্রথম তথ্য হারিয়ে যায়?"
           }
         },
         {
@@ -486,41 +486,41 @@
             "challenge": "Say a cache removes 40% of the calls for Search rewrite. Ask the chat for the new month-end forecast and the new alert day."
           },
           "bn": {
-            "title": "খুঁজে বের করো কোন feature budget ভাঙবে",
-            "why": "তুমি যখন একটা AI product বানাবে, প্রতিটা feature token খরচ করবে, আর token-এ টাকা লাগে। একটা feature বেহিসাবি চললে পুরো মাসের bill শেষ হয়ে যেতে পারে। প্রতি feature-এর আলাদা budget আর alert তোমাকে আগেই সতর্ক করে।",
+            "title": "খুঁজে বের করুন কোন ফিচার বাজেট ভাঙবে",
+            "why": "আপনি যখন একটা AI প্রোডাক্ট বানাবেন, প্রতিটা ফিচার টোকেন খরচ করবে, আর টোকেনে টাকা লাগে। একটা ফিচার বেহিসাবি চললে পুরো মাসের বিল শেষ হয়ে যেতে পারে। প্রতি ফিচারের আলাদা বাজেট আর অ্যালার্ট আপনাকে আগেই সতর্ক করে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। AI 3টা feature-এর জন্য একটা budget table বানাবে।",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। AI ৩টা ফিচারের জন্য একটা বাজেট টেবিল বানাবে।",
                 "prompt": "একটা company প্রতিটা LLM feature-কে মাসিক token budget দেয়। নিয়ম: budget-এর 80% হলে alert পাঠানো হবে, আর 100% হলে feature-টা throttle করা হবে (ধীর বা বন্ধ করা হবে)।\nআজ 30 দিনের একটা মাসের 12 নম্বর দিনের শেষ। ধরে নাও প্রতিদিনের ব্যবহার একই থাকবে।\n\nFeature | মাসিক budget | এ পর্যন্ত ব্যবহার (12 দিন)\nChat support | 40,000,000 token | 20,000,000 token\nDocument summary | 20,000,000 token | 4,000,000 token\nSearch rewrite | 6,000,000 token | 3,600,000 token\n\nএকটা table বানাও। প্রতিটা feature-এর জন্য দেখাও:\n1) প্রতিদিন কত token ব্যবহার হয়।\n2) মাসের শেষে কত ব্যবহার হবে, budget-এর শতাংশে।\n3) মাসের কত তারিখে 80% হবে।\n4) মাসের কত তারিখে 100% হবে।\nFeature যদি limit-এর নিচেই থাকে, তাহলে \"never\" লেখো।",
-                "expect": "3 সারির একটা table। <strong>Search rewrite</strong>-এর forecast সবচেয়ে বেশি, প্রায় 150%।",
+                "expect": "৩ সারির একটা টেবিল। <strong>Search rewrite</strong>-এর ফোরকাস্ট সবচেয়ে বেশি, প্রায় ১৫০%।",
                 "example": "Feature | প্রতিদিন | মাসের শেষে | 80% দিন | 100% দিন\nChat support | 1.67M | 125% | 20 তারিখ | 24 তারিখ\nDocument summary | 0.33M | 50% | never | never\nSearch rewrite | 0.3M | 150% | 16 তারিখ | 20 তারিখ"
               },
               {
                 "chat": "same",
-                "do": "একটা সারি হাতে মেলাও। Search rewrite-এর জন্য: 3,600,000 ÷ 12 = প্রতিদিনের token। তারপর 30 দিয়ে গুণ করো। Table-এর সাথে মেলাও।",
-                "expect": "প্রতিদিন 300,000 token। 300,000 x 30 = 9,000,000 token। এটা 6,000,000 budget-এর <strong>150%</strong>। এটা 80% (4,800,000) ছোঁয় 16 তারিখে, আর 100% ছোঁয় 20 তারিখে।"
+                "do": "একটা সারি হাতে মেলান। Search rewrite-এর জন্য: ৩,৬০০,০০০ ÷ ১২ = প্রতিদিনের টোকেন। তারপর ৩০ দিয়ে গুণ করুন। টেবিলের সাথে মেলান।",
+                "expect": "প্রতিদিন ৩০০,০০০ টোকেন। ৩০০,০০০ x ৩০ = ৯,০০০,০০০ টোকেন। এটা ৬,০০০,০০০ বাজেটের <strong>১৫০%</strong>। এটা ৮০% (৪,৮০০,০০০) ছোঁয় ১৬ তারিখে, আর ১০০% ছোঁয় ২০ তারিখে।"
               },
               {
                 "chat": "same",
-                "do": "বাকি দুই সারি এই key-র সাথে মেলাও। কোনো সংখ্যা আলাদা হলে chat-কে আবার হিসাব করতে বলো। Key: Chat support 125%, 20 তারিখ, 24 তারিখ। Document summary 50%, never, never।",
-                "expect": "একই সংখ্যা। Chat support প্রতিদিন 20,000,000 ÷ 12 = প্রায় 1.67M ব্যবহার করে, তাই 1.67M x 30 = 50M, যা 40M-এর 125%।"
+                "do": "বাকি দুই সারি এই কী-র সাথে মেলান। কোনো সংখ্যা আলাদা হলে চ্যাটকে আবার হিসাব করতে বলুন। কী: Chat support ১২৫%, ২০ তারিখ, ২৪ তারিখ। Document summary ৫০%, never, never।",
+                "expect": "একই সংখ্যা। Chat support প্রতিদিন ২০,০০০,০০০ ÷ ১২ = প্রায় ১.৬৭M ব্যবহার করে, তাই ১.৬৭M x ৩০ = ৫০M, যা 40M-এর ১২৫%।"
               },
               {
                 "chat": "same",
-                "do": "এই follow-up প্রশ্নটা copy করো, paste করে Enter চাপো।",
+                "do": "এই ফলো-আপ প্রশ্নটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "কোন feature-এ সবার আগে ব্যবস্থা নিতে হবে? তার ব্যবহার কমানোর দুটো সস্তা উপায় বলো। 3টা ছোট লাইনে উত্তর দাও।",
-                "expect": "সবার আগে <strong>Search rewrite</strong>, কারণ তার alert সবার আগে আসে (16 তারিখ)। সাথে দুটো আইডিয়া, যেমন cache বা ছোট prompt।",
+                "expect": "সবার আগে <strong>Search rewrite</strong>, কারণ তার অ্যালার্ট সবার আগে আসে (১৬ তারিখ)। সাথে দুটো আইডিয়া, যেমন ক্যাশ বা ছোট প্রম্পট।",
                 "example": "Search rewrite-এ সবার আগে ব্যবস্থা নিতে হবে। এটা 16 তারিখে 80% ছোঁয়।\n1. Cache যোগ করো, যাতে একই প্রশ্নে বারবার AI call না হয়।\n2. Prompt ছোট করো, যাতে প্রতি call-এ কম token লাগে।"
               }
             ],
-            "learned": "Forecast মানে প্রতিদিনের ব্যবহার গুণ মাসের দিনসংখ্যা। <strong>Budget</strong> প্রতিটা feature-কে নিজের আলাদা limit দেয়। 80%-এ alert তোমাকে ব্যবস্থা নেওয়ার সময় দেয়। 100%-এ throttle bill-কে আর বাড়তে দেয় না। খেয়াল করো, সবচেয়ে ছোট budget (Search rewrite) আগে সমস্যায় পড়েছে, যে feature সবচেয়ে বেশি token ব্যবহার করে সেটা নয়।",
-            "done": "তোমার কাছে 3টা forecast-সহ একটা table আছে, আর তুমি জানো Search rewrite 16 তারিখে 80% alert ছোঁয়।",
+            "learned": "ফোরকাস্ট মানে প্রতিদিনের ব্যবহার গুণ মাসের দিনসংখ্যা। <strong>বাজেট</strong> প্রতিটা ফিচারকে নিজের আলাদা লিমিট দেয়। ৮০%-এ অ্যালার্ট আপনাকে ব্যবস্থা নেওয়ার সময় দেয়। ১০০%-এ থ্রটল বিলকে আর বাড়তে দেয় না। খেয়াল করুন, সবচেয়ে ছোট বাজেট (Search rewrite) আগে সমস্যায় পড়েছে, যে ফিচার সবচেয়ে বেশি টোকেন ব্যবহার করে সেটা নয়।",
+            "done": "আপনার কাছে ৩টা ফোরকাস্ট-সহ একটা টেবিল আছে, আর আপনি জানেন Search rewrite ১৬ তারিখে ৮০% অ্যালার্ট ছোঁয়।",
             "check": {
-              "question": "পুরো company-র জন্য একটা budget না রেখে প্রতি feature-এর আলাদা budget রাখা হয় কেন?",
-              "answer": "প্রতি feature-এর আলাদা budget থাকলে বোঝা যায় কোন feature টাকা খরচ করছে, আর একটা বেহিসাবি feature পুরো bill শেষ করতে পারে না। 80% alert তোমাকে 100% throttle-এর আগেই ব্যবস্থা নেওয়ার সময় দেয়।"
+              "question": "পুরো কোম্পানির জন্য একটা বাজেট না রেখে প্রতি ফিচারের আলাদা বাজেট রাখা হয় কেন?",
+              "answer": "প্রতি ফিচারের আলাদা বাজেট থাকলে বোঝা যায় কোন ফিচার টাকা খরচ করছে, আর একটা বেহিসাবি ফিচার পুরো বিল শেষ করতে পারে না। ৮০% অ্যালার্ট আপনাকে ১০০% থ্রটলের আগেই ব্যবস্থা নেওয়ার সময় দেয়।"
             },
-            "challenge": "ধরো একটা cache Search rewrite-এর 40% call কমিয়ে দেয়। Chat-কে নতুন মাস-শেষের forecast আর নতুন alert-এর তারিখ জিজ্ঞেস করো।"
+            "challenge": "ধরুন একটা ক্যাশ Search rewrite-এর ৪০% কল কমিয়ে দেয়। চ্যাটকে নতুন মাস-শেষের ফোরকাস্ট আর নতুন অ্যালার্টের তারিখ জিজ্ঞেস করুন।"
           }
         }
       ]
@@ -694,14 +694,14 @@
         "why": "This Part states that caching is the single most powerful cost lever. It lists semantic, output, and prompt caches."
       },
       "bn": {
-        "q": "এই Part কোন technique-কে খরচ কমানোর সবচেয়ে শক্তিশালী উপায় বলেছে?",
+        "q": "এই পার্ট কোন টেকনিককে খরচ কমানোর সবচেয়ে শক্তিশালী উপায় বলেছে?",
         "options": [
-          "Token budgeting",
-          "Distillation",
-          "Model cascading",
-          "Caching"
+          "টোকেন বাজেটিং",
+          "ডিস্টিলেশন",
+          "মডেল ক্যাসকেডিং",
+          "ক্যাশিং"
         ],
-        "why": "এই Part-এ স্পষ্ট বলা আছে, খরচ কমানোর উপায়গুলোর মধ্যে caching সবচেয়ে শক্তিশালী। এতে semantic, output আর prompt cache আছে।"
+        "why": "এই পার্টে স্পষ্ট বলা আছে, খরচ কমানোর উপায়গুলোর মধ্যে ক্যাশিং সবচেয়ে শক্তিশালী। এতে সেম্যান্টিক, আউটপুট আর প্রম্পট ক্যাশ আছে।"
       }
     },
     {
@@ -713,8 +713,8 @@
         "why": "A cascade sends easy requests to a small, cheap model. It escalates to the large model only when the small model's confidence is low."
       },
       "bn": {
-        "q": "Model cascade-এ প্রতিটা request আগে বড় ও দামি model-এ যায়।",
-        "why": "Cascade সহজ request ছোট ও সস্তা model-এ পাঠায়। ছোট model-এর confidence কম হলে তবেই বড় model-এ escalate করে।"
+        "q": "মডেল ক্যাসকেডে প্রতিটা রিকোয়েস্ট আগে বড় ও দামি মডেলে যায়।",
+        "why": "ক্যাসকেড সহজ রিকোয়েস্ট ছোট ও সস্তা মডেলে পাঠায়। ছোট মডেলের কনফিডেন্স কম হলে তবেই বড় মডেলে এস্কেলেট করে।"
       }
     },
     {
@@ -732,14 +732,14 @@
         "why": "Batch APIs suit work that does not need an answer in the next 5 seconds. This Part lists nightly evals, bulk labelling, and backfills."
       },
       "bn": {
-        "q": "Batch API 24h-এর মধ্যে অর্ধেক খরচে ফলাফল দেয়। কোন কাজ এতে মানায়?",
+        "q": "ব্যাচ API 24h-এর মধ্যে অর্ধেক খরচে ফলাফল দেয়। কোন কাজ এতে মানায়?",
         "options": [
-          "যে chat reply 5 সেকেন্ডের মধ্যে দেখাতে হবে",
-          "চলমান agent-এর ভেতরের tool call",
-          "রাতের eval আর bulk labelling",
-          "অপেক্ষা করা customer-কে live support উত্তর"
+          "যে চ্যাট উত্তর ৫ সেকেন্ডের মধ্যে দেখাতে হবে",
+          "চলমান এজেন্টের ভেতরের টুল কল",
+          "রাতের ইভ্যাল আর বাল্ক লেবেলিং",
+          "অপেক্ষা করা কাস্টমারকে লাইভ সাপোর্ট উত্তর"
         ],
-        "why": "যে কাজে পরের 5 সেকেন্ডে উত্তর লাগে না, তার জন্য Batch API ভালো। এই Part-এ nightly eval, bulk labelling আর backfill-এর কথা আছে।"
+        "why": "যে কাজে পরের ৫ সেকেন্ডে উত্তর লাগে না, তার জন্য ব্যাচ API ভালো। এই পার্টে নাইটলি ইভ্যাল, বাল্ক লেবেলিং আর ব্যাকফিলের কথা আছে।"
       }
     },
     {
@@ -757,14 +757,14 @@
         "why": "This Part says distillation is the only technique that does all three at the same time. You fine-tune a small open model on big-model answers."
       },
       "bn": {
-        "q": "এই Part-এর মতে কোন technique একই সাথে খরচ ও latency কমায় এবং self-hosting-এর পথ খুলে দেয়?",
+        "q": "এই পার্টের মতে কোন টেকনিক একই সাথে খরচ ও ল্যাটেন্সি কমায় এবং সেলফ-হোস্টিংয়ের পথ খুলে দেয়?",
         "options": [
-          "Prompt compression",
-          "Token budgeting",
-          "Semantic cache",
-          "Distillation"
+          "প্রম্পট কম্প্রেশন",
+          "টোকেন বাজেটিং",
+          "সেম্যান্টিক ক্যাশ",
+          "ডিস্টিলেশন"
         ],
-        "why": "এই Part বলছে distillation-ই একমাত্র technique যা একসাথে এই তিনটি কাজ করে। তুমি বড় model-এর উত্তর দিয়ে একটা ছোট open model fine-tune করো।"
+        "why": "এই পার্ট বলছে ডিস্টিলেশনই একমাত্র টেকনিক যা একসাথে এই তিনটি কাজ করে। আপনি বড় মডেলের উত্তর দিয়ে একটা ছোট ওপেন মডেল ফাইন-টিউন করেন।"
       }
     },
     {
@@ -782,14 +782,14 @@
         "why": "A model gateway sits between the app and all providers. It gives one API plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching."
       },
       "bn": {
-        "q": "LiteLLM, Portkey বা OpenRouter-এর মতো model gateway কী কাজ করে?",
+        "q": "LiteLLM, Portkey বা OpenRouter-এর মতো মডেল গেটওয়ে কী কাজ করে?",
         "options": [
-          "শুধু প্রায় একই রকম prompt একটা vector index-এ জমা রাখে",
-          "তোমার app আর প্রতিটা LLM provider-এর মাঝখানে বসে এবং একটাই API দেয়",
-          "লম্বা prompt থেকে stopword সরিয়ে দেয়",
-          "বড় model-এর উত্তর দিয়ে একটা ছোট model fine-tune করে"
+          "শুধু প্রায় একই রকম প্রম্পট একটা ভেক্টর ইনডেক্সে জমা রাখে",
+          "আপনার অ্যাপ আর প্রতিটা LLM প্রোভাইডারের মাঝখানে বসে এবং একটাই API দেয়",
+          "লম্বা প্রম্পট থেকে স্টপওয়ার্ড সরিয়ে দেয়",
+          "বড় মডেলের উত্তর দিয়ে একটা ছোট মডেল ফাইন-টিউন করে"
         ],
-        "why": "Model gateway app আর সব provider-এর মাঝখানে বসে। এটা একটা API দেয়, সাথে per-key rate limit, cost tracking, retry, fallback আর semantic caching।"
+        "why": "মডেল গেটওয়ে অ্যাপ আর সব প্রোভাইডারের মাঝখানে বসে। এটা একটা API দেয়, সাথে প্রতি-কী রেট লিমিট, খরচ ট্র্যাকিং, রিট্রাই, ফলব্যাক আর সেম্যান্টিক ক্যাশিং।"
       }
     }
   ]

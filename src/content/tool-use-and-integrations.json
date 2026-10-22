@@ -3,8 +3,8 @@
   "title": "Tool Use and Integrations",
   "lede": "How an LLM becomes an actor: tool/function schema design, parallel tool calling, Model Context Protocol (MCP) servers/clients/resources/prompts, sandboxed code execution (E2B, Modal, Daytona, Cloudflare), API wrappers, and tool-result formatting for LLM consumption. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
   "bn": {
-    "title": "Tool Use আর Integration",
-    "lede": "LLM কীভাবে নিজে কাজ করতে শেখে: tool/function schema-র design, parallel tool calling, Model Context Protocol (MCP) server/client/resource/prompt, sandbox-এ code চালানো (E2B, Modal, Daytona, Cloudflare), API wrapper, আর LLM যাতে সহজে পড়তে পারে সেভাবে tool-result সাজানো। <strong>প্রতিটি section দুই ভাবে লেখা:</strong> engineer-এর জন্য technical version (code আর diagram সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি topic-এর শেষে বাংলা ব্যাখ্যাও আছে।"
+    "title": "টুল ইউজ আর ইন্টিগ্রেশন",
+    "lede": "LLM কীভাবে নিজে কাজ করতে শেখে: টুল/ফাংশন স্কিমার ডিজাইন, প্যারালাল টুল কলিং, Model Context Protocol (MCP) সার্ভার/ক্লায়েন্ট/রিসোর্স/প্রম্পট, স্যান্ডবক্সে কোড চালানো (E2B, Modal, Daytona, Cloudflare), API র‍্যাপার, আর LLM যাতে সহজে পড়তে পারে সেভাবে টুল-রেজাল্ট গুছিয়ে দেওয়া। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
   },
   "sections": [
     {
@@ -13,8 +13,8 @@
       "title": "Tool use & integrations (incl. MCP)",
       "sub": "An LLM is just a text generator until you give it <strong>tools</strong>: a way to call your API, run code, query a database, or read a file. Tool design is the difference between a chatbot demo and a production system. The single highest-leverage decision is the quality of your tool descriptions.",
       "bn": {
-        "title": "Tool use আর integration (MCP সহ)",
-        "sub": "Tool না দেওয়া পর্যন্ত LLM শুধু একটা text generator। <strong>Tool</strong> মানে এমন একটা উপায়, যাতে সে আপনার API call করতে, code চালাতে, database-এ query করতে বা file পড়তে পারে। Chatbot-এর demo আর production system-এর মধ্যে তফাত গড়ে দেয় tool design। সবচেয়ে বড় প্রভাব ফেলার সিদ্ধান্ত হলো আপনার tool description-এর মান।"
+        "title": "টুল ইউজ আর ইন্টিগ্রেশন (MCP সহ)",
+        "sub": "টুল না দেওয়া পর্যন্ত LLM শুধু একটা টেক্সট জেনারেটর। <strong>টুল</strong> মানে এমন একটা উপায়, যাতে সে আপনার API কল করতে, কোড চালাতে, ডেটাবেসে কুয়েরি করতে বা ফাইল পড়তে পারে। চ্যাটবটের ডেমো আর প্রোডাকশন সিস্টেমের মধ্যে তফাত গড়ে দেয় টুল ডিজাইন। সবচেয়ে বড় প্রভাব ফেলার সিদ্ধান্ত হলো আপনার টুল ডেসক্রিপশনের মান।"
       },
       "body": [
         {
@@ -86,7 +86,7 @@
           "type": "diagram",
           "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"MCP architecture\">\n      <defs>\n        <marker id=\"arr-mcp\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <rect x=\"40\" y=\"100\" width=\"180\" height=\"120\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"130\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">MCP Host</text>\n      <text x=\"130\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">(Claude Code, Cursor,</text>\n      <text x=\"130\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">VS Code, your app)</text>\n      <text x=\"130\" y=\"190\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">connects to many servers</text>\n      \n      <rect x=\"270\" y=\"120\" width=\"120\" height=\"80\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"330\" y=\"150\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">MCP Client</text>\n      <text x=\"330\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">JSON-RPC</text>\n      \n      <rect x=\"450\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"560\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\" dy=\"20\">Filesystem server</text>\n      <text x=\"560\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: read_file, write_file</text>\n      <text x=\"560\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: file://...</text>\n      <text x=\"560\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">stdio / sse / http</text>\n\n      <rect x=\"700\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"810\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\" dy=\"20\">GitHub server</text>\n      <text x=\"810\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: create_issue, list_prs</text>\n      <text x=\"810\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: repo://...</text>\n      <text x=\"810\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">oauth / token</text>\n\n      <rect x=\"450\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"560\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\" dy=\"20\">Postgres server</text>\n      <text x=\"560\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: run_query (read-only)</text>\n      <text x=\"560\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: table://...</text>\n      <text x=\"560\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">read replica</text>\n\n      <rect x=\"700\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n      <text x=\"810\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\" dy=\"20\">Browser server</text>\n      <text x=\"810\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: navigate, click, type</text>\n      <text x=\"810\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: screenshot://</text>\n      <text x=\"810\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">isolated profile</text>\n\n      <line x1=\"220\" y1=\"160\" x2=\"270\" y2=\"160\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"140\" x2=\"450\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"150\" x2=\"700\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"180\" x2=\"450\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"190\" x2=\"700\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n    </svg>",
           "caption": "MCP architecture: one host can speak to many servers in parallel, each over stdio, SSE, or streamable HTTP. Servers expose tools (actions), resources (data), and prompts (templates).",
-          "captionBn": "MCP আর্কিটেকচার: একটি host একাধিক server-এর সাথে কথা বলে (stdio / SSE / HTTP); প্রতিটি server tools (কর্ম), resources (তথ্য) ও prompts (টেমপ্লেট) প্রকাশ করে।"
+          "captionBn": "MCP আর্কিটেকচার: একটি হোস্ট একাধিক সার্ভারের সাথে কথা বলে (stdio / SSE / HTTP); প্রতিটি সার্ভার টুলস (কর্ম), রিসোর্সেস (তথ্য) ও প্রম্পটস (টেমপ্লেট) প্রকাশ করে।"
         },
         {
           "type": "callout",
@@ -206,52 +206,52 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>Tool</strong> হলো এমন একটি ফাংশন যা model কল করতে পারে। LLM আগে শুধু text generate করতে পারে; tool যোগ করলে সে আপনার API কল করতে, কোড রান করতে, ডাটাবেস query দিতে বা ফাইল পড়তে পারে। Tool-এর description-এর মানই নির্ধারণ করে চ্যাটবট ডেমো আর প্রোডাকশন সিস্টেমের মধ্যে পার্থক্য।"
+          "html": "<strong>টুল</strong> হলো এমন একটি ফাংশন যা মডেল কল করতে পারে। LLM আগে শুধু টেক্সট জেনারেট করতে পারে; টুল যোগ করলে সে আপনার API কল করতে, কোড রান করতে, ডেটাবেসে কুয়েরি দিতে বা ফাইল পড়তে পারে। টুলের ডেসক্রিপশনের মানই নির্ধারণ করে চ্যাটবট ডেমো আর প্রোডাকশন সিস্টেমের মধ্যে পার্থক্য।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Schema-এর নকশা:</strong> name verb_noun হওয়া উচিত (<code>search_documents</code>, <code>docs</code> নয়); description-এ এক লাইনে কী করে, কখন ব্যবহার করবে ও কী ফেরত দেয় — তিনটিই থাকা উচিত।<a class=\"cite\" href=\"#src10\">[10]</a> Parameter-এ explicit type, enum ও description দিন; <code>any</code> এড়িয়ে চলুন। একটি prompt-এ ২০-এর বেশি tool দিলে selection quality ক্ষতিগ্রস্ত হয় — domain অনুযায়ী sub-agent-এ ভাগ করুন।"
+          "html": "<strong>স্কিমার নকশা:</strong> নাম ভার্ব_নাউন ফরম্যাটে হওয়া উচিত (<code>search_documents</code>, <code>docs</code> নয়); ডেসক্রিপশনে এক লাইনে কী করে, কখন ব্যবহার করবেন ও কী ফেরত দেয় — তিনটিই থাকা উচিত।<a class=\"cite\" href=\"#src10\">[১০]</a> প্যারামিটারে স্পষ্ট টাইপ, enum ও ডেসক্রিপশন দিন; <code>any</code> এড়িয়ে চলুন। একটি প্রম্পটে ২০-এর বেশি টুল দিলে সিলেকশনের মান ক্ষতিগ্রস্ত হয় — ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Parallel tool calling:</strong> একে অপরের ওপর নির্ভরশীল নয় এমন তথ্য (যেমন টোকিওর আবহাওয়া <em>এবং</em> USD→JPY রেট) একই turn-এ একসাথে কল করুন। এটাই tool-heavy এজেন্টের সবচেয়ে বড় latency জয়।"
+          "html": "<strong>প্যারালাল টুল কলিং:</strong> একে অপরের ওপর নির্ভরশীল নয় এমন তথ্য (যেমন টোকিওর আবহাওয়া <em>এবং</em> USD→JPY রেট) একই টার্নে একসাথে কল করুন। এটাই টুল-নির্ভর এজেন্টের সবচেয়ে বড় ল্যাটেন্সি জয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>MCP (Model Context Protocol):</strong> Anthropic ২০২৪-এর শেষে চালু করা ও এখন OpenAI, Google ও প্রধান IDE vendor-রা গ্রহণ করেছে এমন একটি খোলা মানদণ্ড।<a class=\"cite\" href=\"#src12\">[12]</a> model হলো client; data/tool প্রদানকারী চালায় MCP server। server তিনটি primitive প্রকাশ করে:"
+          "html": "<strong>MCP (Model Context Protocol):</strong> Anthropic ২০২৪-এর শেষে চালু করা ও এখন OpenAI, Google ও প্রধান IDE ভেন্ডররা গ্রহণ করেছে এমন একটি খোলা মানদণ্ড।<a class=\"cite\" href=\"#src12\">[১২]</a> মডেল হলো ক্লায়েন্ট; ডেটা/টুল প্রদানকারী চালায় MCP সার্ভার। সার্ভার তিনটি প্রিমিটিভ প্রকাশ করে:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Tools</strong> — model যে ফাংশন কল করতে পারে।",
-            "<strong>Resources</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB row, ওয়েবপেজ)। model লক্ষ্য অনুযায়ী <code>read</code> করার সিদ্ধান্ত নেয়।",
-            "<strong>Prompts</strong> — নামকরা prompt টেমপ্লেট যা host তালিকা করে ব্যবহারকারীকে নাম ধরে ব্যবহার করতে দেয়।"
+            "<strong>টুলস</strong> — মডেল যে ফাংশন কল করতে পারে।",
+            "<strong>রিসোর্সেস</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB রো, ওয়েবপেজ)। মডেল লক্ষ্য অনুযায়ী <code>read</code> করার সিদ্ধান্ত নেয়।",
+            "<strong>প্রম্পটস</strong> — নামকরা প্রম্পট টেমপ্লেট যা হোস্ট তালিকা করে ব্যবহারকারীকে নাম ধরে ব্যবহার করতে দেয়।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>MCP-এর গুরুত্ব:</strong> MCP-এর আগে প্রতিটি IDE / agent app প্রতিটি data source-এর জন্য কাস্টম integration লিখত। এখন একটি MCP server (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-compatible client — Claude Code, Cursor, VS Code, custom agent — ব্যবহার করতে পারে।"
+          "html": "<strong>MCP-এর গুরুত্ব:</strong> MCP-এর আগে প্রতিটি IDE / এজেন্ট অ্যাপ প্রতিটি ডেটা সোর্সের জন্য কাস্টম ইন্টিগ্রেশন লিখত। এখন একটি MCP সার্ভার (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-কম্প্যাটিবল ক্লায়েন্ট — Claude Code, Cursor, VS Code, কাস্টম এজেন্ট — ব্যবহার করতে পারে।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Sandboxed code execution:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। model-কে sandbox-এ কোড লিখে রান করার অনুমতি দিলে tool-এর বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, sub-second Python), Modal (hosted container + GPU), Daytona (full dev environment), Cloudflare Workers/Sandbox (edge isolates)।"
+          "html": "<strong>স্যান্ডবক্সড কোড এক্সিকিউশন:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, সাব-সেকেন্ড Python), Modal (হোস্টেড কনটেইনার + GPU), Daytona (ফুল ডেভেলপমেন্ট এনভায়রনমেন্ট), Cloudflare Workers/Sandbox (এজ আইসোলেট)।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>API wrapper:</strong> প্রতিটি internal API-কে এমন একটি ফাংশনে মুড়িয়ে দিন যা (ক) এক বাক্যে purpose বর্ণনা করে, (খ) typed input নেয়, (গ) ফলাফল অথবা <code>{error, retryable}</code> envelope ফেরত দেয়।"
+          "html": "<strong>API র‍্যাপার:</strong> প্রতিটি ইন্টারনাল API-কে এমন একটি ফাংশনে মুড়িয়ে দিন যা (ক) এক বাক্যে উদ্দেশ্য বর্ণনা করে, (খ) টাইপ করা ইনপুট নেয়, (গ) ফলাফল অথবা <code>{error, retryable}</code> এনভেলপ ফেরত দেয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Tool result formatting:</strong> model আপনার tool-এর output পরের turn-এ prompt-এর অংশ হিসেবে পুনঃপড়ে। তাই output হলো <em>prompt content</em>। তিনটি নিয়ম:<a class=\"cite\" href=\"#src10\">[10]</a>"
+          "html": "<strong>টুল রেজাল্ট ফরম্যাটিং:</strong> মডেল আপনার টুলের আউটপুট পরের টার্নে প্রম্পটের অংশ হিসেবে পুনঃপড়ে। তাই আউটপুট হলো <em>প্রম্পট কনটেন্ট</em>। তিনটি নিয়ম:<a class=\"cite\" href=\"#src10\">[১০]</a>"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>নির্মমভাবে ছাঁটাই করুন:</strong> ১০,০০০-row SQL ফলাফল context window উড়িয়ে দেবে। শীর্ষ N ফেরত দিন, বাকিটা সারমর্ম করুন।",
-            "<strong>পড়ার জন্য ফর্ম্যাট করুন, সংরক্ষণের জন্য নয়:</strong> মানুষের যুক্তির জন্য Markdown table JSON array-এর চেয়ে ভালো।",
-            "<strong>একটি \"এটি কী বোঝায়\" বাক্য যোগ করুন</strong> যখন ফলাফল অ-সুস্পষ্ট — model-এর পুনঃউদ্ভাবন বাঁচায়।"
+            "<strong>নির্মমভাবে ছাঁটাই করুন:</strong> ১০,০০০ রো-এর SQL ফলাফল কনটেক্সট উইন্ডো উড়িয়ে দেবে। শীর্ষ N ফেরত দিন, বাকিটা সারমর্ম করুন।",
+            "<strong>পড়ার জন্য ফরম্যাট করুন, সংরক্ষণের জন্য নয়:</strong> মানুষের যুক্তির জন্য Markdown টেবিল JSON অ্যারের চেয়ে ভালো।",
+            "<strong>একটি \"এটি কী বোঝায়\" বাক্য যোগ করুন</strong> যখন ফলাফল অ-সুস্পষ্ট — মডেলের পুনঃউদ্ভাবন বাঁচায়।"
           ]
         },
         {
@@ -259,7 +259,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>টুলবক্সের উপমা:</strong> AI-কে একজন handyperson হিসেবে ভাবুন। তাকে ৩০টি টুলের বাক্স দিচ্ছেন, কিন্তু প্রতিটি টুলের লেবেল অস্পষ্ট হলে (\"জিনিসপত্র\", \"কর্তব্যটা\") সে ভুল টুল ধরবে। স্পষ্টভাবে লেবেল করলে (\"ফিলিপস স্ক্রুড্রাইভার, সাইজ ২\") সঠিক টুল ধরে। MCP হলো টুলের হাতলের স্ট্যান্ডার্ড সাইজ — এখন প্রতিটি টুলবক্স প্রতিটি টুলে খাপায়। সারাংশের নিয়ম: handyperson crawl space থেকে ফিরে আসলে সে সারা junk drawer আপনার রান্নাঘরের টেবিলে ফেলে না দিয়ে সহজ ইংরেজিতে বলে কী পেয়েছে।"
+              "html": "<strong>টুলবক্সের উপমা:</strong> AI-কে একজন হ্যান্ডিপারসন হিসেবে ভাবুন। তাকে ৩০টি টুলের বাক্স দিচ্ছেন, কিন্তু প্রতিটি টুলের লেবেল অস্পষ্ট হলে (\"জিনিসপত্র\", \"কর্তব্যটা\") সে ভুল টুল ধরবে। স্পষ্টভাবে লেবেল করলে (\"ফিলিপস স্ক্রুড্রাইভার, সাইজ ২\") সঠিক টুল ধরে। MCP হলো টুলের হাতলের স্ট্যান্ডার্ড সাইজ — এখন প্রতিটি টুলবক্স প্রতিটি টুলে খাপায়। সারসংক্ষেপের নিয়ম: হ্যান্ডিপারসন ক্রল স্পেস থেকে ফিরে আসলে সে সারা জাঙ্ক ড্রয়ার আপনার রান্নাঘরের টেবিলে ফেলে না দিয়ে সহজ ইংরেজিতে বলে কী পেয়েছে।"
             }
           ]
         }
@@ -346,45 +346,45 @@
             "challenge": "Add 15 extra made-up rows to the table in step 2. Is the answer still good? Then cut the table back to 4 rows. Which one is easier for the model to read?"
           },
           "bn": {
-            "title": "Chat-এ নিজেই tool হয়ে দেখো",
-            "why": "তুমি যখন order দেখার একটা support chatbot বানাবে, model তোমার database দেখতে পারে না। তোমার code-কে tool চালিয়ে result model-কে ফেরত দিতে হবে। তাই model কী পাঠায় আর কী ফেরত চায়, সেটা জানা দরকার।",
+            "title": "চ্যাটে নিজেই টুল হয়ে দেখুন",
+            "why": "আপনি যখন অর্ডার দেখার একটা সাপোর্ট চ্যাটবট বানাবেন, মডেল আপনার ডেটাবেস দেখতে পারে না। আপনার কোডকে টুল চালিয়ে রেজাল্ট মডেলকে ফেরত দিতে হবে। তাই মডেল কী পাঠায় আর কী ফেরত চায়, সেটা জানা দরকার।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, chat-এ paste করে Enter চাপো। উত্তরটা পড়ো। (JSON আর tool-এর নাম English-এ আছে, তাই এই অংশ English-এ রাখা হয়েছে।)",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। উত্তরটা পড়ুন। (JSON আর টুলের নাম ইংরেজিতে আছে, তাই এই অংশ ইংরেজিতেই রাখা হয়েছে।)",
                 "prompt": "তুমি একটা online shop-এর support assistant। তুমি শুধু ১টা tool ব্যবহার করতে পারো।\n\nTool:\n{\"name\": \"get_order_status\", \"description\": \"Look up the status of one customer order. Use when the user asks where their order is. Returns status, carrier, and expected delivery date, or an error field if the order is not found.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"order_id\": {\"type\": \"string\", \"description\": \"Order ID such as ORD-4821\"}}, \"required\": [\"order_id\"]}}\n\nনিয়ম:\n১. tool লাগলে শুধু একটা JSON object দিয়ে উত্তর দাও, এই রকম: {\"tool\": \"name\", \"input\": {...}}। আর কোনো লেখা লিখবে না।\n২. আমি tool-এর result পাঠানোর পর customer-কে বাংলায় দুটো ছোট বাক্যে উত্তর দাও।\n\nCustomer-এর message: \"হাই, আমার অর্ডার ORD-4821 এখনো আসেনি। এটা কোথায়?\"",
-                "expect": "শুধু একটা ছোট JSON object, তাতে tool-এর নাম <code>get_order_status</code> আর order ID <code>ORD-4821</code> আছে। অন্য কোনো লেখা নেই।",
+                "expect": "শুধু একটা ছোট JSON অবজেক্ট, তাতে টুলের নাম <code>get_order_status</code> আর অর্ডার ID <code>ORD-4821</code> আছে। অন্য কোনো লেখা নেই।",
                 "example": "{\"tool\": \"get_order_status\", \"input\": {\"order_id\": \"ORD-4821\"}}"
               },
               {
                 "chat": "same",
-                "do": "এবার তুমিই tool। এই বানানো tool result টা copy করো, paste করে Enter চাপো।",
+                "do": "এবার আপনিই টুল। এই বানানো টুল রেজাল্টটা কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "TOOL RESULT for get_order_status:\n\n| field | value |\n|---|---|\n| status | delayed |\n| carrier | SwiftCourier |\n| expected_delivery | 2026-03-14 |\n| delay_reason | warehouse backlog |\n\nএবার customer-কে বাংলায় উত্তর দাও।",
-                "expect": "Customer-এর জন্য দুটো ছোট বাক্য। তোমার table থেকে carrier, নতুন তারিখ আর কারণ ব্যবহার করা হয়েছে।",
+                "expect": "কাস্টমারের জন্য দুটো ছোট বাক্য। আপনার টেবিল থেকে ক্যারিয়ার, নতুন তারিখ আর কারণ ব্যবহার করা হয়েছে।",
                 "example": "দুঃখিত, গুদামে কাজের চাপের কারণে আপনার অর্ডার ORD-4821 দেরি হচ্ছে। SwiftCourier এখন ২০২৬-০৩-১৪ তারিখে এটা পৌঁছে দেওয়ার কথা বলছে।"
               },
               {
                 "chat": "new",
-                "do": "আবার শুরু করো। ধাপ ১-এর prompt টাই আবার copy করো, paste করে Enter চাপো।",
+                "do": "আবার শুরু করুন। ধাপ ১-এর প্রম্পটটাই আবার কপি করুন, পেস্ট করে Enter চাপুন।",
                 "prompt": "তুমি একটা online shop-এর support assistant। তুমি শুধু ১টা tool ব্যবহার করতে পারো।\n\nTool:\n{\"name\": \"get_order_status\", \"description\": \"Look up the status of one customer order. Use when the user asks where their order is. Returns status, carrier, and expected delivery date, or an error field if the order is not found.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"order_id\": {\"type\": \"string\", \"description\": \"Order ID such as ORD-4821\"}}, \"required\": [\"order_id\"]}}\n\nনিয়ম:\n১. tool লাগলে শুধু একটা JSON object দিয়ে উত্তর দাও, এই রকম: {\"tool\": \"name\", \"input\": {...}}। আর কোনো লেখা লিখবে না।\n২. আমি tool-এর result পাঠানোর পর customer-কে বাংলায় দুটো ছোট বাক্যে উত্তর দাও।\n\nCustomer-এর message: \"হাই, আমার অর্ডার ORD-4821 এখনো আসেনি। এটা কোথায়?\"",
-                "expect": "ধাপ ১-এর মতোই একটা JSON tool request।",
+                "expect": "ধাপ ১-এর মতোই একটা JSON টুল রিকোয়েস্ট।",
                 "example": "{\"tool\": \"get_order_status\", \"input\": {\"order_id\": \"ORD-4821\"}}"
               },
               {
                 "chat": "same",
-                "do": "এবার tool fail করেছে। এই error result টা copy করো, paste করে Enter চাপো। দেখো, উত্তরে বানানো কোনো তারিখ আছে কি না।",
+                "do": "এবার টুল ফেইল করেছে। এই এরর রেজাল্টটা কপি করুন, পেস্ট করে Enter চাপুন। দেখুন, উত্তরে বানানো কোনো তারিখ আছে কি না।",
                 "prompt": "TOOL RESULT for get_order_status:\n\n{\"error\": \"order_not_found\", \"retryable\": false}\n\nএবার customer-কে বাংলায় উত্তর দাও।",
-                "expect": "ভালো উত্তরে বলা হবে order পাওয়া যায়নি, আর সাহায্য করার কথা থাকবে। সে কোনো delivery তারিখ <strong>বানাবে না</strong>। কিছু model তবুও আন্দাজ করতে পারে, তাই মন দিয়ে পড়ো।",
+                "expect": "ভালো উত্তরে বলা হবে অর্ডার পাওয়া যায়নি, আর সাহায্য করার কথা থাকবে। সে কোনো ডেলিভারি তারিখ <strong>বানাবে না</strong>। কিছু মডেল তবুও আন্দাজ করতে পারে, তাই মন দিয়ে পড়ুন।",
                 "example": "দুঃখিত, ORD-4821 ID-র কোনো অর্ডার আমি খুঁজে পাইনি। ID টা আবার দেখে নিন, অথবা আমি আপনাকে আমাদের support team-এর সাথে যুক্ত করে দিতে পারি।"
               }
             ],
-            "learned": "Model কোনো tool চালাতে পারে না, সে শুধু লেখা লেখে। প্রথমে সে একটা <strong>tool call</strong> লিখেছে (মানে কোন tool কী input দিয়ে চালাতে হবে, তার অনুরোধ)। তুমি tool চালিয়ে result paste করেছ, তাই result টা prompt-এর অংশ হয়ে গেছে। Model সেটা পড়ে উত্তর দিয়েছে। পরিষ্কার error result model-কে বলেছে যে আন্দাজ করা যাবে না।",
-            "done": "তোমার কাছে দুটো final উত্তর আছে: একটায় তোমার table-এর carrier আর তারিখ আছে, আরেকটায় বলা আছে order পাওয়া যায়নি।",
+            "learned": "মডেল কোনো টুল চালাতে পারে না, সে শুধু লেখা লেখে। প্রথমে সে একটা <strong>টুল কল</strong> লিখেছে (মানে কোন টুল কী ইনপুট দিয়ে চালাতে হবে, তার অনুরোধ)। আপনি টুল চালিয়ে রেজাল্ট পেস্ট করেছেন, তাই রেজাল্টটা প্রম্পটের অংশ হয়ে গেছে। মডেল সেটা পড়ে উত্তর দিয়েছে। পরিষ্কার এরর রেজাল্ট মডেলকে বলেছে যে আন্দাজ করা যাবে না।",
+            "done": "আপনার কাছে দুটো ফাইনাল উত্তর আছে: একটায় আপনার টেবিলের ক্যারিয়ার আর তারিখ আছে, আরেকটায় বলা আছে অর্ডার পাওয়া যায়নি।",
             "check": {
-              "question": "এই task-এ কে tool চালিয়েছে? Model result দিয়ে কী করেছে?",
-              "answer": "তুমি tool চালিয়েছ, কারণ model শুধু লেখা লেখে। Result টা prompt-এর অংশ হয়েছে, আর model সেটা পড়ে উত্তর লিখেছে। তাই tool-কে পরিষ্কার shape-এ result দিতে হয়, আর fail করলে একটা error field দিতে হয়।"
+              "question": "এই টাস্কে কে টুল চালিয়েছে? মডেল রেজাল্ট দিয়ে কী করেছে?",
+              "answer": "আপনি টুল চালিয়েছেন, কারণ মডেল শুধু লেখা লেখে। রেজাল্টটা প্রম্পটের অংশ হয়েছে, আর মডেল সেটা পড়ে উত্তর লিখেছে। তাই টুলকে পরিষ্কার শেপে রেজাল্ট দিতে হয়, আর ফেইল করলে একটা এরর ফিল্ড দিতে হয়।"
             },
-            "challenge": "ধাপ ২-এর table-এ ১৫টা বাড়তি বানানো সারি যোগ করো। উত্তর কি এখনো ভালো? তারপর table আবার ৪ সারিতে ছোট করো। কোনটা model-এর পড়তে সহজ?"
+            "challenge": "ধাপ ২-এর টেবিলে ১৫টা বাড়তি বানানো সারি যোগ করুন। উত্তর কি এখনো ভালো? তারপর টেবিল আবার ৪ সারিতে ছোট করুন। কোনটা মডেলের পড়তে সহজ?"
           }
         },
         {
@@ -416,31 +416,31 @@
             "challenge": "In the second prompt, change both descriptions to just \"Looks things up.\" Keep the clear names. Does the model still choose well? Which matters more, the name or the description?"
           },
           "bn": {
-            "title": "অস্পষ্ট আর পরিষ্কার tool description মিলিয়ে দেখো",
-            "why": "তুমি যখন একটা AI agent-কে কয়েকটা tool দেবে, সে প্রতিটা tool-এর নাম আর description পড়ে একটা বাছে। লেখা অস্পষ্ট হলে সে ভুল tool বাছে বা আটকে যায়, আর তোমার bot ভুল উত্তর দেয়।",
+            "title": "অস্পষ্ট আর পরিষ্কার টুল ডেসক্রিপশন মিলিয়ে দেখুন",
+            "why": "আপনি যখন একটা AI এজেন্টকে কয়েকটা টুল দেবেন, সে প্রতিটা টুলের নাম আর ডেসক্রিপশন পড়ে একটা বাছে। লেখা অস্পষ্ট হলে সে ভুল টুল বাছে বা আটকে যায়, আর আপনার বট ভুল উত্তর দেয়।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো। এতে দুটো tool আছে, দুটোর description অস্পষ্ট। Paste করে Enter চাপো, আর model কী করে লিখে রাখো। (tool-এর নাম আর JSON English-এ থাকে, তাই এই অংশ English-এ রাখা হয়েছে।)",
+                "do": "এই প্রম্পটটা কপি করুন। এতে দুটো টুল আছে, দুটোর ডেসক্রিপশন অস্পষ্ট। পেস্ট করে Enter চাপুন, আর মডেল কী করে লিখে রাখুন। (টুলের নাম আর JSON ইংরেজিতে থাকে, তাই এই অংশ ইংরেজিতেই রাখা হয়েছে।)",
                 "prompt": "তুমি এই tool-গুলো ব্যবহার করতে পারো:\n[\n  {\"name\": \"search\", \"description\": \"Searches.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"q\": {\"type\": \"string\"}}}},\n  {\"name\": \"find\", \"description\": \"Finds things.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"q\": {\"type\": \"string\"}}}}\n]\n\nনিয়ম: কোনো tool কাজে লাগলে শুধু একটা JSON object দিয়ে উত্তর দাও, এই রকম: {\"tool\": \"name\", \"input\": {...}}। কোন tool ঠিক, সে ব্যাপারে নিশ্চিত না হলে এক বাক্যে বলো কেন নিশ্চিত নও। প্রশ্নের উত্তর নিজে দেবে না।\n\nUser-এর প্রশ্ন: \"Farhana Akter কার কাছে report করে?\"",
-                "expect": "প্রায়ই এক বাক্যে বলবে সে নিশ্চিত না কোন tool ঠিক। কিছু model আন্দাজে <code>search</code> বা <code>find</code> বাছে।",
+                "expect": "প্রায়ই এক বাক্যে বলবে সে নিশ্চিত না কোন টুল ঠিক। কিছু মডেল আন্দাজে <code>search</code> বা <code>find</code> বাছে।",
                 "example": "কোন tool ঠিক, আমি নিশ্চিত না। কারণ দুটো tool-এর description শুধু \"Searches\" আর \"Finds things\", কোনটাতেই লেখা নেই যে মানুষের তথ্য খোঁজা যায়।"
               },
               {
                 "chat": "new",
-                "do": "নতুন chat খোলো। এই prompt টা copy করো। প্রশ্ন একই, কিন্তু tool দুটোর description পরিষ্কার। Paste করে Enter চাপো, আর ধাপ ১-এর সাথে মেলাও।",
+                "do": "নতুন চ্যাট খুলুন। এই প্রম্পটটা কপি করুন। প্রশ্ন একই, কিন্তু টুল দুটোর ডেসক্রিপশন পরিষ্কার। পেস্ট করে Enter চাপুন, আর ধাপ ১-এর সাথে মেলান।",
                 "prompt": "তুমি এই tool-গুলো ব্যবহার করতে পারো:\n[\n  {\"name\": \"search_documents\", \"description\": \"Search the company wiki for policy pages and project documents. Use when the user asks about internal policy or past projects. Does NOT return data about people. Returns the top 5 text chunks with source URLs.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"query\": {\"type\": \"string\", \"description\": \"Natural-language query, 3 to 8 words.\"}}, \"required\": [\"query\"]}},\n  {\"name\": \"get_employee\", \"description\": \"Look up one employee by full name. Use when the user asks who someone is, who their manager is, or which team they are in. Returns name, job title, manager, and team.\", \"input_schema\": {\"type\": \"object\", \"properties\": {\"full_name\": {\"type\": \"string\", \"description\": \"Full name, for example Farhana Akter.\"}}, \"required\": [\"full_name\"]}}\n]\n\nনিয়ম: কোনো tool কাজে লাগলে শুধু একটা JSON object দিয়ে উত্তর দাও, এই রকম: {\"tool\": \"name\", \"input\": {...}}। কোন tool ঠিক, সে ব্যাপারে নিশ্চিত না হলে এক বাক্যে বলো কেন নিশ্চিত নও। প্রশ্নের উত্তর নিজে দেবে না।\n\nUser-এর প্রশ্ন: \"Farhana Akter কার কাছে report করে?\"",
-                "expect": "বেশিরভাগ model <code>get_employee</code>-এর জন্য একটা JSON request পাঠায়, full name <em>Farhana Akter</em> দিয়ে।",
+                "expect": "বেশিরভাগ মডেল <code>get_employee</code>-এর জন্য একটা JSON রিকোয়েস্ট পাঠায়, ফুল নাম <em>Farhana Akter</em> দিয়ে।",
                 "example": "{\"tool\": \"get_employee\", \"input\": {\"full_name\": \"Farhana Akter\"}}"
               }
             ],
-            "learned": "দুটো prompt-এ প্রশ্ন একই ছিল। শুধু tool-এর লেখা বদলেছে। Model বাছার আগে প্রতিটা tool-এর নাম আর description পড়ে, তাই এই লেখা ছোট একটা manual-এর মতো কাজ করে। ভালো লেখায় থাকে verb আর noun দিয়ে বানানো <strong>নাম</strong> (<code>get_employee</code>), tool কী করে আর কখন ব্যবহার করতে হবে সেই বাক্য, আর উদাহরণসহ input-এর বর্ণনা।",
-            "done": "তোমার কাছে দুটো উত্তর আছে: একটায় model নিশ্চিত না বা আন্দাজ করছে, আরেকটায় পরিষ্কার <code>get_employee</code> request।",
+            "learned": "দুটো প্রম্পটে প্রশ্ন একই ছিল। শুধু টুলের লেখা বদলেছে। মডেল বাছার আগে প্রতিটা টুলের নাম আর ডেসক্রিপশন পড়ে, তাই এই লেখা ছোট একটা ম্যানুয়ালের মতো কাজ করে। ভালো লেখায় থাকে ভার্ব আর নাউন দিয়ে বানানো <strong>নাম</strong> (<code>get_employee</code>), টুল কী করে আর কখন ব্যবহার করতে হবে সেই বাক্য, আর উদাহরণসহ ইনপুটের বর্ণনা।",
+            "done": "আপনার কাছে দুটো উত্তর আছে: একটায় মডেল নিশ্চিত না বা আন্দাজ করছে, আরেকটায় পরিষ্কার <code>get_employee</code> রিকোয়েস্ট।",
             "check": {
-              "question": "Tool-এর লেখার কোন তিনটা অংশ দ্বিতীয় prompt-কে model-এর জন্য সহজ করেছে?",
-              "answer": "verb আর noun দিয়ে নাম, যেমন get_employee। Tool কী করে আর কখন ব্যবহার করতে হবে, সেই description। আর উদাহরণসহ input field-এর বর্ণনা। Model সিদ্ধান্ত নেওয়ার আগে এই সবকিছু পড়ে।"
+              "question": "টুলের লেখার কোন তিনটা অংশ দ্বিতীয় প্রম্পটকে মডেলের জন্য সহজ করেছে?",
+              "answer": "ভার্ব আর নাউন দিয়ে নাম, যেমন get_employee। টুল কী করে আর কখন ব্যবহার করতে হবে, সেই ডেসক্রিপশন। আর উদাহরণসহ ইনপুট ফিল্ডের বর্ণনা। মডেল সিদ্ধান্ত নেওয়ার আগে এই সবকিছু পড়ে।"
             },
-            "challenge": "দ্বিতীয় prompt-এ দুটো description-ই বদলে শুধু \"Looks things up.\" করে দাও। নাম পরিষ্কার রাখো। Model কি এখনো ঠিক বাছে? নাম বেশি জরুরি, না description?"
+            "challenge": "দ্বিতীয় প্রম্পটে দুটো ডেসক্রিপশনই বদলে শুধু \"Looks things up.\" করে দিন। নাম পরিষ্কার রাখুন। মডেল কি এখনো ঠিক বাছে? নাম বেশি জরুরি, না ডেসক্রিপশন?"
           }
         },
         {
@@ -479,38 +479,38 @@
             "challenge": "Write a question that needs 3 calls: two that can run together and one that must wait. Test it in a new chat. Does the model split the calls correctly?"
           },
           "bn": {
-            "title": "কোন tool call একসাথে চলতে পারে, চিনে নাও",
-            "why": "একটা agent-এর যখন কয়েকটা তথ্য লাগে, একটা একটা করে tool-এর জন্য অপেক্ষা করলে user-কে অনেক সময় বসে থাকতে হয়। Travel বা support bot-এ যে call-গুলো একে অপরের উপর নির্ভর করে না, সেগুলো একসাথে চালালে উত্তর অনেক দ্রুত আসে।",
+            "title": "কোন টুল কল একসাথে চলতে পারে, চিনে নিন",
+            "why": "একটা এজেন্টের যখন কয়েকটা তথ্য লাগে, একটা একটা করে টুলের জন্য অপেক্ষা করলে ইউজারকে অনেক সময় বসে থাকতে হয়। ট্রাভেল বা সাপোর্ট বটে যে কলগুলো একে অপরের উপর নির্ভর করে না, সেগুলো একসাথে চালালে উত্তর অনেক দ্রুত আসে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt টা copy করো, paste করে Enter চাপো। List-এ কয়টা tool call আছে, গুনে দেখো। (tool-এর নাম আর JSON English-এ, তাই এখানে English-এ রাখা হয়েছে।)",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। তালিকায় কয়টা টুল কল আছে, গুনে দেখুন। (টুলের নাম আর JSON ইংরেজিতে, তাই এখানে ইংরেজিতেই রাখা হয়েছে।)",
                 "prompt": "তুমি এই tool-গুলো ব্যবহার করতে পারো:\n1. get_weather(city): এক শহরের এখনকার আবহাওয়া দেয়।\n2. get_exchange_rate(from, to): দুটো currency code-এর (যেমন USD আর BDT) exchange rate দেয়।\n3. get_user_city(user_id): একজন user-এর নিজের শহর দেয়।\n\nনিয়ম: শুধু tool call-এর একটা JSON list দিয়ে উত্তর দাও, এই রকম: [{\"tool\": \"name\", \"input\": {...}}]। যে call-গুলো তুমি এখনই করতে পারো, সবগুলো list-এ দাও। কোনো call অন্য call-এর result ছাড়া করা যায় না হলে সেটা বাদ দাও। আর কোনো লেখা লিখবে না।\n\nUser-এর প্রশ্ন: \"Tokyo-তে আবহাওয়া কেমন, আর 1 USD কত BDT?\"",
-                "expect": "একটা list-এ <strong>২টা call</strong>: Tokyo-র আবহাওয়ার call, আর USD থেকে BDT exchange rate-এর call।",
+                "expect": "একটা তালিকায় <strong>২টা কল</strong>: টোকিওর আবহাওয়ার কল, আর USD থেকে BDT এক্সচেঞ্জ রেটের কল।",
                 "example": "[{\"tool\": \"get_weather\", \"input\": {\"city\": \"Tokyo\"}}, {\"tool\": \"get_exchange_rate\", \"input\": {\"from\": \"USD\", \"to\": \"BDT\"}}]"
               },
               {
                 "chat": "new",
-                "do": "নতুন chat খোলো। এই prompt টা copy করো, paste করে Enter চাপো। call গুনে দেখো। ভাবো, list এত ছোট কেন।",
+                "do": "নতুন চ্যাট খুলুন। এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। কল গুনে দেখুন। ভাবুন, তালিকা এত ছোট কেন।",
                 "prompt": "তুমি এই tool-গুলো ব্যবহার করতে পারো:\n1. get_weather(city): এক শহরের এখনকার আবহাওয়া দেয়।\n2. get_exchange_rate(from, to): দুটো currency code-এর (যেমন USD আর BDT) exchange rate দেয়।\n3. get_user_city(user_id): একজন user-এর নিজের শহর দেয়।\n\nনিয়ম: শুধু tool call-এর একটা JSON list দিয়ে উত্তর দাও, এই রকম: [{\"tool\": \"name\", \"input\": {...}}]। যে call-গুলো তুমি এখনই করতে পারো, সবগুলো list-এ দাও। কোনো call অন্য call-এর result ছাড়া করা যায় না হলে সেটা বাদ দাও। আর কোনো লেখা লিখবে না।\n\nUser-এর প্রশ্ন: \"User U-77 যে শহরে থাকে, সেখানকার আবহাওয়া কেমন?\"",
-                "expect": "মাত্র <strong>১টা call</strong>: U-77-এর জন্য <code>get_user_city</code>। আবহাওয়ার call-এর আগে শহরের নাম লাগে।",
+                "expect": "মাত্র <strong>১টা কল</strong>: U-77-এর জন্য <code>get_user_city</code>। আবহাওয়ার কলের আগে শহরের নাম লাগে।",
                 "example": "[{\"tool\": \"get_user_city\", \"input\": {\"user_id\": \"U-77\"}}]"
               },
               {
                 "chat": "new",
-                "do": "নতুন chat খোলো। এই prompt টা copy করো, paste করে Enter চাপো। লিখে রাখো, list-এ কোন call আছে আর কোনটা নেই।",
+                "do": "নতুন চ্যাট খুলুন। এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। লিখে রাখুন, তালিকায় কোন কল আছে আর কোনটা নেই।",
                 "prompt": "তুমি এই tool-গুলো ব্যবহার করতে পারো:\n1. get_weather(city): এক শহরের এখনকার আবহাওয়া দেয়।\n2. get_exchange_rate(from, to): দুটো currency code-এর (যেমন USD আর BDT) exchange rate দেয়।\n3. get_user_city(user_id): একজন user-এর নিজের শহর দেয়।\n\nনিয়ম: শুধু tool call-এর একটা JSON list দিয়ে উত্তর দাও, এই রকম: [{\"tool\": \"name\", \"input\": {...}}]। যে call-গুলো তুমি এখনই করতে পারো, সবগুলো list-এ দাও। কোনো call অন্য call-এর result ছাড়া করা যায় না হলে সেটা বাদ দাও। আর কোনো লেখা লিখবে না।\n\nUser-এর প্রশ্ন: \"Tokyo-র আবহাওয়ার সাথে user U-77 যে শহরে থাকে সেখানকার আবহাওয়া তুলনা করো।\"",
-                "expect": "<strong>২টা call</strong>: Tokyo-র আবহাওয়া আর U-77-এর জন্য <code>get_user_city</code>। U-77-এর শহরের আবহাওয়ার call list-এ নেই, কারণ সেটাকে অপেক্ষা করতে হবে।",
+                "expect": "<strong>২টা কল</strong>: টোকিওর আবহাওয়া আর U-77-এর জন্য <code>get_user_city</code>। U-77-এর শহরের আবহাওয়ার কল তালিকায় নেই, কারণ সেটাকে অপেক্ষা করতে হবে।",
                 "example": "[{\"tool\": \"get_weather\", \"input\": {\"city\": \"Tokyo\"}}, {\"tool\": \"get_user_city\", \"input\": {\"user_id\": \"U-77\"}}]"
               }
             ],
-            "learned": "Tokyo-র আবহাওয়া আর BDT rate একে অপরের উপর নির্ভর করে না। Model একই turn-এ দুটোই চায়, আর দুটো একসাথে চলে। একে বলে <strong>parallel tool calls</strong>। U-77-এর শহরের আবহাওয়ার জন্য আগে শহরের নাম লাগে, তাই সেটাকে পরের turn পর্যন্ত অপেক্ষা করতে হয়। Parallel call হলে মোট অপেক্ষা হয় সবচেয়ে ধীর call-এর সমান, সব call-এর যোগফলের সমান নয়।",
-            "done": "তোমার কাছে ৩টা list আছে, যেগুলোতে call আছে ২টা, ১টা আর ২টা, আর শেষটায় কোন call বাদ পড়েছে সেটা তুমি জানো।",
+            "learned": "টোকিওর আবহাওয়া আর BDT রেট একে অপরের উপর নির্ভর করে না। মডেল একই টার্নে দুটোই চায়, আর দুটো একসাথে চলে। একে বলে <strong>প্যারালাল টুল কল</strong>। U-77-এর শহরের আবহাওয়ার জন্য আগে শহরের নাম লাগে, তাই সেটাকে পরের টার্ন পর্যন্ত অপেক্ষা করতে হয়। প্যারালাল কল হলে মোট অপেক্ষা হয় সবচেয়ে ধীর কলের সমান, সব কলের যোগফলের সমান নয়।",
+            "done": "আপনার কাছে ৩টা তালিকা আছে, যেগুলোতে কল আছে ২টা, ১টা আর ২টা, আর শেষটায় কোন কল বাদ পড়েছে সেটা আপনি জানেন।",
             "check": {
-              "question": "Parallel tool call agent-কে দ্রুত করে কেন? কখন এটা ব্যবহার করা যায় না?",
-              "answer": "নির্ভরশীল না হলে call-গুলো একসাথে চলে, তাই অপেক্ষা হয় শুধু সবচেয়ে ধীর call-এর সমান। একটা call-এর জন্য অন্য call-এর result লাগলে সেটাকে পরের turn পর্যন্ত অপেক্ষা করতে হয়।"
+              "question": "প্যারালাল টুল কল এজেন্টকে দ্রুত করে কেন? কখন এটা ব্যবহার করা যায় না?",
+              "answer": "নির্ভরশীল না হলে কলগুলো একসাথে চলে, তাই অপেক্ষা হয় শুধু সবচেয়ে ধীর কলের সমান। একটা কলের জন্য অন্য কলের রেজাল্ট লাগলে সেটাকে পরের টার্ন পর্যন্ত অপেক্ষা করতে হয়।"
             },
-            "challenge": "এমন একটা প্রশ্ন লেখো, যাতে ৩টা call লাগে: দুটো একসাথে চলতে পারে, একটাকে অপেক্ষা করতে হয়। নতুন chat-এ test করো। Model কি call-গুলো ঠিকভাবে ভাগ করেছে?"
+            "challenge": "এমন একটা প্রশ্ন লিখুন, যাতে ৩টা কল লাগে: দুটো একসাথে চলতে পারে, একটাকে অপেক্ষা করতে হয়। নতুন চ্যাটে টেস্ট করুন। মডেল কি কলগুলো ঠিকভাবে ভাগ করেছে?"
           }
         },
         {
@@ -542,31 +542,31 @@
             "challenge": "Add a 9th feature of your own that is hard to sort, for example a read-only data feed that also needs an input. Ask the model, then argue with its answer."
           },
           "bn": {
-            "title": "একটা MCP server-এর feature ভাগ করো",
-            "why": "তোমার team-এ অনেক app আর অনেক data source থাকলে প্রতিটা সংযোগ হাতে বানাতে কয়েক সপ্তাহ লেগে যায়। MCP একটা shared standard, যা এই কাজ কমায়। এর তিন ধরনের feature-ও তোমাকে জানতে হবে।",
+            "title": "একটা MCP সার্ভারের ফিচার ভাগ করুন",
+            "why": "আপনার টিমে অনেক অ্যাপ আর অনেক ডেটা সোর্স থাকলে প্রতিটা সংযোগ হাতে বানাতে কয়েক সপ্তাহ লেগে যায়। MCP একটা শেয়ার্ড স্ট্যান্ডার্ড, যা এই কাজ কমায়। এর তিন ধরনের ফিচারও আপনাকে জানতে হবে।",
             "steps": [
               {
                 "chat": "new",
-                "do": "এই prompt-এর ৮টা feature পড়ো। কাগজে প্রতিটার জন্য tool, resource, না prompt, আন্দাজ করে লেখো। তারপর copy করে paste করো, Enter চাপো, আর মিলিয়ে দেখো।",
+                "do": "এই প্রম্পটের ৮টা ফিচার পড়ুন। কাগজে প্রতিটার জন্য টুল, রিসোর্স, না প্রম্পট, আন্দাজ করে লিখুন। তারপর কপি করে পেস্ট করুন, Enter চাপুন, আর মিলিয়ে দেখুন।",
                 "prompt": "একটা Postgres database-এর MCP server এই feature-গুলো দেয়:\n1. run_query: একটা SQL query চালায় আর rows ফেরত দেয়\n2. সব table আর column-এর list, db://schema address-এ পড়া যায়\n3. \"weekly-sales-report\" নামে একটা saved template, user menu থেকে নাম দেখে বাছে\n4. insert_row: একটা table-এ নতুন row যোগ করে\n5. গতকালের order-এর একটা read-only CSV file, db://exports/orders-yesterday address-এ\n6. \"explain-this-slow-query\" নামে একটা template, user যে query দেয় সেটা বসিয়ে নেয়\n7. delete_old_logs: ৯০ দিনের পুরনো log row মুছে দেয়\n8. একজন customer-এর record-এর লেখা, db://customers/1042 address-এ\n\nMCP-তে তিন ধরনের primitive আছে:\n- Tool: model যে function call করে কোনো কাজ (action) করাতে পারে।\n- Resource: read-only data, client দরকার হলে এনে নিতে পারে।\n- Prompt: নাম দেওয়া prompt template, user বেছে নিতে পারে।\n\nপ্রতিটা feature-কে একটা primitive-এ ভাগ করো। একটা table দিয়ে উত্তর দাও: নম্বর, primitive, আর ১০ শব্দ বা কম শব্দে কারণ।",
-                "expect": "একটা table। ১, ৪, ৭ নম্বর <strong>tool</strong> (কাজ করে)। ২, ৫, ৮ নম্বর <strong>resource</strong> (address-এ থাকা read-only data)। ৩, ৬ নম্বর <strong>prompt</strong> (template)।",
+                "expect": "একটা টেবিল। ১, ৪, ৭ নম্বর <strong>টুল</strong> (কাজ করে)। ২, ৫, ৮ নম্বর <strong>রিসোর্স</strong> (অ্যাড্রেসে থাকা রিড-অনলি ডেটা)। ৩, ৬ নম্বর <strong>প্রম্পট</strong> (টেমপ্লেট)।",
                 "example": "1 | Tool | query চালায়, এটা একটা কাজ\n2 | Resource | address-এ read-only schema\n3 | Prompt | user নাম দেখে বাছা template\n4 | Tool | row যোগ করে, data বদলায়\n5 | Resource | address-এ read-only file\n6 | Prompt | user যা দেয় সেটা বসানো template\n7 | Tool | row মুছে দেয়, এটা একটা কাজ\n8 | Resource | address-এ read-only record"
               },
               {
                 "chat": "same",
-                "do": "এই prompt টা copy করো, একই chat-এ paste করে Enter চাপো। Calculator দিয়ে সংখ্যাগুলো মিলিয়ে নাও।",
+                "do": "এই প্রম্পটটা কপি করুন, একই চ্যাটে পেস্ট করে Enter চাপুন। ক্যালকুলেটর দিয়ে সংখ্যাগুলো মিলিয়ে নিন।",
                 "prompt": "আমাদের ৩টা app আছে (একটা IDE, একটা chat app, আর একটা custom agent) আর ৪টা data source আছে (Postgres, একটা wiki, GitHub, আর একটা file store)। MCP ছাড়া আমাদের কয়টা custom integration লিখতে হবে? MCP দিয়ে কয়টা অংশ লিখতে হবে (প্রতি app-এ একটা client, প্রতি source-এ একটা server)? Formula দেখাও, আর ২ বাক্যে বলো সংখ্যা দুটো আলাদা কেন।",
-                "expect": "MCP ছাড়া: 3 × 4 = <strong>12</strong> integration। MCP দিয়ে: 3 + 4 = <strong>7</strong> অংশ।",
+                "expect": "MCP ছাড়া: ৩ × ৪ = <strong>১২</strong> ইন্টিগ্রেশন। MCP দিয়ে: ৩ + ৪ = <strong>৭</strong> অংশ।",
                 "example": "MCP ছাড়া: 3 app × 4 source = 12টা custom integration।\nMCP দিয়ে: 3 client + 4 server = 7টা অংশ।\nসংখ্যা আলাদা, কারণ MCP ছাড়া প্রতিটা app-কে প্রতিটা source-এর সাথে আলাদা করে জুড়তে হয়। MCP থাকলে প্রতিটা app আর প্রতিটা source শুধু একটাই shared standard মানলেই হয়।"
               }
             ],
-            "learned": "<strong>MCP</strong> (Model Context Protocol) একটা open standard, যা AI app-কে data আর tool-এর সাথে জোড়া দেয়। একটা server তিন ধরনের feature দেয়: tool (model কোনো কাজ করে), resource (read-only data, model এনে নিতে পারে), আর prompt (নাম দেওয়া template, user বাছে)। যা data বদলায়, সেটাই tool। MCP ছাড়া তোমাকে app × source সংখ্যক সংযোগ বানাতে হয়। MCP দিয়ে বানাতে হয় app + source সংখ্যক অংশ।",
-            "done": "তোমার কাছে এমন একটা table আছে যাতে ৮টা feature-ই ভাগ করা, আর তুমি 12 আর 7-এর পার্থক্য দেখেছ।",
+            "learned": "<strong>MCP</strong> (Model Context Protocol) একটা ওপেন স্ট্যান্ডার্ড, যা AI অ্যাপকে ডেটা আর টুলের সাথে জোড়া দেয়। একটা সার্ভার তিন ধরনের ফিচার দেয়: টুল (মডেল কোনো কাজ করে), রিসোর্স (রিড-অনলি ডেটা, মডেল এনে নিতে পারে), আর প্রম্পট (নাম দেওয়া টেমপ্লেট, ইউজার বাছে)। যা ডেটা বদলায়, সেটাই টুল। MCP ছাড়া আপনাকে অ্যাপ × সোর্স সংখ্যক সংযোগ বানাতে হয়। MCP দিয়ে বানাতে হয় অ্যাপ + সোর্স সংখ্যক অংশ।",
+            "done": "আপনার কাছে এমন একটা টেবিল আছে যাতে ৮টা ফিচারই ভাগ করা, আর আপনি ১২ আর 7-এর পার্থক্য দেখেছেন।",
             "check": {
-              "question": "delete_old_logs কেন tool, resource নয়?",
-              "answer": "Resource হলো read-only data, যা client এনে নেয়। Row মুছে ফেলা একটা কাজ (action), আর কাজ করানোর জন্য আছে tool।"
+              "question": "delete_old_logs কেন টুল, রিসোর্স নয়?",
+              "answer": "রিসোর্স হলো রিড-অনলি ডেটা, যা ক্লায়েন্ট এনে নেয়। রো মুছে ফেলা একটা কাজ (অ্যাকশন), আর কাজ করানোর জন্য আছে টুল।"
             },
-            "challenge": "নিজে একটা ৯ নম্বর feature যোগ করো, যেটা ভাগ করা কঠিন, যেমন একটা read-only data feed যার আবার input লাগে। Model-কে জিজ্ঞেস করো, তারপর তার উত্তরের সাথে তর্ক করো।"
+            "challenge": "নিজে একটা ৯ নম্বর ফিচার যোগ করুন, যেটা ভাগ করা কঠিন, যেমন একটা রিড-অনলি ডেটা ফিড যার আবার ইনপুট লাগে। মডেলকে জিজ্ঞেস করুন, তারপর তার উত্তরের সাথে তর্ক করুন।"
           }
         }
       ]
@@ -739,13 +739,13 @@
         "why": "The description is a short text the model reads before it calls the tool. It should say in one sentence each what the tool does, when to use it, and what it returns."
       },
       "bn": {
-        "q": "এই Part অনুযায়ী একটি tool-এর description-এ কী কী থাকা উচিত?",
+        "q": "এই পার্ট অনুযায়ী একটি টুলের ডেসক্রিপশনে কী কী থাকা উচিত?",
         "options": [
-          "এটি কী করে, কখন ব্যবহার করবে, আর কী ফেরত দেয়",
-          "Tool কে লিখেছে, কত খরচ আর কত দ্রুত চলে",
-          "শুধু tool-এর নাম, কারণ নামই একটি contract"
+          "এটি কী করে, কখন ব্যবহার করবেন, আর কী ফেরত দেয়",
+          "টুল কে লিখেছে, কত খরচ আর কত দ্রুত চলে",
+          "শুধু টুলের নাম, কারণ নামই একটি কন্ট্রাক্ট"
         ],
-        "why": "Description হলো একটি ছোট text, যা মডেল tool call করার আগে পড়ে। এতে এক বাক্যে করে বলা উচিত tool কী করে, কখন ব্যবহার করবে, আর কী ফেরত দেয়।"
+        "why": "ডেসক্রিপশন হলো একটি ছোট টেক্সট, যা মডেল টুল কল করার আগে পড়ে। এতে এক বাক্যে করে বলা উচিত টুল কী করে, কখন ব্যবহার করবেন, আর কী ফেরত দেয়।"
       }
     },
     {
@@ -762,13 +762,13 @@
         "why": "Resources are read-only data the client can fetch on demand. Tools are functions the model can call, and Prompts are named prompt templates."
       },
       "bn": {
-        "q": "MCP-তে কোন primitive হলো শুধু-পড়ার যোগ্য data, যা client প্রয়োজনে fetch করতে পারে, যেমন file, DB row বা web page?",
+        "q": "MCP-তে কোন প্রিমিটিভ হলো শুধু-পড়ার যোগ্য ডেটা, যা ক্লায়েন্ট প্রয়োজনে ফেচ করতে পারে, যেমন ফাইল, DB row বা ওয়েব পেজ?",
         "options": [
-          "Resources",
-          "Tools",
-          "Prompts"
+          "রিসোর্সেস",
+          "টুলস",
+          "প্রম্পটস"
         ],
-        "why": "Resources হলো শুধু-পড়ার যোগ্য data, যা client প্রয়োজনে fetch করতে পারে। Tools হলো মডেলের call করার মতো function, আর Prompts হলো নামকরা prompt template।"
+        "why": "রিসোর্সেস হলো শুধু-পড়ার যোগ্য ডেটা, যা ক্লায়েন্ট প্রয়োজনে ফেচ করতে পারে। টুলস হলো মডেলের কল করার মতো ফাংশন, আর প্রম্পটস হলো নামকরা প্রম্পট টেমপ্লেট।"
       }
     },
     {
@@ -780,8 +780,8 @@
         "why": "This Part says more than about 20 tools in one prompt degrades selection accuracy. It suggests splitting into sub-agents by domain, or using a router."
       },
       "bn": {
-        "q": "একটি prompt-এ প্রায় 20-এর বেশি tool দিলে সঠিক tool বেছে নেওয়ার ক্ষেত্রে মডেলের accuracy বাড়ে।",
-        "why": "এই Part বলছে, একটি prompt-এ প্রায় 20-এর বেশি tool দিলে selection accuracy কমে যায়। সমাধান হলো domain অনুযায়ী sub-agent-এ ভাগ করা, অথবা router ব্যবহার করা।"
+        "q": "একটি প্রম্পটে প্রায় 20-এর বেশি টুল দিলে সঠিক টুল বেছে নেওয়ার ক্ষেত্রে মডেলের অ্যাকুরেসি বাড়ে।",
+        "why": "এই পার্ট বলছে, একটি প্রম্পটে প্রায় 20-এর বেশি টুল দিলে সিলেকশন অ্যাকুরেসি কমে যায়। সমাধান হলো ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করা, অথবা রাউটার ব্যবহার করা।"
       }
     },
     {
@@ -799,14 +799,14 @@
         "why": "Independent calls should go out in one turn, and the orchestrator runs them concurrently. This Part calls this the single biggest latency win in tool-heavy agents."
       },
       "bn": {
-        "q": "মডেলের Tokyo-র আবহাওয়া আর USD থেকে JPY rate দুটোই দরকার, আর একটি অন্যটির উপর নির্ভর করে না। তার কী করা উচিত?",
+        "q": "মডেলের টোকিওর আবহাওয়া আর USD থেকে JPY রেট দুটোই দরকার, আর একটি অন্যটির উপর নির্ভর করে না। তার কী করা উচিত?",
         "options": [
-          "একটি একটি করে tool call করা, যাতে orchestrator কখনো দুটো একসাথে না চালায়",
-          "দুটো call একই turn-এ করা",
-          "Tool বাদ দিয়ে নিজের memory থেকে উত্তর দেওয়া",
-          "আগে weather tool call করা, আর rate tool পরের turn-এ call করা"
+          "একটি একটি করে টুল কল করা, যাতে অর্কেস্ট্রেটর কখনো দুটো একসাথে না চালায়",
+          "দুটো কল একই টার্নে করা",
+          "টুল বাদ দিয়ে নিজের মেমরি থেকে উত্তর দেওয়া",
+          "আগে ওয়েদার টুল কল করা, আর রেট টুল পরের টার্নে কল করা"
         ],
-        "why": "যে call-গুলো একে অপরের উপর নির্ভর করে না, সেগুলো এক turn-এ পাঠানো উচিত, আর orchestrator সেগুলো একসাথে চালায়। এই Part একে tool-heavy agent-এর সবচেয়ে বড় latency জয় বলেছে।"
+        "why": "যে কলগুলো একে অপরের উপর নির্ভর করে না, সেগুলো এক টার্নে পাঠানো উচিত, আর অর্কেস্ট্রেটর সেগুলো একসাথে চালায়। এই পার্ট একে টুল-নির্ভর এজেন্টের সবচেয়ে বড় ল্যাটেন্সি জয় বলেছে।"
       }
     },
     {
@@ -824,14 +824,14 @@
         "why": "A tool's output is prompt content, and a 10,000-row result will blow your context window. This Part says to trim ruthlessly: return the top N and summarise the rest."
       },
       "bn": {
-        "q": "একটি SQL tool 10,000 row ফেরত দিল। এই Part কী পরামর্শ দেয়?",
+        "q": "একটি SQL টুল ১০,০০০ রো ফেরত দিল। এই পার্ট কী পরামর্শ দেয়?",
         "options": [
-          "শীর্ষ N টি row ফেরত দাও আর বাকিগুলোর summary দাও",
-          "প্রতিটি row ফেরত দাও, যাতে মডেল সব data দেখতে পায়",
-          "Row-গুলো JSON array হিসেবে ফেরত দাও, কারণ storage-এর জন্য এটাই সেরা format",
-          "Raw row-গুলো ফেরত দাও আর মডেল পরের turn-এ ছেঁটে নিক"
+          "শীর্ষ N টি রো ফেরত দিন আর বাকিগুলোর সারসংক্ষেপ দিন",
+          "প্রতিটি রো ফেরত দিন, যাতে মডেল সব ডেটা দেখতে পায়",
+          "রো-গুলো JSON অ্যারে হিসেবে ফেরত দিন, কারণ স্টোরেজের জন্য এটাই সেরা ফরম্যাট",
+          "কাঁচা রো-গুলো ফেরত দিন আর মডেল পরের টার্নে ছেঁটে নিক"
         ],
-        "why": "Tool-এর output হলো prompt-এর অংশ, আর 10,000 row-এর result context window ভরে ফেলবে। এই Part বলছে নির্মমভাবে ছেঁটে দাও: শীর্ষ N টি row ফেরত দাও আর বাকিগুলোর summary দাও।"
+        "why": "টুলের আউটপুট হলো প্রম্পটের অংশ, আর ১০,০০০ রো-এর রেজাল্ট কনটেক্সট উইন্ডো ভরে ফেলবে। এই পার্ট বলছে নির্মমভাবে ছেঁটে দিন: শীর্ষ N টি রো ফেরত দিন আর বাকিগুলোর সারসংক্ষেপ দিন।"
       }
     }
   ]
