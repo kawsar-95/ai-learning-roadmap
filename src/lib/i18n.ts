@@ -33,9 +33,15 @@ export function contentsHref(lang: Lang): string {
 export function dashboardHref(lang: Lang): string {
   return lang === "bn" ? "/bn/dashboard/" : "/dashboard/";
 }
+export function interviewHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/interview/" : "/interview/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
+
+/** The GitHub profile of the author. */
+export const AUTHOR_GITHUB_URL = "https://github.com/kawsar-95";
 
 /** A feature card on the home page. */
 type Feature = { icon: string; title: string; text: string };
@@ -174,6 +180,14 @@ const en = {
   markRead: "Mark as read",
   markedRead: "Read",
   bookmark: "Bookmark",
+  interview: "Interview",
+  interviewTitle: "Interview questions",
+  interviewIntro:
+    "Three questions for each part, with a short answer. Open a question to see it, and follow the link to read the full section.",
+  readSection: "Read the section →",
+  authorEyebrow: "Author",
+  authorBy: "Built and maintained by",
+  authorGithub: "GitHub ↗",
   quizTitle: "Quiz",
   quizIntro: (n: string) => `Check what you learned. ${n} questions.`,
   quizCheck: "Check answers",
@@ -345,6 +359,14 @@ const bn: Dict = {
   markRead: "পড়া হয়েছে, চিহ্ন দাও",
   markedRead: "পড়া হয়েছে",
   bookmark: "বুকমার্ক",
+  interview: "ইন্টারভিউ",
+  interviewTitle: "ইন্টারভিউ প্রশ্ন",
+  interviewIntro:
+    "প্রতিটি part-এর তিনটি প্রশ্ন, ছোট উত্তরসহ। প্রশ্ন খুললে উত্তর দেখা যাবে, পুরো section পড়তে link-এ যাও।",
+  readSection: "Section পড়ো →",
+  authorEyebrow: "লেখক",
+  authorBy: "যিনি বানিয়েছেন ও দেখভাল করেন",
+  authorGithub: "GitHub ↗",
   quizTitle: "কুইজ",
   quizIntro: (n: string) => `কী শিখলে যাচাই করো। ${n}টি প্রশ্ন।`,
   quizCheck: "উত্তর মেলাও",
