@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SidebarList, activeSlugFromPath, type NavItem } from "./SidebarList";
-import { UI, contentsHref } from "@/lib/i18n";
+import { UI, contentsHref, dashboardHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -144,6 +144,14 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
               className="mx-2 mt-4 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.contentsTitle}
+              <span aria-hidden="true" className="text-accent">→</span>
+            </Link>
+            <Link
+              href={dashboardHref(lang)}
+              onClick={() => setOpen(false)}
+              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+            >
+              {ui.dashboard}
               <span aria-hidden="true" className="text-accent">→</span>
             </Link>
             <SidebarList
