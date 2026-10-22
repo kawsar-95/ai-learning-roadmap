@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { getNavItems } from "@/lib/topics";
 import type { NavItem } from "@/lib/topics";
-import { REPO_URL, UI, contentsHref, dashboardHref, fmtNum, homeHref, topicHref } from "@/lib/i18n";
+import { REPO_URL, UI, contentsHref, dashboardHref, fmtNum, homeHref, interviewHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { SiteHeader } from "./SiteHeader";
 import { SearchPalette } from "@/components/navigation/SearchPalette";
@@ -67,6 +67,11 @@ function SiteFooter({ items, lang }: { items: NavItem[]; lang: Lang }) {
             <li>
               <Link href={dashboardHref(lang)} className={FOOTER_LINK}>
                 {ui.dashboard}
+              </Link>
+            </li>
+            <li>
+              <Link href={interviewHref(lang)} className={FOOTER_LINK}>
+                {ui.interview}
               </Link>
             </li>
             <li>

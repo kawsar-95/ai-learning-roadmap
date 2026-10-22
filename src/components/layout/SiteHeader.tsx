@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { TOPICS } from "@/lib/topics";
 import type { NavItem } from "@/lib/topics";
-import { UI, contentsHref, dashboardHref, homeHref, topicHref } from "@/lib/i18n";
+import { UI, contentsHref, dashboardHref, homeHref, interviewHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { LanguageSwitch, LanguageSwitchFallback } from "./LanguageSwitch";
 import { MobileNav } from "./MobileNav";
@@ -69,6 +69,10 @@ export function SiteHeader({
           </Link>
           <Link href={dashboardHref(lang)} className={NAV_LINK}>
             {UI[lang].dashboard}
+          </Link>
+          {/* From xl only: with this link the bar is too tight at 1024px. The menu and footer always have it. */}
+          <Link href={interviewHref(lang)} className={`${NAV_LINK} hidden xl:block`}>
+            {UI[lang].interview}
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-1.5">

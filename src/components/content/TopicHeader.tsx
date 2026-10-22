@@ -27,6 +27,11 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
         <span className={PILL}>
           <span aria-hidden="true">📖</span> {ui.minRead(fmtNum(lang, minutes))}
         </span>
+        {topic.quiz && (
+          <span className={PILL}>
+            <span aria-hidden="true">📝</span> {ui.quizQuestions(fmtNum(lang, topic.quiz.length))}
+          </span>
+        )}
       </div>
       <h1 className="mt-4 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
         {text.title}
@@ -43,6 +48,15 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
       />
       <div className="mt-6 flex flex-wrap gap-2 border-y border-border py-4">
         <TopicDoneButton keys={topic.sections.map((s) => progressKey(topic.slug, s.id))} lang={lang} />
+        {topic.quiz && (
+          <a
+            href="#quiz"
+            className="inline-flex items-center gap-2 rounded-lg border border-border-strong bg-bg-raised px-4 py-2 text-[14px] font-medium text-text-dim no-underline shadow-card transition-colors hover:border-accent hover:text-text"
+          >
+            <span aria-hidden="true">📝</span>
+            {ui.goToQuiz}
+          </a>
+        )}
       </div>
     </header>
   );

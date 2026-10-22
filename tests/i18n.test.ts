@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import vm from "node:vm";
-import { LANG_STORAGE_KEY, UI, dashboardHref, fmtNum, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
+import { LANG_STORAGE_KEY, UI, dashboardHref, fmtNum, interviewHref, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
 import { practiceLang } from "../src/lib/practice.ts";
 import { videosForVoice } from "../src/lib/videos.ts";
 import type { Video } from "../src/lib/content-schema.ts";
@@ -108,4 +108,11 @@ test("dashboardHref and the language switch agree", () => {
   assert.equal(dashboardHref("bn"), "/bn/dashboard/");
   assert.equal(localizedPath(dashboardHref("en"), "bn"), dashboardHref("bn"));
   assert.equal(localizedPath(dashboardHref("bn"), "en"), dashboardHref("en"));
+});
+
+test("interviewHref and the language switch agree", () => {
+  assert.equal(interviewHref("en"), "/interview/");
+  assert.equal(interviewHref("bn"), "/bn/interview/");
+  assert.equal(localizedPath(interviewHref("en"), "bn"), interviewHref("bn"));
+  assert.equal(localizedPath(interviewHref("bn"), "en"), interviewHref("en"));
 });

@@ -6,6 +6,7 @@ import { progressKey } from "@/lib/progress";
 import type { Lang } from "@/lib/i18n";
 import { PrevNext } from "@/components/content/PrevNext";
 import { SectionView } from "@/components/content/SectionView";
+import { QuizSection } from "@/components/content/QuizSection";
 import { Sources } from "@/components/content/Sources";
 import { TopicHeader } from "@/components/content/TopicHeader";
 import { SectionNav } from "@/components/navigation/SectionNav";
@@ -61,6 +62,11 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
               <SectionView key={s.id} section={s} lang={lang} doneKey={progressKey(topic.slug, s.id)} />
             ))}
           </div>
+          {topic.quiz && (
+            <div className="mt-6 border-t border-border pt-12 sm:pt-14">
+              <QuizSection slug={topic.slug} questions={topic.quiz} lang={lang} />
+            </div>
+          )}
           <div className="mt-16 space-y-10">
             <Sources sources={topic.sources} lang={lang} />
             <PrevNext prev={neighbor(prev)} next={neighbor(next)} lang={lang} />

@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { firstUndone, resolveBookmarks } from "@/lib/progress";
-import { UI, contentsHref } from "@/lib/i18n";
+import { UI, contentsHref, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
-import { toggleBookmark, useBookmarks, useProgress } from "./useProgress";
+import { toggleBookmark, useBookmarks, useProgress, useQuizScores } from "./useProgress";
 
 /** One section as the dashboard shows it, in reading order. */
 export type DashboardSection = { key: string; href: string; title: string; partTitle: string };
@@ -85,5 +85,16 @@ export function BookmarkList({ sections, lang }: { sections: DashboardSection[];
         );
       })}
     </ul>
+  );
+}
+
+/** The best quiz score of a Part. It shows only for a saved score of the current quiz size. */
+export function QuizBest({ slug, total, lang }: { slug: string; total: number; lang: Lang }) {
+  const saved = useQuizScores()[slug];
+  if (!saved || saved.total !== total) return null;
+  return (
+    <p className="mt-3 mb-0 font-mono text-[12px] text-text-faint">
+      {UI[lang].quizBest(fmtNum(lang, saved.best), fmtNum(lang, saved.total))}
+    </p>
   );
 }

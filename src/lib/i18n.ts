@@ -33,9 +33,15 @@ export function contentsHref(lang: Lang): string {
 export function dashboardHref(lang: Lang): string {
   return lang === "bn" ? "/bn/dashboard/" : "/dashboard/";
 }
+export function interviewHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/interview/" : "/interview/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
+
+/** The GitHub profile of the author. */
+export const AUTHOR_GITHUB_URL = "https://github.com/kawsar-95";
 
 /** A feature card on the home page. */
 type Feature = { icon: string; title: string; text: string };
@@ -174,6 +180,28 @@ const en = {
   markRead: "Mark as read",
   markedRead: "Read",
   bookmark: "Bookmark",
+  interview: "Interview",
+  interviewTitle: "Interview questions",
+  interviewIntro:
+    "Three questions for each part, with a short answer. Open a question to see it, and follow the link to read the full section.",
+  readSection: "Read the section →",
+  authorEyebrow: "Author",
+  authorBy: "Built and maintained by",
+  authorGithub: "GitHub ↗",
+  quizTitle: "Quiz",
+  quizIntro: (n: string) => `Check what you learned. ${n} questions.`,
+  quizCheck: "Check answers",
+  quizAnswerAll: "Answer every question to check.",
+  quizRetry: "Try again",
+  quizScore: (c: string, t: string) => `Score: ${c} / ${t}`,
+  quizBest: (c: string, t: string) => `Best: ${c} / ${t}`,
+  quizCorrect: "Correct",
+  quizWrong: "Not quite",
+  quizRightAnswer: "Right answer:",
+  quizTrue: "True",
+  quizFalse: "False",
+  quizQuestions: (n: string) => `${n} questions`,
+  goToQuiz: "Go to quiz",
   sectionDone: "Section done",
 
   // Footer.
@@ -331,6 +359,28 @@ const bn: Dict = {
   markRead: "পড়া হয়েছে, চিহ্ন দাও",
   markedRead: "পড়া হয়েছে",
   bookmark: "বুকমার্ক",
+  interview: "ইন্টারভিউ",
+  interviewTitle: "ইন্টারভিউ প্রশ্ন",
+  interviewIntro:
+    "প্রতিটি part-এর তিনটি প্রশ্ন, ছোট উত্তরসহ। প্রশ্ন খুললে উত্তর দেখা যাবে, পুরো section পড়তে link-এ যাও।",
+  readSection: "Section পড়ো →",
+  authorEyebrow: "লেখক",
+  authorBy: "যিনি বানিয়েছেন ও দেখভাল করেন",
+  authorGithub: "GitHub ↗",
+  quizTitle: "কুইজ",
+  quizIntro: (n: string) => `কী শিখলে যাচাই করো। ${n}টি প্রশ্ন।`,
+  quizCheck: "উত্তর মেলাও",
+  quizAnswerAll: "মেলাতে সব প্রশ্নের উত্তর দাও।",
+  quizRetry: "আবার চেষ্টা করো",
+  quizScore: (c: string, t: string) => `স্কোর: ${c} / ${t}`,
+  quizBest: (c: string, t: string) => `সেরা: ${c} / ${t}`,
+  quizCorrect: "সঠিক",
+  quizWrong: "ঠিক হয়নি",
+  quizRightAnswer: "সঠিক উত্তর:",
+  quizTrue: "সত্য",
+  quizFalse: "মিথ্যা",
+  quizQuestions: (n: string) => `${n}টি প্রশ্ন`,
+  goToQuiz: "কুইজে যাও",
   sectionDone: "Section শেষ",
 
   footerSite: "Site",
