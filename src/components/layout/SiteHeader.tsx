@@ -1,8 +1,9 @@
 import { Suspense } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { TOPICS } from "@/lib/topics";
 import type { NavItem } from "@/lib/topics";
-import { UI, contentsHref, homeHref } from "@/lib/i18n";
+import { UI, contentsHref, homeHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { LanguageSwitch, LanguageSwitchFallback } from "./LanguageSwitch";
 import { MobileNav } from "./MobileNav";
@@ -44,7 +45,7 @@ export function SiteHeader({
       {/* The blur sits on its own layer. A backdrop-filter on the header
           itself would trap the fixed-position drawer inside the header. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-bg/85 backdrop-blur-md backdrop-saturate-150" />
-      <div className="flex h-full items-center gap-2 px-3 sm:px-6">
+      <div className="mx-auto flex h-full max-w-6xl items-center gap-2 px-4 sm:px-6">
         <Suspense fallback={<MenuButtonPlaceholder />}>
           <MobileNav items={items} lang={lang} />
         </Suspense>
@@ -74,6 +75,12 @@ export function SiteHeader({
           </Suspense>
           <InstallButton lang={lang} />
           <ThemeToggle lang={lang} />
+          <Link
+            href={topicHref(TOPICS[0].slug, lang)}
+            className="ml-1 hidden items-center rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 sm:inline-flex"
+          >
+            {UI[lang].startReading}
+          </Link>
         </div>
       </div>
     </header>
