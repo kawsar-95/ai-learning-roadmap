@@ -162,6 +162,8 @@ const en = {
   // Progress on a topic page.
   markDone: "Mark as done",
   markedDone: "Done · click to undo",
+  markRead: "Mark as read",
+  markedRead: "Read",
   sectionDone: "Section done",
 
   // Footer.
@@ -311,6 +313,8 @@ const bn: Dict = {
 
   markDone: "শেষ হয়েছে, চিহ্ন দাও",
   markedDone: "শেষ · বাতিল করতে click করো",
+  markRead: "পড়া হয়েছে, চিহ্ন দাও",
+  markedRead: "পড়া হয়েছে",
   sectionDone: "Section শেষ",
 
   footerSite: "Site",
