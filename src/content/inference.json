@@ -861,5 +861,104 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "According to the rule of thumb, when should a team move from a hosted API to self-hosting?",
+        "options": [
+          "From the first day, because a self-hosted model gets the first token faster",
+          "As soon as the team wants to use any open-weight model",
+          "When the bill exceeds the cost of a half-time ML engineer plus two H100s"
+        ],
+        "why": "The rule of thumb is to start hosted. Move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s."
+      },
+      "bn": {
+        "q": "Rule of thumb অনুযায়ী কখন একটি দলের hosted API থেকে self-hosting-এ যাওয়া উচিত?",
+        "options": [
+          "প্রথম দিন থেকেই, কারণ self-hosted মডেলে প্রথম token আরও আগে আসে",
+          "যে মুহূর্তে দলটি কোনো open-weight মডেল ব্যবহার করতে চায়",
+          "যখন bill একজন half-time ML engineer আর দুটি H100-এর খরচ ছাড়িয়ে যায়"
+        ],
+        "why": "Rule of thumb হলো আগে hosted দিয়ে শুরু করা। Bill একজন half-time ML engineer আর দুটি H100-এর খরচ ছাড়ালে তখন self-hosting-এ যাও।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Which inference server does this Part call the throughput champion, thanks to PagedAttention and continuous batching?",
+        "options": [
+          "vLLM",
+          "Ollama",
+          "TGI",
+          "llama.cpp"
+        ],
+        "why": "vLLM is described as the throughput champion. Its PagedAttention and continuous batching typically deliver 10-24x the throughput of naive Hugging Face."
+      },
+      "bn": {
+        "q": "PagedAttention আর continuous batching-এর কারণে এই Part কোন inference server-কে throughput champion বলেছে?",
+        "options": [
+          "vLLM",
+          "Ollama",
+          "TGI",
+          "llama.cpp"
+        ],
+        "why": "vLLM-কে throughput champion বলা হয়েছে। এর PagedAttention আর continuous batching সাধারণত naive Hugging Face-এর চেয়ে 10-24 গুণ বেশি throughput দেয়।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "What does prefix caching do?",
+        "options": [
+          "When many requests share a long system prompt, the server reuses the cached KV for that prefix",
+          "KV cache memory is allocated in pages, like OS virtual memory",
+          "A small draft model proposes the next 5-10 tokens for the big model to check"
+        ],
+        "why": "With prefix caching, the server hashes the shared prefix and reuses its cached KV instead of computing it again for every request."
+      },
+      "bn": {
+        "q": "Prefix caching কী করে?",
+        "options": [
+          "অনেক request একই লম্বা system prompt শেয়ার করলে server সেই prefix-এর cached KV আবার ব্যবহার করে",
+          "KV cache memory page আকারে allocate হয়, OS virtual memory-র মতো",
+          "একটি ছোট draft model পরের 5-10 টি token প্রস্তাব করে, বড় মডেল সেগুলো যাচাই করে"
+        ],
+        "why": "Prefix caching-এ server শেয়ার করা prefix-এর hash রাখে এবং প্রতিটি request-এর জন্য আবার হিসাব না করে তার cached KV পুনরায় ব্যবহার করে।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "Speculative decoding gives a 2-3x throughput gain but lowers the quality of the output.",
+        "why": "In speculative decoding a tiny draft model proposes tokens and the big model verifies them in parallel. This Part says the gain comes with no quality loss."
+      },
+      "bn": {
+        "q": "Speculative decoding 2-3 গুণ throughput বাড়ায়, কিন্তু output-এর মান কমিয়ে দেয়।",
+        "why": "Speculative decoding-এ একটি ছোট draft model token প্রস্তাব করে আর বড় মডেল সেগুলো parallel-এ যাচাই করে। এই Part বলছে এই লাভ আসে মান না কমিয়েই।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "Quantization lowers model weights from 16-bit to 8-bit or 4-bit, which cuts GPU memory by 2-4x at a small cost in quality.",
+        "why": "That is how this Part defines quantization: less precision per weight, so less GPU memory and faster inference, for a small loss in quality."
+      },
+      "bn": {
+        "q": "Quantization মডেলের weight 16-বিট থেকে 8-বিট বা 4-বিটে নামায়, যাতে মানের সামান্য ক্ষতিতে GPU memory 2-4 গুণ কমে।",
+        "why": "এই Part এভাবেই quantization-কে সংজ্ঞায়িত করেছে: প্রতি weight-এ precision কম, ফলে GPU memory কম ও inference দ্রুত, আর মানের ক্ষতি সামান্য।"
+      }
+    }
   ]
 }

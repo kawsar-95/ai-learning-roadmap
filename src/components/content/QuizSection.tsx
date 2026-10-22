@@ -58,7 +58,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
         {ui.quizTitle}
       </h2>
       <p className="mt-3 text-[17px] leading-[1.75] text-text-dim">
-        {ui.quizIntro(fmtNum(lang, questions.length))}
+        {ui.quizIntro(questions.length)}
         {best && (
           <span className="ml-2 font-mono text-[13px] text-text-faint">
             {ui.quizBest(fmtNum(lang, best.best), fmtNum(lang, best.total))}

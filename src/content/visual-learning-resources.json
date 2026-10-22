@@ -3532,5 +3532,102 @@
       "url": "https://arxiv.org/abs/2005.14165",
       "text": "Brown et al., \"Language Models are Few-Shot Learners\" (NeurIPS 2020)"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "You want to type a prompt in your browser and use sliders for temperature, top-k, and top-p. Which resource fits?",
+        "options": [
+          "Embedding Atlas",
+          "TensorFlow Playground",
+          "Transformer Explainer"
+        ],
+        "why": "Transformer Explainer runs a live GPT-2 (small) in your browser and has sliders for the three sampling settings. TensorFlow Playground trains a tiny network, and Embedding Atlas maps embeddings."
+      },
+      "bn": {
+        "q": "তুমি browser-এ একটা prompt লিখতে চাও আর temperature, top-k ও top-p-এর slider ব্যবহার করতে চাও। কোন resource মানানসই?",
+        "options": [
+          "Embedding Atlas",
+          "TensorFlow Playground",
+          "Transformer Explainer"
+        ],
+        "why": "Transformer Explainer তোমার browser-এ live GPT-2 (small) চালায় আর তিনটি sampling setting-এর slider দেয়। TensorFlow Playground একটা ছোট network train করে, আর Embedding Atlas embedding-এর map বানায়।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Which resource has seven short lessons, with its last three chapters on transformers, attention, and how an LLM can store facts?",
+        "options": [
+          "3Blue1Brown, Neural networks series",
+          "The Illustrated Transformer",
+          "TensorFlow Playground"
+        ],
+        "why": "The 3Blue1Brown Neural networks series has seven chapters. Chapters 5 to 7 cover transformers, attention, and facts in the MLP."
+      },
+      "bn": {
+        "q": "কোন resource-এ সাতটি ছোট lesson আছে, আর তার শেষ তিনটি chapter transformer, attention এবং LLM কীভাবে fact জমা রাখতে পারে সেটা নিয়ে?",
+        "options": [
+          "3Blue1Brown-এর Neural networks series",
+          "The Illustrated Transformer",
+          "TensorFlow Playground"
+        ],
+        "why": "3Blue1Brown-এর Neural networks series-এ সাতটি chapter আছে। Chapter 5 থেকে 7 পর্যন্ত transformer, attention আর MLP-র ভেতরের fact নিয়ে।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "LLM Visualization draws every number as a small cube, and it works well on a phone screen.",
+        "why": "The first half is true. But this Part says to use a desktop browser, because the page is a 3D scene and a phone screen is too small."
+      },
+      "bn": {
+        "q": "LLM Visualization প্রতিটি সংখ্যাকে একটা ছোট cube হিসেবে আঁকে, আর এটা phone screen-এও ভালো কাজ করে।",
+        "why": "প্রথম অংশটা ঠিক। কিন্তু topic বলে desktop browser ব্যবহার করতে, কারণ পাতাটা একটা 3D scene আর phone screen তার জন্য খুব ছোট।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "You want to learn how modern LLMs make attention cheaper for long inputs, with GQA, MLA, and sliding window side by side. Which resource fits?",
+        "options": [
+          "A Visual Guide to Attention Variants",
+          "A Visual Guide to Mixture of Experts",
+          "The Illustrated Transformer"
+        ],
+        "why": "A Visual Guide to Attention Variants compares MHA, GQA, MLA, sliding window, and more. Each variant tries to make attention cheaper for long inputs."
+      },
+      "bn": {
+        "q": "তুমি জানতে চাও আধুনিক LLM কীভাবে লম্বা input-এর জন্য attention সস্তা করে, যেখানে GQA, MLA ও sliding window পাশাপাশি দেখানো হয়েছে। কোন resource মানানসই?",
+        "options": [
+          "A Visual Guide to Attention Variants",
+          "A Visual Guide to Mixture of Experts",
+          "The Illustrated Transformer"
+        ],
+        "why": "A Visual Guide to Attention Variants-এ MHA, GQA, MLA, sliding window আর আরও কয়েকটির তুলনা করা হয়েছে। প্রতিটি variant লম্বা input-এর জন্য attention সস্তা করার চেষ্টা করে।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "The first page of the LLM Inference Handbook has a visualizer that follows one prompt through four steps: Tokenizer, Scheduling, Prefill, and Output.",
+        "why": "This Part says the first page has an interactive LLM Inference Visualizer. It follows one prompt through these four steps."
+      },
+      "bn": {
+        "q": "LLM Inference Handbook-এর প্রথম পাতায় একটা visualizer আছে, যা একটা prompt-কে চারটি ধাপে অনুসরণ করে: Tokenizer, Scheduling, Prefill ও Output।",
+        "why": "এই Part বলে, প্রথম পাতায় একটা interactive LLM Inference Visualizer আছে। সেটা একটা prompt-কে এই চারটি ধাপে অনুসরণ করে।"
+      }
+    }
   ]
 }

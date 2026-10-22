@@ -723,5 +723,116 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "What should a tool description cover, according to this Part?",
+        "options": [
+          "What it does, when to use it, and what it returns",
+          "Who wrote the tool, what it costs, and how fast it runs",
+          "Only the tool's name, since the name is a contract"
+        ],
+        "why": "The description is a short text the model reads before it calls the tool. It should say in one sentence each what the tool does, when to use it, and what it returns."
+      },
+      "bn": {
+        "q": "এই Part অনুযায়ী একটি tool-এর description-এ কী কী থাকা উচিত?",
+        "options": [
+          "এটি কী করে, কখন ব্যবহার করবে, আর কী ফেরত দেয়",
+          "Tool কে লিখেছে, কত খরচ আর কত দ্রুত চলে",
+          "শুধু tool-এর নাম, কারণ নামই একটি contract"
+        ],
+        "why": "Description হলো একটি ছোট text, যা মডেল tool call করার আগে পড়ে। এতে এক বাক্যে করে বলা উচিত tool কী করে, কখন ব্যবহার করবে, আর কী ফেরত দেয়।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "In MCP, which primitive is read-only data that the client can fetch on demand, such as files, DB rows, or web pages?",
+        "options": [
+          "Resources",
+          "Tools",
+          "Prompts"
+        ],
+        "why": "Resources are read-only data the client can fetch on demand. Tools are functions the model can call, and Prompts are named prompt templates."
+      },
+      "bn": {
+        "q": "MCP-তে কোন primitive হলো শুধু-পড়ার যোগ্য data, যা client প্রয়োজনে fetch করতে পারে, যেমন file, DB row বা web page?",
+        "options": [
+          "Resources",
+          "Tools",
+          "Prompts"
+        ],
+        "why": "Resources হলো শুধু-পড়ার যোগ্য data, যা client প্রয়োজনে fetch করতে পারে। Tools হলো মডেলের call করার মতো function, আর Prompts হলো নামকরা prompt template।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "Putting more than about 20 tools in one prompt improves the model's accuracy at choosing the right tool.",
+        "why": "This Part says more than about 20 tools in one prompt degrades selection accuracy. It suggests splitting into sub-agents by domain, or using a router."
+      },
+      "bn": {
+        "q": "একটি prompt-এ প্রায় 20-এর বেশি tool দিলে সঠিক tool বেছে নেওয়ার ক্ষেত্রে মডেলের accuracy বাড়ে।",
+        "why": "এই Part বলছে, একটি prompt-এ প্রায় 20-এর বেশি tool দিলে selection accuracy কমে যায়। সমাধান হলো domain অনুযায়ী sub-agent-এ ভাগ করা, অথবা router ব্যবহার করা।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "The model needs the weather in Tokyo and the USD to JPY rate, and neither depends on the other. What should it do?",
+        "options": [
+          "Call the tools one by one so the orchestrator never runs two at once",
+          "Issue both calls in the same turn",
+          "Skip the tools and answer from memory",
+          "Call the weather tool first and the rate tool in the next turn"
+        ],
+        "why": "Independent calls should go out in one turn, and the orchestrator runs them concurrently. This Part calls this the single biggest latency win in tool-heavy agents."
+      },
+      "bn": {
+        "q": "মডেলের Tokyo-র আবহাওয়া আর USD থেকে JPY rate দুটোই দরকার, আর একটি অন্যটির উপর নির্ভর করে না। তার কী করা উচিত?",
+        "options": [
+          "একটি একটি করে tool call করা, যাতে orchestrator কখনো দুটো একসাথে না চালায়",
+          "দুটো call একই turn-এ করা",
+          "Tool বাদ দিয়ে নিজের memory থেকে উত্তর দেওয়া",
+          "আগে weather tool call করা, আর rate tool পরের turn-এ call করা"
+        ],
+        "why": "যে call-গুলো একে অপরের উপর নির্ভর করে না, সেগুলো এক turn-এ পাঠানো উচিত, আর orchestrator সেগুলো একসাথে চালায়। এই Part একে tool-heavy agent-এর সবচেয়ে বড় latency জয় বলেছে।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "A SQL tool returns 10,000 rows. What does this Part advise?",
+        "options": [
+          "Return the top N rows and summarise the rest",
+          "Return every row, so the model sees all the data",
+          "Return the rows as a JSON array, because it is the best format for storage",
+          "Return the raw rows and let the model trim them in its next turn"
+        ],
+        "why": "A tool's output is prompt content, and a 10,000-row result will blow your context window. This Part says to trim ruthlessly: return the top N and summarise the rest."
+      },
+      "bn": {
+        "q": "একটি SQL tool 10,000 row ফেরত দিল। এই Part কী পরামর্শ দেয়?",
+        "options": [
+          "শীর্ষ N টি row ফেরত দাও আর বাকিগুলোর summary দাও",
+          "প্রতিটি row ফেরত দাও, যাতে মডেল সব data দেখতে পায়",
+          "Row-গুলো JSON array হিসেবে ফেরত দাও, কারণ storage-এর জন্য এটাই সেরা format",
+          "Raw row-গুলো ফেরত দাও আর মডেল পরের turn-এ ছেঁটে নিক"
+        ],
+        "why": "Tool-এর output হলো prompt-এর অংশ, আর 10,000 row-এর result context window ভরে ফেলবে। এই Part বলছে নির্মমভাবে ছেঁটে দাও: শীর্ষ N টি row ফেরত দাও আর বাকিগুলোর summary দাও।"
+      }
+    }
   ]
 }

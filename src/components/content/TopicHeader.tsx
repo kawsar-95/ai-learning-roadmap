@@ -29,7 +29,7 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
         </span>
         {topic.quiz && (
           <span className={PILL}>
-            <span aria-hidden="true">📝</span> {ui.quizQuestions(fmtNum(lang, topic.quiz.length))}
+            <span aria-hidden="true">📝</span> {ui.quizQuestions(topic.quiz.length)}
           </span>
         )}
       </div>

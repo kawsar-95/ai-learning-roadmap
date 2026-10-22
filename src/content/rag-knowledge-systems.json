@@ -3310,5 +3310,106 @@
       "url": "https://arxiv.org/abs/2510.12323",
       "text": "Guo, Ren, Xu, Zhang, Huang, \"RAG-Anything\" — arXiv, 2025"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "What does reciprocal rank fusion (RRF) use to merge BM25 and vector search results?",
+        "options": [
+          "The length of each document",
+          "Each document's rank in each list",
+          "The raw BM25 scores added to the cosine scores",
+          "Only the top-1 result of each list"
+        ],
+        "why": "RRF ignores raw scores and combines only each document's rank in each list, using 1 / (k + rank). This avoids the problem that the two retrievers' scores are on different scales."
+      },
+      "bn": {
+        "q": "BM25 আর vector search-এর ফল মেলাতে reciprocal rank fusion (RRF) কী ব্যবহার করে?",
+        "options": [
+          "প্রতিটি document-এর দৈর্ঘ্য",
+          "প্রতিটি তালিকায় document-এর rank",
+          "BM25-এর raw score আর cosine score যোগ করা",
+          "প্রতিটি তালিকার শুধু প্রথম ফলটি"
+        ],
+        "why": "RRF raw score ব্যবহার করে না, শুধু প্রতিটি তালিকায় document-এর rank নিয়ে 1 / (k + rank) দিয়ে স্কোর করে। ফলে দুই retriever-এর আলাদা স্কেলের সমস্যা এড়ানো যায়।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "A reranker can recover a correct passage that the first-stage retrieval did not return.",
+        "why": "A reranker can only re-order what stage 1 returned. If the right passage is not in the top-N, no reranker can recover it."
+      },
+      "bn": {
+        "q": "প্রথম ধাপের retrieval যে সঠিক passage আনেনি, reranker সেটি ফিরিয়ে আনতে পারে।",
+        "why": "Reranker শুধু প্রথম ধাপে আসা ফলগুলোকে নতুন করে সাজায়। সঠিক passage top-N-এ না থাকলে কোনো reranker তা উদ্ধার করতে পারে না।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Where does late chunking split the text?",
+        "options": [
+          "After mean pooling, at sentence ends",
+          "Before embedding, at fixed sizes",
+          "After the transformer, just before mean pooling"
+        ],
+        "why": "Late chunking runs a long-context embedding model over the whole text and splits after the transformer and just before mean pooling. So every chunk vector carries context from the surrounding document."
+      },
+      "bn": {
+        "q": "Late chunking কোথায় টেক্সট কাটে?",
+        "options": [
+          "mean pooling-এর পরে, বাক্যের শেষে",
+          "embedding-এর আগে, নির্দিষ্ট মাপে",
+          "transformer-এর পরে, mean pooling-এর ঠিক আগে"
+        ],
+        "why": "Late chunking পুরো টেক্সটের ওপর long-context embedding model চালায়, তারপর transformer-এর পরে এবং mean pooling-এর ঠিক আগে কাটে। ফলে প্রতিটি chunk vector আশপাশের document-এর context বহন করে।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "What can go wrong when you apply a strict metadata filter after the ANN search (post-filtering)?",
+        "options": [
+          "It can return fewer than k results, or none.",
+          "It makes the database ignore the query vector.",
+          "It returns results that do not match the filter.",
+          "It always returns exactly k results."
+        ],
+        "why": "Post-filtering with a strict filter can discard a large part of the results, so you may get fewer than k or zero. A downstream LLM then answers from nothing, so check result counts."
+      },
+      "bn": {
+        "q": "ANN search-এর পরে কড়া metadata filter বসালে (post-filtering) কী সমস্যা হতে পারে?",
+        "options": [
+          "k-এর চেয়ে কম ফল আসতে পারে, বা কোনো ফলই না।",
+          "database query vector উপেক্ষা করে।",
+          "ফলে এমন ফল আসে যা filter-এর সাথে মেলে না।",
+          "সবসময় ঠিক k-টি ফল আসে।"
+        ],
+        "why": "কড়া filter-এ post-filtering অনেক ফল বাদ দিয়ে দিতে পারে, ফলে k-এর চেয়ে কম বা শূন্য ফল আসে। তখন LLM কিছু না পেয়েই উত্তর দেয়, তাই ফলের সংখ্যাও দেখো।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "Microsoft GraphRAG pre-generates summaries for communities of related entities, so it can answer global questions such as the main themes of a dataset.",
+        "why": "Vector search returns chunks that look like the query, and no single chunk answers a global question. GraphRAG builds an entity graph and merges partial answers from community summaries."
+      },
+      "bn": {
+        "q": "Microsoft GraphRAG সম্পর্কিত entity-র community-গুলোর summary আগেই তৈরি করে রাখে, তাই ডেটাসেটের প্রধান থিমের মতো global প্রশ্নের উত্তর দিতে পারে।",
+        "why": "Vector search প্রশ্নের সাথে মেলে এমন chunk আনে, কিন্তু global প্রশ্নের উত্তর কোনো একটি chunk-এ থাকে না। GraphRAG entity graph বানায় এবং community summary থেকে আংশিক উত্তর একত্র করে।"
+      }
+    }
   ]
 }

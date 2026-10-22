@@ -1981,5 +1981,104 @@
       "url": "https://platform.openai.com/docs/guides/prompt-caching",
       "text": "OpenAI — Prompt caching documentation"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Where does this Part say you should put the facts you most need the model to recall?",
+        "options": [
+          "Anywhere, because position does not matter",
+          "In the middle of the context, where attention is strongest",
+          "At the start or the end of the context"
+        ],
+        "why": "Liu et al. (2023) found that models recall the start and end well but perform close to random in the middle. So put critical facts at the start or the end, or repeat them at both."
+      },
+      "bn": {
+        "q": "যে তথ্য মডেলের সবচেয়ে বেশি মনে রাখা দরকার, এই Part অনুযায়ী তা কোথায় রাখবে?",
+        "options": [
+          "যেকোনো জায়গায়, কারণ অবস্থান কোনো ব্যাপার নয়",
+          "context-এর মাঝখানে, যেখানে attention সবচেয়ে বেশি",
+          "context-এর শুরুতে বা শেষে"
+        ],
+        "why": "Liu et al. (2023) দেখিয়েছেন, মডেল শুরু ও শেষের তথ্য ভালো মনে রাখে কিন্তু মাঝখানের তথ্যে প্রায় random ফল দেয়। তাই জরুরি তথ্য শুরুতে বা শেষে রাখো, অথবা দুই প্রান্তেই বসাও।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "What must you do so that prompt caching keeps working?",
+        "options": [
+          "Put a fresh timestamp at the top of the system prompt on every call.",
+          "Keep the cached prefix byte-identical, and put dynamic parts such as timestamps after the cache breakpoint.",
+          "Put the user's newest message at the start of the prompt.",
+          "Edit the system prompt a little on each call to keep the cache fresh."
+        ],
+        "why": "Even one new character in the cached region busts the cache for everything after it. So keep the prefix identical and put anything dynamic after the breakpoint."
+      },
+      "bn": {
+        "q": "Prompt caching যেন কাজ করে, তার জন্য কী করতে হবে?",
+        "options": [
+          "প্রতিটি call-এ system prompt-এর শুরুতে নতুন timestamp বসাও।",
+          "cache করা prefix হুবহু একই রাখো, আর timestamp-এর মতো পরিবর্তনশীল অংশ cache breakpoint-এর পরে রাখো।",
+          "ইউজারের নতুন message prompt-এর শুরুতে রাখো।",
+          "cache তাজা রাখতে প্রতি call-এ system prompt একটু বদলাও।"
+        ],
+        "why": "cache করা অংশে মাত্র একটি নতুন অক্ষর এলেও তার পরের সবকিছুর cache নষ্ট হয়। তাই prefix একই রাখো আর পরিবর্তনশীল সবকিছু breakpoint-এর পরে দাও।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "For a tool that can return a huge result, a good pattern is to return a small slice plus a cursor, and let the agent fetch more only if it needs to.",
+        "why": "This Part calls paging through results the most production-friendly approach. It keeps cost bounded and stops one tool result from filling the context window."
+      },
+      "bn": {
+        "q": "যে tool বিশাল ফলাফল ফেরত দিতে পারে, তার জন্য ভালো পদ্ধতি হলো ছোট একটি অংশ আর একটি cursor ফেরত দেওয়া, এবং agent দরকার হলেই আরও আনবে।",
+        "why": "এই Part এই page-by-page পদ্ধতিকে production-এর জন্য সবচেয়ে সুবিধাজনক বলেছে। এতে খরচ সীমিত থাকে, আর একটি tool result পুরো context window ভরে ফেলতে পারে না।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "In the MemGPT idea (Packer et al., 2023), who decides when to move information between working memory and external storage?",
+        "options": [
+          "The model itself, using tool calls",
+          "A cache with a 5-minute TTL",
+          "The developer, by hand on every turn"
+        ],
+        "why": "MemGPT treats the LLM's context like virtual memory. The model itself evicts information to external storage and pages it back in, using tool calls such as recall and archival_search."
+      },
+      "bn": {
+        "q": "MemGPT ধারণায় (Packer et al., 2023) working memory আর external storage-এর মধ্যে তথ্য সরানোর সিদ্ধান্ত কে নেয়?",
+        "options": [
+          "মডেল নিজেই, tool call ব্যবহার করে",
+          "5 মিনিটের TTL-এর একটি cache",
+          "ডেভেলপার, প্রতি টার্নে হাতে"
+        ],
+        "why": "MemGPT LLM-এর context-কে virtual memory-র মতো দেখে। মডেল নিজেই recall ও archival_search-এর মতো tool call দিয়ে তথ্য external storage-এ সরায় এবং দরকারে আবার ফিরিয়ে আনে।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "This Part says a conversation summary is a reliable source of truth, so you can drop the original log.",
+        "why": "Summarisation is lossy, and decisions, exact numbers and quoted text disappear first. Use the summary as an index, and retrieve from the original log when a detail matters."
+      },
+      "bn": {
+        "q": "এই Part বলছে, কথোপকথনের summary নির্ভরযোগ্য source of truth, তাই আসল log ফেলে দেওয়া যায়।",
+        "why": "Summarisation-এ তথ্য হারায়, আর সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি আগে হারায়। summary-কে index হিসেবে ব্যবহার করো, আর কোনো খুঁটিনাটি জরুরি হলে আসল log থেকে retrieve করো।"
+      }
+    }
   ]
 }

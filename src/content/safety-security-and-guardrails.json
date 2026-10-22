@@ -744,5 +744,106 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Why is indirect prompt injection the harder kind to stop?",
+        "options": [
+          "It only works on very small models",
+          "The attacker must type into your chat box",
+          "The attacker does not even need to interact with your system"
+        ],
+        "why": "In indirect injection the attacker plants malicious text in a document that the model will read. So the attacker never has to use your system directly."
+      },
+      "bn": {
+        "q": "Indirect prompt injection ঠেকানো কেন বেশি কঠিন?",
+        "options": [
+          "এটা শুধু খুব ছোট model-এ কাজ করে",
+          "attacker-কে তোমার chat box-এ টাইপ করতে হয়",
+          "attacker-কে তোমার system-এর সাথে interact-ই করতে হয় না"
+        ],
+        "why": "Indirect injection-এ attacker এমন একটা document-এ ক্ষতিকর টেক্সট বসিয়ে রাখে যা model পড়বে। তাই attacker-কে সরাসরি তোমার system ব্যবহারই করতে হয় না।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "For compliance you often need both input redaction and output redaction of PII.",
+        "why": "Input redaction stops you from sending PII to the vendor. Output redaction stops you from echoing PII back to the wrong user."
+      },
+      "bn": {
+        "q": "Compliance-এর জন্য তোমার প্রায়ই PII-এর input redaction আর output redaction দুটোই লাগে।",
+        "why": "Input redaction vendor-এর কাছে PII পাঠানো আটকায়। Output redaction ভুল user-কে PII ফেরত দেখানো আটকায়।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "An LLM returns malformed JSON. What does this Part tell you to do?",
+        "options": [
+          "Ignore it, because it is only a bug",
+          "Parse with a strict schema, retry once, then refuse",
+          "Trust the model and use the output as it is",
+          "Retry without limit until the JSON is valid"
+        ],
+        "why": "This Part says never to trust an LLM to emit valid JSON. Parse with a strict schema, retry once, then refuse, and treat malformed output as a security event."
+      },
+      "bn": {
+        "q": "একটা LLM ভুল format-এর JSON ফেরত দিল। এই Part তোমাকে কী করতে বলে?",
+        "options": [
+          "উপেক্ষা করো, কারণ এটা শুধু একটা bug",
+          "strict schema দিয়ে parse করো, একবার retry করো, তারপর refuse করো",
+          "model-কে বিশ্বাস করে output যেমন আছে তেমনই ব্যবহার করো",
+          "JSON valid না হওয়া পর্যন্ত সীমাহীন retry করো"
+        ],
+        "why": "এই Part বলছে valid JSON দেওয়ার জন্য LLM-কে কখনো বিশ্বাস কোরো না। strict schema দিয়ে parse করো, একবার retry করো, তারপর refuse করো, আর ভুল output-কে security event হিসেবে ধরো।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "Which tool is an open-weight guard model that works as a drop-in classifier for input and output?",
+        "options": [
+          "Microsoft Presidio",
+          "Llama Guard",
+          "Azure AI Content Safety",
+          "OpenAI moderation endpoint"
+        ],
+        "why": "Llama Guard is the open-weight guard model in this Part. The OpenAI endpoint and Azure AI Content Safety are hosted classifiers, and Presidio is a PII detector."
+      },
+      "bn": {
+        "q": "কোন tool একটা open-weight guard model, যা input ও output-এর জন্য drop-in classifier হিসেবে কাজ করে?",
+        "options": [
+          "Microsoft Presidio",
+          "Llama Guard",
+          "Azure AI Content Safety",
+          "OpenAI moderation endpoint"
+        ],
+        "why": "এই Part-এ open-weight guard model হলো Llama Guard। OpenAI endpoint আর Azure AI Content Safety হলো hosted classifier, আর Presidio একটা PII detector।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "With strong enough defences, 100% jailbreak safety is achievable.",
+        "why": "This Part says jailbreaks are a moving target and that red-teams find new ones monthly. It tells you to accept that 100% safety is unachievable."
+      },
+      "bn": {
+        "q": "যথেষ্ট শক্তিশালী defence থাকলে jailbreak থেকে 100% নিরাপত্তা পাওয়া সম্ভব।",
+        "why": "এই Part বলছে jailbreak একটা চলমান লক্ষ্য, red-team প্রতি মাসে নতুন jailbreak খুঁজে পায়। তাই মেনে নিতে হবে যে 100% safety অর্জন করা যায় না।"
+      }
+    }
   ]
 }

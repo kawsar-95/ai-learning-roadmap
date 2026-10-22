@@ -116,3 +116,13 @@ test("interviewHref and the language switch agree", () => {
   assert.equal(localizedPath(interviewHref("en"), "bn"), interviewHref("bn"));
   assert.equal(localizedPath(interviewHref("bn"), "en"), interviewHref("en"));
 });
+
+test("quiz counts use the singular for one question", () => {
+  assert.equal(UI.en.quizQuestions(1), "1 question");
+  assert.equal(UI.en.quizQuestions(5), "5 questions");
+  assert.equal(UI.en.quizIntro(1), "Check what you learned. 1 question.");
+  assert.equal(UI.en.quizIntro(5), "Check what you learned. 5 questions.");
+  assert.equal(UI.bn.quizQuestions(1), "১টি প্রশ্ন");
+  assert.equal(UI.bn.quizQuestions(5), "৫টি প্রশ্ন");
+  assert.equal(UI.bn.quizIntro(5), "কী শিখলে যাচাই করো। ৫টি প্রশ্ন।");
+});

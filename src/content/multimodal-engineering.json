@@ -723,5 +723,102 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "What does this Part say about an LLM and Tesseract for reading text in images?",
+        "options": [
+          "Tesseract beats an LLM on messy photos and handwritten notes.",
+          "An LLM beats Tesseract on messy photos, handwritten notes, and structured forms.",
+          "An LLM can read only clean printed text."
+        ],
+        "why": "This Part says an LLM beats Tesseract on messy photos, handwritten notes, and structured forms. Often you need no separate OCR step."
+      },
+      "bn": {
+        "q": "ছবির লেখা পড়ার ক্ষেত্রে LLM আর Tesseract নিয়ে topic-টা কী বলে?",
+        "options": [
+          "অগোছালো ছবি আর হাতের লেখার নোটে Tesseract, LLM-কে ছাড়িয়ে যায়।",
+          "অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়।",
+          "LLM শুধু পরিষ্কার ছাপা লেখা পড়তে পারে।"
+        ],
+        "why": "এই Part বলে, অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "Which is the voice pipeline that this Part describes?",
+        "options": [
+          "TTS → LLM → STT",
+          "STT → LLM → TTS",
+          "LLM → STT → TTS"
+        ],
+        "why": "A voice pipeline first turns speech into text (STT). The LLM then works on the text, and TTS turns the answer back into speech."
+      },
+      "bn": {
+        "q": "এই Part-এ voice pipeline কোনটা হিসেবে বলা হয়েছে?",
+        "options": [
+          "TTS → LLM → STT",
+          "STT → LLM → TTS",
+          "LLM → STT → TTS"
+        ],
+        "why": "Voice pipeline আগে speech-কে text-এ বদলায় (STT)। তারপর LLM সেই text নিয়ে কাজ করে, আর TTS উত্তরটাকে আবার speech বানায়।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "Realtime APIs skip the STT → LLM → TTS loop by streaming audio in both directions.",
+        "why": "This Part says realtime APIs stream audio bidirectionally, so they skip the chunky STT → LLM → TTS loop. Sub-500 ms turn-taking is now achievable."
+      },
+      "bn": {
+        "q": "Realtime API দুই দিকে audio stream করে বলে STT → LLM → TTS loop এড়িয়ে যায়।",
+        "why": "এই Part বলে, realtime API দুই দিকে audio stream করে, তাই chunky STT → LLM → TTS loop লাগে না। এখন 500 ms-এর কম সময়ে turn-taking সম্ভব।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Which tool is a pay-per-second API for any open-source model?",
+        "options": [
+          "Fal",
+          "ComfyUI",
+          "Replicate"
+        ],
+        "why": "This Part describes Replicate as a pay-per-second API for any open-source model. Fal is fast hosted inference for diffusion, and ComfyUI is a node-based UI."
+      },
+      "bn": {
+        "q": "কোন tool যেকোনো open-source model-এর জন্য pay-per-second API?",
+        "options": [
+          "Fal",
+          "ComfyUI",
+          "Replicate"
+        ],
+        "why": "এই Part-এ Replicate-কে যেকোনো open-source model-এর pay-per-second API বলা হয়েছে। Fal হলো diffusion-এর জন্য দ্রুত hosted inference, আর ComfyUI একটা node-based UI।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "ControlNet is the tool that gives style or character consistency in an image workflow.",
+        "why": "This Part says ControlNet is for structure, such as pose, depth, and canny edges. LoRA is for style or character consistency."
+      },
+      "bn": {
+        "q": "Image workflow-তে ControlNet হলো সেই tool, যা style বা character consistency দেয়।",
+        "why": "এই Part বলে, ControlNet structure-এর জন্য, যেমন pose, depth আর canny edges। Style বা character consistency-র জন্য আছে LoRA।"
+      }
+    }
   ]
 }
