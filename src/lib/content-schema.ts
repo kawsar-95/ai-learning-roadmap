@@ -131,6 +131,13 @@ export type Section = {
 
 export type Source = { n: number; url: string; text: string };
 
+type McqText = { q: string; options: string[]; why: string };
+type TfText = { q: string; why: string };
+/** One quiz question. `mcq` has one right option (an index); `tf` is true or false. */
+export type QuizQuestion =
+  | { id: string; kind: "mcq"; answer: number; en: McqText; bn: McqText }
+  | { id: string; kind: "tf"; answer: boolean; en: TfText; bn: TfText };
+
 export type TopicFile = {
   slug: string;
   title: string;
@@ -140,6 +147,8 @@ export type TopicFile = {
   bn: { title: string; tagline?: string; lede: Inline };
   sections: Section[];
   sources: Source[];
+  /** The quiz at the end of the topic page. Leave it out for no quiz. */
+  quiz?: QuizQuestion[];
 };
 
 const TAG = /<[^>]*>/g;
@@ -293,6 +302,34 @@ const SourceSchema = z.strictObject({
   text: z.string(),
 });
 
+const McqTextSchema = z.strictObject({
+  q: PlainTextSchema,
+  options: z.array(PlainTextSchema).min(2).max(6),
+  why: PlainTextSchema,
+});
+const TfTextSchema = z.strictObject({ q: PlainTextSchema, why: PlainTextSchema });
+
+const QuizQuestionSchema: z.ZodType<QuizQuestion> = z
+  .discriminatedUnion("kind", [
+    z.strictObject({
+      id: PlainTextSchema,
+      kind: z.literal("mcq"),
+      answer: z.number().int(),
+      en: McqTextSchema,
+      bn: McqTextSchema,
+    }),
+    z.strictObject({ id: PlainTextSchema, kind: z.literal("tf"), answer: z.boolean(), en: TfTextSchema, bn: TfTextSchema }),
+  ])
+  .superRefine((q, ctx) => {
+    if (q.kind !== "mcq") return;
+    if (q.en.options.length !== q.bn.options.length) {
+      ctx.addIssue({ code: "custom", message: "en and bn must have the same number of options" });
+    }
+    if (q.answer < 0 || q.answer >= q.en.options.length) {
+      ctx.addIssue({ code: "custom", message: "answer must be an index of the options" });
+    }
+  });
+
 export const TopicFileSchema: z.ZodType<TopicFile> = z.strictObject({
   slug: z.string(),
   title: z.string(),
@@ -305,4 +342,9 @@ export const TopicFileSchema: z.ZodType<TopicFile> = z.strictObject({
   }),
   sections: z.array(SectionSchema),
   sources: z.array(SourceSchema),
+  quiz: z
+    .array(QuizQuestionSchema)
+    .min(1)
+    .refine((qs) => new Set(qs.map((q) => q.id)).size === qs.length, { message: "quiz ids must be unique" })
+    .optional(),
 });
