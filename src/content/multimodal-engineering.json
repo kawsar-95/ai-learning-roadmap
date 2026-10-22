@@ -745,27 +745,27 @@
           "অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়।",
           "LLM শুধু পরিষ্কার ছাপা লেখা পড়তে পারে।"
         ],
-        "why": "Topic বলে, অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
+        "why": "এই Part বলে, অগোছালো ছবি, হাতের লেখার নোট আর structured form-এ LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
       }
     },
     {
       "id": "q2",
       "kind": "mcq",
-      "answer": 0,
+      "answer": 1,
       "en": {
         "q": "Which is the voice pipeline that this Part describes?",
         "options": [
-          "STT → LLM → TTS",
           "TTS → LLM → STT",
+          "STT → LLM → TTS",
           "LLM → STT → TTS"
         ],
         "why": "A voice pipeline first turns speech into text (STT). The LLM then works on the text, and TTS turns the answer back into speech."
       },
       "bn": {
-        "q": "Topic-এ voice pipeline কোনটা হিসেবে বলা হয়েছে?",
+        "q": "এই Part-এ voice pipeline কোনটা হিসেবে বলা হয়েছে?",
         "options": [
-          "STT → LLM → TTS",
           "TTS → LLM → STT",
+          "STT → LLM → TTS",
           "LLM → STT → TTS"
         ],
         "why": "Voice pipeline আগে speech-কে text-এ বদলায় (STT)। তারপর LLM সেই text নিয়ে কাজ করে, আর TTS উত্তরটাকে আবার speech বানায়।"
@@ -781,7 +781,7 @@
       },
       "bn": {
         "q": "Realtime API দুই দিকে audio stream করে বলে STT → LLM → TTS loop এড়িয়ে যায়।",
-        "why": "Topic বলে, realtime API দুই দিকে audio stream করে, তাই chunky STT → LLM → TTS loop লাগে না। এখন 500 ms-এর কম সময়ে turn-taking সম্ভব।"
+        "why": "এই Part বলে, realtime API দুই দিকে audio stream করে, তাই chunky STT → LLM → TTS loop লাগে না। এখন 500 ms-এর কম সময়ে turn-taking সম্ভব।"
       }
     },
     {
@@ -791,8 +791,8 @@
       "en": {
         "q": "Which tool is a pay-per-second API for any open-source model?",
         "options": [
-          "ComfyUI",
           "Fal",
+          "ComfyUI",
           "Replicate"
         ],
         "why": "This Part describes Replicate as a pay-per-second API for any open-source model. Fal is fast hosted inference for diffusion, and ComfyUI is a node-based UI."
@@ -800,11 +800,11 @@
       "bn": {
         "q": "কোন tool যেকোনো open-source model-এর জন্য pay-per-second API?",
         "options": [
-          "ComfyUI",
           "Fal",
+          "ComfyUI",
           "Replicate"
         ],
-        "why": "Topic-এ Replicate-কে যেকোনো open-source model-এর pay-per-second API বলা হয়েছে। Fal হলো diffusion-এর জন্য দ্রুত hosted inference, আর ComfyUI একটা node-based UI।"
+        "why": "এই Part-এ Replicate-কে যেকোনো open-source model-এর pay-per-second API বলা হয়েছে। Fal হলো diffusion-এর জন্য দ্রুত hosted inference, আর ComfyUI একটা node-based UI।"
       }
     },
     {
@@ -817,7 +817,7 @@
       },
       "bn": {
         "q": "Image workflow-তে ControlNet হলো সেই tool, যা style বা character consistency দেয়।",
-        "why": "Topic বলে, ControlNet structure-এর জন্য, যেমন pose, depth আর canny edges। Style বা character consistency-র জন্য আছে LoRA।"
+        "why": "এই Part বলে, ControlNet structure-এর জন্য, যেমন pose, depth আর canny edges। Style বা character consistency-র জন্য আছে LoRA।"
       }
     }
   ]

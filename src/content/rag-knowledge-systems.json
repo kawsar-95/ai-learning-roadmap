@@ -3315,24 +3315,24 @@
     {
       "id": "q1",
       "kind": "mcq",
-      "answer": 3,
+      "answer": 1,
       "en": {
         "q": "What does reciprocal rank fusion (RRF) use to merge BM25 and vector search results?",
         "options": [
-          "The raw BM25 scores added to the cosine scores",
-          "Only the top-1 result of each list",
           "The length of each document",
-          "Each document's rank in each list"
+          "Each document's rank in each list",
+          "The raw BM25 scores added to the cosine scores",
+          "Only the top-1 result of each list"
         ],
         "why": "RRF ignores raw scores and combines only each document's rank in each list, using 1 / (k + rank). This avoids the problem that the two retrievers' scores are on different scales."
       },
       "bn": {
         "q": "BM25 আর vector search-এর ফল মেলাতে reciprocal rank fusion (RRF) কী ব্যবহার করে?",
         "options": [
-          "BM25-এর raw score আর cosine score যোগ করা",
-          "প্রতিটি তালিকার শুধু প্রথম ফলটি",
           "প্রতিটি document-এর দৈর্ঘ্য",
-          "প্রতিটি তালিকায় document-এর rank"
+          "প্রতিটি তালিকায় document-এর rank",
+          "BM25-এর raw score আর cosine score যোগ করা",
+          "প্রতিটি তালিকার শুধু প্রথম ফলটি"
         ],
         "why": "RRF raw score ব্যবহার করে না, শুধু প্রতিটি তালিকায় document-এর rank নিয়ে 1 / (k + rank) দিয়ে স্কোর করে। ফলে দুই retriever-এর আলাদা স্কেলের সমস্যা এড়ানো যায়।"
       }
@@ -3353,22 +3353,22 @@
     {
       "id": "q3",
       "kind": "mcq",
-      "answer": 1,
+      "answer": 2,
       "en": {
         "q": "Where does late chunking split the text?",
         "options": [
+          "After mean pooling, at sentence ends",
           "Before embedding, at fixed sizes",
-          "After the transformer, just before mean pooling",
-          "After mean pooling, at sentence ends"
+          "After the transformer, just before mean pooling"
         ],
         "why": "Late chunking runs a long-context embedding model over the whole text and splits after the transformer and just before mean pooling. So every chunk vector carries context from the surrounding document."
       },
       "bn": {
         "q": "Late chunking কোথায় টেক্সট কাটে?",
         "options": [
+          "mean pooling-এর পরে, বাক্যের শেষে",
           "embedding-এর আগে, নির্দিষ্ট মাপে",
-          "transformer-এর পরে, mean pooling-এর ঠিক আগে",
-          "mean pooling-এর পরে, বাক্যের শেষে"
+          "transformer-এর পরে, mean pooling-এর ঠিক আগে"
         ],
         "why": "Late chunking পুরো টেক্সটের ওপর long-context embedding model চালায়, তারপর transformer-এর পরে এবং mean pooling-এর ঠিক আগে কাটে। ফলে প্রতিটি chunk vector আশপাশের document-এর context বহন করে।"
       }
@@ -3381,9 +3381,9 @@
         "q": "What can go wrong when you apply a strict metadata filter after the ANN search (post-filtering)?",
         "options": [
           "It can return fewer than k results, or none.",
-          "It always returns exactly k results.",
           "It makes the database ignore the query vector.",
-          "It returns results that do not match the filter."
+          "It returns results that do not match the filter.",
+          "It always returns exactly k results."
         ],
         "why": "Post-filtering with a strict filter can discard a large part of the results, so you may get fewer than k or zero. A downstream LLM then answers from nothing, so check result counts."
       },
@@ -3391,9 +3391,9 @@
         "q": "ANN search-এর পরে কড়া metadata filter বসালে (post-filtering) কী সমস্যা হতে পারে?",
         "options": [
           "k-এর চেয়ে কম ফল আসতে পারে, বা কোনো ফলই না।",
-          "সবসময় ঠিক k-টি ফল আসে।",
           "database query vector উপেক্ষা করে।",
-          "ফলে এমন ফল আসে যা filter-এর সাথে মেলে না।"
+          "ফলে এমন ফল আসে যা filter-এর সাথে মেলে না।",
+          "সবসময় ঠিক k-টি ফল আসে।"
         ],
         "why": "কড়া filter-এ post-filtering অনেক ফল বাদ দিয়ে দিতে পারে, ফলে k-এর চেয়ে কম বা শূন্য ফল আসে। তখন LLM কিছু না পেয়েই উত্তর দেয়, তাই ফলের সংখ্যাও দেখো।"
       }

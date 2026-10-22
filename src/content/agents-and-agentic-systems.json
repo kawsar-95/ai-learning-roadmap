@@ -2479,21 +2479,21 @@
     {
       "id": "q1",
       "kind": "mcq",
-      "answer": 1,
+      "answer": 0,
       "en": {
         "q": "How does this Part separate a workflow from an agent?",
         "options": [
-          "A workflow uses tools and an agent does not",
           "In an agent, the LLM decides at runtime the behaviour of at least one node; a workflow is a deterministic graph",
+          "A workflow uses tools and an agent does not",
           "An agent always runs more than one LLM at the same time"
         ],
         "why": "A workflow is a deterministic graph of LLM and tool calls. An agent is a workflow where at least one node's behaviour is decided at runtime by the LLM itself."
       },
       "bn": {
-        "q": "Text অনুযায়ী workflow আর agent-এর মধ্যে পার্থক্য কীভাবে করা হয়?",
+        "q": "এই Part অনুযায়ী workflow আর agent-এর মধ্যে পার্থক্য কীভাবে করা হয়?",
         "options": [
-          "Workflow tool ব্যবহার করে, আর agent করে না",
           "Agent-এ অন্তত একটি node-এর আচরণ runtime-এ LLM নিজে ঠিক করে; workflow হলো একটি নির্ধারিত (deterministic) graph",
+          "Workflow tool ব্যবহার করে, আর agent করে না",
           "Agent সবসময় একসাথে একাধিক LLM চালায়"
         ],
         "why": "Workflow হলো LLM call আর tool call-এর একটি deterministic graph। Agent হলো এমন workflow, যেখানে অন্তত একটি node-এর আচরণ runtime-এ LLM নিজেই ঠিক করে।"
@@ -2502,24 +2502,24 @@
     {
       "id": "q2",
       "kind": "mcq",
-      "answer": 2,
+      "answer": 3,
       "en": {
         "q": "Which agent loop asks the model to reflect on what went wrong and adds that reflection to memory for the next attempt?",
         "options": [
-          "ReAct",
           "Plan-and-Execute",
-          "Reflexion",
-          "ReWOO"
+          "ReAct",
+          "ReWOO",
+          "Reflexion"
         ],
         "why": "Reflexion adds a second pass: after a ReAct attempt, the model reflects on what went wrong, and the reflection is appended to memory for the next attempt."
       },
       "bn": {
         "q": "কোন agent loop মডেলকে বলে কী ভুল হয়েছিল তা নিয়ে reflect করতে, এবং সেই reflection পরের চেষ্টার জন্য memory-তে যোগ করে?",
         "options": [
-          "ReAct",
           "Plan-and-Execute",
-          "Reflexion",
-          "ReWOO"
+          "ReAct",
+          "ReWOO",
+          "Reflexion"
         ],
         "why": "Reflexion একটি দ্বিতীয় pass যোগ করে: ReAct attempt-এর পর মডেল কী ভুল হয়েছিল তা নিয়ে reflect করে, আর সেই reflection পরের attempt-এর জন্য memory-তে যোগ হয়।"
       }
@@ -2527,14 +2527,14 @@
     {
       "id": "q3",
       "kind": "tf",
-      "answer": false,
+      "answer": true,
       "en": {
-        "q": "Saving only the message log to disk after every step is enough to resume a crashed agent safely.",
-        "why": "The agent's state is more than the message log: it also holds in-flight tool calls, partial writes, approval state, and retry counters. Saving the messages and losing the rest gives a corrupt resume."
+        "q": "A browser agent is a constrained subset of computer use: the model can only see and act inside a single browser tab.",
+        "why": "Browser agents use the same screenshot-to-action loop as computer use, but with a smaller surface area, which makes them more reliable."
       },
       "bn": {
-        "q": "প্রতিটি ধাপের পর শুধু message log disk-এ save করলেই crash হওয়া agent নিরাপদে resume করা যায়।",
-        "why": "Agent-এর state শুধু message log নয়: এতে in-flight tool call, আংশিক write, approval state আর retry counter-ও থাকে। শুধু message save করে বাকি হারালে resume নষ্ট হয়ে যায়।"
+        "q": "Browser agent হলো computer use-এর একটি সীমিত অংশ: মডেল শুধু একটি browser tab-এর ভেতরেই দেখতে ও কাজ করতে পারে।",
+        "why": "Browser agent computer use-এর মতোই screenshot থেকে action-এর loop চালায়, কিন্তু তার surface area ছোট, তাই এটি বেশি নির্ভরযোগ্য।"
       }
     },
     {
@@ -2545,9 +2545,9 @@
         "q": "In the risk ladder, how should an agent treat a destructive action such as deleting a record?",
         "options": [
           "Use the two-person rule",
+          "Approve per call, plus a daily cap",
           "Auto-approve it",
-          "Auto-approve it with a soft cap",
-          "Approve per call, plus a daily cap"
+          "Auto-approve it with a soft cap"
         ],
         "why": "Destructive actions sit at the top of the ladder and need the two-person rule. Per-call approval with a daily cap is the rule for money, not for deletes."
       },
@@ -2555,9 +2555,9 @@
         "q": "Risk ladder-এ কোনো record delete করার মতো destructive action agent-কে কীভাবে সামলাতে হবে?",
         "options": [
           "Two-person rule ব্যবহার করো",
+          "প্রতি call-এ approve করো, সাথে daily cap রাখো",
           "নিজে থেকেই approve করে দাও",
-          "Soft cap দিয়ে নিজে থেকেই approve করে দাও",
-          "প্রতি call-এ approve করো, সাথে daily cap রাখো"
+          "Soft cap দিয়ে নিজে থেকেই approve করে দাও"
         ],
         "why": "Destructive action ladder-এর সবচেয়ে উপরে, তাই এখানে two-person rule লাগে। প্রতি call-এ approval আর daily cap হলো money-র নিয়ম, delete-এর নয়।"
       }
@@ -2565,14 +2565,14 @@
     {
       "id": "q5",
       "kind": "tf",
-      "answer": true,
+      "answer": false,
       "en": {
-        "q": "A browser agent is a constrained subset of computer use: the model can only see and act inside a single browser tab.",
-        "why": "Browser agents use the same screenshot-to-action loop as computer use, but with a smaller surface area, which makes them more reliable."
+        "q": "Saving only the message log to disk after every step is enough to resume a crashed agent safely.",
+        "why": "The agent's state is more than the message log: it also holds in-flight tool calls, partial writes, approval state, and retry counters. Saving the messages and losing the rest gives a corrupt resume."
       },
       "bn": {
-        "q": "Browser agent হলো computer use-এর একটি সীমিত অংশ: মডেল শুধু একটি browser tab-এর ভেতরেই দেখতে ও কাজ করতে পারে।",
-        "why": "Browser agent computer use-এর মতোই screenshot থেকে action-এর loop চালায়, কিন্তু তার surface area ছোট, তাই এটি বেশি নির্ভরযোগ্য।"
+        "q": "প্রতিটি ধাপের পর শুধু message log disk-এ save করলেই crash হওয়া agent নিরাপদে resume করা যায়।",
+        "why": "Agent-এর state শুধু message log নয়: এতে in-flight tool call, আংশিক write, approval state আর retry counter-ও থাকে। শুধু message save করে বাকি হারালে resume নষ্ট হয়ে যায়।"
       }
     }
   ]

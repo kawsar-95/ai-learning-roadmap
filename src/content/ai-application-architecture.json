@@ -733,7 +733,7 @@
         "why": "Anything over about 10 seconds should not block an HTTP request. Push it to a queue and return a job_id, and the client polls or subscribes for updates."
       },
       "bn": {
-        "q": "একটা task প্রায় 10 সেকেন্ডের বেশি সময় নেয়। Topic অনুযায়ী কী করা উচিত?",
+        "q": "একটা task প্রায় 10 সেকেন্ডের বেশি সময় নেয়। এই Part অনুযায়ী কী করা উচিত?",
         "options": [
           "Task শেষ না হওয়া পর্যন্ত HTTP request খোলা রাখো।",
           "Task-টা queue-তে push করো আর একটা job_id ফেরত দাও।",
@@ -745,22 +745,22 @@
     {
       "id": "q2",
       "kind": "mcq",
-      "answer": 2,
+      "answer": 0,
       "en": {
         "q": "Which streaming transport is the simplest, one-way (server to client), and works through any HTTP proxy?",
         "options": [
-          "WebSockets",
+          "SSE (Server-Sent Events)",
           "HTTP chunked transfer",
-          "SSE (Server-Sent Events)"
+          "WebSockets"
         ],
         "why": "SSE is the simplest transport, it is one-way, and it works through any HTTP proxy. WebSockets are bidirectional, and HTTP chunked transfer is a fallback."
       },
       "bn": {
         "q": "কোন streaming transport সবচেয়ে সহজ, একমুখী (server থেকে client) আর যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে?",
         "options": [
-          "WebSockets",
+          "SSE (Server-Sent Events)",
           "HTTP chunked transfer",
-          "SSE (Server-Sent Events)"
+          "WebSockets"
         ],
         "why": "SSE সবচেয়ে সহজ transport, একমুখী, আর যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে। WebSockets দ্বিমুখী, আর HTTP chunked transfer হলো fallback।"
       }
@@ -775,30 +775,30 @@
       },
       "bn": {
         "q": "Multi-tenant app-এর ক্ষেত্রে topic বলে, প্রতিটি tenant-এর prompt তার নিজের codebase-এ hard-code করতে হবে।",
-        "why": "Topic বলে, কখনোই কোনো tenant-এর prompt তার codebase-এ hard-code কোরো না। Prompt আর key একটা tenant_config row-তে রাখো এবং প্রতিটি request-এর edge-এ fetch করো।"
+        "why": "এই Part বলে, কখনোই কোনো tenant-এর prompt তার codebase-এ hard-code কোরো না। Prompt আর key একটা tenant_config row-তে রাখো এবং প্রতিটি request-এর edge-এ fetch করো।"
       }
     },
     {
       "id": "q4",
       "kind": "mcq",
-      "answer": 0,
+      "answer": 1,
       "en": {
         "q": "What does this Part say a model gateway is, essentially?",
         "options": [
-          "A fallback router plus cost tracking",
           "A store for checkpoints of agent state",
+          "A fallback router plus cost tracking",
           "A feature flag service for prompts"
         ],
         "why": "This Part says a model gateway is essentially a fallback router plus cost tracking. LiteLLM and Portkey do this out of the box."
       },
       "bn": {
-        "q": "Topic অনুযায়ী model gateway মূলত কী?",
+        "q": "এই Part অনুযায়ী model gateway মূলত কী?",
         "options": [
-          "একটা fallback router আর cost tracking",
           "Agent state-এর checkpoint রাখার জায়গা",
+          "একটা fallback router আর cost tracking",
           "Prompt-এর জন্য একটা feature flag service"
         ],
-        "why": "Topic বলে, model gateway মূলত একটা fallback router আর cost tracking। LiteLLM ও Portkey এটা বাক্সের বাইরেই করে।"
+        "why": "এই Part বলে, model gateway মূলত একটা fallback router আর cost tracking। LiteLLM ও Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে।"
       }
     },
     {
@@ -811,7 +811,7 @@
       },
       "bn": {
         "q": "একটা AI API-তে client যেন request-এর মধ্যেই cost আর latency budget দিতে পারে, যেমন $0.05 আর 8s।",
-        "why": "Topic-এর পাঁচটি API নিয়মের একটা এটা। Client বলে দেয় কত খরচ করা যাবে, আর server সেটা মানে।"
+        "why": "এই Part-এর পাঁচটি API নিয়মের একটা এটা। Client বলে দেয় কত খরচ করা যাবে, আর server সেটা মানে।"
       }
     }
   ]

@@ -3541,8 +3541,8 @@
       "en": {
         "q": "You want to type a prompt in your browser and use sliders for temperature, top-k, and top-p. Which resource fits?",
         "options": [
-          "TensorFlow Playground",
           "Embedding Atlas",
+          "TensorFlow Playground",
           "Transformer Explainer"
         ],
         "why": "Transformer Explainer runs a live GPT-2 (small) in your browser and has sliders for the three sampling settings. TensorFlow Playground trains a tiny network, and Embedding Atlas maps embeddings."
@@ -3550,8 +3550,8 @@
       "bn": {
         "q": "তুমি browser-এ একটা prompt লিখতে চাও আর temperature, top-k ও top-p-এর slider ব্যবহার করতে চাও। কোন resource মানানসই?",
         "options": [
-          "TensorFlow Playground",
           "Embedding Atlas",
+          "TensorFlow Playground",
           "Transformer Explainer"
         ],
         "why": "Transformer Explainer তোমার browser-এ live GPT-2 (small) চালায় আর তিনটি sampling setting-এর slider দেয়। TensorFlow Playground একটা ছোট network train করে, আর Embedding Atlas embedding-এর map বানায়।"
@@ -3596,12 +3596,12 @@
     {
       "id": "q4",
       "kind": "mcq",
-      "answer": 1,
+      "answer": 0,
       "en": {
         "q": "You want to learn how modern LLMs make attention cheaper for long inputs, with GQA, MLA, and sliding window side by side. Which resource fits?",
         "options": [
-          "A Visual Guide to Mixture of Experts",
           "A Visual Guide to Attention Variants",
+          "A Visual Guide to Mixture of Experts",
           "The Illustrated Transformer"
         ],
         "why": "A Visual Guide to Attention Variants compares MHA, GQA, MLA, sliding window, and more. Each variant tries to make attention cheaper for long inputs."
@@ -3609,8 +3609,8 @@
       "bn": {
         "q": "তুমি জানতে চাও আধুনিক LLM কীভাবে লম্বা input-এর জন্য attention সস্তা করে, যেখানে GQA, MLA ও sliding window পাশাপাশি দেখানো হয়েছে। কোন resource মানানসই?",
         "options": [
-          "A Visual Guide to Mixture of Experts",
           "A Visual Guide to Attention Variants",
+          "A Visual Guide to Mixture of Experts",
           "The Illustrated Transformer"
         ],
         "why": "A Visual Guide to Attention Variants-এ MHA, GQA, MLA, sliding window আর আরও কয়েকটির তুলনা করা হয়েছে। প্রতিটি variant লম্বা input-এর জন্য attention সস্তা করার চেষ্টা করে।"
@@ -3626,7 +3626,7 @@
       },
       "bn": {
         "q": "LLM Inference Handbook-এর প্রথম পাতায় একটা visualizer আছে, যা একটা prompt-কে চারটি ধাপে অনুসরণ করে: Tokenizer, Scheduling, Prefill ও Output।",
-        "why": "Topic বলে, প্রথম পাতায় একটা interactive LLM Inference Visualizer আছে। সেটা একটা prompt-কে এই চারটি ধাপে অনুসরণ করে।"
+        "why": "এই Part বলে, প্রথম পাতায় একটা interactive LLM Inference Visualizer আছে। সেটা একটা prompt-কে এই চারটি ধাপে অনুসরণ করে।"
       }
     }
   ]

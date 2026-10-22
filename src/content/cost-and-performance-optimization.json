@@ -682,24 +682,24 @@
     {
       "id": "q1",
       "kind": "mcq",
-      "answer": 1,
+      "answer": 3,
       "en": {
         "q": "Which technique does this Part call the single most powerful cost lever?",
         "options": [
-          "Model cascading",
-          "Caching",
+          "Token budgeting",
           "Distillation",
-          "Token budgeting"
+          "Model cascading",
+          "Caching"
         ],
         "why": "This Part states that caching is the single most powerful cost lever. It lists semantic, output, and prompt caches."
       },
       "bn": {
         "q": "এই Part কোন technique-কে খরচ কমানোর সবচেয়ে শক্তিশালী উপায় বলেছে?",
         "options": [
-          "Model cascading",
-          "Caching",
+          "Token budgeting",
           "Distillation",
-          "Token budgeting"
+          "Model cascading",
+          "Caching"
         ],
         "why": "এই Part-এ স্পষ্ট বলা আছে, খরচ কমানোর উপায়গুলোর মধ্যে caching সবচেয়ে শক্তিশালী। এতে semantic, output আর prompt cache আছে।"
       }
@@ -725,9 +725,9 @@
         "q": "Batch APIs return results within 24h at half the cost. Which workload fits them?",
         "options": [
           "A chat reply that must appear in 5 seconds",
-          "A live support answer for a waiting customer",
+          "A tool call inside a running agent",
           "Nightly evals and bulk labelling",
-          "A tool call inside a running agent"
+          "A live support answer for a waiting customer"
         ],
         "why": "Batch APIs suit work that does not need an answer in the next 5 seconds. This Part lists nightly evals, bulk labelling, and backfills."
       },
@@ -735,9 +735,9 @@
         "q": "Batch API 24h-এর মধ্যে অর্ধেক খরচে ফলাফল দেয়। কোন কাজ এতে মানায়?",
         "options": [
           "যে chat reply 5 সেকেন্ডের মধ্যে দেখাতে হবে",
-          "অপেক্ষা করা customer-কে live support উত্তর",
+          "চলমান agent-এর ভেতরের tool call",
           "রাতের eval আর bulk labelling",
-          "চলমান agent-এর ভেতরের tool call"
+          "অপেক্ষা করা customer-কে live support উত্তর"
         ],
         "why": "যে কাজে পরের 5 সেকেন্ডে উত্তর লাগে না, তার জন্য Batch API ভালো। এই Part-এ nightly eval, bulk labelling আর backfill-এর কথা আছে।"
       }
@@ -745,24 +745,24 @@
     {
       "id": "q4",
       "kind": "mcq",
-      "answer": 0,
+      "answer": 3,
       "en": {
         "q": "Which technique does this Part say cuts cost and latency and also unlocks self-hosting?",
         "options": [
-          "Distillation",
           "Prompt compression",
+          "Token budgeting",
           "Semantic cache",
-          "Token budgeting"
+          "Distillation"
         ],
         "why": "This Part says distillation is the only technique that does all three at the same time. You fine-tune a small open model on big-model answers."
       },
       "bn": {
         "q": "এই Part-এর মতে কোন technique একই সাথে খরচ ও latency কমায় এবং self-hosting-এর পথ খুলে দেয়?",
         "options": [
-          "Distillation",
           "Prompt compression",
+          "Token budgeting",
           "Semantic cache",
-          "Token budgeting"
+          "Distillation"
         ],
         "why": "এই Part বলছে distillation-ই একমাত্র technique যা একসাথে এই তিনটি কাজ করে। তুমি বড় model-এর উত্তর দিয়ে একটা ছোট open model fine-tune করো।"
       }
@@ -770,24 +770,24 @@
     {
       "id": "q5",
       "kind": "mcq",
-      "answer": 3,
+      "answer": 1,
       "en": {
         "q": "What does a model gateway like LiteLLM, Portkey, or OpenRouter do?",
         "options": [
-          "It fine-tunes a small model on big-model answers",
-          "It removes stopwords from long prompts",
           "It stores near-identical prompts in a vector index only",
-          "It sits between your app and every LLM provider and gives one API"
+          "It sits between your app and every LLM provider and gives one API",
+          "It removes stopwords from long prompts",
+          "It fine-tunes a small model on big-model answers"
         ],
         "why": "A model gateway sits between the app and all providers. It gives one API plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching."
       },
       "bn": {
         "q": "LiteLLM, Portkey বা OpenRouter-এর মতো model gateway কী কাজ করে?",
         "options": [
-          "বড় model-এর উত্তর দিয়ে একটা ছোট model fine-tune করে",
-          "লম্বা prompt থেকে stopword সরিয়ে দেয়",
           "শুধু প্রায় একই রকম prompt একটা vector index-এ জমা রাখে",
-          "তোমার app আর প্রতিটা LLM provider-এর মাঝখানে বসে এবং একটাই API দেয়"
+          "তোমার app আর প্রতিটা LLM provider-এর মাঝখানে বসে এবং একটাই API দেয়",
+          "লম্বা prompt থেকে stopword সরিয়ে দেয়",
+          "বড় model-এর উত্তর দিয়ে একটা ছোট model fine-tune করে"
         ],
         "why": "Model gateway app আর সব provider-এর মাঝখানে বসে। এটা একটা API দেয়, সাথে per-key rate limit, cost tracking, retry, fallback আর semantic caching।"
       }

@@ -776,24 +776,24 @@
     {
       "id": "q1",
       "kind": "mcq",
-      "answer": 2,
+      "answer": 3,
       "en": {
         "q": "Which RAG metric asks: were all the chunks needed to answer actually retrieved?",
         "options": [
+          "Context precision",
           "Faithfulness",
           "Answer relevance",
-          "Context recall",
-          "Context precision"
+          "Context recall"
         ],
         "why": "Context recall checks that all the needed chunks were retrieved. Context precision checks the opposite side: whether the retrieved chunks are mostly relevant and not noise."
       },
       "bn": {
         "q": "কোন RAG metric জিজ্ঞেস করে: উত্তর দিতে যত chunk দরকার ছিল, সবগুলো কি আসলে retrieve হয়েছে?",
         "options": [
+          "Context precision",
           "Faithfulness",
           "Answer relevance",
-          "Context recall",
-          "Context precision"
+          "Context recall"
         ],
         "why": "Context recall যাচাই করে দরকারি সব chunk retrieve হয়েছে কিনা। Context precision দেখে উল্টো দিকটা: retrieve করা chunk-গুলো বেশিরভাগ প্রাসঙ্গিক কিনা, noise নয় তো।"
       }
@@ -839,14 +839,14 @@
     {
       "id": "q4",
       "kind": "mcq",
-      "answer": 1,
+      "answer": 3,
       "en": {
         "q": "Your golden set is too small, so you ask an LLM to write synthetic eval pairs. What must you always include?",
         "options": [
           "A rubric with 4 to 6 criteria",
-          "A contamination check",
+          "A human label for every pair",
           "A pairwise comparison step",
-          "A human label for every pair"
+          "A contamination check"
         ],
         "why": "This Part says to always include a contamination check. Without it, synthetic questions may paraphrase training data, so you test memorisation and not capability."
       },
@@ -854,9 +854,9 @@
         "q": "তোমার golden set খুব ছোট, তাই তুমি LLM দিয়ে synthetic eval pair লেখাচ্ছ। কোন জিনিসটা সবসময় রাখতে হবে?",
         "options": [
           "4 থেকে 6টি criteria-র একটা rubric",
-          "একটা contamination check",
+          "প্রতিটা pair-এর জন্য মানুষের label",
           "একটা pairwise comparison ধাপ",
-          "প্রতিটা pair-এর জন্য মানুষের label"
+          "একটা contamination check"
         ],
         "why": "এই Part বলছে সবসময় contamination check রাখতে হবে। না রাখলে synthetic প্রশ্ন training data-র paraphrase হতে পারে, তখন তুমি capability নয়, memorisation পরীক্ষা করছ।"
       }

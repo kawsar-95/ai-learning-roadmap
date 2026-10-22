@@ -2327,69 +2327,6 @@
     {
       "id": "q2",
       "kind": "tf",
-      "answer": false,
-      "en": {
-        "q": "This Part says that a persona such as \"You are an expert doctor\" gives the model real medical knowledge.",
-        "why": "A persona does not grant knowledge. It only styles the output, so pair it with retrieved knowledge (RAG) when expertise matters."
-      },
-      "bn": {
-        "q": "এই Part বলছে, \"You are an expert doctor\"-এর মতো persona মডেলকে সত্যিকারের চিকিৎসা-জ্ঞান দেয়।",
-        "why": "Persona জ্ঞান দেয় না। এটা শুধু উত্তরের ঢং বদলায়, তাই বিশেষজ্ঞতা দরকার হলে retrieved knowledge (RAG)-এর সাথে ব্যবহার করো।"
-      }
-    },
-    {
-      "id": "q3",
-      "kind": "mcq",
-      "answer": 3,
-      "en": {
-        "q": "Which technique samples N independent chain-of-thought chains and takes the majority answer?",
-        "options": [
-          "Auto-CoT",
-          "Least-to-Most",
-          "Tree of Thoughts",
-          "Self-consistency"
-        ],
-        "why": "Self-consistency samples N independent CoT chains and takes the majority answer. Tree of Thoughts explores and prunes branches, and Least-to-Most solves sub-problems in order."
-      },
-      "bn": {
-        "q": "কোন কৌশলে N-টি স্বাধীন chain-of-thought নমুনা নিয়ে সংখ্যাগরিষ্ঠ উত্তর বেছে নেওয়া হয়?",
-        "options": [
-          "Auto-CoT",
-          "Least-to-Most",
-          "Tree of Thoughts",
-          "Self-consistency"
-        ],
-        "why": "Self-consistency N-টি স্বাধীন CoT chain নমুনা নেয় এবং সংখ্যাগরিষ্ঠ উত্তর বেছে নেয়। Tree of Thoughts একাধিক branch খুঁজে ছাঁটাই করে, আর Least-to-Most উপ-সমস্যাগুলো ক্রমানুসারে সমাধান করে।"
-      }
-    },
-    {
-      "id": "q4",
-      "kind": "mcq",
-      "answer": 0,
-      "en": {
-        "q": "What does this Part say about prompt-layer defences against prompt injection?",
-        "options": [
-          "They reduce the risk but do not eliminate it.",
-          "Used together, they remove the risk completely.",
-          "They stop indirect injection but not direct injection.",
-          "They make system-layer defences unnecessary."
-        ],
-        "why": "This Part says none of these defences is bulletproof. They are defence in depth, so combine them with system-layer defences such as a classifier, rate limits, and a tool allowlist."
-      },
-      "bn": {
-        "q": "Prompt injection-এর বিরুদ্ধে prompt-স্তরের প্রতিরক্ষা নিয়ে এই Part কী বলে?",
-        "options": [
-          "এগুলো ঝুঁকি কমায়, কিন্তু পুরোপুরি দূর করে না।",
-          "সবগুলো একসাথে ব্যবহার করলে ঝুঁকি পুরোপুরি শেষ হয়।",
-          "এগুলো indirect injection ঠেকায়, কিন্তু direct injection নয়।",
-          "এগুলো থাকলে system-স্তরের প্রতিরক্ষা আর লাগে না।"
-        ],
-        "why": "এই Part বলছে, এর কোনোটিই সম্পূর্ণ নিরাপদ নয়। এগুলো defence in depth, তাই classifier, rate limit আর tool allowlist-এর মতো system-স্তরের প্রতিরক্ষার সাথে মেলাও।"
-      }
-    },
-    {
-      "id": "q5",
-      "kind": "tf",
       "answer": true,
       "en": {
         "q": "This Part says to pin the model version, for example a dated name instead of \"latest\", because a silent vendor update can break a prompt that worked before.",
@@ -2398,6 +2335,69 @@
       "bn": {
         "q": "এই Part বলছে, \"latest\"-এর বদলে তারিখসহ নির্দিষ্ট model version pin করো, কারণ ভেন্ডরের নীরব আপডেটে আগে-কাজ-করা prompt ভেঙে যেতে পারে।",
         "why": "গত সপ্তাহে ভালো চলা prompt ভেন্ডরের নীরব আপডেটে খারাপ হতে পারে। model version pin করলে এটা এড়ানো যায়।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Which technique samples N independent chain-of-thought chains and takes the majority answer?",
+        "options": [
+          "Self-consistency",
+          "Least-to-Most",
+          "Tree of Thoughts",
+          "Auto-CoT"
+        ],
+        "why": "Self-consistency samples N independent CoT chains and takes the majority answer. Tree of Thoughts explores and prunes branches, and Least-to-Most solves sub-problems in order."
+      },
+      "bn": {
+        "q": "কোন কৌশলে N-টি স্বাধীন chain-of-thought নমুনা নিয়ে সংখ্যাগরিষ্ঠ উত্তর বেছে নেওয়া হয়?",
+        "options": [
+          "Self-consistency",
+          "Least-to-Most",
+          "Tree of Thoughts",
+          "Auto-CoT"
+        ],
+        "why": "Self-consistency N-টি স্বাধীন CoT chain নমুনা নেয় এবং সংখ্যাগরিষ্ঠ উত্তর বেছে নেয়। Tree of Thoughts একাধিক branch খুঁজে ছাঁটাই করে, আর Least-to-Most উপ-সমস্যাগুলো ক্রমানুসারে সমাধান করে।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "What does this Part say about prompt-layer defences against prompt injection?",
+        "options": [
+          "They stop indirect injection but not direct injection.",
+          "They reduce the risk but do not eliminate it.",
+          "Used together, they remove the risk completely.",
+          "They make system-layer defences unnecessary."
+        ],
+        "why": "This Part says none of these defences is bulletproof. They are defence in depth, so combine them with system-layer defences such as a classifier, rate limits, and a tool allowlist."
+      },
+      "bn": {
+        "q": "Prompt injection-এর বিরুদ্ধে prompt-স্তরের প্রতিরক্ষা নিয়ে এই Part কী বলে?",
+        "options": [
+          "এগুলো indirect injection ঠেকায়, কিন্তু direct injection নয়।",
+          "এগুলো ঝুঁকি কমায়, কিন্তু পুরোপুরি দূর করে না।",
+          "সবগুলো একসাথে ব্যবহার করলে ঝুঁকি পুরোপুরি শেষ হয়।",
+          "এগুলো থাকলে system-স্তরের প্রতিরক্ষা আর লাগে না।"
+        ],
+        "why": "এই Part বলছে, এর কোনোটিই সম্পূর্ণ নিরাপদ নয়। এগুলো defence in depth, তাই classifier, rate limit আর tool allowlist-এর মতো system-স্তরের প্রতিরক্ষার সাথে মেলাও।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "This Part says that a persona such as \"You are an expert doctor\" gives the model real medical knowledge.",
+        "why": "A persona does not grant knowledge. It only styles the output, so pair it with retrieved knowledge (RAG) when expertise matters."
+      },
+      "bn": {
+        "q": "এই Part বলছে, \"You are an expert doctor\"-এর মতো persona মডেলকে সত্যিকারের চিকিৎসা-জ্ঞান দেয়।",
+        "why": "Persona জ্ঞান দেয় না। এটা শুধু উত্তরের ঢং বদলায়, তাই বিশেষজ্ঞতা দরকার হলে retrieved knowledge (RAG)-এর সাথে ব্যবহার করো।"
       }
     }
   ]
