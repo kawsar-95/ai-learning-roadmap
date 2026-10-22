@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Block, TopicFile } from "../src/lib/content-schema.ts";
-import { blockText, buildSearchDocs, createIndex, runSearch } from "../src/lib/search.ts";
+import { blockText, buildSearchDocs, createIndex, readingMinutes, runSearch } from "../src/lib/search.ts";
 
 const strip = (h: string) => h.replace(/<[^>]+>/g, "");
 
@@ -90,4 +90,14 @@ test("buildSearchDocs in Bangla: Bangla titles, /bn links, Bangla and Technical 
   assert.equal(doc.topic, "RAG (বাংলা)");
   assert.equal(doc.title, "Reranking (বাংলা)");
   assert.match(doc.text, /^Cross-encoder সহজ ব্যাখ্যা BM25 first$/);
+});
+
+test("readingMinutes gives at least 1 minute", () => {
+  assert.equal(readingMinutes([], strip), 1);
+  assert.equal(readingMinutes([{ type: "paragraph", html: "<b>one</b> two" }], strip), 1);
+});
+
+test("readingMinutes counts 200 words per minute", () => {
+  const html = Array(600).fill("word").join(" ");
+  assert.equal(readingMinutes([{ type: "paragraph", html }], strip), 3);
 });

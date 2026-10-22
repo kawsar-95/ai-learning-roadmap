@@ -18,6 +18,12 @@ export type SearchDoc = {
 /** A search result: the stored fields of a doc, without the body text. */
 export type SearchHit = Omit<SearchDoc, "text">;
 
+/** Minutes to read the blocks at 200 words a minute. Never less than 1. */
+export function readingMinutes(blocks: Block[], strip: (html: string) => string): number {
+  const words = blocks.map((block) => blockText(block, strip)).join(" ").match(/\S+/g)?.length ?? 0;
+  return Math.max(1, Math.round(words / 200));
+}
+
 /**
  * The plain text of one block. `strip` turns an inline html field into
  * text. Code blocks return their raw source. Diagrams return only captions.
