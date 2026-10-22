@@ -30,6 +30,9 @@ export function topicHref(slug: string, lang: Lang): string {
 export function contentsHref(lang: Lang): string {
   return lang === "bn" ? "/bn/contents/" : "/contents/";
 }
+export function dashboardHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/dashboard/" : "/dashboard/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";

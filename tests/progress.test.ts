@@ -1,9 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  BOOKMARKS_STORAGE_KEY,
+  PROGRESS_STORAGE_KEY,
   firstUndone,
   parseProgress,
   progressKey,
+  resolveBookmarks,
   serializeProgress,
   setKeys,
   summarize,
@@ -68,4 +71,23 @@ test("setKeys adds every key and keeps other topics", () => {
 test("setKeys removes every key and keeps other topics", () => {
   const next = setKeys(new Set(["rag/s1", "inference/s1", "inference/s2"]), ["inference/s1", "inference/s2"], false);
   assert.deepEqual([...next], ["rag/s1"]);
+});
+
+test("resolveBookmarks keeps reading order and drops unknown keys", () => {
+  const stored = new Set(["rag/s2", "gone/s9", "inference/s1"]);
+  assert.deepEqual(resolveBookmarks(stored, ["inference/s1", "rag/s1", "rag/s2"]), ["inference/s1", "rag/s2"]);
+});
+
+test("resolveBookmarks gives an empty list for no bookmarks", () => {
+  assert.deepEqual(resolveBookmarks(new Set(), ["inference/s1"]), []);
+});
+
+test("the bookmarks and progress storage keys differ", () => {
+  assert.equal(BOOKMARKS_STORAGE_KEY, "bookmarks");
+  assert.notEqual(BOOKMARKS_STORAGE_KEY, PROGRESS_STORAGE_KEY);
+});
+
+test("parseProgress reads corrupt bookmark text as an empty set", () => {
+  assert.equal(parseProgress("{not json").size, 0);
+  assert.equal(parseProgress('{"a":1}').size, 0);
 });

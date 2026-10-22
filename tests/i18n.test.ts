@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import vm from "node:vm";
-import { LANG_STORAGE_KEY, UI, fmtNum, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
+import { LANG_STORAGE_KEY, UI, dashboardHref, fmtNum, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
 import { practiceLang } from "../src/lib/practice.ts";
 import { videosForVoice } from "../src/lib/videos.ts";
 import type { Video } from "../src/lib/content-schema.ts";
@@ -101,4 +101,11 @@ test("a topic and each section need their Bangla title and intro", async () => {
   assert.throws(() => TopicFileSchema.parse({ ...topic, bn: { ...topic.bn, title: "" } }), "empty bn title");
   assert.throws(() => TopicFileSchema.parse({ ...topic, bn: { ...topic.bn, extra: 1 } }), "extra bn key");
   assert.throws(() => TopicFileSchema.parse({ ...topic, sections: [{ ...section, bn: { title: "টি", sub: "<script>x</script>" } }] }), "bad tag in bn sub");
+});
+
+test("dashboardHref and the language switch agree", () => {
+  assert.equal(dashboardHref("en"), "/dashboard/");
+  assert.equal(dashboardHref("bn"), "/bn/dashboard/");
+  assert.equal(localizedPath(dashboardHref("en"), "bn"), dashboardHref("bn"));
+  assert.equal(localizedPath(dashboardHref("bn"), "en"), dashboardHref("en"));
 });
