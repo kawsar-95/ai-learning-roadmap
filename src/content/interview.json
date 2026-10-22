@@ -60,7 +60,7 @@
           },
           "bn": {
             "q": "Model এমন output দিলে যা তোমার parser আশা করেনি, তখন তুমি কীভাবে সামলাবে?",
-            "a": "তিনটা স্তর ব্যবহার করো। প্রথমে JSON mode বা structured outputs দিয়ে model-কে constrain করো, এটাই সবচেয়ে সস্তা insurance। দ্বিতীয়ত, Pydantic, Zod বা JSON Schema দিয়ে runtime-এ output validate করো, কারণ constrained output-ও ভুল field বা hallucinated value থাকতে পারে। তৃতীয়ত, সুন্দরভাবে recover করো: আরও কড়া prompt দিয়ে retry করো, default-এ ফিরে যাও, অথবা user-কে \"I don't know\" দেখাও। Model output-এর ওপর কখনো eval() চালিয়ো না।"
+            "a": "তিনটা স্তর ব্যবহার করো। প্রথমে JSON mode বা structured outputs দিয়ে model-কে constrain করো, এটাই সবচেয়ে সস্তা insurance। দ্বিতীয়ত, Pydantic, Zod বা JSON Schema দিয়ে runtime-এ output validate করো, কারণ constrained output-এও ভুল field বা hallucinated value থাকতে পারে। তৃতীয়ত, ব্যর্থতা সামলে নিয়ে নিরাপদে recover করো: আরও কড়া prompt দিয়ে retry করো, default-এ ফিরে যাও, অথবা user-কে \"I don't know\" দেখাও। Model output-এর ওপর কখনো eval() চালিয়ো না।"
           }
         },
         {
@@ -125,7 +125,7 @@
           },
           "bn": {
             "q": "RAG-এ chunking কেন গুরুত্বপূর্ণ, আর late chunking কী?",
-            "a": "Retrieval কাজ করে document-এর টুকরোর ওপর, তাই text কীভাবে কাটছ তার ওপরই নির্ভর করে retriever কী ফেরত দিতে পারবে: chunk খুব মোটা হলে উত্তর noise-এ চাপা পড়ে, আর খুব ছোট হলে context হারিয়ে যায়। Fixed-size chunking-এ পাশাপাশি chunk-এর মধ্যে chunk_overlap ভাগ থাকে, যাতে সীমানার কোনো তথ্য অন্তত একটা chunk-এ পুরোটা থাকে, আর recursive splitter আগে paragraph, তারপর line, word এবং শেষে character দিয়ে কাটে। Late chunking (Günther et al., 2024) একটা long-context embedding model দিয়ে পুরো text-কে একবারে encode করে, তারপর transformer-এর পরে এবং mean pooling-এর ঠিক আগে কাটে, ফলে প্রতিটি chunk vector আশপাশের context বহন করে। এতে বাড়তি training লাগে না, তবে এমন একটা embedding model লাগে যার context window পুরো document ধরতে পারে।"
+            "a": "Retrieval কাজ করে document-এর টুকরোর ওপর, তাই text কীভাবে কাটছ তার ওপরই নির্ভর করে retriever কী ফেরত দিতে পারবে: chunk খুব বড় হলে উত্তর noise-এ চাপা পড়ে, আর খুব ছোট হলে context হারিয়ে যায়। Fixed-size chunking-এ পাশাপাশি chunk-এর মধ্যে chunk_overlap ভাগ থাকে, যাতে সীমানার কোনো তথ্য অন্তত একটা chunk-এ পুরোটা থাকে, আর recursive splitter আগে paragraph, তারপর line, word এবং শেষে character দিয়ে কাটে। Late chunking (Günther et al., 2024) একটা long-context embedding model দিয়ে পুরো text-কে একবারে encode করে, তারপর transformer-এর পরে এবং mean pooling-এর ঠিক আগে কাটে, ফলে প্রতিটি chunk vector আশপাশের context বহন করে। এতে বাড়তি training লাগে না, তবে এমন একটা embedding model লাগে যার context window পুরো document ধরতে পারে।"
           }
         },
         {
@@ -159,11 +159,11 @@
           "section": "s2",
           "en": {
             "q": "When would you choose ReWOO over ReAct, and why is ReAct still the default loop?",
-            "a": "ReAct interleaves a Thought, an Action, and an Observation, so its traces are human-readable and you can see why the model picked an action. That is why it is the default for short, tool-heavy tasks and for debugging. ReWOO plans the whole tool graph upfront, the worker runs everything in parallel, and the solver reads the evidence and answers. It uses 4–6× fewer tokens than ReAct on retrieval benchmarks, but its debug-ability is weak."
+            "a": "ReAct interleaves a Thought, an Action, and an Observation, so its traces are human-readable and you can see why the model picked an action. That is why it is the default for short, tool-heavy tasks and for debugging. Choose ReWOO for retrieval-heavy tasks with fan-out tool graphs, where the model does not need the result of one tool to plan the next. It plans the whole tool graph upfront, the worker runs everything in parallel, and the solver reads the evidence and answers. It uses 4–6× fewer tokens than ReAct on retrieval benchmarks, but its debug-ability is weak."
           },
           "bn": {
             "q": "ReWOO কখন ReAct-এর বদলে বেছে নেবে, আর ReAct কেন এখনও default loop?",
-            "a": "ReAct-এ Thought, Action আর Observation পালাক্রমে চলে, তাই তার trace মানুষ পড়তে পারে আর model কেন একটা action বেছেছে তা দেখা যায়। এই কারণেই short, tool-heavy কাজে আর debugging-এ এটাই default। ReWOO পুরো tool graph আগে থেকেই plan করে, worker সব parallel-এ চালায়, তারপর solver evidence পড়ে উত্তর দেয়। Retrieval benchmark-এ এটা ReAct-এর চেয়ে 4–6× কম token ব্যবহার করে, কিন্তু এর debug-ability দুর্বল।"
+            "a": "ReAct-এ Thought, Action আর Observation পালাক্রমে চলে, তাই তার trace মানুষ পড়তে পারে আর model কেন একটা action বেছেছে তা দেখা যায়। এই কারণেই short, tool-heavy কাজে আর debugging-এ এটাই default। Retrieval-heavy কাজে, যেখানে fan-out tool graph থাকে আর একটা tool-এর result না দেখেও পরের tool plan করা যায়, সেখানে ReWOO বেছে নাও। এটা পুরো tool graph আগে থেকেই plan করে, worker সব parallel-এ চালায়, তারপর solver evidence পড়ে উত্তর দেয়। Retrieval benchmark-এ এটা ReAct-এর চেয়ে 4–6× কম token ব্যবহার করে, কিন্তু এর debug-ability দুর্বল।"
           }
         },
         {
@@ -212,7 +212,7 @@
           },
           "bn": {
             "q": "MCP কী, আর একটা MCP server কী কী expose করে?",
-            "a": "MCP, মানে Model Context Protocol, হলো একটা open standard যা Anthropic ২০২৪-এর শেষে চালু করেছে এবং এখন OpenAI, Google আর প্রধান IDE vendor-রা গ্রহণ করেছে। Model হলো client, আর data বা tool provider একটা MCP server চালায়। Server তিনটা primitive expose করে: Tools (model যে function কল করতে পারে), Resources (client চাইলে যে read-only data fetch করতে পারে) আর Prompts (নামওয়ালা prompt template)। তুমি একটা MCP server লিখলে, যেমন Postgres-এর জন্য, সব MCP-compatible client সেটা ব্যবহার করতে পারে।"
+            "a": "MCP, মানে Model Context Protocol, হলো একটা open standard যা Anthropic 2024-এর শেষে চালু করেছে এবং এখন OpenAI, Google আর প্রধান IDE vendor-রা গ্রহণ করেছে। Model হলো client, আর data বা tool provider একটা MCP server চালায়। Server তিনটা primitive expose করে: Tools (model যে function কল করতে পারে), Resources (client চাইলে যে read-only data fetch করতে পারে) আর Prompts (নামওয়ালা prompt template)। তুমি একটা MCP server লিখলে, যেমন Postgres-এর জন্য, সব MCP-compatible client সেটা ব্যবহার করতে পারে।"
           }
         },
         {
@@ -235,11 +235,11 @@
           "section": "s3",
           "en": {
             "q": "When should a team move from a hosted inference API to self-hosting?",
-            "a": "Start hosted: time to first token is minutes, against weeks for self-hosting because of GPU procurement and ops. The rule of thumb is to move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s. Hosted cost is $0.10–$15 per 1M tokens, and self-hosted cost is $0.04–$2 at scale. Self-hosting also gives you control of data privacy and full customisation, but you must scale for peak traffic yourself."
+            "a": "Start hosted: you can start in minutes, against weeks for self-hosting because of GPU procurement and ops. The rule of thumb is to move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s. Hosted cost is $0.10–$15 per 1M tokens, and self-hosted cost is $0.04–$2 at scale. Self-hosting also gives you control of data privacy and full customisation, but you must scale for peak traffic yourself."
           },
           "bn": {
             "q": "কখন একটা team-এর hosted inference API ছেড়ে self-hosting-এ যাওয়া উচিত?",
-            "a": "Hosted দিয়ে শুরু করো: time to first token লাগে কয়েক মিনিট, আর self-hosting-এ GPU procurement ও ops-এর কারণে লাগে কয়েক সপ্তাহ। Rule of thumb হলো, তোমার bill অর্ধেক সময়ের একজন ML engineer আর দুটো H100-এর খরচ ছাড়িয়ে গেলে self-hosting-এ যাও। Hosted-এর খরচ প্রতি 1M token-এ $0.10–$15, আর scale-এ self-hosted-এর খরচ $0.04–$2। Self-hosting-এ data privacy-র নিয়ন্ত্রণ আর পুরো customisation পাওয়া যায়, কিন্তু peak traffic-এর জন্য scale তোমাকেই করতে হয়।"
+            "a": "Hosted দিয়ে শুরু করো: শুরু করতে লাগে কয়েক মিনিট, আর self-hosting-এ GPU procurement ও ops-এর কারণে লাগে কয়েক সপ্তাহ। Rule of thumb হলো, তোমার bill অর্ধেক সময়ের একজন ML engineer আর দুটো H100-এর খরচ ছাড়িয়ে গেলে self-hosting-এ যাও। Hosted-এর খরচ প্রতি 1M token-এ $0.10–$15, আর scale-এ self-hosted-এর খরচ $0.04–$2। Self-hosting-এ data privacy-র নিয়ন্ত্রণ আর পুরো customisation পাওয়া যায়, কিন্তু peak traffic-এর জন্য scale তোমাকেই করতে হয়।"
           }
         },
         {
@@ -261,7 +261,7 @@
           },
           "bn": {
             "q": "Continuous batching আর speculative decoding কীভাবে serving performance বাড়ায়?",
-            "a": "Naive serving প্রতি GPU-তে একবারে একটা request সামলায়। vLLM, TGI আর SGLang-এ ব্যবহৃত continuous batching অনেক request-এর token আন্তঃপ্রবিষ্ট করে, ফলে একটা slow request-এর জন্য GPU কখনো idle থাকে না, আর এটা সাধারণত 5–20× বেশি throughput দেয়। Speculative decoding-এ একটা ছোট draft model পরের 5–10টা token প্রস্তাব করে আর বড় model সেগুলো parallel-এ verify করে, quality না কমিয়ে throughput +2–3×। vLLM আরও যোগ করে paged KV cache, যেটা OS virtual memory-র মতো page করে allocate হয়।"
+            "a": "Naive serving প্রতি GPU-তে একবারে একটা request সামলায়। vLLM, TGI আর SGLang-এ ব্যবহৃত continuous batching অনেক request-এর token পালা করে মিশিয়ে চালায়, ফলে একটা slow request-এর জন্য GPU কখনো idle থাকে না, আর এটা সাধারণত 5–20× বেশি throughput দেয়। Speculative decoding-এ একটা ছোট draft model পরের 5–10টা token প্রস্তাব করে আর বড় model সেগুলো parallel-এ verify করে, quality না কমিয়ে throughput +2–3×। vLLM আরও যোগ করে paged KV cache, যেটা OS virtual memory-র মতো page করে allocate হয়।"
           }
         }
       ]
@@ -326,7 +326,7 @@
           },
           "bn": {
             "q": "LLM-as-judge তুমি কীভাবে ব্যবহার করবে, আর কোন practice এটাকে নির্ভরযোগ্য করে?",
-            "a": "তুমি একটি শক্তিশালী LLM-কে judge হিসেবে ব্যবহার করবে, দুটি mode-এর একটিতে। Pairwise comparison-এ judge-কে A ও B দেখিয়ে জিজ্ঞেস করবে কোনটি ভালো, আর এটা absolute scoring-এর চেয়ে ভালো কাজ করে, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ। অন্য mode হলো rubric-based scoring, যেখানে ৪–৬টি criteria থাকে আর প্রতিটিতে যুক্তিসহ ০–৫ রেটিং চাওয়া হয়। Judge হিসেবে আলাদা (প্রায়ই আরও শক্তিশালী) model নেবে, judge prompt rotate করবে, আর মাঝে মাঝে judge-কে human label-এর সাথে মিলিয়ে দেখবে।"
+            "a": "তুমি একটি শক্তিশালী LLM-কে judge হিসেবে ব্যবহার করবে, দুটি mode-এর একটিতে। Pairwise comparison-এ judge-কে A ও B দেখিয়ে জিজ্ঞেস করবে কোনটি ভালো, আর এটা absolute scoring-এর চেয়ে ভালো কাজ করে, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ। অন্য mode হলো rubric-based scoring, যেখানে 4–6টি criteria থাকে আর প্রতিটিতে যুক্তিসহ 0–5 রেটিং চাওয়া হয়। Judge হিসেবে আলাদা (প্রায়ই আরও শক্তিশালী) model নেবে, judge prompt rotate করবে, আর মাঝে মাঝে judge-কে human label-এর সাথে মিলিয়ে দেখবে।"
           }
         },
         {
@@ -353,7 +353,7 @@
           },
           "bn": {
             "q": "Model cascading কীভাবে LLM-এর খরচ কমায়, আর কখন escalate করতে হবে তা তুমি কীভাবে ঠিক করবে?",
-            "a": "তুমি সহজ request ছোট, সস্তা model-এ পাঠাবে, আর ছোট model-এর confidence কম হলেই কেবল বড়, দামি model-এ escalate করবে। Confidence মাপতে logprobs, self-critique বা আলাদা classifier ব্যবহার করতে পারো। ভালোভাবে tune করা cascade প্রায়ই frontier quality-তে পৌঁছে যায় খরচের ৩০–৭০%-এ।"
+            "a": "তুমি সহজ request ছোট, সস্তা model-এ পাঠাবে, আর ছোট model-এর confidence কম হলেই কেবল বড়, দামি model-এ escalate করবে। Confidence মাপতে logprobs, self-critique বা আলাদা classifier ব্যবহার করতে পারো। ভালোভাবে tune করা cascade প্রায়ই frontier quality-তে পৌঁছে যায় খরচের 30–70%-এ।"
           }
         },
         {
@@ -364,7 +364,7 @@
           },
           "bn": {
             "q": "একটি LLM app-এ তুমি কী কী ধরনের caching ব্যবহার করতে পারো, আর প্রতিটি কী করে?",
-            "a": "Caching হলো খরচ কমানোর সবচেয়ে শক্তিশালী উপায়, আর এটা তিন ধরনের। Semantic cache কাজ করে এভাবে: প্রায় একই prompt-এর উত্তর সম্প্রতি দেওয়া হয়ে থাকলে (cosine > ০.৯৫) cached উত্তর ফেরত দেয়। Output cache হলো input-কে key ধরে একটি key-value cache, যা deterministic কাজের জন্য, যেমন temperature=0 দিয়ে extraction বা classification। Prompt cache provider-level: এটা একাধিক call-এ system prompt-এর KV আবার ব্যবহার করে, আর cached prefix-এ ৮০–৯০% ছাড় পাওয়া যায়।"
+            "a": "Caching হলো খরচ কমানোর সবচেয়ে শক্তিশালী উপায়, আর এটা তিন ধরনের। Semantic cache কাজ করে এভাবে: প্রায় একই prompt-এর উত্তর সম্প্রতি দেওয়া হয়ে থাকলে (cosine > 0.95) cached উত্তর ফেরত দেয়। Output cache হলো input-কে key ধরে একটি key-value cache, যা deterministic কাজের জন্য, যেমন temperature=0 দিয়ে extraction বা classification। Prompt cache provider-level: এটা একাধিক call-এ system prompt-এর KV আবার ব্যবহার করে, আর cached prefix-এ 80–90% ছাড় পাওয়া যায়।"
           }
         },
         {
@@ -375,7 +375,7 @@
           },
           "bn": {
             "q": "একটি feature যাতে LLM bill বাড়িয়ে না ফেলে, তুমি তা কীভাবে ঠেকাবে, আর model gateway এতে কী যোগ করে?",
-            "a": "তুমি প্রতিটি feature-এর জন্য মাসিক token budget ঠিক করবে, ৮০%-এ alert দেবে, আর ১০০%-এ throttle করবে, যা সেই operational layer, যা একটি feature-কে কোম্পানির পুরো bill ফাঁপিয়ে ফেলা থেকে আটকায়। Model gateway তোমার app আর সব LLM provider-এর মাঝখানে বসে। এটা দেয় অনেক provider-এর জন্য একটি API, per-key rate limit, cost tracking, retry আর fallback, আর প্রধান তিনটি option হলো LiteLLM, Portkey আর OpenRouter।"
+            "a": "তুমি প্রতিটি feature-এর জন্য মাসিক token budget ঠিক করবে, 80%-এ alert দেবে, আর 100%-এ throttle করবে। এটাই সেই operational layer, যা বেপরোয়াভাবে চলা একটি feature-কে কোম্পানির পুরো bill বাড়িয়ে ফেলা থেকে আটকায়। Model gateway তোমার app আর সব LLM provider-এর মাঝখানে বসে। এটা দেয় অনেক provider-এর জন্য একটি API, per-key rate limit, cost tracking, retry আর fallback, আর প্রধান তিনটি option হলো LiteLLM, Portkey আর OpenRouter।"
           }
         }
       ]
@@ -402,7 +402,7 @@
           },
           "bn": {
             "q": "Jailbreak থেকে তুমি কীভাবে রক্ষা পাবে, আর এ বিষয়ে কী মেনে নেবে?",
-            "a": "Jailbreak হলো নিষিদ্ধ prompt-এর এমন সৃজনশীল পুনর্লিখন যা safety training-এর পাশ কাটিয়ে যায়, আর এটা একটি চলমান লক্ষ্য, কারণ red-team প্রতি মাসে নতুন jailbreak খুঁজে পায়। প্রতিরক্ষা হলো Constitutional AI fine-tuning, output classifier আর robust system prompt। সাথে তুমি এটাও মেনে নেবে যে ১০০% safety অর্জনযোগ্য নয়।"
+            "a": "Jailbreak হলো নিষিদ্ধ prompt-এর এমন সৃজনশীল পুনর্লিখন যা safety training-এর পাশ কাটিয়ে যায়, আর এটা একটি চলমান লক্ষ্য, কারণ red-team প্রতি মাসে নতুন jailbreak খুঁজে পায়। প্রতিরক্ষা হলো Constitutional AI fine-tuning, output classifier আর robust system prompt। সাথে তুমি এটাও মেনে নেবে যে 100% safety অর্জনযোগ্য নয়।"
           }
         },
         {
@@ -467,7 +467,7 @@
           },
           "bn": {
             "q": "LLM-এর output কীভাবে user-এর কাছে stream করবে, আর কোন transport বাছবে?",
-            "a": "User চায় model যেমন লেখে তেমন করে শব্দ দেখতে, ৩ সেকেন্ড থেমে থাকার পরে নয়। SSE সবচেয়ে সহজ, যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে, আর একমুখী (server থেকে client)। WebSockets দ্বিমুখী, voice আর collaborative UI-এর জন্য লাগে, কিন্তু handshake ভারী। SSE header strip করে এমন proxy-র জন্য HTTP chunked transfer হলো fallback।"
+            "a": "User চায় model যেমন লেখে তেমন করে শব্দ দেখতে, 3 সেকেন্ড থেমে থাকার পরে নয়। SSE সবচেয়ে সহজ, যেকোনো HTTP proxy-র মধ্য দিয়ে কাজ করে, আর একমুখী (server থেকে client)। WebSockets দ্বিমুখী, voice আর collaborative UI-এর জন্য লাগে, কিন্তু handshake ভারী। SSE header strip করে এমন proxy-র জন্য HTTP chunked transfer হলো fallback।"
           }
         },
         {
@@ -478,7 +478,7 @@
           },
           "bn": {
             "q": "যে agent run কয়েক মিনিট লাগে সেটা কীভাবে সামলাবে, আর call fail করলে কী করবে?",
-            "a": "প্রায় ১০ সেকেন্ডের বেশি লাগে এমন কিছু HTTP request block করে রাখা উচিত না। সেটা queue-তে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) push করো আর একটা job_id ফেরত দাও, তারপর client poll করে বা SSE/WebSocket দিয়ে update subscribe করে। fail-এর জন্য প্রতিটি request-এ একটা idempotency key বানাও আর duplicate reject করো, আর agent state-এর checkpoint রাখো যাতে resume করলে শুধু fail হওয়া step-গুলো replay হয়। এক মিনিটের বেশি লাগে এমন কিছুর জন্য durable execution (Temporal/Restate) ব্যবহার করো।"
+            "a": "প্রায় 10 সেকেন্ডের বেশি লাগে এমন কিছু HTTP request block করে রাখা উচিত না। সেটা queue-তে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) push করো আর একটা job_id ফেরত দাও, তারপর client poll করে বা SSE/WebSocket দিয়ে update subscribe করে। fail-এর জন্য প্রতিটি request-এ একটা idempotency key বানাও আর duplicate reject করো, আর agent state-এর checkpoint রাখো যাতে resume করলে শুধু fail হওয়া step-গুলো replay হয়। এক মিনিটের বেশি লাগে এমন কিছুর জন্য durable execution (Temporal/Restate) ব্যবহার করো।"
           }
         },
         {
@@ -489,7 +489,7 @@
           },
           "bn": {
             "q": "Provider-এর outage কীভাবে সামলাবে, আর নতুন model নিরাপদে কীভাবে roll out করবে?",
-            "a": "Fallback chain ব্যবহার করো: OpenAI 503 দিলে Anthropic-এ route করো, আর Anthropic 429 দিলে Together-এ route করো, প্রতিটি provider-এর জন্য degraded prompt সহ। LiteLLM আর Portkey এটা বাক্সের বাইরেই করে, আর একটা model gateway মূলত একটা fallback router আর cost tracking। প্রতিটি prompt আর প্রতিটি model-কে feature flag হিসেবে দেখো, আর ১%, তারপর ১০%, তারপর ১০০%-এ roll out করো। eval regress করলে সঙ্গে সঙ্গে roll back করো।"
+            "a": "Fallback chain ব্যবহার করো: OpenAI 503 দিলে Anthropic-এ route করো, আর Anthropic 429 দিলে Together-এ route করো, প্রতিটি provider-এর জন্য degraded prompt সহ। LiteLLM আর Portkey এটা আলাদা কোনো সেটআপ ছাড়াই করে, আর একটা model gateway মূলত একটা fallback router আর cost tracking। প্রতিটি prompt আর প্রতিটি model-কে feature flag হিসেবে দেখো, আর 1%, তারপর 10%, তারপর 100%-এ roll out করো। eval regress করলে সঙ্গে সঙ্গে roll back করো।"
           }
         }
       ]
@@ -505,7 +505,7 @@
           },
           "bn": {
             "q": "একজন junior engineer জিজ্ঞেস করল transformer কীভাবে পরের token বাছে। তুমি কোন free resource দেখাবে, আর সেটা কী দেখায়?",
-            "a": "Georgia Tech-এর Polo Club of Data Science-এর Transformer Explainer তোমার browser-এর ভেতরেই একটা live GPT-2 (small) model চালায়। এটা tokenize, embed, attention, MLP, repeat, output আর sample ধাপগুলো দেখায়, আর temperature, top-k ও top-p-র জন্য slider আছে। GPT-2 (small)-এর 124 million parameter আর 12টা block। এটা ২০১৯ সালের, তাই এটা transformer-এর আকার দেখায়, আধুনিক model-এর মান নয়।"
+            "a": "Georgia Tech-এর Polo Club of Data Science-এর Transformer Explainer তোমার browser-এর ভেতরেই একটা live GPT-2 (small) model চালায়। এটা tokenize, embed, attention, MLP, repeat, output আর sample ধাপগুলো দেখায়, আর temperature, top-k ও top-p-র জন্য slider আছে। GPT-2 (small)-এর 124 million parameter আর 12টা block। এটা 2019 সালের, তাই এটা transformer-এর গঠন দেখায়, আধুনিক model-এর মান নয়।"
           }
         },
         {
@@ -516,7 +516,7 @@
           },
           "bn": {
             "q": "কেউ code-এর আগে LLM-এর পেছনের idea বুঝতে চায়। কোন resource মানাবে, আর তার কোন অংশগুলো?",
-            "a": "কেউ code-এর আগে idea চাইলে 3Blue1Brown-এর Neural networks series হলো সবচেয়ে ভালো প্রথম ধাপ। অধ্যায় ১ থেকে ৪ একটা ছোট network বানায় আর শেখায় সেটা কীভাবে শেখে, আর অধ্যায় ৫ থেকে ৭ একই idea LLM-এর transformer-এ প্রয়োগ করে: transformers, attention ধাপে ধাপে, আর LLM কীভাবে fact জমা রাখতে পারে। ভিডিওগুলো idea শেখায়, production code নয়। grouped-query attention বা mixture of experts-এর মতো নতুন design এগুলোতে নেই।"
+            "a": "কেউ code-এর আগে idea চাইলে 3Blue1Brown-এর Neural networks series হলো সবচেয়ে ভালো প্রথম ধাপ। অধ্যায় 1 থেকে 4 একটা ছোট network বানায় আর শেখায় সেটা কীভাবে শেখে, আর অধ্যায় 5 থেকে 7 একই idea LLM-এর transformer-এ প্রয়োগ করে: transformers, attention ধাপে ধাপে, আর LLM কীভাবে fact জমা রাখতে পারে। ভিডিওগুলো idea শেখায়, production code নয়। grouped-query attention বা mixture of experts-এর মতো নতুন design এগুলোতে নেই।"
           }
         },
         {
