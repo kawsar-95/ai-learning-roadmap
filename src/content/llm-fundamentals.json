@@ -2659,5 +2659,106 @@
       "url": "https://qwen.ai/blog?id=qwen3",
       "text": "Qwen Team — Qwen3 blog announcement (May 2025)"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "A prompt shrinks from 800 to 200 tokens. What does this Part say this does?",
+        "options": [
+          "Cost falls by 25%, and latency does not change.",
+          "Cost falls by 75%, and latency falls by a meaningful fraction.",
+          "The context window grows by 75%.",
+          "Cost stays the same, because APIs charge per character."
+        ],
+        "why": "Everything a model does is denominated in tokens, and APIs charge per token. This Part says this cut lowers cost by 75% and also lowers latency."
+      },
+      "bn": {
+        "q": "একটি prompt 800 token থেকে কমে 200 token হলো। এই Part অনুযায়ী এতে কী হয়?",
+        "options": [
+          "খরচ 25% কমে, আর latency বদলায় না।",
+          "খরচ 75% কমে, আর latency-ও উল্লেখযোগ্য পরিমাণে কমে।",
+          "context window 75% বড় হয়।",
+          "খরচ একই থাকে, কারণ API অক্ষর ধরে charge করে।"
+        ],
+        "why": "মডেলের সবকিছু token দিয়ে মাপা হয়, আর API token ধরে charge করে। এই Part বলছে, এই কাটছাঁটে খরচ 75% কমে এবং latency-ও কমে।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "This Part says that with a 1M-token window, it is better to put 800K tokens in the prompt than to use retrieval or summarisation.",
+        "why": "This Part warns that long context is not free performance. Retrieval, summarisation, or hierarchical attention beats dumping 800K tokens in."
+      },
+      "bn": {
+        "q": "এই Part বলছে, 1M token-এর window থাকলে retrieval বা summarisation-এর বদলে prompt-এ 800K token ঢেলে দেওয়াই ভালো।",
+        "why": "এই Part সতর্ক করছে যে long context মানেই বিনামূল্যে ভালো performance নয়। 800K token ঢেলে দেওয়ার চেয়ে retrieval, summarisation বা hierarchical attention ভালো ফল দেয়।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Which temperature does this Part give for code, JSON, classification and math?",
+        "options": [
+          "0",
+          "0.7–1.0",
+          "1.0–2.0"
+        ],
+        "why": "The sampling table says temperature 0 for code, JSON, classification and math. 0.7–1.0 is for chat, and 1.0–2.0 is for creative writing and brainstorming."
+      },
+      "bn": {
+        "q": "কোড, JSON, classification আর math-এর জন্য এই Part কোন temperature দেয়?",
+        "options": [
+          "0",
+          "0.7–1.0",
+          "1.0–2.0"
+        ],
+        "why": "Sampling-এর টেবিলে code, JSON, classification ও math-এর জন্য temperature 0 বলা আছে। 0.7–1.0 chat-এর জন্য, আর 1.0–2.0 সৃজনশীল লেখা ও brainstorming-এর জন্য।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "For which task does this Part say a reasoning model is the best choice?",
+        "options": [
+          "Chat and summarisation",
+          "Simple Q&A and classification",
+          "Math, physics and formal proofs",
+          "Data extraction"
+        ],
+        "why": "The table marks reasoning models as best for math, physics and formal proofs. For chat, summarisation, extraction and simple Q&A they are overkill and waste tokens."
+      },
+      "bn": {
+        "q": "এই Part অনুযায়ী কোন কাজে reasoning model সবচেয়ে ভালো পছন্দ?",
+        "options": [
+          "Chat আর summarisation",
+          "সহজ Q&A আর classification",
+          "Math, physics আর formal proof",
+          "Data extraction"
+        ],
+        "why": "টেবিলে math, physics ও formal proof-এর জন্য reasoning model সবচেয়ে ভালো বলা আছে। Chat, summarisation, extraction আর সহজ Q&A-তে এগুলো overkill এবং token নষ্ট করে।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "In function calling, the model does not run the tool itself. Your code runs the tool and feeds the result back.",
+        "why": "This Part says the model only decides what to call and with what arguments. Your code runs the tool and returns the result."
+      },
+      "bn": {
+        "q": "Function calling-এ মডেল নিজে tool চালায় না। তোমার কোড tool চালায় এবং ফলাফল ফেরত দেয়।",
+        "why": "এই Part বলছে, মডেল শুধু ঠিক করে কোন tool কোন argument দিয়ে ডাকতে হবে। tool চালায় তোমার কোড, আর ফলাফল মডেলকে ফেরত দেয়।"
+      }
+    }
   ]
 }

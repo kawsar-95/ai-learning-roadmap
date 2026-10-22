@@ -771,5 +771,108 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Which RAG metric asks: were all the chunks needed to answer actually retrieved?",
+        "options": [
+          "Faithfulness",
+          "Answer relevance",
+          "Context recall",
+          "Context precision"
+        ],
+        "why": "Context recall checks that all the needed chunks were retrieved. Context precision checks the opposite side: whether the retrieved chunks are mostly relevant and not noise."
+      },
+      "bn": {
+        "q": "কোন RAG metric জিজ্ঞেস করে: উত্তর দিতে যত chunk দরকার ছিল, সবগুলো কি আসলে retrieve হয়েছে?",
+        "options": [
+          "Faithfulness",
+          "Answer relevance",
+          "Context recall",
+          "Context precision"
+        ],
+        "why": "Context recall যাচাই করে দরকারি সব chunk retrieve হয়েছে কিনা। Context precision দেখে উল্টো দিকটা: retrieve করা chunk-গুলো বেশিরভাগ প্রাসঙ্গিক কিনা, noise নয় তো।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Why does pairwise comparison beat absolute scoring in LLM-as-judge?",
+        "options": [
+          "Relative judgements are easier than absolute ones",
+          "It does not need a judge model at all",
+          "It checks the answers with regex",
+          "It always uses a weaker judge than the model under test"
+        ],
+        "why": "In pairwise mode the judge sees A and B and picks the better one. This Part says this beats absolute scoring because relative judgements are easier."
+      },
+      "bn": {
+        "q": "LLM-as-judge-এ pairwise comparison কেন absolute scoring-এর চেয়ে ভালো?",
+        "options": [
+          "আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ",
+          "এতে কোনো judge model-ই লাগে না",
+          "এটা regex দিয়ে উত্তর যাচাই করে",
+          "এটা সবসময় পরীক্ষা করা model-এর চেয়ে দুর্বল judge ব্যবহার করে"
+        ],
+        "why": "Pairwise mode-এ judge A আর B দেখে কোনটা ভালো বেছে নেয়। এই Part বলছে এটা absolute scoring-এর চেয়ে ভালো, কারণ আপেক্ষিক বিচার সহজ।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "For an agent, a correct final answer is not enough. You also need to check how the agent got there.",
+        "why": "This Part says the right answer is necessary but not sufficient. You also track trajectory match, tool-call accuracy, and step efficiency."
+      },
+      "bn": {
+        "q": "একটা agent-এর ক্ষেত্রে শুধু সঠিক final answer যথেষ্ট নয়। agent কীভাবে সেখানে পৌঁছাল, সেটাও তোমাকে যাচাই করতে হবে।",
+        "why": "এই Part বলছে সঠিক উত্তর দরকার, কিন্তু যথেষ্ট নয়। তুমি trajectory match, tool-call accuracy আর step efficiency-ও ট্র্যাক করবে।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "Your golden set is too small, so you ask an LLM to write synthetic eval pairs. What must you always include?",
+        "options": [
+          "A rubric with 4 to 6 criteria",
+          "A contamination check",
+          "A pairwise comparison step",
+          "A human label for every pair"
+        ],
+        "why": "This Part says to always include a contamination check. Without it, synthetic questions may paraphrase training data, so you test memorisation and not capability."
+      },
+      "bn": {
+        "q": "তোমার golden set খুব ছোট, তাই তুমি LLM দিয়ে synthetic eval pair লেখাচ্ছ। কোন জিনিসটা সবসময় রাখতে হবে?",
+        "options": [
+          "4 থেকে 6টি criteria-র একটা rubric",
+          "একটা contamination check",
+          "একটা pairwise comparison ধাপ",
+          "প্রতিটা pair-এর জন্য মানুষের label"
+        ],
+        "why": "এই Part বলছে সবসময় contamination check রাখতে হবে। না রাখলে synthetic প্রশ্ন training data-র paraphrase হতে পারে, তখন তুমি capability নয়, memorisation পরীক্ষা করছ।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "Online evals run an expensive judge on every live request in production.",
+        "why": "Online evals sample only 1 to 5% of live requests. They use cheap judges such as heuristics, regex, or a small LLM."
+      },
+      "bn": {
+        "q": "Online eval production-এর প্রতিটা live request-এ একটা দামি judge চালায়।",
+        "why": "Online eval live request-এর মাত্র 1 থেকে 5% sample করে। এতে heuristic, regex বা ছোট LLM-এর মতো সস্তা judge ব্যবহার হয়।"
+      }
+    }
   ]
 }

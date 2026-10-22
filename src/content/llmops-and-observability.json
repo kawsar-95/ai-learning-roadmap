@@ -648,5 +648,104 @@
       "url": "https://platform.openai.com/docs/guides/production-best-practices",
       "text": "OpenAI — Production best practices guide"
     }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "What is an LLM trace, according to this Part?",
+        "options": [
+          "A single log line that records the HTTP status code",
+          "A table of the vendor's prices per token",
+          "A tree of spans: the user request, the prompt assembly, the LLM call, every tool invocation, and the result"
+        ],
+        "why": "A trace is a tree of spans that shows one request from the user input through each LLM call and tool call to the result. This is why you can replay and debug it."
+      },
+      "bn": {
+        "q": "Text অনুযায়ী LLM trace কী?",
+        "options": [
+          "একটি log line, যাতে HTTP status code লেখা থাকে",
+          "প্রতি token-এ vendor-এর দামের একটি table",
+          "Span-এর একটি tree: user request, prompt assembly, LLM call, প্রতিটি tool invocation আর result"
+        ],
+        "why": "Trace হলো span-এর একটি tree, যা user input থেকে শুরু করে প্রতিটি LLM call ও tool call পেরিয়ে result পর্যন্ত একটি request দেখায়। তাই তুমি সেটি replay আর debug করতে পারো।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "How should a team handle prompts, according to this Part?",
+        "options": [
+          "Like code: store them in git, review them by PR, and deploy them through CI",
+          "Edit them live in an admin panel, so fixes ship at once",
+          "Keep them in the model vendor's dashboard, with no version IDs"
+        ],
+        "why": "This Part says prompts are code. Each prompt version gets a stable ID and every trace carries that ID, so you can tell which prompt version users were on."
+      },
+      "bn": {
+        "q": "Text অনুযায়ী একটি দলের prompt কীভাবে সামলানো উচিত?",
+        "options": [
+          "কোডের মতো: git-এ রাখো, PR দিয়ে review করো, আর CI দিয়ে deploy করো",
+          "Admin panel-এ সরাসরি edit করো, যাতে fix সাথে সাথে চালু হয়",
+          "Model vendor-এর dashboard-এ রাখো, কোনো version ID ছাড়া"
+        ],
+        "why": "Text বলছে prompt হলো কোড। প্রতিটি prompt version-এর একটি স্থির ID থাকে আর প্রতিটি trace সেই ID বহন করে, তাই তুমি জানতে পারো user-রা কোন prompt version-এ ছিল।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "Traditional DevOps checks, such as whether a request returned 200, are enough to know if an LLM app gives right, affordable, and safe answers.",
+        "why": "LLM apps need richer questions: did the model return the right answer, at the right cost, in the right tone, with no leakage? LLMOps is the discipline of answering them."
+      },
+      "bn": {
+        "q": "একটি request 200 ফেরত দিয়েছে কি না, এমন চিরাচরিত DevOps check-ই জানার জন্য যথেষ্ট যে LLM app সঠিক, সাশ্রয়ী ও নিরাপদ উত্তর দিচ্ছে কি না।",
+        "why": "LLM app-এ আরও গভীর প্রশ্ন লাগে: মডেল কি সঠিক উত্তর দিয়েছে, সঠিক খরচে, সঠিক tone-এ, কোনো leakage ছাড়া? এই প্রশ্নের উত্তর খোঁজার বিদ্যাই LLMOps।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "How does this Part suggest you catch drift when a vendor silently changes a same-named model?",
+        "options": [
+          "Rely on your offline evals, which will catch it",
+          "Run 1-5% of production traffic through both the old and new model, compare evals, and alert on the difference",
+          "Wait for users to complain, then change the prompt",
+          "Stop using hosted models"
+        ],
+        "why": "Drift changes outputs in ways offline evals will not catch. The fix is to run a small share of production traffic through both models, compare evals, and alert on the delta."
+      },
+      "bn": {
+        "q": "Vendor একই নামের মডেল চুপচাপ বদলে দিলে drift ধরার জন্য text কী পরামর্শ দেয়?",
+        "options": [
+          "তোমার offline eval-এর উপর ভরসা করো, ওগুলোই ধরবে",
+          "Production traffic-এর 1-5% পুরোনো ও নতুন দুই মডেলেই চালাও, eval তুলনা করো, আর পার্থক্য দেখা দিলে alert দাও",
+          "User অভিযোগ করা পর্যন্ত অপেক্ষা করো, তারপর prompt বদলাও",
+          "Hosted মডেল ব্যবহারই বন্ধ করো"
+        ],
+        "why": "Drift এমনভাবে output বদলায় যা offline eval ধরতে পারে না। সমাধান হলো production traffic-এর ছোট একটি অংশ দুই মডেলেই চালানো, eval তুলনা করা, আর delta দেখা দিলে alert দেওয়া।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "To A/B test two prompt versions, this Part routes traffic between them by a hash of the user_id.",
+        "why": "This Part says to route traffic between two prompt versions (or two models) by user_id hash, then measure cost, latency, evals, and user feedback."
+      },
+      "bn": {
+        "q": "দুটি prompt version A/B test করতে text user_id-এর hash দিয়ে তাদের মধ্যে traffic রাউট করে।",
+        "why": "Text বলছে user_id hash দিয়ে দুটি prompt version (বা দুটি model)-এর মধ্যে traffic রাউট করো, তারপর cost, latency, eval আর user feedback মাপো।"
+      }
+    }
   ]
 }
