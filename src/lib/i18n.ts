@@ -160,6 +160,12 @@ const en = {
   startOver: "Start over",
   startOverConfirm: "Clear the progress of all sections?",
   allDone: "You finished every section.",
+  dashboard: "Dashboard",
+  dashboardTitle: "Your dashboard",
+  dashboardIntro: "Where you stopped, how far each part is, and the sections you saved.",
+  bookmarksTitle: "Bookmarks",
+  bookmarksEmpty: "No bookmarks yet. Use the Bookmark button at the end of a section.",
+  removeBookmark: "Remove",
   doneMark: "Done",
 
   // Progress on a topic page.
@@ -312,6 +318,12 @@ const bn: Dict = {
   startOver: "আবার শুরু করো",
   startOverConfirm: "সব section-এর progress মুছে ফেলবে?",
   allDone: "তুমি সব section শেষ করেছ।",
+  dashboard: "ড্যাশবোর্ড",
+  dashboardTitle: "তোমার ড্যাশবোর্ড",
+  dashboardIntro: "কোথায় থেমেছ, প্রতিটি part কতদূর, আর কোন section save করেছ।",
+  bookmarksTitle: "বুকমার্ক",
+  bookmarksEmpty: "এখনো কোনো বুকমার্ক নেই। কোনো section-এর শেষে Bookmark বোতাম চাপো।",
+  removeBookmark: "সরাও",
   doneMark: "শেষ",
 
   markDone: "শেষ হয়েছে, চিহ্ন দাও",
