@@ -9,6 +9,8 @@ import type { SearchDoc } from "@/lib/search";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const FOCUSABLE = 'input, button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 type Index = MiniSearch<SearchDoc>;
@@ -101,7 +103,14 @@ export function SearchPalette({ lang }: { lang: Lang }) {
 
   function go(href: string) {
     setOpen(false);
-    router.push(href);
+    // On the same page, change the hash ourselves: router.push fires no hashchange, and the topic pager listens for it.
+    const [path, hash] = href.split("#");
+    const here = window.location.pathname.replace(BASE_PATH, "").replace(/\/$/, "");
+    if (hash && here === path.replace(/\/$/, "")) {
+      history.pushState(null, "", `#${hash}`);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    }
+    else router.push(href);
   }
 
   function onDialogKeyDown(event: KeyboardEvent<HTMLDivElement>) {

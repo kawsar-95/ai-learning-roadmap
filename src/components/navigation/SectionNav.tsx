@@ -28,11 +28,13 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
       let current: string | null = null;
       for (const item of items) {
         const el = document.getElementById(item.id);
-        if (el && el.getBoundingClientRect().top <= line) current = item.id;
+        if (el && el.getClientRects().length && el.getBoundingClientRect().top <= line) current = item.id;
       }
       setActive(current);
     };
 
+    // The topic pager shows one section at a time: it says when the step changes.
+    window.addEventListener("section-step", update);
     const observer = new IntersectionObserver(update, {
       rootMargin: `0px 0px -${(1 - LINE) * 100}% 0px`,
       threshold: 0,
@@ -61,6 +63,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
     mutations.observe(article, { childList: true, subtree: true });
 
     return () => {
+      window.removeEventListener("section-step", update);
       mutations.disconnect();
       observer.disconnect();
     };

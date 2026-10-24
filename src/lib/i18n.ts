@@ -202,6 +202,10 @@ const en = {
   quizFalse: "False",
   quizQuestions: (n: number) => `${n} ${n === 1 ? "question" : "questions"}`,
   goToQuiz: "Go to quiz",
+  stepNav: "Sections of this Part",
+  stepOf: (n: string, total: string) => `Section ${n} of ${total}`,
+  stepPrev: "Previous",
+  stepNext: "Next",
   sectionDone: "Section done",
 
   // Footer.
@@ -381,6 +385,10 @@ const bn: Dict = {
   quizFalse: "মিথ্যা",
   quizQuestions: (n: number) => `${fmtNum("bn", n)}টি প্রশ্ন`,
   goToQuiz: "কুইজে যান",
+  stepNav: "এই পার্টের সেকশন",
+  stepOf: (n: string, total: string) => `সেকশন ${n} / ${total}`,
+  stepPrev: "আগের",
+  stepNext: "পরের",
   sectionDone: "সেকশন শেষ",
 
   footerSite: "সাইট",
