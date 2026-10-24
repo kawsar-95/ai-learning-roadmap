@@ -1,10 +1,10 @@
 {
   "slug": "ai-application-architecture",
   "title": "AI Application Architecture",
-  "lede": "Streaming over SSE / WebSockets / chunked HTTP, background jobs and queues for long agent runs, idempotency and resumability, multi-tenant prompt and key management, fallback chains across providers, feature flags for prompts and models, and API design patterns for AI features (cancel, retry, partial results). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "How to build the app around the model: stream answers to the user, run long jobs in the background, retry safely, manage keys and prompts for many customers, fall back to another provider, and design APIs for AI features.",
   "bn": {
     "title": "AI অ্যাপ্লিকেশনের আর্কিটেকচার",
-    "lede": "SSE / ওয়েবসকেট / HTTP চাঙ্কডে স্ট্রিমিং, লম্বা এজেন্ট রানের জন্য ব্যাকগ্রাউন্ড জব আর কিউ, আইডেমপোটেন্সি আর রিজিউমেবিলিটি, মাল্টি-টেন্যান্ট প্রম্পট আর কী ম্যানেজমেন্ট, বিভিন্ন প্রোভাইডার জুড়ে ফলব্যাক চেইন, প্রম্পট আর মডেলের জন্য ফিচার ফ্ল্যাগ, আর AI ফিচারের API ডিজাইন প্যাটার্ন (ক্যানসেল, রিট্রাই, পার্শিয়াল রেজাল্ট)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে আরও আছে বাংলা ব্যাখ্যা।"
+    "lede": "মডেলকে ঘিরে অ্যাপ কীভাবে বানাবেন: ব্যবহারকারীকে উত্তর স্ট্রিম করা, লম্বা কাজ ব্যাকগ্রাউন্ডে চালানো, নিরাপদে রিট্রাই করা, অনেক কাস্টমারের জন্য কী আর প্রম্পট সামলানো, এক প্রোভাইডার ব্যর্থ হলে আরেকটায় যাওয়া, আর AI ফিচারের জন্য API ডিজাইন।"
   },
   "sections": [
     {

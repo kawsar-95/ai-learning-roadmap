@@ -71,7 +71,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
       aria-label={UI[lang].onThisPage}
       className="sticky top-20 max-h-[calc(100vh-7rem)] overflow-y-auto pb-6"
     >
-      <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.16em] text-text-faint">
+      <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-text-faint">
         {UI[lang].onThisPage}
       </p>
       <ol className="m-0 list-none border-l border-border p-0">

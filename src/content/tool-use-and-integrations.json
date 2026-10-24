@@ -1,10 +1,10 @@
 {
   "slug": "tool-use-and-integrations",
   "title": "Tool Use and Integrations",
-  "lede": "How an LLM becomes an actor: tool/function schema design, parallel tool calling, Model Context Protocol (MCP) servers/clients/resources/prompts, sandboxed code execution (E2B, Modal, Daytona, Cloudflare), API wrappers, and tool-result formatting for LLM consumption. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "An LLM can act, not just talk. Learn how to design tools, call several tools at once, connect with MCP, run code safely in a sandbox, wrap APIs, and format tool results so the model can use them.",
   "bn": {
     "title": "টুল ইউজ আর ইন্টিগ্রেশন",
-    "lede": "LLM কীভাবে নিজে কাজ করতে শেখে: টুল/ফাংশন স্কিমার ডিজাইন, প্যারালাল টুল কলিং, Model Context Protocol (MCP) সার্ভার/ক্লায়েন্ট/রিসোর্স/প্রম্পট, স্যান্ডবক্সে কোড চালানো (E2B, Modal, Daytona, Cloudflare), API র‍্যাপার, আর LLM যাতে সহজে পড়তে পারে সেভাবে টুল-রেজাল্ট গুছিয়ে দেওয়া। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
+    "lede": "LLM শুধু কথা বলে না, কাজও করতে পারে। শিখবেন: টুল ডিজাইন করা, একসাথে কয়েকটা টুল কল করা, MCP দিয়ে সংযোগ, স্যান্ডবক্সে নিরাপদে কোড চালানো, API র‍্যাপার, আর টুলের ফলাফল এমনভাবে সাজানো, যাতে মডেল সহজে ব্যবহার করতে পারে।"
   },
   "sections": [
     {

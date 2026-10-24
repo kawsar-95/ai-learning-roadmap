@@ -31,7 +31,7 @@ export function SidebarList({
 }) {
   return (
     <nav aria-label={UI[lang].partsNav} className="px-2 py-4">
-      <p className="mb-2 px-3 font-mono text-[11px] uppercase tracking-[0.16em] text-text-faint">
+      <p className="mb-2 px-3 font-mono text-xs uppercase tracking-[0.16em] text-text-faint">
         {UI[lang].partsNav}
       </p>
       <ol className="m-0 list-none space-y-px p-0">

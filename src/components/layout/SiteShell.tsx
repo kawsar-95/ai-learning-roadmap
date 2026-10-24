@@ -8,7 +8,7 @@ import { SiteHeader } from "./SiteHeader";
 import { SearchPalette } from "@/components/navigation/SearchPalette";
 
 const FOOTER_LINK = "text-[14px] leading-snug text-text-dim no-underline transition-colors hover:text-accent";
-const FOOTER_HEAD = "mb-3 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-text-faint";
+const FOOTER_HEAD = "mb-3 font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint";
 
 function PartLinks({ items, lang }: { items: NavItem[]; lang: Lang }) {
   return (

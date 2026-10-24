@@ -1,10 +1,10 @@
 {
   "slug": "multimodal-engineering",
   "title": "Multimodal Engineering",
-  "lede": "Vision (OCR-via-LLM, document AI), voice (STT/TTS, realtime APIs from OpenAI / LiveKit / Vapi), image generation (Flux, SDXL, Imagen, DALL-E; ControlNet, LoRA, ComfyUI), and video generation (Sora, Veo, Runway, Kling). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "Models work with more than text. This part covers understanding images and documents, voice, image generation, and video generation.",
   "bn": {
     "title": "মাল্টিমোডাল ইঞ্জিনিয়ারিং (টেক্সটের বাইরে)",
-    "lede": "ভিশন (LLM দিয়ে OCR, ডকুমেন্ট AI), ভয়েস (STT/TTS, OpenAI / LiveKit / Vapi-র রিয়েলটাইম API), ইমেজ জেনারেশন (Flux, SDXL, Imagen, DALL-E; ControlNet, LoRA, ComfyUI), আর ভিডিও জেনারেশন (Sora, Veo, Runway, Kling)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে একটা বাংলা ব্যাখ্যা আছে।"
+    "lede": "মডেল শুধু টেক্সট নয়, আরও অনেক কিছু নিয়ে কাজ করে। এই পার্টে আছে ছবি আর ডকুমেন্ট বোঝা, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশন।"
   },
   "sections": [
     {

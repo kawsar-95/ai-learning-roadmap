@@ -17,7 +17,7 @@ export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbo
     <nav aria-label={ui.prevNextNav} className="grid gap-3 sm:grid-cols-2">
       {prev && (
         <Link href={topicHref(prev.slug, lang)} rel="prev" className={CARD}>
-          <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">
+          <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
             ← {partLabel(prev.part)}
           </span>
           <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">
@@ -31,7 +31,7 @@ export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbo
           rel="next"
           className={CARD + " sm:col-start-2 sm:text-right"}
         >
-          <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">
+          <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
             {partLabel(next.part)} →
           </span>
           <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">

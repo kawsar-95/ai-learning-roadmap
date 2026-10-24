@@ -1,10 +1,10 @@
 {
   "slug": "agents-and-agentic-systems",
   "title": "Agents and Agentic Systems",
-  "lede": "An <strong>agent</strong> is an LLM running in a control loop: it observes the world, decides what to do, calls tools, observes the results, and repeats until the goal is reached. This chapter covers the four canonical agent loops, single- vs multi-agent orchestration, state machines and workflow graphs, agent memory, human-in-the-loop checkpoints, subagents, error recovery, durable long-running execution, and browser / computer-use agents.",
+  "lede": "An <strong>agent</strong> is an LLM running in a control loop: it observes the world, decides what to do, calls tools, observes the results, and repeats until the goal is reached. This part covers the common agent loops, several agents working together, memory, human checkpoints, and recovery from errors.",
   "bn": {
     "title": "এজেন্ট আর এজেন্টিক সিস্টেম",
-    "lede": "<strong>এজেন্ট</strong> হলো একটা LLM, যা একটা কন্ট্রোল লুপের ভেতরে চলে। সে চারপাশ দেখে (অবজার্ভ করে), কী করবে ঠিক করে, টুল কল করে, ফলাফল দেখে, আর লক্ষ্যে না পৌঁছানো পর্যন্ত এটা বারবার করে। এই অধ্যায়ে আছে: চারটা প্রচলিত এজেন্ট লুপ, সিঙ্গেল-এজেন্ট বনাম মাল্টি-এজেন্ট অর্কেস্ট্রেশন, স্টেট মেশিন আর ওয়ার্কফ্লো গ্রাফ, এজেন্ট মেমরি, হিউম্যান-ইন-দ্য-লুপ চেকপয়েন্ট, সাবএজেন্ট, এরর রিকভারি, দীর্ঘ সময় ধরে চলা ডিউরেবল এক্সিকিউশন, আর ব্রাউজার / কম্পিউটার-ইউজ এজেন্ট।"
+    "lede": "<strong>এজেন্ট</strong> হলো একটা LLM, যা একটা কন্ট্রোল লুপের ভেতরে চলে। সে চারপাশ দেখে (অবজার্ভ করে), কী করবে ঠিক করে, টুল কল করে, ফলাফল দেখে, আর লক্ষ্যে না পৌঁছানো পর্যন্ত এটা বারবার করে। এই পার্টে আছে প্রচলিত এজেন্ট লুপ, একাধিক এজেন্টের একসাথে কাজ, মেমরি, মানুষের চেকপয়েন্ট আর এরর সামলানো।"
   },
   "sections": [
     {

@@ -60,7 +60,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
       <p className="mt-3 text-[17px] leading-[1.75] text-text-dim">
         {ui.quizIntro(questions.length)}
         {best && (
-          <span className="ml-2 font-mono text-[13px] text-text-faint">
+          <span className="ml-2 inline-block font-mono text-[13px] whitespace-nowrap text-text-faint">
             {ui.quizBest(fmtNum(lang, best.best), fmtNum(lang, best.total))}
           </span>
         )}
@@ -72,11 +72,11 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
           const right = answers[question.id] === question.answer;
           const rightLabel = choicesOf(question, lang).find((c) => c.value === question.answer)?.label;
           return (
-            <fieldset key={question.id} className="m-0 rounded-2xl border border-border bg-bg-raised p-5 shadow-card sm:p-6">
-              <legend className="px-1 text-[17px] font-semibold leading-snug text-text">
+            <div key={question.id} role="radiogroup" aria-labelledby={`${slug}-${question.id}-q`} className="rounded-2xl border border-border bg-bg-raised p-5 shadow-card sm:p-6">
+              <p id={`${slug}-${question.id}-q`} className="m-0 mb-3 text-[17px] font-semibold leading-snug text-text">
                 {fmtNum(lang, index + 1)}. {text.q}
-              </legend>
-              <div className="mt-3 space-y-2">
+              </p>
+              <div className="space-y-2">
                 {choicesOf(question, lang).map((choice) => {
                   const picked = answers[question.id] === choice.value;
                   let tone = "border-border-strong";
@@ -86,7 +86,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
                   return (
                     <label
                       key={String(choice.value)}
-                      className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2.5 text-[16px] leading-snug text-text ${tone}`}
+                      className={`flex items-start gap-3 rounded-lg border px-3 py-2.5 text-[16px] leading-snug text-text ${checked ? "" : "cursor-pointer"} ${tone}`}
                     >
                       <input
                         type="radio"
@@ -94,7 +94,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
                         checked={picked}
                         disabled={checked}
                         onChange={() => setAnswers((a) => ({ ...a, [question.id]: choice.value }))}
-                        className="mt-1 accent-accent"
+                        className="mt-0.5 size-4 shrink-0 accent-accent"
                       />
                       <span>{choice.label}</span>
                     </label>
@@ -115,7 +115,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
                   <p className="mt-1 mb-0">{text.why}</p>
                 </div>
               )}
-            </fieldset>
+            </div>
           );
         })}
       </div>

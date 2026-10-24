@@ -1,10 +1,10 @@
 {
   "slug": "evaluation-engineering",
   "title": "Evaluation Engineering",
-  "lede": "Offline evals on golden datasets, LLM-as-judge (pairwise + rubric), RAG metrics (faithfulness, answer relevance, context precision/recall via Ragas), agent evals (task success, trajectory, tool-call accuracy), synthetic data generation, frameworks (Promptfoo, DeepEval, Inspect, Braintrust, OpenAI Evals), online evals on production traffic, and red-teaming. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "How do you know your AI app is good? Learn to test it with a fixed set of examples, use an LLM as the judge, measure RAG and agents, generate test data, and watch real traffic after launch.",
   "bn": {
     "title": "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং (মডেল মাপার কাজ)",
-    "lede": "গোল্ডেন ডেটাসেটের ওপর অফলাইন ইভ্যাল, LLM-as-judge (পেয়ারওয়াইজ + রুব্রিক), RAG মেট্রিক (ফেইথফুলনেস, আনসার রিলেভেন্স, কনটেক্সট প্রিসিশন/রিকল, Ragas দিয়ে), এজেন্ট ইভ্যাল (টাস্ক সাকসেস, ট্রাজেক্টরি, টুল-কল অ্যাকুরেসি), সিনথেটিক ডেটা তৈরি, ফ্রেমওয়ার্ক (Promptfoo, DeepEval, Inspect, Braintrust, OpenAI Evals), প্রোডাকশন ট্রাফিকের ওপর অনলাইন ইভ্যাল, আর রেড-টিমিং। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারদের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
+    "lede": "আপনার AI অ্যাপ ভালো কি না, বুঝবেন কীভাবে? শিখবেন: নির্দিষ্ট উদাহরণের সেট দিয়ে টেস্ট করা, LLM-কে বিচারক বানানো, RAG আর এজেন্ট মাপা, টেস্ট ডেটা তৈরি করা, আর লঞ্চের পর আসল ট্রাফিকের ওপর নজর রাখা।"
   },
   "sections": [
     {

@@ -1,10 +1,10 @@
 {
   "slug": "cost-and-performance-optimization",
   "title": "Cost and Performance Optimization",
-  "lede": "Model cascading, semantic / output / prompt caching, batch APIs, distillation, LLMLingua-style prompt compression, per-feature token budgets, and model gateways (LiteLLM, Portkey, OpenRouter) — a five-tier stack that can cut LLM spend by 5–50× without losing quality. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "You can cut LLM cost by 5–50× without losing quality. Learn to send easy questions to cheaper models, cache answers, batch requests, shorten prompts, and set a token budget for each feature.",
   "bn": {
     "title": "খরচ আর পারফরম্যান্স অপ্টিমাইজেশন",
-    "lede": "মডেল ক্যাসকেডিং, সেম্যান্টিক / আউটপুট / প্রম্পট ক্যাশিং, ব্যাচ API, ডিস্টিলেশন, LLMLingua-ধরনের প্রম্পট কম্প্রেশন, প্রতিটা ফিচারের জন্য টোকেন বাজেট, আর মডেল গেটওয়ে (LiteLLM, Portkey, OpenRouter)। এই পাঁচ স্তরের স্ট্যাক মান না কমিয়ে LLM-এর খরচ ৫–৫০ গুণ কমাতে পারে। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
+    "lede": "মান না কমিয়ে LLM-এর খরচ ৫–৫০ গুণ কমানো যায়। শিখবেন: সহজ প্রশ্ন সস্তা মডেলে পাঠানো, উত্তর ক্যাশ করা, ব্যাচে রিকোয়েস্ট পাঠানো, প্রম্পট ছোট করা, আর প্রতিটা ফিচারের জন্য টোকেন বাজেট ঠিক করা।"
   },
   "sections": [
     {

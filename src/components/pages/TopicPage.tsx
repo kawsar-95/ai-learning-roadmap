@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { TOPIC_ORDER, getNavItems, getNeighbors, getOutline, getTopic, stripTags, topicText } from "@/lib/topics";
 import { progressKey } from "@/lib/progress";
+import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { PrevNext } from "@/components/content/PrevNext";
 import { SectionView } from "@/components/content/SectionView";
@@ -42,6 +43,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
   const neighbor = (t?: typeof topic) => t && { slug: t.slug, part: t.part, title: topicText(t, lang).title };
 
   const items = getNavItems(lang);
+  const outline = getOutline(topic, lang);
 
   // Three columns like a book chapter: the Parts, the text (720px at most),
   // and "On this page". Below `lg` only the text shows; the Parts are in the
@@ -57,6 +59,29 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
         </aside>
         <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-8 pb-20 sm:px-6 sm:pt-12 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
+          {/* The "On this page" column shows from `xl`. Below it, this closed list does the same job. */}
+          {outline.length > 1 && (
+            <details className="mb-10 rounded-lg border border-border px-4 py-2.5 xl:hidden">
+              <summary className="cursor-pointer text-[14px] text-text">{UI[lang].onThisPage}</summary>
+              <nav aria-label={UI[lang].onThisPage}>
+                <ol className="m-0 mt-2 list-none p-0">
+                  {outline.map((item) => (
+                    <li key={item.id}>
+                      <a
+                        href={`#${item.id}`}
+                        className={
+                          "block py-1.5 leading-snug text-text-dim no-underline hover:text-text " +
+                          (item.level === 3 ? "pl-4 text-[13px]" : "text-[14px]")
+                        }
+                      >
+                        {item.title}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </details>
+          )}
           <div className="divide-y divide-border [&>section]:py-12 sm:[&>section]:py-14 [&>section:first-child]:pt-0">
             {topic.sections.map((s) => (
               <SectionView key={s.id} section={s} lang={lang} doneKey={progressKey(topic.slug, s.id)} />
@@ -73,7 +98,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
           </div>
         </article>
         <aside className="hidden py-12 pr-6 xl:block">
-          <SectionNav items={getOutline(topic, lang)} lang={lang} />
+          <SectionNav items={outline} lang={lang} />
         </aside>
       </div>
     </>
