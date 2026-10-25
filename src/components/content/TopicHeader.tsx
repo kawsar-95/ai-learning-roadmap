@@ -22,16 +22,11 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
     <header className="mb-10 sm:mb-12">
       <div className="flex flex-wrap items-center gap-2">
         <span className={PILL}>
-          {ui.part(fmtNum(lang, topic.part))} · {text.title}
+          {ui.part(fmtNum(lang, topic.part))}
         </span>
         <span className={PILL}>
           <span aria-hidden="true">📖</span> {ui.minRead(fmtNum(lang, minutes))}
         </span>
-        {topic.quiz && (
-          <span className={PILL}>
-            <span aria-hidden="true">📝</span> {ui.quizQuestions(topic.quiz.length)}
-          </span>
-        )}
       </div>
       <h1 className="mt-4 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
         {text.title}

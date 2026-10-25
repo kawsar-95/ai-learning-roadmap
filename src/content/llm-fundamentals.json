@@ -2,11 +2,11 @@
   "slug": "llm-fundamentals",
   "title": "LLM Fundamentals",
   "tagline": "from an engineer's lens",
-  "lede": "A dense, citation-backed reference for ten topics every ML engineer, applied researcher, and platform builder needs to internalise — tokens, families, sampling, structured outputs, tool use, multimodal, embeddings, reasoning, and the trade-offs that decide which model runs in production. <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies) at the bottom of each topic. প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "Learn how LLMs work in practice: tokens, model families, sampling, structured output, tool use, embeddings, reasoning, and how to choose the right model for production.",
   "bn": {
     "title": "LLM-এর মূল ভিত্তি",
     "tagline": "একজন ইঞ্জিনিয়ারের চোখে",
-    "lede": "দশটি বিষয়ের একটি ঘন, সাইটেশন-সহ রেফারেন্স। প্রত্যেক ML ইঞ্জিনিয়ার, অ্যাপ্লাইড রিসার্চার আর প্ল্যাটফর্ম বিল্ডারের এগুলো ভালোভাবে বোঝা দরকার: টোকেন, মডেল ফ্যামিলি, স্যাম্পলিং, স্ট্রাকচার্ড আউটপুট, টুল ইউজ, মাল্টিমোডাল, এমবেডিং, রিজনিং, আর প্রোডাকশনে কোন মডেল চলবে তা ঠিক করে দেওয়া ট্রেড-অফ। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (টেকনিক্যাল, কোড আর ডায়াগ্রাম-সহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। প্রতিটি টপিকের শেষে বাংলায় বুঝিয়েও বলা আছে।"
+    "lede": "বাস্তবে LLM কীভাবে কাজ করে, তা শিখবেন: টোকেন, মডেল ফ্যামিলি, স্যাম্পলিং, স্ট্রাকচার্ড আউটপুট, টুল ইউজ, এমবেডিং, রিজনিং, আর প্রোডাকশনের জন্য সঠিক মডেল বেছে নেওয়া।"
   },
   "sections": [
     {

@@ -78,7 +78,7 @@ function bnNum(n: number): string {
 }
 
 const LABEL =
-  "practice-label font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-text-faint";
+  "practice-label font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint";
 const BODY = "text-[14.5px] leading-relaxed";
 
 function PromptBox({ text, label, lang }: { text: string; label: string; lang: Lang }) {
@@ -119,7 +119,7 @@ function StepItem({ step, n, lang }: { step: PracticeStep; n: number; lang: Lang
         <h6 className="m-0 text-[13px] font-semibold text-text">{ui.step(n)}</h6>
         <span
           className={
-            "rounded border px-1.5 py-px font-mono text-[10.5px] uppercase tracking-[0.1em] " +
+            "rounded border px-1.5 py-px font-mono text-xs uppercase tracking-[0.1em] " +
             (isNew ? "border-accent/50 text-accent" : "border-border-strong text-text-faint")
           }
         >
@@ -139,7 +139,7 @@ function StepItem({ step, n, lang }: { step: PracticeStep; n: number; lang: Lang
       </p>
       {step.example && (
         <details className="group mt-2">
-          <summary className="cursor-pointer text-[13px] text-accent">
+          <summary className="cursor-pointer py-1.5 text-[13px] text-accent">
             {ui.example}
           </summary>
           <div className="mt-2 rounded-lg border border-dashed border-border-strong px-3.5 py-3">
@@ -186,7 +186,7 @@ function PracticeCard({ text, index, lang }: { text: PracticeText; index: number
       </p>
 
       <details className="group mt-4 rounded-lg border border-border px-3.5 py-2.5">
-        <summary className={`cursor-pointer list-none ${BODY} [&::-webkit-details-marker]:hidden`}>
+        <summary className={`cursor-pointer list-none py-1 ${BODY} [&::-webkit-details-marker]:hidden`}>
           <span className={`${LABEL} mr-2`}>{ui.check}</span>
           <Inline html={text.check.question} className="text-text" />
           <span className="ml-2 text-[13px] text-accent group-open:hidden">{ui.showAnswer}</span>
@@ -198,13 +198,15 @@ function PracticeCard({ text, index, lang }: { text: PracticeText; index: number
         />
       </details>
 
-      <div
+      <details
         className={`mt-3 rounded-lg border-l-[3px] border-l-warn px-3.5 py-2.5 ${BODY}`}
         style={{ backgroundColor: "color-mix(in srgb, var(--warn) 8%, transparent)" }}
       >
-        <span className={`${LABEL} mr-2`}>{ui.challenge}</span>
-        <Inline html={text.challenge} />
-      </div>
+        <summary className="cursor-pointer py-1">
+          <span className={LABEL}>{ui.challenge}</span>
+        </summary>
+        <Inline as="p" html={text.challenge} className="mt-2" />
+      </details>
     </article>
   );
 }
@@ -222,15 +224,18 @@ export function PracticeList({
   if (!practice?.length) return null;
   const ui = UI[lang];
   const headingId = `${sectionId}-practice`;
+  // Closed at first: the tasks are longer than the section text, so open
+  // they bury the reading. The native marker shows that it opens.
   return (
-    <section
-      aria-labelledby={headingId}
+    <details
       lang={lang}
       className={"border-t border-border pt-6 " + (lang === "bn" ? "font-bengali" : "")}
     >
-      <h3 id={headingId} className={LABEL}>
-        {ui.heading(practice.length)}
-      </h3>
+      <summary className="cursor-pointer py-2 marker:text-accent">
+        <h3 id={headingId} className={`${LABEL} inline`}>
+          {ui.heading(practice.length)}
+        </h3>
+      </summary>
       <p className={`mt-2 text-text-dim ${BODY}`}>
         {ui.openChat}{" "}
         {CHATS.map((chat, i) => (
@@ -243,7 +248,7 @@ export function PracticeList({
         ))}
       </p>
       <details className="mt-3 rounded-lg border border-border px-4 py-2.5">
-        <summary className="cursor-pointer text-[14px] text-text">{ui.howTitle}</summary>
+        <summary className="cursor-pointer py-1 text-[14px] text-text">{ui.howTitle}</summary>
         <ul className={`mt-2 list-disc space-y-1.5 pl-5 text-text-dim ${BODY} marker:text-text-faint`}>
           {ui.how.map((item, i) => (
             <Inline key={i} as="li" html={item} />
@@ -255,6 +260,6 @@ export function PracticeList({
           <PracticeCard key={p.en.title} text={p[lang]} index={i} lang={lang} />
         ))}
       </div>
-    </section>
+    </details>
   );
 }

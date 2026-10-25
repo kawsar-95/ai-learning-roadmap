@@ -2,11 +2,11 @@
   "slug": "context-engineering",
   "title": "Context Engineering",
   "tagline": "the new \"prompt engineering\"",
-  "lede": "A dense, citation-backed reference for the seven techniques every production LLM system reaches for — context budgeting, summarization, caching, hierarchical memory, compression, tool-result truncation, and the \"lost in the middle\" failure mode. <strong>Each section ships in two voices:</strong> the engineer's version (with diagrams and papers) and a layman's version (plain English with analogies) at the bottom of each topic. <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>",
+  "lede": "A model can read only so much at once. Learn seven ways to use that space well: context budgeting, summarization, caching, memory, compression, trimming tool results, and avoiding the \"lost in the middle\" problem.",
   "bn": {
     "title": "কনটেক্সট ইঞ্জিনিয়ারিংয়ের কৌশল",
     "tagline": "নতুন “প্রম্পট ইঞ্জিনিয়ারিং”",
-    "lede": "সাতটি কৌশলের একটি ঘন, সাইটেশনসহ রেফারেন্স, যা প্রতিটি প্রোডাকশন LLM সিস্টেমে লাগে: কনটেক্সট বাজেটিং, সামারাইজেশন, ক্যাশিং, হায়ারার্কিক্যাল মেমরি, কমপ্রেশন, টুল-রেজাল্ট ট্রাঙ্কেশন, আর “lost in the middle” সমস্যা। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (ডায়াগ্রাম আর পেপারসহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>"
+    "lede": "একটা মডেল একবারে সীমিত পরিমাণ পড়তে পারে। সেই জায়গা ভালোভাবে কাজে লাগানোর সাতটা কৌশল শিখবেন: কনটেক্সট বাজেটিং, সামারাইজেশন, ক্যাশিং, মেমরি, কমপ্রেশন, টুল-রেজাল্ট ছোট করা, আর “lost in the middle” সমস্যা এড়ানো।"
   },
   "sections": [
     {

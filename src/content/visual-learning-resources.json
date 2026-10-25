@@ -2,11 +2,11 @@
   "slug": "visual-learning-resources",
   "title": "Visual Learning Resources",
   "tagline": "ten interactive guides that show how AI works",
-  "lede": "Ten visual and interactive resources that let you see inside a language model: Transformer Explainer, LLM Visualization, 3Blue1Brown, The Illustrated Transformer, TensorFlow Playground, a visual guide to attention variants, a visual guide to mixture of experts, the LLM Inference Handbook, Neuronpedia, and Embedding Atlas. <strong>Each section explains what the resource shows, how to use it in minutes, and what to check,</strong> with its own diagram, a worked example, a layman's version, and a practice task. প্রতিটি টপিকের সাথে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "Ten visual and interactive resources that let you see inside a language model, such as Transformer Explainer, LLM Visualization, and 3Blue1Brown. Each section shows what a resource displays, how to use it in a few minutes, and what to check.",
   "bn": {
     "title": "ভিজ্যুয়াল লার্নিং রিসোর্স (ছবিতে শেখার উৎস)",
     "tagline": "AI কীভাবে কাজ করে তা দেখানো দশটি ইন্টারঅ্যাকটিভ গাইড",
-    "lede": "দশটি ভিজ্যুয়াল ও ইন্টারঅ্যাকটিভ উৎস, যা আপনাকে ল্যাঙ্গুয়েজ মডেলের ভেতরটা দেখতে দেয়: Transformer Explainer, LLM Visualization, 3Blue1Brown, The Illustrated Transformer, TensorFlow Playground, অ্যাটেনশন ভ্যারিয়েন্টের ভিজ্যুয়াল গাইড, মিক্সচার অফ এক্সপার্টসের ভিজ্যুয়াল গাইড, LLM Inference Handbook, Neuronpedia এবং Embedding Atlas। <strong>প্রতিটি সেকশন বলে উৎসটি কী দেখায়, কয়েক মিনিটে কীভাবে ব্যবহার করবেন এবং কী যাচাই করবেন।</strong> প্রতিটির নিজস্ব ডায়াগ্রাম, হিসাবের উদাহরণ, সহজ ভাষার ব্যাখ্যা এবং প্র্যাকটিস টাস্ক আছে।"
+    "lede": "দশটি ভিজ্যুয়াল ও ইন্টারঅ্যাকটিভ উৎস, যা আপনাকে ল্যাঙ্গুয়েজ মডেলের ভেতরটা দেখতে দেয়, যেমন Transformer Explainer, LLM Visualization আর 3Blue1Brown। প্রতিটি সেকশনে দেখবেন উৎসটি কী দেখায়, কয়েক মিনিটে কীভাবে ব্যবহার করবেন, আর কী যাচাই করবেন।"
   },
   "sections": [
     {

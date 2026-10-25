@@ -123,21 +123,15 @@ function Hero({ lang }: { lang: Lang }) {
             html={ui.homeIntro}
             className="mb-9 max-w-xl text-[18px] leading-[1.7] text-pretty text-text-dim"
           />
-          <div className="mb-12 flex flex-wrap gap-3.5">
+          <div className="flex flex-wrap gap-3.5 sm:mb-12">
             <Link
               href={topicHref(TOPICS[0].slug, lang)}
               className={`${BUTTON} bg-accent text-on-accent shadow-card hover:-translate-y-0.5 hover:shadow-card-hover`}
             >
               <span aria-hidden="true">📖</span> {ui.startReading}
             </Link>
-            <Link
-              href={contentsHref(lang)}
-              className={`${BUTTON} border border-border-strong bg-bg-raised text-text hover:border-accent hover:text-accent`}
-            >
-              {ui.seeContents}
-            </Link>
           </div>
-          <dl className="m-0 grid max-w-lg grid-cols-2 gap-6 sm:grid-cols-4">
+          <dl className="m-0 hidden max-w-lg grid-cols-4 gap-6 sm:grid">
             {stats.map(([value, label]) => (
               <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3.5">
                 <dt className="mt-1 text-[13px] leading-snug text-text-faint">{label}</dt>
@@ -150,34 +144,6 @@ function Hero({ lang }: { lang: Lang }) {
         <div className="hidden lg:block">
           <CoverCard lang={lang} />
         </div>
-      </div>
-    </section>
-  );
-}
-
-function Features({ lang }: { lang: Lang }) {
-  const ui = UI[lang];
-  return (
-    <section aria-labelledby="why-heading" className="py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className={EYEBROW}>{ui.whyEyebrow}</p>
-        <h2 id="why-heading" className={SECTION_TITLE}>
-          {ui.whyTitle}
-        </h2>
-        <ul className="m-0 mt-10 grid list-none gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
-          {ui.features.map((f) => (
-            <li
-              key={f.title}
-              className="rounded-2xl border border-border bg-bg-raised p-7 transition duration-200 hover:-translate-y-[3px] hover:border-accent hover:shadow-card-hover motion-reduce:transition-none"
-            >
-              <span aria-hidden="true" className="mb-3 block text-[32px] leading-none">
-                {f.icon}
-              </span>
-              <h3 className="m-0 mb-2 font-display text-[22px] font-bold leading-snug text-text">{f.title}</h3>
-              <p className="m-0 text-[15px] leading-[1.7] text-text-dim">{f.text}</p>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );
@@ -270,12 +236,11 @@ function Author({ lang }: { lang: Lang }) {
   );
 }
 
-/** The landing page: hero, features, the 14 Parts, and the author, in one language. */
+/** The landing page: hero, the 14 Parts, and the author, in one language. */
 export function HomePage({ lang }: { lang: Lang }) {
   return (
     <>
       <Hero lang={lang} />
-      <Features lang={lang} />
       <Parts lang={lang} />
       <Author lang={lang} />
     </>

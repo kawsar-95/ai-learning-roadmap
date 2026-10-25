@@ -5,6 +5,7 @@ import { UI, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { PartProgress, ProgressSummary, SectionCheck } from "@/components/progress/ProgressWidgets";
 import type { SectionLink } from "@/components/progress/ProgressWidgets";
+import { QuizBest } from "@/components/progress/DashboardWidgets";
 
 /** Every section in reading order, with its progress key and address. */
 function allSections(lang: Lang) {
@@ -57,6 +58,7 @@ export function ContentsPage({ lang }: { lang: Lang }) {
               </div>
               <div className="mt-4 mb-2 max-w-xs">
                 <PartProgress keys={sections.map((s) => s.key)} lang={lang} />
+                {topic.quiz && <QuizBest slug={topic.slug} total={topic.quiz.length} lang={lang} />}
               </div>
               <ol className="m-0 list-none divide-y divide-border p-0">
                 {sections.map(({ section, key, href }) => (

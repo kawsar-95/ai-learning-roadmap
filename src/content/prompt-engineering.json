@@ -1,10 +1,10 @@
 {
   "slug": "prompt-engineering",
   "title": "Prompt Engineering",
-  "lede": "A dense, citation-backed reference for the eight techniques every prompt engineer reaches for — message design, few-shot and personas, reasoning patterns, structured prompts, templating, versioning, output handling, and adversarial defense. <strong>Each section ships in two voices:</strong> the engineer's version (with code, diagrams, and papers) and a layman's version (plain English with analogies) at the bottom of each topic. <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>",
+  "lede": "Learn the eight techniques of a good prompt: message design, examples and personas, reasoning patterns, structured prompts, templates, versioning, output handling, and defense against attacks.",
   "bn": {
     "title": "প্রম্পট ইঞ্জিনিয়ারিংয়ের কৌশল",
-    "lede": "আটটি কৌশলের একটি ঘন, সাইটেশন-সহ রেফারেন্স, যা প্রত্যেক প্রম্পট ইঞ্জিনিয়ারের কাজে লাগে: মেসেজ ডিজাইন, ফিউ-শট আর পারসোনা, রিজনিং প্যাটার্ন, স্ট্রাকচার্ড প্রম্পট, টেমপ্লেটিং, ভার্সনিং, আউটপুট হ্যান্ডলিং, আর অ্যাডভার্সারিয়াল আক্রমণ থেকে বাঁচা। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (কোড, ডায়াগ্রাম আর পেপার-সহ) এবং প্রতিটি টপিকের শেষে সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে)। <strong>এর সঙ্গে প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>"
+    "lede": "ভালো প্রম্পটের আটটা কৌশল শিখবেন: মেসেজ ডিজাইন, উদাহরণ আর পারসোনা, রিজনিং প্যাটার্ন, স্ট্রাকচার্ড প্রম্পট, টেমপ্লেট, ভার্সনিং, আউটপুট সামলানো, আর আক্রমণ থেকে বাঁচা।"
   },
   "sections": [
     {

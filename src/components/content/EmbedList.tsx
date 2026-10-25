@@ -11,7 +11,7 @@ export function EmbedList({ embeds, sectionId, lang }: { embeds: Embed[]; sectio
     <section aria-labelledby={headingId}>
       <h3
         id={headingId}
-        className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-text-faint"
+        className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint"
       >
         {UI[lang].liveHeading(embeds.length)}
       </h3>

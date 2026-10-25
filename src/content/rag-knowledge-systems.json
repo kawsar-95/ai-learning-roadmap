@@ -1,10 +1,10 @@
 {
   "slug": "rag-knowledge-systems",
   "title": "RAG and Knowledge Systems",
-  "lede": "A citation-backed reference for ten topics behind production RAG: chunking, vector databases, hybrid search, query transformation, multi-hop and agentic retrieval, GraphRAG, reranking, metadata filtering, document parsing, and multimodal retrieval. <strong>Each section ships in three voices:</strong> the engineer's version (diagrams, code, research findings), a layman's version (plain English with analogies), and a Bangla explanation. <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।</strong>",
+  "lede": "RAG lets a model answer from your own documents. Learn how it works in production: chunking, vector databases, hybrid search, better queries, reranking, filters, document parsing, GraphRAG, and multimodal retrieval.",
   "bn": {
     "title": "RAG আর নলেজ সিস্টেম",
-    "lede": "প্রোডাকশন RAG-এর পেছনের দশটি বিষয়ের সাইটেশন-সহ রেফারেন্স: চাঙ্কিং, ভেক্টর ডেটাবেস, হাইব্রিড সার্চ, কুয়েরি ট্রান্সফরমেশন, মাল্টি-হপ আর এজেন্টিক রিট্রিভাল, GraphRAG, রিরেংকিং, মেটাডেটা ফিল্টারিং, ডকুমেন্ট পার্সিং, আর মাল্টিমোডাল রিট্রিভাল। <strong>প্রতিটি সেকশন তিন ভাবে লেখা:</strong> ইঞ্জিনিয়ারের ভার্সন (ডায়াগ্রাম, কোড, গবেষণার ফলাফল), সাধারণ পাঠকের ভার্সন (সহজ ভাষায়, উপমা দিয়ে), আর বাংলা ব্যাখ্যা। <strong>প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাটিও আছে।</strong>"
+    "lede": "RAG মডেলকে আপনার নিজের ডকুমেন্ট থেকে উত্তর দিতে দেয়। প্রোডাকশনে এটা কীভাবে কাজ করে শিখবেন: চাঙ্কিং, ভেক্টর ডেটাবেস, হাইব্রিড সার্চ, ভালো কুয়েরি, রিরেংকিং, ফিল্টার, ডকুমেন্ট পার্সিং, GraphRAG আর মাল্টিমোডাল রিট্রিভাল।"
   },
   "sections": [
     {

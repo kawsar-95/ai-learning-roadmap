@@ -1,10 +1,10 @@
 {
   "slug": "inference",
   "title": "Inference",
-  "lede": "API-based vs self-hosted inference; vLLM, TGI, SGLang, Ollama, llama.cpp; GGUF/AWQ/GPTQ/INT4-INT8 quantisation; KV cache, prefix caching, speculative decoding; continuous batching; TTFT vs TPS; GPU economics, edge inference, and the major hosted providers (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock). <strong>Each section ships in two voices:</strong> the engineer's version (technical, with code & diagrams) and a layman's version (plain English with analogies). প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।",
+  "lede": "How to run a model: use an API or host it yourself. Learn how to make it faster and cheaper (quantization, caching, batching), what GPUs cost, and who the main hosting providers are.",
   "bn": {
     "title": "ইনফারেন্স (মডেল চালানো)",
-    "lede": "API-ভিত্তিক বনাম নিজে হোস্ট করা ইনফারেন্স; vLLM, TGI, SGLang, Ollama, llama.cpp; GGUF/AWQ/GPTQ/INT4-INT8 কোয়ান্টাইজেশন; KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং; কন্টিনিউয়াস ব্যাচিং; TTFT বনাম TPS; GPU-র অর্থনীতি, এজ ইনফারেন্স, আর বড় বড় হোস্টেড প্রোভাইডার (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। <strong>প্রতিটি সেকশন দুই ভাবে লেখা:</strong> ইঞ্জিনিয়ারের জন্য টেকনিক্যাল ভার্সন (কোড আর ডায়াগ্রাম সহ), আর সাধারণ পাঠকের জন্য সহজ ভাষায় ব্যাখ্যা (উপমা সহ)। প্রতিটি টপিকের শেষে বাংলা ব্যাখ্যাও আছে।"
+    "lede": "মডেল কীভাবে চালাবেন: API ব্যবহার করবেন, নাকি নিজে হোস্ট করবেন। আরও শিখবেন কীভাবে এটা দ্রুত আর সস্তা করা যায় (কোয়ান্টাইজেশন, ক্যাশিং, ব্যাচিং), GPU-র খরচের হিসাব, আর বড় হোস্টিং প্রোভাইডারগুলো।"
   },
   "sections": [
     {

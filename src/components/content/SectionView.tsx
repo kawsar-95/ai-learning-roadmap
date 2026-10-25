@@ -13,9 +13,19 @@ import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
 import { VideoList } from "./VideoList";
 import { BookmarkButton, SectionDoneButton } from "@/components/progress/ProgressWidgets";
+import { createStore } from "@/components/progress/createStore";
 import { VOICE_COLOR, VoiceSwitcher } from "./VoiceSwitcher";
 import type { Voice } from "./VoiceSwitcher";
 
+/** The voice the reader picked last. Every section follows it, so the reader chooses once. */
+const voiceStore = createStore<Voice | null>({
+  storageKey: "voice",
+  eventName: "voice-change",
+  parse: (raw) => (raw === "main" || raw === "layman" || raw === "bangla" ? raw : null),
+  serialize: (voice) => voice ?? "",
+  empty: null,
+  isEmpty: (voice) => voice === null,
+});
 /** The voices a section has. The Bangla site lists বাংলা first. */
 function availableVoices(section: Section, lang: Lang): Voice[] {
   const voices: Voice[] = [];
@@ -23,7 +33,6 @@ function availableVoices(section: Section, lang: Lang): Voice[] {
   if (section.body.length) voices.push("main");
   if (section.layman.length) voices.push("layman");
   if (lang === "en" && section.bangla.length) voices.push("bangla");
-  if (voices.length > 1) voices.push("all");
   return voices;
 }
 
@@ -100,8 +109,8 @@ function VoicePanel({
 /**
  * One section of a topic: number, title, lede, and the voice switcher.
  * The Technical voice renders as plain prose. The Layman's and Bangla voices
- * render in panels. "All three" stacks them in that order. The choice is
- * local to the section. On the Bangla site, a section opens in বাংলা and
+ * render in panels. One voice shows at a time. The choice is saved and every
+ * section follows it. With no saved choice, on the Bangla site a section opens in বাংলা and
  * its title, intro, practice tasks, and labels are in Bangla. The section
  * ends with a "Mark as done" toggle for the reading progress (`doneKey`).
  */
@@ -109,7 +118,16 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
   const ui = UI[lang];
   const text = lang === "bn" ? section.bn : section;
   const available = availableVoices(section, lang);
-  const [voice, setVoice] = useState<Voice>(available[0] ?? "main");
+  // The first render has no stored voice: it shows the section's first voice.
+  const stored = voiceStore.use();
+  // A heading link shows the Technical voice in this section only. The saved choice stays.
+  const [forced, setForced] = useState<Voice | null>(null);
+  const shown = forced ?? stored;
+  const voice: Voice = shown && available.includes(shown) ? shown : (available[0] ?? "main");
+  const pick = (v: Voice) => {
+    setForced(null);
+    voiceStore.write(v);
+  };
   const show = (v: Exclude<Voice, "all">) =>
     (voice === v || voice === "all") && available.includes(v);
 
@@ -145,7 +163,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
       if (current !== "layman" && current !== "bangla") return;
       pendingScroll.current = id;
       voiceRef.current = "main";
-      setVoice("main");
+      setForced("main");
     };
     // A click covers a repeat click on the same link: the hash does not
     // change, so no hashchange event fires.
@@ -193,7 +211,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
 
       {available.length > 1 && (
         <div className="mt-5">
-          <VoiceSwitcher value={voice} onChange={setVoice} available={available} lang={lang} />
+          <VoiceSwitcher value={voice} onChange={pick} available={available} lang={lang} />
         </div>
       )}
 

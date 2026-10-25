@@ -49,8 +49,8 @@ export function InterviewPage({ lang }: { lang: Lang }) {
               </div>
               <div className="mt-3 divide-y divide-border">
                 {part.items.map((item, index) => (
-                  <details key={`${item.section}-${index}`}>
-                    <summary className="cursor-pointer py-3.5 pr-2 text-[16px] font-medium leading-snug text-text marker:text-accent hover:text-accent">
+                  <details key={`${item.section}-${index}`} className="group">
+                    <summary className="relative cursor-pointer list-none py-3.5 pr-2 pl-5 text-[16px] font-medium leading-snug text-text before:absolute before:top-3.5 before:left-0 before:text-accent before:transition-transform before:content-['▸'] group-open:before:rotate-90 hover:text-accent motion-reduce:before:transition-none [&::-webkit-details-marker]:hidden">
                       {item[lang].q}
                     </summary>
                     <div className="pr-2 pb-4 pl-5">
