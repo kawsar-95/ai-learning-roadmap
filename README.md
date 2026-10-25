@@ -53,8 +53,9 @@ not set it, so the site serves from `/`. Code that builds a URL by hand
 | --------------------------- | -------------------------------------------------- |
 | `/`                         | Landing page. An index of the 14 parts.            |
 | `/topics/<slug>`            | One part, with prev/next links and an outline.     |
+| `/roadmap/`                 | The study roadmap: 20 phases, 542 lessons.         |
 | `/search-index.json`        | The search index. Built at build time.             |
-| `/bn/`, `/bn/topics/<slug>` | The same pages in Bangla. See "Languages".         |
+| `/bn/`, `/bn/topics/<slug>`, `/bn/roadmap/` | The same pages in Bangla. See "Languages". |
 | `/bn/search-index.json`     | The Bangla search index.                           |
 
 The 14 parts, in order:
@@ -347,3 +348,23 @@ All citations resolve to:
 ## License
 
 [MIT](LICENSE)
+
+## Roadmap
+
+`/roadmap/` (and `/bn/roadmap/`) is a study path through the open
+[AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)
+curriculum. It groups the 20 phases into 7 stages, marks five phases as
+optional depth, links each phase to the Parts of this site that cover the same
+ground, and lets you tick lessons off. Progress is saved in the browser under
+its own `roadmap-progress` key, separate from the Part progress. Each lesson
+opens on the curriculum site.
+
+- `src/data/roadmap-lessons.json` is generated from the curriculum's
+  `ROADMAP.md`. Refresh it with
+  `node scripts/build-roadmap.mjs <path to the curriculum repo>`.
+- `src/data/roadmap-phases.json` is written by hand: the stages, a one-line
+  summary of each phase (English and Bangla), which phases are optional, and
+  the related Parts.
+- `npm run build` and `npm test` check that the two files agree: every phase
+  has a summary and a stage, lesson numbers do not repeat, and every related
+  Part exists.

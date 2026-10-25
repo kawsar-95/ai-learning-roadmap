@@ -36,6 +36,9 @@ export function dashboardHref(lang: Lang): string {
 export function interviewHref(lang: Lang): string {
   return lang === "bn" ? "/bn/interview/" : "/interview/";
 }
+export function roadmapHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/roadmap/" : "/roadmap/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
@@ -155,6 +158,27 @@ const en = {
   partsTitle: "The 14 parts",
   partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
   sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
+
+  // Roadmap page.
+  roadmap: "Roadmap",
+  roadmapTitle: "AI engineering roadmap",
+  roadmapIntro:
+    "A study path through the open AI Engineering from Scratch curriculum: 20 phases, from setup and math to agents, production and capstone projects. Each lesson opens on the curriculum site. Tick the lessons you finish; your progress stays in this browser.",
+  roadmapLessonsDone: "Lessons done",
+  roadmapLessonsTotal: "Total lessons",
+  roadmapTimeLeft: "Left to study",
+  roadmapCoreOnly: "Show the suggested path only",
+  roadmapCoreNote: "The suggested path skips the five optional phases (vision, speech, generative models, reinforcement learning, multimodal). Switch it off to see all 20.",
+  roadmapPhase: (n: string) => `Phase ${n}`,
+  roadmapCore: "Suggested",
+  roadmapOptional: "Optional depth",
+  roadmapLessons: (n: string) => `${n} lessons`,
+  roadmapRelated: "Covered in the Parts",
+  roadmapMarkLesson: (title: string) => `Mark done: ${title}`,
+  roadmapUnmarkLesson: (title: string) => `Done, click to undo: ${title}`,
+  roadmapOpenLesson: "Open lesson ↗",
+  roadmapResetConfirm: "Clear the progress of all roadmap lessons?",
+  roadmapSource: "Source: the ROADMAP.md of the curriculum. Lesson titles stay in English.",
 
   // Contents page.
   contentsTitle: "All contents",
@@ -340,6 +364,26 @@ const bn: Dict = {
   partsTitle: "১৪টি পার্ট",
   partsIntro: "ক্রম অনুযায়ী পড়ুন, অথবা যে পার্ট দরকার সেখানে যান। প্রতিটি পার্ট নিজে নিজেই সম্পূর্ণ।",
   sectionCount: (n: number) => `${fmtNum("bn", n)}টি সেকশন`,
+
+  roadmap: "রোডম্যাপ",
+  roadmapTitle: "AI engineering রোডম্যাপ",
+  roadmapIntro:
+    "ওপেন সোর্স AI Engineering from Scratch কারিকুলামের ওপর একটি পড়ার পথ: সেটআপ আর ম্যাথ থেকে এজেন্ট, প্রোডাকশন আর ক্যাপস্টোন প্রজেক্ট পর্যন্ত ২০টি ফেজ। প্রতিটি লেসন কারিকুলামের সাইটে খোলে। যে লেসন শেষ করলেন তাতে টিক দিন; প্রগ্রেস এই ব্রাউজারেই থাকে।",
+  roadmapLessonsDone: "শেষ করা লেসন",
+  roadmapLessonsTotal: "মোট লেসন",
+  roadmapTimeLeft: "পড়তে বাকি",
+  roadmapCoreOnly: "শুধু প্রস্তাবিত পথ দেখান",
+  roadmapCoreNote: "প্রস্তাবিত পথে পাঁচটি ঐচ্ছিক ফেজ (ভিশন, স্পিচ, জেনারেটিভ মডেল, reinforcement learning, multimodal) বাদ যায়। ২০টি ফেজই দেখতে এটি বন্ধ করুন।",
+  roadmapPhase: (n: string) => `ফেজ ${n}`,
+  roadmapCore: "প্রস্তাবিত",
+  roadmapOptional: "ঐচ্ছিক গভীরতা",
+  roadmapLessons: (n: string) => `${n}টি লেসন`,
+  roadmapRelated: "যেসব পার্টে আছে",
+  roadmapMarkLesson: (title: string) => `শেষ চিহ্ন দিন: ${title}`,
+  roadmapUnmarkLesson: (title: string) => `শেষ, বাতিল করতে ক্লিক করুন: ${title}`,
+  roadmapOpenLesson: "লেসন খুলুন ↗",
+  roadmapResetConfirm: "রোডম্যাপের সব লেসনের প্রগ্রেস মুছে ফেলবেন?",
+  roadmapSource: "সোর্স: কারিকুলামের ROADMAP.md। লেসনের নাম English-এ থাকে।",
 
   contentsTitle: "সম্পূর্ণ সূচিপত্র",
   contentsIntro: "সব পার্ট আর সেকশন পড়ার ক্রমে। যে সেকশন শেষ করেছেন, তার পাশে টিক চিহ্ন থাকে।",
