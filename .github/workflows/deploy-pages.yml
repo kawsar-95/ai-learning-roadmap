@@ -35,9 +35,6 @@ jobs:
       - run: npm run build
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          # The URL of the tutor endpoint (a repository variable, not a secret).
-          # Unset: the "Ask the tutor" box is not built into the site.
-          NEXT_PUBLIC_TUTOR_URL: ${{ vars.TUTOR_URL }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
