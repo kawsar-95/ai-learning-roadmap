@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { STAGES } from "@/lib/roadmap";
 import { getTopic, topicText } from "@/lib/topics";
-import { CURRICULUM_URL, LESSON_BASE_URL, formatDuration, lessonKey, lessonUrl } from "@/lib/roadmap-schema";
-import { UI, fmtNum, topicHref } from "@/lib/i18n";
+import { CURRICULUM_URL, formatDuration, lessonHref, lessonKey } from "@/lib/roadmap-schema";
+import { UI, fmtNum, roadmapHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import {
   CoreFilter,
@@ -89,7 +89,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
     stage.phases.flatMap((phase) =>
       phase.lessons.map((lesson) => ({
         key: lessonKey(phase.phase, lesson.n),
-        href: lessonUrl(phase, lesson),
+        href: lessonHref(phase, lesson, lang),
         minutes: lesson.minutes,
       })),
     ),
@@ -126,14 +126,9 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                 <h3 className="m-0 mt-1 font-display text-[20px] font-bold leading-snug text-text">{text.title}</h3>
                 <p className="mt-2 mb-0 flex-1 text-[15px] text-text-dim">{text.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-medium">
-                  <a
-                    href={LESSON_BASE_URL + path.lesson + (path.kind === "start" ? "" : `&learningPath=${path.id}`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-6 items-center text-accent"
-                  >
+                  <Link href={`${roadmapHref(lang)}${path.lesson}/`} className="inline-flex min-h-6 items-center text-accent">
                     {ui.pathsStart}
-                  </a>
+                  </Link>
                   <a
                     href={path.github}
                     target="_blank"
@@ -234,15 +229,12 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                               <span className="w-7 shrink-0 font-mono text-[12px] text-text-faint">
                                 {String(lesson.n).padStart(2, "0")}
                               </span>
-                              <a
-                                href={lessonUrl(phase, lesson)}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <Link
+                                href={lessonHref(phase, lesson, lang)}
                                 className="min-w-0 flex-1 text-[15px] leading-snug text-text no-underline hover:text-accent"
                               >
                                 {lesson.title}
-                                <span className="sr-only"> ({ui.roadmapOpenLesson})</span>
-                              </a>
+                              </Link>
                               <span className="shrink-0 font-mono text-[12px] text-text-faint">
                                 {formatDuration(lesson.minutes, lang, fmt)}
                               </span>

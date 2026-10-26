@@ -5,6 +5,7 @@
 //   src/data/roadmap-phases.json   written by hand: stages, summaries, links to the 14 Parts
 
 import { z } from "zod";
+import { roadmapHref } from "./i18n.ts";
 import type { Lang } from "./i18n.ts";
 
 /** The lesson pages live on the curriculum site, one per lesson folder. */
@@ -87,6 +88,11 @@ export function lessonKey(phase: number, n: number): string {
 
 export function lessonUrl(phase: Pick<Phase, "folder">, lesson: Pick<Lesson, "dir">): string {
   return `${LESSON_BASE_URL}${phase.folder}/${lesson.dir}`;
+}
+
+/** The lesson page on this site (without the basePath). */
+export function lessonHref(phase: Pick<Phase, "folder">, lesson: Pick<Lesson, "dir">, lang: Lang): string {
+  return `${roadmapHref(lang)}${phase.folder}/${lesson.dir}/`;
 }
 
 /** Joins the two files. Throws on a gap, a repeat, or a stage that skips a phase. */
