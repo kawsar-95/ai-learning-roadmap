@@ -392,7 +392,9 @@ ANTHROPIC_API_KEY=... TUTOR_ALLOW_ORIGIN=https://kawsar-95.github.io \
   node scripts/tutor-server.ts          # POST http://localhost:8787/tutor
 ```
 
-Then build the site with `NEXT_PUBLIC_TUTOR_URL=<the endpoint URL>`. The "Ask
+Then build the site with `NEXT_PUBLIC_TUTOR_URL=<the endpoint URL>`. On GitHub
+Pages, set it as a repository variable named `TUTOR_URL` (Settings, Secrets and
+variables, Actions, Variables); `deploy-pages.yml` passes it to the build. The "Ask
 the tutor" box on `/roadmap/` appears only when that variable is set.
 `scripts/tutor-server.ts` limits each client address to `TUTOR_PER_MINUTE`
 (default 20) requests a minute. It reads the address from `X-Forwarded-For`,
