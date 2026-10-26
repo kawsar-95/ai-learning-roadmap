@@ -12,6 +12,7 @@ import {
   RoadmapSummary,
 } from "@/components/progress/RoadmapWidgets";
 import type { LessonLink } from "@/components/progress/RoadmapWidgets";
+import { TutorPanel } from "@/components/tutor/TutorPanel";
 
 /** The roadmap: stages of phases, each phase a list of lessons with a done toggle. */
 export function RoadmapPage({ lang }: { lang: Lang }) {
@@ -38,6 +39,8 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
       </header>
 
       <RoadmapSummary lessons={links} lang={lang} />
+
+      <TutorPanel lang={lang} />
 
       <CoreFilter lang={lang}>
         {STAGES.map((stage, stageIndex) => {

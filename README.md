@@ -368,3 +368,35 @@ opens on the curriculum site.
 - `npm run build` and `npm test` check that the two files agree: every phase
   has a summary and a stage, lesson numbers do not repeat, and every related
   Part exists.
+
+## AI tutor
+
+`src/tutor/` is a tutor that answers questions about the curriculum. It is
+framework-free: `createTutorHandler` takes a `Request` and returns a streaming
+`Response` (Server-Sent Events), so it runs in Node, a Next route handler,
+Hono or a worker.
+
+- The system prompt holds the whole outline (20 phases, 542 lesson folders and
+  titles), cached, followed by a short summary of the learner's progress.
+  The tutor knows titles and phase summaries, not lesson text.
+- The request is `{ "messages": [...], "done": ["0/1", ...] }`, where `done`
+  holds the lesson keys the roadmap page stores. It is validated with zod.
+- The model call (`src/tutor/anthropic.ts`) uses the Anthropic SDK with
+  `claude-opus-5-5` (override with `TUTOR_MODEL`), medium effort, and the
+  server-side fallback, so a declined request is retried on another model.
+
+The static site cannot host the endpoint, so run it separately:
+
+```bash
+ANTHROPIC_API_KEY=... TUTOR_ALLOW_ORIGIN=https://kawsar-95.github.io \
+  node scripts/tutor-server.ts          # POST http://localhost:8787/tutor
+```
+
+Then build the site with `NEXT_PUBLIC_TUTOR_URL=<the endpoint URL>`. The "Ask
+the tutor" box on `/roadmap/` appears only when that variable is set.
+`scripts/tutor-server.ts` limits each client address to `TUTOR_PER_MINUTE`
+(default 20) requests a minute. It reads the address from `X-Forwarded-For`,
+so run it behind a proxy that sets that header, or replace `allow`.
+To use the tutor in another app, import `createTutorHandler` and
+`createAnthropicModel` from `src/tutor/index.ts` and pass the stages from
+`buildRoadmap` (`src/lib/roadmap-schema.ts`).

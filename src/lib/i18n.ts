@@ -180,6 +180,20 @@ const en = {
   roadmapResetConfirm: "Clear the progress of all roadmap lessons?",
   roadmapSource: "Source: the ROADMAP.md of the curriculum. Lesson titles stay in English.",
 
+  // Tutor panel on the roadmap page.
+  tutorTitle: "Ask the tutor",
+  tutorIntro:
+    "Ask what to study next or how the phases connect. The tutor knows the roadmap and the lessons you ticked off. It knows lesson titles, not lesson text.",
+  tutorLabel: "Your question",
+  tutorPlaceholder: "What should I study next?",
+  tutorSend: "Ask",
+  tutorClear: "Clear",
+  tutorYou: "You",
+  tutorName: "Tutor",
+  tutorThinking: "Thinking…",
+  tutorError: "The tutor could not answer. Try again.",
+  tutorRefusal: "The tutor declined to answer that.",
+
   // Contents page.
   contentsTitle: "All contents",
   contentsIntro: "Every part and section in reading order. A check mark shows a section you marked as done.",
@@ -384,6 +398,19 @@ const bn: Dict = {
   roadmapOpenLesson: "লেসন খুলুন ↗",
   roadmapResetConfirm: "রোডম্যাপের সব লেসনের প্রগ্রেস মুছে ফেলবেন?",
   roadmapSource: "সোর্স: কারিকুলামের ROADMAP.md। লেসনের নাম English-এ থাকে।",
+
+  tutorTitle: "টিউটরকে জিজ্ঞেস করুন",
+  tutorIntro:
+    "এরপর কী পড়বেন, বা ফেজগুলো কীভাবে জোড়া লাগে, জিজ্ঞেস করুন। টিউটর রোডম্যাপ আর আপনার টিক দেওয়া লেসন জানে। সে লেসনের নাম জানে, লেসনের লেখা জানে না।",
+  tutorLabel: "আপনার প্রশ্ন",
+  tutorPlaceholder: "এরপর কী পড়ব?",
+  tutorSend: "জিজ্ঞেস করুন",
+  tutorClear: "মুছুন",
+  tutorYou: "আপনি",
+  tutorName: "টিউটর",
+  tutorThinking: "ভাবছে…",
+  tutorError: "টিউটর উত্তর দিতে পারেনি। আবার চেষ্টা করুন।",
+  tutorRefusal: "টিউটর এর উত্তর দিতে রাজি হয়নি।",
 
   contentsTitle: "সম্পূর্ণ সূচিপত্র",
   contentsIntro: "সব পার্ট আর সেকশন পড়ার ক্রমে। যে সেকশন শেষ করেছেন, তার পাশে টিক চিহ্ন থাকে।",
