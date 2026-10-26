@@ -179,6 +179,12 @@ const en = {
   roadmapOpenLesson: "Open lesson ↗",
   roadmapResetConfirm: "Clear the progress of all roadmap lessons?",
   roadmapSource: "Source: the ROADMAP.md of the curriculum. Lesson titles stay in English.",
+  pathsTitle: "Learning paths",
+  pathsIntro: "Not sure where to start? Pick one path. Each path is a short list of lessons from the phases below, in a good order.",
+  pathsStartHere: "Start here",
+  pathsCore: "Core path",
+  pathsFocused: "Focused path",
+  pathsStart: "Start path ↗",
 
   // Contents page.
   contentsTitle: "All contents",
@@ -384,6 +390,12 @@ const bn: Dict = {
   roadmapOpenLesson: "লেসন খুলুন ↗",
   roadmapResetConfirm: "রোডম্যাপের সব লেসনের প্রগ্রেস মুছে ফেলবেন?",
   roadmapSource: "সোর্স: কারিকুলামের ROADMAP.md। লেসনের নাম English-এ থাকে।",
+  pathsTitle: "লার্নিং পাথ",
+  pathsIntro: "কোথা থেকে শুরু করবেন বুঝতে পারছেন না? একটি পাথ বেছে নিন। প্রতিটি পাথ নিচের ফেজগুলো থেকে বাছাই করা লেসনের একটি ছোট তালিকা, ঠিক ক্রমে সাজানো।",
+  pathsStartHere: "এখান থেকে শুরু",
+  pathsCore: "মূল পাথ",
+  pathsFocused: "ফোকাসড পাথ",
+  pathsStart: "পাথ শুরু করুন ↗",
 
   contentsTitle: "সম্পূর্ণ সূচিপত্র",
   contentsIntro: "সব পার্ট আর সেকশন পড়ার ক্রমে। যে সেকশন শেষ করেছেন, তার পাশে টিক চিহ্ন থাকে।",
