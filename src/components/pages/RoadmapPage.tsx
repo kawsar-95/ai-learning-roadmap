@@ -2,7 +2,7 @@ import Link from "next/link";
 import { STAGES } from "@/lib/roadmap";
 import { getTopic, topicText } from "@/lib/topics";
 import { CURRICULUM_URL, formatDuration, lessonHref, lessonKey } from "@/lib/roadmap-schema";
-import { UI, fmtNum, roadmapHref, topicHref } from "@/lib/i18n";
+import { UI, fmtNum, resourcesHref, roadmapHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import {
   CoreFilter,
@@ -142,6 +142,11 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
             );
           })}
         </ul>
+        <p className="mt-4 mb-0 text-[15px]">
+          <Link href={resourcesHref(lang)} className="font-medium text-accent">
+            {ui.resourcesTitle} →
+          </Link>
+        </p>
       </section>
 
       <RoadmapSummary lessons={links} lang={lang} />

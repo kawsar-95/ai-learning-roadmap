@@ -39,6 +39,9 @@ export function interviewHref(lang: Lang): string {
 export function roadmapHref(lang: Lang): string {
   return lang === "bn" ? "/bn/roadmap/" : "/roadmap/";
 }
+export function resourcesHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/resources/" : "/resources/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
@@ -187,6 +190,12 @@ const en = {
   lessonPrev: "Previous lesson",
   lessonNext: "Next lesson",
   lessonNav: "Lesson navigation",
+  resources: "Resources",
+  resourcesTitle: "Open-source repos to learn from",
+  resourcesIntro:
+    "Twenty well-known GitHub repositories for AI engineers. Each card says what the repo is for and which roadmap phase it fits. The links open GitHub.",
+  resourcesBangla: "Bangla translation ↗",
+  resourcesNote: "Star counts change, so they are not shown. Check each repo's license before you reuse its code or text.",
   lessonCode: "Code and tests on GitHub ↗",
   lessonCredit: "Lesson text from AI Engineering from Scratch by Rohit Ghumare and contributors, under the",
 
@@ -402,6 +411,12 @@ const bn: Dict = {
   lessonPrev: "আগের লেসন",
   lessonNext: "পরের লেসন",
   lessonNav: "লেসন নেভিগেশন",
+  resources: "রিসোর্স",
+  resourcesTitle: "শেখার জন্য ওপেন সোর্স রিপো",
+  resourcesIntro:
+    "AI ইঞ্জিনিয়ারদের জন্য বিশটি পরিচিত GitHub রিপো। প্রতিটি কার্ডে আছে রিপোটি কী কাজের, আর রোডম্যাপের কোন ফেজের সাথে মেলে। লিংক GitHub-এ খোলে।",
+  resourcesBangla: "বাংলা অনুবাদ ↗",
+  resourcesNote: "স্টারের সংখ্যা বদলায়, তাই দেখানো হয়নি। কোনো রিপোর কোড বা লেখা আবার ব্যবহার করার আগে তার লাইসেন্স দেখে নিন।",
   lessonCode: "GitHub-এ কোড আর টেস্ট ↗",
   lessonCredit: "লেসনের লেখা English-এ, AI Engineering from Scratch থেকে নেওয়া। লেখক Rohit Ghumare ও সহযোগীরা। লাইসেন্স:",
 
