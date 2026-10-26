@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { STAGES } from "@/lib/roadmap";
 import { getTopic, topicText } from "@/lib/topics";
-import { CURRICULUM_URL, formatDuration, lessonKey, lessonUrl } from "@/lib/roadmap-schema";
+import { CURRICULUM_URL, formatDuration, lessonKey, lessonPath } from "@/lib/roadmap-schema";
 import { UI, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import {
@@ -22,7 +22,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
     stage.phases.flatMap((phase) =>
       phase.lessons.map((lesson) => ({
         key: lessonKey(phase.phase, lesson.n),
-        href: lessonUrl(phase, lesson),
+        href: lessonPath(phase, lesson),
         minutes: lesson.minutes,
       })),
     ),
@@ -125,15 +125,12 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                               <span className="w-7 shrink-0 font-mono text-[12px] text-text-faint">
                                 {String(lesson.n).padStart(2, "0")}
                               </span>
-                              <a
-                                href={lessonUrl(phase, lesson)}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <Link
+                                href={lessonPath(phase, lesson)}
                                 className="min-w-0 flex-1 text-[15px] leading-snug text-text no-underline hover:text-accent"
                               >
                                 {lesson.title}
-                                <span className="sr-only"> ({ui.roadmapOpenLesson})</span>
-                              </a>
+                              </Link>
                               <span className="shrink-0 font-mono text-[12px] text-text-faint">
                                 {formatDuration(lesson.minutes, lang, fmt)}
                               </span>

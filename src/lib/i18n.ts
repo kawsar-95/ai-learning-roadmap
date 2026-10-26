@@ -13,10 +13,22 @@ export function langFromPath(path: string): Lang {
   return path === "/bn" || path.startsWith("/bn/") ? "bn" : "en";
 }
 
-/** The same page in `lang`. `path` has no base path. */
+/**
+ * A lesson page ("/roadmap/<phase folder>/<lesson folder>/"). The lesson
+ * text is English only, so these pages exist once, at the English address.
+ */
+export function isLessonPath(path: string): boolean {
+  return /^\/roadmap\/\d\d-/.test(path);
+}
+
+/**
+ * The same page in `lang`. `path` has no base path. A lesson page has no
+ * Bangla twin; its Bangla link is the Bangla roadmap.
+ */
 export function localizedPath(path: string, lang: Lang): string {
   const english = langFromPath(path) === "bn" ? path.slice(3) || "/" : path;
   if (lang === "en") return english;
+  if (isLessonPath(english)) return "/bn/roadmap/";
   return english === "/" ? "/bn/" : `/bn${english}`;
 }
 
@@ -57,13 +69,14 @@ export function fmtNum(lang: Lang, n: number): string {
 /**
  * Runs in <head> before the first paint. It sets <html lang> from the path.
  * If the reader chose the other language before, it opens the same page in
- * that language. It must agree with langFromPath and localizedPath
- * (tests/i18n.test.ts checks this).
+ * that language, except on a lesson page, which has no Bangla twin. It must
+ * agree with langFromPath, localizedPath and isLessonPath (tests/i18n.test.ts
+ * checks this).
  */
 export function langInitScript(basePath: string): string {
   return `(function(){try{var b=${JSON.stringify(basePath)},l=location,p=l.pathname;if(b&&p.indexOf(b)===0)p=p.slice(b.length)||"/";var bn=p==="/bn"||p.indexOf("/bn/")===0;document.documentElement.setAttribute("lang",bn?"bn":"en");var s=localStorage.getItem(${JSON.stringify(
     LANG_STORAGE_KEY,
-  )});if((s==="bn"&&!bn)||(s==="en"&&bn)){var e=bn?p.slice(3)||"/":p,t=s==="en"?e:e==="/"?"/bn/":"/bn"+e;l.replace(b+t+l.search+l.hash)}}catch(x){}})()`;
+  )});if(!/^\\/roadmap\\/\\d\\d-/.test(p)&&((s==="bn"&&!bn)||(s==="en"&&bn))){var e=bn?p.slice(3)||"/":p,t=s==="en"?e:e==="/"?"/bn/":"/bn"+e;l.replace(b+t+l.search+l.hash)}}catch(x){}})()`;
 }
 
 const en = {
@@ -163,7 +176,7 @@ const en = {
   roadmap: "Roadmap",
   roadmapTitle: "AI engineering roadmap",
   roadmapIntro:
-    "A study path through the open AI Engineering from Scratch curriculum: 20 phases, from setup and math to agents, production and capstone projects. Each lesson opens on the curriculum site. Tick the lessons you finish; your progress stays in this browser.",
+    "A study path through the open AI Engineering from Scratch curriculum: 20 phases, from setup and math to agents, production and capstone projects. Open a lesson to read it here, and tick the lessons you finish; your progress stays in this browser.",
   roadmapLessonsDone: "Lessons done",
   roadmapLessonsTotal: "Total lessons",
   roadmapTimeLeft: "Left to study",
@@ -176,7 +189,6 @@ const en = {
   roadmapRelated: "Covered in the Parts",
   roadmapMarkLesson: (title: string) => `Mark done: ${title}`,
   roadmapUnmarkLesson: (title: string) => `Done, click to undo: ${title}`,
-  roadmapOpenLesson: "Open lesson ↗",
   roadmapResetConfirm: "Clear the progress of all roadmap lessons?",
   roadmapSource: "Source: the ROADMAP.md of the curriculum. Lesson titles stay in English.",
 
@@ -193,6 +205,18 @@ const en = {
   tutorThinking: "Thinking…",
   tutorError: "The tutor could not answer. Try again.",
   tutorRefusal: "The tutor declined to answer that.",
+
+  // Lesson pages.
+  lessonBack: "← Roadmap",
+  lessonInEnglish: "Lesson text is in English.",
+  lessonSourceLabel: "Source",
+  lessonSourceText: "Lesson text from AI Engineering from Scratch (MIT license).",
+  lessonCode: "Code and outputs on GitHub ↗",
+  lessonDiagram: "Diagram source (Mermaid)",
+  lessonPrev: "Previous lesson",
+  lessonNext: "Next lesson",
+  lessonNav: "Previous and next lesson",
+  lessonOf: (phase: string, n: string) => `Phase ${phase} · Lesson ${n}`,
 
   // Contents page.
   contentsTitle: "All contents",
@@ -382,7 +406,7 @@ const bn: Dict = {
   roadmap: "রোডম্যাপ",
   roadmapTitle: "AI engineering রোডম্যাপ",
   roadmapIntro:
-    "ওপেন সোর্স AI Engineering from Scratch কারিকুলামের ওপর একটি পড়ার পথ: সেটআপ আর ম্যাথ থেকে এজেন্ট, প্রোডাকশন আর ক্যাপস্টোন প্রজেক্ট পর্যন্ত ২০টি ফেজ। প্রতিটি লেসন কারিকুলামের সাইটে খোলে। যে লেসন শেষ করলেন তাতে টিক দিন; প্রগ্রেস এই ব্রাউজারেই থাকে।",
+    "ওপেন সোর্স AI Engineering from Scratch কারিকুলামের ওপর একটি পড়ার পথ: সেটআপ আর ম্যাথ থেকে এজেন্ট, প্রোডাকশন আর ক্যাপস্টোন প্রজেক্ট পর্যন্ত ২০টি ফেজ। লেসন খুলে এখানেই পড়ুন, আর যে লেসন শেষ করলেন তাতে টিক দিন; প্রগ্রেস এই ব্রাউজারেই থাকে।",
   roadmapLessonsDone: "শেষ করা লেসন",
   roadmapLessonsTotal: "মোট লেসন",
   roadmapTimeLeft: "পড়তে বাকি",
@@ -395,7 +419,6 @@ const bn: Dict = {
   roadmapRelated: "যেসব পার্টে আছে",
   roadmapMarkLesson: (title: string) => `শেষ চিহ্ন দিন: ${title}`,
   roadmapUnmarkLesson: (title: string) => `শেষ, বাতিল করতে ক্লিক করুন: ${title}`,
-  roadmapOpenLesson: "লেসন খুলুন ↗",
   roadmapResetConfirm: "রোডম্যাপের সব লেসনের প্রগ্রেস মুছে ফেলবেন?",
   roadmapSource: "সোর্স: কারিকুলামের ROADMAP.md। লেসনের নাম English-এ থাকে।",
 
@@ -411,6 +434,17 @@ const bn: Dict = {
   tutorThinking: "ভাবছে…",
   tutorError: "টিউটর উত্তর দিতে পারেনি। আবার চেষ্টা করুন।",
   tutorRefusal: "টিউটর এর উত্তর দিতে রাজি হয়নি।",
+
+  lessonBack: "← রোডম্যাপ",
+  lessonInEnglish: "লেসনের লেখা English-এ।",
+  lessonSourceLabel: "সোর্স",
+  lessonSourceText: "লেসনের লেখা AI Engineering from Scratch থেকে (MIT লাইসেন্স)।",
+  lessonCode: "GitHub-এ কোড আর আউটপুট ↗",
+  lessonDiagram: "ডায়াগ্রামের সোর্স (Mermaid)",
+  lessonPrev: "আগের লেসন",
+  lessonNext: "পরের লেসন",
+  lessonNav: "আগের ও পরের লেসন",
+  lessonOf: (phase: string, n: string) => `ফেজ ${phase} · লেসন ${n}`,
 
   contentsTitle: "সম্পূর্ণ সূচিপত্র",
   contentsIntro: "সব পার্ট আর সেকশন পড়ার ক্রমে। যে সেকশন শেষ করেছেন, তার পাশে টিক চিহ্ন থাকে।",

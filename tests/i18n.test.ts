@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import vm from "node:vm";
-import { LANG_STORAGE_KEY, UI, dashboardHref, fmtNum, interviewHref, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
+import { LANG_STORAGE_KEY, UI, dashboardHref, fmtNum, interviewHref, isLessonPath, langFromPath, langInitScript, localizedPath } from "../src/lib/i18n.ts";
 import { practiceLang } from "../src/lib/practice.ts";
 import { videosForVoice } from "../src/lib/videos.ts";
 import type { Video } from "../src/lib/content-schema.ts";
@@ -61,6 +61,13 @@ test("langInitScript does nothing when the saved language matches or is missing"
   assert.equal(runInit("/topics/x/", "en").replaced, null);
   assert.equal(runInit("/topics/x/", null).replaced, null);
   assert.equal(runInit("/topics/x/", "fr").replaced, null);
+});
+
+test("langInitScript leaves a lesson page where it is, even for a reader who saved Bangla", () => {
+  const lesson = "/roadmap/11-llm-engineering/01-prompt-engineering/";
+  assert.equal(runInit(lesson, "bn").replaced, null);
+  assert.equal(runInit(lesson, "bn").lang, "en");
+  assert.equal(runInit("/roadmap/", "bn").replaced, "/repo/bn/roadmap/?q=1#s2");
 });
 
 test("both dictionaries have the same keys", () => {
@@ -125,4 +132,13 @@ test("quiz counts use the singular for one question", () => {
   assert.equal(UI.bn.quizQuestions(1), "১টি প্রশ্ন");
   assert.equal(UI.bn.quizQuestions(5), "৫টি প্রশ্ন");
   assert.equal(UI.bn.quizIntro(5), "কী শিখলেন যাচাই করুন। ৫টি প্রশ্ন।");
+});
+
+test("a lesson page has no Bangla twin: its Bangla link is the Bangla roadmap", () => {
+  const lesson = "/roadmap/11-llm-engineering/01-prompt-engineering/";
+  assert.equal(isLessonPath(lesson), true);
+  assert.equal(isLessonPath("/roadmap/"), false);
+  assert.equal(isLessonPath("/bn/roadmap/"), false);
+  assert.equal(localizedPath(lesson, "bn"), "/bn/roadmap/");
+  assert.equal(localizedPath(lesson, "en"), lesson);
 });

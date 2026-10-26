@@ -54,6 +54,7 @@ not set it, so the site serves from `/`. Code that builds a URL by hand
 | `/`                         | Landing page. An index of the 14 parts.            |
 | `/topics/<slug>`            | One part, with prev/next links and an outline.     |
 | `/roadmap/`                 | The study roadmap: 20 phases, 542 lessons.         |
+| `/roadmap/<phase>/<lesson>/` | One lesson of the roadmap (English only).         |
 | `/search-index.json`        | The search index. Built at build time.             |
 | `/bn/`, `/bn/topics/<slug>`, `/bn/roadmap/` | The same pages in Bangla. See "Languages". |
 | `/bn/search-index.json`     | The Bangla search index.                           |
@@ -356,18 +357,34 @@ All citations resolve to:
 curriculum. It groups the 20 phases into 7 stages, marks five phases as
 optional depth, links each phase to the Parts of this site that cover the same
 ground, and lets you tick lessons off. Progress is saved in the browser under
-its own `roadmap-progress` key, separate from the Part progress. Each lesson
-opens on the curriculum site.
+its own `roadmap-progress` key, separate from the Part progress.
+
+Each lesson is a page of this site, at `/roadmap/<phase folder>/<lesson folder>/`
+(for example `/roadmap/11-llm-engineering/01-prompt-engineering/`). The text is
+the curriculum's `docs/en.md`, rendered at build time with `react-markdown`
+(raw HTML in it is sanitized). The lesson text is English only, so there are no
+`/bn/` lesson pages; the Bangla roadmap links to the English lessons, and the
+language switch on a lesson goes to the Bangla roadmap. Links between lessons
+become links between these pages. Links to the lessons' code and outputs go to
+GitHub. Mermaid diagrams show their source, because the site loads no diagram
+library. Lesson pages are left out of the offline cache: they add about 200 MB to
+`out/`.
 
 - `src/data/roadmap-lessons.json` is generated from the curriculum's
   `ROADMAP.md`. Refresh it with
   `node scripts/build-roadmap.mjs <path to the curriculum repo>`.
+- `src/data/lessons/` (the lesson text) and `public/lesson-assets/` (their
+  images) are copied from the curriculum with
+  `node scripts/build-lessons.mjs <path to the curriculum repo>`. Run it after
+  `build-roadmap.mjs`, and commit the results. The curriculum is MIT licensed;
+  its notice is in `src/data/lessons/LICENSE`.
 - `src/data/roadmap-phases.json` is written by hand: the stages, a one-line
   summary of each phase (English and Bangla), which phases are optional, and
   the related Parts.
 - `npm run build` and `npm test` check that the two files agree: every phase
   has a summary and a stage, lesson numbers do not repeat, and every related
-  Part exists.
+  Part exists. They also check that every lesson has its text, every image is
+  copied, and every link between lessons resolves.
 
 ## AI tutor
 

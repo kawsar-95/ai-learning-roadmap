@@ -44,6 +44,9 @@ function makeOut() {
     "sw.js": swSource,
     "next.svg": "<svg/>",
     "_not-found/index.html": "nf",
+    "roadmap/index.html": "roadmap",
+    "roadmap/11-llm-engineering/01-prompt-engineering/index.html": "lesson",
+    "roadmap/11-llm-engineering/01-prompt-engineering/index.txt": "rsc",
   };
   for (const [file, text] of Object.entries(files)) {
     mkdirSync(dirname(join(dir, file)), { recursive: true });
@@ -52,9 +55,9 @@ function makeOut() {
   return dir;
 }
 
-test("precache: lists pages as their folder URL, their RSC index.txt and the files they need, not sw.js", () => {
+test("precache: lists pages as their folder URL, but not the lesson pages,, their RSC index.txt and the files they need, not sw.js", () => {
   const urls = buildManifest(makeOut()).map((e: { url: string }) => e.url);
-  assert.deepEqual(urls, ["", "_next/static/chunks/app.js", "search-index.json", "topics/inference/", "topics/inference/index.txt"]);
+  assert.deepEqual(urls, ["", "_next/static/chunks/app.js", "roadmap/", "search-index.json", "topics/inference/", "topics/inference/index.txt"]);
 });
 
 test("precache: the revision changes only when the file changes", () => {

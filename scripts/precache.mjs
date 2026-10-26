@@ -25,7 +25,8 @@ const KEEP = [
   /^favicon\.ico$/,
   /^apple-icon\.png$/,
 ];
-const SKIP = [/^_not-found\//];
+// The 542 lesson pages (about 200 MB) are not saved at install; they load on demand.
+const SKIP = [/^_not-found\//, /^roadmap\/\d\d-/];
 
 function walk(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

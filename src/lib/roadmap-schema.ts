@@ -89,6 +89,11 @@ export function lessonUrl(phase: Pick<Phase, "folder">, lesson: Pick<Lesson, "di
   return `${LESSON_BASE_URL}${phase.folder}/${lesson.dir}`;
 }
 
+/** The page of a lesson on this site. */
+export function lessonPath(phase: Pick<Phase, "folder">, lesson: Pick<Lesson, "dir">): string {
+  return `/roadmap/${phase.folder}/${lesson.dir}/`;
+}
+
 /** Joins the two files. Throws on a gap, a repeat, or a stage that skips a phase. */
 export function buildRoadmap(lessonsFile: unknown, phasesFile: unknown): Stage[] {
   const lessons = LessonsFileSchema.parse(lessonsFile);

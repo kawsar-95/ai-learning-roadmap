@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 import { firstUndone, summarize } from "@/lib/progress";
 import { formatDuration } from "@/lib/roadmap-schema";
@@ -8,7 +9,7 @@ import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { resetRoadmap, setLessons, toggleLesson, useRoadmapProgress } from "./useProgress";
 
-/** A lesson as the widgets need it: progress key, address on the curriculum site, and minutes. */
+/** A lesson as the widgets need it: progress key, page address on this site, and minutes. */
 export type LessonLink = { key: string; href: string; minutes: number };
 
 /** The thin bar and "done / total" count of one phase. */
@@ -47,6 +48,28 @@ export function LessonCheck({ lessonKey, title, lang }: { lessonKey: string; tit
       }
     >
       <span aria-hidden="true">✓</span>
+    </button>
+  );
+}
+
+/** The toggle on a lesson page. */
+export function LessonDoneButton({ lessonKey, lang }: { lessonKey: string; lang: Lang }) {
+  const ui = UI[lang];
+  const done = useRoadmapProgress().has(lessonKey);
+  return (
+    <button
+      type="button"
+      aria-pressed={done}
+      onClick={() => toggleLesson(lessonKey)}
+      className={
+        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
+        (done
+          ? "border-accent bg-accent text-on-accent hover:opacity-90"
+          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
+      }
+    >
+      <span aria-hidden="true">{done ? "✓" : "○"}</span>
+      {done ? ui.markedDone : ui.markDone}
     </button>
   );
 }
@@ -117,14 +140,12 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         {nextHref ? (
-          <a
+          <Link
             href={nextHref}
-            target="_blank"
-            rel="noopener noreferrer"
             className="rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
           >
             {ui.continueReading}
-          </a>
+          </Link>
         ) : (
           <p className="m-0 text-[15px] font-medium text-good">{ui.allDone}</p>
         )}
