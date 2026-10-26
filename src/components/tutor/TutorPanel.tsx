@@ -30,16 +30,18 @@ async function readEvents(response: Response, onEvent: (event: Record<string, un
 
 /**
  * A chat box that asks the tutor endpoint. It sends the lessons the learner
- * ticked off, so answers fit their progress. It renders nothing unless
+ * ticked off, so answers fit their progress, and `lesson` ("<phase folder>/
+ * <lesson folder>") when the box sits on a lesson page. It renders nothing unless
  * NEXT_PUBLIC_TUTOR_URL was set when the site was built.
  */
-export function TutorPanel({ lang }: { lang: Lang }) {
+export function TutorPanel({ lang, lesson }: { lang: Lang; lesson?: string }) {
   const ui = UI[lang];
   const done = useRoadmapProgress();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [reading, setReading] = useState<string | null>(null);
   const abort = useRef<AbortController | null>(null);
 
   if (!TUTOR_URL) return null;
@@ -58,13 +60,16 @@ export function TutorPanel({ lang }: { lang: Lang }) {
       const response = await fetch(TUTOR_URL!, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: history.slice(-20), done: [...done] }),
+        body: JSON.stringify({ messages: history.slice(-20), done: [...done], ...(lesson ? { lesson } : {}) }),
         signal: abort.current.signal,
       });
       if (!response.ok) throw new Error(String(response.status));
       await readEvents(response, (data) => {
-        if (typeof data.text === "string") {
+        if (typeof data.reading === "string") {
+          setReading(data.reading);
+        } else if (typeof data.text === "string") {
           const text = data.text;
+          setReading(null);
           setMessages((current) => {
             const last = current[current.length - 1];
             return [...current.slice(0, -1), { ...last, content: last.content + text }];
@@ -78,6 +83,7 @@ export function TutorPanel({ lang }: { lang: Lang }) {
     } catch (error) {
       if ((error as Error).name !== "AbortError") setNotice(ui.tutorError);
     } finally {
+      setReading(null);
       setBusy(false);
     }
   }
@@ -87,7 +93,7 @@ export function TutorPanel({ lang }: { lang: Lang }) {
       <h2 id="tutor-title" className="m-0 font-display text-[24px] font-bold text-text">
         {ui.tutorTitle}
       </h2>
-      <p className="mt-1 mb-4 text-[15px] text-text-dim">{ui.tutorIntro}</p>
+      <p className="mt-1 mb-4 text-[15px] text-text-dim">{lesson ? ui.tutorLessonIntro : ui.tutorIntro}</p>
 
       <div aria-live="polite" className="space-y-3">
         {messages.map((message, i) => (
@@ -101,7 +107,7 @@ export function TutorPanel({ lang }: { lang: Lang }) {
             <span className="mb-1 block font-mono text-[11px] tracking-[0.12em] text-text-faint uppercase">
               {message.role === "user" ? ui.tutorYou : ui.tutorName}
             </span>
-            {message.content || (busy && i === messages.length - 1 ? ui.tutorThinking : "")}
+            {message.content || (busy && i === messages.length - 1 ? (reading ? ui.tutorReading(reading) : ui.tutorThinking) : "")}
           </div>
         ))}
         {notice && <p className="m-0 text-[14px] text-danger">{notice}</p>}

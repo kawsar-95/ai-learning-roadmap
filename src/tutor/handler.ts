@@ -4,24 +4,29 @@
 //
 // The response is a Server-Sent Events stream. Each event is one JSON line:
 //   {"text":"..."}                         a piece of the answer
+//   {"reading":"Lesson title"}             the tutor is reading that lesson
 //   {"done":true,"stopReason":"end_turn"}  the end; "refusal" means the model declined
 //   {"error":"..."}                        a failure; the stream ends after it
 
 import type { Stage } from "../lib/roadmap-schema.ts";
+import type { LessonSource } from "./lessons.ts";
 import { buildSystem } from "./prompt.ts";
 import type { SystemBlock } from "./prompt.ts";
 import { TutorRequestSchema } from "./request.ts";
 import type { ChatMessage } from "./request.ts";
 
-export type TutorEvent = { text: string } | { stopReason: string | null };
+export type TutorEvent = { text: string } | { reading: string } | { stopReason: string | null };
 export type TutorModel = (input: {
   system: SystemBlock[];
   messages: ChatMessage[];
   signal: AbortSignal;
+  /** Where the model's read_lesson tool finds lesson text. */
+  lessons: LessonSource;
 }) => AsyncIterable<TutorEvent>;
 
 export type TutorHandlerOptions = {
   stages: Stage[];
+  lessons: LessonSource;
   model: TutorModel;
   /** The origin allowed to call the endpoint from a browser, such as "https://example.com". Unset: same-origin only. */
   allowOrigin?: string;
@@ -31,7 +36,7 @@ export type TutorHandlerOptions = {
 
 const MAX_BODY = 100_000;
 
-export function createTutorHandler({ stages, model, allowOrigin, allow }: TutorHandlerOptions) {
+export function createTutorHandler({ stages, lessons, model, allowOrigin, allow }: TutorHandlerOptions) {
   const cors: Record<string, string> = allowOrigin
     ? {
         "access-control-allow-origin": allowOrigin,
@@ -59,7 +64,9 @@ export function createTutorHandler({ stages, model, allowOrigin, allow }: TutorH
     const parsed = TutorRequestSchema.safeParse(body);
     if (!parsed.success) return json(400, { error: parsed.error.issues[0]?.message ?? "Bad request." });
 
-    const { messages, done } = parsed.data;
+    const { messages, done, lesson: lessonKey } = parsed.data;
+    const openLesson = lessonKey ? lessons.find(lessonKey) : undefined;
+    if (lessonKey && !openLesson) return json(400, { error: "Unknown lesson." });
     const encoder = new TextEncoder();
     const send = (controller: ReadableStreamDefaultController<Uint8Array>, event: unknown) =>
       controller.enqueue(encoder.encode(`data: ${JSON.stringify(event)}\n\n`));
@@ -67,8 +74,10 @@ export function createTutorHandler({ stages, model, allowOrigin, allow }: TutorH
     const stream = new ReadableStream<Uint8Array>({
       async start(controller) {
         try {
-          for await (const event of model({ system: buildSystem(stages, done), messages, signal: request.signal })) {
+          const system = buildSystem(stages, done, openLesson);
+          for await (const event of model({ system, messages, signal: request.signal, lessons })) {
             if ("text" in event) send(controller, { text: event.text });
+            else if ("reading" in event) send(controller, { reading: event.reading });
             else send(controller, { done: true, stopReason: event.stopReason });
           }
         } catch (error) {

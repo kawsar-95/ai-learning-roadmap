@@ -395,12 +395,21 @@ Hono or a worker.
 
 - The system prompt holds the whole outline (20 phases, 542 lesson folders and
   titles), cached, followed by a short summary of the learner's progress.
-  The tutor knows titles and phase summaries, not lesson text.
-- The request is `{ "messages": [...], "done": ["0/1", ...] }`, where `done`
-  holds the lesson keys the roadmap page stores. It is validated with zod.
+- The tutor reads lesson text in two ways. The `read_lesson` tool returns the
+  full text of any lesson, and the model calls it when a question is about what
+  a lesson teaches. On a lesson page the box also sends the open lesson's key
+  (`lesson`), and that lesson goes into the system prompt with its own cache
+  breakpoint, so a chat about one lesson reuses it. Lesson text comes from
+  `src/data/lessons/`; `createLessonSource` takes the function that reads it.
+- The request is `{ "messages": [...], "done": ["0/1", ...], "lesson": "<phase
+  folder>/<lesson folder>" }`. `done` holds the lesson keys the roadmap page
+  stores; `done` and `lesson` are optional. It is validated with zod.
 - The model call (`src/tutor/anthropic.ts`) uses the Anthropic SDK with
   `claude-opus-5-5` (override with `TUTOR_MODEL`), medium effort, and the
-  server-side fallback, so a declined request is retried on another model.
+  server-side fallback, so a declined request is retried on another model. A
+  question may take up to four requests (the last one runs without tools), and
+  a lesson is about 10,000 tokens, so a question that reads lessons costs more
+  than one that does not.
 
 The static site cannot host the endpoint, so run it separately:
 
@@ -416,6 +425,6 @@ the tutor" box on `/roadmap/` appears only when that variable is set.
 `scripts/tutor-server.ts` limits each client address to `TUTOR_PER_MINUTE`
 (default 20) requests a minute. It reads the address from `X-Forwarded-For`,
 so run it behind a proxy that sets that header, or replace `allow`.
-To use the tutor in another app, import `createTutorHandler` and
-`createAnthropicModel` from `src/tutor/index.ts` and pass the stages from
-`buildRoadmap` (`src/lib/roadmap-schema.ts`).
+To use the tutor in another app, import `createTutorHandler`,
+`createLessonSource` and `createAnthropicModel` from `src/tutor/index.ts` and
+pass the stages from `buildRoadmap` (`src/lib/roadmap-schema.ts`).

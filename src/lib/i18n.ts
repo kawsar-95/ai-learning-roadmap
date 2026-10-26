@@ -195,7 +195,10 @@ const en = {
   // Tutor panel on the roadmap page.
   tutorTitle: "Ask the tutor",
   tutorIntro:
-    "Ask what to study next or how the phases connect. The tutor knows the roadmap and the lessons you ticked off. It knows lesson titles, not lesson text.",
+    "Ask what to study next or how the phases connect. The tutor knows the roadmap and the lessons you ticked off. It reads lesson text when you ask about a lesson.",
+  tutorLessonIntro:
+    "Ask about this lesson. The tutor has its text, and can read other lessons of the roadmap when you ask about them.",
+  tutorReading: (title: string) => `Reading the lesson “${title}”…`,
   tutorLabel: "Your question",
   tutorPlaceholder: "What should I study next?",
   tutorSend: "Ask",
@@ -424,7 +427,10 @@ const bn: Dict = {
 
   tutorTitle: "টিউটরকে জিজ্ঞেস করুন",
   tutorIntro:
-    "এরপর কী পড়বেন, বা ফেজগুলো কীভাবে জোড়া লাগে, জিজ্ঞেস করুন। টিউটর রোডম্যাপ আর আপনার টিক দেওয়া লেসন জানে। সে লেসনের নাম জানে, লেসনের লেখা জানে না।",
+    "এরপর কী পড়বেন, বা ফেজগুলো কীভাবে জোড়া লাগে, জিজ্ঞেস করুন। টিউটর রোডম্যাপ আর আপনার টিক দেওয়া লেসন জানে। কোনো লেসন নিয়ে জিজ্ঞেস করলে সে লেসনের লেখা পড়ে নেয়।",
+  tutorLessonIntro:
+    "এই লেসন নিয়ে জিজ্ঞেস করুন। টিউটরের কাছে এর লেখা আছে, আর অন্য লেসনের কথা জিজ্ঞেস করলে সে রোডম্যাপের সেই লেসনও পড়ে নিতে পারে।",
+  tutorReading: (title: string) => `লেসন পড়ছে: “${title}”…`,
   tutorLabel: "আপনার প্রশ্ন",
   tutorPlaceholder: "এরপর কী পড়ব?",
   tutorSend: "জিজ্ঞেস করুন",

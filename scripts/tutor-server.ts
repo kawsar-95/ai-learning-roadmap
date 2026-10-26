@@ -2,18 +2,23 @@
 //
 //   ANTHROPIC_API_KEY=... TUTOR_ALLOW_ORIGIN=https://you.github.io node scripts/tutor-server.ts
 //
-// POST /tutor with {"messages":[{"role":"user","content":"..."}],"done":["0/1"]}.
+// POST /tutor with {"messages":[{"role":"user","content":"..."}],"done":["0/1"],"lesson":"11-llm-engineering/06-rag"}
+// (done and lesson are optional). The tutor reads lesson text from src/data/lessons/.
 // PORT (default 8787), TUTOR_MODEL and TUTOR_PER_MINUTE (default 20 requests
 // per minute per client address) are optional.
 
 import { readFileSync } from "node:fs";
 import { createServer } from "node:http";
 import { buildRoadmap } from "../src/lib/roadmap-schema.ts";
-import { createAnthropicModel, createTutorHandler } from "../src/tutor/index.ts";
+import { createAnthropicModel, createLessonSource, createTutorHandler } from "../src/tutor/index.ts";
 
 const read = (name: string): unknown =>
   JSON.parse(readFileSync(new URL(`../src/data/${name}`, import.meta.url), "utf8"));
 const stages = buildRoadmap(read("roadmap-lessons.json"), read("roadmap-phases.json"));
+
+const lessons = createLessonSource(stages, (folder, dir) =>
+  readFileSync(new URL(`../src/data/lessons/${folder}/${dir}.md`, import.meta.url), "utf8"),
+);
 
 const perMinute = Number(process.env.TUTOR_PER_MINUTE ?? 20);
 const hits = new Map<string, number[]>();
@@ -31,6 +36,7 @@ function allow(request: Request): boolean {
 
 const handle = createTutorHandler({
   stages,
+  lessons,
   model: createAnthropicModel(),
   allowOrigin: process.env.TUTOR_ALLOW_ORIGIN,
   allow,

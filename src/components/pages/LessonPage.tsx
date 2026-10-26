@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LessonMarkdown } from "@/components/content/LessonMarkdown";
 import { LessonDoneButton } from "@/components/progress/RoadmapWidgets";
+import { TutorPanel } from "@/components/tutor/TutorPanel";
 import { LESSON_REFS, getLesson } from "@/lib/lessons";
 import type { LessonRef } from "@/lib/lessons";
 import { UPSTREAM_BLOB_URL, UPSTREAM_REPO_URL } from "@/lib/lesson-links";
@@ -71,6 +72,8 @@ export async function LessonPage({ params, lang }: { params: Promise<LessonParam
           GitHub ↗
         </a>
       </p>
+
+      <TutorPanel lang={lang} lesson={`${folder}/${dir}`} />
 
       {(prev || next) && (
         <nav aria-label={ui.lessonNav} className="mt-8 grid gap-3 sm:grid-cols-2">
