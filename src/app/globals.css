@@ -192,6 +192,37 @@ html {
 }
 .prose-inline a.cite:hover { background: var(--accent); color: var(--bg); }
 
+/* Curriculum lessons (src/lib/lesson-markdown.ts): HTML from markdown. */
+.lesson-prose { color: var(--text-dim); font-size: 17px; line-height: 1.75; overflow-wrap: break-word; }
+.lesson-prose > * + * { margin-top: 1em; }
+.lesson-prose h2 { margin-top: 2.2em; color: var(--text); font-family: var(--font-display); font-size: 1.6em; font-weight: 700; line-height: 1.25; }
+.lesson-prose h3 { margin-top: 1.8em; color: var(--text); font-size: 1.2em; font-weight: 600; line-height: 1.35; }
+.lesson-prose h4 { margin-top: 1.5em; color: var(--text); font-weight: 600; }
+.lesson-prose strong { color: var(--text); font-weight: 600; }
+.lesson-prose ul { list-style: disc; padding-left: 1.4em; }
+.lesson-prose ol { list-style: decimal; padding-left: 1.4em; }
+.lesson-prose li + li { margin-top: 0.35em; }
+.lesson-prose blockquote { border-left: 3px solid var(--accent); padding-left: 1em; color: var(--text); font-style: italic; }
+.lesson-prose hr { border: 0; border-top: 1px solid var(--border); margin: 2.5em 0; }
+.lesson-prose img { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--border); }
+.lesson-prose a { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+.lesson-prose a:hover { border-bottom-color: currentColor; }
+.lesson-prose :not(pre) > code {
+  font-family: var(--font-mono-jb), ui-monospace, monospace;
+  font-size: 0.86em;
+  background: var(--bg-raised-2);
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.lesson-prose .code-block .shiki { background: #22272e; color: #adbac7; }
+.lesson-prose table { display: block; overflow-x: auto; border-collapse: collapse; font-size: 15px; }
+.lesson-prose th, .lesson-prose td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
+.lesson-prose th { color: var(--text); background: var(--bg-raised-2); font-weight: 600; }
+.lesson-prose .lesson-math { overflow-x: auto; overflow-y: hidden; color: var(--text); }
+.lesson-prose .lesson-figure { border: 1px dashed var(--border-strong); border-radius: 10px; padding: 10px 14px; font-size: 15px; }
+
 /* Code blocks: Shiki emits <pre class="shiki ..."> with its own background
    and the github-dark-dimmed colors inline. Code blocks stay dark in both
    themes, so their colors here are fixed and do not use the theme tokens. */

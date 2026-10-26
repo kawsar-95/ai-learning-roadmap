@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { LessonsFileSchema, buildRoadmap, formatDuration, lessonKey, lessonUrl } from "../src/lib/roadmap-schema.ts";
+import { LessonsFileSchema, buildRoadmap, formatDuration, lessonHref, lessonKey, lessonUrl } from "../src/lib/roadmap-schema.ts";
 import { ROADMAP_STORAGE_KEY, PROGRESS_STORAGE_KEY, firstUndone, summarize } from "../src/lib/progress.ts";
 import { UI, fmtNum, localizedPath, roadmapHref } from "../src/lib/i18n.ts";
 
@@ -44,6 +44,13 @@ test("lessonUrl points at the lesson folder on the curriculum site", () => {
     lessonUrl({ folder: "11-llm-engineering" }, { dir: "01-prompt-engineering" }),
     "https://aiengineeringfromscratch.com/lesson?path=phases/11-llm-engineering/01-prompt-engineering",
   );
+});
+
+test("lessonHref points at the lesson page on this site, in each language", () => {
+  const phase = { folder: "11-llm-engineering" };
+  const lesson = { dir: "01-prompt-engineering" };
+  assert.equal(lessonHref(phase, lesson, "en"), "/roadmap/11-llm-engineering/01-prompt-engineering/");
+  assert.equal(lessonHref(phase, lesson, "bn"), "/bn/roadmap/11-llm-engineering/01-prompt-engineering/");
 });
 
 test("buildRoadmap rejects a phase with no summary entry, a duplicate lesson, and a phase in no stage", () => {

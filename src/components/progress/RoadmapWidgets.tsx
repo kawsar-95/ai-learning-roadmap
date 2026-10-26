@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { firstUndone, summarize } from "@/lib/progress";
@@ -8,7 +9,7 @@ import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { resetRoadmap, setLessons, toggleLesson, useRoadmapProgress } from "./useProgress";
 
-/** A lesson as the widgets need it: progress key, address on the curriculum site, and minutes. */
+/** A lesson as the widgets need it: progress key, lesson page on this site, and minutes. */
 export type LessonLink = { key: string; href: string; minutes: number };
 
 /** The thin bar and "done / total" count of one phase. */
@@ -117,14 +118,12 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
         {nextHref ? (
-          <a
+          <Link
             href={nextHref}
-            target="_blank"
-            rel="noopener noreferrer"
             className="rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
           >
             {ui.continueReading}
-          </a>
+          </Link>
         ) : (
           <p className="m-0 text-[15px] font-medium text-good">{ui.allDone}</p>
         )}
