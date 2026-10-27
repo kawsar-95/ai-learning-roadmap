@@ -79,6 +79,20 @@ const PATHS: {
     en: { title: "Agent skills", summary: "Write skills that agents can load, then test, secure and package them for real agent tools." },
     bn: { title: "এজেন্ট স্কিল", summary: "এমন স্কিল লিখুন যা এজেন্ট লোড করতে পারে, তারপর আসল এজেন্ট টুলের জন্য টেস্ট, সুরক্ষা আর প্যাকেজ করুন।" },
   },
+  {
+    id: "agents-llms-mcp-under-the-hood",
+    kind: "focused",
+    lesson: "10-llms-from-scratch/01-tokenizers",
+    github: `${CURRICULUM_URL}/tree/main/phases/10-llms-from-scratch/01-tokenizers`,
+    en: {
+      title: "Agents, LLMs and MCP under the hood",
+      summary: "How a model turns tokens into a reply, how an agent loop plans and calls tools, and how MCP wires it all to the outside world.",
+    },
+    bn: {
+      title: "Agent, LLM আর MCP ভেতরে কীভাবে কাজ করে",
+      summary: "মডেল কীভাবে token থেকে উত্তর বানায়, agent loop কীভাবে প্ল্যান করে টুল কল করে, আর MCP কীভাবে সব বাইরের জগতের সাথে যুক্ত করে।",
+    },
+  },
 ];
 
 /** The roadmap: stages of phases, each phase a list of lessons with a done toggle. */
