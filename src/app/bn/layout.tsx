@@ -4,7 +4,7 @@ import { SiteShell } from "@/components/layout/SiteShell";
 import { UI } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: { default: UI.bn.metaTitle, template: "%s — AI Engineering" },
+  title: { default: UI.bn.metaTitle, template: "%s — Learn AI" },
   description: UI.bn.metaDescription,
 };
 

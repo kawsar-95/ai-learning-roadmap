@@ -70,10 +70,10 @@ export function langInitScript(basePath: string): string {
 }
 
 const en = {
-  siteName: "AI Engineering",
+  siteName: "Learn AI",
   skipLink: "Skip to content",
   footer: "14 parts · citations verified against each publisher's metadata.",
-  metaTitle: "AI Engineering — All Necessary Topics",
+  metaTitle: "Learn AI — All Necessary Topics",
   metaDescription:
     "Fourteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
 
@@ -254,7 +254,7 @@ const en = {
   // Footer.
   footerSite: "Site",
   footerSource: "Source on GitHub",
-  footerCopy: "AI Engineering reference",
+  footerCopy: "Learn AI reference",
 
   // Topic page.
   minRead: (n: string) => `${n} min read`,
@@ -296,10 +296,10 @@ const en = {
 export type Dict = typeof en;
 
 const bn: Dict = {
-  siteName: "AI Engineering",
+  siteName: "Learn AI",
   skipLink: "মূল লেখায় যান",
   footer: "১৪টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
-  metaTitle: "AI Engineering — দরকারি সব বিষয়, বাংলায়",
+  metaTitle: "Learn AI — দরকারি সব বিষয়, বাংলায়",
   metaDescription:
     "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৪টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
 
@@ -472,7 +472,7 @@ const bn: Dict = {
 
   footerSite: "সাইট",
   footerSource: "GitHub-এ সোর্স কোড",
-  footerCopy: "AI Engineering রেফারেন্স",
+  footerCopy: "Learn AI রেফারেন্স",
 
   minRead: (n: string) => `${n} মিনিট পড়া`,
   references: "তথ্যসূত্র",

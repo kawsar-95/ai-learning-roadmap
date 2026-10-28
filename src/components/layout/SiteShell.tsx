@@ -38,9 +38,9 @@ function SiteFooter({ items, lang }: { items: NavItem[]; lang: Lang }) {
           <Link href={homeHref(lang)} className="inline-flex items-center gap-2.5 text-text no-underline">
             <span
               aria-hidden="true"
-              className="grid size-8 place-items-center rounded-[9px] bg-accent font-display text-[15px] font-bold italic text-on-accent"
+              className="grid size-8 place-items-center rounded-[9px] bg-accent font-display text-[13px] font-bold italic text-on-accent"
             >
-              Ai
+              LA
             </span>
             <span className="font-display text-lg font-bold">{ui.siteName}</span>
           </Link>
