@@ -90,6 +90,7 @@ test("InterviewFileSchema rejects an unknown key", () => {
 const PART_ORDER = [
   "llm-fundamentals",
   "prompt-engineering",
+  "fine-tuning-roadmap",
   "context-engineering",
   "rag-knowledge-systems",
   "agents-and-agentic-systems",
