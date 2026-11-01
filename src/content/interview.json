@@ -569,6 +569,44 @@
           }
         }
       ]
+    },
+    {
+      "topic": "ai-engineering-book",
+      "items": [
+        {
+          "section": "ch2",
+          "en": {
+            "q": "A teammate asks why the same foundation model gives a different answer every time it is asked the same question. What is going on, and how do you make outputs more repeatable?",
+            "a": "Foundation models sample the next token from a probability distribution rather than always picking the single most likely one, so the same prompt can produce different outputs. Lowering the temperature (or setting it to 0, where supported) makes sampling more deterministic by sharpening that distribution toward the highest-probability tokens, at the cost of less varied output. Full determinism still is not guaranteed across hardware or provider updates."
+          },
+          "bn": {
+            "q": "একজন সহকর্মী জিজ্ঞেস করল, একই প্রশ্নে foundation model প্রতিবার ভিন্ন উত্তর কেন দেয়। কারণ কী, আর আউটপুট কীভাবে বেশি পুনরাবৃত্তিযোগ্য করবেন?",
+            "a": "Foundation model পরের টোকেন সবসময় সবচেয়ে সম্ভাব্যটা না বেছে একটা probability distribution থেকে স্যাম্পল করে, তাই একই প্রম্পটেও আউটপুট আলাদা হতে পারে। temperature কমালে (বা সাপোর্ট থাকলে ০ করলে) distribution শার্প হয়ে সবচেয়ে সম্ভাব্য টোকেনের দিকে ঝুঁকে যায়, ফলে আউটপুট বেশি deterministic হয় — তবে বৈচিত্র্য কমে যায়। হার্ডওয়্যার বা প্রোভাইডার আপডেটের কারণে সম্পূর্ণ determinism তবুও নিশ্চিত থাকে না।"
+          }
+        },
+        {
+          "section": "ch6",
+          "en": {
+            "q": "A product manager wants an agent that can book a meeting by checking a calendar and sending an email. What two things does an agent need beyond a foundation model to do this, and what is the main risk?",
+            "a": "An agent needs tools (e.g. a calendar-read API and an email-send API) that let it act outside the model, and a planning loop that breaks \"book this meeting\" into ordered steps, calls the right tool at each step, and reacts to what each tool returns. The main risk is a failure mode compounding silently across steps, such as an agent calling the wrong tool, misreading a tool's output, or looping, so agent systems need their own evaluation for tool selection and task completion, not just final-answer quality."
+          },
+          "bn": {
+            "q": "একজন প্রোডাক্ট ম্যানেজার চান এমন একটা agent যা ক্যালেন্ডার চেক করে আর ইমেইল পাঠিয়ে মিটিং বুক করতে পারে। foundation model ছাড়া agent-এর আর কী দুটো জিনিস লাগবে, আর মূল ঝুঁকি কী?",
+            "a": "Agent-এর লাগবে tools (যেমন ক্যালেন্ডার-রিড API আর ইমেইল-সেন্ড API) যা মডেলকে বাইরের দুনিয়ায় কাজ করতে দেয়, আর একটা planning loop যা \"এই মিটিং বুক করো\"-কে ধাপে ধাপে ভাগ করে, প্রতি ধাপে সঠিক tool কল করে, আর প্রতিটা tool-এর ফলাফল অনুযায়ী প্রতিক্রিয়া জানায়। মূল ঝুঁকি হলো একটা ভুল ধাপে ধাপে বড় হয়ে যাওয়া — যেমন ভুল tool কল করা, tool-এর আউটপুট ভুল পড়া, বা লুপে আটকে যাওয়া — তাই agent সিস্টেমের জন্য শুধু শেষ উত্তরের মান নয়, tool বাছাই আর টাস্ক সম্পন্ন হওয়া নিয়েও আলাদা evaluation দরকার।"
+          }
+        },
+        {
+          "section": "ch9",
+          "en": {
+            "q": "Your chatbot feels slow to start responding but types out the rest of the answer quickly. Which inference metric does this point to, and what is one fix?",
+            "a": "This points to a high TTFT (time to first token) relative to TPOT (time per output token): the prefill step, which processes the whole prompt before generating anything, is the bottleneck, not per-token decoding. Prompt caching (reusing the computed state for a prompt prefix seen before, such as a fixed system prompt) is one common fix, since it skips re-processing that shared prefix on every request."
+          },
+          "bn": {
+            "q": "আপনার চ্যাটবট উত্তর শুরু করতে ধীর মনে হয়, কিন্তু শুরু হওয়ার পর বাকি উত্তর দ্রুত টাইপ করে। এটা কোন inference মেট্রিকের দিকে ইঙ্গিত করে, আর একটা সমাধান কী?",
+            "a": "এটা ইঙ্গিত করে একটা বেশি TTFT (প্রথম টোকেন পেতে সময়)-এর দিকে TPOT (প্রতি টোকেনের সময়)-এর তুলনায়: পুরো প্রম্পট প্রসেস করার prefill ধাপটাই বাধা, প্রতি-টোকেন ডিকোডিং নয়। Prompt caching (আগে দেখা প্রম্পটের অংশের, যেমন ফিক্সড সিস্টেম প্রম্পটের, হিসাব করা state পুনরায় ব্যবহার করা) একটা সাধারণ সমাধান, কারণ এটা প্রতি রিকোয়েস্টে সেই শেয়ার্ড অংশটুকু আবার প্রসেস করা এড়িয়ে যায়।"
+          }
+        }
+      ]
     }
   ]
 }
