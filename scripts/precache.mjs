@@ -14,7 +14,8 @@ export const PLACEHOLDER = "/* PRECACHE_MANIFEST */ []";
 // Pages and the files they need. index.txt is the RSC payload the router
 // fetches on a link click; without it, offline navigation waits forever.
 // Not included: sw.js itself, the __next.* segment .txt files (prefetch
-// only, and Next does not prefetch offline), and the unused starter SVGs.
+// only, and Next does not prefetch offline), the unused starter SVGs, and the
+// curriculum lesson pages under roadmap/<phase>/<lesson>/.
 const KEEP = [
   /\.html$/,
   /(^|\/)index\.txt$/,
@@ -25,7 +26,8 @@ const KEEP = [
   /^favicon\.ico$/,
   /^apple-icon\.png$/,
 ];
-const SKIP = [/^_not-found\//];
+// The 1084 curriculum lesson pages would make the install download huge; they load online only.
+const SKIP = [/^_not-found\//, /^(bn\/)?roadmap\/[^/]+\/[^/]+\//];
 
 function walk(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {

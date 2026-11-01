@@ -9,6 +9,9 @@ export const PROGRESS_STORAGE_KEY = "progress";
 /** The localStorage key of the bookmarked sections. Same key format as progress. */
 export const BOOKMARKS_STORAGE_KEY = "bookmarks";
 
+/** The localStorage key of the roadmap lessons marked as done. Keys come from lessonKey in roadmap-schema.ts. */
+export const ROADMAP_STORAGE_KEY = "roadmap-progress";
+
 export type ProgressSummary = { done: number; total: number; percent: number };
 
 export function progressKey(slug: string, sectionId: string): string {

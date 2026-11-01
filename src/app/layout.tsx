@@ -35,14 +35,14 @@ const notoBengali = Noto_Sans_Bengali({
 
 export const metadata: Metadata = {
   title: {
-    default: "AI Engineering — All Necessary Topics",
-    template: "%s — AI Engineering",
+    default: "Learn AI — All Necessary Topics",
+    template: "%s — Learn AI",
   },
   description:
     "Fourteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
   appleWebApp: {
     capable: true,
-    title: "AI Engineering",
+    title: "Learn AI",
     statusBarStyle: "default",
   },
 };

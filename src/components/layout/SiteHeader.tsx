@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { TOPICS } from "@/lib/topics";
 import type { NavItem } from "@/lib/topics";
-import { UI, contentsHref, dashboardHref, homeHref, interviewHref, topicHref } from "@/lib/i18n";
+import { UI, contentsHref, dashboardHref, homeHref, interviewHref, roadmapHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { LanguageSwitch, LanguageSwitchFallback } from "./LanguageSwitch";
 import { MobileNav } from "./MobileNav";
@@ -64,6 +64,9 @@ export function SiteHeader({
           <Link href={`${homeHref(lang)}#parts`} className={NAV_LINK}>
             {UI[lang].partsNav}
           </Link>
+          <Link href={roadmapHref(lang)} className={NAV_LINK}>
+            {UI[lang].roadmap}
+          </Link>
           <Link href={contentsHref(lang)} className={NAV_LINK}>
             {UI[lang].contents}
           </Link>
@@ -81,7 +84,7 @@ export function SiteHeader({
           </Suspense>
           <InstallButton lang={lang} />
           <ThemeToggle lang={lang} />
-          {/* Hidden from 1024px to 1279px: the four nav links leave no room for it there. */}
+          {/* Hidden from 1024px to 1279px: the five nav links leave no room for it there. */}
           <Link
             href={topicHref(TOPICS[0].slug, lang)}
             className="ml-1 hidden items-center whitespace-nowrap rounded-lg bg-accent px-4 py-2 text-[14px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 md:inline-flex lg:hidden xl:inline-flex"

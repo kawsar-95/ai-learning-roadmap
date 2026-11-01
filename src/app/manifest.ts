@@ -9,8 +9,8 @@ export const dynamic = "force-static";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AI Engineering — All Necessary Topics",
-    short_name: "AI Engineering",
+    name: "Learn AI — All Necessary Topics",
+    short_name: "Learn AI",
     description:
       "Fourteen reference parts for applied AI engineers. Each topic in three voices: technical, layman, and বাংলা.",
     start_url: "./",

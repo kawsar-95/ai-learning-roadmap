@@ -3,6 +3,7 @@
 import {
   BOOKMARKS_STORAGE_KEY,
   PROGRESS_STORAGE_KEY,
+  ROADMAP_STORAGE_KEY,
   parseProgress,
   serializeProgress,
   setKeys,
@@ -35,11 +36,15 @@ function createKeyStore(storageKey: string, eventName: string) {
 
 const progress = createKeyStore(PROGRESS_STORAGE_KEY, "progress-change");
 const bookmarks = createKeyStore(BOOKMARKS_STORAGE_KEY, "bookmarks-change");
+const roadmap = createKeyStore(ROADMAP_STORAGE_KEY, "roadmap-change");
 
 export const toggleDone = progress.toggle;
 export const setDone = progress.set;
 export const resetProgress = progress.reset;
 export const toggleBookmark = bookmarks.toggle;
+export const toggleLesson = roadmap.toggle;
+export const setLessons = roadmap.set;
+export const resetRoadmap = roadmap.reset;
 
 /**
  * The set of done section keys. The static HTML and the first client
@@ -49,6 +54,9 @@ export const useProgress = progress.use;
 
 /** The set of bookmarked section keys. Same first-render rule as `useProgress`. */
 export const useBookmarks = bookmarks.use;
+
+/** The set of done roadmap lesson keys. Same first-render rule as `useProgress`. */
+export const useRoadmapProgress = roadmap.use;
 
 const quizScores = createStore<QuizScores>({
   storageKey: QUIZ_SCORES_STORAGE_KEY,

@@ -1,0 +1,3416 @@
+{
+  "phases": [
+    {
+      "phase": 0,
+      "folder": "00-setup-and-tooling",
+      "title": "Setup & Tooling",
+      "hours": 16,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Dev Environment",
+          "dir": "01-dev-environment",
+          "minutes": 75
+        },
+        {
+          "n": 2,
+          "title": "Git & Collaboration",
+          "dir": "02-git-and-collaboration",
+          "minutes": 45
+        },
+        {
+          "n": 3,
+          "title": "GPU Setup & Cloud",
+          "dir": "03-gpu-setup-and-cloud",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "APIs & Keys",
+          "dir": "04-apis-and-keys",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Jupyter Notebooks",
+          "dir": "05-jupyter-notebooks",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Python Environments",
+          "dir": "06-python-environments",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Docker for AI",
+          "dir": "07-docker-for-ai",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Editor Setup",
+          "dir": "08-editor-setup",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Data Management",
+          "dir": "09-data-management",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Terminal & Shell",
+          "dir": "10-terminal-and-shell",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Linux for AI",
+          "dir": "11-linux-for-ai",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "Debugging & Profiling",
+          "dir": "12-debugging-and-profiling",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Python for AI Engineering",
+          "dir": "13-python-for-ai-engineering",
+          "minutes": 120
+        }
+      ]
+    },
+    {
+      "phase": 1,
+      "folder": "01-math-foundations",
+      "title": "Math Foundations",
+      "hours": 23,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Linear Algebra Intuition",
+          "dir": "01-linear-algebra-intuition",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Vectors, Matrices & Operations",
+          "dir": "02-vectors-matrices-operations",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Matrix Transformations & Eigenvalues",
+          "dir": "03-matrix-transformations",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Calculus for ML — Derivatives & Gradients",
+          "dir": "04-calculus-for-ml",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "Chain Rule & Automatic Differentiation",
+          "dir": "05-chain-rule-and-autodiff",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Probability & Distributions",
+          "dir": "06-probability-and-distributions",
+          "minutes": 45
+        },
+        {
+          "n": 7,
+          "title": "Bayes' Theorem & Statistical Thinking",
+          "dir": "07-bayes-theorem",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Optimization — Gradient Descent Family",
+          "dir": "08-optimization",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Information Theory — Entropy, KL Divergence",
+          "dir": "09-information-theory",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Dimensionality Reduction — PCA, t-SNE, UMAP",
+          "dir": "10-dimensionality-reduction",
+          "minutes": 75
+        },
+        {
+          "n": 11,
+          "title": "Singular Value Decomposition",
+          "dir": "11-singular-value-decomposition",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Tensor Operations",
+          "dir": "12-tensor-operations",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Numerical Stability",
+          "dir": "13-numerical-stability",
+          "minutes": 45
+        },
+        {
+          "n": 14,
+          "title": "Norms & Distances",
+          "dir": "14-norms-and-distances",
+          "minutes": 45
+        },
+        {
+          "n": 15,
+          "title": "Statistics for ML",
+          "dir": "15-statistics-for-ml",
+          "minutes": 45
+        },
+        {
+          "n": 16,
+          "title": "Sampling Methods",
+          "dir": "16-sampling-methods",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "Linear Systems",
+          "dir": "17-linear-systems",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Convex Optimization",
+          "dir": "18-convex-optimization",
+          "minutes": 75
+        },
+        {
+          "n": 19,
+          "title": "Complex Numbers for AI",
+          "dir": "19-complex-numbers",
+          "minutes": 45
+        },
+        {
+          "n": 20,
+          "title": "The Fourier Transform",
+          "dir": "20-fourier-transform",
+          "minutes": 75
+        },
+        {
+          "n": 21,
+          "title": "Graph Theory for ML",
+          "dir": "21-graph-theory",
+          "minutes": 45
+        },
+        {
+          "n": 22,
+          "title": "Stochastic Processes",
+          "dir": "22-stochastic-processes",
+          "minutes": 45
+        }
+      ]
+    },
+    {
+      "phase": 2,
+      "folder": "02-ml-fundamentals",
+      "title": "ML Fundamentals",
+      "hours": 26,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "What Is Machine Learning — Types & Taxonomy",
+          "dir": "01-what-is-machine-learning",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Linear Regression from Scratch",
+          "dir": "02-linear-regression",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Logistic Regression & Classification",
+          "dir": "03-logistic-regression",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Decision Trees & Random Forests",
+          "dir": "04-decision-trees",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Support Vector Machines",
+          "dir": "05-support-vector-machines",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "K-Nearest Neighbors & Distance Metrics",
+          "dir": "06-knn-and-distances",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Unsupervised Learning — K-Means, DBSCAN",
+          "dir": "07-unsupervised-learning",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Feature Engineering & Selection",
+          "dir": "08-feature-engineering",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Model Evaluation — Metrics, Cross-Validation",
+          "dir": "09-model-evaluation",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Bias, Variance & the Learning Curve",
+          "dir": "10-bias-variance",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Ensemble Methods — Boosting, Bagging, Stacking",
+          "dir": "11-ensemble-methods",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Hyperparameter Tuning & AutoML",
+          "dir": "12-hyperparameter-tuning",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "ML Pipelines & Experiment Tracking",
+          "dir": "13-ml-pipelines",
+          "minutes": 75
+        },
+        {
+          "n": 14,
+          "title": "Naive Bayes — Multinomial, Gaussian, Bernoulli",
+          "dir": "14-naive-bayes",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "Time Series Fundamentals",
+          "dir": "15-time-series",
+          "minutes": 45
+        },
+        {
+          "n": 16,
+          "title": "Anomaly Detection",
+          "dir": "16-anomaly-detection",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "Handling Imbalanced Data",
+          "dir": "17-imbalanced-data",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Feature Selection",
+          "dir": "18-feature-selection",
+          "minutes": 75
+        },
+        {
+          "n": 19,
+          "title": "ML System Design — From Problem to Deployed Model",
+          "dir": "19-ml-system-design",
+          "minutes": 110
+        },
+        {
+          "n": 20,
+          "title": "Monitoring Models in Production — Data Drift and Concept Drift",
+          "dir": "20-model-monitoring-and-drift",
+          "minutes": 110
+        },
+        {
+          "n": 21,
+          "title": "Feature Stores and Training-Serving Skew",
+          "dir": "21-feature-stores-and-training-serving-skew",
+          "minutes": 100
+        }
+      ]
+    },
+    {
+      "phase": 3,
+      "folder": "03-deep-learning-core",
+      "title": "Deep Learning Core",
+      "hours": 15,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "The Perceptron — Where It All Started",
+          "dir": "01-the-perceptron",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Multi-Layer Networks & Forward Pass",
+          "dir": "02-multi-layer-networks",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Backpropagation from Scratch",
+          "dir": "03-backpropagation",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Activation Functions — ReLU, Sigmoid, GELU & Why",
+          "dir": "04-activation-functions",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "Loss Functions — MSE, Cross-Entropy, Contrastive",
+          "dir": "05-loss-functions",
+          "minutes": 45
+        },
+        {
+          "n": 6,
+          "title": "Optimizers — SGD, Momentum, Adam, AdamW",
+          "dir": "06-optimizers",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Regularization — Dropout, Weight Decay, BatchNorm",
+          "dir": "07-regularization",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Weight Initialization & Training Stability",
+          "dir": "08-weight-initialization",
+          "minutes": 45
+        },
+        {
+          "n": 9,
+          "title": "Learning Rate Schedules & Warmup",
+          "dir": "09-learning-rate-schedules",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Build Your Own Mini Framework",
+          "dir": "10-mini-framework",
+          "minutes": 120
+        },
+        {
+          "n": 11,
+          "title": "Introduction to PyTorch",
+          "dir": "11-intro-to-pytorch",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Introduction to JAX",
+          "dir": "12-intro-to-jax",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Debugging Neural Networks",
+          "dir": "13-debugging-neural-networks",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 4,
+      "folder": "04-computer-vision",
+      "title": "Computer Vision",
+      "hours": 27,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Image Fundamentals — Pixels, Channels, Color Spaces",
+          "dir": "01-image-fundamentals",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Convolutions from Scratch",
+          "dir": "02-convolutions-from-scratch",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "CNNs — LeNet to ResNet",
+          "dir": "03-cnns-lenet-to-resnet",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Image Classification",
+          "dir": "04-image-classification",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Transfer Learning & Fine-Tuning",
+          "dir": "05-transfer-learning",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Object Detection — YOLO from Scratch",
+          "dir": "06-object-detection-yolo",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Semantic Segmentation — U-Net",
+          "dir": "07-semantic-segmentation-unet",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Instance Segmentation — Mask R-CNN",
+          "dir": "08-instance-segmentation-mask-rcnn",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Image Generation — GANs",
+          "dir": "09-image-generation-gans",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Image Generation — Diffusion Models",
+          "dir": "10-image-generation-diffusion",
+          "minutes": 75
+        },
+        {
+          "n": 11,
+          "title": "Stable Diffusion — Architecture & Fine-Tuning",
+          "dir": "11-stable-diffusion",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Video Understanding — Temporal Modeling",
+          "dir": "12-video-understanding",
+          "minutes": 45
+        },
+        {
+          "n": 13,
+          "title": "3D Vision — Point Clouds, NeRFs",
+          "dir": "13-3d-vision-nerf",
+          "minutes": 45
+        },
+        {
+          "n": 14,
+          "title": "Vision Transformers (ViT)",
+          "dir": "14-vision-transformers",
+          "minutes": 45
+        },
+        {
+          "n": 15,
+          "title": "Real-Time Vision — Edge Deployment",
+          "dir": "15-real-time-edge",
+          "minutes": 75
+        },
+        {
+          "n": 16,
+          "title": "Build a Complete Vision Pipeline",
+          "dir": "16-vision-pipeline-capstone",
+          "minutes": 120
+        },
+        {
+          "n": 17,
+          "title": "Self-Supervised Vision — SimCLR, DINO, MAE",
+          "dir": "17-self-supervised-vision",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Open-Vocabulary Vision — CLIP",
+          "dir": "18-open-vocab-clip",
+          "minutes": 45
+        },
+        {
+          "n": 19,
+          "title": "OCR & Document Understanding",
+          "dir": "19-ocr-document-understanding",
+          "minutes": 45
+        },
+        {
+          "n": 20,
+          "title": "Image Retrieval & Metric Learning",
+          "dir": "20-image-retrieval-metric",
+          "minutes": 45
+        },
+        {
+          "n": 21,
+          "title": "Keypoint Detection & Pose Estimation",
+          "dir": "21-keypoint-pose",
+          "minutes": 45
+        },
+        {
+          "n": 22,
+          "title": "3D Gaussian Splatting from Scratch",
+          "dir": "22-3d-gaussian-splatting",
+          "minutes": 90
+        },
+        {
+          "n": 23,
+          "title": "Diffusion Transformers & Rectified Flow",
+          "dir": "23-diffusion-transformers-rectified-flow",
+          "minutes": 75
+        },
+        {
+          "n": 24,
+          "title": "SAM 3 & Open-Vocabulary Segmentation",
+          "dir": "24-sam3-open-vocab-segmentation",
+          "minutes": 60
+        },
+        {
+          "n": 25,
+          "title": "Vision-Language Models (ViT-MLP-LLM)",
+          "dir": "25-vision-language-models",
+          "minutes": 75
+        },
+        {
+          "n": 26,
+          "title": "Monocular Depth & Geometry Estimation",
+          "dir": "26-monocular-depth",
+          "minutes": 60
+        },
+        {
+          "n": 27,
+          "title": "Multi-Object Tracking & Video Memory",
+          "dir": "27-multi-object-tracking",
+          "minutes": 60
+        },
+        {
+          "n": 28,
+          "title": "World Models & Video Diffusion",
+          "dir": "28-world-models-video-diffusion",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 5,
+      "folder": "05-nlp-foundations-to-advanced",
+      "title": "NLP — Foundations to Advanced",
+      "hours": 30,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Text Processing — Tokenization, Stemming, Lemmatization",
+          "dir": "01-text-processing",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Bag of Words, TF-IDF & Text Representation",
+          "dir": "02-bag-of-words-tfidf",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Word Embeddings — Word2Vec from Scratch",
+          "dir": "03-word-embeddings-word2vec",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "GloVe, FastText & Subword Embeddings",
+          "dir": "04-glove-fasttext-subword",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "Sentiment Analysis",
+          "dir": "05-sentiment-analysis",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Named Entity Recognition (NER)",
+          "dir": "06-named-entity-recognition",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "POS Tagging & Syntactic Parsing",
+          "dir": "07-pos-tagging-parsing",
+          "minutes": 45
+        },
+        {
+          "n": 8,
+          "title": "Text Classification — CNNs & RNNs for Text",
+          "dir": "08-cnns-rnns-for-text",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Sequence-to-Sequence Models",
+          "dir": "09-sequence-to-sequence",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Attention Mechanism — The Breakthrough",
+          "dir": "10-attention-mechanism",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Machine Translation",
+          "dir": "11-machine-translation",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Text Summarization",
+          "dir": "12-text-summarization",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Question Answering Systems",
+          "dir": "13-question-answering",
+          "minutes": 75
+        },
+        {
+          "n": 14,
+          "title": "Information Retrieval & Search",
+          "dir": "14-information-retrieval-search",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "Topic Modeling — LDA, BERTopic",
+          "dir": "15-topic-modeling",
+          "minutes": 45
+        },
+        {
+          "n": 16,
+          "title": "Text Generation — Language Models Before Transformers",
+          "dir": "16-text-generation-pre-transformer",
+          "minutes": 45
+        },
+        {
+          "n": 17,
+          "title": "Chatbots — Rule-Based to Neural",
+          "dir": "17-chatbots-rule-to-neural",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Multilingual NLP",
+          "dir": "18-multilingual-nlp",
+          "minutes": 45
+        },
+        {
+          "n": 19,
+          "title": "Subword Tokenization — BPE, WordPiece, Unigram, SentencePiece",
+          "dir": "19-subword-tokenization",
+          "minutes": 60
+        },
+        {
+          "n": 20,
+          "title": "Structured Outputs & Constrained Decoding",
+          "dir": "20-structured-outputs-constrained-decoding",
+          "minutes": 60
+        },
+        {
+          "n": 21,
+          "title": "NLI & Textual Entailment",
+          "dir": "21-nli-textual-entailment",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "Embedding Models Deep Dive",
+          "dir": "22-embedding-models-deep-dive",
+          "minutes": 60
+        },
+        {
+          "n": 23,
+          "title": "Chunking Strategies for RAG",
+          "dir": "23-chunking-strategies-rag",
+          "minutes": 60
+        },
+        {
+          "n": 24,
+          "title": "Coreference Resolution",
+          "dir": "24-coreference-resolution",
+          "minutes": 60
+        },
+        {
+          "n": 25,
+          "title": "Entity Linking & Disambiguation",
+          "dir": "25-entity-linking",
+          "minutes": 60
+        },
+        {
+          "n": 26,
+          "title": "Relation Extraction & Knowledge Graph Construction",
+          "dir": "26-relation-extraction-kg",
+          "minutes": 60
+        },
+        {
+          "n": 27,
+          "title": "LLM Evaluation — RAGAS, DeepEval, G-Eval",
+          "dir": "27-llm-evaluation-frameworks",
+          "minutes": 75
+        },
+        {
+          "n": 28,
+          "title": "Long-Context Evaluation — NIAH, RULER, LongBench, MRCR",
+          "dir": "28-long-context-evaluation",
+          "minutes": 60
+        },
+        {
+          "n": 29,
+          "title": "Dialogue State Tracking",
+          "dir": "29-dialogue-state-tracking",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 6,
+      "folder": "06-speech-and-audio",
+      "title": "Speech & Audio",
+      "hours": 18,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Audio Fundamentals — Waveforms, Sampling, Fourier Transform",
+          "dir": "01-audio-fundamentals",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Spectrograms, Mel Scale & Audio Features",
+          "dir": "02-spectrograms-mel-features",
+          "minutes": 45
+        },
+        {
+          "n": 3,
+          "title": "Audio Classification",
+          "dir": "03-audio-classification",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Speech Recognition (ASR)",
+          "dir": "04-speech-recognition-asr",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "Whisper — Architecture & Fine-Tuning",
+          "dir": "05-whisper-architecture-finetuning",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Speaker Recognition & Verification",
+          "dir": "06-speaker-recognition-verification",
+          "minutes": 45
+        },
+        {
+          "n": 7,
+          "title": "Text-to-Speech (TTS)",
+          "dir": "07-text-to-speech",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Voice Cloning & Voice Conversion",
+          "dir": "08-voice-cloning-conversion",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Music Generation",
+          "dir": "09-music-generation",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Audio-Language Models",
+          "dir": "10-audio-language-models",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Real-Time Audio Processing",
+          "dir": "11-real-time-audio-processing",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Build a Voice Assistant Pipeline",
+          "dir": "12-voice-assistant-pipeline",
+          "minutes": 120
+        },
+        {
+          "n": 13,
+          "title": "Neural Audio Codecs — EnCodec, SNAC, Mimi, DAC",
+          "dir": "13-neural-audio-codecs",
+          "minutes": 60
+        },
+        {
+          "n": 14,
+          "title": "Voice Activity Detection & Turn-Taking",
+          "dir": "14-voice-activity-detection-turn-taking",
+          "minutes": 45
+        },
+        {
+          "n": 15,
+          "title": "Streaming Speech-to-Speech — Moshi, Hibiki",
+          "dir": "15-streaming-speech-to-speech-moshi-hibiki",
+          "minutes": 75
+        },
+        {
+          "n": 16,
+          "title": "Voice Anti-Spoofing & Audio Watermarking",
+          "dir": "16-anti-spoofing-audio-watermarking",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "Audio Evaluation — WER, MOS, MMAU, Leaderboards",
+          "dir": "17-audio-evaluation-metrics",
+          "minutes": 60
+        }
+      ]
+    },
+    {
+      "phase": 7,
+      "folder": "07-transformers-deep-dive",
+      "title": "Transformers Deep Dive",
+      "hours": 14,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Why Transformers — The Problems with RNNs",
+          "dir": "01-why-transformers",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Self-Attention from Scratch",
+          "dir": "02-self-attention-from-scratch",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Multi-Head Attention",
+          "dir": "03-multi-head-attention",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Positional Encoding — Sinusoidal, RoPE, ALiBi",
+          "dir": "04-positional-encoding",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "The Full Transformer — Encoder + Decoder",
+          "dir": "05-full-transformer",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "BERT — Masked Language Modeling",
+          "dir": "06-bert-masked-language-modeling",
+          "minutes": 45
+        },
+        {
+          "n": 7,
+          "title": "GPT — Causal Language Modeling",
+          "dir": "07-gpt-causal-language-modeling",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "T5, BART — Encoder-Decoder Models",
+          "dir": "08-t5-bart-encoder-decoder",
+          "minutes": 45
+        },
+        {
+          "n": 9,
+          "title": "Vision Transformers (ViT)",
+          "dir": "09-vision-transformers",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Audio Transformers — Whisper Architecture",
+          "dir": "10-audio-transformers-whisper",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Mixture of Experts (MoE)",
+          "dir": "11-mixture-of-experts",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "KV Cache, Flash Attention & Inference Optimization",
+          "dir": "12-kv-cache-flash-attention",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Scaling Laws",
+          "dir": "13-scaling-laws",
+          "minutes": 45
+        },
+        {
+          "n": 14,
+          "title": "Build a Transformer from Scratch — The Capstone",
+          "dir": "14-build-a-transformer-capstone",
+          "minutes": 120
+        },
+        {
+          "n": 15,
+          "title": "Attention Variants — Sliding Window, Sparse, Differential",
+          "dir": "15-attention-variants",
+          "minutes": 60
+        },
+        {
+          "n": 16,
+          "title": "Speculative Decoding — Draft, Verify, Repeat",
+          "dir": "16-speculative-decoding",
+          "minutes": 60
+        }
+      ]
+    },
+    {
+      "phase": 8,
+      "folder": "08-generative-ai",
+      "title": "Generative AI",
+      "hours": 14,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Generative Models — Taxonomy & History",
+          "dir": "01-generative-models-taxonomy-history",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Autoencoders & VAE",
+          "dir": "02-autoencoders-vae",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "GANs — Generator vs Discriminator",
+          "dir": "03-gans-generator-discriminator",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Conditional GANs & Pix2Pix",
+          "dir": "04-conditional-gans-pix2pix",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "StyleGAN",
+          "dir": "05-stylegan",
+          "minutes": 45
+        },
+        {
+          "n": 6,
+          "title": "Diffusion Models — DDPM from Scratch",
+          "dir": "06-diffusion-ddpm-from-scratch",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Latent Diffusion & Stable Diffusion",
+          "dir": "07-latent-diffusion-stable-diffusion",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "ControlNet, LoRA & Image Conditioning",
+          "dir": "08-controlnet-lora-conditioning",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Inpainting, Outpainting & Image Editing",
+          "dir": "09-inpainting-outpainting-editing",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Video Generation",
+          "dir": "10-video-generation",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Audio Generation",
+          "dir": "11-audio-generation",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "3D Generation",
+          "dir": "12-3d-generation",
+          "minutes": 45
+        },
+        {
+          "n": 13,
+          "title": "Flow Matching & Rectified Flows",
+          "dir": "13-flow-matching-rectified-flows",
+          "minutes": 45
+        },
+        {
+          "n": 14,
+          "title": "Evaluation — FID, CLIP Score, Human Preference",
+          "dir": "14-evaluation-fid-clip-score",
+          "minutes": 45
+        },
+        {
+          "n": 19,
+          "title": "Visual Autoregressive Modeling (VAR): Next-Scale Prediction",
+          "dir": "19-visual-autoregressive-var",
+          "minutes": 90
+        }
+      ]
+    },
+    {
+      "phase": 9,
+      "folder": "09-reinforcement-learning",
+      "title": "Reinforcement Learning",
+      "hours": 13,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "MDPs, States, Actions & Rewards",
+          "dir": "01-mdps-states-actions-rewards",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Dynamic Programming",
+          "dir": "02-dynamic-programming",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Monte Carlo Methods",
+          "dir": "03-monte-carlo-methods",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Temporal Difference — Q-Learning, SARSA",
+          "dir": "04-q-learning-sarsa",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Deep Q-Networks (DQN)",
+          "dir": "05-dqn",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Policy Gradient Methods — REINFORCE",
+          "dir": "06-policy-gradients-reinforce",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Actor-Critic — A2C, A3C",
+          "dir": "07-actor-critic-a2c-a3c",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Proximal Policy Optimization (PPO)",
+          "dir": "08-ppo",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Reward Modeling & RLHF",
+          "dir": "09-reward-modeling-rlhf",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Multi-Agent RL",
+          "dir": "10-multi-agent-rl",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Sim-to-Real Transfer",
+          "dir": "11-sim-to-real-transfer",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "RL for Games",
+          "dir": "12-rl-for-games",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 10,
+      "folder": "10-llms-from-scratch",
+      "title": "LLMs from Scratch",
+      "hours": 26,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Tokenizers — BPE, WordPiece, SentencePiece",
+          "dir": "01-tokenizers",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Building a Tokenizer from Scratch",
+          "dir": "02-building-a-tokenizer",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Data Pipelines for Pre-Training",
+          "dir": "03-data-pipelines",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Pre-Training a Mini GPT (124M)",
+          "dir": "04-pre-training-mini-gpt",
+          "minutes": 120
+        },
+        {
+          "n": 5,
+          "title": "Scaling — Distributed Training, FSDP, DeepSpeed",
+          "dir": "05-scaling-distributed",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Instruction Tuning — SFT",
+          "dir": "06-instruction-tuning-sft",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "RLHF — Reward Model + PPO Training",
+          "dir": "07-rlhf",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "DPO — Direct Preference Optimization",
+          "dir": "08-dpo",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Constitutional AI & Self-Improvement",
+          "dir": "09-constitutional-ai-self-improvement",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Evaluation — Benchmarks, Evals, LM Harness",
+          "dir": "10-evaluation",
+          "minutes": 75
+        },
+        {
+          "n": 11,
+          "title": "Quantization — INT8, GPTQ, AWQ, GGUF",
+          "dir": "11-quantization",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Inference Optimization",
+          "dir": "12-inference-optimization",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Building a Complete LLM Pipeline",
+          "dir": "13-building-complete-llm-pipeline",
+          "minutes": 120
+        },
+        {
+          "n": 14,
+          "title": "Open Models — Architecture Walkthroughs",
+          "dir": "14-open-models-architecture-walkthroughs",
+          "minutes": 45
+        },
+        {
+          "n": 15,
+          "title": "Speculative Decoding and EAGLE-3",
+          "dir": "15-speculative-decoding-eagle3",
+          "minutes": 75
+        },
+        {
+          "n": 16,
+          "title": "Differential Attention (V2)",
+          "dir": "16-differential-attention-v2",
+          "minutes": 60
+        },
+        {
+          "n": 17,
+          "title": "Native Sparse Attention (DeepSeek NSA)",
+          "dir": "17-native-sparse-attention",
+          "minutes": 60
+        },
+        {
+          "n": 18,
+          "title": "Multi-Token Prediction (MTP)",
+          "dir": "18-multi-token-prediction",
+          "minutes": 60
+        },
+        {
+          "n": 19,
+          "title": "DualPipe Parallelism",
+          "dir": "19-dualpipe-parallelism",
+          "minutes": 60
+        },
+        {
+          "n": 20,
+          "title": "DeepSeek-V3 Architecture Walkthrough",
+          "dir": "20-deepseek-v3-walkthrough",
+          "minutes": 75
+        },
+        {
+          "n": 21,
+          "title": "Jamba — Hybrid SSM-Transformer",
+          "dir": "21-jamba-hybrid-ssm-transformer",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "Async and Hogwild! Inference",
+          "dir": "22-async-hogwild-inference",
+          "minutes": 60
+        },
+        {
+          "n": 25,
+          "title": "Speculative Decoding and EAGLE",
+          "dir": "25-speculative-decoding",
+          "minutes": 75
+        },
+        {
+          "n": 34,
+          "title": "Gradient Checkpointing and Activation Recomputation",
+          "dir": "34-gradient-checkpointing",
+          "minutes": 70
+        }
+      ]
+    },
+    {
+      "phase": 11,
+      "folder": "11-llm-engineering",
+      "title": "LLM Engineering",
+      "hours": 19,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Prompt Engineering — Techniques & Patterns",
+          "dir": "01-prompt-engineering",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Few-Shot, Chain-of-Thought, Tree-of-Thought",
+          "dir": "02-few-shot-cot",
+          "minutes": 45
+        },
+        {
+          "n": 3,
+          "title": "Structured Outputs",
+          "dir": "03-structured-outputs",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Embeddings & Vector Representations",
+          "dir": "04-embeddings",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Context Engineering",
+          "dir": "05-context-engineering",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "RAG — Retrieval-Augmented Generation",
+          "dir": "06-rag",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Advanced RAG",
+          "dir": "07-advanced-rag",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Fine-Tuning with LoRA & QLoRA",
+          "dir": "08-fine-tuning-lora",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Function Calling & Tool Use",
+          "dir": "09-function-calling",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Evaluation & Testing LLM Applications",
+          "dir": "10-evaluation",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Caching, Rate Limiting & Cost Optimization",
+          "dir": "11-caching-cost",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "Guardrails, Safety & Content Filtering",
+          "dir": "12-guardrails",
+          "minutes": 45
+        },
+        {
+          "n": 13,
+          "title": "Building a Production LLM Application",
+          "dir": "13-production-app",
+          "minutes": 120
+        },
+        {
+          "n": 14,
+          "title": "Model Context Protocol (MCP)",
+          "dir": "14-model-context-protocol",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "Prompt Caching & Context Caching",
+          "dir": "15-prompt-caching",
+          "minutes": 60
+        },
+        {
+          "n": 16,
+          "title": "Agent State Machines — Graphs, Nodes, Checkpoints",
+          "dir": "16-langgraph-state-machines",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "Agent Framework Tradeoffs",
+          "dir": "17-agent-framework-tradeoffs",
+          "minutes": 45
+        }
+      ]
+    },
+    {
+      "phase": 12,
+      "folder": "12-multimodal-ai",
+      "title": "Multimodal AI",
+      "hours": 65,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Vision Transformers and the Patch-Token Primitive",
+          "dir": "01-vision-transformer-patch-tokens",
+          "minutes": 120
+        },
+        {
+          "n": 2,
+          "title": "CLIP and Contrastive Vision-Language Pretraining",
+          "dir": "02-clip-contrastive-pretraining",
+          "minutes": 180
+        },
+        {
+          "n": 3,
+          "title": "BLIP-2 and Q-Former as Modality Bridge",
+          "dir": "03-blip2-qformer-bridge",
+          "minutes": 180
+        },
+        {
+          "n": 4,
+          "title": "Flamingo and Gated Cross-Attention",
+          "dir": "04-flamingo-gated-cross-attention",
+          "minutes": 120
+        },
+        {
+          "n": 5,
+          "title": "LLaVA and Visual Instruction Tuning",
+          "dir": "05-llava-visual-instruction-tuning",
+          "minutes": 180
+        },
+        {
+          "n": 6,
+          "title": "Any-Resolution Vision: Patch-n'-Pack and NaFlex",
+          "dir": "06-any-resolution-patch-n-pack",
+          "minutes": 120
+        },
+        {
+          "n": 7,
+          "title": "Open-Weight VLM Recipes: What Actually Matters",
+          "dir": "07-open-weight-vlm-recipes",
+          "minutes": 180
+        },
+        {
+          "n": 8,
+          "title": "LLaVA-OneVision: Single, Multi, Video",
+          "dir": "08-llava-onevision-single-multi-video",
+          "minutes": 180
+        },
+        {
+          "n": 9,
+          "title": "Qwen-VL Family and Dynamic-FPS Video",
+          "dir": "09-qwen-vl-family-dynamic-fps",
+          "minutes": 120
+        },
+        {
+          "n": 10,
+          "title": "InternVL3 Native Multimodal Pretraining",
+          "dir": "10-internvl3-native-multimodal",
+          "minutes": 120
+        },
+        {
+          "n": 11,
+          "title": "Chameleon and Early-Fusion Token-Only",
+          "dir": "11-chameleon-early-fusion-tokens",
+          "minutes": 180
+        },
+        {
+          "n": 12,
+          "title": "Emu3 Next-Token Prediction for Generation",
+          "dir": "12-emu3-next-token-for-generation",
+          "minutes": 120
+        },
+        {
+          "n": 13,
+          "title": "Transfusion Autoregressive + Diffusion",
+          "dir": "13-transfusion-autoregressive-diffusion",
+          "minutes": 180
+        },
+        {
+          "n": 14,
+          "title": "Show-o and Discrete-Diffusion Unified",
+          "dir": "14-show-o-discrete-diffusion-unified",
+          "minutes": 120
+        },
+        {
+          "n": 15,
+          "title": "Janus-Pro Decoupled Encoders",
+          "dir": "15-janus-pro-decoupled-encoders",
+          "minutes": 120
+        },
+        {
+          "n": 16,
+          "title": "MIO Any-to-Any Streaming",
+          "dir": "16-mio-any-to-any-streaming",
+          "minutes": 120
+        },
+        {
+          "n": 17,
+          "title": "Video-Language Temporal Grounding",
+          "dir": "17-video-language-temporal-grounding",
+          "minutes": 180
+        },
+        {
+          "n": 18,
+          "title": "Long-Video Understanding at Million-Token Context",
+          "dir": "18-long-video-million-token",
+          "minutes": 180
+        },
+        {
+          "n": 19,
+          "title": "Audio-Language Models: Whisper to AF3",
+          "dir": "19-audio-language-whisper-to-af3",
+          "minutes": 180
+        },
+        {
+          "n": 20,
+          "title": "Omni Models: Thinker-Talker",
+          "dir": "20-omni-models-thinker-talker",
+          "minutes": 180
+        },
+        {
+          "n": 21,
+          "title": "Embodied VLAs: RT-2, OpenVLA, π0, GR00T",
+          "dir": "21-embodied-vlas-openvla-pi0-groot",
+          "minutes": 180
+        },
+        {
+          "n": 22,
+          "title": "Document and Diagram Understanding",
+          "dir": "22-document-diagram-understanding",
+          "minutes": 180
+        },
+        {
+          "n": 23,
+          "title": "ColPali Vision-Native Document RAG",
+          "dir": "23-colpali-vision-native-rag",
+          "minutes": 180
+        },
+        {
+          "n": 24,
+          "title": "Multimodal RAG and Cross-Modal Retrieval",
+          "dir": "24-multimodal-rag-cross-modal",
+          "minutes": 180
+        },
+        {
+          "n": 25,
+          "title": "Multimodal Agents and Computer-Use (Capstone)",
+          "dir": "25-multimodal-agents-computer-use",
+          "minutes": 240
+        }
+      ]
+    },
+    {
+      "phase": 13,
+      "folder": "13-tools-and-protocols",
+      "title": "Tools & Protocols",
+      "hours": 76,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "The Tool Interface",
+          "dir": "01-the-tool-interface",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Function Calling Deep Dive",
+          "dir": "02-function-calling-deep-dive",
+          "minutes": 75
+        },
+        {
+          "n": 3,
+          "title": "Parallel and Streaming Tool Calls",
+          "dir": "03-parallel-and-streaming-tool-calls",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Structured Output",
+          "dir": "04-structured-output",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Tool Schema Design",
+          "dir": "05-tool-schema-design",
+          "minutes": 45
+        },
+        {
+          "n": 6,
+          "title": "MCP Fundamentals: Stateless Requests and JSON-RPC",
+          "dir": "06-mcp-fundamentals",
+          "minutes": 55
+        },
+        {
+          "n": 7,
+          "title": "Building an MCP Server: Stateless Python and TypeScript",
+          "dir": "07-building-an-mcp-server",
+          "minutes": 85
+        },
+        {
+          "n": 8,
+          "title": "Building an MCP Client: Discovery, Routing, and Dual-Era Fallback",
+          "dir": "08-building-an-mcp-client",
+          "minutes": 85
+        },
+        {
+          "n": 9,
+          "title": "MCP Transports: stdio and Stateless Streamable HTTP",
+          "dir": "09-mcp-transports",
+          "minutes": 65
+        },
+        {
+          "n": 10,
+          "title": "MCP Resources and Prompts: Addressable Context for Stateless Servers",
+          "dir": "10-mcp-resources-and-prompts",
+          "minutes": 60
+        },
+        {
+          "n": 11,
+          "title": "MCP Model Input: Sampling Migration and Stateless MRTR",
+          "dir": "11-mcp-sampling",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Explicit Scope and Stateless Elicitation",
+          "dir": "12-mcp-roots-and-elicitation",
+          "minutes": 60
+        },
+        {
+          "n": 13,
+          "title": "MCP Tasks Extension: Durable Work on a Stateless Core",
+          "dir": "13-mcp-async-tasks",
+          "minutes": 90
+        },
+        {
+          "n": 14,
+          "title": "MCP Apps on the Stateless Protocol",
+          "dir": "14-mcp-apps",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "MCP Security: Poisoned Metadata, Routing, and MRTR State",
+          "dir": "15-mcp-security-tool-poisoning",
+          "minutes": 60
+        },
+        {
+          "n": 16,
+          "title": "MCP Authorization: CIMD, Issuer Binding, PKCE, and Step-Up",
+          "dir": "16-mcp-security-oauth-2-1",
+          "minutes": 90
+        },
+        {
+          "n": 17,
+          "title": "Stateless MCP Gateways and Registry Admission",
+          "dir": "17-mcp-gateways-and-registries",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "MCP Auth in Production: Issuer-Bound Enrollment and Tokens",
+          "dir": "18-mcp-auth-production",
+          "minutes": 90
+        },
+        {
+          "n": 19,
+          "title": "A2A Protocol",
+          "dir": "19-a2a-protocol",
+          "minutes": 75
+        },
+        {
+          "n": 20,
+          "title": "OpenTelemetry GenAI",
+          "dir": "20-opentelemetry-genai",
+          "minutes": 75
+        },
+        {
+          "n": 21,
+          "title": "LLM Routing Layer",
+          "dir": "21-llm-routing-layer",
+          "minutes": 45
+        },
+        {
+          "n": 22,
+          "title": "Agent Skills: Portable Contract and Runtime Boundary",
+          "dir": "22-skills-and-agent-sdks",
+          "minutes": 90
+        },
+        {
+          "n": 23,
+          "title": "Capstone: Stateless Tool Ecosystem",
+          "dir": "23-capstone-tool-ecosystem",
+          "minutes": 120
+        },
+        {
+          "n": 24,
+          "title": "Skill Discovery and Progressive Disclosure",
+          "dir": "24-skill-discovery-and-progressive-disclosure",
+          "minutes": 105
+        },
+        {
+          "n": 25,
+          "title": "Skill Invocation and Routing",
+          "dir": "25-skill-invocation-and-routing",
+          "minutes": 105
+        },
+        {
+          "n": 26,
+          "title": "Skill Permissions, Sandboxes, and Trust",
+          "dir": "26-skill-permissions-sandboxes-and-trust",
+          "minutes": 120
+        },
+        {
+          "n": 27,
+          "title": "Skill Evals, Packaging, and Portability",
+          "dir": "27-skill-evals-packaging-and-portability",
+          "minutes": 150
+        },
+        {
+          "n": 28,
+          "title": "MCP Tool Contracts and Content",
+          "dir": "28-mcp-tool-contracts-and-content",
+          "minutes": 120
+        },
+        {
+          "n": 29,
+          "title": "MCP Reliability, Cancellation, and Flow Control",
+          "dir": "29-mcp-reliability-cancellation-and-flow-control",
+          "minutes": 120
+        },
+        {
+          "n": 30,
+          "title": "MCP Registry Supply Chain: Admission, Drift, and Rollback",
+          "dir": "30-mcp-registry-supply-chain-and-drift",
+          "minutes": 90
+        },
+        {
+          "n": 31,
+          "title": "MCP Conformance Engineering: Versioning, Evidence, and Operations",
+          "dir": "31-mcp-conformance-versioning-and-operations",
+          "minutes": 100
+        },
+        {
+          "n": 32,
+          "title": "Program Anatomy: Reading ELF From Scratch",
+          "dir": "32-program-anatomy-elf-from-scratch",
+          "minutes": 120
+        },
+        {
+          "n": 33,
+          "title": "Disassembly and Control-Flow Graphs",
+          "dir": "33-disassembly-and-control-flow",
+          "minutes": 150
+        },
+        {
+          "n": 34,
+          "title": "Lifting Machine Code to Pseudocode",
+          "dir": "34-lifting-to-pseudocode",
+          "minutes": 150
+        },
+        {
+          "n": 35,
+          "title": "Evidence, Confidence, and Unknowns in Binary Analysis",
+          "dir": "35-evidence-confidence-and-unknowns",
+          "minutes": 105
+        },
+        {
+          "n": 36,
+          "title": "Rebuild and Prove Equal",
+          "dir": "36-rebuild-and-prove-equal",
+          "minutes": 110
+        },
+        {
+          "n": 37,
+          "title": "The Reverse Engineering Landscape",
+          "dir": "37-the-reverse-engineering-landscape",
+          "minutes": 150
+        },
+        {
+          "n": 38,
+          "title": "Calling Conventions and Stack Frames",
+          "dir": "38-calling-conventions-and-stack-frames",
+          "minutes": 140
+        },
+        {
+          "n": 39,
+          "title": "Compiler Idioms and Optimization",
+          "dir": "39-compiler-idioms-and-optimization",
+          "minutes": 150
+        },
+        {
+          "n": 40,
+          "title": "Linking, Loading, and Stripped Binaries",
+          "dir": "40-linking-loading-and-stripped-binaries",
+          "minutes": 160
+        },
+        {
+          "n": 41,
+          "title": "Recovering Data and Types",
+          "dir": "41-recovering-data-and-types",
+          "minutes": 140
+        },
+        {
+          "n": 42,
+          "title": "Dynamic Analysis of Your Own Program",
+          "dir": "42-dynamic-analysis-of-your-own-program",
+          "minutes": 130
+        },
+        {
+          "n": 43,
+          "title": "Bytecode and Managed Formats",
+          "dir": "43-bytecode-and-managed-formats",
+          "minutes": 150
+        },
+        {
+          "n": 44,
+          "title": "Binary Diffing and Symbolic Execution",
+          "dir": "44-binary-diffing-and-symbolic-execution",
+          "minutes": 150
+        },
+        {
+          "n": 45,
+          "title": "AI-Assisted Reverse Engineering",
+          "dir": "45-ai-assisted-reverse-engineering",
+          "minutes": 140
+        }
+      ]
+    },
+    {
+      "phase": 14,
+      "folder": "14-agent-engineering",
+      "title": "Agent Engineering",
+      "hours": 55,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "The Agent Loop",
+          "dir": "01-the-agent-loop",
+          "minutes": 60
+        },
+        {
+          "n": 2,
+          "title": "ReWOO and Plan-and-Execute",
+          "dir": "02-rewoo-plan-and-execute",
+          "minutes": 60
+        },
+        {
+          "n": 3,
+          "title": "Reflexion and Verbal Reinforcement Learning",
+          "dir": "03-reflexion-verbal-rl",
+          "minutes": 60
+        },
+        {
+          "n": 4,
+          "title": "Tree of Thoughts and LATS",
+          "dir": "04-tree-of-thoughts-lats",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "Self-Refine and CRITIC",
+          "dir": "05-self-refine-and-critic",
+          "minutes": 60
+        },
+        {
+          "n": 6,
+          "title": "Tool Use and Function Calling",
+          "dir": "06-tool-use-and-function-calling",
+          "minutes": 60
+        },
+        {
+          "n": 7,
+          "title": "Agent Memory — Virtual Context and Memory Paging",
+          "dir": "07-memory-virtual-context-memgpt",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Memory Blocks and Sleep-Time Compute",
+          "dir": "08-memory-blocks-sleep-time-compute",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Hybrid Memory — Vector + Graph + KV",
+          "dir": "09-hybrid-memory-mem0",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Skill Libraries and Lifelong Learning (Voyager)",
+          "dir": "10-skill-libraries-voyager",
+          "minutes": 75
+        },
+        {
+          "n": 11,
+          "title": "Planning with HTN and Evolutionary Search",
+          "dir": "11-planning-htn-and-evolutionary",
+          "minutes": 75
+        },
+        {
+          "n": 12,
+          "title": "Anthropic's Workflow Patterns",
+          "dir": "12-anthropic-workflow-patterns",
+          "minutes": 60
+        },
+        {
+          "n": 13,
+          "title": "Stateful Graph Orchestration — Durable Execution and Checkpoints",
+          "dir": "13-langgraph-stateful-graphs",
+          "minutes": 75
+        },
+        {
+          "n": 14,
+          "title": "The Actor Model for Agents",
+          "dir": "14-autogen-actor-model",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "Role-Based Agent Teams — Roles, Tasks, Processes",
+          "dir": "15-crewai-role-based-crews",
+          "minutes": 60
+        },
+        {
+          "n": 16,
+          "title": "OpenAI Agents SDK — Handoffs, Guardrails, Tracing",
+          "dir": "16-openai-agents-sdk",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "The Harness as a Library — Subagents and Session Store",
+          "dir": "17-claude-agent-sdk",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Production Agent Runtimes",
+          "dir": "18-agno-and-mastra-runtimes",
+          "minutes": 45
+        },
+        {
+          "n": 19,
+          "title": "Benchmarks — SWE-bench, GAIA, AgentBench",
+          "dir": "19-benchmarks-swebench-gaia",
+          "minutes": 60
+        },
+        {
+          "n": 20,
+          "title": "Benchmarks — WebArena and OSWorld",
+          "dir": "20-benchmarks-webarena-osworld",
+          "minutes": 60
+        },
+        {
+          "n": 21,
+          "title": "Computer Use — Claude, OpenAI CUA, Gemini",
+          "dir": "21-computer-use-agents",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "Voice Agents — Pipecat and LiveKit",
+          "dir": "22-voice-agents-pipecat-livekit",
+          "minutes": 60
+        },
+        {
+          "n": 23,
+          "title": "OpenTelemetry GenAI Semantic Conventions",
+          "dir": "23-otel-genai-conventions",
+          "minutes": 60
+        },
+        {
+          "n": 24,
+          "title": "Agent Observability — Langfuse, Phoenix, Opik",
+          "dir": "24-agent-observability-platforms",
+          "minutes": 45
+        },
+        {
+          "n": 25,
+          "title": "Multi-Agent Debate and Collaboration",
+          "dir": "25-multi-agent-debate",
+          "minutes": 60
+        },
+        {
+          "n": 26,
+          "title": "Failure Modes — Why Agents Break",
+          "dir": "26-failure-modes-agentic",
+          "minutes": 60
+        },
+        {
+          "n": 27,
+          "title": "Prompt Injection and the PVE Defense",
+          "dir": "27-prompt-injection-defense",
+          "minutes": 75
+        },
+        {
+          "n": 28,
+          "title": "Orchestration Patterns — Supervisor, Swarm, Hierarchical",
+          "dir": "28-orchestration-patterns",
+          "minutes": 60
+        },
+        {
+          "n": 29,
+          "title": "Production Runtimes — Queue, Event, Cron",
+          "dir": "29-production-runtimes",
+          "minutes": 60
+        },
+        {
+          "n": 30,
+          "title": "Eval-Driven Agent Development",
+          "dir": "30-eval-driven-agent-development",
+          "minutes": 60
+        },
+        {
+          "n": 31,
+          "title": "Agent Workbench: Why Capable Models Still Fail",
+          "dir": "31-agent-workbench-why-models-fail",
+          "minutes": 45
+        },
+        {
+          "n": 32,
+          "title": "The Minimal Agent Workbench",
+          "dir": "32-minimal-agent-workbench",
+          "minutes": 45
+        },
+        {
+          "n": 33,
+          "title": "Agent Instructions as Executable Constraints",
+          "dir": "33-instructions-as-executable-constraints",
+          "minutes": 50
+        },
+        {
+          "n": 34,
+          "title": "Repo Memory and Durable State",
+          "dir": "34-repo-memory-and-state",
+          "minutes": 60
+        },
+        {
+          "n": 35,
+          "title": "Initialization Scripts for Agents",
+          "dir": "35-initialization-scripts",
+          "minutes": 45
+        },
+        {
+          "n": 36,
+          "title": "Scope Contracts and Task Boundaries",
+          "dir": "36-scope-contracts",
+          "minutes": 50
+        },
+        {
+          "n": 37,
+          "title": "Runtime Feedback Loops",
+          "dir": "37-runtime-feedback-loops",
+          "minutes": 50
+        },
+        {
+          "n": 38,
+          "title": "Verification Gates",
+          "dir": "38-verification-gates",
+          "minutes": 55
+        },
+        {
+          "n": 39,
+          "title": "Reviewer Agent: Separate Builder from Marker",
+          "dir": "39-reviewer-agent",
+          "minutes": 55
+        },
+        {
+          "n": 40,
+          "title": "Multi-Session Handoff",
+          "dir": "40-multi-session-handoff",
+          "minutes": 50
+        },
+        {
+          "n": 41,
+          "title": "The Workbench on a Real Repo",
+          "dir": "41-workbench-for-real-repos",
+          "minutes": 60
+        },
+        {
+          "n": 42,
+          "title": "Capstone: Ship a Reusable Agent Workbench Pack",
+          "dir": "42-agent-workbench-capstone",
+          "minutes": 75
+        },
+        {
+          "n": 43,
+          "title": "Frame the Task Before the Agent Writes Code",
+          "dir": "43-frame-the-task-before-code",
+          "minutes": 60
+        },
+        {
+          "n": 44,
+          "title": "Build an Evidence-Backed Execution Plan",
+          "dir": "44-plan-from-evidence",
+          "minutes": 65
+        },
+        {
+          "n": 45,
+          "title": "Delegate Agent Work with Isolation and Merge Contracts",
+          "dir": "45-delegate-with-isolation",
+          "minutes": 70
+        },
+        {
+          "n": 46,
+          "title": "Turn Every Agent Correction into a System Improvement",
+          "dir": "46-turn-feedback-into-system",
+          "minutes": 65
+        },
+        {
+          "n": 47,
+          "title": "Define the Outcome Before You Choose the Output",
+          "dir": "47-outcomes-before-output",
+          "minutes": 60
+        },
+        {
+          "n": 48,
+          "title": "Discover the Workflow People Actually Perform",
+          "dir": "48-discover-the-real-workflow",
+          "minutes": 70
+        },
+        {
+          "n": 49,
+          "title": "Map Assumptions and Resolve the Riskiest One First",
+          "dir": "49-map-assumptions-and-risk",
+          "minutes": 65
+        },
+        {
+          "n": 50,
+          "title": "Choose the Smallest Slice That Can Change the Decision",
+          "dir": "50-choose-the-smallest-testable-slice",
+          "minutes": 65
+        },
+        {
+          "n": 51,
+          "title": "Write Specifications That Preserve Judgment",
+          "dir": "51-write-specifications-that-preserve-judgment",
+          "minutes": 75
+        },
+        {
+          "n": 52,
+          "title": "Design Success Metrics Before the Result Exists",
+          "dir": "52-design-success-metrics",
+          "minutes": 70
+        },
+        {
+          "n": 53,
+          "title": "Choose Prototype, Pilot, or Production Deliberately",
+          "dir": "53-prototype-pilot-or-production",
+          "minutes": 70
+        },
+        {
+          "n": 54,
+          "title": "Build a Feedback Ratchet with Ownership and Retirement",
+          "dir": "54-build-the-feedback-ratchet",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 15,
+      "folder": "15-autonomous-systems",
+      "title": "Autonomous Systems",
+      "hours": 20,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "From Chatbots to Long-Horizon Agents (METR)",
+          "dir": "01-long-horizon-agents",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "STaR, V-STaR, Quiet-STaR — Self-Taught Reasoning",
+          "dir": "02-star-family-reasoning",
+          "minutes": 60
+        },
+        {
+          "n": 3,
+          "title": "AlphaEvolve — Evolutionary Coding Agents",
+          "dir": "03-alphaevolve-evolutionary-coding",
+          "minutes": 60
+        },
+        {
+          "n": 4,
+          "title": "Darwin Gödel Machine — Self-Modifying Agents",
+          "dir": "04-darwin-godel-machine",
+          "minutes": 60
+        },
+        {
+          "n": 5,
+          "title": "AI Scientist v2 — Workshop-Level Research",
+          "dir": "05-ai-scientist-v2",
+          "minutes": 60
+        },
+        {
+          "n": 6,
+          "title": "Automated Alignment Research (Anthropic AAR)",
+          "dir": "06-automated-alignment-research",
+          "minutes": 60
+        },
+        {
+          "n": 7,
+          "title": "Recursive Self-Improvement — Capability vs Alignment",
+          "dir": "07-recursive-self-improvement",
+          "minutes": 60
+        },
+        {
+          "n": 8,
+          "title": "Bounded Self-Improvement Designs",
+          "dir": "08-bounded-self-improvement",
+          "minutes": 60
+        },
+        {
+          "n": 9,
+          "title": "Autonomous Coding Agent Landscape (SWE-bench, CodeAct)",
+          "dir": "09-coding-agent-landscape",
+          "minutes": 45
+        },
+        {
+          "n": 10,
+          "title": "Permission Modes for Autonomous Agents",
+          "dir": "10-claude-code-permission-modes",
+          "minutes": 45
+        },
+        {
+          "n": 11,
+          "title": "Browser Agents and Indirect Prompt Injection",
+          "dir": "11-browser-agents",
+          "minutes": 45
+        },
+        {
+          "n": 12,
+          "title": "Durable Execution for Long-Running Agents",
+          "dir": "12-durable-execution",
+          "minutes": 60
+        },
+        {
+          "n": 13,
+          "title": "Action Budgets, Iteration Caps, Cost Governors",
+          "dir": "13-cost-governors",
+          "minutes": 60
+        },
+        {
+          "n": 14,
+          "title": "Kill Switches, Circuit Breakers, Canary Tokens",
+          "dir": "14-kill-switches-canaries",
+          "minutes": 60
+        },
+        {
+          "n": 15,
+          "title": "HITL — Propose-Then-Commit",
+          "dir": "15-propose-then-commit",
+          "minutes": 60
+        },
+        {
+          "n": 16,
+          "title": "Checkpoints and Rollback",
+          "dir": "16-checkpoints-rollback",
+          "minutes": 60
+        },
+        {
+          "n": 17,
+          "title": "Constitutional AI and Rule Overrides",
+          "dir": "17-constitutional-ai",
+          "minutes": 60
+        },
+        {
+          "n": 18,
+          "title": "Llama Guard and Input/Output Classification",
+          "dir": "18-llama-guard",
+          "minutes": 45
+        },
+        {
+          "n": 19,
+          "title": "Anthropic Responsible Scaling Policy v3.0",
+          "dir": "19-anthropic-rsp",
+          "minutes": 45
+        },
+        {
+          "n": 20,
+          "title": "OpenAI Preparedness Framework and DeepMind FSF",
+          "dir": "20-openai-preparedness-deepmind-fsf",
+          "minutes": 45
+        },
+        {
+          "n": 21,
+          "title": "METR Time Horizons and External Evaluation",
+          "dir": "21-metr-external-evaluation",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "CAIS, CAISI, and Societal-Scale Risk",
+          "dir": "22-cais-caisi-societal-risk",
+          "minutes": 45
+        }
+      ]
+    },
+    {
+      "phase": 16,
+      "folder": "16-multi-agent-and-swarms",
+      "title": "Multi-Agent & Swarms",
+      "hours": 28,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Why Multi-Agent",
+          "dir": "01-why-multi-agent",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "FIPA-ACL Heritage and Speech Acts",
+          "dir": "02-fipa-acl-heritage",
+          "minutes": 60
+        },
+        {
+          "n": 3,
+          "title": "Communication Protocols",
+          "dir": "03-communication-protocols",
+          "minutes": 45
+        },
+        {
+          "n": 4,
+          "title": "The Multi-Agent Primitive Model",
+          "dir": "04-primitive-model",
+          "minutes": 60
+        },
+        {
+          "n": 5,
+          "title": "Supervisor / Orchestrator-Worker Pattern",
+          "dir": "05-supervisor-orchestrator-pattern",
+          "minutes": 75
+        },
+        {
+          "n": 6,
+          "title": "Hierarchical Architecture and Decomposition Drift",
+          "dir": "06-hierarchical-architecture",
+          "minutes": 60
+        },
+        {
+          "n": 7,
+          "title": "Society of Mind and Multi-Agent Debate",
+          "dir": "07-society-of-mind-debate",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Role Specialization — Planner / Critic / Executor / Verifier",
+          "dir": "08-role-specialization",
+          "minutes": 75
+        },
+        {
+          "n": 9,
+          "title": "Parallel Swarm and Networked Architectures",
+          "dir": "09-parallel-swarm-networks",
+          "minutes": 60
+        },
+        {
+          "n": 10,
+          "title": "Group Chat and Speaker Selection",
+          "dir": "10-group-chat-speaker-selection",
+          "minutes": 60
+        },
+        {
+          "n": 11,
+          "title": "Handoffs and Routines (Stateless Orchestration)",
+          "dir": "11-handoffs-and-routines",
+          "minutes": 60
+        },
+        {
+          "n": 12,
+          "title": "A2A — The Agent-to-Agent Protocol",
+          "dir": "12-a2a-protocol",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Shared Memory and Blackboard Patterns",
+          "dir": "13-shared-memory-blackboard",
+          "minutes": 75
+        },
+        {
+          "n": 14,
+          "title": "Consensus and Byzantine Fault Tolerance for Agents",
+          "dir": "14-consensus-and-bft",
+          "minutes": 75
+        },
+        {
+          "n": 15,
+          "title": "Voting, Self-Consistency, and Debate Topology",
+          "dir": "15-voting-debate-topology",
+          "minutes": 75
+        },
+        {
+          "n": 16,
+          "title": "Negotiation and Bargaining",
+          "dir": "16-negotiation-bargaining",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "Generative Agents and Emergent Simulation",
+          "dir": "17-generative-agents-simulation",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Theory of Mind and Emergent Coordination",
+          "dir": "18-theory-of-mind-coordination",
+          "minutes": 75
+        },
+        {
+          "n": 19,
+          "title": "Swarm Optimization for LLMs (PSO, ACO)",
+          "dir": "19-swarm-optimization-pso-aco",
+          "minutes": 75
+        },
+        {
+          "n": 20,
+          "title": "MARL — MADDPG, QMIX, MAPPO",
+          "dir": "20-marl-maddpg-qmix-mappo",
+          "minutes": 90
+        },
+        {
+          "n": 21,
+          "title": "Agent Economies, Token Incentives, Reputation",
+          "dir": "21-agent-economies",
+          "minutes": 75
+        },
+        {
+          "n": 22,
+          "title": "Production Scaling — Queues, Checkpoints, Durability",
+          "dir": "22-production-scaling-queues-checkpoints",
+          "minutes": 75
+        },
+        {
+          "n": 23,
+          "title": "Failure Modes — MAST, Groupthink, Monoculture, Cascading",
+          "dir": "23-failure-modes-mast-groupthink",
+          "minutes": 75
+        },
+        {
+          "n": 24,
+          "title": "Evaluation and Coordination Benchmarks",
+          "dir": "24-evaluation-coordination-benchmarks",
+          "minutes": 75
+        },
+        {
+          "n": 25,
+          "title": "Case Studies and 2026 State of the Art",
+          "dir": "25-case-studies-2026-sota",
+          "minutes": 90
+        }
+      ]
+    },
+    {
+      "phase": 17,
+      "folder": "17-infrastructure-and-production",
+      "title": "Infrastructure & Production",
+      "hours": 34,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Managed LLM Platforms — Bedrock, Azure OpenAI, Vertex AI",
+          "dir": "01-managed-llm-platforms",
+          "minutes": 60
+        },
+        {
+          "n": 2,
+          "title": "Inference Platform Economics — Fireworks, Together, Baseten, Modal",
+          "dir": "02-inference-platform-economics",
+          "minutes": 60
+        },
+        {
+          "n": 3,
+          "title": "GPU Autoscaling on Kubernetes — Karpenter, KAI Scheduler",
+          "dir": "03-gpu-autoscaling-kubernetes",
+          "minutes": 75
+        },
+        {
+          "n": 4,
+          "title": "Serving Engine Internals — PagedAttention, Continuous Batching, Chunked Prefill",
+          "dir": "04-vllm-serving-internals",
+          "minutes": 75
+        },
+        {
+          "n": 5,
+          "title": "EAGLE-3 Speculative Decoding in Production",
+          "dir": "05-eagle3-speculative-decoding",
+          "minutes": 60
+        },
+        {
+          "n": 6,
+          "title": "Prefix-Cache Serving — RadixAttention and KV Reuse",
+          "dir": "06-sglang-radixattention",
+          "minutes": 60
+        },
+        {
+          "n": 7,
+          "title": "Hardware-Specialized Inference Compilation — FP8 and NVFP4 on Blackwell",
+          "dir": "07-tensorrt-llm-blackwell",
+          "minutes": 75
+        },
+        {
+          "n": 8,
+          "title": "Inference Metrics — TTFT, TPOT, ITL, Goodput, P99",
+          "dir": "08-inference-metrics-goodput",
+          "minutes": 60
+        },
+        {
+          "n": 9,
+          "title": "Production Quantization — AWQ, GPTQ, GGUF, FP8, NVFP4",
+          "dir": "09-production-quantization",
+          "minutes": 75
+        },
+        {
+          "n": 10,
+          "title": "Cold Start Mitigation for Serverless LLMs",
+          "dir": "10-cold-start-mitigation",
+          "minutes": 60
+        },
+        {
+          "n": 11,
+          "title": "Multi-Region LLM Serving and KV Cache Locality",
+          "dir": "11-multi-region-kv-locality",
+          "minutes": 60
+        },
+        {
+          "n": 12,
+          "title": "Edge Inference — ANE, Hexagon, WebGPU, Jetson",
+          "dir": "12-edge-inference",
+          "minutes": 60
+        },
+        {
+          "n": 13,
+          "title": "LLM Observability Stack Selection",
+          "dir": "13-llm-observability",
+          "minutes": 60
+        },
+        {
+          "n": 14,
+          "title": "Prompt Caching and Semantic Caching Economics",
+          "dir": "14-prompt-semantic-caching",
+          "minutes": 60
+        },
+        {
+          "n": 15,
+          "title": "Batch APIs — the 50% Discount as Industry Standard",
+          "dir": "15-batch-apis",
+          "minutes": 45
+        },
+        {
+          "n": 16,
+          "title": "Model Routing as a Cost-Reduction Primitive",
+          "dir": "16-model-routing",
+          "minutes": 60
+        },
+        {
+          "n": 17,
+          "title": "Disaggregated Prefill/Decode — NVIDIA Dynamo and llm-d",
+          "dir": "17-disaggregated-prefill-decode",
+          "minutes": 75
+        },
+        {
+          "n": 18,
+          "title": "Production Serving Stack — KV Offloading and Cache-Aware Routing",
+          "dir": "18-vllm-production-stack-lmcache",
+          "minutes": 60
+        },
+        {
+          "n": 19,
+          "title": "AI Gateways — LiteLLM, Portkey, Kong, Bifrost",
+          "dir": "19-ai-gateways",
+          "minutes": 60
+        },
+        {
+          "n": 20,
+          "title": "Shadow, Canary, and Progressive Deployment",
+          "dir": "20-shadow-canary-progressive",
+          "minutes": 60
+        },
+        {
+          "n": 21,
+          "title": "A/B Testing LLM Features — GrowthBook and Statsig",
+          "dir": "21-ab-testing-llm-features",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "Load Testing LLM APIs — k6, LLMPerf, GenAI-Perf",
+          "dir": "22-load-testing-llm-apis",
+          "minutes": 75
+        },
+        {
+          "n": 23,
+          "title": "SRE for AI — Multi-Agent Incident Response",
+          "dir": "23-sre-for-ai",
+          "minutes": 60
+        },
+        {
+          "n": 24,
+          "title": "Chaos Engineering for LLM Production",
+          "dir": "24-chaos-engineering-llm",
+          "minutes": 60
+        },
+        {
+          "n": 25,
+          "title": "Security — Secrets, PII Scrubbing, Audit Logs",
+          "dir": "25-security-secrets-audit",
+          "minutes": 60
+        },
+        {
+          "n": 26,
+          "title": "Compliance — SOC 2, HIPAA, GDPR, EU AI Act, ISO 42001",
+          "dir": "26-compliance-frameworks",
+          "minutes": 60
+        },
+        {
+          "n": 27,
+          "title": "FinOps for LLMs — Unit Economics and Multi-Tenant Attribution",
+          "dir": "27-finops-llms",
+          "minutes": 60
+        },
+        {
+          "n": 28,
+          "title": "Self-Hosted Serving Selection — Matching Engine to Hardware and Scale",
+          "dir": "28-self-hosted-serving-selection",
+          "minutes": 45
+        },
+        {
+          "n": 29,
+          "title": "Model Demo Interfaces — From a Function to a Shareable App",
+          "dir": "29-model-demo-interfaces",
+          "minutes": 90
+        }
+      ]
+    },
+    {
+      "phase": 18,
+      "folder": "18-ethics-safety-alignment",
+      "title": "Ethics, Safety & Alignment",
+      "hours": 31,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Instruction-Following as Alignment Signal",
+          "dir": "01-instruction-following-alignment-signal",
+          "minutes": 45
+        },
+        {
+          "n": 2,
+          "title": "Reward Hacking & Goodhart's Law",
+          "dir": "02-reward-hacking-goodhart",
+          "minutes": 60
+        },
+        {
+          "n": 3,
+          "title": "Direct Preference Optimization Family",
+          "dir": "03-direct-preference-optimization-family",
+          "minutes": 60
+        },
+        {
+          "n": 4,
+          "title": "Sycophancy as RLHF Amplification",
+          "dir": "04-sycophancy-rlhf-amplification",
+          "minutes": 45
+        },
+        {
+          "n": 5,
+          "title": "Constitutional AI & RLAIF",
+          "dir": "05-constitutional-ai-rlaif",
+          "minutes": 60
+        },
+        {
+          "n": 6,
+          "title": "Mesa-Optimization & Deceptive Alignment",
+          "dir": "06-mesa-optimization-deceptive-alignment",
+          "minutes": 75
+        },
+        {
+          "n": 7,
+          "title": "Sleeper Agents — Persistent Deception",
+          "dir": "07-sleeper-agents-persistent-deception",
+          "minutes": 60
+        },
+        {
+          "n": 8,
+          "title": "In-Context Scheming in Frontier Models",
+          "dir": "08-in-context-scheming-frontier-models",
+          "minutes": 60
+        },
+        {
+          "n": 9,
+          "title": "Alignment Faking",
+          "dir": "09-alignment-faking",
+          "minutes": 60
+        },
+        {
+          "n": 10,
+          "title": "AI Control — Safety Despite Subversion",
+          "dir": "10-ai-control-subversion",
+          "minutes": 75
+        },
+        {
+          "n": 11,
+          "title": "Scalable Oversight & Weak-to-Strong Generalization",
+          "dir": "11-scalable-oversight-weak-to-strong",
+          "minutes": 60
+        },
+        {
+          "n": 12,
+          "title": "Red-Teaming — PAIR & Automated Attacks",
+          "dir": "12-red-teaming-pair-automated-attacks",
+          "minutes": 75
+        },
+        {
+          "n": 13,
+          "title": "Many-Shot Jailbreaking",
+          "dir": "13-many-shot-jailbreaking",
+          "minutes": 45
+        },
+        {
+          "n": 14,
+          "title": "ASCII Art & Visual Jailbreaks",
+          "dir": "14-ascii-art-visual-jailbreaks",
+          "minutes": 60
+        },
+        {
+          "n": 15,
+          "title": "Indirect Prompt Injection",
+          "dir": "15-indirect-prompt-injection",
+          "minutes": 75
+        },
+        {
+          "n": 16,
+          "title": "Red-Team Tooling — Garak, Llama Guard, PyRIT",
+          "dir": "16-red-team-tooling-garak-llamaguard-pyrit",
+          "minutes": 75
+        },
+        {
+          "n": 17,
+          "title": "WMDP & Dual-Use Capability Evaluation",
+          "dir": "17-wmdp-dual-use-evaluation",
+          "minutes": 60
+        },
+        {
+          "n": 18,
+          "title": "Frontier Safety Frameworks — RSP, PF, FSF",
+          "dir": "18-frontier-safety-frameworks-rsp-pf-fsf",
+          "minutes": 75
+        },
+        {
+          "n": 19,
+          "title": "Model Welfare Research",
+          "dir": "19-model-welfare-research",
+          "minutes": 45
+        },
+        {
+          "n": 20,
+          "title": "Bias & Representational Harm",
+          "dir": "20-bias-representational-harm",
+          "minutes": 60
+        },
+        {
+          "n": 21,
+          "title": "Fairness Criteria — Group, Individual, Counterfactual",
+          "dir": "21-fairness-criteria-group-individual-counterfactual",
+          "minutes": 60
+        },
+        {
+          "n": 22,
+          "title": "Differential Privacy for LLMs",
+          "dir": "22-differential-privacy-for-llms",
+          "minutes": 60
+        },
+        {
+          "n": 23,
+          "title": "Watermarking — SynthID, Stable Signature, C2PA",
+          "dir": "23-watermarking-synthid-stable-signature-c2pa",
+          "minutes": 75
+        },
+        {
+          "n": 24,
+          "title": "Regulatory Frameworks — EU, US, UK, Korea",
+          "dir": "24-regulatory-frameworks-eu-us-uk-korea",
+          "minutes": 75
+        },
+        {
+          "n": 25,
+          "title": "EchoLeak & CVEs for AI",
+          "dir": "25-echoleak-cves-for-ai",
+          "minutes": 45
+        },
+        {
+          "n": 26,
+          "title": "Model, System & Dataset Cards",
+          "dir": "26-model-system-dataset-cards",
+          "minutes": 60
+        },
+        {
+          "n": 27,
+          "title": "Data Provenance & Training-Data Governance",
+          "dir": "27-data-provenance-training-governance",
+          "minutes": 60
+        },
+        {
+          "n": 28,
+          "title": "Alignment Research Ecosystem — MATS, Redwood, Apollo, METR",
+          "dir": "28-alignment-research-ecosystem",
+          "minutes": 45
+        },
+        {
+          "n": 29,
+          "title": "Moderation Systems — OpenAI, Perspective, Llama Guard",
+          "dir": "29-moderation-systems-openai-perspective-llamaguard",
+          "minutes": 60
+        },
+        {
+          "n": 30,
+          "title": "Dual-Use Risk — Cyber, Bio, Chem, Nuclear",
+          "dir": "30-dual-use-risk-cyber-bio-chem-nuclear",
+          "minutes": 75
+        }
+      ]
+    },
+    {
+      "phase": 19,
+      "folder": "19-capstone-projects",
+      "title": "Capstone Projects",
+      "hours": 620,
+      "lessons": [
+        {
+          "n": 1,
+          "title": "Terminal-Native Coding Agent",
+          "dir": "01-terminal-native-coding-agent",
+          "minutes": 2100
+        },
+        {
+          "n": 2,
+          "title": "RAG over Codebase (Cross-Repo Semantic Search)",
+          "dir": "02-rag-over-codebase",
+          "minutes": 1800
+        },
+        {
+          "n": 3,
+          "title": "Real-Time Voice Assistant (ASR to LLM to TTS)",
+          "dir": "03-realtime-voice-assistant",
+          "minutes": 1800
+        },
+        {
+          "n": 4,
+          "title": "Multimodal Document QA (Vision-First)",
+          "dir": "04-multimodal-document-qa",
+          "minutes": 1800
+        },
+        {
+          "n": 5,
+          "title": "Autonomous Research Agent (AI-Scientist Class)",
+          "dir": "05-autonomous-research-agent",
+          "minutes": 2400
+        },
+        {
+          "n": 6,
+          "title": "DevOps Troubleshooting Agent for Kubernetes",
+          "dir": "06-devops-troubleshooting-agent",
+          "minutes": 1800
+        },
+        {
+          "n": 7,
+          "title": "End-to-End Fine-Tuning Pipeline",
+          "dir": "07-end-to-end-fine-tuning-pipeline",
+          "minutes": 2100
+        },
+        {
+          "n": 8,
+          "title": "Production RAG Chatbot (Regulated Vertical)",
+          "dir": "08-production-rag-chatbot",
+          "minutes": 1800
+        },
+        {
+          "n": 9,
+          "title": "Code Migration Agent (Repo-Level Upgrade)",
+          "dir": "09-code-migration-agent",
+          "minutes": 1800
+        },
+        {
+          "n": 10,
+          "title": "Multi-Agent Software Engineering Team",
+          "dir": "10-multi-agent-software-team",
+          "minutes": 2400
+        },
+        {
+          "n": 11,
+          "title": "LLM Observability & Eval Dashboard",
+          "dir": "11-llm-observability-dashboard",
+          "minutes": 1500
+        },
+        {
+          "n": 12,
+          "title": "Video Understanding Pipeline (Scene to QA)",
+          "dir": "12-video-understanding-pipeline",
+          "minutes": 1800
+        },
+        {
+          "n": 13,
+          "title": "Stateless MCP Server with Registry and Governance",
+          "dir": "13-mcp-server-with-registry",
+          "minutes": 1500
+        },
+        {
+          "n": 14,
+          "title": "Speculative-Decoding Inference Server",
+          "dir": "14-speculative-decoding-server",
+          "minutes": 1800
+        },
+        {
+          "n": 15,
+          "title": "Constitutional Safety Harness + Red-Team Range",
+          "dir": "15-constitutional-safety-harness",
+          "minutes": 1500
+        },
+        {
+          "n": 16,
+          "title": "GitHub Issue-to-PR Autonomous Agent",
+          "dir": "16-github-issue-to-pr-agent",
+          "minutes": 1800
+        },
+        {
+          "n": 17,
+          "title": "Personal AI Tutor (Adaptive, Multimodal)",
+          "dir": "17-personal-ai-tutor",
+          "minutes": 1800
+        },
+        {
+          "n": 20,
+          "title": "Agent Harness Loop Contract",
+          "dir": "20-agent-harness-loop-contract",
+          "minutes": 90
+        },
+        {
+          "n": 21,
+          "title": "Tool Registry with Schema Validation",
+          "dir": "21-tool-registry-schema-validation",
+          "minutes": 90
+        },
+        {
+          "n": 22,
+          "title": "JSON-RPC 2.0 Over Newline-Delimited Stdio",
+          "dir": "22-jsonrpc-stdio-transport",
+          "minutes": 90
+        },
+        {
+          "n": 23,
+          "title": "Function Call Dispatcher",
+          "dir": "23-function-call-dispatcher",
+          "minutes": 90
+        },
+        {
+          "n": 24,
+          "title": "Plan-Execute Control Flow",
+          "dir": "24-plan-execute-control-flow",
+          "minutes": 90
+        },
+        {
+          "n": 25,
+          "title": "Verification Gates and the Observation Budget",
+          "dir": "25-verification-gates-observation-budget",
+          "minutes": 90
+        },
+        {
+          "n": 26,
+          "title": "Sandbox Runner with Denylist and Path Jail",
+          "dir": "26-sandbox-runner-denylist",
+          "minutes": 90
+        },
+        {
+          "n": 27,
+          "title": "Eval Harness with Fixture Tasks",
+          "dir": "27-eval-harness-fixture-tasks",
+          "minutes": 90
+        },
+        {
+          "n": 28,
+          "title": "Observability with OTel GenAI Spans and Prometheus Metrics",
+          "dir": "28-observability-otel-traces",
+          "minutes": 90
+        },
+        {
+          "n": 29,
+          "title": "End-to-End Coding Agent on the Harness",
+          "dir": "29-end-to-end-coding-task-demo",
+          "minutes": 90
+        },
+        {
+          "n": 30,
+          "title": "BPE Tokenizer From Scratch",
+          "dir": "30-bpe-tokenizer-from-scratch",
+          "minutes": 90
+        },
+        {
+          "n": 31,
+          "title": "Tokenized Dataset with Sliding Window",
+          "dir": "31-tokenized-dataset-sliding-window",
+          "minutes": 90
+        },
+        {
+          "n": 32,
+          "title": "Token and Positional Embeddings",
+          "dir": "32-token-positional-embeddings",
+          "minutes": 90
+        },
+        {
+          "n": 33,
+          "title": "Multi-Head Self-Attention",
+          "dir": "33-multihead-self-attention",
+          "minutes": 90
+        },
+        {
+          "n": 34,
+          "title": "Transformer Block from Scratch",
+          "dir": "34-transformer-block",
+          "minutes": 90
+        },
+        {
+          "n": 35,
+          "title": "GPT Model Assembly",
+          "dir": "35-gpt-model-assembly",
+          "minutes": 90
+        },
+        {
+          "n": 36,
+          "title": "Training Loop and Evaluation",
+          "dir": "36-training-loop-eval",
+          "minutes": 90
+        },
+        {
+          "n": 37,
+          "title": "Loading Pretrained Weights",
+          "dir": "37-loading-pretrained-weights",
+          "minutes": 90
+        },
+        {
+          "n": 38,
+          "title": "Classifier Fine-Tuning by Head Swap",
+          "dir": "38-classifier-finetuning",
+          "minutes": 90
+        },
+        {
+          "n": 39,
+          "title": "Instruction Tuning by Supervised Fine-Tuning",
+          "dir": "39-instruction-tuning-sft",
+          "minutes": 90
+        },
+        {
+          "n": 40,
+          "title": "Direct Preference Optimization from Scratch",
+          "dir": "40-dpo-from-scratch",
+          "minutes": 90
+        },
+        {
+          "n": 41,
+          "title": "Full Evaluation Pipeline",
+          "dir": "41-eval-pipeline",
+          "minutes": 90
+        },
+        {
+          "n": 42,
+          "title": "Large Corpus Downloader",
+          "dir": "42-large-corpus-downloader",
+          "minutes": 90
+        },
+        {
+          "n": 43,
+          "title": "HDF5 Tokenized Corpus",
+          "dir": "43-hdf5-tokenized-corpus",
+          "minutes": 90
+        },
+        {
+          "n": 44,
+          "title": "Cosine LR with Linear Warmup",
+          "dir": "44-cosine-lr-warmup",
+          "minutes": 90
+        },
+        {
+          "n": 45,
+          "title": "Gradient Clipping and Mixed Precision",
+          "dir": "45-gradient-clipping-amp",
+          "minutes": 90
+        },
+        {
+          "n": 46,
+          "title": "Gradient Accumulation",
+          "dir": "46-gradient-accumulation",
+          "minutes": 90
+        },
+        {
+          "n": 47,
+          "title": "Checkpoint Save and Resume",
+          "dir": "47-checkpoint-save-resume",
+          "minutes": 90
+        },
+        {
+          "n": 48,
+          "title": "Distributed Data Parallel and FSDP from Scratch",
+          "dir": "48-distributed-fsdp-ddp",
+          "minutes": 90
+        },
+        {
+          "n": 49,
+          "title": "Language Model Evaluation Harness",
+          "dir": "49-lm-eval-harness",
+          "minutes": 90
+        },
+        {
+          "n": 50,
+          "title": "Hypothesis Generator",
+          "dir": "50-hypothesis-generator",
+          "minutes": 90
+        },
+        {
+          "n": 51,
+          "title": "Literature Retrieval",
+          "dir": "51-literature-retrieval",
+          "minutes": 90
+        },
+        {
+          "n": 52,
+          "title": "Experiment Runner",
+          "dir": "52-experiment-runner",
+          "minutes": 90
+        },
+        {
+          "n": 53,
+          "title": "Result Evaluator",
+          "dir": "53-result-evaluator",
+          "minutes": 90
+        },
+        {
+          "n": 54,
+          "title": "Paper Writer",
+          "dir": "54-paper-writer",
+          "minutes": 90
+        },
+        {
+          "n": 55,
+          "title": "Critic Loop",
+          "dir": "55-critic-loop",
+          "minutes": 90
+        },
+        {
+          "n": 56,
+          "title": "Iteration Scheduler",
+          "dir": "56-iteration-scheduler",
+          "minutes": 90
+        },
+        {
+          "n": 57,
+          "title": "End-to-End Research Demo",
+          "dir": "57-end-to-end-research-demo",
+          "minutes": 90
+        },
+        {
+          "n": 58,
+          "title": "Vision Encoder Patches",
+          "dir": "58-vision-encoder-patches",
+          "minutes": 90
+        },
+        {
+          "n": 59,
+          "title": "Vision Transformer Encoder",
+          "dir": "59-vit-transformer",
+          "minutes": 90
+        },
+        {
+          "n": 60,
+          "title": "Projection Layer for Modality Alignment",
+          "dir": "60-projection-layer-modality-align",
+          "minutes": 90
+        },
+        {
+          "n": 61,
+          "title": "Cross-Attention Fusion",
+          "dir": "61-cross-attention-fusion",
+          "minutes": 90
+        },
+        {
+          "n": 62,
+          "title": "Vision-Language Pretraining",
+          "dir": "62-vision-language-pretraining",
+          "minutes": 90
+        },
+        {
+          "n": 63,
+          "title": "Multimodal Evaluation",
+          "dir": "63-multimodal-eval",
+          "minutes": 90
+        },
+        {
+          "n": 64,
+          "title": "Chunking Strategies, Compared",
+          "dir": "64-chunking-strategies-advanced",
+          "minutes": 90
+        },
+        {
+          "n": 65,
+          "title": "Hybrid Retrieval with BM25 and Dense Embeddings",
+          "dir": "65-hybrid-retrieval-bm25-dense",
+          "minutes": 90
+        },
+        {
+          "n": 66,
+          "title": "Cross-Encoder Reranker",
+          "dir": "66-reranker-cross-encoder",
+          "minutes": 90
+        },
+        {
+          "n": 67,
+          "title": "Query Rewriting: HyDE, Multi-Query, and Decomposition",
+          "dir": "67-query-rewriting-hyde",
+          "minutes": 90
+        },
+        {
+          "n": 68,
+          "title": "RAG Evaluation: Precision, Recall, MRR, nDCG, Faithfulness, Answer Relevance",
+          "dir": "68-rag-eval-precision-recall",
+          "minutes": 90
+        },
+        {
+          "n": 69,
+          "title": "End-to-End RAG System",
+          "dir": "69-end-to-end-rag-system",
+          "minutes": 90
+        },
+        {
+          "n": 70,
+          "title": "Task Spec Format",
+          "dir": "70-task-spec-format",
+          "minutes": 90
+        },
+        {
+          "n": 71,
+          "title": "Classical Metrics",
+          "dir": "71-classical-metrics",
+          "minutes": 90
+        },
+        {
+          "n": 72,
+          "title": "Code Exec Metric",
+          "dir": "72-code-exec-metric",
+          "minutes": 90
+        },
+        {
+          "n": 73,
+          "title": "Perplexity and Calibration",
+          "dir": "73-perplexity-calibration",
+          "minutes": 90
+        },
+        {
+          "n": 74,
+          "title": "Leaderboard Aggregation",
+          "dir": "74-leaderboard-aggregation",
+          "minutes": 90
+        },
+        {
+          "n": 75,
+          "title": "End-to-End Eval Runner",
+          "dir": "75-end-to-end-eval-runner",
+          "minutes": 90
+        },
+        {
+          "n": 76,
+          "title": "Collective Ops From Scratch",
+          "dir": "76-collective-ops-from-scratch",
+          "minutes": 90
+        },
+        {
+          "n": 77,
+          "title": "Data Parallel DDP From Scratch",
+          "dir": "77-data-parallel-ddp",
+          "minutes": 90
+        },
+        {
+          "n": 78,
+          "title": "ZeRO Optimizer State Sharding",
+          "dir": "78-zero-parameter-sharding",
+          "minutes": 90
+        },
+        {
+          "n": 79,
+          "title": "Pipeline Parallel and Bubble Analysis",
+          "dir": "79-pipeline-parallel",
+          "minutes": 90
+        },
+        {
+          "n": 80,
+          "title": "Sharded Checkpoint and Atomic Resume",
+          "dir": "80-checkpoint-sharded-resume",
+          "minutes": 90
+        },
+        {
+          "n": 81,
+          "title": "End-to-End Distributed Training",
+          "dir": "81-end-to-end-distributed-train",
+          "minutes": 90
+        },
+        {
+          "n": 82,
+          "title": "Jailbreak Taxonomy",
+          "dir": "82-jailbreak-taxonomy",
+          "minutes": 90
+        },
+        {
+          "n": 83,
+          "title": "Prompt Injection Detector",
+          "dir": "83-prompt-injection-detector",
+          "minutes": 90
+        },
+        {
+          "n": 84,
+          "title": "Refusal Evaluation",
+          "dir": "84-refusal-evaluation",
+          "minutes": 90
+        },
+        {
+          "n": 85,
+          "title": "Content Classifier Integration",
+          "dir": "85-content-classifier-integration",
+          "minutes": 90
+        },
+        {
+          "n": 86,
+          "title": "Constitutional Rules Engine",
+          "dir": "86-constitutional-rules-engine",
+          "minutes": 90
+        },
+        {
+          "n": 87,
+          "title": "End-to-End Safety Gate",
+          "dir": "87-end-to-end-safety-gate",
+          "minutes": 90
+        }
+      ]
+    }
+  ]
+}

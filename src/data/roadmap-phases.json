@@ -1,0 +1,229 @@
+{
+  "stages": [
+    {
+      "id": "foundations",
+      "phases": [0, 1, 2, 3],
+      "title": "Foundations",
+      "summary": "Tooling, math, classical ML and deep learning. Everything later stands on this.",
+      "bn": {
+        "title": "ভিত্তি",
+        "summary": "টুলিং, ম্যাথ, ক্লাসিক্যাল ML আর ডিপ লার্নিং। পরের সবকিছু এর ওপর দাঁড়িয়ে আছে।"
+      }
+    },
+    {
+      "id": "perception-language",
+      "phases": [4, 5, 6],
+      "title": "Vision, language and speech",
+      "summary": "How models see, read and hear, before transformers took over.",
+      "bn": {
+        "title": "ভিশন, ল্যাঙ্গুয়েজ আর স্পিচ",
+        "summary": "ট্রান্সফর্মার আসার আগে মডেল কীভাবে দেখত, পড়ত আর শুনত।"
+      }
+    },
+    {
+      "id": "transformers-llms",
+      "phases": [7, 8, 9, 10],
+      "title": "Transformers and LLMs",
+      "summary": "Attention, generative models, reinforcement learning, and a language model built by hand.",
+      "bn": {
+        "title": "ট্রান্সফর্মার আর LLM",
+        "summary": "Attention, জেনারেটিভ মডেল, reinforcement learning, আর হাতে বানানো একটি language model।"
+      }
+    },
+    {
+      "id": "building-with-llms",
+      "phases": [11, 12, 13],
+      "title": "Building with LLMs",
+      "summary": "Prompts, retrieval, structured output, multimodal inputs, tools and protocols such as MCP.",
+      "bn": {
+        "title": "LLM দিয়ে অ্যাপ বানানো",
+        "summary": "Prompt, retrieval, structured output, multimodal ইনপুট, tool আর MCP-র মতো protocol।"
+      }
+    },
+    {
+      "id": "agents",
+      "phases": [14, 15, 16],
+      "title": "Agents",
+      "summary": "Agent loops, long-running autonomous systems, and teams of agents.",
+      "bn": {
+        "title": "এজেন্ট",
+        "summary": "Agent loop, দীর্ঘক্ষণ চলা autonomous system, আর একসাথে কাজ করা agent-এর দল।"
+      }
+    },
+    {
+      "id": "production-responsibility",
+      "phases": [17, 18],
+      "title": "Production and safety",
+      "summary": "Serving, observability and cost, then ethics, safety and alignment.",
+      "bn": {
+        "title": "প্রোডাকশন আর সেফটি",
+        "summary": "Serving, observability আর খরচ, তারপর ethics, safety আর alignment।"
+      }
+    },
+    {
+      "id": "capstone",
+      "phases": [19],
+      "title": "Capstone",
+      "summary": "Full projects that tie the earlier phases together.",
+      "bn": {
+        "title": "ক্যাপস্টোন",
+        "summary": "আগের সব ফেজকে জোড়া দেওয়া পূর্ণাঙ্গ প্রজেক্ট।"
+      }
+    }
+  ],
+  "phases": [
+    {
+      "phase": 0,
+      "core": true,
+      "topics": [],
+      "summary": "Set up Python, Git, Docker, GPUs and API keys so every later lesson runs.",
+      "bn": "Python, Git, Docker, GPU আর API key সেট করা, যাতে পরের প্রতিটি লেসন চালানো যায়।"
+    },
+    {
+      "phase": 1,
+      "core": true,
+      "topics": [],
+      "summary": "Linear algebra, calculus, probability and optimization, the math behind training.",
+      "bn": "লিনিয়ার অ্যালজেবরা, ক্যালকুলাস, প্রবাবিলিটি আর optimization, মানে training-এর পেছনের ম্যাথ।"
+    },
+    {
+      "phase": 2,
+      "core": true,
+      "topics": [],
+      "summary": "Classical machine learning: regression, trees, evaluation and feature work.",
+      "bn": "ক্লাসিক্যাল machine learning: regression, tree, evaluation আর feature-এর কাজ।"
+    },
+    {
+      "phase": 3,
+      "core": true,
+      "topics": [],
+      "summary": "Neural networks from scratch: backpropagation, layers, regularization and training loops.",
+      "bn": "শুরু থেকে neural network: backpropagation, layer, regularization আর training loop।"
+    },
+    {
+      "phase": 4,
+      "core": false,
+      "topics": ["multimodal-engineering"],
+      "summary": "Convolutional networks, detection, segmentation and vision transformers.",
+      "bn": "Convolutional network, detection, segmentation আর vision transformer।"
+    },
+    {
+      "phase": 5,
+      "core": true,
+      "topics": ["llm-fundamentals"],
+      "summary": "Tokenization, embeddings, sequence models and the road to modern language models.",
+      "bn": "Tokenization, embedding, sequence model আর আধুনিক language model-এ পৌঁছানোর পথ।"
+    },
+    {
+      "phase": 6,
+      "core": false,
+      "topics": ["multimodal-engineering"],
+      "summary": "Speech recognition, synthesis and audio models.",
+      "bn": "Speech recognition, synthesis আর audio model।"
+    },
+    {
+      "phase": 7,
+      "core": true,
+      "topics": ["llm-fundamentals"],
+      "summary": "Attention, the transformer block, positional encoding and the variants in use today.",
+      "bn": "Attention, transformer block, positional encoding আর এখনকার ব্যবহৃত ভ্যারিয়েন্টগুলো।"
+    },
+    {
+      "phase": 8,
+      "core": false,
+      "topics": ["multimodal-engineering"],
+      "summary": "Generative models: autoencoders, GANs, diffusion and flow-based methods.",
+      "bn": "জেনারেটিভ মডেল: autoencoder, GAN, diffusion আর flow-based পদ্ধতি।"
+    },
+    {
+      "phase": 9,
+      "core": false,
+      "topics": [],
+      "summary": "Reinforcement learning, from bandits and Q-learning to policy gradients.",
+      "bn": "Reinforcement learning, bandit আর Q-learning থেকে policy gradient পর্যন্ত।"
+    },
+    {
+      "phase": 10,
+      "core": true,
+      "topics": ["llm-fundamentals", "inference"],
+      "summary": "Pre-train, align and sample from a language model you wrote yourself.",
+      "bn": "নিজের লেখা language model pre-train করা, align করা আর তা থেকে sample নেওয়া।"
+    },
+    {
+      "phase": 11,
+      "core": true,
+      "topics": [
+        "prompt-engineering",
+        "context-engineering",
+        "rag-knowledge-systems",
+        "tool-use-and-integrations",
+        "evaluation-engineering",
+        "cost-and-performance-optimization",
+        "safety-security-and-guardrails"
+      ],
+      "summary": "The day-to-day craft: prompts, structured outputs, RAG, tool use, evaluation, caching and guardrails.",
+      "bn": "প্রতিদিনের কাজ: prompt, structured output, RAG, tool use, evaluation, caching আর guardrail।"
+    },
+    {
+      "phase": 12,
+      "core": false,
+      "topics": ["multimodal-engineering"],
+      "summary": "Models that take images, audio and video alongside text.",
+      "bn": "টেক্সটের সাথে ছবি, অডিও আর ভিডিও নেওয়া মডেল।"
+    },
+    {
+      "phase": 13,
+      "core": true,
+      "topics": ["tool-use-and-integrations"],
+      "summary": "Function calling, MCP and the protocols that connect models to tools and to each other.",
+      "bn": "Function calling, MCP আর যে protocol মডেলকে tool-এর সাথে এবং একে অপরের সাথে জোড়ে।"
+    },
+    {
+      "phase": 14,
+      "core": true,
+      "topics": ["agents-and-agentic-systems", "context-engineering"],
+      "summary": "Build agent runtimes: loops, planning, memory, state machines and evaluation.",
+      "bn": "Agent runtime বানানো: loop, planning, memory, state machine আর evaluation।"
+    },
+    {
+      "phase": 15,
+      "core": true,
+      "topics": ["agents-and-agentic-systems"],
+      "summary": "Long-running agents that act on their own, and the controls that keep them in bounds.",
+      "bn": "নিজে নিজে কাজ করা দীর্ঘক্ষণ চলা agent, আর তাদের সীমার ভেতরে রাখার নিয়ন্ত্রণ।"
+    },
+    {
+      "phase": 16,
+      "core": true,
+      "topics": ["agents-and-agentic-systems"],
+      "summary": "Several agents working together: coordination, handoffs and swarm patterns.",
+      "bn": "একাধিক agent একসাথে কাজ করা: coordination, handoff আর swarm pattern।"
+    },
+    {
+      "phase": 17,
+      "core": true,
+      "topics": [
+        "inference",
+        "llmops-and-observability",
+        "cost-and-performance-optimization",
+        "ai-application-architecture"
+      ],
+      "summary": "Serving, scaling, observability and cost control for AI systems in production.",
+      "bn": "প্রোডাকশনে AI সিস্টেমের serving, scaling, observability আর খরচ নিয়ন্ত্রণ।"
+    },
+    {
+      "phase": 18,
+      "core": true,
+      "topics": ["safety-security-and-guardrails", "evaluation-engineering"],
+      "summary": "Ethics, safety, red-teaming, security and alignment.",
+      "bn": "Ethics, safety, red-teaming, security আর alignment।"
+    },
+    {
+      "phase": 19,
+      "core": true,
+      "topics": ["ai-application-architecture"],
+      "summary": "Capstone projects, from a terminal coding agent to a stateless MCP server.",
+      "bn": "ক্যাপস্টোন প্রজেক্ট, টার্মিনাল coding agent থেকে stateless MCP server পর্যন্ত।"
+    }
+  ]
+}

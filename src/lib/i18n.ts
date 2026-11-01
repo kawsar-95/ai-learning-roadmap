@@ -36,6 +36,12 @@ export function dashboardHref(lang: Lang): string {
 export function interviewHref(lang: Lang): string {
   return lang === "bn" ? "/bn/interview/" : "/interview/";
 }
+export function roadmapHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/roadmap/" : "/roadmap/";
+}
+export function resourcesHref(lang: Lang): string {
+  return lang === "bn" ? "/bn/resources/" : "/resources/";
+}
 
 /** The source code of the site. */
 export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
@@ -64,10 +70,10 @@ export function langInitScript(basePath: string): string {
 }
 
 const en = {
-  siteName: "AI Engineering",
+  siteName: "Learn AI",
   skipLink: "Skip to content",
   footer: "14 parts · citations verified against each publisher's metadata.",
-  metaTitle: "AI Engineering — All Necessary Topics",
+  metaTitle: "Learn AI — All Necessary Topics",
   metaDescription:
     "Fourteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
 
@@ -156,6 +162,43 @@ const en = {
   partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
   sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
 
+  // Roadmap page.
+  roadmap: "Roadmap",
+  roadmapTitle: "AI engineering roadmap",
+  roadmapIntro:
+    "A study path through the open AI Engineering from Scratch curriculum: 20 phases, from setup and math to agents, production and capstone projects. Each lesson opens on the curriculum site. Tick the lessons you finish; your progress stays in this browser.",
+  roadmapLessonsDone: "Lessons done",
+  roadmapLessonsTotal: "Total lessons",
+  roadmapTimeLeft: "Left to study",
+  roadmapCoreOnly: "Show the suggested path only",
+  roadmapCoreNote: "The suggested path skips the five optional phases (vision, speech, generative models, reinforcement learning, multimodal). Switch it off to see all 20.",
+  roadmapPhase: (n: string) => `Phase ${n}`,
+  roadmapCore: "Suggested",
+  roadmapOptional: "Optional depth",
+  roadmapLessons: (n: string) => `${n} lessons`,
+  roadmapRelated: "Covered in the Parts",
+  roadmapMarkLesson: (title: string) => `Mark done: ${title}`,
+  roadmapUnmarkLesson: (title: string) => `Done, click to undo: ${title}`,
+  roadmapResetConfirm: "Clear the progress of all roadmap lessons?",
+  roadmapSource: "Source: the ROADMAP.md of the curriculum. Lesson titles stay in English.",
+  pathsTitle: "Learning paths",
+  pathsIntro: "Not sure where to start? Pick one path. Each path is a short list of lessons from the phases below, in a good order.",
+  pathsStartHere: "Start here",
+  pathsCore: "Core path",
+  pathsFocused: "Focused path",
+  pathsStart: "Start path",
+  lessonPrev: "Previous lesson",
+  lessonNext: "Next lesson",
+  lessonNav: "Lesson navigation",
+  resources: "Resources",
+  resourcesTitle: "Open-source repos to learn from",
+  resourcesIntro:
+    "Twenty well-known GitHub repositories for AI engineers. Each card says what the repo is for and which roadmap phase it fits. The links open GitHub.",
+  resourcesBangla: "Bangla translation ↗",
+  resourcesNote: "Star counts change, so they are not shown. Check each repo's license before you reuse its code or text.",
+  lessonCode: "Code and tests on GitHub ↗",
+  lessonCredit: "Lesson text from AI Engineering from Scratch by Rohit Ghumare and contributors, under the",
+
   // Contents page.
   contentsTitle: "All contents",
   contentsIntro: "Every part and section in reading order. A check mark shows a section you marked as done.",
@@ -211,7 +254,7 @@ const en = {
   // Footer.
   footerSite: "Site",
   footerSource: "Source on GitHub",
-  footerCopy: "AI Engineering reference",
+  footerCopy: "Learn AI reference",
 
   // Topic page.
   minRead: (n: string) => `${n} min read`,
@@ -253,10 +296,10 @@ const en = {
 export type Dict = typeof en;
 
 const bn: Dict = {
-  siteName: "AI Engineering",
+  siteName: "Learn AI",
   skipLink: "মূল লেখায় যান",
   footer: "১৪টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
-  metaTitle: "AI Engineering — দরকারি সব বিষয়, বাংলায়",
+  metaTitle: "Learn AI — দরকারি সব বিষয়, বাংলায়",
   metaDescription:
     "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৪টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
 
@@ -341,6 +384,42 @@ const bn: Dict = {
   partsIntro: "ক্রম অনুযায়ী পড়ুন, অথবা যে পার্ট দরকার সেখানে যান। প্রতিটি পার্ট নিজে নিজেই সম্পূর্ণ।",
   sectionCount: (n: number) => `${fmtNum("bn", n)}টি সেকশন`,
 
+  roadmap: "রোডম্যাপ",
+  roadmapTitle: "AI engineering রোডম্যাপ",
+  roadmapIntro:
+    "ওপেন সোর্স AI Engineering from Scratch কারিকুলামের ওপর একটি পড়ার পথ: সেটআপ আর ম্যাথ থেকে এজেন্ট, প্রোডাকশন আর ক্যাপস্টোন প্রজেক্ট পর্যন্ত ২০টি ফেজ। প্রতিটি লেসন কারিকুলামের সাইটে খোলে। যে লেসন শেষ করলেন তাতে টিক দিন; প্রগ্রেস এই ব্রাউজারেই থাকে।",
+  roadmapLessonsDone: "শেষ করা লেসন",
+  roadmapLessonsTotal: "মোট লেসন",
+  roadmapTimeLeft: "পড়তে বাকি",
+  roadmapCoreOnly: "শুধু প্রস্তাবিত পথ দেখান",
+  roadmapCoreNote: "প্রস্তাবিত পথে পাঁচটি ঐচ্ছিক ফেজ (ভিশন, স্পিচ, জেনারেটিভ মডেল, reinforcement learning, multimodal) বাদ যায়। ২০টি ফেজই দেখতে এটি বন্ধ করুন।",
+  roadmapPhase: (n: string) => `ফেজ ${n}`,
+  roadmapCore: "প্রস্তাবিত",
+  roadmapOptional: "ঐচ্ছিক গভীরতা",
+  roadmapLessons: (n: string) => `${n}টি লেসন`,
+  roadmapRelated: "যেসব পার্টে আছে",
+  roadmapMarkLesson: (title: string) => `শেষ চিহ্ন দিন: ${title}`,
+  roadmapUnmarkLesson: (title: string) => `শেষ, বাতিল করতে ক্লিক করুন: ${title}`,
+  roadmapResetConfirm: "রোডম্যাপের সব লেসনের প্রগ্রেস মুছে ফেলবেন?",
+  roadmapSource: "সোর্স: কারিকুলামের ROADMAP.md। লেসনের নাম English-এ থাকে।",
+  pathsTitle: "লার্নিং পাথ",
+  pathsIntro: "কোথা থেকে শুরু করবেন বুঝতে পারছেন না? একটি পাথ বেছে নিন। প্রতিটি পাথ নিচের ফেজগুলো থেকে বাছাই করা লেসনের একটি ছোট তালিকা, ঠিক ক্রমে সাজানো।",
+  pathsStartHere: "এখান থেকে শুরু",
+  pathsCore: "মূল পাথ",
+  pathsFocused: "ফোকাসড পাথ",
+  pathsStart: "পাথ শুরু করুন",
+  lessonPrev: "আগের লেসন",
+  lessonNext: "পরের লেসন",
+  lessonNav: "লেসন নেভিগেশন",
+  resources: "রিসোর্স",
+  resourcesTitle: "শেখার জন্য ওপেন সোর্স রিপো",
+  resourcesIntro:
+    "AI ইঞ্জিনিয়ারদের জন্য বিশটি পরিচিত GitHub রিপো। প্রতিটি কার্ডে আছে রিপোটি কী কাজের, আর রোডম্যাপের কোন ফেজের সাথে মেলে। লিংক GitHub-এ খোলে।",
+  resourcesBangla: "বাংলা অনুবাদ ↗",
+  resourcesNote: "স্টারের সংখ্যা বদলায়, তাই দেখানো হয়নি। কোনো রিপোর কোড বা লেখা আবার ব্যবহার করার আগে তার লাইসেন্স দেখে নিন।",
+  lessonCode: "GitHub-এ কোড আর টেস্ট ↗",
+  lessonCredit: "লেসনের লেখা English-এ, AI Engineering from Scratch থেকে নেওয়া। লেখক Rohit Ghumare ও সহযোগীরা। লাইসেন্স:",
+
   contentsTitle: "সম্পূর্ণ সূচিপত্র",
   contentsIntro: "সব পার্ট আর সেকশন পড়ার ক্রমে। যে সেকশন শেষ করেছেন, তার পাশে টিক চিহ্ন থাকে।",
   doneLabel: "শেষ করা সেকশন",
@@ -393,7 +472,7 @@ const bn: Dict = {
 
   footerSite: "সাইট",
   footerSource: "GitHub-এ সোর্স কোড",
-  footerCopy: "AI Engineering রেফারেন্স",
+  footerCopy: "Learn AI রেফারেন্স",
 
   minRead: (n: string) => `${n} মিনিট পড়া`,
   references: "তথ্যসূত্র",
