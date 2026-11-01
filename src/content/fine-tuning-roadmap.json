@@ -53,6 +53,20 @@
             ["Mislabeled rows", "<code>value_counts()</code> audits, manual spot-checks", "A fine-tune learns your labels as ground truth, errors included"],
             ["Split leakage", "group-aware splits (e.g. by source document)", "Near-duplicate rows in train and test inflate your eval score"]
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Free resources:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://pandas.pydata.org/docs/user_guide/index.html\">pandas User Guide</a> — official documentation, the canonical reference",
+            "<a href=\"https://www.kaggle.com/learn/pandas\">Kaggle Learn: Pandas</a> — free, hands-on micro-course with exercises",
+            "<a href=\"https://www.kaggle.com/learn/data-cleaning\">Kaggle Learn: Data Cleaning</a> — free micro-course on missing values and inconsistent data",
+            "<a href=\"https://www.dataquest.io/blog/data-cleaning-in-python/\">Dataquest: Complete Guide to Data Cleaning in Python</a> — free tutorial with a cheat sheet"
+          ]
         }
       ],
       "layman": [
@@ -102,6 +116,20 @@
               "html": "মনে রাখার নিয়ম: ৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো ফল দেয়।"
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফ্রি রিসোর্স:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://pandas.pydata.org/docs/user_guide/index.html\">pandas User Guide</a> — অফিসিয়াল ডকুমেন্টেশন",
+            "<a href=\"https://www.kaggle.com/learn/pandas\">Kaggle Learn: Pandas</a> — ফ্রি, হাতে-কলমে মাইক্রো-কোর্স",
+            "<a href=\"https://www.kaggle.com/learn/data-cleaning\">Kaggle Learn: Data Cleaning</a> — মিসিং ভ্যালু ও এলোমেলো ডেটা নিয়ে ফ্রি মাইক্রো-কোর্স",
+            "<a href=\"https://www.dataquest.io/blog/data-cleaning-in-python/\">Dataquest: Data Cleaning in Python</a> — চিট শিট সহ ফ্রি টিউটোরিয়াল"
+          ]
         }
       ]
     },
@@ -137,7 +165,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Free resources: <a href=\"https://course.fast.ai/\">fast.ai's Practical Deep Learning</a> and <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy's Neural Networks: Zero to Hero</a>. Check that both are still available and current before starting, since course platforms change."
+              "html": "Free resources: <a href=\"https://docs.pytorch.org/tutorials/beginner/basics/index.html\">PyTorch: Learn the Basics</a> (official), <a href=\"https://course.fast.ai/\">fast.ai's Practical Deep Learning</a>, and <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy's Neural Networks: Zero to Hero</a>. Check that all three are still available and current before starting, since course platforms change."
             }
           ]
         },
@@ -190,7 +218,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "ফ্রি রিসোর্স: <a href=\"https://course.fast.ai/\">fast.ai-র Practical Deep Learning</a> আর <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy-র Neural Networks: Zero to Hero</a>। শুরুর আগে দেখে নিন দুটোই এখনো চালু আছে কিনা।"
+              "html": "ফ্রি রিসোর্স: <a href=\"https://docs.pytorch.org/tutorials/beginner/basics/index.html\">PyTorch: Learn the Basics</a> (অফিসিয়াল), <a href=\"https://course.fast.ai/\">fast.ai-র Practical Deep Learning</a>, আর <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy-র Neural Networks: Zero to Hero</a>। শুরুর আগে দেখে নিন তিনটাই এখনো চালু আছে কিনা।"
             }
           ]
         }
@@ -233,6 +261,18 @@
               "html": "<code>transformers</code>, <code>datasets</code>, and <code>PEFT</code> change fast. Follow the current official docs for each release rather than an old tutorial, which may reference a removed argument or a renamed function."
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Free resources:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://huggingface.co/learn/llm-course/en/chapter11/4\">Hugging Face LLM Course — Chapter 11.4: LoRA</a> — free, official, hands-on LoRA walkthrough",
+            "<a href=\"https://www.datacamp.com/tutorial/fine-tuning-llama-2\">DataCamp: Fine-Tuning Llama 2 with QLoRA</a> — free step-by-step Colab tutorial"
+          ]
         }
       ],
       "layman": [
@@ -272,6 +312,18 @@
               "html": "<code>transformers</code>, <code>datasets</code>, আর <code>PEFT</code> খুব দ্রুত বদলায়। পুরনো টিউটোরিয়ালের বদলে সবসময় বর্তমান অফিসিয়াল ডকুমেন্টেশন অনুসরণ করুন।"
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফ্রি রিসোর্স:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://huggingface.co/learn/llm-course/en/chapter11/4\">Hugging Face LLM Course — Chapter 11.4: LoRA</a> — ফ্রি, অফিসিয়াল, হাতে-কলমে LoRA ওয়াকথ্রু",
+            "<a href=\"https://www.datacamp.com/tutorial/fine-tuning-llama-2\">DataCamp: Fine-Tuning Llama 2 with QLoRA</a> — ফ্রি, ধাপে ধাপে Colab টিউটোরিয়াল"
+          ]
         }
       ]
     },
@@ -309,6 +361,20 @@
               "html": "This phase is essentially QA applied to models: writing test cases, tracking failures, and refusing to trust a model's output just because it reads fluently. It is a natural fit for QA experience."
             }
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Free resources:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — widely cited practical guide to building an eval workflow",
+            "<a href=\"https://huggingface.co/docs/evaluate/index\">Hugging Face Evaluate</a> — official docs for standard evaluation metrics",
+            "<a href=\"https://github.com/EleutherAI/lm-evaluation-harness\">lm-evaluation-harness</a> — open-source standard benchmark harness",
+            "<a href=\"https://github.com/confident-ai/deepeval\">DeepEval</a> — open-source, pytest-style LLM testing framework"
+          ]
         }
       ],
       "layman": [
@@ -344,6 +410,20 @@
               "type": "paragraph",
               "html": "এই ফেজটা মূলত মডেলের জন্য QA: টেস্ট কেস লেখা, ব্যর্থতা ট্র্যাক করা, আর শুধু ফ্লুয়েন্ট শোনানোর কারণে কোনো আউটপুটকে বিশ্বাস না করা। QA অভিজ্ঞতার সাথে এটা স্বাভাবিকভাবেই মিলে যায়।"
             }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফ্রি রিসোর্স:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — ইভ্যালুয়েশন ওয়ার্কফ্লো বানানোর ব্যবহারিক গাইড",
+            "<a href=\"https://huggingface.co/docs/evaluate/index\">Hugging Face Evaluate</a> — স্ট্যান্ডার্ড ইভ্যালুয়েশন মেট্রিকের অফিসিয়াল ডকুমেন্টেশন",
+            "<a href=\"https://github.com/EleutherAI/lm-evaluation-harness\">lm-evaluation-harness</a> — ওপেন-সোর্স স্ট্যান্ডার্ড বেঞ্চমার্ক হারনেস",
+            "<a href=\"https://github.com/confident-ai/deepeval\">DeepEval</a> — ওপেন-সোর্স, pytest-স্টাইল LLM টেস্টিং ফ্রেমওয়ার্ক"
           ]
         }
       ]
@@ -382,6 +462,20 @@
             "Put it in a Docker container",
             "Deploy it"
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Free resources:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://github.com/ggml-org/llama.cpp\">llama.cpp</a> — official repo: conversion scripts, quantization tool, and server",
+            "<a href=\"https://ollama.com\">Ollama</a> — run quantized local models behind a simple API",
+            "<a href=\"https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/\">Collabnix: Complete Ollama Guide</a> — free walkthrough covering Docker Compose and a FastAPI integration",
+            "<a href=\"https://www.byteplus.com/en/topic/556170\">BytePlus: Deploying Ollama with Docker and FastAPI</a> — free end-to-end guide: Modelfile → Docker → FastAPI"
+          ]
         }
       ],
       "layman": [
@@ -417,6 +511,20 @@
             "একটা API-র পেছনে র‍্যাপ করুন",
             "Docker কন্টেইনারে রাখুন",
             "ডিপ্লয় করুন"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফ্রি রিসোর্স:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<a href=\"https://github.com/ggml-org/llama.cpp\">llama.cpp</a> — অফিসিয়াল রিপো: কনভার্সন স্ক্রিপ্ট, কোয়ান্টাইজেশন টুল, আর সার্ভার",
+            "<a href=\"https://ollama.com\">Ollama</a> — একটা সহজ API-র পেছনে কোয়ান্টাইজড লোকাল মডেল চালান",
+            "<a href=\"https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/\">Collabnix: Complete Ollama Guide</a> — Docker Compose আর FastAPI ইন্টিগ্রেশনসহ ফ্রি ওয়াকথ্রু",
+            "<a href=\"https://www.byteplus.com/en/topic/556170\">BytePlus: Ollama, Docker আর FastAPI দিয়ে ডিপ্লয়</a> — Modelfile → Docker → FastAPI, এন্ড-টু-এন্ড ফ্রি গাইড"
           ]
         }
       ]
@@ -517,7 +625,20 @@
     { "n": 6, "url": "https://course.fast.ai/", "text": "fast.ai, Practical Deep Learning for Coders (free course)" },
     { "n": 7, "url": "https://github.com/karpathy/nn-zero-to-hero", "text": "Andrej Karpathy, Neural Networks: Zero to Hero (free course)" },
     { "n": 8, "url": "https://github.com/ggml-org/llama.cpp", "text": "llama.cpp — GGUF format and local inference" },
-    { "n": 9, "url": "https://ollama.com", "text": "Ollama — run quantized local models behind a simple API" }
+    { "n": 9, "url": "https://ollama.com", "text": "Ollama — run quantized local models behind a simple API" },
+    { "n": 10, "url": "https://pandas.pydata.org/docs/user_guide/index.html", "text": "pandas User Guide (official documentation)" },
+    { "n": 11, "url": "https://www.kaggle.com/learn/pandas", "text": "Kaggle Learn, Pandas (free micro-course)" },
+    { "n": 12, "url": "https://www.kaggle.com/learn/data-cleaning", "text": "Kaggle Learn, Data Cleaning (free micro-course)" },
+    { "n": 13, "url": "https://www.dataquest.io/blog/data-cleaning-in-python/", "text": "Dataquest, Complete Guide to Data Cleaning in Python (free tutorial)" },
+    { "n": 14, "url": "https://docs.pytorch.org/tutorials/beginner/basics/index.html", "text": "PyTorch, Learn the Basics (official beginner tutorials)" },
+    { "n": 15, "url": "https://huggingface.co/learn/llm-course/en/chapter11/4", "text": "Hugging Face LLM Course, Chapter 11.4: LoRA (free, official)" },
+    { "n": 16, "url": "https://www.datacamp.com/tutorial/fine-tuning-llama-2", "text": "DataCamp, Fine-Tuning Llama 2 with QLoRA (free Colab tutorial)" },
+    { "n": 17, "url": "https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals", "text": "Hamel Husain, \"Your AI Product Needs Evals\" (practical eval-workflow guide)" },
+    { "n": 18, "url": "https://huggingface.co/docs/evaluate/index", "text": "Hugging Face Evaluate (official metrics library documentation)" },
+    { "n": 19, "url": "https://github.com/EleutherAI/lm-evaluation-harness", "text": "EleutherAI, lm-evaluation-harness (open-source benchmark harness)" },
+    { "n": 20, "url": "https://github.com/confident-ai/deepeval", "text": "DeepEval (open-source, pytest-style LLM testing framework)" },
+    { "n": 21, "url": "https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/", "text": "Collabnix, Complete Ollama Guide (Docker + FastAPI walkthrough)" },
+    { "n": 22, "url": "https://www.byteplus.com/en/topic/556170", "text": "BytePlus, Deploying Ollama with Docker and FastAPI (end-to-end guide)" }
   ],
   "quiz": [
     {
