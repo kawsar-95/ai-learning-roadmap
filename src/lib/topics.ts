@@ -1,4 +1,4 @@
-// Server-only access to the 14 topic files. Never import this module from a
+// Server-only access to the 15 topic files. Never import this module from a
 // "use client" file; pass the data down as props.
 //
 // Each file goes through TopicFileSchema.parse at module load, so bad content
@@ -10,6 +10,7 @@ import type { Lang } from "@/lib/i18n";
 
 import llmFundamentals from "@/content/llm-fundamentals.json";
 import promptEngineering from "@/content/prompt-engineering.json";
+import fineTuningRoadmap from "@/content/fine-tuning-roadmap.json";
 import contextEngineering from "@/content/context-engineering.json";
 import ragKnowledgeSystems from "@/content/rag-knowledge-systems.json";
 import agentsAndAgenticSystems from "@/content/agents-and-agentic-systems.json";
@@ -31,6 +32,7 @@ export type NavItem = { part: number; slug: string; title: string };
 export const TOPIC_ORDER: readonly string[] = [
   "llm-fundamentals",
   "prompt-engineering",
+  "fine-tuning-roadmap",
   "context-engineering",
   "rag-knowledge-systems",
   "agents-and-agentic-systems",
@@ -48,6 +50,7 @@ export const TOPIC_ORDER: readonly string[] = [
 const FILES: Record<string, unknown> = {
   "llm-fundamentals": llmFundamentals,
   "prompt-engineering": promptEngineering,
+  "fine-tuning-roadmap": fineTuningRoadmap,
   "context-engineering": contextEngineering,
   "rag-knowledge-systems": ragKnowledgeSystems,
   "agents-and-agentic-systems": agentsAndAgenticSystems,

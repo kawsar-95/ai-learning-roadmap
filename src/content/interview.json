@@ -77,6 +77,44 @@
       ]
     },
     {
+      "topic": "fine-tuning-roadmap",
+      "items": [
+        {
+          "section": "s1",
+          "en": {
+            "q": "Why does data quality matter more than most other choices in fine-tuning?",
+            "a": "A fine-tuned model cannot be better than the data it is shown: it learns whatever is in the training set as ground truth, errors included. 500 clean, correctly labeled examples usually beat 5,000 noisy ones, so time spent on data hygiene (deduplication, label audits, leak-free splits) pays off more than time spent tuning hyperparameters."
+          },
+          "bn": {
+            "q": "ফাইন-টিউনিংয়ে বেশিরভাগ অন্য সিদ্ধান্তের চেয়ে ডেটার মান কেন বেশি গুরুত্বপূর্ণ?",
+            "a": "ফাইন-টিউন করা মডেল কখনোই তার দেখানো ডেটার চেয়ে ভালো হতে পারে না: ট্রেইনিং সেটে যা থাকে, ভুলসহ, মডেল সেটাকেই সত্যি ধরে শেখে। ৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো ফল দেয়, তাই হাইপারপ্যারামিটার টিউনিংয়ের চেয়ে ডেটা হাইজিনে (ডুপ্লিকেট সরানো, লেবেল যাচাই, ফাঁসবিহীন স্প্লিট) দেওয়া সময় বেশি কাজে লাগে।"
+          }
+        },
+        {
+          "section": "s3",
+          "en": {
+            "q": "How does LoRA/QLoRA through PEFT differ from a full fine-tune, and why does it matter for a free Colab GPU?",
+            "a": "A full fine-tune updates every weight in the model. PEFT's LoRA freezes the base model and trains a small set of added low-rank weights instead; QLoRA does the same on a 4-bit quantized base. Because the trained part is small, a single free Colab GPU is usually enough for models in the 1–3B parameter range, which would be out of reach for a full fine-tune."
+          },
+          "bn": {
+            "q": "PEFT দিয়ে LoRA/QLoRA ফুল ফাইন-টিউনের থেকে কীভাবে আলাদা, আর এটা ফ্রি Colab GPU-র জন্য কেন গুরুত্বপূর্ণ?",
+            "a": "ফুল ফাইন-টিউন মডেলের প্রতিটা ওয়েট আপডেট করে। PEFT-এর LoRA বেস মডেল ফ্রিজ রেখে পাশে একটা ছোট low-rank ওয়েট সেট ট্রেইন করে; QLoRA একই কাজ করে 4-bit কোয়ান্টাইজড বেসে। ট্রেইন হওয়া অংশ ছোট বলে, একটা ফ্রি Colab GPU সাধারণত ১–৩ বিলিয়ন প্যারামিটারের মডেলের জন্য যথেষ্ট হয়, যা ফুল ফাইন-টিউনে সম্ভব হতো না।"
+          }
+        },
+        {
+          "section": "s4",
+          "en": {
+            "q": "Why is evaluation called the phase that matters most, and how is it similar to QA?",
+            "a": "Without comparing the base model against the fine-tuned one on a held-out test set, you cannot tell whether fine-tuning actually helped. This is essentially QA applied to models: writing test cases, tracking failure cases, and refusing to trust fluent-sounding output, backed by a running regression suite built from every failure found."
+          },
+          "bn": {
+            "q": "ইভ্যালুয়েশনকে কেন সবচেয়ে গুরুত্বপূর্ণ ফেজ বলা হয়, আর এটা QA-র সাথে কীভাবে মেলে?",
+            "a": "হেল্ড-আউট টেস্ট সেটে বেস মডেল আর ফাইন-টিউন করা মডেল তুলনা না করলে বোঝার উপায় নেই ফাইন-টিউনিং আসলে কাজে লেগেছে কিনা। এটা মূলত মডেলের জন্য QA: টেস্ট কেস লেখা, ব্যর্থতা ট্র্যাক করা, আর শুধু ফ্লুয়েন্ট শোনানোর কারণে আউটপুট বিশ্বাস না করা, সাথে প্রতিটা খুঁজে পাওয়া ব্যর্থতা দিয়ে একটা চলমান regression suite।"
+          }
+        }
+      ]
+    },
+    {
       "topic": "context-engineering",
       "items": [
         {

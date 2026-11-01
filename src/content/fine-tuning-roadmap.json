@@ -1,0 +1,607 @@
+{
+  "slug": "fine-tuning-roadmap",
+  "title": "Fine-Tuning Small Models",
+  "tagline": "a practical roadmap",
+  "lede": "A roadmap for building and fine-tuning small models, building on the LLM fundamentals, prompting, and RAG you've already covered: data prep, how neural nets train, LoRA/QLoRA fine-tuning, evaluation, and shipping a quantized model locally.",
+  "bn": {
+    "title": "ছোট মডেল ফাইন-টিউনিং",
+    "tagline": "একটা প্র্যাকটিক্যাল রোডম্যাপ",
+    "lede": "ছোট মডেল বানানো আর ফাইন-টিউন করার রোডম্যাপ, যা আপনার আগে শেখা LLM fundamentals, prompting, আর RAG-এর উপর দাঁড়িয়ে আছে: ডেটা প্রস্তুতি, নিউরাল নেট কীভাবে ট্রেইন হয়, LoRA/QLoRA দিয়ে ফাইন-টিউনিং, ইভ্যালুয়েশন, আর কোয়ান্টাইজ করা মডেল লোকালি শিপ করা।"
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "num": "01",
+      "title": "Phase 1 — Python for data",
+      "sub": "pandas, data hygiene, and why data is the real currency (3–4 weeks)",
+      "bn": {
+        "title": "ফেজ ১ — ডেটার জন্য Python",
+        "sub": "pandas, ডেটা হাইজিন, আর কেন ডেটাই আসল মুদ্রা (৩–৪ সপ্তাহ)"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s1-why-data-first", "html": "Why data comes first" },
+        {
+          "type": "paragraph",
+          "html": "A fine-tuned model cannot be better than the data it is shown. Before touching <code>transformers</code> or <code>PEFT</code>, you need Python fluency for data work: reading, cleaning, and reshaping with <code>pandas</code>."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Python basics: functions, loops, list/dict comprehensions",
+            "<code>pandas</code>: <code>read_csv</code>, <code>groupby</code>, <code>merge</code>, <code>pivot_table</code>",
+            "Data hygiene: removing duplicates, fixing bad labels, handling missing values",
+            "Train / validation / test splits, done so similar examples don't leak across splits",
+            "Spotting class imbalance before it skews training"
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "Rule of thumb: 500 clean, correctly labeled examples usually beat 5,000 noisy ones. Time spent auditing data pays off more than time spent tuning hyperparameters."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": ["Data problem", "pandas tool", "Why it matters"],
+          "rows": [
+            ["Duplicate rows", "<code>drop_duplicates()</code>", "Duplicates let the model memorize instead of generalize"],
+            ["Mislabeled rows", "<code>value_counts()</code> audits, manual spot-checks", "A fine-tune learns your labels as ground truth, errors included"],
+            ["Split leakage", "group-aware splits (e.g. by source document)", "Near-duplicate rows in train and test inflate your eval score"]
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Fine-tuning is like training a new hire by showing them examples of good work. If half the examples are wrong, the new hire learns the wrong habits — confidently."
+        },
+        {
+          "type": "paragraph",
+          "html": "<code>pandas</code> is a spreadsheet with superpowers: it can filter, merge, and reshape thousands of rows in a line of code, instead of scrolling forever."
+        },
+        {
+          "type": "paragraph",
+          "html": "This phase has no AI in it yet — it's the unglamorous cleanup work that decides whether every later phase succeeds."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ফাইন-টিউন করা মডেল কখনোই তার দেখানো ডেটার চেয়ে ভালো হতে পারে না। তাই <code>transformers</code> বা <code>PEFT</code> ধরার আগে, <code>pandas</code> দিয়ে ডেটা পড়া, পরিষ্কার করা আর রিশেপ করার দক্ষতা লাগবে।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Python বেসিক: ফাংশন, লুপ, লিস্ট/ডিক্ট কম্প্রিহেনশন",
+            "<code>pandas</code>: <code>read_csv</code>, <code>groupby</code>, <code>merge</code>, <code>pivot_table</code>",
+            "ডেটা হাইজিন: ডুপ্লিকেট সরানো, ভুল লেবেল ঠিক করা, মিসিং ভ্যালু সামলানো",
+            "ট্রেন/ভ্যালিডেশন/টেস্ট স্প্লিট, যাতে একই ধরনের উদাহরণ দুই দিকেই ফাঁস না হয়ে যায়"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>রাঁধুনির উপমা:</strong> যত ভালো রাঁধুনিই হোন না কেন, বাজে উপকরণ দিয়ে ভালো রান্না হয় না। ফাইন-টিউনিংয়ে ডেটা হলো উপকরণ — এটা পরিষ্কার না হলে বাকি সব ধাপ নষ্ট হবে।"
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "মনে রাখার নিয়ম: ৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো ফল দেয়।"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "num": "02",
+      "title": "Phase 2 — How neural nets train",
+      "sub": "loss, gradients, and overfitting, learned conceptually, not as math proofs (4–6 weeks)",
+      "bn": {
+        "title": "ফেজ ২ — নিউরাল নেট কীভাবে ট্রেইন হয়",
+        "sub": "loss, gradient, আর overfitting ধারণাগতভাবে, ম্যাথ প্রুফ হিসেবে নয় (৪–৬ সপ্তাহ)"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s2-loss-gradients-overfitting", "html": "Loss, gradients, and overfitting" },
+        {
+          "type": "paragraph",
+          "html": "You don't need to derive backpropagation to fine-tune well, but you do need a working mental model of what training is doing: a <strong>loss function</strong> scores how wrong the model's current guess is, and <strong>gradient descent</strong> nudges the model's weights to make that score smaller, one small step at a time."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Loss: a single number measuring how wrong a prediction was",
+            "Gradient descent: repeatedly nudging weights to reduce the loss",
+            "Epoch / batch / learning rate: how training is chunked and paced",
+            "Overfitting: the model memorizes training examples instead of generalizing",
+            "Validation curves: the early-warning sign that overfitting has started"
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "Free resources: <a href=\"https://course.fast.ai/\">fast.ai's Practical Deep Learning</a> and <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy's Neural Networks: Zero to Hero</a>. Check that both are still available and current before starting, since course platforms change."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Do small <code>PyTorch</code> exercises alongside the theory — training a tiny model on a toy dataset end to end teaches more than reading about gradients ever will."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Loss is just \"how wrong was that guess?\" as a single number. Training is the model making a guess, checking the number, and adjusting itself to make the number smaller next time — over and over, thousands of times."
+        },
+        {
+          "type": "paragraph",
+          "html": "Gradient descent is like finding the bottom of a valley while blindfolded: you feel which way the ground slopes down and take a small step that way, then repeat."
+        },
+        {
+          "type": "paragraph",
+          "html": "Overfitting is memorizing the answers to practice questions instead of learning the subject — it looks perfect on practice and falls apart on the real exam."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ফাইন-টিউন ভালোভাবে করতে ব্যাকপ্রোপাগেশনের ম্যাথ ডিরাইভ করার দরকার নেই, কিন্তু ট্রেইনিং আসলে কী করছে তার একটা কাজ-চালানো ধারণা থাকা দরকার: <strong>loss</strong> হলো একটা সংখ্যা, যা বলে দেয় মডেলের এই মুহূর্তের অনুমান কতটা ভুল; <strong>gradient descent</strong> ছোট ছোট ধাপে মডেলের ওয়েট বদলে সেই সংখ্যাটা কমায়।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Loss: অনুমান কতটা ভুল, তার একটা সংখ্যা",
+            "Gradient descent: loss কমানোর জন্য বারবার ওয়েট সামান্য বদলানো",
+            "Epoch/batch/learning rate: ট্রেইনিং কতটা অংশে ভাগ হয়ে কতটা গতিতে এগোয়",
+            "Overfitting: মডেল বোঝার বদলে ট্রেইনিং উদাহরণ মুখস্থ করে ফেলা"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>পরীক্ষার উপমা:</strong> Overfitting হলো প্র্যাকটিস প্রশ্নের উত্তর মুখস্থ করা, বিষয়টা না বুঝেই। প্র্যাকটিসে ১০০% নম্বর পাবেন, কিন্তু আসল পরীক্ষায় একটু অন্যরকম প্রশ্ন এলেই আটকে যাবেন।"
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "ফ্রি রিসোর্স: <a href=\"https://course.fast.ai/\">fast.ai-র Practical Deep Learning</a> আর <a href=\"https://github.com/karpathy/nn-zero-to-hero\">Andrej Karpathy-র Neural Networks: Zero to Hero</a>। শুরুর আগে দেখে নিন দুটোই এখনো চালু আছে কিনা।"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "num": "03",
+      "title": "Phase 3 — Fine-tuning open models",
+      "sub": "Hugging Face transformers/datasets, and LoRA/QLoRA through PEFT (6–8 weeks)",
+      "bn": {
+        "title": "ফেজ ৩ — ওপেন মডেল ফাইন-টিউনিং",
+        "sub": "Hugging Face transformers/datasets, আর PEFT দিয়ে LoRA/QLoRA (৬–৮ সপ্তাহ)"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s3-lora-qlora-peft", "html": "LoRA and QLoRA through PEFT" },
+        {
+          "type": "paragraph",
+          "html": "<code>transformers</code> loads the base model and tokenizer; <code>datasets</code> loads and preprocesses your cleaned data from Phase 1. Instead of updating every one of a model's weights, the <strong>PEFT</strong> library's <strong>LoRA</strong> (and its 4-bit variant <strong>QLoRA</strong>) freezes the base model and trains a small add-on of extra weights alongside it."
+        },
+        {
+          "type": "table",
+          "headers": ["Approach", "What gets trained", "Typical GPU need"],
+          "rows": [
+            ["Full fine-tune", "Every weight in the model", "Large — out of reach on a free GPU for most models"],
+            ["LoRA", "A small set of added low-rank weights", "Moderate — fits a single consumer or free-tier GPU for small models"],
+            ["QLoRA", "Same as LoRA, on a 4-bit quantized base model", "Lowest — the usual choice on a free Colab GPU"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "A free Colab GPU is generally enough for small models, roughly in the 1–3B parameter range."
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<code>transformers</code>, <code>datasets</code>, and <code>PEFT</code> change fast. Follow the current official docs for each release rather than an old tutorial, which may reference a removed argument or a renamed function."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Full fine-tuning is like rebuilding a car's entire engine to change how it drives. LoRA is like bolting on a small add-on part: the original engine (the base model) stays untouched, and the small part does the adjusting."
+        },
+        {
+          "type": "paragraph",
+          "html": "Because that add-on part is small, it trains fast and fits on free hardware — which is why LoRA/QLoRA is the default choice for small-model fine-tuning today."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<code>transformers</code> বেস মডেল আর টোকেনাইজার লোড করে; <code>datasets</code> Phase 1-এ পরিষ্কার করা ডেটা লোড ও প্রিপ্রসেস করে। মডেলের প্রতিটা ওয়েট আপডেট করার বদলে, <strong>PEFT</strong> লাইব্রেরির <strong>LoRA</strong> (আর তার 4-bit ভার্সন <strong>QLoRA</strong>) বেস মডেল ফ্রিজ করে রেখে পাশে একটা ছোট অতিরিক্ত অংশ ট্রেইন করে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>টার্বোচার্জারের উপমা:</strong> পুরো ইঞ্জিন খুলে নতুন করে বানানো (ফুল ফাইন-টিউন) অনেক কাজ। LoRA হলো গাড়ির পাশে একটা ছোট টার্বোচার্জার লাগিয়ে দেওয়া — মূল ইঞ্জিন (বেস মডেল) অক্ষত থাকে, ছোট অংশটাই কাজ করে।"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "একটা ফ্রি Colab GPU সাধারণত ছোট মডেলের জন্য যথেষ্ট, মোটামুটি ১–৩ বিলিয়ন প্যারামিটার পর্যন্ত।"
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<code>transformers</code>, <code>datasets</code>, আর <code>PEFT</code> খুব দ্রুত বদলায়। পুরনো টিউটোরিয়ালের বদলে সবসময় বর্তমান অফিসিয়াল ডকুমেন্টেশন অনুসরণ করুন।"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "num": "04",
+      "title": "Phase 4 — Evaluation",
+      "sub": "the phase that matters most, and the closest thing to QA applied to models (2–3 weeks)",
+      "bn": {
+        "title": "ফেজ ৪ — ইভ্যালুয়েশন",
+        "sub": "সবচেয়ে গুরুত্বপূর্ণ ফেজ, আর মডেলের জন্য অনেকটা QA-র মতোই কাজ (২–৩ সপ্তাহ)"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s4-building-test-sets", "html": "Building test sets and comparing models" },
+        {
+          "type": "paragraph",
+          "html": "Build a held-out test set the model never saw during training, then compare the base model against your fine-tuned one on the same inputs. Without this step, you cannot tell whether fine-tuning actually helped."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "A held-out test set, kept separate from anything used in training",
+            "Exact-match or rubric scoring for tasks with a clear right answer",
+            "LLM-as-judge scoring for open-ended outputs, with spot-checks by a human",
+            "A running regression suite built from every failure case you find"
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "This phase is essentially QA applied to models: writing test cases, tracking failures, and refusing to trust a model's output just because it reads fluently. It is a natural fit for QA experience."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "This is the before/after comparison: run the same questions through the old model and the new one, and check which answers are actually better, not just different."
+        },
+        {
+          "type": "paragraph",
+          "html": "A model can sound confident and still be wrong. The only way to catch that is to test it on cases it hasn't seen, the same way you'd test any other piece of software."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ট্রেইনিংয়ে মডেল কখনো দেখেনি এমন একটা টেস্ট সেট বানান, তারপর একই ইনপুটে বেস মডেল আর ফাইন-টিউন করা মডেলকে পাশাপাশি তুলনা করুন। এই ধাপ ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং আসলে কাজে লেগেছে কিনা।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ট্রেইনিংয়ের সাথে সম্পর্কহীন, আলাদা রাখা একটা টেস্ট সেট",
+            "স্পষ্ট সঠিক উত্তর থাকা টাস্কের জন্য exact-match বা রুব্রিক স্কোরিং",
+            "ওপেন-এন্ডেড আউটপুটের জন্য LLM-as-judge স্কোরিং, সাথে মানুষের স্পট-চেক",
+            "প্রতিটা খুঁজে পাওয়া ব্যর্থতা দিয়ে একটা চলমান regression suite তৈরি করা"
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "এই ফেজটা মূলত মডেলের জন্য QA: টেস্ট কেস লেখা, ব্যর্থতা ট্র্যাক করা, আর শুধু ফ্লুয়েন্ট শোনানোর কারণে কোনো আউটপুটকে বিশ্বাস না করা। QA অভিজ্ঞতার সাথে এটা স্বাভাবিকভাবেই মিলে যায়।"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "num": "05",
+      "title": "Phase 5 — Run it locally and ship it",
+      "sub": "quantize to GGUF, serve with llama.cpp or Ollama, wrap it and deploy (3–4 weeks)",
+      "bn": {
+        "title": "ফেজ ৫ — লোকালি চালানো আর শিপ করা",
+        "sub": "GGUF-এ কোয়ান্টাইজ, llama.cpp বা Ollama দিয়ে সার্ভ, তারপর র‍্যাপ করে ডিপ্লয় (৩–৪ সপ্তাহ)"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s5-quantize-and-serve", "html": "Quantize, serve, wrap, deploy" },
+        {
+          "type": "paragraph",
+          "html": "A fine-tuned model is usually quantized into the <strong>GGUF</strong> format and run with <code>llama.cpp</code> or <code>Ollama</code>, so it can run on ordinary hardware without a dedicated GPU server."
+        },
+        {
+          "type": "table",
+          "headers": ["Quantization level", "Relative size", "Trade-off"],
+          "rows": [
+            ["Q8", "Largest of the common levels", "Closest to the original model's quality"],
+            ["Q5", "Mid-size", "A reasonable balance for most small models"],
+            ["Q4", "Smallest of the common levels", "Fastest and lightest, with a bit more quality loss"]
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Convert the fine-tuned model to GGUF",
+            "Quantize it (Q4/Q5/Q8) and test quality against your Phase 4 test set",
+            "Wrap it behind an API",
+            "Put it in a Docker container",
+            "Deploy it"
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Quantization is like compressing a video file: the file gets much smaller and still looks nearly as good, as long as you don't compress it too aggressively."
+        },
+        {
+          "type": "paragraph",
+          "html": "This phase overlaps directly with general DevOps work — packaging something into a container and shipping it is the same skill whether the thing inside is a model or a web app."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ফাইন-টিউন করা মডেলকে সাধারণত <strong>GGUF</strong> ফরম্যাটে কোয়ান্টাইজ করে <code>llama.cpp</code> বা <code>Ollama</code> দিয়ে চালানো হয়, যাতে আলাদা GPU সার্ভার ছাড়াই সাধারণ হার্ডওয়্যারে চলতে পারে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>ভিডিও কমপ্রেশনের উপমা:</strong> কোয়ান্টাইজেশন অনেকটা ভিডিও ফাইল কমপ্রেস করার মতো — ফাইল অনেক ছোট হয়ে যায়, দেখতে প্রায় একই রকম লাগে, যতক্ষণ না বেশি কমপ্রেস করা হয়।"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ফাইন-টিউন করা মডেল GGUF-এ কনভার্ট করুন",
+            "কোয়ান্টাইজ করুন (Q4/Q5/Q8) আর Phase ৪-এর টেস্ট সেটে মান যাচাই করুন",
+            "একটা API-র পেছনে র‍্যাপ করুন",
+            "Docker কন্টেইনারে রাখুন",
+            "ডিপ্লয় করুন"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "num": "06",
+      "title": "Capstone & the full timeline",
+      "sub": "a realistic project idea, with synthetic data only, and roughly 5–7 months total",
+      "bn": {
+        "title": "ক্যাপস্টোন আর পুরো টাইমলাইন",
+        "sub": "একটা বাস্তবসম্মত প্রজেক্ট আইডিয়া, শুধু সিন্থেটিক ডেটা দিয়ে, মোট আনুমানিক ৫–৭ মাস"
+      },
+      "body": [
+        { "type": "heading", "level": 3, "id": "s6-capstone-idea", "html": "Capstone idea" },
+        {
+          "type": "paragraph",
+          "html": "Fine-tune a small model to turn requirements into test cases, or to classify bug reports. Use anonymized or synthetic data — never real company or employee data."
+        },
+        {
+          "type": "callout",
+          "variant": "danger",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "Never fine-tune on real company or employee data, even for a personal project. Use anonymized or synthetic examples instead; the risk of leaking sensitive data through a model is not worth the convenience."
+            }
+          ]
+        },
+        { "type": "heading", "level": 3, "id": "s6-timeline", "html": "The full timeline" },
+        {
+          "type": "table",
+          "headers": ["Phase", "Focus", "Duration (part-time)"],
+          "rows": [
+            ["1", "Python for data", "3–4 weeks"],
+            ["2", "How neural nets train", "4–6 weeks"],
+            ["3", "Fine-tuning open models", "6–8 weeks"],
+            ["4", "Evaluation", "2–3 weeks"],
+            ["5", "Run it locally and ship it", "3–4 weeks"],
+            ["Total", "—", "Roughly 5–7 months"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Treat the total as an estimate, not a deadline — the phases build on each other, so time spent getting Phase 1's data hygiene right shortens every phase after it."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "A good capstone is small enough to finish and specific enough to show real skill — turning a messy bug report into a clean label, or a requirement into a test case, is exactly that kind of project."
+        },
+        {
+          "type": "paragraph",
+          "html": "The 5–7 month estimate is a rough part-time pace, not a contract. Some phases will go faster, some slower — what matters is finishing each phase before starting the next."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ছোট একটা মডেল ফাইন-টিউন করুন, যা রিকোয়ারমেন্টকে টেস্ট কেসে রূপান্তর করে, বা বাগ রিপোর্ট ক্লাসিফাই করে। শুধু anonymized বা সিন্থেটিক ডেটা ব্যবহার করুন — কখনো আসল কোম্পানি বা কর্মীর ডেটা নয়।"
+        },
+        {
+          "type": "callout",
+          "variant": "danger",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "ব্যক্তিগত প্রজেক্টেও আসল কোম্পানি বা কর্মীর ডেটা দিয়ে ফাইন-টিউন করবেন না। Anonymized বা সিন্থেটিক উদাহরণ ব্যবহার করুন — সুবিধার জন্য সংবেদনশীল ডেটা ফাঁস হওয়ার ঝুঁকি নেওয়ার মানে হয় না।"
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": ["ফেজ", "মূল কাজ", "সময় (পার্ট-টাইম)"],
+          "rows": [
+            ["১", "ডেটার জন্য Python", "৩–৪ সপ্তাহ"],
+            ["২", "নিউরাল নেট কীভাবে ট্রেইন হয়", "৪–৬ সপ্তাহ"],
+            ["৩", "ওপেন মডেল ফাইন-টিউনিং", "৬–৮ সপ্তাহ"],
+            ["৪", "ইভ্যালুয়েশন", "২–৩ সপ্তাহ"],
+            ["৫", "লোকালি চালানো আর শিপ করা", "৩–৪ সপ্তাহ"],
+            ["মোট", "—", "আনুমানিক ৫–৭ মাস"]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "মোট সময়টাকে একটা আনুমানিক হিসাব হিসেবে দেখুন, ডেডলাইন হিসেবে নয় — ফেজগুলো একে অপরের উপর দাঁড়িয়ে আছে, তাই Phase ১-এ ডেটা হাইজিনে ভালোভাবে সময় দিলে পরের প্রতিটা ফেজ সহজ হয়ে যায়।"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    { "n": 1, "url": "https://huggingface.co/docs/peft/index", "text": "Hugging Face, PEFT documentation (LoRA, QLoRA, and other parameter-efficient methods)" },
+    { "n": 2, "url": "https://huggingface.co/docs/transformers/index", "text": "Hugging Face, transformers documentation" },
+    { "n": 3, "url": "https://huggingface.co/docs/datasets/index", "text": "Hugging Face, datasets documentation" },
+    { "n": 4, "url": "https://arxiv.org/abs/2106.09685", "text": "Hu et al., \"LoRA: Low-Rank Adaptation of Large Language Models\" — Microsoft, 2021" },
+    { "n": 5, "url": "https://arxiv.org/abs/2305.14314", "text": "Dettmers et al., \"QLoRA: Efficient Finetuning of Quantized LLMs\" — University of Washington, 2023" },
+    { "n": 6, "url": "https://course.fast.ai/", "text": "fast.ai, Practical Deep Learning for Coders (free course)" },
+    { "n": 7, "url": "https://github.com/karpathy/nn-zero-to-hero", "text": "Andrej Karpathy, Neural Networks: Zero to Hero (free course)" },
+    { "n": 8, "url": "https://github.com/ggml-org/llama.cpp", "text": "llama.cpp — GGUF format and local inference" },
+    { "n": 9, "url": "https://ollama.com", "text": "Ollama — run quantized local models behind a simple API" }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "In Phase 3, which library lets you train a small add-on instead of the model's full weights?",
+        "options": ["PEFT (LoRA/QLoRA)", "pandas", "Docker", "llama.cpp"],
+        "why": "PEFT implements LoRA and QLoRA, which freeze the base model and train a small set of added weights instead of every weight in the model."
+      },
+      "bn": {
+        "q": "Phase ৩-এ, কোন লাইব্রেরি পুরো মডেলের ওয়েটের বদলে একটা ছোট অতিরিক্ত অংশ ট্রেইন করতে দেয়?",
+        "options": ["PEFT (LoRA/QLoRA)", "pandas", "Docker", "llama.cpp"],
+        "why": "PEFT LoRA আর QLoRA ইমপ্লিমেন্ট করে, যা বেস মডেল ফ্রিজ রেখে মডেলের প্রতিটা ওয়েটের বদলে একটা ছোট অতিরিক্ত অংশ ট্রেইন করে।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "What format do you quantize a fine-tuned model to before running it with llama.cpp or Ollama?",
+        "options": ["ONNX", "GGUF", "Pickle", "SavedModel"],
+        "why": "GGUF is the format llama.cpp and Ollama expect for quantized local models."
+      },
+      "bn": {
+        "q": "llama.cpp বা Ollama দিয়ে চালানোর আগে ফাইন-টিউন করা মডেলকে কোন ফরম্যাটে কোয়ান্টাইজ করতে হয়?",
+        "options": ["ONNX", "GGUF", "Pickle", "SavedModel"],
+        "why": "llama.cpp আর Ollama কোয়ান্টাইজড লোকাল মডেলের জন্য GGUF ফরম্যাট আশা করে।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Roughly how large a model can a single free Colab GPU comfortably fine-tune, per this roadmap?",
+        "options": ["Around 1–3 billion parameters", "Over 70 billion parameters", "Under 10 million parameters", "Over 1 trillion parameters"],
+        "why": "This roadmap puts a free Colab GPU's comfortable range at roughly 1–3B parameters with LoRA/QLoRA."
+      },
+      "bn": {
+        "q": "এই রোডম্যাপ অনুযায়ী, একটা ফ্রি Colab GPU মোটামুটি কত বড় মডেল স্বাচ্ছন্দ্যে ফাইন-টিউন করতে পারে?",
+        "options": ["আনুমানিক ১–৩ বিলিয়ন প্যারামিটার", "৭০ বিলিয়নের বেশি প্যারামিটার", "১ কোটি প্যারামিটারের কম", "১ ট্রিলিয়নের বেশি প্যারামিটার"],
+        "why": "এই রোডম্যাপ অনুযায়ী, LoRA/QLoRA দিয়ে ফ্রি Colab GPU-র স্বাচ্ছন্দ্যের রেঞ্জ মোটামুটি ১–৩ বিলিয়ন প্যারামিটার।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "Why does Phase 4 (Evaluation) matter most, according to this roadmap?",
+        "options": [
+          "It is the shortest phase, so it carries the least risk",
+          "Without it, you can't tell whether fine-tuning actually helped",
+          "It replaces the need for a held-out test set",
+          "It is optional once training finishes"
+        ],
+        "why": "Phase 4 compares the base model against the fine-tuned one on held-out data — the only way to confirm the fine-tune actually improved results."
+      },
+      "bn": {
+        "q": "এই রোডম্যাপ অনুযায়ী Phase ৪ (ইভ্যালুয়েশন) কেন সবচেয়ে গুরুত্বপূর্ণ?",
+        "options": [
+          "এটা সবচেয়ে ছোট ফেজ, তাই ঝুঁকি কম",
+          "এটা ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং আসলে কাজে লেগেছে কিনা",
+          "এটা হেল্ড-আউট টেস্ট সেটের দরকার দূর করে দেয়",
+          "ট্রেইনিং শেষ হলে এটা ঐচ্ছিক হয়ে যায়"
+        ],
+        "why": "Phase ৪ হেল্ড-আউট ডেটায় বেস মডেল আর ফাইন-টিউন করা মডেল তুলনা করে — ফাইন-টিউনিং আসলে উন্নতি করেছে কিনা, তা নিশ্চিত করার একমাত্র উপায়।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "The capstone project should use real, unanonymized company or employee data to be realistic.",
+        "why": "This roadmap says to use anonymized or synthetic data for the capstone, never real company or employee data."
+      },
+      "bn": {
+        "q": "বাস্তবসম্মত করার জন্য ক্যাপস্টোন প্রজেক্টে আসল, অ্যানোনিমাইজ-না-করা কোম্পানি বা কর্মীর ডেটা ব্যবহার করা উচিত।",
+        "why": "এই রোডম্যাপ বলছে ক্যাপস্টোনে anonymized বা সিন্থেটিক ডেটা ব্যবহার করতে, কখনো আসল কোম্পানি বা কর্মীর ডেটা নয়।"
+      }
+    }
+  ]
+}
