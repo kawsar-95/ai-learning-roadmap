@@ -205,6 +205,26 @@
           "type": "paragraph",
           "html": "AI engineering stack-কে তিনটা লেয়ারে ভাগ করা হয়েছে: <strong>application development</strong> (prompt, context, evaluation, interface), <strong>model development</strong> (training, fine-tuning, dataset engineering), আর <strong>infrastructure</strong> (compute, data, serving, monitoring)। এখন বেশিরভাগ AI engineer-দের কাজ হয় সবচেয়ে উপরের layer-এ, কারণ মডেল আগে থেকেই রেডি থাকে।"
         }
+      ],
+      "videos": [
+        {
+          "id": "98o_L3jlixw",
+          "title": "AI Engineering with Chip Huyen",
+          "channel": "The Pragmatic Engineer",
+          "lang": "en"
+        },
+        {
+          "id": "pYax2rupKEY",
+          "title": "How to Choose Large Language Models: A Developer's Guide to LLMs",
+          "channel": "IBM Technology",
+          "lang": "en"
+        },
+        {
+          "id": "YhFv_0zidTw",
+          "title": "E-2: LLM কী | LLM কীভাবে কাজ করে?",
+          "channel": "Afran Sarkar",
+          "lang": "bn"
+        }
       ]
     },
     {
@@ -459,6 +479,32 @@
             }
           ]
         }
+      ],
+      "videos": [
+        {
+          "id": "aircAruvnKk",
+          "title": "But what is a neural network? | Deep learning chapter 1",
+          "channel": "3Blue1Brown",
+          "lang": "en"
+        },
+        {
+          "id": "wjZofJX0v4M",
+          "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
+          "channel": "3Blue1Brown",
+          "lang": "en"
+        },
+        {
+          "id": "MkaazQttbpc",
+          "title": "The Secret Controls for your LLM: Temperature, Top-K, Top-P, etc",
+          "channel": "Gary Explains",
+          "lang": "en"
+        },
+        {
+          "id": "f_NYCEMSfrA",
+          "title": "E-6: Temperature, Top-p, Top-k, Penalties, Stop Sequence, Seed",
+          "channel": "Afran Sarkar",
+          "lang": "bn"
+        }
       ]
     },
     {
@@ -675,6 +721,20 @@
           "type": "paragraph",
           "html": "তবে এর সীমাবদ্ধতাও আছে: মডেলের সংখ্যা বাড়লে তুলনার সংখ্যা অনেক বেড়ে যায়, crowd-sourced vote-এ quality control রাখা কঠিন, এবং একটা মডেল আরেকটার চেয়ে ভালো মানেই এই না যে সেটা আপনার application-এর জন্য যথেষ্ট ভালো।"
         }
+      ],
+      "videos": [
+        {
+          "id": "Qj3u_kzfJVo",
+          "title": "LLM-as-a-judge: evaluating LLMs with LLMs",
+          "channel": "Evidently AI",
+          "lang": "en"
+        },
+        {
+          "id": "NaCjm8rdxqk",
+          "title": "Build Your First Eval: Creating a Custom LLM Evaluator with a Golden Dataset",
+          "channel": "Arize AI",
+          "lang": "en"
+        }
       ]
     },
     {
@@ -888,6 +948,20 @@
           "type": "paragraph",
           "html": "নিজের evaluation pipeline বানানোর তিনটা ধাপ: ১) সিস্টেমের প্রতিটা অংশ আলাদা করে মূল্যায়ন করুন, ২) স্পষ্ট evaluation guideline আর scoring rubric তৈরি করুন, ৩) সঠিক evaluation method আর annotated data বেছে নিন। এই pipeline নিজেও মাঝে মাঝে পরীক্ষা করে দেখতে হবে, এটা ঠিকমতো কাজ করছে কিনা।"
         }
+      ],
+      "videos": [
+        {
+          "id": "bk0TmxoZlUY",
+          "title": "Evals 101 — Doug Guthrie, Braintrust",
+          "channel": "AI Engineer",
+          "lang": "en"
+        },
+        {
+          "id": "GLlrNdUIXdQ",
+          "title": "How to Run LLM Evals on Live Production Traffic with your Agents | Ep. 11",
+          "channel": "Arize AI",
+          "lang": "en"
+        }
       ]
     },
     {
@@ -1082,6 +1156,32 @@
               "html": "সুরক্ষা তিন স্তরে দিতে হয়: model-level (system prompt-কে বেশি priority দিতে training), prompt-level (স্পষ্টভাবে বলে দেওয়া কী কখনোই বলা যাবে না), আর system-level (input/output guardrail)। কোনোটাই ১০০% নিশ্চয়তা দেয় না, তাই violation rate আর false refusal rate — দুটোই নজরে রাখতে হয়।"
             }
           ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "ysPbXH0LpIE",
+          "title": "Prompting 101 | Code w/ Claude",
+          "channel": "Anthropic",
+          "lang": "en"
+        },
+        {
+          "id": "ojtbHUqw1LA",
+          "title": "Few-Shot Prompting Explained",
+          "channel": "Elvis Saravia",
+          "lang": "en"
+        },
+        {
+          "id": "FgxwCaL6UTA",
+          "title": "Prompt Injection, explained",
+          "channel": "Simon Willison",
+          "lang": "en"
+        },
+        {
+          "id": "sl1t67CqFJ4",
+          "title": "E-5: Zero-shot, One-shot, Few-shot আসলে কী",
+          "channel": "Afran Sarkar",
+          "lang": "bn"
         }
       ]
     },
@@ -1305,6 +1405,32 @@
           "type": "paragraph",
           "html": "বেশি ধাপ আর বেশি tool মানে ভুল হওয়ার সুযোগও বেশি, তাই agent-এর জন্য দরকার হয় <strong>failure mode</strong> ট্র্যাক করা — ভুল tool ডাকা, ভুল parameter, বা অদক্ষ (অনেক বেশি সময়/খরচ লাগা) plan। পাশাপাশি দরকার <strong>memory</strong> ব্যবস্থাপনা: কোনটা model-এর internal knowledge, কোনটা সাময়িক short-term context, আর কোনটা দীর্ঘমেয়াদি long-term memory হিসেবে বাইরে সংরক্ষণ করা হবে।"
         }
+      ],
+      "videos": [
+        {
+          "id": "8OJC21T2SL4",
+          "title": "The 5 Levels Of Text Splitting For Retrieval",
+          "channel": "Greg Kamradt",
+          "lang": "en"
+        },
+        {
+          "id": "klTvEwg3oJ4",
+          "title": "Vector databases are so hot right now. WTF are they?",
+          "channel": "Fireship",
+          "lang": "en"
+        },
+        {
+          "id": "uhJJgc-0iTQ",
+          "title": "Building more effective AI agents",
+          "channel": "Anthropic",
+          "lang": "en"
+        },
+        {
+          "id": "w0Eh9c6ROYo",
+          "title": "AI Agent কী? কী থাকে AI Agent এর ভেতরে? সহজ বাংলায় শিখুন AI Automation",
+          "channel": "Ostad",
+          "lang": "bn"
+        }
       ]
     },
     {
@@ -1504,6 +1630,20 @@
         {
           "type": "paragraph",
           "html": "প্র্যাকটিক্যাল টিপস: শুরুতে LoRA-র মতো সস্তা পদ্ধতি ব্যবহার করুন, learning rate আর batch size নিয়ে experiment করুন, আর training loss ও validation loss দুটোই নজর রাখুন — validation loss বাড়তে থাকলে বুঝবেন মডেল overfit করছে।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "DhRoTONcyZE",
+          "title": "What is Low-Rank Adaptation (LoRA) | explained by the inventor",
+          "channel": "Edward Hu",
+          "lang": "en"
+        },
+        {
+          "id": "mNE_d-C82lI",
+          "title": "Which Quantization Method is Right for You? (GPTQ vs. GGUF vs. AWQ)",
+          "channel": "Maarten Grootendorst",
+          "lang": "en"
         }
       ]
     },
@@ -1766,6 +1906,26 @@
           "type": "paragraph",
           "html": "ডেটা সংগ্রহ করার পর সরাসরি ট্রেনিংয়ে ব্যবহার করা যায় না। এর আগে চারটি ধাপ লাগে: ডেটা <strong>inspect</strong> করা (দেখে বোঝা কী আছে), <strong>deduplicate</strong> করা (একই ডেটা বারবার থাকলে বায়াস তৈরি হয়), <strong>clean ও filter</strong> করা (নোংরা formatting আর নিম্নমানের উদাহরণ সরানো), আর শেষে মডেলের চাহিদা অনুযায়ী সঠিক ফরম্যাটে সাজানো।"
         }
+      ],
+      "videos": [
+        {
+          "id": "HIusawrGBN4",
+          "title": "What is Synthetic Data? No, It's Not \"Fake\" Data",
+          "channel": "IBM Technology",
+          "lang": "en"
+        },
+        {
+          "id": "4L-CB0lMq_I",
+          "title": "Synthetic Data Generation for Smarter AI Workflows",
+          "channel": "IBM Technology",
+          "lang": "en"
+        },
+        {
+          "id": "1RvdM-q6kDQ",
+          "title": "Knowledge Distillation in Large Language Models",
+          "channel": "John Olafenwa",
+          "lang": "en"
+        }
       ]
     },
     {
@@ -2010,6 +2170,26 @@
         {
           "type": "paragraph",
           "html": "সার্ভিস লেভেলে আরও টেকনিক আছে: prefill আর decode আলাদা মেশিনে চালানো, বারবার ব্যবহৃত প্রম্পট অংশ cache করে রাখা (<strong>prompt caching</strong>), আর বড় মডেলকে একাধিক GPU-তে ভাগ করে চালানো (tensor parallelism, pipeline parallelism, replica parallelism)। এসব টেকনিক সাধারণত মডেলের আউটপুট কোয়ালিটি না বদলে শুধু speed আর cost ঠিক করার চেষ্টা করে।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "McLdlg5Gc9s",
+          "title": "What is vLLM? Efficient AI Inference for Large Language Models",
+          "channel": "IBM Technology",
+          "lang": "en"
+        },
+        {
+          "id": "7OrMFn86PlM",
+          "title": "KV Cache in LLMs Explained Visually | How LLMs Generate Tokens Faster",
+          "channel": "ExplainingAI",
+          "lang": "en"
+        },
+        {
+          "id": "E4pY0x9yOfo",
+          "title": "Accelerating LLM inference with speculative decoding: From Zero to Hero",
+          "channel": "ARGO Vision",
+          "lang": "en"
         }
       ]
     },
@@ -2264,6 +2444,26 @@
               "html": "তবে feedback-এ bias থাকে: leniency bias (মানুষ বেশি খারাপ রেটিং দিতে অস্বস্তি বোধ করে), position bias (প্রথম অপশনেই বেশি ক্লিক পড়ে), আর degenerate feedback loop — যেখানে জনপ্রিয় উত্তরই বারবার দেখানো হয়, তাই সেটাই আরও বেশি ক্লিক পায়, আর নতুন ভালো উত্তর কখনো সুযোগই পায় না।"
             }
           ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "tECAkJAI_Vk",
+          "title": "Build Hour: Prompt Caching",
+          "channel": "OpenAI",
+          "lang": "en"
+        },
+        {
+          "id": "pTneXS_m1rk",
+          "title": "Langfuse Intro - Observability & Tracing Deep Dive",
+          "channel": "Langfuse",
+          "lang": "en"
+        },
+        {
+          "id": "GEXllEH2XiQ",
+          "title": "Build an AI Agent with Temporal",
+          "channel": "Temporal",
+          "lang": "en"
         }
       ]
     }

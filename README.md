@@ -1,11 +1,11 @@
-# All Necessary Topics Related to AI Engineering
+# Learn AI — All Necessary Topics Related to AI Engineering
 
 A citation-backed Next.js reference for the topics an applied AI engineer
-needs. It has 14 parts, from LLM fundamentals to AI application
-architecture, and a last part with ten visual and interactive learning
-resources. Each topic has three voices: Technical (diagrams, code, cited
-sources), Layman's (plain English with analogies), and বাংলা (Bangla
-explanation).
+needs. It has 16 parts, from LLM fundamentals to AI application
+architecture, a part with ten visual and interactive learning resources,
+and a part on Chip Huyen's *AI Engineering* book, nested by chapter. Each
+topic has three voices: Technical (diagrams, code, cited sources),
+Layman's (plain English with analogies), and বাংলা (Bangla explanation).
 
 Live site: https://kawsar-95.github.io/ai-learning-roadmap/
 
@@ -51,35 +51,41 @@ not set it, so the site serves from `/`. Code that builds a URL by hand
 
 | Route                       | What it is                                         |
 | --------------------------- | -------------------------------------------------- |
-| `/`                         | Landing page. An index of the 14 parts.            |
+| `/`                         | Landing page. An index of the 16 parts.            |
 | `/topics/<slug>`            | One part, with prev/next links and an outline.     |
-| `/roadmap/`                 | The study roadmap: 20 phases, 542 lessons.         |
+| `/contents/`                | Every section of every part, with reading progress. |
+| `/dashboard/`               | Where to continue, bookmarks, and quiz scores.     |
+| `/interview/`               | Interview questions and short answers, one set per part. |
+| `/resources/`               | Curated open-source repos to learn from, grouped by topic. |
+| `/roadmap/`                 | The study roadmap: 20 phases, 542 lessons, grouped into learning paths. |
 | `/search-index.json`        | The search index. Built at build time.             |
-| `/bn/`, `/bn/topics/<slug>`, `/bn/roadmap/` | The same pages in Bangla. See "Languages". |
+| `/bn/`, `/bn/topics/<slug>`, `/bn/contents/`, `/bn/dashboard/`, `/bn/interview/`, `/bn/resources/`, `/bn/roadmap/` | The same pages in Bangla. See "Languages". |
 | `/bn/search-index.json`     | The Bangla search index.                           |
 
-The 14 parts, in order:
+The 16 parts, in order:
 
 | Part | Route                                      |
 | ---- | ------------------------------------------ |
 | 1    | `/topics/llm-fundamentals`                 |
 | 2    | `/topics/prompt-engineering`               |
-| 3    | `/topics/context-engineering`              |
-| 4    | `/topics/rag-knowledge-systems`            |
-| 5    | `/topics/agents-and-agentic-systems`       |
-| 6    | `/topics/tool-use-and-integrations`        |
-| 7    | `/topics/inference`                        |
-| 8    | `/topics/llmops-and-observability`         |
-| 9    | `/topics/evaluation-engineering`           |
-| 10   | `/topics/cost-and-performance-optimization` |
-| 11   | `/topics/safety-security-and-guardrails`   |
-| 12   | `/topics/multimodal-engineering`           |
-| 13   | `/topics/ai-application-architecture`      |
-| 14   | `/topics/visual-learning-resources`        |
+| 3    | `/topics/fine-tuning-roadmap`              |
+| 4    | `/topics/context-engineering`              |
+| 5    | `/topics/rag-knowledge-systems`            |
+| 6    | `/topics/agents-and-agentic-systems`       |
+| 7    | `/topics/tool-use-and-integrations`        |
+| 8    | `/topics/inference`                        |
+| 9    | `/topics/llmops-and-observability`         |
+| 10   | `/topics/evaluation-engineering`           |
+| 11   | `/topics/cost-and-performance-optimization` |
+| 12   | `/topics/safety-security-and-guardrails`   |
+| 13   | `/topics/multimodal-engineering`           |
+| 14   | `/topics/ai-application-architecture`      |
+| 15   | `/topics/visual-learning-resources`        |
+| 16   | `/topics/ai-engineering-book`              |
 
 The order is set in one place: `TOPIC_ORDER` in `src/lib/topics.ts`.
 
-Only these 14 slugs exist. Any other URL gets the 404 page.
+Only these 16 slugs exist. Any other URL gets the 404 page.
 
 ## Content
 
@@ -133,7 +139,7 @@ allows only these tags: `strong`, `em`, `code`, `br`, `a` (a citation link
 `<a class="cite" href="#srcN">` or an `http(s)` link). The schema rejects
 any other tag.
 
-`src/lib/topics.ts` loads and validates the 14 files, and it exposes the
+`src/lib/topics.ts` loads and validates the 16 files, and it exposes the
 parts in order. Only server code imports it. Client components get data as
 props.
 
@@ -300,7 +306,7 @@ All citations resolve to:
 │   │   │                               language and theme switches
 │   │   ├── navigation/                 search palette, outline (TOC)
 │   │   └── pages/                      home and topic pages, shared by both languages
-│   ├── content/                        14 topic JSON files (source of truth)
+│   ├── content/                        16 topic JSON files (source of truth)
 │   └── lib/
 │       ├── content-schema.ts           block types and Zod schema
 │       ├── topics.ts                   loads and validates content; order, outline, nav
@@ -335,7 +341,7 @@ All citations resolve to:
   one. If you add a diagram with a new solid color, add it to that map.
 - Fraunces (headings), Inter, JetBrains Mono, and Noto Sans Bengali load
   through `next/font/google` with `display: swap`.
-- The sidebar lists the 14 parts. Below the `lg` breakpoint, a menu button
+- The sidebar lists the 16 parts. Below the `lg` breakpoint, a menu button
   opens the same list.
 - The voice switcher works for one section at a time. Its options are
   Technical, Layman's, বাংলা, and All three. A section shows only the
@@ -355,9 +361,11 @@ All citations resolve to:
 [AI Engineering from Scratch](https://github.com/rohitg00/ai-engineering-from-scratch)
 curriculum. It groups the 20 phases into 7 stages, marks five phases as
 optional depth, links each phase to the Parts of this site that cover the same
-ground, and lets you tick lessons off. Progress is saved in the browser under
-its own `roadmap-progress` key, separate from the Part progress. Each lesson
-opens on the curriculum site.
+ground, and lets you tick lessons off. It also lists a few focused learning
+paths (for example, an Agents/LLMs/MCP under-the-hood path) that point
+readers through an existing subset of phases. Progress is saved in the
+browser under its own `roadmap-progress` key, separate from the Part
+progress. Each lesson opens on the curriculum site.
 
 - `src/data/roadmap-lessons.json` is generated from the curriculum's
   `ROADMAP.md`. Refresh it with
