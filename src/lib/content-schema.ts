@@ -22,7 +22,14 @@ export type Video = {
   title: string;
   channel: string;
   lang: "en" | "bn";
+  /** "short" for a vertical YouTube Short (9:16). Leave it out for a normal 16:9 video. */
+  format?: "short";
+  /** The length in whole seconds, shown on the card. Leave it out when unknown. */
+  seconds?: number;
 };
+
+/** The longest YouTube Short, in seconds. */
+export const MAX_SHORT_SECONDS = 180;
 
 /**
  * The hosts a section may show or link to. A page on FRAMEABLE_HOSTS can be
@@ -224,12 +231,18 @@ export const BlockSchema: z.ZodType<Block> = z.lazy(() =>
   ]),
 );
 
-const VideoSchema = z.strictObject({
-  id: z.string().regex(/^[A-Za-z0-9_-]{11}$/, "Expected an 11-character YouTube video id"),
-  title: z.string().min(1),
-  channel: z.string().min(1),
-  lang: z.enum(["en", "bn"]),
-});
+const VideoSchema = z
+  .strictObject({
+    id: z.string().regex(/^[A-Za-z0-9_-]{11}$/, "Expected an 11-character YouTube video id"),
+    title: z.string().min(1),
+    channel: z.string().min(1),
+    lang: z.enum(["en", "bn"]),
+    format: z.literal("short").optional(),
+    seconds: z.number().int().positive().optional(),
+  })
+  .refine((v) => v.format !== "short" || v.seconds === undefined || v.seconds <= MAX_SHORT_SECONDS, {
+    message: `A Short is at most ${MAX_SHORT_SECONDS} seconds long`,
+  });
 
 const FilledInlineSchema = InlineSchema.refine((s) => s.trim().length > 0, {
   message: "Expected non-empty text",

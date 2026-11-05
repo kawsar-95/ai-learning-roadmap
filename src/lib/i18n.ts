@@ -277,6 +277,7 @@ const en = {
   // Videos.
   watch: (n: number) => `Watch · ${n} ${n === 1 ? "video" : "videos"}`,
   playVideo: (title: string) => `Play video: ${title}`,
+  shorts: "Shorts",
 
   // Live views: pages from other sites, shown in a frame.
   liveHeading: (n: number) => `Live view · ${n} ${n === 1 ? "page" : "pages"}`,
@@ -492,6 +493,7 @@ const bn: Dict = {
 
   watch: (n: number) => `ভিডিও দেখুন · ${fmtNum("bn", n)}টি`,
   playVideo: (title: string) => `ভিডিও চালান: ${title}`,
+  shorts: "শর্টস",
 
   liveHeading: (n: number) => `সরাসরি দেখুন · ${fmtNum("bn", n)}টি পাতা`,
   liveLoad: "সরাসরি দেখুন",
