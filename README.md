@@ -184,7 +184,9 @@ Each section can list YouTube videos in `videos`:
 The cards are `src/components/content/VideoList.tsx` and `VideoCard.tsx`.
 The voice rule and the length format are in `src/lib/videos.ts`. The check
 is `scripts/check-videos.mjs`, and its comparisons are in
-`src/lib/video-check.ts`.
+`src/lib/video-check.ts`. The scripts that found, read and verified the clips,
+and that write `docs/video-coverage.md` and `docs/video-review-log.md`, are in
+`scripts/video-curation/` (see its README).
 
 [Video coverage](docs/video-coverage.md) lists the channels the videos and
 Shorts come from (KodeKloud, Cole Medin, AI Jason, Krish Naik, David Ondrej,
