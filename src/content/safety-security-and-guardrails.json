@@ -287,6 +287,44 @@
           "title": "Validate & Standardize LLM Output with Guardrails-AI",
           "channel": "Apply AI like a Pro",
           "lang": "en"
+        },
+        {
+          "id": "yyAyR1VrA3c",
+          "title": "What is Lethal Trifecta in AI Agents?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 151
+        },
+        {
+          "id": "ig2JpD_sAHE",
+          "title": "What Are AI Guardrails and How Do They Work!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 170
+        },
+        {
+          "id": "3sM_XmXZnDI",
+          "title": "AI Security: Preventing Data Leaks in RAG",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 165
+        },
+        {
+          "id": "VQdim50QJw8",
+          "title": "What Is Prompt Injection? The Real Risk in AI Agents",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 203
+        },
+        {
+          "id": "ruiLq0OzjkI",
+          "title": "Guardrails with LangChain: A Complete Crash Course for Building Safe AI Agents",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 2295
         }
       ],
       "practice": [

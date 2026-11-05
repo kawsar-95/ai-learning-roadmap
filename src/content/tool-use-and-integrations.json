@@ -300,6 +300,65 @@
           "title": "MCP সার্ভার কি? সহজ কনসেপ্ট ও TypeScript SDK উদাহরণ",
           "channel": "Learn with Sumit - LWS - Bangladesh",
           "lang": "bn"
+        },
+        {
+          "id": "iGJTw_PWogs",
+          "title": "Why We Need MCP When APIs Already Exist",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        },
+        {
+          "id": "7VfKiaGOZcA",
+          "title": "MCP vs UTCP",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        },
+        {
+          "id": "E2DEHOEbzks",
+          "title": "Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1450
+        },
+        {
+          "id": "kn6dxL53NkM",
+          "title": "MCP vs API Explained: Do You Really Need MCP?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1038
+        },
+        {
+          "id": "RhTiAOGwbYE",
+          "title": "MCP Tutorial: Build Your First MCP Server and Client from Scratch (Free Labs)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 2414
+        },
+        {
+          "id": "oblaHqULUHk",
+          "title": "MCP Explained Simply — What It Is and Why It Exists",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1806
+        },
+        {
+          "id": "-UQ6OZywZ2I",
+          "title": "All You Need To Know About Model Context Protocol(MCP)",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1483
+        },
+        {
+          "id": "b1zI8pyCE38",
+          "title": "MCP is INSECURE - Here's Why and How to Fix it",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "format": "short",
+          "seconds": 163
         }
       ],
       "practice": [

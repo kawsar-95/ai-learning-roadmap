@@ -247,6 +247,13 @@
           "title": "Build a Prompt Learning Loop - SallyAnn DeLucia & Fuad Ali, Arize",
           "channel": "AI Engineer",
           "lang": "en"
+        },
+        {
+          "id": "3Gcm27l-uyQ",
+          "title": "Langsmith LLMOPS Platform By Langchain-Debug ,Monitor And Build Production Grade LLM Application",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1327
         }
       ],
       "practice": [

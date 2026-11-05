@@ -222,6 +222,38 @@
             }
           ]
         }
+      ],
+      "videos": [
+        {
+          "id": "2nIoXBvQKhs",
+          "title": "Neural Network Explained in 3 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 193
+        },
+        {
+          "id": "7czI2jchAE8",
+          "title": "Why Neural Networks Took 80 Years to Finally Work",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 161
+        },
+        {
+          "id": "h2mTTdoMvzo",
+          "title": "How LLMs Actually Learn?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 170
+        },
+        {
+          "id": "du1B6633-hU",
+          "title": "How Machine Learning Works, End to End (Full Basics)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 3628
+        }
       ]
     },
     {
@@ -324,6 +356,50 @@
             "<a href=\"https://huggingface.co/learn/llm-course/en/chapter11/4\">Hugging Face LLM Course — Chapter 11.4: LoRA</a> — ফ্রি, অফিসিয়াল, হাতে-কলমে LoRA ওয়াকথ্রু",
             "<a href=\"https://www.datacamp.com/tutorial/fine-tuning-llama-2\">DataCamp: Fine-Tuning Llama 2 with QLoRA</a> — ফ্রি, ধাপে ধাপে Colab টিউটোরিয়াল"
           ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "o9jz04bIW0E",
+          "title": "LLM Fine Tuning Tutorial (Free Labs)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 659
+        },
+        {
+          "id": "qIHaSPQYciM",
+          "title": "Stop Prompt Engineering. Start Customizing Your LLM the Right Way",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 765
+        },
+        {
+          "id": "jFl5Fewrieo",
+          "title": "EASIEST Way to Train LLM Train w/ unsloth (2x faster with 70% less GPU memory required)",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 1497
+        },
+        {
+          "id": "g80Q1sVtikE",
+          "title": "Fine-tune your own LLM in 13 minutes, here’s how",
+          "channel": "David Ondrej",
+          "lang": "en",
+          "seconds": 789
+        },
+        {
+          "id": "6S59Y0ckTm4",
+          "title": "Part 1-Road To Learn Finetuning LLM With Custom Data-Quantization,LoRA,QLoRA Indepth Intuition",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1975
+        },
+        {
+          "id": "6SO-8FcSkz4",
+          "title": "Prompt Engineering Vs RAG Vs Finetuning Explained Easily",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1068
         }
       ]
     },
@@ -526,6 +602,52 @@
             "<a href=\"https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/\">Collabnix: Complete Ollama Guide</a> — Docker Compose আর FastAPI ইন্টিগ্রেশনসহ ফ্রি ওয়াকথ্রু",
             "<a href=\"https://www.byteplus.com/en/topic/556170\">BytePlus: Ollama, Docker আর FastAPI দিয়ে ডিপ্লয়</a> — Modelfile → Docker → FastAPI, এন্ড-টু-এন্ড ফ্রি গাইড"
           ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "YluO7Dr4ybs",
+          "title": "Run Powerful AI Models Locally with Docker!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 110
+        },
+        {
+          "id": "vdkMNy5LPho",
+          "title": "Stop Running Models Too Big for Your Mac (Memory Trap Explained)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 115
+        },
+        {
+          "id": "tYg6T_DAP-k",
+          "title": "Run LLMs with Docker Model Runner (No Python, PyTorch, or CUDA Required)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 641
+        },
+        {
+          "id": "XPGSqqgwmgA",
+          "title": "Docker Model Runner: Your Local AI Solution!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 894
+        },
+        {
+          "id": "V_0dNE-H2gw",
+          "title": "Run ALL Your AI Locally in Minutes (LLMs, RAG, and more)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1219
+        },
+        {
+          "id": "89CQRxq0YSg",
+          "title": "If you don’t run AI locally you’re falling behind…",
+          "channel": "David Ondrej",
+          "lang": "en",
+          "seconds": 1697
         }
       ]
     },
