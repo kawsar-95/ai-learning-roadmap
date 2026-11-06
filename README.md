@@ -1,9 +1,10 @@
 # Learn AI — All Necessary Topics Related to AI Engineering
 
 A citation-backed Next.js reference for the topics an applied AI engineer
-needs. It has 16 parts, from LLM fundamentals to AI application
+needs. It has 17 parts, from LLM fundamentals to AI application
 architecture, a part with ten visual and interactive learning resources,
-and a part on Chip Huyen's *AI Engineering* book, nested by chapter. Each
+a part on Chip Huyen's *AI Engineering* book, nested by chapter, and a
+part on deploying and operating AI systems. Each
 topic has three voices: Technical (diagrams, code, cited sources),
 Layman's (plain English with analogies), and বাংলা (Bangla explanation).
 
@@ -52,7 +53,7 @@ not set it, so the site serves from `/`. Code that builds a URL by hand
 
 | Route                       | What it is                                         |
 | --------------------------- | -------------------------------------------------- |
-| `/`                         | Landing page. An index of the 16 parts.            |
+| `/`                         | Landing page. An index of the 17 parts.            |
 | `/topics/<slug>`            | One part, with prev/next links and an outline.     |
 | `/contents/`                | Every section of every part, with reading progress. |
 | `/dashboard/`               | Where to continue, bookmarks, and quiz scores.     |
@@ -63,7 +64,7 @@ not set it, so the site serves from `/`. Code that builds a URL by hand
 | `/bn/`, `/bn/topics/<slug>`, `/bn/contents/`, `/bn/dashboard/`, `/bn/interview/`, `/bn/resources/`, `/bn/roadmap/` | The same pages in Bangla. See "Languages". |
 | `/bn/search-index.json`     | The Bangla search index.                           |
 
-The 16 parts, in order:
+The 17 parts, in order:
 
 | Part | Route                                      |
 | ---- | ------------------------------------------ |
@@ -83,10 +84,11 @@ The 16 parts, in order:
 | 14   | `/topics/ai-application-architecture`      |
 | 15   | `/topics/visual-learning-resources`        |
 | 16   | `/topics/ai-engineering-book`              |
+| 17   | `/topics/deploying-and-operating-ai-systems` |
 
 The order is set in one place: `TOPIC_ORDER` in `src/lib/topics.ts`.
 
-Only these 16 slugs exist. Any other URL gets the 404 page.
+Only these 17 slugs exist. Any other URL gets the 404 page.
 
 ## Content
 
@@ -140,7 +142,7 @@ allows only these tags: `strong`, `em`, `code`, `br`, `a` (a citation link
 `<a class="cite" href="#srcN">` or an `http(s)` link). The schema rejects
 any other tag.
 
-`src/lib/topics.ts` loads and validates the 16 files, and it exposes the
+`src/lib/topics.ts` loads and validates the 17 files, and it exposes the
 parts in order. Only server code imports it. Client components get data as
 props.
 
@@ -336,7 +338,7 @@ All citations resolve to:
 │   │   │                               language and theme switches
 │   │   ├── navigation/                 search palette, outline (TOC)
 │   │   └── pages/                      home and topic pages, shared by both languages
-│   ├── content/                        16 topic JSON files (source of truth)
+│   ├── content/                        17 topic JSON files (source of truth)
 │   └── lib/
 │       ├── content-schema.ts           block types and Zod schema
 │       ├── topics.ts                   loads and validates content; order, outline, nav
@@ -372,7 +374,7 @@ All citations resolve to:
   one. If you add a diagram with a new solid color, add it to that map.
 - Fraunces (headings), Inter, JetBrains Mono, and Noto Sans Bengali load
   through `next/font/google` with `display: swap`.
-- The sidebar lists the 16 parts. Below the `lg` breakpoint, a menu button
+- The sidebar lists the 17 parts. Below the `lg` breakpoint, a menu button
   opens the same list.
 - The voice switcher works for one section at a time. Its options are
   Technical, Layman's, বাংলা, and All three. A section shows only the

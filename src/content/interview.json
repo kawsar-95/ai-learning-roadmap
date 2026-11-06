@@ -607,6 +607,44 @@
           }
         }
       ]
+    },
+    {
+      "topic": "deploying-and-operating-ai-systems",
+      "items": [
+        {
+          "section": "s6",
+          "en": {
+            "q": "How do you deploy an LLM server on Kubernetes so that it gets traffic only after the model has loaded?",
+            "a": "Give the container a startupProbe on a health endpoint that succeeds only after the weights are loaded. Until it passes, the Pod is not ready, so it receives no traffic, and the liveness probe does not restart it while it loads. Request the GPU as a resource limit (nvidia.com/gpu: 1) so the scheduler places the Pod on a GPU node, set CPU and memory requests, and scale on request rate or queue length rather than CPU."
+          },
+          "bn": {
+            "q": "Kubernetes-এ LLM সার্ভার কীভাবে ডিপ্লয় করবেন, যাতে মডেল লোড হওয়ার পরেই সেটা ট্রাফিক পায়?",
+            "a": "কনটেইনারে একটা health এন্ডপয়েন্টের ওপর startupProbe দিন, যা ওয়েট লোড শেষ হলেই সফল হয়। সেটা পাশ না করা পর্যন্ত Pod ready হয় না, তাই ট্রাফিক পায় না, আর লোড চলার সময় liveness probe সেটাকে রিস্টার্টও করে না। GPU চান resource limit হিসেবে (nvidia.com/gpu: 1), যাতে শিডিউলার Pod-টাকে GPU নোডে বসায়। CPU আর মেমরির requests দিন, আর CPU-র বদলে রিকোয়েস্ট রেট বা কিউ দৈর্ঘ্য দেখে স্কেল করুন।"
+          }
+        },
+        {
+          "section": "s7",
+          "en": {
+            "q": "How do you stop a bad prompt or model change from reaching production?",
+            "a": "Treat it as code. Keep prompts and eval cases in Git, and run the eval set in CI on every pull request, with the model version and the judge model pinned. Fail the build when the score falls below a baseline measured on main, and keep a small must-pass set for known failures. Then roll out in stages while watching live metrics, and keep the previous version one revert away."
+          },
+          "bn": {
+            "q": "একটা খারাপ প্রম্পট বা মডেল পরিবর্তন প্রোডাকশনে পৌঁছানো আপনি কীভাবে ঠেকাবেন?",
+            "a": "একে কোডের মতো দেখুন। প্রম্পট আর ইভ্যাল কেস Git-এ রাখুন, আর প্রতিটি পুল রিকোয়েস্টে CI-তে ইভ্যাল সেট চালান, মডেল ভার্সন আর জাজ মডেল পিন করে। main-এ মাপা বেসলাইনের নিচে স্কোর নামলে বিল্ড ফেল করান, আর পরিচিত ব্যর্থতার জন্য ছোট একটা must-pass সেট রাখুন। তারপর লাইভ মেট্রিক দেখতে দেখতে ধাপে ধাপে রোলআউট করুন, আর আগের ভার্সন এক revert দূরে রাখুন।"
+          }
+        },
+        {
+          "section": "s12",
+          "en": {
+            "q": "How do you keep API keys and model files safe in a deployed AI service?",
+            "a": "Keep keys in a secrets manager and inject them when the service starts, never in Git or in an image, and rotate any key that leaks. Give each service its own identity with least privilege. Load weights only from sources you trust, and prefer safetensors to pickle, which can run code when it is loaded. Scan images and dependencies in CI, and restrict the network access of agents."
+          },
+          "bn": {
+            "q": "ডিপ্লয় করা AI সার্ভিসে API key আর মডেল ফাইল কীভাবে নিরাপদ রাখবেন?",
+            "a": "key রাখুন সিক্রেট ম্যানেজারে আর সার্ভিস চালুর সময় ঢুকিয়ে দিন, Git বা ইমেজে কখনও নয়, আর যে key ফাঁস হয় তা বদলে ফেলুন। প্রতিটি সার্ভিসকে নিজের পরিচয় দিন, least privilege মেনে। ওয়েট শুধু বিশ্বস্ত উৎস থেকে নিন, আর pickle-এর বদলে safetensors বেছে নিন, কারণ pickle লোড করার সময় কোড চালাতে পারে। CI-তে ইমেজ আর ডিপেন্ডেন্সি স্ক্যান করুন, আর এজেন্টের নেটওয়ার্ক অ্যাক্সেস সীমিত করুন।"
+          }
+        }
+      ]
     }
   ]
 }

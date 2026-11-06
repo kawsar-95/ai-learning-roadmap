@@ -104,6 +104,7 @@ const PART_ORDER = [
   "ai-application-architecture",
   "visual-learning-resources",
   "ai-engineering-book",
+  "deploying-and-operating-ai-systems",
 ];
 
 test("the real interview file has no problems", () => {
