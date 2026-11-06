@@ -28,7 +28,7 @@ test("every phase has an English and a Bangla summary, and every stage a Bangla 
 });
 
 test("related topics are real Parts", () => {
-  assert.equal(topicSlugs.length, 16);
+  assert.equal(topicSlugs.length, 17);
   for (const phase of buildRoadmap(lessonsFile, phasesFile).flatMap((s) => s.phases)) {
     for (const slug of phase.topics) assert.ok(topicSlugs.includes(slug), `phase ${phase.phase}: ${slug}`);
   }

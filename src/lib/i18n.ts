@@ -72,7 +72,7 @@ export function langInitScript(basePath: string): string {
 const en = {
   siteName: "Learn AI",
   skipLink: "Skip to content",
-  footer: "16 parts · citations verified against each publisher's metadata.",
+  footer: "17 parts · citations verified against each publisher's metadata.",
   metaTitle: "Learn AI — All Necessary Topics",
   metaDescription:
     "Sixteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
@@ -95,9 +95,9 @@ const en = {
 
   // Search.
   search: "Search",
-  searchAll: "Search all 16 parts",
+  searchAll: "Search all 17 parts",
   searchUnavailable: "Search is unavailable.",
-  searchType: "Type to search 16 parts.",
+  searchType: "Type to search 17 parts.",
   searchLoading: "Loading…",
   searchNone: "No results.",
   searchClose: "Close search",
@@ -158,7 +158,7 @@ const en = {
     },
   ] as Feature[],
   partsEyebrow: "Structure",
-  partsTitle: "The 16 parts",
+  partsTitle: "The 17 parts",
   partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
   sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
 
@@ -290,7 +290,7 @@ const en = {
   // 404.
   notFoundEyebrow: "Error 404",
   notFoundTitle: "Page not found",
-  notFoundText: "That page does not exist. All 16 parts are listed on the home page.",
+  notFoundText: "That page does not exist. All 17 parts are listed on the home page.",
   notFoundBack: "← Back to all parts",
 };
 
@@ -299,10 +299,10 @@ export type Dict = typeof en;
 const bn: Dict = {
   siteName: "Learn AI",
   skipLink: "মূল লেখায় যান",
-  footer: "১৬টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
+  footer: "১৭টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
   metaTitle: "Learn AI — দরকারি সব বিষয়, বাংলায়",
   metaDescription:
-    "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৬টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
+    "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৭টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
 
   langSwitchText: "English",
   langSwitchLabel: "Read in English",
@@ -319,9 +319,9 @@ const bn: Dict = {
   prevNextNav: "আগের আর পরের পার্ট",
 
   search: "খুঁজুন",
-  searchAll: "১৬টি পার্টে খুঁজুন",
+  searchAll: "১৭টি পার্টে খুঁজুন",
   searchUnavailable: "এখন সার্চ কাজ করছে না।",
-  searchType: "১৬টি পার্টে খুঁজতে লিখুন।",
+  searchType: "১৭টি পার্টে খুঁজতে লিখুন।",
   searchLoading: "লোড হচ্ছে…",
   searchNone: "কিছু পাওয়া যায়নি।",
   searchClose: "সার্চ বন্ধ করুন",
@@ -381,7 +381,7 @@ const bn: Dict = {
     },
   ],
   partsEyebrow: "কাঠামো",
-  partsTitle: "১৬টি পার্ট",
+  partsTitle: "১৭টি পার্ট",
   partsIntro: "ক্রম অনুযায়ী পড়ুন, অথবা যে পার্ট দরকার সেখানে যান। প্রতিটি পার্ট নিজে নিজেই সম্পূর্ণ।",
   sectionCount: (n: number) => `${fmtNum("bn", n)}টি সেকশন`,
 
@@ -504,7 +504,7 @@ const bn: Dict = {
 
   notFoundEyebrow: "এরর 404",
   notFoundTitle: "পাতাটি পাওয়া যায়নি",
-  notFoundText: "এই পাতাটি নেই। হোম পেজে ১৬টি পার্টের তালিকা আছে।",
+  notFoundText: "এই পাতাটি নেই। হোম পেজে ১৭টি পার্টের তালিকা আছে।",
   notFoundBack: "← সব পার্টে ফিরে যান",
 };
 
