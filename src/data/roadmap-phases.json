@@ -75,7 +75,9 @@
     {
       "phase": 0,
       "core": true,
-      "topics": [],
+      "topics": [
+        "deploying-and-operating-ai-systems"
+      ],
       "summary": "Set up Python, Git, Docker, GPUs and API keys so every later lesson runs.",
       "bn": "Python, Git, Docker, GPU আর API key সেট করা, যাতে পরের প্রতিটি লেসন চালানো যায়।"
     },
@@ -206,7 +208,8 @@
         "inference",
         "llmops-and-observability",
         "cost-and-performance-optimization",
-        "ai-application-architecture"
+        "ai-application-architecture",
+        "deploying-and-operating-ai-systems"
       ],
       "summary": "Serving, scaling, observability and cost control for AI systems in production.",
       "bn": "প্রোডাকশনে AI সিস্টেমের serving, scaling, observability আর খরচ নিয়ন্ত্রণ।"

@@ -70,6 +70,21 @@ DRAFT = {
     "safety-security-and-guardrails/s7": ["S:what is lethal trifecta", "S:what are ai guardrails", "S:ai security: preventing data leaks in rag", "V:what is prompt injection", "S:claude fable 5: anthropic", "S:anthropic's ai accidentally hacked", "S:unbelievable abuse of claude"],
     "multimodal-engineering/s8": ["V:building audio transcription on aws"],
     "ai-application-architecture/s9": ["S:how chatgpt handles 900 million users", "S:how openai saved 30,000 cpu cores", "V:how openai serves 800 million users", "S:how to deploy an ai agent in kubernetes", "S:why git wasn", "S:build an ai chatbot in seconds"],
+    "deploying-and-operating-ai-systems/s1": ["S:3 bash tricks every developer must know", "S:linux command every engineer should use", "S:linux explained: what is linux"],
+    "deploying-and-operating-ai-systems/s2": ["V:what is git? | git basics for devops beginners", "S:learn git worktrees in under 3 minutes", "S:why git wasn"],
+    "deploying-and-operating-ai-systems/s3": ["S:interview: how tcp, tls and http actually work together", "S:interview: how dns finds a website"],
+    "deploying-and-operating-ai-systems/s4": ["V:yaml explained: a beginner", "S:meet uv"],
+    "deploying-and-operating-ai-systems/s5": ["V:docker 101: a beginner", "S:containers vs virtual machines explained", "S:docker vs podman, explained"],
+    "deploying-and-operating-ai-systems/s6": ["V:kubernetes architecture simplified", "V:ai infrastructure explained (gpus, vllm, and llm-d)", "S:kubernetes liveness vs readiness probes"],
+    "deploying-and-operating-ai-systems/s7": ["V:demystifying gitops", "V:devops: ci/cd introduction", "S:canary deployment in kubernetes explained"],
+    "deploying-and-operating-ai-systems/s8": ["S:crossplane vs terraform", "V:ansible playbook for beginners"],
+    "deploying-and-operating-ai-systems/s9": ["V:aws eks tutorial | what is eks?", "S:aws lambda explained in 60 seconds"],
+    "deploying-and-operating-ai-systems/s10": ["S:what is mlops?@35000", "S:what is kubeflow?"],
+    "deploying-and-operating-ai-systems/s11": ["S:what is grafana loki?", "S:how distributed tracing works across microservices in kubernetes", "V:how prometheus monitoring works | explaining prometheus architecture"],
+    "deploying-and-operating-ai-systems/s12": ["S:stop storing kubernetes secrets like this", "V:zero trust explained in 5 minutes", "V:what is devsecops? | devops vs devsecops"],
+    "deploying-and-operating-ai-systems/s13": ["S:consistent hashing explained", "S:postgres hit the connection limit", "V:change data capture (cdc) explained for beginners", "S:system design: designing load balancer"],
+    "deploying-and-operating-ai-systems/s14": ["V:what is aiops? how it differs from devops and mlops", "V:every devops engineer should know aiops", "S:the complete aiops roadmap you need to know", "S:what is aiops and how does it differ"],
+    "deploying-and-operating-ai-systems/s15": ["V:claude code explained for beginners", "S:gemini cli: open-source ai in your terminal", "S:claude code explained in 60 seconds"],
 }
 
 

@@ -1,0 +1,2460 @@
+{
+  "slug": "deploying-and-operating-ai-systems",
+  "title": "Deploying and Operating AI Systems",
+  "tagline": "the platform skills behind every AI app",
+  "lede": "The platform side of AI engineering: Linux, Git, networking, containers, Kubernetes, CI/CD, infrastructure as code, cloud, observability and security. Each section says what the skill is, why an AI system needs it, and where to learn more.",
+  "bn": {
+    "title": "AI সিস্টেম ডিপ্লয় ও অপারেট করা",
+    "tagline": "প্রতিটি AI অ্যাপের পেছনের প্ল্যাটফর্ম স্কিল",
+    "lede": "AI ইঞ্জিনিয়ারিংয়ের প্ল্যাটফর্ম দিক: Linux, Git, নেটওয়ার্কিং, কনটেইনার, Kubernetes, CI/CD, ইনফ্রাস্ট্রাকচার অ্যাজ কোড, ক্লাউড, অবজার্ভেবিলিটি আর সিকিউরিটি। প্রতিটি সেকশনে বলা আছে স্কিলটা কী, AI সিস্টেমের কেন লাগে, আর আরও কোথায় শেখা যায়।"
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "num": "01",
+      "title": "Linux and the shell",
+      "sub": "Most model servers, containers and CI runners run on Linux. These are the commands and habits an AI engineer uses to find out what a machine is doing.",
+      "bn": {
+        "title": "Linux আর শেল",
+        "sub": "বেশিরভাগ মডেল সার্ভার, কনটেইনার আর CI runner Linux-এ চলে। একটা মেশিন কী করছে তা জানতে AI ইঞ্জিনিয়ার যে কমান্ড আর অভ্যাস ব্যবহার করেন, এখানে সেগুলো।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s1-read-the-machine",
+          "html": "Read the machine before you fix it"
+        },
+        {
+          "type": "paragraph",
+          "html": "A model server, a vector database and a build runner all run on Linux. When one of them is slow, full or gone, you look at it from a shell. You do not need to be a system administrator, only to know a small set of commands."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Question",
+            "Command",
+            "What it shows"
+          ],
+          "rows": [
+            [
+              "Is the GPU busy, and how much memory is free?",
+              "<code>nvidia-smi</code>",
+              "GPU use, GPU memory and the processes on the GPU <a class=\"cite\" href=\"#src1\">[1]</a>"
+            ],
+            [
+              "Is the disk full? Model weights are large.",
+              "<code>df -h</code>, <code>du -sh *</code>",
+              "Free space per disk, size of each folder"
+            ],
+            [
+              "Is RAM used up?",
+              "<code>free -h</code>",
+              "Used and available memory"
+            ],
+            [
+              "What is running, and what uses the CPU?",
+              "<code>ps aux</code>, <code>top</code>",
+              "Processes with their CPU and memory use"
+            ],
+            [
+              "What listens on a port?",
+              "<code>ss -ltnp</code>",
+              "Listening TCP sockets and the process behind each"
+            ],
+            [
+              "Why did a service stop?",
+              "<code>journalctl -u &lt;name&gt;</code>",
+              "The service's log under systemd"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s1-processes-and-permissions",
+          "html": "Processes, signals and permissions"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<code>kill &lt;pid&gt;</code> sends SIGTERM, which asks a process to exit and lets it clean up. <code>kill -9</code> sends SIGKILL, which the process cannot catch, so use it last <a class=\"cite\" href=\"#src2\">[2]</a>.",
+            "Every file has an owner, a group and read, write and execute bits. <code>chmod 600 key.pem</code> makes a private key readable by its owner only.",
+            "Environment variables pass settings, including secrets, to a process. Do not print them into logs.",
+            "A pipe (<code>|</code>) feeds the output of one command into the next: <code>journalctl -u api | grep ERROR | tail</code>."
+          ]
+        },
+        {
+          "type": "code",
+          "lang": "bash",
+          "code": "# keep a job running after you log out, and keep its output\nnohup python serve.py > serve.log 2>&1 &\n\n# why did the service restart?\nsystemctl status llm-api\njournalctl -u llm-api --since \"1 hour ago\"",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># keep a job running after you log out, and keep its output</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">nohup</span><span style=\"color:#96D0FF\"> python</span><span style=\"color:#96D0FF\"> serve.py</span><span style=\"color:#F47067\"> ></span><span style=\"color:#96D0FF\"> serve.log</span><span style=\"color:#F47067\"> 2>&#x26;1</span><span style=\"color:#ADBAC7\"> &#x26;</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># why did the service restart?</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">systemctl</span><span style=\"color:#96D0FF\"> status</span><span style=\"color:#96D0FF\"> llm-api</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">journalctl</span><span style=\"color:#6CB6FF\"> -u</span><span style=\"color:#96D0FF\"> llm-api</span><span style=\"color:#6CB6FF\"> --since</span><span style=\"color:#96D0FF\"> \"1 hour ago\"</span></span></code></pre>"
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The out-of-memory killer.</strong> When RAM runs out, the kernel may kill a process to free memory. A model server that vanishes without an error in its own log is often such a case. Look for an out-of-memory message in the kernel log (<code>dmesg</code>, or <code>journalctl -k</code>)."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Linux is the operating system under almost every server. The shell is a text window where you type instructions instead of clicking. It looks old-fashioned, but it is how you ask a server what it is doing and why it is unhappy."
+        },
+        {
+          "type": "paragraph",
+          "html": "A handful of commands answer most questions: is the disk full, is the memory full, what is running, and what did the program write in its log."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A car dashboard.</strong> Warning lights tell you the engine is hot or the tank is empty. These commands are a server's dashboard: you read the gauges first, and only then you open the bonnet."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "মডেল সার্ভার, ভেক্টর ডেটাবেস, CI runner আর কনটেইনার প্রায় সবই Linux-এ চলে। কিছু ধীর হলে, ভরে গেলে বা বন্ধ হয়ে গেলে শেল থেকেই দেখতে হয়। এর জন্য সিস্টেম অ্যাডমিনিস্ট্রেটর হওয়া লাগে না, কয়েকটা কমান্ড জানলেই চলে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<code>nvidia-smi</code> দেখায় GPU কতটা ব্যস্ত, <code>df -h</code> দেখায় ডিস্ক কতটা ভরা, <code>free -h</code> দেখায় RAM কতটা বাকি, আর <code>journalctl -u</code> দেখায় সার্ভিসের লগ। <code>kill</code> দিয়ে আগে SIGTERM পাঠান, যাতে প্রোগ্রাম নিজে গুছিয়ে বন্ধ হতে পারে; <code>kill -9</code> শেষ উপায়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "RAM ফুরিয়ে গেলে কার্নেল কোনো প্রসেস মেরে ফেলতে পারে (OOM killer)। তখন মডেল সার্ভার নিজের লগে কোনো এরর না রেখেই উধাও হয়ে যায়। তাই <code>dmesg</code> দেখে নিন।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>গাড়ির ড্যাশবোর্ড:</strong> ইঞ্জিন গরম না ট্যাংক খালি, আগে ড্যাশবোর্ড দেখে বুঝে নিন, তারপর বনেট খুলুন। এই কমান্ডগুলোই সার্ভারের ড্যাশবোর্ড।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "Tbp3hGHCdzA",
+          "title": "3 Bash Tricks Every Developer MUST Know!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 150
+        },
+        {
+          "id": "Kkdd7rPEbFA",
+          "title": "Linux Command Every Engineer Should Use!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 58
+        },
+        {
+          "id": "CLh2ACdXNbc",
+          "title": "20% of Linux Commands You'll Use 80% of the Time (Real-World Example)",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1502
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "num": "02",
+      "title": "Git and GitHub",
+      "sub": "Git records every change to your code, prompts and settings. GitHub adds review, automation and a shared place to work. AI work needs both, plus a few extra rules about secrets and large files.",
+      "bn": {
+        "title": "Git আর GitHub",
+        "sub": "Git আপনার কোড, প্রম্পট আর সেটিংসের প্রতিটি পরিবর্তন মনে রাখে। GitHub যোগ করে রিভিউ, অটোমেশন আর কাজ করার ভাগ করা জায়গা। AI-এর কাজে দুটোই লাগে, সাথে সিক্রেট আর বড় ফাইল নিয়ে কয়েকটা বাড়তি নিয়ম।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s2-how-git-thinks",
+          "html": "How Git thinks"
+        },
+        {
+          "type": "paragraph",
+          "html": "A commit is a snapshot of the project with a message. A branch is a movable name for a commit, so creating one is cheap <a class=\"cite\" href=\"#src3\">[3]</a>. Work happens on a branch, and a pull request asks for that branch to be merged into <code>main</code> after review and automatic checks."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Put in Git",
+            "Keep out of Git"
+          ],
+          "rows": [
+            [
+              "Code, prompts, eval cases, config files, infrastructure code",
+              "API keys, <code>.env</code> files, passwords"
+            ],
+            [
+              "Lock files that pin dependency versions",
+              "Model weights and large datasets: use Git LFS, an object store or a model hub"
+            ],
+            [
+              "Small test fixtures",
+              "Build output and caches (list them in <code>.gitignore</code>)"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s2-agents-and-worktrees",
+          "html": "Several agents, one repository"
+        },
+        {
+          "type": "paragraph",
+          "html": "<code>git worktree</code> checks out more than one branch of the same repository into separate folders <a class=\"cite\" href=\"#src4\">[4]</a>. Coding agents that work in parallel each get their own folder and branch, so they cannot overwrite one another's files."
+        },
+        {
+          "type": "code",
+          "lang": "bash",
+          "code": "git worktree add ../repo-agent-a -b agent-a\ngit worktree add ../repo-agent-b -b agent-b\ngit worktree list",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F69D50\">git</span><span style=\"color:#96D0FF\"> worktree</span><span style=\"color:#96D0FF\"> add</span><span style=\"color:#96D0FF\"> ../repo-agent-a</span><span style=\"color:#6CB6FF\"> -b</span><span style=\"color:#96D0FF\"> agent-a</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">git</span><span style=\"color:#96D0FF\"> worktree</span><span style=\"color:#96D0FF\"> add</span><span style=\"color:#96D0FF\"> ../repo-agent-b</span><span style=\"color:#6CB6FF\"> -b</span><span style=\"color:#96D0FF\"> agent-b</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">git</span><span style=\"color:#96D0FF\"> worktree</span><span style=\"color:#96D0FF\"> list</span></span></code></pre>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rebase tidies your own unpublished branch by rewriting its commits. Never rebase a branch that other people have pulled. Merge keeps shared history as it was.",
+            "Write commit messages that say why, and keep each commit to one change. A revert is only as clean as the commit it undoes."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A secret you commit is a secret you leaked.</strong> Deleting the file in a later commit does not remove it from history. Revoke the key at the provider first, then clean up."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Git is a save-game system for a project. Every commit is a save point you can return to, and a branch is a parallel playthrough where you can try something risky without touching the main game."
+        },
+        {
+          "type": "paragraph",
+          "html": "GitHub is the shared table where the saves live: people review each other's changes there, and robots run checks on them before anything is merged."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A shared notebook with tracked changes.</strong> Everyone writes in their own copy, a reviewer reads the changes, and only approved pages go into the master notebook."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "Git প্রজেক্টের প্রতিটি পরিবর্তন স্ন্যাপশট আকারে রাখে। ব্রাঞ্চ হলো একটা কমিটের নাম, তাই নতুন ব্রাঞ্চ বানানো সস্তা। কাজ হয় ব্রাঞ্চে, আর রিভিউ ও অটোমেটিক চেক শেষে পুল রিকোয়েস্ট দিয়ে সেটা <code>main</code>-এ মার্জ হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "কোড, প্রম্পট, ইভ্যাল কেস, কনফিগ আর ইনফ্রাস্ট্রাকচার কোড Git-এ রাখুন। API key, <code>.env</code> আর বড় মডেল ওয়েট রাখবেন না; বড় ফাইলের জন্য Git LFS, অবজেক্ট স্টোর বা মডেল হাব ব্যবহার করুন। একাধিক এজেন্ট একসাথে চালালে <code>git worktree</code> দিয়ে প্রত্যেককে আলাদা ফোল্ডার আর ব্রাঞ্চ দিন, যাতে একে অপরের ফাইল বদলে না ফেলে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "কোনো সিক্রেট কমিট হয়ে গেলে ধরে নিন সেটা ফাঁস হয়ে গেছে। পরের কমিটে ফাইল মুছলেও ইতিহাসে থেকে যায়। আগে provider-এ key বাতিল করুন।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>ট্র্যাক-চেঞ্জ করা ভাগ করা নোটবই:</strong> সবাই নিজের কপিতে লেখে, একজন রিভিউয়ার পরিবর্তন পড়ে দেখেন, আর অনুমোদিত পাতাই মূল নোটবইয়ে ওঠে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "Lr7sYCrhxE0",
+          "title": "What is Git? | GIT Basics for DevOps Beginners | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1052
+        },
+        {
+          "id": "efVKPUr9D1A",
+          "title": "Learn Git Worktrees in Under 3 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 168
+        },
+        {
+          "id": "GQQqf-C2ha4",
+          "title": "3 Git Workflows Every Developer Should Know (And When to Use Each)",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1892
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "num": "03",
+      "title": "Networking fundamentals",
+      "sub": "One call to a model API passes through DNS, TCP, TLS, HTTP and usually a proxy. Knowing the order tells you where to look when it fails.",
+      "bn": {
+        "title": "নেটওয়ার্কিংয়ের মূল কথা",
+        "sub": "একটা মডেল API কল DNS, TCP, TLS, HTTP আর সাধারণত একটা প্রক্সির ভেতর দিয়ে যায়। ক্রমটা জানলে কিছু ভাঙলে কোথায় দেখতে হবে বোঝা যায়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s3-one-request",
+          "html": "The path of one request"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "<strong>DNS</strong> turns the name (<code>api.example.com</code>) into an IP address.",
+            "<strong>TCP</strong> opens a connection to that address and port.",
+            "<strong>TLS</strong> encrypts the connection and checks the server's certificate.",
+            "<strong>HTTP</strong> sends the request and returns a status code <a class=\"cite\" href=\"#src5\">[5]</a>.",
+            "A <strong>proxy or load balancer</strong> in between forwards the request to a healthy server."
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Layer",
+            "A typical failure",
+            "What you see"
+          ],
+          "rows": [
+            [
+              "DNS",
+              "The name does not resolve or points to the wrong place",
+              "\"could not resolve host\""
+            ],
+            [
+              "TCP",
+              "The port is closed or a firewall drops packets",
+              "\"connection refused\" or a timeout"
+            ],
+            [
+              "TLS",
+              "An expired or untrusted certificate, a wrong clock",
+              "Certificate errors"
+            ],
+            [
+              "HTTP",
+              "A bad request, missing credentials, a rate limit",
+              "Status <code>400</code>, <code>401</code>, <code>429</code>"
+            ],
+            [
+              "Proxy or load balancer",
+              "Buffering, a short idle timeout, no healthy server",
+              "Cut-off streams, <code>502</code> or <code>504</code>"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s3-streaming-and-retries",
+          "html": "Streaming, long requests and retries"
+        },
+        {
+          "type": "paragraph",
+          "html": "A streamed answer arrives as server-sent events, a long-lived HTTP response <a class=\"cite\" href=\"#src6\">[6]</a>. A reverse proxy that buffers the response holds the tokens back until the end, and a load balancer with a short idle timeout cuts a long generation in the middle. Turn buffering off for the streaming route (in nginx, <code>proxy_buffering off;</code>) and set timeouts longer than your slowest answer."
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Retry with backoff on <code>429</code> and <code>5xx</code>.</strong> Wait, then try again with a growing delay and a little randomness. Do not retry in a tight loop, and retry only requests that are safe to repeat."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Sending a request over the internet is like sending a parcel. First you look up the address, then the courier agrees to deliver, then you seal the box, then you put the note inside. A shop in the middle may check the parcel and hand it to a free courier."
+        },
+        {
+          "type": "paragraph",
+          "html": "When a parcel does not arrive, the useful question is which step failed. Each step breaks in its own way, so the order is your map."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Sending a parcel.</strong> DNS is looking up the address, TCP is the courier agreeing to deliver, TLS is the sealed box, and HTTP is the note inside."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা মডেল API কল করলে অনুরোধটা কয়েকটা স্তর পেরিয়ে যায়: DNS নামকে IP ঠিকানায় বদলায়, TCP সংযোগ খোলে, TLS সেটা এনক্রিপ্ট করে আর সার্টিফিকেট যাচাই করে, তারপর HTTP অনুরোধ যায়। মাঝখানে প্রক্সি বা লোড ব্যালান্সার সেটা একটা সুস্থ সার্ভারে পাঠায়। প্রতিটি স্তর আলাদা ভাবে ভাঙে, তাই ক্রমটা জানলে কোথায় দেখতে হবে বোঝা যায়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "স্ট্রিমিং উত্তর আসে server-sent events হয়ে, মানে একটা দীর্ঘ HTTP রেসপন্স। প্রক্সি রেসপন্স বাফার করলে টোকেন শেষে একসাথে আসে, আর লোড ব্যালান্সারের idle timeout ছোট হলে লম্বা উত্তর মাঝপথে কেটে যায়। স্ট্রিমিং রুটে বাফারিং বন্ধ করুন (nginx-এ <code>proxy_buffering off;</code>) আর timeout সবচেয়ে ধীর উত্তরের চেয়ে বড় রাখুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<code>429</code> বা <code>5xx</code> পেলে একটু অপেক্ষা করে আবার চেষ্টা করুন, প্রতিবার অপেক্ষা বাড়িয়ে আর একটু এলোমেলো করে। শুধু সেই অনুরোধই আবার পাঠান যা দুবার চালালে ক্ষতি নেই।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>পার্সেল পাঠানো:</strong> DNS হলো ঠিকানা খোঁজা, TCP হলো কুরিয়ার রাজি হওয়া, TLS হলো সিল করা বাক্স, আর HTTP হলো ভেতরের চিঠি। পার্সেল না পৌঁছালে জিজ্ঞেস করুন কোন ধাপে আটকেছে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "lVWXZb_4tU8",
+          "title": "Interview: How TCP, TLS and HTTP Actually Work Together",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 158
+        },
+        {
+          "id": "wEjgtknhLUQ",
+          "title": "Interview: How DNS Finds a Website’s IP Address",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        },
+        {
+          "id": "xo5V9g9joFs",
+          "title": "Proxy vs Reverse Proxy vs Load Balancer | Simply Explained",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 799
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "num": "04",
+      "title": "Python and YAML for pipelines",
+      "sub": "Python glues AI systems together, and YAML configures most of the tools around them. A few habits keep both from breaking in quiet ways.",
+      "bn": {
+        "title": "পাইপলাইনের জন্য Python আর YAML",
+        "sub": "Python AI সিস্টেমের অংশগুলো জোড়া লাগায়, আর YAML দিয়ে তার চারপাশের বেশিরভাগ টুলের কনফিগ লেখা হয়। কিছু অভ্যাস দুটোকেই নিঃশব্দে ভাঙা থেকে বাঁচায়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s4-python-environments",
+          "html": "Isolated Python environments"
+        },
+        {
+          "type": "paragraph",
+          "html": "Install a project's packages into its own virtual environment, so two projects do not fight over versions <a class=\"cite\" href=\"#src7\">[7]</a>. Pin the versions in a lock file, so a build next month installs what you installed today. A newer tool, uv, does the same job faster and writes a lock file."
+        },
+        {
+          "type": "code",
+          "lang": "bash",
+          "code": "python -m venv .venv\nsource .venv/bin/activate\npip install -r requirements.txt",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F69D50\">python</span><span style=\"color:#6CB6FF\"> -m</span><span style=\"color:#96D0FF\"> venv</span><span style=\"color:#96D0FF\"> .venv</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">source</span><span style=\"color:#96D0FF\"> .venv/bin/activate</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">pip</span><span style=\"color:#96D0FF\"> install</span><span style=\"color:#6CB6FF\"> -r</span><span style=\"color:#96D0FF\"> requirements.txt</span></span></code></pre>"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s4-yaml-in-five-rules",
+          "html": "YAML in five rules"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Structure comes from indentation with spaces. Tabs are not allowed.",
+            "A mapping is <code>key: value</code>. A list item starts with <code>- </code>.",
+            "Quote a string that could be read as something else, such as <code>\"no\"</code>, <code>\"on\"</code> or <code>\"1.10\"</code>. YAML 1.2 reads only <code>true</code> and <code>false</code> as booleans <a class=\"cite\" href=\"#src8\">[8]</a>, but many tools still follow YAML 1.1, where unquoted <code>no</code>, <code>yes</code>, <code>on</code> and <code>off</code> are booleans.",
+            "Anchors and aliases (<code>&amp;name</code>, <code>*name</code>) reuse a block. Keep them rare, because they make a file hard to read.",
+            "Comments start with <code>#</code>. Use them to say why a setting has its value."
+          ]
+        },
+        {
+          "type": "code",
+          "lang": "yaml",
+          "code": "# docker-compose.yml (excerpt)\nservices:\n  api:\n    image: my-rag-api:1.4\n    ports:\n      - \"8000:8000\"\n    environment:\n      LOG_LEVEL: info",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># docker-compose.yml (excerpt)</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">services</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  api</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    image</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">my-rag-api:1.4</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    ports</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#96D0FF\">\"8000:8000\"</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    environment</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">      LOG_LEVEL</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">info</span></span></code></pre>"
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Indentation is the syntax.</strong> One misplaced space moves a key under a different parent, and the file still parses. Run a linter such as <code>yamllint</code>, and read what the tool actually loaded."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Python is the all-purpose tool that ties the pieces of an AI system together: it calls the model, runs the tests, moves data around. YAML is the settings sheet that most deployment tools read."
+        },
+        {
+          "type": "paragraph",
+          "html": "Both are easy to write and easy to get quietly wrong, so two habits help: give each project its own set of packages, and let a checker read your settings sheet before the real tool does."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A form with indents.</strong> YAML is a settings form where the indentation shows what belongs to what, like the outline of an essay."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "Python দিয়ে AI সিস্টেমের অংশগুলো জোড়া লাগানো হয়: API কল, ইভ্যাল চালানো, পাইপলাইন স্ক্রিপ্ট। আর Docker Compose, Kubernetes, GitHub Actions-এর মতো বেশিরভাগ DevOps টুলের কনফিগ লেখা হয় YAML-এ।"
+        },
+        {
+          "type": "paragraph",
+          "html": "প্রতিটি প্রজেক্টের প্যাকেজ আলাদা virtual environment-এ বসান, যাতে দুই প্রজেক্টের ভার্সন না মেশে। ভার্সন lock ফাইলে পিন করুন, তাহলে এক মাস পরের বিল্ডেও আজকের জিনিসই ইনস্টল হবে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "YAML-এ কাঠামো আসে ইন্ডেন্টেশন থেকে, ট্যাব চলে না। <code>no</code>, <code>on</code> বা <code>1.10</code>-এর মতো মান স্ট্রিং চাইলে কোটেশনে রাখুন, কারণ অনেক টুল এখনও YAML-এর পুরোনো সংস্করণ মানে, যেখানে এগুলো বুলিয়ান বা সংখ্যা হয়ে যায়। একটা বাড়তি স্পেস কোনো কী অন্য প্যারেন্টের নিচে সরিয়ে দিতে পারে, অথচ ফাইল তবুও পার্স হয়, তাই <code>yamllint</code> চালান।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>ইন্ডেন্ট করা ফর্ম:</strong> YAML একটা সেটিংস ফর্ম, যেখানে ভেতরে ঢোকানো লাইন দেখায় কোনটা কার অংশ, ঠিক রচনার রূপরেখার মতো।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "o9pT9cWzbnI",
+          "title": "YAML Explained: A Beginner's Guide in 10 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 506
+        },
+        {
+          "id": "PXO9wfRa3SA",
+          "title": "Meet UV — The Fastest Python Package Manager",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 86
+        },
+        {
+          "id": "1uFVr15xDGg",
+          "title": "Yaml Tutorial | Learn YAML in 18 mins",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1085
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "num": "05",
+      "title": "Docker and containers",
+      "sub": "A container packs your code with its dependencies, so it runs the same on a laptop, in CI and in production. AI work adds three questions: weights, GPUs and the other services.",
+      "bn": {
+        "title": "Docker আর কনটেইনার",
+        "sub": "কনটেইনার আপনার কোড আর তার ডিপেন্ডেন্সি একসাথে প্যাক করে, তাই ল্যাপটপ, CI আর প্রোডাকশনে একই ভাবে চলে। AI-এর কাজে তিনটে প্রশ্ন বাড়ে: ওয়েট, GPU আর অন্য সার্ভিস।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s5-images-and-containers",
+          "html": "Images and containers"
+        },
+        {
+          "type": "paragraph",
+          "html": "An image is the packed recipe, built in read-only layers. A container is a running copy of an image <a class=\"cite\" href=\"#src9\">[9]</a>. A Dockerfile lists the steps that build the image."
+        },
+        {
+          "type": "code",
+          "lang": "dockerfile",
+          "code": "FROM python:3.12-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nCMD [\"uvicorn\", \"app:app\", \"--host\", \"0.0.0.0\", \"--port\", \"8000\"]",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F47067\">FROM</span><span style=\"color:#ADBAC7\"> python:3.12-slim</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">WORKDIR</span><span style=\"color:#ADBAC7\"> /app</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">COPY</span><span style=\"color:#ADBAC7\"> requirements.txt .</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">RUN</span><span style=\"color:#ADBAC7\"> pip install --no-cache-dir -r requirements.txt</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">COPY</span><span style=\"color:#ADBAC7\"> . .</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">CMD</span><span style=\"color:#ADBAC7\"> [</span><span style=\"color:#96D0FF\">\"uvicorn\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"app:app\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"--host\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"0.0.0.0\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"--port\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"8000\"</span><span style=\"color:#ADBAC7\">]</span></span></code></pre>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Put the lines that change least first (dependencies) and the ones that change most last (your code), so a rebuild reuses the cached layers.",
+            "Add a <code>.dockerignore</code>, so <code>.git</code>, <code>.env</code> and local data are not copied into the image.",
+            "Do not bake secrets into an image. Anyone who can pull the image can read its layers."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s5-containers-for-ai",
+          "html": "Containers for AI work"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Weights.</strong> A model of many gigabytes baked into the image makes every pull slow. Mount the weights as a volume or download them at start. Baking them in gives reproducible, offline starts. Choose on purpose.",
+            "<strong>GPUs.</strong> A container sees a GPU only when the host has the NVIDIA driver and the NVIDIA Container Toolkit. Then <code>docker run --gpus all ...</code> hands it the GPUs <a class=\"cite\" href=\"#src10\">[10]</a>.",
+            "<strong>Compose.</strong> One file can start a RAG stack: your API, a vector database and a cache, each as a service, with <code>docker compose up</code>.",
+            "<strong>Podman</strong> runs the same images without a background daemon, and most <code>docker</code> commands work with <code>podman</code> in their place."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A container is not a virtual machine.</strong> It shares the host's kernel, so it starts in seconds but isolates less. Do not run untrusted agent code in a plain container without further limits."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "A container is a lunchbox for software. The program and everything it needs are packed together, so it works the same on your laptop and on the server. That ends the old excuse, \"it works on my machine\"."
+        },
+        {
+          "type": "paragraph",
+          "html": "The image is the recipe and the container is the meal made from it. You can make as many identical meals as you like from one recipe."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A shipping container.</strong> It does not matter what is inside or which ship carries it. Cranes, trucks and trains all handle the same box."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "কনটেইনার আপনার কোড আর তার ডিপেন্ডেন্সি একসাথে প্যাক করে, তাই ল্যাপটপ, CI আর প্রোডাকশনে একই ভাবে চলে। ইমেজ হলো প্যাক করা রেসিপি, আর কনটেইনার হলো সেই ইমেজের চলমান কপি।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Dockerfile-এ যে লাইন কম বদলায় (ডিপেন্ডেন্সি) আগে রাখুন, আর যেটা বেশি বদলায় (আপনার কোড) পরে, যাতে রিবিল্ডে ক্যাশ করা লেয়ার কাজে লাগে। <code>.dockerignore</code> দিয়ে <code>.git</code> আর <code>.env</code> ইমেজের বাইরে রাখুন। ইমেজে সিক্রেট ঢোকাবেন না, কারণ ইমেজ পুল করতে পারলেই তার লেয়ার পড়া যায়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "কয়েক গিগাবাইটের মডেল ওয়েট ইমেজে ঢোকালে প্রতিবার পুল ধীর হয়। ভলিউম মাউন্ট করুন বা চালুর সময় নামান, আর ইচ্ছা করে বেছে নিন। কনটেইনার GPU দেখে তখনই, যখন হোস্টে NVIDIA ড্রাইভার আর NVIDIA Container Toolkit আছে, তারপর <code>docker run --gpus all</code>। কনটেইনার ভার্চুয়াল মেশিন নয়, হোস্টের কার্নেল ভাগ করে, তাই অবিশ্বস্ত কোড চালাতে আরও সীমা লাগে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>শিপিং কনটেইনার:</strong> ভেতরে কী আছে বা কোন জাহাজ বইছে, তাতে কিছু যায় আসে না। ক্রেন, ট্রাক আর ট্রেন একই বাক্স সামলায়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "wxxigbHwDGM",
+          "title": "Docker 101: A Beginner's Guide to Containerization",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 663
+        },
+        {
+          "id": "biDEGt6XWc4",
+          "title": "Containers vs Virtual Machines Explained",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 69
+        },
+        {
+          "id": "OM3LfuQRL3s",
+          "title": "Docker vs Podman, Explained",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "num": "06",
+      "title": "Kubernetes",
+      "sub": "Kubernetes runs containers across many machines and keeps them in the shape you describe. For AI it adds GPU scheduling and the problem of slow model loads.",
+      "bn": {
+        "title": "Kubernetes",
+        "sub": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বর্ণনা করা অবস্থায় ধরে রাখে। AI-এর জন্য এতে যোগ হয় GPU শিডিউলিং আর মডেল লোড হতে সময় লাগার সমস্যা।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s6-objects-you-meet",
+          "html": "The objects you meet first"
+        },
+        {
+          "type": "paragraph",
+          "html": "You describe the state you want, and Kubernetes keeps the cluster in that state: if a container dies it starts another, and if you ask for three copies it keeps three <a class=\"cite\" href=\"#src11\">[11]</a>."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Object",
+            "What it is",
+            "Example for an LLM service"
+          ],
+          "rows": [
+            [
+              "Pod",
+              "One or more containers that run together",
+              "A model server container"
+            ],
+            [
+              "Deployment",
+              "Keeps N copies of a Pod and rolls out new versions",
+              "Three replicas of the API"
+            ],
+            [
+              "Service",
+              "A stable name and address in front of changing Pods",
+              "<code>llm-api</code>, reached by other services"
+            ],
+            [
+              "Ingress",
+              "Routes HTTP traffic from outside to Services",
+              "<code>api.example.com</code> to <code>llm-api</code>"
+            ],
+            [
+              "ConfigMap, Secret",
+              "Settings and sensitive values, kept apart from the image",
+              "The model name; the API key"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s6-gpus-probes-scaling",
+          "html": "GPUs, probes and scaling"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "A Pod asks for a GPU as a resource limit (<code>nvidia.com/gpu: 1</code>). The cluster needs the GPU vendor's device plugin installed <a class=\"cite\" href=\"#src12\">[12]</a>.",
+            "Set <code>requests</code> and <code>limits</code> for CPU and memory. Without them, one Pod can starve the others on the same node.",
+            "A model can take minutes to load. A <code>startupProbe</code> gives it that time. Until it passes, the other probes wait and the Pod gets no traffic.",
+            "A HorizontalPodAutoscaler changes the number of replicas from a metric. CPU is a poor signal for a GPU service, so scale on request rate or queue length, which you export yourself."
+          ]
+        },
+        {
+          "type": "code",
+          "lang": "yaml",
+          "code": "# Deployment excerpt: one GPU per replica, and time to load the model\nspec:\n  replicas: 2\n  template:\n    spec:\n      containers:\n        - name: llm\n          image: my-llm-server:1.0\n          resources:\n            limits:\n              nvidia.com/gpu: 1\n          startupProbe:\n            httpGet: { path: /health, port: 8000 }\n            periodSeconds: 10\n            failureThreshold: 60",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Deployment excerpt: one GPU per replica, and time to load the model</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">spec</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  replicas</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">2</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  template</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    spec</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">      containers</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        - </span><span style=\"color:#8DDB8C\">name</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">llm</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          image</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">my-llm-server:1.0</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          resources</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">            limits</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">              nvidia.com/gpu</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">1</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          startupProbe</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">            httpGet</span><span style=\"color:#ADBAC7\">: { </span><span style=\"color:#8DDB8C\">path</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">/health</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#8DDB8C\">port</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">8000</span><span style=\"color:#ADBAC7\"> }</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">            periodSeconds</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">10</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">            failureThreshold</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">60</span></span></code></pre>"
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Do you need it?</strong> One service on one machine rarely does. Kubernetes pays off when you run many services, need rolling updates, or share a costly GPU pool between teams. Projects such as KServe package model serving for it."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "A cluster is a group of machines. Kubernetes is the manager of that group: you tell it what must be running, and it places the work, restarts what breaks and moves things when a machine fails."
+        },
+        {
+          "type": "paragraph",
+          "html": "For AI, the manager also has to know which machines have the expensive graphics cards, and to wait patiently while a large model loads."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A restaurant manager.</strong> You say how many tables must be staffed. When a waiter calls in sick, the manager moves someone else in, and you never hear about it."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে: কনটেইনার মরে গেলে নতুন একটা চালু করে, তিনটে কপি চাইলে তিনটেই রাখে। প্রথমে যে অবজেক্টগুলো দেখবেন: Pod (একসাথে চলা কনটেইনার), Deployment (N কপি আর নতুন ভার্সনের রোলআউট), Service (বদলাতে থাকা Pod-এর সামনে স্থির নাম), Ingress (বাইরের HTTP ট্রাফিক ভেতরে পাঠানো), আর ConfigMap ও Secret।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Pod-এ GPU চাইতে হয় resource limit হিসেবে (<code>nvidia.com/gpu: 1</code>), আর ক্লাস্টারে GPU ভেন্ডরের device plugin থাকতে হয়। CPU আর মেমরির <code>requests</code> ও <code>limits</code> দিন, নইলে একটা Pod পাশের Pod-গুলোকে না খাইয়ে রাখতে পারে। মডেল লোড হতে কয়েক মিনিট লাগতে পারে, তাই <code>startupProbe</code> দিন; সেটা পাশ না করা পর্যন্ত Pod ট্রাফিক পায় না। GPU সার্ভিসে CPU দেখে স্কেল করা ঠিক সংকেত নয়, রিকোয়েস্ট রেট বা কিউ দৈর্ঘ্য দেখে স্কেল করুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "একটা মেশিনে একটা সার্ভিস চালালে সাধারণত Kubernetes লাগে না। অনেক সার্ভিস, রোলিং আপডেট, বা টিমগুলোর মধ্যে দামি GPU ভাগ করে নেওয়ার দরকার হলে এটা কাজে আসে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>রেস্টুরেন্ট ম্যানেজার:</strong> কয়টা টেবিলে লোক থাকবে আপনি বলে দেন। কোনো ওয়েটার অসুস্থ হলে ম্যানেজার অন্য কাউকে বসিয়ে দেন, আপনি টেরও পান না।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "8C_SCDbUJTg",
+          "title": "Kubernetes Architecture Simplified | K8s Explained in 10 Minutes | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 571
+        },
+        {
+          "id": "hBzUokVYQkI",
+          "title": "AI Infrastructure Explained (GPUs, vLLM, and LLM-D)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 3060
+        },
+        {
+          "id": "oM5-knpFPw4",
+          "title": "Kubernetes Liveness vs Readiness Probes, Done Right!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 167
+        },
+        {
+          "id": "VnvRFRk_51k",
+          "title": "What is Kubernetes | Kubernetes explained in 15 mins",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 853
+        },
+        {
+          "id": "T4Z7visMM4E",
+          "title": "Kubernetes Services explained | ClusterIP vs NodePort vs LoadBalancer vs Headless Service",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1453
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "num": "07",
+      "title": "CI/CD and GitOps",
+      "sub": "CI builds and tests every change, and CD ships it. For an AI system the tests include the model's behaviour, and GitOps makes Git the record of what runs.",
+      "bn": {
+        "title": "CI/CD আর GitOps",
+        "sub": "CI প্রতিটি পরিবর্তন বিল্ড আর টেস্ট করে, CD সেটা পাঠিয়ে দেয়। AI সিস্টেমে টেস্টের মধ্যে মডেলের আচরণও পড়ে, আর GitOps Git-কে বানায় কী চলছে তার রেকর্ড।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s7-pipeline",
+          "html": "A pipeline for an AI service"
+        },
+        {
+          "type": "paragraph",
+          "html": "Continuous integration (CI) builds and tests every change automatically. Continuous delivery or deployment (CD) ships a passing change to an environment <a class=\"cite\" href=\"#src13\">[13]</a>. A typical pipeline for an AI service has these stages:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Lint and run the unit tests.",
+            "Build the container image and tag it with the commit.",
+            "Run a small evaluation set against the prompt, the model version and the retrieval settings. Fail the build when the score drops below a baseline.",
+            "Deploy to staging, check it, then promote it."
+          ]
+        },
+        {
+          "type": "code",
+          "lang": "yaml",
+          "code": "# .github/workflows/ci.yml\nname: ci\non: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: pip install -r requirements.txt\n      - run: pytest\n      # your own script: exits with an error when the score is below the baseline\n      - run: python evals/run.py --baseline evals/baseline.json",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># .github/workflows/ci.yml</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">name</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ci</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">on</span><span style=\"color:#ADBAC7\">: [</span><span style=\"color:#96D0FF\">pull_request</span><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">jobs</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  test</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    runs-on</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ubuntu-latest</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    steps</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/checkout@v4</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/setup-python@v5</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">        with</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          python-version</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"3.12\"</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pip install -r requirements.txt</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pytest</span></span>\n<span class=\"line\"><span style=\"color:#768390\">      # your own script: exits with an error when the score is below the baseline</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">python evals/run.py --baseline evals/baseline.json</span></span></code></pre>"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s7-gitops",
+          "html": "GitOps"
+        },
+        {
+          "type": "paragraph",
+          "html": "In GitOps the Git repository is the source of truth for what runs. A controller inside the cluster, such as Argo CD or Flux, compares the cluster with the repository and removes the difference. To deploy, you merge a change. To roll back, you revert it <a class=\"cite\" href=\"#src14\">[14]</a>."
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>An LLM judge in CI is noisy.</strong> Run it on a fixed set, pin the judge model, and compare with a baseline measured on <code>main</code> instead of a single magic number."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Keep secrets out of the repository.</strong> Store a reference, or an encrypted value, in Git, and keep the secret itself in a secrets manager."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Continuous integration means that every time someone changes the software, a robot builds it and runs the tests at once, so a mistake is found in minutes. Continuous delivery means the robot can also put the passing version into use."
+        },
+        {
+          "type": "paragraph",
+          "html": "For AI, the robot also asks the model a fixed list of questions and checks that the answers did not get worse. GitOps adds one rule: what is written in the shared repository is what runs, and nothing else."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A kitchen's taste test.</strong> Before any dish leaves the kitchen it passes the same tasting, whoever cooked it. If a new recipe tastes worse, it goes back."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "CI প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর CD পাশ করা পরিবর্তন কোনো এনভায়রনমেন্টে পাঠায়। AI সার্ভিসের পাইপলাইনে সাধারণত থাকে: লিন্ট আর ইউনিট টেস্ট, কমিট ট্যাগ দিয়ে কনটেইনার ইমেজ বিল্ড, প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালানো, আর স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করানো। শেষে staging-এ ডিপ্লয় করে দেখে নিয়ে প্রোডাকশনে তোলা।"
+        },
+        {
+          "type": "paragraph",
+          "html": "GitOps-এ Git রিপোজিটরিই সত্যের উৎস: কী চলবে তা সেখানে লেখা থাকে। ক্লাস্টারের ভেতরের একটা কন্ট্রোলার (Argo CD বা Flux) ক্লাস্টারের সাথে রিপোজিটরি মিলিয়ে তফাত মিটিয়ে দেয়। ডিপ্লয় করতে পরিবর্তন মার্জ করুন, রোলব্যাক করতে সেটা revert করুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "CI-তে LLM জাজ কিছুটা এলোমেলো ফল দেয়। নির্দিষ্ট একটা সেটে চালান, জাজ মডেল পিন করুন, আর একটা জাদুর সংখ্যার বদলে <code>main</code>-এ মাপা বেসলাইনের সাথে তুলনা করুন। সিক্রেট রিপোজিটরিতে রাখবেন না।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>রান্নাঘরের স্বাদ পরীক্ষা:</strong> যেকোনো খাবার বাইরে যাওয়ার আগে একই পরীক্ষা পাশ করে, যে-ই রান্না করুক। নতুন রেসিপির স্বাদ খারাপ হলে সেটা ফিরে যায়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "GlG6Xr2HH1g",
+          "title": "Demystifying GitOps: A Beginner-Friendly Explanation | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 481
+        },
+        {
+          "id": "AlrImm1T8Wg",
+          "title": "DevOps: CI/CD Introduction (Continuous Integration, Continuous Delivery, Continuous Deployment)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 249
+        },
+        {
+          "id": "HTe2_uIWSuY",
+          "title": "Canary Deployment in Kubernetes Explained",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 176
+        },
+        {
+          "id": "R8_veQiYBjI",
+          "title": "GitHub Actions Tutorial - Basic Concepts and CI/CD Pipeline with Docker",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1951
+        },
+        {
+          "id": "f5EpcWp0THw",
+          "title": "What is GitOps, How GitOps works and Why it's so useful",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 693
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "num": "08",
+      "title": "Infrastructure as code",
+      "sub": "IaC describes servers, networks and databases in files that you review and version like code. For AI it is how you create GPU nodes and the services around them the same way every time.",
+      "bn": {
+        "title": "ইনফ্রাস্ট্রাকচার অ্যাজ কোড",
+        "sub": "IaC সার্ভার, নেটওয়ার্ক আর ডেটাবেসকে কোডের মতো রিভিউ আর ভার্সন করা ফাইলে বর্ণনা করে। AI-এর জন্য এভাবেই GPU নোড আর তার চারপাশের সার্ভিস প্রতিবার একই ভাবে বানানো হয়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s8-tools",
+          "html": "Four tools, three styles"
+        },
+        {
+          "type": "paragraph",
+          "html": "Infrastructure as code (IaC) replaces clicking in a cloud console with files that you review, version and run again. The same files give the same result each time <a class=\"cite\" href=\"#src15\">[15]</a>."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Tool",
+            "Style",
+            "Best at"
+          ],
+          "rows": [
+            [
+              "Terraform (and its open-source fork OpenTofu)",
+              "Declarative: you describe the end state",
+              "Creating cloud resources: GPU nodes, networks, buckets, databases"
+            ],
+            [
+              "Ansible",
+              "Ordered steps run over SSH, with no agent on the machine <a class=\"cite\" href=\"#src16\">[16]</a>",
+              "Configuring machines that already exist: drivers, packages, services"
+            ],
+            [
+              "Pulumi",
+              "Declarative, written in a general-purpose language such as Python or TypeScript",
+              "Teams that want loops, functions and tests in the IaC itself"
+            ],
+            [
+              "Crossplane",
+              "Declarative, runs inside Kubernetes",
+              "Managing cloud resources through the Kubernetes API"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s8-plan-and-apply",
+          "html": "The plan-and-apply loop"
+        },
+        {
+          "type": "paragraph",
+          "html": "Terraform compares your files with its recorded state and with the real resources, shows a plan, and changes only the difference when you apply. The state can hold sensitive values and is shared by the team, so keep it in a remote backend with locking, never in Git."
+        },
+        {
+          "type": "code",
+          "lang": "bash",
+          "code": "terraform init     # download the providers\nterraform plan     # show what would change\nterraform apply    # make the change, after you approve it",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F69D50\">terraform</span><span style=\"color:#96D0FF\"> init</span><span style=\"color:#768390\">     # download the providers</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">terraform</span><span style=\"color:#96D0FF\"> plan</span><span style=\"color:#768390\">     # show what would change</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">terraform</span><span style=\"color:#96D0FF\"> apply</span><span style=\"color:#768390\">    # make the change, after you approve it</span></span></code></pre>"
+        },
+        {
+          "type": "code",
+          "lang": "hcl",
+          "code": "variable \"ami_id\" {\n  type = string\n}\n\nvariable \"gpu_instance_type\" {\n  type = string\n}\n\nresource \"aws_instance\" \"llm_node\" {\n  ami           = var.ami_id\n  instance_type = var.gpu_instance_type\n  tags          = { Name = \"llm-node\" }\n}",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#F69D50\">variable</span><span style=\"color:#6CB6FF\"> \"ami_id\"</span><span style=\"color:#ADBAC7\"> {</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">  type</span><span style=\"color:#F47067\"> =</span><span style=\"color:#F47067\"> string</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F69D50\">variable</span><span style=\"color:#6CB6FF\"> \"gpu_instance_type\"</span><span style=\"color:#ADBAC7\"> {</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">  type</span><span style=\"color:#F47067\"> =</span><span style=\"color:#F47067\"> string</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F69D50\">resource</span><span style=\"color:#6CB6FF\"> \"aws_instance\"</span><span style=\"color:#6CB6FF\"> \"llm_node\"</span><span style=\"color:#ADBAC7\"> {</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">  ami</span><span style=\"color:#F47067\">           =</span><span style=\"color:#ADBAC7\"> var</span><span style=\"color:#F47067\">.</span><span style=\"color:#ADBAC7\">ami_id</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">  instance_type</span><span style=\"color:#F47067\"> =</span><span style=\"color:#ADBAC7\"> var</span><span style=\"color:#F47067\">.</span><span style=\"color:#ADBAC7\">gpu_instance_type</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">  tags</span><span style=\"color:#F47067\">          =</span><span style=\"color:#ADBAC7\"> { Name </span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\"> \"llm-node\"</span><span style=\"color:#ADBAC7\"> }</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">}</span></span></code></pre>"
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Drift and cost.</strong> If someone changes a resource by hand, the files no longer match reality, and <code>terraform plan</code> shows the difference. GPUs are expensive and <code>terraform destroy</code> is as easy as <code>terraform apply</code>, so tag every resource with an owner and an expiry, and set a budget alert."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Instead of building a house by telling each worker what to do, you hand over a blueprint. Infrastructure as code is the blueprint for servers and networks: it is written down, reviewed and kept, so you can build the same thing again, or fix the difference when someone changes it by hand."
+        },
+        {
+          "type": "paragraph",
+          "html": "For AI this matters because machines with graphics cards are costly. A blueprint makes it easy to create them, share them fairly and switch them off when the experiment ends."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A building plan.</strong> The builders compare the plan with the building and fix whatever differs. Nobody has to remember the steps."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ক্লাউড কনসোলে ক্লিক করার বদলে IaC ফাইল লেখে, যা আপনি রিভিউ করেন, ভার্সন রাখেন আর আবার চালান। একই ফাইল প্রতিবার একই ফল দেয়। Terraform (আর তার ওপেন-সোর্স ফর্ক OpenTofu) ক্লাউড রিসোর্স বানায়: GPU নোড, নেটওয়ার্ক, বাকেট, ডেটাবেস। Ansible আগে থেকে থাকা মেশিন কনফিগার করে: ড্রাইভার, প্যাকেজ, সার্ভিস। Pulumi কাজ করে Python বা TypeScript-এর মতো ভাষায়, আর Crossplane চলে Kubernetes-এর ভেতরে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Terraform আপনার ফাইলকে তার রেকর্ড করা state আর আসল রিসোর্সের সাথে মেলায়, একটা plan দেখায়, আর apply করলে শুধু তফাতটুকু বদলায়। state-এ সংবেদনশীল মান থাকতে পারে আর পুরো টিম সেটা ভাগ করে, তাই লকিংসহ remote backend-এ রাখুন, কখনও Git-এ নয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "কেউ হাতে কিছু বদলালে ফাইল আর বাস্তব মেলে না (drift), তখন <code>terraform plan</code> তফাত দেখায়। GPU দামি, আর <code>terraform destroy</code> চালানো <code>apply</code>-এর মতোই সহজ। তাই প্রতিটি রিসোর্সে মালিক আর মেয়াদের ট্যাগ দিন, আর বাজেট অ্যালার্ট রাখুন।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দালানের নকশা:</strong> রাজমিস্ত্রিরা নকশার সাথে দালান মিলিয়ে যেখানে তফাত সেখানে ঠিক করে। ধাপগুলো কাউকে মনে রাখতে হয় না।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "jKipg6vA3mE",
+          "title": "Crossplane vs Terraform: What's the Real Difference?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 95
+        },
+        {
+          "id": "Z01b9QZG0D0",
+          "title": "Ansible Playbook for Beginners: Quick 10-Minute Guide",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 496
+        },
+        {
+          "id": "l5k1ai_GBDE",
+          "title": "Terraform explained in 15 mins | Terraform Tutorial for Beginners",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1095
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "num": "09",
+      "title": "Cloud platforms and managed AI services",
+      "sub": "A cloud rents you computers, storage and networks by the hour. For AI you pick a level: a hosted model API, a managed platform, or GPUs that you run yourself.",
+      "bn": {
+        "title": "ক্লাউড প্ল্যাটফর্ম আর ম্যানেজড AI সার্ভিস",
+        "sub": "ক্লাউড কম্পিউটার, স্টোরেজ আর নেটওয়ার্ক ঘণ্টা হিসেবে ভাড়া দেয়। AI-এর জন্য আপনি একটা স্তর বেছে নেন: হোস্টেড মডেল API, ম্যানেজড প্ল্যাটফর্ম, বা নিজে চালানো GPU।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s9-three-levels",
+          "html": "Three levels"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Level",
+            "Examples",
+            "You manage",
+            "Trade-off"
+          ],
+          "rows": [
+            [
+              "Hosted model API",
+              "The model company's own API",
+              "Your prompts and your data",
+              "The fastest start. You depend on their limits and prices."
+            ],
+            [
+              "Managed platform",
+              "Amazon Bedrock <a class=\"cite\" href=\"#src17\">[17]</a>, Google Cloud's Gemini Enterprise Agent Platform <a class=\"cite\" href=\"#src18\">[18]</a>, Microsoft Foundry <a class=\"cite\" href=\"#src19\">[19]</a>",
+              "Access, quotas, networking and cost",
+              "Models sit behind your cloud account's identity, private networking and billing."
+            ],
+            [
+              "Rented GPUs",
+              "Virtual machines or Kubernetes nodes with GPUs",
+              "The whole serving stack",
+              "The most control and the most work (Part 8)."
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s9-cloud-basics-that-bite",
+          "html": "Cloud basics that bite"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Identity and access management (IAM)</strong> decides who and what may call a model or read a bucket. Give each service its own role with the least access it needs.",
+            "<strong>Regions</strong> matter for latency, data-residency rules and which models are offered.",
+            "<strong>Quotas</strong> cap requests or tokens per minute in each region. Ask for an increase before a launch, not during it.",
+            "<strong>Egress</strong>, data that leaves the cloud, is billed. Keep the model, the vector database and the app in one region when you can."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Names change.</strong> Cloud products are renamed and reorganised often. Microsoft's own page lists Azure AI Foundry as the previous name of Microsoft Foundry <a class=\"cite\" href=\"#src19\">[19]</a>, and Google's Vertex AI documentation now opens under the name Gemini Enterprise Agent Platform <a class=\"cite\" href=\"#src18\">[18]</a>. Learn the pattern (hosted models, private networking, IAM, quotas), then read the current product page. Part 11 covers what these choices cost."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Using the cloud is renting instead of buying. You can rent a ready-made service and pay per use, rent a platform where you set the rules, or rent the raw machines and set everything up yourself. The more you set up, the more control you have, and the more you have to look after."
+        },
+        {
+          "type": "paragraph",
+          "html": "Three things catch beginners: who is allowed to do what (permissions), which city the machines are in (regions), and the bill for moving data out."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Eating out, catering or cooking at home.</strong> A hosted API is ordering a dish. A managed platform is catering in your own hall. Renting GPUs is cooking in a rented kitchen."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ক্লাউডে AI চালানোর তিনটে স্তর: হোস্টেড মডেল API (সবচেয়ে দ্রুত শুরু, তবে তাদের সীমা আর দামের ওপর নির্ভর), ম্যানেজড প্ল্যাটফর্ম (Amazon Bedrock, Google Cloud-এর Gemini Enterprise Agent Platform, Microsoft Foundry), যেখানে মডেল আপনার ক্লাউড অ্যাকাউন্টের পরিচয়, প্রাইভেট নেটওয়ার্ক আর বিলিংয়ের ভেতরে থাকে, আর ভাড়া করা GPU, যেখানে নিয়ন্ত্রণ সবচেয়ে বেশি আর কাজও সবচেয়ে বেশি (পার্ট ৮)।"
+        },
+        {
+          "type": "paragraph",
+          "html": "IAM ঠিক করে কে বা কোন সার্ভিস মডেল কল করতে বা বাকেট পড়তে পারবে; প্রতিটি সার্ভিসকে নিজের রোল দিন, ততটুকু অ্যাক্সেস সহ যতটুকু লাগে। রিজিয়ন লেটেন্সি, ডেটা রাখার আইন আর কোন মডেল পাওয়া যায়, তাতে প্রভাব ফেলে। কোটা প্রতি মিনিটের রিকোয়েস্ট বা টোকেন আটকে দেয়, তাই লঞ্চের আগে বাড়ানোর অনুরোধ করুন। ক্লাউডের বাইরে ডেটা গেলে (egress) বিল হয়, তাই পারলে মডেল, ভেক্টর ডেটাবেস আর অ্যাপ এক রিজিয়নে রাখুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "ক্লাউড প্রোডাক্টের নাম ঘনঘন বদলায়। যেমন Microsoft-এর নিজের পাতায় Azure AI Foundry-কে Microsoft Foundry-র আগের নাম বলা আছে, আর Google-এর Vertex AI ডকুমেন্টেশন এখন Gemini Enterprise Agent Platform নামে খোলে। প্যাটার্নটা শিখুন, তারপর বর্তমান প্রোডাক্ট পাতা পড়ুন। খরচের হিসাব পার্ট ১১-তে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>বাইরে খাওয়া, ক্যাটারিং, নাকি ঘরে রান্না:</strong> হোস্টেড API হলো একটা পদ অর্ডার করা। ম্যানেজড প্ল্যাটফর্ম হলো নিজের হলে ক্যাটারিং। GPU ভাড়া করা হলো ভাড়া করা রান্নাঘরে রান্না।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "CukYk43agA4",
+          "title": "AWS EKS Tutorial | What is EKS? | EKS Explained | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1348
+        },
+        {
+          "id": "dlTX_TBpVUs",
+          "title": "AWS Lambda explained in 60 seconds",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 78
+        },
+        {
+          "id": "AYAh6YDXuho",
+          "title": "Containers on AWS Overview: ECS | EKS | Fargate | ECR",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1510
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "num": "10",
+      "title": "MLOps",
+      "sub": "MLOps applies DevOps habits to machine-learning systems, where the model depends on data that keeps changing. It matters most when you train, fine-tune or serve your own models.",
+      "bn": {
+        "title": "MLOps",
+        "sub": "MLOps DevOps-এর অভ্যাসগুলো মেশিন লার্নিং সিস্টেমে লাগায়, যেখানে মডেল এমন ডেটার ওপর নির্ভর করে যা বদলাতে থাকে। নিজে ট্রেন, ফাইন-টিউন বা সার্ভ করলে এটা সবচেয়ে বেশি কাজে লাগে।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s10-the-loop",
+          "html": "The loop and its pieces"
+        },
+        {
+          "type": "paragraph",
+          "html": "The loop is: collect data, train, evaluate, register the model, deploy, monitor, and retrain <a class=\"cite\" href=\"#src20\">[20]</a>. Each step is automated, so a new model reaches production the same way every time."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Piece",
+            "What it does",
+            "Tools you will meet"
+          ],
+          "rows": [
+            [
+              "Experiment tracking",
+              "Records the parameters, metrics and files of every training run",
+              "MLflow <a class=\"cite\" href=\"#src21\">[21]</a>, Weights &amp; Biases"
+            ],
+            [
+              "Model registry",
+              "Versions a trained model and marks which one is in staging or production",
+              "MLflow Model Registry"
+            ],
+            [
+              "Data and pipeline versioning",
+              "Ties a model to the exact data and code that produced it",
+              "DVC"
+            ],
+            [
+              "Orchestration",
+              "Runs the steps in order, on a schedule or when new data arrives",
+              "Airflow, Kubeflow Pipelines"
+            ],
+            [
+              "Feature store",
+              "Serves the same features in training and in production",
+              "Feast"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s10-drift",
+          "html": "Drift"
+        },
+        {
+          "type": "paragraph",
+          "html": "A model can get worse without any code change. <strong>Data drift</strong> means the inputs no longer look like the training data. <strong>Concept drift</strong> means the right answer for the same input has changed. Watch the statistics of the inputs and, when true labels arrive later, the live accuracy."
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>MLOps and LLMOps.</strong> If you call a hosted model you do not train it, so there is no retraining loop. Your artifacts are prompts, retrieval settings and eval sets, and you watch traces, cost and quality scores. That is Part 9. This section matters when you fine-tune (Part 3) or serve your own models."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Training a model is like baking from a recipe that depends on the flour, and the flour changes over time. MLOps is the discipline of keeping the recipe book, noting which flour made which loaf, and tasting samples from the shelf, so that you notice when the bread starts to go wrong."
+        },
+        {
+          "type": "paragraph",
+          "html": "The key point is that a model can break while nobody touches the code: the world it was trained on moves on."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A bakery's recipe book.</strong> Every recipe version is kept, every loaf is labelled with its flour, and someone tastes yesterday's bread today."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "MLOps-এর চক্র: ডেটা সংগ্রহ, ট্রেনিং, ইভ্যালুয়েশন, মডেল রেজিস্ট্রিতে রাখা, ডিপ্লয়, মনিটর, আর দরকারে আবার ট্রেনিং। প্রতিটি ধাপ অটোমেট করা থাকে, তাই নতুন মডেল প্রতিবার একই পথে প্রোডাকশনে যায়। টুল: experiment tracking-এর জন্য MLflow, ডেটা ও পাইপলাইন ভার্সনিংয়ের জন্য DVC, অর্কেস্ট্রেশনের জন্য Airflow বা Kubeflow Pipelines, আর feature store হিসেবে Feast।"
+        },
+        {
+          "type": "paragraph",
+          "html": "কোড না বদলালেও মডেল খারাপ হতে পারে। ইনপুট ট্রেনিং ডেটার মতো না থাকলে সেটা data drift; একই ইনপুটের সঠিক উত্তর বদলে গেলে সেটা concept drift। ইনপুটের পরিসংখ্যান দেখুন, আর আসল লেবেল পরে এলে লাইভ accuracy দেখুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "হোস্টেড মডেল কল করলে আপনি ট্রেন করেন না, তাই রিট্রেনিং চক্র নেই; আপনার আর্টিফ্যাক্ট প্রম্পট, রিট্রিভাল সেটিংস আর ইভ্যাল সেট। সেটা পার্ট ৯। নিজে ফাইন-টিউন (পার্ট ৩) বা মডেল সার্ভ করলে এই সেকশন কাজে লাগে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>বেকারির রেসিপি বই:</strong> রেসিপির প্রতিটি ভার্সন রাখা হয়, প্রতিটি রুটিতে ময়দার ব্যাচ লেখা থাকে, আর কেউ আজ গতকালের রুটি চেখে দেখে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "EwZcKZ_k6d0",
+          "title": "What is MLOps?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 155
+        },
+        {
+          "id": "8JT6DS8yt0s",
+          "title": "What is Kubeflow?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 173
+        },
+        {
+          "id": "biqYkVf-a7Y",
+          "title": "MLOps Explained - What It Is, Why You Need It and How It Works",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1583
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "num": "11",
+      "title": "Metrics, logs and the observability stack",
+      "sub": "Observability means you can ask a running system why it behaves as it does, using the data it emits. The stack under an AI service is the ordinary one, plus a few numbers that are specific to models and GPUs.",
+      "bn": {
+        "title": "মেট্রিক, লগ আর অবজার্ভেবিলিটি স্ট্যাক",
+        "sub": "অবজার্ভেবিলিটি মানে একটা চলমান সিস্টেম কেন এমন আচরণ করছে, তা সে নিজে যে ডেটা ছাড়ে তা দিয়ে জিজ্ঞেস করতে পারা। AI সার্ভিসের নিচের স্ট্যাকটা সাধারণ স্ট্যাকই, সাথে মডেল আর GPU-র নির্দিষ্ট কয়েকটা সংখ্যা।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s11-three-signals",
+          "html": "Three signals"
+        },
+        {
+          "type": "paragraph",
+          "html": "The three signals are metrics (numbers over time), logs (events) and traces (the path of one request through the system) <a class=\"cite\" href=\"#src22\">[22]</a>."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Signal",
+            "Tools you will meet",
+            "Good for"
+          ],
+          "rows": [
+            [
+              "Metrics",
+              "Prometheus scrapes numbers from your services and stores them <a class=\"cite\" href=\"#src23\">[23]</a>; Grafana draws dashboards",
+              "Trends, alerts, capacity"
+            ],
+            [
+              "Logs",
+              "Loki, Elasticsearch",
+              "The detail of one failure"
+            ],
+            [
+              "Traces",
+              "OpenTelemetry produces them; Jaeger and Tempo show them",
+              "Where one slow request spent its time"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s11-what-to-measure",
+          "html": "What to measure"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The four golden signals: latency, traffic, errors and saturation <a class=\"cite\" href=\"#src24\">[24]</a>.",
+            "For an LLM service add time to first token, tokens per second, queue length and cost per request.",
+            "For GPUs, NVIDIA's DCGM exporter publishes utilisation, memory and temperature as Prometheus metrics <a class=\"cite\" href=\"#src25\">[25]</a>.",
+            "Alert on what users feel (error rate, slow answers), not on every internal cause <a class=\"cite\" href=\"#src24\">[24]</a>."
+          ]
+        },
+        {
+          "type": "code",
+          "lang": "promql",
+          "code": "# 95th percentile of request latency over 5 minutes\nhistogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span># 95th percentile of request latency over 5 minutes</span></span>\n<span class=\"line\"><span>histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket[5m])))</span></span></code></pre>"
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Part 9 sits on top of this.</strong> LLM tracing tools show the prompt, the tool calls and the token counts of each request. The stack here tells you whether the machine under them is healthy."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "When a system misbehaves you cannot open it and look inside, so you rely on what it reports. Numbers over time tell you that something changed. Written notes tell you what happened in one case. A trace follows a single request from the door to the end."
+        },
+        {
+          "type": "paragraph",
+          "html": "For an AI service the numbers that matter most are how fast the first word appears, how fast the rest follows, and whether the expensive graphics card is busy or idle."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A hospital monitor.</strong> Heart rate and temperature are the metrics, the nurse's notes are the logs, and following one patient from admission to discharge is a trace."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "তিনটে সংকেত: মেট্রিক (সময়ের সাথে সংখ্যা), লগ (ঘটনা) আর ট্রেস (একটা অনুরোধ সিস্টেমের ভেতর দিয়ে যে পথে যায়)। Prometheus সার্ভিস থেকে সংখ্যা তুলে জমা রাখে, Grafana ড্যাশবোর্ড আঁকে, Loki লগ রাখে, আর OpenTelemetry ট্রেস তৈরি করে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "চারটে golden signal মাপুন: latency, traffic, errors আর saturation। LLM সার্ভিসে যোগ করুন প্রথম টোকেন আসতে কত সময়, প্রতি সেকেন্ডে কত টোকেন, কিউ কত লম্বা আর প্রতি রিকোয়েস্টে খরচ। GPU-র ব্যবহার, মেমরি আর তাপমাত্রা NVIDIA-র DCGM exporter Prometheus মেট্রিক হিসেবে প্রকাশ করে। ব্যবহারকারী যা টের পায় (এরর রেট, ধীর উত্তর) তার ওপর অ্যালার্ট দিন, প্রতিটি ভেতরের কারণে নয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "পার্ট ৯ এর ওপরেই বসে: LLM ট্রেসিং টুল প্রতিটি রিকোয়েস্টের প্রম্পট, টুল কল আর টোকেন সংখ্যা দেখায়, আর এই স্ট্যাক বলে নিচের মেশিনটা সুস্থ কি না।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>হাসপাতালের মনিটর:</strong> হৃদস্পন্দন আর তাপমাত্রা হলো মেট্রিক, নার্সের নোট হলো লগ, আর ভর্তি থেকে ছাড়া পর্যন্ত একজন রোগীকে অনুসরণ করা হলো ট্রেস।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "UmJ1vFfGUWg",
+          "title": "What is Grafana Loki?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 52
+        },
+        {
+          "id": "nzg8KxL5ftI",
+          "title": "How Distributed Tracing Works Across Microservices in Kubernetes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 157
+        },
+        {
+          "id": "h4Sl21AKiDg",
+          "title": "How Prometheus Monitoring works | Prometheus Architecture explained",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1291
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "num": "12",
+      "title": "DevSecOps and platform security",
+      "sub": "DevSecOps puts security checks into the same pipeline as the tests. For AI it adds three things to protect: API keys, model files and the tools that an agent may call.",
+      "bn": {
+        "title": "DevSecOps আর প্ল্যাটফর্ম সিকিউরিটি",
+        "sub": "DevSecOps টেস্টের একই পাইপলাইনে সিকিউরিটি চেক বসায়। AI-এর জন্য আরও তিনটে জিনিস রক্ষা করতে হয়: API key, মডেল ফাইল আর এজেন্ট যে টুল কল করতে পারে সেগুলো।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s12-shift-left",
+          "html": "Shift security left"
+        },
+        {
+          "type": "paragraph",
+          "html": "The idea is to find a security problem when a change is made, not after it ships <a class=\"cite\" href=\"#src26\">[26]</a>. The checks run in CI next to the tests."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Secrets.</strong> Keep API keys and passwords in a secrets manager (HashiCorp Vault, or your cloud's secrets service) and inject them when the service starts. Never in Git, never in an image. A Kubernetes Secret is only base64-encoded unless you turn on encryption at rest, so limit who can read it <a class=\"cite\" href=\"#src27\">[27]</a>.",
+            "<strong>Least privilege.</strong> Each service gets its own identity with only the access it needs: IAM roles in the cloud, RBAC in Kubernetes.",
+            "<strong>Images and dependencies.</strong> Scan them for known vulnerabilities, keep a software bill of materials (SBOM), pin versions, and pull only from registries you trust.",
+            "<strong>Network.</strong> Deny traffic by default and open only what a service needs (a Kubernetes NetworkPolicy can do this, with a network plugin that enforces it). An agent that can reach the whole internet or your internal network can leak data."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s12-the-model-file-is-code-too",
+          "html": "The model file is code too"
+        },
+        {
+          "type": "paragraph",
+          "html": "Some model file formats, such as Python's pickle, can run code when you load them. Load weights only from sources you trust, and prefer a format that holds only tensors, such as safetensors <a class=\"cite\" href=\"#src28\">[28]</a>."
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Treat an agent's tools as an attack surface.</strong> Prompt injection can make a model call a tool you gave it. Limit what each tool can do, log every call, and ask a human before any action that cannot be undone. Part 12 covers this in depth."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Security work asks one question early and often: what is the worst thing someone could do with this? Keep the keys in a safe instead of taped to the door, give each person only the keys they need, and check what you let in."
+        },
+        {
+          "type": "paragraph",
+          "html": "For AI there is a twist. The model file is something you run, so a bad one is like a bad program, and an agent that can use tools is like an employee who obeys whoever spoke last."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Building security.</strong> Locks on every door (least privilege), a safe for valuables (a secrets manager), a guest list at the gate (scanning), and a guard who checks the delivery boxes (the supply chain)."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "ধারণাটা হলো নিরাপত্তার সমস্যা পরিবর্তন করার সময়ই ধরা, ডিপ্লয়ের পরে নয়। চেকগুলো CI-তে টেস্টের পাশেই চলে। API key আর পাসওয়ার্ড রাখুন সিক্রেট ম্যানেজারে (HashiCorp Vault বা ক্লাউডের সিক্রেট সার্ভিস), সার্ভিস চালুর সময় সেগুলো দিন। Git-এ নয়, ইমেজেও নয়। Kubernetes Secret এনক্রিপশন চালু না করলে শুধু base64 এনকোড করা থাকে, তাই কে সেটা পড়তে পারবে তা সীমিত করুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "প্রতিটি সার্ভিসকে নিজের পরিচয় দিন, শুধু যতটুকু অ্যাক্সেস লাগে ততটুকু (IAM রোল, Kubernetes RBAC)। ইমেজ আর ডিপেন্ডেন্সি পরিচিত দুর্বলতার জন্য স্ক্যান করুন, SBOM রাখুন, ভার্সন পিন করুন। নেটওয়ার্কে ডিফল্টে সব বন্ধ রেখে শুধু দরকারটুকু খুলুন, কারণ যে এজেন্ট পুরো ইন্টারনেট বা আপনার ভেতরের নেটওয়ার্কে পৌঁছাতে পারে সে ডেটা ফাঁস করতে পারে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "pickle-এর মতো কিছু মডেল ফাইল ফরম্যাট লোড করার সময় কোড চালাতে পারে। ওয়েট শুধু বিশ্বস্ত উৎস থেকে নিন, আর safetensors-এর মতো শুধু টেন্সর রাখা ফরম্যাট বেছে নিন। এজেন্টের টুলও আক্রমণের জায়গা: prompt injection দিয়ে মডেলকে আপনার দেওয়া টুল কল করানো যায়। প্রতিটি টুল কী করতে পারে তা সীমিত করুন, প্রতিটি কল লগ করুন, আর যা ফেরানো যায় না তার আগে মানুষের অনুমতি নিন। পার্ট ১২-তে এটা বিস্তারিত।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>ভবনের নিরাপত্তা:</strong> প্রতিটি দরজায় তালা (least privilege), দামি জিনিসের জন্য সিন্দুক (সিক্রেট ম্যানেজার), গেটে অতিথি তালিকা (স্ক্যানিং), আর ডেলিভারি বাক্স পরীক্ষা করা প্রহরী (সাপ্লাই চেইন)।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "JBstJnxbozc",
+          "title": "Stop Storing Kubernetes Secrets Like This!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 176
+        },
+        {
+          "id": "q2phcnesXvY",
+          "title": "Zero Trust Explained in 5 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 356
+        },
+        {
+          "id": "1XpUDV7PBFo",
+          "title": "What is DevSecOps? | DevOps vs DevSecOps | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 530
+        },
+        {
+          "id": "klyAhaklGNU",
+          "title": "HashiCorp Vault Tutorial for Beginners - What, Why and How",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1750
+        },
+        {
+          "id": "oBf5lrmquYI",
+          "title": "Kubernetes Security Best Practices you need to know | THE Guide for securing your K8s cluster!",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1781
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "num": "13",
+      "title": "System design and data infrastructure",
+      "sub": "An AI feature is a slow, costly call in the middle of an ordinary system, so ordinary system-design tools apply. Part 14 covers the architecture of an AI application. This is the infrastructure toolbox under it.",
+      "bn": {
+        "title": "সিস্টেম ডিজাইন আর ডেটা ইনফ্রাস্ট্রাকচার",
+        "sub": "AI ফিচার হলো একটা সাধারণ সিস্টেমের মাঝখানে একটা ধীর, দামি কল, তাই সাধারণ সিস্টেম ডিজাইনের টুলই খাটে। AI অ্যাপ্লিকেশনের আর্কিটেকচার পার্ট ১৪-তে। এটা তার নিচের ইনফ্রাস্ট্রাকচারের টুলবক্স।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s13-problems-and-tools",
+          "html": "Problems and the tools for them"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Problem",
+            "Tool",
+            "How it helps"
+          ],
+          "rows": [
+            [
+              "A model call takes ten seconds and the web request cannot wait",
+              "A queue or log (Kafka <a class=\"cite\" href=\"#src29\">[29]</a>, RabbitMQ, or a cloud queue service) and workers",
+              "The request returns a job id. Workers call the model and store the result."
+            ],
+            [
+              "The same question arrives again and again",
+              "A cache such as Redis <a class=\"cite\" href=\"#src30\">[30]</a>",
+              "Return a stored answer. A semantic cache also matches similar questions."
+            ],
+            [
+              "Too many requests at once",
+              "Rate limiting and backpressure",
+              "Protect the model's quota and keep the service up."
+            ],
+            [
+              "You want vector search next to your data",
+              "Postgres with pgvector <a class=\"cite\" href=\"#src31\">[31]</a>",
+              "One database holds the rows and their embeddings."
+            ],
+            [
+              "Many app copies open too many database connections",
+              "A connection pooler such as PgBouncer",
+              "Postgres has a connection limit. A pooler shares connections between clients."
+            ],
+            [
+              "A search index must follow a database",
+              "Change data capture (CDC)",
+              "Stream each row change into the index."
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s13-reliability",
+          "html": "Timeouts, retries and idempotency"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Set a timeout on every call. A call without one can hold a worker forever.",
+            "Retry with backoff, and make the operation <strong>idempotent</strong>, so that running it twice has the same effect as running it once. A common way is to send an idempotency key with the request.",
+            "Prefer scaling out (more copies behind a load balancer) to one bigger machine, and keep state in a database or a cache, not inside the process."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Consistent hashing</strong> spreads cache keys over many nodes, so that adding a node moves only a small share of the keys. It is why a cache cluster can grow without emptying itself."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "A busy restaurant does not make every guest wait at the stove. Orders go on a ticket rail, several cooks work at once, popular dishes are prepared in advance, and the door staff stop letting people in when the room is full."
+        },
+        {
+          "type": "paragraph",
+          "html": "An AI feature behaves like the slowest dish on the menu. The same four ideas keep the restaurant running: a queue, parallel workers, a cache and a limit at the door."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A busy restaurant.</strong> Tickets are the queue, cooks are the workers, dishes made in advance are the cache, and the door staff are the rate limit."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "AI ফিচার একটা সাধারণ সিস্টেমের মাঝখানে ধীর আর দামি কল, তাই পরিচিত টুলগুলোই খাটে। মডেল কল দশ সেকেন্ড লাগলে ওয়েব রিকোয়েস্ট অপেক্ষা করতে পারে না; তখন কিউ (Kafka, RabbitMQ) আর ওয়ার্কার ব্যবহার করুন: রিকোয়েস্ট একটা জব আইডি ফেরত দেয়, ওয়ার্কার মডেল কল করে ফল জমা রাখে। একই প্রশ্ন বারবার এলে Redis-এর মতো ক্যাশ কাজে লাগে, আর semantic cache মিল থাকা প্রশ্নও ধরে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Postgres-এর সাথে pgvector থাকলে একটা ডেটাবেসেই সারি আর এমবেডিং থাকে। Postgres-এর সংযোগের সীমা আছে, তাই অনেক অ্যাপ কপি থাকলে PgBouncer-এর মতো pooler দিন। সার্চ ইনডেক্সকে ডেটাবেসের সাথে রাখতে change data capture (CDC) ব্যবহার করুন। প্রতিটি কলে timeout দিন; retry করুন backoff দিয়ে, আর কাজটা idempotent বানান, যাতে দুবার চললেও একবারের মতোই ফল হয়, যেমন idempotency key পাঠিয়ে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "একটা বড় মেশিনের বদলে বেশি কপি চালান লোড ব্যালান্সারের পেছনে, আর state রাখুন ডেটাবেস বা ক্যাশে, প্রসেসের ভেতরে নয়। Consistent hashing ক্যাশ কী অনেক নোডে ছড়ায়, তাই নতুন নোড যোগ করলে অল্প কী-ই সরে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>ব্যস্ত রেস্টুরেন্ট:</strong> অর্ডারের টিকিট হলো কিউ, বাবুর্চিরা ওয়ার্কার, আগে বানিয়ে রাখা পদ হলো ক্যাশ, আর দরজার কর্মীরা রেট লিমিট।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "AIuZExZFHNU",
+          "title": "Consistent Hashing Explained (System Design Basics)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 166
+        },
+        {
+          "id": "-C_EKxhwYew",
+          "title": "Postgres Hit the Connection Limit. Now What?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 175
+        },
+        {
+          "id": "K83NPFfWPBw",
+          "title": "Change Data Capture (CDC) Explained for Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 594
+        },
+        {
+          "id": "BpGljU1miLI",
+          "title": "System Design: Designing Load Balancer",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 171
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "num": "14",
+      "title": "AIOps",
+      "sub": "AIOps uses machine learning, and lately language models, to help run IT systems. It is AI used to operate software, which is a different thing from operating AI.",
+      "bn": {
+        "title": "AIOps",
+        "sub": "AIOps মেশিন লার্নিং আর সম্প্রতি ভাষা মডেল ব্যবহার করে IT সিস্টেম চালাতে সাহায্য করে। এটা সফটওয়্যার চালাতে AI ব্যবহার, যা AI চালানো থেকে আলাদা জিনিস।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s14-what-it-does",
+          "html": "What it does"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Task",
+            "Without AI",
+            "With AI"
+          ],
+          "rows": [
+            [
+              "Too many alerts",
+              "Grouping, inhibition and silences in the alerting tool <a class=\"cite\" href=\"#src32\">[32]</a>",
+              "Learn which alerts usually fire together and show one incident"
+            ],
+            [
+              "A metric looks odd",
+              "A fixed threshold",
+              "A model of what is normal for this hour and this weekday"
+            ],
+            [
+              "A huge log",
+              "<code>grep</code> and a lot of scrolling",
+              "A summary of what changed around the first error"
+            ],
+            [
+              "An incident at 3 a.m.",
+              "A runbook page",
+              "An assistant that reads the runbook, runs read-only checks and drafts the update"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s14-adding-it-safely",
+          "html": "Adding it safely"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Start read-only: let the assistant look and explain, not change anything.",
+            "Keep a human approval step for every change, such as a restart, a scale-up or a rollback.",
+            "Log every action and the evidence behind it, and review the log after each incident <a class=\"cite\" href=\"#src33\">[33]</a>.",
+            "Measure it: time to detect, time to resolve, and how often its suggestion was right."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A confident wrong fix is worse than none.</strong> A language model can invent a command or a cause. Give it the same evidence an engineer would use, and check its claim against a metric or a log line before anything is changed."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "info",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Not the same as MLOps.</strong> AIOps is AI that helps operate software. MLOps and LLMOps (section 10 and Part 9) are about operating AI systems."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Operations teams drown in alerts and logs. AIOps asks software to do the sorting: group the alerts that belong together, notice when a number looks strange for this time of day, and summarise the log. The engineer still decides what to do."
+        },
+        {
+          "type": "paragraph",
+          "html": "The safe order is: first let it watch and explain, then let it suggest, and only later let it act, with a person pressing the button."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A smoke detector with a brain.</strong> An ordinary detector rings for burnt toast. A smarter one learns your kitchen and tells you: this looks like a real fire, and the gas valve is the quickest thing to turn off."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "অপারেশন টিম অ্যালার্ট আর লগে ডুবে থাকে। AIOps সেই বাছাইয়ের কাজ সফটওয়্যারকে দেয়: একসাথে ঘটা অ্যালার্ট এক ঘটনায় জড়ো করা, এই সময়ের জন্য অদ্ভুত লাগা সংখ্যা ধরা, আর লগের সারাংশ বানানো। সাধারণ টুলও (যেমন Alertmanager-এর গ্রুপিং আর silence) এই কাজের কিছুটা করে; AI এখানে শেখা প্যাটার্ন যোগ করে। এটা সফটওয়্যার চালাতে AI ব্যবহার; MLOps আর LLMOps হলো AI চালানো (সেকশন ১০ আর পার্ট ৯)।"
+        },
+        {
+          "type": "paragraph",
+          "html": "নিরাপদ ভাবে শুরু করুন: প্রথমে শুধু দেখা আর ব্যাখ্যা করা, কিছু বদলানো নয়। প্রতিটি পরিবর্তনে (রিস্টার্ট, স্কেল-আপ, রোলব্যাক) মানুষের অনুমোদন রাখুন। প্রতিটি কাজ আর তার প্রমাণ লগ করুন, আর প্রতিটি ঘটনার পরে লগ রিভিউ করুন। মাপুন: ধরতে কত সময়, সারাতে কত সময়, আর পরামর্শ কতবার সঠিক ছিল।"
+        },
+        {
+          "type": "paragraph",
+          "html": "আত্মবিশ্বাসী ভুল সমাধান কোনো সমাধান না থাকার চেয়ে খারাপ। ভাষা মডেল কমান্ড বা কারণ বানিয়ে ফেলতে পারে, তাই কিছু বদলানোর আগে তার দাবি কোনো মেট্রিক বা লগ লাইনের সাথে মিলিয়ে নিন।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>মাথাওয়ালা স্মোক ডিটেক্টর:</strong> সাধারণ ডিটেক্টর পোড়া রুটিতেও বাজে। বুদ্ধিমানটা আপনার রান্নাঘর চিনে বলে: এটা সত্যিকারের আগুন মনে হচ্ছে, আর গ্যাসের ভালভ বন্ধ করাই সবচেয়ে দ্রুত।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "_cexdeRAtCg",
+          "title": "What is AIOps? How It Differs from DevOps and MLOps",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 224
+        },
+        {
+          "id": "SUAHtdDBeps",
+          "title": "Every DevOps Engineer Should Know AIOps [FREE LABs]",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 769
+        },
+        {
+          "id": "lmY94ldWa3Q",
+          "title": "The complete AIOps roadmap you need to know!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 168
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "num": "15",
+      "title": "AI coding assistants",
+      "sub": "Tools such as Claude Code, Cursor, GitHub Copilot, Gemini CLI and Codex CLI read your repository, edit files, run commands and iterate. They are most useful when you treat them like a fast junior engineer.",
+      "bn": {
+        "title": "AI কোডিং অ্যাসিস্ট্যান্ট",
+        "sub": "Claude Code, Cursor, GitHub Copilot, Gemini CLI আর Codex CLI-এর মতো টুল আপনার রিপোজিটরি পড়ে, ফাইল বদলায়, কমান্ড চালায় আর বারবার চেষ্টা করে। এদের একজন দ্রুত জুনিয়র ইঞ্জিনিয়ারের মতো ধরলে সবচেয়ে বেশি কাজ হয়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s15-context-and-limits",
+          "html": "Give it context and limits"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "A <strong>context file</strong> in the repository tells the tool how the project works: the build and test commands, the conventions, and what not to touch. Claude Code reads <code>CLAUDE.md</code> <a class=\"cite\" href=\"#src34\">[34]</a>, and <code>AGENTS.md</code> is an open convention that several tools read <a class=\"cite\" href=\"#src35\">[35]</a>. Keep it short and true.",
+            "<strong>Permissions.</strong> Let the tool run read-only commands freely, and ask before it writes outside the project, installs packages or uses the network.",
+            "<strong>MCP servers</strong> let a tool call outside systems, such as issue trackers, databases and browsers, through one protocol <a class=\"cite\" href=\"#src36\">[36]</a>. Each one is also an attack surface, so install only servers you trust (Part 7).",
+            "<strong>One task, one branch.</strong> Give each agent its own branch, and its own worktree when several run at once (section 2 of this Part)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s15-review-it",
+          "html": "Review it like any other change"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "For a large change, ask for a plan first, and read the diff, not only the summary.",
+            "Make the tool run the tests, and read what it ran.",
+            "Never paste secrets into a prompt, and keep real credentials out of the folder the tool can read.",
+            "Small, checkable steps beat one huge request. When a step goes wrong, you throw away a small branch."
+          ]
+        },
+        {
+          "type": "callout",
+          "variant": "warn",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Speed moves the bottleneck to review.</strong> Generated code that nobody understands is a loan you repay during the first outage. Keep the tests, the types and a human reviewer in the loop."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "An AI coding assistant is a very fast apprentice. It can draft code, run the tests and fix its own mistakes, but it sometimes gets things confidently wrong, and it does what it understood, not what you meant."
+        },
+        {
+          "type": "paragraph",
+          "html": "So you give it a clear job, a workbench of its own (a branch) and a note about the house rules (the context file), and you check the result before it goes on the shelf."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>A very fast apprentice.</strong> Brilliant at first drafts, sometimes sure of a wrong answer. You give a clear job, you check the work, and you decide what ships."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "AI কোডিং অ্যাসিস্ট্যান্ট আপনার রিপোজিটরি পড়ে, ফাইল বদলায়, কমান্ড আর টেস্ট চালায় এবং বারবার চেষ্টা করে। প্রজেক্ট কীভাবে চলে তা জানাতে রিপোজিটরিতে একটা context ফাইল রাখুন: বিল্ড আর টেস্টের কমান্ড, নিয়মকানুন, আর কী ছোঁয়া যাবে না। Claude Code পড়ে <code>CLAUDE.md</code>, আর <code>AGENTS.md</code> একটা খোলা রীতি যা কয়েকটা টুল পড়ে। ফাইলটা ছোট আর সত্য রাখুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "রিড-অনলি কমান্ড টুলকে স্বাধীনভাবে চালাতে দিন, কিন্তু প্রজেক্টের বাইরে লেখা, প্যাকেজ ইনস্টল বা নেটওয়ার্ক ব্যবহারের আগে জিজ্ঞেস করতে বলুন। MCP সার্ভার টুলকে বাইরের সিস্টেম কল করতে দেয়, কিন্তু প্রতিটি সার্ভার আক্রমণেরও জায়গা, তাই শুধু বিশ্বস্ত সার্ভার ইনস্টল করুন (পার্ট ৭)। প্রতিটি কাজ আলাদা ব্রাঞ্চে করান, আর একসাথে অনেক এজেন্ট চালালে আলাদা worktree দিন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "বড় পরিবর্তনের আগে পরিকল্পনা চান, আর শুধু সারাংশ নয়, diff পড়ুন। টুলকে টেস্ট চালাতে বলুন আর কী চালিয়েছে তা পড়ুন। প্রম্পটে কখনও সিক্রেট দেবেন না। জেনারেট করা কোড কেউ না বুঝলে সেটা ধার, যা প্রথম আউটেজে শোধ করতে হয়। টেস্ট, টাইপ আর একজন মানুষ রিভিউয়ার রাখুন।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>খুব দ্রুত শিক্ষানবিশ:</strong> প্রথম খসড়ায় দারুণ, কখনও ভুল উত্তরেও নিশ্চিত। আপনি পরিষ্কার কাজ দেন, কাজ পরীক্ষা করেন, আর কী যাবে তা আপনি ঠিক করেন।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "sxp-VXbXZU4",
+          "title": "Claude Code Explained for Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 541
+        },
+        {
+          "id": "mDAnW8MUVlQ",
+          "title": "Gemini CLI: Open-Source AI in Your Terminal",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 180
+        },
+        {
+          "id": "amEUIuBKwvg",
+          "title": "A Complete Guide to Claude Code - Here are ALL the Best Strategies",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 3017
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "n": 1,
+      "url": "https://docs.nvidia.com/deploy/nvidia-smi/index.html",
+      "text": "NVIDIA, \"System Management Interface (nvidia-smi)\""
+    },
+    {
+      "n": 2,
+      "url": "https://man7.org/linux/man-pages/man7/signal.7.html",
+      "text": "Linux man-pages project, \"signal(7) - overview of signals\""
+    },
+    {
+      "n": 3,
+      "url": "https://git-scm.com/book/en/v2",
+      "text": "Chacon and Straub, \"Pro Git\" (2nd edition)"
+    },
+    {
+      "n": 4,
+      "url": "https://git-scm.com/docs/git-worktree",
+      "text": "Git documentation, \"git-worktree\""
+    },
+    {
+      "n": 5,
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+      "text": "MDN Web Docs, \"Overview of HTTP\""
+    },
+    {
+      "n": 6,
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events",
+      "text": "MDN Web Docs, \"Using server-sent events\""
+    },
+    {
+      "n": 7,
+      "url": "https://docs.python.org/3/library/venv.html",
+      "text": "Python documentation, \"venv - Creation of virtual environments\""
+    },
+    {
+      "n": 8,
+      "url": "https://yaml.org/spec/1.2.2/",
+      "text": "YAML Language Development Team, \"YAML Ain't Markup Language (YAML) revision 1.2.2\""
+    },
+    {
+      "n": 9,
+      "url": "https://docs.docker.com/get-started/docker-overview/",
+      "text": "Docker Docs, \"What is Docker?\""
+    },
+    {
+      "n": 10,
+      "url": "https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html",
+      "text": "NVIDIA, \"Installing the NVIDIA Container Toolkit\""
+    },
+    {
+      "n": 11,
+      "url": "https://kubernetes.io/docs/concepts/overview/",
+      "text": "Kubernetes documentation, \"Overview\""
+    },
+    {
+      "n": 12,
+      "url": "https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/",
+      "text": "Kubernetes documentation, \"Schedule GPUs\""
+    },
+    {
+      "n": 13,
+      "url": "https://docs.github.com/en/actions/get-started/understand-github-actions",
+      "text": "GitHub Docs, \"Understanding GitHub Actions\""
+    },
+    {
+      "n": 14,
+      "url": "https://opengitops.dev/",
+      "text": "OpenGitOps, \"GitOps Principles\""
+    },
+    {
+      "n": 15,
+      "url": "https://developer.hashicorp.com/terraform/intro",
+      "text": "HashiCorp, \"What is Terraform?\""
+    },
+    {
+      "n": 16,
+      "url": "https://docs.ansible.com/projects/ansible/latest/getting_started/introduction.html",
+      "text": "Ansible documentation, \"Introduction to Ansible\""
+    },
+    {
+      "n": 17,
+      "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
+      "text": "AWS, \"What is Amazon Bedrock?\""
+    },
+    {
+      "n": 18,
+      "url": "https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning",
+      "text": "Google Cloud, \"Introduction to machine learning on Gemini Enterprise Agent Platform\""
+    },
+    {
+      "n": 19,
+      "url": "https://learn.microsoft.com/en-us/azure/foundry/what-is-foundry",
+      "text": "Microsoft Learn, \"What is Microsoft Foundry?\""
+    },
+    {
+      "n": 20,
+      "url": "https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning",
+      "text": "Google Cloud, \"MLOps: Continuous delivery and automation pipelines in machine learning\""
+    },
+    {
+      "n": 21,
+      "url": "https://mlflow.org/docs/latest/index.html",
+      "text": "MLflow documentation"
+    },
+    {
+      "n": 22,
+      "url": "https://opentelemetry.io/docs/concepts/signals/",
+      "text": "OpenTelemetry, \"Signals\""
+    },
+    {
+      "n": 23,
+      "url": "https://prometheus.io/docs/introduction/overview/",
+      "text": "Prometheus documentation, \"Overview\""
+    },
+    {
+      "n": 24,
+      "url": "https://sre.google/sre-book/monitoring-distributed-systems/",
+      "text": "Beyer et al., \"Monitoring Distributed Systems\", Site Reliability Engineering (Google, 2016)"
+    },
+    {
+      "n": 25,
+      "url": "https://github.com/NVIDIA/dcgm-exporter",
+      "text": "NVIDIA, \"DCGM-Exporter\" (GitHub)"
+    },
+    {
+      "n": 26,
+      "url": "https://owasp.org/www-project-devsecops-guideline/",
+      "text": "OWASP, \"DevSecOps Guideline\""
+    },
+    {
+      "n": 27,
+      "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+      "text": "Kubernetes documentation, \"Secrets\""
+    },
+    {
+      "n": 28,
+      "url": "https://huggingface.co/docs/safetensors/index",
+      "text": "Hugging Face, \"Safetensors\""
+    },
+    {
+      "n": 29,
+      "url": "https://github.com/apache/kafka",
+      "text": "Apache Kafka (GitHub)"
+    },
+    {
+      "n": 30,
+      "url": "https://redis.io/docs/latest/",
+      "text": "Redis documentation"
+    },
+    {
+      "n": 31,
+      "url": "https://github.com/pgvector/pgvector",
+      "text": "pgvector, \"Open-source vector similarity search for Postgres\" (GitHub)"
+    },
+    {
+      "n": 32,
+      "url": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+      "text": "Prometheus documentation, \"Alertmanager\""
+    },
+    {
+      "n": 33,
+      "url": "https://sre.google/sre-book/managing-incidents/",
+      "text": "Beyer et al., \"Managing Incidents\", Site Reliability Engineering (Google, 2016)"
+    },
+    {
+      "n": 34,
+      "url": "https://docs.claude.com/en/docs/claude-code/overview",
+      "text": "Anthropic, \"Claude Code overview\""
+    },
+    {
+      "n": 35,
+      "url": "https://agents.md/",
+      "text": "AGENTS.md, \"A simple, open format for guiding coding agents\""
+    },
+    {
+      "n": 36,
+      "url": "https://modelcontextprotocol.io/",
+      "text": "Model Context Protocol, \"What is the Model Context Protocol (MCP)?\""
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "kind": "mcq",
+      "answer": 1,
+      "en": {
+        "q": "A model server running in a container disappears with no error in its own log, and the host was short of memory. What is the most likely cause?",
+        "options": [
+          "The GPU driver was updated",
+          "The kernel's out-of-memory killer stopped the process",
+          "The load balancer changed a DNS record"
+        ],
+        "why": "When RAM runs out, the Linux kernel may kill a process to free memory, and the killed process cannot log it. The kernel log (dmesg, or journalctl -k) shows the message."
+      },
+      "bn": {
+        "q": "একটা কনটেইনারে চলা মডেল সার্ভার নিজের লগে কোনো এরর ছাড়াই উধাও হয়ে গেছে, আর হোস্টে মেমরি কম ছিল। সবচেয়ে সম্ভাব্য কারণ কী?",
+        "options": [
+          "GPU ড্রাইভার আপডেট হয়েছিল",
+          "কার্নেলের out-of-memory killer প্রসেসটা বন্ধ করে দিয়েছে",
+          "লোড ব্যালান্সার একটা DNS রেকর্ড বদলেছে"
+        ],
+        "why": "RAM ফুরিয়ে গেলে Linux কার্নেল মেমরি খালি করতে কোনো প্রসেস মেরে ফেলতে পারে, আর মারা প্রসেস সেটা লগ করতে পারে না। কার্নেল লগে (dmesg বা journalctl -k) বার্তাটা দেখা যায়।"
+      }
+    },
+    {
+      "id": "q2",
+      "kind": "mcq",
+      "answer": 2,
+      "en": {
+        "q": "Where should a deployed service keep the API key for a model provider?",
+        "options": [
+          "In the Git repository, if the repository is private",
+          "In the Docker image, so the container is self-contained",
+          "In a secrets manager, injected when the service starts"
+        ],
+        "why": "Anything in Git or in an image can be read by everyone who can read the repository or pull the image, and it stays in the history or the layers. A secrets manager keeps the key out of both and makes it easy to rotate."
+      },
+      "bn": {
+        "q": "ডিপ্লয় করা একটা সার্ভিসে মডেল provider-এর API key কোথায় রাখা উচিত?",
+        "options": [
+          "Git রিপোজিটরিতে, রিপোজিটরি প্রাইভেট হলে",
+          "Docker ইমেজে, যাতে কনটেইনার নিজেই সম্পূর্ণ থাকে",
+          "সিক্রেট ম্যানেজারে, সার্ভিস চালুর সময় ঢুকিয়ে দেওয়া হয়"
+        ],
+        "why": "Git বা ইমেজে যা থাকে তা রিপোজিটরি পড়তে বা ইমেজ পুল করতে পারা সবাই পড়তে পারে, আর সেটা ইতিহাসে বা লেয়ারে থেকে যায়। সিক্রেট ম্যানেজার key-কে এই দুটোর বাইরে রাখে আর বদলানোও সহজ করে।"
+      }
+    },
+    {
+      "id": "q3",
+      "kind": "tf",
+      "answer": true,
+      "en": {
+        "q": "In GitOps, you roll back a bad release by reverting the change in the Git repository.",
+        "why": "Git is the source of truth, and a controller in the cluster makes the cluster match it, so reverting the change rolls the release back."
+      },
+      "bn": {
+        "q": "GitOps-এ একটা খারাপ রিলিজ রোলব্যাক করতে Git রিপোজিটরিতে পরিবর্তনটা revert করতে হয়।",
+        "why": "Git-ই সত্যের উৎস, আর ক্লাস্টারের কন্ট্রোলার ক্লাস্টারকে সেটার সাথে মিলিয়ে দেয়, তাই পরিবর্তন revert করলেই রিলিজ ফিরে যায়।"
+      }
+    },
+    {
+      "id": "q4",
+      "kind": "mcq",
+      "answer": 0,
+      "en": {
+        "q": "Streamed answers are cut off after the same amount of time, but only when the request goes through the load balancer. What should you check first?",
+        "options": [
+          "The idle timeout of the load balancer or proxy",
+          "The Python version of the client",
+          "The number of GPUs on the node"
+        ],
+        "why": "A load balancer or proxy with a short idle timeout closes a long-lived response, and a streamed answer is one. Raise the timeout above your slowest answer and turn off response buffering on that route."
+      },
+      "bn": {
+        "q": "স্ট্রিম করা উত্তর প্রতিবার একই সময় পরে কেটে যায়, কিন্তু শুধু লোড ব্যালান্সারের ভেতর দিয়ে গেলে। প্রথমে কী দেখবেন?",
+        "options": [
+          "লোড ব্যালান্সার বা প্রক্সির idle timeout",
+          "ক্লায়েন্টের Python ভার্সন",
+          "নোডে GPU-র সংখ্যা"
+        ],
+        "why": "ছোট idle timeout থাকা লোড ব্যালান্সার বা প্রক্সি দীর্ঘ রেসপন্স বন্ধ করে দেয়, আর স্ট্রিম করা উত্তর তেমনই একটা রেসপন্স। timeout সবচেয়ে ধীর উত্তরের চেয়ে বড় করুন আর ওই রুটে রেসপন্স বাফারিং বন্ধ করুন।"
+      }
+    },
+    {
+      "id": "q5",
+      "kind": "tf",
+      "answer": false,
+      "en": {
+        "q": "Terraform state is safe to commit to a public Git repository, because it only lists resource names.",
+        "why": "State can hold sensitive values, and the whole team shares it. Keep it in a remote backend with locking and access control, never in Git."
+      },
+      "bn": {
+        "q": "Terraform state পাবলিক Git রিপোজিটরিতে কমিট করা নিরাপদ, কারণ তাতে শুধু রিসোর্সের নাম থাকে।",
+        "why": "state-এ সংবেদনশীল মান থাকতে পারে, আর পুরো টিম সেটা ভাগ করে। লকিং আর অ্যাক্সেস নিয়ন্ত্রণসহ remote backend-এ রাখুন, কখনও Git-এ নয়।"
+      }
+    }
+  ]
+}

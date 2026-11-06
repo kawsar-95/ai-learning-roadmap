@@ -7,7 +7,7 @@ They talk to YouTube, so nothing here runs in `npm test`, the build or the deplo
 ## Setup
 
 - Python 3 (standard library only), the Node version the site already needs, [`yt-dlp`](https://github.com/yt-dlp/yt-dlp), and Chrome or Chromium for the player probe.
-- `export VIDEO_WORK=~/video-work`: an empty directory for crawl lists, caches and lookups. The default is `<temp dir>/video-curation`. Nothing in it is committed, and every step can be re-run.
+- `export VIDEO_WORK=~/video-work`: an empty directory for crawl lists, caches and lookups. The default is `<temp dir>/video-curation`. Nothing in it is committed, and every step can be re-run. Export it in every shell that runs these scripts, `node` included: the player probe finds `playwright-core` through it.
 - `export YT_DLP=/path/to/yt-dlp` when `yt-dlp` is not on your `PATH`.
 - For the player probe: `cd "$VIDEO_WORK" && npm i playwright-core`. It is not a dependency of the site. `CHROME=/path/to/chrome` replaces the default `/usr/bin/google-chrome`.
 - Run every command from the repository root. A file name argument (such as `pool_ids.txt`) is read from `$VIDEO_WORK`.
@@ -36,6 +36,8 @@ All paths below are in `scripts/video-curation/`. The last column is what the st
 | 9 | Write the docs | `python3 gaps.py`, `python3 build_docs.py` | `gaps.json`, `docs/video-*.md` |
 
 `build_docs.py` reads the crawl lists, the lookups and the probe results, so run steps 1 to 7 on the same `$VIDEO_WORK` first.
+
+Do not re-run `gaps.py` now that Part 17 exists: it counts keyword hits in the Parts, and Part 17 is made of those keywords. `docs/video-coverage.md` keeps the counts taken before Part 17 was added. To verify only a few new picks, write their ids to a file and run `PAUSE_MS=2000 node probe-player.mjs --file new_ids.txt >> probe.jsonl` from `$VIDEO_WORK`, after `python3 lookup.py <file>` (it extends `lookups.json` and skips ids it already has).
 
 ## Needles
 

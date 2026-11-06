@@ -105,6 +105,20 @@ DRAFT2 = {
         "colemedin/V:build your first voice ai agent in 20 minutes with livekit", "automata/V:building a local voice ai assistant with llama 3.2",
         "automata/V:building an audio transcription app with openai whisper and streamlit", "aijason/V:ai agent + vision = incredible",
     ],
+    "deploying-and-operating-ai-systems/s1": ["nana/V:20% of linux commands"],
+    "deploying-and-operating-ai-systems/s2": ["nana/V:3 git workflows every developer should know"],
+    "deploying-and-operating-ai-systems/s3": ["nana/V:proxy vs reverse proxy vs load balancer"],
+    "deploying-and-operating-ai-systems/s4": ["nana/V:yaml tutorial | learn yaml in 18 mins"],
+    "deploying-and-operating-ai-systems/s5": ["nana/V:what is docker? docker container concept explained"],
+    "deploying-and-operating-ai-systems/s6": ["nana/V:what is kubernetes | kubernetes explained in 15 mins", "nana/V:kubernetes services explained", "nana/V:what is helm in kubernetes?"],
+    "deploying-and-operating-ai-systems/s7": ["nana/V:github actions tutorial - basic concepts and ci/cd pipeline with docker", "nana/V:what is gitops, how gitops works"],
+    "deploying-and-operating-ai-systems/s8": ["nana/V:terraform explained in 15 mins"],
+    "deploying-and-operating-ai-systems/s9": ["nana/V:containers on aws overview"],
+    "deploying-and-operating-ai-systems/s10": ["nana/V:mlops explained - what it is, why you need it"],
+    "deploying-and-operating-ai-systems/s11": ["nana/V:how prometheus monitoring works"],
+    "deploying-and-operating-ai-systems/s12": ["nana/V:hashicorp vault tutorial for beginners", "nana/V:kubernetes security best practices"],
+    "deploying-and-operating-ai-systems/s13": ["nana/V:microservices explained - the what, why and how"],
+    "deploying-and-operating-ai-systems/s15": ["colemedin/V:a complete guide to claude code", "aijason/V:i was using claude code wrong"],
 }
 
 # Gap-topic resources from these creators (they go in the coverage doc, not on a section page).

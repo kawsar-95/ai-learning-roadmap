@@ -360,6 +360,135 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [How OpenAI Serves 800 Million Users With ONE Database](https://www.youtube.com/watch?v=E2g_nWXRA54) | KodeKloud | 3:37 | 4K |  |
 | [How to Deploy an AI Agent in Kubernetes (Kagent)](https://www.youtube.com/shorts/CeOsIjO0gzk) | KodeKloud | Short, 2:25 | 25K |  |
 
+## deploying-and-operating-ai-systems
+
+### Linux and the shell (`deploying-and-operating-ai-systems/s1`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [3 Bash Tricks Every Developer MUST Know!](https://www.youtube.com/shorts/Tbp3hGHCdzA) | KodeKloud | Short, 2:30 | 43K | uploaded 2026-08 |
+| [Linux Command Every Engineer Should Use!](https://www.youtube.com/shorts/Kkdd7rPEbFA) | KodeKloud | Short, 0:58 | 40K | uploaded 2026-07 |
+| [20% of Linux Commands You'll Use 80% of the Time (Real-World Example)](https://www.youtube.com/watch?v=CLh2ACdXNbc) | TechWorld with Nana | 25:01 | 661K | uploaded 2025-04 |
+
+### Git and GitHub (`deploying-and-operating-ai-systems/s2`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [What is Git? \| GIT Basics for DevOps Beginners \| KodeKloud](https://www.youtube.com/watch?v=Lr7sYCrhxE0) | KodeKloud | 17:31 | 58K | uploaded 2020-06; mentions KodeKloud's labs or platform |
+| [Learn Git Worktrees in Under 3 Minutes](https://www.youtube.com/shorts/efVKPUr9D1A) | KodeKloud | Short, 2:48 | 87K | uploaded 2026-04 |
+| [3 Git Workflows Every Developer Should Know (And When to Use Each)](https://www.youtube.com/watch?v=GQQqf-C2ha4) | TechWorld with Nana | 31:32 | 188K | uploaded 2026-01 |
+
+### Networking fundamentals (`deploying-and-operating-ai-systems/s3`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Interview: How TCP, TLS and HTTP Actually Work Together](https://www.youtube.com/shorts/lVWXZb_4tU8) | KodeKloud | Short, 2:38 | 344K | uploaded 2026-10 |
+| [Interview: How DNS Finds a Website’s IP Address](https://www.youtube.com/shorts/wEjgtknhLUQ) | KodeKloud | Short, 2:58 | 160K | uploaded 2026-10 |
+| [Proxy vs Reverse Proxy vs Load Balancer \| Simply Explained](https://www.youtube.com/watch?v=xo5V9g9joFs) | TechWorld with Nana | 13:18 | 754K | uploaded 2024-09 |
+
+### Python and YAML for pipelines (`deploying-and-operating-ai-systems/s4`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [YAML Explained: A Beginner's Guide in 10 Minutes](https://www.youtube.com/watch?v=o9pT9cWzbnI) | KodeKloud | 8:26 | 137K | uploaded 2018-04 |
+| [Meet UV — The Fastest Python Package Manager](https://www.youtube.com/shorts/PXO9wfRa3SA) | KodeKloud | Short, 1:26 | 28K | uploaded 2025-10 |
+| [Yaml Tutorial \| Learn YAML in 18 mins](https://www.youtube.com/watch?v=1uFVr15xDGg) | TechWorld with Nana | 18:05 | 772K | uploaded 2020-06 |
+
+### Docker and containers (`deploying-and-operating-ai-systems/s5`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Docker 101: A Beginner's Guide to Containerization](https://www.youtube.com/watch?v=wxxigbHwDGM) | KodeKloud | 11:03 | 98K | uploaded 2017-09 |
+| [Containers vs Virtual Machines Explained](https://www.youtube.com/shorts/biDEGt6XWc4) | KodeKloud | Short, 1:08 | 66K | uploaded 2026-08 |
+| [Docker vs Podman, Explained](https://www.youtube.com/shorts/OM3LfuQRL3s) | KodeKloud | Short, 2:58 | 112K | uploaded 2026-08 |
+
+### Kubernetes (`deploying-and-operating-ai-systems/s6`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Kubernetes Architecture Simplified \| K8s Explained in 10 Minutes \| KodeKloud](https://www.youtube.com/watch?v=8C_SCDbUJTg) | KodeKloud | 9:30 | 367K | uploaded 2019-04 |
+| [AI Infrastructure Explained (GPUs, vLLM, and LLM-D)](https://www.youtube.com/watch?v=hBzUokVYQkI) | KodeKloud | 50:59 | 434K |  |
+| [Kubernetes Liveness vs Readiness Probes, Done Right!](https://www.youtube.com/shorts/oM5-knpFPw4) | KodeKloud | Short, 2:47 | 42K | uploaded 2026-08 |
+| [What is Kubernetes \| Kubernetes explained in 15 mins](https://www.youtube.com/watch?v=VnvRFRk_51k) | TechWorld with Nana | 14:13 | 1.5M | uploaded 2019-12 |
+| [Kubernetes Services explained \| ClusterIP vs NodePort vs LoadBalancer vs Headless Service](https://www.youtube.com/watch?v=T4Z7visMM4E) | TechWorld with Nana | 24:13 | 692K | uploaded 2020-10; mentions a sponsor |
+
+### CI/CD and GitOps (`deploying-and-operating-ai-systems/s7`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Demystifying GitOps: A Beginner-Friendly Explanation \| KodeKloud](https://www.youtube.com/watch?v=GlG6Xr2HH1g) | KodeKloud | 8:01 | 49K | uploaded 2023-01 |
+| [DevOps: CI/CD Introduction (Continuous Integration, Continuous Delivery, Continuous Deployment)](https://www.youtube.com/watch?v=AlrImm1T8Wg) | KodeKloud | 4:08 | 109K | uploaded 2017-10 |
+| [Canary Deployment in Kubernetes Explained](https://www.youtube.com/shorts/HTe2_uIWSuY) | KodeKloud | Short, 2:55 | 40K | uploaded 2026-09 |
+| [GitHub Actions Tutorial - Basic Concepts and CI/CD Pipeline with Docker](https://www.youtube.com/watch?v=R8_veQiYBjI) | TechWorld with Nana | 32:30 | 2.3M | uploaded 2020-10 |
+| [What is GitOps, How GitOps works and Why it's so useful](https://www.youtube.com/watch?v=f5EpcWp0THw) | TechWorld with Nana | 11:33 | 472K | uploaded 2021-06; mentions KodeKloud's labs or platform |
+
+### Infrastructure as code (`deploying-and-operating-ai-systems/s8`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Crossplane vs Terraform: What's the Real Difference?](https://www.youtube.com/shorts/jKipg6vA3mE) | KodeKloud | Short, 1:35 | 33K | uploaded 2026-08 |
+| [Ansible Playbook for Beginners: Quick 10-Minute Guide](https://www.youtube.com/watch?v=Z01b9QZG0D0) | KodeKloud | 8:16 | 169K | uploaded 2017-06 |
+| [Terraform explained in 15 mins \| Terraform Tutorial for Beginners](https://www.youtube.com/watch?v=l5k1ai_GBDE) | TechWorld with Nana | 18:15 | 2.2M | uploaded 2020-07; mentions KodeKloud's labs or platform |
+
+### Cloud platforms and managed AI services (`deploying-and-operating-ai-systems/s9`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [AWS EKS Tutorial \| What is EKS? \| EKS Explained \| KodeKloud](https://www.youtube.com/watch?v=CukYk43agA4) | KodeKloud | 22:27 | 167K | uploaded 2022-12 |
+| [AWS Lambda explained in 60 seconds](https://www.youtube.com/shorts/dlTX_TBpVUs) | KodeKloud | Short, 1:18 | 44K | uploaded 2025-12 |
+| [Containers on AWS Overview: ECS \| EKS \| Fargate \| ECR](https://www.youtube.com/watch?v=AYAh6YDXuho) | TechWorld with Nana | 25:10 | 644K | uploaded 2020-11 |
+
+### MLOps (`deploying-and-operating-ai-systems/s10`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [What is MLOps?](https://www.youtube.com/shorts/EwZcKZ_k6d0) | KodeKloud | Short, 2:34 | 35K |  |
+| [What is Kubeflow?](https://www.youtube.com/shorts/8JT6DS8yt0s) | KodeKloud | Short, 2:53 | 20K |  |
+| [MLOps Explained - What It Is, Why You Need It and How It Works](https://www.youtube.com/watch?v=biqYkVf-a7Y) | TechWorld with Nana | 26:23 | 174K | uploaded 2025-11 |
+
+### Metrics, logs and the observability stack (`deploying-and-operating-ai-systems/s11`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [What is Grafana Loki?](https://www.youtube.com/shorts/UmJ1vFfGUWg) | KodeKloud | Short, 0:52 | 23K | uploaded 2024-07 |
+| [How Distributed Tracing Works Across Microservices in Kubernetes](https://www.youtube.com/shorts/nzg8KxL5ftI) | KodeKloud | Short, 2:36 | 12K | uploaded 2026-07 |
+| [How Prometheus Monitoring works \| Prometheus Architecture explained](https://www.youtube.com/watch?v=h4Sl21AKiDg) | TechWorld with Nana | 21:30 | 1.2M | uploaded 2020-04 |
+
+### DevSecOps and platform security (`deploying-and-operating-ai-systems/s12`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Stop Storing Kubernetes Secrets Like This!](https://www.youtube.com/shorts/JBstJnxbozc) | KodeKloud | Short, 2:55 | 33K | uploaded 2026-09 |
+| [Zero Trust Explained in 5 Minutes](https://www.youtube.com/watch?v=q2phcnesXvY) | KodeKloud | 5:56 | 35K | uploaded 2026-07; mentions KodeKloud's labs or platform |
+| [What is DevSecOps? \| DevOps vs DevSecOps \| KodeKloud](https://www.youtube.com/watch?v=1XpUDV7PBFo) | KodeKloud | 8:50 | 15K | uploaded 2024-01 |
+| [HashiCorp Vault Tutorial for Beginners - What, Why and How](https://www.youtube.com/watch?v=klyAhaklGNU) | TechWorld with Nana | 29:10 | 180K | uploaded 2025-01 |
+| [Kubernetes Security Best Practices you need to know \| THE Guide for securing your K8s cluster!](https://www.youtube.com/watch?v=oBf5lrmquYI) | TechWorld with Nana | 29:41 | 257K | uploaded 2022-05; mentions a sponsor |
+
+### System design and data infrastructure (`deploying-and-operating-ai-systems/s13`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Consistent Hashing Explained (System Design Basics)](https://www.youtube.com/shorts/AIuZExZFHNU) | KodeKloud | Short, 2:46 | 255K | uploaded 2026-07 |
+| [Postgres Hit the Connection Limit. Now What?](https://www.youtube.com/shorts/-C_EKxhwYew) | KodeKloud | Short, 2:55 | 219K | uploaded 2026-07 |
+| [Change Data Capture (CDC) Explained for Beginners](https://www.youtube.com/watch?v=K83NPFfWPBw) | KodeKloud | 9:54 | 84K | uploaded 2026-10 |
+| [System Design: Designing Load Balancer](https://www.youtube.com/shorts/BpGljU1miLI) | KodeKloud | Short, 2:51 | 131K | uploaded 2026-10 |
+
+### AIOps (`deploying-and-operating-ai-systems/s14`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [What is AIOps? How It Differs from DevOps and MLOps](https://www.youtube.com/watch?v=_cexdeRAtCg) | KodeKloud | 3:44 | 14K | uploaded 2025-12 |
+| [Every DevOps Engineer Should Know AIOps [FREE LABs]](https://www.youtube.com/watch?v=SUAHtdDBeps) | KodeKloud | 12:49 | 8K | uploaded 2026-03 |
+| [The complete AIOps roadmap you need to know!](https://www.youtube.com/shorts/lmY94ldWa3Q) | KodeKloud | Short, 2:48 | 22K | uploaded 2025-12 |
+
+### AI coding assistants (`deploying-and-operating-ai-systems/s15`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Claude Code Explained for Beginners](https://www.youtube.com/watch?v=sxp-VXbXZU4) | KodeKloud | 9:01 | 41K |  |
+| [Gemini CLI: Open-Source AI in Your Terminal](https://www.youtube.com/shorts/mDAnW8MUVlQ) | KodeKloud | Short, 2:59 | 51K | uploaded 2025-10 |
+| [A Complete Guide to Claude Code - Here are ALL the Best Strategies](https://www.youtube.com/watch?v=amEUIuBKwvg) | Cole Medin | 50:17 | 151K | uploaded 2025-08; mentions the creator's community or product |
+
 ## Candidates that were read and not used
 
 | Clip | Channel | Drafted for | Why not |
@@ -386,8 +515,7 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [Why do RAG Exists?](https://www.youtube.com/shorts/dVqNaukCiOo) | KodeKloud | `rag-knowledge-systems/s1` | over the section limit or covered by a clearer pick |
 | [AI Agents for Beginners – Part 1 (Free Labs)](https://www.youtube.com/watch?v=MZhjki7t6p8) | KodeKloud | `agents-and-agentic-systems/s1` | a 67-minute course lesson built around enrolment and lab sign-up |
 | [AI Agents for Beginners Course - Part 1](https://www.youtube.com/shorts/BWAEyVB_zAk) | KodeKloud | `agents-and-agentic-systems/s1` | a trailer for a KodeKloud course |
-| [Claude Code Explained in 60 Seconds](https://www.youtube.com/shorts/p7U_98jWqWo) | KodeKloud | `agents-and-agentic-systems/s1` | an AI coding assistant, not a topic of any Part: listed under "AI coding assistants" in video-coverage.md |
-| [Claude Code Explained for Beginners](https://www.youtube.com/watch?v=sxp-VXbXZU4) | KodeKloud | `agents-and-agentic-systems/s1` | an AI coding assistant, not a topic of any Part: listed under "AI coding assistants" in video-coverage.md |
+| [Claude Code Explained in 60 Seconds](https://www.youtube.com/shorts/p7U_98jWqWo) | KodeKloud | `agents-and-agentic-systems/s1` | the same script as the kept 9-minute video |
 | [(Part 1/2) Agent vs Workflow - Which Should You Choose? (Part 1/2)](https://www.youtube.com/shorts/aFxTJbhkb2c) | KodeKloud | `agents-and-agentic-systems/s2` | over the section limit or covered by a clearer pick |
 | [(Part 2/2) Agent vs Workflow - Which Should You Choose?](https://www.youtube.com/shorts/m9-Yxu-0fJc) | KodeKloud | `agents-and-agentic-systems/s2` | over the section limit or covered by a clearer pick |
 | [Why AI Agents Are Killing Workflows in 2026](https://www.youtube.com/shorts/0X3cQo4euEo) | KodeKloud | `agents-and-agentic-systems/s2` | hype title; the two-part workflow series covers the same ground |
@@ -407,13 +535,10 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [Everyone's Quitting MCP… Here's What They're Using Instead #shorts](https://www.youtube.com/shorts/l72Dy8U98QU) | KodeKloud | `tool-use-and-integrations/s2` | over the section limit or covered by a clearer pick |
 | [MCP in 10 Minutes (Model Context Protocol + Free Lab)](https://www.youtube.com/watch?v=dyt-bhxrrbk) | KodeKloud | `tool-use-and-integrations/s2` | over the section limit or covered by a clearer pick |
 | [Build a Fully Functional MCP Server in Minutes Using Postman! (No Code Required)](https://www.youtube.com/watch?v=GDFD7nq6IGg) | KodeKloud | `tool-use-and-integrations/s2` | over the section limit or covered by a clearer pick |
-| [AI Infrastructure Explained (GPUs, vLLM, and LLM-D)](https://www.youtube.com/watch?v=hBzUokVYQkI) | KodeKloud | `inference/s3` | a 51-minute course-style video with lab pitches: listed under "Kubernetes (and AI on Kubernetes)" in video-coverage.md |
-| [What is MLOps?](https://www.youtube.com/shorts/EwZcKZ_k6d0) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
 | [Best Observability Tools Ranked (2026)](https://www.youtube.com/shorts/tQFCUXTkcLs) | KodeKloud | `llmops-and-observability/s4` | infrastructure observability, not LLM tracing: listed under the observability stack in video-coverage.md |
 | [Complete Guide to MLOps \| Machine Learning Essentials](https://www.youtube.com/watch?v=7Xjrp9j9bLw) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
 | [How MLOps Works \| Complete Architecture & Workflow Explained](https://www.youtube.com/watch?v=IN3zEeVte8c) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
 | [Kubeflow Explained for Beginners](https://www.youtube.com/watch?v=hvzEPlRdJ2Q) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
-| [What is Kubeflow?](https://www.youtube.com/shorts/8JT6DS8yt0s) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
 | [What is MLOps?](https://www.youtube.com/watch?v=QkaDZg-2oM4) | KodeKloud | `llmops-and-observability/s4` | classic MLOps or infrastructure observability, not LLMOps: listed under "MLOps" in video-coverage.md |
 | [Can AI Pass Humanity's Last Exam?](https://www.youtube.com/shorts/_rpaJRcdWvI) | KodeKloud | `evaluation-engineering/s5` | a benchmark explainer with few views, tangential to application evals |
 | [The $2 Million AI Puzzle Most Models Still Can't Solve](https://www.youtube.com/watch?v=ycLQxhkirc4) | KodeKloud | `evaluation-engineering/s5` | a benchmark explainer with few views, tangential to application evals |
@@ -421,8 +546,11 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [🚨 Anthropic's AI Accidentally Hacked 3 Real Companies!](https://www.youtube.com/shorts/rBaG_Jq0AhQ) | KodeKloud | `safety-security-and-guardrails/s7` | news about one report, not engineering education |
 | [Unbelievable Abuse of Claude! 🤯](https://www.youtube.com/shorts/K7PvmqN_T8w) | KodeKloud | `safety-security-and-guardrails/s7` | news about one report, not engineering education |
 | [How OpenAI Saved 30,000 CPU Cores! 🤯](https://www.youtube.com/shorts/KBs0MerAnoE) | KodeKloud | `ai-application-architecture/s9` | a log-collector configuration story, not AI application architecture |
-| [Why Git Wasn’t Enough for Anthropic!](https://www.youtube.com/shorts/7atGIcL-vRY) | KodeKloud | `ai-application-architecture/s9` | about version control at one company, tangential to the Part |
+| [Why Git Wasn’t Enough for Anthropic!](https://www.youtube.com/shorts/7atGIcL-vRY) | KodeKloud | `ai-application-architecture/s9` | news about one company's internal tool; its claims cannot be checked from the clip |
 | [Build an AI Chatbot in SECONDS 🤖](https://www.youtube.com/shorts/2yua8o7os3U) | KodeKloud | `ai-application-architecture/s9` | a vague pitch for pre-built modules |
+| [Linux Explained: What Is Linux and Why It’s So Popular in Tech?](https://www.youtube.com/shorts/KyOA2iUXAIM) | KodeKloud | `deploying-and-operating-ai-systems/s1` | over the section limit or covered by a clearer pick |
+| [How Prometheus Monitoring Works \| Explaining Prometheus Architecture \| KodeKloud](https://www.youtube.com/watch?v=f4W_eEJC-20) | KodeKloud | `deploying-and-operating-ai-systems/s11` | over the section limit or covered by a clearer pick |
+| [What is AIOps and how does it differ from DevOps and MLOps?](https://www.youtube.com/shorts/uKQQzrq9Cqw) | KodeKloud | `deploying-and-operating-ai-systems/s14` | the same script as the kept video |
 | [GPT5 unlocks LLM System 2 Thinking?](https://www.youtube.com/watch?v=sD0X-lWPdxg) | AI Jason | `llm-fundamentals/s10` | a 2024 prompting talk, not about reasoning models |
 | [Full AI Prompting Course with Andrew Ng](https://www.youtube.com/watch?v=8ib4Qnh2HFE) | DeepLearningAI | `prompt-engineering/s2` | a 2.5-hour course for general users, not engineers' prompt design |
 | ["Next Level Prompts?" - 10 mins into advanced prompting](https://www.youtube.com/watch?v=69bH4IHZivs) | AI Jason | `prompt-engineering/s2` | 2023, built on one niche library |
@@ -448,8 +576,11 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [Getting Started with MCP For LLM Agents](https://www.youtube.com/watch?v=JTjNdk7WDus) | Lucas Soares \| Automata Learning Lab | `tool-use-and-integrations/s2` | a third video over 30 minutes; the section keeps two |
 | [Build Anything with MCP Agents, Here’s How](https://www.youtube.com/watch?v=TQsP_PlCY1I) | David Ondrej | `tool-use-and-integrations/s2` | Cursor usage plus a product plug, not MCP itself |
 | [Claude MCP has Changed AI Forever - Here's What You NEED to Know](https://www.youtube.com/watch?v=v_6EXt6T83I) | Cole Medin | `tool-use-and-integrations/s2` | a Claude Desktop walkthrough from early 2025 |
-| [MLOps Explained - What It Is, Why You Need It and How It Works](https://www.youtube.com/watch?v=biqYkVf-a7Y) | TechWorld with Nana | `llmops-and-observability/s4` | classic MLOps: listed under "MLOps" in video-coverage.md |
 | [Building an Audio Transcription App with OpenAI Whisper and Streamlit](https://www.youtube.com/watch?v=cNLXzXyuzUs) | Lucas Soares \| Automata Learning Lab | `multimodal-engineering/s8` | November 2022, Whisper's release era |
 | [AI agent + Vision = Incredible](https://www.youtube.com/watch?v=JgVb8A6OJwM) | AI Jason | `multimodal-engineering/s8` | sponsored (SceneXplain), GPT-4V era |
 | ["How to give GPT my business knowledge?" - Knowledge embedding 101](https://www.youtube.com/watch?v=c_nCjlSB1Zk) | AI Jason | `llm-fundamentals/s9` | 2023 code-along tied to the old OpenAI embedding model |
 | [What Is LLM HAllucination And How to Reduce It?](https://www.youtube.com/watch?v=r0q1n8BJ0QI) | Krish Naik | `safety-security-and-guardrails/s7` | the safety section does not cover hallucination |
+| [What is Docker? Docker container concept explained \|\| Docker Tutorial 1](https://www.youtube.com/watch?v=jPdIRX6q4jA) | TechWorld with Nana | `deploying-and-operating-ai-systems/s5` | opens by welcoming viewers to a Kubernetes tutorial |
+| [What is Helm in Kubernetes? Helm and Helm Charts explained  \| Kubernetes Tutorial 23](https://www.youtube.com/watch?v=-ykwb1d0DXU) | TechWorld with Nana | `deploying-and-operating-ai-systems/s6` | the section does not cover Helm |
+| [Microservices explained - the What, Why and How?](https://www.youtube.com/watch?v=rv4LlmLmVWk) | TechWorld with Nana | `deploying-and-operating-ai-systems/s13` | sponsored by HashiCorp, and about architecture styles rather than the section's topics |
+| [I was using Claude Code wrong... The Ultimate Workflow](https://www.youtube.com/watch?v=UZb0if-7wGE) | AI Jason | `deploying-and-operating-ai-systems/s15` | a sponsored 2025 workflow video that ends in a community pitch |
