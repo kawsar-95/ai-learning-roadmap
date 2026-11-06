@@ -16,7 +16,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Pinned to the image every earlier deploy ran on. `ubuntu-latest` moved to
+    # 26.04, and the first two deploys on it stalled in the Pages queue.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -42,10 +45,16 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # A deploy takes 6 to 27 seconds. When the Pages queue stalls, the
+          # default of 10 minutes only delays the failure. The same commit
+          # cannot be deployed again after it: push a new one.
+          timeout: 180000
