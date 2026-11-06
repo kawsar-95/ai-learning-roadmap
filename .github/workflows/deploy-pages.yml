@@ -31,7 +31,10 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
 
-      - run: npm ci
+      # With a warm cache the audit request is the only network call npm ci
+      # makes, and nothing here uses its result. Skipping it leaves the install
+      # with nothing to wait on outside the runner.
+      - run: npm ci --no-audit
 
       - run: npm test
 
