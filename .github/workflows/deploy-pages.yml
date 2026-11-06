@@ -49,7 +49,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -57,7 +57,8 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
         with:
-          # A deploy takes 6 to 27 seconds. When the Pages queue stalls, the
-          # default of 10 minutes only delays the failure. The same commit
-          # cannot be deployed again after it: push a new one.
-          timeout: 180000
+          # GitHub times a Pages deployment out after 10 minutes. A shorter
+          # limit here can cancel a deployment the service would still finish,
+          # and a cancelled one cannot be deployed again for the same commit:
+          # that commit needs a new push.
+          timeout: 600000

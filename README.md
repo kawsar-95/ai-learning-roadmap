@@ -45,10 +45,10 @@ every push to `main`, and you can also start it from the Actions tab. It:
 3. Publishes `out/` to GitHub Pages.
 
 A deploy takes about two minutes, and the publishing step a few seconds of
-that. If the `deploy` job sits on `deployment_queued`, the workflow cancels
-it after 3 minutes. A cancelled deployment cannot be run again for the same
-commit (re-running the job answers "Deployment cancelled"), so push a new
-commit.
+that. If GitHub's Pages service stalls, the workflow waits for the service's
+own 10-minute limit and then cancels the deployment. A cancelled deployment
+cannot be run again for the same commit (re-running the job answers
+"Deployment cancelled"), so push a new commit.
 
 `next.config.ts` reads `PAGES_BASE_PATH` as the `basePath`. Local builds do
 not set it, so the site serves from `/`. Code that builds a URL by hand
