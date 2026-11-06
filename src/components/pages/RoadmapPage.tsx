@@ -4,6 +4,7 @@ import { getTopic, topicText } from "@/lib/topics";
 import { CURRICULUM_URL, formatDuration, lessonHref, lessonKey } from "@/lib/roadmap-schema";
 import { UI, fmtNum, resourcesHref, roadmapHref, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
+import { PageHeader } from "@/components/layout/PageHeader";
 import {
   CoreFilter,
   LessonCheck,
@@ -111,13 +112,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16">
-      <header className="mb-10">
-        <p className="font-mono text-[12px] font-medium tracking-[0.2em] text-accent uppercase">{ui.roadmap}</p>
-        <h1 className="mt-3 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-text">
-          {ui.roadmapTitle}
-        </h1>
-        <p className="mt-3 max-w-2xl text-[17px] text-text-dim">{ui.roadmapIntro}</p>
-      </header>
+      <PageHeader title={ui.roadmapTitle} intro={ui.roadmapIntro} />
 
       <section aria-labelledby="learning-paths" className="mb-12">
         <h2 id="learning-paths" className="font-display text-[28px] font-bold leading-tight text-text">

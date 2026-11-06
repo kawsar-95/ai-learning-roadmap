@@ -9,21 +9,27 @@ import { resetProgress, setDone, toggleBookmark, toggleDone, useBookmarks, usePr
 /** A section key and the page address of that section. */
 export type SectionLink = { key: string; href: string };
 
-/** The thin bar and "done / total" count of one Part, for the Part cards. */
-export function PartProgress({ keys, lang }: { keys: string[]; lang: Lang }) {
-  const { done, total, percent } = summarize(useProgress(), keys);
+/** The small flat buttons of the reading pages: a border, no shadow, a fill only when on. */
+const BUTTON = "inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[13px] font-medium transition-colors";
+const BUTTON_IDLE = "border-border-strong text-text-dim hover:border-accent hover:text-text";
+
+/**
+ * The reading progress of one Part, for the Part lists. With a `label` (for
+ * example "10 sections") it shows the label until the reader finishes a
+ * section, then the count "3/10". Without a `label` it always shows the count.
+ */
+export function PartCount({ keys, label, lang }: { keys: string[]; label?: string; lang: Lang }) {
+  const { done, total } = summarize(useProgress(), keys);
+  if (label && done === 0) return <span className="shrink-0 text-[13px] text-text-faint">{label}</span>;
   return (
-    <div className="flex items-center gap-3" aria-label={`${UI[lang].doneLabel}: ${done} / ${total}`}>
-      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-bg-raised-2">
-        <div
-          className="h-full rounded-full bg-linear-to-r from-accent to-accent-2 transition-[width] duration-300"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-      <span className="font-mono text-[12px] tabular-nums text-text-faint">
+    <span className={"shrink-0 font-mono text-[12px] tabular-nums " + (done > 0 ? "text-accent" : "text-text-faint")}>
+      <span aria-hidden="true">
         {fmtNum(lang, done)}/{fmtNum(lang, total)}
       </span>
-    </div>
+      <span className="sr-only">
+        {UI[lang].doneLabel}: {fmtNum(lang, done)} / {fmtNum(lang, total)}
+      </span>
+    </span>
   );
 }
 
@@ -52,12 +58,7 @@ export function SectionDoneButton({ sectionKey, lang }: { sectionKey: string; la
       type="button"
       aria-pressed={done}
       onClick={() => toggleDone(sectionKey)}
-      className={
-        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
-        (done
-          ? "border-accent bg-accent text-on-accent hover:opacity-90"
-          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
-      }
+      className={`${BUTTON} ${done ? "border-accent bg-accent text-on-accent hover:opacity-90" : BUTTON_IDLE}`}
     >
       <span aria-hidden="true">{done ? "✓" : "○"}</span>
       {done ? ui.markedDone : ui.markDone}
@@ -73,16 +74,19 @@ export function BookmarkButton({ sectionKey, lang }: { sectionKey: string; lang:
       type="button"
       aria-pressed={on}
       onClick={() => toggleBookmark(sectionKey)}
-      className={
-        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
-        (on
-          ? "border-accent bg-bg-raised text-accent hover:opacity-90"
-          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
-      }
+      className={`${BUTTON} ${on ? "border-accent text-accent hover:opacity-90" : BUTTON_IDLE}`}
     >
-      <span aria-hidden="true" className={on ? "" : "opacity-40"}>
-        🔖
-      </span>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        className="size-3.5"
+        fill={on ? "currentColor" : "none"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      >
+        <path d="M4 2.5h8v11l-4-2.8-4 2.8z" />
+      </svg>
       {UI[lang].bookmark}
     </button>
   );
@@ -98,12 +102,7 @@ export function TopicDoneButton({ keys, lang }: { keys: string[]; lang: Lang }) 
       type="button"
       aria-pressed={allDone}
       onClick={() => setDone(keys, !allDone)}
-      className={
-        "inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-[14px] font-medium transition-colors " +
-        (allDone
-          ? "border-accent bg-bg-raised text-accent hover:opacity-90"
-          : "border-border-strong bg-bg-raised text-text-dim shadow-card hover:border-accent hover:text-text")
-      }
+      className={`${BUTTON} ${allDone ? "border-accent text-accent hover:opacity-90" : BUTTON_IDLE}`}
     >
       <span aria-hidden="true">✓</span>
       {allDone ? ui.markedRead : ui.markRead}
@@ -127,28 +126,25 @@ export function ProgressSummary({ sections, lang }: { sections: SectionLink[]; l
   ];
 
   return (
-    <div className="rounded-2xl border border-border bg-bg-raised p-6 shadow-card sm:p-8">
+    <div className="rounded-2xl border border-border bg-bg-raised p-5 sm:p-6">
       <dl className="m-0 grid grid-cols-3 gap-4">
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3 sm:pl-4">
             <dt className="mt-1.5 text-[13px] leading-snug text-text-faint">{label}</dt>
-            <dd className="m-0 font-display text-[clamp(1.75rem,5vw,2.5rem)] font-bold leading-none text-text">
+            <dd className="m-0 font-display text-[clamp(1.75rem,5vw,2.25rem)] font-bold leading-none text-text">
               {value}
             </dd>
           </div>
         ))}
       </dl>
-      <div className="mt-6 h-2 overflow-hidden rounded-full bg-bg-raised-2">
-        <div
-          className="h-full rounded-full bg-linear-to-r from-accent to-accent-2 transition-[width] duration-300"
-          style={{ width: `${percent}%` }}
-        />
+      <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-bg-raised-2">
+        <div className="h-full rounded-full bg-accent transition-[width] duration-300" style={{ width: `${percent}%` }} />
       </div>
-      <div className="mt-6 flex flex-wrap items-center gap-3">
+      <div className="mt-5 flex flex-wrap items-center gap-3">
         {nextHref ? (
           <Link
             href={nextHref}
-            className="rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+            className="rounded-lg bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline transition-opacity hover:opacity-90"
           >
             {ui.continueReading}
           </Link>
@@ -161,7 +157,7 @@ export function ProgressSummary({ sections, lang }: { sections: SectionLink[]; l
           onClick={() => {
             if (window.confirm(ui.startOverConfirm)) resetProgress();
           }}
-          className="rounded-[10px] border border-border-strong px-5 py-2.5 text-[15px] font-medium text-text-dim transition-colors hover:border-danger hover:text-danger disabled:pointer-events-none disabled:opacity-40"
+          className="rounded-lg border border-border-strong px-5 py-2.5 text-[15px] font-medium text-text-dim transition-colors hover:border-danger hover:text-danger disabled:pointer-events-none disabled:opacity-40"
         >
           {ui.startOver}
         </button>

@@ -168,21 +168,13 @@ export function SearchPalette({ lang }: { lang: Lang }) {
         aria-expanded={open}
         aria-keyshortcuts="Control+K Meta+K"
         onClick={openPalette}
-        className="flex h-8 items-center gap-2 rounded-md border border-border bg-bg-raised/60 px-2 text-sm text-text-dim transition-colors hover:border-border-strong hover:text-text sm:min-w-52"
+        className="grid size-8 shrink-0 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised-2 hover:text-text"
+        title={`${ui.search} · Ctrl/⌘ K`}
       >
-        <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4 shrink-0" fill="none">
+        <svg aria-hidden="true" viewBox="0 0 20 20" className="size-[18px]" fill="none">
           <circle cx="9" cy="9" r="5.5" stroke="currentColor" strokeWidth="1.6" />
           <path d="M13.2 13.2L17 17" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
-        <span aria-hidden="true" className="hidden flex-1 text-left sm:inline">
-          {ui.search}
-        </span>
-        <kbd
-          aria-hidden="true"
-          className="hidden rounded border border-border-strong px-1.5 py-0.5 font-mono text-[11px] leading-none text-text-faint sm:inline"
-        >
-          Ctrl K
-        </kbd>
       </button>
 
       {open && (

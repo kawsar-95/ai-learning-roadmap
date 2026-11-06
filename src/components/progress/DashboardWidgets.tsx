@@ -44,7 +44,7 @@ export function ContinueCard({ sections, lang }: { sections: DashboardSection[];
       </p>
       <Link
         href={next.href}
-        className="inline-block rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+        className="inline-block rounded-lg bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline transition-opacity hover:opacity-90"
       >
         {started ? ui.continueReading : ui.startReading}
       </Link>

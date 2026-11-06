@@ -120,7 +120,7 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
         {nextHref ? (
           <Link
             href={nextHref}
-            className="rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
+            className="rounded-lg bg-accent px-5 py-2.5 text-[15px] font-semibold text-on-accent no-underline transition-opacity hover:opacity-90"
           >
             {ui.continueReading}
           </Link>

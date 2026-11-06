@@ -44,23 +44,25 @@ export function SidebarList({
                 aria-current={active ? "page" : undefined}
                 onClick={onNavigate}
                 className={
-                  "group block rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
+                  "group flex items-baseline gap-2.5 rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
                   (active
                     ? "border-accent bg-bg-raised-2"
                     : "border-transparent hover:border-border-strong hover:bg-bg-raised-2/60")
                 }
               >
                 <span
+                  aria-hidden="true"
                   className={
-                    "block font-mono text-[10px] uppercase tracking-[0.12em] " +
+                    "w-5 shrink-0 font-mono text-[11px] tabular-nums " +
                     (active ? "text-accent" : "text-text-faint")
                   }
                 >
-                  {UI[lang].part(fmtNum(lang, item.part))}
+                  {fmtNum(lang, item.part).padStart(2, fmtNum(lang, 0))}
                 </span>
+                <span className="sr-only">{UI[lang].part(fmtNum(lang, item.part))}: </span>
                 <span
                   className={
-                    "block text-[13px] leading-snug " +
+                    "text-[13px] leading-snug " +
                     (active ? "text-text" : "text-text-dim group-hover:text-text")
                   }
                 >
