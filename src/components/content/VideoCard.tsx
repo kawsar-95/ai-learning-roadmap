@@ -4,21 +4,30 @@ import { useState } from "react";
 import type { Video } from "@/lib/content-schema";
 import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
+import { formatClock, isoDuration } from "@/lib/videos";
 
 /**
  * A YouTube video as a thumbnail card. Nothing loads from YouTube until the
  * reader clicks: then the card swaps in the youtube-nocookie player.
+ * A Short is vertical (9:16), and YouTube's thumbnail for it is 4:3 with black
+ * bars, so a Short shows a plain poster instead and loads no image at all.
  */
 export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
   const [playing, setPlaying] = useState(false);
   const watchUrl = `https://www.youtube.com/watch?v=${video.id}`;
+  const short = video.format === "short";
 
   return (
-    <figure className="m-0 overflow-hidden rounded-xl border border-border bg-bg-raised">
-      <div className="relative aspect-video bg-bg-raised-2">
+    <figure
+      className={
+        "m-0 h-full overflow-hidden rounded-xl border border-border bg-bg-raised " +
+        (short ? "mx-auto w-full max-w-[15rem]" : "")
+      }
+    >
+      <div className={"relative bg-bg-raised-2 " + (short ? "aspect-[9/16]" : "aspect-video")}>
         {playing ? (
           <iframe
-            src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`}
+            src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0${short ? "&playsinline=1" : ""}`}
             title={video.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -32,14 +41,23 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
             aria-label={UI[lang].playVideo(video.title)}
             className="group absolute inset-0 block h-full w-full cursor-pointer p-0"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element -- static export has no image optimizer */}
-            <img
-              src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover opacity-85 transition-opacity group-hover:opacity-100"
-            />
+            {short ? (
+              <span
+                aria-hidden
+                className="absolute left-3 top-3 rounded border border-border-strong px-1.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-text-faint"
+              >
+                {UI[lang].shorts}
+              </span>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element -- static export has no image optimizer
+              <img
+                src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover opacity-85 transition-opacity group-hover:opacity-100"
+              />
+            )}
             <span
               aria-hidden
               className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-bg/80 text-accent ring-1 ring-border-strong backdrop-blur-sm transition-transform group-hover:scale-110"
@@ -66,6 +84,11 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
         </a>
         <p className="mt-1 flex items-center gap-2 text-[12.5px] text-text-faint">
           <span className="truncate">{video.channel}</span>
+          {video.seconds !== undefined && (
+            <time dateTime={isoDuration(video.seconds)} className="shrink-0 font-mono text-[11.5px]">
+              {formatClock(video.seconds, lang)}
+            </time>
+          )}
           {video.lang === "bn" && (
             <span className="shrink-0 rounded border border-voice-bangla/40 px-1.5 font-bengali text-[11px] text-voice-bangla">
               বাংলা

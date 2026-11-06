@@ -188,6 +188,30 @@
           "title": "Prompting 101 | Code w/ Claude",
           "channel": "Anthropic",
           "lang": "en"
+        },
+        {
+          "id": "bGc8RdYVXIY",
+          "title": "LLM Roles and Messages (Part 1/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 45
+        },
+        {
+          "id": "SjuXckDBbVo",
+          "title": "LLM Roles and Messages (Part - 2/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 64
+        },
+        {
+          "id": "w3oDLeSl4kc",
+          "title": "LLM Roles and Messages (Part 3/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 67
         }
       ],
       "practice": [
@@ -495,6 +519,13 @@
           "title": "E-5: Zero-shot, One-shot, Few-shot আসলে কী | Prompt Engineering Full Course in Bangla| Afran Sarkar",
           "channel": "Afran Sarkar",
           "lang": "bn"
+        },
+        {
+          "id": "Vx6VwdhDCEc",
+          "title": "Prompt Engineering in Generative AI: Types & Techniques | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1258
         }
       ],
       "practice": [
@@ -1017,7 +1048,7 @@
         },
         {
           "id": "J4UOArmPtIg",
-          "title": "15.  XML Tags — The Prompt Trick Claude Responds Best To",
+          "title": "15. XML Tags — The Prompt Trick Claude Responds Best To",
           "channel": "The Agentic Engineer",
           "lang": "en"
         }
@@ -1271,6 +1302,13 @@
           "title": "ChatPromptTemplate Explained: Build Reusable AI Prompts | Video 4 | LangChain Series",
           "channel": "LearningHub",
           "lang": "en"
+        },
+        {
+          "id": "8K2HbXhwWug",
+          "title": "Organizing Your AI Prompts with Jinja Templates with ChatGPT & OpenAI",
+          "channel": "Lucas Soares | Automata Learning Lab",
+          "lang": "en",
+          "seconds": 676
         }
       ],
       "practice": [

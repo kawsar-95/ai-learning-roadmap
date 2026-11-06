@@ -260,6 +260,29 @@
           "title": "Rate Limiting and Model Failover With Agentgateway",
           "channel": "solo.io",
           "lang": "en"
+        },
+        {
+          "id": "fVLmyuCEEy8",
+          "title": "How ChatGPT Handles 900 Million Users",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 174
+        },
+        {
+          "id": "E2g_nWXRA54",
+          "title": "How OpenAI Serves 800 Million Users With ONE Database",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 217
+        },
+        {
+          "id": "CeOsIjO0gzk",
+          "title": "How to Deploy an AI Agent in Kubernetes (Kagent)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 146
         }
       ],
       "practice": [

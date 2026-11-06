@@ -149,6 +149,43 @@
           "title": "AI Agent কী? কী থাকে AI Agent এর ভেতরে? সহজ বাংলায় শিখুন AI Automation | Ostad App",
           "channel": "Ostad",
           "lang": "bn"
+        },
+        {
+          "id": "kIlgDm5gcMY",
+          "title": "Why do we need AI Agents when we have AI models?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 118
+        },
+        {
+          "id": "IVdJj_aNwhE",
+          "title": "Agent Harness Explained in 2 minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 148
+        },
+        {
+          "id": "gw25S8CmnFI",
+          "title": "What Is an AI Agent Harness?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 182
+        },
+        {
+          "id": "ZaPbP9DwBOE",
+          "title": "Don't learn AI Agents without Learning these Fundamentals",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 3400
+        },
+        {
+          "id": "p4pHsuEf4Ms",
+          "title": "Generative AI Vs Agentic AI Vs AI Agents",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1068
         }
       ],
       "practice": [
@@ -415,6 +452,60 @@
           "title": "Language Agents: From Reasoning to Acting — with Shunyu Yao of OpenAI, Harrison Chase of LangGraph",
           "channel": "Latent Space",
           "lang": "en"
+        },
+        {
+          "id": "dvvWoRxqkIQ",
+          "title": "What is Loop Engineering?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 161
+        },
+        {
+          "id": "NDAcOsSdanQ",
+          "title": "How AI Workflows Really Work (Part 1/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 62
+        },
+        {
+          "id": "2kyYhswN_10",
+          "title": "How AI Workflows Really Work (Part 2/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 79
+        },
+        {
+          "id": "zh0n6S2NcLM",
+          "title": "AI Agents vs AI Workflows (Part - 1/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 65
+        },
+        {
+          "id": "rZE-CIAwJqo",
+          "title": "AI Agents vs AI Workflows (Part - 2/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 102
+        },
+        {
+          "id": "ulNsa0sD8N0",
+          "title": "Harness Engineering: What Separates Top Agentic Engineers Right Now",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1029
+        },
+        {
+          "id": "Lj9npd7u1Ms",
+          "title": "Learn how to build an agent from scratch with LangGraph",
+          "channel": "DeepLearningAI",
+          "lang": "en",
+          "seconds": 763
         }
       ],
       "practice": [
@@ -651,6 +742,50 @@
           "title": "Multi Agent Systems Explained: How AI Agents & LLMs Work Together",
           "channel": "IBM Technology",
           "lang": "en"
+        },
+        {
+          "id": "NvKowH8PnaA",
+          "title": "Build AI Agents in 60 Seconds | Google ADK Tutorial",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 49
+        },
+        {
+          "id": "_ACk2DeLfSU",
+          "title": "Google’s ADK Explained in 60 Seconds",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 68
+        },
+        {
+          "id": "RA8wFVWn-EU",
+          "title": "Google A2A Protocol: The Future of AI Agent Collaboration Explained!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 546
+        },
+        {
+          "id": "wgOCzHXKw4c",
+          "title": "Google ADK Tutorial: Build Multi-Agent AI Systems from Scratch",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 4256
+        },
+        {
+          "id": "UV81LAb3x2g",
+          "title": "crewAI Crash Course For Beginners-How To Create Multi AI Agent For Complex Usecases",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1962
+        },
+        {
+          "id": "YwUD3l7--V8",
+          "title": "Context Engineering is the future of AI Agents - here’s why",
+          "channel": "David Ondrej",
+          "lang": "en",
+          "seconds": 1419
         }
       ],
       "practice": [
@@ -876,6 +1011,43 @@
           "title": "LangGraph 001 -  Introduction and Programming your First Agentic Graph Application (Bangla/বাংলা)",
           "channel": "Ahsan Iqbal",
           "lang": "bn"
+        },
+        {
+          "id": "I77wm5WKdJQ",
+          "title": "When LangChain Isn't Enough → Try LangGraph!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 178
+        },
+        {
+          "id": "ZWgFAtNzGqg",
+          "title": "How LangGraph Makes LLM Apps Simple & Powerful",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 76
+        },
+        {
+          "id": "gyBxdNpFM-8",
+          "title": "LangChain vs LangGraph: Which One Should You Use?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1526
+        },
+        {
+          "id": "vmy3HgaKJsY",
+          "title": "Most Popular Framework-Langchain vs LangGraph",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1243
+        },
+        {
+          "id": "gqvFmK7LpDo",
+          "title": "Tutorial 1-Getting Started With LangGraph- Building Stateful Multi AI Agents",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 2423
         }
       ],
       "practice": [
@@ -1118,6 +1290,27 @@
           "title": "Memory for agents (conceptual video)",
           "channel": "LangChain",
           "lang": "en"
+        },
+        {
+          "id": "0P-ACuHyu-0",
+          "title": "Agent Memory Explained in 5 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 298
+        },
+        {
+          "id": "7LWTZqksmSg",
+          "title": "Unlock AI Agent real power?! Long term memory & Self improving",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 1330
+        },
+        {
+          "id": "30Ofh-Myte4",
+          "title": "AI Dev 25 | Apoorva Joshi: Building Agents That Learn—Managing Memory in AI Agents",
+          "channel": "DeepLearningAI",
+          "lang": "en",
+          "seconds": 1927
         }
       ],
       "practice": [
@@ -1535,6 +1728,13 @@
           "title": "Subagents Explained: Isolated Context Delegation in Claude Agent SDK",
           "channel": "Yash Jain",
           "lang": "en"
+        },
+        {
+          "id": "LCYBVpSB0Wo",
+          "title": "I was using sub-agents wrong... Here is my way after 20+ hrs test",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 962
         }
       ],
       "practice": [
@@ -2233,6 +2433,14 @@
           "title": "CMU AI Agents 2026: 7. Computer Use Agents",
           "channel": "Graham Neubig",
           "lang": "en"
+        },
+        {
+          "id": "yahZy5tBoeo",
+          "title": "How Claude Does Web Search?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 98
         }
       ],
       "practice": [

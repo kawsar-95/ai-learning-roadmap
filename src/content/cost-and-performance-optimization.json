@@ -223,8 +223,8 @@
         },
         {
           "id": "zZGYnZ3HBOY",
-          "title": "Reducing the cost of LLMs in production",
-          "channel": "LATENT AI",
+          "title": "How to Reduce Costs of Large Language Models (LLMs) in Production: Effective Strategies Explained",
+          "channel": "Archer",
           "lang": "en"
         },
         {
@@ -232,6 +232,43 @@
           "title": "LiteLLM Proxy Tutorial: Track Costs, Budgets, and Multi-Provider LLM Usage",
           "channel": "Ready Tensor",
           "lang": "en"
+        },
+        {
+          "id": "uWzX8Jc9tO8",
+          "title": "Why Claude Uses 3 Different Rate Limits?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 144
+        },
+        {
+          "id": "I97FwirBidA",
+          "title": "The Real Cost of AI Agents in 2026 (Token Prices vs the Loop)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 226
+        },
+        {
+          "id": "bMubfhIYsU0",
+          "title": "You're Burning Thousands of Tokens Without Knowing",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 312
+        },
+        {
+          "id": "a17HbAv_q78",
+          "title": "Why does AI charge you MORE every time it replies?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 132
+        },
+        {
+          "id": "lHxl5SchjPA",
+          "title": "The REAL cost of LLM (And How to reduce 78%+ of Cost)",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 1640
         }
       ],
       "practice": [

@@ -26,6 +26,7 @@ npm run dev      # http://localhost:3000
 npm run build    # validates content, then writes the static site to out/
 npm test         # runs the tests in tests/
 npm run lint
+npm run check:videos   # asks YouTube if every video still exists (not part of npm test)
 npx serve out    # previews the static build at http://localhost:3000
 ```
 
@@ -152,19 +153,48 @@ Each section can list YouTube videos in `videos`:
 
 ```json
 { "id": "zduSFxRajkE", "title": "Let's build the GPT Tokenizer", "channel": "Andrej Karpathy", "lang": "en" }
+{ "id": "p7U_98jWqWo", "title": "Claude Code Explained in 60 Seconds", "channel": "KodeKloud", "lang": "en", "format": "short", "seconds": 78 }
 ```
 
 - `id` is the 11-character YouTube video ID. `lang` is `en` or `bn`.
 - Copy `title` and `channel` from YouTube's oEmbed answer:
   `https://www.youtube.com/oembed?format=json&url=https://www.youtube.com/watch?v=<id>`.
   A 200 answer also confirms that the video is public and allows embedding.
+  The stored title is the published one without hashtags and emoji.
+- `format: "short"` marks a vertical YouTube Short (9:16, 180 seconds at most).
+  `seconds` is the length in whole seconds, and the card shows it. Take it
+  from the player (`getDuration()` in the IFrame API), not from a listing.
+  Both fields are optional.
 - Technical and Layman's show the English videos. বাংলা shows the Bangla
   videos first, then the English ones. All three shows all of them.
-- A card loads nothing from YouTube until the reader clicks it. Then it
-  plays in place through `youtube-nocookie.com`.
+- A section shows its videos in a grid and its Shorts under them in a
+  vertical grid. A Short has no thumbnail: YouTube's thumbnail for a Short
+  is 4:3 with black bars.
+- A card loads no player from YouTube until the reader clicks it. The
+  thumbnail of a normal video comes from `i.ytimg.com` once its list is
+  opened (the list starts closed); a Short loads nothing. After the click,
+  the video plays in place through `youtube-nocookie.com`.
+- Videos of one channel are other people's work. `npm run check:videos`
+  asks YouTube if every video is still public, can still be embedded, and
+  still has the stored title and channel, and if a Short is still a Short
+  (`-- --channel KodeKloud` checks one channel). It prints one `FAIL` line
+  for each problem. Run it by hand. `npm test` and the deploy never run it,
+  because a creator can remove a video at any time.
 
 The cards are `src/components/content/VideoList.tsx` and `VideoCard.tsx`.
-The voice rule is `src/lib/videos.ts`.
+The voice rule and the length format are in `src/lib/videos.ts`. The check
+is `scripts/check-videos.mjs`, and its comparisons are in
+`src/lib/video-check.ts`. The scripts that found, read and verified the clips,
+and that write `docs/video-coverage.md` and `docs/video-review-log.md`, are in
+`scripts/video-curation/` (see its README).
+
+[Video coverage](docs/video-coverage.md) lists the channels the videos and
+Shorts come from (KodeKloud, Cole Medin, AI Jason, Krish Naik, David Ondrej,
+TechWorld with Nana, Lucas Soares | Automata Learning Lab, and DeepLearningAI),
+the technical topics that the site does not cover yet with curated resources
+for each, and how a clip is chosen. [Video review log](docs/video-review-log.md)
+lists every clip that was added to a section, with what was noticed in it, and
+the clips that were read and left out, each with the reason.
 
 ## Practice
 
@@ -311,12 +341,13 @@ All citations resolve to:
 │       ├── content-schema.ts           block types and Zod schema
 │       ├── topics.ts                   loads and validates content; order, outline, nav
 │       ├── search.ts                   search index helpers
-│       ├── videos.ts                   which videos each voice shows
+│       ├── videos.ts                   which videos each voice shows; clip length format
+│       ├── video-check.ts              title, channel and status comparisons for check:videos
 │       ├── practice.ts                 which practice language each voice shows
 │       ├── theme.ts                    theme choice and the inline head script
 │       └── i18n.ts                     languages, URLs, interface text, the lang head script
 ├── tests/                              content-schema, search, video, practice, theme, PWA, and language tests
-├── docs/                               design spec and plan
+├── docs/                               design spec and plan, video coverage and review log
 ├── .github/workflows/deploy-pages.yml  GitHub Pages deploy
 ├── next.config.ts                      static export and base path
 └── LICENSE

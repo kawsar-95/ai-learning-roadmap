@@ -322,6 +322,42 @@
           "title": "AI Red Teaming — Why & How to Jailbreak LLM Agents | Alex Combessie, Giskard l The Next Wave of AI",
           "channel": "Toronto Machine Learning Society (TMLS)",
           "lang": "en"
+        },
+        {
+          "id": "1M24UHWL41A",
+          "title": "RAG Retrieval Metrics Explained: Recall, Precision, MRR & NDCG",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 95
+        },
+        {
+          "id": "uamd4C7AFXo",
+          "title": "How SWE-bench Changed the Way We Test AI Coders",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 305
+        },
+        {
+          "id": "NebOSOTp-zA",
+          "title": "Mastering LLM Chatbots And RAG Evaluation Crash Course",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 3972
+        },
+        {
+          "id": "fAfuQN0WwFE",
+          "title": "AI Dev 26 x SF | Ara Khan: Evals Are Broken Use Them Anyway",
+          "channel": "DeepLearningAI",
+          "lang": "en",
+          "seconds": 1477
+        },
+        {
+          "id": "VCwk0Xk1oR0",
+          "title": "LLM Evaluation With MLFLOW And Dagshub For Generative AI Application",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1129
         }
       ],
       "practice": [

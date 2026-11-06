@@ -280,6 +280,65 @@
           "title": "Late chunking improves context recall in RAG pipelines",
           "channel": "Weaviate vector database",
           "lang": "en"
+        },
+        {
+          "id": "_HQ2H_0Ayy0",
+          "title": "RAG Explained For Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 609
+        },
+        {
+          "id": "swvzKSOEluc",
+          "title": "RAG Crash Course for Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 3530
+        },
+        {
+          "id": "jG-gbB0ULac",
+          "title": "What is RAG? How AI Chatbots Access Your Custom Data (Explained Simply)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 175
+        },
+        {
+          "id": "vvp97qJB6CU",
+          "title": "RAG Chunking Strategies Explained (Fixed Size vs Semantic Chunking)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 132
+        },
+        {
+          "id": "uDfUvC1oi3M",
+          "title": "Poor Chunking Strategy Undermine RAG System",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 94
+        },
+        {
+          "id": "tLMViADvSNE",
+          "title": "Every RAG Strategy Explained in 13 Minutes (No Fluff)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 771
+        },
+        {
+          "id": "fZM3oX4xEyg",
+          "title": "Introduction To Undertsanding RAG(Retrieval-Augmented Generation)",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1240
+        },
+        {
+          "id": "o126p1QN_RI",
+          "title": "Complete RAG Crash Course With Langchain In 2 Hours",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 7689
         }
       ],
       "practice": [
@@ -653,6 +712,20 @@
           "title": "The Weaviate Vector Database — Bring AI-native applications to life.",
           "channel": "CMU Database Group",
           "lang": "en"
+        },
+        {
+          "id": "VVNYQKDLY5s",
+          "title": "How does a Vector Database work?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 646
+        },
+        {
+          "id": "MykcjWPJ6T4",
+          "title": "2-Build RAG Pipeline From Scratch-Data Ingestion to Vector DB Pipeline-Part 1",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 3548
         }
       ],
       "practice": [
@@ -915,6 +988,13 @@
           "title": "Build your own Hybrid Search",
           "channel": "Abhishek Thakur",
           "lang": "en"
+        },
+        {
+          "id": "CK0ExcCWDP4",
+          "title": "Hybrid Search RAG With Langchain And Pinecone Vector DB",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 2555
         }
       ],
       "practice": [
@@ -1468,6 +1548,20 @@
           "title": "Self-Corrective RAG with LangGraph - Agentic RAG Tutorial",
           "channel": "Coding Crash Courses",
           "lang": "en"
+        },
+        {
+          "id": "_R-ff4ZMLC8",
+          "title": "The Future of RAG is Agentic - Learn this Strategy NOW",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 2749
+        },
+        {
+          "id": "u5Vcrwpzoz8",
+          "title": "\"I want Llama3 to perform 10x with my private knowledge\" - Local Agentic RAG w/ llama3",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 1442
         }
       ],
       "practice": [
@@ -2307,6 +2401,28 @@
           "title": "RAG with a Neo4j Knowledge Graph: How it Works and How to Set It Up",
           "channel": "Neo4j",
           "lang": "en"
+        },
+        {
+          "id": "PxcOIINgiaA",
+          "title": "Make RAG 100x Better with Real-Time Knowledge Graphs",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1600
+        },
+        {
+          "id": "Fx3J8k--U3E",
+          "title": "The PROVEN Solution for Unbelievable RAG Performance (LightRAG Guide)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1384
+        },
+        {
+          "id": "1ajWYL7Nddo",
+          "title": "Introducing RAG 2.0: Agentic RAG + Knowledge Graphs (FREE Template)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "format": "short",
+          "seconds": 133
         }
       ],
       "practice": [
@@ -2589,6 +2705,28 @@
           "title": "How to convert PDF DOCX to Structured TXT Formats for RAG! (UNSTRUCTURED Tutorial)",
           "channel": "1littlecoder",
           "lang": "en"
+        },
+        {
+          "id": "fg0_0M8kZ8g",
+          "title": "Turn ANY File into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1281
+        },
+        {
+          "id": "7nMolRAdTgc",
+          "title": "Turn ANY File into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "format": "short",
+          "seconds": 50
+        },
+        {
+          "id": "JWfNLF_g_V0",
+          "title": "Turn ANY Website into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1124
         }
       ],
       "practice": [
@@ -2893,6 +3031,13 @@
           "title": "Optimizing Document Retrieval with ColPali and Qdrant's Binary Quantization",
           "channel": "Qdrant Vector Search",
           "lang": "en"
+        },
+        {
+          "id": "BV0YUeam4y8",
+          "title": "Step By Step Process To Build MultiModal RAG With Langchain(PDF And Images)",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 2699
         }
       ],
       "practice": [

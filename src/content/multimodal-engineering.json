@@ -268,6 +268,27 @@
           "title": "ComfyUI Tutorial: How to Build and Experiment with AI pipelines – No Coding Needed",
           "channel": "Super Data Science",
           "lang": "en"
+        },
+        {
+          "id": "NEsN29prMY4",
+          "title": "Building Audio Transcription on AWS with OpenAI Whisper",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 526
+        },
+        {
+          "id": "TXVyxJdlzQs",
+          "title": "Build Your First Voice AI Agent in 20 Minutes with LiveKit (Open Source)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1140
+        },
+        {
+          "id": "PgSzh_Q5J40",
+          "title": "Building a Local Voice AI Assistant with Llama 3.2 & OpenAI Whisper Turbo 3",
+          "channel": "Lucas Soares | Automata Learning Lab",
+          "lang": "en",
+          "seconds": 3496
         }
       ],
       "practice": [

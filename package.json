@@ -7,7 +7,8 @@
     "build": "next build && node scripts/precache.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"tests/**/*.test.ts\""
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test \"tests/**/*.test.ts\"",
+    "check:videos": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/check-videos.mjs"
   },
   "dependencies": {
     "katex": "^0.19.1",

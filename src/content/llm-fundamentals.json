@@ -211,6 +211,30 @@
           "title": "AI Token, Context Window and Token Optimization Bangla Tutorial",
           "channel": "Bangla Coding Tutor",
           "lang": "bn"
+        },
+        {
+          "id": "P-mv2hQc43E",
+          "title": "What Actually is an AI Token? (Simply Explained)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 174
+        },
+        {
+          "id": "uh5wFLOyG_4",
+          "title": "Why Should You Care About AI Tokens in 2026?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 111
+        },
+        {
+          "id": "WLu6dvfqL3A",
+          "title": "Every AI request has a price and it's paid in tokens.",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 147
         }
       ],
       "practice": [
@@ -477,6 +501,45 @@
           "title": "Small vs. Large AI Models: Trade-offs & Use Cases Explained",
           "channel": "IBM Technology",
           "lang": "en"
+        },
+        {
+          "id": "Yd0orWB2l60",
+          "title": "What Are Large Language Models?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 178
+        },
+        {
+          "id": "GtfqAr9CAgg",
+          "title": "LLM Explained | Common LLM Terms You Should Know | KodeKloud",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 434
+        },
+        {
+          "id": "dc9mK3876_E",
+          "title": "When Should You Use an LLM? (Part 1/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 63
+        },
+        {
+          "id": "3iCF5WGdC_0",
+          "title": "When Should You Use an LLM? (Part 2/2)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 98
+        },
+        {
+          "id": "ietNakjXOtk",
+          "title": "Training Cutoff in LLMs",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 88
         }
       ],
       "practice": [
@@ -941,6 +1004,36 @@
           "title": "E-6: Temperature, Top-p, Top-k, Penalties, Stop Sequence, Seed | Prompt Engineering Course in Bangla",
           "channel": "Afran Sarkar",
           "lang": "bn"
+        },
+        {
+          "id": "tbNCwO6qQE0",
+          "title": "6 LLM settings every AI Developer needs to know",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 174
+        },
+        {
+          "id": "pTbDqo1_auw",
+          "title": "Why does AI give you a different answer every time? (Autoregression Explained)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 167
+        },
+        {
+          "id": "IWSutLJbURU",
+          "title": "LLM Temperature Explained in 5 Minutes",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 308
+        },
+        {
+          "id": "TjeDv6Nb6EI",
+          "title": "LLM Settings That Every AI Developer Must Know",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 876
         }
       ],
       "practice": [
@@ -1155,7 +1248,7 @@
         },
         {
           "id": "vEmiZ8u7KfA",
-          "title": "SSE Deep Dive: How Server-Sent Events Stream LLM Responses #realtimecommunication",
+          "title": "SSE Deep Dive: How Server-Sent Events Stream LLM Responses",
           "channel": "Free World Coder",
           "lang": "en"
         },
@@ -1164,6 +1257,14 @@
           "title": "Server-Sent Events Crash Course",
           "channel": "Hussein Nasser",
           "lang": "en"
+        },
+        {
+          "id": "kQMQGormS4I",
+          "title": "How LLM API Calls Actually Work (OpenAI SDK vs Raw HTTP)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 73
         }
       ],
       "practice": [
@@ -1590,6 +1691,38 @@
           "title": "Function Calls in OpenAI: How They Work and the Opportunities They Open (Bangla)",
           "channel": "AI Defusion",
           "lang": "bn"
+        },
+        {
+          "id": "Dptu_rlm4qE",
+          "title": "LLM Tools Explained (Part - 1/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 69
+        },
+        {
+          "id": "n4jFNWC1Fk4",
+          "title": "LLM Tools Explained (Part - 2/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 71
+        },
+        {
+          "id": "GIHZJC8gGKQ",
+          "title": "LLM Tools Explained (Part 3/3)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 60
+        },
+        {
+          "id": "Fanndh77I7w",
+          "title": "Tool Calling in RAG",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 99
         }
       ],
       "practice": [
@@ -2116,6 +2249,30 @@
           "title": "What Are Embeddings? The Foundation of RAG & AI Search (Bangla)",
           "channel": "Jack Pritom Soren",
           "lang": "bn"
+        },
+        {
+          "id": "KTc0qvJEqhY",
+          "title": "What is an Embedding Model?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 99
+        },
+        {
+          "id": "V1iGw0Os27w",
+          "title": "Why Your AI Can’t Find Your Data!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 121
+        },
+        {
+          "id": "S_xwTgs8zmo",
+          "title": "Semantic Search Starts With Embeddings",
+          "channel": "DeepLearningAI",
+          "lang": "en",
+          "format": "short",
+          "seconds": 33
         }
       ],
       "practice": [
@@ -2442,6 +2599,14 @@
           "title": "Deep Dive into LLMs like ChatGPT",
           "channel": "Andrej Karpathy",
           "lang": "en"
+        },
+        {
+          "id": "9F-WHimhscs",
+          "title": "How Reasoning Models Actually Work",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 154
         }
       ],
       "practice": [

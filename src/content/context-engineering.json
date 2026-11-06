@@ -150,6 +150,44 @@
           "title": "What is Context Engineering?",
           "channel": "Standarity",
           "lang": "en"
+        },
+        {
+          "id": "zkf1BMXvqF0",
+          "title": "What Is a Context Window?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 76
+        },
+        {
+          "id": "99YuwbgvQf4",
+          "title": "The Real Reason AI Loses Track of Your Conversation",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 87
+        },
+        {
+          "id": "Ctl59wNrnKo",
+          "title": "What is Context Engineering?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 683
+        },
+        {
+          "id": "AfHU2BL-Bjs",
+          "title": "Why Context Engineering Is the Future of AI?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 174
+        },
+        {
+          "id": "Egeuql3Lrzg",
+          "title": "Context Engineering is the New Vibe Coding (Learn this Now)",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1376
         }
       ],
       "practice": [
@@ -724,6 +762,14 @@
           "title": "Cutting Claude API cost 80% in minutes using Anthropic Prompt Caching",
           "channel": "Coev",
           "lang": "en"
+        },
+        {
+          "id": "0E8kDTW10HQ",
+          "title": "What is Prompt Caching?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 106
         }
       ],
       "practice": [
@@ -1243,7 +1289,7 @@
       "videos": [
         {
           "id": "bNhbULlSW7g",
-          "title": "Revolutionizing LLM Inference: LLMLingua's Breakthrough in Prompt Compression 🚀",
+          "title": "Revolutionizing LLM Inference: LLMLingua's Breakthrough in Prompt Compression",
           "channel": "Tokenetic AI",
           "lang": "en"
         },
@@ -1533,6 +1579,21 @@
           "title": "Context Engineering for AI Agents with LangChain and Manus",
           "channel": "LangChain",
           "lang": "en"
+        },
+        {
+          "id": "7QUj_vXkivg",
+          "title": "How Anthropic Fixed MCP Context Bloat Issue",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 151
+        },
+        {
+          "id": "3wglqgskzjQ",
+          "title": "Anthropic killed Tool calling",
+          "channel": "AI Jason",
+          "lang": "en",
+          "seconds": 850
         }
       ],
       "practice": [
@@ -1833,6 +1894,21 @@
           "title": "Context Rot: When Long Context Fails",
           "channel": "Hamel Husain",
           "lang": "en"
+        },
+        {
+          "id": "TXuYu-RkSkI",
+          "title": "Why More Context is KILLING Your LLM Responses (RAG vs Prompt Stuffing)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 104
+        },
+        {
+          "id": "mKtBS-pKY3Y",
+          "title": "Why LLMs Forget—and How RAG + Context Engineering Fix It (Free Labs).",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 628
         }
       ],
       "practice": [

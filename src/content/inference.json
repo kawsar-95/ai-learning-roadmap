@@ -470,6 +470,43 @@
           "title": "TLMs: Tiny LLMs and Agents on Edge Devices with LiteRT-LM — Cormac Brick, Google",
           "channel": "AI Engineer",
           "lang": "en"
+        },
+        {
+          "id": "5Y_JM6C9xOA",
+          "title": "How the vLLM inference engine works?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 174
+        },
+        {
+          "id": "qdPkA5mxLhg",
+          "title": "Understanding vLLM with a Hands On Demo",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 917
+        },
+        {
+          "id": "gZYrSZHHZns",
+          "title": "AI Training vs Inference Explained",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 210
+        },
+        {
+          "id": "UfmG0PeMS-k",
+          "title": "Why Your LLM is Slow Despite High GPU Usage?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 120
+        },
+        {
+          "id": "jUIjgp4puvw",
+          "title": "LLM Quantization Explained",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 258
         }
       ],
       "practice": [
