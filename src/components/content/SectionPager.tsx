@@ -10,7 +10,7 @@ export type Step = { id: string; title: string; label: string; node: ReactNode }
 
 const TOP = "top";
 const BUTTON =
-  "group flex-1 rounded-2xl border border-border bg-bg-raised px-5 py-3 text-left no-underline shadow-card transition hover:border-accent hover:shadow-card-hover motion-reduce:transition-none";
+  "group flex-1 rounded-xl border border-border bg-bg-raised px-4 py-3 text-left no-underline transition-colors hover:border-accent motion-reduce:transition-none";
 
 /** The element id that a hash points to, or null. */
 function idFromHash(hash: string): string | null {
@@ -100,13 +100,11 @@ export function SectionPager({ steps, lang }: { steps: Step[]; lang: Lang }) {
   return (
     <div>
       <div ref={top} className="scroll-mt-24" />
-      <div className="mb-8">
-        <p className="m-0 font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint">
-          {steps[index].label}
-        </p>
-        <div aria-hidden="true" className="mt-2 h-1.5 overflow-hidden rounded-full bg-bg-raised-2">
+      <div className="mb-5">
+        <p className="m-0 text-[13px] text-text-faint">{steps[index].label}</p>
+        <div aria-hidden="true" className="mt-2 h-0.5 overflow-hidden rounded-full bg-bg-raised-2">
           <div
-            className="h-full rounded-full bg-linear-to-r from-accent to-accent-2 transition-[width] duration-300"
+            className="h-full rounded-full bg-accent transition-[width] duration-300"
             style={{ width: `${((index + 1) / steps.length) * 100}%` }}
           />
         </div>
@@ -121,20 +119,20 @@ export function SectionPager({ steps, lang }: { steps: Step[]; lang: Lang }) {
       <nav aria-label={ui.stepNav} className="mt-12 flex flex-col gap-3 sm:flex-row">
         {prev && (
           <button type="button" onClick={() => go(index - 1)} className={BUTTON}>
-            <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
+            <span className="block text-[13px] text-text-faint">
               ← {ui.stepPrev}
             </span>
-            <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">
+            <span className="mt-0.5 block font-display text-[17px] leading-snug text-text transition-colors group-hover:text-accent">
               {prev.title}
             </span>
           </button>
         )}
         {next && (
           <button type="button" onClick={() => go(index + 1)} className={BUTTON + " sm:text-right"}>
-            <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
+            <span className="block text-[13px] text-text-faint">
               {ui.stepNext} →
             </span>
-            <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">
+            <span className="mt-0.5 block font-display text-[17px] leading-snug text-text transition-colors group-hover:text-accent">
               {next.title}
             </span>
           </button>

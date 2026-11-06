@@ -1,32 +1,18 @@
 import Link from "next/link";
-import { TOPICS, getOutline, topicText } from "@/lib/topics";
-import type { Topic } from "@/lib/topics";
+import { TOPICS, topicText } from "@/lib/topics";
 import { progressKey } from "@/lib/progress";
 import { AUTHOR_GITHUB_URL, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { Inline } from "@/components/content/Inline";
-import { PartProgress } from "@/components/progress/ProgressWidgets";
+import { PartCount } from "@/components/progress/ProgressWidgets";
 
 const TOTAL_SECTIONS = TOPICS.reduce((sum, t) => sum + t.sections.length, 0);
 const TOTAL_SOURCES = TOPICS.reduce((sum, t) => sum + t.sources.length, 0);
 
-const EYEBROW = "font-mono text-[12px] font-medium uppercase tracking-[0.2em] text-accent";
 const SECTION_TITLE =
-  "mt-3 font-display text-[clamp(2rem,4.5vw,3rem)] font-bold leading-[1.08] tracking-[-0.02em] text-balance text-text";
+  "font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text";
 const BUTTON =
   "inline-flex items-center gap-2 rounded-[10px] px-6 py-3 text-[16px] font-semibold no-underline transition";
-
-/**
- * The titles to show under a Part. A multi-section topic shows its section
- * titles. A one-section topic shows the h3 titles of that section, because
- * its only section title says nothing new.
- */
-function outlineTitles(topic: Topic, lang: Lang): string[] {
-  const level = topic.sections.length === 1 ? 3 : 2;
-  return getOutline(topic, lang)
-    .filter((item) => item.level === level)
-    .map((item) => item.title);
-}
 
 function partNum(lang: Lang, n: number): string {
   return fmtNum(lang, n).padStart(2, fmtNum(lang, 0));
@@ -102,10 +88,7 @@ function Hero({ lang }: { lang: Lang }) {
       </div>
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <div>
-          <p className={EYEBROW}>
-            {ui.homeEyebrow(fmtNum(lang, TOPICS.length), fmtNum(lang, TOTAL_SECTIONS))}
-          </p>
-          <h1 className="mt-5 mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.025em] text-text">
+          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.025em] text-text">
             <span className="block">{ui.heroLine1}</span>
             <span className="block text-text-dim">
               {ui.heroLine2}{" "}
@@ -126,9 +109,9 @@ function Hero({ lang }: { lang: Lang }) {
           <div className="flex flex-wrap gap-3.5 sm:mb-12">
             <Link
               href={topicHref(TOPICS[0].slug, lang)}
-              className={`${BUTTON} bg-accent text-on-accent shadow-card hover:-translate-y-0.5 hover:shadow-card-hover`}
+              className={`${BUTTON} bg-accent text-on-accent hover:opacity-90`}
             >
-              <span aria-hidden="true">📖</span> {ui.startReading}
+              {ui.startReading}
             </Link>
           </div>
           <dl className="m-0 hidden max-w-lg grid-cols-4 gap-6 sm:grid">
@@ -149,62 +132,55 @@ function Hero({ lang }: { lang: Lang }) {
   );
 }
 
+/**
+ * The Parts as a numbered index, like the contents of a book: number, title,
+ * one line, and the section count (or the reader's progress). Seventeen
+ * boxed cards were too much to scan; a ruled list is not.
+ */
 function Parts({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   return (
-    <section id="parts" aria-labelledby="parts-heading" className="scroll-mt-16 bg-bg-raised-2 py-16 sm:py-20">
+    <section id="parts" aria-labelledby="parts-heading" className="scroll-mt-16 bg-bg-raised-2 py-14 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className={EYEBROW}>{ui.partsEyebrow}</p>
         <h2 id="parts-heading" className={SECTION_TITLE}>
           {ui.partsTitle}
         </h2>
         <p className="mt-3 max-w-2xl text-[17px] text-text-dim">{ui.partsIntro}</p>
-        <ol className="m-0 mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="m-0 mt-8 grid list-none gap-x-12 border-b border-border-strong p-0 md:grid-cols-2">
           {TOPICS.map((topic) => {
             const text = topicText(topic, lang);
             return (
               <li
                 key={topic.slug}
-                className="group relative flex flex-col gap-3 rounded-2xl border border-border bg-bg-raised p-7 transition duration-200 hover:-translate-y-[3px] hover:border-accent hover:shadow-card-hover motion-reduce:transition-none"
+                className="group relative flex items-baseline gap-4 border-t border-border-strong py-4"
               >
-                <span aria-hidden="true" className="font-display text-[36px] font-bold leading-none text-accent">
+                <span aria-hidden="true" className="w-9 shrink-0 font-display text-[26px] font-bold leading-none text-accent">
                   {partNum(lang, topic.part)}
                 </span>
-                <h3 className="m-0 font-display text-[22px] font-bold leading-snug text-balance">
-                  <Link
-                    href={topicHref(topic.slug, lang)}
-                    className="text-text no-underline after:absolute after:inset-0 after:rounded-2xl after:content-[''] group-hover:text-accent"
-                  >
-                    {text.title}
-                  </Link>
-                </h3>
-                {text.tagline && (
-                  <p className="m-0 font-display text-[17px] leading-snug text-text-dim italic">{text.tagline}</p>
-                )}
-                <p className="m-0 line-clamp-3 text-[14px] leading-[1.65] text-text-dim">
-                  {outlineTitles(topic, lang).join(" · ")}
-                </p>
-                <div className="mt-auto space-y-2.5 pt-2">
-                  <p className="m-0 text-[12px] font-semibold tracking-[0.08em] text-accent uppercase">
-                    {ui.sectionCount(topic.sections.length)}
-                  </p>
-                  {/* Above the card's stretched link, so it stays readable but not clickable. */}
-                  <div className="pointer-events-none relative">
-                    <PartProgress
-                      keys={topic.sections.map((s) => progressKey(topic.slug, s.id))}
-                      lang={lang}
-                    />
-                  </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="m-0 font-display text-[20px] font-bold leading-snug text-balance">
+                    <Link
+                      href={topicHref(topic.slug, lang)}
+                      className="text-text no-underline after:absolute after:inset-0 after:content-[''] group-hover:text-accent"
+                    >
+                      {text.title}
+                    </Link>
+                  </h3>
+                  {text.tagline && (
+                    <p className="m-0 mt-0.5 text-[14px] leading-snug text-text-dim">{text.tagline}</p>
+                  )}
                 </div>
+                <PartCount
+                  keys={topic.sections.map((s) => progressKey(topic.slug, s.id))}
+                  label={ui.sectionCount(topic.sections.length)}
+                  lang={lang}
+                />
               </li>
             );
           })}
         </ol>
-        <p className="mt-12 text-center">
-          <Link
-            href={contentsHref(lang)}
-            className={`${BUTTON} border border-border-strong bg-bg-raised text-text hover:border-accent hover:text-accent`}
-          >
+        <p className="mt-8 mb-0">
+          <Link href={contentsHref(lang)} className="text-[16px] font-medium text-accent no-underline hover:underline">
             {ui.seeContents}
           </Link>
         </p>
@@ -216,18 +192,17 @@ function Parts({ lang }: { lang: Lang }) {
 function Author({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   return (
-    <section aria-labelledby="author-heading" className="py-16 sm:py-20">
+    <section aria-labelledby="author-heading" className="py-12 sm:py-14">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <p className={EYEBROW}>{ui.authorEyebrow}</p>
-        <h2 id="author-heading" className={SECTION_TITLE}>
+        <h2 id="author-heading" className="m-0 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
           Nuruddin Kawsar
         </h2>
-        <p className="mt-3 text-[17px] text-text-dim">{ui.authorBy}</p>
+        <p className="mt-1 mb-0 text-[16px] text-text-dim">{ui.authorBy}</p>
         <a
           href={AUTHOR_GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-block text-[16px] font-medium text-accent no-underline hover:underline"
+          className="mt-2 inline-block text-[16px] font-medium text-accent no-underline hover:underline"
         >
           {ui.authorGithub}
         </a>
@@ -236,7 +211,7 @@ function Author({ lang }: { lang: Lang }) {
   );
 }
 
-/** The landing page: hero, the 14 Parts, and the author, in one language. */
+/** The landing page: hero, the Parts index, and the author, in one language. */
 export function HomePage({ lang }: { lang: Lang }) {
   return (
     <>

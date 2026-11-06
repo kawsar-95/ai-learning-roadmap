@@ -71,7 +71,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
             id: s.id,
             title: sectionText(s, lang).title,
             label: UI[lang].stepOf(fmtNum(lang, i + 1), total),
-            node: <div className="[&>section]:py-8 [&>section]:pt-0 sm:[&>section]:py-10">{sectionViews[i]}</div>,
+            node: <div className="[&>section]:pt-0 [&>section]:pb-8 sm:[&>section]:pb-10">{sectionViews[i]}</div>,
           })),
           ...(topic.quiz
             ? [{ id: "quiz", title: UI[lang].quizTitle, label: UI[lang].quizTitle, node: <>{quiz}{tail}</> }]
@@ -96,11 +96,11 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
             <Sidebar items={items} lang={lang} />
           </Suspense>
         </aside>
-        <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-8 pb-20 sm:px-6 sm:pt-12 lg:px-0">
+        <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
           {/* The "On this page" column shows from `xl`. Below it, this closed list does the same job. */}
           {outline.length > 1 && (
-            <details className="mb-10 rounded-lg border border-border px-4 py-2.5 xl:hidden">
+            <details className="mb-6 rounded-lg border border-border px-4 py-2 xl:hidden">
               <summary className="cursor-pointer text-[14px] text-text">{UI[lang].onThisPage}</summary>
               <nav aria-label={UI[lang].onThisPage}>
                 <ol className="m-0 mt-2 list-none p-0">

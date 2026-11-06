@@ -192,14 +192,14 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
       <header>
         <h2
           id={`${section.id}-title`}
-          className="font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-balance text-text"
+          className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.015em] text-balance text-text"
         >
           {text.title}
         </h2>
         <Inline
           as="p"
           html={text.sub}
-          className="mt-3 text-[17px] leading-[1.75] text-pretty text-text-dim sm:text-[18px]"
+          className="mt-2 text-[16px] leading-[1.7] text-pretty text-text-dim sm:text-[17px]"
         />
       </header>
 
@@ -217,7 +217,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
 
       <div
         key={voice}
-        className="voice-fade mt-5 space-y-6 text-[16px] leading-[1.8] sm:text-[17px]"
+        className="voice-fade mt-4 space-y-6 text-[16px] leading-[1.8] sm:text-[17px]"
       >
         {show("main") && (
           <div className="[&>:last-child]:mb-0">
@@ -244,7 +244,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
         <VideoList sectionId={section.id} videos={videosForVoice(section.videos, voice, lang)} lang={lang} />
       </div>
 
-      <div className="mt-8 flex flex-wrap items-center justify-end gap-2 border-t border-border pt-5">
+      <div className="mt-6 flex flex-wrap items-center justify-end gap-2 border-t border-border pt-4">
         <BookmarkButton sectionKey={doneKey} lang={lang} />
         <SectionDoneButton sectionKey={doneKey} lang={lang} />
       </div>

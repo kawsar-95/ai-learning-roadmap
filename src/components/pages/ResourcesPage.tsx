@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PHASES } from "@/lib/roadmap";
 import { UI, fmtNum, roadmapHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 type Text = { en: string; bn: string };
 type Repo = { repo: string; phase: number; about: Text; bangla?: boolean };
@@ -209,13 +210,7 @@ export function ResourcesPage({ lang }: { lang: Lang }) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 pt-12 pb-20 sm:px-6 sm:pt-16">
-      <header className="mb-10">
-        <p className="font-mono text-[12px] font-medium tracking-[0.2em] text-accent uppercase">{ui.resources}</p>
-        <h1 className="mt-3 font-display text-[clamp(2.25rem,5vw,3.25rem)] font-bold leading-[1.1] tracking-[-0.02em] text-text">
-          {ui.resourcesTitle}
-        </h1>
-        <p className="mt-3 max-w-2xl text-[17px] text-text-dim">{ui.resourcesIntro}</p>
-      </header>
+      <PageHeader title={ui.resourcesTitle} intro={ui.resourcesIntro} />
 
       {GROUPS.map((group) => (
         <section key={group.id} aria-labelledby={`group-${group.id}`} className="mt-12">

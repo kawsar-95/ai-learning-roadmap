@@ -57,18 +57,13 @@ export function VoiceSwitcher({
       role="group"
       aria-label={UI[lang].voiceGroup}
       onKeyDown={onKeyDown}
-      className="inline-flex max-w-full flex-wrap gap-1 rounded-xl border border-border bg-bg-raised p-1"
+      className="inline-flex max-w-full flex-wrap gap-x-1 border-b border-border"
     >
       {available.map((v) => {
         const active = v === value;
         const color = VOICE_COLOR[v];
-        const style: CSSProperties | undefined = active
-          ? {
-              color,
-              borderColor: `color-mix(in srgb, ${color} 55%, transparent)`,
-              backgroundColor: `color-mix(in srgb, ${color} 10%, transparent)`,
-            }
-          : undefined;
+        // The active tab takes its voice color for the text and the underline.
+        const style: CSSProperties | undefined = active ? { color, borderBottomColor: color } : undefined;
         return (
           <button
             key={v}
@@ -83,10 +78,8 @@ export function VoiceSwitcher({
             lang={v === "bangla" ? "bn" : undefined}
             style={style}
             className={
-              "rounded-lg border px-3 py-1.5 text-[13px] leading-5 font-medium transition-colors " +
-              (active
-                ? ""
-                : "border-transparent text-text-dim hover:bg-bg-raised-2 hover:text-text")
+              "-mb-px border-b-2 px-3 py-2 text-[14px] leading-5 font-medium transition-colors " +
+              (active ? "" : "border-transparent text-text-dim hover:text-text")
             }
           >
             {voiceLabel(v, lang)}

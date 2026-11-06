@@ -340,8 +340,8 @@ All citations resolve to:
 │   ├── components/
 │   │   ├── content/                    topic header, sections, voice switcher,
 │   │   │   └── blocks/                 sources, prev/next, one file per block type
-│   │   ├── layout/                     site shell, header, sidebar, mobile nav,
-│   │   │                               language and theme switches
+│   │   ├── layout/                     site shell, header, page header, sidebar,
+│   │   │                               mobile nav, language and theme switches
 │   │   ├── navigation/                 search palette, outline (TOC)
 │   │   └── pages/                      home and topic pages, shared by both languages
 │   ├── content/                        17 topic JSON files (source of truth)
@@ -378,8 +378,16 @@ All citations resolve to:
 - Diagram SVGs use fixed colors made for a dark ground. In the light
   theme, `globals.css` maps each solid diagram color to a darker or lighter
   one. If you add a diagram with a new solid color, add it to that map.
-- Fraunces (headings), Inter, JetBrains Mono, and Noto Sans Bengali load
+- Crimson Pro (headings), Inter, JetBrains Mono, and Noto Sans Bengali load
   through `next/font/google` with `display: swap`.
+- The layout is deliberately plain, so the text stays the loudest thing on a
+  page. Cards are flat: a border, no resting shadow (`--shadow-card` in
+  `globals.css` is a transparent shadow; only the home cover card keeps
+  `--shadow-cover`), and nothing lifts on hover. Page chrome uses no emoji.
+  Index pages (the Parts on the home page, Contents, Interview) are ruled
+  lists, not stacks of boxes. A secondary page opens with `PageHeader`: a
+  title and one line, with no label above it. The footer does not list the
+  Parts again; the home page, the sidebar, and the mobile menu already do.
 - The sidebar lists the 17 parts. Below the `lg` breakpoint, a menu button
   opens the same list.
 - The voice switcher works for one section at a time. Its options are

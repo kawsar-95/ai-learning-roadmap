@@ -1,39 +1,30 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { getNavItems } from "@/lib/topics";
-import type { NavItem } from "@/lib/topics";
-import { REPO_URL, UI, contentsHref, dashboardHref, fmtNum, homeHref, interviewHref, resourcesHref, roadmapHref, topicHref } from "@/lib/i18n";
+import { REPO_URL, UI, contentsHref, dashboardHref, homeHref, interviewHref, resourcesHref, roadmapHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { SiteHeader } from "./SiteHeader";
 import { SearchPalette } from "@/components/navigation/SearchPalette";
 
 const FOOTER_LINK = "text-[14px] leading-snug text-text-dim no-underline transition-colors hover:text-accent";
-const FOOTER_HEAD = "mb-3 font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint";
 
-function PartLinks({ items, lang }: { items: NavItem[]; lang: Lang }) {
-  return (
-    <ul className="m-0 list-none space-y-2 p-0">
-      {items.map((item) => (
-        <li key={item.slug}>
-          <Link href={topicHref(item.slug, lang)} className={FOOTER_LINK}>
-            <span className="mr-2 font-mono text-[12px] text-text-faint">
-              {fmtNum(lang, item.part).padStart(2, fmtNum(lang, 0))}
-            </span>
-            {item.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** The footer: the brand, the Parts in two columns, and the site links. */
-function SiteFooter({ items, lang }: { items: NavItem[]; lang: Lang }) {
+/**
+ * The footer: the brand with one line about the site, the site links in one
+ * row, and the copyright. It does not list the Parts again: the home page,
+ * the sidebar, and the mobile menu already do.
+ */
+function SiteFooter({ lang }: { lang: Lang }) {
   const ui = UI[lang];
-  const half = Math.ceil(items.length / 2);
+  const links: [string, string][] = [
+    [roadmapHref(lang), ui.roadmap],
+    [resourcesHref(lang), ui.resources],
+    [contentsHref(lang), ui.contentsTitle],
+    [dashboardHref(lang), ui.dashboard],
+    [interviewHref(lang), ui.interview],
+  ];
   return (
     <footer className="border-t border-border bg-bg-raised-2">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr_0.8fr]">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-start md:justify-between">
         <div>
           <Link href={homeHref(lang)} className="inline-flex items-center gap-2.5 text-text no-underline">
             <span
@@ -46,54 +37,25 @@ function SiteFooter({ items, lang }: { items: NavItem[]; lang: Lang }) {
           </Link>
           <p className="mt-3 max-w-xs text-[14px] leading-relaxed text-text-dim">{ui.footer}</p>
         </div>
-        <div>
-          <p className={FOOTER_HEAD}>{ui.partsNav}</p>
-          <PartLinks items={items.slice(0, half)} lang={lang} />
-        </div>
-        <div>
-          <p aria-hidden="true" className={FOOTER_HEAD + " max-md:hidden"}>
-            &nbsp;
-          </p>
-          <PartLinks items={items.slice(half)} lang={lang} />
-        </div>
-        <div>
-          <p className={FOOTER_HEAD}>{ui.footerSite}</p>
-          <ul className="m-0 list-none space-y-2 p-0">
-            <li>
-              <Link href={roadmapHref(lang)} className={FOOTER_LINK}>
-                {ui.roadmap}
-              </Link>
-            </li>
-            <li>
-              <Link href={resourcesHref(lang)} className={FOOTER_LINK}>
-                {ui.resources}
-              </Link>
-            </li>
-            <li>
-              <Link href={contentsHref(lang)} className={FOOTER_LINK}>
-                {ui.contentsTitle}
-              </Link>
-            </li>
-            <li>
-              <Link href={dashboardHref(lang)} className={FOOTER_LINK}>
-                {ui.dashboard}
-              </Link>
-            </li>
-            <li>
-              <Link href={interviewHref(lang)} className={FOOTER_LINK}>
-                {ui.interview}
-              </Link>
-            </li>
+        <nav aria-label={ui.footerSite}>
+          <ul className="m-0 flex list-none flex-wrap gap-x-6 gap-y-2.5 p-0">
+            {links.map(([href, label]) => (
+              <li key={href}>
+                <Link href={href} className={FOOTER_LINK}>
+                  {label}
+                </Link>
+              </li>
+            ))}
             <li>
               <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className={FOOTER_LINK}>
                 {ui.footerSource} ↗
               </a>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div className="border-t border-border">
-        <p className="mx-auto max-w-6xl px-4 py-5 text-[13px] text-text-faint sm:px-6">
+        <p className="mx-auto max-w-6xl px-4 py-4 text-[13px] text-text-faint sm:px-6">
           © {lang === "bn" ? "২০২৬" : "2026"} {ui.footerCopy}
         </p>
       </div>
@@ -122,7 +84,7 @@ export function SiteShell({ lang, children }: { lang: Lang; children: ReactNode 
       <main id="content" tabIndex={-1} style={{ outline: "none" }} className="min-w-0 flex-1">
         {children}
       </main>
-      <SiteFooter items={items} lang={lang} />
+      <SiteFooter lang={lang} />
     </div>
   );
 }

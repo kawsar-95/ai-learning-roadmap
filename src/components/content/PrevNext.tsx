@@ -6,7 +6,7 @@ import type { Lang } from "@/lib/i18n";
 export type Neighbor = { slug: string; part: number; title: string };
 
 const CARD =
-  "group block rounded-2xl border border-border bg-bg-raised px-5 py-4 no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:shadow-card-hover motion-reduce:transition-none";
+  "group block rounded-xl border border-border bg-bg-raised px-4 py-3 no-underline transition-colors hover:border-accent motion-reduce:transition-none";
 
 /** Cards that link to the previous and the next Part. */
 export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbor; lang: Lang }) {
@@ -17,10 +17,10 @@ export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbo
     <nav aria-label={ui.prevNextNav} className="grid gap-3 sm:grid-cols-2">
       {prev && (
         <Link href={topicHref(prev.slug, lang)} rel="prev" className={CARD}>
-          <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
+          <span className="block text-[13px] text-text-faint">
             ← {partLabel(prev.part)}
           </span>
-          <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">
+          <span className="mt-0.5 block font-display text-[17px] leading-snug text-text transition-colors group-hover:text-accent">
             {prev.title}
           </span>
         </Link>
@@ -31,10 +31,10 @@ export function PrevNext({ prev, next, lang }: { prev?: Neighbor; next?: Neighbo
           rel="next"
           className={CARD + " sm:col-start-2 sm:text-right"}
         >
-          <span className="block font-mono text-xs uppercase tracking-[0.14em] text-text-faint">
+          <span className="block text-[13px] text-text-faint">
             {partLabel(next.part)} →
           </span>
-          <span className="mt-1 block font-display text-lg leading-snug text-text transition-colors group-hover:text-accent">
+          <span className="mt-0.5 block font-display text-[17px] leading-snug text-text transition-colors group-hover:text-accent">
             {next.title}
           </span>
         </Link>

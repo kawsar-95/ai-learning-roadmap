@@ -104,7 +104,6 @@ const en = {
   searchResults: "Search results",
 
   // Home page.
-  homeEyebrow: (parts: string, sections: string) => `Reference · ${parts} parts · ${sections} sections`,
   homeTitle: "All necessary topics related to AI Engineering",
   homeIntro:
     "A dense, citation-backed reference for the fundamentals every applied AI engineer needs — from tokens and tool use to retrieval, context, and agent loops. Each topic ships in three voices: the engineer's version (with code and diagrams), the layman's version (plain English with analogies), and <span lang=\"bn\" class=\"text-voice-bangla\">বাংলা ব্যাখ্যা</span>.",
@@ -157,7 +156,6 @@ const en = {
       text: "A warm paper theme for the day and a dark theme for the night. It follows your device.",
     },
   ] as Feature[],
-  partsEyebrow: "Structure",
   partsTitle: "The 17 parts",
   partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
   sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
@@ -228,7 +226,6 @@ const en = {
   interviewIntro:
     "Three questions for each part, with a short answer. Open a question to see it, and follow the link to read the full section.",
   readSection: "Read the section →",
-  authorEyebrow: "Author",
   authorBy: "Built and maintained by",
   authorGithub: "GitHub ↗",
   quizTitle: "Quiz",
@@ -327,7 +324,6 @@ const bn: Dict = {
   searchClose: "সার্চ বন্ধ করুন",
   searchResults: "সার্চের ফলাফল",
 
-  homeEyebrow: (parts: string, sections: string) => `রেফারেন্স · ${parts}টি পার্ট · ${sections}টি সেকশন`,
   homeTitle: "AI Engineering-এর দরকারি সব বিষয়",
   homeIntro:
     "একজন AI ইঞ্জিনিয়ারের যা যা জানা দরকার, সব এক জায়গায়: টোকেন আর টুল ইউজ থেকে শুরু করে রিট্রিভাল, কনটেক্সট আর এজেন্ট লুপ পর্যন্ত। প্রতিটি বিষয়ে আছে সহজ <span class=\"text-voice-bangla\">বাংলা ব্যাখ্যা</span>, হাতে-কলমে প্র্যাকটিস টাস্ক আর ভিডিও। চাইলে টেকনিক্যাল English ভার্সন আর সহজ English ভার্সনও পড়তে পারেন।",
@@ -380,7 +376,6 @@ const bn: Dict = {
       text: "দিনের জন্য কাগজের মতো লাইট থিম, রাতের জন্য ডার্ক থিম। আপনার ডিভাইসের সেটিং মেনে চলে।",
     },
   ],
-  partsEyebrow: "কাঠামো",
   partsTitle: "১৭টি পার্ট",
   partsIntro: "ক্রম অনুযায়ী পড়ুন, অথবা যে পার্ট দরকার সেখানে যান। প্রতিটি পার্ট নিজে নিজেই সম্পূর্ণ।",
   sectionCount: (n: number) => `${fmtNum("bn", n)}টি সেকশন`,
@@ -448,7 +443,6 @@ const bn: Dict = {
   interviewIntro:
     "প্রতিটি পার্টের তিনটি প্রশ্ন, ছোট উত্তরসহ। প্রশ্ন খুললে উত্তর দেখা যাবে, পুরো সেকশন পড়তে লিংকে যান।",
   readSection: "সেকশন পড়ুন →",
-  authorEyebrow: "লেখক",
   authorBy: "যিনি বানিয়েছেন ও দেখভাল করেন",
   authorGithub: "GitHub ↗",
   quizTitle: "কুইজ",

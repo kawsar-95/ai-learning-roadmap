@@ -90,8 +90,10 @@
 
   /* Each stack ends its Latin fonts with Noto Sans Bengali, so Bengali
      letters in any text, Bangla page or not, use it. */
-  --shadow-card: var(--shadow-sm);
-  --shadow-card-hover: var(--shadow-md);
+  /* Cards are flat: a border, no resting shadow, no lift on hover. Only the
+     hero cover card keeps a shadow. */
+  --shadow-card: 0 0 #0000;
+  --shadow-card-hover: 0 0 #0000;
   --shadow-cover: var(--shadow-lg);
 
   --font-display: var(--font-crimson), var(--font-noto-bengali), ui-serif, Georgia, serif;
