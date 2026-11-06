@@ -25,6 +25,15 @@ TODAY = date.today().isoformat()
 lookups = json.load(open(f"{AIE}/lookups.json", encoding="utf-8"))
 final = json.load(open(f"{AIE}/final_picks.json", encoding="utf-8"))
 gaps_cov = json.load(open(f"{AIE}/gaps.json", encoding="utf-8"))
+P17 = "deploying-and-operating-ai-systems"
+P17_USED = {it["id"]: sec.split("/")[1] for sec, items in final.items() if sec.startswith(P17 + "/") for it in items}  # clip id -> section id
+P17_SECTION = {  # gap topic -> the Part 17 section that covers it
+    "Linux and the shell": "s1", "Git and GitHub": "s2", "Networking fundamentals": "s3", "Python and YAML for DevOps/AI work": "s4",
+    "Docker & containers": "s5", "Kubernetes (and AI on Kubernetes)": "s6", "CI/CD and GitOps": "s7", "Infrastructure as Code": "s8",
+    "Cloud platforms and managed AI services": "s9", "MLOps": "s10", "Metrics, logs and the observability stack": "s11",
+    "DevSecOps and platform security": "s12", "System design and data infrastructure": "s13", "AIOps (AI for IT operations)": "s14",
+    "AI coding assistants": "s15",
+}
 probe = {}
 for line in open(f"{AIE}/probe.jsonl", encoding="utf-8") if os.path.exists(f"{AIE}/probe.jsonl") else []:
     if line.startswith("{"):
@@ -124,10 +133,11 @@ GAP_INFO = {  # topic -> (keys in gaps.json, suggested addition)
 
 
 def gap_section():
+    P17_TITLES = {sec["id"]: sec["title"] for sec in json.load(open(f"{ROOT}/src/content/{P17}.json", encoding="utf-8"))["sections"]}
     kk = json.load(open(f"{AIE}/gap_resolved.json", encoding="utf-8"))
     cr = json.load(open(f"{AIE}/gap2_resolved.json", encoding="utf-8"))
     lines, excluded = [], 0
-    for topic, (keys, suggestion) in GAP_INFO.items():
+    for topic, (keys, _scope) in GAP_INFO.items():
         rows = []
         for src in (kk.get(topic, []), cr.get(topic, [])):
             for h in src:
@@ -146,17 +156,22 @@ def gap_section():
         parts = sum(c["parts_with_hits"] for c in cov)
         lessons = sum(c["lesson_files"] for c in cov)
         lines.append(f"### {topic}\n")
-        lines.append(f"**On the site today:** {part_hits} keyword hits in {parts} of the 16 Parts, and {lessons} roadmap lessons mention it. **Suggested addition:** {suggestion}\n")
-        lines.append("| Resource | Channel | Length | Views |")
-        lines.append("| --- | --- | --- | --- |")
+        sec_id = P17_SECTION[topic]
+        lines.append(f"**Before Part 17:** {part_hits} keyword hits in {parts} of the 16 Parts, and {lessons} roadmap lessons mentioned it. **Now:** Part 17, section {sec_id[1:]}, {P17_TITLES[sec_id]}.\n")
+        lines.append("| Resource | Channel | Length | Views | In Part 17 |")
+        lines.append("| --- | --- | --- | --- | --- |")
         for (vid, is_short, _, _, author, v, dur), title in sorted(zip(rows, titles), key=lambda x: -x[0][5]):
-            lines.append(f"| {esc(link(vid, title, is_short))} | {esc(author)} | {'Short, ' + length(dur) if is_short and dur else ('Short' if is_short else length(dur))} | {views(v)} |")
+            used = f"section {P17_USED[vid][1:]}" if vid in P17_USED else ""
+            lines.append(f"| {esc(link(vid, title, is_short))} | {esc(author)} | {'Short, ' + length(dur) if is_short and dur else ('Short' if is_short else length(dur))} | {views(v)} | {used} |")
         lines.append("")
     return "\n".join(lines), excluded
 
 
 # ---------------------------------------------------------------- reasons for the review log
 KK_WHY = [  # title substring (lower case) -> reason
+    ("why git wasn't enough", "news about one company's internal tool; its claims cannot be checked from the clip"),
+    ("claude code explained in 60 seconds", "the same script as the kept 9-minute video"),
+    ("what is aiops and how does it differ", "the same script as the kept video"),
     ("model size and hyperparameters", "conflates parameters with hyperparameters and says DeepSeek V3 has 82b parameters"),
     ("rag explained: how retrieval", "dates RAG to early 2021; the paper is from May 2020"),
     ("open vs closed ai models explained", "says ChatGPT launched \"in 2019\" (probably a caption garble of GPT-2, not confirmed)"),
@@ -198,6 +213,10 @@ KK_WHY = [  # title substring (lower case) -> reason
     ("tool calling in rag", "kept once, in Function calling & tool use"),
 ]
 CR_WHY = {  # needle in DROP2 -> reason (the comments of picks.py, kept as data so the log can print them)
+    "nana/V:what is docker? docker container concept explained": "opens by welcoming viewers to a Kubernetes tutorial",
+    "nana/V:what is helm in kubernetes?": "the section does not cover Helm",
+    "nana/V:microservices explained - the what, why and how": "sponsored by HashiCorp, and about architecture styles rather than the section's topics",
+    "aijason/V:i was using claude code wrong": "a sponsored 2025 workflow video that ends in a community pitch",
     "aijason/V:gpt5 unlocks llm system 2 thinking": "a 2024 prompting talk, not about reasoning models",
     "deeplearningai/V:full ai prompting course with andrew ng": "a 2.5-hour course for general users, not engineers' prompt design",
     "aijason/V:next level prompts": "2023, built on one niche library",
@@ -320,7 +339,7 @@ def main():
     log_md, n_dropped = log_section()
 
     cov = [f"# Video coverage\n",
-           f"Which YouTube videos the Parts list, which technical topics the site does not cover yet, and where each clip came from. Generated {TODAY} from the same data the site reads. Every id was found from a published title, never typed. Each clip on a page was checked live against YouTube before it went into `src/content/`: oEmbed (public and embeddable), the Shorts redirect (a Short really is one), and the IFrame player (it starts, and its length is the real one). The gap-list resources below got the first two checks, because the site does not embed them. Views are rounded and were read from each channel's listing on that day.\n",
+           f"Which YouTube videos the Parts list, which technical topics Part 17 was added to cover, and where each clip came from. Generated {TODAY} from the same data the site reads. Every id was found from a published title, never typed. Each clip on a page was checked live against YouTube before it went into `src/content/`: oEmbed (public and embeddable), the Shorts redirect (a Short really is one), and the IFrame player (it starts, and its length is the real one). The resources below that Part 17 does not list got the first two checks, because the site does not embed them. Views are rounded and were read from each channel's listing on that day.\n",
            "## Channels\n",
            "| Channel | Handle | Listed (videos / Shorts) | Added to the Parts (videos / Shorts) |", "| --- | --- | --- | --- |"]
     for slug, name, handle in CHANNELS:
@@ -330,8 +349,8 @@ def main():
     cov.append("\nKrish Naik's list stops at the newest 1,500 videos, a cap set for the crawl, so his older videos were not searched.")
     n_sections = sum(1 for v in final.values() if v)
     cov.append(f"\n{n_added} clips were added to {n_sections} sections; {n_dropped} more were read and left out, each with its reason in [video-review-log.md](video-review-log.md).\n")
-    cov.append("## Topics the site does not cover yet\n")
-    cov.append("KodeKloud and TechWorld with Nana publish courses on all of these, which is where the lists below come from, but the 16 Parts have little or no reference page for them. The counts are rough keyword hits, not a judgement of quality: a topic with many roadmap lessons but no Part reference can be attached to those lessons once the roadmap schema allows videos (it does not today). The lists put the most viewed first. They are suggestions to review before any of them becomes a Part or a section, and the site does not embed them.\n")
+    cov.append("## Topics Part 17 covers\n")
+    cov.append("KodeKloud and TechWorld with Nana publish courses on all of these, which is where the lists below come from. The first 16 Parts had little or no reference page for them, so Part 17, Deploying and Operating AI Systems, has one section for each. The counts are rough keyword hits taken before Part 17 existed, not a judgement of quality, and they are kept as they were: running gaps.py now would count Part 17 itself. The lists put the most viewed first. The last column names the Part 17 section that lists a clip. The other resources were found and link-checked but are not used on the site, and the review log gives the reason for each one that was read.\n")
     cov.append(gap_md)
     cov.append("## How the clips were chosen\n")
     cov.append("- On topic for the section it sits in, taken from the section's own text, then read in the transcript: the opening, the ending, and a sample of the middle for long videos.")
