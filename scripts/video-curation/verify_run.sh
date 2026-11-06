@@ -2,6 +2,8 @@
 # Live verification, strictly serial: the oEmbed + /shorts/ lookups first, then (only if those were not throttled) the player probe.
 # Needs verify_ids.txt and probe_ids.txt in $VIDEO_WORK (mk_verify.py writes them) and playwright-core in $VIDEO_WORK/node_modules.
 # Writes lookups.json, lookup_run.log, probe.jsonl and probe_err.log into $VIDEO_WORK.
+# The script exits with the status of the step that failed. A probe that fails leaves the previous probe.jsonl as it was:
+# the new results go to probe.jsonl.new and replace it only when the probe finished cleanly.
 set -u
 HERE="$(cd "$(dirname "$0")" && pwd)"
 WORK="${VIDEO_WORK:-${TMPDIR:-/tmp}/video-curation}"
@@ -13,6 +15,12 @@ if [ "$rc" -ne 0 ]; then
   echo "probe skipped because the lookup did not finish cleanly" >> lookup_run.log
   exit "$rc"
 fi
-PAUSE_MS=2000 node "$HERE/probe-player.mjs" --file probe_ids.txt > probe.jsonl 2> probe_err.log
-echo "probe exit=$?" >> probe_err.log
+PAUSE_MS=2000 node "$HERE/probe-player.mjs" --file probe_ids.txt > probe.jsonl.new 2> probe_err.log
+rc=$?
+echo "probe exit=$rc" >> probe_err.log
 cat lookup_run.log probe_err.log
+if [ "$rc" -ne 0 ]; then
+  echo "the probe failed: probe.jsonl was left as it was, and the partial output is in probe.jsonl.new" >&2
+  exit "$rc"
+fi
+mv probe.jsonl.new probe.jsonl
