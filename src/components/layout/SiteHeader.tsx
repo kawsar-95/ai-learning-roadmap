@@ -29,15 +29,19 @@ const NAV_LINK =
  * The sticky 64px top bar: the menu button (below `lg`), the logo, the
  * page links (`lg` and wider), and on the right the search trigger slot,
  * the language switch, the install button, and the theme switch.
+ * `languageSwitchToHome` makes the language switch open the other home page
+ * (see LanguageSwitch).
  */
 export function SiteHeader({
   items,
   lang,
   searchSlot,
+  languageSwitchToHome = false,
 }: {
   items: NavItem[];
   lang: Lang;
   searchSlot?: ReactNode;
+  languageSwitchToHome?: boolean;
 }) {
   return (
     <header className="sticky top-0 z-40 h-16 border-b border-border">
@@ -79,7 +83,7 @@ export function SiteHeader({
         <div className="ml-auto flex items-center gap-1.5">
           {searchSlot}
           <Suspense fallback={<LanguageSwitchFallback lang={lang} />}>
-            <LanguageSwitch lang={lang} />
+            <LanguageSwitch lang={lang} toHome={languageSwitchToHome} />
           </Suspense>
           <InstallButton lang={lang} />
           <ThemeToggle lang={lang} />
