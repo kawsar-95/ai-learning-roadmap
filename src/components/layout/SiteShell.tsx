@@ -66,9 +66,19 @@ function SiteFooter({ lang }: { lang: Lang }) {
 /**
  * Everything around a page in one language: the skip link, the header, and
  * the footer. The English and Bangla layouts and the 404 page use it. The
- * topic pages add the sidebar of Parts themselves.
+ * topic pages add the sidebar of Parts themselves. The 404 page sets
+ * `languageSwitchToHome`: the URL asked for is not a page in either
+ * language, so the language switch opens the other home page.
  */
-export function SiteShell({ lang, children }: { lang: Lang; children: ReactNode }) {
+export function SiteShell({
+  lang,
+  languageSwitchToHome = false,
+  children,
+}: {
+  lang: Lang;
+  languageSwitchToHome?: boolean;
+  children: ReactNode;
+}) {
   const items = getNavItems(lang);
   const ui = UI[lang];
   return (
@@ -79,7 +89,12 @@ export function SiteShell({ lang, children }: { lang: Lang; children: ReactNode 
       >
         {ui.skipLink}
       </a>
-      <SiteHeader items={items} lang={lang} searchSlot={<SearchPalette lang={lang} />} />
+      <SiteHeader
+        items={items}
+        lang={lang}
+        searchSlot={<SearchPalette lang={lang} />}
+        languageSwitchToHome={languageSwitchToHome}
+      />
       {/* The inline style beats the global :focus-visible rule for the skip-link target. */}
       <main id="content" tabIndex={-1} style={{ outline: "none" }} className="min-w-0 flex-1">
         {children}

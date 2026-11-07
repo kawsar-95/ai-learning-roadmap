@@ -5,11 +5,13 @@ import { UI } from "@/lib/i18n";
 /**
  * The one 404 page for both languages (GitHub Pages serves it for every
  * unknown URL). It shows the English text with the Bangla text under it.
+ * Its language switch opens the Bangla home page, because the URL asked for
+ * is not a page in either language.
  */
 export default function NotFound() {
   const { en, bn } = UI;
   return (
-    <SiteShell lang="en">
+    <SiteShell lang="en" languageSwitchToHome>
       <div className="mx-auto max-w-2xl px-5 pt-20 pb-20 sm:px-8 sm:pt-28">
         <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-accent">
           {en.notFoundEyebrow}

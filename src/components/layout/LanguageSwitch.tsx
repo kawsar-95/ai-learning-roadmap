@@ -22,11 +22,16 @@ function save(lang: Lang) {
  * The link to the same page in the other language. It saves the choice,
  * so the head script (langInitScript) opens later visits in that language.
  * The URL hash (the section in view) comes along.
+ *
+ * `toHome` is for the 404 page. It is prerendered once, for "/_not-found",
+ * and GitHub Pages serves it at every unknown URL, so the pathname is not a
+ * page of the site in either language. The link then opens the other home
+ * page, and the hash stays behind.
  */
-export function LanguageSwitch({ lang }: { lang: Lang }) {
+export function LanguageSwitch({ lang, toHome = false }: { lang: Lang; toHome?: boolean }) {
   const pathname = usePathname();
   const other: Lang = lang === "en" ? "bn" : "en";
-  const href = BASE + localizedPath(pathname ?? homeHref(lang), other);
+  const href = BASE + (toHome ? homeHref(other) : localizedPath(pathname ?? homeHref(lang), other));
 
   const onClick = (event: MouseEvent<HTMLAnchorElement>) => {
     // Save on every click, also one that opens a new tab, so the new page
@@ -34,7 +39,7 @@ export function LanguageSwitch({ lang }: { lang: Lang }) {
     save(other);
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    window.location.assign(href + window.location.hash);
+    window.location.assign(href + (toHome ? "" : window.location.hash));
   };
 
   return (
