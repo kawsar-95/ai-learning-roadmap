@@ -24,6 +24,7 @@ const KEEP = [
   /(^|\/)search-index\.json$/,
   /^manifest\.webmanifest$/,
   /^favicon\.ico$/,
+  /^icon\.svg$/,
   /^apple-icon\.png$/,
 ];
 // The 1084 curriculum lesson pages would make the install download huge; they load online only.
