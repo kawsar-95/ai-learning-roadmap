@@ -10,10 +10,10 @@
     {
       "id": "s3",
       "num": "01",
-      "title": "Hosted or self-hosted: inference servers, GPU economics and providers",
+      "title": "Hosted or self-hosted: the trade-off and the inference servers",
       "sub": "Every LLM call has two sides: the <strong>request</strong> you send and the <strong>inference</strong> that serves it. Most teams start by renting a hosted API. Once usage justifies it, they self-host on an inference server.",
       "bn": {
-        "title": "হোস্টেড না সেলফ-হোস্টেড: ইনফারেন্স সার্ভার, GPU-র অর্থনীতি আর প্রোভাইডার",
+        "title": "হোস্টেড না সেলফ-হোস্টেড: ইনফারেন্স সার্ভার",
         "sub": "প্রতিটা LLM কলের দুই দিক: আপনার পাঠানো <strong>রিকোয়েস্ট</strong>, আর সেটা যে <strong>ইনফারেন্স</strong> সামলায়। বেশিরভাগ টিম শুরুতে ভাড়া নেয় (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। ব্যবহার যথেষ্ট বাড়লে তারা vLLM, TGI, SGLang, Ollama বা llama.cpp দিয়ে নিজে হোস্ট করে।"
       },
       "body": [
@@ -141,71 +141,6 @@
               ]
             }
           ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "id": "s3-gpu-economics-edge-inference-on-device-models",
-          "html": "GPU economics, edge inference, on-device models"
-        },
-        {
-          "type": "paragraph",
-          "html": "An H100 rents for $2–$4/hr on the major clouds, ~$30k to buy. At a 70B model, you serve ~30 concurrent requests before latency collapses — about $0.10 per 1k generated tokens fully loaded. Edge inference pushes smaller models onto the user's device (3B–8B on phones via MLX, llama.cpp, or vendor SDKs).<a class=\"cite\" href=\"#src15\">[15]</a> The trade-off: zero server cost, but quality and capability are limited."
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "id": "s3-inference-providers",
-          "html": "Inference providers"
-        },
-        {
-          "type": "paragraph",
-          "html": "Hosted inference in 2025 is a commodity market. Pick by which model you want at what price with what SLA (service-level agreement):"
-        },
-        {
-          "type": "table",
-          "headers": [
-            "Provider",
-            "Specialty",
-            "Models"
-          ],
-          "rows": [
-            [
-              "<strong>Together</strong>",
-              "Open-weight catalogue, good default",
-              "Llama, Qwen, DeepSeek, Mistral"
-            ],
-            [
-              "<strong>Fireworks</strong>",
-              "Fast, function-calling optimised",
-              "Most open + fine-tunes"
-            ],
-            [
-              "<strong>Groq</strong>",
-              "Ultra-low latency LPU hardware (Language Processing Unit, Groq's own chip)",
-              "Llama, Mixtral, Whisper"
-            ],
-            [
-              "<strong>Cerebras</strong>",
-              "Fast inference on wafer-scale chips",
-              "Llama, Qwen"
-            ],
-            [
-              "<strong>Replicate</strong>",
-              "Pay-per-second, model marketplace",
-              "Anything on Hugging Face"
-            ],
-            [
-              "<strong>AWS Bedrock / Azure AI Foundry</strong>",
-              "Enterprise compliance",
-              "Anthropic, Cohere, Llama, Mistral, etc."
-            ],
-            [
-              "<strong>OpenRouter</strong>",
-              "Aggregator — one API, many providers",
-              "All of the above"
-            ]
-          ]
         }
       ],
       "layman": [
@@ -235,10 +170,6 @@
             "<em>Ollama</em>: a one-liner for your laptop.",
             "<em>llama.cpp</em>: runs on phones and Raspberry Pis."
           ]
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>GPU economics:</strong> a top-end AI chip (an Nvidia H100) costs ~$30k to buy, or $2–4/hour to rent. At full tilt it serves ~30 conversations at once. So if you're running millions of conversations, owning is cheaper. If you're running thousands, renting is cheaper."
         },
         {
           "type": "analogy",
@@ -272,27 +203,6 @@
           ]
         },
         {
-          "type": "paragraph",
-          "html": "<strong>GPU-র অর্থনীতি, এজ ইনফারেন্স, অন-ডিভাইস মডেল:</strong> H100 প্রধান ক্লাউডে ঘণ্টায় $২–$4-এ ভাড়া নেওয়া যায়, কিন্তু কেনা ~$৩০k। ৭০B মডেলে এটি ল্যাটেন্সি ভেঙে পড়ার আগে প্রায় ৩০ সমকালীন রিকোয়েস্ট সার্ভ করে — পুরো লোডে প্রায় $০.10/১k জেনারেটেড টোকেন। এজ ইনফারেন্স ছোট মডেল (৩B–৮B) ইউজারের ডিভাইসে ঠেলে দেয় (MLX, llama.cpp বা ভেন্ডর SDK দিয়ে)।<a class=\"cite\" href=\"#src15\">[১৫]</a>"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>ইনফারেন্স প্রোভাইডার (২০২৫):</strong>"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "Together (ওপেন-ওয়েট ক্যাটালগ, ভালো ডিফল্ট);",
-            "Fireworks (দ্রুত, ফাংশন-কলিং-অপ্টিমাইজড);",
-            "Groq (LPU হার্ডওয়্যার, অতি-কম ল্যাটেন্সি);",
-            "Cerebras (ওয়েফার-স্কেল চিপ);",
-            "Replicate (প্রতি সেকেন্ডে পে, মডেল মার্কেটপ্লেস);",
-            "AWS Bedrock / Azure AI Foundry (এন্টারপ্রাইজ কমপ্লায়েন্স);",
-            "OpenRouter (অ্যাগ্রিগেটর)।"
-          ]
-        },
-        {
           "type": "analogy",
           "blocks": [
             {
@@ -319,12 +229,6 @@
           "id": "SAqktpwcE4M",
           "title": "An Intermediate Guide to Inference Using vLLM",
           "channel": "Red Hat Open",
-          "lang": "en"
-        },
-        {
-          "id": "BKWpYIWvAo4",
-          "title": "TLMs: Tiny LLMs and Agents on Edge Devices with LiteRT-LM — Cormac Brick, Google",
-          "channel": "AI Engineer",
           "lang": "en"
         },
         {
@@ -412,8 +316,130 @@
       ]
     },
     {
-      "id": "s4",
+      "id": "s5",
       "num": "02",
+      "title": "What inference costs: GPU economics, edge devices and hosted providers",
+      "sub": "This section covers what a GPU costs to rent or buy, how many requests it serves, what running small models on the user's device trades away, and which hosted providers to rent from.",
+      "bn": {
+        "title": "ইনফারেন্সের খরচ: GPU-র অর্থনীতি, এজ ডিভাইস আর প্রোভাইডার",
+        "sub": "একটা GPU ভাড়া বা কেনার খরচ আর সেটা কত রিকোয়েস্ট সামলায়, ইউজারের ডিভাইসে ছোট মডেল চালালে কী ছাড়তে হয়, আর কোন হোস্টেড প্রোভাইডার থেকে ভাড়া নেবেন।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s3-gpu-economics-edge-inference-on-device-models",
+          "html": "GPU economics, edge inference, on-device models"
+        },
+        {
+          "type": "paragraph",
+          "html": "An H100 rents for $2–$4/hr on the major clouds, ~$30k to buy. At a 70B model, you serve ~30 concurrent requests before latency collapses — about $0.10 per 1k generated tokens fully loaded. Edge inference pushes smaller models onto the user's device (3B–8B on phones via MLX, llama.cpp, or vendor SDKs).<a class=\"cite\" href=\"#src15\">[15]</a> The trade-off: zero server cost, but quality and capability are limited."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s3-inference-providers",
+          "html": "Inference providers"
+        },
+        {
+          "type": "paragraph",
+          "html": "Hosted inference in 2025 is a commodity market. Pick by which model you want at what price with what SLA (service-level agreement):"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Provider",
+            "Specialty",
+            "Models"
+          ],
+          "rows": [
+            [
+              "<strong>Together</strong>",
+              "Open-weight catalogue, good default",
+              "Llama, Qwen, DeepSeek, Mistral"
+            ],
+            [
+              "<strong>Fireworks</strong>",
+              "Fast, function-calling optimised",
+              "Most open + fine-tunes"
+            ],
+            [
+              "<strong>Groq</strong>",
+              "Ultra-low latency LPU hardware (Language Processing Unit, Groq's own chip)",
+              "Llama, Mixtral, Whisper"
+            ],
+            [
+              "<strong>Cerebras</strong>",
+              "Fast inference on wafer-scale chips",
+              "Llama, Qwen"
+            ],
+            [
+              "<strong>Replicate</strong>",
+              "Pay-per-second, model marketplace",
+              "Anything on Hugging Face"
+            ],
+            [
+              "<strong>AWS Bedrock / Azure AI Foundry</strong>",
+              "Enterprise compliance",
+              "Anthropic, Cohere, Llama, Mistral, etc."
+            ],
+            [
+              "<strong>OpenRouter</strong>",
+              "Aggregator — one API, many providers",
+              "All of the above"
+            ]
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>GPU economics:</strong> a top-end AI chip (an Nvidia H100) costs ~$30k to buy, or $2–4/hour to rent. At full tilt it serves ~30 conversations at once. So if you're running millions of conversations, owning is cheaper. If you're running thousands, renting is cheaper."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>On the user's own device:</strong> smaller models can also run on a phone or laptop. There is no server bill, but quality and capability are limited."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Renting from a provider:</strong> many companies rent out the same open models. Pick by which model you want, the price, and how fast and reliable the provider promises to be."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>GPU-র অর্থনীতি, এজ ইনফারেন্স, অন-ডিভাইস মডেল:</strong> H100 প্রধান ক্লাউডে ঘণ্টায় $২–$4-এ ভাড়া নেওয়া যায়, কিন্তু কেনা ~$৩০k। ৭০B মডেলে এটি ল্যাটেন্সি ভেঙে পড়ার আগে প্রায় ৩০ সমকালীন রিকোয়েস্ট সার্ভ করে — পুরো লোডে প্রায় $০.10/১k জেনারেটেড টোকেন। এজ ইনফারেন্স ছোট মডেল (৩B–৮B) ইউজারের ডিভাইসে ঠেলে দেয় (MLX, llama.cpp বা ভেন্ডর SDK দিয়ে)।<a class=\"cite\" href=\"#src15\">[১৫]</a>"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ইনফারেন্স প্রোভাইডার (২০২৫):</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Together (ওপেন-ওয়েট ক্যাটালগ, ভালো ডিফল্ট);",
+            "Fireworks (দ্রুত, ফাংশন-কলিং-অপ্টিমাইজড);",
+            "Groq (LPU হার্ডওয়্যার, অতি-কম ল্যাটেন্সি);",
+            "Cerebras (ওয়েফার-স্কেল চিপ);",
+            "Replicate (প্রতি সেকেন্ডে পে, মডেল মার্কেটপ্লেস);",
+            "AWS Bedrock / Azure AI Foundry (এন্টারপ্রাইজ কমপ্লায়েন্স);",
+            "OpenRouter (অ্যাগ্রিগেটর)।"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "BKWpYIWvAo4",
+          "title": "TLMs: Tiny LLMs and Agents on Edge Devices with LiteRT-LM — Cormac Brick, Google",
+          "channel": "AI Engineer",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "num": "03",
       "title": "Faster, cheaper inference: quantization, caching, batching and metrics",
       "sub": "Teams that self-host learn a different optimization vocabulary: KV cache, prefix caching, speculative decoding, continuous batching.",
       "bn": {
@@ -429,16 +455,22 @@
         },
         {
           "type": "paragraph",
-          "html": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference. The common formats:"
+          "html": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s3-common-formats",
+          "html": "The common formats"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>GGUF</strong> — llama.cpp's format. Single file, CPU+GPU hybrid, the de facto standard for open-weight local inference.<a class=\"cite\" href=\"#src15\">[15]</a>",
-            "<strong>AWQ</strong> — Activation-aware Weight Quantization. 4-bit with near-FP16 quality; popular for vLLM/SGLang.<a class=\"cite\" href=\"#src16\">[16]</a>",
+            "<strong>GGUF</strong> — llama.cpp's format: a single file that runs on CPU, GPU or both. It is the de facto standard for open-weight local inference.<a class=\"cite\" href=\"#src15\">[15]</a>",
+            "<strong>AWQ</strong> — Activation-aware Weight Quantization. 4-bit with near-FP16 quality (close to the unquantized original); popular for vLLM/SGLang.<a class=\"cite\" href=\"#src16\">[16]</a>",
             "<strong>GPTQ</strong> — a post-training quantization method; older, still common for GPU serving.",
-            "<strong>INT8 / FP8</strong> — minimal-quality-loss quantisation on H100s; native hardware support.",
+            "<strong>INT8 / FP8</strong> (eight-bit integer or eight-bit floating point) — minimal-quality-loss quantisation on H100s; native hardware support.",
             "<strong>INT4 / NF4</strong> — four-bit integer and four-bit NormalFloat formats; bitsandbytes (QLoRA) for training, also used at inference time."
           ]
         },
@@ -456,16 +488,25 @@
         },
         {
           "type": "paragraph",
-          "html": "The <strong>KV cache</strong> holds the attention keys and values already computed for earlier tokens, so the model does not recompute them for each new token. Three ideas show up in every modern inference server:"
+          "html": "The <strong>KV cache</strong> holds the attention keys and values already computed for earlier tokens, so the model does not recompute them for each new token. Three ideas show up in every modern inference server. The first two make the KV cache cheaper:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
             "<strong>Paged KV cache:</strong> instead of one contiguous buffer per request, KV cache memory is allocated in pages (à la OS virtual memory). vLLM's PagedAttention removes the wasted-memory problem of naive serving.<a class=\"cite\" href=\"#src13\">[13]</a>",
-            "<strong>Prefix caching:</strong> if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's <code>prompt_caching</code> and OpenAI's <code>cached_prompt</code> save 80–90% of cost on the cached portion.<a class=\"cite\" href=\"#src17\">[17]</a>",
-            "<strong>Speculative decoding:</strong> a tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. Net throughput +2–3× for free, no quality loss."
+            "<strong>Prefix caching:</strong> if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's <code>prompt_caching</code> and OpenAI's <code>cached_prompt</code> save 80–90% of cost on the cached portion.<a class=\"cite\" href=\"#src17\">[17]</a>"
           ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s3-speculative-decoding",
+          "html": "Speculative decoding"
+        },
+        {
+          "type": "paragraph",
+          "html": "The third idea speeds up generation itself. A tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. Net throughput +2–3× for free, no quality loss."
         },
         {
           "type": "heading",

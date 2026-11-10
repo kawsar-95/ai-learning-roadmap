@@ -10,11 +10,11 @@
     {
       "id": "s1",
       "num": "01",
-      "title": "Chunking strategies: fixed, semantic, structural, late chunking",
-      "sub": "Retrieval works on pieces of documents, not whole documents, so how you cut the text decides what the retriever can ever return. A chunk that is too coarse buries the answer in noise; one that is too fine strips away the context that made the sentence meaningful. This section covers four families: <strong>fixed-size</strong> (with overlap and recursive separators), <strong>structural</strong> (headers and sentences), <strong>semantic</strong> (embedding-driven breakpoints) and <strong>late chunking</strong> (split after the transformer), plus Anthropic's <strong>contextual retrieval</strong>, which repairs lost context by prepending an explanation to every chunk.<a class=\"cite\" href=\"#src1\">[1]</a><a class=\"cite\" href=\"#src2\">[2]</a>",
+      "title": "Chunking strategies: fixed-size, recursive, structural and semantic",
+      "sub": "Retrieval works on pieces of documents, not whole documents, so how you cut the text decides what the retriever can ever return. A chunk that is too coarse buries the answer in noise; one that is too fine strips away the context that made the sentence meaningful. This section covers three families: <strong>fixed-size</strong> (with overlap and recursive separators), <strong>structural</strong> (headers and sentences) and <strong>semantic</strong> (embedding-driven breakpoints).",
       "bn": {
-        "title": "চাঙ্কিং: ফিক্সড, সেম্যান্টিক, স্ট্রাকচারাল আর লেট চাঙ্কিং",
-        "sub": "রিট্রিভাল কাজ করে ডকুমেন্টের টুকরা নিয়ে, পুরো ডকুমেন্ট নিয়ে নয়। তাই লেখাটা কীভাবে কাটবেন, তার উপরই ঠিক হয় রিট্রিভার কী ফেরত দিতে পারবে। চাঙ্ক বেশি বড় হলে উত্তর বাড়তি লেখার ভিড়ে হারিয়ে যায়। বেশি ছোট হলে বাক্যটির অর্থ যে কনটেক্সট দিয়েছিল, তা চলে যায়। এখানে চার ধরন আছে: <strong>ফিক্সড-সাইজ</strong> (ওভারল্যাপ আর রিকার্সিভ সেপারেটর-সহ), <strong>স্ট্রাকচারাল</strong> (হেডার আর বাক্য), <strong>সেম্যান্টিক</strong> (এমবেডিং দিয়ে ঠিক করা ভাঙার জায়গা) আর <strong>লেট চাঙ্কিং</strong> (ট্রান্সফর্মারের পরে ভাঙা)। সাথে Anthropic-এর <strong>কনটেক্সচুয়াল রিট্রিভাল</strong>, যা প্রতিটি চাঙ্কের আগে একটি ব্যাখ্যা জুড়ে হারানো কনটেক্সট ফিরিয়ে আনে।<a class=\"cite\" href=\"#src1\">[১]</a><a class=\"cite\" href=\"#src2\">[২]</a>"
+        "title": "চাঙ্কিং: ফিক্সড, রিকার্সিভ, স্ট্রাকচারাল আর সেম্যান্টিক",
+        "sub": "রিট্রিভাল কাজ করে ডকুমেন্টের টুকরা নিয়ে, পুরো ডকুমেন্ট নিয়ে নয়। তাই লেখাটা কীভাবে কাটবেন, তার উপরই ঠিক হয় রিট্রিভার কী ফেরত দিতে পারবে। চাঙ্ক বেশি বড় হলে উত্তর বাড়তি লেখার ভিড়ে হারিয়ে যায়। বেশি ছোট হলে বাক্যটির অর্থ যে কনটেক্সট দিয়েছিল, তা চলে যায়। এখানে তিন ধরন আছে: <strong>ফিক্সড-সাইজ</strong> (ওভারল্যাপ আর রিকার্সিভ সেপারেটর-সহ), <strong>স্ট্রাকচারাল</strong> (হেডার আর বাক্য) আর <strong>সেম্যান্টিক</strong> (এমবেডিং দিয়ে ঠিক করা ভাঙার জায়গা)।"
       },
       "body": [
         {
@@ -74,7 +74,205 @@
           "svg": "<svg viewBox=\"0 0 1100 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Semantic chunking: similarity between adjacent sentences with breakpoints at the sharpest drops\">\n      <defs>\n        <marker id=\"arr-s1b\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <text x=\"40\" y=\"26\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#cfd8e6\">Similarity of neighbouring sentences (schematic, not measured data)</text>\n      <line x1=\"60\" y1=\"190\" x2=\"1040\" y2=\"190\" stroke=\"#334155\"></line>\n      <line x1=\"60\" y1=\"50\" x2=\"60\" y2=\"190\" stroke=\"#334155\"></line>\n      <text x=\"54\" y=\"54\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">hi</text>\n      <text x=\"54\" y=\"190\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">lo</text>\n      <polyline points=\"100,80 190,76 280,88 370,84 460,170 550,90 640,82 730,94 820,176 910,86 1000,80\" fill=\"none\" stroke=\"#22d3ee\" stroke-width=\"2\"></polyline>\n      <g fill=\"#22d3ee\">\n        <circle cx=\"100\" cy=\"80\" r=\"3\"></circle><circle cx=\"190\" cy=\"76\" r=\"3\"></circle><circle cx=\"280\" cy=\"88\" r=\"3\"></circle><circle cx=\"370\" cy=\"84\" r=\"3\"></circle>\n        <circle cx=\"550\" cy=\"90\" r=\"3\"></circle><circle cx=\"640\" cy=\"82\" r=\"3\"></circle><circle cx=\"730\" cy=\"94\" r=\"3\"></circle><circle cx=\"910\" cy=\"86\" r=\"3\"></circle><circle cx=\"1000\" cy=\"80\" r=\"3\"></circle>\n      </g>\n      <circle cx=\"460\" cy=\"170\" r=\"5\" fill=\"#fb7185\"></circle>\n      <circle cx=\"820\" cy=\"176\" r=\"5\" fill=\"#fb7185\"></circle>\n      <line x1=\"460\" y1=\"50\" x2=\"460\" y2=\"190\" stroke=\"#fb7185\" stroke-dasharray=\"5 4\"></line>\n      <line x1=\"820\" y1=\"50\" x2=\"820\" y2=\"190\" stroke=\"#fb7185\" stroke-dasharray=\"5 4\"></line>\n      <text x=\"468\" y=\"62\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">breakpoint</text>\n      <text x=\"828\" y=\"62\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">breakpoint</text>\n      <text x=\"260\" y=\"214\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">chunk 1</text>\n      <text x=\"640\" y=\"214\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a78bfa\">chunk 2</text>\n      <text x=\"930\" y=\"214\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#34d399\">chunk 3</text>\n      <text x=\"40\" y=\"240\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">A cut is made where the distance jumps past a percentile threshold (docs example: 95).</text>\n    </svg>",
           "caption": "Semantic chunking cuts at the biggest topic shifts between adjacent sentences. The curve is illustrative only.",
           "captionBn": "পাশাপাশি বাক্যের এমবেডিং সিমিলারিটি হঠাৎ কমে গেলে সেখানে ব্রেকপয়েন্ট বসে এবং নতুন চাঙ্ক শুরু হয়। বক্ররেখাটি শুধু ধারণা বোঝানোর জন্য আঁকা, বাস্তব ডেটা নয়।"
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is chunking?</strong> Before a computer can search your documents, it has to cut them into bite-sized pieces. Each piece is what gets matched to a question."
         },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> Cut badly and the answer gets split in half, or a piece says \"it was approved\" without saying what \"it\" is. Cut well and each piece makes sense on its own. Tricks like overlapping pieces or cutting at headings fight that problem."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>When does it go wrong?</strong> Pieces that are too small lose their meaning; pieces that are too big bury the answer in clutter."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The scrapbook analogy:</strong> imagine cutting up a newspaper to make a scrapbook. Cut by exact inches and you slice sentences in half. Cut along the article borders and each clipping makes sense."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>চাঙ্কিং কী?</strong> RAG সিস্টেমে বড় ডকুমেন্ট সরাসরি খোঁজা হয় না; আগে সেটাকে ছোট ছোট টুকরায় (চাঙ্ক) ভাগ করা হয়, তারপর প্রতিটি টুকরা আলাদাভাবে ইনডেক্স হয়। কাটার পদ্ধতির ওপরই নির্ভর করে রিট্রিভার কী খুঁজে পাবে।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>ফিক্সড-সাইজ + ওভারল্যাপ:</strong> <code>chunk_size</code> ও <code>chunk_overlap</code> দিয়ে কাটা হয়। LangChain-এর <code>RecursiveCharacterTextSplitter</code>-এ মাপ ডিফল্টভাবে ক্যারেক্টারে (Python <code>len()</code>), টোকেনে নয়। ওভারল্যাপ থাকলে সীমানায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।",
+            "<strong>রিকার্সিভ:</strong> আগে প্যারাগ্রাফ (<code>\"\\n\\n\"</code>), না হলে লাইন, তারপর ওয়ার্ড, শেষে ক্যারেক্টার দিয়ে কাটে, যাতে অর্থপূর্ণ অংশ যতটা সম্ভব একসাথে থাকে।",
+            "<strong>স্ট্রাকচারাল:</strong> <code>MarkdownHeaderTextSplitter</code> হেডার অনুযায়ী ভাগ করে হেডারকে মেটাডেটা হিসেবে রাখে; LlamaIndex-এর <code>SentenceSplitter</code> বাক্যের সীমানায় কাটে।",
+            "<strong>সেম্যান্টিক:</strong> পাশাপাশি বাক্যের এমবেডিং সিমিলারিটি বেশি কমে গেলে সেখানে কাটা হয় (<code>SemanticSplitterNodeParser</code>); এতে অতিরিক্ত এমবেডিং খরচ আর থ্রেশহোল্ড ঠিক করার ঝামেলা থাকে।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফাঁদ:</strong> টোকেন আর ক্যারেক্টার গুলিয়ে ফেলা, হেডারের সীমানা পেরিয়ে ওভারল্যাপ হওয়া, আর বিক্রেতার নিজস্ব মূল্যায়নের সংখ্যাকে নিজের ডেটার ফল ধরে নেওয়া।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে পুরোনো খবরের কাগজ থেকে কাটিং রাখার কথা ভাবুন। ইঞ্চি মেপে কাটলে বাক্য মাঝখানে কেটে যায়; খবরের সীমানা ধরে কাটলে প্রতিটি কাটিং পড়ার মতো থাকে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "8OJC21T2SL4",
+          "title": "The 5 Levels Of Text Splitting For Retrieval",
+          "channel": "Greg Kamradt",
+          "lang": "en"
+        },
+        {
+          "id": "7JS0pqXvha8",
+          "title": "Semantic Chunking - 3 Methods for Better RAG",
+          "channel": "James Briggs",
+          "lang": "en"
+        },
+        {
+          "id": "_HQ2H_0Ayy0",
+          "title": "RAG Explained For Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 609
+        },
+        {
+          "id": "swvzKSOEluc",
+          "title": "RAG Crash Course for Beginners",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 3530
+        },
+        {
+          "id": "jG-gbB0ULac",
+          "title": "What is RAG? How AI Chatbots Access Your Custom Data (Explained Simply)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 175
+        },
+        {
+          "id": "vvp97qJB6CU",
+          "title": "RAG Chunking Strategies Explained (Fixed Size vs Semantic Chunking)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 132
+        },
+        {
+          "id": "uDfUvC1oi3M",
+          "title": "Poor Chunking Strategy Undermine RAG System",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 94
+        },
+        {
+          "id": "fZM3oX4xEyg",
+          "title": "Introduction To Undertsanding RAG(Retrieval-Augmented Generation)",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1240
+        },
+        {
+          "id": "o126p1QN_RI",
+          "title": "Complete RAG Crash Course With Langchain In 2 Hours",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 7689
+        }
+      ],
+      "practice": [
+        {
+          "en": {
+            "title": "See how a bad cut breaks an answer",
+            "why": "When you build a support chatbot, your documents are cut into small pieces called chunks. If a cut lands in the middle of a fact, the bot can give a wrong answer, or no answer.",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "Copy this prompt, paste it, and press Enter. It gives the AI a chunk that was cut in the middle of a sentence.",
+                "prompt": "You are a support bot. Answer the question using ONLY the chunk below. If the chunk does not contain the answer, say \"Not enough information\".\n\nChunk (cut every 90 characters, this is chunk 2 of 2):\n\"days of purchase. Pro plan customers may request a refund within 30 days. Refunds are paid to the original payment method in 5 business days.\"\n\nQuestion: How many days do Basic plan customers have to ask for a refund?",
+                "expect": "Most chats reply <em>Not enough information</em>, because the number for the Basic plan is missing. A few wrongly say <em>30</em>.",
+                "example": "Not enough information"
+              },
+              {
+                "chat": "new",
+                "do": "Copy this prompt, paste it, and press Enter. This chunk was cut at the end of a sentence.",
+                "prompt": "You are a support bot. Answer the question using ONLY the chunk below. If the chunk does not contain the answer, say \"Not enough information\".\n\nChunk (cut at the end of a sentence):\n\"Zentro Cloud Refund Policy. Basic plan customers may request a full refund within 14 days of purchase. Pro plan customers may request a refund within 30 days.\"\n\nQuestion: How many days do Basic plan customers have to ask for a refund?",
+                "expect": "<strong>14 days</strong>. The whole fact is inside one chunk.",
+                "example": "Basic plan customers have 14 days to request a refund."
+              },
+              {
+                "chat": "same",
+                "do": "Look at the chunk in step 1 again. Write down the words that are missing there.",
+                "expect": "The chunk starts with <em>days of purchase</em>. The number <em>14</em> and the words <em>Basic plan</em> are gone."
+              }
+            ],
+            "learned": "A chatbot does not read your whole document. It searches small pieces called <strong>chunks</strong> and sends only the best ones to the AI. A fixed-size cutter cuts after a set number of characters, even in the middle of a fact. Here the cut removed <em>14</em>, so the AI could not answer. A cutter that stops at sentence ends keeps the fact whole.",
+            "done": "You have two answers: one without the number 14, and one with <em>14 days</em>.",
+            "check": {
+              "question": "Why did step 1 fail, when the full policy exists in the document?",
+              "answer": "The cutter split the sentence, so the number and the plan name went into different chunks. The search sent only one chunk to the AI. A cutter that respects sentence ends keeps the fact in one piece."
+            },
+            "challenge": "In the chunk from step 2, replace the first sentence with <em>The company raised prices.</em> and ask <em>Which company is this about?</em> Then add the line <em>From the Zentro Cloud refund policy.</em> at the top and ask again. What changed?"
+          },
+          "bn": {
+            "title": "দেখুন, ভুল জায়গায় কাটলে উত্তর কীভাবে নষ্ট হয়",
+            "why": "আপনি যখন একটা সাপোর্ট চ্যাটবট বানাবেন, আপনার ডকুমেন্ট ছোট ছোট টুকরা করে কাটা হবে, যাকে চাঙ্ক বলে। কাটাটা যদি কোনো তথ্যের মাঝখানে পড়ে, বট ভুল উত্তর দিতে পারে, বা কোনো উত্তরই দিতে পারবে না।",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। এখানে AI-কে একটা চাঙ্ক দেওয়া হয়েছে, যেটা বাক্যের মাঝখানে কাটা।",
+                "prompt": "তুমি একটা support bot। শুধু নিচের chunk দেখে প্রশ্নের উত্তর দাও। chunk-এ উত্তর না থাকলে লেখো \"যথেষ্ট তথ্য নেই\"।\n\nChunk (প্রতি 90 অক্ষর পরপর কাটা, এটা 2 নম্বর chunk):\n\"দিনের মধ্যে। Pro plan-এর customer-রা 30 দিনের মধ্যে refund চাইতে পারবে। Refund মূল payment method-এ 5 কর্মদিবসে ফেরত দেওয়া হয়।\"\n\nপ্রশ্ন: Basic plan-এর customer-রা কত দিনের মধ্যে refund চাইতে পারবে?",
+                "expect": "বেশিরভাগ চ্যাট লিখবে <em>যথেষ্ট তথ্য নেই</em>, কারণ বেসিক প্ল্যানের সংখ্যাটা নেই। কয়েকটা মডেল ভুল করে <em>৩০</em> বলতে পারে।",
+                "example": "যথেষ্ট তথ্য নেই"
+              },
+              {
+                "chat": "new",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এবার চাঙ্কটা বাক্যের শেষে কাটা।",
+                "prompt": "তুমি একটা support bot। শুধু নিচের chunk দেখে প্রশ্নের উত্তর দাও। chunk-এ উত্তর না থাকলে লেখো \"যথেষ্ট তথ্য নেই\"।\n\nChunk (বাক্যের শেষে কাটা):\n\"Zentro Cloud Refund Policy. Basic plan-এর customer-রা কেনার 14 দিনের মধ্যে পুরো refund চাইতে পারবে। Pro plan-এর customer-রা 30 দিনের মধ্যে refund চাইতে পারবে।\"\n\nপ্রশ্ন: Basic plan-এর customer-রা কত দিনের মধ্যে refund চাইতে পারবে?",
+                "expect": "<strong>১৪ দিন</strong>। পুরো তথ্যটা একটা চাঙ্কের ভেতরেই আছে।",
+                "example": "Basic plan-এর customer-রা 14 দিনের মধ্যে refund চাইতে পারবে।"
+              },
+              {
+                "chat": "same",
+                "do": "ধাপ ১-এর চাঙ্কটা আবার দেখুন। কোন কোন শব্দ সেখানে নেই, লিখে রাখুন।",
+                "expect": "চাঙ্কটা শুরু হয়েছে <em>দিনের মধ্যে</em> দিয়ে। সংখ্যা <em>১৪</em> আর <em>Basic plan</em> শব্দ দুটো নেই।"
+              }
+            ],
+            "learned": "একটা চ্যাটবট আপনার পুরো ডকুমেন্ট পড়ে না। সে ছোট টুকরা, মানে <strong>চাঙ্ক</strong>, খোঁজে, আর সবচেয়ে ভালো কয়েকটা AI-কে পাঠায়। ফিক্সড-সাইজ কাটার নির্দিষ্ট সংখ্যক অক্ষর পরপর কাটে, তথ্যের মাঝখানে হলেও। এখানে কাটায় <em>১৪</em> হারিয়ে গেছে, তাই AI উত্তর দিতে পারেনি। যে কাটার বাক্যের শেষে থামে, সে তথ্যটা পুরো রাখে।",
+            "done": "আপনার কাছে দুটো উত্তর আছে: একটাতে ১৪ সংখ্যা নেই, আরেকটাতে <em>১৪ দিন</em> আছে।",
+            "check": {
+              "question": "পুরো পলিসি ডকুমেন্টে থাকা সত্ত্বেও ধাপ ১ কেন ব্যর্থ হলো?",
+              "answer": "কাটার বাক্যটা ভেঙে ফেলেছে, তাই সংখ্যা আর প্ল্যানের নাম আলাদা চাঙ্কে চলে গেছে। সার্চ শুধু একটা চাঙ্ক AI-কে পাঠিয়েছে। যে কাটার বাক্যের শেষে কাটে, সে তথ্যটা এক টুকরাতেই রাখে।"
+            },
+            "challenge": "ধাপ ২-এর চাঙ্কের প্রথম বাক্যটা বদলে লিখুন <em>কোম্পানি দাম বাড়িয়েছে।</em> তারপর জিজ্ঞেস করুন <em>এটা কোন কোম্পানির কথা?</em> এরপর একদম উপরে <em>Zentro Cloud-এর refund policy থেকে।</em> লাইনটা যোগ করে আবার জিজ্ঞেস করুন। কী বদলালো?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "num": "02",
+      "title": "Late chunking, contextual retrieval, and choosing a chunking strategy",
+      "sub": "Two newer fixes keep a chunk tied to its document: <strong>late chunking</strong> (split after the transformer) and Anthropic's <strong>contextual retrieval</strong>, which repairs lost context by prepending an explanation to every chunk.<a class=\"cite\" href=\"#src1\">[1]</a><a class=\"cite\" href=\"#src2\">[2]</a> The section ends with how to choose a strategy.",
+      "bn": {
+        "title": "লেট চাঙ্কিং, কনটেক্সচুয়াল রিট্রিভাল আর চাঙ্কিং কৌশল বাছাই",
+        "sub": "দুটি নতুন কৌশল: <strong>লেট চাঙ্কিং</strong> (ট্রান্সফর্মারের পরে ভাঙা)। সাথে Anthropic-এর <strong>কনটেক্সচুয়াল রিট্রিভাল</strong>, যা প্রতিটি চাঙ্কের আগে একটি ব্যাখ্যা জুড়ে হারানো কনটেক্সট ফিরিয়ে আনে।<a class=\"cite\" href=\"#src1\">[১]</a><a class=\"cite\" href=\"#src2\">[২]</a> শেষে আছে কোন কৌশল কখন বাছবেন।"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -207,39 +405,27 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is chunking?</strong> Before a computer can search your documents, it has to cut them into bite-sized pieces. Each piece is what gets matched to a question."
+          "html": "<strong>What is it?</strong> Two newer tricks keep each piece tied to its document. One reads the whole document first and cuts afterwards. The other staples a one-line note (\"this is from the 2023 refund policy\") to every piece."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> Cut badly and the answer gets split in half, or a piece says \"it was approved\" without saying what \"it\" is. Cut well and each piece makes sense on its own. Tricks like overlapping pieces, cutting at headings, or stapling a one-line note (\"this is from the 2023 refund policy\") to every piece all fight that problem."
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>When does it go wrong?</strong> Pieces that are too small lose their meaning; pieces that are too big bury the answer in clutter. And no single cutting rule is best for every kind of document, so you have to test on your own."
+          "html": "<strong>How do you choose?</strong> No single cutting rule is best for every kind of document, so you have to test on your own."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The scrapbook analogy:</strong> imagine cutting up a newspaper to make a scrapbook. Cut by exact inches and you slice sentences in half. Cut along the article borders and each clipping makes sense. Write the newspaper name and date on the back of every clipping, and even a tiny clipping can be understood later."
+              "html": "<strong>The scrapbook analogy:</strong> write the newspaper name and date on the back of every clipping, and even a tiny clipping can be understood later."
             }
           ]
         }
       ],
       "bangla": [
         {
-          "type": "paragraph",
-          "html": "<strong>চাঙ্কিং কী?</strong> RAG সিস্টেমে বড় ডকুমেন্ট সরাসরি খোঁজা হয় না; আগে সেটাকে ছোট ছোট টুকরায় (চাঙ্ক) ভাগ করা হয়, তারপর প্রতিটি টুকরা আলাদাভাবে ইনডেক্স হয়। কাটার পদ্ধতির ওপরই নির্ভর করে রিট্রিভার কী খুঁজে পাবে।"
-        },
-        {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>ফিক্সড-সাইজ + ওভারল্যাপ:</strong> <code>chunk_size</code> ও <code>chunk_overlap</code> দিয়ে কাটা হয়। LangChain-এর <code>RecursiveCharacterTextSplitter</code>-এ মাপ ডিফল্টভাবে ক্যারেক্টারে (Python <code>len()</code>), টোকেনে নয়। ওভারল্যাপ থাকলে সীমানায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।",
-            "<strong>রিকার্সিভ:</strong> আগে প্যারাগ্রাফ (<code>\"\\n\\n\"</code>), না হলে লাইন, তারপর ওয়ার্ড, শেষে ক্যারেক্টার দিয়ে কাটে, যাতে অর্থপূর্ণ অংশ যতটা সম্ভব একসাথে থাকে।",
-            "<strong>স্ট্রাকচারাল:</strong> <code>MarkdownHeaderTextSplitter</code> হেডার অনুযায়ী ভাগ করে হেডারকে মেটাডেটা হিসেবে রাখে; LlamaIndex-এর <code>SentenceSplitter</code> বাক্যের সীমানায় কাটে।",
-            "<strong>সেম্যান্টিক:</strong> পাশাপাশি বাক্যের এমবেডিং সিমিলারিটি বেশি কমে গেলে সেখানে কাটা হয় (<code>SemanticSplitterNodeParser</code>); এতে অতিরিক্ত এমবেডিং খরচ আর থ্রেশহোল্ড ঠিক করার ঝামেলা থাকে।",
             "<strong>লেট চাঙ্কিং:</strong> আগে পুরো ডকুমেন্ট লং-কনটেক্সট মডেল দিয়ে এনকোড করা হয়, তারপর মিন পুলিংয়ের ঠিক আগে কাটা হয়। ফলে প্রতিটি চাঙ্ক ভেক্টর আশপাশের কনটেক্সট জানে; আলাদা ট্রেনিং লাগে না, তবে লং-কনটেক্সট এমবেডিং মডেল দরকার।",
             "<strong>কনটেক্সচুয়াল রিট্রিভাল:</strong> প্রতিটি চাঙ্কের সামনে LLM দিয়ে লেখা প্রায় 50-100 টোকেনের কনটেক্সট জুড়ে এমবেডিং ও BM25 দুটোতেই ব্যবহার করা হয়। Anthropic জানিয়েছে ফেইলিউর রেট ৫.৭% থেকে রিরেংকিং-সহ ১.৯%-এ নেমেছে; ২০০,০০০ টোকেনের কম নলেজ বেস হলে সবটা প্রম্পটে দিয়ে দেওয়াই যথেষ্ট।"
           ]
@@ -250,10 +436,6 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ফাঁদ:</strong> টোকেন আর ক্যারেক্টার গুলিয়ে ফেলা, হেডারের সীমানা পেরিয়ে ওভারল্যাপ হওয়া, আর বিক্রেতার নিজস্ব মূল্যায়নের সংখ্যাকে নিজের ডেটার ফল ধরে নেওয়া।"
-        },
-        {
-          "type": "paragraph",
           "html": "<strong>গবেষণার সারকথা:</strong> Late chunking পুরো document-এর context রেখে chunk embedding বানায়; contextual retrieval প্রতিটি chunk-এ ব্যাখ্যা জুড়ে failure rate 5.7% থেকে 1.9% করে।"
         },
         {
@@ -261,24 +443,12 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে পুরোনো খবরের কাগজ থেকে কাটিং রাখার কথা ভাবুন। ইঞ্চি মেপে কাটলে বাক্য মাঝখানে কেটে যায়; খবরের সীমানা ধরে কাটলে প্রতিটি কাটিং পড়ার মতো থাকে। আর প্রতিটির পেছনে কাগজের নাম ও তারিখ লিখে রাখলে অনেক পরেও বোঝা যায় এটা কোথাকার।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে পুরোনো খবরের কাগজ থেকে কাটিং রাখার কথা ভাবুন। আর প্রতিটির পেছনে কাগজের নাম ও তারিখ লিখে রাখলে অনেক পরেও বোঝা যায় এটা কোথাকার।"
             }
           ]
         }
       ],
       "videos": [
-        {
-          "id": "8OJC21T2SL4",
-          "title": "The 5 Levels Of Text Splitting For Retrieval",
-          "channel": "Greg Kamradt",
-          "lang": "en"
-        },
-        {
-          "id": "7JS0pqXvha8",
-          "title": "Semantic Chunking - 3 Methods for Better RAG",
-          "channel": "James Briggs",
-          "lang": "en"
-        },
         {
           "id": "buzWGXOydD8",
           "title": "Late chunking improves context recall in RAG pipelines",
@@ -286,137 +456,17 @@
           "lang": "en"
         },
         {
-          "id": "_HQ2H_0Ayy0",
-          "title": "RAG Explained For Beginners",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 609
-        },
-        {
-          "id": "swvzKSOEluc",
-          "title": "RAG Crash Course for Beginners",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 3530
-        },
-        {
-          "id": "jG-gbB0ULac",
-          "title": "What is RAG? How AI Chatbots Access Your Custom Data (Explained Simply)",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "format": "short",
-          "seconds": 175
-        },
-        {
-          "id": "vvp97qJB6CU",
-          "title": "RAG Chunking Strategies Explained (Fixed Size vs Semantic Chunking)",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "format": "short",
-          "seconds": 132
-        },
-        {
-          "id": "uDfUvC1oi3M",
-          "title": "Poor Chunking Strategy Undermine RAG System",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "format": "short",
-          "seconds": 94
-        },
-        {
           "id": "tLMViADvSNE",
           "title": "Every RAG Strategy Explained in 13 Minutes (No Fluff)",
           "channel": "Cole Medin",
           "lang": "en",
           "seconds": 771
-        },
-        {
-          "id": "fZM3oX4xEyg",
-          "title": "Introduction To Undertsanding RAG(Retrieval-Augmented Generation)",
-          "channel": "Krish Naik",
-          "lang": "en",
-          "seconds": 1240
-        },
-        {
-          "id": "o126p1QN_RI",
-          "title": "Complete RAG Crash Course With Langchain In 2 Hours",
-          "channel": "Krish Naik",
-          "lang": "en",
-          "seconds": 7689
-        }
-      ],
-      "practice": [
-        {
-          "en": {
-            "title": "See how a bad cut breaks an answer",
-            "why": "When you build a support chatbot, your documents are cut into small pieces called chunks. If a cut lands in the middle of a fact, the bot can give a wrong answer, or no answer.",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "Copy this prompt, paste it, and press Enter. It gives the AI a chunk that was cut in the middle of a sentence.",
-                "prompt": "You are a support bot. Answer the question using ONLY the chunk below. If the chunk does not contain the answer, say \"Not enough information\".\n\nChunk (cut every 90 characters, this is chunk 2 of 2):\n\"days of purchase. Pro plan customers may request a refund within 30 days. Refunds are paid to the original payment method in 5 business days.\"\n\nQuestion: How many days do Basic plan customers have to ask for a refund?",
-                "expect": "Most chats reply <em>Not enough information</em>, because the number for the Basic plan is missing. A few wrongly say <em>30</em>.",
-                "example": "Not enough information"
-              },
-              {
-                "chat": "new",
-                "do": "Copy this prompt, paste it, and press Enter. This chunk was cut at the end of a sentence.",
-                "prompt": "You are a support bot. Answer the question using ONLY the chunk below. If the chunk does not contain the answer, say \"Not enough information\".\n\nChunk (cut at the end of a sentence):\n\"Zentro Cloud Refund Policy. Basic plan customers may request a full refund within 14 days of purchase. Pro plan customers may request a refund within 30 days.\"\n\nQuestion: How many days do Basic plan customers have to ask for a refund?",
-                "expect": "<strong>14 days</strong>. The whole fact is inside one chunk.",
-                "example": "Basic plan customers have 14 days to request a refund."
-              },
-              {
-                "chat": "same",
-                "do": "Look at the chunk in step 1 again. Write down the words that are missing there.",
-                "expect": "The chunk starts with <em>days of purchase</em>. The number <em>14</em> and the words <em>Basic plan</em> are gone."
-              }
-            ],
-            "learned": "A chatbot does not read your whole document. It searches small pieces called <strong>chunks</strong> and sends only the best ones to the AI. A fixed-size cutter cuts after a set number of characters, even in the middle of a fact. Here the cut removed <em>14</em>, so the AI could not answer. A cutter that stops at sentence ends keeps the fact whole.",
-            "done": "You have two answers: one without the number 14, and one with <em>14 days</em>.",
-            "check": {
-              "question": "Why did step 1 fail, when the full policy exists in the document?",
-              "answer": "The cutter split the sentence, so the number and the plan name went into different chunks. The search sent only one chunk to the AI. A cutter that respects sentence ends keeps the fact in one piece."
-            },
-            "challenge": "In the chunk from step 2, replace the first sentence with <em>The company raised prices.</em> and ask <em>Which company is this about?</em> Then add the line <em>From the Zentro Cloud refund policy.</em> at the top and ask again. What changed?"
-          },
-          "bn": {
-            "title": "দেখুন, ভুল জায়গায় কাটলে উত্তর কীভাবে নষ্ট হয়",
-            "why": "আপনি যখন একটা সাপোর্ট চ্যাটবট বানাবেন, আপনার ডকুমেন্ট ছোট ছোট টুকরা করে কাটা হবে, যাকে চাঙ্ক বলে। কাটাটা যদি কোনো তথ্যের মাঝখানে পড়ে, বট ভুল উত্তর দিতে পারে, বা কোনো উত্তরই দিতে পারবে না।",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। এখানে AI-কে একটা চাঙ্ক দেওয়া হয়েছে, যেটা বাক্যের মাঝখানে কাটা।",
-                "prompt": "তুমি একটা support bot। শুধু নিচের chunk দেখে প্রশ্নের উত্তর দাও। chunk-এ উত্তর না থাকলে লেখো \"যথেষ্ট তথ্য নেই\"।\n\nChunk (প্রতি 90 অক্ষর পরপর কাটা, এটা 2 নম্বর chunk):\n\"দিনের মধ্যে। Pro plan-এর customer-রা 30 দিনের মধ্যে refund চাইতে পারবে। Refund মূল payment method-এ 5 কর্মদিবসে ফেরত দেওয়া হয়।\"\n\nপ্রশ্ন: Basic plan-এর customer-রা কত দিনের মধ্যে refund চাইতে পারবে?",
-                "expect": "বেশিরভাগ চ্যাট লিখবে <em>যথেষ্ট তথ্য নেই</em>, কারণ বেসিক প্ল্যানের সংখ্যাটা নেই। কয়েকটা মডেল ভুল করে <em>৩০</em> বলতে পারে।",
-                "example": "যথেষ্ট তথ্য নেই"
-              },
-              {
-                "chat": "new",
-                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। এবার চাঙ্কটা বাক্যের শেষে কাটা।",
-                "prompt": "তুমি একটা support bot। শুধু নিচের chunk দেখে প্রশ্নের উত্তর দাও। chunk-এ উত্তর না থাকলে লেখো \"যথেষ্ট তথ্য নেই\"।\n\nChunk (বাক্যের শেষে কাটা):\n\"Zentro Cloud Refund Policy. Basic plan-এর customer-রা কেনার 14 দিনের মধ্যে পুরো refund চাইতে পারবে। Pro plan-এর customer-রা 30 দিনের মধ্যে refund চাইতে পারবে।\"\n\nপ্রশ্ন: Basic plan-এর customer-রা কত দিনের মধ্যে refund চাইতে পারবে?",
-                "expect": "<strong>১৪ দিন</strong>। পুরো তথ্যটা একটা চাঙ্কের ভেতরেই আছে।",
-                "example": "Basic plan-এর customer-রা 14 দিনের মধ্যে refund চাইতে পারবে।"
-              },
-              {
-                "chat": "same",
-                "do": "ধাপ ১-এর চাঙ্কটা আবার দেখুন। কোন কোন শব্দ সেখানে নেই, লিখে রাখুন।",
-                "expect": "চাঙ্কটা শুরু হয়েছে <em>দিনের মধ্যে</em> দিয়ে। সংখ্যা <em>১৪</em> আর <em>Basic plan</em> শব্দ দুটো নেই।"
-              }
-            ],
-            "learned": "একটা চ্যাটবট আপনার পুরো ডকুমেন্ট পড়ে না। সে ছোট টুকরা, মানে <strong>চাঙ্ক</strong>, খোঁজে, আর সবচেয়ে ভালো কয়েকটা AI-কে পাঠায়। ফিক্সড-সাইজ কাটার নির্দিষ্ট সংখ্যক অক্ষর পরপর কাটে, তথ্যের মাঝখানে হলেও। এখানে কাটায় <em>১৪</em> হারিয়ে গেছে, তাই AI উত্তর দিতে পারেনি। যে কাটার বাক্যের শেষে থামে, সে তথ্যটা পুরো রাখে।",
-            "done": "আপনার কাছে দুটো উত্তর আছে: একটাতে ১৪ সংখ্যা নেই, আরেকটাতে <em>১৪ দিন</em> আছে।",
-            "check": {
-              "question": "পুরো পলিসি ডকুমেন্টে থাকা সত্ত্বেও ধাপ ১ কেন ব্যর্থ হলো?",
-              "answer": "কাটার বাক্যটা ভেঙে ফেলেছে, তাই সংখ্যা আর প্ল্যানের নাম আলাদা চাঙ্কে চলে গেছে। সার্চ শুধু একটা চাঙ্ক AI-কে পাঠিয়েছে। যে কাটার বাক্যের শেষে কাটে, সে তথ্যটা এক টুকরাতেই রাখে।"
-            },
-            "challenge": "ধাপ ২-এর চাঙ্কের প্রথম বাক্যটা বদলে লিখুন <em>কোম্পানি দাম বাড়িয়েছে।</em> তারপর জিজ্ঞেস করুন <em>এটা কোন কোম্পানির কথা?</em> এরপর একদম উপরে <em>Zentro Cloud-এর refund policy থেকে।</em> লাইনটা যোগ করে আবার জিজ্ঞেস করুন। কী বদলালো?"
-          }
         }
       ]
     },
     {
       "id": "s2",
-      "num": "02",
+      "num": "03",
       "title": "How vector search works: flat, IVF, HNSW and distance metrics",
       "sub": "A vector database stores embeddings and answers \"which stored vectors are closest to this one?\" without comparing against every row. Exact search over millions of vectors is too slow, so these systems build an <strong>approximate nearest neighbour (ANN)</strong> index, most often the HNSW graph.<a class=\"cite\" href=\"#src6\">[6]</a>",
       "bn": {
@@ -611,12 +661,12 @@
     },
     {
       "id": "s11",
-      "num": "03",
+      "num": "04",
       "title": "Comparing vector databases: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus",
-      "sub": "Six popular options differ less in the core idea than in deployment model, index choices, hybrid-search support and how they isolate tenants. The feature table below is built only from vendor documentation I fetched; the \"when to choose\" guidance is my own synthesis and is labelled that way.",
+      "sub": "Six popular options differ less in the core idea than in deployment model, index choices, hybrid-search support and how they isolate tenants. The feature table below is built only from vendor documentation I fetched.",
       "bn": {
         "title": "ভেক্টর ডেটাবেস: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus-এর তুলনা",
-        "sub": "জনপ্রিয় ছয়টি অপশনের মূল ধারণা প্রায় এক। পার্থক্য ডিপ্লয়মেন্ট মডেল, ইনডেক্সের বিকল্প, হাইব্রিড সার্চের সাপোর্ট আর টেন্যান্ট আলাদা রাখার উপায়ে। নিচের ফিচার টেবিল শুধু আমার পড়া ভেন্ডর ডকুমেন্টেশন থেকে বানানো। “কখন কোনটা বাছবেন” পরামর্শটা আমার নিজের সংশ্লেষণ, আর সেটা সেভাবেই লেখা আছে।"
+        "sub": "জনপ্রিয় ছয়টি অপশনের মূল ধারণা প্রায় এক। পার্থক্য ডিপ্লয়মেন্ট মডেল, ইনডেক্সের বিকল্প, হাইব্রিড সার্চের সাপোর্ট আর টেন্যান্ট আলাদা রাখার উপায়ে। নিচের ফিচার টেবিল শুধু আমার পড়া ভেন্ডর ডকুমেন্টেশন থেকে বানানো।"
       },
       "body": [
         {
@@ -684,8 +734,113 @@
           ]
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "s11-abbreviations-in-the-table",
+          "html": "Abbreviations in the table"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>BYOC</strong>: bring your own cloud;",
+            "<strong>ACID</strong>: atomic, consistent, isolated and durable transactions;",
+            "<strong>PITR</strong>: point-in-time recovery."
+          ]
+        },
+        {
           "type": "paragraph",
-          "html": "<em>Abbreviations in the table:</em> BYOC is bring your own cloud, ACID is atomic, consistent, isolated and durable transactions, and PITR is point-in-time recovery. In the Milvus index names, SQ is scalar quantization (SQ8 stores one byte per value), PQ is product quantization and PRQ is product residual quantization. SCANN is based on Google's ScaNN, and DiskANN is a graph index built to serve from SSD instead of RAM."
+          "html": "In the Milvus index names:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>SQ</strong>: scalar quantization (SQ8 stores one byte per value);",
+            "<strong>PQ</strong>: product quantization;",
+            "<strong>PRQ</strong>: product residual quantization;",
+            "<strong>SCANN</strong>: based on Google's ScaNN;",
+            "<strong>DiskANN</strong>: a graph index built to serve from SSD instead of RAM."
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is this about?</strong> Six popular vector databases do the same basic job: they use a shortcut map to find the closest items fast. They package it differently: some are services you rent, some you run yourself, one lives inside an ordinary database."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> The table puts them side by side: how each one is run, which shortcut maps it offers, and how it handles filters."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The housing analogy:</strong> renting a flat means the landlord fixes the plumbing (a service you rent). Building your own house gives you full control, and all the repairs (a database you run yourself). Adding a room to the house you already live in is easiest if your family is already there (a vector index inside your existing database). No choice is best for everyone; it depends on how big the family gets."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>ছয়টি ডেটাবেস:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Qdrant (Rust, Apache ২.০, পেলোড ফিল্টার ও স্পার্স/মাল্টিভেক্টর);",
+            "Pinecone (ম্যানেজড সার্ভারলেস, নেমস্পেস দিয়ে টেন্যান্ট আলাদা);",
+            "Weaviate (HNSW, ফ্ল্যাট, ডায়নামিক, HFresh ইনডেক্স এবং BM25 + ভেক্টর হাইব্রিড);",
+            "pgvector (Postgres এক্সটেনশন, ACID ও HNSW/IVFFlat);",
+            "Chroma (Apache ২.০, লোকাল থেকে ক্লাউড পর্যন্ত);",
+            "Milvus (Apache ২.০, Lite/Standalone/Distributed, অনেক ধরনের ইনডেক্স)।"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> বাসা ভাড়া নিলে মেরামতের ঝামেলা বাড়িওয়ালার (ভাড়া নেওয়া সেবা)। নিজের বাড়ি বানালে পুরো নিয়ন্ত্রণ আপনার, কিন্তু সব মেরামতও আপনার (নিজে চালানো ডেটাবেস)। নিজের বাড়িতেই একটা ঘর বাড়িয়ে নেওয়া সবচেয়ে সহজ, যদি পরিবার আগে থেকেই সেখানে থাকে (বর্তমান ডেটাবেসের ভেতরেই ভেক্টর ইনডেক্স)। সবার জন্য একটাই সেরা নয়; পরিবার কতটা বড় হবে, তার ওপর নির্ভর করে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "pHB-m-ZITw4",
+          "title": "The Weaviate Vector Database — Bring AI-native applications to life.",
+          "channel": "CMU Database Group",
+          "lang": "en"
+        },
+        {
+          "id": "MykcjWPJ6T4",
+          "title": "2-Build RAG Pipeline From Scratch-Data Ingestion to Vector DB Pipeline-Part 1",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 3548
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "num": "05",
+      "title": "Choosing a vector database: key settings, filtered search and fit",
+      "sub": "This section covers the defaults worth knowing, why filtered search is where engines differ, and which database to lean toward in which situation. The \"when to choose\" guidance is my own synthesis and is labelled that way.",
+      "bn": {
+        "title": "ভেক্টর ডেটাবেস বাছাই: জরুরি সেটিং, ফিল্টার-সহ সার্চ আর কোনটা কখন",
+        "sub": "জানার মতো ডিফল্ট সেটিং, ফিল্টার-সহ সার্চে কেন ইঞ্জিনগুলো আলাদা, আর কোন পরিস্থিতিতে কোনটার দিকে ঝুঁকবেন। “কখন কোনটা বাছবেন” পরামর্শটা আমার নিজের সংশ্লেষণ, আর সেটা সেভাবেই লেখা আছে।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s11-key-settings-and-filtered-search",
+          "html": "Key settings and filtered search"
         },
         {
           "type": "code",
@@ -792,7 +947,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is this about?</strong> Six popular vector databases do the same basic job: they use a shortcut map to find the closest items fast. They package it differently: some are services you rent, some you run yourself, one lives inside an ordinary database."
+          "html": "<strong>What is this about?</strong> A few settings decide how well a vector database finds the closest items, and the best pick depends on your situation."
         },
         {
           "type": "paragraph",
@@ -801,34 +956,9 @@
         {
           "type": "paragraph",
           "html": "<strong>When does it go wrong?</strong> If you add filters like \"only this customer's files\", a shortcut map that ignores filters can return too few results. And a product that is perfect for a prototype may be awkward at huge scale."
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>The housing analogy:</strong> renting a flat means the landlord fixes the plumbing (a service you rent). Building your own house gives you full control, and all the repairs (a database you run yourself). Adding a room to the house you already live in is easiest if your family is already there (a vector index inside your existing database). No choice is best for everyone; it depends on how big the family gets."
-            }
-          ]
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "<strong>ছয়টি ডেটাবেস:</strong>"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "Qdrant (Rust, Apache ২.০, পেলোড ফিল্টার ও স্পার্স/মাল্টিভেক্টর);",
-            "Pinecone (ম্যানেজড সার্ভারলেস, নেমস্পেস দিয়ে টেন্যান্ট আলাদা);",
-            "Weaviate (HNSW, ফ্ল্যাট, ডায়নামিক, HFresh ইনডেক্স এবং BM25 + ভেক্টর হাইব্রিড);",
-            "pgvector (Postgres এক্সটেনশন, ACID ও HNSW/IVFFlat);",
-            "Chroma (Apache ২.০, লোকাল থেকে ক্লাউড পর্যন্ত);",
-            "Milvus (Apache ২.০, Lite/Standalone/Distributed, অনেক ধরনের ইনডেক্স)।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "<strong>কোনটি কখন (আমার নিজস্ব সংশ্লেষণ, বিক্রেতার পরামর্শ নয়):</strong>"
@@ -856,36 +986,12 @@
             "ফিল্টার-সহ সার্চ আর ফিল্টার ছাড়া সার্চের রিকল এক নয়;",
             "কোনো সূত্রে ক্রস-ভেন্ডর বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ডেটায় মেপে নিন।"
           ]
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> বাসা ভাড়া নিলে মেরামতের ঝামেলা বাড়িওয়ালার (ভাড়া নেওয়া সেবা)। নিজের বাড়ি বানালে পুরো নিয়ন্ত্রণ আপনার, কিন্তু সব মেরামতও আপনার (নিজে চালানো ডেটাবেস)। নিজের বাড়িতেই একটা ঘর বাড়িয়ে নেওয়া সবচেয়ে সহজ, যদি পরিবার আগে থেকেই সেখানে থাকে (বর্তমান ডেটাবেসের ভেতরেই ভেক্টর ইনডেক্স)। সবার জন্য একটাই সেরা নয়; পরিবার কতটা বড় হবে, তার ওপর নির্ভর করে।"
-            }
-          ]
-        }
-      ],
-      "videos": [
-        {
-          "id": "pHB-m-ZITw4",
-          "title": "The Weaviate Vector Database — Bring AI-native applications to life.",
-          "channel": "CMU Database Group",
-          "lang": "en"
-        },
-        {
-          "id": "MykcjWPJ6T4",
-          "title": "2-Build RAG Pipeline From Scratch-Data Ingestion to Vector DB Pipeline-Part 1",
-          "channel": "Krish Naik",
-          "lang": "en",
-          "seconds": 3548
         }
       ]
     },
     {
       "id": "s3",
-      "num": "04",
+      "num": "06",
       "title": "Hybrid search (BM25 + vector) & reciprocal rank fusion",
       "sub": "Keyword search (BM25) and embedding search fail in opposite ways: BM25 needs the query's exact words to appear, while dense vectors can blur rare identifiers, names and codes. <strong>Hybrid search</strong> runs both and merges the results. The most common merge is <strong>reciprocal rank fusion (RRF)</strong>, which ignores raw scores and combines only each document's rank in each list.<a class=\"cite\" href=\"#src16\">[16]</a> The catch is that the two retrievers' scores live on different scales, which is exactly the problem rank-based fusion sidesteps.",
       "bn": {
@@ -901,7 +1007,7 @@
         },
         {
           "type": "paragraph",
-          "html": "BM25 comes from the Probabilistic Relevance Framework (grounded in 1970s-80s work); BM25F extends it to document fields such as metadata.<a class=\"cite\" href=\"#src17\">[17]</a> It scores exact term matches via an inverted index. Learned sparse models such as SPLADE keep that exact-match, inverted-index efficiency and interpretability but add learned term expansion to handle vocabulary mismatch.<a class=\"cite\" href=\"#src18\">[18]</a> A dense retriever embeds the query and finds nearest vectors with an ANN index. Weaviate states that its hybrid search runs the vector and BM25 searches in parallel and then fuses them.<a class=\"cite\" href=\"#src13\">[13]</a>"
+          "html": "BM25 comes from the Probabilistic Relevance Framework (grounded in 1970s-80s work). BM25F extends it to document fields such as metadata.<a class=\"cite\" href=\"#src17\">[17]</a> It scores exact term matches via an inverted index. Learned sparse models such as SPLADE keep that exact-match, inverted-index efficiency and interpretability. They add learned term expansion to handle vocabulary mismatch.<a class=\"cite\" href=\"#src18\">[18]</a> A dense retriever embeds the query and finds nearest vectors with an ANN index. Weaviate states that its hybrid search runs the vector and BM25 searches in parallel and then fuses them.<a class=\"cite\" href=\"#src13\">[13]</a>"
         },
         {
           "type": "diagram",
@@ -917,7 +1023,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Cormack, Clarke and Buettcher define a document's score as a sum over every ranking that contains it. Each ranking adds <code>1 / (k + r(d))</code>, where <code>r(d)</code> is the document's rank in that list. The paper states that \"k = 60 was fixed during a pilot investigation and not altered during subsequent validation.\"<a class=\"cite\" href=\"#src16\">[16]</a> Elasticsearch uses <code>score += 1.0 / (k + rank)</code> with rank starting at 1. Its <code>rank_constant</code> defaults to 60, and <code>rank_window_size</code> defaults to the <code>size</code> parameter.<a class=\"cite\" href=\"#src19\">[19]</a> OpenSearch added RRF in 2.19 (12 Feb 2025) with a default rank constant of 60.<a class=\"cite\" href=\"#src20\">[20]</a> The ranks in the diagram are invented for the arithmetic."
+          "html": "Cormack, Clarke and Buettcher define a document's score as a sum over every ranking that contains it. Each ranking adds <code>1 / (k + r(d))</code>, where <code>r(d)</code> is the document's rank in that list. The ranks in the diagram are invented for the arithmetic."
         },
         {
           "type": "diagram",
@@ -926,12 +1032,30 @@
           "captionBn": "এখানে ডকুমেন্ট A BM25-তে প্রথম কিন্তু ডেন্স তালিকায় পঞ্চম, তাই ফিউজড স্কোরে B ও C তার চেয়ে এগিয়ে যায়। দুই তালিকাতেই ভালো র‍্যাংক পাওয়া ডকুমেন্টই RRF-এ জেতে। র‍্যাংকগুলো কাল্পনিক, অঙ্কটি নিখুঁত।"
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "s3-the-constant-k-across-engines",
+          "html": "The constant k across engines"
+        },
+        {
+          "type": "paragraph",
+          "html": "The paper states that \"k = 60 was fixed during a pilot investigation and not altered during subsequent validation.\"<a class=\"cite\" href=\"#src16\">[16]</a>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Elasticsearch uses <code>score += 1.0 / (k + rank)</code> with rank starting at 1. Its <code>rank_constant</code> defaults to 60, and <code>rank_window_size</code> defaults to the <code>size</code> parameter.<a class=\"cite\" href=\"#src19\">[19]</a>",
+            "OpenSearch added RRF in 2.19 (12 Feb 2025) with a default rank constant of 60.<a class=\"cite\" href=\"#src20\">[20]</a>"
+          ]
+        },
+        {
           "type": "callout",
           "variant": "warn",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Vendors disagree on k:</strong> the paper fixed k = 60, and Elasticsearch and OpenSearch default to 60. Qdrant's docs, however, state that RRF's k is \"set to 2 by default\". Weaviate's <code>rankedFusion</code> uses <code>1/(RANK+60)</code>.<a class=\"cite\" href=\"#src21\">[21]</a><a class=\"cite\" href=\"#src13\">[13]</a> The same two lists can therefore fuse differently across engines; check the default before comparing results, and set k explicitly where the API allows it."
+              "html": "<strong>Vendors disagree on k:</strong> the paper fixed k = 60, and Elasticsearch and OpenSearch default to 60. Qdrant's docs, however, state that RRF's k is \"set to 2 by default\". Weaviate's <code>rankedFusion</code> uses <code>1/(RANK+60)</code>.<a class=\"cite\" href=\"#src21\">[21]</a><a class=\"cite\" href=\"#src13\">[13]</a> The same two lists can therefore fuse differently across engines. Check the default before comparing results, and set k explicitly where the API allows it."
             }
           ]
         },
@@ -943,7 +1067,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Weaviate's default hybrid method is <code>relativeScoreFusion</code> (default since v1.24). It normalises each search's scores to 0-1 (min-max style) and weights them with <code>alpha</code>: 0 is keyword only, 1 is vector only, and the server default is 0.75. It notes there is no max-distance equivalent for BM25 because BM25 scores are unbounded. <code>rankedFusion</code>, the default through v1.23, is the rank-based alternative.<a class=\"cite\" href=\"#src13\">[13]</a> Qdrant's Query API supports RRF and DBSF (distribution-based score fusion), and it added weighted RRF in v1.17.0. Its docs advise RRF as the default when you have no evaluation set.<a class=\"cite\" href=\"#src21\">[21]</a>"
+          "html": "Weaviate's default hybrid method is <code>relativeScoreFusion</code> (default since v1.24). It normalises each search's scores to 0-1 (min-max style), then weights them with <code>alpha</code>. An <code>alpha</code> of 0 is keyword only, 1 is vector only, and the server default is 0.75. It notes there is no max-distance equivalent for BM25 because BM25 scores are unbounded. <code>rankedFusion</code>, the default through v1.23, is the rank-based alternative.<a class=\"cite\" href=\"#src13\">[13]</a> Qdrant's Query API supports RRF and DBSF (distribution-based score fusion). It added weighted RRF in v1.17.0. Its docs advise RRF as the default when you have no evaluation set.<a class=\"cite\" href=\"#src21\">[21]</a>"
         },
         {
           "type": "diagram",
@@ -1180,7 +1304,7 @@
     },
     {
       "id": "s4",
-      "num": "05",
+      "num": "07",
       "title": "Query rewriting, expansion & HyDE",
       "sub": "User queries are short, ambiguous and phrased differently from the documents that answer them. <strong>Query transformation</strong> puts a step before retrieval that rewrites, broadens, multiplies or even \"answers\" the query so the retriever has a better string (or vector) to match. Established variants include HyDE<a class=\"cite\" href=\"#src23\">[23]</a>, step-back prompting<a class=\"cite\" href=\"#src24\">[24]</a>, Query2doc<a class=\"cite\" href=\"#src25\">[25]</a>, RAG-Fusion<a class=\"cite\" href=\"#src26\">[26]</a> and Rewrite-Retrieve-Read<a class=\"cite\" href=\"#src27\">[27]</a>. Each trades one extra LLM call (latency and cost) for a better chance that the right chunk appears in the candidate set.",
       "bn": {
@@ -1228,25 +1352,9 @@
         },
         {
           "type": "heading",
-          "level": 3,
-          "id": "s4-multi-query-fusion-with-rrf-worked-through",
-          "html": "Multi-query fusion with RRF, worked through"
-        },
-        {
-          "type": "paragraph",
-          "html": "RAG-Fusion scores each document by summing 1/(k + rank) across the lists produced by the query variants.<a class=\"cite\" href=\"#src26\">[26]</a> The original paper defining RRF fixed k = 60 in a pilot and did not alter it afterwards<a class=\"cite\" href=\"#src16\">[16]</a>, and Elasticsearch defaults <code>rank_constant</code> to 60<a class=\"cite\" href=\"#src19\">[19]</a>. Vendors differ, though: Qdrant's docs state RRF's k is \"set to 2 by default\"<a class=\"cite\" href=\"#src21\">[21]</a>, so check your engine's default before comparing rankings."
-        },
-        {
-          "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Worked RRF example with two query-variant lists and k equals 60\">\n      <defs>\n        <marker id=\"arr-s4c\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <text x=\"40\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">variant 1 list</text>\n      <text x=\"240\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a78bfa\">variant 2 list</text>\n      <text x=\"690\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#34d399\">fused score, k = 60</text>\n\n      <rect x=\"40\" y=\"55\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 1: Doc A</text>\n      <rect x=\"40\" y=\"99\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 2: Doc B</text>\n      <rect x=\"40\" y=\"143\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 3: Doc C</text>\n\n      <rect x=\"240\" y=\"55\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 1: Doc B</text>\n      <rect x=\"240\" y=\"99\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 2: Doc D</text>\n      <rect x=\"240\" y=\"143\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 3: Doc A</text>\n\n      <rect x=\"470\" y=\"80\" width=\"150\" height=\"70\" rx=\"6\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\"></rect>\n      <text x=\"545\" y=\"108\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#f472b6\">RRF</text>\n      <text x=\"545\" y=\"128\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">sum of 1/(k+rank)</text>\n      <line x1=\"410\" y1=\"115\" x2=\"470\" y2=\"115\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s4c)\"></line>\n      <line x1=\"620\" y1=\"115\" x2=\"690\" y2=\"115\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s4c)\"></line>\n\n      <rect x=\"690\" y=\"55\" width=\"370\" height=\"34\" rx=\"6\" fill=\"rgba(52,211,153,0.14)\" stroke=\"#34d399\"></rect>\n      <text x=\"875\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#e2e8f0\">1. Doc B  1/62 + 1/61 = 0.03252</text>\n      <rect x=\"690\" y=\"99\" width=\"370\" height=\"34\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"875\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#e2e8f0\">2. Doc A  1/61 + 1/63 = 0.03227</text>\n      <rect x=\"690\" y=\"143\" width=\"370\" height=\"34\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"875\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">3. Doc D  1/62 = 0.01613</text>\n      <rect x=\"690\" y=\"187\" width=\"370\" height=\"34\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"875\" y=\"209\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">4. Doc C  1/63 = 0.01587</text>\n\n      <text x=\"40\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Doc B wins: high in both lists beats rank 1 in only one list.</text>\n      <text x=\"40\" y=\"284\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Illustrative numbers computed from the RRF formula. Qdrant docs state a default k of 2, the 2009 paper used 60.</text>\n    </svg>",
-          "caption": "Worked RRF: ranks from two query-variant lists are turned into 1/(60 + rank) contributions and summed; agreement across lists decides the order.",
-          "captionBn": "দুটি কুয়েরি ভ্যারিয়েন্টের র‍্যাংকিং থেকে প্রতিটি ডকুমেন্টের 1/(৬০ + র‍্যাংক) যোগ করা হয়েছে। ডকুমেন্ট B দুই তালিকাতেই ওপরের দিকে থাকায় একটিতে এক নম্বরে থাকা ডকুমেন্ট A-কে সামান্য ব্যবধানে হারায়।"
-        },
-        {
-          "type": "code",
-          "lang": "python",
-          "code": "# Query transformation sketch: multi-query + HyDE, fused with RRF.\n# llm(), embed(), dense_search() and bm25_search() are placeholders for your stack.\ndef rrf(lists, k=60):\n    scores = {}\n    for ranked in lists:\n        for rank, doc_id in enumerate(ranked, start=1):\n            scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank)\n    return sorted(scores, key=scores.get, reverse=True)\n\ndef retrieve(question, n_variants=3, top_k=20):\n    variants = llm(f\"Write {n_variants} search queries for: {question}\").splitlines()\n    fake_doc = llm(f\"Write a short passage answering: {question}\")   # HyDE\n    lists = [bm25_search(q, top_k) for q in [question, *variants]]\n    lists.append(dense_search(embed(fake_doc), top_k))\n    return rrf(lists)[:top_k]",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Query transformation sketch: multi-query + HyDE, fused with RRF.</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># llm(), embed(), dense_search() and bm25_search() are placeholders for your stack.</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> rrf</span><span style=\"color:#ADBAC7\">(lists, k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">60</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    scores </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> {}</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    for</span><span style=\"color:#ADBAC7\"> ranked </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> lists:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        for</span><span style=\"color:#ADBAC7\"> rank, doc_id </span><span style=\"color:#F47067\">in</span><span style=\"color:#6CB6FF\"> enumerate</span><span style=\"color:#ADBAC7\">(ranked, </span><span style=\"color:#F69D50\">start</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            scores[doc_id] </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> scores.get(doc_id, </span><span style=\"color:#6CB6FF\">0.0</span><span style=\"color:#ADBAC7\">) </span><span style=\"color:#F47067\">+</span><span style=\"color:#6CB6FF\"> 1.0</span><span style=\"color:#F47067\"> /</span><span style=\"color:#ADBAC7\"> (k </span><span style=\"color:#F47067\">+</span><span style=\"color:#ADBAC7\"> rank)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#6CB6FF\"> sorted</span><span style=\"color:#ADBAC7\">(scores, </span><span style=\"color:#F69D50\">key</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">scores.get, </span><span style=\"color:#F69D50\">reverse</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">True</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> retrieve</span><span style=\"color:#ADBAC7\">(question, n_variants</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">3</span><span style=\"color:#ADBAC7\">, top_k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">20</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    variants </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm(</span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Write </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">n_variants</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\"> search queries for: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">question</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">).splitlines()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    fake_doc </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm(</span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Write a short passage answering: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">question</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">)   </span><span style=\"color:#768390\"># HyDE</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    lists </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> [bm25_search(q, top_k) </span><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> q </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> [question, </span><span style=\"color:#F47067\">*</span><span style=\"color:#ADBAC7\">variants]]</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    lists.append(dense_search(embed(fake_doc), top_k))</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> rrf(lists)[:top_k]</span></span></code></pre>"
+          "level": 4,
+          "id": "s4-before-you-add-a-rewrite-step",
+          "html": "Before you add a rewrite step"
         },
         {
           "type": "table",
@@ -1317,7 +1425,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> People type short, vague questions, while documents are written in full, formal sentences. A better-worded search finds the right page more often. Asking several versions of the question and combining the results catches pages a single wording would miss."
+          "html": "<strong>Why does it matter?</strong> People type short, vague questions, while documents are written in full, formal sentences. A better-worded search finds the right page more often."
         },
         {
           "type": "paragraph",
@@ -1345,7 +1453,6 @@
             "<strong>HyDE:</strong> LLM প্রশ্নের একটি কাল্পনিক উত্তর লেখে। সেটি ভুল তথ্যও ধরতে পারে। এনকোডার (যেমন Contriever) সেই লেখা এমবেড করার সময় ভুল খুঁটিনাটি ছেঁটে প্রাসঙ্গিকতার ধরনটা রাখে, তারপর সেই ভেক্টর দিয়ে আসল ডকুমেন্ট খোঁজা হয়।",
             "<strong>স্টেপ-ব্যাক:</strong> আগে একটি বড় ও সাধারণ প্রশ্ন করা (অ্যাবস্ট্রাকশন), তারপর যুক্তি দিয়ে উত্তর দেওয়া। এটি মূলত রিজনিং পদ্ধতি, রিট্রিভালেও কাজে লাগে।",
             "<strong>Query2doc:</strong> LLM-এর বানানো সিউডো-ডকুমেন্ট মূল কুয়েরির সাথে জুড়ে দেওয়া হয়। BM25-এর ক্ষেত্রে মূল কুয়েরি কয়েকবার পুনরাবৃত্তি করে ওজন ঠিক রাখা হয়। পেপার অনুযায়ী BM25-এ লাভ বেশি, ডেন্স রিট্রিভারে কম।",
-            "<strong>RAG-Fusion ও মাল্টি-কুয়েরি:</strong> কয়েকটি কুয়েরি ভ্যারিয়েন্ট দিয়ে আলাদা আলাদা খোঁজা হয়, তারপর <code>RRF</code> দিয়ে তালিকাগুলো মেলানো হয়।",
             "<strong>Rewrite-Retrieve-Read:</strong> রিট্রিভালের আগে একটি রিরাইটার বসে; এটি প্রম্পট করা LLM বা RL দিয়ে প্রশিক্ষিত ছোট T5 হতে পারে।"
           ]
         },
@@ -1355,7 +1462,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> তৈরি করা ভ্যারিয়েন্ট মূল উদ্দেশ্য থেকে সরে যেতে পারে; HyDE-এর কাল্পনিক লেখায় ভুল তথ্য থাকতে পারে। মূল কুয়েরিটি সবসময় তালিকায় রাখুন এবং নিজের ডেটায় মেপে দেখুন। বিভিন্ন ভেন্ডরের RRF-এর <code>k</code> আলাদা (পেপারে ৬০, Qdrant-এর ডকসে ২)।"
+          "html": "<strong>সতর্কতা:</strong> তৈরি করা ভ্যারিয়েন্ট মূল উদ্দেশ্য থেকে সরে যেতে পারে; HyDE-এর কাল্পনিক লেখায় ভুল তথ্য থাকতে পারে। মূল কুয়েরিটি সবসময় তালিকায় রাখুন এবং নিজের ডেটায় মেপে দেখুন।"
         },
         {
           "type": "paragraph",
@@ -1366,7 +1473,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে কেউ বলল \"ওই যে লম্বা মতো লোকটা, যে গতকাল এসেছিল।\" দোকানদার নিজে একটু ঘুরিয়ে ভাবে: কার কথা হতে পারে, নাম কী, কোন পাড়ার। কয়েকজন পরিচিতকে একই কথা আলাদাভাবে জিজ্ঞেস করে, তারপর সবার উত্তর মিলিয়ে সঠিক মানুষটিকে খুঁজে পায়।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে কেউ বলল \"ওই যে লম্বা মতো লোকটা, যে গতকাল এসেছিল।\" দোকানদার নিজে একটু ঘুরিয়ে ভাবে: কার কথা হতে পারে, নাম কী, কোন পাড়ার।"
             }
           ]
         }
@@ -1375,12 +1482,6 @@
         {
           "id": "SaDzIVkYqyY",
           "title": "RAG from scratch: Part 9 (Query Translation -- HyDE)",
-          "channel": "LangChain",
-          "lang": "en"
-        },
-        {
-          "id": "JChPi0CRnDY",
-          "title": "RAG from scratch: Part 5 (Query Translation -- Multi Query)",
           "channel": "LangChain",
           "lang": "en"
         },
@@ -1465,8 +1566,92 @@
       ]
     },
     {
+      "id": "s17",
+      "num": "08",
+      "title": "Multi-query fusion (RAG-Fusion) with RRF, worked through",
+      "sub": "Search with several versions of the query, then merge the ranked lists with reciprocal rank fusion (RRF). This section works one fusion through by hand and in code.",
+      "bn": {
+        "title": "মাল্টি-কুয়েরি ফিউশন (RAG-Fusion) আর RRF, ধাপে ধাপে",
+        "sub": "প্রশ্নের কয়েকটি রূপ দিয়ে আলাদা আলাদা খোঁজা, তারপর RRF দিয়ে তালিকাগুলো মেলানো। এখানে একটা ফিউশন হাতে আর কোডে করে দেখানো হয়েছে।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s4-multi-query-fusion-with-rrf-worked-through",
+          "html": "Multi-query fusion with RRF, worked through"
+        },
+        {
+          "type": "paragraph",
+          "html": "RAG-Fusion scores each document by summing 1/(k + rank) across the lists produced by the query variants.<a class=\"cite\" href=\"#src26\">[26]</a> The original paper defining RRF fixed k = 60 in a pilot and did not alter it afterwards<a class=\"cite\" href=\"#src16\">[16]</a>, and Elasticsearch defaults <code>rank_constant</code> to 60<a class=\"cite\" href=\"#src19\">[19]</a>. Vendors differ, though: Qdrant's docs state RRF's k is \"set to 2 by default\"<a class=\"cite\" href=\"#src21\">[21]</a>, so check your engine's default before comparing rankings."
+        },
+        {
+          "type": "diagram",
+          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Worked RRF example with two query-variant lists and k equals 60\">\n      <defs>\n        <marker id=\"arr-s4c\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <text x=\"40\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">variant 1 list</text>\n      <text x=\"240\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a78bfa\">variant 2 list</text>\n      <text x=\"690\" y=\"40\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#34d399\">fused score, k = 60</text>\n\n      <rect x=\"40\" y=\"55\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 1: Doc A</text>\n      <rect x=\"40\" y=\"99\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 2: Doc B</text>\n      <rect x=\"40\" y=\"143\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"125\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 3: Doc C</text>\n\n      <rect x=\"240\" y=\"55\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 1: Doc B</text>\n      <rect x=\"240\" y=\"99\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 2: Doc D</text>\n      <rect x=\"240\" y=\"143\" width=\"170\" height=\"34\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"325\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">rank 3: Doc A</text>\n\n      <rect x=\"470\" y=\"80\" width=\"150\" height=\"70\" rx=\"6\" fill=\"rgba(244,114,182,0.10)\" stroke=\"#f472b6\"></rect>\n      <text x=\"545\" y=\"108\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#f472b6\">RRF</text>\n      <text x=\"545\" y=\"128\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">sum of 1/(k+rank)</text>\n      <line x1=\"410\" y1=\"115\" x2=\"470\" y2=\"115\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s4c)\"></line>\n      <line x1=\"620\" y1=\"115\" x2=\"690\" y2=\"115\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s4c)\"></line>\n\n      <rect x=\"690\" y=\"55\" width=\"370\" height=\"34\" rx=\"6\" fill=\"rgba(52,211,153,0.14)\" stroke=\"#34d399\"></rect>\n      <text x=\"875\" y=\"77\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#e2e8f0\">1. Doc B  1/62 + 1/61 = 0.03252</text>\n      <rect x=\"690\" y=\"99\" width=\"370\" height=\"34\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"875\" y=\"121\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#e2e8f0\">2. Doc A  1/61 + 1/63 = 0.03227</text>\n      <rect x=\"690\" y=\"143\" width=\"370\" height=\"34\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"875\" y=\"165\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">3. Doc D  1/62 = 0.01613</text>\n      <rect x=\"690\" y=\"187\" width=\"370\" height=\"34\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"875\" y=\"209\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">4. Doc C  1/63 = 0.01587</text>\n\n      <text x=\"40\" y=\"262\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Doc B wins: high in both lists beats rank 1 in only one list.</text>\n      <text x=\"40\" y=\"284\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Illustrative numbers computed from the RRF formula. Qdrant docs state a default k of 2, the 2009 paper used 60.</text>\n    </svg>",
+          "caption": "Worked RRF: ranks from two query-variant lists are turned into 1/(60 + rank) contributions and summed; agreement across lists decides the order.",
+          "captionBn": "দুটি কুয়েরি ভ্যারিয়েন্টের র‍্যাংকিং থেকে প্রতিটি ডকুমেন্টের 1/(৬০ + র‍্যাংক) যোগ করা হয়েছে। ডকুমেন্ট B দুই তালিকাতেই ওপরের দিকে থাকায় একটিতে এক নম্বরে থাকা ডকুমেন্ট A-কে সামান্য ব্যবধানে হারায়।"
+        },
+        {
+          "type": "code",
+          "lang": "python",
+          "code": "# Query transformation sketch: multi-query + HyDE, fused with RRF.\n# llm(), embed(), dense_search() and bm25_search() are placeholders for your stack.\ndef rrf(lists, k=60):\n    scores = {}\n    for ranked in lists:\n        for rank, doc_id in enumerate(ranked, start=1):\n            scores[doc_id] = scores.get(doc_id, 0.0) + 1.0 / (k + rank)\n    return sorted(scores, key=scores.get, reverse=True)\n\ndef retrieve(question, n_variants=3, top_k=20):\n    variants = llm(f\"Write {n_variants} search queries for: {question}\").splitlines()\n    fake_doc = llm(f\"Write a short passage answering: {question}\")   # HyDE\n    lists = [bm25_search(q, top_k) for q in [question, *variants]]\n    lists.append(dense_search(embed(fake_doc), top_k))\n    return rrf(lists)[:top_k]",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Query transformation sketch: multi-query + HyDE, fused with RRF.</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># llm(), embed(), dense_search() and bm25_search() are placeholders for your stack.</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> rrf</span><span style=\"color:#ADBAC7\">(lists, k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">60</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    scores </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> {}</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    for</span><span style=\"color:#ADBAC7\"> ranked </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> lists:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        for</span><span style=\"color:#ADBAC7\"> rank, doc_id </span><span style=\"color:#F47067\">in</span><span style=\"color:#6CB6FF\"> enumerate</span><span style=\"color:#ADBAC7\">(ranked, </span><span style=\"color:#F69D50\">start</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            scores[doc_id] </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> scores.get(doc_id, </span><span style=\"color:#6CB6FF\">0.0</span><span style=\"color:#ADBAC7\">) </span><span style=\"color:#F47067\">+</span><span style=\"color:#6CB6FF\"> 1.0</span><span style=\"color:#F47067\"> /</span><span style=\"color:#ADBAC7\"> (k </span><span style=\"color:#F47067\">+</span><span style=\"color:#ADBAC7\"> rank)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#6CB6FF\"> sorted</span><span style=\"color:#ADBAC7\">(scores, </span><span style=\"color:#F69D50\">key</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">scores.get, </span><span style=\"color:#F69D50\">reverse</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">True</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> retrieve</span><span style=\"color:#ADBAC7\">(question, n_variants</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">3</span><span style=\"color:#ADBAC7\">, top_k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">20</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    variants </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm(</span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Write </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">n_variants</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\"> search queries for: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">question</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">).splitlines()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    fake_doc </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm(</span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Write a short passage answering: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">question</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">)   </span><span style=\"color:#768390\"># HyDE</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    lists </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> [bm25_search(q, top_k) </span><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> q </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> [question, </span><span style=\"color:#F47067\">*</span><span style=\"color:#ADBAC7\">variants]]</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    lists.append(dense_search(embed(fake_doc), top_k))</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> rrf(lists)[:top_k]</span></span></code></pre>"
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is it?</strong> Instead of one search, the AI searches with several versions of your question and merges the results into one list."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> Asking several versions of the question and combining the results catches pages a single wording would miss."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>When does it go wrong?</strong> If one version drifts away from what you meant, its results get mixed in too. Keeping your original question among the versions helps."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The librarian analogy:</strong> a good librarian tries a couple of wordings of your question and searches with each. The books that come up near the top of several searches go on the pile first."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>RAG-Fusion ও মাল্টি-কুয়েরি:</strong> কয়েকটি কুয়েরি ভ্যারিয়েন্ট দিয়ে আলাদা আলাদা খোঁজা হয়, তারপর <code>RRF</code> দিয়ে তালিকাগুলো মেলানো হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>সতর্কতা:</strong> বিভিন্ন ভেন্ডরের RRF-এর <code>k</code> আলাদা (পেপারে ৬০, Qdrant-এর ডকসে ২)।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> চায়ের দোকানে কেউ বলল \"ওই যে লম্বা মতো লোকটা, যে গতকাল এসেছিল।\" দোকানদার কয়েকজন পরিচিতকে একই কথা আলাদাভাবে জিজ্ঞেস করে, তারপর সবার উত্তর মিলিয়ে সঠিক মানুষটিকে খুঁজে পায়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "JChPi0CRnDY",
+          "title": "RAG from scratch: Part 5 (Query Translation -- Multi Query)",
+          "channel": "LangChain",
+          "lang": "en"
+        }
+      ]
+    },
+    {
       "id": "s5",
-      "num": "06",
+      "num": "09",
       "title": "Multi-hop retrieval patterns: IRCoT, ReAct, Self-RAG, CRAG and Adaptive-RAG",
       "sub": "Some questions cannot be answered from one retrieval: the second search depends on what the first one found. Multi-hop benchmarks such as HotpotQA (113k Wikipedia question-answer pairs that require reasoning over multiple documents, with sentence-level supporting facts)<a class=\"cite\" href=\"#src28\">[28]</a> exist to test exactly this.",
       "bn": {
@@ -1660,7 +1845,7 @@
     },
     {
       "id": "s12",
-      "num": "07",
+      "num": "10",
       "title": "Agentic retrieval: workflows, agents and what they cost",
       "sub": "<strong>Agentic retrieval</strong> lets the model itself decide whether to retrieve, what to search for, whether the results are good enough, and when to stop. The price is more LLM calls, more latency and a harder system to debug.",
       "bn": {
@@ -1837,7 +2022,7 @@
     },
     {
       "id": "s7",
-      "num": "08",
+      "num": "11",
       "title": "How rerankers score: bi-encoders, cross-encoders and late interaction",
       "sub": "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus. It scores each document without ever looking at the query and document together. A <strong>reranker</strong> is a second-stage model that does look at them together: it takes the short candidate list and re-orders it by a more accurate relevance score.",
       "bn": {
@@ -1960,7 +2145,7 @@
     },
     {
       "id": "s13",
-      "num": "09",
+      "num": "12",
       "title": "Reranking in practice: the two-stage funnel, Cohere, Voyage and BGE",
       "sub": "Sentence-Transformers documents this as the recommended pattern: a bi-encoder retrieves top-k candidates, then a cross-encoder re-ranks them.<a class=\"cite\" href=\"#src43\">[43]</a> Hosted options include Cohere Rerank and Voyage rerankers; open weights include BAAI's BGE rerankers.<a class=\"cite\" href=\"#src44\">[44]</a><a class=\"cite\" href=\"#src45\">[45]</a><a class=\"cite\" href=\"#src46\">[46]</a>",
       "bn": {
@@ -1982,7 +2167,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The sizing of N and k is an engineering choice you tune against your own evaluation set. The vendor and paper limits above are hard ceilings. The commonly quoted \"retrieve 50 to 100, keep 5 to 10\" is practitioner folklore that none of the pages cited here state, so treat it as a starting point, not a rule. Because cross-encoder cost is linear in N, doubling N roughly doubles reranking latency and cost (this follows from one forward pass per pair)."
+          "html": "How many results to retrieve (N) and how many to keep (k) is an engineering choice. Tune both against your own evaluation set. The vendor and paper limits are hard ceilings. The commonly quoted \"retrieve 50 to 100, keep 5 to 10\" is practitioner folklore: none of the pages cited here state it. Treat it as a starting point, not a rule. A cross-encoder makes one forward pass per pair, so its cost is linear in N. Doubling N roughly doubles reranking latency and cost."
         },
         {
           "type": "heading",
@@ -2031,7 +2216,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Pitfalls.</strong> Scores from different rerankers are not on a common scale, so pick any score threshold per model and per corpus. Long documents get truncated or cut by token limits (for example Cohere's <code>max_tokens_per_doc</code>, Voyage's <code>truncation</code>), so rerank chunks, not whole files. A reranker can only re-order what stage 1 returned: if the right passage is not in the top-N, no reranker can recover it."
+              "html": "<strong>Pitfalls.</strong> Scores from different rerankers are not on a common scale. Pick any score threshold per model and per corpus. Token limits truncate or cut long documents (for example Cohere's <code>max_tokens_per_doc</code>, Voyage's <code>truncation</code>), so rerank chunks, not whole files. A reranker can only re-order what stage 1 returned. If the right passage is not in the top-N, no reranker can recover it."
             }
           ]
         }
@@ -2157,7 +2342,7 @@
     },
     {
       "id": "s8",
-      "num": "10",
+      "num": "13",
       "title": "Filtering a vector search: pre-filter, post-filter and what each engine does",
       "sub": "Real questions mix meaning with constraints: \"refund policy for <em>enterprise</em> customers in <em>2025</em>\" or \"science-fiction movies after 2000 with rating above 8\". Vector similarity alone cannot enforce <code>year &gt; 2000</code>. Production retrieval therefore attaches metadata to each chunk and filters on it. The hard part is that a filter interacts badly with approximate nearest-neighbour (ANN) indexes, and each vector database handles that differently.<a class=\"cite\" href=\"#src50\">[50]</a><a class=\"cite\" href=\"#src51\">[51]</a>",
       "bn": {
@@ -2396,7 +2581,7 @@
     },
     {
       "id": "s14",
-      "num": "11",
+      "num": "14",
       "title": "Self-querying and text-to-SQL: letting the LLM write the filter or the query",
       "sub": "Users type natural language, not filter JSON, so production retrieval can let an LLM write the filter (self-querying). For questions about counts or totals, it hands the job to a database.",
       "bn": {
@@ -2511,7 +2696,7 @@
     },
     {
       "id": "s6",
-      "num": "12",
+      "num": "15",
       "title": "GraphRAG & knowledge-graph augmentation",
       "sub": "Vector search returns chunks that look like the query. It struggles with \"global\" questions such as \"what are the main themes in this dataset?\", which no single chunk answers. Microsoft's GraphRAG reframes this as query-focused summarization. An LLM builds an entity knowledge graph and pre-generates summaries for communities of related entities. At query time, GraphRAG merges partial answers from those summaries.<a class=\"cite\" href=\"#src37\">[37]</a> Lighter variants (LightRAG<a class=\"cite\" href=\"#src38\">[38]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[39]</a>) and graph-database tooling (Neo4j<a class=\"cite\" href=\"#src40\">[40]</a>) target the same gap with different cost profiles.",
       "bn": {
@@ -2619,6 +2804,12 @@
               "Lower per the papers' claims; verify"
             ]
           ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s6-before-you-build-a-graph",
+          "html": "Before you build a graph"
         },
         {
           "type": "callout",
@@ -2822,7 +3013,7 @@
     },
     {
       "id": "s9",
-      "num": "13",
+      "num": "16",
       "title": "Document parsing pipelines: Docling, Unstructured and LlamaParse side by side",
       "sub": "A RAG system is only as good as the text it indexes. Most enterprise knowledge sits in PDFs, scans, slide decks and spreadsheets, not clean strings. A <strong>parsing pipeline</strong> turns those files into structured elements (headings, paragraphs, tables, figures) and then into Markdown or JSON that a chunker can split sensibly. Three widely used options are Docling (IBM Research, MIT-licensed)<a class=\"cite\" href=\"#src58\">[58]</a>, the Unstructured open-source partitioner<a class=\"cite\" href=\"#src59\">[59]</a> and LlamaParse from LlamaIndex<a class=\"cite\" href=\"#src60\">[60]</a>.",
       "bn": {
@@ -2843,6 +3034,10 @@
           "captionBn": "PDF থেকে প্রথমে লেআউট বোঝা হয়, তারপর OCR ও টেবিল স্ট্রাকচার বের করা হয়, শেষে স্ট্রাকচার্ড Markdown/JSON হয়ে চাঙ্কে ভাগ হয়। এই ধাপ দুর্বল হলে পরের সব ধাপের মান নেমে যায়।"
         },
         {
+          "type": "paragraph",
+          "html": "A parser turns each file into clean, structured text before anything is chunked. It works out the page layout and the reading order, recovers the text (using OCR for scanned pages) and the structure of tables, and writes the result as Markdown or JSON."
+        },
+        {
           "type": "heading",
           "level": 3,
           "id": "s9-docling-unstructured-llamaparse-side-by-side",
@@ -2850,7 +3045,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The table below contains only what each project's own documentation or paper states; it is not a benchmark."
+          "html": "Docling, Unstructured and LlamaParse are three well-known parsers. They differ in where they run, which files they read, and how they handle layout, tables and scans. The table below contains only what each project's own documentation or paper states; it is not a benchmark."
         },
         {
           "type": "table",
@@ -2996,7 +3191,7 @@
     },
     {
       "id": "s15",
-      "num": "14",
+      "num": "17",
       "title": "Choosing a parsing strategy, and where parsing fails",
       "sub": "Which parsing strategy fits depends on the file: a text-only PDF, a document with tables, or a scan. Parsing also fails in documented ways, so plan a fallback before you index.",
       "bn": {
@@ -3176,7 +3371,7 @@
     },
     {
       "id": "s10",
-      "num": "15",
+      "num": "18",
       "title": "Multimodal RAG: images, tables, charts",
       "sub": "Text-only RAG goes blind the moment the answer lives in a chart, a scanned table or a slide. Multimodal RAG keeps those objects searchable. There are three broad designs: turn everything into text, embed images directly into a shared vector space, or retrieve page images with late interaction and let a vision-capable model read them.<a class=\"cite\" href=\"#src63\">[63]</a><a class=\"cite\" href=\"#src62\">[62]</a>",
       "bn": {

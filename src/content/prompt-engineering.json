@@ -77,6 +77,12 @@
           "html": "<strong>Assistant message</strong> is reserved for the model's own prior replies — for multi-turn conversation, you replay history. Don't pre-fill assistant messages unless you're seeding a specific format (more on that in §2).<a class=\"cite\" href=\"#src10\">[10]</a>"
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "s1-common-placement-mistakes",
+          "html": "Common placement mistakes"
+        },
+        {
           "type": "callout",
           "variant": "warn",
           "blocks": [
@@ -2015,6 +2021,12 @@
           "html": "None of these is bulletproof. All of them together shift the cost from \"any user can break you\" to \"a determined attacker needs significant effort.\" Treat them as <strong>defence in depth</strong>, never a complete solution."
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "s8-keep-instructions-and-data-apart",
+          "html": "Keep instructions and data apart"
+        },
+        {
           "type": "panels",
           "panels": [
             {
@@ -2055,7 +2067,18 @@
                   "html": "Use distinct roles (system/user) and have the model explicitly distinguish instructions from data. Stronger models are better at this — Claude 4 / GPT-5 are noticeably more resistant than older models."
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s8-limit-the-input-check-the-output",
+          "html": "Limit the input, check the output"
+        },
+        {
+          "type": "panels",
+          "panels": [
             {
               "heading": "4. Length / structure limits",
               "blocks": [
