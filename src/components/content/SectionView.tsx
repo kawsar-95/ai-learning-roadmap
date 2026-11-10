@@ -184,11 +184,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
   }, [bodyHeadings]);
 
   return (
-    <section
-      id={section.id}
-      aria-labelledby={`${section.id}-title`}
-      className="scroll-mt-24"
-    >
+    <section id={section.id} aria-labelledby={`${section.id}-title`}>
       <header>
         <h2
           id={`${section.id}-title`}

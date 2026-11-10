@@ -185,7 +185,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                       key={phase.phase}
                       id={`phase-${phase.phase}`}
                       data-core={phase.core}
-                      className="scroll-mt-24 rounded-2xl border border-border bg-bg-raised p-6 shadow-card group-data-[core-only=true]/filter:data-[core=false]:hidden sm:p-7"
+                      className="rounded-2xl border border-border bg-bg-raised p-6 shadow-card group-data-[core-only=true]/filter:data-[core=false]:hidden sm:p-7"
                     >
                       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                         <span className="font-mono text-[12px] tracking-[0.12em] text-accent uppercase">

@@ -2,7 +2,7 @@
 // No server imports besides marked and katex, so `node --test` can load it.
 
 import { Marked } from "marked";
-import type { TokenizerAndRendererExtension } from "marked";
+import type { Token, TokenizerAndRendererExtension } from "marked";
 import katex from "katex";
 import { CURRICULUM_URL, lessonHref, lessonUrl } from "./roadmap-schema.ts";
 import type { Lang } from "./i18n.ts";
@@ -48,14 +48,53 @@ export function resolveLessonHref(href: string, { folder, dir, commit, lang, bas
   return IMAGE.test(url.pathname) ? `${RAW_URL}/${commit}${url.pathname}` : `${CURRICULUM_URL}/blob/${commit}${url.pathname}${url.hash}`;
 }
 
+/** An h2 of a lesson, for its "On this page" list. */
+export type LessonHeading = { id: string; title: string; level: 2 };
+
 /**
- * The lesson body as HTML, without its first "# Title" line (the page shows the title).
+ * GitHub-style heading ids: lower case, punctuation dropped, each space a
+ * hyphen, and "-1", "-2" on a repeat. Use one slugger per lesson.
+ */
+export function headingSlugger(): (text: string) => string {
+  const seen = new Map<string, number>();
+  return (text) => {
+    const base = text.toLowerCase().trim().replace(/[^\p{L}\p{M}\p{N}\p{Pc} -]/gu, "").replace(/ /g, "-") || "section";
+    let slug = base;
+    if (seen.has(base)) {
+      let n = seen.get(base) ?? 0;
+      do {
+        n++;
+        slug = `${base}-${n}`;
+      } while (seen.has(slug));
+      seen.set(base, n);
+    }
+    if (!seen.has(slug)) seen.set(slug, 0);
+    return slug;
+  };
+}
+
+/** The text of inline tokens, without markup. Raw HTML adds nothing. */
+function plainText(tokens: Token[]): string {
+  return tokens
+    .map((token) => {
+      if (token.type === "html") return "";
+      if ("tokens" in token && token.tokens?.length) return plainText(token.tokens);
+      return "text" in token && typeof token.text === "string" ? token.text : "";
+    })
+    .join("");
+}
+
+/**
+ * The lesson body as HTML, without its first "# Title" line (the page shows the title),
+ * and the list of its h2 headings. Every heading gets an id.
  * Raw HTML in the source is escaped: the text comes from another repository.
  * `math` blocks become KaTeX; `figure` blocks are animations that only the
  * curriculum site has, so they become a link to the lesson there.
  * shortcut: `mermaid` blocks stay as source code; add a client-side renderer if diagrams matter.
  */
-export function renderLesson(markdown: string, source: LessonSource): string {
+export function renderLessonWithOutline(markdown: string, source: LessonSource): { html: string; outline: LessonHeading[] } {
+  const slug = headingSlugger();
+  const outline: LessonHeading[] = [];
   const marked = new Marked({
     gfm: true,
     extensions: [inlineMath],
@@ -64,6 +103,12 @@ export function renderLesson(markdown: string, source: LessonSource): string {
     },
     renderer: {
       html: ({ text }) => escape(text),
+      heading({ tokens, depth }) {
+        const title = plainText(tokens).trim();
+        const id = slug(title);
+        if (depth === 2) outline.push({ id, title, level: 2 });
+        return `<h${depth} id="${escape(id)}">${this.parser.parseInline(tokens)}</h${depth}>\n`;
+      },
       code({ text, lang }) {
         const kind = (lang ?? "").trim().split(/\s/)[0];
         if (kind === "math") {
@@ -78,5 +123,11 @@ export function renderLesson(markdown: string, source: LessonSource): string {
       },
     },
   });
-  return marked.parse(markdown.replace(/^# .*\n+/, ""), { async: false }) as string;
+  const html = marked.parse(markdown.replace(/^# .*\n+/, ""), { async: false }) as string;
+  return { html, outline };
+}
+
+/** The lesson body as HTML (see renderLessonWithOutline). */
+export function renderLesson(markdown: string, source: LessonSource): string {
+  return renderLessonWithOutline(markdown, source).html;
 }

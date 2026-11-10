@@ -118,7 +118,7 @@
           "rows": [
             [
               "<strong>E2B</strong>",
-              "Hosted Firecracker microVMs",
+              "Hosted Firecracker microVMs (lightweight virtual machines)",
               "Sub-second Python, easy REST API"
             ],
             [
@@ -129,7 +129,7 @@
             [
               "<strong>Daytona</strong>",
               "Hosted dev environments",
-              "Full git/REPL workflows, AI agents"
+              "Full git/REPL (interactive shell) workflows, AI agents"
             ],
             [
               "<strong>Cloudflare Workers / Sandbox</strong>",
@@ -191,14 +191,14 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The output of a tool is also a prompt.</strong> The AI re-reads what the tool returned as part of its next thought. So the output shouldn't be a giant wall of raw JSON; it should be a tidy Markdown table with the key numbers up front and a one-line summary at the bottom. Same way you'd summarise a report for a colleague."
+          "html": "<strong>The output of a tool is also a prompt.</strong> The AI re-reads what the tool returned as part of its next thought. So the output shouldn't be a giant wall of raw JSON. It should be a tidy Markdown table with the key numbers up front and a one-line summary at the bottom. Same way you'd summarise a report for a colleague."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The toolbox analogy:</strong> think of the AI as a handyperson. You can hand them a toolbox with 30 tools in it, but if every tool is labelled vaguely (\"thingamajig,\" \"whatsit\"), they'll pick the wrong one. Label them clearly (\"Phillips screwdriver, size 2\"), and they pick the right one. MCP is the standard size for tool handles — every toolbox now fits every tool. The summary rule: when the handyperson comes back from the crawl space, they tell you what they found in plain English, not by dumping the entire junk drawer on your kitchen table."
+              "html": "<strong>The toolbox analogy:</strong> think of the AI as a handyperson. You can hand them a toolbox with 30 tools in it, but if every tool is labelled vaguely (\"thingamajig,\" \"whatsit\"), they'll pick the wrong one. Label them clearly (\"Phillips screwdriver, size 2\"), and they pick the right one. MCP is the standard size for tool handles — every toolbox now fits every tool. The summary rule: when the handyperson comes back from the crawl space, they tell you what they found in plain English. They don't dump the entire junk drawer on your kitchen table."
             }
           ]
         }

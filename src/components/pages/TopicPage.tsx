@@ -12,6 +12,7 @@ import { SectionView } from "@/components/content/SectionView";
 import { QuizSection } from "@/components/content/QuizSection";
 import { Sources } from "@/components/content/Sources";
 import { TopicHeader } from "@/components/content/TopicHeader";
+import { OutlineDetails } from "@/components/navigation/OutlineDetails";
 import { SectionNav } from "@/components/navigation/SectionNav";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { SidebarList } from "@/components/layout/SidebarList";
@@ -97,28 +98,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
         <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
           {/* The "On this page" column shows from `xl`. Below it, this closed list does the same job. */}
-          {outline.length > 1 && (
-            <details className="mb-6 rounded-lg border border-border px-4 py-2 xl:hidden">
-              <summary className="cursor-pointer text-[14px] text-text">{UI[lang].onThisPage}</summary>
-              <nav aria-label={UI[lang].onThisPage}>
-                <ol className="m-0 mt-2 list-none p-0">
-                  {outline.map((item) => (
-                    <li key={item.id}>
-                      <a
-                        href={`#${item.id}`}
-                        className={
-                          "block py-1.5 leading-snug text-text-dim no-underline hover:text-text " +
-                          (item.level === 3 ? "pl-4 text-[13px]" : "text-[14px]")
-                        }
-                      >
-                        {item.title}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            </details>
-          )}
+          {outline.length > 1 && <OutlineDetails items={outline} lang={lang} className="mb-6" />}
           {steps.length > 0 ? <SectionPager steps={steps} lang={lang} /> : (
             <>
               {sectionViews}

@@ -45,11 +45,11 @@
           "section": "s3",
           "en": {
             "q": "What is the difference between chain-of-thought, ReAct, and Reflexion?",
-            "a": "Chain-of-thought (Wei et al., 2022) makes the model emit intermediate reasoning tokens before the answer, for example when you add \"Let's think step by step\". ReAct (Yao et al., 2022) interleaves reasoning with actions and observations, and it is the architectural pattern of every modern AI agent. Reflexion (Shinn et al., 2023) adds a loop in which the model reflects on what went wrong and writes that reflection into memory for the next attempt. A CoT trace can be 10–50× longer than a direct answer, so use it only for tasks like math, planning, debugging, and multi-hop reasoning."
+            "a": "Chain-of-thought (Wei et al., 2022) makes the model emit intermediate reasoning tokens before the answer, for example when you show worked examples, or add \"Let's think step by step\" (Kojima et al., 2022). ReAct (Yao et al., 2022) interleaves reasoning with actions and observations, and it is the architectural pattern of every modern AI agent. Reflexion (Shinn et al., 2023) adds a loop in which the model reflects on what went wrong and writes that reflection into memory for the next attempt. A CoT trace can be 10–50× longer than a direct answer, so use it only for tasks like math, planning, debugging, and multi-hop reasoning."
           },
           "bn": {
             "q": "চেইন-অফ-থট, ReAct আর Reflexion-এর মধ্যে পার্থক্য কী?",
-            "a": "চেইন-অফ-থট (Wei et al., ২০২২) উত্তরের আগে মডেলকে মাঝের রিজনিং টোকেন তৈরি করায়, যেমন আপনি \"Let's think step by step\" যোগ করলে। ReAct (Yao et al., ২০২২) রিজনিংকে অ্যাকশন আর অবজারভেশনের সাথে পর্যায়ক্রমে মেশায়, আর এটাই প্রতিটি আধুনিক AI এজেন্টের আর্কিটেকচারাল প্যাটার্ন। Reflexion (Shinn et al., ২০২৩) আরেকটা লুপ যোগ করে: মডেল কী ভুল হলো তা ভেবে দেখে এবং সেই রিফ্লেকশন মেমরিতে লিখে রাখে, যাতে পরের অ্যাটেম্পটে কাজে লাগে। একটা CoT ট্রেস সরাসরি উত্তরের চেয়ে ১০–৫০ গুণ লম্বা হতে পারে, তাই শুধু ম্যাথ, প্ল্যানিং, ডিবাগিং আর মাল্টি-হপ রিজনিংয়ের মতো কাজে এটা ব্যবহার করুন।"
+            "a": "চেইন-অফ-থট (Wei et al., ২০২২) উত্তরের আগে মডেলকে মাঝের রিজনিং টোকেন তৈরি করায়, যেমন আপনি কাজের ধাপ-সহ উদাহরণ দেখালে, বা \"Let's think step by step\" (Kojima et al., ২০২২) যোগ করলে। ReAct (Yao et al., ২০২২) রিজনিংকে অ্যাকশন আর অবজারভেশনের সাথে পর্যায়ক্রমে মেশায়, আর এটাই প্রতিটি আধুনিক AI এজেন্টের আর্কিটেকচারাল প্যাটার্ন। Reflexion (Shinn et al., ২০২৩) আরেকটা লুপ যোগ করে: মডেল কী ভুল হলো তা ভেবে দেখে এবং সেই রিফ্লেকশন মেমরিতে লিখে রাখে, যাতে পরের অ্যাটেম্পটে কাজে লাগে। একটা CoT ট্রেস সরাসরি উত্তরের চেয়ে ১০–৫০ গুণ লম্বা হতে পারে, তাই শুধু ম্যাথ, প্ল্যানিং, ডিবাগিং আর মাল্টি-হপ রিজনিংয়ের মতো কাজে এটা ব্যবহার করুন।"
           }
         },
         {
@@ -281,7 +281,7 @@
           }
         },
         {
-          "section": "s3",
+          "section": "s4",
           "en": {
             "q": "What is quantization, and what is the trade-off?",
             "a": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference. GGUF is llama.cpp's single-file format with CPU+GPU hybrid support. AWQ gives 4-bit with near-FP16 quality and is popular for vLLM and SGLang."
@@ -292,7 +292,7 @@
           }
         },
         {
-          "section": "s3",
+          "section": "s4",
           "en": {
             "q": "How do continuous batching and speculative decoding increase serving performance?",
             "a": "Naive serving handles one request at a time per GPU. Continuous batching, used in vLLM, TGI, and SGLang, interleaves tokens from many requests so the GPU is never idle waiting for one slow request, and it typically delivers 5–20× higher throughput. Speculative decoding has a tiny draft model propose the next 5–10 tokens while the big model verifies them in parallel, for +2–3× throughput with no quality loss. vLLM adds a paged KV cache, allocated in pages like OS virtual memory."

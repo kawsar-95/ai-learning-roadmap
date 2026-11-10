@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { renderLesson, resolveLessonHref } from "../src/lib/lesson-markdown.ts";
+import { headingSlugger, renderLesson, renderLessonWithOutline, resolveLessonHref } from "../src/lib/lesson-markdown.ts";
 import type { LessonSource } from "../src/lib/lesson-markdown.ts";
 
 const src: LessonSource = { folder: "01-math", dir: "02-vectors", commit: "abc123", lang: "en" };
@@ -10,7 +10,31 @@ const content = (path: string) => new URL(`../src/content/lessons/${path}`, impo
 test("renderLesson drops the first title line and keeps the rest", () => {
   const html = renderLesson("# Vectors\n\n## Why\n\nSome text.\n", src);
   assert.doesNotMatch(html, /<h1/);
-  assert.match(html, /<h2>Why<\/h2>/);
+  assert.match(html, /<h2 id="why">Why<\/h2>/);
+});
+
+test("headingSlugger makes GitHub-style ids and numbers repeats", () => {
+  const slug = headingSlugger();
+  assert.equal(slug("Build It"), "build-it");
+  assert.equal(slug("What's new? (2026)"), "whats-new-2026");
+  assert.equal(slug("Phase 1 — Setup"), "phase-1--setup");
+  assert.equal(slug("Lab"), "lab");
+  assert.equal(slug("Lab"), "lab-1");
+  assert.equal(slug("Lab"), "lab-2");
+  assert.equal(slug("!!!"), "section");
+});
+
+test("renderLessonWithOutline lists the h2 headings with the ids it gives them", () => {
+  const md = "# T\n\n## The `ToolRegistry` class\n\n### Detail\n\n## Use It\n\n## Use It\n";
+  const { html, outline } = renderLessonWithOutline(md, src);
+  assert.deepEqual(outline, [
+    { id: "the-toolregistry-class", title: "The ToolRegistry class", level: 2 },
+    { id: "use-it", title: "Use It", level: 2 },
+    { id: "use-it-1", title: "Use It", level: 2 },
+  ]);
+  assert.match(html, /<h2 id="the-toolregistry-class">The <code>ToolRegistry<\/code> class<\/h2>/);
+  assert.match(html, /<h3 id="detail">Detail<\/h3>/);
+  assert.equal(renderLesson(md, src), html);
 });
 
 test("renderLesson escapes raw HTML and blocks script links", () => {
@@ -57,11 +81,16 @@ test("every roadmap lesson has its copied text, renders, and links only to lesso
   let count = 0;
   for (const p of phases) {
     for (const l of p.lessons) {
-      const html = renderLesson(readFileSync(content(`${p.folder}/${l.dir}.md`), "utf8"), { folder: p.folder, dir: l.dir, commit, lang: "en" });
+      const { html, outline } = renderLessonWithOutline(readFileSync(content(`${p.folder}/${l.dir}.md`), "utf8"), { folder: p.folder, dir: l.dir, commit, lang: "en" });
       assert.ok(html.length > 200, `${p.folder}/${l.dir} renders`);
       for (const [, href] of html.matchAll(/href="(\/roadmap\/[^"#]+)/g)) {
         assert.ok(pages.has(href), `${p.folder}/${l.dir} links to a missing lesson ${href}`);
       }
+      // The "On this page" list: at least 3 parts, and every id is unique and on a heading.
+      const ids = [...html.matchAll(/<h[2-6] id="([^"]+)">/g)].map((m) => m[1]);
+      assert.equal(new Set(ids).size, ids.length, `${p.folder}/${l.dir} repeats a heading id`);
+      assert.ok(outline.length >= 3, `${p.folder}/${l.dir} has ${outline.length} h2 parts`);
+      for (const item of outline) assert.ok(ids.includes(item.id), `${p.folder}/${l.dir} outline id ${item.id}`);
       count++;
     }
   }
