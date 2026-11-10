@@ -27,11 +27,17 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>language model</strong> is just a system that predicts which token is likely to come next in a piece of text. Early language models were small and trained on labeled data, which is expensive to collect. The breakthrough came from <strong>self-supervision</strong>: a technique where the text itself supplies the training labels, since every word in a sentence can serve as the \"answer\" for predicting the words before it. This removed the labeling bottleneck and let models scale up into <strong>large language models (LLMs)</strong>."
+          "html": "A <strong>language model</strong> is just a system that predicts which token is likely to come next in a piece of text. Early language models were small and trained on labeled data, which is expensive to collect. The breakthrough came from <strong>self-supervision</strong>, where the text itself supplies the training labels. Every word in a sentence can serve as the \"answer\" that the model predicts from the words before it. This removed the labeling bottleneck and let models scale up into <strong>large language models (LLMs)</strong>."
         },
         {
           "type": "paragraph",
-          "html": "As models learned to handle images, audio, and video in addition to text, they outgrew the name \"language model.\" The field now calls them <strong>foundation models</strong>: large, general-purpose models that can be adapted to many different downstream applications instead of being built for one narrow task."
+          "html": "As models learned to handle images, audio, and video in addition to text, they outgrew the name \"language model.\" The field now calls them <strong>foundation models</strong>: large, general-purpose models that can be adapted to many different downstream applications. They are not built for one narrow task."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch1-why-a-new-discipline",
+          "html": "Why a new discipline"
         },
         {
           "type": "paragraph",
@@ -94,7 +100,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Coding and conversational bots dominate open source AI projects, but enterprises lean toward lower-risk, internal-facing use cases first (knowledge management, text summarization) before exposing AI directly to customers."
+              "html": "Coding and conversational bots dominate open source AI projects. Enterprises lean toward lower-risk, internal-facing use cases first (knowledge management, text summarization), before exposing AI directly to customers."
             }
           ]
         },
@@ -106,15 +112,24 @@
         },
         {
           "type": "paragraph",
-          "html": "Before building, it helps to ask why the application is worth building at all. The chapter frames this as a risk-and-opportunity question: does skipping AI put you at an existential disadvantage, does AI unlock clear profit or productivity gains, or are you simply exploring so you are not caught flat-footed later?"
+          "html": "Before building, it helps to ask why the application is worth building at all. The chapter frames this as a risk-and-opportunity question:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Setting expectations:</strong> define success with concrete business metrics (percentage of tickets automated, response time saved) and a usefulness threshold the product must clear before going live.",
+            "Does skipping AI put you at an existential disadvantage?",
+            "Does AI unlock clear profit or productivity gains?",
+            "Or are you simply exploring, so you are not caught flat-footed later?"
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Setting expectations:</strong> define success with concrete business metrics (percentage of tickets automated, response time saved). Set a usefulness threshold the product must clear before going live.",
             "<strong>Milestone planning:</strong> evaluate existing off-the-shelf models first; the stronger they already are at your task, the less work remains. Expect the <strong>last mile problem</strong> — going from a 60% working demo to a 95%+ reliable product takes far longer than the initial demo.",
-            "<strong>Maintenance:</strong> foundation models and their pricing change quickly, so plan for context lengths, costs, and capabilities to keep shifting, and build in a way that lets you swap models or providers."
+            "<strong>Maintenance:</strong> foundation models and their pricing change quickly. Plan for context lengths, costs, and capabilities to keep shifting, and build so that you can swap models or providers."
           ]
         },
         {
@@ -125,7 +140,20 @@
         },
         {
           "type": "paragraph",
-          "html": "The chapter organizes AI application building into three layers: <strong>application development</strong> (prompting, context construction, evaluation, and the user-facing interface), <strong>model development</strong> (training, finetuning, dataset engineering, and inference optimization), and <strong>infrastructure</strong> (compute, data management, serving, and monitoring). Most AI engineers today spend most of their time in the application development layer, because the model itself is already available as a service."
+          "html": "The chapter organizes AI application building into three layers:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>application development</strong>: prompting, context construction, evaluation, and the user-facing interface;",
+            "<strong>model development</strong>: training, finetuning, dataset engineering, and inference optimization;",
+            "<strong>infrastructure</strong>: compute, data management, serving, and monitoring."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Most AI engineers today spend most of their time in the application development layer, because the model itself is already available as a service."
         },
         {
           "type": "heading",
@@ -135,7 +163,16 @@
         },
         {
           "type": "paragraph",
-          "html": "AI engineering grew out of traditional ML engineering, and many of its principles (experimentation, feedback loops, mapping business metrics to model metrics) still apply. Three differences stand out: AI engineers adapt existing models instead of training from scratch, so the work shifts from modeling toward <strong>prompt engineering</strong> and <strong>finetuning</strong>; foundation models are larger and costlier to run, raising the stakes for inference optimization; and their outputs are open-ended rather than fixed to a small set of labels, which makes evaluation significantly harder."
+          "html": "AI engineering grew out of traditional ML engineering, and many of its principles (experimentation, feedback loops, mapping business metrics to model metrics) still apply. Three differences stand out:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "AI engineers adapt existing models instead of training from scratch, so the work shifts from modeling toward <strong>prompt engineering</strong> and <strong>finetuning</strong>.",
+            "Foundation models are larger and costlier to run, which raises the stakes for inference optimization.",
+            "Their outputs are open-ended rather than fixed to a small set of labels, which makes evaluation significantly harder."
+          ]
         },
         {
           "type": "heading",
@@ -145,7 +182,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Because anyone can call a model API, the field has pulled in far more generalist and full-stack engineers than traditional ML engineering did, and non-Python interfaces (JavaScript SDKs, browser extensions, chat-app integrations) are becoming common. The build order has also flipped: traditional ML engineering goes data → model → product, while AI engineering can start from product → data → model, since a usable product can be shipped on top of an existing model before any custom data or training is needed."
+          "html": "Because anyone can call a model API, the field has pulled in far more generalist and full-stack engineers than traditional ML engineering did. Non-Python interfaces (JavaScript SDKs, browser extensions, chat-app integrations) are becoming common. The build order has also flipped. Traditional ML engineering goes data → model → product. AI engineering can start from product → data → model, because a usable product can ship on top of an existing model before any custom data or training is needed."
         }
       ],
       "layman": [
@@ -259,20 +296,26 @@
         },
         {
           "type": "paragraph",
-          "html": "English dominates internet text, accounting for nearly half of Common Crawl, roughly eight times more than the next most common language, Russian. Languages with little representation in training data are called <strong>low-resource languages</strong>. This imbalance shows up directly in benchmark results: GPT-4 scores much higher on English MMLU questions than on the same questions in Telugu, and performs far better at math problems posed in English than in Burmese or Amharic."
+          "html": "English dominates internet text, accounting for nearly half of Common Crawl, roughly eight times more than the next most common language, Russian. Languages with little representation in training data are called <strong>low-resource languages</strong>. This imbalance shows up directly in benchmark results. GPT-4 scores much higher on English MMLU questions (a multiple-choice knowledge benchmark) than on the same questions in Telugu. It also performs far better at math problems posed in English than in Burmese or Amharic."
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
             "Under-representation is not the only cause — the structure and culture embedded in a language also affects how well a model learns it.",
-            "Translating everything into English first and back is not a clean fix: it requires a model that already understands the low-resource language well, and translation can lose information (for example, pronouns that encode relationships between speakers).",
-            "Tokenization efficiency also differs by language. For the same meaning, the MASSIVE dataset shows English needs about 7 tokens on average, Hindi about 32, and Burmese about 72 — so non-English users can pay far more and wait far longer for the same request."
+            "Translating everything into English first and back is not a clean fix. It requires a model that already understands the low-resource language well, and translation can lose information (for example, pronouns that encode relationships between speakers).",
+            "Tokenization efficiency also differs by language. For the same meaning, the MASSIVE dataset shows English needs about 7 tokens on average, Hindi about 32, and Burmese about 72. Non-English users can therefore pay far more and wait far longer for the same request."
           ]
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "ch2-domain-models",
+          "html": "Domain-specific models"
+        },
+        {
           "type": "paragraph",
-          "html": "The same logic applies to domains. General-purpose models do well on topics well covered by Common Crawl, such as business, technology, and news. They are far weaker on domains barely present in public internet text, like drug discovery or medical imaging, which is why <strong>domain-specific models</strong> such as AlphaFold (protein structures) or Med-PaLM2 (medical queries) are trained on curated, specialized datasets instead."
+          "html": "The same logic applies to domains. General-purpose models do well on topics well covered by Common Crawl, such as business, technology, and news. They are far weaker on domains barely present in public internet text, like drug discovery or medical imaging. That is why <strong>domain-specific models</strong> such as AlphaFold (protein structures) or Med-PaLM2 (medical queries) are trained on curated, specialized datasets instead."
         },
         {
           "type": "heading",
@@ -282,11 +325,30 @@
         },
         {
           "type": "paragraph",
-          "html": "Before the transformer, the dominant architecture for sequence tasks was <strong>seq2seq</strong>, built on recurrent neural networks (RNNs). A seq2seq encoder reads the input one token at a time and compresses it into a single final hidden state, from which the decoder generates the output. This created two problems: the decoder only ever sees a compressed summary of the input (like answering questions about a book using only its summary), and processing is strictly sequential, making long inputs slow."
+          "html": "Before the transformer, the dominant architecture for sequence tasks was <strong>seq2seq</strong>, built on recurrent neural networks (RNNs). A seq2seq encoder reads the input one token at a time and compresses it into a single final hidden state. The decoder generates the output from that state. This created two problems. The decoder only ever sees a compressed summary of the input, like answering questions about a book using only its summary. And processing is strictly sequential, which makes long inputs slow."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch2-attention",
+          "html": "The attention mechanism"
         },
         {
           "type": "paragraph",
-          "html": "The <strong>transformer</strong> architecture, introduced in \"Attention Is All You Need\" (Vaswani et al., 2017), solves both problems with the <strong>attention mechanism</strong>. Instead of relying on one compressed summary, attention lets the model weigh every previous token directly when generating each new token — like being able to flip to any page of the book rather than relying only on its summary. Attention relies on three vectors per token: a <strong>query</strong> (what the current step is looking for), a <strong>key</strong> (an index for a previous token), and a <strong>value</strong> (that token's content). Transformers also process input tokens in parallel, removing the sequential input bottleneck of RNNs — though generating output tokens one at a time (decoding) is still sequential."
+          "html": "The <strong>transformer</strong> architecture, introduced in \"Attention Is All You Need\" (Vaswani et al., 2017), solves both problems with the <strong>attention mechanism</strong>. Instead of relying on one compressed summary, attention lets the model weigh every previous token directly when it generates each new token. It is like being able to flip to any page of the book, rather than relying only on its summary. Attention relies on three vectors per token:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "a <strong>query</strong>: what the current step is looking for;",
+            "a <strong>key</strong>: an index for a previous token;",
+            "a <strong>value</strong>: that token's content."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Transformers also process input tokens in parallel, which removes the sequential input bottleneck of RNNs. Generating output tokens one at a time (decoding) is still sequential, though."
         },
         {
           "type": "table",
@@ -306,8 +368,14 @@
           ]
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "ch2-transformer-blocks",
+          "html": "Transformer blocks"
+        },
+        {
           "type": "paragraph",
-          "html": "A transformer model stacks many identical <strong>transformer blocks</strong>, each containing an attention module and an MLP (feedforward) module, sandwiched between an embedding layer and an output layer that turns final vectors into token probabilities. Alternative architectures exist — RNN-based RWKV, state-space models like Mamba, and hybrids like Jamba — and some show real efficiency advantages on long sequences, but none has yet displaced the transformer at the scale and hardware people actually use."
+          "html": "A transformer model stacks many identical <strong>transformer blocks</strong>, each with an attention module and an MLP (feedforward) module. The stack sits between an embedding layer and an output layer that turns the final vectors into token probabilities. Alternative architectures exist: RNN-based RWKV, state-space models like Mamba, and hybrids like Jamba. Some show real efficiency advantages on long sequences, but none has yet displaced the transformer at the scale and on the hardware people actually use."
         },
         {
           "type": "heading",
@@ -317,7 +385,20 @@
         },
         {
           "type": "paragraph",
-          "html": "A model's scale is usually summarized by three numbers: its <strong>parameter count</strong> (a proxy for learning capacity), the <strong>number of training tokens</strong> it saw (a proxy for how much it learned), and the <strong>FLOPs</strong> spent training it (a proxy for cost). More parameters generally help, but a larger model trained on too little or too low-quality data can underperform a much smaller, well-trained one — the well-known <strong>Chinchilla scaling law</strong> found that compute-optimal training needs roughly 20 training tokens for every parameter, and that model size and token count should scale together."
+          "html": "A model's scale is usually summarized by three numbers:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "its <strong>parameter count</strong>, a proxy for learning capacity;",
+            "the <strong>number of training tokens</strong> it saw, a proxy for how much it learned;",
+            "the <strong>FLOPs</strong> (floating-point operations) spent training it, a proxy for cost."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "More parameters generally help. But a larger model trained on too little or too low-quality data can underperform a much smaller, well-trained one. The well-known <strong>Chinchilla scaling law</strong> found that compute-optimal training needs roughly 20 training tokens for every parameter, and that model size and token count should scale together."
         },
         {
           "type": "callout",
@@ -325,13 +406,13 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Not all parameters are equally active. <strong>Mixture-of-experts (MoE)</strong> models like Mixtral 8x7B split parameters into expert groups and activate only a few per token, so a 46.7B-parameter model can run at roughly the cost and speed of a 12.9B-parameter one."
+              "html": "Not all parameters are equally active. <strong>Mixture-of-experts (MoE)</strong> models like Mixtral 8x7B split parameters into expert groups and activate only a few per token. A 46.7B-parameter model can then run at roughly the cost and speed of a 12.9B-parameter one."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Two bottlenecks limit how far scaling can keep going: the supply of good training data (public text is being consumed faster than new text is produced) and electricity, since data centers already consume a meaningful share of global power and demand is projected to keep rising."
+          "html": "Two bottlenecks limit how far scaling can keep going. The first is the supply of good training data: public text is being consumed faster than new text is produced. The second is electricity: data centers already consume a meaningful share of global power, and demand is projected to keep rising."
         },
         {
           "type": "heading",
@@ -341,19 +422,19 @@
         },
         {
           "type": "paragraph",
-          "html": "A model that only went through pre-training is optimized to predict the next token of internet-like text, not to hold a conversation, and it can reproduce the racism, misinformation, and rudeness present in its training data. <strong>Post-training</strong> addresses both problems in two stages."
+          "html": "A model that only went through pre-training is optimized to predict the next token of internet-like text, not to hold a conversation. It can also reproduce the racism, misinformation, and rudeness present in its training data. <strong>Post-training</strong> addresses both problems in two stages."
         },
         {
           "type": "list",
           "ordered": true,
           "items": [
-            "<strong>Supervised finetuning (SFT):</strong> the model is finetuned on curated (prompt, response) pairs, called demonstration data, written by trained labelers, so it learns to behave like an assistant rather than a text-completion engine.",
-            "<strong>Preference finetuning:</strong> the model is further tuned to produce responses humans actually prefer. The classic approach, <strong>RLHF</strong>, trains a reward model on human comparisons of response pairs (comparison data), then uses reinforcement learning to push the model toward outputs the reward model scores highly. Newer approaches, such as DPO, skip the separate reward model and optimize directly on preference data."
+            "<strong>Supervised finetuning (SFT):</strong> the model is finetuned on curated (prompt, response) pairs written by trained labelers, called demonstration data. It learns to behave like an assistant rather than a text-completion engine.",
+            "<strong>Preference finetuning:</strong> the model is further tuned to produce responses humans actually prefer. The classic approach, <strong>RLHF</strong> (reinforcement learning from human feedback), trains a reward model on human comparisons of response pairs (comparison data). Reinforcement learning then pushes the model toward outputs the reward model scores highly. Newer approaches, such as DPO (direct preference optimization), skip the separate reward model and optimize directly on preference data."
           ]
         },
         {
           "type": "paragraph",
-          "html": "Collecting the data for either stage is expensive: InstructGPT's demonstration data was written mostly by labelers with at least a college degree, and ranking a single pair of responses can take minutes once fact-checking is included. Some teams skip reinforcement learning entirely and instead just generate several candidate outputs and keep the one the reward model scores best — an approach known as <strong>best of N</strong>."
+          "html": "Collecting the data for either stage is expensive. InstructGPT's demonstration data was written mostly by labelers with at least a college degree, and ranking a single pair of responses can take minutes once fact-checking is included. Some teams skip reinforcement learning entirely. They generate several candidate outputs and keep the one the reward model scores best, an approach known as <strong>best of N</strong>."
         },
         {
           "type": "heading",
@@ -363,16 +444,16 @@
         },
         {
           "type": "paragraph",
-          "html": "A language model does not output a single fixed answer — for each step it computes a probability distribution over every token in its vocabulary, then samples one. Always picking the single most likely token is called <strong>greedy sampling</strong>; it is safe but tends to produce dull, repetitive text. Instead, most systems sample proportionally to probability, and shape that distribution with a few controls:"
+          "html": "A language model does not output a single fixed answer. At each step it computes a probability distribution over every token in its vocabulary, then samples one. Always picking the single most likely token is called <strong>greedy sampling</strong>; it is safe but tends to produce dull, repetitive text. Instead, most systems sample proportionally to probability, and shape that distribution with a few controls:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Temperature</strong> rescales the raw scores (logits) before converting them to probabilities. Higher temperature flattens the distribution, giving rare tokens more of a chance and making output more creative but less predictable; lower temperature sharpens it toward the most likely token.",
+            "<strong>Temperature</strong> rescales the raw scores (logits) before converting them to probabilities. Higher temperature flattens the distribution: rare tokens get more of a chance, and output becomes more creative but less predictable. Lower temperature sharpens it toward the most likely token.",
             "<strong>Top-k</strong> restricts sampling to only the k most likely tokens, cutting compute and keeping output more focused.",
-            "<strong>Top-p (nucleus sampling)</strong> keeps the smallest set of tokens whose cumulative probability passes a threshold p, so the number of candidates adapts to how confident the model is at each step.",
-            "A <strong>stopping condition</strong> (a maximum token limit or a specific stop token) tells the model when to end a response — stopping too early can cut off or malform structured output like JSON."
+            "<strong>Top-p (nucleus sampling)</strong> keeps the smallest set of tokens whose cumulative probability passes a threshold p. The number of candidates then adapts to how confident the model is at each step.",
+            "A <strong>stopping condition</strong> (a maximum token limit or a specific stop token) tells the model when to end a response. Stopping too early can cut off or malform structured output like JSON."
           ]
         },
         {
@@ -383,11 +464,21 @@
         },
         {
           "type": "paragraph",
-          "html": "Response quality can also be improved at inference time by generating multiple candidate outputs and picking the best one — by highest average log-probability, by a reward model's score, or by majority vote among the answers. This is called <strong>test time compute</strong>, and it reliably helps up to a point, after which more samples stop improving (and can even hurt) results while still costing more."
+          "html": "Response quality can also be improved at inference time: generate multiple candidate outputs and pick the best one. The pick can go by the highest average log-probability, by a reward model's score, or by majority vote among the answers. This is called <strong>test time compute</strong>. It reliably helps up to a point; after that, more samples stop improving results (and can even hurt them) while still costing more."
         },
         {
           "type": "paragraph",
-          "html": "Many production use cases, such as text-to-SQL or outputs feeding another program, need a response in a specific, parseable format. Teams enforce this at several layers: prompting (ask nicely, least reliable), post-processing (patch common, predictable mistakes), constrained sampling (filter out tokens that would break the required grammar before sampling), and finetuning (train the model directly on examples in the desired format, the most reliable but most expensive option)."
+          "html": "Many production use cases, such as text-to-SQL or outputs feeding another program, need a response in a specific, parseable format. Teams enforce this at several layers:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>prompting</strong>: ask nicely (the least reliable);",
+            "<strong>post-processing</strong>: patch common, predictable mistakes;",
+            "<strong>constrained sampling</strong>: filter out tokens that would break the required grammar before sampling;",
+            "<strong>finetuning</strong>: train the model directly on examples in the desired format (the most reliable, but the most expensive)."
+          ]
         },
         {
           "type": "heading",
@@ -397,11 +488,11 @@
         },
         {
           "type": "paragraph",
-          "html": "Because sampling is probabilistic rather than deterministic, the same prompt can get different answers on different runs, and a tiny change in wording can produce a very different response. This <strong>inconsistency</strong> can be reduced — fixing temperature, top-p, top-k, and a random seed helps — but never fully eliminated, since even the hardware a model runs on can introduce small differences."
+          "html": "Because sampling is probabilistic rather than deterministic, the same prompt can get different answers on different runs. A tiny change in wording can produce a very different response. This <strong>inconsistency</strong> can be reduced: fixing temperature, top-p, top-k, and a random seed helps. It can never be fully eliminated, since even the hardware a model runs on can introduce small differences."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Hallucination</strong>, where a model confidently states something false or unverifiable, has two competing explanations. One view says the model cannot tell its own earlier generated text apart from the original prompt, so an early guess becomes accepted as fact and gets built upon (self-delusion, which can snowball into increasingly confident errors). The other view says hallucination comes from training the model to mimic labeler answers that draw on knowledge the model itself never had, effectively teaching it to make things up. Neither hypothesis fully explains the phenomenon, and techniques like RLHF do not reliably fix it — RLHF improved InstructGPT's helpfulness overall but actually made its hallucination rate on some benchmarks worse."
+          "html": "<strong>Hallucination</strong>, where a model confidently states something false or unverifiable, has two competing explanations. One view says the model cannot tell its own earlier generated text apart from the original prompt. An early guess is then accepted as fact and built upon (self-delusion), which can snowball into increasingly confident errors. The other view says hallucination comes from training the model to mimic labeler answers that draw on knowledge the model never had. That effectively teaches it to make things up. Neither hypothesis fully explains the phenomenon, and techniques like RLHF do not reliably fix it. RLHF improved InstructGPT's helpfulness overall, but it made its hallucination rate on some benchmarks worse."
         }
       ],
       "layman": [
@@ -525,7 +616,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Foundation models are open-ended: for a single prompt there can be countless acceptable answers, so you cannot just check output against one correct label the way you would for a classifier. As models get smarter, judging their answers also gets harder — a reader may need domain expertise or fact-checking just to tell if a response is good. On top of that, most foundation models are closed boxes (no access to architecture or training data), and public benchmarks saturate quickly as models improve, so evaluation has to keep catching up."
+          "html": "Foundation models are open-ended: a single prompt can have countless acceptable answers. You cannot just check the output against one correct label, the way you would for a classifier. As models get smarter, judging their answers also gets harder. A reader may need domain expertise or fact-checking just to tell if a response is good. On top of that, most foundation models are closed boxes, with no access to the architecture or training data. Public benchmarks also saturate quickly as models improve, so evaluation has to keep catching up."
         },
         {
           "type": "list",
@@ -545,11 +636,26 @@
         },
         {
           "type": "paragraph",
-          "html": "Many foundation models still contain a language model at their core, and how well that language model predicts text correlates with how well it performs downstream. <strong>Entropy</strong> measures how much information, on average, a token carries — a language with more possible tokens has higher entropy and needs more bits per token. <strong>Cross entropy</strong> measures how hard it is for a trained model to predict what comes next in a dataset; it depends on the data's own predictability (its entropy) and on how far the model's learned distribution has drifted from the true one. <strong>Perplexity</strong> (PPL) is the exponential of cross entropy, and is commonly used as the default language modeling metric: the more uncertain a model is about the next token, the higher its perplexity."
+          "html": "Many foundation models still contain a language model at their core. How well that language model predicts text correlates with how well it performs downstream. Three related metrics describe this:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Entropy</strong> measures how much information, on average, a token carries. A language with more possible tokens has higher entropy and needs more bits per token.",
+            "<strong>Cross entropy</strong> measures how hard it is for a trained model to predict what comes next in a dataset. It depends on the data's own predictability (its entropy) and on how far the model's learned distribution has drifted from the true one.",
+            "<strong>Perplexity</strong> (PPL) is the exponential of cross entropy, and it is commonly used as the default language modeling metric. The more uncertain a model is about the next token, the higher its perplexity."
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Bits-per-character (BPC)</strong> and <strong>bits-per-byte (BPB)</strong> are the same idea expressed per character or per byte instead of per token, which makes them comparable across models that tokenize text differently."
+          "html": "<strong>Bits-per-character (BPC)</strong> and <strong>bits-per-byte (BPB)</strong> express the same idea per character or per byte instead of per token. That makes them comparable across models that tokenize text differently."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch3-interpreting-perplexity",
+          "html": "Interpreting perplexity"
         },
         {
           "type": "table",
@@ -578,7 +684,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Perplexity is also useful beyond training: a very low perplexity on a benchmark can signal that the benchmark's data leaked into training (contamination), and perplexity can flag abnormal or low-quality text, since gibberish and highly unusual claims tend to produce very high perplexity. It becomes less reliable as a quality signal after post-training (SFT/RLHF), since post-training optimizes for following instructions, not for predicting text."
+              "html": "Perplexity is also useful beyond training. A very low perplexity on a benchmark can signal that the benchmark's data leaked into training (contamination). Perplexity can also flag abnormal or low-quality text, since gibberish and highly unusual claims tend to produce very high perplexity. It becomes less reliable as a quality signal after post-training (SFT/RLHF), since post-training optimizes for following instructions, not for predicting text."
             }
           ]
         },
@@ -590,11 +696,25 @@
         },
         {
           "type": "paragraph",
-          "html": "Exact evaluation produces an unambiguous judgment — right or wrong, with no interpretation needed. <strong>Functional correctness</strong> checks whether a system actually does what it was asked to do, and is easiest to automate for tasks with testable outcomes, such as code generation: the generated code is run against test cases, and a model's score (e.g., <code>pass@k</code>) reflects how often at least one of <code>k</code> generated samples passes all tests. Benchmarks like HumanEval and MBPP use this approach."
+          "html": "Exact evaluation produces an unambiguous judgment — right or wrong, with no interpretation needed. <strong>Functional correctness</strong> checks whether a system actually does what it was asked to do. It is easiest to automate for tasks with testable outcomes, such as code generation. The generated code is run against test cases, and a model's score (e.g., <code>pass@k</code>) reflects how often at least one of <code>k</code> generated samples passes all tests. Benchmarks like HumanEval and MBPP use this approach."
         },
         {
           "type": "paragraph",
-          "html": "When functional correctness can't be automated, you can instead compare a generated response against reference (ground-truth) responses. Four ways to do this, from loosest to most meaning-aware, are: human judgment, exact match (identical text), lexical similarity (token overlap, measured with metrics like BLEU, ROUGE, or edit distance / fuzzy matching), and semantic similarity (comparing meaning via embeddings, e.g. cosine similarity, also called embedding similarity). Each has a weakness: exact match fails whenever there's more than one valid phrasing; lexical similarity depends heavily on having a comprehensive, correct set of references; and semantic similarity depends on the quality of the underlying embedding model."
+          "html": "When functional correctness can't be automated, you can instead compare a generated response against reference (ground-truth) responses. Four ways to do this, from loosest to most meaning-aware, are:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "human judgment;",
+            "<strong>exact match</strong>: identical text;",
+            "<strong>lexical similarity</strong>: token overlap, measured with metrics like BLEU, ROUGE, or edit distance / fuzzy matching;",
+            "<strong>semantic similarity</strong>: comparing meaning via embeddings, e.g. cosine similarity (also called embedding similarity)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Each has a weakness. Exact match fails whenever there's more than one valid phrasing. Lexical similarity depends heavily on having a comprehensive, correct set of references. Semantic similarity depends on the quality of the underlying embedding model."
         },
         {
           "type": "heading",
@@ -604,7 +724,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An <strong>embedding</strong> is a numerical vector that tries to capture the meaning of a piece of data (text, image, audio, etc.), typically with 100 to 10,000 dimensions. Good embeddings place similar inputs closer together, measured by cosine similarity. Models like BERT, CLIP, and Sentence Transformers specialize in producing embeddings, and joint embedding spaces (e.g., CLIP, ImageBind) let you compare across modalities, such as matching an image to a caption."
+          "html": "An <strong>embedding</strong> is a numerical vector that tries to capture the meaning of a piece of data (text, image, audio, etc.). It typically has 100 to 10,000 dimensions. Good embeddings place similar inputs closer together, measured by cosine similarity. Models like BERT, CLIP, and Sentence Transformers specialize in producing embeddings. Joint embedding spaces (e.g., CLIP, ImageBind) let you compare across modalities, such as matching an image to a caption."
         },
         {
           "type": "heading",
@@ -614,11 +734,30 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>AI as a judge</strong> (LLM as a judge) means using one AI model to score or compare the outputs of another (or the same) AI model. It became practical around 2020 with GPT-3 and is now one of the most common ways teams evaluate production AI systems, because it is fast, cheap relative to human annotation, works without reference data, and can judge on any criteria you describe (correctness, toxicity, tone, and so on). Studies have found AI judges can correlate with human judgments nearly as well as humans agree with each other."
+          "html": "<strong>AI as a judge</strong> (LLM as a judge) means using one AI model to score or compare the outputs of another (or the same) AI model. It became practical around 2020 with GPT-3, and it is now one of the most common ways teams evaluate production AI systems. It is fast and cheap relative to human annotation, works without reference data, and can judge on any criteria you describe (correctness, toxicity, tone, and so on). Studies have found AI judges can correlate with human judgments nearly as well as humans agree with each other."
         },
         {
           "type": "paragraph",
-          "html": "An AI judge can be used in three main ways: scoring a response on its own, comparing a response to a reference answer, or comparing two responses against each other to pick a winner. A judge's prompt should spell out the task, the scoring criteria in detail, and the scoring system (classification labels, discrete numbers such as 1–5, or a continuous scale) — discrete classification-style scoring tends to work more reliably than open-ended numeric scoring."
+          "html": "An AI judge can be used in three main ways:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "scoring a response on its own;",
+            "comparing a response to a reference answer;",
+            "comparing two responses against each other to pick a winner."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "A judge's prompt should spell out the task, the scoring criteria in detail, and the scoring system: classification labels, discrete numbers such as 1–5, or a continuous scale. Discrete, classification-style scoring tends to work more reliably than open-ended numeric scoring."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch3-judge-limitations",
+          "html": "Limitations of AI judges"
         },
         {
           "type": "list",
@@ -638,7 +777,20 @@
         },
         {
           "type": "paragraph",
-          "html": "A judge model can be stronger than, weaker than, or the same size as the model it is evaluating. Stronger judges tend to track human preference better, but are costlier and slower, and leave the strongest model in the field with no eligible judge of its own. Weaker or specialized judges are cheaper and still useful: three common specialized judge types are reward models (score a prompt-response pair), reference-based judges (score a response against reference answers, e.g. BLEURT, Prometheus), and preference models (pick which of two responses is better, e.g. PandaLM, JudgeLM). A model can also judge its own output (self-evaluation), which is useful as a sanity check even though it can't be fully trusted."
+          "html": "A judge model can be stronger than, weaker than, or the same size as the model it is evaluating. Stronger judges tend to track human preference better, but they are costlier and slower. They also leave the strongest model in the field with no eligible judge of its own. Weaker or specialized judges are cheaper and still useful. Three common specialized judge types are:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>reward models</strong>: score a prompt-response pair;",
+            "<strong>reference-based judges</strong>: score a response against reference answers (e.g. BLEURT, Prometheus);",
+            "<strong>preference models</strong>: pick which of two responses is better (e.g. PandaLM, JudgeLM)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "A model can also judge its own output (self-evaluation), which is useful as a sanity check even though it can't be fully trusted."
         },
         {
           "type": "heading",
@@ -648,20 +800,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Instead of scoring each model independently (pointwise evaluation) and ranking by score, <strong>comparative evaluation</strong> has evaluators compare two models' outputs for the same prompt side by side and pick a winner, the way LMSYS's Chatbot Arena does. This is often easier for subjective quality judgments — it's simpler to say which of two songs is better than to give each song a precise score. From a history of pairwise \"matches,\" a rating algorithm (such as Elo or Bradley–Terry) converts win rates into an overall ranking."
+          "html": "Pointwise evaluation scores each model independently and ranks by score. <strong>Comparative evaluation</strong> instead has evaluators compare two models' outputs for the same prompt side by side and pick a winner, the way LMSYS's Chatbot Arena does. This is often easier for subjective quality judgments. It's simpler to say which of two songs is better than to give each song a precise score. From a history of pairwise \"matches,\" a rating algorithm (such as Elo or Bradley–Terry) converts win rates into an overall ranking."
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Scalability:</strong> the number of model pairs to compare grows quadratically with the number of models, and every new model normally needs to be compared against the rest.",
+            "<strong>Scalability:</strong> the number of model pairs to compare grows quadratically with the number of models. Every new model normally needs to be compared against the rest.",
             "<strong>Standardization and quality control:</strong> crowdsourced votes can be noisy, biased toward politeness or length, or even gamed, and volunteer prompts may not reflect real usage.",
-            "<strong>Comparative-to-absolute gap:</strong> knowing model B beats model A doesn't tell you if either is actually good enough, or whether the win is worth B's extra cost."
+            "<strong>Comparative-to-absolute gap:</strong> knowing that model B beats model A doesn't tell you if either is good enough. Nor does it tell you whether the win is worth B's extra cost."
           ]
         },
         {
           "type": "paragraph",
-          "html": "Despite these limits, comparative evaluation is likely to keep growing in importance: it captures human preference directly, it is hard to game compared with reference-based scoring, and it never \"saturates\" the way fixed benchmarks do, since it keeps working as newer, stronger models are added to the comparison pool."
+          "html": "Despite these limits, comparative evaluation is likely to keep growing in importance. It captures human preference directly, and it is hard to game compared with reference-based scoring. It also never \"saturates\" the way fixed benchmarks do: it keeps working as newer, stronger models are added to the comparison pool."
         }
       ],
       "layman": [
@@ -755,7 +907,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An application should start with a list of evaluation criteria before any heavy building begins, an approach the author calls <strong>evaluation-driven development</strong> (similar to test-driven development: write the checks before writing the system). These criteria usually fall into four buckets."
+          "html": "An application should start with a list of evaluation criteria before any heavy building begins. The author calls this <strong>evaluation-driven development</strong>, which is similar to test-driven development: write the checks before writing the system. These criteria usually fall into four buckets."
         },
         {
           "type": "list",
@@ -775,11 +927,11 @@
         },
         {
           "type": "paragraph",
-          "html": "Domain-specific capability is commonly tested with close-ended formats such as multiple-choice questions (MCQs), because they are cheap to grade and reproduce — benchmarks like MMLU and ARC-C work this way. MCQs are good at telling whether a model recognizes a correct answer, but they say little about the model's ability to generate good open-ended text."
+          "html": "Domain-specific capability is commonly tested with close-ended formats such as multiple-choice questions (MCQs), because they are cheap to grade and reproduce. Benchmarks like MMLU and ARC-C work this way. MCQs are good at telling whether a model recognizes a correct answer, but they say little about the model's ability to generate good open-ended text."
         },
         {
           "type": "paragraph",
-          "html": "Generation capability covers the open-ended side: <em>fluency</em> and <em>coherence</em> (borrowed from older NLP research) matter less now that most strong models write grammatically natural text, but two newer concerns dominate: <strong>factual consistency</strong> (does the output match the given context or the real world?) and <strong>safety</strong> (toxicity, bias, harmful instructions)."
+          "html": "Generation capability covers the open-ended side. <em>Fluency</em> and <em>coherence</em> (borrowed from older NLP research) matter less now that most strong models write grammatically natural text. Two newer concerns dominate: <strong>factual consistency</strong> (does the output match the given context or the real world?) and <strong>safety</strong> (toxicity, bias, harmful instructions)."
         },
         {
           "type": "table",
@@ -807,7 +959,17 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Ways to check factual consistency include asking an AI judge directly, <strong>self-verification</strong> (generate several answers and see if they agree with each other, as SelfCheckGPT does), <strong>knowledge-augmented verification</strong> (break the answer into individual claims and check each one against a search engine, as Google's SAFE does), and <strong>textual entailment</strong> models that classify an output as entailment, contradiction, or neutral relative to a context."
+              "html": "Ways to check factual consistency include:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "asking an AI judge directly;",
+                "<strong>self-verification</strong>: generate several answers and see if they agree with each other, as SelfCheckGPT does;",
+                "<strong>knowledge-augmented verification</strong>: break the answer into individual claims and check each one against a search engine, as Google's SAFE does;",
+                "<strong>textual entailment</strong> models, which classify an output as entailment, contradiction, or neutral relative to a context."
+              ]
             }
           ]
         },
@@ -819,11 +981,11 @@
         },
         {
           "type": "paragraph",
-          "html": "Instruction-following capability asks whether the model obeys the instructions it is given, independent of whether it understands the topic. Benchmarks such as <strong>IFEval</strong> check automatically verifiable rules (keyword counts, word limits, output format), while <strong>INFOBench</strong> turns each instruction into a set of yes/no checklist questions, often graded by an AI judge."
+          "html": "Instruction-following capability asks whether the model obeys the instructions it is given, independent of whether it understands the topic. Benchmarks such as <strong>IFEval</strong> check automatically verifiable rules (keyword counts, word limits, output format). <strong>INFOBench</strong> turns each instruction into a set of yes/no checklist questions, often graded by an AI judge."
         },
         {
           "type": "paragraph",
-          "html": "Cost and latency decide whether a technically good model is actually usable. Latency can be measured as time to first token, time per token, or time per full query; cost for model APIs is usually charged per token, while self-hosting shifts the cost toward compute and engineering effort. A practical approach is to set hard requirements (what you cannot compromise on) and an ideal target for each metric, then filter models against both."
+          "html": "Cost and latency decide whether a technically good model is actually usable. Latency can be measured as time to first token, time per token, or time per full query. Model APIs usually charge per token, while self-hosting shifts the cost toward compute and engineering effort. A practical approach is to set hard requirements (what you cannot compromise on) and an ideal target for each metric, then filter models against both."
         },
         {
           "type": "heading",
@@ -833,7 +995,17 @@
         },
         {
           "type": "paragraph",
-          "html": "Choosing a model is really choosing the best model <em>for a specific application</em>, not the best model overall, and this choice gets revisited at every stage of development (prompting, then possibly finetuning). The workflow has four iterative steps: filter by hard attributes you cannot change (license, privacy policy, hosting requirements), narrow the field using public benchmarks and leaderboards, run your own experiments with your own evaluation pipeline, and then keep monitoring the chosen model in production."
+          "html": "Choosing a model is really choosing the best model <em>for a specific application</em>, not the best model overall. The choice gets revisited at every stage of development (prompting, then possibly finetuning). The workflow has four iterative steps:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Filter by hard attributes you cannot change (license, privacy policy, hosting requirements).",
+            "Narrow the field using public benchmarks and leaderboards.",
+            "Run your own experiments with your own evaluation pipeline.",
+            "Keep monitoring the chosen model in production."
+          ]
         },
         {
           "type": "heading",
@@ -843,7 +1015,20 @@
         },
         {
           "type": "paragraph",
-          "html": "A central recurring decision is whether to call a commercial model API or host an open source (strictly: open-weight) model yourself. The trade-off spans several axes: data privacy (sending data to a third party vs. keeping it in-house), data lineage and copyright exposure, raw performance (the strongest models are usually proprietary), functionality (APIs bundle scaling, function calling, and structured outputs, but may hide useful features like logprobs), API cost vs. engineering cost, control and risk of losing access to a model that changes or disappears, and the ability to deploy on-device."
+          "html": "A central recurring decision is whether to call a commercial model API or host an open source (strictly: open-weight) model yourself. The trade-off spans several axes:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>data privacy</strong>: sending data to a third party vs. keeping it in-house;",
+            "<strong>data lineage and copyright exposure</strong>;",
+            "<strong>raw performance</strong>: the strongest models are usually proprietary;",
+            "<strong>functionality</strong>: APIs bundle scaling, function calling, and structured outputs, but may hide useful features like logprobs;",
+            "<strong>API cost vs. engineering cost</strong>;",
+            "<strong>control</strong>, and the risk of losing access to a model that changes or disappears;",
+            "the ability to <strong>deploy on-device</strong>."
+          ]
         },
         {
           "type": "heading",
@@ -853,7 +1038,7 @@
         },
         {
           "type": "paragraph",
-          "html": "With thousands of benchmarks and new ones appearing as old ones saturate, public leaderboards (Hugging Face's Open LLM Leaderboard, Stanford's HELM) try to summarize model quality by averaging scores across a small, curated set of benchmarks. This is useful for filtering out clearly weak models, but leaderboards rarely explain their selection process, strongly correlated benchmarks can double-count the same capability, and averaging treats every benchmark as equally important even though it may not be for your application."
+          "html": "There are thousands of benchmarks, and new ones appear as old ones saturate. Public leaderboards (Hugging Face's Open LLM Leaderboard, Stanford's HELM) try to summarize model quality by averaging scores across a small, curated set of benchmarks. This is useful for filtering out clearly weak models, but it has three weaknesses. Leaderboards rarely explain their selection process. Strongly correlated benchmarks can double-count the same capability. And averaging treats every benchmark as equally important, even though it may not be for your application."
         },
         {
           "type": "callout",
@@ -879,14 +1064,34 @@
           "type": "list",
           "ordered": true,
           "items": [
-            "<strong>Evaluate all components in a system.</strong> Score the end-to-end output as well as each intermediate step (for example, PDF text extraction and then field extraction), and evaluate both per turn and per task for multi-step or conversational systems.",
-            "<strong>Create an evaluation guideline.</strong> Define concrete criteria (such as relevance, factual consistency, safety), build a scoring rubric with labeled examples for each criterion, validate the rubric with human reviewers, and connect evaluation metrics to business metrics (for example, what factual-consistency score is needed before a workflow can be automated).",
-            "<strong>Define evaluation methods and data.</strong> Mix cheap and expensive methods (a classifier over all data plus an AI judge over a sample), use logprobs when available, keep humans in the loop as a check, curate annotated and sliced evaluation sets (to catch issues like Simpson's paradox, where a model wins on every subgroup but loses overall), and size the evaluation set large enough that results are statistically reliable across repeated runs."
+            "<strong>Evaluate all components in a system.</strong> Score the end-to-end output as well as each intermediate step (for example, PDF text extraction and then field extraction). For multi-step or conversational systems, evaluate both per turn and per task.",
+            "<strong>Create an evaluation guideline.</strong> Define concrete criteria (such as relevance, factual consistency, safety). Build a scoring rubric with labeled examples for each criterion, and validate it with human reviewers. Connect evaluation metrics to business metrics, for example the factual-consistency score needed before a workflow can be automated.",
+            "<strong>Define evaluation methods and data.</strong> Mix cheap and expensive methods: a classifier over all data, plus an AI judge over a sample. Use logprobs when available, and keep humans in the loop as a check. Curate annotated and sliced evaluation sets, to catch issues like Simpson's paradox (a model wins on every subgroup but loses overall). Size the evaluation set large enough that results are statistically reliable across repeated runs."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch4-pipeline-checks",
+          "html": "Evaluating the pipeline itself"
+        },
+        {
+          "type": "paragraph",
+          "html": "The pipeline itself needs evaluating too. Check:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "whether it gives the right signal (do better outputs score higher?);",
+            "whether repeated runs are reproducible;",
+            "whether its metrics are overly correlated;",
+            "how much cost and latency it adds."
           ]
         },
         {
           "type": "paragraph",
-          "html": "The pipeline itself needs evaluating too: check whether it gives the right signal (do better outputs score higher?), whether repeated runs are reproducible, whether its metrics are overly correlated, and how much cost and latency it adds — then keep iterating as criteria evolve, while logging every configuration change so results stay comparable over time."
+          "html": "Then keep iterating as criteria evolve, and log every configuration change so results stay comparable over time."
         }
       ],
       "layman": [
@@ -982,7 +1187,20 @@
         },
         {
           "type": "paragraph",
-          "html": "A prompt is simply the instruction you give a model to perform a task. It usually combines three things: a <strong>task description</strong> (what to do, what role to play, what format to answer in), optional <strong>examples</strong> of the task done correctly, and the <strong>actual task</strong> itself. Prompt engineering is the cheapest, fastest way to adapt a foundation model to your use case, since it changes nothing about the model's weights &mdash; it only changes what you feed into it. It is worth exhausting good prompting before reaching for fine-tuning."
+          "html": "A prompt is simply the instruction you give a model to perform a task. It usually combines three things:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "a <strong>task description</strong>: what to do, what role to play, what format to answer in;",
+            "optional <strong>examples</strong> of the task done correctly;",
+            "the <strong>actual task</strong> itself."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Prompt engineering is the cheapest, fastest way to adapt a foundation model to your use case. It changes nothing about the model's weights &mdash; it only changes what you feed into it. It is worth exhausting good prompting before reaching for fine-tuning."
         },
         {
           "type": "heading",
@@ -992,7 +1210,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Models can learn a new behavior just from examples placed inside the prompt, without any weight update. This is called <strong>in-context learning</strong>. Each example in the prompt is a <em>shot</em>: zero examples is zero-shot, five examples is 5-shot. More shots generally help, but they cost more tokens and are capped by the model's context length. As models get better at following instructions, the gap between zero-shot and few-shot tends to shrink &mdash; though few-shot examples still help a lot for niche or domain-specific tasks the model has rarely seen."
+          "html": "Models can learn a new behavior just from examples placed inside the prompt, without any weight update. This is called <strong>in-context learning</strong>. Each example in the prompt is a <em>shot</em>: zero examples is zero-shot, five examples is 5-shot. More shots generally help, but they cost more tokens and are capped by the model's context length. As models get better at following instructions, the gap between zero-shot and few-shot tends to shrink. Few-shot examples still help a lot, though, for niche or domain-specific tasks the model has rarely seen."
         },
         {
           "type": "heading",
@@ -1002,7 +1220,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Most model APIs let you split a prompt into a <strong>system prompt</strong> (the task description and persona, usually set by the application developer) and a <strong>user prompt</strong> (the actual question or request, usually from the end user). Internally, the two are concatenated using a model-specific <em>chat template</em> before being sent to the model &mdash; getting that template wrong causes silent, hard-to-debug performance drops. System prompts often perform better not because the model treats them as special by nature, but because they come first in the final text and many models are explicitly post-trained to weigh them more heavily."
+          "html": "Most model APIs let you split a prompt into two parts. The <strong>system prompt</strong> holds the task description and persona, usually set by the application developer. The <strong>user prompt</strong> holds the actual question or request, usually from the end user. Internally, the two are concatenated with a model-specific <em>chat template</em> before being sent to the model. Getting that template wrong causes silent, hard-to-debug performance drops. System prompts often perform better, but not because the model treats them as special by nature. They come first in the final text, and many models are explicitly post-trained to weigh them more heavily."
         },
         {
           "type": "heading",
@@ -1012,7 +1230,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones. But a longer context window does not mean every position in it is used equally well: research using <strong>needle-in-a-haystack (NIAH)</strong> tests shows models recall information placed near the <strong>beginning or end</strong> of a prompt far more reliably than information buried in the middle. If a model's accuracy drops as prompts get longer, shortening or re-ordering the prompt &mdash; putting critical instructions first or last &mdash; can help."
+          "html": "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones. But a longer context window does not mean every position in it is used equally well. Research with <strong>needle-in-a-haystack (NIAH)</strong> tests shows that models recall information near the <strong>beginning or end</strong> of a prompt far more reliably than information buried in the middle. If a model's accuracy drops as prompts get longer, shortening or re-ordering the prompt &mdash; putting critical instructions first or last &mdash; can help."
         },
         {
           "type": "heading",
@@ -1024,13 +1242,25 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Write clear, explicit instructions</strong> &mdash; spell out the scoring scale, format, and edge-case behavior; ask the model to adopt a relevant persona; give examples to remove ambiguity; and use markers to clearly separate your input from the model's expected output.",
-            "<strong>Provide sufficient context</strong> &mdash; a model forced to rely on its own internal knowledge is more likely to hallucinate; give it the reference material, or tools to fetch it (retrieval, search).",
-            "<strong>Break complex tasks into subtasks</strong> &mdash; chain several focused prompts (e.g., classify intent, then respond) instead of one giant prompt. This improves monitoring, debugging, and lets you parallelize independent steps or use cheaper models for easier steps, at the cost of extra latency and API calls.",
-            "<strong>Give the model time to think</strong> &mdash; chain-of-thought (CoT) prompting (\"think step by step\") and self-critique nudge the model toward more systematic reasoning and fewer hallucinations, though both can add latency.",
+            "<strong>Write clear, explicit instructions</strong> &mdash; spell out the scoring scale, format, and edge-case behavior. Ask the model to adopt a relevant persona, and give examples to remove ambiguity. Use markers to clearly separate your input from the model's expected output.",
+            "<strong>Provide sufficient context</strong> &mdash; a model forced to rely on its own internal knowledge is more likely to hallucinate. Give it the reference material, or tools to fetch it (retrieval, search).",
+            "<strong>Break complex tasks into subtasks</strong> &mdash; chain several focused prompts (e.g., classify intent, then respond) instead of one giant prompt. This makes monitoring and debugging easier, and lets you parallelize independent steps or use cheaper models for easier steps. The cost is extra latency and API calls.",
+            "<strong>Give the model time to think</strong> &mdash; chain-of-thought (CoT) prompting (\"think step by step\") and self-critique nudge the model toward more systematic reasoning and fewer hallucinations. Both can add latency."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch5-managing-prompts",
+          "html": "Managing prompts over time"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
             "<strong>Iterate systematically</strong> &mdash; version your prompts, track experiments, and evaluate each change against the whole system, not just one subtask.",
-            "<strong>Use prompt engineering tools carefully</strong> &mdash; automated optimizers (e.g., DSPy, Promptbreeder) can help, but they generate hidden API calls that can balloon costs, and may ship buggy default templates.",
-            "<strong>Organize and version prompts</strong> &mdash; keep prompts out of application code (e.g., in a dedicated file, prompt catalog, or <code>.prompt</code> format) for reuse, independent testing, and safer rollout across teams."
+            "<strong>Use prompt engineering tools carefully</strong> &mdash; automated optimizers (e.g., DSPy, Promptbreeder) can help. But they generate hidden API calls that can balloon costs, and they may ship buggy default templates.",
+            "<strong>Organize and version prompts</strong> &mdash; keep prompts out of application code, e.g., in a dedicated file, prompt catalog, or <code>.prompt</code> format. That allows reuse, independent testing, and safer rollout across teams."
           ]
         },
         {
@@ -1041,7 +1271,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A deployed application faces users who are not always well-intentioned. Three broad attack categories matter most: <strong>prompt extraction</strong> (recovering your system prompt), <strong>jailbreaking and prompt injection</strong> (getting the model to do something unsafe or unintended), and <strong>information extraction</strong> (pulling training data, private context, or copyrighted material out of the model)."
+          "html": "A deployed application faces users who are not always well-intentioned. Three broad attack categories matter most: <strong>prompt extraction</strong>, <strong>jailbreaking and prompt injection</strong>, and <strong>information extraction</strong>. The table shows what each one does."
         },
         {
           "type": "table",
@@ -1063,19 +1293,19 @@
             ],
             [
               "Prompt injection",
-              "Smuggles malicious instructions inside data the model processes",
+              "Smuggles malicious instructions inside data the model processes, to make it do something unsafe or unintended",
               "A malicious email or webpage telling an AI agent to forward all mail"
             ],
             [
               "Information extraction",
-              "Pulls private or copyrighted data out of the model",
+              "Pulls training data, private context, or copyrighted material out of the model",
               "Fill-in-the-blank prompts, repeated-token divergence attacks"
             ]
           ]
         },
         {
           "type": "paragraph",
-          "html": "A particularly dangerous evolution is <strong>indirect prompt injection</strong>: instead of attacking the user prompt directly, attackers plant malicious instructions inside content the model will later retrieve &mdash; a web page, a GitHub repo, an email, even a database field like a username. When an agent with tool access reads that content, it can mistake the planted text for a legitimate instruction."
+          "html": "A particularly dangerous evolution is <strong>indirect prompt injection</strong>. Instead of attacking the user prompt directly, attackers plant malicious instructions inside content the model will later retrieve: a web page, a GitHub repo, an email, even a database field like a username. When an agent with tool access reads that content, it can mistake the planted text for a legitimate instruction."
         },
         {
           "type": "callout",
@@ -1083,7 +1313,20 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Defenses operate at three levels: <strong>model-level</strong> (training the model to prioritize system prompts over user prompts, and user prompts over tool outputs, via an instruction hierarchy), <strong>prompt-level</strong> (explicitly stating what must never be revealed, repeating key instructions, or pre-warning the model about known attack patterns), and <strong>system-level</strong> (input/output guardrails, anomaly detection on usage patterns). No single layer is foolproof, and two metrics should always be tracked together: the <strong>violation rate</strong> (successful attacks) and the <strong>false refusal rate</strong> (safe requests wrongly blocked)."
+              "html": "Defenses operate at three levels:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "<strong>model-level</strong>: training the model to prioritize system prompts over user prompts, and user prompts over tool outputs, via an instruction hierarchy;",
+                "<strong>prompt-level</strong>: explicitly stating what must never be revealed, repeating key instructions, or pre-warning the model about known attack patterns;",
+                "<strong>system-level</strong>: input/output guardrails, anomaly detection on usage patterns."
+              ]
+            },
+            {
+              "type": "paragraph",
+              "html": "No single layer is foolproof. Track two metrics together: the <strong>violation rate</strong> (successful attacks) and the <strong>false refusal rate</strong> (safe requests wrongly blocked)."
             }
           ]
         }
@@ -1203,7 +1446,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A model's instructions tell it <em>how</em> to behave; its context gives it the facts it needs for a specific query. Without relevant context, even a well-instructed model will guess or hallucinate. Two dominant patterns build this context automatically: <strong>RAG</strong> (retrieval-augmented generation), which pulls in relevant documents, and the <strong>agentic pattern</strong>, which lets a model call tools to fetch information or take action."
+          "html": "A model's instructions tell it <em>how</em> to behave; its context gives it the facts it needs for a specific query. Without relevant context, even a well-instructed model will guess or hallucinate. Two dominant patterns build this context automatically. <strong>RAG</strong> (retrieval-augmented generation) pulls in relevant documents. The <strong>agentic pattern</strong> lets a model call tools to fetch information or take action."
         },
         {
           "type": "heading",
@@ -1213,7 +1456,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A RAG system has two parts: a <strong>retriever</strong> that finds relevant chunks of data from an external memory (documents, tables, chat history), and a <strong>generator</strong> that writes a response using what was retrieved. Long documents are split into smaller <strong>chunks</strong> so that only the most relevant pieces are fed into the model, keeping the prompt short and focused."
+          "html": "A RAG system has two parts. A <strong>retriever</strong> finds relevant chunks of data in an external memory (documents, tables, chat history). A <strong>generator</strong> writes a response using what was retrieved. Long documents are split into smaller <strong>chunks</strong> so that only the most relevant pieces are fed into the model, keeping the prompt short and focused."
         },
         {
           "type": "heading",
@@ -1223,7 +1466,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Retrievers rank documents by relevance using one of two broad mechanisms. <strong>Term-based retrieval</strong> (lexical search) matches keywords; algorithms such as TF-IDF and BM25 score documents by how often and how distinctively a term appears. <strong>Embedding-based retrieval</strong> (semantic search) compares the meaning of the query and documents using vector embeddings, stored and searched in a vector database with approximate nearest-neighbor algorithms such as HNSW, IVF, or product quantization."
+          "html": "Retrievers rank documents by relevance using one of two broad mechanisms. <strong>Term-based retrieval</strong> (lexical search) matches keywords; algorithms such as TF-IDF (term frequency–inverse document frequency) and BM25 score documents by how often and how distinctively a term appears. <strong>Embedding-based retrieval</strong> (semantic search) compares the meaning of the query and the documents using vector embeddings. The embeddings are stored and searched in a vector database, with approximate nearest-neighbor algorithms such as HNSW, IVF, or product quantization."
         },
         {
           "type": "table",
@@ -1257,7 +1500,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Because each approach has blind spots, production systems often combine them. Running a cheap retriever first and reranking with a more precise one is called <strong>hybrid search</strong>, and <strong>reciprocal rank fusion</strong> can merge rankings from multiple retrievers into one list."
+          "html": "Because each approach has blind spots, production systems often combine them. Running a cheap retriever first and reranking with a more precise one is called <strong>hybrid search</strong>. <strong>Reciprocal rank fusion</strong> can merge rankings from multiple retrievers into one list."
         },
         {
           "type": "heading",
@@ -1283,7 +1526,7 @@
         },
         {
           "type": "paragraph",
-          "html": "RAG is not limited to plain text. <strong>Multimodal RAG</strong> retrieves images, audio, or video alongside text using a shared multimodal embedding model such as CLIP. <strong>RAG with tabular data</strong> works differently: instead of embedding rows, the system translates the question into a SQL query (<strong>text-to-SQL</strong>), executes it against the database, and feeds the result back to the generator."
+          "html": "RAG is not limited to plain text. <strong>Multimodal RAG</strong> retrieves images, audio, or video alongside text using a shared multimodal embedding model such as CLIP. <strong>RAG with tabular data</strong> works differently. Instead of embedding rows, the system translates the question into a SQL query (<strong>text-to-SQL</strong>), runs it against the database, and feeds the result back to the generator."
         },
         {
           "type": "heading",
@@ -1303,7 +1546,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Tools fall into three broad categories: <strong>knowledge augmentation</strong> (retrievers, web search, internal APIs), <strong>capability extension</strong> (calculators, code interpreters, translators, that fix a model's inherent weaknesses), and tools that perform <strong>write actions</strong> (sending an email, updating a database) rather than just reading data. Invoking a tool through a model API is called <strong>function calling</strong>: the tool is declared with a name, parameters, and description, and the model decides when and how to call it."
+          "html": "Tools fall into three broad categories:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>knowledge augmentation</strong>: retrievers, web search, internal APIs;",
+            "<strong>capability extension</strong>: calculators, code interpreters, translators, which fix a model's inherent weaknesses;",
+            "<strong>write actions</strong>: tools that change something (sending an email, updating a database) rather than just reading data."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Invoking a tool through a model API is called <strong>function calling</strong>. The tool is declared with a name, parameters, and description, and the model decides when and how to call it."
         },
         {
           "type": "heading",
@@ -1313,7 +1569,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A task is defined by a goal and constraints; a <strong>plan</strong> is the sequence of actions meant to achieve it. Good practice decouples <strong>planning</strong> from <strong>execution</strong>: generate a plan, validate it with heuristics or an AI judge, and only then execute it, so a bad plan never burns time and money running. Plans can follow different control flows — sequential, parallel, conditional (if), or a loop. <strong>Reflection</strong>, where the agent or a separate evaluator critiques its own plan or outcome, is not mandatory but sharply improves reliability; the ReAct and Reflexion frameworks popularized interleaving reasoning, acting, and reflecting."
+          "html": "A task is defined by a goal and constraints; a <strong>plan</strong> is the sequence of actions meant to achieve it. Good practice decouples <strong>planning</strong> from <strong>execution</strong>. Generate a plan, validate it with heuristics or an AI judge, and only then execute it, so a bad plan never burns time and money. Plans can follow different control flows — sequential, parallel, conditional (if), or a loop. In <strong>reflection</strong>, the agent or a separate evaluator critiques the plan or the outcome. It is not mandatory, but it sharply improves reliability. The ReAct and Reflexion frameworks popularized interleaving reasoning, acting, and reflecting."
         },
         {
           "type": "heading",
@@ -1323,7 +1579,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Agents fail in ways beyond ordinary model errors. <strong>Planning failures</strong> include calling an invalid tool, a valid tool with invalid or wrong parameters, or a plan that technically runs but misses the goal or constraint (e.g. going over budget). <strong>Tool failures</strong> happen when a correctly chosen tool returns a wrong result, or when the agent lacks a tool it actually needs. <strong>Efficiency</strong> is also a failure axis: a correct plan that takes too many steps, too long, or too much money is still a poor outcome. Evaluation means tracking how often each failure mode occurs and comparing against a baseline (a human operator or another agent)."
+          "html": "Agents fail in ways beyond ordinary model errors:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Planning failures</strong>: calling an invalid tool, calling a valid tool with invalid or wrong parameters, or a plan that technically runs but misses the goal or a constraint (e.g. going over budget).",
+            "<strong>Tool failures</strong>: a correctly chosen tool returns a wrong result, or the agent lacks a tool it actually needs.",
+            "<strong>Efficiency</strong>: a correct plan that takes too many steps, too long, or too much money is still a poor outcome."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Evaluation means tracking how often each failure mode occurs and comparing against a baseline (a human operator or another agent)."
         },
         {
           "type": "callout",
@@ -1343,7 +1612,20 @@
         },
         {
           "type": "paragraph",
-          "html": "A model has three memory mechanisms. <strong>Internal knowledge</strong> is what it learned during training (changes only via retraining or fine-tuning). <strong>Short-term memory</strong> is the model's context window — fast but limited, reset between tasks. <strong>Long-term memory</strong> is external storage, such as a RAG database, that persists across sessions and can be edited without touching the model. Good memory management decides what overflow from short-term memory gets pushed into long-term storage, commonly using a simple FIFO strategy, so the system retains what matters without exceeding the context limit."
+          "html": "A model has three memory mechanisms:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Internal knowledge</strong> is what it learned during training. It changes only via retraining or fine-tuning.",
+            "<strong>Short-term memory</strong> is the model's context window: fast but limited, and reset between tasks.",
+            "<strong>Long-term memory</strong> is external storage, such as a RAG database. It persists across sessions and can be edited without touching the model."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Good memory management decides which overflow from short-term memory gets pushed into long-term storage, commonly with a simple FIFO (first in, first out) strategy. The system then retains what matters without exceeding the context limit."
         }
       ],
       "layman": [
@@ -1451,7 +1733,16 @@
         },
         {
           "type": "paragraph",
-          "html": "Finetuning is extra training you run on top of a pre-trained foundation model, using your own task-specific data. It is a form of transfer learning: the model already knows a lot from pre-training, and finetuning nudges that knowledge toward your task, usually needing far fewer examples than training from scratch. <strong>Supervised finetuning</strong> trains the model on (input, output) pairs so it follows instructions and produces the right format. <strong>Preference finetuning</strong> trains the model on (instruction, better response, worse response) comparisons so it generates answers people prefer. You can also do <strong>continued pre-training</strong> (self-supervised finetuning on cheap, unlabeled, domain text) before the more expensive supervised step."
+          "html": "Finetuning is extra training you run on top of a pre-trained foundation model, using your own task-specific data. It is a form of transfer learning. The model already knows a lot from pre-training, and finetuning nudges that knowledge toward your task. It usually needs far fewer examples than training from scratch."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Supervised finetuning</strong> trains the model on (input, output) pairs so it follows instructions and produces the right format.",
+            "<strong>Preference finetuning</strong> trains the model on (instruction, better response, worse response) comparisons so it generates answers people prefer.",
+            "<strong>Continued pre-training</strong> (self-supervised finetuning on cheap, unlabeled, domain text) can come before the more expensive supervised step."
+          ]
         },
         {
           "type": "heading",
@@ -1464,13 +1755,41 @@
           "html": "Finetuning is expensive in data, compute, and ML expertise, so it should usually come after you have already pushed prompting as far as it goes. It is not a replacement for prompting — the two are often combined."
         },
         {
+          "type": "paragraph",
+          "html": "<strong>Good reasons to finetune:</strong>"
+        },
+        {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Good reasons to finetune:</strong> improving task-specific quality (such as following a strict output format), adapting a model to a rare dialect or domain language it saw little of during pre-training, mitigating specific biases with curated data, and shrinking a cheaper model to match a much bigger one's quality on one task (distillation).",
-            "<strong>Reasons to think twice:</strong> finetuning for one task can quietly hurt performance on others; it requires annotated data, ML know-how, and a plan for monitoring and hosting the result; and a new base model often improves faster than you can re-finetune your own.",
-            "A useful rule of thumb from the research: <strong>finetuning is for form, and RAG is for facts.</strong> If the model lacks or has outdated information, retrieval usually helps more than finetuning. If the model's facts are fine but its tone, structure, or syntax is wrong (for example malformed JSON or an unfamiliar query language), finetuning is the better tool. The two can also be combined for an extra boost."
+            "improving task-specific quality, such as following a strict output format;",
+            "adapting a model to a rare dialect or domain language it saw little of during pre-training;",
+            "mitigating specific biases with curated data;",
+            "shrinking a cheaper model to match a much bigger one's quality on one task (distillation)."
           ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Reasons to think twice:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "finetuning for one task can quietly hurt performance on others;",
+            "it requires annotated data, ML know-how, and a plan for monitoring and hosting the result;",
+            "a new base model often improves faster than you can re-finetune your own."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch7-finetuning-or-rag",
+          "html": "Finetuning or RAG"
+        },
+        {
+          "type": "paragraph",
+          "html": "A useful rule of thumb from the research: <strong>finetuning is for form, and RAG is for facts.</strong> If the model lacks or has outdated information, retrieval usually helps more than finetuning. If the model's facts are fine but its tone, structure, or syntax is wrong (for example malformed JSON or an unfamiliar query language), finetuning is the better tool. The two can also be combined for an extra boost."
         },
         {
           "type": "callout",
@@ -1478,7 +1797,18 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "A typical path: prompt engineering first, then add more examples to the prompt, then add retrieval (RAG) for information gaps, then consider finetuning for remaining behavioral or formatting problems, and finally combine RAG and finetuning if you need the last bit of performance."
+              "html": "A typical path:"
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Prompt engineering.",
+                "More examples in the prompt.",
+                "Retrieval (RAG) for information gaps.",
+                "Finetuning for the remaining behavioral or formatting problems.",
+                "RAG and finetuning combined, if you need the last bit of performance."
+              ]
             }
           ]
         },
@@ -1490,7 +1820,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Finetuning is far more memory-hungry than inference because training runs both a <strong>forward pass</strong> (compute the output) and a <strong>backward pass</strong> (compute how wrong each parameter was, called the gradient, and adjust it via an optimizer such as Adam). Every <strong>trainable parameter</strong> needs memory for its weight, its gradient, and one or two optimizer values, while a <strong>frozen parameter</strong> needs none of that extra memory. This is why the number of trainable parameters, not just the model's total size, drives the memory bill — and why most memory-saving finetuning techniques work by cutting that number down, or by storing each value in fewer bits (quantization)."
+          "html": "Finetuning is far more memory-hungry than inference, because training runs both a <strong>forward pass</strong> and a <strong>backward pass</strong>. The forward pass computes the output. The backward pass computes how wrong each parameter was (the gradient) and adjusts it via an optimizer such as Adam. Every <strong>trainable parameter</strong> needs memory for its weight, its gradient, and one or two optimizer values. A <strong>frozen parameter</strong> needs none of that extra memory. This is why the number of trainable parameters, not just the model's total size, drives the memory bill. It is also why most memory-saving finetuning techniques work by cutting that number down, or by storing each value in fewer bits (quantization)."
         },
         {
           "type": "table",
@@ -1521,7 +1851,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Model values are normally stored as floating-point numbers such as FP32 (4 bytes), FP16 or BF16 (2 bytes), with integer formats like INT8 and INT4 also used. <strong>Quantization</strong> means converting a model to a format with fewer bits per value, which shrinks memory roughly in proportion to the bits saved and often speeds up computation too, at the cost of some precision. It is usually done after training (post-training quantization) since training itself is more sensitive to low precision; when training in low precision is needed, it is typically done in <strong>mixed precision</strong>, keeping sensitive values like gradients in a higher-precision format."
+          "html": "Model values are normally stored as floating-point numbers such as FP32 (4 bytes) and FP16 or BF16 (2 bytes). Integer formats like INT8 and INT4 are also used. <strong>Quantization</strong> means converting a model to a format with fewer bits per value. It shrinks memory roughly in proportion to the bits saved, and it often speeds up computation too, at the cost of some precision. It is usually done after training (post-training quantization), since training itself is more sensitive to low precision. When training in low precision is needed, it is typically done in <strong>mixed precision</strong>, which keeps sensitive values like gradients in a higher-precision format."
         },
         {
           "type": "heading",
@@ -1531,11 +1861,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Full finetuning</strong> updates every parameter and needs full-training-level memory. <strong>Partial finetuning</strong> (freezing most layers) saves memory but needs many more trainable parameters to match full finetuning's quality. <strong>PEFT</strong> methods aim to match full finetuning's performance using orders of magnitude fewer trainable parameters, by inserting small trainable modules (adapters) or trainable prompt tokens (soft prompts) rather than touching the base weights."
+          "html": "<strong>Full finetuning</strong> updates every parameter and needs full-training-level memory. <strong>Partial finetuning</strong> (freezing most layers) saves memory but needs many more trainable parameters to match full finetuning's quality. <strong>PEFT</strong> methods aim to match full finetuning's performance with orders of magnitude fewer trainable parameters. They insert small trainable modules (adapters) or trainable prompt tokens (soft prompts) rather than touching the base weights."
         },
         {
           "type": "paragraph",
-          "html": "<strong>LoRA</strong> (Low-Rank Adaptation) is the most widely used PEFT method. For a weight matrix W, LoRA learns two much smaller matrices A and B whose product approximates the needed update; only A and B are trained, and they can later be merged back into W with zero extra inference cost, or kept separate so many LoRA adapters can share one base model (multi-LoRA serving, useful for per-customer or per-task models). <strong>QLoRA</strong> pushes this further by storing the base model in 4-bit precision during finetuning, making it possible to finetune very large models on a single consumer-grade GPU."
+          "html": "<strong>LoRA</strong> (Low-Rank Adaptation) is the most widely used PEFT method. For a weight matrix W, LoRA learns two much smaller matrices A and B whose product approximates the needed update. Only A and B are trained. They can later be merged back into W with zero extra inference cost. Or they can be kept separate, so many LoRA adapters share one base model (multi-LoRA serving, useful for per-customer or per-task models). <strong>QLoRA</strong> pushes this further by storing the base model in 4-bit precision during finetuning. That makes it possible to finetune very large models on a single consumer-grade GPU."
         },
         {
           "type": "heading",
@@ -1545,7 +1875,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Model merging combines multiple (often finetuned) models into one, without necessarily needing a GPU. Approaches include <strong>summing</strong> (averaging weights or interpolating them, e.g. SLERP), <strong>layer stacking</strong> (taking layers from different models, used for frankenmerges, mixture-of-experts upcycling, and model upscaling), and <strong>concatenation</strong>. Compared to training on all tasks at once (which needs more data) or training on tasks one after another (which risks catastrophic forgetting, where the model forgets earlier tasks), merging lets you finetune separately per task in parallel and then combine the results into one smaller, multi-skilled model — valuable for on-device deployment and federated learning."
+          "html": "Model merging combines multiple (often finetuned) models into one, without necessarily needing a GPU. Approaches include:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>summing</strong>: averaging weights or interpolating them (e.g. SLERP);",
+            "<strong>layer stacking</strong>: taking layers from different models, used for frankenmerges, mixture-of-experts upcycling, and model upscaling;",
+            "<strong>concatenation</strong>."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Training on all tasks at once needs more data. Training on tasks one after another risks catastrophic forgetting, where the model forgets earlier tasks. Merging instead lets you finetune separately per task, in parallel, and then combine the results into one smaller, multi-skilled model. That is valuable for on-device deployment and federated learning."
         },
         {
           "type": "heading",
@@ -1557,10 +1900,23 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Base model and path:</strong> start from the strongest model you can afford to test feasibility, or follow a distillation path — finetune a strong model on a small dataset, use it to generate more data, then train a cheaper model on that data.",
-            "<strong>Method:</strong> start with an adapter method like LoRA (cheaper, works with smaller datasets); move to full finetuning later only if you have enough data and need the extra quality.",
-            "<strong>Framework:</strong> finetuning APIs are quick but limited to supported base models; frameworks like Hugging Face PEFT, Axolotl, unsloth, and LitGPT give more control.",
-            "<strong>Key hyperparameters:</strong> learning rate (step size — too high and training destabilizes, too low and it crawls), batch size (larger is more stable but needs more memory; gradient accumulation helps when memory is tight), number of epochs (watch training vs. validation loss to catch overfitting), and prompt loss weight (how much the prompt tokens, versus the response tokens, count toward the training loss)."
+            "<strong>Base model and path:</strong> start from the strongest model you can afford, to test feasibility. Or follow a distillation path: finetune a strong model on a small dataset, use it to generate more data, then train a cheaper model on that data.",
+            "<strong>Method:</strong> start with an adapter method like LoRA, which is cheaper and works with smaller datasets. Move to full finetuning later only if you have enough data and need the extra quality.",
+            "<strong>Framework:</strong> finetuning APIs are quick but limited to supported base models; frameworks like Hugging Face PEFT, Axolotl, unsloth, and LitGPT give more control."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Key hyperparameters:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>learning rate</strong>: the step size. Too high and training destabilizes; too low and it crawls.",
+            "<strong>batch size</strong>: larger is more stable but needs more memory. Gradient accumulation helps when memory is tight.",
+            "<strong>number of epochs</strong>: watch training vs. validation loss to catch overfitting.",
+            "<strong>prompt loss weight</strong>: how much the prompt tokens, versus the response tokens, count toward the training loss."
           ]
         }
       ],
@@ -1665,7 +2021,7 @@
         },
         {
           "type": "paragraph",
-          "html": "No amount of compute or model skill can fix bad data. The goal of dataset engineering is to build a dataset that lets you train the best model you can within your budget. As fewer teams build foundation models from scratch, data has become the main place where teams can still differentiate their model's performance, which is why many AI companies now have dedicated data labelers, dataset creators, and data quality engineers."
+          "html": "No amount of compute or model skill can fix bad data. The goal of dataset engineering is to build a dataset that lets you train the best model you can within your budget. As fewer teams build foundation models from scratch, data has become the main place where teams can still differentiate their model's performance. That is why many AI companies now have dedicated data labelers, dataset creators, and data quality engineers."
         },
         {
           "type": "callout",
@@ -1689,14 +2045,14 @@
         },
         {
           "type": "paragraph",
-          "html": "A small amount of high-quality data regularly beats a large amount of noisy data. Studies on models like Yi and LIMA found that a few thousand carefully written examples can match or beat results from hundreds of thousands of messy ones. Quality is normally judged on six properties: data should be <strong>relevant</strong> to the task, <strong>aligned</strong> with what the task actually needs (not just technically correct), <strong>consistent</strong> across examples and annotators, <strong>correctly formatted</strong> with no stray tokens or markup, <strong>sufficiently unique</strong> so duplicates don't bias training, and <strong>compliant</strong> with privacy and licensing rules."
+          "html": "A small amount of high-quality data regularly beats a large amount of noisy data. Studies on models like Yi and LIMA found that a few thousand carefully written examples can match or beat results from hundreds of thousands of messy ones. Quality is normally judged on six properties:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
             "<strong>Relevant:</strong> the example should match the task's domain and time period.",
-            "<strong>Aligned:</strong> annotations should match what the task actually rewards, e.g. creativity for a creative task, conciseness for a concise one.",
+            "<strong>Aligned:</strong> annotations should match what the task actually rewards, not just be technically correct, e.g. creativity for a creative task, conciseness for a concise one.",
             "<strong>Consistent:</strong> two annotators scoring the same example should agree; this needs clear annotation guidelines.",
             "<strong>Correctly formatted:</strong> no leftover HTML, inconsistent casing, or trailing whitespace.",
             "<strong>Sufficiently unique:</strong> duplicate examples can introduce bias and leak into the test set.",
@@ -1711,7 +2067,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Coverage (often called <em>data diversity</em>) means your training data spans the range of inputs your model will actually see in production — different phrasing styles, topics, output formats, and languages. What diversity matters depends on the application: a translation tool mostly needs stylistic diversity, while a general-purpose chatbot needs diversity in topic, task type, and tone."
+          "html": "Coverage, often called <em>data diversity</em>, means your training data spans the range of inputs your model will see in production. That includes different phrasing styles, topics, output formats, and languages. Which diversity matters depends on the application. A translation tool mostly needs stylistic diversity, while a general-purpose chatbot needs diversity in topic, task type, and tone."
         },
         {
           "type": "table",
@@ -1740,7 +2096,16 @@
         },
         {
           "type": "paragraph",
-          "html": "There is no universal answer to \"how much data do I need.\" More examples generally help, but returns diminish quickly: the first thousand examples might move accuracy by ten points, the next thousand by five. A practical approach is to finetune on subsets of your current data (25%, 50%, 100%) and plot a performance-vs-size curve: a steep slope means more data will keep helping, a flat one means you're near the ceiling. Besides quality and coverage, three things change how much data you need: the finetuning technique (full finetuning needs far more data than LoRA-style PEFT), task complexity, and how strong your base model already is."
+          "html": "There is no universal answer to \"how much data do I need.\" More examples generally help, but returns diminish quickly: the first thousand examples might move accuracy by ten points, the next thousand by five. A practical approach is to finetune on subsets of your current data (25%, 50%, 100%) and plot a performance-vs-size curve. A steep slope means more data will keep helping; a flat one means you're near the ceiling. Besides quality and coverage, three things change how much data you need:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "the finetuning technique: full finetuning needs far more data than LoRA-style PEFT;",
+            "task complexity;",
+            "how strong your base model already is."
+          ]
         },
         {
           "type": "heading",
@@ -1750,7 +2115,24 @@
         },
         {
           "type": "paragraph",
-          "html": "Data augmentation creates new examples from real data you already have (e.g., flipping an image, swapping a word for a synonym). Data synthesis creates data that mimics real data without being derived from a specific real example (e.g., a simulated API response). People reach for synthetic data to increase quantity, improve coverage of rare or sensitive cases, improve quality (AI can sometimes write more consistent preference labels than humans), protect privacy, and to distill a smaller model from a larger one."
+          "html": "Data augmentation creates new examples from real data you already have (e.g., flipping an image, swapping a word for a synonym). Data synthesis creates data that mimics real data without being derived from a specific real example (e.g., a simulated API response). People reach for synthetic data to:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "increase quantity;",
+            "improve coverage of rare or sensitive cases;",
+            "improve quality (AI can sometimes write more consistent preference labels than humans);",
+            "protect privacy;",
+            "distill a smaller model from a larger one."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch8-synthesis-techniques",
+          "html": "Techniques"
         },
         {
           "type": "list",
@@ -1758,13 +2140,19 @@
           "items": [
             "<strong>Rule-based and template synthesis:</strong> fill a template (an invoice, a transaction record) with randomly generated values — fast and safe for sensitive formats like financial data.",
             "<strong>Perturbation:</strong> add small amounts of noise or word swaps to existing data to create new, slightly harder examples and build robustness.",
-            "<strong>Simulation:</strong> generate data inside a virtual environment instead of the real world — common for self-driving cars, robotics, and tool-use agents, where real data collection is slow, costly, or dangerous.",
+            "<strong>Simulation:</strong> generate data inside a virtual environment instead of the real world. It is common for self-driving cars, robotics, and tool-use agents, where real data collection is slow, costly, or dangerous.",
             "<strong>AI-powered synthesis:</strong> use a foundation model to paraphrase, translate, generate instructions, generate responses, or play both sides of a conversation (self-play)."
           ]
         },
         {
           "type": "paragraph",
-          "html": "AI-powered instruction data synthesis usually starts from a small seed set (as in Self-Instruct and Alpaca), then asks a strong model to generate many more instructions and responses that mirror the seed examples in style and difficulty. A useful variant is <strong>reverse instruction</strong>: start from high-quality existing text (a book chapter, a Wikipedia article) and ask the model to generate the instruction that would have produced it — this sidesteps the fact that models are better at writing short instructions than long, accurate responses."
+          "html": "AI-powered instruction data synthesis usually starts from a small seed set (as in Self-Instruct and Alpaca). A strong model then generates many more instructions and responses that mirror the seed examples in style and difficulty. A useful variant is <strong>reverse instruction</strong>. Start from high-quality existing text (a book chapter, a Wikipedia article) and ask the model to generate the instruction that would have produced it. This sidesteps the fact that models are better at writing short instructions than long, accurate responses."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch8-synthesis-risks",
+          "html": "Risks and verification"
         },
         {
           "type": "callout",
@@ -1772,13 +2160,31 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Synthetic data is not free of risk. Three documented failure modes are: <strong>superficial imitation</strong> (the student model copies the teacher's style without its underlying ability, which can push the student to hallucinate confidently), <strong>model collapse</strong> (training recursively on AI-generated data degrades a model over generations, as rare patterns slowly disappear), and <strong>obscured data lineage</strong> (if the generator model saw copyrighted or contaminated benchmark data, that risk and bias can silently flow into your model)."
+              "html": "Synthetic data is not free of risk. Three documented failure modes are:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "<strong>superficial imitation</strong>: the student model copies the teacher's style without its underlying ability, which can push the student to hallucinate confidently;",
+                "<strong>model collapse</strong>: training recursively on AI-generated data degrades a model over generations, as rare patterns slowly disappear;",
+                "<strong>obscured data lineage</strong>: if the generator model saw copyrighted or contaminated benchmark data, that risk and bias can silently flow into your model."
+              ]
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Because of these risks, generated data still needs verification: functional checks when possible (does the generated code pass its tests?), an AI judge or scorer otherwise, and simple heuristics such as filtering out examples that are too short, too repetitive, or where the instruction and response barely differ from other pairs in the set."
+          "html": "Because of these risks, generated data still needs verification:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "functional checks when possible (does the generated code pass its tests?);",
+            "an AI judge or scorer otherwise;",
+            "simple heuristics, such as filtering out examples that are too short, too repetitive, or where the instruction and response barely differ from other pairs in the set."
+          ]
         },
         {
           "type": "heading",
@@ -1798,7 +2204,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Once data is gathered (real or synthetic), it still has to be processed before it is training-ready. The four recurring steps are inspection, deduplication, cleaning/filtering, and formatting — in whichever order saves the most compute, since there's no fixed sequence that always wins."
+          "html": "Once data is gathered (real or synthetic), it still has to be processed before it is training-ready. The four recurring steps are inspection, deduplication, cleaning/filtering, and formatting. Run them in whichever order saves the most compute; no fixed sequence always wins."
         },
         {
           "type": "panels",
@@ -1817,7 +2223,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Remove exact and near-duplicate examples using pairwise similarity, hashing (MinHash, Bloom filters), or dimensionality reduction first. Duplicates can bias the model and leak between train and test sets — one study showed repeating just 0.1% of data 100 times degraded an 800M-parameter model to the performance of a 400M-parameter one."
+                  "html": "Remove exact and near-duplicate examples using pairwise similarity, hashing (MinHash, Bloom filters), or dimensionality reduction first. Duplicates can bias the model and leak between train and test sets. One study showed that repeating just 0.1% of data 100 times degraded an 800M-parameter model to the performance of a 400M-parameter one."
                 }
               ]
             },
@@ -1950,7 +2356,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Optimization can target three levels: the <strong>model</strong> (make the model itself smaller or more efficient), the <strong>hardware</strong> (build or pick better chips), and the <strong>service</strong> (manage requests and resources better). These levels interact, and most production systems combine techniques from more than one."
+          "html": "Optimization can target three levels:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "the <strong>model</strong>: make the model itself smaller or more efficient;",
+            "the <strong>hardware</strong>: build or pick better chips;",
+            "the <strong>service</strong>: manage requests and resources better."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "These levels interact, and most production systems combine techniques from more than one."
         },
         {
           "type": "heading",
@@ -1960,7 +2379,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every workload hits one of two bottlenecks. A <strong>compute-bound</strong> task is limited by how many calculations the hardware can do; a <strong>memory bandwidth-bound</strong> task is limited by how fast data can move between memory and processors. For autoregressive language models, <strong>prefill</strong> (processing the input prompt in parallel) is compute-bound, while <strong>decode</strong> (generating one output token at a time) is memory bandwidth-bound, because each step must reload the model's weights to produce a single token."
+          "html": "Every workload hits one of two bottlenecks. A <strong>compute-bound</strong> task is limited by how many calculations the hardware can do. A <strong>memory bandwidth-bound</strong> task is limited by how fast data can move between memory and processors. For autoregressive language models, <strong>prefill</strong> (processing the input prompt in parallel) is compute-bound. <strong>Decode</strong> (generating one output token at a time) is memory bandwidth-bound, because each step must reload the model's weights to produce a single token."
         },
         {
           "type": "list",
@@ -2032,11 +2451,24 @@
         },
         {
           "type": "paragraph",
-          "html": "An <strong>accelerator</strong> is a chip built for one kind of workload. GPUs dominate AI because, unlike CPUs (a few powerful general-purpose cores), they pack thousands of smaller cores suited to the massively parallel matrix multiplications behind most ML workloads. Other accelerators — Google's TPU, AWS Inferentia, Intel's Gaudi, and more — target training, inference, or edge devices specifically."
+          "html": "An <strong>accelerator</strong> is a chip built for one kind of workload. GPUs dominate AI because they pack thousands of smaller cores, suited to the massively parallel matrix multiplications behind most ML workloads. CPUs have a few powerful general-purpose cores instead. Other accelerators — Google's TPU, AWS Inferentia, Intel's Gaudi, and more — target training, inference, or edge devices specifically."
         },
         {
           "type": "paragraph",
-          "html": "Three specs matter most when evaluating a chip: <strong>computational capability</strong> (FLOP/s, which drops as numeric precision increases), <strong>memory size and bandwidth</strong> (CPU DRAM is cheapest and slowest, GPU high-bandwidth memory, or HBM, is faster, and on-chip SRAM is fastest but tiny), and <strong>power consumption</strong> (maximum power draw and TDP). Quantization reduces how many bytes per parameter a model needs, which directly reduces the memory bandwidth it consumes."
+          "html": "Three specs matter most when evaluating a chip:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>computational capability</strong>: FLOP/s (floating-point operations per second), which drops as numeric precision increases;",
+            "<strong>memory size and bandwidth</strong>: CPU DRAM is cheapest and slowest, GPU high-bandwidth memory (HBM) is faster, and on-chip SRAM is fastest but tiny;",
+            "<strong>power consumption</strong>: maximum power draw and TDP (thermal design power)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Quantization reduces how many bytes per parameter a model needs, which directly reduces the memory bandwidth it consumes."
         },
         {
           "type": "heading",
@@ -2049,15 +2481,39 @@
           "html": "Model optimization changes the model to make it cheaper to run, which can also change its output quality. Transformer-based language models are expensive mainly because of three traits: model size, autoregressive decoding, and the attention mechanism."
         },
         {
+          "type": "heading",
+          "level": 4,
+          "id": "ch9-model-compression",
+          "html": "Model compression"
+        },
+        {
+          "type": "paragraph",
+          "html": "Quantization (lower-precision weights) and distillation (train a small model to mimic a large one) shrink a model's footprint. <strong>Pruning</strong> removes or zeroes out the least useful parameters, making the model sparser, though it is harder to apply well and less common in practice."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch9-faster-decoding",
+          "html": "Faster decoding"
+        },
+        {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Model compression</strong>: quantization (lower-precision weights) and distillation (train a small model to mimic a large one) shrink a model's footprint. <strong>Pruning</strong> removes or zeroes out the least useful parameters, making the model sparser, though it is harder to apply well and less common in practice.",
-            "<strong>Speculative decoding</strong>: a small, fast draft model proposes several tokens, and the large target model verifies them all in one parallel pass, accepting the longest correct prefix. This turns part of decode's sequential cost into a parallel, compute-bound check.",
-            "<strong>Inference with reference</strong>: when a response is likely to reuse chunks of the input (quoting a document, editing code), those spans are copied directly instead of regenerated token by token.",
-            "<strong>Parallel decoding</strong> (e.g., Medusa, lookahead decoding): multiple candidate future tokens are generated at once and verified together, breaking the one-token-at-a-time dependency.",
-            "<strong>Attention and KV cache optimization</strong>: the KV cache stores previously computed key/value vectors so they are not recomputed at every step, but it grows with sequence length and batch size and can dominate memory use. Techniques include redesigning attention (local windowed attention, multi-query attention, grouped-query attention, cross-layer attention), smarter KV cache management (e.g., vLLM's PagedAttention), and hand-written kernels such as FlashAttention that fuse several operations into one fast pass."
+            "<strong>Speculative decoding</strong>: a small, fast draft model proposes several tokens. The large target model verifies them all in one parallel pass and accepts the longest correct prefix. This turns part of decode's sequential cost into a parallel, compute-bound check.",
+            "<strong>Inference with reference</strong>: some responses reuse chunks of the input (quoting a document, editing code). In that case those spans are copied directly instead of regenerated token by token.",
+            "<strong>Parallel decoding</strong> (e.g., Medusa, lookahead decoding): multiple candidate future tokens are generated at once and verified together, breaking the one-token-at-a-time dependency."
           ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch9-attention-kv-cache",
+          "html": "Attention and KV cache optimization"
+        },
+        {
+          "type": "paragraph",
+          "html": "The KV cache stores previously computed key/value vectors, so they are not recomputed at every step. But it grows with sequence length and batch size, and it can dominate memory use. Techniques include redesigning attention (local windowed, multi-query, grouped-query, or cross-layer attention) and smarter KV cache management (e.g., vLLM's PagedAttention). Hand-written kernels such as FlashAttention also help, by fusing several operations into one fast pass."
         },
         {
           "type": "heading",
@@ -2067,7 +2523,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>kernel</strong> is hardware-specific code written for a repeated, performance-critical operation, such as matrix multiplication or attention. Common kernel-writing techniques include vectorization, parallelization, loop tiling, and operator fusion. A <strong>compiler</strong> (such as <code>torch.compile</code>, XLA, or TensorRT) <em>lowers</em> a general model script into kernels optimized for the target chip, bridging model code and hardware."
+          "html": "A <strong>kernel</strong> is hardware-specific code written for a repeated, performance-critical operation, such as matrix multiplication or attention. Common kernel-writing techniques include vectorization, parallelization, loop tiling, and operator fusion. A <strong>compiler</strong> (such as <code>torch.compile</code>, XLA, or TensorRT) <em>lowers</em> a general model script into kernels optimized for the target chip. It bridges model code and hardware."
         },
         {
           "type": "heading",
@@ -2084,9 +2540,28 @@
           "ordered": false,
           "items": [
             "<strong>Batching</strong>: grouping multiple requests together to use hardware more efficiently. <strong>Static batching</strong> waits for a full batch before running (simple but can delay early requests). <strong>Dynamic batching</strong> runs when the batch is full or a time window expires, whichever comes first. <strong>Continuous (in-flight) batching</strong> returns each response the moment it finishes and immediately slots in a new request, avoiding wasted capacity.",
-            "<strong>Decoupling prefill and decode</strong>: since the two steps have opposite bottlenecks, running them on separate machines avoids them competing for the same resources and improves both TTFT and TPOT.",
-            "<strong>Prompt caching</strong>: overlapping text across requests (like a shared system prompt or a long reference document) is processed once and reused, cutting both latency and cost for repeated context.",
-            "<strong>Parallelism strategies</strong>: <em>replica parallelism</em> runs multiple full copies of a model to serve more requests; <em>tensor parallelism</em> splits individual operators (like a matrix multiply) across devices to fit and speed up large models; <em>pipeline parallelism</em> splits a model into stages across devices, which raises per-request latency but helps throughput, so it is more common in training than in latency-sensitive inference; <em>context</em> and <em>sequence parallelism</em> split long inputs or their operators across machines."
+            "<strong>Decoupling prefill and decode</strong>: the two steps have opposite bottlenecks. Running them on separate machines stops them competing for the same resources, and improves both TTFT and TPOT.",
+            "<strong>Prompt caching</strong>: overlapping text across requests (like a shared system prompt or a long reference document) is processed once and reused. That cuts both latency and cost for repeated context."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch9-parallelism",
+          "html": "Parallelism strategies"
+        },
+        {
+          "type": "paragraph",
+          "html": "They split the work across devices:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<em>replica parallelism</em> runs multiple full copies of a model to serve more requests;",
+            "<em>tensor parallelism</em> splits individual operators (like a matrix multiply) across devices to fit and speed up large models;",
+            "<em>pipeline parallelism</em> splits a model into stages across devices. It raises per-request latency but helps throughput, so it is more common in training than in latency-sensitive inference;",
+            "<em>context</em> and <em>sequence parallelism</em> split long inputs or their operators across machines."
           ]
         },
         {
@@ -2211,7 +2686,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The simplest possible AI application is just a query sent to a <strong>model API</strong> and a response returned to the user — no context, no safety checks, no optimization. Real production systems grow out of this baseline one layer at a time, each layer added to solve a specific pain point rather than out of a desire for complexity."
+          "html": "The simplest possible AI application is just a query sent to a <strong>model API</strong> and a response returned to the user. It has no context, no safety checks, and no optimization. Real production systems grow out of this baseline one layer at a time. Each layer is added to solve a specific pain point, not out of a desire for complexity."
         },
         {
           "type": "list",
@@ -2236,11 +2711,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Context construction</strong> is essentially feature engineering for foundation models: retrieval (text, image, tabular) and tool use (web search, SQL, APIs) feed the model the information it needs for a specific query. Because this step shapes output quality so directly, almost every model API provider now supports some form of it, though providers differ in document limits, retrieval algorithms, and tool-calling modes."
+          "html": "<strong>Context construction</strong> is essentially feature engineering for foundation models. Retrieval (text, image, tabular) and tool use (web search, SQL, APIs) feed the model the information it needs for a specific query. This step shapes output quality so directly that almost every model API provider now supports some form of it. Providers differ in document limits, retrieval algorithms, and tool-calling modes."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Guardrails</strong> fall into two groups. Input guardrails defend against leaking private data to external APIs (an employee pasting secrets into a prompt, a tool pulling sensitive records into context) and against prompt attacks. A common pattern is to mask sensitive data with a placeholder like <code>[PHONE NUMBER]</code> before the call, then unmask it afterward using a reversible map. Output guardrails catch failures after generation — malformatted responses, hallucinations, toxic or private content, and brand-risk answers — and decide the policy for handling them: block, retry, or route to a human."
+          "html": "<strong>Guardrails</strong> fall into two groups. Input guardrails defend against prompt attacks. They also stop private data leaking to external APIs, such as an employee pasting secrets into a prompt or a tool pulling sensitive records into context. A common pattern is to mask sensitive data with a placeholder like <code>[PHONE NUMBER]</code> before the call, then unmask it afterward using a reversible map. Output guardrails catch failures after generation: malformatted responses, hallucinations, toxic or private content, and brand-risk answers. They also set the policy for handling them: block, retry, or route to a human."
         },
         {
           "type": "callout",
@@ -2248,7 +2723,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Guardrails trade safety for latency: every check adds a round trip or a scoring pass, and output guardrails get harder in streaming mode because tokens may reach the user before the full response can be evaluated. A system can also be <em>too</em> safe — tracking the false refusal rate matters as much as tracking security failures."
+              "html": "Guardrails trade safety for latency: every check adds a round trip or a scoring pass. Output guardrails get harder in streaming mode, because tokens may reach the user before the full response can be evaluated. A system can also be <em>too</em> safe — tracking the false refusal rate matters as much as tracking security failures."
             }
           ]
         },
@@ -2260,11 +2735,11 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>router</strong> uses an intent classifier to send each query to the right place — a cheap model for simple questions, a specialized model for billing, a human for anything the classifier can't handle. Routers also catch out-of-scope requests before an expensive model call is made, and can ask for clarification when a query is ambiguous. They are usually small, fast, and cheap on purpose, since they sit in front of every single request."
+          "html": "A <strong>router</strong> uses an intent classifier to send each query to the right place. Simple questions can go to a cheap model, billing questions to a specialized model, and anything the classifier can't handle to a human. Routers also catch out-of-scope requests before an expensive model call is made, and can ask for clarification when a query is ambiguous. They are usually small, fast, and cheap on purpose, since they sit in front of every single request."
         },
         {
           "type": "paragraph",
-          "html": "A <strong>gateway</strong> is a unified interface between an application and every model it uses, self-hosted or third-party. Instead of distributing provider API keys across every application, a gateway centralizes access control, usage monitoring, cost limits, and fallback logic (retrying or switching providers when a call fails or hits a rate limit). Since every request already passes through it, a gateway is also a natural place to add load balancing, logging, caching, and guardrails."
+          "html": "A <strong>gateway</strong> is a unified interface between an application and every model it uses, self-hosted or third-party. Instead of distributing provider API keys across every application, a gateway centralizes access control, usage monitoring, and cost limits. It also holds the fallback logic: retrying or switching providers when a call fails or hits a rate limit. Since every request already passes through it, a gateway is also a natural place to add load balancing, logging, caching, and guardrails."
         },
         {
           "type": "heading",
@@ -2274,7 +2749,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Two system-level caching strategies are common. <strong>Exact caching</strong> stores results keyed to an identical query (or an identical retrieval request) and reuses them only on an exact match — useful for repeated multi-step queries, with an eviction policy such as LRU or LFU to bound cache size. <strong>Semantic caching</strong> reuses a cached answer for a query that is only similar, not identical, by comparing embeddings against a similarity threshold."
+          "html": "Two system-level caching strategies are common. <strong>Exact caching</strong> stores results keyed to an identical query (or an identical retrieval request) and reuses them only on an exact match. It is useful for repeated multi-step queries, with an eviction policy such as LRU (least recently used) or LFU (least frequently used) to bound the cache size. <strong>Semantic caching</strong> reuses a cached answer for a query that is only similar, not identical, by comparing embeddings against a similarity threshold."
         },
         {
           "type": "table",
@@ -2304,7 +2779,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Once an architecture supports loops, parallel execution, and conditional branching, it crosses into agentic territory: a model can decide its first answer was incomplete, trigger another retrieval, and feed the new context back into itself or a different model. The architecture can go one step further by allowing <strong>write actions</strong> — sending an email, placing an order, updating a database — which make the system far more capable but also far riskier, since a mistake is no longer just a bad answer but a real-world side effect."
+          "html": "Once an architecture supports loops, parallel execution, and conditional branching, it crosses into agentic territory. A model can decide its first answer was incomplete, trigger another retrieval, and feed the new context back into itself or a different model. The architecture can go one step further by allowing <strong>write actions</strong>, such as sending an email, placing an order, or updating a database. They make the system far more capable but also far riskier: a mistake is no longer just a bad answer but a real-world side effect."
         },
         {
           "type": "heading",
@@ -2314,15 +2789,24 @@
         },
         {
           "type": "paragraph",
-          "html": "Monitoring tracks a system's outputs; observability goes further, assuming that internal state can be inferred from logs and metrics without shipping new code just to diagnose a problem. Three DevOps-derived metrics help judge how observable a system is: <strong>MTTD</strong> (mean time to detection), <strong>MTTR</strong> (mean time to response), and <strong>CFR</strong> (change failure rate, the share of deployments that need a fix or rollback)."
+          "html": "Monitoring tracks a system's outputs. Observability goes further: it assumes that internal state can be inferred from logs and metrics, without shipping new code just to diagnose a problem. Three DevOps-derived metrics help judge how observable a system is:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>MTTD</strong>: mean time to detection;",
+            "<strong>MTTR</strong>: mean time to response;",
+            "<strong>CFR</strong>: change failure rate, the share of deployments that need a fix or rollback."
+          ]
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
             "<strong>Metrics</strong> should be designed around specific failure modes — format failures, hallucination signals, toxicity, refusal rate, and cost/latency figures like TTFT, TPOT, and tokens per request.",
-            "<strong>Logs</strong> are an append-only record of events; the common advice is to log everything, since it's rarely obvious in advance what you'll need to debug later.",
-            "<strong>Traces</strong> reconstruct a single request's full path — retrieval, tool calls, model calls, timing, cost — so a failure can be pinpointed to the exact step that went wrong."
+            "<strong>Logs</strong> are an append-only record of events. The common advice is to log everything, since it's rarely obvious in advance what you'll need to debug later.",
+            "<strong>Traces</strong> reconstruct a single request's full path: retrieval, tool calls, model calls, timing, cost. A failure can then be pinpointed to the exact step that went wrong."
           ]
         },
         {
@@ -2337,7 +2821,19 @@
         },
         {
           "type": "paragraph",
-          "html": "An orchestrator wires all the components together in two steps: <strong>component definition</strong> (declaring the models, data sources, and tools available) and <strong>chaining</strong> (specifying the order of operations — process query, retrieve, build the prompt, generate, evaluate, then return to the user or escalate to a human). Where latency is tight, independent steps such as routing and PII redaction should run in parallel rather than in sequence. Adopting a heavy orchestration framework early can hide details you still need to understand about your own system, so starting without one is often the better default."
+          "html": "An orchestrator wires all the components together in two steps:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "<strong>Component definition</strong>: declare the models, data sources, and tools available.",
+            "<strong>Chaining</strong>: specify the order of operations (process the query, retrieve, build the prompt, generate, evaluate, then return to the user or escalate to a human)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Where latency is tight, independent steps such as routing and PII (personally identifiable information) redaction should run in parallel rather than in sequence. Adopting a heavy orchestration framework early can hide details you still need to understand about your own system. Starting without one is often the better default."
         },
         {
           "type": "heading",
@@ -2347,7 +2843,22 @@
         },
         {
           "type": "paragraph",
-          "html": "Feedback is <strong>explicit</strong> (thumbs up/down, star ratings, a direct yes/no) or <strong>implicit</strong> (inferred from what a user does). Conversational interfaces make implicit feedback unusually rich: a user's follow-up message itself signals success or failure. Early termination, a correction starting with \"No, I meant...\", regenerating a response, editing the output directly, and simply expressing frustration are all natural language signals that can be tracked in production, and can serve evaluation, model development, and personalization."
+          "html": "Feedback is <strong>explicit</strong> (thumbs up/down, star ratings, a direct yes/no) or <strong>implicit</strong> (inferred from what a user does). Conversational interfaces make implicit feedback unusually rich: a user's follow-up message itself signals success or failure. Signals that can be tracked in production include:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "early termination;",
+            "a correction starting with \"No, I meant...\";",
+            "regenerating a response;",
+            "editing the output directly;",
+            "simply expressing frustration."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "These signals can serve evaluation, model development, and personalization."
         },
         {
           "type": "heading",
@@ -2357,7 +2868,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Feedback should be collectible throughout the user journey without interrupting it: during onboarding (calibrating to a new user), right after a failure (letting the user downvote, regenerate, or correct), and when the model itself has low confidence (showing two candidate outputs and letting the user pick, as with comparative evaluation). Good feedback design makes giving feedback nearly free — Midjourney's upscale/variation/regenerate buttons and GitHub Copilot's accept-or-keep-typing flow are both cited as examples that collect signal without asking users to do anything extra."
+          "html": "Feedback should be collectible throughout the user journey without interrupting it:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>during onboarding</strong>, to calibrate to a new user;",
+            "<strong>right after a failure</strong>, letting the user downvote, regenerate, or correct;",
+            "<strong>when the model itself has low confidence</strong>, showing two candidate outputs and letting the user pick (as with comparative evaluation)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Good feedback design makes giving feedback nearly free. Midjourney's upscale/variation/regenerate buttons and GitHub Copilot's accept-or-keep-typing flow are both cited as examples that collect signal without asking users to do anything extra."
         },
         {
           "type": "heading",
@@ -2367,7 +2891,20 @@
         },
         {
           "type": "paragraph",
-          "html": "User feedback is valuable but biased and incomplete. <strong>Leniency bias</strong> pushes ratings upward when negative feedback feels like extra work or conflict. <strong>Position bias</strong> favors whichever option is shown first. <strong>Preference bias</strong> rewards length or recency over actual correctness. Feedback is also only ever collected on what the system already chose to show, which can produce a <strong>degenerate feedback loop</strong>: popular outputs get shown more, get more clicks, and get reinforced further, while anything not shown never gets a chance to prove itself — the mechanism behind popularity bias and filter bubbles. Training a model directly on user feedback can also push it toward sycophancy, optimizing for what users want to hear rather than what is accurate."
+          "html": "User feedback is valuable but biased and incomplete:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Leniency bias</strong> pushes ratings upward when negative feedback feels like extra work or conflict.",
+            "<strong>Position bias</strong> favors whichever option is shown first.",
+            "<strong>Preference bias</strong> rewards length or recency over actual correctness."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Feedback is also only ever collected on what the system already chose to show. That can produce a <strong>degenerate feedback loop</strong>: popular outputs get shown more, get more clicks, and get reinforced further, while anything not shown never gets a chance to prove itself. This is the mechanism behind popularity bias and filter bubbles. Training a model directly on user feedback can also push it toward sycophancy, optimizing for what users want to hear rather than what is accurate."
         }
       ],
       "layman": [

@@ -11,7 +11,7 @@
       "id": "s3",
       "num": "01",
       "title": "Inference (servers, quantization, providers)",
-      "sub": "Every LLM call has two sides: the <strong>request</strong> you send and the <strong>inference</strong> that serves it. Most teams start by renting (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock). Once usage justifies it, you self-host with vLLM, TGI, SGLang, Ollama, or llama.cpp — and learn a different optimization vocabulary: KV cache, prefix caching, speculative decoding, continuous batching.",
+      "sub": "Every LLM call has two sides: the <strong>request</strong> you send and the <strong>inference</strong> that serves it. Most teams start by renting a hosted API. Once usage justifies it, they self-host on an inference server and learn a different optimization vocabulary: KV cache, prefix caching, speculative decoding, continuous batching.",
       "bn": {
         "title": "ইনফারেন্স: সার্ভার, কোয়ান্টাইজেশন আর প্রোভাইডার",
         "sub": "প্রতিটা LLM কলের দুই দিক: আপনার পাঠানো <strong>রিকোয়েস্ট</strong>, আর সেটা যে <strong>ইনফারেন্স</strong> সামলায়। বেশিরভাগ টিম শুরুতে ভাড়া নেয় (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। ব্যবহার যথেষ্ট বাড়লে তারা vLLM, TGI, SGLang, Ollama বা llama.cpp দিয়ে নিজে হোস্ট করে। তখন অপ্টিমাইজেশনের একদম নতুন শব্দভান্ডার শিখতে হয়: KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং, কন্টিনিউয়াস ব্যাচিং।"
@@ -100,7 +100,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Hugging Face's Rust+Python server. Polished, supports the HF model hub natively, slightly lower raw TPS than TGI/vLLM."
+                  "html": "Hugging Face's Rust+Python server. Polished, supports the HF model hub natively, slightly lower raw TPS than vLLM."
                 }
               ]
             },
@@ -150,7 +150,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit, trading a small amount of quality for 2–4× less GPU memory and proportionally faster inference. The common formats:"
+          "html": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference. The common formats:"
         },
         {
           "type": "list",
@@ -158,9 +158,9 @@
           "items": [
             "<strong>GGUF</strong> — llama.cpp's format. Single file, CPU+GPU hybrid, the de facto standard for open-weight local inference.<a class=\"cite\" href=\"#src15\">[15]</a>",
             "<strong>AWQ</strong> — Activation-aware Weight Quantization. 4-bit with near-FP16 quality; popular for vLLM/SGLang.<a class=\"cite\" href=\"#src16\">[16]</a>",
-            "<strong>GPTQ</strong> — older, still common for GPU serving.",
+            "<strong>GPTQ</strong> — a post-training quantization method; older, still common for GPU serving.",
             "<strong>INT8 / FP8</strong> — minimal-quality-loss quantisation on H100s; native hardware support.",
-            "<strong>INT4 / NF4</strong> — bitsandbytes (QLora) for training; also used at inference time."
+            "<strong>INT4 / NF4</strong> — four-bit integer and four-bit NormalFloat formats; bitsandbytes (QLoRA) for training, also used at inference time."
           ]
         },
         {
@@ -177,7 +177,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Three ideas that show up in every modern inference server:"
+          "html": "The <strong>KV cache</strong> holds the attention keys and values already computed for earlier tokens, so the model does not recompute them for each new token. Three ideas show up in every modern inference server:"
         },
         {
           "type": "list",
@@ -215,7 +215,7 @@
             [
               "<strong>TTFT</strong> (time to first token)",
               "How long until the user sees the first word",
-              "Prompt length, prefill compute, network"
+              "Prompt length, prefill compute (processing the prompt), network"
             ],
             [
               "<strong>TPS</strong> (tokens per second, per request)",
@@ -252,7 +252,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Hosted inference in 2025 is a commodity market. Pick by which model you want at what price with what SLA:"
+          "html": "Hosted inference in 2025 is a commodity market. Pick by which model you want at what price with what SLA (service-level agreement):"
         },
         {
           "type": "table",
@@ -274,7 +274,7 @@
             ],
             [
               "<strong>Groq</strong>",
-              "Ultra-low latency LPU hardware",
+              "Ultra-low latency LPU hardware (Language Processing Unit, Groq's own chip)",
               "Llama, Mixtral, Whisper"
             ],
             [
@@ -315,7 +315,18 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The \"engine\" matters when you own.</strong> If you do own, the <em>inference server</em> is the software that turns user requests into GPU math. The five big names in 2025 are <em>vLLM</em> (fastest for big loads), <em>TGI</em> (easy and from Hugging Face), <em>SGLang</em> (best when you reuse the same prompt a lot), <em>Ollama</em> (one-liner for your laptop), and <em>llama.cpp</em> (runs on phones and Raspberry Pis)."
+          "html": "<strong>The \"engine\" matters when you own.</strong> If you do own, the <em>inference server</em> is the software that turns user requests into GPU math. The five big names in 2025:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<em>vLLM</em>: fastest for big loads.",
+            "<em>TGI</em>: easy, and from Hugging Face.",
+            "<em>SGLang</em>: best when you reuse the same prompt a lot.",
+            "<em>Ollama</em>: a one-liner for your laptop.",
+            "<em>llama.cpp</em>: runs on phones and Raspberry Pis."
+          ]
         },
         {
           "type": "paragraph",
@@ -335,7 +346,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>GPU economics:</strong> an H100 chip costs ~$30k to buy, or $2–4/hour to rent. At full tilt it serves ~30 conversations at once. So if you're running millions of conversations, owning is cheaper. If you're running thousands, renting is cheaper."
+          "html": "<strong>GPU economics:</strong> a top-end AI chip (an Nvidia H100) costs ~$30k to buy, or $2–4/hour to rent. At full tilt it serves ~30 conversations at once. So if you're running millions of conversations, owning is cheaper. If you're running thousands, renting is cheaper."
         },
         {
           "type": "analogy",

@@ -25,7 +25,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The baseline is a window of <code>chunk_size</code> units with <code>chunk_overlap</code> units shared between neighbours so a fact straddling a boundary still lands whole in at least one chunk. In LangChain's <code>RecursiveCharacterTextSplitter</code> the size is measured by <code>length_function</code>, which defaults to Python <code>len()</code>, i.e. characters. The recursive variant tries separators in order (<code>\"\\n\\n\"</code>, <code>\"\\n\"</code>, <code>\" \"</code>, <code>\"\"</code>: paragraph, line, word, character) so coherent units stay together for as long as possible.<a class=\"cite\" href=\"#src3\">[3]</a>"
+          "html": "The baseline is a window of <code>chunk_size</code> units. Neighbouring windows share <code>chunk_overlap</code> units, so a fact that straddles a boundary still lands whole in at least one chunk. In LangChain's <code>RecursiveCharacterTextSplitter</code> the size is measured by <code>length_function</code>, which defaults to Python <code>len()</code>, i.e. characters. The recursive variant tries separators in order (<code>\"\\n\\n\"</code>, <code>\"\\n\"</code>, <code>\" \"</code>, <code>\"\"</code>: paragraph, line, word, character) so coherent units stay together for as long as possible.<a class=\"cite\" href=\"#src3\">[3]</a>"
         },
         {
           "type": "diagram",
@@ -41,7 +41,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Structure-aware splitters respect boundaries the author already drew. LlamaIndex's <code>SentenceSplitter</code> breaks at sentence boundaries (the docs example uses <code>chunk_size=1024</code> plus a <code>chunk_overlap</code>), and <code>MarkdownNodeParser</code> parses raw markdown into nodes.<a class=\"cite\" href=\"#src4\">[4]</a> LangChain's <code>MarkdownHeaderTextSplitter</code> groups text by header level and attaches the headers as metadata (for example <code>{'Header 1': ..., 'Header 2': ...}</code>); headers are stripped from the text by default (<code>strip_headers=False</code> keeps them). Chain it with a recursive splitter so overlap applies inside a section and never crosses a header boundary.<a class=\"cite\" href=\"#src5\">[5]</a>"
+          "html": "Structure-aware splitters respect boundaries the author already drew. LlamaIndex's <code>SentenceSplitter</code> breaks at sentence boundaries (the docs example uses <code>chunk_size=1024</code> plus a <code>chunk_overlap</code>), and <code>MarkdownNodeParser</code> parses raw markdown into nodes.<a class=\"cite\" href=\"#src4\">[4]</a> LangChain's <code>MarkdownHeaderTextSplitter</code> groups text by header level and attaches the headers as metadata (for example <code>{'Header 1': ..., 'Header 2': ...}</code>). By default it strips the headers from the text; <code>strip_headers=False</code> keeps them. Chain it with a recursive splitter so overlap applies inside a section and never crosses a header boundary.<a class=\"cite\" href=\"#src5\">[5]</a>"
         },
         {
           "type": "code",
@@ -55,7 +55,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Units matter:</strong> the LangChain default measures characters, not tokens, so a \"1000\" chunk is not 1000 tokens. The values above are illustrative; none of the sources I checked states a recommended chunk size or overlap percentage, so tune them against your own retrieval evals."
+              "html": "<strong>Units matter:</strong> the LangChain default measures characters, not tokens, so a \"1000\" chunk is not 1000 tokens. The values above are illustrative. None of the sources I checked states a recommended chunk size or overlap percentage, so tune them against your own retrieval evals."
             }
           ]
         },
@@ -67,7 +67,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Instead of a fixed size, semantic chunking embeds sentences and cuts where adjacent-sentence similarity drops. LlamaIndex's <code>SemanticSplitterNodeParser</code> chooses breakpoints from embedding similarity; its docs example uses <code>breakpoint_percentile_threshold=95</code> and <code>buffer_size=1</code>, and credits Greg Kamradt's \"5 levels of embedding chunking\".<a class=\"cite\" href=\"#src4\">[4]</a>"
+          "html": "Instead of a fixed size, semantic chunking embeds sentences and cuts where adjacent-sentence similarity drops. LlamaIndex's <code>SemanticSplitterNodeParser</code> chooses breakpoints from embedding similarity. Its docs example uses <code>breakpoint_percentile_threshold=95</code> and <code>buffer_size=1</code>, and credits Greg Kamradt's \"5 levels of embedding chunking\".<a class=\"cite\" href=\"#src4\">[4]</a>"
         },
         {
           "type": "diagram",
@@ -83,7 +83,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Conventional pipelines chunk first and embed each chunk alone, so a chunk saying \"the company\" cannot know which company. Late chunking (Günther et al., 2024) runs a long-context embedding model over the whole text and splits \"after the transformer model and just before mean pooling\", so every chunk vector is pooled from token embeddings that already attended to the surrounding document. The authors state it needs no extra training, and fine-tuning can improve it further.<a class=\"cite\" href=\"#src1\">[1]</a> The limit is practical: it requires an embedding model whose context window can hold the document."
+          "html": "Conventional pipelines chunk first and embed each chunk alone, so a chunk saying \"the company\" cannot know which company. Late chunking (Günther et al., 2024) runs a long-context embedding model over the whole text. It splits \"after the transformer model and just before mean pooling\", so every chunk vector is pooled from token embeddings that already attended to the surrounding document. The authors state it needs no extra training, and fine-tuning can improve it further.<a class=\"cite\" href=\"#src1\">[1]</a> The limit is practical: it requires an embedding model whose context window can hold the document."
         },
         {
           "type": "diagram",
@@ -99,7 +99,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A different repair: have an LLM write a short, chunk-specific explanation of where the chunk sits in its document, prepend it to the chunk, and use the result for <em>both</em> the embedding and the BM25 index. Anthropic reports the context is roughly 50 to 100 tokens per chunk and that one-time generation costs $1.02 per million document tokens. For knowledge bases under about 200,000 tokens (around 500 pages) the post says simpler approaches, such as putting everything in the prompt, are enough.<a class=\"cite\" href=\"#src2\">[2]</a>"
+          "html": "A different repair: have an LLM write a short, chunk-specific explanation of where the chunk sits in its document. Prepend it to the chunk, and use the result for <em>both</em> the embedding and the BM25 index. Anthropic reports the context is roughly 50 to 100 tokens per chunk and that one-time generation costs $1.02 per million document tokens. For knowledge bases under about 200,000 tokens (around 500 pages) the post says simpler approaches, such as putting everything in the prompt, are enough.<a class=\"cite\" href=\"#src2\">[2]</a>"
         },
         {
           "type": "diagram",
@@ -199,7 +199,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> Late chunking (Günther et al., 2024) moves the split to after the transformer and before mean pooling so chunk embeddings carry whole-document context, with no extra training required.<a class=\"cite\" href=\"#src1\">[1]</a> Anthropic's contextual retrieval reports cutting failed retrievals by 35% (contextual embeddings), 49% (adding contextual BM25) and 67% (adding reranking) from a 5.7% baseline.<a class=\"cite\" href=\"#src2\">[2]</a> Limits: the Anthropic figures are the vendor's own evaluation, and late chunking depends on a long-context embedding model. I did not verify head-to-head comparisons between the two.\n    <br>গবেষণার সারকথা: Late chunking পুরো document-এর context রেখে chunk embedding বানায়; contextual retrieval প্রতিটি chunk-এ ব্যাখ্যা জুড়ে failure rate 5.7% থেকে 1.9% করে।"
+              "html": "<strong>Research frontier:</strong> Late chunking (Günther et al., 2024) moves the split to after the transformer and before mean pooling. Chunk embeddings then carry whole-document context, with no extra training required.<a class=\"cite\" href=\"#src1\">[1]</a> Anthropic's contextual retrieval reports cutting failed retrievals by 35% (contextual embeddings), 49% (adding contextual BM25) and 67% (adding reranking) from a 5.7% baseline.<a class=\"cite\" href=\"#src2\">[2]</a> Limits: the Anthropic figures are the vendor's own evaluation, and late chunking depends on a long-context embedding model. I did not verify head-to-head comparisons between the two."
             }
           ]
         }
@@ -251,6 +251,10 @@
         {
           "type": "paragraph",
           "html": "<strong>ফাঁদ:</strong> টোকেন আর ক্যারেক্টার গুলিয়ে ফেলা, হেডারের সীমানা পেরিয়ে ওভারল্যাপ হওয়া, আর বিক্রেতার নিজস্ব মূল্যায়নের সংখ্যাকে নিজের ডেটার ফল ধরে নেওয়া।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> Late chunking পুরো document-এর context রেখে chunk embedding বানায়; contextual retrieval প্রতিটি chunk-এ ব্যাখ্যা জুড়ে failure rate 5.7% থেকে 1.9% করে।"
         },
         {
           "type": "analogy",
@@ -428,7 +432,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Flat</strong> search is a linear scan: exact, low memory, sensible for small collections (Weaviate suggests it for small per-tenant data).<a class=\"cite\" href=\"#src7\">[7]</a> <strong>IVF</strong> partitions vectors into lists and searches only some of them; in pgvector that is <code>lists</code> at build time and <code>ivfflat.probes</code> (default 1) at query time.<a class=\"cite\" href=\"#src8\">[8]</a> <strong>HNSW</strong> (Malkov and Yashunin) builds multi-layer proximity graphs, similar in spirit to a skip list, with search cost that scales logarithmically.<a class=\"cite\" href=\"#src6\">[6]</a>"
+          "html": "<strong>Flat</strong> search is a linear scan: exact, low memory, sensible for small collections (Weaviate suggests it for small per-tenant data).<a class=\"cite\" href=\"#src7\">[7]</a> <strong>IVF</strong> (inverted file index) partitions vectors into lists and searches only some of them. In pgvector you set <code>lists</code> at build time and <code>ivfflat.probes</code> (default 1) at query time.<a class=\"cite\" href=\"#src8\">[8]</a> <strong>HNSW</strong> (hierarchical navigable small world, by Malkov and Yashunin) builds multi-layer proximity graphs, similar in spirit to a skip list, with search cost that scales logarithmically.<a class=\"cite\" href=\"#src6\">[6]</a>"
         },
         {
           "type": "diagram",
@@ -450,7 +454,7 @@
         },
         {
           "type": "paragraph",
-          "html": "pgvector exposes <code>&lt;-&gt;</code> (L2), <code>&lt;#&gt;</code> (negative inner product), <code>&lt;=&gt;</code> (cosine), <code>&lt;+&gt;</code> (L1), <code>&lt;~&gt;</code> (Hamming) and <code>&lt;%&gt;</code> (Jaccard).<a class=\"cite\" href=\"#src8\">[8]</a> Milvus lists L2 and IP for float vectors, Jaccard and Hamming for binary vectors, and IP or BM25 for sparse vectors.<a class=\"cite\" href=\"#src9\">[9]</a> Weaviate's HFresh index supports only cosine and l2-squared.<a class=\"cite\" href=\"#src7\">[7]</a> Match the metric to the one your embedding model was trained for; for unit-length vectors cosine and dot product rank identically."
+          "html": "pgvector exposes <code>&lt;-&gt;</code> (L2), <code>&lt;#&gt;</code> (negative inner product), <code>&lt;=&gt;</code> (cosine), <code>&lt;+&gt;</code> (L1), <code>&lt;~&gt;</code> (Hamming) and <code>&lt;%&gt;</code> (Jaccard).<a class=\"cite\" href=\"#src8\">[8]</a> Milvus lists L2 and IP (inner product) for float vectors, Jaccard and Hamming for binary vectors, and IP or BM25 for sparse vectors.<a class=\"cite\" href=\"#src9\">[9]</a> Weaviate's HFresh index supports only cosine and l2-squared.<a class=\"cite\" href=\"#src7\">[7]</a> Match the metric to the one your embedding model was trained for; for unit-length vectors cosine and dot product rank identically."
         },
         {
           "type": "diagram",
@@ -523,6 +527,10 @@
           ]
         },
         {
+          "type": "paragraph",
+          "html": "<em>Abbreviations in the table:</em> BYOC is bring your own cloud, ACID is atomic, consistent, isolated and durable transactions, and PITR is point-in-time recovery. In the Milvus index names, SQ is scalar quantization (SQ8 stores one byte per value), PQ is product quantization and PRQ is product residual quantization. SCANN is based on Google's ScaNN, and DiskANN is a graph index built to serve from SSD instead of RAM."
+        },
+        {
           "type": "code",
           "lang": "sql",
           "code": "-- pgvector: HNSW index with the documented defaults, cosine distance\nCREATE EXTENSION vector;\nCREATE TABLE items (id bigserial PRIMARY KEY, body text, embedding vector(768));\nCREATE INDEX ON items USING hnsw (embedding vector_cosine_ops)\n  WITH (m = 16, ef_construction = 64);\n\nSET hnsw.ef_search = 40;                 -- query-time recall/speed knob (default 40)\nSELECT id, body FROM items\nORDER BY embedding <=> '[0.12, -0.03, ...]'  -- <=> is cosine distance\nLIMIT 5;",
@@ -563,7 +571,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Filtered search:</strong> combining a metadata filter with ANN is where engines differ. Qdrant's docs say payload indexes let it filter during a single graph traversal, while pgvector offers partial indexes, partitioning and iterative index scans for filtered queries. Test your real filters at your real selectivity; a recall number measured without filters says little about filtered queries.<a class=\"cite\" href=\"#src11\">[11]</a><a class=\"cite\" href=\"#src8\">[8]</a>"
+              "html": "<strong>Filtered search:</strong> combining a metadata filter with ANN is where engines differ. Qdrant's docs say payload indexes let it filter during a single graph traversal. pgvector offers partial indexes, partitioning and iterative index scans for filtered queries. Test your real filters at your real selectivity; a recall number measured without filters says little about filtered queries.<a class=\"cite\" href=\"#src11\">[11]</a><a class=\"cite\" href=\"#src8\">[8]</a>"
             }
           ]
         },
@@ -629,7 +637,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> The HNSW paper (Malkov and Yashunin, 2016, final 2018) introduced multi-layer proximity graphs with logarithmic search scaling, plus a neighbour-selection heuristic that helps at high recall and on clustered data.<a class=\"cite\" href=\"#src6\">[6]</a> Limits: HNSW is an approximate index, so recall depends on parameters such as <code>ef_search</code>, and I did not verify any cross-vendor benchmark numbers, so none are given here.\n    <br>গবেষণার সারকথা: HNSW বহুস্তরীয় graph দিয়ে লগারিদমিক সময়ে প্রায়-নিকটতম প্রতিবেশী খোঁজে; তবে ফল approximate, তাই recall নির্ভর করে ef_search-এর মতো প্যারামিটারের ওপর।"
+              "html": "<strong>Research frontier:</strong> The HNSW paper (Malkov and Yashunin, 2016, final 2018) introduced multi-layer proximity graphs with logarithmic search scaling. It also added a neighbour-selection heuristic that helps at high recall and on clustered data.<a class=\"cite\" href=\"#src6\">[6]</a> Limits: HNSW is an approximate index, so recall depends on parameters such as <code>ef_search</code>. I did not verify any cross-vendor benchmark numbers, so none are given here."
             }
           ]
         }
@@ -683,6 +691,10 @@
         {
           "type": "paragraph",
           "html": "<strong>ফাঁদ:</strong> ফিল্টার-সহ সার্চ আর ফিল্টার ছাড়া সার্চের রিকল এক নয়; এমবেডিং মডেলের জন্য ভুল মেট্রিক বেছে নিলে ফল খারাপ হয়; আর কোনো সূত্রে ক্রস-ভেন্ডর বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ডেটায় মেপে নিন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> HNSW বহুস্তরীয় graph দিয়ে লগারিদমিক সময়ে প্রায়-নিকটতম প্রতিবেশী খোঁজে; তবে ফল approximate, তাই recall নির্ভর করে ef_search-এর মতো প্যারামিটারের ওপর।"
         },
         {
           "type": "analogy",
@@ -821,7 +833,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Cormack, Clarke and Buettcher define the score as the sum, over every ranking that contains the document, of <code>1 / (k + r(d))</code>, where <code>r(d)</code> is the document's rank. The paper states that \"k = 60 was fixed during a pilot investigation and not altered during subsequent validation.\"<a class=\"cite\" href=\"#src16\">[16]</a> Elasticsearch uses <code>score += 1.0 / (k + rank)</code> with rank starting at 1, <code>rank_constant</code> defaulting to 60, and <code>rank_window_size</code> defaulting to the <code>size</code> parameter.<a class=\"cite\" href=\"#src19\">[19]</a> OpenSearch added RRF in 2.19 (12 Feb 2025) with a default rank constant of 60.<a class=\"cite\" href=\"#src20\">[20]</a> The ranks in the diagram are invented for the arithmetic."
+          "html": "Cormack, Clarke and Buettcher define a document's score as a sum over every ranking that contains it. Each ranking adds <code>1 / (k + r(d))</code>, where <code>r(d)</code> is the document's rank in that list. The paper states that \"k = 60 was fixed during a pilot investigation and not altered during subsequent validation.\"<a class=\"cite\" href=\"#src16\">[16]</a> Elasticsearch uses <code>score += 1.0 / (k + rank)</code> with rank starting at 1. Its <code>rank_constant</code> defaults to 60, and <code>rank_window_size</code> defaults to the <code>size</code> parameter.<a class=\"cite\" href=\"#src19\">[19]</a> OpenSearch added RRF in 2.19 (12 Feb 2025) with a default rank constant of 60.<a class=\"cite\" href=\"#src20\">[20]</a> The ranks in the diagram are invented for the arithmetic."
         },
         {
           "type": "diagram",
@@ -847,7 +859,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Weaviate's default hybrid method is <code>relativeScoreFusion</code> (default since v1.24), which normalises each search's scores to 0-1 (min-max style) and weights them with <code>alpha</code> (0 is keyword only, 1 is vector only, server default 0.75). It notes there is no max-distance equivalent for BM25 because BM25 scores are unbounded. <code>rankedFusion</code>, the default through v1.23, is the rank-based alternative.<a class=\"cite\" href=\"#src13\">[13]</a> Qdrant's Query API supports RRF and DBSF (distribution-based score fusion), added weighted RRF in v1.17.0, and advises RRF as the default when you have no evaluation set.<a class=\"cite\" href=\"#src21\">[21]</a>"
+          "html": "Weaviate's default hybrid method is <code>relativeScoreFusion</code> (default since v1.24). It normalises each search's scores to 0-1 (min-max style) and weights them with <code>alpha</code>: 0 is keyword only, 1 is vector only, and the server default is 0.75. It notes there is no max-distance equivalent for BM25 because BM25 scores are unbounded. <code>rankedFusion</code>, the default through v1.23, is the rank-based alternative.<a class=\"cite\" href=\"#src13\">[13]</a> Qdrant's Query API supports RRF and DBSF (distribution-based score fusion), and it added weighted RRF in v1.17.0. Its docs advise RRF as the default when you have no evaluation set.<a class=\"cite\" href=\"#src21\">[21]</a>"
         },
         {
           "type": "diagram",
@@ -869,7 +881,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Pinecone documents three hybrid patterns: filter-then-rank (Documents API), client-side RRF over separate keyword and dense searches, and a single index storing a dense and a sparse vector per record with alpha weighting (Vectors API). Its docs add a useful caution: \"RRF is a fusion method, not a synonym for hybrid search.\"<a class=\"cite\" href=\"#src22\">[22]</a>"
+          "html": "Pinecone documents three hybrid patterns:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "filter-then-rank (Documents API);",
+            "client-side RRF over separate keyword and dense searches;",
+            "a single index that stores a dense and a sparse vector per record, with alpha weighting (Vectors API)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Its docs add a useful caution: \"RRF is a fusion method, not a synonym for hybrid search.\"<a class=\"cite\" href=\"#src22\">[22]</a>"
         },
         {
           "type": "pillGrid",
@@ -906,7 +931,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> Cormack et al. (SIGIR 2009) showed that RRF outperforms Condorcet fusion and individual rank-learning methods, using only ranks and a single constant fixed in a pilot study.<a class=\"cite\" href=\"#src16\">[16]</a> SPLADE shows sparse retrieval can add learned term expansion while keeping inverted-index efficiency.<a class=\"cite\" href=\"#src18\">[18]</a> Elasticsearch's docs say RRF is also shown to give improved relevance over either query individually.<a class=\"cite\" href=\"#src19\">[19]</a> Limits: the optimal k is not universal (Qdrant documents 2, the paper used 60), and I did not verify head-to-head benchmark numbers across engines, so none are claimed.\n    <br>গবেষণার সারকথা: RRF শুধু rank ব্যবহার করে বলে আলাদা scale-এর স্কোর মেলাতে হয় না; তবে k-এর মান বিভিন্ন সিস্টেমে ভিন্ন (paper-এ 60, Qdrant docs-এ 2)।"
+              "html": "<strong>Research frontier:</strong> Cormack et al. (SIGIR 2009) showed that RRF outperforms Condorcet fusion and individual rank-learning methods. It uses only ranks and a single constant, fixed in a pilot study.<a class=\"cite\" href=\"#src16\">[16]</a> SPLADE shows sparse retrieval can add learned term expansion while keeping inverted-index efficiency.<a class=\"cite\" href=\"#src18\">[18]</a> Elasticsearch's docs say RRF is also shown to give improved relevance over either query individually.<a class=\"cite\" href=\"#src19\">[19]</a> Limits: the optimal k is not universal (Qdrant documents 2, the paper used 60). I did not verify head-to-head benchmark numbers across engines, so none are claimed."
             }
           ]
         }
@@ -959,6 +984,10 @@
         {
           "type": "paragraph",
           "html": "<strong>ফাঁদ:</strong> একটি রিট্রিভার নিজের ডেটায় খারাপ হলে মেশালে ফল নামতে পারে; k বা alpha না দেখে ইঞ্জিনের ডিফল্ট ধরে নেওয়া; আর কোনো সূত্রে ইঞ্জিনভিত্তিক বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ইভ্যালে মেপে নিন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> RRF শুধু rank ব্যবহার করে বলে আলাদা scale-এর স্কোর মেলাতে হয় না; তবে k-এর মান বিভিন্ন সিস্টেমে ভিন্ন (paper-এ 60, Qdrant docs-এ 2)।"
         },
         {
           "type": "analogy",
@@ -1074,7 +1103,7 @@
         },
         {
           "type": "paragraph",
-          "html": "HyDE (Hypothetical Document Embeddings) asks an instruction-following LM to write a document that answers the query. The text \"captures relevance patterns but is unreal and may contain false details\"; an unsupervised contrastive encoder (Contriever) embeds it, and the resulting vector is used for nearest-neighbour search over the real corpus. The authors describe the encoder as a lossy compressor that filters out the hallucinated details, and report gains over the Contriever baseline across web search, QA and fact verification, all without relevance labels.<a class=\"cite\" href=\"#src23\">[23]</a>"
+          "html": "HyDE (Hypothetical Document Embeddings) asks an instruction-following LM to write a document that answers the query. The text \"captures relevance patterns but is unreal and may contain false details\". An unsupervised contrastive encoder (Contriever) embeds it, and the resulting vector is used for nearest-neighbour search over the real corpus. The authors describe the encoder as a lossy compressor that filters out the hallucinated details. They report gains over the Contriever baseline across web search, QA and fact verification, all without relevance labels.<a class=\"cite\" href=\"#src23\">[23]</a>"
         },
         {
           "type": "diagram",
@@ -1094,7 +1123,7 @@
           "items": [
             "<strong>Rewrite-Retrieve-Read</strong> inserts a rewriting step before retrieval. The rewriter can be a prompted LLM or a small trainable T5 tuned with reinforcement learning, and the reader can stay a frozen black-box LLM. It was tested on HotpotQA, AmbigNQ, PopQA and MMLU.<a class=\"cite\" href=\"#src27\">[27]</a>",
             "<strong>Step-back prompting</strong> has two stages: abstraction (derive a higher-level concept or question) and reasoning. With PaLM-2L the authors report +7% on MMLU physics, +11% on chemistry, +27% on TimeQA and +7% on MuSiQue. It is a reasoning method that also covers retrieval-augmented use (TimeQA), not a retrieval trick alone.<a class=\"cite\" href=\"#src24\">[24]</a>",
-            "<strong>Query2doc</strong> few-shot prompts an LLM for a pseudo-document and concatenates it with the query; for BM25 the original query is repeated several times to balance the weights. Reported: 3-15% BM25 gains on in-domain sets, only 0.4-4% for dense retrievers, and larger LLMs help more.<a class=\"cite\" href=\"#src25\">[25]</a>",
+            "<strong>Query2doc</strong> few-shot prompts an LLM for a pseudo-document and concatenates it with the query. For BM25 the original query is repeated several times to balance the weights. Reported: 3-15% BM25 gains on in-domain sets, only 0.4-4% for dense retrievers, and larger LLMs help more.<a class=\"cite\" href=\"#src25\">[25]</a>",
             "<strong>RAG-Fusion</strong> generates several query variants, retrieves for each, and fuses the lists with Reciprocal Rank Fusion before the LLM answers.<a class=\"cite\" href=\"#src26\">[26]</a>"
           ]
         },
@@ -1183,7 +1212,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> HyDE showed that a dense retriever can be steered without relevance labels by retrieving with a generated pseudo-document<a class=\"cite\" href=\"#src23\">[23]</a>; Query2doc found the same idea helps sparse BM25 much more than dense models<a class=\"cite\" href=\"#src25\">[25]</a>. Rewrite-Retrieve-Read made the rewriter itself trainable with reinforcement learning against a frozen reader<a class=\"cite\" href=\"#src27\">[27]</a>, and step-back prompting showed that abstraction before reasoning improves multi-hop and knowledge-heavy QA<a class=\"cite\" href=\"#src24\">[24]</a>. Limits: RAG-Fusion's evidence is manual assessment and it can drift off-topic<a class=\"cite\" href=\"#src26\">[26]</a>, and HyDE's hypothetical text may contain false details.<a class=\"cite\" href=\"#src23\">[23]</a>\n    <br>গবেষণার সারকথা: LLM দিয়ে query বদলে বা কাল্পনিক উত্তর বানিয়ে retrieval ভালো করা যায়, তবে লাভ retriever-এর ধরনের ওপর নির্ভর করে এবং বাড়তি খরচ ও বিষয়-থেকে-সরে-যাওয়ার ঝুঁকি আছে।"
+              "html": "<strong>Research frontier:</strong> HyDE showed that a dense retriever can be steered without relevance labels, by retrieving with a generated pseudo-document.<a class=\"cite\" href=\"#src23\">[23]</a> Query2doc found the same idea helps sparse BM25 much more than dense models.<a class=\"cite\" href=\"#src25\">[25]</a> Rewrite-Retrieve-Read made the rewriter itself trainable with reinforcement learning against a frozen reader.<a class=\"cite\" href=\"#src27\">[27]</a> Step-back prompting showed that abstraction before reasoning improves multi-hop and knowledge-heavy QA.<a class=\"cite\" href=\"#src24\">[24]</a> Limits: RAG-Fusion's evidence is manual assessment and it can drift off-topic<a class=\"cite\" href=\"#src26\">[26]</a>, and HyDE's hypothetical text may contain false details.<a class=\"cite\" href=\"#src23\">[23]</a>"
             }
           ]
         }
@@ -1234,6 +1263,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> তৈরি করা ভ্যারিয়েন্ট মূল উদ্দেশ্য থেকে সরে যেতে পারে; HyDE-এর কাল্পনিক লেখায় ভুল তথ্য থাকতে পারে। মূল কুয়েরিটি সবসময় তালিকায় রাখুন এবং নিজের ডেটায় মেপে দেখুন। বিভিন্ন ভেন্ডরের RRF-এর <code>k</code> আলাদা (পেপারে ৬০, Qdrant-এর ডকসে ২)।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> LLM দিয়ে query বদলে বা কাল্পনিক উত্তর বানিয়ে retrieval ভালো করা যায়, তবে লাভ retriever-এর ধরনের ওপর নির্ভর করে এবং বাড়তি খরচ ও বিষয়-থেকে-সরে-যাওয়ার ঝুঁকি আছে।"
         },
         {
           "type": "analogy",
@@ -1356,7 +1389,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>IRCoT</strong> alternates retrieval with chain-of-thought steps: the CoT so far guides what to retrieve next, and the retrieved passages improve the following CoT step. The paper reports retrieval gains of 11-21 points and QA gains of up to 15 F1 across HotpotQA, 2WikiMultihopQA, MuSiQue and IIRC, working from 0.2B to 175B models, and up to 50% fewer factual errors in the CoT.<a class=\"cite\" href=\"#src29\">[29]</a> <strong>ReAct</strong> interleaves reasoning traces with actions such as Wikipedia lookups; it reduced hallucination in QA and fact verification and gave +34% / +10% absolute success on ALFWorld / WebShop.<a class=\"cite\" href=\"#src30\">[30]</a>"
+          "html": "<strong>IRCoT</strong> alternates retrieval with chain-of-thought (CoT) steps: the CoT so far guides what to retrieve next, and the retrieved passages improve the following CoT step. On HotpotQA, 2WikiMultihopQA, MuSiQue and IIRC, the paper reports retrieval gains of 11-21 points and QA gains of up to 15 F1. It works with models from 0.2B to 175B, and reports up to 50% fewer factual errors in the CoT.<a class=\"cite\" href=\"#src29\">[29]</a> <strong>ReAct</strong> interleaves reasoning traces with actions such as Wikipedia lookups. It reduced hallucination in QA and fact verification, and gave +34% / +10% absolute success on ALFWorld / WebShop.<a class=\"cite\" href=\"#src30\">[30]</a>"
         },
         {
           "type": "diagram",
@@ -1381,8 +1414,8 @@
           "ordered": false,
           "items": [
             "<strong>Self-RAG:</strong> the LM retrieves on demand and critiques both the passages and its own output using special \"reflection tokens\". The 7B and 13B models are reported to outperform ChatGPT and retrieval-augmented Llama2-chat on open-domain QA, reasoning and fact verification, with better citation accuracy.<a class=\"cite\" href=\"#src31\">[31]</a>",
-            "<strong>CRAG (Corrective RAG):</strong> a lightweight retrieval evaluator returns a confidence; if the static corpus retrieval is inadequate, it falls back to large-scale web search, and a decompose-then-recompose step filters noise. It is plug-and-play over an existing RAG pipeline.<a class=\"cite\" href=\"#src32\">[32]</a>",
-            "<strong>Adaptive-RAG:</strong> a smaller LM classifier predicts query complexity and routes among no retrieval, single-step retrieval and iterative retrieval, improving efficiency and accuracy against adaptive baselines (NAACL 2024).<a class=\"cite\" href=\"#src33\">[33]</a>"
+            "<strong>CRAG (Corrective RAG):</strong> a lightweight retrieval evaluator returns a confidence. If retrieval from the static corpus is inadequate, CRAG falls back to large-scale web search, and a decompose-then-recompose step filters noise. It is plug-and-play over an existing RAG pipeline.<a class=\"cite\" href=\"#src32\">[32]</a>",
+            "<strong>Adaptive-RAG:</strong> a smaller LM classifier predicts query complexity. It routes each query to no retrieval, single-step retrieval or iterative retrieval, which improved efficiency and accuracy against adaptive baselines (NAACL 2024).<a class=\"cite\" href=\"#src33\">[33]</a>"
           ]
         },
         {
@@ -1399,11 +1432,17 @@
         },
         {
           "type": "paragraph",
-          "html": "Anthropic distinguishes <em>workflows</em> (LLMs and tools orchestrated through predefined code paths) from <em>agents</em> (the LLM directs its own process and tool use), and recommends starting simple because a single optimized LLM call with retrieval is often enough; it also stresses investing in tool definitions.<a class=\"cite\" href=\"#src34\">[34]</a> OpenAI's <code>file_search</code> tool in the Responses API is a hosted retrieval tool the model chooses to invoke, doing semantic and keyword search over vector stores, with <code>max_num_results</code> and metadata filters; its docs do not detail internal query rewriting or ranking.<a class=\"cite\" href=\"#src35\">[35]</a>"
+          "html": "Anthropic distinguishes <em>workflows</em> (LLMs and tools orchestrated through predefined code paths) from <em>agents</em> (the LLM directs its own process and tool use). It recommends starting simple, because a single optimized LLM call with retrieval is often enough, and it stresses investing in tool definitions.<a class=\"cite\" href=\"#src34\">[34]</a> OpenAI's <code>file_search</code> tool in the Responses API is a hosted retrieval tool that the model chooses to invoke. It does semantic and keyword search over vector stores, with <code>max_num_results</code> and metadata filters. Its docs do not detail internal query rewriting or ranking.<a class=\"cite\" href=\"#src35\">[35]</a>"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s5-results-and-costs",
+          "html": "Reported results and costs"
         },
         {
           "type": "paragraph",
-          "html": "In Anthropic's multi-agent research system a lead agent spawns parallel subagents that search iteratively. They report agents using about 4x the tokens of chat and multi-agent systems about 15x, token usage explaining 80% of performance variance on a browsing evaluation, and an Opus 4 lead with Sonnet 4 subagents beating single-agent Opus 4 by 90.2% on their internal evaluation.<a class=\"cite\" href=\"#src36\">[36]</a>"
+          "html": "In Anthropic's multi-agent research system a lead agent spawns parallel subagents that search iteratively. They report that agents use about 4x the tokens of chat, and multi-agent systems about 15x. Token usage explained 80% of the performance variance on a browsing evaluation. On their internal evaluation, an Opus 4 lead with Sonnet 4 subagents beat single-agent Opus 4 by 90.2%.<a class=\"cite\" href=\"#src36\">[36]</a>"
         },
         {
           "type": "diagram",
@@ -1458,7 +1497,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Pitfalls:</strong> loops need a hard step limit and a stopping rule, or a confused model keeps searching. Start with single-step retrieval and add iteration only for questions that fail it (a routing idea in the spirit of Adaptive-RAG)<a class=\"cite\" href=\"#src33\">[33]</a>, in line with Anthropic's advice to start simple<a class=\"cite\" href=\"#src34\">[34]</a>. Agentic systems multiply tokens and latency<a class=\"cite\" href=\"#src36\">[36]</a>, so track cost per answered question."
+              "html": "<strong>Pitfalls:</strong> loops need a hard step limit and a stopping rule, or a confused model keeps searching. Start with single-step retrieval, and add iteration only for questions that fail it. This is a routing idea in the spirit of Adaptive-RAG<a class=\"cite\" href=\"#src33\">[33]</a>, in line with Anthropic's advice to start simple<a class=\"cite\" href=\"#src34\">[34]</a>. Agentic systems multiply tokens and latency<a class=\"cite\" href=\"#src36\">[36]</a>, so track cost per answered question."
             }
           ]
         },
@@ -1468,7 +1507,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> IRCoT showed that using each reasoning step as the next query lifts retrieval and QA on four multi-hop datasets<a class=\"cite\" href=\"#src29\">[29]</a>; Self-RAG trains the model to decide when to retrieve and to critique itself<a class=\"cite\" href=\"#src31\">[31]</a>; CRAG adds an evaluator with a web-search fallback<a class=\"cite\" href=\"#src32\">[32]</a>; Adaptive-RAG routes by complexity<a class=\"cite\" href=\"#src33\">[33]</a>; ReAct interleaves reasoning with actions<a class=\"cite\" href=\"#src30\">[30]</a>. Limits: these papers report on specific benchmarks and models, and the Anthropic system numbers come from the vendor's own internal evaluation, not an independent benchmark.<a class=\"cite\" href=\"#src36\">[36]</a>\n    <br>গবেষণার সারকথা: মডেলকে কখন, কী খুঁজতে হবে তা নিজে ঠিক করতে দিলে multi-hop প্রশ্নে ফল ভালো হয়, কিন্তু খরচ ও জটিলতা বাড়ে।"
+              "html": "<strong>Research frontier:</strong> IRCoT showed that using each reasoning step as the next query lifts retrieval and QA on four multi-hop datasets.<a class=\"cite\" href=\"#src29\">[29]</a> Self-RAG trains the model to decide when to retrieve and to critique itself.<a class=\"cite\" href=\"#src31\">[31]</a> CRAG adds an evaluator with a web-search fallback<a class=\"cite\" href=\"#src32\">[32]</a>, Adaptive-RAG routes by complexity<a class=\"cite\" href=\"#src33\">[33]</a>, and ReAct interleaves reasoning with actions.<a class=\"cite\" href=\"#src30\">[30]</a> Limits: these papers report on specific benchmarks and models. The Anthropic system numbers come from the vendor's own internal evaluation, not an independent benchmark.<a class=\"cite\" href=\"#src36\">[36]</a>"
             }
           ]
         }
@@ -1519,6 +1558,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> লুপে সর্বোচ্চ ধাপ ও থামার শর্ত না থাকলে মডেল ঘুরপাক খেতে পারে; ক্লাসিফায়ার ভুল করলে প্রশ্ন ভুল পথে যায়; কত খরচ হচ্ছে তা প্রতি উত্তরে মাপুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> মডেলকে কখন, কী খুঁজতে হবে তা নিজে ঠিক করতে দিলে multi-hop প্রশ্নে ফল ভালো হয়, কিন্তু খরচ ও জটিলতা বাড়ে।"
         },
         {
           "type": "analogy",
@@ -1655,7 +1698,7 @@
       "id": "s7",
       "num": "06",
       "title": "Reranking: Cohere, BGE, Voyage",
-      "sub": "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus, so it scores each document without ever looking at the query and document together. A <strong>reranker</strong> is a second-stage model that does look at them together: it takes the short candidate list and re-orders it by a more accurate relevance score. Sentence-Transformers documents this as the recommended pattern: a bi-encoder retrieves top-k candidates, then a cross-encoder re-ranks them.<a class=\"cite\" href=\"#src43\">[43]</a> Hosted options include Cohere Rerank and Voyage rerankers; open weights include BAAI's BGE rerankers.<a class=\"cite\" href=\"#src44\">[44]</a><a class=\"cite\" href=\"#src45\">[45]</a><a class=\"cite\" href=\"#src46\">[46]</a>",
+      "sub": "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus. It scores each document without ever looking at the query and document together. A <strong>reranker</strong> is a second-stage model that does look at them together: it takes the short candidate list and re-orders it by a more accurate relevance score. Sentence-Transformers documents this as the recommended pattern: a bi-encoder retrieves top-k candidates, then a cross-encoder re-ranks them.<a class=\"cite\" href=\"#src43\">[43]</a> Hosted options include Cohere Rerank and Voyage rerankers; open weights include BAAI's BGE rerankers.<a class=\"cite\" href=\"#src44\">[44]</a><a class=\"cite\" href=\"#src45\">[45]</a><a class=\"cite\" href=\"#src46\">[46]</a>",
       "bn": {
         "title": "রিরেংকিংয়ে ফলাফল সাজানো: Cohere, BGE, Voyage",
         "sub": "প্রথম ধাপের রিট্রিভাল (BM25, ডেন্স ভেক্টর, বা দুটোই) বিশাল কর্পাসে দ্রুত চলার জন্য বানানো। তাই সে প্রতিটি ডকুমেন্টের স্কোর দেয় কুয়েরি আর ডকুমেন্ট একসাথে না দেখেই। <strong>রিরেংকার</strong> দ্বিতীয় ধাপের মডেল, যে দুটো একসাথে দেখে: ছোট ক্যান্ডিডেট তালিকা নিয়ে আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে সেটা নতুন করে সাজায়। Sentence-Transformers এটাকেই সুপারিশ করা প্যাটার্ন হিসেবে লিখেছে: বাই-এনকোডার টপ-k ক্যান্ডিডেট রিট্রিভ করে, তারপর ক্রস-এনকোডার তাদের রিরেংক করে।<a class=\"cite\" href=\"#src43\">[৪৩]</a> হোস্টেড অপশনের মধ্যে আছে Cohere Rerank আর Voyage রিরেংকার, আর ওপেন-ওয়েটের মধ্যে BAAI-র BGE রিরেংকার।<a class=\"cite\" href=\"#src44\">[৪৪]</a><a class=\"cite\" href=\"#src45\">[৪৫]</a><a class=\"cite\" href=\"#src46\">[৪৬]</a>"
@@ -1681,11 +1724,17 @@
         },
         {
           "type": "paragraph",
-          "html": "Per the Sentence-Transformers docs, a bi-encoder embeds each text independently and compares vectors with cosine similarity, while a cross-encoder processes the pair jointly and outputs a score; it produces no reusable embedding, and it is more accurate but slower.<a class=\"cite\" href=\"#src43\">[43]</a> The same docs give a concrete cost example: clustering 10,000 sentences with a cross-encoder needs about 50 million pairwise comparisons, roughly 65 hours.<a class=\"cite\" href=\"#src43\">[43]</a> BGE describes its reranker the same way: it takes the question and document as input and directly outputs a similarity, not an embedding, and a full system is a first-stage retriever followed by the reranker.<a class=\"cite\" href=\"#src47\">[47]</a>"
+          "html": "Per the Sentence-Transformers docs, a bi-encoder embeds each text independently and compares the vectors with cosine similarity. A cross-encoder processes the pair jointly and outputs a score. It produces no reusable embedding, and it is more accurate but slower.<a class=\"cite\" href=\"#src43\">[43]</a> The same docs give a concrete cost example: clustering 10,000 sentences with a cross-encoder needs about 50 million pairwise comparisons, roughly 65 hours.<a class=\"cite\" href=\"#src43\">[43]</a> BGE describes its reranker the same way: it takes the question and document as input and directly outputs a similarity, not an embedding. A full system is a first-stage retriever followed by the reranker.<a class=\"cite\" href=\"#src47\">[47]</a>"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s7-late-interaction-colbert",
+          "html": "Late interaction (ColBERT)"
         },
         {
           "type": "paragraph",
-          "html": "ColBERT sits in between. Query and document are encoded independently by BERT, so document representations can be computed offline, and the score is MaxSim: for each query token take the maximum cosine against the document's token vectors, then sum.<a class=\"cite\" href=\"#src48\">[48]</a> The paper reports about 170x faster and 14,000x fewer FLOPs per query than BERT rerankers at competitive quality on MS MARCO and TREC CAR, and shows it used either as a reranker over BM25 top-1000 or end-to-end with FAISS.<a class=\"cite\" href=\"#src48\">[48]</a>"
+          "html": "ColBERT sits in between. BERT encodes the query and the document independently, so document representations can be computed offline. The score is MaxSim: for each query token, take the maximum cosine against the document's token vectors, then sum.<a class=\"cite\" href=\"#src48\">[48]</a> The paper reports about 170x faster and 14,000x fewer FLOPs (floating-point operations) per query than BERT rerankers, at competitive quality on MS MARCO and TREC CAR. It shows ColBERT used either as a reranker over BM25 top-1000 or end-to-end with FAISS.<a class=\"cite\" href=\"#src48\">[48]</a>"
         },
         {
           "type": "diagram",
@@ -1707,7 +1756,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The sizing of N and k is an engineering choice you tune against your own evaluation set. The vendor and paper limits above are hard ceilings; the commonly quoted \"retrieve 50 to 100, keep 5 to 10\" is practitioner folklore that none of the pages cited here state, so treat it as a starting point, not a rule. Because cross-encoder cost is linear in N, doubling N roughly doubles reranking latency and cost (this follows from one forward pass per pair)."
+          "html": "The sizing of N and k is an engineering choice you tune against your own evaluation set. The vendor and paper limits above are hard ceilings. The commonly quoted \"retrieve 50 to 100, keep 5 to 10\" is practitioner folklore that none of the pages cited here state, so treat it as a starting point, not a rule. Because cross-encoder cost is linear in N, doubling N roughly doubles reranking latency and cost (this follows from one forward pass per pair)."
         },
         {
           "type": "heading",
@@ -1766,7 +1815,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> ColBERT showed that you can keep cross-encoder-like token-level matching while precomputing document representations: about 170x faster and 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality on MS MARCO and TREC CAR.<a class=\"cite\" href=\"#src48\">[48]</a> Qdrant exposes the same idea operationally: prefetch cheap dense candidates, then rescore the top candidates with a multivector (ColBERT-style) model.<a class=\"cite\" href=\"#src21\">[21]</a> Limits: late interaction stores one vector per token, which costs index space, and the speed figures are from the paper's own setup, not your hardware.\n    <br>গবেষণার সারকথা: ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়; তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
+              "html": "<strong>Research frontier:</strong> ColBERT showed that you can keep cross-encoder-like token-level matching while precomputing document representations. It was about 170x faster and used 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality on MS MARCO and TREC CAR.<a class=\"cite\" href=\"#src48\">[48]</a> Qdrant exposes the same idea operationally: prefetch cheap dense candidates, then rescore the top candidates with a multivector (ColBERT-style) model.<a class=\"cite\" href=\"#src21\">[21]</a> Limits: late interaction stores one vector per token, which costs index space, and the speed figures are from the paper's own setup, not your hardware."
             }
           ]
         }
@@ -1823,6 +1872,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> প্রথম ধাপে যে ডকুমেন্ট আসেনি, রিরেংকার তা ফেরাতে পারে না। আলাদা রিরেংকারের স্কোর একই স্কেলে নয়, তাই থ্রেশহোল্ড মডেল ধরে ঠিক করুন। লম্বা ডকুমেন্ট কাটা পড়তে পারে, তাই পুরো ফাইলের বদলে চাঙ্ক রিরেংক করুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়; তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
         },
         {
           "type": "analogy",
@@ -1917,7 +1970,7 @@
       "id": "s8",
       "num": "07",
       "title": "Metadata filtering & structured retrieval",
-      "sub": "Real questions mix meaning with constraints: \"refund policy for <em>enterprise</em> customers in <em>2025</em>\" or \"science-fiction movies after 2000 with rating above 8\". Vector similarity alone cannot enforce <code>year &gt; 2000</code>, so production retrieval attaches metadata to each chunk and filters on it, and for questions about counts or totals it hands the job to a database. The hard part is that a filter interacts badly with approximate nearest-neighbour (ANN) indexes, and each vector database handles that differently.<a class=\"cite\" href=\"#src50\">[50]</a><a class=\"cite\" href=\"#src51\">[51]</a>",
+      "sub": "Real questions mix meaning with constraints: \"refund policy for <em>enterprise</em> customers in <em>2025</em>\" or \"science-fiction movies after 2000 with rating above 8\". Vector similarity alone cannot enforce <code>year &gt; 2000</code>. Production retrieval therefore attaches metadata to each chunk and filters on it. For questions about counts or totals, it hands the job to a database. The hard part is that a filter interacts badly with approximate nearest-neighbour (ANN) indexes, and each vector database handles that differently.<a class=\"cite\" href=\"#src50\">[50]</a><a class=\"cite\" href=\"#src51\">[51]</a>",
       "bn": {
         "title": "মেটাডেটা ফিল্টারিং আর স্ট্রাকচার্ড রিট্রিভাল",
         "sub": "আসল প্রশ্নে অর্থের সাথে শর্তও মেশানো থাকে: “২০২৫ সালে <em>এন্টারপ্রাইজ</em> কাস্টমারদের রিফান্ড পলিসি” বা “2000-এর পরের, রেটিং 8-এর বেশি সায়েন্স-ফিকশন সিনেমা”। শুধু ভেক্টর সিমিলারিটি দিয়ে <code>year &gt; 2000</code> জোর করে খাটানো যায় না। তাই প্রোডাকশন রিট্রিভাল প্রতিটি চাঙ্কে মেটাডেটা জুড়ে তার উপর ফিল্টার করে। আর গোনা বা মোট বের করার প্রশ্ন হলে কাজটা ডেটাবেসকে দিয়ে দেয়। কঠিন দিকটা হলো, ফিল্টার অ্যাপ্রক্সিমেট নিয়ারেস্ট-নেইবার (ANN) ইনডেক্সের সাথে ভালোভাবে কাজ করে না, আর প্রতিটি ভেক্টর ডেটাবেস এটা আলাদা ভাবে সামলায়।<a class=\"cite\" href=\"#src50\">[৫০]</a><a class=\"cite\" href=\"#src51\">[৫১]</a>"
@@ -1937,7 +1990,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Qdrant's filtering guide states the trade-off plainly: at scale, pre-filtering \"breaks too many links in the HNSW graph, causing lower accuracy\", while post-filtering with a low-cardinality filter means you often end up discarding a large portion of the results.<a class=\"cite\" href=\"#src50\">[50]</a> Its answer is <em>filterable HNSW</em>, which adds links between the leftover points, plus a payload index that lets it switch from HNSW to a payload-index search when the filter's cardinality is low.<a class=\"cite\" href=\"#src50\">[50]</a> A newer Qdrant post describes in-place filtering during HNSW traversal, filterable HNSW with extra index-time edges, and ACORN as a query-time repair, with a query planner choosing the path from estimated selectivity.<a class=\"cite\" href=\"#src52\">[52]</a>"
+          "html": "Qdrant's filtering guide states the trade-off plainly. At scale, pre-filtering \"breaks too many links in the HNSW graph, causing lower accuracy\". Post-filtering with a low-cardinality filter means you often end up discarding a large portion of the results.<a class=\"cite\" href=\"#src50\">[50]</a> Its answer is <em>filterable HNSW</em>, which adds links between the leftover points. A payload index also lets it switch from HNSW to a payload-index search when the filter's cardinality is low.<a class=\"cite\" href=\"#src50\">[50]</a> A newer Qdrant post describes three mechanisms: in-place filtering during HNSW traversal, filterable HNSW with extra index-time edges, and ACORN as a query-time repair. A query planner chooses the path from the estimated selectivity.<a class=\"cite\" href=\"#src52\">[52]</a>"
         },
         {
           "type": "diagram",
@@ -1987,7 +2040,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Two silent failures.</strong> (1) Post-filtering returns fewer than k results, or none, and a downstream LLM then answers from nothing; check result counts, not just scores. (2) Filtering on a field with no index forces scans or fallbacks, so index the fields you filter on (Qdrant's payload index, for example, is what enables its low-cardinality switch).<a class=\"cite\" href=\"#src50\">[50]</a>"
+              "html": "<strong>Two silent failures.</strong> (1) Post-filtering returns fewer than k results, or none, and a downstream LLM then answers from nothing; check result counts, not just scores. (2) Filtering on a field with no index forces scans or fallbacks, so index the fields you filter on. Qdrant's payload index, for example, is what enables its low-cardinality switch.<a class=\"cite\" href=\"#src50\">[50]</a>"
             }
           ]
         },
@@ -1999,7 +2052,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Users type natural language, not filter JSON. A self-querying retriever has an LLM parse the request into a semantic query plus a structured metadata filter, then runs both against embeddings and metadata; Elastic's example is \"science fiction movies released after 2000 with rating above 8\".<a class=\"cite\" href=\"#src55\">[55]</a> The LLM must be told the available fields, their types, and the allowed operators, and its output should be validated against that schema before it reaches the database."
+          "html": "Users type natural language, not filter JSON. A self-querying retriever has an LLM parse the request into a semantic query plus a structured metadata filter. It then runs both, against the embeddings and the metadata. Elastic's example is \"science fiction movies released after 2000 with rating above 8\".<a class=\"cite\" href=\"#src55\">[55]</a> The LLM must be told the available fields, their types, and the allowed operators. Validate its output against that schema before it reaches the database."
         },
         {
           "type": "code",
@@ -2015,7 +2068,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Counts, sums, joins and \"top customer by revenue\" are exact computations, not similarity problems; the right tool is text-to-SQL, where an LLM writes SQL against a schema. The standard benchmark is Spider (Yu et al., EMNLP 2018), built so that test databases have schemas the model never saw.<a class=\"cite\" href=\"#src56\">[56]</a>"
+          "html": "Counts, sums, joins and \"top customer by revenue\" are exact computations, not similarity problems. The right tool is text-to-SQL, where an LLM writes SQL against a schema. The standard benchmark is Spider (Yu et al., EMNLP 2018), built so that test databases have schemas the model never saw.<a class=\"cite\" href=\"#src56\">[56]</a>"
         },
         {
           "type": "pillGrid",
@@ -2050,7 +2103,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Spider's 2018 figure of 9.7% for the best model is a historical baseline showing how hard cross-domain SQL generation was then, not a statement about current models.<a class=\"cite\" href=\"#src56\">[56]</a> In practice, give the model the schema, validate generated SQL (read-only credentials, allow-listed tables, row limits) and log every query."
+          "html": "Spider's 2018 figure of 9.7% for the best model is a historical baseline. It shows how hard cross-domain SQL generation was then; it says nothing about current models.<a class=\"cite\" href=\"#src56\">[56]</a> In practice, give the model the schema, validate generated SQL (read-only credentials, allow-listed tables, row limits) and log every query."
         },
         {
           "type": "callout",
@@ -2058,7 +2111,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> The ACORN paper (arXiv 2403.04871) frames the problem: pre-filtering scans the filtered set exhaustively and scales poorly, post-filtering has to expand the search when the predicate is uncorrelated with vector similarity. ACORN modifies HNSW to traverse the predicate subgraph, and claims 2 to 1,000 times higher throughput at fixed recall.<a class=\"cite\" href=\"#src57\">[57]</a> Elasticsearch and Weaviate have since exposed ACORN-style handling in their docs.<a class=\"cite\" href=\"#src53\">[53]</a><a class=\"cite\" href=\"#src51\">[51]</a> Limits: the throughput range is the paper's own claim across its workloads, and how well any engine copes still depends on filter selectivity and correlation with the query.\n    <br>গবেষণার সারকথা: ACORN HNSW-কে এমনভাবে বদলায় যাতে filter-এ মিলে যাওয়া অংশের graph ধরে চলা যায়; paper-এর দাবি একই recall-এ ২ থেকে ১,০০০ গুণ বেশি throughput, তবে ফল নির্ভর করে filter কতটা কড়া তার ওপর।"
+              "html": "<strong>Research frontier:</strong> The ACORN paper (arXiv 2403.04871) frames the problem. Pre-filtering scans the filtered set exhaustively and scales poorly. Post-filtering has to expand the search when the predicate is uncorrelated with vector similarity. ACORN modifies HNSW to traverse the predicate subgraph, and claims 2 to 1,000 times higher throughput at fixed recall.<a class=\"cite\" href=\"#src57\">[57]</a> Elasticsearch and Weaviate have since exposed ACORN-style handling in their docs.<a class=\"cite\" href=\"#src53\">[53]</a><a class=\"cite\" href=\"#src51\">[51]</a> Limits: the throughput range is the paper's own claim across its workloads. How well any engine copes still depends on the filter's selectivity and on its correlation with the query."
             }
           ]
         }
@@ -2115,6 +2168,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> ফল কয়টি এল তা সবসময় দেখুন, শূন্য ফলে LLM ফাঁকা থেকে উত্তর বানাতে পারে। যে ফিল্ডে ফিল্টার দেবেন সেটির ইনডেক্স রাখুন। LLM-এর বানানো SQL বা ফিল্টার যাচাই করে রিড-অনলি অধিকারে চালান।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> ACORN HNSW-কে এমনভাবে বদলায় যাতে filter-এ মিলে যাওয়া অংশের graph ধরে চলা যায়; paper-এর দাবি একই recall-এ ২ থেকে ১,০০০ গুণ বেশি throughput, তবে ফল নির্ভর করে filter কতটা কড়া তার ওপর।"
         },
         {
           "type": "analogy",
@@ -2217,7 +2274,7 @@
       "id": "s6",
       "num": "08",
       "title": "GraphRAG & knowledge-graph augmentation",
-      "sub": "Vector search returns chunks that look like the query. It struggles with \"global\" questions such as \"what are the main themes in this dataset?\", which no single chunk answers. Microsoft's GraphRAG reframes this as query-focused summarization: an LLM builds an entity knowledge graph, pre-generates summaries for communities of related entities, and merges partial answers from those summaries at query time.<a class=\"cite\" href=\"#src37\">[37]</a> Lighter variants (LightRAG<a class=\"cite\" href=\"#src38\">[38]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[39]</a>) and graph-database tooling (Neo4j<a class=\"cite\" href=\"#src40\">[40]</a>) target the same gap with different cost profiles.",
+      "sub": "Vector search returns chunks that look like the query. It struggles with \"global\" questions such as \"what are the main themes in this dataset?\", which no single chunk answers. Microsoft's GraphRAG reframes this as query-focused summarization. An LLM builds an entity knowledge graph and pre-generates summaries for communities of related entities. At query time, GraphRAG merges partial answers from those summaries.<a class=\"cite\" href=\"#src37\">[37]</a> Lighter variants (LightRAG<a class=\"cite\" href=\"#src38\">[38]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[39]</a>) and graph-database tooling (Neo4j<a class=\"cite\" href=\"#src40\">[40]</a>) target the same gap with different cost profiles.",
       "bn": {
         "title": "GraphRAG আর নলেজ গ্রাফ দিয়ে শক্তিবৃদ্ধি",
         "sub": "ভেক্টর সার্চ এমন চাঙ্ক ফেরত দেয় যা দেখতে কুয়েরির মতো। কিন্তু “এই ডেটাসেটের মূল বিষয়গুলো কী?” — এমন “গ্লোবাল” প্রশ্নে সে হোঁচট খায়, কারণ কোনো একটি চাঙ্কই এর উত্তর দেয় না। Microsoft-এর GraphRAG এটাকে কুয়েরি-কেন্দ্রিক সামারাইজেশন হিসেবে দেখে: একটি LLM এন্টিটি নলেজ গ্রাফ বানায়, সম্পর্কিত এন্টিটির দলগুলোর (কমিউনিটি) সারসংক্ষেপ আগে থেকেই তৈরি করে রাখে, আর কুয়েরির সময় সেই সারসংক্ষেপ থেকে আংশিক উত্তর জুড়ে দেয়।<a class=\"cite\" href=\"#src37\">[৩৭]</a> হালকা ধরনগুলো (LightRAG<a class=\"cite\" href=\"#src38\">[৩৮]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[৩৯]</a>) আর গ্রাফ-ডেটাবেস টুলিং (Neo4j<a class=\"cite\" href=\"#src40\">[৪০]</a>) একই ফাঁক পূরণ করতে চায়, তবে খরচের হিসাব আলাদা।"
@@ -2231,7 +2288,20 @@
         },
         {
           "type": "paragraph",
-          "html": "The documented indexing pipeline segments documents into TextUnits, extracts entities, relationships and claims, runs Leiden hierarchical clustering, and summarizes each community. Query modes include <strong>Global search</strong> (reasoning over community summaries), <strong>Local search</strong> (expanding from matched entities to their neighbours) and <strong>DRIFT</strong> (local search enriched with community context). The docs recommend prompt tuning.<a class=\"cite\" href=\"#src41\">[41]</a> The original paper tested on corpora of about 1M tokens and reported gains in answer comprehensiveness and diversity over standard RAG.<a class=\"cite\" href=\"#src37\">[37]</a>"
+          "html": "The documented indexing pipeline segments documents into TextUnits, extracts entities, relationships and claims, runs Leiden hierarchical clustering, and summarizes each community. Its query modes include:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Global search</strong>: reasoning over community summaries;",
+            "<strong>Local search</strong>: expanding from matched entities to their neighbours;",
+            "<strong>DRIFT</strong>: local search enriched with community context."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "The docs recommend prompt tuning.<a class=\"cite\" href=\"#src41\">[41]</a> The original paper tested on corpora of about 1M tokens and reported gains in answer comprehensiveness and diversity over standard RAG.<a class=\"cite\" href=\"#src37\">[37]</a>"
         },
         {
           "type": "diagram",
@@ -2255,9 +2325,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>LightRAG</strong> builds graph structures into both indexing and retrieval, with dual-level (low-level and high-level) retrieval, combines graph and vector retrieval, supports incremental updates, and is open source.<a class=\"cite\" href=\"#src38\">[38]</a>",
+            "<strong>LightRAG</strong> builds graph structures into both indexing and retrieval, with dual-level (low-level and high-level) retrieval. It combines graph and vector retrieval, supports incremental updates, and is open source.<a class=\"cite\" href=\"#src38\">[38]</a>",
             "<strong>HippoRAG</strong> is hippocampus-inspired: an LLM, a knowledge graph and Personalized PageRank. It reports up to 20% better multi-hop QA, and single-step retrieval comparable to or better than iterative retrieval while 10-30x cheaper and 6-13x faster.<a class=\"cite\" href=\"#src39\">[39]</a>",
-            "<strong>Neo4j's <code>neo4j-graphrag</code> Python package</strong> is Neo4j's official GraphRAG library (successor to neo4j-genai): a knowledge-graph builder, retrievers (<code>VectorRetriever</code> and others), and a <code>GraphRAG</code> class. It needs Neo4j 5.18.1 or later and supports LLM providers including OpenAI, Anthropic, Cohere, Mistral, Vertex AI and Ollama, plus external vector stores such as Weaviate, Pinecone and Qdrant.<a class=\"cite\" href=\"#src40\">[40]</a>"
+            "<strong>Neo4j's <code>neo4j-graphrag</code> Python package</strong> is Neo4j's official GraphRAG library (successor to neo4j-genai): a knowledge-graph builder, retrievers (<code>VectorRetriever</code> and others), and a <code>GraphRAG</code> class. It needs Neo4j 5.18.1 or later. It supports LLM providers including OpenAI, Anthropic, Cohere, Mistral, Vertex AI and Ollama, plus external vector stores such as Weaviate, Pinecone and Qdrant.<a class=\"cite\" href=\"#src40\">[40]</a>"
           ]
         },
         {
@@ -2327,7 +2397,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> Edge et al. recast RAG over a whole corpus as query-focused summarization and showed gains in comprehensiveness and diversity on roughly 1M-token datasets<a class=\"cite\" href=\"#src37\">[37]</a>. LightRAG added dual-level retrieval and incremental updates<a class=\"cite\" href=\"#src38\">[38]</a>, and HippoRAG used Personalized PageRank over an LLM-built graph to match or beat iterative retrieval at far lower cost<a class=\"cite\" href=\"#src39\">[39]</a>. Limits: GraphRAG's own authors tested at about 1M tokens, indexing is costly<a class=\"cite\" href=\"#src42\">[42]</a>, and the lighter methods' cost claims come from their own papers.\n    <br>গবেষণার সারকথা: graph যোগ করলে পুরো corpus-এর থিম ও সংযুক্ত entity-র প্রশ্নে সুবিধা মেলে, তবে index তৈরির LLM খরচ বড় বিবেচ্য।"
+              "html": "<strong>Research frontier:</strong> Edge et al. recast RAG over a whole corpus as query-focused summarization and showed gains in comprehensiveness and diversity on roughly 1M-token datasets<a class=\"cite\" href=\"#src37\">[37]</a>. LightRAG added dual-level retrieval and incremental updates.<a class=\"cite\" href=\"#src38\">[38]</a> HippoRAG used Personalized PageRank over an LLM-built graph to match or beat iterative retrieval at far lower cost.<a class=\"cite\" href=\"#src39\">[39]</a> Limits: GraphRAG's own authors tested at about 1M tokens, indexing is costly<a class=\"cite\" href=\"#src42\">[42]</a>, and the lighter methods' cost claims come from their own papers."
             }
           ]
         }
@@ -2378,6 +2448,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> এক্সট্র্যাকশনে এন্টিটি মিস বা গুলিয়ে গেলে পুরো গ্রাফ ভুল হয়; ডকুমেন্ট বদলালে সারসংক্ষেপ পুরোনো হয়ে যায়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> graph যোগ করলে পুরো corpus-এর থিম ও সংযুক্ত entity-র প্রশ্নে সুবিধা মেলে, তবে index তৈরির LLM খরচ বড় বিবেচ্য।"
         },
         {
           "type": "analogy",
@@ -2502,7 +2576,7 @@
       "id": "s9",
       "num": "09",
       "title": "Document parsing pipelines: Unstructured, LlamaParse, Docling",
-      "sub": "A RAG system is only as good as the text it indexes, and most enterprise knowledge sits in PDFs, scans, slide decks and spreadsheets, not clean strings. A <strong>parsing pipeline</strong> turns those files into structured elements (headings, paragraphs, tables, figures) and then into Markdown or JSON that a chunker can split sensibly. Three widely used options are Docling (IBM Research, MIT-licensed)<a class=\"cite\" href=\"#src58\">[58]</a>, the Unstructured open-source partitioner<a class=\"cite\" href=\"#src59\">[59]</a> and LlamaParse from LlamaIndex<a class=\"cite\" href=\"#src60\">[60]</a>.",
+      "sub": "A RAG system is only as good as the text it indexes. Most enterprise knowledge sits in PDFs, scans, slide decks and spreadsheets, not clean strings. A <strong>parsing pipeline</strong> turns those files into structured elements (headings, paragraphs, tables, figures) and then into Markdown or JSON that a chunker can split sensibly. Three widely used options are Docling (IBM Research, MIT-licensed)<a class=\"cite\" href=\"#src58\">[58]</a>, the Unstructured open-source partitioner<a class=\"cite\" href=\"#src59\">[59]</a> and LlamaParse from LlamaIndex<a class=\"cite\" href=\"#src60\">[60]</a>.",
       "bn": {
         "title": "ডকুমেন্ট পার্সিং পাইপলাইন: Unstructured, LlamaParse, Docling-এর পরিচয়",
         "sub": "RAG সিস্টেম ততটাই ভালো, ইনডেক্স করা টেক্সট যতটা ভালো। অথচ কোম্পানির বেশিরভাগ জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ডেক আর স্প্রেডশিটে, পরিষ্কার স্ট্রিংয়ে নয়। <strong>পার্সিং পাইপলাইন</strong> এই ফাইলগুলোকে স্ট্রাকচার্ড এলিমেন্টে (হেডিং, প্যারাগ্রাফ, টেবিল, ফিগার) বদলায়, তারপর Markdown বা JSON-এ, যাতে চাঙ্কার সেটাকে বুদ্ধি করে ভাঙতে পারে। তিনটি বহুল ব্যবহৃত অপশন: Docling (IBM Research, MIT লাইসেন্স)<a class=\"cite\" href=\"#src58\">[৫৮]</a>, ওপেন-সোর্স Unstructured পার্টিশনার<a class=\"cite\" href=\"#src59\">[৫৯]</a> আর LlamaIndex-এর LlamaParse<a class=\"cite\" href=\"#src60\">[৬০]</a>।"
@@ -2559,7 +2633,7 @@
             ],
             [
               "OCR",
-              "OCR for scans; VLM support (GraniteDocling)<a class=\"cite\" href=\"#src61\">[61]</a>",
+              "OCR (optical character recognition) for scans; support for a vision-language model (VLM), GraniteDocling<a class=\"cite\" href=\"#src61\">[61]</a>",
               "<code>ocr_only</code> strategy for scans<a class=\"cite\" href=\"#src59\">[59]</a>",
               "Built into the layout-aware OCR<a class=\"cite\" href=\"#src60\">[60]</a>"
             ],
@@ -2613,7 +2687,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Always plan an OCR fallback.</strong> The <code>fast</code> strategy relies on a selectable text layer, so a scanned PDF silently produces nothing useful unless you detect the empty result and re-run with <code>ocr_only</code> or a layout-aware parser.<a class=\"cite\" href=\"#src59\">[59]</a> Spot-check multi-column documents by eye before trusting the output."
+              "html": "<strong>Always plan an OCR fallback.</strong> The <code>fast</code> strategy relies on a selectable text layer. A scanned PDF therefore silently produces nothing useful, unless you detect the empty result and re-run with <code>ocr_only</code> or a layout-aware parser.<a class=\"cite\" href=\"#src59\">[59]</a> Spot-check multi-column documents by eye before trusting the output."
             }
           ]
         },
@@ -2623,7 +2697,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> The Docling technical report describes an open-source toolkit that converts PDFs using a layout-analysis model (DocLayNet) and a table-structure model (TableFormer), runs on commodity hardware and is extensible.<a class=\"cite\" href=\"#src58\">[58]</a> A different line of work questions the pipeline itself: ColPali argues that text-extraction pipelines lose figures, layout, tables and fonts, and retrieves from page images directly (covered in the next section).<a class=\"cite\" href=\"#src62\">[62]</a> Limit: neither source provides a head-to-head parser benchmark in the material used here, so choose by testing on your own documents.\n    <br>গবেষণার সারকথা: Docling layout ও table-এর জন্য আলাদা মডেল ব্যবহার করে। ColPali বলে text extraction-এ ছবি, layout ও table হারায়, তাই পাতার ছবি থেকেই retrieval করা যায়।"
+              "html": "<strong>Research frontier:</strong> The Docling technical report describes an open-source toolkit that converts PDFs with a layout-analysis model (DocLayNet) and a table-structure model (TableFormer). It runs on commodity hardware and is extensible.<a class=\"cite\" href=\"#src58\">[58]</a> A different line of work questions the pipeline itself. ColPali argues that text-extraction pipelines lose figures, layout, tables and fonts, so it retrieves from page images directly (covered in the next section).<a class=\"cite\" href=\"#src62\">[62]</a> Limit: neither source provides a head-to-head parser benchmark in the material used here, so choose by testing on your own documents."
             }
           ]
         }
@@ -2676,6 +2750,10 @@
         {
           "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> টেক্সট লেয়ার ছাড়া স্ক্যানে <code>fast</code> ব্যর্থ হয়; মাল্টি-কলাম পাতায় <code>hi_res</code> কষ্ট করে; আর শুধু টেক্সট এক্সট্র্যাকশন ছবি, লেআউট, টেবিল ও ফন্ট হারায়। তাই OCR ফলব্যাক রাখুন এবং আউটপুট চোখে দেখে নিন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> Docling layout ও table-এর জন্য আলাদা মডেল ব্যবহার করে। ColPali বলে text extraction-এ ছবি, layout ও table হারায়, তাই পাতার ছবি থেকেই retrieval করা যায়।"
         },
         {
           "type": "analogy",
@@ -2826,7 +2904,20 @@
         },
         {
           "type": "paragraph",
-          "html": "LangChain's write-up lists these as: (1) multimodal embeddings such as CLIP, passing raw images to a multimodal LLM; (2) LLM summaries of images and tables embedded as text; (3) summaries embedded with a reference to the raw image, which is handed to a multimodal LLM at synthesis time. Option 3 relies on a <em>multi-vector retriever</em>, which decouples the retrieval key from the document used for synthesis.<a class=\"cite\" href=\"#src63\">[63]</a>"
+          "html": "LangChain's write-up lists these as:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "multimodal embeddings such as CLIP, passing raw images to a multimodal LLM;",
+            "LLM summaries of images and tables, embedded as text;",
+            "summaries embedded with a reference to the raw image, which is handed to a multimodal LLM at synthesis time."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Option 3 relies on a <em>multi-vector retriever</em>, which decouples the retrieval key from the document used for synthesis.<a class=\"cite\" href=\"#src63\">[63]</a>"
         },
         {
           "type": "code",
@@ -2902,7 +2993,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Jina's vendor page also lists approximate image token cost per 600x600 image: 363 (v5-omni), 4,840 (v4) and 16,000 (clip-v2), which matters when you embed millions of pages.<a class=\"cite\" href=\"#src67\">[67]</a>"
+          "html": "Jina's vendor page also lists the approximate token cost of one 600x600 image: 363 (v5-omni), 4,840 (v4) and 16,000 (clip-v2). That matters when you embed millions of pages.<a class=\"cite\" href=\"#src67\">[67]</a>"
         },
         {
           "type": "heading",
@@ -2934,7 +3025,16 @@
         },
         {
           "type": "paragraph",
-          "html": "Tables are the hardest object: a plain-text flattening loses row and column relationships. Three practical routes follow from the architectures above: parse the table into Markdown or HTML (previous section), summarise it for retrieval while keeping the raw table for the answer step (option 3), or retrieve the page image (ColPali). RAG-Anything takes a broader view: a unified framework over text, images, tables and equations with dual-graph construction (cross-modal plus textual) and cross-modal hybrid retrieval; code is open source at HKUDS/RAG-Anything.<a class=\"cite\" href=\"#src68\">[68]</a>"
+          "html": "Tables are the hardest object: a plain-text flattening loses row and column relationships. Three practical routes follow from the architectures above:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "parse the table into Markdown or HTML (previous section);",
+            "summarise it for retrieval while keeping the raw table for the answer step (option 3);",
+            "retrieve the page image (ColPali)."
+          ]
         },
         {
           "type": "callout",
@@ -2942,9 +3042,19 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Summaries can hide the detail you need.</strong> In options 2 and 3 the retriever only sees what the summariser wrote. If the summary omits a number in a chart, no query can find it. Prefer option 3 so the generator still sees the original, and evaluate retrieval on questions that depend on specific cell values (my synthesis, not a sourced finding)."
+              "html": "<strong>Summaries can hide the detail you need.</strong> In options 2 and 3 the retriever only sees what the summariser wrote. If the summary omits a number in a chart, no query can find it. Prefer option 3, so the generator still sees the original. Evaluate retrieval on questions that depend on specific cell values (my synthesis, not a sourced finding)."
             }
           ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "s10-unified-frameworks",
+          "html": "Unified frameworks"
+        },
+        {
+          "type": "paragraph",
+          "html": "RAG-Anything takes a broader view. It is a unified framework over text, images, tables and equations, with dual-graph construction (cross-modal plus textual) and cross-modal hybrid retrieval. The code is open source at HKUDS/RAG-Anything.<a class=\"cite\" href=\"#src68\">[68]</a>"
         },
         {
           "type": "callout",
@@ -2952,7 +3062,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> ColPali (Faysse et al.) builds the ViDoRe benchmark and shows that embedding page images as multi-vector representations with late interaction can replace the parse-then-embed pipeline for visually rich documents.<a class=\"cite\" href=\"#src62\">[62]</a> RAG-Anything (Guo et al., 2025) instead unifies modalities through a dual-graph design and cross-modal hybrid retrieval.<a class=\"cite\" href=\"#src68\">[68]</a> Limits: multi-vector page embeddings store many vectors per page (index size is a cost to measure), and the reported gains are on the authors' benchmark, so validate on your own documents.\n    <br>গবেষণার সারকথা: ColPali পাতার ছবি থেকেই multi-vector embedding বানায়, text extraction লাগে না। RAG-Anything text, ছবি, table ও equation এক কাঠামোয় আনে।"
+              "html": "<strong>Research frontier:</strong> ColPali (Faysse et al.) builds the ViDoRe benchmark. It shows that embedding page images as multi-vector representations with late interaction can replace the parse-then-embed pipeline for visually rich documents.<a class=\"cite\" href=\"#src62\">[62]</a> RAG-Anything (Guo et al., 2025) instead unifies modalities through a dual-graph design and cross-modal hybrid retrieval.<a class=\"cite\" href=\"#src68\">[68]</a> Limits: multi-vector page embeddings store many vectors per page, so index size is a cost to measure. The reported gains are on the authors' benchmark, so validate on your own documents."
             }
           ]
         }
@@ -3002,6 +3112,10 @@
         {
           "type": "paragraph",
           "html": "<strong>কখন কোনটা:</strong> সরল ক্ষেত্রে সারসংক্ষেপ যথেষ্ট; সূক্ষ্ম তথ্য (চার্টের সংখ্যা) দরকার হলে কাঁচা রেফারেন্স রাখুন বা পেজ-ইমেজ রিট্রিভাল দেখুন। মনে রাখুন, মাল্টি-ভেক্টরে প্রতি পাতায় অনেক ভেক্টর, তাই স্টোরেজ খরচ বাড়ে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> ColPali পাতার ছবি থেকেই multi-vector embedding বানায়, text extraction লাগে না। RAG-Anything text, ছবি, table ও equation এক কাঠামোয় আনে।"
         },
         {
           "type": "analogy",

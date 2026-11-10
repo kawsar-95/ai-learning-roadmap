@@ -36,7 +36,7 @@
           "rows": [
             [
               "<strong>Langfuse</strong>",
-              "Open-source, OpenTelemetry-native, self-hostable"
+              "Open-source, OpenTelemetry-native (the open standard for traces and metrics), self-hostable"
             ],
             [
               "<strong>LangSmith</strong>",
@@ -70,7 +70,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every request must record: <strong>input tokens</strong>, <strong>output tokens</strong>, <strong>model</strong>, <strong>cost</strong> (computed from vendor's pricing), <strong>latency</strong> (TTFT, total), and <strong>cache hit</strong>. Tag with <code>user_id</code>, <code>feature</code>, <code>experiment</code>. This data is the substrate for every other LLMOps question — \"is feature X losing money?\", \"is the new model slower?\""
+          "html": "Every request must record: <strong>input tokens</strong>, <strong>output tokens</strong>, <strong>model</strong>, <strong>cost</strong> (computed from vendor's pricing), <strong>latency</strong> (time to first token, or TTFT, and total), and <strong>cache hit</strong>. Tag with <code>user_id</code>, <code>feature</code>, <code>experiment</code>. This data is the substrate for every other LLMOps question — \"is feature X losing money?\", \"is the new model slower?\""
         },
         {
           "type": "heading",

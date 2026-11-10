@@ -1431,7 +1431,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The hard part is the UI, not the protocol.</strong> Most teams underestimate how much work the approval surface is. The framework gives you a clean \"interrupt\" primitive, but you still have to build the inbox, the diff view, the approve/reject buttons, the audit log, the SLA, the mobile notifications. Budget at least 30% of agent project time for the human-facing surface."
+              "html": "<strong>The hard part is the UI, not the protocol.</strong> Most teams underestimate how much work the approval surface is. The framework gives you a clean \"interrupt\" primitive, but you still have to build the inbox, the diff view, the approve/reject buttons, the audit log, the SLA (service-level agreement), the mobile notifications. Budget at least 30% of agent project time for the human-facing surface."
             }
           ]
         },

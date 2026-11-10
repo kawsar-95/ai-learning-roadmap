@@ -118,7 +118,7 @@
           "rows": [
             [
               "<strong>E2B</strong>",
-              "Hosted Firecracker microVMs",
+              "Hosted Firecracker microVMs (lightweight virtual machines)",
               "Sub-second Python, easy REST API"
             ],
             [
@@ -129,7 +129,7 @@
             [
               "<strong>Daytona</strong>",
               "Hosted dev environments",
-              "Full git/REPL workflows, AI agents"
+              "Full git/REPL (interactive shell) workflows, AI agents"
             ],
             [
               "<strong>Cloudflare Workers / Sandbox</strong>",

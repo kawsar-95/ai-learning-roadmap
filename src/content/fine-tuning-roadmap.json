@@ -517,7 +517,7 @@
         { "type": "heading", "level": 3, "id": "s5-quantize-and-serve", "html": "Quantize, serve, wrap, deploy" },
         {
           "type": "paragraph",
-          "html": "A fine-tuned model is usually quantized into the <strong>GGUF</strong> format and run with <code>llama.cpp</code> or <code>Ollama</code>, so it can run on ordinary hardware without a dedicated GPU server."
+          "html": "A fine-tuned model is usually quantized into the <strong>GGUF</strong> format and run with <code>llama.cpp</code> or <code>Ollama</code>, so it can run on ordinary hardware without a dedicated GPU server. The number in each quantization level's name is roughly the bits stored per weight."
         },
         {
           "type": "table",

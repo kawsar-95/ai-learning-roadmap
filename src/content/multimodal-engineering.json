@@ -31,7 +31,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>OCR-via-LLM</strong>: an LLM beats Tesseract on messy photos, handwritten notes, and structured forms. Often no separate OCR step needed.<a class=\"cite\" href=\"#src28\">[28]</a>",
+            "<strong>OCR-via-LLM</strong> (reading the text in an image with an LLM): it beats Tesseract on messy photos, handwritten notes, and structured forms. Often no separate OCR step is needed.<a class=\"cite\" href=\"#src28\">[28]</a>",
             "<strong>Document AI</strong>: PDF understanding with layout awareness (Claude, Mistral OCR, Qwen2-VL).",
             "<strong>Chart/diagram extraction</strong>: ask the model to read a chart and emit JSON.",
             "<strong>Visual Q&amp;A</strong>: \"what's wrong with this screenshot?\""
@@ -45,7 +45,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A voice pipeline is STT → LLM → TTS. Each has its own SOTA:"
+          "html": "A voice pipeline is STT (speech-to-text) → LLM → TTS (text-to-speech). Each stage has its own leading options:"
         },
         {
           "type": "table",
@@ -109,7 +109,21 @@
         },
         {
           "type": "paragraph",
-          "html": "Workflows: <strong>ControlNet</strong> for structure (pose, depth, canny edges), <strong>LoRA</strong> for style or character consistency, <strong>inpainting</strong> for edits, <strong>IP-Adapter</strong> for reference images. ComfyUI lets you wire these into reproducible pipelines."
+          "html": "Common workflow add-ons:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>ControlNet</strong> conditions the image on a structure: a pose, a depth map, or canny edges (an edge-detected outline);",
+            "<strong>LoRA</strong> adds a small trained adapter for a style or a consistent character;",
+            "<strong>inpainting</strong> regenerates only a masked part of an image, for edits;",
+            "<strong>IP-Adapter</strong> uses a reference image as part of the prompt."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "ComfyUI lets you wire these into reproducible pipelines."
         },
         {
           "type": "heading",
