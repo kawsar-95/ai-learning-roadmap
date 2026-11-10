@@ -140,7 +140,7 @@ function Hero({ lang }: { lang: Lang }) {
 function Parts({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   return (
-    <section id="parts" aria-labelledby="parts-heading" className="scroll-mt-16 bg-bg-raised-2 py-14 sm:py-16">
+    <section id="parts" aria-labelledby="parts-heading" className="bg-bg-raised-2 py-14 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 id="parts-heading" className={SECTION_TITLE}>
           {ui.partsTitle}

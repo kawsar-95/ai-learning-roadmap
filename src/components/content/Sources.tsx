@@ -20,7 +20,7 @@ export function Sources({ sources, lang }: { sources: Source[]; lang: Lang }) {
           <li
             key={s.n}
             id={`src${s.n}`}
-            className="grid scroll-mt-24 grid-cols-[2.75rem_minmax(0,1fr)] gap-x-2 rounded-md py-2 text-[13.5px] leading-relaxed transition-colors target:bg-accent/10"
+            className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-2 rounded-md py-2 text-[13.5px] leading-relaxed transition-colors target:bg-accent/10"
           >
             <span className="pl-1 pt-[3px] font-mono text-xs text-text-faint">[{s.n}]</span>
             <a

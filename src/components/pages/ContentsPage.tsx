@@ -39,7 +39,7 @@ export function ContentsPage({ lang }: { lang: Lang }) {
         {parts.map(({ topic, sections }) => {
           const text = topicText(topic, lang);
           return (
-            <li key={topic.slug} id={`part-${topic.part}`} className="scroll-mt-24 border-t border-border-strong pt-5">
+            <li key={topic.slug} id={`part-${topic.part}`} className="border-t border-border-strong pt-5">
               <div className="flex items-baseline gap-4">
                 <span aria-hidden="true" className="font-display text-[26px] font-bold leading-none text-accent">
                   {fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0))}

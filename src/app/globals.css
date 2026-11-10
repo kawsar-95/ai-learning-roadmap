@@ -117,7 +117,8 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* The header is fixed and 64px high: in-page links stop below it. */
+/* The header is fixed and 64px high: in-page links stop 16px below it.
+   This is the only offset. A scroll-margin on a target (scroll-mt-*) would add to it. */
 html {
   scroll-padding-top: 80px;
 }

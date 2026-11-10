@@ -48,7 +48,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
   }
 
   return (
-    <section id="quiz" aria-labelledby="quiz-title" className="scroll-mt-24">
+    <section id="quiz" aria-labelledby="quiz-title">
       {/* The same heading and intro as a section (SectionView): the quiz is the last step of the pager. */}
       <h2
         id="quiz-title"

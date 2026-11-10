@@ -99,7 +99,7 @@ export function SectionPager({ steps, lang }: { steps: Step[]; lang: Lang }) {
   const next = steps[index + 1];
   return (
     <div>
-      <div ref={top} className="scroll-mt-24" />
+      <div ref={top} />
       <div className="mb-5">
         <p className="m-0 text-[13px] text-text-faint">{steps[index].label}</p>
         <div aria-hidden="true" className="mt-2 h-0.5 overflow-hidden rounded-full bg-bg-raised-2">
