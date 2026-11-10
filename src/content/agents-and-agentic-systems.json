@@ -74,7 +74,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>An agent is an AI that doesn't stop until the job is done.</strong> A normal chatbot: you ask, it answers, done. An agent: you ask \"find me a hotel under $150 in Tokyo next week,\" and it goes off, browses the web, checks three sites, compares them, and comes back in five minutes with a recommendation. You didn't tell it which sites. It figured that out."
+          "html": "<strong>An agent is an AI that doesn't stop until the job is done.</strong> A normal chatbot: you ask, it answers, done. An agent: you ask \"find me a hotel under $150 in Tokyo next week.\" It goes off, browses the web, checks three sites, compares them, and comes back in five minutes with a recommendation. You didn't tell it which sites. It figured that out."
         },
         {
           "type": "paragraph",
@@ -86,7 +86,22 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The five things every production agent must have:</strong> a cap on how many times it can loop, a small list of allowed tools, a place to keep notes that survive the model's short memory, a way to say \"I'm done,\" and a way to record what it did so you can debug it later. Skip any one and you have a hobby project, not a product."
+          "html": "<strong>The five things every production agent must have:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "a cap on how many times it can loop;",
+            "a small list of allowed tools;",
+            "a place to keep notes that survive the model's short memory;",
+            "a way to say \"I'm done\";",
+            "a way to record what it did, so you can debug it later."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Skip any one and you have a hobby project, not a product."
         },
         {
           "type": "analogy",

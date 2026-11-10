@@ -130,7 +130,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Tracing = a flight recorder for every request.</strong> When a user says \"your AI gave me a weird answer yesterday,\" you should be able to pull up the exact request, see every prompt, every model call, every tool it used, the cost, and the latency — in one view. The big tracing tools (Langfuse, LangSmith, Helicone, Arize Phoenix) all do this."
+          "html": "<strong>Tracing = a flight recorder for every request.</strong> When a user says \"your AI gave me a weird answer yesterday,\" you should be able to pull up the exact request. In one view, you see every prompt, every model call, every tool it used, the cost, and the latency. The big tracing tools (Langfuse, LangSmith, Helicone, Arize Phoenix) all do this."
         },
         {
           "type": "paragraph",
@@ -157,7 +157,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The black-box flight recorder analogy:</strong> every LLM call should leave a black-box flight recorder behind. The recorder should write down the prompt, the model's reply, the cost, the latency, which user, which feature, which experiment — so when something goes wrong (or silently degrades), you can replay the exact moment and figure out why."
+              "html": "<strong>The black-box flight recorder analogy:</strong> every LLM call should leave a black-box flight recorder behind. The recorder should write down the prompt, the model's reply, the cost, the latency, which user, which feature, and which experiment. Then, when something goes wrong (or silently degrades), you can replay the exact moment and figure out why."
             }
           ]
         }
@@ -169,7 +169,18 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ট্রেসিং = প্রতিটি রিকোয়েস্টের জন্য ফ্লাইট রেকর্ডার:</strong> ইউজার বললে \"আপনার AI গতকাল আমাকে অদ্ভুত উত্তর দিয়েছে,\" আপনি সেই নির্দিষ্ট রিকোয়েস্ট টেনে এনে প্রতিটি প্রম্পট, প্রতিটি মডেল কল, প্রতিটি ব্যবহৃত টুল, খরচ ও ল্যাটেন্সি এক দৃশ্যে দেখতে পারবেন। প্রধান ট্রেসিং টুল: Langfuse (ওপেন-সোর্স, OpenTelemetry-নেটিভ, সেলফ-হোস্ট করা যায়), LangSmith (LangChain ইন্টিগ্রেশন), Helicone (একটি এনভায়রনমেন্ট ভ্যারিয়েবল দিয়ে সব ক্যাপচার), Arize Phoenix (ইভ্যালুয়েশন-ফার্স্ট), Braintrust (ইভ্যাল + ট্রেস এক জায়গায়)।"
+          "html": "<strong>ট্রেসিং = প্রতিটি রিকোয়েস্টের জন্য ফ্লাইট রেকর্ডার:</strong> ইউজার বললে \"আপনার AI গতকাল আমাকে অদ্ভুত উত্তর দিয়েছে,\" আপনি সেই নির্দিষ্ট রিকোয়েস্ট টেনে আনতে পারবেন। এক দৃশ্যেই দেখা যাবে প্রতিটি প্রম্পট, প্রতিটি মডেল কল, প্রতিটি ব্যবহৃত টুল, খরচ ও ল্যাটেন্সি। প্রধান ট্রেসিং টুল:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Langfuse (ওপেন-সোর্স, OpenTelemetry-নেটিভ, সেলফ-হোস্ট করা যায়);",
+            "LangSmith (LangChain ইন্টিগ্রেশন);",
+            "Helicone (একটি এনভায়রনমেন্ট ভ্যারিয়েবল দিয়ে সব ক্যাপচার);",
+            "Arize Phoenix (ইভ্যালুয়েশন-ফার্স্ট);",
+            "Braintrust (ইভ্যাল + ট্রেস এক জায়গায়)।"
+          ]
         },
         {
           "type": "paragraph",
@@ -185,7 +196,16 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>রিপ্লে ও ডিবাগিং:</strong> ইউজার অভিযোগ করলে ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন, ব্যর্থতা চিহ্নিত করুন, এবং সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে <strong>রিপ্লে</strong> করে ফিক্স যাচাই করুন।"
+          "html": "<strong>রিপ্লে ও ডিবাগিং:</strong> ইউজার অভিযোগ করলে:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন।",
+            "ব্যর্থতা চিহ্নিত করুন।",
+            "সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে <strong>রিপ্লে</strong> করে ফিক্স যাচাই করুন।"
+          ]
         },
         {
           "type": "paragraph",
@@ -200,7 +220,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার উপমা:</strong> প্রতিটি LLM কল একটি ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার রেখে আসা উচিত। রেকর্ডার প্রম্পট, মডেল উত্তর, খরচ, ল্যাটেন্সি, কোন ইউজার, কোন ফিচার, কোন এক্সপেরিমেন্ট — সব লিখে রাখুক, যাতে কিছু ভুল হলে (বা নীরবে খারাপ হলে) আপনি সেই মুহূর্তটি রিপ্লে করে বুঝতে পারেন কেন।"
+              "html": "<strong>ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার উপমা:</strong> প্রতিটি LLM কল একটি ব্ল্যাক-বক্স ফ্লাইট রেকর্ডার রেখে আসা উচিত। রেকর্ডার প্রম্পট, মডেল উত্তর, খরচ, ল্যাটেন্সি, কোন ইউজার, কোন ফিচার, কোন এক্সপেরিমেন্ট — সব লিখে রাখুক। তাহলে কিছু ভুল হলে (বা নীরবে খারাপ হলে) আপনি সেই মুহূর্তটি রিপ্লে করে বুঝতে পারেন কেন।"
             }
           ]
         }

@@ -371,7 +371,23 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The key is asking the AI to summarize in a structured way.</strong> Don't just say \"summarise the chat\" — you'll get mush. Instead, say: \"extract: <em>what the user is trying to do, what decisions we made, what questions are still open, what facts they mentioned, what names/IDs came up, what preferences they expressed.</em>\" This structured summary is much more useful than a paragraph — the AI can later look at it and find exactly what it needs."
+          "html": "<strong>The key is asking the AI to summarize in a structured way.</strong> Don't just say \"summarise the chat\": you'll get mush. Instead, ask it to extract:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "what the user is trying to do;",
+            "what decisions we made;",
+            "what questions are still open;",
+            "what facts they mentioned;",
+            "what names/IDs came up;",
+            "what preferences they expressed."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "This structured summary is much more useful than a paragraph. The AI can later look at it and find exactly what it needs."
         },
         {
           "type": "paragraph",
@@ -680,11 +696,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Prompt caching is the fix.</strong> All the major AI providers (Anthropic, OpenAI, Gemini) now let you mark a portion of your prompt as \"cached\" — meaning if the next call has the same prefix, they reuse the work instead of re-reading it. Cost drops 80–90%. Latency drops too."
+          "html": "<strong>Prompt caching is the fix.</strong> All the major AI providers (Anthropic, OpenAI, Gemini) now let you mark a portion of your prompt as \"cached.\" If the next call has the same prefix, they reuse the work instead of re-reading it. Cost drops 80–90%. Latency drops too."
         },
         {
           "type": "paragraph",
-          "html": "<strong>The trick:</strong> structure your prompt so the stable parts come at the start (system prompt, tool descriptions, retrieved documents you reuse), and the changing parts come at the end (the user's question). Cache the start, send the end fresh each time."
+          "html": "<strong>The trick:</strong> structure your prompt so the stable parts come at the start: the system prompt, tool descriptions, and retrieved documents you reuse. The changing parts, like the user's question, come at the end. Cache the start, send the end fresh each time."
         },
         {
           "type": "paragraph",
@@ -728,7 +744,7 @@
         },
         {
           "type": "paragraph",
-          "html": "নিয়ম হলো <strong>স্থির জিনিস আগে, পরিবর্তনশীল জিনিস শেষে</strong>। ক্যাশ করুন: সিস্টেম প্রম্পট, স্থির টুল স্কিমা, বারবার ব্যবহৃত বড় ডকুমেন্ট, স্ট্যাটিক ফিউ-শট উদাহরণ, স্টাইল গাইড। ক্যাশ করবেন না: ইউজারের সর্বশেষ বার্তা, প্রতি কলে বদলে যাওয়া রিট্রিভাল (যেমন আজকের খবর), এবং যেখানে প্রতি কলে ফ্রেশনেস জরুরি। হিসাবের উদাহরণ: ৬০K টোকেনের প্রিফিক্স ও ৪K টোকেনের ইউজার মেসেজ থাকলে ক্যাশ ছাড়া ৬৪K টোকেনের পুরো দাম; ক্যাশ থাকলে ৬০K প্রায় ১০ গুণ সস্তা ও ৪K সাধারণ দামে — স্টেডি স্টেটে ইনপুট খরচে প্রায় ~৮৫% সাশ্রয়।"
+          "html": "নিয়ম হলো <strong>স্থির জিনিস আগে, পরিবর্তনশীল জিনিস শেষে</strong>। ক্যাশ করুন: সিস্টেম প্রম্পট, স্থির টুল স্কিমা, বারবার ব্যবহৃত বড় ডকুমেন্ট, স্ট্যাটিক ফিউ-শট উদাহরণ, স্টাইল গাইড। ক্যাশ করবেন না: ইউজারের সর্বশেষ বার্তা, প্রতি কলে বদলে যাওয়া রিট্রিভাল (যেমন আজকের খবর), এবং যেখানে প্রতি কলে ফ্রেশনেস জরুরি। হিসাবের উদাহরণ: ৬০K টোকেনের প্রিফিক্স ও ৪K টোকেনের ইউজার মেসেজ থাকলে ক্যাশ ছাড়া ৬৪K টোকেনের পুরো দাম লাগে। ক্যাশ থাকলে ৬০K প্রায় ১০ গুণ সস্তা, আর ৪K সাধারণ দামে। স্টেডি স্টেটে ইনপুট খরচে প্রায় ~৮৫% সাশ্রয় হয়।"
         },
         {
           "type": "paragraph",
@@ -944,7 +960,21 @@
         },
         {
           "type": "paragraph",
-          "html": "Your brain has layers: working memory (what you're thinking about right now), short-term (what you did today), long-term (your name, your preferences, your childhood), and episodic (specific memories like \"the trip to Paris in 2019\"). Different timescales, different uses."
+          "html": "Your brain has layers:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "working memory: what you're thinking about right now;",
+            "short-term: what you did today;",
+            "long-term: your name, your preferences, your childhood;",
+            "episodic: specific memories, like \"the trip to Paris in 2019.\""
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Different timescales, different uses."
         },
         {
           "type": "paragraph",
@@ -956,7 +986,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The breakthrough paper \"MemGPT\"</strong> showed that the AI itself should manage its own memory: it should be allowed to \"evict\" old facts from working memory into external storage, and \"page them back in\" when needed. The AI decides what's important enough to remember and what to forget. Same as humans."
+          "html": "<strong>The breakthrough paper \"MemGPT\"</strong> showed that the AI itself should manage its own memory. It should be allowed to \"evict\" old facts from working memory into external storage, and \"page them back in\" when needed. The AI decides what's important enough to remember and what to forget. Same as humans."
         },
         {
           "type": "paragraph",
@@ -1231,7 +1261,22 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The best production recipe combines both:</strong> retrieve 20 candidates → re-rank to top 5 → drop redundant ones → if still over budget, compress each with LLMLingua → inject into the prompt in the right place. Each step saves tokens; together they keep you under budget without losing the parts that matter."
+          "html": "<strong>The best production recipe combines both:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Retrieve 20 candidates.",
+            "Re-rank to the top 5.",
+            "Drop redundant ones.",
+            "If still over budget, compress each with LLMLingua.",
+            "Inject them into the prompt in the right place."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Each step saves tokens; together they keep you under budget without losing the parts that matter."
         },
         {
           "type": "paragraph",
@@ -1270,11 +1315,40 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রুনিং</strong> চার রকম: রেলিভেন্স প্রুনিং (প্রশ্নের সাথে মিল কম এমন নিচের চাঙ্ক ফেলা), রিসেন্সি প্রুনিং (সারসংক্ষেপে ঢুকে যাওয়া পুরোনো টার্ন বাদ), টাস্ক-অ্যাওয়ার প্রুনিং (বর্তমান ধাপে অপ্রয়োজনীয় টুল ডেফিনিশন বাদ), আর ডাইভার্সিটি প্রুনিং (একই তথ্যের একাধিক ডকুমেন্ট থেকে সবচেয়ে ভালোটি রাখা)। কমপ্রেশন সবকিছুকে ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে — দুটো পরিপূরক।"
+          "html": "<strong>প্রুনিং</strong> চার রকম:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "রেলিভেন্স প্রুনিং (প্রশ্নের সাথে মিল কম এমন নিচের চাঙ্ক ফেলা);",
+            "রিসেন্সি প্রুনিং (সারসংক্ষেপে ঢুকে যাওয়া পুরোনো টার্ন বাদ);",
+            "টাস্ক-অ্যাওয়ার প্রুনিং (বর্তমান ধাপে অপ্রয়োজনীয় টুল ডেফিনিশন বাদ);",
+            "ডাইভার্সিটি প্রুনিং (একই তথ্যের একাধিক ডকুমেন্ট থেকে সবচেয়ে ভালোটি রাখা)।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রোডাকশনের সম্মিলিত পদ্ধতি:</strong> (১) K=২০ ক্যান্ডিডেট চাঙ্ক রিট্রিভ করুন, (২) ক্রস-এনকোডার দিয়ে রিরেংক করুন, (৩) সেরা ৫টিতে প্রুন করুন, (৪) তখনও বাজেটের বেশি হলে LLMLingua দিয়ে কমপ্রেস করুন, (৫) প্রম্পটের সঠিক জায়গায় (§৭ মনে রেখে) চিহ্নিত সেকশনে বসান। মনে রাখবেন, দুটোই লসি — যে তথ্যটি কমপ্রেস হয়ে হারাল সেটিই হয়তো উত্তর ছিল, তাই নয়েজ ছাঁটুন, সিগন্যাল (তথ্য, সিদ্ধান্ত, নাম) যথাসম্ভব হুবহু রাখুন।"
+          "html": "কমপ্রেশন সবকিছুকে ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে — দুটো পরিপূরক।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>প্রোডাকশনের সম্মিলিত পদ্ধতি:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "K=২০ ক্যান্ডিডেট চাঙ্ক রিট্রিভ করুন।",
+            "ক্রস-এনকোডার দিয়ে রিরেংক করুন।",
+            "সেরা ৫টিতে প্রুন করুন।",
+            "তখনও বাজেটের বেশি হলে LLMLingua দিয়ে কমপ্রেস করুন।",
+            "প্রম্পটের সঠিক জায়গায় (§৭ মনে রেখে) চিহ্নিত সেকশনে বসান।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "মনে রাখবেন, দুটোই লসি। যে তথ্যটি কমপ্রেস হয়ে হারাল সেটিই হয়তো উত্তর ছিল। তাই নয়েজ ছাঁটুন, আর সিগন্যাল (তথ্য, সিদ্ধান্ত, নাম) যথাসম্ভব হুবহু রাখুন।"
         },
         {
           "type": "analogy",
@@ -1821,7 +1895,7 @@
         },
         {
           "type": "paragraph",
-          "html": "1. <strong>Sandwich it:</strong> put the most important stuff at the very top of your prompt AND repeat it at the very bottom. Hit both attention peaks.<br>\n       2. <strong>Re-order documents:</strong> if you retrieved 10 documents, put the most relevant at the start and the end, the least relevant in the middle.<br>\n       3. <strong>Cut shorter:</strong> shorter prompts = better recall. If you can fit it in 8K tokens, don't use 50K.<br>\n       4. <strong>Mark the important:</strong> wrap critical info in <code>&lt;important&gt;…&lt;/important&gt;</code> tags. Strong models pay attention to marked regions.<br>\n       5. <strong>Re-query when unsure:</strong> if the AI doesn't find the answer in one pass, ask it to look again with what it learned. Two short passes beat one long one.<br>\n       6. <strong>Add an \"answer here\" prompt:</strong> end the prompt with \"based on the above, your answer:\" — this nudges the AI to look back over the whole context one more time before responding."
+          "html": "1. <strong>Sandwich it:</strong> put the most important stuff at the very top of your prompt AND repeat it at the very bottom. Hit both attention peaks.<br>\n       2. <strong>Re-order documents:</strong> if you retrieved 10 documents, put the most relevant at the start and the end, the least relevant in the middle.<br>\n       3. <strong>Cut shorter:</strong> shorter prompts = better recall. If you can fit it in 8K tokens, don't use 50K.<br>\n       4. <strong>Mark the important:</strong> wrap critical info in <code>&lt;important&gt;…&lt;/important&gt;</code> tags. Strong models pay attention to marked regions.<br>\n       5. <strong>Re-query when unsure:</strong> if the AI doesn't find the answer in one pass, ask it to look again with what it learned. Two short passes beat one long one.<br>\n       6. <strong>Add an \"answer here\" prompt:</strong> end the prompt with \"based on the above, your answer:\". This nudges the AI to look back over the whole context one more time before responding."
         },
         {
           "type": "paragraph",
@@ -1864,7 +1938,30 @@
         },
         {
           "type": "paragraph",
-          "html": "পরের গবেষণা (RULER, Summary-of-a-Haystack, BABILong, ২০২৪) বলছে: ভালো মডেলে ইউ-কার্ভ চ্যাপ্টা হয় কিন্তু পুরোপুরি যায় না; পরিবর্তনশীল দৈর্ঘ্যের কাজ কঠিনতর; দীর্ঘ কনটেক্সট জুড়ে মাল্টি-হপ রিজনিং এখনও খোলা সমস্যা; আর RAG ও লং-কনটেক্সট একে অপরের পরিপূরক। <strong>ব্যবহারিক নিয়ম:</strong> যে তথ্য নির্ভরযোগ্যভাবে মনে রাখাতে চান, সেটি কনটেক্সটের <strong>প্রথম ১০%</strong> বা <strong>শেষ ১০%</strong>-এ রাখুন; না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন; তাতেও না হলে ছোট কনটেক্সট, এক্সটার্নাল রিট্রিভাল বা ভিন্ন আর্কিটেকচার ব্যবহার করুন।"
+          "html": "পরের গবেষণা (RULER, Summary-of-a-Haystack, BABILong, ২০২৪) বলছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ভালো মডেলে ইউ-কার্ভ চ্যাপ্টা হয় কিন্তু পুরোপুরি যায় না;",
+            "পরিবর্তনশীল দৈর্ঘ্যের কাজ কঠিনতর;",
+            "দীর্ঘ কনটেক্সট জুড়ে মাল্টি-হপ রিজনিং এখনও খোলা সমস্যা;",
+            "RAG ও লং-কনটেক্সট একে অপরের পরিপূরক।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ব্যবহারিক নিয়ম:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "যে তথ্য নির্ভরযোগ্যভাবে মনে রাখাতে চান, সেটি কনটেক্সটের <strong>প্রথম ১০%</strong> বা <strong>শেষ ১০%</strong>-এ রাখুন।",
+            "না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন।",
+            "তাতেও না হলে ছোট কনটেক্সট, এক্সটার্নাল রিট্রিভাল বা ভিন্ন আর্কিটেকচার ব্যবহার করুন।"
+          ]
         },
         {
           "type": "analogy",

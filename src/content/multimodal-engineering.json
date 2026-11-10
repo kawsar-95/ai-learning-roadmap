@@ -191,7 +191,20 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Image generation (\"AI that draws\"):</strong> Flux, SDXL, Imagen, DALL-E — pick by what you need: open weights and fine-tunability (Flux, SDXL), photorealism (Imagen), instruction-following (DALL-E). Advanced: <em>ControlNet</em> lets you say \"draw this character in <em>this</em> pose\"; <em>LoRA</em> lets you teach it a model in the style you want; <em>inpainting</em> lets you edit part of an image. <em>ComfyUI</em> is the node-based UI where you wire these into reproducible pipelines."
+          "html": "<strong>Image generation (\"AI that draws\"):</strong> Flux, SDXL, Imagen, DALL-E — pick by what you need: open weights and fine-tunability (Flux, SDXL), photorealism (Imagen), instruction-following (DALL-E). Advanced add-ons:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<em>ControlNet</em> lets you say \"draw this character in <em>this</em> pose\";",
+            "<em>LoRA</em> lets you teach the model the style you want;",
+            "<em>inpainting</em> lets you edit part of an image."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<em>ComfyUI</em> is the node-based UI where you wire these into reproducible pipelines."
         },
         {
           "type": "paragraph",

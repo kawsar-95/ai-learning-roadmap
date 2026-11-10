@@ -191,7 +191,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "ফাইন-টিউন ভালোভাবে করতে ব্যাকপ্রোপাগেশনের ম্যাথ ডিরাইভ করার দরকার নেই, কিন্তু ট্রেইনিং আসলে কী করছে তার একটা কাজ-চালানো ধারণা থাকা দরকার: <strong>loss</strong> হলো একটা সংখ্যা, যা বলে দেয় মডেলের এই মুহূর্তের অনুমান কতটা ভুল; <strong>gradient descent</strong> ছোট ছোট ধাপে মডেলের ওয়েট বদলে সেই সংখ্যাটা কমায়।"
+          "html": "ফাইন-টিউন ভালোভাবে করতে ব্যাকপ্রোপাগেশনের ম্যাথ ডিরাইভ করার দরকার নেই। কিন্তু ট্রেইনিং আসলে কী করছে, তার একটা কাজ-চালানো ধারণা থাকা দরকার। <strong>loss</strong> হলো একটা সংখ্যা, যা বলে দেয় মডেলের এই মুহূর্তের অনুমান কতটা ভুল। <strong>gradient descent</strong> ছোট ছোট ধাপে মডেলের ওয়েট বদলে সেই সংখ্যাটা কমায়।"
         },
         {
           "type": "list",
@@ -561,7 +561,7 @@
         },
         {
           "type": "paragraph",
-          "html": "This phase overlaps directly with general DevOps work — packaging something into a container and shipping it is the same skill whether the thing inside is a model or a web app."
+          "html": "This phase overlaps directly with general DevOps work. Packaging something into a container and shipping it is the same skill whether the thing inside is a model or a web app."
         }
       ],
       "bangla": [
@@ -697,7 +697,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "A good capstone is small enough to finish and specific enough to show real skill — turning a messy bug report into a clean label, or a requirement into a test case, is exactly that kind of project."
+          "html": "A good capstone is small enough to finish and specific enough to show real skill. Turning a messy bug report into a clean label, or a requirement into a test case, is exactly that kind of project."
         },
         {
           "type": "paragraph",

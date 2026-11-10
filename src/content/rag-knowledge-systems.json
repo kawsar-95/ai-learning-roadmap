@@ -682,15 +682,48 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ছয়টি ডেটাবেস:</strong> Qdrant (Rust, Apache ২.০, পেলোড ফিল্টার ও স্পার্স/মাল্টিভেক্টর), Pinecone (ম্যানেজড সার্ভারলেস, নেমস্পেস দিয়ে টেন্যান্ট আলাদা), Weaviate (HNSW, ফ্ল্যাট, ডায়নামিক, HFresh ইনডেক্স এবং BM25 + ভেক্টর হাইব্রিড), pgvector (Postgres এক্সটেনশন, ACID ও HNSW/IVFFlat), Chroma (Apache ২.০, লোকাল থেকে ক্লাউড পর্যন্ত), Milvus (Apache ২.০, Lite/Standalone/Distributed, অনেক ধরনের ইনডেক্স)।"
+          "html": "<strong>ছয়টি ডেটাবেস:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Qdrant (Rust, Apache ২.০, পেলোড ফিল্টার ও স্পার্স/মাল্টিভেক্টর);",
+            "Pinecone (ম্যানেজড সার্ভারলেস, নেমস্পেস দিয়ে টেন্যান্ট আলাদা);",
+            "Weaviate (HNSW, ফ্ল্যাট, ডায়নামিক, HFresh ইনডেক্স এবং BM25 + ভেক্টর হাইব্রিড);",
+            "pgvector (Postgres এক্সটেনশন, ACID ও HNSW/IVFFlat);",
+            "Chroma (Apache ২.০, লোকাল থেকে ক্লাউড পর্যন্ত);",
+            "Milvus (Apache ২.০, Lite/Standalone/Distributed, অনেক ধরনের ইনডেক্স)।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>কোনটি কখন (আমার নিজস্ব সংশ্লেষণ, বিক্রেতার পরামর্শ নয়):</strong> ডেটা আগে থেকেই Postgres-এ থাকলে pgvector; দ্রুত প্রোটোটাইপে Chroma; ঝামেলাহীন ম্যানেজড সেবা চাইলে Pinecone বা অন্যদের ম্যানেজড টিয়ার; ফিল্টার-ভারী সেলফ-হোস্টেড কাজে Qdrant; Kubernetes-এ বিশাল ডিস্ট্রিবিউটেড ব্যবহারে Milvus; বিল্ট-ইন হাইব্রিড ফিউশন চাইলে Weaviate।"
+          "html": "<strong>কোনটি কখন (আমার নিজস্ব সংশ্লেষণ, বিক্রেতার পরামর্শ নয়):</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ডেটা আগে থেকেই Postgres-এ থাকলে pgvector;",
+            "দ্রুত প্রোটোটাইপে Chroma;",
+            "ঝামেলাহীন ম্যানেজড সেবা চাইলে Pinecone বা অন্যদের ম্যানেজড টিয়ার;",
+            "ফিল্টার-ভারী সেলফ-হোস্টেড কাজে Qdrant;",
+            "Kubernetes-এ বিশাল ডিস্ট্রিবিউটেড ব্যবহারে Milvus;",
+            "বিল্ট-ইন হাইব্রিড ফিউশন চাইলে Weaviate।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>ফাঁদ:</strong> ফিল্টার-সহ সার্চ আর ফিল্টার ছাড়া সার্চের রিকল এক নয়; এমবেডিং মডেলের জন্য ভুল মেট্রিক বেছে নিলে ফল খারাপ হয়; আর কোনো সূত্রে ক্রস-ভেন্ডর বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ডেটায় মেপে নিন।"
+          "html": "<strong>ফাঁদ:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ফিল্টার-সহ সার্চ আর ফিল্টার ছাড়া সার্চের রিকল এক নয়;",
+            "এমবেডিং মডেলের জন্য ভুল মেট্রিক বেছে নিলে ফল খারাপ হয়;",
+            "কোনো সূত্রে ক্রস-ভেন্ডর বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ডেটায় মেপে নিন।"
+          ]
         },
         {
           "type": "paragraph",
@@ -983,7 +1016,16 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ফাঁদ:</strong> একটি রিট্রিভার নিজের ডেটায় খারাপ হলে মেশালে ফল নামতে পারে; k বা alpha না দেখে ইঞ্জিনের ডিফল্ট ধরে নেওয়া; আর কোনো সূত্রে ইঞ্জিনভিত্তিক বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ইভ্যালে মেপে নিন।"
+          "html": "<strong>ফাঁদ:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "একটি রিট্রিভার নিজের ডেটায় খারাপ হলে মেশালে ফল নামতে পারে;",
+            "k বা alpha না দেখে ইঞ্জিনের ডিফল্ট ধরে নেওয়া;",
+            "কোনো সূত্রে ইঞ্জিনভিত্তিক বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ইভ্যালে মেপে নিন।"
+          ]
         },
         {
           "type": "paragraph",
@@ -1823,7 +1865,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is it?</strong> A reranker is a careful second look. A quick search first pulls out a pile of documents that might answer your question, then the reranker reads your question next to each one and sorts the pile from best to worst."
+          "html": "<strong>What is it?</strong> A reranker is a careful second look. A quick search first pulls out a pile of documents that might answer your question. Then the reranker reads your question next to each one and sorts the pile from best to worst."
         },
         {
           "type": "paragraph",
@@ -1875,7 +1917,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>গবেষণার সারকথা:</strong> ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়; তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
+          "html": "<strong>গবেষণার সারকথা:</strong> ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়। তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
         },
         {
           "type": "analogy",
@@ -2171,7 +2213,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>গবেষণার সারকথা:</strong> ACORN HNSW-কে এমনভাবে বদলায় যাতে filter-এ মিলে যাওয়া অংশের graph ধরে চলা যায়; paper-এর দাবি একই recall-এ ২ থেকে ১,০০০ গুণ বেশি throughput, তবে ফল নির্ভর করে filter কতটা কড়া তার ওপর।"
+          "html": "<strong>গবেষণার সারকথা:</strong> ACORN HNSW-কে এমনভাবে বদলায় যাতে filter-এ মিলে যাওয়া অংশের graph ধরে চলা যায়। paper-এর দাবি একই recall-এ ২ থেকে ১,০০০ গুণ বেশি throughput, তবে ফল নির্ভর করে filter কতটা কড়া তার ওপর।"
         },
         {
           "type": "analogy",
@@ -2428,7 +2470,16 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "সাধারণ ভেক্টর সার্চ এমন চাঙ্ক আনে যা প্রশ্নের সাথে মেলে। কিন্তু \"এই পুরো ডেটাসেটের প্রধান থিম কী?\"-র মতো <strong>গ্লোবাল</strong> প্রশ্নের উত্তর কোনো একটি চাঙ্কে থাকে না। Microsoft <code>GraphRAG</code> এটিকে কুয়েরি-ফোকাসড সামারাইজেশন হিসেবে দেখে: LLM এন্টিটির একটি নলেজ গ্রাফ বানায়, সম্পর্কিত এন্টিটির কমিউনিটিগুলোর সারসংক্ষেপ আগেই তৈরি করে রাখে, আর প্রশ্নের সময় সেই সারসংক্ষেপ থেকে আংশিক উত্তর নিয়ে একত্র করে।"
+          "html": "সাধারণ ভেক্টর সার্চ এমন চাঙ্ক আনে যা প্রশ্নের সাথে মেলে। কিন্তু \"এই পুরো ডেটাসেটের প্রধান থিম কী?\"-র মতো <strong>গ্লোবাল</strong> প্রশ্নের উত্তর কোনো একটি চাঙ্কে থাকে না। Microsoft <code>GraphRAG</code> এটিকে কুয়েরি-ফোকাসড সামারাইজেশন হিসেবে দেখে:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "LLM এন্টিটির একটি নলেজ গ্রাফ বানায়।",
+            "সম্পর্কিত এন্টিটির কমিউনিটিগুলোর সারসংক্ষেপ আগেই তৈরি করে রাখে।",
+            "প্রশ্নের সময় সেই সারসংক্ষেপ থেকে আংশিক উত্তর নিয়ে একত্র করে।"
+          ]
         },
         {
           "type": "list",

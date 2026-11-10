@@ -531,7 +531,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Both are easy to write and easy to get quietly wrong, so two habits help: give each project its own set of packages, and let a checker read your settings sheet before the real tool does."
+          "html": "Both are easy to write and easy to get quietly wrong. Two habits help: give each project its own set of packages, and let a checker read your settings sheet before the real tool does."
         },
         {
           "type": "analogy",
@@ -831,7 +831,18 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে: কনটেইনার মরে গেলে নতুন একটা চালু করে, তিনটে কপি চাইলে তিনটেই রাখে। প্রথমে যে অবজেক্টগুলো দেখবেন: Pod (একসাথে চলা কনটেইনার), Deployment (N কপি আর নতুন ভার্সনের রোলআউট), Service (বদলাতে থাকা Pod-এর সামনে স্থির নাম), Ingress (বাইরের HTTP ট্রাফিক ভেতরে পাঠানো), আর ConfigMap ও Secret।"
+          "html": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে: কনটেইনার মরে গেলে নতুন একটা চালু করে, তিনটে কপি চাইলে তিনটেই রাখে। প্রথমে যে অবজেক্টগুলো দেখবেন:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Pod (একসাথে চলা কনটেইনার);",
+            "Deployment (N কপি আর নতুন ভার্সনের রোলআউট);",
+            "Service (বদলাতে থাকা Pod-এর সামনে স্থির নাম);",
+            "Ingress (বাইরের HTTP ট্রাফিক ভেতরে পাঠানো);",
+            "ConfigMap ও Secret।"
+          ]
         },
         {
           "type": "paragraph",
@@ -979,7 +990,21 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "CI প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর CD পাশ করা পরিবর্তন কোনো এনভায়রনমেন্টে পাঠায়। AI সার্ভিসের পাইপলাইনে সাধারণত থাকে: লিন্ট আর ইউনিট টেস্ট, কমিট ট্যাগ দিয়ে কনটেইনার ইমেজ বিল্ড, প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালানো, আর স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করানো। শেষে staging-এ ডিপ্লয় করে দেখে নিয়ে প্রোডাকশনে তোলা।"
+          "html": "CI প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর CD পাশ করা পরিবর্তন কোনো এনভায়রনমেন্টে পাঠায়। AI সার্ভিসের পাইপলাইনে সাধারণত থাকে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "লিন্ট আর ইউনিট টেস্ট;",
+            "কমিট ট্যাগ দিয়ে কনটেইনার ইমেজ বিল্ড;",
+            "প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালানো;",
+            "স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করানো।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "শেষে staging-এ ডিপ্লয় করে দেখে নিয়ে প্রোডাকশনে তোলা।"
         },
         {
           "type": "paragraph",
@@ -1124,7 +1149,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Instead of building a house by telling each worker what to do, you hand over a blueprint. Infrastructure as code is the blueprint for servers and networks: it is written down, reviewed and kept, so you can build the same thing again, or fix the difference when someone changes it by hand."
+          "html": "Instead of building a house by telling each worker what to do, you hand over a blueprint. Infrastructure as code is the blueprint for servers and networks. It is written down, reviewed and kept. So you can build the same thing again, or fix the difference when someone changes it by hand."
         },
         {
           "type": "paragraph",
@@ -1282,7 +1307,16 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "ক্লাউডে AI চালানোর তিনটে স্তর: হোস্টেড মডেল API (সবচেয়ে দ্রুত শুরু, তবে তাদের সীমা আর দামের ওপর নির্ভর), ম্যানেজড প্ল্যাটফর্ম (Amazon Bedrock, Google Cloud-এর Gemini Enterprise Agent Platform, Microsoft Foundry), যেখানে মডেল আপনার ক্লাউড অ্যাকাউন্টের পরিচয়, প্রাইভেট নেটওয়ার্ক আর বিলিংয়ের ভেতরে থাকে, আর ভাড়া করা GPU, যেখানে নিয়ন্ত্রণ সবচেয়ে বেশি আর কাজও সবচেয়ে বেশি (পার্ট ৮)।"
+          "html": "ক্লাউডে AI চালানোর তিনটে স্তর:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "হোস্টেড মডেল API (সবচেয়ে দ্রুত শুরু, তবে তাদের সীমা আর দামের ওপর নির্ভর);",
+            "ম্যানেজড প্ল্যাটফর্ম (Amazon Bedrock, Google Cloud-এর Gemini Enterprise Agent Platform, Microsoft Foundry), যেখানে মডেল আপনার ক্লাউড অ্যাকাউন্টের পরিচয়, প্রাইভেট নেটওয়ার্ক আর বিলিংয়ের ভেতরে থাকে;",
+            "ভাড়া করা GPU, যেখানে নিয়ন্ত্রণ সবচেয়ে বেশি আর কাজও সবচেয়ে বেশি (পার্ট ৮)।"
+          ]
         },
         {
           "type": "paragraph",
@@ -1406,7 +1440,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Training a model is like baking from a recipe that depends on the flour, and the flour changes over time. MLOps is the discipline of keeping the recipe book, noting which flour made which loaf, and tasting samples from the shelf, so that you notice when the bread starts to go wrong."
+          "html": "Training a model is like baking from a recipe that depends on the flour, and the flour changes over time. MLOps is the discipline of keeping the recipe book, noting which flour made which loaf, and tasting samples from the shelf. That way you notice when the bread starts to go wrong."
         },
         {
           "type": "paragraph",
@@ -1556,7 +1590,16 @@
         },
         {
           "type": "paragraph",
-          "html": "For an AI service the numbers that matter most are how fast the first word appears, how fast the rest follows, and whether the expensive graphics card is busy or idle."
+          "html": "For an AI service, three numbers matter most:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "how fast the first word appears;",
+            "how fast the rest follows;",
+            "whether the expensive graphics card is busy or idle."
+          ]
         },
         {
           "type": "analogy",
@@ -1675,14 +1718,24 @@
         },
         {
           "type": "paragraph",
-          "html": "For AI there is a twist. The model file is something you run, so a bad one is like a bad program, and an agent that can use tools is like an employee who obeys whoever spoke last."
+          "html": "For AI there is a twist. The model file is something you run, so a bad one is like a bad program. And an agent that can use tools is like an employee who obeys whoever spoke last."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Building security.</strong> Locks on every door (least privilege), a safe for valuables (a secrets manager), a guest list at the gate (scanning), and a guard who checks the delivery boxes (the supply chain)."
+              "html": "<strong>Building security.</strong>"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Locks on every door (least privilege).",
+                "A safe for valuables (a secrets manager).",
+                "A guest list at the gate (scanning).",
+                "A guard who checks the delivery boxes (the supply chain)."
+              ]
             }
           ]
         }
@@ -1853,7 +1906,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "AI ফিচার একটা সাধারণ সিস্টেমের মাঝখানে ধীর আর দামি কল, তাই পরিচিত টুলগুলোই খাটে। মডেল কল দশ সেকেন্ড লাগলে ওয়েব রিকোয়েস্ট অপেক্ষা করতে পারে না; তখন কিউ (Kafka, RabbitMQ) আর ওয়ার্কার ব্যবহার করুন: রিকোয়েস্ট একটা জব আইডি ফেরত দেয়, ওয়ার্কার মডেল কল করে ফল জমা রাখে। একই প্রশ্ন বারবার এলে Redis-এর মতো ক্যাশ কাজে লাগে, আর semantic cache মিল থাকা প্রশ্নও ধরে।"
+          "html": "AI ফিচার একটা সাধারণ সিস্টেমের মাঝখানে ধীর আর দামি কল, তাই পরিচিত টুলগুলোই খাটে। মডেল কল দশ সেকেন্ড লাগলে ওয়েব রিকোয়েস্ট অপেক্ষা করতে পারে না। তখন কিউ (Kafka, RabbitMQ) আর ওয়ার্কার ব্যবহার করুন: রিকোয়েস্ট একটা জব আইডি ফেরত দেয়, ওয়ার্কার মডেল কল করে ফল জমা রাখে। একই প্রশ্ন বারবার এলে Redis-এর মতো ক্যাশ কাজে লাগে, আর semantic cache মিল থাকা প্রশ্নও ধরে।"
         },
         {
           "type": "paragraph",
@@ -2117,7 +2170,7 @@
         },
         {
           "type": "paragraph",
-          "html": "So you give it a clear job, a workbench of its own (a branch) and a note about the house rules (the context file), and you check the result before it goes on the shelf."
+          "html": "So you give it a clear job, a workbench of its own (a branch) and a note about the house rules (the context file). Then you check the result before it goes on the shelf."
         },
         {
           "type": "analogy",

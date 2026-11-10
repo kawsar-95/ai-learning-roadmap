@@ -205,7 +205,21 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Red teaming = \"hire someone to try to break it.\"</strong> Every month, try to break your AI: try to inject prompts, try to extract training data, try to make it give medical advice, try to make it reveal other users' info. Each successful attack is a bug. Track them; ship fixes."
+          "html": "<strong>Red teaming = \"hire someone to try to break it.\"</strong> Every month, try to break your AI. Try to:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "inject prompts;",
+            "extract training data;",
+            "make it give medical advice;",
+            "make it reveal other users' info."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Each successful attack is a bug. Track them; ship fixes."
         },
         {
           "type": "analogy",
@@ -254,7 +268,18 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ফ্রেমওয়ার্ক:</strong> Promptfoo (CLI-ফার্স্ট, YAML কনফিগ, CI-ফ্রেন্ডলি, প্রোভাইডার-অ্যাগনস্টিক), DeepEval (pytest-স্টাইল, বিল্ট-ইন মেট্রিক প্রচুর — G-Eval, হ্যালুসিনেশন, বায়াস), Inspect (UK AISI, রিসার্চ-ধাঁচের টাস্ক, সেফটি ইভ্যালের জন্য শক্তিশালী), Braintrust (ইভ্যাল UI + ট্রেস + ডেটাসেট ম্যানেজমেন্ট), OpenAI Evals / Anthropic Eval টেমপ্লেট (ভেন্ডর-প্রস্তুত বেসলাইন)।"
+          "html": "<strong>ফ্রেমওয়ার্ক:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Promptfoo (CLI-ফার্স্ট, YAML কনফিগ, CI-ফ্রেন্ডলি, প্রোভাইডার-অ্যাগনস্টিক);",
+            "DeepEval (pytest-স্টাইল, বিল্ট-ইন মেট্রিক প্রচুর — G-Eval, হ্যালুসিনেশন, বায়াস);",
+            "Inspect (UK AISI, রিসার্চ-ধাঁচের টাস্ক, সেফটি ইভ্যালের জন্য শক্তিশালী);",
+            "Braintrust (ইভ্যাল UI + ট্রেস + ডেটাসেট ম্যানেজমেন্ট);",
+            "OpenAI Evals / Anthropic Eval টেমপ্লেট (ভেন্ডর-প্রস্তুত বেসলাইন)।"
+          ]
         },
         {
           "type": "paragraph",

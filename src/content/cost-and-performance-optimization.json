@@ -120,7 +120,16 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>2. Cache (don't re-answer the same thing).</strong> If 1,000 users all ask \"what's your refund policy?\" within an hour, you answer once and serve the cached answer 999 times. Three kinds: <em>semantic</em> cache (answers to questions similar by meaning), <em>output</em> cache (answers to exact inputs), and <em>prompt cache</em> (the AI vendor remembers the start of your prompt and skips re-reading it)."
+          "html": "<strong>2. Cache (don't re-answer the same thing).</strong> If 1,000 users all ask \"what's your refund policy?\" within an hour, you answer once and serve the cached answer 999 times. Three kinds:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<em>semantic</em> cache: answers to questions similar by meaning;",
+            "<em>output</em> cache: answers to exact inputs;",
+            "<em>prompt cache</em>: the AI vendor remembers the start of your prompt and skips re-reading it."
+          ]
         },
         {
           "type": "paragraph",

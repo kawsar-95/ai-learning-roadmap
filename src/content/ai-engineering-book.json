@@ -188,11 +188,11 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "A foundation model is a big, general AI model — like the ones behind ChatGPT or Midjourney — that was not built for one narrow job but can be pointed at many different jobs: writing, coding, answering questions, generating images, and more."
+          "html": "A foundation model is a big, general AI model, like the ones behind ChatGPT or Midjourney. It was not built for one narrow job. It can be pointed at many different jobs: writing, coding, answering questions, generating images, and more."
         },
         {
           "type": "paragraph",
-          "html": "Because a few large companies have already built and trained these models, the rest of us no longer need to build a model from scratch. We can simply use one through an API and focus on building a product around it. This is what the chapter calls <strong>AI engineering</strong>: less about training models, more about directing and wrapping an existing model so it solves a real problem well."
+          "html": "A few large companies have already built and trained these models. So the rest of us no longer need to build a model from scratch. We can simply use one through an API and focus on building a product around it. This is what the chapter calls <strong>AI engineering</strong>. It is less about training models, and more about directing and wrapping an existing model so it solves a real problem well."
         },
         {
           "type": "analogy",
@@ -208,7 +208,7 @@
           "ordered": false,
           "items": [
             "The easy part is often the demo — getting something working in a weekend. The hard part is the \"last mile\": making it reliable enough that people actually trust and use it every day.",
-            "A good AI product idea is one where AI either saves you from being left behind, clearly makes you faster or cheaper, or helps you learn where AI fits before everyone else figures it out too."
+            "A good AI product idea is one where AI does one of three things. It saves you from being left behind. It clearly makes you faster or cheaper. Or it helps you learn where AI fits before everyone else figures it out too."
           ]
         }
       ],
@@ -223,7 +223,20 @@
         },
         {
           "type": "paragraph",
-          "html": "foundation model-কে adapt করার তিনটা মূল উপায় আছে: <strong>prompt engineering</strong> (শুধু ভালো নির্দেশনা আর context দিয়ে), <strong>RAG</strong> (বাইরের ডেটাবেস থেকে তথ্য যোগ করে), আর <strong>fine-tuning</strong> (মডেলের ওয়েট নিজেই বদলে)। prompt engineering সবচেয়ে সহজ, আর fine-tuning সবচেয়ে বেশি রিসোর্স লাগে কিন্তু সবচেয়ে বেশি কাস্টমাইজেশন দেয়।"
+          "html": "foundation model-কে adapt করার তিনটা মূল উপায় আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>prompt engineering</strong>: শুধু ভালো নির্দেশনা আর context দিয়ে;",
+            "<strong>RAG</strong>: বাইরের ডেটাবেস থেকে তথ্য যোগ করে;",
+            "<strong>fine-tuning</strong>: মডেলের ওয়েট নিজেই বদলে।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "prompt engineering সবচেয়ে সহজ। আর fine-tuning সবচেয়ে বেশি রিসোর্স নেয়, কিন্তু সবচেয়ে বেশি কাস্টমাইজেশনও দেয়।"
         },
         {
           "type": "paragraph",
@@ -234,13 +247,26 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>বিদ্যুৎ গ্রিডের উপমা:</strong> যেমন এখন কেউ টোস্টার বানাতে নিজের বিদ্যুৎকেন্দ্র বানায় না, শুধু গ্রিডে প্লাগ করে — তেমনি এখন AI অ্যাপ বানাতে নিজের মডেল ট্রেইন করতে হয় না, foundation model-এ প্লাগ করলেই হয়।"
+              "html": "<strong>বিদ্যুৎ গ্রিডের উপমা:</strong> এখন কেউ টোস্টার বানাতে নিজের বিদ্যুৎকেন্দ্র বানায় না, শুধু গ্রিডে প্লাগ করে। তেমনি এখন AI অ্যাপ বানাতে নিজের মডেল ট্রেইন করতে হয় না। foundation model-এ প্লাগ করলেই হয়।"
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "AI engineering stack-কে তিনটা লেয়ারে ভাগ করা হয়েছে: <strong>application development</strong> (prompt, context, evaluation, interface), <strong>model development</strong> (training, fine-tuning, dataset engineering), আর <strong>infrastructure</strong> (compute, data, serving, monitoring)। এখন বেশিরভাগ AI engineer-দের কাজ হয় সবচেয়ে উপরের layer-এ, কারণ মডেল আগে থেকেই রেডি থাকে।"
+          "html": "AI engineering stack-কে তিনটা লেয়ারে ভাগ করা হয়েছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>application development</strong>: prompt, context, evaluation, interface;",
+            "<strong>model development</strong>: training, fine-tuning, dataset engineering;",
+            "<strong>infrastructure</strong>: compute, data, serving, monitoring।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "এখন বেশিরভাগ AI engineer-দের কাজ হয় সবচেয়ে উপরের layer-এ, কারণ মডেল আগে থেকেই রেডি থাকে।"
         }
       ],
       "videos": [
@@ -498,38 +524,58 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "A foundation model is shaped by four big decisions: what data it is shown, how its internal architecture processes that data, how it is coached afterward to be a helpful assistant, and how it picks words when it writes an answer."
+          "html": "Four big decisions shape a foundation model:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "what data it is shown;",
+            "how its internal architecture processes that data;",
+            "how it is coached afterward to be a helpful assistant;",
+            "how it picks words when it writes an answer."
+          ]
         },
         {
           "type": "paragraph",
-          "html": "The data decision explains why a chatbot might be excellent in English and clumsy in Bengali, or great at general trivia but useless on drug discovery questions: it reflects what the model actually saw while learning, not some fixed ceiling on its ability."
+          "html": "The data decision explains why a chatbot might be excellent in English but clumsy in Bengali. It also explains why one might be great at general trivia but useless on drug discovery questions. Both reflect what the model actually saw while learning, not some fixed ceiling on its ability."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The book-summary analogy:</strong> an older-style model could only answer questions about a book using its summary. A transformer-based model can flip to any page of the book while answering, which is why today's models track context so much better."
+              "html": "<strong>The book-summary analogy:</strong> an older-style model could only answer questions about a book using its summary. A transformer-based model can flip to any page of the book while answering. That is why today's models track context so much better."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Post-training is like teaching a very well-read but socially clueless person how to actually hold a conversation and be polite about it — first by showing good example conversations (supervised finetuning), then by learning which of two responses people actually prefer (preference finetuning)."
+          "html": "Post-training is like teaching a very well-read but socially clueless person how to actually hold a conversation and be polite about it. It happens in two steps. First, the model is shown good example conversations (supervised finetuning). Then it learns which of two responses people actually prefer (preference finetuning)."
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "Sampling is why the same question can get a slightly different answer twice — the model is rolling weighted dice over likely next words, not looking up a fixed answer.",
-            "Hallucination happens partly because the model cannot always tell the difference between \"what I was told\" and \"what I just said a moment ago,\" so an early guess can snowball into a confidently wrong answer."
+            "Sampling is why the same question can get a slightly different answer twice. The model is rolling weighted dice over likely next words, not looking up a fixed answer.",
+            "Hallucination happens partly because the model cannot always tell \"what I was told\" apart from \"what I just said a moment ago.\" So an early guess can snowball into a confidently wrong answer."
           ]
         }
       ],
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটা <strong>foundation model</strong> যতটা ভালো হবে, তা নির্ভর করে চারটা জিনিসের ওপর: কী ডেটা দিয়ে ট্রেইন হয়েছে, এর ভেতরের আর্কিটেকচার কেমন, ট্রেইনিংয়ের পর একে কীভাবে মানুষের পছন্দমতো আচরণ করতে শেখানো হয়েছে, আর উত্তর লেখার সময় কীভাবে পরের শব্দটা বেছে নেয়।"
+          "html": "একটা <strong>foundation model</strong> যতটা ভালো হবে, তা নির্ভর করে চারটা জিনিসের ওপর:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "কী ডেটা দিয়ে ট্রেইন হয়েছে;",
+            "এর ভেতরের আর্কিটেকচার কেমন;",
+            "ট্রেইনিংয়ের পর একে কীভাবে মানুষের পছন্দমতো আচরণ করতে শেখানো হয়েছে;",
+            "উত্তর লেখার সময় কীভাবে পরের শব্দটা বেছে নেয়।"
+          ]
         },
         {
           "type": "paragraph",
@@ -550,11 +596,19 @@
         },
         {
           "type": "paragraph",
-          "html": "মডেল সাইজ মাপা হয় তিনটা সংখ্যা দিয়ে: parameter সংখ্যা, training token সংখ্যা, আর FLOPs (compute)। <strong>Chinchilla scaling law</strong> বলে, parameter সংখ্যার প্রায় ২০ গুণ training token থাকলে সবচেয়ে ভালো ফলাফল পাওয়া যায় — শুধু মডেল বড় করলেই চলে না, ডেটাও সেই অনুপাতে বাড়াতে হয়।"
+          "html": "মডেল সাইজ মাপা হয় তিনটা সংখ্যা দিয়ে: parameter সংখ্যা, training token সংখ্যা, আর FLOPs (compute)। <strong>Chinchilla scaling law</strong> বলে, parameter সংখ্যার প্রায় ২০ গুণ training token থাকলে সবচেয়ে ভালো ফলাফল পাওয়া যায়। অর্থাৎ শুধু মডেল বড় করলেই চলে না, ডেটাও সেই অনুপাতে বাড়াতে হয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>Post-training</strong>-এ দুইটা ধাপ থাকে: <strong>supervised fine-tuning (SFT)</strong>-এ মডেলকে ভালো উদাহরণ (prompt, response) দেখানো হয় যাতে এটা কথোপকথন করতে শেখে; আর <strong>preference fine-tuning</strong>-এ (যেমন RLHF বা DPO) মানুষ কোন উত্তরটা বেশি পছন্দ করে তার ভিত্তিতে মডেলকে আরও মানুষ-পছন্দসই করে তোলা হয়।"
+          "html": "<strong>Post-training</strong>-এ দুইটা ধাপ থাকে:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "<strong>supervised fine-tuning (SFT)</strong>-এ মডেলকে ভালো উদাহরণ (prompt, response) দেখানো হয়, যাতে এটা কথোপকথন করতে শেখে।",
+            "<strong>preference fine-tuning</strong>-এ (যেমন RLHF বা DPO) মানুষ কোন উত্তরটা বেশি পছন্দ করে, তার ভিত্তিতে মডেলকে আরও মানুষ-পছন্দসই করে তোলা হয়।"
+          ]
         },
         {
           "type": "paragraph",
@@ -823,20 +877,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Some tasks are easy to check automatically — like code, where you can just run it and see if it works. For everything else, people either compare the AI's answer to a sample \"correct\" answer, or increasingly, they ask another AI to act as a judge and score the response, since that's much faster and cheaper than paying humans to read every answer."
+          "html": "Some tasks are easy to check automatically. Code is one: you can just run it and see if it works. For everything else, people compare the AI's answer to a sample \"correct\" answer. Or, more and more, they ask another AI to act as a judge and score the response. That is much faster and cheaper than paying humans to read every answer."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Talent-show analogy:</strong> an AI judge is like a talent-show judge: fast and useful, but it can have its own favorites (its own style of singing), might be swayed by who performs first or who sings the longest song, and two different judges can disagree about what \"good\" even means. That's why shows often use several judges together, and why AI judges work best alongside other checks, not alone."
+              "html": "<strong>Talent-show analogy:</strong> an AI judge is like a talent-show judge. It is fast and useful, but it can have its own favorites (its own style of singing). It might be swayed by who performs first, or by who sings the longest song. And two different judges can disagree about what \"good\" even means. That's why shows often use several judges together. It's also why AI judges work best alongside other checks, not alone."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Another approach is to skip scoring altogether and just have two AI answers compete head-to-head, with a human or AI picking the winner, similar to a dance-off. Doing this many times across many model pairs produces a ranking, like a leaderboard — this is how popular AI leaderboards such as Chatbot Arena work. It tells you which model people prefer, but not whether either model is actually good enough for your needs."
+          "html": "Another approach skips scoring altogether. Two AI answers compete head-to-head, and a human or AI picks the winner, like a dance-off. Doing this many times across many model pairs produces a ranking, like a leaderboard. This is how popular AI leaderboards such as Chatbot Arena work. It tells you which model people prefer, but not whether either model is actually good enough for your needs."
         }
       ],
       "bangla": [
@@ -850,11 +904,30 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Exact evaluation</strong>-এ উত্তর একদম নির্দিষ্টভাবে সঠিক বা ভুল বলা যায়। code generation-এর ক্ষেত্রে এটা সহজ — code রান করে test case-এর বিপরীতে চেক করা যায় (functional correctness)। আর যেখানে test case চালানো যায় না, সেখানে reference answer-এর সাথে মিল দেখা হয়: exact match, lexical similarity (word overlap, যেমন BLEU/ROUGE), বা semantic similarity (embedding দিয়ে অর্থের মিল মাপা)।"
+          "html": "<strong>Exact evaluation</strong>-এ উত্তর একদম নির্দিষ্টভাবে সঠিক বা ভুল বলা যায়। code generation-এর ক্ষেত্রে এটা সহজ — code রান করে test case-এর বিপরীতে চেক করা যায় (functional correctness)। আর যেখানে test case চালানো যায় না, সেখানে reference answer-এর সাথে মিল দেখা হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "exact match;",
+            "lexical similarity: word overlap, যেমন BLEU/ROUGE;",
+            "semantic similarity: embedding দিয়ে অর্থের মিল মাপা।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "সবচেয়ে আলোচিত বিষয় হলো <strong>AI as a judge</strong> — একটা AI মডেল দিয়ে আরেকটা AI-এর output score করানো বা compare করানো। এটা দ্রুত, সস্তা, আর যেকোনো criteria (সততা, toxicity, tone) দিয়ে judge করা যায়। তবে সমস্যাও আছে: একই prompt-এ বারবার ভিন্ন score দেওয়া (inconsistency), নিজের তৈরি উত্তরকে বেশি পছন্দ করা (self-bias), লম্বা উত্তরকে বেশি নম্বর দেওয়া (verbosity bias), এবং আলাদা টুলের মধ্যে criteria-র মানে ভিন্ন হওয়া (criteria ambiguity)।"
+          "html": "সবচেয়ে আলোচিত বিষয় হলো <strong>AI as a judge</strong> — একটা AI মডেল দিয়ে আরেকটা AI-এর output score করানো বা compare করানো। এটা দ্রুত, সস্তা, আর যেকোনো criteria (সততা, toxicity, tone) দিয়ে judge করা যায়। তবে সমস্যাও আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "একই prompt-এ বারবার ভিন্ন score দেওয়া (inconsistency);",
+            "নিজের তৈরি উত্তরকে বেশি পছন্দ করা (self-bias);",
+            "লম্বা উত্তরকে বেশি নম্বর দেওয়া (verbosity bias);",
+            "আলাদা টুলের মধ্যে criteria-র মানে ভিন্ন হওয়া (criteria ambiguity)।"
+          ]
         },
         {
           "type": "paragraph",
@@ -865,13 +938,22 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>প্রতিযোগিতার উপমা:</strong> comparative evaluation অনেকটা নাচের প্রতিযোগিতার মতো — দুইটা মডেলের উত্তর পাশাপাশি দেখিয়ে কোনটা ভালো, সেটা ভোট দিয়ে ঠিক করা হয়, প্রতিটা উত্তরকে আলাদা নম্বর না দিয়ে। Chatbot Arena-র মতো leaderboard এভাবেই কাজ করে।"
+              "html": "<strong>প্রতিযোগিতার উপমা:</strong> comparative evaluation অনেকটা নাচের প্রতিযোগিতার মতো। দুইটা মডেলের উত্তর পাশাপাশি দেখিয়ে কোনটা ভালো, সেটা ভোট দিয়ে ঠিক করা হয়। প্রতিটা উত্তরকে আলাদা নম্বর দেওয়া হয় না। Chatbot Arena-র মতো leaderboard এভাবেই কাজ করে।"
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "তবে এর সীমাবদ্ধতাও আছে: মডেলের সংখ্যা বাড়লে তুলনার সংখ্যা অনেক বেড়ে যায়, crowd-sourced vote-এ quality control রাখা কঠিন, এবং একটা মডেল আরেকটার চেয়ে ভালো মানেই এই না যে সেটা আপনার application-এর জন্য যথেষ্ট ভালো।"
+          "html": "তবে এর সীমাবদ্ধতাও আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "মডেলের সংখ্যা বাড়লে তুলনার সংখ্যা অনেক বেড়ে যায়;",
+            "crowd-sourced vote-এ quality control রাখা কঠিন;",
+            "একটা মডেল আরেকটার চেয়ে ভালো মানেই এই না যে সেটা আপনার application-এর জন্য যথেষ্ট ভালো।"
+          ]
         }
       ],
       "videos": [
@@ -1097,18 +1179,28 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Before you build an AI feature, decide how you will know if it's working. That means picking a few things to check: does the model know enough about the topic, does it write good, truthful answers, does it follow your instructions, and is it fast and cheap enough to use."
+          "html": "Before you build an AI feature, decide how you will know if it's working. That means picking a few things to check:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Does the model know enough about the topic?",
+            "Does it write good, truthful answers?",
+            "Does it follow your instructions?",
+            "Is it fast and cheap enough to use?"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "Choosing which model to use is not about finding the single \"best\" model in the world — it's about finding the best one for your specific job and budget. You can either pay for a commercial model through an API, or download and run an open model yourself; each option trades off privacy, cost, control, and raw quality differently."
+          "html": "Choosing which model to use is not about finding the single \"best\" model in the world. It's about finding the best one for your specific job and budget. You can pay for a commercial model through an API. Or you can download and run an open model yourself. Each option trades off privacy, cost, control, and raw quality differently."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Restaurant review analogy:</strong> public leaderboards are like a city's \"Top 50 Restaurants\" list — handy for ruling out bad restaurants, but useless for telling you which one serves the best biryani if that's specifically what you care about. You still need to go taste a few yourself."
+              "html": "<strong>Restaurant review analogy:</strong> public leaderboards are like a city's \"Top 50 Restaurants\" list. It is handy for ruling out bad restaurants. But it can't tell you which one serves the best biryani, if that's specifically what you care about. You still need to go taste a few yourself."
             }
           ]
         },
@@ -1117,23 +1209,52 @@
           "ordered": false,
           "items": [
             "Public benchmark scores can be misleading because some models were accidentally (or deliberately) trained on the test questions.",
-            "You should build your own small, clear set of test examples with a scoring guide, so you can reliably tell good answers from bad ones for your own use case.",
-            "Checking the model once is not enough — you should keep checking it after launch, because models and user behavior both change over time."
+            "Build your own small, clear set of test examples with a scoring guide. Then you can reliably tell good answers from bad ones for your own use case.",
+            "Checking the model once is not enough. Keep checking it after launch, because models and user behavior both change over time."
           ]
         }
       ],
       "bangla": [
         {
           "type": "paragraph",
-          "html": "কোনো AI অ্যাপ্লিকেশন বানানোর আগেই ঠিক করে নিতে হবে, কীভাবে বুঝবেন এটা ভালো কাজ করছে কিনা — একে বলে evaluation-driven development। মূলত চারটা জিনিস দেখা হয়: domain-specific capability (মডেল বিষয়টা জানে কিনা), generation capability (উত্তর সত্য ও নিরাপদ কিনা), instruction-following capability (আপনার নির্দেশ ঠিকমতো মানছে কিনা), আর cost ও latency।"
+          "html": "কোনো AI অ্যাপ্লিকেশন বানানোর আগেই ঠিক করে নিতে হবে, কীভাবে বুঝবেন এটা ভালো কাজ করছে কিনা — একে বলে evaluation-driven development। মূলত চারটা জিনিস দেখা হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "domain-specific capability (মডেল বিষয়টা জানে কিনা);",
+            "generation capability (উত্তর সত্য ও নিরাপদ কিনা);",
+            "instruction-following capability (আপনার নির্দেশ ঠিকমতো মানছে কিনা);",
+            "cost ও latency।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Factual consistency</strong> যাচাই করার কয়েকটা উপায় আছে: AI judge দিয়ে সরাসরি জিজ্ঞেস করা, self-verification (একাধিক উত্তর বানিয়ে একে অপরের সাথে মেলানো), আর knowledge-augmented verification (প্রতিটা দাবি আলাদা করে সার্চ ইঞ্জিন দিয়ে যাচাই করা, যেমন Google-এর SAFE পদ্ধতি)।"
+          "html": "<strong>Factual consistency</strong> যাচাই করার কয়েকটা উপায় আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "AI judge দিয়ে সরাসরি জিজ্ঞেস করা;",
+            "self-verification: একাধিক উত্তর বানিয়ে একে অপরের সাথে মেলানো;",
+            "knowledge-augmented verification: প্রতিটা দাবি আলাদা করে সার্চ ইঞ্জিন দিয়ে যাচাই করা, যেমন Google-এর SAFE পদ্ধতি।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "Model selection মানে পুরো দুনিয়ার সেরা মডেল খোঁজা না, বরং আপনার অ্যাপ্লিকেশনের জন্য সেরা মডেল খোঁজা। এজন্য একটা workflow আছে: প্রথমে hard attributes (লাইসেন্স, ডেটা প্রাইভেসি) দিয়ে ফিল্টার করা, এরপর পাবলিক বেঞ্চমার্ক দিয়ে তালিকা ছোট করা, তারপর নিজের evaluation pipeline দিয়ে পরীক্ষা করা, আর শেষে প্রোডাকশনে মনিটর করা।"
+          "html": "Model selection মানে পুরো দুনিয়ার সেরা মডেল খোঁজা না, বরং আপনার অ্যাপ্লিকেশনের জন্য সেরা মডেল খোঁজা। এজন্য একটা workflow আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "hard attributes (লাইসেন্স, ডেটা প্রাইভেসি) দিয়ে ফিল্টার করা;",
+            "পাবলিক বেঞ্চমার্ক দিয়ে তালিকা ছোট করা;",
+            "নিজের evaluation pipeline দিয়ে পরীক্ষা করা;",
+            "প্রোডাকশনে মনিটর করা।"
+          ]
         },
         {
           "type": "callout",
@@ -1141,7 +1262,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>সতর্কতা:</strong> public benchmark-এর স্কোর সবসময় বিশ্বাস করা যায় না, কারণ অনেক মডেল অজান্তেই (বা ইচ্ছাকৃতভাবে) সেই বেঞ্চমার্কের প্রশ্ন দিয়ে ট্রেইন হয়ে যায় — একে বলে data contamination।"
+              "html": "<strong>সতর্কতা:</strong> public benchmark-এর স্কোর সবসময় বিশ্বাস করা যায় না, কারণ অনেক মডেল অজান্তেই (বা ইচ্ছাকৃতভাবে) সেই বেঞ্চমার্কের প্রশ্ন দিয়ে ট্রেইন হয়ে যায়। একে বলে data contamination।"
             }
           ]
         },
@@ -1151,7 +1272,20 @@
         },
         {
           "type": "paragraph",
-          "html": "নিজের evaluation pipeline বানানোর তিনটা ধাপ: ১) সিস্টেমের প্রতিটা অংশ আলাদা করে মূল্যায়ন করুন, ২) স্পষ্ট evaluation guideline আর scoring rubric তৈরি করুন, ৩) সঠিক evaluation method আর annotated data বেছে নিন। এই pipeline নিজেও মাঝে মাঝে পরীক্ষা করে দেখতে হবে, এটা ঠিকমতো কাজ করছে কিনা।"
+          "html": "নিজের evaluation pipeline বানানোর তিনটা ধাপ:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "সিস্টেমের প্রতিটা অংশ আলাদা করে মূল্যায়ন করুন।",
+            "স্পষ্ট evaluation guideline আর scoring rubric তৈরি করুন।",
+            "সঠিক evaluation method আর annotated data বেছে নিন।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "এই pipeline নিজেও মাঝে মাঝে পরীক্ষা করে দেখতে হবে, এটা ঠিকমতো কাজ করছে কিনা।"
         }
       ],
       "videos": [
@@ -1341,7 +1475,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The library analogy:</strong> one way to picture a foundation model is as a giant library containing countless \"programs\" &mdash; one that writes poems, one that writes code, one that answers trivia. Prompt engineering is the art of finding the right words to pull the exact program you need off the shelf."
+              "html": "<strong>The library analogy:</strong> picture a foundation model as a giant library of countless \"programs.\" One writes poems, one writes code, one answers trivia. Prompt engineering is the art of finding the right words to pull the exact program you need off the shelf."
             }
           ]
         },
@@ -1351,15 +1485,15 @@
           "items": [
             "Showing the model a few solved examples before asking your real question (few-shot) usually helps it understand exactly what you want.",
             "Telling the model to \"think step by step\" often makes its answers more accurate, because it reasons instead of jumping straight to a guess.",
-            "Just like a person, a model pays closest attention to what it reads first and last &mdash; information buried in the middle of a huge prompt can get missed.",
-            "Because models just follow instructions, bad actors can hide instructions in emails, webpages, or even usernames to trick an AI assistant into doing something harmful. This is why safety checks are needed at every layer, not just in the prompt."
+            "Just like a person, a model pays closest attention to what it reads first and last. Information buried in the middle of a huge prompt can get missed.",
+            "Models just follow instructions. So bad actors can hide instructions in emails, webpages, or even usernames to trick an AI assistant into doing something harmful. This is why safety checks are needed at every layer, not just in the prompt."
           ]
         }
       ],
       "bangla": [
         {
           "type": "paragraph",
-          "html": "প্রম্পট মানে হলো আপনি একটা foundation model-কে ঠিক কী করতে বলছেন, সেই instruction। সাধারণত এতে থাকে task description, কিছু example, আর আসল task। সবচেয়ে ভালো দিক হলো, prompt engineering করতে মডেলের weight পরিবর্তন করতে হয় না — তাই fine-tuning-এ যাওয়ার আগে আগে prompting দিয়েই যতটা সম্ভব ফলাফল বের করে নেওয়া উচিত।"
+          "html": "প্রম্পট মানে হলো আপনি একটা foundation model-কে ঠিক কী করতে বলছেন, সেই instruction। সাধারণত এতে থাকে task description, কিছু example, আর আসল task। সবচেয়ে ভালো দিক হলো, prompt engineering করতে মডেলের weight পরিবর্তন করতে হয় না। তাই fine-tuning-এ যাওয়ার আগে আগে prompting দিয়েই যতটা সম্ভব ফলাফল বের করে নেওয়া উচিত।"
         },
         {
           "type": "paragraph",
@@ -1388,7 +1522,20 @@
         },
         {
           "type": "paragraph",
-          "html": "অ্যাপ্লিকেশন চালু হওয়ার পর বাজে উদ্দেশ্যের ব্যবহারকারীরাও আসতে পারে। তিন ধরনের মূল ঝুঁকি: system prompt চুরি (prompt extraction), মডেলকে খারাপ কাজ করিয়ে নেওয়া (jailbreaking/prompt injection), আর training data বা private context বের করে আনা (information extraction)। সবচেয়ে বিপজ্জনক হলো <strong>indirect prompt injection</strong> — যেখানে আক্রমণকারী ক্ষতিকর instruction লুকিয়ে রাখে কোনো email, website বা database-এর মধ্যে, যা মডেল পরে retrieve করে নিজের instruction ভেবে মেনে নেয়।"
+          "html": "অ্যাপ্লিকেশন চালু হওয়ার পর বাজে উদ্দেশ্যের ব্যবহারকারীরাও আসতে পারে। তিন ধরনের মূল ঝুঁকি:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "system prompt চুরি (prompt extraction);",
+            "মডেলকে খারাপ কাজ করিয়ে নেওয়া (jailbreaking/prompt injection);",
+            "training data বা private context বের করে আনা (information extraction)।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "সবচেয়ে বিপজ্জনক হলো <strong>indirect prompt injection</strong>। এতে আক্রমণকারী ক্ষতিকর instruction লুকিয়ে রাখে কোনো email, website বা database-এর মধ্যে। মডেল পরে সেটা retrieve করে, আর নিজের instruction ভেবে মেনে নেয়।"
         },
         {
           "type": "callout",
@@ -1396,7 +1543,20 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "সুরক্ষা তিন স্তরে দিতে হয়: model-level (system prompt-কে বেশি priority দিতে training), prompt-level (স্পষ্টভাবে বলে দেওয়া কী কখনোই বলা যাবে না), আর system-level (input/output guardrail)। কোনোটাই ১০০% নিশ্চয়তা দেয় না, তাই violation rate আর false refusal rate — দুটোই নজরে রাখতে হয়।"
+              "html": "সুরক্ষা তিন স্তরে দিতে হয়:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "model-level: system prompt-কে বেশি priority দিতে training;",
+                "prompt-level: স্পষ্টভাবে বলে দেওয়া কী কখনোই বলা যাবে না;",
+                "system-level: input/output guardrail।"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "html": "কোনোটাই ১০০% নিশ্চয়তা দেয় না, তাই violation rate আর false refusal rate — দুটোই নজরে রাখতে হয়।"
             }
           ]
         }
@@ -1631,7 +1791,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Think of a foundation model as a very well-read assistant who has a huge but fixed memory from training and a small notepad for the current conversation. RAG is like letting this assistant look things up in a library before answering, instead of only guessing from memory. Agents go further: the assistant also gets a phone, a calculator, and a set of office tools, so it can look things up, do math, or actually make a change for you, not just talk about it."
+          "html": "Think of a foundation model as a very well-read assistant. It has a huge but fixed memory from training, and a small notepad for the current conversation. RAG is like letting this assistant look things up in a library before answering, instead of only guessing from memory. Agents go further. The assistant also gets a phone, a calculator, and a set of office tools. So it can look things up, do math, or actually make a change for you, not just talk about it."
         },
         {
           "type": "list",
@@ -1648,19 +1808,19 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Librarian vs. intern analogy:</strong> A plain model answering from memory is like a very smart person answering from recollection alone. A RAG system is that same person with a librarian pulling the exact right book first. An agent is that person turned into a capable intern — one who can also search the web, run a calculator, send an email, or query a database to get the job done, step by step."
+              "html": "<strong>Librarian vs. intern analogy:</strong> A plain model answering from memory is like a very smart person answering from recollection alone. A RAG system is that same person with a librarian pulling the exact right book first. An agent is that person turned into a capable intern. The intern can also search the web, run a calculator, send an email, or query a database to get the job done, step by step."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "The catch: giving an assistant more tools and more steps also gives it more chances to go wrong, so every real agent system needs a way to check its plans and catch mistakes before they cause damage."
+          "html": "The catch: giving an assistant more tools and more steps also gives it more chances to go wrong. So every real agent system needs a way to check its plans and catch mistakes before they cause damage."
         }
       ],
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটা foundation model-কে ঠিকভাবে কাজ করাতে শুধু instruction দিলেই হয় না, তার সাথে দরকার সঠিক context — যে তথ্য দিয়ে ও আপনার নির্দিষ্ট প্রশ্নের উত্তর দিতে পারবে। এই context বানানোর দুইটা প্রধান পদ্ধতি হলো <strong>RAG</strong> (retrieval-augmented generation) আর <strong>agent</strong>।"
+          "html": "একটা foundation model-কে ঠিকভাবে কাজ করাতে শুধু instruction দিলেই হয় না। তার সাথে দরকার সঠিক context, অর্থাৎ যে তথ্য দিয়ে ও আপনার নির্দিষ্ট প্রশ্নের উত্তর দিতে পারবে। এই context বানানোর দুইটা প্রধান পদ্ধতি হলো <strong>RAG</strong> (retrieval-augmented generation) আর <strong>agent</strong>।"
         },
         {
           "type": "paragraph",
@@ -1668,11 +1828,25 @@
         },
         {
           "type": "paragraph",
-          "html": "Retrieval আরও ভালো করার জন্য কিছু কৌশল আছে: ডকুমেন্টকে ছোট ছোট <strong>chunk</strong>-এ ভাগ করা, retrieval-এর পরে ভালো candidate-গুলোকে আবার <strong>rerank</strong> করা, অস্পষ্ট প্রশ্নকে <strong>query rewriting</strong>-এর মাধ্যমে স্পষ্ট করা, আর chunk-এর সাথে extra context বা metadata জুড়ে দেওয়া (<strong>contextual retrieval</strong>)। RAG শুধু টেক্সটে সীমাবদ্ধ না — ছবি-ভিডিওর জন্য multimodal RAG আছে, আর table ডেটার জন্য text-to-SQL ব্যবহার করা হয়।"
+          "html": "Retrieval আরও ভালো করার জন্য কিছু কৌশল আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ডকুমেন্টকে ছোট ছোট <strong>chunk</strong>-এ ভাগ করা;",
+            "retrieval-এর পরে ভালো candidate-গুলোকে আবার <strong>rerank</strong> করা;",
+            "অস্পষ্ট প্রশ্নকে <strong>query rewriting</strong>-এর মাধ্যমে স্পষ্ট করা;",
+            "chunk-এর সাথে extra context বা metadata জুড়ে দেওয়া (<strong>contextual retrieval</strong>)।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Agent</strong> মানে এমন একটা সিস্টেম, যে তার environment বুঝতে পারে আর tool ব্যবহার করে সেখানে কাজ করতে পারে — যেমন web search, calculator, code interpreter, এমনকি email পাঠানো বা database আপডেট করার মতো write action। Agent-এর কাজ শুরুর আগে একটা <strong>plan</strong> তৈরি করে, সেটা validate করে, তারপর execute করে — এভাবে planning আর execution আলাদা রাখলে ভুল plan-এর পেছনে সময়-টাকা নষ্ট হয় না।"
+          "html": "RAG শুধু টেক্সটে সীমাবদ্ধ না — ছবি-ভিডিওর জন্য multimodal RAG আছে, আর table ডেটার জন্য text-to-SQL ব্যবহার করা হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Agent</strong> মানে এমন একটা সিস্টেম, যে তার environment বুঝতে পারে আর tool ব্যবহার করে সেখানে কাজ করতে পারে। tool হতে পারে web search, calculator, code interpreter, এমনকি email পাঠানো বা database আপডেট করার মতো write action। Agent-এর কাজ শুরুর আগে একটা <strong>plan</strong> তৈরি করে, সেটা validate করে, তারপর execute করে। এভাবে planning আর execution আলাদা রাখলে ভুল plan-এর পেছনে সময়-টাকা নষ্ট হয় না।"
         },
         {
           "type": "analogy",
@@ -1685,7 +1859,7 @@
         },
         {
           "type": "paragraph",
-          "html": "বেশি ধাপ আর বেশি tool মানে ভুল হওয়ার সুযোগও বেশি, তাই agent-এর জন্য দরকার হয় <strong>failure mode</strong> ট্র্যাক করা — ভুল tool ডাকা, ভুল parameter, বা অদক্ষ (অনেক বেশি সময়/খরচ লাগা) plan। পাশাপাশি দরকার <strong>memory</strong> ব্যবস্থাপনা: কোনটা model-এর internal knowledge, কোনটা সাময়িক short-term context, আর কোনটা দীর্ঘমেয়াদি long-term memory হিসেবে বাইরে সংরক্ষণ করা হবে।"
+          "html": "বেশি ধাপ আর বেশি tool মানে ভুল হওয়ার সুযোগও বেশি। তাই agent-এর জন্য <strong>failure mode</strong> ট্র্যাক করা দরকার হয়: ভুল tool ডাকা, ভুল parameter, বা অদক্ষ (অনেক বেশি সময়/খরচ লাগা) plan। পাশাপাশি দরকার <strong>memory</strong> ব্যবস্থাপনা: কোনটা model-এর internal knowledge, কোনটা সাময়িক short-term context, আর কোনটা দীর্ঘমেয়াদি long-term memory হিসেবে বাইরে সংরক্ষণ করা হবে।"
         }
       ],
       "videos": [
@@ -1923,20 +2097,20 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Finetuning means taking an already-trained AI model and giving it extra, more focused training on examples from your own task, so it gets better at exactly what you need."
+          "html": "Finetuning means taking an already-trained AI model and giving it extra, more focused training on examples from your own task. Then it gets better at exactly what you need."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>New-hire analogy:</strong> a foundation model is like a smart new hire with broad general knowledge. Prompting is like giving them instructions and a few examples for today's task. Finetuning is like putting them through a short, focused training course on your company's specific way of doing things — it works well, but it costs time and effort, so you only do it when just giving instructions isn't enough."
+              "html": "<strong>New-hire analogy:</strong> a foundation model is like a smart new hire with broad general knowledge. Prompting is like giving them instructions and a few examples for today's task. Finetuning is like putting them through a short, focused training course on your company's specific way of doing things. It works well, but it costs time and effort. So you only do it when just giving instructions isn't enough."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Finetuning is memory-hungry because the model has to remember not just its answer, but also how wrong it was and how to adjust itself — for every piece it is allowed to change. Techniques like LoRA get around this by only training a tiny add-on instead of the whole model, and quantization shrinks memory further by storing numbers less precisely."
+          "html": "Finetuning is memory-hungry. The model has to remember not just its answer, but also how wrong it was and how to adjust itself. It must do that for every piece it is allowed to change. Techniques like LoRA get around this by training only a tiny add-on instead of the whole model. Quantization shrinks memory further by storing numbers less precisely."
         },
         {
           "type": "list",
@@ -1967,7 +2141,7 @@
           "items": [
             "<strong>Quantization:</strong> প্রতিটা সংখ্যা কম বিট (যেমন ৩২-বিটের বদলে ৮-বিট) দিয়ে রাখলে মেমরি কমে যায়, কিছুটা precision হারানোর বিনিময়ে।",
             "<strong>PEFT (Parameter-Efficient Finetuning):</strong> পুরো মডেল না বদলে ছোট্ট একটা অংশ ট্রেইন করা।",
-            "<strong>LoRA:</strong> সবচেয়ে জনপ্রিয় PEFT পদ্ধতি — একটা বড় weight matrix-কে দুইটা ছোট matrix দিয়ে approximate করে শুধু ওই ছোট দুটো ট্রেইন করা হয়, এতে মেমরি অনেক কম লাগে এবং একই base model-এর ওপর একাধিক LoRA adapter আলাদা আলাদা কাজের জন্য serve করা যায়।"
+            "<strong>LoRA:</strong> সবচেয়ে জনপ্রিয় PEFT পদ্ধতি। একটা বড় weight matrix-কে দুইটা ছোট matrix দিয়ে approximate করে শুধু ওই ছোট দুটো ট্রেইন করা হয়। এতে মেমরি অনেক কম লাগে। আর একই base model-এর ওপর একাধিক LoRA adapter আলাদা আলাদা কাজের জন্য serve করা যায়।"
           ]
         },
         {
@@ -1975,7 +2149,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>উপমা:</strong> পুরো মডেল fine-tune করা মানে পুরো বইটা আবার নতুন করে লেখা; LoRA মানে বইয়ের মার্জিনে ছোট ছোট নোট যোগ করা — অনেক কম কাজ, কিন্তু প্রায় একই উপকার।"
+              "html": "<strong>উপমা:</strong> পুরো মডেল fine-tune করা মানে পুরো বইটা আবার নতুন করে লেখা। LoRA মানে বইয়ের মার্জিনে ছোট ছোট নোট যোগ করা — অনেক কম কাজ, কিন্তু প্রায় একই উপকার।"
             }
           ]
         },
@@ -1985,7 +2159,16 @@
         },
         {
           "type": "paragraph",
-          "html": "প্র্যাকটিক্যাল টিপস: শুরুতে LoRA-র মতো সস্তা পদ্ধতি ব্যবহার করুন, learning rate আর batch size নিয়ে experiment করুন, আর training loss ও validation loss দুটোই নজর রাখুন — validation loss বাড়তে থাকলে বুঝবেন মডেল overfit করছে।"
+          "html": "প্র্যাকটিক্যাল টিপস:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "শুরুতে LoRA-র মতো সস্তা পদ্ধতি ব্যবহার করুন।",
+            "learning rate আর batch size নিয়ে experiment করুন।",
+            "training loss ও validation loss দুটোই নজর রাখুন। validation loss বাড়তে থাকলে বুঝবেন মডেল overfit করছে।"
+          ]
         }
       ],
       "videos": [
@@ -2264,7 +2447,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Since getting enough high-quality human-written data is hard and expensive, teams increasingly use AI to generate more training data — this is called data synthesis. It's powerful, but risky if left unchecked: if you keep training new models only on data made by older AI models, quality can slowly drift and degrade over time, a problem researchers call model collapse. That's why generated data still needs checking before it's trusted."
+          "html": "Getting enough high-quality human-written data is hard and expensive. So teams increasingly use AI to generate more training data. This is called data synthesis. It's powerful, but risky if left unchecked. If you keep training new models only on data made by older AI models, quality can slowly drift and degrade over time. Researchers call this problem model collapse. That's why generated data still needs checking before it's trusted."
         },
         {
           "type": "list",
@@ -2283,7 +2466,20 @@
         },
         {
           "type": "paragraph",
-          "html": "ডেটা মূল্যায়ন করার তিনটি মূল মাপকাঠি হলো <strong>data quality</strong> (ডেটা কতটা নির্ভুল আর সামঞ্জস্যপূর্ণ), <strong>data coverage</strong> বা diversity (ডেটায় বাস্তব ব্যবহারের সব ধরনের বৈচিত্র্য আছে কিনা), আর <strong>data quantity</strong> (পরিমাণে পর্যাপ্ত কিনা)। গবেষণায় বারবার দেখা গেছে, অল্প কিন্তু উচ্চমানের ডেটা অনেক সময় বিশাল পরিমাণ noisy ডেটার চেয়ে ভালো ফল দেয়।"
+          "html": "ডেটা মূল্যায়ন করার তিনটি মূল মাপকাঠি:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>data quality</strong>: ডেটা কতটা নির্ভুল আর সামঞ্জস্যপূর্ণ;",
+            "<strong>data coverage</strong> বা diversity: ডেটায় বাস্তব ব্যবহারের সব ধরনের বৈচিত্র্য আছে কিনা;",
+            "<strong>data quantity</strong>: পরিমাণে পর্যাপ্ত কিনা।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "গবেষণায় বারবার দেখা গেছে, অল্প কিন্তু উচ্চমানের ডেটা অনেক সময় বিশাল পরিমাণ noisy ডেটার চেয়ে ভালো ফল দেয়।"
         },
         {
           "type": "analogy",
@@ -2296,7 +2492,7 @@
         },
         {
           "type": "paragraph",
-          "html": "যথেষ্ট পরিমাণে human-annotated ডেটা পাওয়া কঠিন ও ব্যয়বহুল বলে, এখন অনেক টিম <strong>data synthesis</strong>-এর দিকে ঝুঁকছে — অর্থাৎ একটি foundation model ব্যবহার করে নতুন instruction আর response তৈরি করা। এমনকি <strong>model distillation</strong>-ও এক ধরনের synthesis, যেখানে একটি ছোট student model একটি বড় teacher model-এর তৈরি করা আউটপুট দেখে শেখে, যেমন Alpaca মডেলটি GPT-3-এর একটি সংস্করণের আউটপুট দিয়ে ফাইন-টিউন করা হয়েছিল।"
+          "html": "যথেষ্ট পরিমাণে human-annotated ডেটা পাওয়া কঠিন ও ব্যয়বহুল। তাই এখন অনেক টিম <strong>data synthesis</strong>-এর দিকে ঝুঁকছে, অর্থাৎ একটি foundation model ব্যবহার করে নতুন instruction আর response তৈরি করা। এমনকি <strong>model distillation</strong>-ও এক ধরনের synthesis। এতে একটি ছোট student model একটি বড় teacher model-এর তৈরি করা আউটপুট দেখে শেখে। যেমন Alpaca মডেলটি GPT-3-এর একটি সংস্করণের আউটপুট দিয়ে ফাইন-টিউন করা হয়েছিল।"
         },
         {
           "type": "callout",
@@ -2304,13 +2500,23 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "তবে সতর্ক থাকতে হবে: synthetic data নিয়ে কাজ করলে <strong>model collapse</strong>-এর ঝুঁকি আছে — বারবার AI-generated ডেটা দিয়ে ট্রেনিং করলে মডেলের মান ধীরে ধীরে খারাপ হতে পারে। তাই generated ডেটা সবসময় যাচাই (verify) করে নিতে হবে।"
+              "html": "তবে সতর্ক থাকতে হবে: synthetic data নিয়ে কাজ করলে <strong>model collapse</strong>-এর ঝুঁকি আছে। বারবার AI-generated ডেটা দিয়ে ট্রেনিং করলে মডেলের মান ধীরে ধীরে খারাপ হতে পারে। তাই generated ডেটা সবসময় যাচাই (verify) করে নিতে হবে।"
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "ডেটা সংগ্রহ করার পর সরাসরি ট্রেনিংয়ে ব্যবহার করা যায় না। এর আগে চারটি ধাপ লাগে: ডেটা <strong>inspect</strong> করা (দেখে বোঝা কী আছে), <strong>deduplicate</strong> করা (একই ডেটা বারবার থাকলে বায়াস তৈরি হয়), <strong>clean ও filter</strong> করা (নোংরা formatting আর নিম্নমানের উদাহরণ সরানো), আর শেষে মডেলের চাহিদা অনুযায়ী সঠিক ফরম্যাটে সাজানো।"
+          "html": "ডেটা সংগ্রহ করার পর সরাসরি ট্রেনিংয়ে ব্যবহার করা যায় না। এর আগে চারটি ধাপ লাগে:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "ডেটা <strong>inspect</strong> করা (দেখে বোঝা কী আছে);",
+            "<strong>deduplicate</strong> করা (একই ডেটা বারবার থাকলে বায়াস তৈরি হয়);",
+            "<strong>clean ও filter</strong> করা (নোংরা formatting আর নিম্নমানের উদাহরণ সরানো);",
+            "মডেলের চাহিদা অনুযায়ী সঠিক ফরম্যাটে সাজানো।"
+          ]
         }
       ],
       "videos": [
@@ -2578,7 +2784,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Once a model is trained, someone still has to run it for real users, and that costs money and takes time for every single response. This chapter is about making that running step — called inference — faster and cheaper without ruining the model's answers."
+          "html": "Once a model is trained, someone still has to run it for real users. That costs money and takes time for every single response. This chapter is about making that running step — called inference — faster and cheaper without ruining the model's answers."
         },
         {
           "type": "paragraph",
@@ -2589,7 +2795,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Restaurant kitchen analogy:</strong> reading an order and gathering ingredients is like <strong>prefill</strong> — it can be done quickly by many hands at once. Cooking the dish step by step is like <strong>decode</strong> — it happens one step after another and cannot be rushed past a point. A busy kitchen that groups similar orders together (batching), reuses prepped ingredients across orders (caching), and lets fast hands assist the chef (speculative decoding) serves far more diners without making anyone wait longer."
+              "html": "<strong>Restaurant kitchen analogy:</strong> reading an order and gathering ingredients is like <strong>prefill</strong>. It can be done quickly by many hands at once. Cooking the dish step by step is like <strong>decode</strong>. It happens one step after another and cannot be rushed past a point. A busy kitchen serves far more diners without making anyone wait longer. It groups similar orders together (batching), reuses prepped ingredients across orders (caching), and lets fast hands assist the chef (speculative decoding)."
             }
           ]
         },
@@ -2599,7 +2805,7 @@
           "items": [
             "Shrinking the model (quantization, distillation, pruning) makes it lighter and faster to run.",
             "Clever tricks like having a small helper model draft guesses, or reusing repeated text, can speed up word-by-word generation.",
-            "Serving many users at once (batching), splitting a model across multiple machines, and caching reused text are all ways to serve more people with the same hardware."
+            "Serving many users at once (batching), splitting a model across multiple machines, and caching reused text all let the same hardware serve more people."
           ]
         },
         {
@@ -2614,7 +2820,15 @@
         },
         {
           "type": "paragraph",
-          "html": "অটোরিগ্রেসিভ ল্যাঙ্গুয়েজ মডেলের ইনফারেন্স দুইটা ধাপে হয়: <strong>prefill</strong> (ইনপুট টোকেনগুলো একসাথে প্রসেস করা, যা compute-bound) আর <strong>decode</strong> (একটা একটা করে আউটপুট টোকেন জেনারেট করা, যা memory bandwidth-bound)।"
+          "html": "অটোরিগ্রেসিভ ল্যাঙ্গুয়েজ মডেলের ইনফারেন্স দুইটা ধাপে হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>prefill</strong>: ইনপুট টোকেনগুলো একসাথে প্রসেস করা, যা compute-bound;",
+            "<strong>decode</strong>: একটা একটা করে আউটপুট টোকেন জেনারেট করা, যা memory bandwidth-bound।"
+          ]
         },
         {
           "type": "list",
@@ -2627,24 +2841,37 @@
         },
         {
           "type": "paragraph",
-          "html": "মডেল লেভেলে অপ্টিমাইজেশনের জন্য আছে quantization, distillation, pruning এর মতো model compression টেকনিক, আর speculative decoding-এর মতো পদ্ধতি, যেখানে একটা ছোট draft model আগে থেকে কয়েকটা টোকেন গেস করে, আর মূল (target) model সেগুলো প্যারালালি ভেরিফাই করে।"
+          "html": "মডেল লেভেলে অপ্টিমাইজেশনের জন্য আছে quantization, distillation, pruning এর মতো model compression টেকনিক। আছে speculative decoding-এর মতো পদ্ধতিও। এতে একটা ছোট draft model আগে থেকে কয়েকটা টোকেন গেস করে, আর মূল (target) model সেগুলো প্যারালালি ভেরিফাই করে।"
         },
         {
           "type": "paragraph",
-          "html": "Attention mechanism অপ্টিমাইজ করার জন্য <strong>KV cache</strong> ব্যবহার হয়, যাতে আগের টোকেনের key-value ভেক্টর বারবার কম্পিউট করতে না হয়। তবে লম্বা context বা বড় batch size-এ এই cache অনেক মেমোরি খেয়ে ফেলতে পারে, তাই multi-query attention, grouped-query attention, আর FlashAttention-এর মতো kernel optimization দরকার হয়।"
+          "html": "Attention mechanism অপ্টিমাইজ করার জন্য <strong>KV cache</strong> ব্যবহার হয়, যাতে আগের টোকেনের key-value ভেক্টর বারবার কম্পিউট করতে না হয়। তবে লম্বা context বা বড় batch size-এ এই cache অনেক মেমোরি খেয়ে ফেলতে পারে। তাই দরকার হয় attention-এর নতুন নকশা (multi-query attention, grouped-query attention) আর FlashAttention-এর মতো kernel optimization।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>বাসের উপমা:</strong> প্রতিটা রিকোয়েস্ট আলাদা গাড়িতে পাঠানোর বদলে, <strong>batching</strong> হলো সবাইকে একসাথে একটা বাসে তোলা — এতে খরচ কমে, তবে বাস ছাড়তে একটু দেরি হতে পারে। <strong>Continuous batching</strong>-এ বাস থেকে একজন নামলেই আরেকজন উঠে যায়, তাই বাসটা সবসময় প্রায় ভরা থাকে।"
+              "html": "<strong>বাসের উপমা:</strong> প্রতিটা রিকোয়েস্ট আলাদা গাড়িতে পাঠানোর বদলে, <strong>batching</strong> হলো সবাইকে একসাথে একটা বাসে তোলা। এতে খরচ কমে, তবে বাস ছাড়তে একটু দেরি হতে পারে। <strong>Continuous batching</strong>-এ বাস থেকে একজন নামলেই আরেকজন উঠে যায়, তাই বাসটা সবসময় প্রায় ভরা থাকে।"
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "সার্ভিস লেভেলে আরও টেকনিক আছে: prefill আর decode আলাদা মেশিনে চালানো, বারবার ব্যবহৃত প্রম্পট অংশ cache করে রাখা (<strong>prompt caching</strong>), আর বড় মডেলকে একাধিক GPU-তে ভাগ করে চালানো (tensor parallelism, pipeline parallelism, replica parallelism)। এসব টেকনিক সাধারণত মডেলের আউটপুট কোয়ালিটি না বদলে শুধু speed আর cost ঠিক করার চেষ্টা করে।"
+          "html": "সার্ভিস লেভেলে আরও টেকনিক আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "prefill আর decode আলাদা মেশিনে চালানো;",
+            "বারবার ব্যবহৃত প্রম্পট অংশ cache করে রাখা (<strong>prompt caching</strong>);",
+            "বড় মডেলকে একাধিক GPU-তে ভাগ করে চালানো (tensor parallelism, pipeline parallelism), বা মডেলের একাধিক কপি চালানো (replica parallelism)।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "এসব টেকনিক সাধারণত মডেলের আউটপুট কোয়ালিটি না বদলে শুধু speed আর cost ঠিক করার চেষ্টা করে।"
         }
       ],
       "videos": [
@@ -2910,42 +3137,71 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Think of building an AI app like building a house. You start with four walls and a roof — just send the question to the model and show the answer. Then, because real problems come up, you add plumbing (giving the model outside information like documents or search results), locks on the doors (guardrails that block bad requests or bad answers), a reception desk (a router that sends different questions to different rooms), and a pantry (caching, so you don't cook the same meal twice)."
+          "html": "Think of building an AI app like building a house. You start with four walls and a roof: just send the question to the model and show the answer. Then real problems come up, so you add:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "plumbing: giving the model outside information, like documents or search results;",
+            "locks on the doors: guardrails that block bad requests or bad answers;",
+            "a reception desk: a router that sends different questions to different rooms;",
+            "a pantry: caching, so you don't cook the same meal twice."
+          ]
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Restaurant analogy:</strong> monitoring is like a manager watching the dining room — are plates coming back untouched, are customers waiting too long, are any dishes making people sick? Logs and traces are the kitchen's ticket system: when something goes wrong, you can walk back through exactly which station touched the order and when."
+              "html": "<strong>Restaurant analogy:</strong> monitoring is like a manager watching the dining room. Are plates coming back untouched? Are customers waiting too long? Are any dishes making people sick? Logs and traces are the kitchen's ticket system. When something goes wrong, you can walk back through exactly which station touched the order, and when."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "The second half of this chapter is about listening to customers. Every time a user corrects the AI, stops it mid-answer, regenerates a response, or just says \"that's wrong,\" they are quietly teaching the system what good and bad look like. The trick is collecting that feedback without being annoying about it — the best designs (like an image generator letting you simply pick your favorite of four pictures) get useful signal for free."
+          "html": "The second half of this chapter is about listening to customers. A user might correct the AI, stop it mid-answer, regenerate a response, or just say \"that's wrong.\" Each time, they quietly teach the system what good and bad look like. The trick is to collect that feedback without being annoying about it. The best designs get useful signal for free, like an image generator that lets you simply pick your favorite of four pictures."
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "Not all feedback is honest or fair: people rate things kinder than they feel, click the first option out of habit, or prefer long answers even when a short one was more correct.",
-            "If you only ever show your most popular answers, they get more clicks and look even more popular — new, possibly better answers never get a chance. This is the trap called a degenerate feedback loop."
+            "Not all feedback is honest or fair. People rate things kinder than they feel, click the first option out of habit, or prefer long answers even when a short one was more correct.",
+            "If you only ever show your most popular answers, they get more clicks and look even more popular. New, possibly better answers never get a chance. This is the trap called a degenerate feedback loop."
           ]
         }
       ],
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটা AI অ্যাপ সবচেয়ে সহজ অবস্থায় শুধু একটা <strong>model API</strong>-তে query পাঠায় আর response ফেরত দেয় — কোনো context, guardrail বা optimization ছাড়াই। প্রোডাকশনে গিয়ে এই সহজ কাঠামোর উপর ধাপে ধাপে ০৫টা স্তর যোগ হয়: context enhance করা, guardrails বসানো, router আর gateway যোগ করা, caching দিয়ে latency কমানো, আর agent pattern যোগ করে জটিল কাজ করানো।"
+          "html": "একটা AI অ্যাপ সবচেয়ে সহজ অবস্থায় শুধু একটা <strong>model API</strong>-তে query পাঠায় আর response ফেরত দেয় — কোনো context, guardrail বা optimization ছাড়াই। প্রোডাকশনে গিয়ে এই সহজ কাঠামোর উপর ধাপে ধাপে ০৫টা স্তর যোগ হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "context enhance করা;",
+            "guardrails বসানো;",
+            "router আর gateway যোগ করা;",
+            "caching দিয়ে latency কমানো;",
+            "agent pattern যোগ করে জটিল কাজ করানো।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Context construction</strong> হলো foundation model-এর জন্য ফিচার ইঞ্জিনিয়ারিং-এর মতো — retrieval আর tool use দিয়ে মডেলকে উত্তর দেয়ার জন্য দরকারি তথ্য দেওয়া হয়। <strong>Guardrails</strong> দুই ধরনের: input guardrail লিক হওয়া sensitive তথ্য আর prompt attack ঠেকায় (যেমন ফোন নম্বর <code>[PHONE NUMBER]</code> দিয়ে মাস্ক করে পরে আনমাস্ক করা), আর output guardrail hallucination, toxic content, বা malformatted output ধরে ফেলে।"
+          "html": "<strong>Context construction</strong> হলো foundation model-এর জন্য ফিচার ইঞ্জিনিয়ারিং-এর মতো — retrieval আর tool use দিয়ে মডেলকে উত্তর দেয়ার জন্য দরকারি তথ্য দেওয়া হয়। <strong>Guardrails</strong> দুই ধরনের:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "input guardrail লিক হওয়া sensitive তথ্য আর prompt attack ঠেকায় (যেমন ফোন নম্বর <code>[PHONE NUMBER]</code> দিয়ে মাস্ক করে পরে আনমাস্ক করা);",
+            "output guardrail hallucination, toxic content, বা malformatted output ধরে ফেলে।"
+          ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Router</strong> একটা intent classifier দিয়ে ঠিক করে কোন query কোথায় যাবে — সস্তা মডেল না বিশেষায়িত মডেল, নাকি মানুষ অপারেটর। <strong>Gateway</strong> সব মডেলের (self-hosted বা third-party) জন্য একটা একক API দেয়, যাতে access control, cost management আর fallback (একটা provider fail করলে অন্যটায় যাওয়া) কেন্দ্রীয়ভাবে করা যায়।"
+          "html": "<strong>Router</strong> একটা intent classifier দিয়ে ঠিক করে কোন query কোথায় যাবে — সস্তা মডেল না বিশেষায়িত মডেল, নাকি মানুষ অপারেটর। <strong>Gateway</strong> সব মডেলের (self-hosted বা third-party) জন্য একটা একক API দেয়। ফলে access control, cost management আর fallback (একটা provider fail করলে অন্যটায় যাওয়া) কেন্দ্রীয়ভাবে করা যায়।"
         },
         {
           "type": "list",
@@ -2957,20 +3213,20 @@
         },
         {
           "type": "paragraph",
-          "html": "Agent pattern দিয়ে সিস্টেম loop চালাতে পারে (উত্তর যথেষ্ট না হলে আবার retrieval করে নিজেকে ফিডব্যাক দেওয়া), আর write action (ইমেইল পাঠানো, অর্ডার বসানো) যোগ করলে সিস্টেম অনেক বেশি কার্যকর কিন্তু ঝুঁকিপূর্ণও হয়ে যায়। <strong>Monitoring আর observability</strong>-তে metrics, logs, আর traces — এই তিনটা মিলিয়ে বোঝা যায় সিস্টেম কোথায় ভেঙেছে, আর <strong>orchestration</strong> সব component একসাথে চেইন করে দেয়।"
+          "html": "Agent pattern দিয়ে সিস্টেম loop চালাতে পারে: উত্তর যথেষ্ট না হলে আবার retrieval করে নিজেকে ফিডব্যাক দেয়। আর write action (ইমেইল পাঠানো, অর্ডার বসানো) যোগ করলে সিস্টেম অনেক বেশি কার্যকর হয়, কিন্তু ঝুঁকিপূর্ণও হয়ে যায়। <strong>Monitoring আর observability</strong>-তে metrics, logs, আর traces — এই তিনটা মিলিয়ে বোঝা যায় সিস্টেম কোথায় ভেঙেছে। আর <strong>orchestration</strong> সব component একসাথে চেইন করে দেয়।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>উপমা:</strong> ইউজার যখন AI-কে বলে \"না, আমি এটা বলিনি\" বা মাঝপথে থামিয়ে দেয়, সেটাও একধরনের ফিডব্যাক — যেমন রেস্টুরেন্টে প্লেট অর্ধেক খাওয়া অবস্থায় ফেরত গেলে বোঝা যায় রান্না ভালো হয়নি।"
+              "html": "<strong>উপমা:</strong> ইউজার যখন AI-কে বলে \"না, আমি এটা বলিনি\" বা মাঝপথে থামিয়ে দেয়, সেটাও একধরনের ফিডব্যাক। যেমন রেস্টুরেন্টে প্লেট অর্ধেক খাওয়া অবস্থায় ফেরত গেলে বোঝা যায় রান্না ভালো হয়নি।"
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>Feedback</strong> explicit (thumbs up/down, star rating) বা implicit (ইউজারের আচরণ থেকে বোঝা) হতে পারে। ভালো feedback design হলো সেটা যা ইউজারের কাজে বাধা না দিয়ে সিগন্যাল সংগ্রহ করে — যেমন Midjourney-তে একটা ছবি upscale করার বাটন চাপাই বলে দেয় কোনটা পছন্দ হয়েছে।"
+          "html": "<strong>Feedback</strong> explicit (thumbs up/down, star rating) বা implicit (ইউজারের আচরণ থেকে বোঝা) হতে পারে। ভালো feedback design হলো সেটা যা ইউজারের কাজে বাধা না দিয়ে সিগন্যাল সংগ্রহ করে। যেমন Midjourney-তে একটা ছবি upscale করার বাটন চাপাই বলে দেয় কোনটা পছন্দ হয়েছে।"
         },
         {
           "type": "callout",
@@ -2978,7 +3234,16 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "তবে feedback-এ bias থাকে: leniency bias (মানুষ বেশি খারাপ রেটিং দিতে অস্বস্তি বোধ করে), position bias (প্রথম অপশনেই বেশি ক্লিক পড়ে), আর degenerate feedback loop — যেখানে জনপ্রিয় উত্তরই বারবার দেখানো হয়, তাই সেটাই আরও বেশি ক্লিক পায়, আর নতুন ভালো উত্তর কখনো সুযোগই পায় না।"
+              "html": "তবে feedback-এ bias থাকে:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "<strong>leniency bias</strong>: মানুষ বেশি খারাপ রেটিং দিতে অস্বস্তি বোধ করে;",
+                "<strong>position bias</strong>: প্রথম অপশনেই বেশি ক্লিক পড়ে;",
+                "<strong>degenerate feedback loop</strong>: জনপ্রিয় উত্তরই বারবার দেখানো হয়, তাই সেটাই আরও বেশি ক্লিক পায়। নতুন ভালো উত্তর কখনো সুযোগই পায় না।"
+              ]
             }
           ]
         }

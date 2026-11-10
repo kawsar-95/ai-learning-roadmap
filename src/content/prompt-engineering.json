@@ -431,7 +431,7 @@
         },
         {
           "type": "paragraph",
-          "html": "This works shockingly well. Three to eight examples can be more powerful than a page of rules. But you have to include the tricky cases — the sarcastic \"great, another Monday,\" the ambiguous \"it's fine I suppose\" — otherwise the AI learns only the easy pattern and bombs on edge cases."
+          "html": "This works shockingly well. Three to eight examples can be more powerful than a page of rules. But you have to include the tricky cases, like the sarcastic \"great, another Monday\" or the ambiguous \"it's fine I suppose.\" Otherwise the AI learns only the easy pattern and bombs on edge cases."
         },
         {
           "type": "paragraph",
@@ -439,7 +439,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The trick to writing a good persona: be <em>specific</em>. \"You are a helpful assistant\" is generic mush. \"You are a 15-year veteran of penetration testing who writes reports so clear that a non-technical CEO can act on them\" tells the AI <em>who</em>, <em>how long</em>, <em>what format</em>, and <em>for what audience</em>. Specific personas produce specific outputs dramatically better than vague ones."
+          "html": "The trick to writing a good persona: be <em>specific</em>. \"You are a helpful assistant\" is generic mush. \"You are a 15-year veteran of penetration testing who writes reports so clear that a non-technical CEO can act on them\" is specific. It tells the AI <em>who</em>, <em>how long</em>, <em>what format</em>, and <em>for what audience</em>. Specific personas produce specific outputs dramatically better than vague ones."
         },
         {
           "type": "paragraph",
@@ -483,7 +483,18 @@
         },
         {
           "type": "paragraph",
-          "html": "কখন কী: ফরম্যাট কথায় বোঝানো কঠিন হলে একটা সঠিক উদাহরণ দেখান; এজ কেস বেশি হলে সেগুলো স্পষ্ট দেখান; সূক্ষ্ম ৫-way ট্যাক্সোনমিতে প্রতিটি ক্যাটাগরির একটা করে উদাহরণ দিন; টুল কলের মতো প্রসিডিউরাল কাজে পুরো ওয়ার্কড উদাহরণ দিন; আর \"কখনো X করবেন না\" ধরনের যুক্তিভিত্তিক নিয়মে সাধারণ নিয়মের সাথে রিফিউজালের একটা উদাহরণ দিন।"
+          "html": "কখন কী:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ফরম্যাট কথায় বোঝানো কঠিন হলে একটা সঠিক উদাহরণ দেখান;",
+            "এজ কেস বেশি হলে সেগুলো স্পষ্ট দেখান;",
+            "সূক্ষ্ম ৫-way ট্যাক্সোনমিতে প্রতিটি ক্যাটাগরির একটা করে উদাহরণ দিন;",
+            "টুল কলের মতো প্রসিডিউরাল কাজে পুরো ওয়ার্কড উদাহরণ দিন;",
+            "\"কখনো X করবেন না\" ধরনের যুক্তিভিত্তিক নিয়মে সাধারণ নিয়মের সাথে রিফিউজালের একটা উদাহরণ দিন।"
+          ]
         },
         {
           "type": "analogy",
@@ -726,7 +737,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>চেইন-অফ-থট (CoT):</strong> Wei et al. (২০২২) দেখিয়েছেন, \"Let's think step by step\" যোগ করলে বা কাজের ধাপ-সহ উদাহরণ দেখালে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ প্রশ্নে ফল অনেক ভালো হয়, মডেল না বদলেই। কারণ হলো, মধ্যবর্তী টোকেন লিখতে গিয়ে কঠিন অংশের জন্য বেশি কম্পিউটেশন বরাদ্দ হয়। সেকশনের চার্ট অনুযায়ী সরাসরি উত্তরে ~৪০%, আর CoT-তে ~৭০ থেকে ৮৫%। CoT-এর প্রকারভেদ:"
+          "html": "<strong>চেইন-অফ-থট (CoT):</strong> Wei et al. (২০২২) দেখিয়েছেন, \"Let's think step by step\" যোগ করলে বা কাজের ধাপ-সহ উদাহরণ দেখালে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ প্রশ্নে ফল অনেক ভালো হয়। এর জন্য মডেল বদলাতে হয় না। কারণ হলো, মধ্যবর্তী টোকেন লিখতে গিয়ে কঠিন অংশের জন্য বেশি কম্পিউটেশন বরাদ্দ হয়। সেকশনের চার্ট অনুযায়ী সরাসরি উত্তরে ~৪০%, আর CoT-তে ~৭০ থেকে ৮৫%। CoT-এর প্রকারভেদ:"
         },
         {
           "type": "list",
@@ -1152,7 +1163,7 @@
               "Quick prototyping, simple cases. Watch for <code>{</code>/<code>}</code> in JSON content."
             ],
             [
-              "Jinja2 / Mustache",
+              "Template engines (Jinja2 / Mustache)",
               "<code>{{ user_name }} says {{ message }}</code>",
               "Multi-variable prompts, loops, conditionals, reusable partials."
             ],
@@ -1189,7 +1200,7 @@
           "ordered": true,
           "items": [
             "<strong>Wrap in XML tags.</strong> The model learns to treat <code>&lt;document&gt;…&lt;/document&gt;</code> as inert data. Both Claude and GPT respond strongly to XML wrapping of untrusted input.",
-            "<strong>Use unique sentinels.</strong> Triple quotes, custom tokens, or random IDs that won't collide.",
+            "<strong>Use unique sentinels.</strong> A sentinel is a marker that won't collide with the data: triple quotes, custom tokens, or random IDs.",
             "<strong>Length-limit and summarise first.</strong> Don't dump a 50K-token raw blob — summarise or truncate before injection."
           ]
         },
@@ -1211,7 +1222,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Store templates as <code>.j2</code> files or dedicated Python modules. Version them. Lint them. Run them through unit tests with golden outputs. The teams that ship reliable LLM features treat prompts the same way they treat database schemas."
+          "html": "Store templates as Jinja2 (<code>.j2</code>) files or dedicated Python modules. Version them. Lint them. Run them through unit tests with golden outputs. The teams that ship reliable LLM features treat prompts the same way they treat database schemas."
         }
       ],
       "layman": [
@@ -1270,7 +1281,16 @@
         },
         {
           "type": "paragraph",
-          "html": "আসল সমস্যা ডিলিমিটার ও এস্কেপিং। ভেতরে JSON বা HTML থাকলে সাধারণ টেমপ্লেটিং অস্পষ্টতা তৈরি করে। তিনটা সমাধান: (১) আনট্রাস্টেড ইনপুটকে <code>&lt;document&gt;</code> এর মতো XML ট্যাগে মুড়ে দিন, যাতে মডেল সেটাকে নিষ্ক্রিয় ডেটা হিসেবে দেখে; (২) এমন ইউনিক সেন্টিনেল (ট্রিপল কোট, কাস্টম টোকেন, র‍্যান্ডম ID) ব্যবহার করুন যা ডেটার সাথে মিলে যাবে না; (৩) ৫০K টোকেনের কাঁচা ডেটা না ঢুকিয়ে আগে সামারাইজ বা ট্রাঙ্কেট করুন।"
+          "html": "আসল সমস্যা ডিলিমিটার ও এস্কেপিং। ভেতরে JSON বা HTML থাকলে সাধারণ টেমপ্লেটিং অস্পষ্টতা তৈরি করে। তিনটা সমাধান:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "আনট্রাস্টেড ইনপুটকে <code>&lt;document&gt;</code> এর মতো XML ট্যাগে মুড়ে দিন, যাতে মডেল সেটাকে নিষ্ক্রিয় ডেটা হিসেবে দেখে।",
+            "এমন ইউনিক সেন্টিনেল (ট্রিপল কোট, কাস্টম টোকেন, র‍্যান্ডম ID) ব্যবহার করুন যা ডেটার সাথে মিলে যাবে না।",
+            "৫০K টোকেনের কাঁচা ডেটা না ঢুকিয়ে আগে সামারাইজ বা ট্রাঙ্কেট করুন।"
+          ]
         },
         {
           "type": "paragraph",
@@ -1846,7 +1866,18 @@
         },
         {
           "type": "paragraph",
-          "html": "পার্সার কৌশল ফরম্যাট অনুযায়ী আলাদা: সাধারণ JSON-এ <code>json.loads()</code> try/except-এ মুড়ে; Markdown সেকশনে প্রতি সেকশনের জন্য রেজেক্স; XML-এ <code>defusedxml</code> বা <code>xml.etree</code>; টুল কলে কার্যকর করার আগে প্রতিটি টুলের JSON Schema-য় আর্গুমেন্ট যাচাই; আর স্ট্রিমিংয়ে টোকেন বাফার করে আংশিক ফলাফল দেখানো এবং ফিনিশ রিজন খেয়াল রাখা।"
+          "html": "পার্সার কৌশল ফরম্যাট অনুযায়ী আলাদা:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "সাধারণ JSON-এ <code>json.loads()</code> try/except-এ মুড়ে;",
+            "Markdown সেকশনে প্রতি সেকশনের জন্য রেজেক্স;",
+            "XML-এ <code>defusedxml</code> বা <code>xml.etree</code>;",
+            "টুল কলে কার্যকর করার আগে প্রতিটি টুলের JSON Schema-য় আর্গুমেন্ট যাচাই;",
+            "স্ট্রিমিংয়ে টোকেন বাফার করে আংশিক ফলাফল দেখানো এবং ফিনিশ রিজন খেয়াল রাখা।"
+          ]
         },
         {
           "type": "paragraph",

@@ -463,7 +463,20 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "\"সেরা মডেল\" বলে কিছু নেই, প্রশ্ন হলো আপনার ওয়ার্কলোডের জন্য কোন ট্রেড-অফ মানানসই। প্রধান পরিবারগুলো: OpenAI (GPT-4o, o3, GPT-5) রিজনিং ও পরিণত ইকোসিস্টেমে ভালো; Anthropic (Claude 4) লম্বা কনটেক্সট (২০০K), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো; Google (Gemini 2.5) নেটিভ মাল্টিমোডাল ও ১–২M কনটেক্সটে এগিয়ে; Meta (Llama 3.1) ওপেন ওয়েটস ও শক্তিশালী ছোট মডেল; Mistral ইউরোপীয় ডেটা রেসিডেন্সি ও এজ ডিপ্লয়মেন্টের জন্য; Alibaba Qwen3 সস্তা সেলফ-হোস্ট ও বহুভাষিক কাজে; DeepSeek (V3, R1) কম ট্রেনিং খরচে শক্তিশালী ওপেন-ওয়েট রিজনিংয়ে।"
+          "html": "\"সেরা মডেল\" বলে কিছু নেই, প্রশ্ন হলো আপনার ওয়ার্কলোডের জন্য কোন ট্রেড-অফ মানানসই। প্রধান পরিবারগুলো:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "OpenAI (GPT-4o, o3, GPT-5) রিজনিং ও পরিণত ইকোসিস্টেমে ভালো;",
+            "Anthropic (Claude 4) লম্বা কনটেক্সট (২০০K), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো;",
+            "Google (Gemini 2.5) নেটিভ মাল্টিমোডাল ও ১–২M কনটেক্সটে এগিয়ে;",
+            "Meta (Llama 3.1) ওপেন ওয়েটস ও শক্তিশালী ছোট মডেল;",
+            "Mistral ইউরোপীয় ডেটা রেসিডেন্সি ও এজ ডিপ্লয়মেন্টের জন্য;",
+            "Alibaba Qwen3 সস্তা সেলফ-হোস্ট ও বহুভাষিক কাজে;",
+            "DeepSeek (V3, R1) কম ট্রেনিং খরচে শক্তিশালী ওপেন-ওয়েট রিজনিংয়ে।"
+          ]
         },
         {
           "type": "paragraph",
@@ -696,7 +709,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The 2025 reality:</strong> open-weight models got <em>so good</em> that for most business tasks, a free open-weight model running on rented GPUs is 80% as good as GPT-4 at 10% of the cost. Companies are quietly switching. The frontier closed models (Claude 4, GPT-5) still lead on hard reasoning, but the gap is small."
+          "html": "<strong>The 2025 reality:</strong> open-weight models got <em>so good</em>. For most business tasks, a free open-weight model running on rented GPUs is 80% as good as GPT-4 at 10% of the cost. Companies are quietly switching. The frontier closed models (Claude 4, GPT-5) still lead on hard reasoning, but the gap is small."
         },
         {
           "type": "analogy",
@@ -921,7 +934,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>Inside the AI, every word is a dice roll.</strong> When the model writes \"The cat sat on the...\" it has a list of probabilities: <em>mat</em> 40%, <em>floor</em> 25%, <em>couch</em> 15%, <em>roof</em> 8%, ... and thousands of weird options at fractions of a percent. The model has to <em>choose</em> one. How it chooses is \"sampling.\""
+          "html": "<strong>Inside the AI, every word is a dice roll.</strong> When the model writes \"The cat sat on the...\" it has a list of probabilities: <em>mat</em> 40%, <em>floor</em> 25%, <em>couch</em> 15%, <em>roof</em> 8%. Thousands of weird options follow, at fractions of a percent. The model has to <em>choose</em> one. How it chooses is \"sampling.\""
         },
         {
           "type": "paragraph",
@@ -1899,7 +1912,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>Modern AI isn't just text anymore.</strong> You can paste a photo of a handwritten note, a chart, an X-ray, a screenshot, a 200-page PDF, or even a 30-second voice clip — and the AI can read, describe, and reason about it like a human would."
+          "html": "<strong>Modern AI isn't just text anymore.</strong> You can paste a photo of a handwritten note, a chart, an X-ray, a screenshot, a 200-page PDF, or even a 30-second voice clip. The AI can read, describe, and reason about it like a human would."
         },
         {
           "type": "paragraph",
@@ -1938,7 +1951,17 @@
         },
         {
           "type": "paragraph",
-          "html": "ক্ষমতা মডেলভেদে আলাদা: Gemini 1.5/2.5 সবচেয়ে নেটিভ মাল্টিমোডাল (ছবি, অডিও ইন/আউট, ভিডিও, PDF); GPT-4o ছবিতে ভালো; Claude 4 চার্ট ও ডায়াগ্রাম পড়ায় ভালো; Qwen-VL ও Llama 3.2 Vision হলো ওপেন-ওয়েট ভিশন মডেল।"
+          "html": "ক্ষমতা মডেলভেদে আলাদা:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Gemini 1.5/2.5 সবচেয়ে নেটিভ মাল্টিমোডাল (ছবি, অডিও ইন/আউট, ভিডিও, PDF);",
+            "GPT-4o ছবিতে ভালো;",
+            "Claude 4 চার্ট ও ডায়াগ্রাম পড়ায় ভালো;",
+            "Qwen-VL ও Llama 3.2 Vision হলো ওপেন-ওয়েট ভিশন মডেল।"
+          ]
         },
         {
           "type": "paragraph",
