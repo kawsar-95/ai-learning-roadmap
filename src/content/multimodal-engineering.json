@@ -55,11 +55,11 @@
           ],
           "rows": [
             [
-              "<strong>STT (speech → text)</strong>",
+              "<strong>STT</strong>",
               "Whisper, Deepgram, AssemblyAI, ElevenLabs Scribe"
             ],
             [
-              "<strong>TTS (text → speech)</strong>",
+              "<strong>TTS</strong>",
               "ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
             ],
             [
@@ -79,6 +79,10 @@
           "html": "Image generation"
         },
         {
+          "type": "paragraph",
+          "html": "The models differ in licence and in what they do best. Open models can be fine-tuned, for example with LoRA; others lead on photorealism, on following instructions, or on typography and design."
+        },
+        {
           "type": "table",
           "headers": [
             "Model",
@@ -90,7 +94,7 @@
               "Open-weights availability, strong prompt fidelity"
             ],
             [
-              "<strong>SDXL / SD3 (Stability)</strong>",
+              "<strong>SDXL / SD3 (Stable Diffusion, from Stability)</strong>",
               "Open, fine-tuneable with LoRA"
             ],
             [
@@ -130,6 +134,10 @@
           "level": 3,
           "id": "s8-video-generation",
           "html": "Video generation"
+        },
+        {
+          "type": "paragraph",
+          "html": "They differ in clip length, built-in audio and resolution, in how well a character stays the same from shot to shot, and in price and speed."
         },
         {
           "type": "table",

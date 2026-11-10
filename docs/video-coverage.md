@@ -17,7 +17,7 @@ Which YouTube videos the Parts list, which technical topics Part 17 was added to
 
 Krish Naik's list stops at the newest 1,500 videos, a cap set for the crawl, so his older videos were not searched.
 
-187 clips were added to 56 sections; 91 more were read and left out, each with its reason in [video-review-log.md](video-review-log.md).
+187 clips were added to 58 sections; 91 more were read and left out, each with its reason in [video-review-log.md](video-review-log.md).
 
 ## Topics Part 17 covers
 

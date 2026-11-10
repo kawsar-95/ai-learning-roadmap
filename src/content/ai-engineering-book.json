@@ -293,11 +293,11 @@
     {
       "id": "ch2",
       "num": "02",
-      "title": "Understanding Foundation Models",
-      "sub": "What training data, architecture, post-training, and sampling actually decide about a model",
+      "title": "Understanding Foundation Models: training data, architecture and size",
+      "sub": "What training data, architecture, and model size actually decide about a model",
       "bn": {
-        "title": "ফাউন্ডেশন মডেল বোঝা",
-        "sub": "ট্রেনিং ডেটা, আর্কিটেকচার, পোস্ট-ট্রেনিং আর স্যাম্পলিং আসলে একটা মডেল সম্পর্কে কী ঠিক করে দেয়"
+        "title": "ফাউন্ডেশন মডেল বোঝা: ট্রেনিং ডেটা, আর্কিটেকচার আর সাইজ",
+        "sub": "ট্রেনিং ডেটা, আর্কিটেকচার আর মডেলের সাইজ আসলে একটা মডেল সম্পর্কে কী ঠিক করে দেয়"
       },
       "body": [
         {
@@ -439,7 +439,99 @@
         {
           "type": "paragraph",
           "html": "Two bottlenecks limit how far scaling can keep going. The first is the supply of good training data: public text is being consumed faster than new text is produced. The second is electricity: data centers already consume a meaningful share of global power, and demand is projected to keep rising."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Four big decisions shape a foundation model:"
         },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "what data it is shown;",
+            "how its internal architecture processes that data;",
+            "how it is coached afterward to be a helpful assistant;",
+            "how it picks words when it writes an answer."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "The data decision explains why a chatbot might be excellent in English but clumsy in Bengali. It also explains why one might be great at general trivia but useless on drug discovery questions. Both reflect what the model actually saw while learning, not some fixed ceiling on its ability."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The book-summary analogy:</strong> an older-style model could only answer questions about a book using its summary. A transformer-based model can flip to any page of the book while answering. That is why today's models track context so much better."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা <strong>foundation model</strong> যতটা ভালো হবে, তা নির্ভর করে চারটা জিনিসের ওপর:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "কী ডেটা দিয়ে ট্রেইন হয়েছে;",
+            "এর ভেতরের আর্কিটেকচার কেমন;",
+            "ট্রেইনিংয়ের পর একে কীভাবে মানুষের পছন্দমতো আচরণ করতে শেখানো হয়েছে;",
+            "উত্তর লেখার সময় কীভাবে পরের শব্দটা বেছে নেয়।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "ইন্টারনেটের বেশিরভাগ টেক্সট ইংরেজিতে, তাই <strong>low-resource language</strong>গুলোতে (যেমন তেলেগু বা বর্মিজ) মডেলগুলো তুলনামূলক দুর্বল পারফর্ম করে। এমনকি একই অর্থ প্রকাশ করতে বর্মিজ ভাষায় ইংরেজির চেয়ে প্রায় ১০ গুণ বেশি token লাগে, মানে খরচ আর সময় দুটোই বেড়ে যায়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "বর্তমান dominant আর্কিটেকচার হলো <strong>transformer</strong>, যা <strong>attention mechanism</strong> ব্যবহার করে। আগের seq2seq আর্কিটেকচার শুধু ইনপুটের একটা সংক্ষিপ্ত সারাংশ দেখে উত্তর বানাতো, কিন্তু transformer চাইলে আগের যেকোনো token-এর দিকে সরাসরি \"নজর\" দিতে পারে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>বইয়ের উপমা:</strong> আগের মডেল বইয়ের সারাংশ দেখে প্রশ্নের উত্তর দিত। Transformer-ভিত্তিক মডেল উত্তর দেওয়ার সময় বইয়ের যেকোনো পাতায় ফিরে যেতে পারে — এজন্যই আজকের মডেলগুলো অনেক বেশি কনটেক্সট-সচেতন।"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "মডেল সাইজ মাপা হয় তিনটা সংখ্যা দিয়ে: parameter সংখ্যা, training token সংখ্যা, আর FLOPs (compute)। <strong>Chinchilla scaling law</strong> বলে, parameter সংখ্যার প্রায় ২০ গুণ training token থাকলে সবচেয়ে ভালো ফলাফল পাওয়া যায়। অর্থাৎ শুধু মডেল বড় করলেই চলে না, ডেটাও সেই অনুপাতে বাড়াতে হয়।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "aircAruvnKk",
+          "title": "But what is a neural network? | Deep learning chapter 1",
+          "channel": "3Blue1Brown",
+          "lang": "en"
+        },
+        {
+          "id": "wjZofJX0v4M",
+          "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
+          "channel": "3Blue1Brown",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "ch2b",
+      "num": "03",
+      "title": "Understanding Foundation Models: post-training, sampling and hallucination",
+      "sub": "What post-training and sampling decide about a model, and why its answers can be inconsistent or made up",
+      "bn": {
+        "title": "ফাউন্ডেশন মডেল বোঝা: পোস্ট-ট্রেনিং, স্যাম্পলিং আর hallucination",
+        "sub": "পোস্ট-ট্রেনিং আর স্যাম্পলিং আসলে একটা মডেল সম্পর্কে কী ঠিক করে দেয়, আর কেন উত্তর কখনো অসংগত বা বানানো হতে পারে"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -524,33 +616,6 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Four big decisions shape a foundation model:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "what data it is shown;",
-            "how its internal architecture processes that data;",
-            "how it is coached afterward to be a helpful assistant;",
-            "how it picks words when it writes an answer."
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "The data decision explains why a chatbot might be excellent in English but clumsy in Bengali. It also explains why one might be great at general trivia but useless on drug discovery questions. Both reflect what the model actually saw while learning, not some fixed ceiling on its ability."
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>The book-summary analogy:</strong> an older-style model could only answer questions about a book using its summary. A transformer-based model can flip to any page of the book while answering. That is why today's models track context so much better."
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
           "html": "Post-training is like teaching a very well-read but socially clueless person how to actually hold a conversation and be polite about it. It happens in two steps. First, the model is shown good example conversations (supervised finetuning). Then it learns which of two responses people actually prefer (preference finetuning)."
         },
         {
@@ -563,41 +628,6 @@
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "একটা <strong>foundation model</strong> যতটা ভালো হবে, তা নির্ভর করে চারটা জিনিসের ওপর:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "কী ডেটা দিয়ে ট্রেইন হয়েছে;",
-            "এর ভেতরের আর্কিটেকচার কেমন;",
-            "ট্রেইনিংয়ের পর একে কীভাবে মানুষের পছন্দমতো আচরণ করতে শেখানো হয়েছে;",
-            "উত্তর লেখার সময় কীভাবে পরের শব্দটা বেছে নেয়।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "ইন্টারনেটের বেশিরভাগ টেক্সট ইংরেজিতে, তাই <strong>low-resource language</strong>গুলোতে (যেমন তেলেগু বা বর্মিজ) মডেলগুলো তুলনামূলক দুর্বল পারফর্ম করে। এমনকি একই অর্থ প্রকাশ করতে বর্মিজ ভাষায় ইংরেজির চেয়ে প্রায় ১০ গুণ বেশি token লাগে, মানে খরচ আর সময় দুটোই বেড়ে যায়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "বর্তমান dominant আর্কিটেকচার হলো <strong>transformer</strong>, যা <strong>attention mechanism</strong> ব্যবহার করে। আগের seq2seq আর্কিটেকচার শুধু ইনপুটের একটা সংক্ষিপ্ত সারাংশ দেখে উত্তর বানাতো, কিন্তু transformer চাইলে আগের যেকোনো token-এর দিকে সরাসরি \"নজর\" দিতে পারে।"
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>বইয়ের উপমা:</strong> আগের মডেল বইয়ের সারাংশ দেখে প্রশ্নের উত্তর দিত। Transformer-ভিত্তিক মডেল উত্তর দেওয়ার সময় বইয়ের যেকোনো পাতায় ফিরে যেতে পারে — এজন্যই আজকের মডেলগুলো অনেক বেশি কনটেক্সট-সচেতন।"
-            }
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "মডেল সাইজ মাপা হয় তিনটা সংখ্যা দিয়ে: parameter সংখ্যা, training token সংখ্যা, আর FLOPs (compute)। <strong>Chinchilla scaling law</strong> বলে, parameter সংখ্যার প্রায় ২০ গুণ training token থাকলে সবচেয়ে ভালো ফলাফল পাওয়া যায়। অর্থাৎ শুধু মডেল বড় করলেই চলে না, ডেটাও সেই অনুপাতে বাড়াতে হয়।"
-        },
         {
           "type": "paragraph",
           "html": "<strong>Post-training</strong>-এ দুইটা ধাপ থাকে:"
@@ -627,18 +657,6 @@
       ],
       "videos": [
         {
-          "id": "aircAruvnKk",
-          "title": "But what is a neural network? | Deep learning chapter 1",
-          "channel": "3Blue1Brown",
-          "lang": "en"
-        },
-        {
-          "id": "wjZofJX0v4M",
-          "title": "Transformers, the tech behind LLMs | Deep Learning Chapter 5",
-          "channel": "3Blue1Brown",
-          "lang": "en"
-        },
-        {
           "id": "MkaazQttbpc",
           "title": "The Secret Controls for your LLM: Temperature, Top-K, Top-P, etc",
           "channel": "Gary Explains",
@@ -654,12 +672,12 @@
     },
     {
       "id": "ch3",
-      "num": "03",
-      "title": "Evaluation Methodology",
-      "sub": "How to measure open-ended model outputs: language modeling metrics, exact scoring, AI judges, and ranking",
+      "num": "04",
+      "title": "Evaluation Methodology: language modeling metrics and exact evaluation",
+      "sub": "How to measure open-ended model outputs: language modeling metrics, exact scoring and embeddings",
       "bn": {
-        "title": "ইভ্যালুয়েশন মেথডোলজি",
-        "sub": "ওপেন-এন্ডেড মডেল আউটপুট মাপার উপায়: ল্যাঙ্গুয়েজ মডেলিং মেট্রিক, এক্সাক্ট স্কোরিং, AI judge, আর র‍্যাংকিং"
+        "title": "ইভ্যালুয়েশন মেথডোলজি: ল্যাঙ্গুয়েজ মডেলিং মেট্রিক আর এক্সাক্ট স্কোরিং",
+        "sub": "ওপেন-এন্ডেড মডেল আউটপুট মাপার উপায়: ল্যাঙ্গুয়েজ মডেলিং মেট্রিক, এক্সাক্ট স্কোরিং আর এমবেডিং"
       },
       "body": [
         {
@@ -779,7 +797,60 @@
         {
           "type": "paragraph",
           "html": "An <strong>embedding</strong> is a numerical vector that tries to capture the meaning of a piece of data (text, image, audio, etc.). It typically has 100 to 10,000 dimensions. Good embeddings place similar inputs closer together, measured by cosine similarity. Models like BERT, CLIP, and Sentence Transformers specialize in producing embeddings. Joint embedding spaces (e.g., CLIP, ImageBind) let you compare across modalities, such as matching an image to a caption."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Grading an AI's answer is much harder than grading a multiple-choice test. There's often no single correct answer, so you need other ways to tell a good response from a bad one."
         },
+        {
+          "type": "paragraph",
+          "html": "Some tasks are easy to check automatically. Code is one: you can just run it and see if it works. For everything else, people compare the AI's answer to a sample \"correct\" answer."
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা foundation model-এর answer কতটা ভালো, সেটা বোঝা একটা multiple-choice exam চেক করার মতো সহজ না, কারণ একটা প্রশ্নের অনেকগুলো সঠিক উত্তর থাকতে পারে। তাই এই chapter-এ evaluation-এর কয়েকটা পদ্ধতি নিয়ে আলোচনা করা হয়েছে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "প্রথমে আসে <strong>language modeling metrics</strong>: entropy, cross entropy, perplexity, আর bits-per-character/byte। এগুলো মূলত মাপে একটা মডেল পরের token কতটা ভালো predict করতে পারছে। perplexity যত কম, মডেল তত ভালো predict করছে, কিন্তু fine-tuning বা RLHF-এর পর perplexity আর ততটা নির্ভরযোগ্য থাকে না।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Exact evaluation</strong>-এ উত্তর একদম নির্দিষ্টভাবে সঠিক বা ভুল বলা যায়। code generation-এর ক্ষেত্রে এটা সহজ — code রান করে test case-এর বিপরীতে চেক করা যায় (functional correctness)। আর যেখানে test case চালানো যায় না, সেখানে reference answer-এর সাথে মিল দেখা হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "হুবহু মিল (exact match);",
+            "lexical similarity: word overlap, যেমন BLEU/ROUGE;",
+            "semantic similarity: embedding দিয়ে অর্থের মিল মাপা।"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "NaCjm8rdxqk",
+          "title": "Build Your First Eval: Creating a Custom LLM Evaluator with a Golden Dataset",
+          "channel": "Arize AI",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "ch3b",
+      "num": "05",
+      "title": "Evaluation Methodology: AI judges and comparative evaluation",
+      "sub": "Using AI models as judges, and ranking models by comparing their answers head to head",
+      "bn": {
+        "title": "ইভ্যালুয়েশন মেথডোলজি: AI judge আর তুলনামূলক র‍্যাংকিং",
+        "sub": "AI judge হিসেবে মডেলের স্কোর, আর উত্তর পাশাপাশি তুলনা করে মডেলের র‍্যাংকিং"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -873,11 +944,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Grading an AI's answer is much harder than grading a multiple-choice test. There's often no single correct answer, so you need other ways to tell a good response from a bad one."
-        },
-        {
-          "type": "paragraph",
-          "html": "Some tasks are easy to check automatically. Code is one: you can just run it and see if it works. For everything else, people compare the AI's answer to a sample \"correct\" answer. Or, more and more, they ask another AI to act as a judge and score the response. That is much faster and cheaper than paying humans to read every answer."
+          "html": "<strong>AI judges.</strong> More and more, people ask another AI to act as a judge and score the response. That is much faster and cheaper than paying humans to read every answer."
         },
         {
           "type": "analogy",
@@ -894,27 +961,6 @@
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "একটা foundation model-এর answer কতটা ভালো, সেটা বোঝা একটা multiple-choice exam চেক করার মতো সহজ না, কারণ একটা প্রশ্নের অনেকগুলো সঠিক উত্তর থাকতে পারে। তাই এই chapter-এ evaluation-এর কয়েকটা পদ্ধতি নিয়ে আলোচনা করা হয়েছে।"
-        },
-        {
-          "type": "paragraph",
-          "html": "প্রথমে আসে <strong>language modeling metrics</strong>: entropy, cross entropy, perplexity, আর bits-per-character/byte। এগুলো মূলত মাপে একটা মডেল পরের token কতটা ভালো predict করতে পারছে। perplexity যত কম, মডেল তত ভালো predict করছে, কিন্তু fine-tuning বা RLHF-এর পর perplexity আর ততটা নির্ভরযোগ্য থাকে না।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>Exact evaluation</strong>-এ উত্তর একদম নির্দিষ্টভাবে সঠিক বা ভুল বলা যায়। code generation-এর ক্ষেত্রে এটা সহজ — code রান করে test case-এর বিপরীতে চেক করা যায় (functional correctness)। আর যেখানে test case চালানো যায় না, সেখানে reference answer-এর সাথে মিল দেখা হয়:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "exact match;",
-            "lexical similarity: word overlap, যেমন BLEU/ROUGE;",
-            "semantic similarity: embedding দিয়ে অর্থের মিল মাপা।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "সবচেয়ে আলোচিত বিষয় হলো <strong>AI as a judge</strong> — একটা AI মডেল দিয়ে আরেকটা AI-এর output score করানো বা compare করানো। এটা দ্রুত, সস্তা, আর যেকোনো criteria (সততা, toxicity, tone) দিয়ে judge করা যায়। তবে সমস্যাও আছে:"
@@ -962,18 +1008,12 @@
           "title": "LLM-as-a-judge: evaluating LLMs with LLMs",
           "channel": "Evidently AI",
           "lang": "en"
-        },
-        {
-          "id": "NaCjm8rdxqk",
-          "title": "Build Your First Eval: Creating a Custom LLM Evaluator with a Golden Dataset",
-          "channel": "Arize AI",
-          "lang": "en"
         }
       ]
     },
     {
       "id": "ch4",
-      "num": "04",
+      "num": "06",
       "title": "Evaluate AI Systems",
       "sub": "Turning evaluation criteria into a model selection process and a trustworthy evaluation pipeline",
       "bn": {
@@ -1305,12 +1345,12 @@
     },
     {
       "id": "ch5",
-      "num": "05",
-      "title": "Prompt Engineering",
-      "sub": "Getting a model to do what you want, without touching its weights",
+      "num": "07",
+      "title": "Prompt Engineering: prompts, in-context learning and context length",
+      "sub": "Getting a model to do what you want, without touching its weights: what a prompt holds, learning from examples, and how models use a long context",
       "bn": {
-        "title": "প্রম্পট ইঞ্জিনিয়ারিং",
-        "sub": "মডেলের weight না বদলেই তাকে দিয়ে কাজ করিয়ে নেওয়ার কৌশল"
+        "title": "প্রম্পট ইঞ্জিনিয়ারিং: প্রম্পট, in-context learning আর context length",
+        "sub": "মডেলের weight না বদলেই তাকে দিয়ে কাজ করিয়ে নেওয়ার কৌশল: প্রম্পটে কী থাকে, উদাহরণ থেকে শেখা, আর লম্বা context"
       },
       "body": [
         {
@@ -1365,7 +1405,76 @@
         {
           "type": "paragraph",
           "html": "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones. But a longer context window does not mean every position in it is used equally well. Research with <strong>needle-in-a-haystack (NIAH)</strong> tests shows that models recall information near the <strong>beginning or end</strong> of a prompt far more reliably than information buried in the middle. If a model's accuracy drops as prompts get longer, shortening or re-ordering the prompt &mdash; putting critical instructions first or last &mdash; can help."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Think of a prompt as the instructions you give a very capable but very literal new employee. The clearer and more complete your instructions, the better the result &mdash; vague requests get vague answers."
         },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The library analogy:</strong> picture a foundation model as a giant library of countless \"programs.\" One writes poems, one writes code, one answers trivia. Prompt engineering is the art of finding the right words to pull the exact program you need off the shelf."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Showing the model a few solved examples before asking your real question (few-shot) usually helps it understand exactly what you want.",
+            "Just like a person, a model pays closest attention to what it reads first and last. Information buried in the middle of a huge prompt can get missed."
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "প্রম্পট মানে হলো আপনি একটা foundation model-কে ঠিক কী করতে বলছেন, সেই instruction। সাধারণত এতে থাকে task description, কিছু example, আর আসল task। সবচেয়ে ভালো দিক হলো, prompt engineering করতে মডেলের weight পরিবর্তন করতে হয় না। তাই fine-tuning-এ যাওয়ার আগে আগে prompting দিয়েই যতটা সম্ভব ফলাফল বের করে নেওয়া উচিত।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>In-context learning</strong> হলো prompt-এর ভেতরেই কিছু example দিয়ে মডেলকে নতুন behavior শিখিয়ে দেওয়া, কোনো weight update ছাড়াই। Example না থাকলে zero-shot, আর কয়েকটা example থাকলে সেটা few-shot। বেশি example মানে সাধারণত ভালো ফল, কিন্তু context length আর cost-এর সীমাবদ্ধতা মাথায় রাখতে হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "অনেক model API-তে prompt-কে দুই ভাগে ভাগ করা যায়: <strong>system prompt</strong> (ডেভেলপারের instruction, persona ইত্যাদি) আর <strong>user prompt</strong> (আসল প্রশ্ন)। মডেলের নিজস্ব chat template অনুযায়ী এই দুইটা জোড়া লাগে — টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়ে যায়, বোঝাও যায় না কেন।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "ysPbXH0LpIE",
+          "title": "Prompting 101 | Code w/ Claude",
+          "channel": "Anthropic",
+          "lang": "en"
+        },
+        {
+          "id": "ojtbHUqw1LA",
+          "title": "Few-Shot Prompting Explained",
+          "channel": "Elvis Saravia",
+          "lang": "en"
+        },
+        {
+          "id": "sl1t67CqFJ4",
+          "title": "E-5: Zero-shot, One-shot, Few-shot আসলে কী",
+          "channel": "Afran Sarkar",
+          "lang": "bn"
+        }
+      ]
+    },
+    {
+      "id": "ch5b",
+      "num": "08",
+      "title": "Prompt Engineering: best practices and defensive prompting",
+      "sub": "Habits that make prompts reliable, managing prompts over time, and defending against prompt attacks",
+      "bn": {
+        "title": "প্রম্পট ইঞ্জিনিয়ারিং: ভালো অভ্যাস আর আক্রমণ থেকে সুরক্ষা",
+        "sub": "prompt নির্ভরযোগ্য করার অভ্যাস, prompt-এর version রাখা, আর prompt আক্রমণ ঠেকানো"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -1468,24 +1577,13 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Think of a prompt as the instructions you give a very capable but very literal new employee. The clearer and more complete your instructions, the better the result &mdash; vague requests get vague answers."
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>The library analogy:</strong> picture a foundation model as a giant library of countless \"programs.\" One writes poems, one writes code, one answers trivia. Prompt engineering is the art of finding the right words to pull the exact program you need off the shelf."
-            }
-          ]
+          "html": "A few habits make prompts work better, and a few checks keep them safe:"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "Showing the model a few solved examples before asking your real question (few-shot) usually helps it understand exactly what you want.",
             "Telling the model to \"think step by step\" often makes its answers more accurate, because it reasons instead of jumping straight to a guess.",
-            "Just like a person, a model pays closest attention to what it reads first and last. Information buried in the middle of a huge prompt can get missed.",
             "Models just follow instructions. So bad actors can hide instructions in emails, webpages, or even usernames to trick an AI assistant into doing something harmful. This is why safety checks are needed at every layer, not just in the prompt."
           ]
         }
@@ -1493,15 +1591,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "প্রম্পট মানে হলো আপনি একটা foundation model-কে ঠিক কী করতে বলছেন, সেই instruction। সাধারণত এতে থাকে task description, কিছু example, আর আসল task। সবচেয়ে ভালো দিক হলো, prompt engineering করতে মডেলের weight পরিবর্তন করতে হয় না। তাই fine-tuning-এ যাওয়ার আগে আগে prompting দিয়েই যতটা সম্ভব ফলাফল বের করে নেওয়া উচিত।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>In-context learning</strong> হলো prompt-এর ভেতরেই কিছু example দিয়ে মডেলকে নতুন behavior শিখিয়ে দেওয়া, কোনো weight update ছাড়াই। Example না থাকলে zero-shot, আর কয়েকটা example থাকলে সেটা few-shot। বেশি example মানে সাধারণত ভালো ফল, কিন্তু context length আর cost-এর সীমাবদ্ধতা মাথায় রাখতে হয়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "অনেক model API-তে prompt-কে দুই ভাগে ভাগ করা যায়: <strong>system prompt</strong> (ডেভেলপারের instruction, persona ইত্যাদি) আর <strong>user prompt</strong> (আসল প্রশ্ন)। মডেলের নিজস্ব chat template অনুযায়ী এই দুইটা জোড়া লাগে — টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়ে যায়, বোঝাও যায় না কেন।"
+          "html": "ভালো ফলের জন্য কিছু অভ্যাস:"
         },
         {
           "type": "list",
@@ -1551,7 +1641,7 @@
               "items": [
                 "model-level: system prompt-কে বেশি priority দিতে training;",
                 "prompt-level: স্পষ্টভাবে বলে দেওয়া কী কখনোই বলা যাবে না;",
-                "system-level: input/output guardrail।"
+                "system-level: input/output guardrail বসানো।"
               ]
             },
             {
@@ -1563,39 +1653,21 @@
       ],
       "videos": [
         {
-          "id": "ysPbXH0LpIE",
-          "title": "Prompting 101 | Code w/ Claude",
-          "channel": "Anthropic",
-          "lang": "en"
-        },
-        {
-          "id": "ojtbHUqw1LA",
-          "title": "Few-Shot Prompting Explained",
-          "channel": "Elvis Saravia",
-          "lang": "en"
-        },
-        {
           "id": "FgxwCaL6UTA",
           "title": "Prompt Injection, explained",
           "channel": "Simon Willison",
           "lang": "en"
-        },
-        {
-          "id": "sl1t67CqFJ4",
-          "title": "E-5: Zero-shot, One-shot, Few-shot আসলে কী",
-          "channel": "Afran Sarkar",
-          "lang": "bn"
         }
       ]
     },
     {
       "id": "ch6",
-      "num": "06",
-      "title": "RAG and Agents",
-      "sub": "Giving foundation models the right context and the power to act",
+      "num": "09",
+      "title": "RAG and Agents: retrieval-augmented generation",
+      "sub": "Giving foundation models the right context: retrievers, retrieval optimization and RAG beyond text",
       "bn": {
-        "title": "RAG এবং Agents",
-        "sub": "foundation model-কে সঠিক context আর কাজ করার ক্ষমতা দেওয়া"
+        "title": "RAG এবং Agents: retrieval-augmented generation",
+        "sub": "foundation model-কে সঠিক context দেওয়া: retriever, retrieval-এর উন্নতি আর টেক্সটের বাইরে RAG"
       },
       "body": [
         {
@@ -1687,7 +1759,85 @@
         {
           "type": "paragraph",
           "html": "RAG is not limited to plain text. <strong>Multimodal RAG</strong> retrieves images, audio, or video alongside text using a shared multimodal embedding model such as CLIP. <strong>RAG with tabular data</strong> works differently. Instead of embedding rows, the system translates the question into a SQL query (<strong>text-to-SQL</strong>), runs it against the database, and feeds the result back to the generator."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Think of a foundation model as a very well-read assistant. It has a huge but fixed memory from training, and a small notepad for the current conversation. RAG is like letting this assistant look things up in a library before answering, instead of only guessing from memory. RAG = fetch the right facts first, then answer."
         },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The librarian analogy:</strong> A plain model answering from memory is like a very smart person answering from recollection alone. A RAG system is that same person with a librarian pulling the exact right book first."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা foundation model-কে ঠিকভাবে কাজ করাতে শুধু instruction দিলেই হয় না। তার সাথে দরকার সঠিক context, অর্থাৎ যে তথ্য দিয়ে ও আপনার নির্দিষ্ট প্রশ্নের উত্তর দিতে পারবে। এই context বানানোর দুইটা প্রধান পদ্ধতি হলো <strong>RAG</strong> (retrieval-augmented generation) আর <strong>agent</strong>।"
+        },
+        {
+          "type": "paragraph",
+          "html": "RAG-এ একটা <strong>retriever</strong> থাকে, যেটা ডকুমেন্ট বা ডেটাবেজ থেকে প্রাসঙ্গিক অংশ (chunk) খুঁজে বের করে, আর একটা <strong>generator</strong> সেই তথ্য দিয়ে উত্তর লেখে। retrieval হতে পারে keyword-ভিত্তিক (term-based, যেমন BM25) অথবা অর্থ-ভিত্তিক (embedding-based, vector database ব্যবহার করে)। দুটো মিলিয়ে ব্যবহার করাকে বলে <strong>hybrid search</strong>।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Retrieval আরও ভালো করার জন্য কিছু কৌশল আছে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "ডকুমেন্টকে ছোট ছোট <strong>chunk</strong>-এ ভাগ করা;",
+            "retrieval-এর পরে ভালো candidate-গুলোকে আবার <strong>rerank</strong> করা;",
+            "অস্পষ্ট প্রশ্নকে <strong>query rewriting</strong>-এর মাধ্যমে স্পষ্ট করা;",
+            "chunk-এর সাথে extra context বা metadata জুড়ে দেওয়া (<strong>contextual retrieval</strong>)।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "RAG শুধু টেক্সটে সীমাবদ্ধ না — ছবি-ভিডিওর জন্য multimodal RAG আছে, আর table ডেটার জন্য text-to-SQL ব্যবহার করা হয়।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>উপমা:</strong> সাধারণ model হলো স্মৃতি থেকে উত্তর দেওয়া একজন মানুষ। RAG হলো সেই মানুষ, যার পাশে একজন লাইব্রেরিয়ান আছে সঠিক বই এনে দেওয়ার জন্য।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "8OJC21T2SL4",
+          "title": "The 5 Levels Of Text Splitting For Retrieval",
+          "channel": "Greg Kamradt",
+          "lang": "en"
+        },
+        {
+          "id": "klTvEwg3oJ4",
+          "title": "Vector databases are so hot right now. WTF are they?",
+          "channel": "Fireship",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "ch6b",
+      "num": "10",
+      "title": "RAG and Agents: tools, planning, failure modes and memory",
+      "sub": "Giving foundation models the power to act: tools, planning, failure modes and memory",
+      "bn": {
+        "title": "RAG এবং Agents: tool, planning, failure mode আর memory",
+        "sub": "foundation model-কে কাজ করার ক্ষমতা দেওয়া: tool, planning, failure mode আর memory"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -1791,13 +1941,12 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Think of a foundation model as a very well-read assistant. It has a huge but fixed memory from training, and a small notepad for the current conversation. RAG is like letting this assistant look things up in a library before answering, instead of only guessing from memory. Agents go further. The assistant also gets a phone, a calculator, and a set of office tools. So it can look things up, do math, or actually make a change for you, not just talk about it."
+          "html": "<strong>Agents go further.</strong> The assistant also gets a phone, a calculator, and a set of office tools. So it can look things up, do math, or actually make a change for you, not just talk about it."
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "RAG = fetch the right facts first, then answer.",
             "Agent = can use tools and take multiple steps to get something done.",
             "Planning = the agent's to-do list, checked before it starts acting.",
             "Memory = what the assistant remembers right now versus what it can look up later."
@@ -1808,7 +1957,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Librarian vs. intern analogy:</strong> A plain model answering from memory is like a very smart person answering from recollection alone. A RAG system is that same person with a librarian pulling the exact right book first. An agent is that person turned into a capable intern. The intern can also search the web, run a calculator, send an email, or query a database to get the job done, step by step."
+              "html": "<strong>The intern analogy:</strong> An agent is a very smart person turned into a capable intern. The intern can also search the web, run a calculator, send an email, or query a database to get the job done, step by step."
             }
           ]
         },
@@ -1820,32 +1969,6 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটা foundation model-কে ঠিকভাবে কাজ করাতে শুধু instruction দিলেই হয় না। তার সাথে দরকার সঠিক context, অর্থাৎ যে তথ্য দিয়ে ও আপনার নির্দিষ্ট প্রশ্নের উত্তর দিতে পারবে। এই context বানানোর দুইটা প্রধান পদ্ধতি হলো <strong>RAG</strong> (retrieval-augmented generation) আর <strong>agent</strong>।"
-        },
-        {
-          "type": "paragraph",
-          "html": "RAG-এ একটা <strong>retriever</strong> থাকে, যেটা ডকুমেন্ট বা ডেটাবেজ থেকে প্রাসঙ্গিক অংশ (chunk) খুঁজে বের করে, আর একটা <strong>generator</strong> সেই তথ্য দিয়ে উত্তর লেখে। retrieval হতে পারে keyword-ভিত্তিক (term-based, যেমন BM25) অথবা অর্থ-ভিত্তিক (embedding-based, vector database ব্যবহার করে)। দুটো মিলিয়ে ব্যবহার করাকে বলে <strong>hybrid search</strong>।"
-        },
-        {
-          "type": "paragraph",
-          "html": "Retrieval আরও ভালো করার জন্য কিছু কৌশল আছে:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "ডকুমেন্টকে ছোট ছোট <strong>chunk</strong>-এ ভাগ করা;",
-            "retrieval-এর পরে ভালো candidate-গুলোকে আবার <strong>rerank</strong> করা;",
-            "অস্পষ্ট প্রশ্নকে <strong>query rewriting</strong>-এর মাধ্যমে স্পষ্ট করা;",
-            "chunk-এর সাথে extra context বা metadata জুড়ে দেওয়া (<strong>contextual retrieval</strong>)।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "RAG শুধু টেক্সটে সীমাবদ্ধ না — ছবি-ভিডিওর জন্য multimodal RAG আছে, আর table ডেটার জন্য text-to-SQL ব্যবহার করা হয়।"
-        },
-        {
-          "type": "paragraph",
           "html": "<strong>Agent</strong> মানে এমন একটা সিস্টেম, যে তার environment বুঝতে পারে আর tool ব্যবহার করে সেখানে কাজ করতে পারে। tool হতে পারে web search, calculator, code interpreter, এমনকি email পাঠানো বা database আপডেট করার মতো write action। Agent-এর কাজ শুরুর আগে একটা <strong>plan</strong> তৈরি করে, সেটা validate করে, তারপর execute করে। এভাবে planning আর execution আলাদা রাখলে ভুল plan-এর পেছনে সময়-টাকা নষ্ট হয় না।"
         },
         {
@@ -1853,7 +1976,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>ইন্টার্নের উপমা:</strong> সাধারণ model হলো স্মৃতি থেকে উত্তর দেওয়া একজন মানুষ। RAG হলো সেই মানুষ, যার পাশে একজন লাইব্রেরিয়ান আছে সঠিক বই এনে দেওয়ার জন্য। আর agent হলো সেই মানুষ, যে এখন একজন ইন্টার্নও বটে — নিজে search করতে পারে, হিসাব করতে পারে, email পাঠাতে পারে।"
+              "html": "<strong>ইন্টার্নের উপমা:</strong> সাধারণ model হলো স্মৃতি থেকে উত্তর দেওয়া একজন মানুষ। আর agent হলো সেই মানুষ, যে এখন একজন ইন্টার্নও বটে — নিজে search করতে পারে, হিসাব করতে পারে, email পাঠাতে পারে।"
             }
           ]
         },
@@ -1863,18 +1986,6 @@
         }
       ],
       "videos": [
-        {
-          "id": "8OJC21T2SL4",
-          "title": "The 5 Levels Of Text Splitting For Retrieval",
-          "channel": "Greg Kamradt",
-          "lang": "en"
-        },
-        {
-          "id": "klTvEwg3oJ4",
-          "title": "Vector databases are so hot right now. WTF are they?",
-          "channel": "Fireship",
-          "lang": "en"
-        },
         {
           "id": "uhJJgc-0iTQ",
           "title": "Building more effective AI agents",
@@ -1891,12 +2002,12 @@
     },
     {
       "id": "ch7",
-      "num": "07",
-      "title": "Finetuning",
-      "sub": "Memory math, PEFT, LoRA, and model merging for adapting foundation models",
+      "num": "11",
+      "title": "Finetuning: when to finetune, and the memory it needs",
+      "sub": "When finetuning beats prompting or RAG, and the memory math behind it, including quantization",
       "bn": {
-        "title": "ফাইন-টিউনিং",
-        "sub": "মেমরি গণিত, PEFT, LoRA, আর মডেল মার্জিং দিয়ে foundation model কাস্টমাইজ করা"
+        "title": "ফাইন-টিউনিং: কখন করবেন, আর কত মেমরি লাগে",
+        "sub": "কখন fine-tuning দরকার, আর এর পেছনের মেমরি গণিত ও quantization"
       },
       "body": [
         {
@@ -2026,7 +2137,72 @@
         {
           "type": "paragraph",
           "html": "Model values are normally stored as floating-point numbers such as FP32 (4 bytes) and FP16 or BF16 (2 bytes). Integer formats like INT8 and INT4 are also used. <strong>Quantization</strong> means converting a model to a format with fewer bits per value. It shrinks memory roughly in proportion to the bits saved, and it often speeds up computation too, at the cost of some precision. It is usually done after training (post-training quantization), since training itself is more sensitive to low precision. When training in low precision is needed, it is typically done in <strong>mixed precision</strong>, which keeps sensitive values like gradients in a higher-precision format."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Finetuning means taking an already-trained AI model and giving it extra, more focused training on examples from your own task. Then it gets better at exactly what you need."
         },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>New-hire analogy:</strong> a foundation model is like a smart new hire with broad general knowledge. Prompting is like giving them instructions and a few examples for today's task. Finetuning is like putting them through a short, focused training course on your company's specific way of doing things. It works well, but it costs time and effort. So you only do it when just giving instructions isn't enough."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Finetuning is memory-hungry. The model has to remember not just its answer, but also how wrong it was and how to adjust itself. It must do that for every piece it is allowed to change. Quantization shrinks memory by storing numbers less precisely."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "If your model gives outdated or missing facts, fix it with search/retrieval (RAG), not finetuning.",
+            "If your model has the right facts but the wrong style, tone, or format, finetuning is the better fix."
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "Fine-tuning মানে একটা আগে থেকে trained foundation model-কে আপনার নিজের টাস্কের ডেটা দিয়ে আবার একটু ট্রেনিং করানো, যাতে মডেলটা আপনার কাজে আরও ভালো পারফর্ম করে। এটা transfer learning-এর একটা রূপ — মডেল আগে থেকেই অনেক কিছু জানে, তাই পুরো ডেটাসেট ছাড়াই অল্প উদাহরণ দিয়ে কাজ চলে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Fine-tuning করার আগে আপনি prompting, few-shot example, আর RAG ভালোভাবে try করে দেখবেন — কারণ fine-tuning-এ ডেটা, কম্পিউট, আর ML এক্সপার্টিজ অনেক বেশি লাগে। একটা সহজ নিয়ম: <strong>ফ্যাক্ট (তথ্য) ভুল হলে RAG, আর ফরম্যাট/স্টাইল ভুল হলে fine-tuning।</strong>"
+        },
+        {
+          "type": "paragraph",
+          "html": "Fine-tuning-এর মূল সমস্যা হলো মেমরি। ট্রেনিংয়ের সময় মডেলকে forward pass আর backward pass দুটোই করতে হয় — মানে আউটপুট বানানো, আর কতটুকু ভুল হলো সেটা হিসাব করে (gradient) প্যারামিটার ঠিক করা। যত বেশি trainable parameter, তত বেশি মেমরি লাগে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Quantization:</strong> প্রতিটা সংখ্যা কম বিট (যেমন ৩২-বিটের বদলে ৮-বিট) দিয়ে রাখলে মেমরি কমে যায়, কিছুটা precision হারানোর বিনিময়ে।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "mNE_d-C82lI",
+          "title": "Which Quantization Method is Right for You? (GPTQ vs. GGUF vs. AWQ)",
+          "channel": "Maarten Grootendorst",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "ch7b",
+      "num": "12",
+      "title": "Finetuning: PEFT, LoRA, model merging and tactics",
+      "sub": "PEFT, LoRA, model merging and practical tactics for adapting foundation models",
+      "bn": {
+        "title": "ফাইন-টিউনিং: PEFT, LoRA, মডেল মার্জিং আর কৌশল",
+        "sub": "PEFT, LoRA, মডেল মার্জিং আর প্র্যাকটিক্যাল কৌশল দিয়ে foundation model কাস্টমাইজ করা"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -2097,49 +2273,27 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Finetuning means taking an already-trained AI model and giving it extra, more focused training on examples from your own task. Then it gets better at exactly what you need."
+          "html": "<strong>Train a small add-on instead.</strong> Finetuning a whole model is memory-hungry. Techniques like LoRA get around this by training only a tiny add-on instead of the whole model."
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>New-hire analogy:</strong> a foundation model is like a smart new hire with broad general knowledge. Prompting is like giving them instructions and a few examples for today's task. Finetuning is like putting them through a short, focused training course on your company's specific way of doing things. It works well, but it costs time and effort. So you only do it when just giving instructions isn't enough."
+              "html": "<strong>The margin-notes analogy:</strong> finetuning the whole model is like rewriting the whole book. LoRA is like adding small notes in the margins: far less work, and nearly the same benefit."
             }
           ]
         },
         {
           "type": "paragraph",
-          "html": "Finetuning is memory-hungry. The model has to remember not just its answer, but also how wrong it was and how to adjust itself. It must do that for every piece it is allowed to change. Techniques like LoRA get around this by training only a tiny add-on instead of the whole model. Quantization shrinks memory further by storing numbers less precisely."
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "If your model gives outdated or missing facts, fix it with search/retrieval (RAG), not finetuning.",
-            "If your model has the right facts but the wrong style, tone, or format, finetuning is the better fix.",
-            "You can also merge several finetuned models into one, instead of training one giant model that does everything."
-          ]
+          "html": "You can also merge several finetuned models into one, instead of training one giant model that does everything."
         }
       ],
       "bangla": [
         {
-          "type": "paragraph",
-          "html": "Fine-tuning মানে একটা আগে থেকে trained foundation model-কে আপনার নিজের টাস্কের ডেটা দিয়ে আবার একটু ট্রেনিং করানো, যাতে মডেলটা আপনার কাজে আরও ভালো পারফর্ম করে। এটা transfer learning-এর একটা রূপ — মডেল আগে থেকেই অনেক কিছু জানে, তাই পুরো ডেটাসেট ছাড়াই অল্প উদাহরণ দিয়ে কাজ চলে।"
-        },
-        {
-          "type": "paragraph",
-          "html": "Fine-tuning করার আগে আপনি prompting, few-shot example, আর RAG ভালোভাবে try করে দেখবেন — কারণ fine-tuning-এ ডেটা, কম্পিউট, আর ML এক্সপার্টিজ অনেক বেশি লাগে। একটা সহজ নিয়ম: <strong>ফ্যাক্ট (তথ্য) ভুল হলে RAG, আর ফরম্যাট/স্টাইল ভুল হলে fine-tuning।</strong>"
-        },
-        {
-          "type": "paragraph",
-          "html": "Fine-tuning-এর মূল সমস্যা হলো মেমরি। ট্রেনিংয়ের সময় মডেলকে forward pass আর backward pass দুটোই করতে হয় — মানে আউটপুট বানানো, আর কতটুকু ভুল হলো সেটা হিসাব করে (gradient) প্যারামিটার ঠিক করা। যত বেশি trainable parameter, তত বেশি মেমরি লাগে।"
-        },
-        {
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Quantization:</strong> প্রতিটা সংখ্যা কম বিট (যেমন ৩২-বিটের বদলে ৮-বিট) দিয়ে রাখলে মেমরি কমে যায়, কিছুটা precision হারানোর বিনিময়ে।",
             "<strong>PEFT (Parameter-Efficient Finetuning):</strong> পুরো মডেল না বদলে ছোট্ট একটা অংশ ট্রেইন করা।",
             "<strong>LoRA:</strong> সবচেয়ে জনপ্রিয় PEFT পদ্ধতি। একটা বড় weight matrix-কে দুইটা ছোট matrix দিয়ে approximate করে শুধু ওই ছোট দুটো ট্রেইন করা হয়। এতে মেমরি অনেক কম লাগে। আর একই base model-এর ওপর একাধিক LoRA adapter আলাদা আলাদা কাজের জন্য serve করা যায়।"
           ]
@@ -2177,18 +2331,12 @@
           "title": "What is Low-Rank Adaptation (LoRA) | explained by the inventor",
           "channel": "Edward Hu",
           "lang": "en"
-        },
-        {
-          "id": "mNE_d-C82lI",
-          "title": "Which Quantization Method is Right for You? (GPTQ vs. GGUF vs. AWQ)",
-          "channel": "Maarten Grootendorst",
-          "lang": "en"
         }
       ]
     },
     {
       "id": "ch8",
-      "num": "08",
+      "num": "13",
       "title": "Dataset Engineering",
       "sub": "Curating, synthesizing, and processing the data that decides how good your finetuned model can be",
       "bn": {
@@ -2542,12 +2690,12 @@
     },
     {
       "id": "ch9",
-      "num": "09",
-      "title": "Inference Optimization",
-      "sub": "Making a trained model fast and cheap to run in production",
+      "num": "14",
+      "title": "Inference Optimization: bottlenecks, metrics and accelerators",
+      "sub": "What makes a trained model slow or costly to run: bottlenecks, metrics and the hardware",
       "bn": {
-        "title": "ইনফারেন্স অপ্টিমাইজেশন",
-        "sub": "ট্রেইন করা মডেলকে প্রোডাকশনে দ্রুত আর সস্তায় চালানো"
+        "title": "ইনফারেন্স অপ্টিমাইজেশন: bottleneck, মেট্রিক আর accelerator",
+        "sub": "ট্রেইন করা মডেল কেন ধীর বা দামি চলে: bottleneck, মেট্রিক আর hardware"
       },
       "body": [
         {
@@ -2558,7 +2706,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Training builds a model; <strong>inference</strong> is using that model to answer real requests. Once a model ships, its usability depends less on raw quality and more on whether it responds fast enough and cheaply enough. The component that runs a model in production is the <strong>inference server</strong>, and the broader system around it (routing, queuing, preprocessing) is the <strong>inference service</strong>."
+          "html": "Training builds a model; <strong>inference</strong> is using that model to answer real requests. Once a model ships, its usability depends less on raw quality and more on whether it responds fast enough and cheaply enough. The component that runs a model in production is the <strong>inference server</strong>. The broader system around it (routing, queuing, preprocessing) is the <strong>inference service</strong>."
         },
         {
           "type": "paragraph",
@@ -2585,7 +2733,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every workload hits one of two bottlenecks. A <strong>compute-bound</strong> task is limited by how many calculations the hardware can do. A <strong>memory bandwidth-bound</strong> task is limited by how fast data can move between memory and processors. For autoregressive language models, <strong>prefill</strong> (processing the input prompt in parallel) is compute-bound. <strong>Decode</strong> (generating one output token at a time) is memory bandwidth-bound, because each step must reload the model's weights to produce a single token."
+          "html": "Every workload hits one of two bottlenecks. A <strong>compute-bound</strong> task is limited by how many calculations the hardware can do. A <strong>memory bandwidth-bound</strong> task is limited by how fast data can move between memory and processors. For autoregressive language models, <strong>prefill</strong> (processing the input prompt in parallel) is compute-bound. <strong>Decode</strong> (generating one output token at a time) is memory bandwidth-bound. Each step must reload the model's weights to produce a single token."
         },
         {
           "type": "list",
@@ -2604,7 +2752,16 @@
         },
         {
           "type": "paragraph",
-          "html": "Three numbers describe an inference service: <strong>latency</strong> (user experience), <strong>throughput</strong> (how much the service produces, tied to cost), and <strong>utilization</strong> (how efficiently hardware is used)."
+          "html": "Three numbers describe an inference service:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>latency</strong>: the user experience;",
+            "<strong>throughput</strong>: how much the service produces, which ties to cost;",
+            "<strong>utilization</strong>: how efficiently the hardware is used."
+          ]
         },
         {
           "type": "table",
@@ -2645,7 +2802,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Latency is a distribution, not a single number. A few slow outlier requests can badly skew an average, so teams report percentiles such as p50, p90, p95, and p99 instead."
+              "html": "Latency is a distribution, not a single number. A few slow outlier requests can badly skew an average. Teams report percentiles such as p50, p90, p95, and p99 instead."
             }
           ]
         },
@@ -2657,7 +2814,13 @@
         },
         {
           "type": "paragraph",
-          "html": "An <strong>accelerator</strong> is a chip built for one kind of workload. GPUs dominate AI because they pack thousands of smaller cores, suited to the massively parallel matrix multiplications behind most ML workloads. CPUs have a few powerful general-purpose cores instead. Other accelerators — Google's TPU, AWS Inferentia, Intel's Gaudi, and more — target training, inference, or edge devices specifically."
+          "html": "An <strong>accelerator</strong> is a chip built for one kind of workload. GPUs dominate AI because they pack thousands of smaller cores. Those suit the massively parallel matrix multiplications behind most ML workloads. CPUs have a few powerful general-purpose cores instead. Other accelerators — Google's TPU, AWS Inferentia, Intel's Gaudi, and more — target training, inference, or edge devices specifically."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "id": "ch9-comparing-chips",
+          "html": "What to compare across chips"
         },
         {
           "type": "paragraph",
@@ -2675,7 +2838,65 @@
         {
           "type": "paragraph",
           "html": "Quantization reduces how many bytes per parameter a model needs, which directly reduces the memory bandwidth it consumes."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Once a model is trained, someone still has to run it for real users. That costs money and takes time for every single response. This chapter is about making that running step — called inference — faster and cheaper without ruining the model's answers."
         },
+        {
+          "type": "paragraph",
+          "html": "Two things slow a model down: generating the very first word of a reply (waiting time) and generating each word after that (typing speed). Engineers measure both separately, because an application can feel instant on one and sluggish on the other."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Restaurant kitchen analogy:</strong> reading an order and gathering ingredients is like <strong>prefill</strong>. It can be done quickly by many hands at once. Cooking the dish step by step is like <strong>decode</strong>. It happens one step after another and cannot be rushed past a point."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা মডেল ট্রেইন করার পর, আসল চ্যালেঞ্জ হলো সেটাকে প্রোডাকশনে চালানো — একে বলে <strong>inference</strong>। মডেল যত ভালোই হোক, যদি রেসপন্স আসতে অনেক সময় লাগে বা খরচ বেশি পড়ে, তাহলে সেটা ইউজারের জন্য কাজে লাগে না।"
+        },
+        {
+          "type": "paragraph",
+          "html": "অটোরিগ্রেসিভ ল্যাঙ্গুয়েজ মডেলের ইনফারেন্স দুইটা ধাপে হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>prefill</strong>: ইনপুট টোকেনগুলো একসাথে প্রসেস করা, যা compute-bound;",
+            "<strong>decode</strong>: একটা একটা করে আউটপুট টোকেন জেনারেট করা, যা memory bandwidth-bound।"
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>TTFT</strong> (Time to First Token) মাপে প্রথম টোকেন আসতে কত সময় লাগে।",
+            "<strong>TPOT</strong> (Time Per Output Token) মাপে প্রতিটা পরের টোকেন কত দ্রুত আসে।",
+            "<strong>Throughput</strong> আর <strong>goodput</strong> বলে দেয় সার্ভিস কতটা দ্রুত এবং কতজন ইউজারের SLO পূরণ করে।"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch9b",
+      "num": "15",
+      "title": "Inference Optimization: model-level and service-level techniques",
+      "sub": "Making a trained model fast and cheap to run in production: compression, faster decoding, kernels, batching and parallelism",
+      "bn": {
+        "title": "ইনফারেন্স অপ্টিমাইজেশন: মডেল আর সার্ভিস লেভেলের কৌশল",
+        "sub": "ট্রেইন করা মডেলকে প্রোডাকশনে দ্রুত আর সস্তায় চালানো: compression, দ্রুত decoding, kernel, batching আর parallelism"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -2784,20 +3005,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "Once a model is trained, someone still has to run it for real users. That costs money and takes time for every single response. This chapter is about making that running step — called inference — faster and cheaper without ruining the model's answers."
-        },
-        {
-          "type": "paragraph",
-          "html": "Two things slow a model down: generating the very first word of a reply (waiting time) and generating each word after that (typing speed). Engineers measure both separately, because an application can feel instant on one and sluggish on the other."
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>Restaurant kitchen analogy:</strong> reading an order and gathering ingredients is like <strong>prefill</strong>. It can be done quickly by many hands at once. Cooking the dish step by step is like <strong>decode</strong>. It happens one step after another and cannot be rushed past a point. A busy kitchen serves far more diners without making anyone wait longer. It groups similar orders together (batching), reuses prepped ingredients across orders (caching), and lets fast hands assist the chef (speculative decoding)."
-            }
-          ]
+          "html": "Three kinds of fixes make a model faster and cheaper to serve:"
         },
         {
           "type": "list",
@@ -2809,36 +3017,20 @@
           ]
         },
         {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The busy-kitchen analogy:</strong> a busy kitchen serves far more diners without making anyone wait longer. It groups similar orders together (batching), reuses prepped ingredients across orders (caching), and lets fast hands assist the chef (speculative decoding)."
+            }
+          ]
+        },
+        {
           "type": "paragraph",
           "html": "None of this changes what the model knows — it only changes how quickly and cheaply it delivers what it already knows."
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "একটা মডেল ট্রেইন করার পর, আসল চ্যালেঞ্জ হলো সেটাকে প্রোডাকশনে চালানো — একে বলে <strong>inference</strong>। মডেল যত ভালোই হোক, যদি রেসপন্স আসতে অনেক সময় লাগে বা খরচ বেশি পড়ে, তাহলে সেটা ইউজারের জন্য কাজে লাগে না।"
-        },
-        {
-          "type": "paragraph",
-          "html": "অটোরিগ্রেসিভ ল্যাঙ্গুয়েজ মডেলের ইনফারেন্স দুইটা ধাপে হয়:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>prefill</strong>: ইনপুট টোকেনগুলো একসাথে প্রসেস করা, যা compute-bound;",
-            "<strong>decode</strong>: একটা একটা করে আউটপুট টোকেন জেনারেট করা, যা memory bandwidth-bound।"
-          ]
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>TTFT</strong> (Time to First Token) মাপে প্রথম টোকেন আসতে কত সময় লাগে।",
-            "<strong>TPOT</strong> (Time Per Output Token) মাপে প্রতিটা পরের টোকেন কত দ্রুত আসে।",
-            "<strong>Throughput</strong> আর <strong>goodput</strong> বলে দেয় সার্ভিস কতটা দ্রুত এবং কতজন ইউজারের SLO পূরণ করে।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "মডেল লেভেলে অপ্টিমাইজেশনের জন্য আছে quantization, distillation, pruning এর মতো model compression টেকনিক। আছে speculative decoding-এর মতো পদ্ধতিও। এতে একটা ছোট draft model আগে থেকে কয়েকটা টোকেন গেস করে, আর মূল (target) model সেগুলো প্যারালালি ভেরিফাই করে।"
@@ -2897,12 +3089,12 @@
     },
     {
       "id": "ch10",
-      "num": "10",
-      "title": "AI Engineering Architecture and User Feedback",
-      "sub": "How a platform grows from a single model call to a full pipeline, and how users teach it to get better",
+      "num": "16",
+      "title": "AI Engineering Architecture and User Feedback: building the platform",
+      "sub": "How a platform grows from a single model call to a full pipeline",
       "bn": {
-        "title": "AI ইঞ্জিনিয়ারিং আর্কিটেকচার এবং ইউজার ফিডব্যাক",
-        "sub": "একটা সিঙ্গেল মডেল কলের অ্যাপ কীভাবে ধাপে ধাপে ফুল প্ল্যাটফর্ম হয়ে ওঠে, আর ইউজাররা কীভাবে একে উন্নত হতে শেখায়"
+        "title": "AI ইঞ্জিনিয়ারিং আর্কিটেকচার এবং ইউজার ফিডব্যাক: প্ল্যাটফর্ম তৈরি",
+        "sub": "একটা সিঙ্গেল মডেল কলের অ্যাপ কীভাবে ধাপে ধাপে ফুল প্ল্যাটফর্ম হয়ে ওঠে"
       },
       "body": [
         {
@@ -3007,7 +3199,88 @@
         {
           "type": "paragraph",
           "html": "Once an architecture supports loops, parallel execution, and conditional branching, it crosses into agentic territory. A model can decide its first answer was incomplete, trigger another retrieval, and feed the new context back into itself or a different model. The architecture can go one step further by allowing <strong>write actions</strong>, such as sending an email, placing an order, or updating a database. They make the system far more capable but also far riskier: a mistake is no longer just a bad answer but a real-world side effect."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "Think of building an AI app like building a house. You start with four walls and a roof: just send the question to the model and show the answer. Then real problems come up, so you add:"
         },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "plumbing: giving the model outside information, like documents or search results;",
+            "locks on the doors: guardrails that block bad requests or bad answers;",
+            "a reception desk: a router that sends different questions to different rooms;",
+            "a pantry: caching, so you don't cook the same meal twice."
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "একটা AI অ্যাপ সবচেয়ে সহজ অবস্থায় শুধু একটা <strong>model API</strong>-তে query পাঠায় আর response ফেরত দেয় — কোনো context, guardrail বা optimization ছাড়াই। প্রোডাকশনে গিয়ে এই সহজ কাঠামোর উপর ধাপে ধাপে ০৫টা স্তর যোগ হয়:"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "context enhance করা;",
+            "guardrails বসানো;",
+            "router আর gateway যোগ করা;",
+            "caching দিয়ে latency কমানো;",
+            "agent pattern যোগ করে জটিল কাজ করানো।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Context construction</strong> হলো foundation model-এর জন্য ফিচার ইঞ্জিনিয়ারিং-এর মতো — retrieval আর tool use দিয়ে মডেলকে উত্তর দেয়ার জন্য দরকারি তথ্য দেওয়া হয়। <strong>Guardrails</strong> দুই ধরনের:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "input guardrail লিক হওয়া sensitive তথ্য আর prompt attack ঠেকায় (যেমন ফোন নম্বর <code>[PHONE NUMBER]</code> দিয়ে মাস্ক করে পরে আনমাস্ক করা);",
+            "output guardrail hallucination, toxic content, বা malformatted output ধরে ফেলে।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Router</strong> একটা intent classifier দিয়ে ঠিক করে কোন query কোথায় যাবে — সস্তা মডেল না বিশেষায়িত মডেল, নাকি মানুষ অপারেটর। <strong>Gateway</strong> সব মডেলের (self-hosted বা third-party) জন্য একটা একক API দেয়। ফলে access control, cost management আর fallback (একটা provider fail করলে অন্যটায় যাওয়া) কেন্দ্রীয়ভাবে করা যায়।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Exact caching</strong>: হুবহু একই query-র জন্য আগের উত্তর রিইউজ করা।",
+            "<strong>Semantic caching</strong>: embedding মিল থাকলে কাছাকাছি অর্থের query-র জন্যও cache রিইউজ করা, তবে threshold ভুল হলে ভুল উত্তর আসার ঝুঁকি থাকে।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Agent pattern দিয়ে সিস্টেম loop চালাতে পারে: উত্তর যথেষ্ট না হলে আবার retrieval করে নিজেকে ফিডব্যাক দেয়। আর write action (ইমেইল পাঠানো, অর্ডার বসানো) যোগ করলে সিস্টেম অনেক বেশি কার্যকর হয়, কিন্তু ঝুঁকিপূর্ণও হয়ে যায়।"
+        }
+      ],
+      "videos": [
+        {
+          "id": "tECAkJAI_Vk",
+          "title": "Build Hour: Prompt Caching",
+          "channel": "OpenAI",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "ch10b",
+      "num": "17",
+      "title": "AI Engineering Architecture and User Feedback: monitoring and feedback",
+      "sub": "How to watch the pipeline in production, orchestrate it, and let users teach it to get better",
+      "bn": {
+        "title": "AI ইঞ্জিনিয়ারিং আর্কিটেকচার এবং ইউজার ফিডব্যাক: মনিটরিং আর ফিডব্যাক",
+        "sub": "প্রোডাকশনে সিস্টেম মনিটর করা, component চেইন করা, আর ইউজাররা কীভাবে একে উন্নত হতে শেখায়"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -3136,20 +3409,6 @@
       ],
       "layman": [
         {
-          "type": "paragraph",
-          "html": "Think of building an AI app like building a house. You start with four walls and a roof: just send the question to the model and show the answer. Then real problems come up, so you add:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "plumbing: giving the model outside information, like documents or search results;",
-            "locks on the doors: guardrails that block bad requests or bad answers;",
-            "a reception desk: a router that sends different questions to different rooms;",
-            "a pantry: caching, so you don't cook the same meal twice."
-          ]
-        },
-        {
           "type": "analogy",
           "blocks": [
             {
@@ -3160,7 +3419,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The second half of this chapter is about listening to customers. A user might correct the AI, stop it mid-answer, regenerate a response, or just say \"that's wrong.\" Each time, they quietly teach the system what good and bad look like. The trick is to collect that feedback without being annoying about it. The best designs get useful signal for free, like an image generator that lets you simply pick your favorite of four pictures."
+          "html": "<strong>Listening to customers.</strong> A user might correct the AI, stop it mid-answer, regenerate a response, or just say \"that's wrong.\" Each time, they quietly teach the system what good and bad look like. The trick is to collect that feedback without being annoying about it. The best designs get useful signal for free, like an image generator that lets you simply pick your favorite of four pictures."
         },
         {
           "type": "list",
@@ -3174,46 +3433,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "একটা AI অ্যাপ সবচেয়ে সহজ অবস্থায় শুধু একটা <strong>model API</strong>-তে query পাঠায় আর response ফেরত দেয় — কোনো context, guardrail বা optimization ছাড়াই। প্রোডাকশনে গিয়ে এই সহজ কাঠামোর উপর ধাপে ধাপে ০৫টা স্তর যোগ হয়:"
-        },
-        {
-          "type": "list",
-          "ordered": true,
-          "items": [
-            "context enhance করা;",
-            "guardrails বসানো;",
-            "router আর gateway যোগ করা;",
-            "caching দিয়ে latency কমানো;",
-            "agent pattern যোগ করে জটিল কাজ করানো।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>Context construction</strong> হলো foundation model-এর জন্য ফিচার ইঞ্জিনিয়ারিং-এর মতো — retrieval আর tool use দিয়ে মডেলকে উত্তর দেয়ার জন্য দরকারি তথ্য দেওয়া হয়। <strong>Guardrails</strong> দুই ধরনের:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "input guardrail লিক হওয়া sensitive তথ্য আর prompt attack ঠেকায় (যেমন ফোন নম্বর <code>[PHONE NUMBER]</code> দিয়ে মাস্ক করে পরে আনমাস্ক করা);",
-            "output guardrail hallucination, toxic content, বা malformatted output ধরে ফেলে।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>Router</strong> একটা intent classifier দিয়ে ঠিক করে কোন query কোথায় যাবে — সস্তা মডেল না বিশেষায়িত মডেল, নাকি মানুষ অপারেটর। <strong>Gateway</strong> সব মডেলের (self-hosted বা third-party) জন্য একটা একক API দেয়। ফলে access control, cost management আর fallback (একটা provider fail করলে অন্যটায় যাওয়া) কেন্দ্রীয়ভাবে করা যায়।"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>Exact caching</strong>: হুবহু একই query-র জন্য আগের উত্তর রিইউজ করা।",
-            "<strong>Semantic caching</strong>: embedding মিল থাকলে কাছাকাছি অর্থের query-র জন্যও cache রিইউজ করা, তবে threshold ভুল হলে ভুল উত্তর আসার ঝুঁকি থাকে।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "Agent pattern দিয়ে সিস্টেম loop চালাতে পারে: উত্তর যথেষ্ট না হলে আবার retrieval করে নিজেকে ফিডব্যাক দেয়। আর write action (ইমেইল পাঠানো, অর্ডার বসানো) যোগ করলে সিস্টেম অনেক বেশি কার্যকর হয়, কিন্তু ঝুঁকিপূর্ণও হয়ে যায়। <strong>Monitoring আর observability</strong>-তে metrics, logs, আর traces — এই তিনটা মিলিয়ে বোঝা যায় সিস্টেম কোথায় ভেঙেছে। আর <strong>orchestration</strong> সব component একসাথে চেইন করে দেয়।"
+          "html": "<strong>Monitoring আর observability</strong>-তে metrics, logs, আর traces — এই তিনটা মিলিয়ে বোঝা যায় সিস্টেম কোথায় ভেঙেছে। আর <strong>orchestration</strong> সব component একসাথে চেইন করে দেয়।"
         },
         {
           "type": "analogy",
@@ -3249,12 +3469,6 @@
         }
       ],
       "videos": [
-        {
-          "id": "tECAkJAI_Vk",
-          "title": "Build Hour: Prompt Caching",
-          "channel": "OpenAI",
-          "lang": "en"
-        },
         {
           "id": "pTneXS_m1rk",
           "title": "Langfuse Intro - Observability & Tracing Deep Dive",

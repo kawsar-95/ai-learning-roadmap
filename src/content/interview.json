@@ -243,7 +243,7 @@
           }
         },
         {
-          "section": "s2",
+          "section": "s3",
           "en": {
             "q": "What is MCP, and what does an MCP server expose?",
             "a": "MCP, the Model Context Protocol, is an open standard introduced by Anthropic in late 2024 and now adopted by OpenAI, Google, and the major IDE vendors. The model is the client, and the data or tool provider runs an MCP server. The server exposes three primitives: Tools (functions the model can call), Resources (read-only data the client can fetch on demand), and Prompts (named prompt templates). You write one MCP server, for example for Postgres, and every MCP-compatible client can use it."
@@ -574,7 +574,7 @@
       "topic": "ai-engineering-book",
       "items": [
         {
-          "section": "ch2",
+          "section": "ch2b",
           "en": {
             "q": "A teammate asks why the same foundation model gives a different answer every time it is asked the same question. What is going on, and how do you make outputs more repeatable?",
             "a": "Foundation models sample the next token from a probability distribution rather than always picking the single most likely one, so the same prompt can produce different outputs. Lowering the temperature (or setting it to 0, where supported) makes sampling more deterministic by sharpening that distribution toward the highest-probability tokens, at the cost of less varied output. Full determinism still is not guaranteed across hardware or provider updates."
@@ -585,7 +585,7 @@
           }
         },
         {
-          "section": "ch6",
+          "section": "ch6b",
           "en": {
             "q": "A product manager wants an agent that can book a meeting by checking a calendar and sending an email. What two things does an agent need beyond a foundation model to do this, and what is the main risk?",
             "a": "An agent needs tools (e.g. a calendar-read API and an email-send API) that let it act outside the model, and a planning loop that breaks \"book this meeting\" into ordered steps, calls the right tool at each step, and reacts to what each tool returns. The main risk is a failure mode compounding silently across steps, such as an agent calling the wrong tool, misreading a tool's output, or looping, so agent systems need their own evaluation for tool selection and task completion, not just final-answer quality."

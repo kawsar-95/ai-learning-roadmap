@@ -1790,7 +1790,114 @@
           "svg": "<svg viewBox=\"0 0 900 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Four ways to store keys and values: MHA, GQA, MQA, and MLA. Each shows 8 query heads and how many key-value entries are stored\"><text x=\"450.0\" y=\"20.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">8 query heads (circles) read from the stored keys and values (squares)</text><rect x=\"10.0\" y=\"36.0\" width=\"435.0\" height=\"134.0\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"></rect><text x=\"24.0\" y=\"60.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"16\" fill=\"#22d3ee\" font-weight=\"700\">MHA</text><text x=\"90.0\" y=\"60.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">8 KV heads. Nothing shared.</text><circle cx=\"48.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"98.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"148.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"198.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"248.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"298.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"348.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"398.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><rect x=\"38.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"48.0\" y1=\"98.0\" x2=\"48.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"88.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"98.0\" y1=\"98.0\" x2=\"98.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"138.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"148.0\" y1=\"98.0\" x2=\"148.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"188.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"198.0\" y1=\"98.0\" x2=\"198.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"238.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"248.0\" y1=\"98.0\" x2=\"248.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"288.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"298.0\" y1=\"98.0\" x2=\"298.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"338.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"348.0\" y1=\"98.0\" x2=\"348.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"388.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.6\"></rect><line x1=\"398.0\" y1=\"98.0\" x2=\"398.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"455.0\" y=\"36.0\" width=\"435.0\" height=\"134.0\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"></rect><text x=\"469.0\" y=\"60.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"16\" fill=\"#34d399\" font-weight=\"700\">GQA</text><text x=\"535.0\" y=\"60.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">2 KV groups. 4 queries share one.</text><circle cx=\"493.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"543.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"593.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"643.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"693.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"743.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"793.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"843.0\" cy=\"88.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><rect x=\"558.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.6\"></rect><line x1=\"493.0\" y1=\"98.0\" x2=\"568.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"543.0\" y1=\"98.0\" x2=\"568.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"593.0\" y1=\"98.0\" x2=\"568.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"643.0\" y1=\"98.0\" x2=\"568.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"758.0\" y=\"132.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.6\"></rect><line x1=\"693.0\" y1=\"98.0\" x2=\"768.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"743.0\" y1=\"98.0\" x2=\"768.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"793.0\" y1=\"98.0\" x2=\"768.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"843.0\" y1=\"98.0\" x2=\"768.0\" y2=\"131.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"10.0\" y=\"182.0\" width=\"435.0\" height=\"134.0\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"></rect><text x=\"24.0\" y=\"206.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"16\" fill=\"#fbbf24\" font-weight=\"700\">MQA</text><text x=\"90.0\" y=\"206.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">1 KV head. All queries share it.</text><circle cx=\"48.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"98.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"148.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"198.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"248.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"298.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"348.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"398.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><rect x=\"213.0\" y=\"278.0\" width=\"20.0\" height=\"20.0\" rx=\"3\" fill=\"rgba(251,191,36,0.13)\" stroke=\"#fbbf24\" stroke-width=\"1.6\"></rect><line x1=\"48.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"98.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"148.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"198.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"248.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"298.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"348.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"398.0\" y1=\"244.0\" x2=\"223.0\" y2=\"277.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><rect x=\"455.0\" y=\"182.0\" width=\"435.0\" height=\"134.0\" rx=\"8\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"></rect><text x=\"469.0\" y=\"206.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"16\" fill=\"#a78bfa\" font-weight=\"700\">MLA</text><text x=\"535.0\" y=\"206.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">One small latent. K and V are rebuilt.</text><circle cx=\"493.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"543.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"593.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"643.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"693.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"743.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"793.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><circle cx=\"843.0\" cy=\"234.0\" r=\"9\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.6\"></circle><rect x=\"615.0\" y=\"277.0\" width=\"120.0\" height=\"22.0\" rx=\"5\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"></rect><text x=\"675.0\" y=\"292.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#e2e8f0\">latent</text><line x1=\"493.0\" y1=\"244.0\" x2=\"654.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"543.0\" y1=\"244.0\" x2=\"660.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"593.0\" y1=\"244.0\" x2=\"666.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"643.0\" y1=\"244.0\" x2=\"672.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"693.0\" y1=\"244.0\" x2=\"678.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"743.0\" y1=\"244.0\" x2=\"684.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"793.0\" y1=\"244.0\" x2=\"690.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line><line x1=\"843.0\" y1=\"244.0\" x2=\"696.0\" y2=\"276.0\" stroke=\"#94a3b8\" stroke-width=\"0.9\"></line></svg>",
           "caption": "How MHA, GQA, MQA and MLA store keys and values. Fewer stored entries means a smaller KV cache. MQA is the extreme case of GQA with one group.",
           "captionBn": "MHA, GQA, MQA ও MLA কীভাবে কী আর ভ্যালু জমা রাখে। কম জমা মানে ছোট KV ক্যাশ। MQA হলো GQA-র চরম রূপ, যেখানে গ্রুপ মাত্র একটি।"
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>Reading a very long book costs a lot of effort.</strong> A language model reads text and must remember what came before. The standard way is to keep notes on every earlier word and to compare the new word with all of them. For a short text this is fine. For a book it is heavy."
         },
+        {
+          "type": "paragraph",
+          "html": "The article shows five tricks that engineers use to save effort:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Share notes (GQA):</strong> several readers use one set of notes instead of each keeping their own.",
+            "<strong>Shrink the notes (MLA):</strong> write the notes in a compressed form and expand them only when needed.",
+            "<strong>Look nearby (sliding window):</strong> only read the last few pages, not the whole book.",
+            "<strong>Look at what matters (sparse attention):</strong> a quick scan picks the important pages, and only those are read closely.",
+            "<strong>Mix skimming and reading (hybrid):</strong> skim most chapters, and read every fourth chapter carefully."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "Each trick saves memory or time. Each trick also risks missing a detail. So designers test them to see how much quality they lose."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The open-book exam analogy:</strong> in an open-book exam you may bring notes. If you copy the whole book, your bag is too heavy and you cannot find anything. You do better with a short summary, a neat index, and the habit of checking only the pages that matter. The attention variants are different ways to prepare these notes."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>Visual Guide to Attention Variants কী:</strong> Sebastian Raschka-র ২২ মার্চ ২০২৬-এর একটি আর্টিকেল। আজকের ওপেন-ওয়েট মডেলগুলো যেসব অ্যাটেনশন নকশা ব্যবহার করে, প্রতিটির ছবিসহ তুলনা এতে আছে। সব ভ্যারিয়েন্টের লক্ষ্য একটাই: লম্বা ইনপুটের জন্য অ্যাটেনশন সস্তা করা, মেমরিতে বা কম্পিউটে বা দুটিতেই।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>দুটি খরচ:</strong> প্রথমটি <strong>KV ক্যাশ</strong>। মডেল আগের প্রতিটি টোকেনের কী আর ভ্যালু জমা রাখে, যাতে নতুন টোকেনের জন্য আবার হিসাব করতে না হয়। দ্বিতীয়টি কম্পিউট। প্রতিটি টোকেন সব আগের টোকেনের সাথে তুলনা করে, তাই খরচ দৈর্ঘ্যের বর্গের সাথে বাড়ে।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>MHA:</strong> প্রতিটি হেডের নিজস্ব K ও V। এটিই মূল রূপ।",
+            "<strong>GQA:</strong> কয়েকটি কুয়েরি হেড একটি K ও V ভাগ করে নেয়। KV ক্যাশের মেমরি কমে। Llama 3 ৮B, Qwen3 ৪B, Gemma 3 ২৭B এটি ব্যবহার করে।",
+            "<strong>MLA:</strong> সংকুচিত একটি ল্যাটেন্ট জমা রাখা হয় এবং দরকারে K ও V আবার বানানো হয়। DeepSeek V3, Kimi K2, GLM-5 এটি ব্যবহার করে।",
+            "<strong>স্লাইডিং উইন্ডো:</strong> প্রতিটি টোকেন শুধু কাছের কয়েকটি টোকেন পড়ে। Gemma 3-এ ৫টি লোকাল লেয়ারের পর ১টি গ্লোবাল লেয়ার, উইন্ডো ১,০২৪ টোকেন।",
+            "<strong>DeepSeek স্পার্স অ্যাটেনশন:</strong> একটি ছোট ইনডেক্সার আগের টোকেনগুলোকে স্কোর দেয় এবং সিলেক্টর সেরাগুলো রাখে।",
+            "<strong>হাইব্রিড:</strong> বেশিরভাগ লেয়ার সস্তা লিনিয়ার ধরনের, কয়েকটি লেয়ার ফুল অ্যাটেনশন। Qwen3-Next-এ অনুপাত ৩ : ১।"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>খোলা-বই পরীক্ষার উপমা:</strong> খোলা-বই পরীক্ষায় নোট আনা যায়। পুরো বই কপি করলে ব্যাগ ভারী হয় আর কিছু খুঁজে পাওয়া যায় না। ভালো হলো ছোট সারসংক্ষেপ, গোছানো সূচি, আর শুধু দরকারি পাতা দেখার অভ্যাস। অ্যাটেনশন ভ্যারিয়েন্টগুলো এই নোট তৈরির ভিন্ন ভিন্ন পথ।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "kx3rETIxo4Q",
+          "title": "Understand Grouped Query Attention (GQA) | The final frontier before latent attention",
+          "channel": "Vizuara",
+          "lang": "en"
+        },
+        {
+          "id": "oanuxVw5CvU",
+          "title": "What is Grouped Query Attention (GQA)",
+          "channel": "Data Science Made Easy",
+          "lang": "en"
+        }
+      ],
+      "embeds": [
+        {
+          "url": "https://sebastianraschka.com/llm-architecture-gallery/",
+          "title": "LLM Architecture Gallery (Sebastian Raschka)",
+          "note": "A gallery of model cards from the same author. Use it to check which attention variant a model uses, and compare it with the table in this section.",
+          "noteBn": "একই লেখকের মডেল কার্ডের একটি গ্যালারি। একটি মডেল কোন অ্যাটেনশন ভ্যারিয়েন্ট ব্যবহার করে তা দেখুন এবং এই সেকশনের টেবিলের সাথে মেলান।",
+          "height": 720
+        },
+        {
+          "url": "https://magazine.sebastianraschka.com/p/visual-attention-variants",
+          "title": "A Visual Guide to Attention Variants in Modern LLMs",
+          "note": "The article for this section, with all of its diagrams. The publisher does not allow it inside other sites, so open it in a new tab.",
+          "noteBn": "এই সেকশনের আর্টিকেল, তার সব ডায়াগ্রামসহ। প্রকাশক এটি অন্য সাইটের ভেতরে দেখাতে দেয় না, তাই নতুন ট্যাবে খুলুন।",
+          "frame": false
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "num": "07",
+      "title": "Attention variants in numbers: KV cache size, sliding windows and hybrids",
+      "sub": "This section covers how big the KV cache gets, how sharing or compressing keys and values shrinks it, how sliding windows, sparse attention and hybrid layers cut compute, and how to read the guide.",
+      "bn": {
+        "title": "অ্যাটেনশনের হিসাব: KV ক্যাশের আকার, স্লাইডিং উইন্ডো আর হাইব্রিড",
+        "sub": "KV ক্যাশ কত বড় হয়, key আর value ভাগ করে বা সংকুচিত করে রাখলে কতটা কমে, স্লাইডিং উইন্ডো, স্পার্স অ্যাটেনশন আর হাইব্রিড লেয়ার কীভাবে কম্পিউট কমায়, আর গাইডটা কীভাবে পড়বেন।"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -1884,58 +1991,18 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>Reading a very long book costs a lot of effort.</strong> A language model reads text and must remember what came before. The standard way is to keep notes on every earlier word and to compare the new word with all of them. For a short text this is fine. For a book it is heavy."
+          "html": "<strong>How big do the notes get?</strong> The AI keeps notes on every earlier word so it does not have to work them out again. For a mid-sized model and a very long chat, those notes can fill many gigabytes of memory. In the article's example, letting every four readers share one set of notes cuts that to a quarter."
         },
         {
           "type": "paragraph",
-          "html": "The article shows five tricks that engineers use to save effort:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>Share notes (GQA):</strong> several readers use one set of notes instead of each keeping their own.",
-            "<strong>Shrink the notes (MLA):</strong> write the notes in a compressed form and expand them only when needed.",
-            "<strong>Look nearby (sliding window):</strong> only read the last few pages, not the whole book.",
-            "<strong>Look at what matters (sparse attention):</strong> a quick scan picks the important pages, and only those are read closely.",
-            "<strong>Mix skimming and reading (hybrid):</strong> skim most chapters, and read every fourth chapter carefully."
-          ]
+          "html": "<strong>Reading fewer words:</strong> a model does not have to compare each new word with every earlier one. It can look only at the most recent words, or let a quick scan pick the useful ones. Many models also skim with cheap layers and read carefully only every few layers."
         },
         {
           "type": "paragraph",
-          "html": "Each trick saves memory or time. Each trick also risks missing a detail. So designers test them to see how much quality they lose."
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>The open-book exam analogy:</strong> in an open-book exam you may bring notes. If you copy the whole book, your bag is too heavy and you cannot find anything. You do better with a short summary, a neat index, and the habit of checking only the pages that matter. The attention variants are different ways to prepare these notes."
-            }
-          ]
+          "html": "<strong>How to use the article:</strong> for each trick, ask two questions: what does it save, and what does it give up?"
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "<strong>Visual Guide to Attention Variants কী:</strong> Sebastian Raschka-র ২২ মার্চ ২০২৬-এর একটি আর্টিকেল। আজকের ওপেন-ওয়েট মডেলগুলো যেসব অ্যাটেনশন নকশা ব্যবহার করে, প্রতিটির ছবিসহ তুলনা এতে আছে। সব ভ্যারিয়েন্টের লক্ষ্য একটাই: লম্বা ইনপুটের জন্য অ্যাটেনশন সস্তা করা, মেমরিতে বা কম্পিউটে বা দুটিতেই।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>দুটি খরচ:</strong> প্রথমটি <strong>KV ক্যাশ</strong>। মডেল আগের প্রতিটি টোকেনের কী আর ভ্যালু জমা রাখে, যাতে নতুন টোকেনের জন্য আবার হিসাব করতে না হয়। দ্বিতীয়টি কম্পিউট। প্রতিটি টোকেন সব আগের টোকেনের সাথে তুলনা করে, তাই খরচ দৈর্ঘ্যের বর্গের সাথে বাড়ে।"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>MHA:</strong> প্রতিটি হেডের নিজস্ব K ও V। এটিই মূল রূপ।",
-            "<strong>GQA:</strong> কয়েকটি কুয়েরি হেড একটি K ও V ভাগ করে নেয়। KV ক্যাশের মেমরি কমে। Llama 3 ৮B, Qwen3 ৪B, Gemma 3 ২৭B এটি ব্যবহার করে।",
-            "<strong>MLA:</strong> সংকুচিত একটি ল্যাটেন্ট জমা রাখা হয় এবং দরকারে K ও V আবার বানানো হয়। DeepSeek V3, Kimi K2, GLM-5 এটি ব্যবহার করে।",
-            "<strong>স্লাইডিং উইন্ডো:</strong> প্রতিটি টোকেন শুধু কাছের কয়েকটি টোকেন পড়ে। Gemma 3-এ ৫টি লোকাল লেয়ারের পর ১টি গ্লোবাল লেয়ার, উইন্ডো ১,০২৪ টোকেন।",
-            "<strong>DeepSeek স্পার্স অ্যাটেনশন:</strong> একটি ছোট ইনডেক্সার আগের টোকেনগুলোকে স্কোর দেয় এবং সিলেক্টর সেরাগুলো রাখে।",
-            "<strong>হাইব্রিড:</strong> বেশিরভাগ লেয়ার সস্তা লিনিয়ার ধরনের, কয়েকটি লেয়ার ফুল অ্যাটেনশন। Qwen3-Next-এ অনুপাত ৩ : ১।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "<strong>KV ক্যাশের হিসাব:</strong> Llama 3 8B-র মতো আকার ধরুন: ৩২ লেয়ার, হেড সাইজ ১২৮, FP16। সূত্র: <code>2 × layer × kv_head × head_size × byte × token</code>। MHA (৩২ KV হেড) হলে প্রতি টোকেনে ৫১২ KiB, ১,৩১,০৭২ টোকেনে ৬৪ GiB। GQA (৮ KV হেড) হলে ১২৮ KiB এবং ১৬ GiB। MQA (১ KV হেড) হলে ১৬ KiB এবং ২ GiB।"
@@ -1943,15 +2010,6 @@
         {
           "type": "paragraph",
           "html": "<strong>সীমা:</strong> আর্টিকেলটি নকশার ধারণা ব্যাখ্যা করে। এটি মডেলগুলোর র‍্যাংকিং করে না। আসল গতি সার্ভিং সফটওয়্যার আর GPU-র উপরও নির্ভর করে (সেকশন ৮ দেখুন)।"
-        },
-        {
-          "type": "analogy",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>খোলা-বই পরীক্ষার উপমা:</strong> খোলা-বই পরীক্ষায় নোট আনা যায়। পুরো বই কপি করলে ব্যাগ ভারী হয় আর কিছু খুঁজে পাওয়া যায় না। ভালো হলো ছোট সারসংক্ষেপ, গোছানো সূচি, আর শুধু দরকারি পাতা দেখার অভ্যাস। অ্যাটেনশন ভ্যারিয়েন্টগুলো এই নোট তৈরির ভিন্ন ভিন্ন পথ।"
-            }
-          ]
         }
       ],
       "videos": [
@@ -1959,18 +2017,6 @@
           "id": "9y-0rpEnPrg",
           "title": "How DeepSeek Reduced KV Cache by 93% | Multi Head Latent Attention MLA",
           "channel": "ExplainingAI",
-          "lang": "en"
-        },
-        {
-          "id": "kx3rETIxo4Q",
-          "title": "Understand Grouped Query Attention (GQA) | The final frontier before latent attention",
-          "channel": "Vizuara",
-          "lang": "en"
-        },
-        {
-          "id": "oanuxVw5CvU",
-          "title": "What is Grouped Query Attention (GQA)",
-          "channel": "Data Science Made Easy",
           "lang": "en"
         }
       ],
@@ -2037,27 +2083,11 @@
             "challenge": "চ্যাটকে ১০ লক্ষ টোকেনে ৮ KV হেডের ক্যাশ হিসাব করতে বলুন। একটি ৮০ GB GPU কি মডেলের ওয়েটের পাশাপাশি এটি ধরতে পারবে?"
           }
         }
-      ],
-      "embeds": [
-        {
-          "url": "https://sebastianraschka.com/llm-architecture-gallery/",
-          "title": "LLM Architecture Gallery (Sebastian Raschka)",
-          "note": "A gallery of model cards from the same author. Use it to check which attention variant a model uses, and compare it with the table in this section.",
-          "noteBn": "একই লেখকের মডেল কার্ডের একটি গ্যালারি। একটি মডেল কোন অ্যাটেনশন ভ্যারিয়েন্ট ব্যবহার করে তা দেখুন এবং এই সেকশনের টেবিলের সাথে মেলান।",
-          "height": 720
-        },
-        {
-          "url": "https://magazine.sebastianraschka.com/p/visual-attention-variants",
-          "title": "A Visual Guide to Attention Variants in Modern LLMs",
-          "note": "The article for this section, with all of its diagrams. The publisher does not allow it inside other sites, so open it in a new tab.",
-          "noteBn": "এই সেকশনের আর্টিকেল, তার সব ডায়াগ্রামসহ। প্রকাশক এটি অন্য সাইটের ভেতরে দেখাতে দেয় না, তাই নতুন ট্যাবে খুলুন।",
-          "frame": false
-        }
       ]
     },
     {
       "id": "s7",
-      "num": "07",
+      "num": "08",
       "title": "A Visual Guide to Mixture of Experts: routers, experts and load balancing",
       "sub": "Why many modern LLMs use only a few of their experts for each token, and how routers are kept fair.",
       "bn": {
@@ -2404,7 +2434,7 @@
     },
     {
       "id": "s8",
-      "num": "08",
+      "num": "09",
       "title": "LLM Inference Handbook: from prompt to first token and beyond",
       "sub": "Tokenizing, scheduling, prefill and decode, and the techniques that make serving faster and cheaper.",
       "bn": {
@@ -2750,7 +2780,7 @@
     },
     {
       "id": "s9",
-      "num": "09",
+      "num": "10",
       "title": "Neuronpedia: look at what features inside a model mean",
       "sub": "An open platform to browse, test, and steer the features that sparse autoencoders find inside language models.",
       "bn": {
@@ -3056,7 +3086,7 @@
     },
     {
       "id": "s10",
-      "num": "10",
+      "num": "11",
       "title": "Embedding Atlas by Apple: a visual map of your embeddings",
       "sub": "Turn a table of text, images or audio into a map. See clusters, neighbours and outliers, and filter with linked charts.",
       "bn": {

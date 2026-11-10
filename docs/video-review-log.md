@@ -149,7 +149,7 @@ Every clip added to a section, with its length, views, and what was noticed in t
 
 ## rag-knowledge-systems
 
-### Chunking strategies: fixed, semantic, structural, late chunking (`rag-knowledge-systems/s1`)
+### Chunking strategies: fixed-size, recursive, structural and semantic (`rag-knowledge-systems/s1`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
@@ -158,9 +158,14 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [What is RAG? How AI Chatbots Access Your Custom Data (Explained Simply)](https://www.youtube.com/shorts/jG-gbB0ULac) | KodeKloud | Short, 2:54 | 17K |  |
 | [RAG Chunking Strategies Explained (Fixed Size vs Semantic Chunking)](https://www.youtube.com/shorts/vvp97qJB6CU) | KodeKloud | Short, 2:12 | 14K |  |
 | [Poor Chunking Strategy Undermine RAG System](https://www.youtube.com/shorts/uDfUvC1oi3M) | KodeKloud | Short, 1:34 | 8K |  |
-| [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | Cole Medin | 12:51 | 158K | uploaded 2025-11; mentions the creator's community or product |
 | [Introduction To Undertsanding RAG(Retrieval-Augmented Generation)](https://www.youtube.com/watch?v=fZM3oX4xEyg) | Krish Naik | 20:40 | 513K | uploaded 2025-08 |
 | [Complete RAG Crash Course With Langchain In 2 Hours](https://www.youtube.com/watch?v=o126p1QN_RI) | Krish Naik | 2:08:09 | 743K | uploaded 2025-10; mentions the creator's community or product |
+
+### Late chunking, contextual retrieval, and choosing a chunking strategy (`rag-knowledge-systems/s18`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Every RAG Strategy Explained in 13 Minutes (No Fluff)](https://www.youtube.com/watch?v=tLMViADvSNE) | Cole Medin | 12:51 | 158K | uploaded 2025-11; mentions the creator's community or product |
 
 ### How vector search works: flat, IVF, HNSW and distance metrics (`rag-knowledge-systems/s2`)
 
@@ -276,7 +281,12 @@ Every clip added to a section, with its length, views, and what was noticed in t
 
 ## tool-use-and-integrations
 
-### Tool use & integrations (incl. MCP) (`tool-use-and-integrations/s2`)
+### Tool use: schema design, parallel calls, API wrappers and result formatting (`tool-use-and-integrations/s2`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+
+### MCP (Model Context Protocol) and sandboxed code execution (`tool-use-and-integrations/s3`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
@@ -291,7 +301,7 @@ Every clip added to a section, with its length, views, and what was noticed in t
 
 ## inference
 
-### Hosted or self-hosted: inference servers, GPU economics and providers (`inference/s3`)
+### Hosted or self-hosted: the trade-off and the inference servers (`inference/s3`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |

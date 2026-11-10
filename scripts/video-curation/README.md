@@ -72,6 +72,8 @@ Add the creator to `CREATORS` in `crawl_channels.py` when the channel is new, an
 
 Six sections were split in two after their clips were picked (5.02, 5.05, 5.06, 5.07, 5.09 and 8.01). `picks.py` and the `candidates_*.py` files still use the original ids, which now stand for the first half. Three groups of picked clips sit in a second half: one in `rag-knowledge-systems/s11` (was `s2`), two in `rag-knowledge-systems/s12` (was `s5`) and three in `inference/s4` (was `inference/s3`). `docs/video-review-log.md` was edited by hand to list them under the new ids, and a regenerated log would put them back under the old ones. Use the section ids that `src/content/*.json` has today.
 
+A second round split thirteen more (5.01, 5.03, 5.05, 7.01, 8.01, 15.06 and the Part 16 chapters 2, 3, 5, 6, 7, 9 and 10, numbered as before that round). Two groups of picked clips now sit in a second half: one in `rag-knowledge-systems/s18` (was `s1`) and eight in `tool-use-and-integrations/s3` (was `s2`). The other clips that moved were added outside `picks.py`.
+
 ## What is not here
 
 The helpers used to shortlist (per-channel keyword rankings, topic sweeps, printouts of candidates) were one-off and are left out. Their result is what is committed: the needles in `candidates_*.py`, the decisions and reasons in `picks.py`, and the log in `docs/video-review-log.md`.

@@ -10,10 +10,10 @@
     {
       "id": "s2",
       "num": "01",
-      "title": "Tool use & integrations (incl. MCP)",
+      "title": "Tool use: schema design, parallel calls, API wrappers and result formatting",
       "sub": "An LLM is just a text generator until you give it <strong>tools</strong>: a way to call your API, run code, query a database, or read a file. Tool design is the difference between a chatbot demo and a production system. The single highest-leverage decision is the quality of your tool descriptions.",
       "bn": {
-        "title": "টুল ইউজ আর ইন্টিগ্রেশন (MCP সহ)",
+        "title": "টুল ইউজ: স্কিমা, প্যারালাল কল, API র‍্যাপার আর ফলাফলের ফরম্যাট",
         "sub": "টুল না দেওয়া পর্যন্ত LLM শুধু একটা টেক্সট জেনারেটর। <strong>টুল</strong> মানে এমন একটা উপায়, যাতে সে আপনার API কল করতে, কোড চালাতে, ডেটাবেসে কুয়েরি করতে বা ফাইল পড়তে পারে। চ্যাটবটের ডেমো আর প্রোডাকশন সিস্টেমের মধ্যে তফাত গড়ে দেয় টুল ডিজাইন। সবচেয়ে বড় প্রভাব ফেলার সিদ্ধান্ত হলো আপনার টুল ডেসক্রিপশনের মান।"
       },
       "body": [
@@ -66,81 +66,6 @@
         {
           "type": "heading",
           "level": 3,
-          "id": "s2-model-context-protocol-mcp",
-          "html": "Model Context Protocol (MCP)"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>MCP</strong> is an open standard (introduced by Anthropic in late 2024, now adopted by OpenAI, Google, and the major IDE vendors) for connecting models to data and tools.<a class=\"cite\" href=\"#src12\">[12]</a> The model is the <strong>client</strong>; the data/tool provider runs an <strong>MCP server</strong>. The server exposes three primitives:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>Tools</strong> — functions the model can call (the action surface).",
-            "<strong>Resources</strong> — read-only data the client can fetch on demand (files, DB rows, web pages). Model decides to <code>read</code> based on its goal.",
-            "<strong>Prompts</strong> — named prompt templates the server offers; the host can list them and let the user invoke by name."
-          ]
-        },
-        {
-          "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"MCP architecture\">\n      <defs>\n        <marker id=\"arr-mcp\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <rect x=\"40\" y=\"100\" width=\"180\" height=\"120\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"130\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">MCP Host</text>\n      <text x=\"130\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">(Claude Code, Cursor,</text>\n      <text x=\"130\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">VS Code, your app)</text>\n      <text x=\"130\" y=\"190\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">connects to many servers</text>\n      \n      <rect x=\"270\" y=\"120\" width=\"120\" height=\"80\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"330\" y=\"150\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">MCP Client</text>\n      <text x=\"330\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">JSON-RPC</text>\n      \n      <rect x=\"450\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"560\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\" dy=\"20\">Filesystem server</text>\n      <text x=\"560\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: read_file, write_file</text>\n      <text x=\"560\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: file://...</text>\n      <text x=\"560\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">stdio / sse / http</text>\n\n      <rect x=\"700\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"810\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\" dy=\"20\">GitHub server</text>\n      <text x=\"810\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: create_issue, list_prs</text>\n      <text x=\"810\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: repo://...</text>\n      <text x=\"810\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">oauth / token</text>\n\n      <rect x=\"450\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"560\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\" dy=\"20\">Postgres server</text>\n      <text x=\"560\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: run_query (read-only)</text>\n      <text x=\"560\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: table://...</text>\n      <text x=\"560\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">read replica</text>\n\n      <rect x=\"700\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n      <text x=\"810\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\" dy=\"20\">Browser server</text>\n      <text x=\"810\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: navigate, click, type</text>\n      <text x=\"810\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: screenshot://</text>\n      <text x=\"810\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">isolated profile</text>\n\n      <line x1=\"220\" y1=\"160\" x2=\"270\" y2=\"160\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"140\" x2=\"450\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"150\" x2=\"700\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"180\" x2=\"450\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"190\" x2=\"700\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n    </svg>",
-          "caption": "MCP architecture: one host can speak to many servers in parallel, each over stdio, SSE, or streamable HTTP. Servers expose tools (actions), resources (data), and prompts (templates).",
-          "captionBn": "MCP আর্কিটেকচার: একটি হোস্ট একাধিক সার্ভারের সাথে কথা বলে (stdio / SSE / HTTP); প্রতিটি সার্ভার টুলস (কর্ম), রিসোর্সেস (তথ্য) ও প্রম্পটস (টেমপ্লেট) প্রকাশ করে।"
-        },
-        {
-          "type": "callout",
-          "variant": "good",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>Why MCP matters:</strong> before MCP, every IDE / agent app wrote custom integrations for every data source. Now you write one MCP server (e.g. for Postgres) and every MCP-compatible client — Claude Code, Cursor, VS Code, custom agents — can use it."
-            }
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "id": "s2-sandboxed-code-execution",
-          "html": "Sandboxed code execution"
-        },
-        {
-          "type": "paragraph",
-          "html": "Many agent tasks are easiest to express as code (\"compute the average of column X\"). Letting the model <strong>generate and execute code</strong> in a sandbox avoids tool explosion and gives you correctness on arithmetic. The four production options in 2025:"
-        },
-        {
-          "type": "table",
-          "headers": [
-            "Sandbox",
-            "Model",
-            "Best for"
-          ],
-          "rows": [
-            [
-              "<strong>E2B</strong>",
-              "Hosted Firecracker microVMs (lightweight virtual machines)",
-              "Sub-second Python, easy REST API"
-            ],
-            [
-              "<strong>Modal</strong>",
-              "Hosted containers + GPU",
-              "Long-running compute, ML inference"
-            ],
-            [
-              "<strong>Daytona</strong>",
-              "Hosted dev environments",
-              "Full git/REPL (interactive shell) workflows, AI agents"
-            ],
-            [
-              "<strong>Cloudflare Workers / Sandbox</strong>",
-              "Edge isolates",
-              "Low-latency, cold-start-fast JS/Wasm"
-            ]
-          ]
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "id": "s2-api-wrappers-as-tools",
           "html": "API wrappers as tools"
         },
@@ -183,14 +108,6 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>MCP (Model Context Protocol) is the universal plug.</strong> Before MCP, every chatbot app wrote its own custom integration for every tool — like Apple chargers, USB-C chargers, micro-USB chargers. MCP says: \"all tools speak this one protocol.\" Now any MCP-compatible chatbot can use any MCP-compatible tool, no glue code. Anthropic released it in late 2024; OpenAI, Google, and every major IDE vendor have adopted it."
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>Sandboxed code execution = \"the AI can run a tiny computer.\"</strong> Sometimes the cleanest way to answer \"what's the average of these 1,000 numbers?\" is to let the AI write and run Python. But you don't want the AI running Python on your real laptop — so you put that Python in a locked sandbox (E2B, Modal, Daytona, Cloudflare Workers). It can compute, but it can't reach your files, your network, or your data."
-        },
-        {
-          "type": "paragraph",
           "html": "<strong>The output of a tool is also a prompt.</strong> The AI re-reads what the tool returned as part of its next thought. So the output shouldn't be a giant wall of raw JSON. It should be a tidy Markdown table with the key numbers up front and a one-line summary at the bottom. Same way you'd summarise a report for a colleague."
         },
         {
@@ -198,7 +115,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The toolbox analogy:</strong> think of the AI as a handyperson. You can hand them a toolbox with 30 tools in it, but if every tool is labelled vaguely (\"thingamajig,\" \"whatsit\"), they'll pick the wrong one. Label them clearly (\"Phillips screwdriver, size 2\"), and they pick the right one. MCP is the standard size for tool handles — every toolbox now fits every tool. The summary rule: when the handyperson comes back from the crawl space, they tell you what they found in plain English. They don't dump the entire junk drawer on your kitchen table."
+              "html": "<strong>The toolbox analogy:</strong> think of the AI as a handyperson. You can hand them a toolbox with 30 tools in it, but if every tool is labelled vaguely (\"thingamajig,\" \"whatsit\"), they'll pick the wrong one. Label them clearly (\"Phillips screwdriver, size 2\"), and they pick the right one. The summary rule: when the handyperson comes back from the crawl space, they tell you what they found in plain English. They don't dump the entire junk drawer on your kitchen table."
             }
           ]
         }
@@ -215,27 +132,6 @@
         {
           "type": "paragraph",
           "html": "<strong>প্যারালাল টুল কলিং:</strong> একে অপরের ওপর নির্ভরশীল নয় এমন তথ্য (যেমন টোকিওর আবহাওয়া <em>এবং</em> USD→JPY রেট) একই টার্নে একসাথে কল করুন। এটাই টুল-নির্ভর এজেন্টের সবচেয়ে বড় ল্যাটেন্সি জয়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>MCP (Model Context Protocol):</strong> Anthropic ২০২৪-এর শেষে চালু করা ও এখন OpenAI, Google ও প্রধান IDE ভেন্ডররা গ্রহণ করেছে এমন একটি খোলা মানদণ্ড।<a class=\"cite\" href=\"#src12\">[১২]</a> মডেল হলো ক্লায়েন্ট; ডেটা/টুল প্রদানকারী চালায় MCP সার্ভার। সার্ভার তিনটি প্রিমিটিভ প্রকাশ করে:"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>টুলস</strong> — মডেল যে ফাংশন কল করতে পারে।",
-            "<strong>রিসোর্সেস</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB রো, ওয়েবপেজ)। মডেল লক্ষ্য অনুযায়ী <code>read</code> করার সিদ্ধান্ত নেয়।",
-            "<strong>প্রম্পটস</strong> — নামকরা প্রম্পট টেমপ্লেট যা হোস্ট তালিকা করে ব্যবহারকারীকে নাম ধরে ব্যবহার করতে দেয়।"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>MCP-এর গুরুত্ব:</strong> MCP-এর আগে প্রতিটি IDE / এজেন্ট অ্যাপ প্রতিটি ডেটা সোর্সের জন্য কাস্টম ইন্টিগ্রেশন লিখত। এখন একটি MCP সার্ভার (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-কম্প্যাটিবল ক্লায়েন্ট — Claude Code, Cursor, VS Code, কাস্টম এজেন্ট — ব্যবহার করতে পারে।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>স্যান্ডবক্সড কোড এক্সিকিউশন:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, সাব-সেকেন্ড Python), Modal (হোস্টেড কনটেইনার + GPU), Daytona (ফুল ডেভেলপমেন্ট এনভায়রনমেন্ট), Cloudflare Workers/Sandbox (এজ আইসোলেট)।"
         },
         {
           "type": "paragraph",
@@ -259,7 +155,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>টুলবক্সের উপমা:</strong> AI-কে একজন হ্যান্ডিপারসন হিসেবে ভাবুন। তাকে ৩০টি টুলের বাক্স দিচ্ছেন, কিন্তু প্রতিটি টুলের লেবেল অস্পষ্ট হলে (\"জিনিসপত্র\", \"কর্তব্যটা\") সে ভুল টুল ধরবে। স্পষ্টভাবে লেবেল করলে (\"ফিলিপস স্ক্রুড্রাইভার, সাইজ ২\") সঠিক টুল ধরে। MCP হলো টুলের হাতলের স্ট্যান্ডার্ড সাইজ — এখন প্রতিটি টুলবক্স প্রতিটি টুলে খাপায়। সারসংক্ষেপের নিয়ম: হ্যান্ডিপারসন ক্রল স্পেস থেকে ফিরে আসলে সে সারা জাঙ্ক ড্রয়ার আপনার রান্নাঘরের টেবিলে ফেলে না দিয়ে সহজ ইংরেজিতে বলে কী পেয়েছে।"
+              "html": "<strong>টুলবক্সের উপমা:</strong> AI-কে একজন হ্যান্ডিপারসন হিসেবে ভাবুন। তাকে ৩০টি টুলের বাক্স দিচ্ছেন, কিন্তু প্রতিটি টুলের লেবেল অস্পষ্ট হলে (\"জিনিসপত্র\", \"কর্তব্যটা\") সে ভুল টুল ধরবে। স্পষ্টভাবে লেবেল করলে (\"ফিলিপস স্ক্রুড্রাইভার, সাইজ ২\") সঠিক টুল ধরে। সারসংক্ষেপের নিয়ম: হ্যান্ডিপারসন ক্রল স্পেস থেকে ফিরে আসলে সে সারা জাঙ্ক ড্রয়ার আপনার রান্নাঘরের টেবিলে ফেলে না দিয়ে সহজ ইংরেজিতে বলে কী পেয়েছে।"
             }
           ]
         }
@@ -278,87 +174,10 @@
           "lang": "en"
         },
         {
-          "id": "kQmXtrmQ5Zg",
-          "title": "Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic",
-          "channel": "AI Engineer",
-          "lang": "en"
-        },
-        {
-          "id": "k0VIgKAUkP4",
-          "title": "[Full Workshop] How to add secure code interpreting in your AI app: Vasek Mlejnsky",
-          "channel": "AI Engineer",
-          "lang": "en"
-        },
-        {
           "id": "5RRYDzfzAi0",
           "title": "Bridging the gap between your API and LLMs",
           "channel": "Stripe Developers",
           "lang": "en"
-        },
-        {
-          "id": "7HjDcv75spg",
-          "title": "MCP সার্ভার কি? সহজ কনসেপ্ট ও TypeScript SDK উদাহরণ",
-          "channel": "Learn with Sumit - LWS - Bangladesh",
-          "lang": "bn"
-        },
-        {
-          "id": "iGJTw_PWogs",
-          "title": "Why We Need MCP When APIs Already Exist",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "format": "short",
-          "seconds": 179
-        },
-        {
-          "id": "7VfKiaGOZcA",
-          "title": "MCP vs UTCP",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "format": "short",
-          "seconds": 179
-        },
-        {
-          "id": "E2DEHOEbzks",
-          "title": "Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 1450
-        },
-        {
-          "id": "kn6dxL53NkM",
-          "title": "MCP vs API Explained: Do You Really Need MCP?",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 1038
-        },
-        {
-          "id": "RhTiAOGwbYE",
-          "title": "MCP Tutorial: Build Your First MCP Server and Client from Scratch (Free Labs)",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 2414
-        },
-        {
-          "id": "oblaHqULUHk",
-          "title": "MCP Explained Simply — What It Is and Why It Exists",
-          "channel": "TechWorld with Nana",
-          "lang": "en",
-          "seconds": 1806
-        },
-        {
-          "id": "-UQ6OZywZ2I",
-          "title": "All You Need To Know About Model Context Protocol(MCP)",
-          "channel": "Krish Naik",
-          "lang": "en",
-          "seconds": 1483
-        },
-        {
-          "id": "b1zI8pyCE38",
-          "title": "MCP is INSECURE - Here's Why and How to Fix it",
-          "channel": "Cole Medin",
-          "lang": "en",
-          "format": "short",
-          "seconds": 163
         }
       ],
       "practice": [
@@ -571,7 +390,226 @@
             },
             "challenge": "এমন একটা প্রশ্ন লিখুন, যাতে ৩টা কল লাগে: দুটো একসাথে চলতে পারে, একটাকে অপেক্ষা করতে হয়। নতুন চ্যাটে টেস্ট করুন। মডেল কি কলগুলো ঠিকভাবে ভাগ করেছে?"
           }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "num": "02",
+      "title": "MCP (Model Context Protocol) and sandboxed code execution",
+      "sub": "<strong>MCP</strong> (Model Context Protocol) lets you write one server for a data source and reuse it from every compatible client. A <strong>sandbox</strong> lets the model write and run code without reaching your files or network.",
+      "bn": {
+        "title": "MCP (Model Context Protocol) আর স্যান্ডবক্সে কোড চালানো",
+        "sub": "এখন একটি MCP সার্ভার (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-কম্প্যাটিবল ক্লায়েন্ট — Claude Code, Cursor, VS Code, কাস্টম এজেন্ট — ব্যবহার করতে পারে। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s2-model-context-protocol-mcp",
+          "html": "Model Context Protocol (MCP)"
         },
+        {
+          "type": "paragraph",
+          "html": "<strong>MCP</strong> is an open standard (introduced by Anthropic in late 2024, now adopted by OpenAI, Google, and the major IDE vendors) for connecting models to data and tools.<a class=\"cite\" href=\"#src12\">[12]</a> The model is the <strong>client</strong>; the data/tool provider runs an <strong>MCP server</strong>. The server exposes three primitives:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Tools</strong> — functions the model can call (the action surface).",
+            "<strong>Resources</strong> — read-only data the client can fetch on demand (files, DB rows, web pages). Model decides to <code>read</code> based on its goal.",
+            "<strong>Prompts</strong> — named prompt templates the server offers; the host can list them and let the user invoke by name."
+          ]
+        },
+        {
+          "type": "diagram",
+          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"MCP architecture\">\n      <defs>\n        <marker id=\"arr-mcp\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <rect x=\"40\" y=\"100\" width=\"180\" height=\"120\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"130\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">MCP Host</text>\n      <text x=\"130\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">(Claude Code, Cursor,</text>\n      <text x=\"130\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">VS Code, your app)</text>\n      <text x=\"130\" y=\"190\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">connects to many servers</text>\n      \n      <rect x=\"270\" y=\"120\" width=\"120\" height=\"80\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"330\" y=\"150\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">MCP Client</text>\n      <text x=\"330\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">JSON-RPC</text>\n      \n      <rect x=\"450\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"560\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\" dy=\"20\">Filesystem server</text>\n      <text x=\"560\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: read_file, write_file</text>\n      <text x=\"560\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: file://...</text>\n      <text x=\"560\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">stdio / sse / http</text>\n\n      <rect x=\"700\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"810\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\" dy=\"20\">GitHub server</text>\n      <text x=\"810\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: create_issue, list_prs</text>\n      <text x=\"810\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: repo://...</text>\n      <text x=\"810\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">oauth / token</text>\n\n      <rect x=\"450\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"560\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\" dy=\"20\">Postgres server</text>\n      <text x=\"560\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: run_query (read-only)</text>\n      <text x=\"560\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: table://...</text>\n      <text x=\"560\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">read replica</text>\n\n      <rect x=\"700\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n      <text x=\"810\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\" dy=\"20\">Browser server</text>\n      <text x=\"810\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: navigate, click, type</text>\n      <text x=\"810\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: screenshot://</text>\n      <text x=\"810\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">isolated profile</text>\n\n      <line x1=\"220\" y1=\"160\" x2=\"270\" y2=\"160\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"140\" x2=\"450\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"150\" x2=\"700\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"180\" x2=\"450\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"190\" x2=\"700\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n    </svg>",
+          "caption": "MCP architecture: one host can speak to many servers in parallel, each over stdio, SSE, or streamable HTTP. Servers expose tools (actions), resources (data), and prompts (templates).",
+          "captionBn": "MCP আর্কিটেকচার: একটি হোস্ট একাধিক সার্ভারের সাথে কথা বলে (stdio / SSE / HTTP); প্রতিটি সার্ভার টুলস (কর্ম), রিসোর্সেস (তথ্য) ও প্রম্পটস (টেমপ্লেট) প্রকাশ করে।"
+        },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Why MCP matters:</strong> before MCP, every IDE / agent app wrote custom integrations for every data source. Now you write one MCP server (e.g. for Postgres) and every MCP-compatible client — Claude Code, Cursor, VS Code, custom agents — can use it."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s2-sandboxed-code-execution",
+          "html": "Sandboxed code execution"
+        },
+        {
+          "type": "paragraph",
+          "html": "Many agent tasks are easiest to express as code (\"compute the average of column X\"). Letting the model <strong>generate and execute code</strong> in a sandbox avoids tool explosion and gives you correctness on arithmetic. The four production options in 2025:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Sandbox",
+            "Model",
+            "Best for"
+          ],
+          "rows": [
+            [
+              "<strong>E2B</strong>",
+              "Hosted Firecracker microVMs (lightweight virtual machines)",
+              "Sub-second Python, easy REST API"
+            ],
+            [
+              "<strong>Modal</strong>",
+              "Hosted containers + GPU",
+              "Long-running compute, ML inference"
+            ],
+            [
+              "<strong>Daytona</strong>",
+              "Hosted dev environments",
+              "Full git/REPL (interactive shell) workflows, AI agents"
+            ],
+            [
+              "<strong>Cloudflare Workers / Sandbox</strong>",
+              "Edge isolates",
+              "Low-latency, cold-start-fast JS/Wasm"
+            ]
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>MCP (Model Context Protocol) is the universal plug.</strong> Before MCP, every chatbot app wrote its own custom integration for every tool — like Apple chargers, USB-C chargers, micro-USB chargers. MCP says: \"all tools speak this one protocol.\" Now any MCP-compatible chatbot can use any MCP-compatible tool, no glue code. Anthropic released it in late 2024; OpenAI, Google, and every major IDE vendor have adopted it."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Sandboxed code execution = \"the AI can run a tiny computer.\"</strong> Sometimes the cleanest way to answer \"what's the average of these 1,000 numbers?\" is to let the AI write and run Python. But you don't want the AI running Python on your real laptop — so you put that Python in a locked sandbox (E2B, Modal, Daytona, Cloudflare Workers). It can compute, but it can't reach your files, your network, or your data."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The toolbox analogy:</strong> MCP is the standard size for tool handles — every toolbox now fits every tool."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>MCP (Model Context Protocol):</strong> Anthropic ২০২৪-এর শেষে চালু করা ও এখন OpenAI, Google ও প্রধান IDE ভেন্ডররা গ্রহণ করেছে এমন একটি খোলা মানদণ্ড।<a class=\"cite\" href=\"#src12\">[১২]</a> মডেল হলো ক্লায়েন্ট; ডেটা/টুল প্রদানকারী চালায় MCP সার্ভার। সার্ভার তিনটি প্রিমিটিভ প্রকাশ করে:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>টুলস</strong> — মডেল যে ফাংশন কল করতে পারে।",
+            "<strong>রিসোর্সেস</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB রো, ওয়েবপেজ)। মডেল লক্ষ্য অনুযায়ী <code>read</code> করার সিদ্ধান্ত নেয়।",
+            "<strong>প্রম্পটস</strong> — নামকরা প্রম্পট টেমপ্লেট যা হোস্ট তালিকা করে ব্যবহারকারীকে নাম ধরে ব্যবহার করতে দেয়।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>MCP-এর গুরুত্ব:</strong> MCP-এর আগে প্রতিটি IDE / এজেন্ট অ্যাপ প্রতিটি ডেটা সোর্সের জন্য কাস্টম ইন্টিগ্রেশন লিখত। এখন একটি MCP সার্ভার (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-কম্প্যাটিবল ক্লায়েন্ট — Claude Code, Cursor, VS Code, কাস্টম এজেন্ট — ব্যবহার করতে পারে।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>স্যান্ডবক্সড কোড এক্সিকিউশন:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, সাব-সেকেন্ড Python), Modal (হোস্টেড কনটেইনার + GPU), Daytona (ফুল ডেভেলপমেন্ট এনভায়রনমেন্ট), Cloudflare Workers/Sandbox (এজ আইসোলেট)।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>টুলবক্সের উপমা:</strong> MCP হলো টুলের হাতলের স্ট্যান্ডার্ড সাইজ — এখন প্রতিটি টুলবক্স প্রতিটি টুলে খাপায়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "kQmXtrmQ5Zg",
+          "title": "Building Agents with Model Context Protocol - Full Workshop with Mahesh Murag of Anthropic",
+          "channel": "AI Engineer",
+          "lang": "en"
+        },
+        {
+          "id": "k0VIgKAUkP4",
+          "title": "[Full Workshop] How to add secure code interpreting in your AI app: Vasek Mlejnsky",
+          "channel": "AI Engineer",
+          "lang": "en"
+        },
+        {
+          "id": "7HjDcv75spg",
+          "title": "MCP সার্ভার কি? সহজ কনসেপ্ট ও TypeScript SDK উদাহরণ",
+          "channel": "Learn with Sumit - LWS - Bangladesh",
+          "lang": "bn"
+        },
+        {
+          "id": "iGJTw_PWogs",
+          "title": "Why We Need MCP When APIs Already Exist",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        },
+        {
+          "id": "7VfKiaGOZcA",
+          "title": "MCP vs UTCP",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "format": "short",
+          "seconds": 179
+        },
+        {
+          "id": "E2DEHOEbzks",
+          "title": "Model Context Protocol (MCP) Explained for Beginners: AI Flight Booking Demo!",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1450
+        },
+        {
+          "id": "kn6dxL53NkM",
+          "title": "MCP vs API Explained: Do You Really Need MCP?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 1038
+        },
+        {
+          "id": "RhTiAOGwbYE",
+          "title": "MCP Tutorial: Build Your First MCP Server and Client from Scratch (Free Labs)",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 2414
+        },
+        {
+          "id": "oblaHqULUHk",
+          "title": "MCP Explained Simply — What It Is and Why It Exists",
+          "channel": "TechWorld with Nana",
+          "lang": "en",
+          "seconds": 1806
+        },
+        {
+          "id": "-UQ6OZywZ2I",
+          "title": "All You Need To Know About Model Context Protocol(MCP)",
+          "channel": "Krish Naik",
+          "lang": "en",
+          "seconds": 1483
+        },
+        {
+          "id": "b1zI8pyCE38",
+          "title": "MCP is INSECURE - Here's Why and How to Fix it",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "format": "short",
+          "seconds": 163
+        }
+      ],
+      "practice": [
         {
           "en": {
             "title": "Sort an MCP server's features",
