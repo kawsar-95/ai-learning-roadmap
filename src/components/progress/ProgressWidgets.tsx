@@ -9,9 +9,12 @@ import { resetProgress, setDone, toggleBookmark, toggleDone, useBookmarks, usePr
 /** A section key and the page address of that section. */
 export type SectionLink = { key: string; href: string };
 
-/** The small flat buttons of the reading pages: a border, no shadow, a fill only when on. */
-const BUTTON = "inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[13px] font-medium transition-colors";
-const BUTTON_IDLE = "border-border-strong text-text-dim hover:border-accent hover:text-text";
+/**
+ * The small flat buttons of the reading pages: a border, no shadow, a fill only when on.
+ * The roadmap's "Mark as read" uses them too (RoadmapWidgets), so both pages keep one look.
+ */
+export const BUTTON = "inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[13px] font-medium transition-colors";
+export const BUTTON_IDLE = "border-border-strong text-text-dim hover:border-accent hover:text-text";
 
 /**
  * The reading progress of one Part, for the Part lists. With a `label` (for

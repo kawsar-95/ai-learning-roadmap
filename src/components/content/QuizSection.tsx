@@ -49,15 +49,16 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
 
   return (
     <section id="quiz" aria-labelledby="quiz-title" className="scroll-mt-24">
+      {/* The same heading and intro as a section (SectionView): the quiz is the last step of the pager. */}
       <h2
         id="quiz-title"
         ref={titleRef}
         tabIndex={-1}
-        className="font-display text-[clamp(1.75rem,3.6vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.015em] text-text"
+        className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.015em] text-balance text-text"
       >
         {ui.quizTitle}
       </h2>
-      <p className="mt-3 text-[17px] leading-[1.75] text-text-dim">
+      <p className="mt-2 text-[16px] leading-[1.7] text-pretty text-text-dim sm:text-[17px]">
         {ui.quizIntro(questions.length)}
         {best && (
           <span className="ml-2 inline-block font-mono text-[13px] whitespace-nowrap text-text-faint">

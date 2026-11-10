@@ -255,7 +255,6 @@ const en = {
 
   // Topic page.
   minRead: (n: string) => `${n} min read`,
-  references: "References",
   sources: "Sources",
   sourcesNote:
     "All citations resolve to primary papers (arXiv), vendor docs (OpenAI, Anthropic, Google), or official team blogs. IDs were verified by fetching each page and extracting the citation metadata.",
@@ -285,7 +284,6 @@ const en = {
   liveWide: "Works best on a wide screen.",
 
   // 404.
-  notFoundEyebrow: "Error 404",
   notFoundTitle: "Page not found",
   notFoundText: "That page does not exist. All 17 parts are listed on the home page.",
   notFoundBack: "← Back to all parts",
@@ -470,7 +468,6 @@ const bn: Dict = {
   footerCopy: "Learn AI রেফারেন্স",
 
   minRead: (n: string) => `${n} মিনিট পড়া`,
-  references: "তথ্যসূত্র",
   sources: "সোর্স",
   sourcesNote:
     "সব সাইটেশন মূল পেপার (arXiv), ভেন্ডরের ডক্স (OpenAI, Anthropic, Google) বা অফিশিয়াল টিম ব্লগে যায়। প্রতিটি পাতা খুলে সাইটেশনের তথ্য যাচাই করা হয়েছে।",
@@ -496,7 +493,6 @@ const bn: Dict = {
   liveOpen: "নতুন ট্যাবে খুলুন",
   liveWide: "বড় স্ক্রিনে সবচেয়ে ভালো কাজ করে।",
 
-  notFoundEyebrow: "এরর 404",
   notFoundTitle: "পাতাটি পাওয়া যায়নি",
   notFoundText: "এই পাতাটি নেই। হোম পেজে ১৭টি পার্টের তালিকা আছে।",
   notFoundBack: "← সব পার্টে ফিরে যান",

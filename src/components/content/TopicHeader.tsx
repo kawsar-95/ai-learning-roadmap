@@ -5,6 +5,7 @@ import type { Lang } from "@/lib/i18n";
 import { progressKey } from "@/lib/progress";
 import { readingMinutes } from "@/lib/search";
 import { TopicDoneButton } from "@/components/progress/ProgressWidgets";
+import { PAGE_TITLE } from "@/components/layout/PageHeader";
 import { Inline } from "./Inline";
 
 /**
@@ -39,9 +40,7 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
           )}
         </div>
       </div>
-      <h1 className="mt-4 font-display text-[clamp(2rem,4.5vw,2.75rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text">
-        {text.title}
-      </h1>
+      <h1 className={`mt-4 ${PAGE_TITLE}`}>{text.title}</h1>
       {text.tagline && (
         <p className="mt-2 font-display text-[clamp(1.125rem,2.5vw,1.375rem)] italic leading-snug text-text-dim">
           {text.tagline}

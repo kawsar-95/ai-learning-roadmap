@@ -11,13 +11,7 @@ export function Sources({ sources, lang }: { sources: Source[]; lang: Lang }) {
   const ui = UI[lang];
   return (
     <section aria-labelledby="sources-title" className="border-t border-border pt-8">
-      <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-faint">
-        {ui.references}
-      </p>
-      <h2
-        id="sources-title"
-        className="mt-2 font-display text-2xl font-medium tracking-[-0.01em] text-text"
-      >
+      <h2 id="sources-title" className="font-display text-2xl font-bold leading-[1.15] tracking-[-0.015em] text-text">
         {ui.sources}
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-text-faint">{ui.sourcesNote}</p>
