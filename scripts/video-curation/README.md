@@ -70,6 +70,8 @@ Step 5 is the editorial step. For every candidate read the opening, a sample of 
 
 Add the creator to `CREATORS` in `crawl_channels.py` when the channel is new, and crawl it. Put the needles into `picks.py` (KodeKloud) or `candidates_creators.py` (the others), then run steps 4 to 9.
 
+Six sections were split in two after their clips were picked (5.02, 5.05, 5.06, 5.07, 5.09 and 8.01). `picks.py` and the `candidates_*.py` files still use the original ids, which now stand for the first half. Three groups of picked clips sit in a second half: one in `rag-knowledge-systems/s11` (was `s2`), two in `rag-knowledge-systems/s12` (was `s5`) and three in `inference/s4` (was `inference/s3`). `docs/video-review-log.md` was edited by hand to list them under the new ids, and a regenerated log would put them back under the old ones. Use the section ids that `src/content/*.json` has today.
+
 ## What is not here
 
 The helpers used to shortlist (per-channel keyword rankings, topic sweeps, printouts of candidates) were one-off and are left out. Their result is what is committed: the needles in `candidates_*.py`, the decisions and reasons in `picks.py`, and the log in `docs/video-review-log.md`.

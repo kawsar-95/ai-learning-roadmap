@@ -281,7 +281,7 @@
           }
         },
         {
-          "section": "s3",
+          "section": "s4",
           "en": {
             "q": "What is quantization, and what is the trade-off?",
             "a": "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference. GGUF is llama.cpp's single-file format with CPU+GPU hybrid support. AWQ gives 4-bit with near-FP16 quality and is popular for vLLM and SGLang."
@@ -292,7 +292,7 @@
           }
         },
         {
-          "section": "s3",
+          "section": "s4",
           "en": {
             "q": "How do continuous batching and speculative decoding increase serving performance?",
             "a": "Naive serving handles one request at a time per GPU. Continuous batching, used in vLLM, TGI, and SGLang, interleaves tokens from many requests so the GPU is never idle waiting for one slow request, and it typically delivers 5–20× higher throughput. Speculative decoding has a tiny draft model propose the next 5–10 tokens while the big model verifies them in parallel, for +2–3× throughput with no quality loss. vLLM adds a paged KV cache, allocated in pages like OS virtual memory."

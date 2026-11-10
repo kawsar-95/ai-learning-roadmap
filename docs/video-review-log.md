@@ -162,11 +162,16 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [Introduction To Undertsanding RAG(Retrieval-Augmented Generation)](https://www.youtube.com/watch?v=fZM3oX4xEyg) | Krish Naik | 20:40 | 513K | uploaded 2025-08 |
 | [Complete RAG Crash Course With Langchain In 2 Hours](https://www.youtube.com/watch?v=o126p1QN_RI) | Krish Naik | 2:08:09 | 743K | uploaded 2025-10; mentions the creator's community or product |
 
-### Vector databases: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus (`rag-knowledge-systems/s2`)
+### How vector search works: flat, IVF, HNSW and distance metrics (`rag-knowledge-systems/s2`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
 | [How does a Vector Database work?](https://www.youtube.com/watch?v=VVNYQKDLY5s) | KodeKloud | 10:45 | 165K |  |
+
+### Comparing vector databases: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus (`rag-knowledge-systems/s11`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
 | [2-Build RAG Pipeline From Scratch-Data Ingestion to Vector DB Pipeline-Part 1](https://www.youtube.com/watch?v=MykcjWPJ6T4) | Krish Naik | 59:07 | 258K | uploaded 2025-09; mentions the creator's community or product |
 
 ### Hybrid search (BM25 + vector) & reciprocal rank fusion (`rag-knowledge-systems/s3`)
@@ -175,7 +180,7 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | --- | --- | --- | --- | --- |
 | [Hybrid Search RAG With Langchain And Pinecone Vector DB](https://www.youtube.com/watch?v=CK0ExcCWDP4) | Krish Naik | 42:35 | 89K | uploaded 2024-07 |
 
-### Multi-hop retrieval & agentic retrieval (`rag-knowledge-systems/s5`)
+### Agentic retrieval: workflows, agents and what they cost (`rag-knowledge-systems/s12`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
@@ -190,7 +195,7 @@ Every clip added to a section, with its length, views, and what was noticed in t
 | [The PROVEN Solution for Unbelievable RAG Performance (LightRAG Guide)](https://www.youtube.com/watch?v=Fx3J8k--U3E) | Cole Medin | 23:04 | 81K | uploaded 2025-04; mentions a sponsor |
 | [Introducing RAG 2.0: Agentic RAG + Knowledge Graphs (FREE Template)](https://www.youtube.com/shorts/1ajWYL7Nddo) | Cole Medin | Short, 2:13 | 169K | uploaded 2025-06 |
 
-### Document parsing pipelines: Unstructured, LlamaParse, Docling (`rag-knowledge-systems/s9`)
+### Document parsing pipelines: Docling, Unstructured and LlamaParse side by side (`rag-knowledge-systems/s9`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
@@ -286,13 +291,18 @@ Every clip added to a section, with its length, views, and what was noticed in t
 
 ## inference
 
-### Inference (servers, quantization, providers) (`inference/s3`)
+### Hosted or self-hosted: inference servers, GPU economics and providers (`inference/s3`)
+
+| Clip | Channel | Length | Views | Notes |
+| --- | --- | --- | --- | --- |
+| [Understanding vLLM with a Hands On Demo](https://www.youtube.com/watch?v=qdPkA5mxLhg) | KodeKloud | 15:17 | 96K |  |
+| [AI Training vs Inference Explained](https://www.youtube.com/watch?v=gZYrSZHHZns) | KodeKloud | 3:29 | 13K |  |
+
+### Faster, cheaper inference: quantization, caching, batching and metrics (`inference/s4`)
 
 | Clip | Channel | Length | Views | Notes |
 | --- | --- | --- | --- | --- |
 | [How the vLLM inference engine works?](https://www.youtube.com/shorts/5Y_JM6C9xOA) | KodeKloud | Short, 2:54 | 274K |  |
-| [Understanding vLLM with a Hands On Demo](https://www.youtube.com/watch?v=qdPkA5mxLhg) | KodeKloud | 15:17 | 96K |  |
-| [AI Training vs Inference Explained](https://www.youtube.com/watch?v=gZYrSZHHZns) | KodeKloud | 3:29 | 13K |  |
 | [Why Your LLM is Slow Despite High GPU Usage?](https://www.youtube.com/shorts/UfmG0PeMS-k) | KodeKloud | Short, 2:00 | 6K |  |
 | [LLM Quantization Explained](https://www.youtube.com/watch?v=jUIjgp4puvw) | KodeKloud | 4:17 | 24K |  |
 

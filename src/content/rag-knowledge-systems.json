@@ -417,11 +417,11 @@
     {
       "id": "s2",
       "num": "02",
-      "title": "Vector databases: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus",
-      "sub": "A vector database stores embeddings and answers \"which stored vectors are closest to this one?\" without comparing against every row. Exact search over millions of vectors is too slow, so these systems build an <strong>approximate nearest neighbour (ANN)</strong> index, most often the HNSW graph.<a class=\"cite\" href=\"#src6\">[6]</a> Six popular options differ less in the core idea than in deployment model, index choices, hybrid-search support and how they isolate tenants. The feature table below is built only from vendor documentation I fetched; the \"when to choose\" guidance is my own synthesis and is labelled that way.",
+      "title": "How vector search works: flat, IVF, HNSW and distance metrics",
+      "sub": "A vector database stores embeddings and answers \"which stored vectors are closest to this one?\" without comparing against every row. Exact search over millions of vectors is too slow, so these systems build an <strong>approximate nearest neighbour (ANN)</strong> index, most often the HNSW graph.<a class=\"cite\" href=\"#src6\">[6]</a>",
       "bn": {
-        "title": "ভেক্টর ডেটাবেস: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus-এর তুলনা",
-        "sub": "ভেক্টর ডেটাবেস এমবেডিং জমা রাখে, আর “জমানো কোন ভেক্টরগুলো এটির সবচেয়ে কাছে?” — এই প্রশ্নের উত্তর দেয়, প্রতিটি রো-র সাথে তুলনা না করেই। লক্ষ লক্ষ ভেক্টরে এক্সাক্ট সার্চ খুব ধীর, তাই এসব সিস্টেম একটি <strong>অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (ANN)</strong> ইনডেক্স বানায়, সবচেয়ে বেশি HNSW গ্রাফ।<a class=\"cite\" href=\"#src6\">[৬]</a> জনপ্রিয় ছয়টি অপশনের মূল ধারণা প্রায় এক। পার্থক্য ডিপ্লয়মেন্ট মডেল, ইনডেক্সের বিকল্প, হাইব্রিড সার্চের সাপোর্ট আর টেন্যান্ট আলাদা রাখার উপায়ে। নিচের ফিচার টেবিল শুধু আমার পড়া ভেন্ডর ডকুমেন্টেশন থেকে বানানো। “কখন কোনটা বাছবেন” পরামর্শটা আমার নিজের সংশ্লেষণ, আর সেটা সেভাবেই লেখা আছে।"
+        "title": "ভেক্টর সার্চ কীভাবে কাজ করে: ফ্ল্যাট, IVF, HNSW আর ডিস্ট্যান্স মেট্রিক",
+        "sub": "ভেক্টর ডেটাবেস এমবেডিং জমা রাখে, আর “জমানো কোন ভেক্টরগুলো এটির সবচেয়ে কাছে?” — এই প্রশ্নের উত্তর দেয়, প্রতিটি রো-র সাথে তুলনা না করেই। লক্ষ লক্ষ ভেক্টরে এক্সাক্ট সার্চ খুব ধীর, তাই এসব সিস্টেম একটি <strong>অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (ANN)</strong> ইনডেক্স বানায়, সবচেয়ে বেশি HNSW গ্রাফ।<a class=\"cite\" href=\"#src6\">[৬]</a>"
       },
       "body": [
         {
@@ -462,6 +462,163 @@
           "caption": "L2 measures the straight-line gap, cosine measures only the angle, and the dot product mixes angle with vector length.",
           "captionBn": "L2 দুই বিন্দুর সরলরেখার দূরত্ব মাপে, কোসাইন শুধু কোণ মাপে, আর ডট প্রোডাক্ট কোণ ও দৈর্ঘ্য দুটোই ধরে। ইউনিট-লেংথ ভেক্টর হলে তিনটিই একই র‍্যাংকিং দেয়।"
         },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Research frontier:</strong> The HNSW paper (Malkov and Yashunin, 2016, final 2018) introduced multi-layer proximity graphs with logarithmic search scaling. It also added a neighbour-selection heuristic that helps at high recall and on clustered data.<a class=\"cite\" href=\"#src6\">[6]</a> Limits: HNSW is an approximate index, so recall depends on parameters such as <code>ef_search</code>. I did not verify any cross-vendor benchmark numbers, so none are given here."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is a vector database?</strong> It is a filing system for meaning. Each document becomes a long list of numbers, and the database finds the lists that look most like the one you ask about."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> Checking every single document for every question would be far too slow. So these systems build a shortcut map that gets you to the right neighbourhood fast."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>When does it go wrong?</strong> The shortcut map can occasionally miss the very best match. And if you measure closeness the wrong way, the nearest result may not be the one you wanted. Use the measure your embedding model was trained for."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The city map analogy:</strong> finding the nearest cafe by walking every street is exact but slow. A map with highways, main roads and side streets lets you zoom in fast. You might miss a tiny cafe on a back lane, but you arrive in seconds."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>ভেক্টর ডেটাবেস কী?</strong> এমবেডিং মডেল প্রতিটি টেক্সটকে সংখ্যার একটি ভেক্টর বানায়। ভেক্টর ডেটাবেস এই ভেক্টর জমা রাখে এবং কুয়েরির সবচেয়ে কাছের ভেক্টরগুলো দ্রুত খুঁজে দেয়। সব ভেক্টরের সাথে তুলনা করা ধীর, তাই ANN (অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার) ইনডেক্স ব্যবহার হয়।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>ফ্ল্যাট:</strong> সবকিছু একে একে মেলানো; নির্ভুল, কম মেমরি, ছোট কালেকশনের জন্য উপযুক্ত।",
+            "<strong>IVF:</strong> ভেক্টরকে <code>lists</code>-এ ভাগ করে কুয়েরির সময় শুধু কয়েকটি লিস্ট দেখা (pgvector-এ <code>ivfflat.probes</code>, ডিফল্ট ১)।",
+            "<strong>HNSW:</strong> বহুস্তরীয় প্রক্সিমিটি গ্রাফ; উপরের স্তরে লম্বা লাফ, নিচে সূক্ষ্ম খোঁজ; খোঁজার খরচ লগারিদমিক হারে বাড়ে। pgvector-এ ডিফল্ট <code>m = 16</code>, <code>ef_construction = 64</code>, <code>hnsw.ef_search = 40</code>।",
+            "<strong>ডিস্ট্যান্স মেট্রিক:</strong> L2 সরলরেখার দূরত্ব, কোসাইন শুধু কোণ, ডট প্রোডাক্ট কোণ ও দৈর্ঘ্য। pgvector-এ <code>&lt;-&gt;</code>, <code>&lt;=&gt;</code>, <code>&lt;#&gt;</code>। ইউনিট-লেংথ ভেক্টর হলে কোসাইন ও ডট প্রোডাক্ট একই র‍্যাংকিং দেয়।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>ফাঁদ:</strong> এমবেডিং মডেলের জন্য ভুল মেট্রিক বেছে নিলে ফল খারাপ হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> HNSW বহুস্তরীয় graph দিয়ে লগারিদমিক সময়ে প্রায়-নিকটতম প্রতিবেশী খোঁজে; তবে ফল approximate, তাই recall নির্ভর করে ef_search-এর মতো প্যারামিটারের ওপর।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> ঢাকার কোনো অচেনা মহল্লায় নির্দিষ্ট দোকান খুঁজতে প্রতিটি গলি হাঁটা (ফ্ল্যাট) অনেক সময় নেয়। বড় রাস্তা, তারপর মোড়, তারপর গলি ধরে এগোলে (HNSW) রিকশায় চড়েই কয়েক মিনিটে পৌঁছানো যায়, শুধু কখনো কোনো ছোট গলির দোকান ফসকে যেতে পারে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "klTvEwg3oJ4",
+          "title": "Vector databases are so hot right now. WTF are they?",
+          "channel": "Fireship",
+          "lang": "en"
+        },
+        {
+          "id": "-q-pLgGDYr4",
+          "title": "Qdrant Essentials | Fast Vector Search with Qdrant HNSW Indexing",
+          "channel": "Qdrant Vector Search",
+          "lang": "en"
+        },
+        {
+          "id": "VVNYQKDLY5s",
+          "title": "How does a Vector Database work?",
+          "channel": "KodeKloud",
+          "lang": "en",
+          "seconds": 646
+        }
+      ],
+      "practice": [
+        {
+          "en": {
+            "title": "Find the nearest point three different ways",
+            "why": "When you build document search, each text becomes a list of numbers (a vector), and a vector database finds the closest ones. The measure of <em>closest</em> that you pick can change which document comes back.",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "Copy this prompt, paste it, and press Enter. Write down the nearest point for each of the three measures.",
+                "prompt": "Here are 5 points, written as (x, y):\nP1 = (2, 2)\nP2 = (10, 9)\nP3 = (1, 0.5)\nP4 = (0, 3)\nP5 = (-1, -1)\n\nThe query point is q = (1, 1).\n\nFor every point, calculate three numbers:\n(a) L2 distance to q (the straight-line gap; smaller means nearer)\n(b) cosine similarity with q (how close the direction is; bigger means nearer)\n(c) dot product with q (direction mixed with length; bigger means nearer)\n\nShow one table with 3 decimals. Then name the nearest point for each of the three.",
+                "expect": "A table with 5 rows. The nearest point is <strong>P3</strong> by L2, <strong>P1</strong> by cosine, and <strong>P2</strong> by dot product. That is three different winners.",
+                "example": "Point | L2 | Cosine | Dot\nP1 | 1.414 | 1.000 | 4.000\nP2 | 12.042 | 0.999 | 19.000\nP3 | 0.500 | 0.949 | 1.500\nP4 | 2.236 | 0.707 | 3.000\nP5 | 2.828 | -1.000 | -2.000\n\nNearest by L2: P3. Nearest by cosine: P1. Nearest by dot product: P2."
+              },
+              {
+                "chat": "same",
+                "do": "Copy this prompt, paste it, and press Enter. Write down the nearest point for each measure again.",
+                "prompt": "Now divide every point by its own length, so every point has length 1. Do the same for q. Then repeat the table with L2 distance, cosine similarity, and dot product, with 3 decimals. Name the nearest point for each of the three.",
+                "expect": "All three measures now pick the same point, <strong>P1</strong>. The numbers in the table are close for P1 and P2.",
+                "example": "Point | L2 | Cosine | Dot\nP1 | 0.000 | 1.000 | 1.000\nP2 | 0.053 | 0.999 | 0.999\nP3 | 0.320 | 0.949 | 0.949\nP4 | 0.765 | 0.707 | 0.707\nP5 | 2.000 | -1.000 | -1.000\n\nNow all three measures pick the same point: P1."
+              }
+            ],
+            "learned": "Each measure has its own idea of <em>near</em>. <strong>L2</strong> is the straight-line gap, <strong>cosine</strong> looks only at direction, and the <strong>dot product</strong> also rewards length. P2 is far away but long, so only the dot product picks it. After you scale every point to length 1, the three measures agree.",
+            "done": "You have 3 different winners from step 1, and 1 shared winner from step 2.",
+            "check": {
+              "question": "Your embedding model (the model that turns text into vectors) was trained with cosine similarity. Which measure should the vector database use?",
+              "answer": "Use cosine, or the dot product on vectors scaled to length 1, which ranks the same. L2 or a raw dot product can pick by length, so the database would return different documents."
+            },
+            "challenge": "Go back to step 1, change q to (3, 3), and run it again. Which winner changes, and which stay the same? Why?"
+          },
+          "bn": {
+            "title": "তিন রকমে সবচেয়ে কাছের পয়েন্ট খুঁজুন",
+            "why": "আপনি যখন ডকুমেন্ট সার্চ বানাবেন, প্রতিটা টেক্সট একটা সংখ্যার তালিকা (ভেক্টর) হয়ে যাবে, আর ভেক্টর ডেটাবেস সবচেয়ে কাছেরগুলো খুঁজে দেবে। <em>কাছে</em> মাপার কোন উপায় বেছে নিলে, সেটা বদলে দিতে পারে কোন ডকুমেন্ট ফিরে আসবে।",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। তিনটা মেজারের প্রতিটায় সবচেয়ে কাছের পয়েন্ট কোনটা, লিখে রাখুন।",
+                "prompt": "এখানে 5টা point আছে, (x, y) আকারে:\nP1 = (2, 2)\nP2 = (10, 9)\nP3 = (1, 0.5)\nP4 = (0, 3)\nP5 = (-1, -1)\n\nquery point হলো q = (1, 1)।\n\nপ্রতিটা point-এর জন্য তিনটা সংখ্যা হিসাব করো:\n(a) q থেকে L2 distance (সরল রেখার দূরত্ব; যত ছোট, তত কাছে)\n(b) q-এর সাথে cosine similarity (দিক কতটা কাছাকাছি; যত বড়, তত কাছে)\n(c) q-এর সাথে dot product (দিক আর দৈর্ঘ্য মেশানো; যত বড়, তত কাছে)\n\nদশমিকের পর 3 ঘর দিয়ে একটা table দেখাও। তারপর তিনটার প্রতিটার জন্য সবচেয়ে কাছের point-এর নাম বলো।",
+                "expect": "৫ সারির একটা টেবিল। L2 অনুযায়ী সবচেয়ে কাছে <strong>P3</strong>, কোসাইন অনুযায়ী <strong>P1</strong>, আর ডট প্রোডাক্ট অনুযায়ী <strong>P2</strong>। অর্থাৎ তিনটা আলাদা উইনার।",
+                "example": "Point | L2 | Cosine | Dot\nP1 | 1.414 | 1.000 | 4.000\nP2 | 12.042 | 0.999 | 19.000\nP3 | 0.500 | 0.949 | 1.500\nP4 | 2.236 | 0.707 | 3.000\nP5 | 2.828 | -1.000 | -2.000\n\nL2 অনুযায়ী সবচেয়ে কাছে: P3। cosine অনুযায়ী: P1। dot product অনুযায়ী: P2।"
+              },
+              {
+                "chat": "same",
+                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। প্রতিটা মেজারে সবচেয়ে কাছের পয়েন্ট আবার লিখে রাখুন।",
+                "prompt": "এবার প্রতিটা point-কে তার নিজের দৈর্ঘ্য দিয়ে ভাগ করো, যাতে প্রতিটা point-এর দৈর্ঘ্য 1 হয়। q-এর সাথেও একই করো। তারপর L2 distance, cosine similarity আর dot product দিয়ে table আবার বানাও, দশমিকের পর 3 ঘর দিয়ে। তিনটার প্রতিটার জন্য সবচেয়ে কাছের point-এর নাম বলো।",
+                "expect": "এবার তিনটা মেজারই একই পয়েন্ট বাছবে, <strong>P1</strong>। টেবিলে P1 আর P2-এর সংখ্যা কাছাকাছি।",
+                "example": "Point | L2 | Cosine | Dot\nP1 | 0.000 | 1.000 | 1.000\nP2 | 0.053 | 0.999 | 0.999\nP3 | 0.320 | 0.949 | 0.949\nP4 | 0.765 | 0.707 | 0.707\nP5 | 2.000 | -1.000 | -1.000\n\nএখন তিনটা measure-ই একই point বেছেছে: P1।"
+              }
+            ],
+            "learned": "প্রতিটা মেজারের নিজের মতো করে <em>কাছে</em> বোঝার উপায় আছে। <strong>L2</strong> হলো সরল রেখার দূরত্ব, <strong>কোসাইন</strong> শুধু দিক দেখে, আর <strong>ডট প্রোডাক্ট</strong> দৈর্ঘ্যকেও গুরুত্ব দেয়। P2 অনেক দূরে কিন্তু লম্বা, তাই শুধু ডট প্রোডাক্ট তাকে বাছে। প্রতিটা পয়েন্টকে দৈর্ঘ্য 1-এ নামিয়ে আনলে তিনটা মেজারই একমত হয়।",
+            "done": "আপনার কাছে ধাপ ১-এর ৩টা আলাদা উইনার আর ধাপ ২-এর ১টা একই উইনার আছে।",
+            "check": {
+              "question": "আপনার এমবেডিং মডেল (যে মডেল টেক্সট থেকে ভেক্টর বানায়) কোসাইন সিমিলারিটি দিয়ে ট্রেন করা। ভেক্টর ডেটাবেসে কোন মেজার ব্যবহার করবেন?",
+              "answer": "কোসাইন ব্যবহার করবেন, বা দৈর্ঘ্য 1-এ নামানো ভেক্টরে ডট প্রোডাক্ট, কারণ দুটোর র‍্যাংকিং একই। L2 বা সাধারণ ডট প্রোডাক্ট দৈর্ঘ্য দেখে বেছে ফেলতে পারে, তখন ডেটাবেস আলাদা ডকুমেন্ট ফেরত দেবে।"
+            },
+            "challenge": "ধাপ ১-এ ফিরে গিয়ে q বদলে (৩, ৩) করুন, আর আবার চালান। কোন উইনার বদলায়, আর কোনগুলো একই থাকে? কেন?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "num": "03",
+      "title": "Comparing vector databases: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus",
+      "sub": "Six popular options differ less in the core idea than in deployment model, index choices, hybrid-search support and how they isolate tenants. The feature table below is built only from vendor documentation I fetched; the \"when to choose\" guidance is my own synthesis and is labelled that way.",
+      "bn": {
+        "title": "ভেক্টর ডেটাবেস: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus-এর তুলনা",
+        "sub": "জনপ্রিয় ছয়টি অপশনের মূল ধারণা প্রায় এক। পার্থক্য ডিপ্লয়মেন্ট মডেল, ইনডেক্সের বিকল্প, হাইব্রিড সার্চের সাপোর্ট আর টেন্যান্ট আলাদা রাখার উপায়ে। নিচের ফিচার টেবিল শুধু আমার পড়া ভেন্ডর ডকুমেন্টেশন থেকে বানানো। “কখন কোনটা বাছবেন” পরামর্শটা আমার নিজের সংশ্লেষণ, আর সেটা সেভাবেই লেখা আছে।"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -630,26 +787,16 @@
               "BM25 + vector fusion options and a flat-index tenancy pattern"
             ]
           ]
-        },
-        {
-          "type": "callout",
-          "variant": "good",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> The HNSW paper (Malkov and Yashunin, 2016, final 2018) introduced multi-layer proximity graphs with logarithmic search scaling. It also added a neighbour-selection heuristic that helps at high recall and on clustered data.<a class=\"cite\" href=\"#src6\">[6]</a> Limits: HNSW is an approximate index, so recall depends on parameters such as <code>ef_search</code>. I did not verify any cross-vendor benchmark numbers, so none are given here."
-            }
-          ]
         }
       ],
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is a vector database?</strong> It is a filing system for meaning. Each document becomes a long list of numbers, and the database finds the lists that look most like the one you ask about."
+          "html": "<strong>What is this about?</strong> Six popular vector databases do the same basic job: they use a shortcut map to find the closest items fast. They package it differently: some are services you rent, some you run yourself, one lives inside an ordinary database."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> Checking every single document for every question would be far too slow. So these systems build a shortcut map that gets you to the right neighbourhood fast, at the cost of occasionally missing the very best match. Different products package this map differently: some are services you rent, some you run yourself, one lives inside an ordinary database."
+          "html": "<strong>Why does it matter?</strong> The right choice depends on your situation, such as where your data already lives, how much work you want to do yourself, and how big you expect to grow."
         },
         {
           "type": "paragraph",
@@ -660,26 +807,12 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The city map analogy:</strong> finding the nearest cafe by walking every street is exact but slow. A map with highways, main roads and side streets lets you zoom in fast. You might miss a tiny cafe on a back lane, but you arrive in seconds."
+              "html": "<strong>The housing analogy:</strong> renting a flat means the landlord fixes the plumbing (a service you rent). Building your own house gives you full control, and all the repairs (a database you run yourself). Adding a room to the house you already live in is easiest if your family is already there (a vector index inside your existing database). No choice is best for everyone; it depends on how big the family gets."
             }
           ]
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "<strong>ভেক্টর ডেটাবেস কী?</strong> এমবেডিং মডেল প্রতিটি টেক্সটকে সংখ্যার একটি ভেক্টর বানায়। ভেক্টর ডেটাবেস এই ভেক্টর জমা রাখে এবং কুয়েরির সবচেয়ে কাছের ভেক্টরগুলো দ্রুত খুঁজে দেয়। সব ভেক্টরের সাথে তুলনা করা ধীর, তাই ANN (অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার) ইনডেক্স ব্যবহার হয়।"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>ফ্ল্যাট:</strong> সবকিছু একে একে মেলানো; নির্ভুল, কম মেমরি, ছোট কালেকশনের জন্য উপযুক্ত।",
-            "<strong>IVF:</strong> ভেক্টরকে <code>lists</code>-এ ভাগ করে কুয়েরির সময় শুধু কয়েকটি লিস্ট দেখা (pgvector-এ <code>ivfflat.probes</code>, ডিফল্ট ১)।",
-            "<strong>HNSW:</strong> বহুস্তরীয় প্রক্সিমিটি গ্রাফ; উপরের স্তরে লম্বা লাফ, নিচে সূক্ষ্ম খোঁজ; খোঁজার খরচ লগারিদমিক হারে বাড়ে। pgvector-এ ডিফল্ট <code>m = 16</code>, <code>ef_construction = 64</code>, <code>hnsw.ef_search = 40</code>।",
-            "<strong>ডিস্ট্যান্স মেট্রিক:</strong> L2 সরলরেখার দূরত্ব, কোসাইন শুধু কোণ, ডট প্রোডাক্ট কোণ ও দৈর্ঘ্য। pgvector-এ <code>&lt;-&gt;</code>, <code>&lt;=&gt;</code>, <code>&lt;#&gt;</code>। ইউনিট-লেংথ ভেক্টর হলে কোসাইন ও ডট প্রোডাক্ট একই র‍্যাংকিং দেয়।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "<strong>ছয়টি ডেটাবেস:</strong>"
@@ -721,49 +854,25 @@
           "ordered": false,
           "items": [
             "ফিল্টার-সহ সার্চ আর ফিল্টার ছাড়া সার্চের রিকল এক নয়;",
-            "এমবেডিং মডেলের জন্য ভুল মেট্রিক বেছে নিলে ফল খারাপ হয়;",
             "কোনো সূত্রে ক্রস-ভেন্ডর বেঞ্চমার্ক যাচাই করা হয়নি, তাই নিজের ডেটায় মেপে নিন।"
           ]
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>গবেষণার সারকথা:</strong> HNSW বহুস্তরীয় graph দিয়ে লগারিদমিক সময়ে প্রায়-নিকটতম প্রতিবেশী খোঁজে; তবে ফল approximate, তাই recall নির্ভর করে ef_search-এর মতো প্যারামিটারের ওপর।"
         },
         {
           "type": "analogy",
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> ঢাকার কোনো অচেনা মহল্লায় নির্দিষ্ট দোকান খুঁজতে প্রতিটি গলি হাঁটা (ফ্ল্যাট) অনেক সময় নেয়। বড় রাস্তা, তারপর মোড়, তারপর গলি ধরে এগোলে (HNSW) রিকশায় চড়েই কয়েক মিনিটে পৌঁছানো যায়, শুধু কখনো কোনো ছোট গলির দোকান ফসকে যেতে পারে।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> বাসা ভাড়া নিলে মেরামতের ঝামেলা বাড়িওয়ালার (ভাড়া নেওয়া সেবা)। নিজের বাড়ি বানালে পুরো নিয়ন্ত্রণ আপনার, কিন্তু সব মেরামতও আপনার (নিজে চালানো ডেটাবেস)। নিজের বাড়িতেই একটা ঘর বাড়িয়ে নেওয়া সবচেয়ে সহজ, যদি পরিবার আগে থেকেই সেখানে থাকে (বর্তমান ডেটাবেসের ভেতরেই ভেক্টর ইনডেক্স)। সবার জন্য একটাই সেরা নয়; পরিবার কতটা বড় হবে, তার ওপর নির্ভর করে।"
             }
           ]
         }
       ],
       "videos": [
         {
-          "id": "klTvEwg3oJ4",
-          "title": "Vector databases are so hot right now. WTF are they?",
-          "channel": "Fireship",
-          "lang": "en"
-        },
-        {
-          "id": "-q-pLgGDYr4",
-          "title": "Qdrant Essentials | Fast Vector Search with Qdrant HNSW Indexing",
-          "channel": "Qdrant Vector Search",
-          "lang": "en"
-        },
-        {
           "id": "pHB-m-ZITw4",
           "title": "The Weaviate Vector Database — Bring AI-native applications to life.",
           "channel": "CMU Database Group",
           "lang": "en"
-        },
-        {
-          "id": "VVNYQKDLY5s",
-          "title": "How does a Vector Database work?",
-          "channel": "KodeKloud",
-          "lang": "en",
-          "seconds": 646
         },
         {
           "id": "MykcjWPJ6T4",
@@ -772,69 +881,11 @@
           "lang": "en",
           "seconds": 3548
         }
-      ],
-      "practice": [
-        {
-          "en": {
-            "title": "Find the nearest point three different ways",
-            "why": "When you build document search, each text becomes a list of numbers (a vector), and a vector database finds the closest ones. The measure of <em>closest</em> that you pick can change which document comes back.",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "Copy this prompt, paste it, and press Enter. Write down the nearest point for each of the three measures.",
-                "prompt": "Here are 5 points, written as (x, y):\nP1 = (2, 2)\nP2 = (10, 9)\nP3 = (1, 0.5)\nP4 = (0, 3)\nP5 = (-1, -1)\n\nThe query point is q = (1, 1).\n\nFor every point, calculate three numbers:\n(a) L2 distance to q (the straight-line gap; smaller means nearer)\n(b) cosine similarity with q (how close the direction is; bigger means nearer)\n(c) dot product with q (direction mixed with length; bigger means nearer)\n\nShow one table with 3 decimals. Then name the nearest point for each of the three.",
-                "expect": "A table with 5 rows. The nearest point is <strong>P3</strong> by L2, <strong>P1</strong> by cosine, and <strong>P2</strong> by dot product. That is three different winners.",
-                "example": "Point | L2 | Cosine | Dot\nP1 | 1.414 | 1.000 | 4.000\nP2 | 12.042 | 0.999 | 19.000\nP3 | 0.500 | 0.949 | 1.500\nP4 | 2.236 | 0.707 | 3.000\nP5 | 2.828 | -1.000 | -2.000\n\nNearest by L2: P3. Nearest by cosine: P1. Nearest by dot product: P2."
-              },
-              {
-                "chat": "same",
-                "do": "Copy this prompt, paste it, and press Enter. Write down the nearest point for each measure again.",
-                "prompt": "Now divide every point by its own length, so every point has length 1. Do the same for q. Then repeat the table with L2 distance, cosine similarity, and dot product, with 3 decimals. Name the nearest point for each of the three.",
-                "expect": "All three measures now pick the same point, <strong>P1</strong>. The numbers in the table are close for P1 and P2.",
-                "example": "Point | L2 | Cosine | Dot\nP1 | 0.000 | 1.000 | 1.000\nP2 | 0.053 | 0.999 | 0.999\nP3 | 0.320 | 0.949 | 0.949\nP4 | 0.765 | 0.707 | 0.707\nP5 | 2.000 | -1.000 | -1.000\n\nNow all three measures pick the same point: P1."
-              }
-            ],
-            "learned": "Each measure has its own idea of <em>near</em>. <strong>L2</strong> is the straight-line gap, <strong>cosine</strong> looks only at direction, and the <strong>dot product</strong> also rewards length. P2 is far away but long, so only the dot product picks it. After you scale every point to length 1, the three measures agree.",
-            "done": "You have 3 different winners from step 1, and 1 shared winner from step 2.",
-            "check": {
-              "question": "Your embedding model (the model that turns text into vectors) was trained with cosine similarity. Which measure should the vector database use?",
-              "answer": "Use cosine, or the dot product on vectors scaled to length 1, which ranks the same. L2 or a raw dot product can pick by length, so the database would return different documents."
-            },
-            "challenge": "Go back to step 1, change q to (3, 3), and run it again. Which winner changes, and which stay the same? Why?"
-          },
-          "bn": {
-            "title": "তিন রকমে সবচেয়ে কাছের পয়েন্ট খুঁজুন",
-            "why": "আপনি যখন ডকুমেন্ট সার্চ বানাবেন, প্রতিটা টেক্সট একটা সংখ্যার তালিকা (ভেক্টর) হয়ে যাবে, আর ভেক্টর ডেটাবেস সবচেয়ে কাছেরগুলো খুঁজে দেবে। <em>কাছে</em> মাপার কোন উপায় বেছে নিলে, সেটা বদলে দিতে পারে কোন ডকুমেন্ট ফিরে আসবে।",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। তিনটা মেজারের প্রতিটায় সবচেয়ে কাছের পয়েন্ট কোনটা, লিখে রাখুন।",
-                "prompt": "এখানে 5টা point আছে, (x, y) আকারে:\nP1 = (2, 2)\nP2 = (10, 9)\nP3 = (1, 0.5)\nP4 = (0, 3)\nP5 = (-1, -1)\n\nquery point হলো q = (1, 1)।\n\nপ্রতিটা point-এর জন্য তিনটা সংখ্যা হিসাব করো:\n(a) q থেকে L2 distance (সরল রেখার দূরত্ব; যত ছোট, তত কাছে)\n(b) q-এর সাথে cosine similarity (দিক কতটা কাছাকাছি; যত বড়, তত কাছে)\n(c) q-এর সাথে dot product (দিক আর দৈর্ঘ্য মেশানো; যত বড়, তত কাছে)\n\nদশমিকের পর 3 ঘর দিয়ে একটা table দেখাও। তারপর তিনটার প্রতিটার জন্য সবচেয়ে কাছের point-এর নাম বলো।",
-                "expect": "৫ সারির একটা টেবিল। L2 অনুযায়ী সবচেয়ে কাছে <strong>P3</strong>, কোসাইন অনুযায়ী <strong>P1</strong>, আর ডট প্রোডাক্ট অনুযায়ী <strong>P2</strong>। অর্থাৎ তিনটা আলাদা উইনার।",
-                "example": "Point | L2 | Cosine | Dot\nP1 | 1.414 | 1.000 | 4.000\nP2 | 12.042 | 0.999 | 19.000\nP3 | 0.500 | 0.949 | 1.500\nP4 | 2.236 | 0.707 | 3.000\nP5 | 2.828 | -1.000 | -2.000\n\nL2 অনুযায়ী সবচেয়ে কাছে: P3। cosine অনুযায়ী: P1। dot product অনুযায়ী: P2।"
-              },
-              {
-                "chat": "same",
-                "do": "এই প্রম্পটটা কপি করুন, পেস্ট করে Enter চাপুন। প্রতিটা মেজারে সবচেয়ে কাছের পয়েন্ট আবার লিখে রাখুন।",
-                "prompt": "এবার প্রতিটা point-কে তার নিজের দৈর্ঘ্য দিয়ে ভাগ করো, যাতে প্রতিটা point-এর দৈর্ঘ্য 1 হয়। q-এর সাথেও একই করো। তারপর L2 distance, cosine similarity আর dot product দিয়ে table আবার বানাও, দশমিকের পর 3 ঘর দিয়ে। তিনটার প্রতিটার জন্য সবচেয়ে কাছের point-এর নাম বলো।",
-                "expect": "এবার তিনটা মেজারই একই পয়েন্ট বাছবে, <strong>P1</strong>। টেবিলে P1 আর P2-এর সংখ্যা কাছাকাছি।",
-                "example": "Point | L2 | Cosine | Dot\nP1 | 0.000 | 1.000 | 1.000\nP2 | 0.053 | 0.999 | 0.999\nP3 | 0.320 | 0.949 | 0.949\nP4 | 0.765 | 0.707 | 0.707\nP5 | 2.000 | -1.000 | -1.000\n\nএখন তিনটা measure-ই একই point বেছেছে: P1।"
-              }
-            ],
-            "learned": "প্রতিটা মেজারের নিজের মতো করে <em>কাছে</em> বোঝার উপায় আছে। <strong>L2</strong> হলো সরল রেখার দূরত্ব, <strong>কোসাইন</strong> শুধু দিক দেখে, আর <strong>ডট প্রোডাক্ট</strong> দৈর্ঘ্যকেও গুরুত্ব দেয়। P2 অনেক দূরে কিন্তু লম্বা, তাই শুধু ডট প্রোডাক্ট তাকে বাছে। প্রতিটা পয়েন্টকে দৈর্ঘ্য 1-এ নামিয়ে আনলে তিনটা মেজারই একমত হয়।",
-            "done": "আপনার কাছে ধাপ ১-এর ৩টা আলাদা উইনার আর ধাপ ২-এর ১টা একই উইনার আছে।",
-            "check": {
-              "question": "আপনার এমবেডিং মডেল (যে মডেল টেক্সট থেকে ভেক্টর বানায়) কোসাইন সিমিলারিটি দিয়ে ট্রেন করা। ভেক্টর ডেটাবেসে কোন মেজার ব্যবহার করবেন?",
-              "answer": "কোসাইন ব্যবহার করবেন, বা দৈর্ঘ্য 1-এ নামানো ভেক্টরে ডট প্রোডাক্ট, কারণ দুটোর র‍্যাংকিং একই। L2 বা সাধারণ ডট প্রোডাক্ট দৈর্ঘ্য দেখে বেছে ফেলতে পারে, তখন ডেটাবেস আলাদা ডকুমেন্ট ফেরত দেবে।"
-            },
-            "challenge": "ধাপ ১-এ ফিরে গিয়ে q বদলে (৩, ৩) করুন, আর আবার চালান। কোন উইনার বদলায়, আর কোনগুলো একই থাকে? কেন?"
-          }
-        }
       ]
     },
     {
       "id": "s3",
-      "num": "03",
+      "num": "04",
       "title": "Hybrid search (BM25 + vector) & reciprocal rank fusion",
       "sub": "Keyword search (BM25) and embedding search fail in opposite ways: BM25 needs the query's exact words to appear, while dense vectors can blur rare identifiers, names and codes. <strong>Hybrid search</strong> runs both and merges the results. The most common merge is <strong>reciprocal rank fusion (RRF)</strong>, which ignores raw scores and combines only each document's rank in each list.<a class=\"cite\" href=\"#src16\">[16]</a> The catch is that the two retrievers' scores live on different scales, which is exactly the problem rank-based fusion sidesteps.",
       "bn": {
@@ -1129,7 +1180,7 @@
     },
     {
       "id": "s4",
-      "num": "04",
+      "num": "05",
       "title": "Query rewriting, expansion & HyDE",
       "sub": "User queries are short, ambiguous and phrased differently from the documents that answer them. <strong>Query transformation</strong> puts a step before retrieval that rewrites, broadens, multiplies or even \"answers\" the query so the retriever has a better string (or vector) to match. Established variants include HyDE<a class=\"cite\" href=\"#src23\">[23]</a>, step-back prompting<a class=\"cite\" href=\"#src24\">[24]</a>, Query2doc<a class=\"cite\" href=\"#src25\">[25]</a>, RAG-Fusion<a class=\"cite\" href=\"#src26\">[26]</a> and Rewrite-Retrieve-Read<a class=\"cite\" href=\"#src27\">[27]</a>. Each trades one extra LLM call (latency and cost) for a better chance that the right chunk appears in the candidate set.",
       "bn": {
@@ -1415,12 +1466,12 @@
     },
     {
       "id": "s5",
-      "num": "05",
-      "title": "Multi-hop retrieval & agentic retrieval",
-      "sub": "Some questions cannot be answered from one retrieval: the second search depends on what the first one found. Multi-hop benchmarks such as HotpotQA (113k Wikipedia question-answer pairs that require reasoning over multiple documents, with sentence-level supporting facts)<a class=\"cite\" href=\"#src28\">[28]</a> exist to test exactly this. <strong>Agentic retrieval</strong> lets the model itself decide whether to retrieve, what to search for, whether the results are good enough, and when to stop. The price is more LLM calls, more latency and a harder system to debug.",
+      "num": "06",
+      "title": "Multi-hop retrieval patterns: IRCoT, ReAct, Self-RAG, CRAG and Adaptive-RAG",
+      "sub": "Some questions cannot be answered from one retrieval: the second search depends on what the first one found. Multi-hop benchmarks such as HotpotQA (113k Wikipedia question-answer pairs that require reasoning over multiple documents, with sentence-level supporting facts)<a class=\"cite\" href=\"#src28\">[28]</a> exist to test exactly this.",
       "bn": {
-        "title": "মাল্টি-হপ রিট্রিভাল আর এজেন্টিক রিট্রিভাল",
-        "sub": "কিছু প্রশ্নের উত্তর একবার রিট্রিভাল করে মেলে না: দ্বিতীয় সার্চ নির্ভর করে প্রথমটি কী পেল তার উপর। HotpotQA-র মতো মাল্টি-হপ বেঞ্চমার্ক ঠিক এটাই পরীক্ষা করে (Wikipedia থেকে ১১৩k প্রশ্ন-উত্তরের জোড়া, যেগুলোর জন্য একাধিক ডকুমেন্ট নিয়ে রিজনিং লাগে, আর প্রতিটির সাথে বাক্য-স্তরের সহায়ক তথ্য আছে)।<a class=\"cite\" href=\"#src28\">[২৮]</a> <strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফলাফল যথেষ্ট ভালো কি না, আর কখন থামবে। এর দাম: বেশি LLM কল, বেশি ল্যাটেন্সি, আর সিস্টেম ডিবাগ করা কঠিন।"
+        "title": "মাল্টি-হপ রিট্রিভালের প্যাটার্ন: IRCoT, ReAct, Self-RAG, CRAG আর Adaptive-RAG",
+        "sub": "কিছু প্রশ্নের উত্তর একবার রিট্রিভাল করে মেলে না: দ্বিতীয় সার্চ নির্ভর করে প্রথমটি কী পেল তার উপর। HotpotQA-র মতো মাল্টি-হপ বেঞ্চমার্ক ঠিক এটাই পরীক্ষা করে (Wikipedia থেকে ১১৩k প্রশ্ন-উত্তরের জোড়া, যেগুলোর জন্য একাধিক ডকুমেন্ট নিয়ে রিজনিং লাগে, আর প্রতিটির সাথে বাক্য-স্তরের সহায়ক তথ্য আছে)।<a class=\"cite\" href=\"#src28\">[২৮]</a>"
       },
       "body": [
         {
@@ -1465,7 +1516,158 @@
           "svg": "<svg viewBox=\"0 0 1100 330\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Left: Adaptive-RAG routes a query to no retrieval, single-step or iterative retrieval. Right: CRAG evaluates retrieval then refines or falls back to web search\">\n      <defs>\n        <marker id=\"arr-s5b\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <text x=\"40\" y=\"26\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">Adaptive-RAG: route by complexity</text>\n      <rect x=\"40\" y=\"130\" width=\"110\" height=\"60\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"95\" y=\"165\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#cfd8e6\">Query</text>\n      <rect x=\"190\" y=\"130\" width=\"150\" height=\"60\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"265\" y=\"154\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\">Classifier</text>\n      <text x=\"265\" y=\"174\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">small-LM complexity</text>\n      <rect x=\"400\" y=\"50\" width=\"130\" height=\"60\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"465\" y=\"76\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#cfd8e6\">No retrieval</text>\n      <text x=\"465\" y=\"96\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">LLM only</text>\n      <rect x=\"400\" y=\"130\" width=\"130\" height=\"60\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"465\" y=\"156\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">Single-step</text>\n      <text x=\"465\" y=\"176\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">one retrieval</text>\n      <rect x=\"400\" y=\"210\" width=\"130\" height=\"60\" rx=\"6\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"465\" y=\"236\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\">Iterative</text>\n      <text x=\"465\" y=\"256\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">multi-step loop</text>\n      <line x1=\"150\" y1=\"160\" x2=\"190\" y2=\"160\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n      <line x1=\"340\" y1=\"150\" x2=\"400\" y2=\"82\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n      <line x1=\"340\" y1=\"160\" x2=\"400\" y2=\"160\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n      <line x1=\"340\" y1=\"170\" x2=\"400\" y2=\"238\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n\n      <text x=\"580\" y=\"26\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">CRAG: evaluate, then correct</text>\n      <rect x=\"580\" y=\"130\" width=\"100\" height=\"60\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"630\" y=\"165\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#cfd8e6\">Retrieve</text>\n      <rect x=\"720\" y=\"130\" width=\"130\" height=\"60\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"785\" y=\"154\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">Evaluator</text>\n      <text x=\"785\" y=\"174\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">returns confidence</text>\n      <rect x=\"910\" y=\"60\" width=\"150\" height=\"60\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"985\" y=\"86\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">Adequate: refine</text>\n      <text x=\"985\" y=\"106\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">decompose-recompose</text>\n      <rect x=\"910\" y=\"200\" width=\"150\" height=\"60\" rx=\"6\" fill=\"rgba(251,113,133,0.10)\" stroke=\"#fb7185\"></rect>\n      <text x=\"985\" y=\"226\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\">Inadequate: web</text>\n      <text x=\"985\" y=\"246\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">fall back: web search</text>\n      <line x1=\"680\" y1=\"160\" x2=\"720\" y2=\"160\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n      <line x1=\"850\" y1=\"150\" x2=\"910\" y2=\"90\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n      <line x1=\"850\" y1=\"170\" x2=\"910\" y2=\"230\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s5b)\"></line>\n\n      <text x=\"40\" y=\"310\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Both are controllers wrapped around an ordinary retriever + LLM.</text>\n    </svg>",
           "caption": "Two control patterns: Adaptive-RAG spends retrieval effort according to predicted query complexity; CRAG checks retrieval quality and repairs it with web search when the corpus falls short.",
           "captionBn": "বাঁ দিকে Adaptive-RAG প্রশ্নের জটিলতা অনুযায়ী রিট্রিভাল ছাড়া, এক ধাপ বা বহু ধাপের পথ বেছে নেয়। ডান দিকে CRAG রিট্রিভালের মান যাচাই করে, অপর্যাপ্ত হলে ওয়েব সার্চে যায়।"
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is it?</strong> Some questions need a chain of lookups: first find who directed a film, then find where that person was born. The AI learns to search, read, think, and search again, instead of searching once."
         },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> One search cannot answer a question whose second half depends on the first answer. Letting the AI decide when to search again, when to skip searching, or when to try the wider internet makes answers more complete."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The detective analogy:</strong> a detective does not solve a case with one question. A first witness gives a name, the name leads to a second witness, and so on."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>মাল্টি-হপ</strong> প্রশ্ন মানে এমন প্রশ্ন যার উত্তর পেতে একাধিক ডকুমেন্ট জুড়ে ধাপে ধাপে যেতে হয়; দ্বিতীয় খোঁজ নির্ভর করে প্রথম ফলাফলের ওপর। বেঞ্চমার্ক হিসেবে <code>HotpotQA</code> বহুল ব্যবহৃত: এতে ১১৩ হাজার Wikipedia প্রশ্নোত্তর আছে এবং বাক্যস্তরের সাপোর্টিং ফ্যাক্টস দেওয়া।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>IRCoT:</strong> চেইন-অফ-থটের প্রতিটি বাক্য পরের খোঁজের কুয়েরি হয়; পেপারে রিট্রিভালে ১১-২১ পয়েন্ট ও QA-তে সর্বোচ্চ ১৫ F1 উন্নতির কথা আছে।",
+            "<strong>ReAct:</strong> রিজনিং ও অ্যাকশন (যেমন Wikipedia লুকআপ) মিশিয়ে চলে, ফলে হ্যালুসিনেশন কমে।",
+            "<strong>Self-RAG:</strong> মডেল রিফ্লেকশন টোকেন দিয়ে নিজেই ঠিক করে কখন রিট্রিভ করবে এবং নিজের উত্তর যাচাই করে।",
+            "<strong>CRAG:</strong> একটি ইভ্যালুয়েটর রিট্রিভালের আস্থা মাপে; অপর্যাপ্ত হলে ওয়েব সার্চে ফিরে যায়।",
+            "<strong>Adaptive-RAG:</strong> ছোট ক্লাসিফায়ার প্রশ্নের জটিলতা দেখে রিট্রিভাল-ছাড়া, এক-ধাপ বা বহু-ধাপের পথ বেছে দেয়।"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> ঢাকায় অচেনা ঠিকানা খুঁজতে গিয়ে আপনি মোড়ের দোকানদারকে জিজ্ঞেস করেন, সে বলে \"ওই গলির রিকশাওয়ালাকে জিজ্ঞেস করুন\", তার কাছ থেকে আরেকজনের খোঁজ মেলে। প্রতিটি উত্তর পরের প্রশ্ন ঠিক করে দেয়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "uZoz3T3Z6-w",
+          "title": "Self-Corrective RAG with LangGraph - Agentic RAG Tutorial",
+          "channel": "Coding Crash Courses",
+          "lang": "en"
+        }
+      ],
+      "practice": [
+        {
+          "en": {
+            "title": "Play the search tool for an AI agent",
+            "why": "When you build a research agent, some questions need several searches, and each search depends on the last result. The agent must also know when to stop.",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "Copy this prompt, paste it, and press Enter. Do not answer the search yet.",
+                "prompt": "You are a research agent. You can use one tool.\n\nTool: search(query) returns a short text from the company wiki.\n\nRules:\n- Reply with ONLY one line: either SEARCH: <your query> or FINAL: <your answer>.\n- Use at most 4 searches.\n- Use only facts from search results. Do not guess.\n\nQuestion: In which city does the manager of the team that built the Kestrel payment API work?",
+                "expect": "One line that starts with <code>SEARCH:</code>, for example <em>SEARCH: Kestrel payment API team</em>. It should not say <code>FINAL:</code> yet, because it knows no facts.",
+                "example": "SEARCH: Which team built the Kestrel payment API?"
+              },
+              {
+                "chat": "same",
+                "do": "You are the search tool now. Copy this line, paste it, and press Enter.",
+                "prompt": "Search result: The Kestrel payment API was built by the Ledger team in 2023.",
+                "expect": "A new search that uses the team name, for example <em>SEARCH: Who manages the Ledger team?</em>",
+                "example": "SEARCH: Who manages the Ledger team?"
+              },
+              {
+                "chat": "same",
+                "do": "Copy this line, paste it, and press Enter.",
+                "prompt": "Search result: The Ledger team is managed by Amina Rahman.",
+                "expect": "A third search that uses the manager's name, for example <em>SEARCH: In which city does Amina Rahman work?</em>",
+                "example": "SEARCH: In which city does Amina Rahman work?"
+              },
+              {
+                "chat": "same",
+                "do": "Copy this line, paste it, and press Enter. Count the searches the AI made.",
+                "prompt": "Search result: Amina Rahman works in the Chattogram office.",
+                "expect": "<code>FINAL:</code> with the city <strong>Chattogram</strong>. The AI made 3 searches.",
+                "example": "FINAL: Chattogram"
+              }
+            ],
+            "learned": "No single search could answer this question. Each search needed a fact from the search before it: the team, then the manager, then the city. A question like this is called <strong>multi-hop</strong>. In agentic retrieval, the AI chooses the next search itself and decides when to stop. The price is more AI calls.",
+            "done": "You have a <code>FINAL:</code> answer, <em>Chattogram</em>, after 3 searches.",
+            "check": {
+              "question": "Why can one single search not answer this question well?",
+              "answer": "The second and third searches need facts that only the earlier searches found, so no single query holds everything. The AI has to choose each next search, and that costs more AI calls."
+            },
+            "challenge": "Start a new chat with the prompt from step 1, but change the rule to <em>Use at most 2 searches</em>. Play the tool again. What does the AI do when it cannot finish in time? Is that what you want?"
+          },
+          "bn": {
+            "title": "AI এজেন্টের সার্চ টুল সেজে দেখুন",
+            "why": "আপনি যখন একটা রিসার্চ এজেন্ট বানাবেন, কিছু প্রশ্নের জন্য কয়েকবার সার্চ লাগবে, আর প্রতিটা সার্চ আগের রেজাল্টের উপর নির্ভর করে। এজেন্টকে এটাও জানতে হবে কখন থামতে হবে।",
+            "steps": [
+              {
+                "chat": "new",
+                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। সার্চের উত্তর এখনই দেবেন না।",
+                "prompt": "তুমি একজন research agent। তুমি একটা tool ব্যবহার করতে পারো।\n\nTool: search(query) company wiki থেকে একটা ছোট text ফেরত দেয়।\n\nনিয়ম:\n- শুধু একটা লাইনে উত্তর দাও: হয় SEARCH: <তোমার query> অথবা FINAL: <তোমার উত্তর>।\n- সর্বোচ্চ 4বার search করতে পারবে।\n- শুধু search result-এর তথ্য ব্যবহার করবে। অনুমান করবে না।\n\nপ্রশ্ন: Kestrel payment API যে team বানিয়েছে, তার manager কোন শহরে কাজ করেন?",
+                "expect": "একটা লাইন, যেটা <code>SEARCH:</code> দিয়ে শুরু, যেমন <em>SEARCH: Kestrel payment API team</em>। এখনই <code>FINAL:</code> লেখা উচিত নয়, কারণ সে কোনো তথ্য জানে না।",
+                "example": "SEARCH: Kestrel payment API কোন team বানিয়েছে?"
+              },
+              {
+                "chat": "same",
+                "do": "এখন আপনি সার্চ টুল। এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন।",
+                "prompt": "Search result: Kestrel payment API 2023 সালে Ledger team বানিয়েছে।",
+                "expect": "টিমের নাম দিয়ে নতুন একটা সার্চ, যেমন <em>SEARCH: Ledger team-এর manager কে?</em>",
+                "example": "SEARCH: Ledger team-এর manager কে?"
+              },
+              {
+                "chat": "same",
+                "do": "এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন।",
+                "prompt": "Search result: Ledger team-এর manager Amina Rahman।",
+                "expect": "ম্যানেজারের নাম দিয়ে তৃতীয় একটা সার্চ, যেমন <em>SEARCH: Amina Rahman কোন শহরে কাজ করেন?</em>",
+                "example": "SEARCH: Amina Rahman কোন শহরে কাজ করেন?"
+              },
+              {
+                "chat": "same",
+                "do": "এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন। AI কয়বার সার্চ করল, গুনে রাখুন।",
+                "prompt": "Search result: Amina Rahman Chattogram office-এ কাজ করেন।",
+                "expect": "<code>FINAL:</code> দিয়ে শহরের নাম <strong>Chattogram</strong>। AI মোট ৩বার সার্চ করেছে।",
+                "example": "FINAL: Chattogram"
+              }
+            ],
+            "learned": "একটা সার্চ দিয়ে এই প্রশ্নের উত্তর পাওয়া যেত না। প্রতিটা সার্চের আগের সার্চ থেকে একটা তথ্য লেগেছে: আগে টিম, তারপর ম্যানেজার, তারপর শহর। এরকম প্রশ্নকে বলে <strong>মাল্টি-হপ</strong>। এজেন্টিক রিট্রিভালে AI নিজেই ঠিক করে পরের সার্চ কী হবে, আর কখন থামবে। এর দাম হলো বেশি AI কল।",
+            "done": "৩টা সার্চের পর আপনার কাছে একটা <code>FINAL:</code> উত্তর আছে, <em>Chattogram</em>।",
+            "check": {
+              "question": "একটা মাত্র সার্চ এই প্রশ্নের ভালো উত্তর কেন দিতে পারে না?",
+              "answer": "দ্বিতীয় আর তৃতীয় সার্চের যে তথ্য লাগে, তা আগের সার্চগুলোই পেয়েছে, তাই একটা কুয়েরিতে সব তথ্য থাকে না। AI-কে প্রতিবার পরের সার্চ ঠিক করতে হয়, আর তাতে বেশি AI কল লাগে।"
+            },
+            "challenge": "নতুন চ্যাটে ধাপ ১-এর প্রম্পট দিয়ে শুরু করুন, কিন্তু নিয়মটা বদলে লিখুন <em>সর্বোচ্চ ২বার search করতে পারবে</em>। আবার টুলের ভূমিকা নিন। সময়মতো শেষ করতে না পারলে AI কী করে? আপনি কি এটাই চান?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "num": "07",
+      "title": "Agentic retrieval: workflows, agents and what they cost",
+      "sub": "<strong>Agentic retrieval</strong> lets the model itself decide whether to retrieve, what to search for, whether the results are good enough, and when to stop. The price is more LLM calls, more latency and a harder system to debug.",
+      "bn": {
+        "title": "এজেন্টিক রিট্রিভাল: ওয়ার্কফ্লো, এজেন্ট আর তার খরচ",
+        "sub": "<strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফলাফল যথেষ্ট ভালো কি না, আর কখন থামবে। এর দাম: বেশি LLM কল, বেশি ল্যাটেন্সি, আর সিস্টেম ডিবাগ করা কঠিন।"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -1557,11 +1759,11 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is it?</strong> Some questions need a chain of lookups: first find who directed a film, then find where that person was born. The AI learns to search, read, think, and search again, instead of searching once."
+          "html": "<strong>What is it?</strong> A fixed script runs the same steps every time. An agent decides its own steps: whether to search, what to search for, whether the results are good enough, and when to stop."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> One search cannot answer a question whose second half depends on the first answer. Letting the AI decide when to search again, when to skip searching, or when to try the wider internet makes answers more complete."
+          "html": "<strong>Why does it matter?</strong> In one company's own tests, a team of AI helpers searching in parallel did better on research questions than a single helper."
         },
         {
           "type": "paragraph",
@@ -1572,7 +1774,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The detective analogy:</strong> a detective does not solve a case with one question. A first witness gives a name, the name leads to a second witness, and so on. A good detective also knows when to stop asking. A team of detectives works faster, but you pay for all of them."
+              "html": "<strong>The detective analogy, continued:</strong> A good detective also knows when to stop asking. A team of detectives works faster, but you pay for all of them."
             }
           ]
         }
@@ -1580,18 +1782,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>মাল্টি-হপ</strong> প্রশ্ন মানে এমন প্রশ্ন যার উত্তর পেতে একাধিক ডকুমেন্ট জুড়ে ধাপে ধাপে যেতে হয়; দ্বিতীয় খোঁজ নির্ভর করে প্রথম ফলাফলের ওপর। বেঞ্চমার্ক হিসেবে <code>HotpotQA</code> বহুল ব্যবহৃত: এতে ১১৩ হাজার Wikipedia প্রশ্নোত্তর আছে এবং বাক্যস্তরের সাপোর্টিং ফ্যাক্টস দেওয়া। <strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফল যথেষ্ট কি না।"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>IRCoT:</strong> চেইন-অফ-থটের প্রতিটি বাক্য পরের খোঁজের কুয়েরি হয়; পেপারে রিট্রিভালে ১১-২১ পয়েন্ট ও QA-তে সর্বোচ্চ ১৫ F1 উন্নতির কথা আছে।",
-            "<strong>ReAct:</strong> রিজনিং ও অ্যাকশন (যেমন Wikipedia লুকআপ) মিশিয়ে চলে, ফলে হ্যালুসিনেশন কমে।",
-            "<strong>Self-RAG:</strong> মডেল রিফ্লেকশন টোকেন দিয়ে নিজেই ঠিক করে কখন রিট্রিভ করবে এবং নিজের উত্তর যাচাই করে।",
-            "<strong>CRAG:</strong> একটি ইভ্যালুয়েটর রিট্রিভালের আস্থা মাপে; অপর্যাপ্ত হলে ওয়েব সার্চে ফিরে যায়।",
-            "<strong>Adaptive-RAG:</strong> ছোট ক্লাসিফায়ার প্রশ্নের জটিলতা দেখে রিট্রিভাল-ছাড়া, এক-ধাপ বা বহু-ধাপের পথ বেছে দেয়।"
-          ]
+          "html": "<strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফল যথেষ্ট কি না।"
         },
         {
           "type": "paragraph",
@@ -1610,7 +1801,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> ঢাকায় অচেনা ঠিকানা খুঁজতে গিয়ে আপনি মোড়ের দোকানদারকে জিজ্ঞেস করেন, সে বলে \"ওই গলির রিকশাওয়ালাকে জিজ্ঞেস করুন\", তার কাছ থেকে আরেকজনের খোঁজ মেলে। প্রতিটি উত্তর পরের প্রশ্ন ঠিক করে দেয়। বেশি লোককে একসাথে পাঠালে তাড়াতাড়ি হয়, তবে রিকশাভাড়াও বেশি লাগে।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> ঢাকায় সেই অচেনা ঠিকানা খুঁজতে বেশি লোককে একসাথে পাঠালে তাড়াতাড়ি হয়, তবে রিকশাভাড়াও বেশি লাগে।"
             }
           ]
         }
@@ -1629,12 +1820,6 @@
           "lang": "en"
         },
         {
-          "id": "uZoz3T3Z6-w",
-          "title": "Self-Corrective RAG with LangGraph - Agentic RAG Tutorial",
-          "channel": "Coding Crash Courses",
-          "lang": "en"
-        },
-        {
           "id": "_R-ff4ZMLC8",
           "title": "The Future of RAG is Agentic - Learn this Strategy NOW",
           "channel": "Cole Medin",
@@ -1648,102 +1833,16 @@
           "lang": "en",
           "seconds": 1442
         }
-      ],
-      "practice": [
-        {
-          "en": {
-            "title": "Play the search tool for an AI agent",
-            "why": "When you build a research agent, some questions need several searches, and each search depends on the last result. The agent must also know when to stop.",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "Copy this prompt, paste it, and press Enter. Do not answer the search yet.",
-                "prompt": "You are a research agent. You can use one tool.\n\nTool: search(query) returns a short text from the company wiki.\n\nRules:\n- Reply with ONLY one line: either SEARCH: <your query> or FINAL: <your answer>.\n- Use at most 4 searches.\n- Use only facts from search results. Do not guess.\n\nQuestion: In which city does the manager of the team that built the Kestrel payment API work?",
-                "expect": "One line that starts with <code>SEARCH:</code>, for example <em>SEARCH: Kestrel payment API team</em>. It should not say <code>FINAL:</code> yet, because it knows no facts.",
-                "example": "SEARCH: Which team built the Kestrel payment API?"
-              },
-              {
-                "chat": "same",
-                "do": "You are the search tool now. Copy this line, paste it, and press Enter.",
-                "prompt": "Search result: The Kestrel payment API was built by the Ledger team in 2023.",
-                "expect": "A new search that uses the team name, for example <em>SEARCH: Who manages the Ledger team?</em>",
-                "example": "SEARCH: Who manages the Ledger team?"
-              },
-              {
-                "chat": "same",
-                "do": "Copy this line, paste it, and press Enter.",
-                "prompt": "Search result: The Ledger team is managed by Amina Rahman.",
-                "expect": "A third search that uses the manager's name, for example <em>SEARCH: In which city does Amina Rahman work?</em>",
-                "example": "SEARCH: In which city does Amina Rahman work?"
-              },
-              {
-                "chat": "same",
-                "do": "Copy this line, paste it, and press Enter. Count the searches the AI made.",
-                "prompt": "Search result: Amina Rahman works in the Chattogram office.",
-                "expect": "<code>FINAL:</code> with the city <strong>Chattogram</strong>. The AI made 3 searches.",
-                "example": "FINAL: Chattogram"
-              }
-            ],
-            "learned": "No single search could answer this question. Each search needed a fact from the search before it: the team, then the manager, then the city. A question like this is called <strong>multi-hop</strong>. In agentic retrieval, the AI chooses the next search itself and decides when to stop. The price is more AI calls.",
-            "done": "You have a <code>FINAL:</code> answer, <em>Chattogram</em>, after 3 searches.",
-            "check": {
-              "question": "Why can one single search not answer this question well?",
-              "answer": "The second and third searches need facts that only the earlier searches found, so no single query holds everything. The AI has to choose each next search, and that costs more AI calls."
-            },
-            "challenge": "Start a new chat with the prompt from step 1, but change the rule to <em>Use at most 2 searches</em>. Play the tool again. What does the AI do when it cannot finish in time? Is that what you want?"
-          },
-          "bn": {
-            "title": "AI এজেন্টের সার্চ টুল সেজে দেখুন",
-            "why": "আপনি যখন একটা রিসার্চ এজেন্ট বানাবেন, কিছু প্রশ্নের জন্য কয়েকবার সার্চ লাগবে, আর প্রতিটা সার্চ আগের রেজাল্টের উপর নির্ভর করে। এজেন্টকে এটাও জানতে হবে কখন থামতে হবে।",
-            "steps": [
-              {
-                "chat": "new",
-                "do": "এই প্রম্পটটা কপি করুন, চ্যাটে পেস্ট করে Enter চাপুন। সার্চের উত্তর এখনই দেবেন না।",
-                "prompt": "তুমি একজন research agent। তুমি একটা tool ব্যবহার করতে পারো।\n\nTool: search(query) company wiki থেকে একটা ছোট text ফেরত দেয়।\n\nনিয়ম:\n- শুধু একটা লাইনে উত্তর দাও: হয় SEARCH: <তোমার query> অথবা FINAL: <তোমার উত্তর>।\n- সর্বোচ্চ 4বার search করতে পারবে।\n- শুধু search result-এর তথ্য ব্যবহার করবে। অনুমান করবে না।\n\nপ্রশ্ন: Kestrel payment API যে team বানিয়েছে, তার manager কোন শহরে কাজ করেন?",
-                "expect": "একটা লাইন, যেটা <code>SEARCH:</code> দিয়ে শুরু, যেমন <em>SEARCH: Kestrel payment API team</em>। এখনই <code>FINAL:</code> লেখা উচিত নয়, কারণ সে কোনো তথ্য জানে না।",
-                "example": "SEARCH: Kestrel payment API কোন team বানিয়েছে?"
-              },
-              {
-                "chat": "same",
-                "do": "এখন আপনি সার্চ টুল। এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন।",
-                "prompt": "Search result: Kestrel payment API 2023 সালে Ledger team বানিয়েছে।",
-                "expect": "টিমের নাম দিয়ে নতুন একটা সার্চ, যেমন <em>SEARCH: Ledger team-এর manager কে?</em>",
-                "example": "SEARCH: Ledger team-এর manager কে?"
-              },
-              {
-                "chat": "same",
-                "do": "এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন।",
-                "prompt": "Search result: Ledger team-এর manager Amina Rahman।",
-                "expect": "ম্যানেজারের নাম দিয়ে তৃতীয় একটা সার্চ, যেমন <em>SEARCH: Amina Rahman কোন শহরে কাজ করেন?</em>",
-                "example": "SEARCH: Amina Rahman কোন শহরে কাজ করেন?"
-              },
-              {
-                "chat": "same",
-                "do": "এই লাইনটা কপি করুন, পেস্ট করে Enter চাপুন। AI কয়বার সার্চ করল, গুনে রাখুন।",
-                "prompt": "Search result: Amina Rahman Chattogram office-এ কাজ করেন।",
-                "expect": "<code>FINAL:</code> দিয়ে শহরের নাম <strong>Chattogram</strong>। AI মোট ৩বার সার্চ করেছে।",
-                "example": "FINAL: Chattogram"
-              }
-            ],
-            "learned": "একটা সার্চ দিয়ে এই প্রশ্নের উত্তর পাওয়া যেত না। প্রতিটা সার্চের আগের সার্চ থেকে একটা তথ্য লেগেছে: আগে টিম, তারপর ম্যানেজার, তারপর শহর। এরকম প্রশ্নকে বলে <strong>মাল্টি-হপ</strong>। এজেন্টিক রিট্রিভালে AI নিজেই ঠিক করে পরের সার্চ কী হবে, আর কখন থামবে। এর দাম হলো বেশি AI কল।",
-            "done": "৩টা সার্চের পর আপনার কাছে একটা <code>FINAL:</code> উত্তর আছে, <em>Chattogram</em>।",
-            "check": {
-              "question": "একটা মাত্র সার্চ এই প্রশ্নের ভালো উত্তর কেন দিতে পারে না?",
-              "answer": "দ্বিতীয় আর তৃতীয় সার্চের যে তথ্য লাগে, তা আগের সার্চগুলোই পেয়েছে, তাই একটা কুয়েরিতে সব তথ্য থাকে না। AI-কে প্রতিবার পরের সার্চ ঠিক করতে হয়, আর তাতে বেশি AI কল লাগে।"
-            },
-            "challenge": "নতুন চ্যাটে ধাপ ১-এর প্রম্পট দিয়ে শুরু করুন, কিন্তু নিয়মটা বদলে লিখুন <em>সর্বোচ্চ ২বার search করতে পারবে</em>। আবার টুলের ভূমিকা নিন। সময়মতো শেষ করতে না পারলে AI কী করে? আপনি কি এটাই চান?"
-          }
-        }
       ]
     },
     {
       "id": "s7",
-      "num": "06",
-      "title": "Reranking: Cohere, BGE, Voyage",
-      "sub": "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus. It scores each document without ever looking at the query and document together. A <strong>reranker</strong> is a second-stage model that does look at them together: it takes the short candidate list and re-orders it by a more accurate relevance score. Sentence-Transformers documents this as the recommended pattern: a bi-encoder retrieves top-k candidates, then a cross-encoder re-ranks them.<a class=\"cite\" href=\"#src43\">[43]</a> Hosted options include Cohere Rerank and Voyage rerankers; open weights include BAAI's BGE rerankers.<a class=\"cite\" href=\"#src44\">[44]</a><a class=\"cite\" href=\"#src45\">[45]</a><a class=\"cite\" href=\"#src46\">[46]</a>",
+      "num": "08",
+      "title": "How rerankers score: bi-encoders, cross-encoders and late interaction",
+      "sub": "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus. It scores each document without ever looking at the query and document together. A <strong>reranker</strong> is a second-stage model that does look at them together: it takes the short candidate list and re-orders it by a more accurate relevance score.",
       "bn": {
-        "title": "রিরেংকিংয়ে ফলাফল সাজানো: Cohere, BGE, Voyage",
-        "sub": "প্রথম ধাপের রিট্রিভাল (BM25, ডেন্স ভেক্টর, বা দুটোই) বিশাল কর্পাসে দ্রুত চলার জন্য বানানো। তাই সে প্রতিটি ডকুমেন্টের স্কোর দেয় কুয়েরি আর ডকুমেন্ট একসাথে না দেখেই। <strong>রিরেংকার</strong> দ্বিতীয় ধাপের মডেল, যে দুটো একসাথে দেখে: ছোট ক্যান্ডিডেট তালিকা নিয়ে আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে সেটা নতুন করে সাজায়। Sentence-Transformers এটাকেই সুপারিশ করা প্যাটার্ন হিসেবে লিখেছে: বাই-এনকোডার টপ-k ক্যান্ডিডেট রিট্রিভ করে, তারপর ক্রস-এনকোডার তাদের রিরেংক করে।<a class=\"cite\" href=\"#src43\">[৪৩]</a> হোস্টেড অপশনের মধ্যে আছে Cohere Rerank আর Voyage রিরেংকার, আর ওপেন-ওয়েটের মধ্যে BAAI-র BGE রিরেংকার।<a class=\"cite\" href=\"#src44\">[৪৪]</a><a class=\"cite\" href=\"#src45\">[৪৫]</a><a class=\"cite\" href=\"#src46\">[৪৬]</a>"
+        "title": "রিরেংকার কীভাবে স্কোর করে: বাই-এনকোডার, ক্রস-এনকোডার আর লেট ইন্টারঅ্যাকশন",
+        "sub": "প্রথম ধাপের রিট্রিভাল (BM25, ডেন্স ভেক্টর, বা দুটোই) বিশাল কর্পাসে দ্রুত চলার জন্য বানানো। তাই সে প্রতিটি ডকুমেন্টের স্কোর দেয় কুয়েরি আর ডকুমেন্ট একসাথে না দেখেই। <strong>রিরেংকার</strong> দ্বিতীয় ধাপের মডেল, যে দুটো একসাথে দেখে: ছোট ক্যান্ডিডেট তালিকা নিয়ে আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে সেটা নতুন করে সাজায়।"
       },
       "body": [
         {
@@ -1784,6 +1883,91 @@
           "caption": "MaxSim on a toy grid: every query token keeps only its best-matching document token, and the per-token maxima are summed into the document score.",
           "captionBn": "MaxSim-এর একটি ছোট উদাহরণ: প্রতিটি কুয়েরি টোকেন শুধু ডকুমেন্টের সবচেয়ে মিলে যাওয়া টোকেনটির মান রাখে, তারপর সেই সর্বোচ্চ মানগুলো যোগ করে ডকুমেন্টের স্কোর হয়। সংখ্যাগুলো উদাহরণের জন্য বানানো।"
         },
+        {
+          "type": "callout",
+          "variant": "good",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>Research frontier:</strong> ColBERT showed that you can keep cross-encoder-like token-level matching while precomputing document representations. It was about 170x faster and used 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality on MS MARCO and TREC CAR.<a class=\"cite\" href=\"#src48\">[48]</a> Qdrant exposes the same idea operationally: prefetch cheap dense candidates, then rescore the top candidates with a multivector (ColBERT-style) model.<a class=\"cite\" href=\"#src21\">[21]</a> Limits: late interaction stores one vector per token, which costs index space, and the speed figures are from the paper's own setup, not your hardware."
+            }
+          ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is it?</strong> A reranker is a careful second look. A quick search first pulls out a pile of documents that might answer your question. Then the reranker reads your question next to each one and sorts the pile from best to worst."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> The quick search is fast because it never reads your question and a document side by side. That makes it good at not missing things, but sloppy at putting the best one first. Since the AI only has room for a few passages, getting the best ones on top is what decides whether the answer is good."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>When does it go wrong?</strong> It is slower and costs money for every document you ask it to read, so you can only afford to show it a short pile."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The library analogy:</strong> a quick search is like judging each book by a summary card written in advance: fast, but the card never saw your question. A careful reranker is like reading each book with your question in hand: slow, but accurate. ColBERT sits in between: it keeps a small card for every word in advance, then matches your question's words against those cards."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>রিরেংকার কী?</strong> প্রথম ধাপের রিট্রিভাল (BM25 বা ডেন্স ভেক্টর) দ্রুত অনেক ডকুমেন্ট আনে, কিন্তু সেরাটিকে সবার ওপরে বসাতে পারে না। রিরেংকার হলো দ্বিতীয় ধাপের মডেল, যা ওই ছোট ক্যান্ডিডেট তালিকাটি আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে নতুন করে সাজায়। Sentence-Transformers-এর পরামর্শও তাই: বাই-এনকোডার দিয়ে টপ-k আনুন, তারপর ক্রস-এনকোডার দিয়ে রিরেংক করুন।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>তিন ধরনের মডেল:</strong>"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>বাই-এনকোডার:</strong> কুয়েরি ও ডকুমেন্ট আলাদাভাবে ভেক্টর হয়, শেষে কোসাইন মাপা হয়। ডকুমেন্ট ভেক্টর আগে থেকে তৈরি থাকে, তাই দ্রুত।",
+            "<strong>ক্রস-এনকোডার:</strong> কুয়েরি ও ডকুমেন্ট একসাথে এক ট্রান্সফর্মারে ঢোকে এবং সরাসরি একটি স্কোর দেয়। রিইউজেবল এমবেডিং তৈরি হয় না; বেশি নিখুঁত কিন্তু ধীর। Sentence-Transformers-এর উদাহরণে ১০,০০০ বাক্য ক্লাস্টার করতে প্রায় ৫ কোটি তুলনা (প্রায় ৬৫ ঘণ্টা) লাগে।",
+            "<strong>ColBERT (লেট ইন্টারঅ্যাকশন):</strong> আলাদা এনকোড হয়, কিন্তু টোকেন স্তরে <code>MaxSim</code> হিসাব হয়: প্রতিটি কুয়েরি টোকেনের জন্য ডকুমেন্টের সবচেয়ে মিলে যাওয়া টোকেনের কোসাইন নিয়ে সেগুলো যোগ করা হয়।"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>গবেষণার সারকথা:</strong> ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়। তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> লাইব্রেরিতে আগে থেকে লেখা সারসংক্ষেপ-কার্ড দেখে বই বাছা দ্রুত, কিন্তু কার্ডটা আপনার প্রশ্ন দেখেনি। প্রশ্ন হাতে নিয়ে বইটা পড়ে দেখা ধীর, কিন্তু নিখুঁত। ColBERT মাঝামাঝি: প্রতিটি শব্দের জন্য আগে থেকে ছোট কার্ড বানিয়ে রাখে, তারপর আপনার প্রশ্নের শব্দগুলো সেই কার্ডের সাথে মেলায়।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "eU1x6_YG2sU",
+          "title": "Reranking Models vs. Embedding Models | Voyage AI and Vector Search for Beginners",
+          "channel": "MongoDB for Developers",
+          "lang": "en"
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "num": "09",
+      "title": "Reranking in practice: the two-stage funnel, Cohere, Voyage and BGE",
+      "sub": "Sentence-Transformers documents this as the recommended pattern: a bi-encoder retrieves top-k candidates, then a cross-encoder re-ranks them.<a class=\"cite\" href=\"#src43\">[43]</a> Hosted options include Cohere Rerank and Voyage rerankers; open weights include BAAI's BGE rerankers.<a class=\"cite\" href=\"#src44\">[44]</a><a class=\"cite\" href=\"#src45\">[45]</a><a class=\"cite\" href=\"#src46\">[46]</a>",
+      "bn": {
+        "title": "রিরেংকার ব্যবহার করা: দুই ধাপের ফানেল, Cohere, Voyage আর BGE",
+        "sub": "Sentence-Transformers এটাকেই সুপারিশ করা প্যাটার্ন হিসেবে লিখেছে: বাই-এনকোডার টপ-k ক্যান্ডিডেট রিট্রিভ করে, তারপর ক্রস-এনকোডার তাদের রিরেংক করে।<a class=\"cite\" href=\"#src43\">[৪৩]</a> হোস্টেড অপশনের মধ্যে আছে Cohere Rerank আর Voyage রিরেংকার, আর ওপেন-ওয়েটের মধ্যে BAAI-র BGE রিরেংকার।<a class=\"cite\" href=\"#src44\">[৪৪]</a><a class=\"cite\" href=\"#src45\">[৪৫]</a><a class=\"cite\" href=\"#src46\">[৪৬]</a>"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -1850,30 +2034,20 @@
               "html": "<strong>Pitfalls.</strong> Scores from different rerankers are not on a common scale, so pick any score threshold per model and per corpus. Long documents get truncated or cut by token limits (for example Cohere's <code>max_tokens_per_doc</code>, Voyage's <code>truncation</code>), so rerank chunks, not whole files. A reranker can only re-order what stage 1 returned: if the right passage is not in the top-N, no reranker can recover it."
             }
           ]
-        },
-        {
-          "type": "callout",
-          "variant": "good",
-          "blocks": [
-            {
-              "type": "paragraph",
-              "html": "<strong>Research frontier:</strong> ColBERT showed that you can keep cross-encoder-like token-level matching while precomputing document representations. It was about 170x faster and used 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality on MS MARCO and TREC CAR.<a class=\"cite\" href=\"#src48\">[48]</a> Qdrant exposes the same idea operationally: prefetch cheap dense candidates, then rescore the top candidates with a multivector (ColBERT-style) model.<a class=\"cite\" href=\"#src21\">[21]</a> Limits: late interaction stores one vector per token, which costs index space, and the speed figures are from the paper's own setup, not your hardware."
-            }
-          ]
         }
       ],
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is it?</strong> A reranker is a careful second look. A quick search first pulls out a pile of documents that might answer your question. Then the reranker reads your question next to each one and sorts the pile from best to worst."
+          "html": "<strong>What is it?</strong> Using a reranker means running two stages: a cheap first search over everything, then the careful reranker on only the few results that survive."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> The quick search is fast because it never reads your question and a document side by side. That makes it good at not missing things, but sloppy at putting the best one first. Since the AI only has room for a few passages, getting the best ones on top is what decides whether the answer is good."
+          "html": "<strong>Why does it matter?</strong> How many results you hand to the reranker is a choice you tune on your own questions, and doubling that number roughly doubles the time and cost. You can rent a reranker (Cohere or Voyage) or run an open one (BGE) on your own machine."
         },
         {
           "type": "paragraph",
-          "html": "<strong>When does it go wrong?</strong> It is slower and costs money for every document you ask it to read, so you can only afford to show it a short pile. And if the right document never made it into the pile, the second look cannot rescue it."
+          "html": "<strong>When does it go wrong?</strong> If the right document never made it into the pile, the second look cannot rescue it. Scores from different rerankers are also not on the same scale, and long documents get cut off, so rerank short chunks rather than whole files."
         },
         {
           "type": "analogy",
@@ -1888,20 +2062,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "<strong>রিরেংকার কী?</strong> প্রথম ধাপের রিট্রিভাল (BM25 বা ডেন্স ভেক্টর) দ্রুত অনেক ডকুমেন্ট আনে, কিন্তু সেরাটিকে সবার ওপরে বসাতে পারে না। রিরেংকার হলো দ্বিতীয় ধাপের মডেল, যা ওই ছোট ক্যান্ডিডেট তালিকাটি আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে নতুন করে সাজায়। Sentence-Transformers-এর পরামর্শও তাই: বাই-এনকোডার দিয়ে টপ-k আনুন, তারপর ক্রস-এনকোডার দিয়ে রিরেংক করুন।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>তিন ধরনের মডেল:</strong>"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>বাই-এনকোডার:</strong> কুয়েরি ও ডকুমেন্ট আলাদাভাবে ভেক্টর হয়, শেষে কোসাইন মাপা হয়। ডকুমেন্ট ভেক্টর আগে থেকে তৈরি থাকে, তাই দ্রুত।",
-            "<strong>ক্রস-এনকোডার:</strong> কুয়েরি ও ডকুমেন্ট একসাথে এক ট্রান্সফর্মারে ঢোকে এবং সরাসরি একটি স্কোর দেয়। রিইউজেবল এমবেডিং তৈরি হয় না; বেশি নিখুঁত কিন্তু ধীর। Sentence-Transformers-এর উদাহরণে ১০,০০০ বাক্য ক্লাস্টার করতে প্রায় ৫ কোটি তুলনা (প্রায় ৬৫ ঘণ্টা) লাগে।",
-            "<strong>ColBERT (লেট ইন্টারঅ্যাকশন):</strong> আলাদা এনকোড হয়, কিন্তু টোকেন স্তরে <code>MaxSim</code> হিসাব হয়: প্রতিটি কুয়েরি টোকেনের জন্য ডকুমেন্টের সবচেয়ে মিলে যাওয়া টোকেনের কোসাইন নিয়ে সেগুলো যোগ করা হয়।"
-          ]
+          "html": "<strong>কখন কী:</strong> সাধারণ নিয়ম হলো পুরো কর্পাসে সস্তা রিট্রিভাল, তারপর অল্প সংখ্যক ক্যান্ডিডেটে রিরেংকার। \"৫০–১০০টি আনুন, ৫–১০টি রাখুন\" কথাটি প্রচলিত অভ্যাস মাত্র, কোনো ভেন্ডরের নথিতে এটি লেখা নেই। নিজের ইভ্যালুয়েশন সেট দিয়ে N ও k ঠিক করুন।"
         },
         {
           "type": "paragraph",
@@ -1909,15 +2070,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>কখন কী:</strong> সাধারণ নিয়ম হলো পুরো কর্পাসে সস্তা রিট্রিভাল, তারপর অল্প সংখ্যক ক্যান্ডিডেটে রিরেংকার। \"৫০–১০০টি আনুন, ৫–১০টি রাখুন\" কথাটি প্রচলিত অভ্যাস মাত্র, কোনো ভেন্ডরের নথিতে এটি লেখা নেই। নিজের ইভ্যালুয়েশন সেট দিয়ে N ও k ঠিক করুন।"
-        },
-        {
-          "type": "paragraph",
           "html": "<strong>সতর্কতা:</strong> প্রথম ধাপে যে ডকুমেন্ট আসেনি, রিরেংকার তা ফেরাতে পারে না। আলাদা রিরেংকারের স্কোর একই স্কেলে নয়, তাই থ্রেশহোল্ড মডেল ধরে ঠিক করুন। লম্বা ডকুমেন্ট কাটা পড়তে পারে, তাই পুরো ফাইলের বদলে চাঙ্ক রিরেংক করুন।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>গবেষণার সারকথা:</strong> ColBERT প্রমাণ করেছে document-এর token vector আগে থেকে হিসাব করে রাখলে cross-encoder-এর কাছাকাছি মান অনেক কম খরচে পাওয়া যায়। তবে প্রতি token-এ একটি vector রাখতে index-এর জায়গা বেশি লাগে।"
         },
         {
           "type": "analogy",
@@ -1934,12 +2087,6 @@
           "id": "Uh9bYiVrW_s",
           "title": "RAG But Better: Rerankers with Cohere AI",
           "channel": "James Briggs",
-          "lang": "en"
-        },
-        {
-          "id": "eU1x6_YG2sU",
-          "title": "Reranking Models vs. Embedding Models | Voyage AI and Vector Search for Beginners",
-          "channel": "MongoDB for Developers",
           "lang": "en"
         },
         {
@@ -2010,12 +2157,12 @@
     },
     {
       "id": "s8",
-      "num": "07",
-      "title": "Metadata filtering & structured retrieval",
-      "sub": "Real questions mix meaning with constraints: \"refund policy for <em>enterprise</em> customers in <em>2025</em>\" or \"science-fiction movies after 2000 with rating above 8\". Vector similarity alone cannot enforce <code>year &gt; 2000</code>. Production retrieval therefore attaches metadata to each chunk and filters on it. For questions about counts or totals, it hands the job to a database. The hard part is that a filter interacts badly with approximate nearest-neighbour (ANN) indexes, and each vector database handles that differently.<a class=\"cite\" href=\"#src50\">[50]</a><a class=\"cite\" href=\"#src51\">[51]</a>",
+      "num": "10",
+      "title": "Filtering a vector search: pre-filter, post-filter and what each engine does",
+      "sub": "Real questions mix meaning with constraints: \"refund policy for <em>enterprise</em> customers in <em>2025</em>\" or \"science-fiction movies after 2000 with rating above 8\". Vector similarity alone cannot enforce <code>year &gt; 2000</code>. Production retrieval therefore attaches metadata to each chunk and filters on it. The hard part is that a filter interacts badly with approximate nearest-neighbour (ANN) indexes, and each vector database handles that differently.<a class=\"cite\" href=\"#src50\">[50]</a><a class=\"cite\" href=\"#src51\">[51]</a>",
       "bn": {
-        "title": "মেটাডেটা ফিল্টারিং আর স্ট্রাকচার্ড রিট্রিভাল",
-        "sub": "আসল প্রশ্নে অর্থের সাথে শর্তও মেশানো থাকে: “২০২৫ সালে <em>এন্টারপ্রাইজ</em> কাস্টমারদের রিফান্ড পলিসি” বা “2000-এর পরের, রেটিং 8-এর বেশি সায়েন্স-ফিকশন সিনেমা”। শুধু ভেক্টর সিমিলারিটি দিয়ে <code>year &gt; 2000</code> জোর করে খাটানো যায় না। তাই প্রোডাকশন রিট্রিভাল প্রতিটি চাঙ্কে মেটাডেটা জুড়ে তার উপর ফিল্টার করে। আর গোনা বা মোট বের করার প্রশ্ন হলে কাজটা ডেটাবেসকে দিয়ে দেয়। কঠিন দিকটা হলো, ফিল্টার অ্যাপ্রক্সিমেট নিয়ারেস্ট-নেইবার (ANN) ইনডেক্সের সাথে ভালোভাবে কাজ করে না, আর প্রতিটি ভেক্টর ডেটাবেস এটা আলাদা ভাবে সামলায়।<a class=\"cite\" href=\"#src50\">[৫০]</a><a class=\"cite\" href=\"#src51\">[৫১]</a>"
+        "title": "ভেক্টর সার্চে ফিল্টার: প্রি-ফিল্টার, পোস্ট-ফিল্টার আর প্রতিটি ইঞ্জিনের আচরণ",
+        "sub": "আসল প্রশ্নে অর্থের সাথে শর্তও মেশানো থাকে: “২০২৫ সালে <em>এন্টারপ্রাইজ</em> কাস্টমারদের রিফান্ড পলিসি” বা “2000-এর পরের, রেটিং 8-এর বেশি সায়েন্স-ফিকশন সিনেমা”। শুধু ভেক্টর সিমিলারিটি দিয়ে <code>year &gt; 2000</code> জোর করে খাটানো যায় না। তাই প্রোডাকশন রিট্রিভাল প্রতিটি চাঙ্কে মেটাডেটা জুড়ে তার উপর ফিল্টার করে। কঠিন দিকটা হলো, ফিল্টার অ্যাপ্রক্সিমেট নিয়ারেস্ট-নেইবার (ANN) ইনডেক্সের সাথে ভালোভাবে কাজ করে না, আর প্রতিটি ভেক্টর ডেটাবেস এটা আলাদা ভাবে সামলায়।<a class=\"cite\" href=\"#src50\">[৫০]</a><a class=\"cite\" href=\"#src51\">[৫১]</a>"
       },
       "body": [
         {
@@ -2087,67 +2234,6 @@
           ]
         },
         {
-          "type": "heading",
-          "level": 3,
-          "id": "s8-self-querying-let-the-llm-write-the-filter",
-          "html": "Self-querying: let the LLM write the filter"
-        },
-        {
-          "type": "paragraph",
-          "html": "Users type natural language, not filter JSON. A self-querying retriever has an LLM parse the request into a semantic query plus a structured metadata filter. It then runs both, against the embeddings and the metadata. Elastic's example is \"science fiction movies released after 2000 with rating above 8\".<a class=\"cite\" href=\"#src55\">[55]</a> The LLM must be told the available fields, their types, and the allowed operators. Validate its output against that schema before it reaches the database."
-        },
-        {
-          "type": "code",
-          "lang": "python",
-          "code": "# 1) LLM turns text into {query, filter}  (llm_json = your structured-output call)\nparsed = llm_json(\n    \"Fields: genre(str), year(int), rating(float). \"\n    \"Return JSON {query, filter} for: sci-fi movies after 2000 rated above 8\"\n)\n# parsed = {\"query\": \"science fiction\",\n#           \"filter\": {\"$and\": [{\"genre\": {\"$eq\": \"sci-fi\"}},\n#                               {\"year\": {\"$gt\": 2000}}, {\"rating\": {\"$gt\": 8}}]}}\n\n# 2a) Pinecone: filter goes straight into the query\nres = index.query(vector=embed(parsed[\"query\"]), top_k=5,\n                  filter=parsed[\"filter\"], include_metadata=True)\n\n# 2b) Elasticsearch: put the filter INSIDE knn so k matching docs return\nbody = {\"knn\": {\n    \"field\": \"embedding\", \"query_vector\": embed(parsed[\"query\"]),\n    \"k\": 5, \"num_candidates\": 50,\n    \"filter\": {\"range\": {\"year\": {\"gt\": 2000}}},\n}}",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># 1) LLM turns text into {query, filter}  (llm_json = your structured-output call)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">parsed </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm_json(</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"Fields: genre(str), year(int), rating(float). \"</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"Return JSON {query, filter} for: sci-fi movies after 2000 rated above 8\"</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># parsed = {\"query\": \"science fiction\",</span></span>\n<span class=\"line\"><span style=\"color:#768390\">#           \"filter\": {\"$and\": [{\"genre\": {\"$eq\": \"sci-fi\"}},</span></span>\n<span class=\"line\"><span style=\"color:#768390\">#                               {\"year\": {\"$gt\": 2000}}, {\"rating\": {\"$gt\": 8}}]}}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># 2a) Pinecone: filter goes straight into the query</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">res </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> index.query(</span><span style=\"color:#F69D50\">vector</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">embed(parsed[</span><span style=\"color:#96D0FF\">\"query\"</span><span style=\"color:#ADBAC7\">]), </span><span style=\"color:#F69D50\">top_k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">5</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">                  filter</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">parsed[</span><span style=\"color:#96D0FF\">\"filter\"</span><span style=\"color:#ADBAC7\">], </span><span style=\"color:#F69D50\">include_metadata</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">True</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># 2b) Elasticsearch: put the filter INSIDE knn so k matching docs return</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">body </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> {</span><span style=\"color:#96D0FF\">\"knn\"</span><span style=\"color:#ADBAC7\">: {</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"field\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"embedding\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"query_vector\"</span><span style=\"color:#ADBAC7\">: embed(parsed[</span><span style=\"color:#96D0FF\">\"query\"</span><span style=\"color:#ADBAC7\">]),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"k\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">5</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"num_candidates\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">50</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"filter\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"range\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"year\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"gt\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">2000</span><span style=\"color:#ADBAC7\">}}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">}}</span></span></code></pre>"
-        },
-        {
-          "type": "heading",
-          "level": 3,
-          "id": "s8-when-the-question-is-really-a-database-query",
-          "html": "When the question is really a database query"
-        },
-        {
-          "type": "paragraph",
-          "html": "Counts, sums, joins and \"top customer by revenue\" are exact computations, not similarity problems. The right tool is text-to-SQL, where an LLM writes SQL against a schema. The standard benchmark is Spider (Yu et al., EMNLP 2018), built so that test databases have schemas the model never saw.<a class=\"cite\" href=\"#src56\">[56]</a>"
-        },
-        {
-          "type": "pillGrid",
-          "items": [
-            {
-              "label": "Spider questions",
-              "value": "10,181"
-            },
-            {
-              "label": "Unique SQL queries",
-              "value": "5,693"
-            },
-            {
-              "label": "Databases",
-              "value": "200"
-            },
-            {
-              "label": "Domains",
-              "value": "138"
-            },
-            {
-              "label": "Best model in 2018",
-              "value": "9.7%"
-            }
-          ]
-        },
-        {
-          "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Routing decision tree: exact or aggregate questions to text-to-SQL, fuzzy questions to vector search, meaning plus attributes to self-query filtered search, mixed questions to both\">\n      <defs>\n        <marker id=\"arr-s8c\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <rect x=\"40\" y=\"170\" width=\"160\" height=\"60\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"205\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#cfd8e6\">user question</text>\n      <rect x=\"240\" y=\"170\" width=\"200\" height=\"60\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"340\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">router</text>\n      <text x=\"340\" y=\"214\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">LLM prompt or rules</text>\n      <line x1=\"200\" y1=\"200\" x2=\"240\" y2=\"200\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n\n      \n      <rect x=\"520\" y=\"30\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"650\" y=\"55\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\">Exact or aggregate</text>\n      <text x=\"650\" y=\"76\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">count, sum, join, group by</text>\n      <rect x=\"830\" y=\"30\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#22d3ee\"></rect>\n      <text x=\"945\" y=\"55\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">text-to-SQL</text>\n      <text x=\"945\" y=\"76\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">run on the relational DB</text>\n\n      <rect x=\"520\" y=\"130\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"650\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">Fuzzy meaning only</text>\n      <text x=\"650\" y=\"176\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">no hard constraints</text>\n      <rect x=\"830\" y=\"130\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#34d399\"></rect>\n      <text x=\"945\" y=\"155\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#34d399\">vector or hybrid search</text>\n      <text x=\"945\" y=\"176\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">no filter needed</text>\n\n      <rect x=\"520\" y=\"230\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"650\" y=\"255\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\">Meaning plus attributes</text>\n      <text x=\"650\" y=\"276\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">sci-fi after 2000, rating &gt; 8</text>\n      <rect x=\"830\" y=\"230\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#fbbf24\"></rect>\n      <text x=\"945\" y=\"255\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">self-query</text>\n      <text x=\"945\" y=\"276\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">LLM emits {query, filter}</text>\n\n      <rect x=\"520\" y=\"330\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(251,113,133,0.10)\" stroke=\"#fb7185\"></rect>\n      <text x=\"650\" y=\"355\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\">Needs facts and documents</text>\n      <text x=\"650\" y=\"376\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">numbers plus policy text</text>\n      <rect x=\"830\" y=\"330\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#fb7185\"></rect>\n      <text x=\"945\" y=\"355\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\">run both, then merge</text>\n      <text x=\"945\" y=\"376\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">SQL rows + passages</text>\n\n      <line x1=\"440\" y1=\"190\" x2=\"520\" y2=\"62\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"196\" x2=\"520\" y2=\"162\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"204\" x2=\"520\" y2=\"262\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"210\" x2=\"520\" y2=\"362\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"62\" x2=\"830\" y2=\"62\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"162\" x2=\"830\" y2=\"162\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"262\" x2=\"830\" y2=\"262\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"362\" x2=\"830\" y2=\"362\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <text x=\"40\" y=\"300\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">routing tree = design synthesis, not a sourced standard</text>\n    </svg>",
-          "caption": "A routing decision tree: exact or aggregate questions go to text-to-SQL, fuzzy ones to vector search, meaning plus attributes to self-query filtered search, and mixed ones to both.",
-          "captionBn": "প্রশ্নের ধরন দেখে পথ বেছে নেওয়ার গাছ: গণনা বা যোগফলের মতো নিখুঁত প্রশ্ন যায় টেক্সট-টু-SQL-এ, অস্পষ্ট অর্থের প্রশ্ন ভেক্টর সার্চে, অর্থ ও শর্ত মেশানো প্রশ্ন সেলফ-কুয়েরি ফিল্টার্ড সার্চে, আর মিশ্র প্রশ্নে দুটোই চলে। এই গাছটি ডিজাইনের সারসংক্ষেপ, কোনো উৎস থেকে নেওয়া মানদণ্ড নয়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "Spider's 2018 figure of 9.7% for the best model is a historical baseline. It shows how hard cross-domain SQL generation was then; it says nothing about current models.<a class=\"cite\" href=\"#src56\">[56]</a> In practice, give the model the schema, validate generated SQL (read-only credentials, allow-listed tables, row limits) and log every query."
-        },
-        {
           "type": "callout",
           "variant": "good",
           "blocks": [
@@ -2165,7 +2251,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> Meaning-based search is fuzzy. It happily returns a 2019 policy when you asked about 2025. Labels give you hard rules, and for questions like \"how many orders last month\" you skip searching text altogether and ask a database."
+          "html": "<strong>Why does it matter?</strong> Meaning-based search is fuzzy. It happily returns a 2019 policy when you asked about 2025. Labels give you hard rules."
         },
         {
           "type": "paragraph",
@@ -2205,11 +2291,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>সেলফ-কুয়েরি ও টেক্সট-টু-SQL:</strong> সেলফ-কুয়েরিতে LLM প্রাকৃতিক ভাষার প্রশ্ন ভেঙে একটি সেম্যান্টিক কুয়েরি ও একটি স্ট্রাকচার্ড ফিল্টার বানায়। গণনা, যোগফল বা জয়েনের মতো প্রশ্ন সিমিলারিটির নয়, সেগুলো টেক্সট-টু-SQL-এ যায়; Spider বেঞ্চমার্কে ২০০টি ডেটাবেস ও ১০,১৮১টি প্রশ্ন আছে। প্রশ্নের ধরন দেখে পথ ঠিক করতে রাউটার ব্যবহার করা হয়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>সতর্কতা:</strong> ফল কয়টি এল তা সবসময় দেখুন, শূন্য ফলে LLM ফাঁকা থেকে উত্তর বানাতে পারে। যে ফিল্ডে ফিল্টার দেবেন সেটির ইনডেক্স রাখুন। LLM-এর বানানো SQL বা ফিল্টার যাচাই করে রিড-অনলি অধিকারে চালান।"
+          "html": "<strong>সতর্কতা:</strong> ফল কয়টি এল তা সবসময় দেখুন, শূন্য ফলে LLM ফাঁকা থেকে উত্তর বানাতে পারে। যে ফিল্ডে ফিল্টার দেবেন সেটির ইনডেক্স রাখুন।"
         },
         {
           "type": "paragraph",
@@ -2220,7 +2302,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> বাজারে গিয়ে আপনি বললেন \"ভালো ইলিশ চাই, এক কেজির নিচে নয়\"। বোকা দোকানি পুরো বাজারের সেরা দশটি মাছ আলাদা করে তারপর দেখে একটাও এক কেজির নয়, আপনি খালি হাতে ফিরলেন (পোস্ট-ফিল্টার)। চালাক দোকানি শুরুতেই এক কেজির ওপরের ইলিশের ঝুড়ি থেকে সেরাটি বাছে (ফিল্টার সহ সার্চ)। আর \"আজ কয়টা ইলিশ বিক্রি হলো\" জানতে চাইলে মাছ না দেখে খাতা খুলতে হয়, সেটাই টেক্সট-টু-SQL।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> বাজারে গিয়ে আপনি বললেন \"ভালো ইলিশ চাই, এক কেজির নিচে নয়\"। বোকা দোকানি পুরো বাজারের সেরা দশটি মাছ আলাদা করে তারপর দেখে একটাও এক কেজির নয়, আপনি খালি হাতে ফিরলেন (পোস্ট-ফিল্টার)। চালাক দোকানি শুরুতেই এক কেজির ওপরের ইলিশের ঝুড়ি থেকে সেরাটি বাছে (ফিল্টার সহ সার্চ)।"
             }
           ]
         }
@@ -2313,8 +2395,123 @@
       ]
     },
     {
+      "id": "s14",
+      "num": "11",
+      "title": "Self-querying and text-to-SQL: letting the LLM write the filter or the query",
+      "sub": "Users type natural language, not filter JSON, so production retrieval can let an LLM write the filter (self-querying). For questions about counts or totals, it hands the job to a database.",
+      "bn": {
+        "title": "সেলফ-কুয়েরি আর টেক্সট-টু-SQL: LLM-কে দিয়ে ফিল্টার বা কুয়েরি লেখানো",
+        "sub": "ব্যবহারকারী প্রাকৃতিক ভাষায় লেখে, ফিল্টার JSON-এ নয়, তাই প্রোডাকশন রিট্রিভাল LLM-কে দিয়েই ফিল্টারটা লিখিয়ে নিতে পারে (সেলফ-কুয়েরি)। গোনা বা মোট বের করার প্রশ্ন হলে কাজটা ডেটাবেসকে দিয়ে দেয়।"
+      },
+      "body": [
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s8-self-querying-let-the-llm-write-the-filter",
+          "html": "Self-querying: let the LLM write the filter"
+        },
+        {
+          "type": "paragraph",
+          "html": "Users type natural language, not filter JSON. A self-querying retriever has an LLM parse the request into a semantic query plus a structured metadata filter. It then runs both, against the embeddings and the metadata. Elastic's example is \"science fiction movies released after 2000 with rating above 8\".<a class=\"cite\" href=\"#src55\">[55]</a> The LLM must be told the available fields, their types, and the allowed operators. Validate its output against that schema before it reaches the database."
+        },
+        {
+          "type": "code",
+          "lang": "python",
+          "code": "# 1) LLM turns text into {query, filter}  (llm_json = your structured-output call)\nparsed = llm_json(\n    \"Fields: genre(str), year(int), rating(float). \"\n    \"Return JSON {query, filter} for: sci-fi movies after 2000 rated above 8\"\n)\n# parsed = {\"query\": \"science fiction\",\n#           \"filter\": {\"$and\": [{\"genre\": {\"$eq\": \"sci-fi\"}},\n#                               {\"year\": {\"$gt\": 2000}}, {\"rating\": {\"$gt\": 8}}]}}\n\n# 2a) Pinecone: filter goes straight into the query\nres = index.query(vector=embed(parsed[\"query\"]), top_k=5,\n                  filter=parsed[\"filter\"], include_metadata=True)\n\n# 2b) Elasticsearch: put the filter INSIDE knn so k matching docs return\nbody = {\"knn\": {\n    \"field\": \"embedding\", \"query_vector\": embed(parsed[\"query\"]),\n    \"k\": 5, \"num_candidates\": 50,\n    \"filter\": {\"range\": {\"year\": {\"gt\": 2000}}},\n}}",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># 1) LLM turns text into {query, filter}  (llm_json = your structured-output call)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">parsed </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm_json(</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"Fields: genre(str), year(int), rating(float). \"</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"Return JSON {query, filter} for: sci-fi movies after 2000 rated above 8\"</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># parsed = {\"query\": \"science fiction\",</span></span>\n<span class=\"line\"><span style=\"color:#768390\">#           \"filter\": {\"$and\": [{\"genre\": {\"$eq\": \"sci-fi\"}},</span></span>\n<span class=\"line\"><span style=\"color:#768390\">#                               {\"year\": {\"$gt\": 2000}}, {\"rating\": {\"$gt\": 8}}]}}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># 2a) Pinecone: filter goes straight into the query</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">res </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> index.query(</span><span style=\"color:#F69D50\">vector</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">embed(parsed[</span><span style=\"color:#96D0FF\">\"query\"</span><span style=\"color:#ADBAC7\">]), </span><span style=\"color:#F69D50\">top_k</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">5</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">                  filter</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">parsed[</span><span style=\"color:#96D0FF\">\"filter\"</span><span style=\"color:#ADBAC7\">], </span><span style=\"color:#F69D50\">include_metadata</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">True</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># 2b) Elasticsearch: put the filter INSIDE knn so k matching docs return</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">body </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> {</span><span style=\"color:#96D0FF\">\"knn\"</span><span style=\"color:#ADBAC7\">: {</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"field\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"embedding\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"query_vector\"</span><span style=\"color:#ADBAC7\">: embed(parsed[</span><span style=\"color:#96D0FF\">\"query\"</span><span style=\"color:#ADBAC7\">]),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"k\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">5</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"num_candidates\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">50</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">    \"filter\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"range\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"year\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"gt\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">2000</span><span style=\"color:#ADBAC7\">}}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">}}</span></span></code></pre>"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "id": "s8-when-the-question-is-really-a-database-query",
+          "html": "When the question is really a database query"
+        },
+        {
+          "type": "paragraph",
+          "html": "Counts, sums, joins and \"top customer by revenue\" are exact computations, not similarity problems. The right tool is text-to-SQL, where an LLM writes SQL against a schema. The standard benchmark is Spider (Yu et al., EMNLP 2018), built so that test databases have schemas the model never saw.<a class=\"cite\" href=\"#src56\">[56]</a>"
+        },
+        {
+          "type": "pillGrid",
+          "items": [
+            {
+              "label": "Spider questions",
+              "value": "10,181"
+            },
+            {
+              "label": "Unique SQL queries",
+              "value": "5,693"
+            },
+            {
+              "label": "Databases",
+              "value": "200"
+            },
+            {
+              "label": "Domains",
+              "value": "138"
+            },
+            {
+              "label": "Best model in 2018",
+              "value": "9.7%"
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "svg": "<svg viewBox=\"0 0 1100 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Routing decision tree: exact or aggregate questions to text-to-SQL, fuzzy questions to vector search, meaning plus attributes to self-query filtered search, mixed questions to both\">\n      <defs>\n        <marker id=\"arr-s8c\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n      <rect x=\"40\" y=\"170\" width=\"160\" height=\"60\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"205\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#cfd8e6\">user question</text>\n      <rect x=\"240\" y=\"170\" width=\"200\" height=\"60\" rx=\"6\" fill=\"rgba(167,139,250,0.10)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"340\" y=\"195\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">router</text>\n      <text x=\"340\" y=\"214\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">LLM prompt or rules</text>\n      <line x1=\"200\" y1=\"200\" x2=\"240\" y2=\"200\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n\n      \n      <rect x=\"520\" y=\"30\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"650\" y=\"55\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\">Exact or aggregate</text>\n      <text x=\"650\" y=\"76\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">count, sum, join, group by</text>\n      <rect x=\"830\" y=\"30\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#22d3ee\"></rect>\n      <text x=\"945\" y=\"55\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">text-to-SQL</text>\n      <text x=\"945\" y=\"76\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">run on the relational DB</text>\n\n      <rect x=\"520\" y=\"130\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(52,211,153,0.10)\" stroke=\"#34d399\"></rect>\n      <text x=\"650\" y=\"155\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\">Fuzzy meaning only</text>\n      <text x=\"650\" y=\"176\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">no hard constraints</text>\n      <rect x=\"830\" y=\"130\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#34d399\"></rect>\n      <text x=\"945\" y=\"155\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#34d399\">vector or hybrid search</text>\n      <text x=\"945\" y=\"176\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">no filter needed</text>\n\n      <rect x=\"520\" y=\"230\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(251,191,36,0.10)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"650\" y=\"255\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\">Meaning plus attributes</text>\n      <text x=\"650\" y=\"276\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">sci-fi after 2000, rating &gt; 8</text>\n      <rect x=\"830\" y=\"230\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#fbbf24\"></rect>\n      <text x=\"945\" y=\"255\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">self-query</text>\n      <text x=\"945\" y=\"276\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">LLM emits {query, filter}</text>\n\n      <rect x=\"520\" y=\"330\" width=\"260\" height=\"64\" rx=\"6\" fill=\"rgba(251,113,133,0.10)\" stroke=\"#fb7185\"></rect>\n      <text x=\"650\" y=\"355\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\">Needs facts and documents</text>\n      <text x=\"650\" y=\"376\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">numbers plus policy text</text>\n      <rect x=\"830\" y=\"330\" width=\"230\" height=\"64\" rx=\"6\" fill=\"#111827\" stroke=\"#fb7185\"></rect>\n      <text x=\"945\" y=\"355\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\">run both, then merge</text>\n      <text x=\"945\" y=\"376\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">SQL rows + passages</text>\n\n      <line x1=\"440\" y1=\"190\" x2=\"520\" y2=\"62\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"196\" x2=\"520\" y2=\"162\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"204\" x2=\"520\" y2=\"262\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"440\" y1=\"210\" x2=\"520\" y2=\"362\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"62\" x2=\"830\" y2=\"62\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"162\" x2=\"830\" y2=\"162\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"262\" x2=\"830\" y2=\"262\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <line x1=\"780\" y1=\"362\" x2=\"830\" y2=\"362\" stroke=\"#94a3b8\" marker-end=\"url(#arr-s8c)\"></line>\n      <text x=\"40\" y=\"300\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">routing tree = design synthesis, not a sourced standard</text>\n    </svg>",
+          "caption": "A routing decision tree: exact or aggregate questions go to text-to-SQL, fuzzy ones to vector search, meaning plus attributes to self-query filtered search, and mixed ones to both.",
+          "captionBn": "প্রশ্নের ধরন দেখে পথ বেছে নেওয়ার গাছ: গণনা বা যোগফলের মতো নিখুঁত প্রশ্ন যায় টেক্সট-টু-SQL-এ, অস্পষ্ট অর্থের প্রশ্ন ভেক্টর সার্চে, অর্থ ও শর্ত মেশানো প্রশ্ন সেলফ-কুয়েরি ফিল্টার্ড সার্চে, আর মিশ্র প্রশ্নে দুটোই চলে। এই গাছটি ডিজাইনের সারসংক্ষেপ, কোনো উৎস থেকে নেওয়া মানদণ্ড নয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "Spider's 2018 figure of 9.7% for the best model is a historical baseline. It shows how hard cross-domain SQL generation was then; it says nothing about current models.<a class=\"cite\" href=\"#src56\">[56]</a> In practice, give the model the schema, validate generated SQL (read-only credentials, allow-listed tables, row limits) and log every query."
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is it?</strong> People type plain sentences, not filter codes. An AI can turn a sentence like \"comfortable running shoes in my size, under my budget\" into a search plus labels to filter on. This is called self-querying."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> For questions like \"how many orders last month\" you skip searching text altogether and ask a database. Counting is exact, so it belongs in a database, not in a meaning search."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>When does it go wrong?</strong> The AI can write a wrong filter or a wrong database question, so check what it wrote before it runs, and let it read the data but never change it."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The shopping-site analogy, continued:</strong> ticking boxes is the filter, and asking the shop assistant \"how many pairs did we sell last month?\" is not a search at all: they open the sales ledger. A database is that ledger."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "<strong>সেলফ-কুয়েরি ও টেক্সট-টু-SQL:</strong> সেলফ-কুয়েরিতে LLM প্রাকৃতিক ভাষার প্রশ্ন ভেঙে একটি সেম্যান্টিক কুয়েরি ও একটি স্ট্রাকচার্ড ফিল্টার বানায়। গণনা, যোগফল বা জয়েনের মতো প্রশ্ন সিমিলারিটির নয়, সেগুলো টেক্সট-টু-SQL-এ যায়; Spider বেঞ্চমার্কে ২০০টি ডেটাবেস ও ১০,১৮১টি প্রশ্ন আছে। প্রশ্নের ধরন দেখে পথ ঠিক করতে রাউটার ব্যবহার করা হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>সতর্কতা:</strong> LLM-এর বানানো SQL বা ফিল্টার যাচাই করে রিড-অনলি অধিকারে চালান।"
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> \"আজ কয়টা ইলিশ বিক্রি হলো\" জানতে চাইলে মাছ না দেখে খাতা খুলতে হয়, সেটাই টেক্সট-টু-SQL।"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "s6",
-      "num": "08",
+      "num": "12",
       "title": "GraphRAG & knowledge-graph augmentation",
       "sub": "Vector search returns chunks that look like the query. It struggles with \"global\" questions such as \"what are the main themes in this dataset?\", which no single chunk answers. Microsoft's GraphRAG reframes this as query-focused summarization. An LLM builds an entity knowledge graph and pre-generates summaries for communities of related entities. At query time, GraphRAG merges partial answers from those summaries.<a class=\"cite\" href=\"#src37\">[37]</a> Lighter variants (LightRAG<a class=\"cite\" href=\"#src38\">[38]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[39]</a>) and graph-database tooling (Neo4j<a class=\"cite\" href=\"#src40\">[40]</a>) target the same gap with different cost profiles.",
       "bn": {
@@ -2625,11 +2822,11 @@
     },
     {
       "id": "s9",
-      "num": "09",
-      "title": "Document parsing pipelines: Unstructured, LlamaParse, Docling",
+      "num": "13",
+      "title": "Document parsing pipelines: Docling, Unstructured and LlamaParse side by side",
       "sub": "A RAG system is only as good as the text it indexes. Most enterprise knowledge sits in PDFs, scans, slide decks and spreadsheets, not clean strings. A <strong>parsing pipeline</strong> turns those files into structured elements (headings, paragraphs, tables, figures) and then into Markdown or JSON that a chunker can split sensibly. Three widely used options are Docling (IBM Research, MIT-licensed)<a class=\"cite\" href=\"#src58\">[58]</a>, the Unstructured open-source partitioner<a class=\"cite\" href=\"#src59\">[59]</a> and LlamaParse from LlamaIndex<a class=\"cite\" href=\"#src60\">[60]</a>.",
       "bn": {
-        "title": "ডকুমেন্ট পার্সিং পাইপলাইন: Unstructured, LlamaParse, Docling-এর পরিচয়",
+        "title": "ডকুমেন্ট পার্সিং পাইপলাইন: Docling, Unstructured, LlamaParse-এর তুলনা",
         "sub": "RAG সিস্টেম ততটাই ভালো, ইনডেক্স করা টেক্সট যতটা ভালো। অথচ কোম্পানির বেশিরভাগ জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ডেক আর স্প্রেডশিটে, পরিষ্কার স্ট্রিংয়ে নয়। <strong>পার্সিং পাইপলাইন</strong> এই ফাইলগুলোকে স্ট্রাকচার্ড এলিমেন্টে (হেডিং, প্যারাগ্রাফ, টেবিল, ফিগার) বদলায়, তারপর Markdown বা JSON-এ, যাতে চাঙ্কার সেটাকে বুদ্ধি করে ভাঙতে পারে। তিনটি বহুল ব্যবহৃত অপশন: Docling (IBM Research, MIT লাইসেন্স)<a class=\"cite\" href=\"#src58\">[৫৮]</a>, ওপেন-সোর্স Unstructured পার্টিশনার<a class=\"cite\" href=\"#src59\">[৫৯]</a> আর LlamaIndex-এর LlamaParse<a class=\"cite\" href=\"#src60\">[৬০]</a>।"
       },
       "body": [
@@ -2701,7 +2898,112 @@
               "Tiers (Fast, Cost Effective, Agentic, Agentic Plus); natural-language instructions and schemas<a class=\"cite\" href=\"#src60\">[60]</a>"
             ]
           ]
+        }
+      ],
+      "layman": [
+        {
+          "type": "paragraph",
+          "html": "<strong>What is it?</strong> Before an AI can answer questions from your documents, something has to read them first. A parser is that reader: it looks at each page and works out which part is a title, which is a paragraph and which is a table."
         },
+        {
+          "type": "paragraph",
+          "html": "<strong>Why does it matter?</strong> If the reader garbles the page, the AI only ever sees the garbled version. Everything after that, searching and answering, builds on those mistakes."
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>Which readers are there?</strong> Three well-known readers are Docling, Unstructured and LlamaParse. They differ in which file types they handle and in how they treat tables and scans."
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>The note-taker analogy:</strong> imagine a student who must copy a textbook into tidy notes for a friend. The friend never sees the textbook, only the notes, so everything depends on how well the student copies."
+            }
+          ]
+        }
+      ],
+      "bangla": [
+        {
+          "type": "paragraph",
+          "html": "RAG সিস্টেমে সবার আগে নথি পড়তে হয়। বেশিরভাগ প্রতিষ্ঠানের জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ও স্প্রেডশিটে, সাজানো টেক্সটে নয়। <strong>পার্সিং পাইপলাইন</strong> এই ফাইলগুলোকে হেডিং, প্যারাগ্রাফ, টেবিল, ফিগারের মতো স্ট্রাকচার্ড এলিমেন্টে ভেঙে Markdown বা JSON বানায়, তারপর সেটা চাঙ্ক করা হয়।"
+        },
+        {
+          "type": "paragraph",
+          "html": "<strong>পাইপলাইনের ধাপ:</strong> PDF → লেআউট অ্যানালাইসিস (কোথায় কী আছে ও পড়ার ক্রম) → OCR ও টেবিল স্ট্রাকচার → স্ট্রাকচার্ড Markdown/JSON → চাঙ্ক।"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "<strong>Docling:</strong> IBM Research-এর MIT-লাইসেন্সড টুল। লেআউটের জন্য <code>DocLayNet</code>, টেবিলের জন্য <code>TableFormer</code>। PDF, DOCX, PPTX, XLSX, HTML ইত্যাদি পড়ে, <code>DoclingDocument</code> থেকে Markdown/HTML/JSON এক্সপোর্ট করে, লোকাল বা অন-প্রেম চলে।",
+            "<strong>Unstructured:</strong> চারটি স্ট্র্যাটেজি: <code>auto</code> (ডিফল্ট), <code>fast</code> (pdfminer, টেক্সট লেয়ার লাগে), <code>hi_res</code> (লেআউট মডেল), <code>ocr_only</code> (স্ক্যানের জন্য)। ফলাফল Title, NarrativeText, Table ইত্যাদি টাইপড এলিমেন্ট।",
+            "<strong>LlamaParse:</strong> লেআউট-অ্যাওয়্যার OCR, সেল স্ট্রাকচার ধরে রাখা টেবিল এক্সট্র্যাকশন, চার্ট পার্সিং, প্রাকৃতিক ভাষায় ইনস্ট্রাকশন, এবং Fast থেকে Agentic Plus পর্যন্ত টিয়ার।"
+          ]
+        },
+        {
+          "type": "analogy",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "html": "<strong>দৈনন্দিন উপমা:</strong> পুরোনো খাতার হিসাব কম্পিউটারে তুলতে দোকানের কর্মচারীকে দিলেন। কম্পিউটার এরপর কর্মচারীর তুলে দেওয়া হিসাবটাই দেখবে, আসল খাতা নয়; তাই তোলাটা যত ভালো হবে, পরের সব কাজ তত ভালো হবে।"
+            }
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "id": "dTVjx1kEJrc",
+          "title": "LlamaParse: super-charging parsing of complex documents",
+          "channel": "LlamaIndex",
+          "lang": "en"
+        },
+        {
+          "id": "hw5P6xCoChw",
+          "title": "Ingesting Unstructured Data with Docling | OpenRAG Summit",
+          "channel": "OpenRAG",
+          "lang": "en"
+        },
+        {
+          "id": "iPiYVCl002o",
+          "title": "How to convert PDF DOCX to Structured TXT Formats for RAG! (UNSTRUCTURED Tutorial)",
+          "channel": "1littlecoder",
+          "lang": "en"
+        },
+        {
+          "id": "fg0_0M8kZ8g",
+          "title": "Turn ANY File into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1281
+        },
+        {
+          "id": "7nMolRAdTgc",
+          "title": "Turn ANY File into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "format": "short",
+          "seconds": 50
+        },
+        {
+          "id": "JWfNLF_g_V0",
+          "title": "Turn ANY Website into LLM Knowledge in SECONDS",
+          "channel": "Cole Medin",
+          "lang": "en",
+          "seconds": 1124
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "num": "14",
+      "title": "Choosing a parsing strategy, and where parsing fails",
+      "sub": "Which parsing strategy fits depends on the file: a text-only PDF, a document with tables, or a scan. Parsing also fails in documented ways, so plan a fallback before you index.",
+      "bn": {
+        "title": "পার্সিং স্ট্র্যাটেজি বাছা আর ব্যর্থতার জন্য তৈরি থাকা",
+        "sub": "কোন পার্সিং স্ট্র্যাটেজি মানাবে, তা ফাইলের ওপর নির্ভর করে: শুধু টেক্সটের PDF, টেবিলওয়ালা নথি, না স্ক্যান। পার্সিং ব্যর্থ হওয়ার কিছু উপায় ডকুমেন্টেশনেই লেখা আছে, তাই ইনডেক্স করার আগে একটা ফলব্যাক ঠিক করে রাখুন।"
+      },
+      "body": [
         {
           "type": "heading",
           "level": 3,
@@ -2756,11 +3058,11 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>What is it?</strong> Before an AI can answer questions from your documents, something has to read them first. A parser is that reader: it looks at each page and works out which part is a title, which is a paragraph and which is a table."
+          "html": "<strong>What is it?</strong> A parser can read a page in different ways: a fast way that only reads text already on the page, a careful way that studies the layout, and a way that reads scanned images (OCR, which turns a picture of text into text)."
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why does it matter?</strong> If the reader garbles the page, the AI only ever sees the garbled version. Everything after that, searching and answering, builds on those mistakes."
+          "html": "<strong>Why does it matter?</strong> The fast way gets nothing from a scanned page. Choosing the wrong way hands the AI empty or scrambled text."
         },
         {
           "type": "paragraph",
@@ -2771,29 +3073,12 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The note-taker analogy:</strong> imagine a student who must copy a textbook into tidy notes for a friend. If the student copies a two-column page straight across the lines, the notes make no sense, and the friend studies nonsense with total confidence."
+              "html": "<strong>The note-taker analogy, continued:</strong> if the student copies a two-column page straight across the lines, the notes make no sense, and the friend studies nonsense with total confidence."
             }
           ]
         }
       ],
       "bangla": [
-        {
-          "type": "paragraph",
-          "html": "RAG সিস্টেমে সবার আগে নথি পড়তে হয়। বেশিরভাগ প্রতিষ্ঠানের জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ও স্প্রেডশিটে, সাজানো টেক্সটে নয়। <strong>পার্সিং পাইপলাইন</strong> এই ফাইলগুলোকে হেডিং, প্যারাগ্রাফ, টেবিল, ফিগারের মতো স্ট্রাকচার্ড এলিমেন্টে ভেঙে Markdown বা JSON বানায়, তারপর সেটা চাঙ্ক করা হয়।"
-        },
-        {
-          "type": "paragraph",
-          "html": "<strong>পাইপলাইনের ধাপ:</strong> PDF → লেআউট অ্যানালাইসিস (কোথায় কী আছে ও পড়ার ক্রম) → OCR ও টেবিল স্ট্রাকচার → স্ট্রাকচার্ড Markdown/JSON → চাঙ্ক।"
-        },
-        {
-          "type": "list",
-          "ordered": false,
-          "items": [
-            "<strong>Docling:</strong> IBM Research-এর MIT-লাইসেন্সড টুল। লেআউটের জন্য <code>DocLayNet</code>, টেবিলের জন্য <code>TableFormer</code>। PDF, DOCX, PPTX, XLSX, HTML ইত্যাদি পড়ে, <code>DoclingDocument</code> থেকে Markdown/HTML/JSON এক্সপোর্ট করে, লোকাল বা অন-প্রেম চলে।",
-            "<strong>Unstructured:</strong> চারটি স্ট্র্যাটেজি: <code>auto</code> (ডিফল্ট), <code>fast</code> (pdfminer, টেক্সট লেয়ার লাগে), <code>hi_res</code> (লেআউট মডেল), <code>ocr_only</code> (স্ক্যানের জন্য)। ফলাফল Title, NarrativeText, Table ইত্যাদি টাইপড এলিমেন্ট।",
-            "<strong>LlamaParse:</strong> লেআউট-অ্যাওয়্যার OCR, সেল স্ট্রাকচার ধরে রাখা টেবিল এক্সট্র্যাকশন, চার্ট পার্সিং, প্রাকৃতিক ভাষায় ইনস্ট্রাকশন, এবং Fast থেকে Agentic Plus পর্যন্ত টিয়ার।"
-          ]
-        },
         {
           "type": "paragraph",
           "html": "<strong>কখন কোনটা:</strong> শুধু টেক্সট থাকা সরল PDF-এ <code>fast</code> যথেষ্ট; টেবিল দরকার হলে <code>hi_res</code> বা Docling; স্ক্যান হলে OCR আবশ্যক। নিজের নথির নমুনায় তিনটিই পরীক্ষা করে নেওয়াই নিরাপদ।"
@@ -2811,51 +3096,9 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>দৈনন্দিন উপমা:</strong> পুরোনো খাতার হিসাব কম্পিউটারে তুলতে দোকানের কর্মচারীকে দিলেন। সে যদি দুই কলামের পাতা লাইন ধরে আড়াআড়ি টুকে ফেলে, তাহলে হিসাব গুলিয়ে যাবে। তাই কাজ শুরুর আগে দেখে নিতে হয় সে কলাম ঠিকমতো আলাদা করছে কি না।"
+              "html": "<strong>দৈনন্দিন উপমা:</strong> দোকানের কর্মচারী যদি দুই কলামের পাতা লাইন ধরে আড়াআড়ি টুকে ফেলে, তাহলে হিসাব গুলিয়ে যাবে। তাই কাজ শুরুর আগে দেখে নিতে হয় সে কলাম ঠিকমতো আলাদা করছে কি না।"
             }
           ]
-        }
-      ],
-      "videos": [
-        {
-          "id": "dTVjx1kEJrc",
-          "title": "LlamaParse: super-charging parsing of complex documents",
-          "channel": "LlamaIndex",
-          "lang": "en"
-        },
-        {
-          "id": "hw5P6xCoChw",
-          "title": "Ingesting Unstructured Data with Docling | OpenRAG Summit",
-          "channel": "OpenRAG",
-          "lang": "en"
-        },
-        {
-          "id": "iPiYVCl002o",
-          "title": "How to convert PDF DOCX to Structured TXT Formats for RAG! (UNSTRUCTURED Tutorial)",
-          "channel": "1littlecoder",
-          "lang": "en"
-        },
-        {
-          "id": "fg0_0M8kZ8g",
-          "title": "Turn ANY File into LLM Knowledge in SECONDS",
-          "channel": "Cole Medin",
-          "lang": "en",
-          "seconds": 1281
-        },
-        {
-          "id": "7nMolRAdTgc",
-          "title": "Turn ANY File into LLM Knowledge in SECONDS",
-          "channel": "Cole Medin",
-          "lang": "en",
-          "format": "short",
-          "seconds": 50
-        },
-        {
-          "id": "JWfNLF_g_V0",
-          "title": "Turn ANY Website into LLM Knowledge in SECONDS",
-          "channel": "Cole Medin",
-          "lang": "en",
-          "seconds": 1124
         }
       ],
       "practice": [
@@ -2933,7 +3176,7 @@
     },
     {
       "id": "s10",
-      "num": "10",
+      "num": "15",
       "title": "Multimodal RAG: images, tables, charts",
       "sub": "Text-only RAG goes blind the moment the answer lives in a chart, a scanned table or a slide. Multimodal RAG keeps those objects searchable. There are three broad designs: turn everything into text, embed images directly into a shared vector space, or retrieve page images with late interaction and let a vision-capable model read them.<a class=\"cite\" href=\"#src63\">[63]</a><a class=\"cite\" href=\"#src62\">[62]</a>",
       "bn": {
