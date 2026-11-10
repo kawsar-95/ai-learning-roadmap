@@ -214,7 +214,7 @@ export function ResourcesPage({ lang }: { lang: Lang }) {
 
       {GROUPS.map((group) => (
         <section key={group.id} aria-labelledby={`group-${group.id}`} className="mt-12">
-          <h2 id={`group-${group.id}`} className="font-display text-[28px] font-bold leading-tight text-text">
+          <h2 id={`group-${group.id}`} className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
             {group.title[lang]}
           </h2>
           <ul className="m-0 mt-5 grid list-none gap-4 p-0 sm:grid-cols-2">

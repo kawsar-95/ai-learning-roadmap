@@ -8,6 +8,7 @@ import { formatDuration } from "@/lib/roadmap-schema";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { resetRoadmap, setLessons, toggleLesson, useRoadmapProgress } from "./useProgress";
+import { BUTTON as FLAT_BUTTON, BUTTON_IDLE as FLAT_BUTTON_IDLE } from "./ProgressWidgets";
 
 /** A lesson as the widgets need it: progress key, lesson page on this site, and minutes. */
 export type LessonLink = { key: string; href: string; minutes: number };
@@ -19,7 +20,7 @@ export function RoadmapPhaseProgress({ keys, lang }: { keys: string[]; lang: Lan
     <div className="flex items-center gap-3" aria-label={`${UI[lang].roadmapLessonsDone}: ${done} / ${total}`}>
       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-bg-raised-2">
         <div
-          className="h-full rounded-full bg-linear-to-r from-accent to-accent-2 transition-[width] duration-300"
+          className="h-full rounded-full bg-accent transition-[width] duration-300"
           style={{ width: `${percent}%` }}
         />
       </div>
@@ -52,7 +53,7 @@ export function LessonCheck({ lessonKey, title, lang }: { lessonKey: string; tit
   );
 }
 
-/** Marks every lesson of a phase done, or clears them. */
+/** Marks every lesson of a phase done, or clears them. It looks like the topic page's "Mark as read". */
 export function PhaseDoneButton({ keys, lang }: { keys: string[]; lang: Lang }) {
   const ui = UI[lang];
   const progress = useRoadmapProgress();
@@ -62,13 +63,9 @@ export function PhaseDoneButton({ keys, lang }: { keys: string[]; lang: Lang }) 
       type="button"
       aria-pressed={allDone}
       onClick={() => setLessons(keys, !allDone)}
-      className={
-        "rounded-lg border px-3 py-1.5 text-[13px] font-medium transition-colors " +
-        (allDone
-          ? "border-accent bg-bg-raised text-accent hover:opacity-90"
-          : "border-border-strong bg-bg-raised text-text-dim hover:border-accent hover:text-text")
-      }
+      className={`${FLAT_BUTTON} ${allDone ? "border-accent text-accent hover:opacity-90" : FLAT_BUTTON_IDLE}`}
     >
+      <span aria-hidden="true">✓</span>
       {allDone ? ui.markedRead : ui.markRead}
     </button>
   );
@@ -91,8 +88,9 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
     [formatDuration(minutesLeft, lang, fmt), ui.roadmapTimeLeft],
   ];
 
+  // The same card as the contents page's ProgressSummary (ProgressWidgets), with a time-left count.
   return (
-    <div className="rounded-2xl border border-border bg-bg-raised p-6 shadow-card sm:p-8">
+    <div className="rounded-2xl border border-border bg-bg-raised p-5 sm:p-6">
       <dl className="m-0 grid grid-cols-3 gap-4">
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3 sm:pl-4">
@@ -109,14 +107,14 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
         aria-valuemax={100}
         aria-valuenow={percent}
         aria-label={ui.percentLabel}
-        className="mt-6 h-2 overflow-hidden rounded-full bg-bg-raised-2"
+        className="mt-5 h-1.5 overflow-hidden rounded-full bg-bg-raised-2"
       >
         <div
-          className="h-full rounded-full bg-linear-to-r from-accent to-accent-2 transition-[width] duration-300"
+          className="h-full rounded-full bg-accent transition-[width] duration-300"
           style={{ width: `${percent}%` }}
         />
       </div>
-      <div className="mt-6 flex flex-wrap items-center gap-3">
+      <div className="mt-5 flex flex-wrap items-center gap-3">
         {nextHref ? (
           <Link
             href={nextHref}
@@ -133,7 +131,7 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
           onClick={() => {
             if (window.confirm(ui.roadmapResetConfirm)) resetRoadmap();
           }}
-          className="rounded-[10px] border border-border-strong px-5 py-2.5 text-[15px] font-medium text-text-dim transition-colors hover:border-danger hover:text-danger disabled:pointer-events-none disabled:opacity-40"
+          className="rounded-lg border border-border-strong px-5 py-2.5 text-[15px] font-medium text-text-dim transition-colors hover:border-danger hover:text-danger disabled:pointer-events-none disabled:opacity-40"
         >
           {ui.startOver}
         </button>

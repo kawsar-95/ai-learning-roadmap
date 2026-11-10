@@ -115,7 +115,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
       <PageHeader title={ui.roadmapTitle} intro={ui.roadmapIntro} />
 
       <section aria-labelledby="learning-paths" className="mb-12">
-        <h2 id="learning-paths" className="font-display text-[28px] font-bold leading-tight text-text">
+        <h2 id="learning-paths" className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
           {ui.pathsTitle}
         </h2>
         <p className="mt-1 max-w-2xl text-[15px] text-text-dim">{ui.pathsIntro}</p>
@@ -168,7 +168,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
               <p className="font-mono text-[12px] tracking-[0.16em] text-text-faint uppercase">
                 {fmt(stageIndex + 1).padStart(2, fmt(0))}
               </p>
-              <h2 id={`stage-${stage.id}`} className="mt-1 font-display text-[28px] font-bold leading-tight text-text">
+              <h2 id={`stage-${stage.id}`} className="mt-1 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
                 {text.title}
               </h2>
               <p className="mt-1 max-w-2xl text-[15px] text-text-dim">{text.summary}</p>

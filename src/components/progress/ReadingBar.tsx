@@ -36,7 +36,7 @@ export function ReadingBar() {
       <div
         ref={fill}
         style={{ transform: "scaleX(0)" }}
-        className="h-full origin-left bg-linear-to-r from-accent to-accent-2"
+        className="h-full origin-left bg-accent"
       />
     </div>
   );

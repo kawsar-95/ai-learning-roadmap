@@ -50,11 +50,9 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
   const sectionViews = topic.sections.map((s) => (
     <SectionView key={s.id} section={s} lang={lang} doneKey={progressKey(topic.slug, s.id)} />
   ));
-  const quiz = topic.quiz && (
-    <div className="mt-6 border-t border-border pt-12 sm:pt-14">
-      <QuizSection slug={topic.slug} questions={topic.quiz} lang={lang} />
-    </div>
-  );
+  const quizSection = topic.quiz && <QuizSection slug={topic.slug} questions={topic.quiz} lang={lang} />;
+  // Below the sections, a rule sets the quiz apart. As a pager step it opens under the step bar, like a section.
+  const quiz = quizSection && <div className="mt-6 border-t border-border pt-12 sm:pt-14">{quizSection}</div>;
   const tail = (
     <div className="mt-16 space-y-10">
       <Sources sources={topic.sources} lang={lang} />
@@ -74,7 +72,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
             node: <div className="[&>section]:pt-0 [&>section]:pb-8 sm:[&>section]:pb-10">{sectionViews[i]}</div>,
           })),
           ...(topic.quiz
-            ? [{ id: "quiz", title: UI[lang].quizTitle, label: UI[lang].quizTitle, node: <>{quiz}{tail}</> }]
+            ? [{ id: "quiz", title: UI[lang].quizTitle, label: UI[lang].quizTitle, node: <>{quizSection}{tail}</> }]
             : []),
         ]
       : [];
