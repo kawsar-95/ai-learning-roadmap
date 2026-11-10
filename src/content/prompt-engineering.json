@@ -626,7 +626,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The single most important prompting technique since GPT-3. Wei et al. (2022) showed that <strong>appending \"Let's think step by step\"</strong> (or showing worked reasoning examples) unlocks dramatically better math, logic, and multi-step answers — without changing the model.<a class=\"cite\" href=\"#src1\">[1]</a> The intuition: forcing the model to emit intermediate tokens allocates more computation to the hard part."
+          "html": "The single most important prompting technique since GPT-3. Wei et al. (2022) showed that <strong>showing worked reasoning examples</strong> unlocks dramatically better math, logic, and multi-step answers — without changing the model.<a class=\"cite\" href=\"#src1\">[1]</a> Kojima et al. (2022) showed that <strong>appending \"Let's think step by step\"</strong>, with no examples at all, also improves reasoning on arithmetic, symbolic and other logical tasks.<a class=\"cite\" href=\"#src16\">[16]</a> The intuition: forcing the model to emit intermediate tokens allocates more computation to the hard part."
         },
         {
           "type": "diagram",
@@ -645,7 +645,7 @@
           "ordered": false,
           "items": [
             "<strong>Manual / few-shot CoT:</strong> include worked examples (\"Q: 17×24 → A: 17×20=340, 17×4=68, 340+68=408\").",
-            "<strong>Zero-shot CoT:</strong> just add <code>\"Let's think step by step\"</code>. Surprisingly effective.<a class=\"cite\" href=\"#src1\">[1]</a>",
+            "<strong>Zero-shot CoT:</strong> just add <code>\"Let's think step by step\"</code>. Surprisingly effective.<a class=\"cite\" href=\"#src16\">[16]</a>",
             "<strong>Auto-CoT:</strong> cluster your dataset, sample diverse questions, let the model generate its own rationales. Removes the manual writing burden.<a class=\"cite\" href=\"#src4\">[4]</a>",
             "<strong>Self-consistency:</strong> sample N independent CoT chains, take the majority answer. ~+10% on GSM8K.<a class=\"cite\" href=\"#src3\">[3]</a>",
             "<strong>Tree of Thoughts:</strong> explore multiple reasoning branches, backtrack, prune. Expensive but powerful on hard puzzles.<a class=\"cite\" href=\"#src5\">[5]</a>",
@@ -737,7 +737,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>চেইন-অফ-থট (CoT):</strong> Wei et al. (২০২২) দেখিয়েছেন, \"Let's think step by step\" যোগ করলে বা কাজের ধাপ-সহ উদাহরণ দেখালে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ প্রশ্নে ফল অনেক ভালো হয়। এর জন্য মডেল বদলাতে হয় না। কারণ হলো, মধ্যবর্তী টোকেন লিখতে গিয়ে কঠিন অংশের জন্য বেশি কম্পিউটেশন বরাদ্দ হয়। সেকশনের চার্ট অনুযায়ী সরাসরি উত্তরে ~৪০%, আর CoT-তে ~৭০ থেকে ৮৫%। CoT-এর প্রকারভেদ:"
+          "html": "<strong>চেইন-অফ-থট (CoT):</strong> Wei et al. (২০২২) দেখিয়েছেন, কাজের ধাপ-সহ উদাহরণ দেখালে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ প্রশ্নে ফল অনেক ভালো হয়। এর জন্য মডেল বদলাতে হয় না। Kojima et al. (২০২২) দেখিয়েছেন, কোনো উদাহরণ ছাড়া শুধু \"Let's think step by step\" যোগ করলেও অঙ্ক ও যুক্তির কাজে ফল ভালো হয়। কারণ হলো, মধ্যবর্তী টোকেন লিখতে গিয়ে কঠিন অংশের জন্য বেশি কম্পিউটেশন বরাদ্দ হয়। সেকশনের চার্ট অনুযায়ী সরাসরি উত্তরে ~৪০%, আর CoT-তে ~৭০ থেকে ৮৫%। CoT-এর প্রকারভেদ:"
         },
         {
           "type": "list",
@@ -2367,6 +2367,11 @@
       "n": 15,
       "url": "https://arxiv.org/abs/2211.01910",
       "text": "Gao et al., \"Program-Aided Language Models (PAL)\" — 2022"
+    },
+    {
+      "n": 16,
+      "url": "https://arxiv.org/abs/2205.11916",
+      "text": "Kojima et al., \"Large Language Models are Zero-Shot Reasoners\" — 2022 (zero-shot CoT: \"Let's think step by step\")"
     }
   ],
   "quiz": [
