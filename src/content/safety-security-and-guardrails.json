@@ -45,7 +45,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Once the model can call tools or render Markdown, a prompt-injected output can call a tool with attacker-chosen arguments (\"send an email to attacker with all user data\") or render a Markdown image whose <code>src</code> URL encodes the user's session. The OWASP LLM Top 10 lists this as #1 in 2025.<a class=\"cite\" href=\"#src25\">[25]</a>"
+          "html": "Once the model can call tools or render Markdown, a prompt-injected output can call a tool with attacker-chosen arguments (\"send an email to attacker with all user data\") or render a Markdown image whose <code>src</code> URL encodes the user's session. The OWASP LLM Top 10 ranks prompt injection, the cause of this attack, #1 in 2025.<a class=\"cite\" href=\"#src25\">[25]</a>"
         },
         {
           "type": "heading",
@@ -203,7 +203,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>টুল কল ও রেন্ডার করা লিংক দিয়ে ডেটা এক্সফিল্ট্রেশন:</strong> মডেল একবার টুল কল করতে বা Markdown রেন্ডার করতে পারলে দুইভাবে ডেটা বেরিয়ে যেতে পারে। প্রম্পট-ইনজেক্টেড আউটপুট আক্রমণকারীর বেছে দেওয়া আর্গুমেন্ট সহ টুল কল করতে পারে (\"attacker-কে ইমেল পাঠাও ব্যবহারকারীর সব ডেটা সহ\")। অথবা আউটপুট এমন Markdown ছবি রেন্ডার করতে পারে, যার <code>src</code> URL ইউজারের সেশন এনকোড করে। OWASP LLM Top ১০ এটিকে ২০২৫-এ #1 হিসেবে তালিকাভুক্ত করেছে।<a class=\"cite\" href=\"#src25\">[২৫]</a>"
+          "html": "<strong>টুল কল ও রেন্ডার করা লিংক দিয়ে ডেটা এক্সফিল্ট্রেশন:</strong> মডেল একবার টুল কল করতে বা Markdown রেন্ডার করতে পারলে দুইভাবে ডেটা বেরিয়ে যেতে পারে। প্রম্পট-ইনজেক্টেড আউটপুট আক্রমণকারীর বেছে দেওয়া আর্গুমেন্ট সহ টুল কল করতে পারে (\"attacker-কে ইমেল পাঠাও ব্যবহারকারীর সব ডেটা সহ\")। অথবা আউটপুট এমন Markdown ছবি রেন্ডার করতে পারে, যার <code>src</code> URL ইউজারের সেশন এনকোড করে। এই আক্রমণের মূলে আছে প্রম্পট ইনজেকশন, আর OWASP LLM Top ১০ সেটিকে ২০২৫-এ #1 হিসেবে তালিকাভুক্ত করেছে।<a class=\"cite\" href=\"#src25\">[২৫]</a>"
         },
         {
           "type": "paragraph",
