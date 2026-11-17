@@ -7,8 +7,9 @@
 
 A free, citation-backed reference for applied AI engineers. It is a static
 Next.js site with 17 Parts, from LLM fundamentals to deploying and operating
-AI systems. Every section comes in three voices: Technical, Layman's, and
-বাংলা. Every page exists in English and in Bangla.
+AI systems. Every section opens with a plain-words **Start here** box and
+comes in three voices: Technical, Layman's, and বাংলা. Every page exists in
+English and in Bangla.
 
 **Live site:** <https://kawsar-95.github.io/ai-learning-roadmap/> ·
 **বাংলা:** <https://kawsar-95.github.io/ai-learning-roadmap/bn/>
@@ -34,6 +35,7 @@ AI systems. Every section comes in three voices: Technical, Layman's, and
 | --- | --- |
 | Parts | 17 |
 | Sections | 113 |
+| Start here boxes | 113, one per section: the big idea, the words to know, and what to remember |
 | Cited sources | 484, from 95 sites (215 of them arXiv papers) |
 | Voices in each section | 3: Technical, Layman's, বাংলা |
 | Languages | English and Bangla, page for page |
@@ -51,7 +53,7 @@ counts at build time.
 
 ### Read one section at a time
 
-![A topic page: the list of Parts on the left, the Part header with "Mark as read" and "Go to quiz", the step bar "Section 1 of 10", the voice switcher, and the "On this page" list on the right](screenshots/topic-page.png)
+![A topic page: the list of Parts on the left, the Part header with "Mark as read" and "Go to quiz", the step bar "Section 1 of 10", the voice switcher, the top of the Start here box, and the "On this page" list on the right](screenshots/topic-page.png)
 
 - A Part opens with its reading time, a **Mark as read** button, and a link
   to its quiz.
@@ -62,6 +64,21 @@ counts at build time.
   screens and becomes a collapsed list on narrow ones.
 - Each section ends with **Bookmark** and **Mark as done**. Each Part ends
   with its numbered sources and links to the previous and next Part.
+
+### Start here
+
+![The Start here box of Part 1, section 1, under the voice tabs: the big idea in three short sentences, seven words to know with a plain meaning each, and four points to remember](screenshots/start-here.png)
+
+Every section opens with a **Start here** box, for readers who find the
+section hard:
+
+- **The big idea** in one to three everyday sentences.
+- **Words to know**: the terms the section uses, each explained in a
+  sentence, so you meet them before the text does.
+- **Remember**: the three or four points to take away.
+
+It sits above every voice. On the Bangla site, and with the বাংলা voice, it is
+in Bangla (এখান থেকে শুরু করুন).
 
 ### Three voices
 
@@ -93,7 +110,7 @@ remembers it.
 
 ### Search everything
 
-![The search palette open over a topic page with the query "kv cache" and results from Parts 15, 8, 11, 16, and 1](screenshots/search.png)
+![The search palette open over a topic page with the query "kv cache" and results from Parts 15, 8, 16, 11, and 1](screenshots/search.png)
 
 Press <kbd>Ctrl</kbd>+<kbd>K</kbd> (<kbd>⌘</kbd>+<kbd>K</kbd> on macOS)
 on any page. The search runs in the browser over one entry per section. The
@@ -146,11 +163,12 @@ GitHub repositories in 5 groups, each tied to a roadmap phase.
 
 ### English and বাংলা
 
-![The Bangla topic page: Bangla sidebar and headings, the voice switcher with বাংলা first and selected, and the Bangla explanation panel](screenshots/bangla-topic.png)
+![The Bangla topic page: Bangla sidebar and headings, the voice switcher with বাংলা first and selected, and the Bangla Start here box, এখান থেকে শুরু করুন](screenshots/bangla-topic.png)
 
 Every page has a twin under `/bn/`. On the Bangla site the interface, the
-Part and section titles, the intros, the practice tasks, and the quizzes are
-in Bangla, and sections open in the বাংলা voice unless you picked another.
+Part and section titles, the intros, the Start here boxes, the practice
+tasks, and the quizzes are in Bangla, and sections open in the বাংলা voice
+unless you picked another.
 The header button switches to the same page in the other language and
 remembers the choice.
 
@@ -317,7 +335,7 @@ A file-by-file map is in
 | Document | What it covers |
 | --- | --- |
 | [docs/architecture.md](docs/architecture.md) | Routes, the build, languages, voices, search, reader state, offline use, theme, design rules, tests, file layout |
-| [docs/content-guide.md](docs/content-guide.md) | The Part file format, block types, code and diagrams, citations, videos, live views, practice tasks, interview questions, stable ids, adding a Part |
+| [docs/content-guide.md](docs/content-guide.md) | The Part file format, Start here boxes, block types, code and diagrams, citations, videos, live views, practice tasks, interview questions, stable ids, adding a Part |
 | [docs/quizzes.md](docs/quizzes.md) | The quiz format and its rules |
 | [docs/roadmap.md](docs/roadmap.md) | The roadmap data, refreshing the curriculum lessons, learning paths, the resources page |
 | [docs/deployment.md](docs/deployment.md) | GitHub Pages, the base path, setting up a fork, previewing a build, stalled deploys, troubleshooting |

@@ -172,6 +172,20 @@ const SHOTS = {
   // A topic page: the Parts, the section pager and voice switcher, "On this page".
   "topic-page": () => capture("/topics/llm-fundamentals/", DESKTOP),
 
+  // Section 1's Start here box, with the voice tabs above it.
+  "start-here": () =>
+    capture("/topics/llm-fundamentals/", {
+      ...DESKTOP,
+      act: async (page) => {
+        await unstickHeader(page);
+        const basics = page.locator(`#${FIRST}-basics`).locator("xpath=..");
+        await basics.scrollIntoViewIfNeeded();
+        const b = await box(basics);
+        const tabs = await box(page.locator(`section#${FIRST} [role=group][aria-label]`).first());
+        return clipBetween(b, tabs.y - 16, b.bottom + 16);
+      },
+    }),
+
   // One section in the three voices, side by side. The saved voice is localStorage "voice".
   voices: async () => {
     const panels = [];
@@ -182,6 +196,8 @@ const SHOTS = {
           seed: { voice },
           act: async (page) => {
             await unstickHeader(page);
+            // The Start here box above the voices has its own shot. Hide it, so each crop shows the voice text.
+            await page.addStyleTag({ content: `div:has(> #${FIRST}-basics){display:none!important}` });
             const section = page.locator(`section#${FIRST}`);
             await section.scrollIntoViewIfNeeded();
             const b = await box(section);
