@@ -16,6 +16,78 @@
         "title": "চাঙ্কিং: ফিক্সড, রিকার্সিভ, স্ট্রাকচারাল আর সেম্যান্টিক",
         "sub": "রিট্রিভাল কাজ করে ডকুমেন্টের টুকরা নিয়ে, পুরো ডকুমেন্ট নিয়ে নয়। তাই লেখাটা কীভাবে কাটবেন, তার উপরই ঠিক হয় রিট্রিভার কী ফেরত দিতে পারবে। চাঙ্ক বেশি বড় হলে উত্তর বাড়তি লেখার ভিড়ে হারিয়ে যায়। বেশি ছোট হলে বাক্যটির অর্থ যে কনটেক্সট দিয়েছিল, তা চলে যায়। এখানে তিন ধরন আছে: <strong>ফিক্সড-সাইজ</strong> (ওভারল্যাপ আর রিকার্সিভ সেপারেটর-সহ), <strong>স্ট্রাকচারাল</strong> (হেডার আর বাক্য) আর <strong>সেম্যান্টিক</strong> (এমবেডিং দিয়ে ঠিক করা ভাঙার জায়গা)।"
       },
+      "basics": {
+        "en": {
+          "idea": "Search works on small pieces of documents called <strong>chunks</strong>, not on whole documents. How you cut the text decides what the search can find, so cutting well matters.",
+          "words": [
+            {
+              "term": "Chunk",
+              "meaning": "One small piece of a document. Search matches each piece to a question."
+            },
+            {
+              "term": "Overlap",
+              "meaning": "The part that two neighbouring chunks share, so a fact on the cut line stays whole in at least one chunk."
+            },
+            {
+              "term": "Recursive splitting",
+              "meaning": "Cutting at the biggest natural break first: paragraph, then line, then word, then character, only when needed."
+            },
+            {
+              "term": "Metadata",
+              "meaning": "Extra labels attached to a chunk, such as the headers it sat under."
+            },
+            {
+              "term": "Embedding",
+              "meaning": "A list of numbers that stands for the meaning of a text."
+            },
+            {
+              "term": "Semantic chunking",
+              "meaning": "Cutting where the meaning of neighbouring sentences changes most, found by comparing their embeddings."
+            }
+          ],
+          "remember": [
+            "Overlap keeps a fact that sits on a cut line whole in at least one chunk.",
+            "The LangChain default measures size in characters, not tokens, so a chunk of 1000 is not 1000 tokens.",
+            "Chain a header splitter with a recursive one, so overlap never crosses a header boundary.",
+            "None of the sources checked gives a best chunk size, so tune it on your own retrieval tests."
+          ]
+        },
+        "bn": {
+          "idea": "সার্চ পুরো ডকুমেন্টে নয়, ডকুমেন্টের ছোট টুকরায় কাজ করে, যাকে বলে <strong>চাঙ্ক</strong> (chunk)। লেখা কীভাবে কাটছেন, তার ওপরই ঠিক হয় সার্চ কী খুঁজে পাবে। তাই ভালোভাবে কাটা জরুরি।",
+          "words": [
+            {
+              "term": "চাঙ্ক (chunk)",
+              "meaning": "ডকুমেন্টের একটি ছোট টুকরা। সার্চ প্রতিটি টুকরাকে প্রশ্নের সাথে মেলায়।"
+            },
+            {
+              "term": "ওভারল্যাপ (overlap)",
+              "meaning": "পাশাপাশি দুই চাঙ্কের যে অংশ দুটোতেই থাকে, যাতে কাটার রেখায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।"
+            },
+            {
+              "term": "রিকার্সিভ স্প্লিটিং (recursive splitting)",
+              "meaning": "আগে সবচেয়ে বড় স্বাভাবিক বিরতিতে কাটা: প্যারাগ্রাফ, তারপর লাইন, তারপর শব্দ, দরকার হলে তবেই ক্যারেক্টার।"
+            },
+            {
+              "term": "মেটাডেটা (metadata)",
+              "meaning": "চাঙ্কের সাথে জুড়ে দেওয়া বাড়তি লেবেল, যেমন সেটা কোন হেডারের নিচের লেখা।"
+            },
+            {
+              "term": "এমবেডিং (embedding)",
+              "meaning": "একটি লেখার অর্থ বোঝানো সংখ্যার তালিকা।"
+            },
+            {
+              "term": "সেম্যান্টিক চাঙ্কিং (semantic chunking)",
+              "meaning": "পাশাপাশি বাক্যের অর্থ যেখানে সবচেয়ে বেশি বদলায়, সেখানে কাটা। এটা এমবেডিং তুলনা করে ঠিক হয়।"
+            }
+          ],
+          "remember": [
+            "ওভারল্যাপ থাকলে কাটার রেখায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।",
+            "LangChain-এর ডিফল্ট মাপ ক্যারেক্টারে, টোকেনে নয়; তাই ১০০০ মাপের চাঙ্ক মানে ১০০০ টোকেন নয়।",
+            "হেডার স্প্লিটারের সাথে রিকার্সিভ স্প্লিটার জুড়ুন, যাতে ওভারল্যাপ হেডারের সীমানা না পেরোয়।",
+            "যাচাই করা কোনো সূত্রে সেরা চাঙ্ক সাইজ বলা নেই, তাই নিজের রিট্রিভাল টেস্টে ঠিক করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -272,6 +344,78 @@
         "title": "লেট চাঙ্কিং, কনটেক্সচুয়াল রিট্রিভাল আর চাঙ্কিং কৌশল বাছাই",
         "sub": "দুটি নতুন কৌশল: <strong>লেট চাঙ্কিং</strong> (ট্রান্সফর্মারের পরে ভাঙা)। সাথে Anthropic-এর <strong>কনটেক্সচুয়াল রিট্রিভাল</strong>, যা প্রতিটি চাঙ্কের আগে একটি ব্যাখ্যা জুড়ে হারানো কনটেক্সট ফিরিয়ে আনে।<a class=\"cite\" href=\"#src1\">[১]</a><a class=\"cite\" href=\"#src2\">[২]</a> শেষে আছে কোন কৌশল কখন বাছবেন।"
       },
+      "basics": {
+        "en": {
+          "idea": "A chunk cut from a document can lose its meaning, like a chunk that says only <em>the company</em>. <strong>Late chunking</strong> and contextual retrieval fix this by keeping each chunk tied to its document.",
+          "words": [
+            {
+              "term": "Late chunking",
+              "meaning": "Reading the whole document with the embedding model first, then splitting, so each chunk's numbers know their surroundings."
+            },
+            {
+              "term": "Mean pooling",
+              "meaning": "Averaging the number lists of many tokens into one list for a chunk."
+            },
+            {
+              "term": "Long-context embedding model",
+              "meaning": "An embedding model whose context window (how much text it can read at once) is big enough to hold the whole document."
+            },
+            {
+              "term": "Contextual retrieval",
+              "meaning": "Anthropic's method: an LLM writes a short note on where a chunk sits in its document, and the note goes in front of the chunk."
+            },
+            {
+              "term": "BM25",
+              "meaning": "A classic keyword score: documents that share the question's words score higher."
+            },
+            {
+              "term": "Reranking",
+              "meaning": "Re-scoring the top results with a more careful model, so the best ones come first."
+            }
+          ],
+          "remember": [
+            "Late chunking embeds the whole document first, then splits just before mean pooling. It needs no extra training.",
+            "Contextual retrieval adds about 50 to 100 tokens of context to each chunk, for both embedding and BM25.",
+            "Anthropic reports failed retrievals falling from 5.7% to 1.9% with reranking. This is the vendor's own test.",
+            "The strategy table is editorial, not a benchmark: each method trades a strength for a cost."
+          ]
+        },
+        "bn": {
+          "idea": "কোনো ডকুমেন্ট থেকে কেটে নেওয়া চাঙ্ক অর্থ হারাতে পারে, যেমন যে চাঙ্কে শুধু <em>কোম্পানিটি</em> লেখা। <strong>লেট চাঙ্কিং (late chunking)</strong> আর কনটেক্সচুয়াল রিট্রিভাল (contextual retrieval) প্রতিটি চাঙ্ককে তার ডকুমেন্টের সাথে জুড়ে রেখে এটা ঠিক করে।",
+          "words": [
+            {
+              "term": "লেট চাঙ্কিং (late chunking)",
+              "meaning": "আগে এমবেডিং মডেল দিয়ে পুরো ডকুমেন্ট পড়া, তারপর কাটা। ফলে প্রতিটি চাঙ্কের সংখ্যা তার আশপাশ জানে।"
+            },
+            {
+              "term": "মিন পুলিং (mean pooling)",
+              "meaning": "অনেক টোকেনের সংখ্যার তালিকার গড় নিয়ে একটি চাঙ্কের জন্য একটি তালিকা বানানো।"
+            },
+            {
+              "term": "লং-কনটেক্সট এমবেডিং মডেল (long-context embedding model)",
+              "meaning": "যে এমবেডিং মডেলের কনটেক্সট উইন্ডো (একবারে কতটা লেখা পড়তে পারে) পুরো ডকুমেন্ট ধরে রাখার মতো বড়।"
+            },
+            {
+              "term": "কনটেক্সচুয়াল রিট্রিভাল (contextual retrieval)",
+              "meaning": "Anthropic-এর পদ্ধতি: LLM চাঙ্কটি ডকুমেন্টের কোথায় আছে তার একটি ছোট নোট লেখে, আর নোটটি চাঙ্কের সামনে বসে।"
+            },
+            {
+              "term": "BM25",
+              "meaning": "কিওয়ার্ড দিয়ে খোঁজার পুরনো স্কোর: প্রশ্নের শব্দ যে ডকুমেন্টে আছে, সেটা বেশি স্কোর পায়।"
+            },
+            {
+              "term": "রিরেংকিং (reranking)",
+              "meaning": "সেরা ফলগুলোকে আরও যত্নশীল মডেল দিয়ে আবার স্কোর করা, যাতে সেরাগুলো আগে আসে।"
+            }
+          ],
+          "remember": [
+            "লেট চাঙ্কিং আগে পুরো ডকুমেন্ট এমবেড করে, তারপর মিন পুলিংয়ের ঠিক আগে কাটে। আলাদা ট্রেনিং লাগে না।",
+            "কনটেক্সচুয়াল রিট্রিভাল প্রতিটি চাঙ্কে প্রায় ৫০ থেকে ১০০ টোকেনের কনটেক্সট জোড়ে, এমবেডিং আর BM25 দুটোর জন্যই।",
+            "Anthropic জানিয়েছে রিরেংকিং-সহ ব্যর্থ রিট্রিভাল ৫.৭% থেকে ১.৯%-এ নেমেছে। এটা বিক্রেতার নিজের পরীক্ষা।",
+            "কৌশলের তুলনার টেবিলটি লেখকের নিজের মত, বেঞ্চমার্ক নয়: প্রতিটি পদ্ধতিতে একটা সুবিধার বদলে একটা খরচ আছে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -473,6 +617,86 @@
         "title": "ভেক্টর সার্চ কীভাবে কাজ করে: ফ্ল্যাট, IVF, HNSW আর ডিস্ট্যান্স মেট্রিক",
         "sub": "ভেক্টর ডেটাবেস এমবেডিং জমা রাখে, আর “জমানো কোন ভেক্টরগুলো এটির সবচেয়ে কাছে?” — এই প্রশ্নের উত্তর দেয়, প্রতিটি রো-র সাথে তুলনা না করেই। লক্ষ লক্ষ ভেক্টরে এক্সাক্ট সার্চ খুব ধীর, তাই এসব সিস্টেম একটি <strong>অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (ANN)</strong> ইনডেক্স বানায়, সবচেয়ে বেশি HNSW গ্রাফ।<a class=\"cite\" href=\"#src6\">[৬]</a>"
       },
+      "basics": {
+        "en": {
+          "idea": "A vector database finds the stored items closest to your query without checking every one. It uses an <strong>approximate nearest neighbour (ANN)</strong> index, a fast shortcut that can miss the very best match.",
+          "words": [
+            {
+              "term": "Vector",
+              "meaning": "A list of numbers that stands for the meaning of a text. The database stores one for each item."
+            },
+            {
+              "term": "Approximate nearest neighbour (ANN)",
+              "meaning": "A search that gets very close to the exact answer, much faster than checking everything."
+            },
+            {
+              "term": "Flat search",
+              "meaning": "Checking every vector one by one. It is exact, but slow on big collections."
+            },
+            {
+              "term": "IVF (inverted file index)",
+              "meaning": "An index that splits vectors into lists and searches only some of them."
+            },
+            {
+              "term": "HNSW (hierarchical navigable small world)",
+              "meaning": "A layered graph of nearby vectors. Search starts with long hops on a sparse top layer, then refines on denser layers."
+            },
+            {
+              "term": "Distance metric",
+              "meaning": "The rule for measuring how close two vectors are, such as L2, cosine or dot product."
+            },
+            {
+              "term": "Recall",
+              "meaning": "What share of the truly best matches the search manages to find."
+            }
+          ],
+          "remember": [
+            "Flat search is exact and low on memory, and it suits small collections.",
+            "IVF searches only some lists; HNSW walks a layered graph whose cost grows logarithmically (very slowly as the collection grows).",
+            "Match the distance metric to the one your embedding model was trained for.",
+            "For unit-length vectors (vectors scaled to length 1), cosine and dot product rank results the same way."
+          ]
+        },
+        "bn": {
+          "idea": "ভেক্টর ডেটাবেস সব আইটেম না দেখেই কুয়েরির সবচেয়ে কাছের জমা-রাখা আইটেমগুলো খুঁজে দেয়। এজন্য সে <strong>অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (ANN)</strong> ইনডেক্স ব্যবহার করে, যা দ্রুত শর্টকাট, তবে সেরা মিলটা মাঝে মাঝে ফসকে যেতে পারে।",
+          "words": [
+            {
+              "term": "ভেক্টর (vector)",
+              "meaning": "একটি লেখার অর্থ বোঝানো সংখ্যার তালিকা। ডেটাবেস প্রতিটি আইটেমের জন্য একটি করে জমা রাখে।"
+            },
+            {
+              "term": "অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (approximate nearest neighbour, ANN)",
+              "meaning": "এমন সার্চ, যা সঠিক উত্তরের খুব কাছাকাছি পৌঁছায়, সবকিছু মেলানোর চেয়ে অনেক দ্রুত।"
+            },
+            {
+              "term": "ফ্ল্যাট সার্চ (flat search)",
+              "meaning": "প্রতিটি ভেক্টর একে একে মেলানো। নির্ভুল, কিন্তু বড় কালেকশনে ধীর।"
+            },
+            {
+              "term": "IVF (inverted file index)",
+              "meaning": "যে ইনডেক্স ভেক্টরকে লিস্টে ভাগ করে আর শুধু কয়েকটি লিস্টে খোঁজে।"
+            },
+            {
+              "term": "HNSW (hierarchical navigable small world)",
+              "meaning": "কাছের ভেক্টরদের স্তরে স্তরে সাজানো গ্রাফ। ফাঁকা উপরের স্তরে লম্বা লাফে শুরু, তারপর ঘন স্তরে সূক্ষ্ম খোঁজ।"
+            },
+            {
+              "term": "ডিস্ট্যান্স মেট্রিক (distance metric)",
+              "meaning": "দুটি ভেক্টর কতটা কাছে তা মাপার নিয়ম, যেমন L2, কোসাইন বা ডট প্রোডাক্ট।"
+            },
+            {
+              "term": "রিকল (recall)",
+              "meaning": "সত্যিকারের সেরা মিলগুলোর কত অংশ সার্চ খুঁজে পায়।"
+            }
+          ],
+          "remember": [
+            "ফ্ল্যাট সার্চ নির্ভুল ও কম মেমরির, আর ছোট কালেকশনের জন্য উপযুক্ত।",
+            "IVF শুধু কয়েকটি লিস্টে খোঁজে; HNSW স্তরে স্তরে গ্রাফ বেয়ে যায়, আর তার খরচ লগারিদমিক হারে বাড়ে (কালেকশন বড় হলেও খুব ধীরে)।",
+            "এমবেডিং মডেল যে মেট্রিকের জন্য ট্রেন হয়েছে, সেই ডিস্ট্যান্স মেট্রিকই বাছুন।",
+            "ইউনিট-লেংথ ভেক্টর (দৈর্ঘ্য ১ করে নেওয়া ভেক্টর) হলে কোসাইন আর ডট প্রোডাক্ট একই র‍্যাংকিং দেয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -668,6 +892,78 @@
         "title": "ভেক্টর ডেটাবেস: Qdrant, Pinecone, Weaviate, pgvector, Chroma, Milvus-এর তুলনা",
         "sub": "জনপ্রিয় ছয়টি অপশনের মূল ধারণা প্রায় এক। পার্থক্য ডিপ্লয়মেন্ট মডেল, ইনডেক্সের বিকল্প, হাইব্রিড সার্চের সাপোর্ট আর টেন্যান্ট আলাদা রাখার উপায়ে। নিচের ফিচার টেবিল শুধু আমার পড়া ভেন্ডর ডকুমেন্টেশন থেকে বানানো।"
       },
+      "basics": {
+        "en": {
+          "idea": "Six <strong>vector databases</strong> do the same core job. They differ in how you run them, which indexes they offer, how they handle hybrid search, and how they keep customers apart.",
+          "words": [
+            {
+              "term": "BYOC (bring your own cloud)",
+              "meaning": "A service that runs inside your own cloud account instead of the vendor's."
+            },
+            {
+              "term": "Hybrid search",
+              "meaning": "Using meaning-based vector search together with keyword search in one query."
+            },
+            {
+              "term": "Multitenancy",
+              "meaning": "Keeping the data of many customers apart inside one system."
+            },
+            {
+              "term": "Namespace",
+              "meaning": "A named section that keeps one group's data apart from the rest. Pinecone uses namespaces to keep customers apart."
+            },
+            {
+              "term": "ACID",
+              "meaning": "Atomic, consistent, isolated and durable transactions. A group of changes is applied safely, or not at all."
+            },
+            {
+              "term": "Quantization (SQ, PQ)",
+              "meaning": "Storing numbers with less precision to save space. SQ8 stores one byte per value."
+            }
+          ],
+          "remember": [
+            "Not stated in the table means the page did not say, not that the feature is missing.",
+            "Pinecone is managed and serverless, pgvector is a Postgres extension, and Milvus runs as Lite, Standalone or Distributed.",
+            "Weaviate docs suggest a flat index for multi-tenant SaaS (software sold as an online service) with small per-tenant data.",
+            "Tenant isolation differs: Pinecone uses namespaces; Milvus works at database, collection, partition or partition-key level."
+          ]
+        },
+        "bn": {
+          "idea": "ছয়টি <strong>ভেক্টর ডেটাবেস</strong> (vector database) মূল কাজ একই করে। তফাত হলো কীভাবে চালাবেন, কোন ইনডেক্স পাবেন, হাইব্রিড সার্চ কেমন, আর গ্রাহকদের ডেটা কীভাবে আলাদা রাখে।",
+          "words": [
+            {
+              "term": "BYOC (bring your own cloud)",
+              "meaning": "যে সেবা বিক্রেতার নয়, আপনার নিজের ক্লাউড অ্যাকাউন্টের ভেতরে চলে।"
+            },
+            {
+              "term": "হাইব্রিড সার্চ (hybrid search)",
+              "meaning": "অর্থ ধরে ভেক্টর সার্চ আর কিওয়ার্ড সার্চ এক কুয়েরিতে একসাথে ব্যবহার করা।"
+            },
+            {
+              "term": "মাল্টিটেন্যান্সি (multitenancy)",
+              "meaning": "একটি সিস্টেমের ভেতরে অনেক গ্রাহকের ডেটা আলাদা রাখা।"
+            },
+            {
+              "term": "নেমস্পেস (namespace)",
+              "meaning": "নাম দেওয়া একটি আলাদা ভাগ, যা এক দলের ডেটা বাকিদের থেকে আলাদা রাখে। Pinecone নেমস্পেস দিয়ে গ্রাহকদের আলাদা রাখে।"
+            },
+            {
+              "term": "ACID",
+              "meaning": "অ্যাটমিক, কনসিস্টেন্ট, আইসোলেটেড ও ডিউরেবল ট্রানজ্যাকশন। একগুচ্ছ পরিবর্তন নিরাপদে পুরোটা হয়, না হলে একেবারেই হয় না।"
+            },
+            {
+              "term": "কোয়ান্টাইজেশন (quantization, SQ, PQ)",
+              "meaning": "জায়গা বাঁচাতে সংখ্যা কম নির্ভুলতায় জমানো। SQ8 প্রতিটি মানের জন্য এক বাইট রাখে।"
+            }
+          ],
+          "remember": [
+            "টেবিলে not stated মানে সেই পাতায় লেখা নেই, ফিচারটি নেই এমন নয়।",
+            "Pinecone ম্যানেজড সার্ভারলেস, pgvector Postgres এক্সটেনশন, আর Milvus চলে Lite, Standalone বা Distributed রূপে।",
+            "প্রতি টেন্যান্টের ডেটা ছোট হলে Weaviate-এর ডকুমেন্টেশন মাল্টি-টেন্যান্ট SaaS-এ (অনলাইন সেবা হিসেবে বিক্রি হওয়া সফটওয়্যার) ফ্ল্যাট ইনডেক্সের পরামর্শ দেয়।",
+            "টেন্যান্ট আলাদা করার উপায় ভিন্ন: Pinecone নেমস্পেস ব্যবহার করে; Milvus ডেটাবেস, কালেকশন, পার্টিশন বা পার্টিশন-কী স্তরে কাজ করে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -835,6 +1131,78 @@
         "title": "ভেক্টর ডেটাবেস বাছাই: জরুরি সেটিং, ফিল্টার-সহ সার্চ আর কোনটা কখন",
         "sub": "জানার মতো ডিফল্ট সেটিং, ফিল্টার-সহ সার্চে কেন ইঞ্জিনগুলো আলাদা, আর কোন পরিস্থিতিতে কোনটার দিকে ঝুঁকবেন। “কখন কোনটা বাছবেন” পরামর্শটা আমার নিজের সংশ্লেষণ, আর সেটা সেভাবেই লেখা আছে।"
       },
+      "basics": {
+        "en": {
+          "idea": "A few settings decide how well a vector database finds close matches. <strong>Filtered search</strong> is where engines differ, and the best pick depends on your situation.",
+          "words": [
+            {
+              "term": "HNSW index",
+              "meaning": "A map of vectors that lets a search find close ones fast, without checking every vector."
+            },
+            {
+              "term": "<code>hnsw.ef_search</code>",
+              "meaning": "A query-time setting that trades speed against recall. The pgvector default is 40."
+            },
+            {
+              "term": "Quantization",
+              "meaning": "Storing vectors in a smaller form to save memory. Qdrant claims up to 97% less RAM."
+            },
+            {
+              "term": "Filtered search",
+              "meaning": "Searching only among items that match a condition on their metadata, such as one customer's files."
+            },
+            {
+              "term": "Recall",
+              "meaning": "How many of the truly best matches a search manages to find."
+            },
+            {
+              "term": "Payload index",
+              "meaning": "Qdrant's index on metadata fields. It lets filtering happen during a single pass through the graph."
+            }
+          ],
+          "remember": [
+            "pgvector HNSW defaults: <code>m</code> 16 and <code>ef_construction</code> 64. The <code>hnsw.ef_search</code> default is 40.",
+            "Filtered search is where engines differ, so test real filters at your real selectivity (how much of the data the filter keeps).",
+            "A recall number measured without filters says little about filtered queries.",
+            "The when-to-choose table is the author's own inference, not vendor advice."
+          ]
+        },
+        "bn": {
+          "idea": "ভেক্টর ডেটাবেস কাছের জিনিস কতটা ভালো খোঁজে, তা ঠিক করে কয়েকটি সেটিং। <strong>ফিল্টার-সহ সার্চেই</strong> ইঞ্জিনগুলো আলাদা, আর সেরা বাছাই নির্ভর করে আপনার পরিস্থিতির ওপর।",
+          "words": [
+            {
+              "term": "HNSW ইনডেক্স (HNSW index)",
+              "meaning": "ভেক্টরের এমন একটি মানচিত্র, যা দিয়ে প্রতিটি ভেক্টর না দেখেই কাছের ভেক্টর দ্রুত খোঁজা যায়।"
+            },
+            {
+              "term": "<code>hnsw.ef_search</code>",
+              "meaning": "কুয়েরির সময় বদলানো যায় এমন সেটিং, যা গতি আর রিকলের মধ্যে ভারসাম্য আনে। pgvector-এ ডিফল্ট ৪০।"
+            },
+            {
+              "term": "কোয়ান্টাইজেশন (quantization)",
+              "meaning": "ভেক্টরকে ছোট আকারে রেখে মেমরি বাঁচানো। Qdrant দাবি করে RAM ৯৭% পর্যন্ত কমে।"
+            },
+            {
+              "term": "ফিল্টার-সহ সার্চ (filtered search)",
+              "meaning": "মেটাডেটার কোনো শর্ত মেলে এমন আইটেমের মধ্যেই খোঁজা, যেমন শুধু একজন গ্রাহকের ফাইল।"
+            },
+            {
+              "term": "রিকল (recall)",
+              "meaning": "সত্যিকারের সেরা মিলগুলোর কতগুলো সার্চ খুঁজে পেল।"
+            },
+            {
+              "term": "পেলোড ইনডেক্স (payload index)",
+              "meaning": "মেটাডেটার ফিল্ডের ওপর Qdrant-এর ইনডেক্স। এতে গ্রাফে একবার খোঁজার সময়ই ফিল্টার করা যায়।"
+            }
+          ],
+          "remember": [
+            "pgvector HNSW-এর ডিফল্ট: <code>m</code> ১৬ আর <code>ef_construction</code> ৬৪। <code>hnsw.ef_search</code> ডিফল্ট ৪০।",
+            "ফিল্টার-সহ সার্চেই ইঞ্জিনগুলো আলাদা। নিজের আসল ফিল্টার আর আসল সিলেকটিভিটিতে (ফিল্টার ডেটার কতটা অংশ রাখে) পরীক্ষা করুন।",
+            "ফিল্টার ছাড়া মাপা রিকল ফিল্টার-সহ কুয়েরি সম্পর্কে খুব কম বলে।",
+            "কোনটি কখন, এই তালিকা লেখকের নিজের অনুমান, বিক্রেতার পরামর্শ নয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -997,6 +1365,78 @@
       "bn": {
         "title": "হাইব্রিড সার্চ (BM25 + ভেক্টর) আর রেসিপ্রোকাল র‍্যাংক ফিউশন",
         "sub": "কীওয়ার্ড সার্চ (BM25) আর এমবেডিং সার্চ উল্টো উল্টো জায়গায় ব্যর্থ হয়। BM25-এর জন্য কুয়েরির ঠিক শব্দগুলো লেখায় থাকতে হয়। ডেন্স ভেক্টর আবার বিরল আইডেন্টিফায়ার, নাম আর কোড ঝাপসা করে ফেলতে পারে। <strong>হাইব্রিড সার্চ</strong> দুটোই চালিয়ে ফলাফল মিলিয়ে দেয়। সবচেয়ে প্রচলিত মেলানোর উপায় <strong>রেসিপ্রোকাল র‍্যাংক ফিউশন (RRF)</strong>: এটা কাঁচা স্কোর দেখে না, শুধু প্রতিটি তালিকায় ডকুমেন্টের র‍্যাংকিং মিলিয়ে নেয়।<a class=\"cite\" href=\"#src16\">[১৬]</a> সমস্যাটা হলো, দুই রিট্রিভারের স্কোর আলাদা মাপের, আর র‍্যাংক-ভিত্তিক ফিউশন ঠিক এই সমস্যাটাই এড়িয়ে যায়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Keyword search and meaning search fail in opposite ways, so <strong>hybrid search</strong> runs both and merges the results. Reciprocal rank fusion merges them by looking only at each document's rank.",
+          "words": [
+            {
+              "term": "BM25",
+              "meaning": "A classic keyword score. It rewards documents that contain the exact words of the query."
+            },
+            {
+              "term": "Dense retriever",
+              "meaning": "Turns the query into a list of numbers, a vector, and finds documents whose vectors are closest. It matches meaning, not exact words."
+            },
+            {
+              "term": "Reciprocal rank fusion (RRF)",
+              "meaning": "A merge method that ignores raw scores. Each list gives a document points based on its rank, and the points add up."
+            },
+            {
+              "term": "Constant k",
+              "meaning": "A number in the RRF formula. A small k gives top ranks much more weight."
+            },
+            {
+              "term": "<code>relativeScoreFusion</code>",
+              "meaning": "Weaviate's default hybrid method. It scales each search's scores to 0–1, then weights them with alpha."
+            },
+            {
+              "term": "<code>alpha</code>",
+              "meaning": "Weaviate's weight between the two searches: 0 is keyword only, 1 is vector only. The server default is 0.75."
+            }
+          ],
+          "remember": [
+            "RRF merges lists using only ranks, so different score scales do not matter.",
+            "The k default differs: 60 in the paper, Elasticsearch and OpenSearch; 2 in Qdrant's docs.",
+            "Check the engine's default before comparing results, and set k explicitly where the API allows.",
+            "RRF is a fusion method, not a synonym for hybrid search."
+          ]
+        },
+        "bn": {
+          "idea": "কীওয়ার্ড সার্চ আর অর্থ-ভিত্তিক সার্চ উল্টো উপায়ে ব্যর্থ হয়, তাই <strong>হাইব্রিড সার্চ</strong> দুটোই চালিয়ে ফল মেলায়। রেসিপ্রোকাল র‍্যাংক ফিউশন মেলায় শুধু প্রতিটি ডকুমেন্টের র‍্যাংক দেখে।",
+          "words": [
+            {
+              "term": "BM25",
+              "meaning": "কীওয়ার্ড দিয়ে খোঁজার ক্লাসিক স্কোর। কুয়েরির হুবহু শব্দ যে ডকুমেন্টে আছে, সেটা বেশি পায়।"
+            },
+            {
+              "term": "ডেন্স রিট্রিভার (dense retriever)",
+              "meaning": "কুয়েরিকে সংখ্যার তালিকা, মানে ভেক্টর, বানায়; তারপর যেসব ডকুমেন্টের ভেক্টর সবচেয়ে কাছে, সেগুলো খোঁজে। শব্দ নয়, অর্থ মেলায়।"
+            },
+            {
+              "term": "রেসিপ্রোকাল র‍্যাংক ফিউশন (reciprocal rank fusion, RRF)",
+              "meaning": "মেলানোর এমন পদ্ধতি, যা কাঁচা স্কোর দেখে না। প্রতিটি তালিকায় র‍্যাংক ধরে পয়েন্ট দেয়, তারপর পয়েন্ট যোগ করে।"
+            },
+            {
+              "term": "ধ্রুবক k (constant k)",
+              "meaning": "RRF সূত্রের একটি সংখ্যা। k ছোট হলে উপরের র‍্যাংক অনেক বেশি গুরুত্ব পায়।"
+            },
+            {
+              "term": "<code>relativeScoreFusion</code>",
+              "meaning": "Weaviate-এর ডিফল্ট হাইব্রিড পদ্ধতি। প্রতিটি সার্চের স্কোর ০–১ স্কেলে আনে, তারপর alpha দিয়ে ওজন দেয়।"
+            },
+            {
+              "term": "<code>alpha</code>",
+              "meaning": "Weaviate-এ দুই সার্চের ওজন: ০ মানে শুধু কীওয়ার্ড, ১ মানে শুধু ভেক্টর। সার্ভারের ডিফল্ট ০.৭৫।"
+            }
+          ],
+          "remember": [
+            "RRF শুধু র‍্যাংক ব্যবহার করে, তাই আলাদা স্কেলের স্কোর মেশানোর ঝামেলা নেই।",
+            "k-এর ডিফল্ট আলাদা: পেপার, Elasticsearch আর OpenSearch-এ ৬০; Qdrant-এর ডকসে ২।",
+            "ফল তুলনার আগে ইঞ্জিনের ডিফল্ট দেখুন, আর API দিলে k নিজে ঠিক করে দিন।",
+            "RRF একটি ফিউশন পদ্ধতি, হাইব্রিড সার্চের সমার্থক নয়।"
+          ]
+        }
       },
       "body": [
         {
@@ -1311,6 +1751,78 @@
         "title": "কুয়েরি রিরাইটিং, এক্সপ্যানশন আর HyDE",
         "sub": "ইউজারের কুয়েরি ছোট, অস্পষ্ট, আর উত্তর-দেওয়া ডকুমেন্টের ভাষা থেকে আলাদা। <strong>কুয়েরি ট্রান্সফরমেশন</strong> রিট্রিভালের আগে একটি ধাপ বসায়, যা কুয়েরিকে নতুন করে লেখে, বড় করে, একাধিক করে, এমনকি “উত্তর দিয়েও” ফেলে, যাতে রিট্রিভার মেলানোর জন্য ভালো একটি স্ট্রিং (বা ভেক্টর) পায়। পরিচিত ধরনগুলো: HyDE<a class=\"cite\" href=\"#src23\">[২৩]</a>, স্টেপ-ব্যাক প্রম্পটিং<a class=\"cite\" href=\"#src24\">[২৪]</a>, Query2doc<a class=\"cite\" href=\"#src25\">[২৫]</a>, RAG-Fusion<a class=\"cite\" href=\"#src26\">[২৬]</a> আর Rewrite-Retrieve-Read<a class=\"cite\" href=\"#src27\">[২৭]</a>। প্রতিটিতে একটি বাড়তি LLM কল লাগে (ল্যাটেন্সি আর খরচ), বিনিময়ে সঠিক চাঙ্ক ক্যান্ডিডেটের মধ্যে আসার সম্ভাবনা বাড়ে।"
       },
+      "basics": {
+        "en": {
+          "idea": "People write short, vague questions, but documents are written differently. <strong>Query transformation</strong> rewrites or widens the question before the search, at the price of one extra LLM call.",
+          "words": [
+            {
+              "term": "HyDE (Hypothetical Document Embeddings)",
+              "meaning": "An LLM writes a made-up answer. The system searches using that answer's meaning, not the query's."
+            },
+            {
+              "term": "Contriever",
+              "meaning": "The encoder HyDE uses to turn the made-up answer into numbers. It is expected to filter out the invented details."
+            },
+            {
+              "term": "Rewrite-Retrieve-Read",
+              "meaning": "Adds a rewriting step before retrieval. The rewriter can be a prompted LLM or a small trainable T5 model."
+            },
+            {
+              "term": "Step-back prompting",
+              "meaning": "First ask a broader, higher-level question, then reason to the answer. It is a reasoning method, not only a retrieval trick."
+            },
+            {
+              "term": "Query2doc",
+              "meaning": "An LLM writes a made-up passage that is joined to the query. It helps keyword scoring (BM25) far more than embedding search."
+            },
+            {
+              "term": "RAG-Fusion",
+              "meaning": "Writes several query variants, searches with each, and merges the lists by each document's rank before the LLM answers."
+            }
+          ],
+          "remember": [
+            "Every rewrite adds one extra LLM call, so delay and cost grow before the first search.",
+            "Generated variants can drift from what the user meant. HyDE's made-up text may hold false details.",
+            "On in-domain sets, Query2doc gains 3–15% for BM25 but only 0.4–4% for dense retrievers.",
+            "Keep the original query among the search strings, and measure on your own queries."
+          ]
+        },
+        "bn": {
+          "idea": "ব্যবহারকারীর প্রশ্ন ছোট ও অস্পষ্ট হয়, উত্তরের নথির মতো নয়। <strong>কুয়েরি ট্রান্সফরমেশন</strong> খোঁজার আগে প্রশ্ন নতুন করে লেখে বা বাড়ায়, তবে এর দাম একটি বাড়তি LLM কল।",
+          "words": [
+            {
+              "term": "HyDE (Hypothetical Document Embeddings)",
+              "meaning": "LLM প্রশ্নের একটি বানানো উত্তর লেখে। সেই উত্তরের অর্থ ধরে খোঁজা হয়, প্রশ্নের নয়।"
+            },
+            {
+              "term": "Contriever",
+              "meaning": "যে এনকোডার HyDE-এর বানানো উত্তরকে সংখ্যায় বদলায়। আশা করা হয়, এটি বানানো খুঁটিনাটি ছেঁটে ফেলে।"
+            },
+            {
+              "term": "Rewrite-Retrieve-Read",
+              "meaning": "খোঁজার আগে একটি নতুন করে লেখার ধাপ বসায়। রিরাইটার হতে পারে প্রম্পট করা LLM বা প্রশিক্ষণযোগ্য ছোট T5 মডেল।"
+            },
+            {
+              "term": "স্টেপ-ব্যাক প্রম্পটিং (step-back prompting)",
+              "meaning": "আগে একটি বড় ও সাধারণ প্রশ্ন করা, তারপর যুক্তি দিয়ে উত্তরে যাওয়া। এটি রিজনিং পদ্ধতি, শুধু খোঁজার কৌশল নয়।"
+            },
+            {
+              "term": "Query2doc",
+              "meaning": "LLM একটি বানানো লেখা তৈরি করে, যা মূল কুয়েরির সাথে জোড়া হয়। এটি এমবেডিং সার্চের তুলনায় কীওয়ার্ড স্কোর (BM25)-কে অনেক বেশি সাহায্য করে।"
+            },
+            {
+              "term": "RAG-Fusion",
+              "meaning": "প্রশ্নের কয়েকটি ভ্যারিয়েন্ট বানায়, প্রতিটি দিয়ে খোঁজে, তারপর LLM উত্তর দেওয়ার আগে র‍্যাংক ধরে তালিকাগুলো মেলায়।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি রিরাইটে একটি বাড়তি LLM কল লাগে, তাই প্রথম সার্চের আগেই দেরি আর খরচ বাড়ে।",
+            "তৈরি ভ্যারিয়েন্ট ব্যবহারকারীর উদ্দেশ্য থেকে সরে যেতে পারে। HyDE-এর বানানো লেখায় ভুল তথ্য থাকতে পারে।",
+            "ইন-ডোমেইন সেটে Query2doc BM25-এ ৩–১৫% লাভ দেয়, কিন্তু ডেন্স রিট্রিভারে মাত্র ০.৪–৪%।",
+            "মূল কুয়েরি সার্চের তালিকায় রাখুন, আর নিজের কুয়েরিতে মেপে দেখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1574,6 +2086,78 @@
         "title": "মাল্টি-কুয়েরি ফিউশন (RAG-Fusion) আর RRF, ধাপে ধাপে",
         "sub": "প্রশ্নের কয়েকটি রূপ দিয়ে আলাদা আলাদা খোঁজা, তারপর RRF দিয়ে তালিকাগুলো মেলানো। এখানে একটা ফিউশন হাতে আর কোডে করে দেখানো হয়েছে।"
       },
+      "basics": {
+        "en": {
+          "idea": "Search with several versions of the question, then merge the ranked lists. <strong>Reciprocal rank fusion (RRF)</strong> gives points by rank, and agreement across lists decides the final order.",
+          "words": [
+            {
+              "term": "RAG-Fusion",
+              "meaning": "Makes several versions of the question, searches with each, then scores each document by adding up its points across the resulting lists."
+            },
+            {
+              "term": "Query variant",
+              "meaning": "One of several rewordings of the user's question. Each one gets its own search."
+            },
+            {
+              "term": "Reciprocal rank fusion (RRF)",
+              "meaning": "A merge method. A document gets <code>1/(k + rank)</code> points from each list, and the points add up."
+            },
+            {
+              "term": "k",
+              "meaning": "A number in the RRF formula. The original paper fixed it at 60; Qdrant's docs state a default of 2."
+            },
+            {
+              "term": "<code>rank_constant</code>",
+              "meaning": "Elasticsearch's name for k. It defaults to 60."
+            },
+            {
+              "term": "HyDE",
+              "meaning": "An LLM writes a made-up passage that answers the question, and the system searches with it as an extra query."
+            }
+          ],
+          "remember": [
+            "A document's score is the sum of <code>1/(k + rank)</code> over all the lists.",
+            "Documents ranked well in several lists rise. Agreement across lists decides the order.",
+            "Defaults for k differ: 60 in the paper and Elasticsearch, 2 in Qdrant's docs. Check yours first.",
+            "The code sketch fuses keyword lists for the original question and each variant, plus one embedding-search list from a HyDE passage."
+          ]
+        },
+        "bn": {
+          "idea": "প্রশ্নের কয়েকটি রূপ দিয়ে খুঁজে, তারপর র‍্যাংক করা তালিকাগুলো মেলান। <strong>রেসিপ্রোকাল র‍্যাংক ফিউশন (RRF)</strong> র‍্যাংক ধরে পয়েন্ট দেয়, আর শেষ ক্রম ঠিক হয় তালিকাগুলোর মিল দেখে।",
+          "words": [
+            {
+              "term": "RAG-Fusion",
+              "meaning": "প্রশ্নের কয়েকটি রূপ বানিয়ে প্রতিটি দিয়ে আলাদা সার্চ চালায়, তারপর সব তালিকায় পাওয়া পয়েন্ট যোগ করে প্রতিটি ডকুমেন্টের স্কোর ঠিক করে।"
+            },
+            {
+              "term": "কুয়েরি ভ্যারিয়েন্ট (query variant)",
+              "meaning": "ব্যবহারকারীর প্রশ্নের একটি নতুন রূপ। প্রতিটি রূপ দিয়ে আলাদা সার্চ চলে।"
+            },
+            {
+              "term": "রেসিপ্রোকাল র‍্যাংক ফিউশন (reciprocal rank fusion, RRF)",
+              "meaning": "মেলানোর পদ্ধতি। প্রতিটি তালিকা থেকে ডকুমেন্ট পায় <code>1/(k + rank)</code> পয়েন্ট, তারপর সব যোগ হয়।"
+            },
+            {
+              "term": "k",
+              "meaning": "RRF সূত্রের একটি সংখ্যা। মূল পেপারে ৬০ ধরা হয়েছিল; Qdrant-এর ডকসে ডিফল্ট ২ লেখা।"
+            },
+            {
+              "term": "<code>rank_constant</code>",
+              "meaning": "Elasticsearch-এ k-এর নাম। ডিফল্ট ৬০।"
+            },
+            {
+              "term": "HyDE",
+              "meaning": "LLM প্রশ্নের একটি বানানো উত্তর লেখে, আর সেটি বাড়তি কুয়েরি হিসেবে ব্যবহার হয়।"
+            }
+          ],
+          "remember": [
+            "একটি ডকুমেন্টের স্কোর হলো সব তালিকা জুড়ে <code>1/(k + rank)</code>-এর যোগফল।",
+            "যে ডকুমেন্ট অনেক তালিকায় ভালো র‍্যাংক পায়, সে ওপরে ওঠে। তালিকাগুলোর মিলই ক্রম ঠিক করে।",
+            "k-এর ডিফল্ট আলাদা: পেপার ও Elasticsearch-এ ৬০, Qdrant-এর ডকসে ২। আগে নিজেরটা দেখে নিন।",
+            "কোডের নমুনায় মূল প্রশ্ন ও প্রতিটি ভ্যারিয়েন্টের কীওয়ার্ড তালিকা আর HyDE লেখা থেকে একটি এমবেডিং-সার্চ তালিকা মেলানো হয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1657,6 +2241,94 @@
       "bn": {
         "title": "মাল্টি-হপ রিট্রিভালের প্যাটার্ন: IRCoT, ReAct, Self-RAG, CRAG আর Adaptive-RAG",
         "sub": "কিছু প্রশ্নের উত্তর একবার রিট্রিভাল করে মেলে না: দ্বিতীয় সার্চ নির্ভর করে প্রথমটি কী পেল তার উপর। HotpotQA-র মতো মাল্টি-হপ বেঞ্চমার্ক ঠিক এটাই পরীক্ষা করে (Wikipedia থেকে ১১৩k প্রশ্ন-উত্তরের জোড়া, যেগুলোর জন্য একাধিক ডকুমেন্ট নিয়ে রিজনিং লাগে, আর প্রতিটির সাথে বাক্য-স্তরের সহায়ক তথ্য আছে)।<a class=\"cite\" href=\"#src28\">[২৮]</a>"
+      },
+      "basics": {
+        "en": {
+          "idea": "Some questions need more than one search, because the second search depends on what the first one found. <strong>Multi-hop retrieval</strong> lets a model search, think, and search again.",
+          "words": [
+            {
+              "term": "Multi-hop question",
+              "meaning": "A question that needs several documents to answer, where each search depends on what the one before it found."
+            },
+            {
+              "term": "HotpotQA",
+              "meaning": "A test set of 113k Wikipedia question-answer pairs that need reasoning over multiple documents."
+            },
+            {
+              "term": "Chain-of-thought (CoT)",
+              "meaning": "The model writing out its reasoning step by step before it answers."
+            },
+            {
+              "term": "IRCoT",
+              "meaning": "A method that alternates searching with CoT steps. Each reasoning sentence becomes the query for the next search."
+            },
+            {
+              "term": "ReAct",
+              "meaning": "A method that mixes reasoning steps with actions such as Wikipedia lookups."
+            },
+            {
+              "term": "Reflection tokens",
+              "meaning": "Special tokens that let the Self-RAG method's model critique the passages it found and its own output."
+            },
+            {
+              "term": "CRAG (Corrective RAG)",
+              "meaning": "A method where a small evaluator rates how good the retrieval is. If it is poor, the system searches the web."
+            },
+            {
+              "term": "Adaptive-RAG",
+              "meaning": "A method where a small classifier guesses how hard a question is, then picks no retrieval, one-step retrieval, or repeated retrieval."
+            }
+          ],
+          "remember": [
+            "In IRCoT, each reasoning sentence becomes the next query. The paper reports retrieval gains of 11-21 points.",
+            "Self-RAG lets the model decide when to retrieve and check its own output.",
+            "CRAG falls back to web search when retrieval from the corpus is not good enough.",
+            "Adaptive-RAG sends each query down a path that matches how complex it is."
+          ]
+        },
+        "bn": {
+          "idea": "কিছু প্রশ্নের উত্তর পেতে একবার খোঁজা যথেষ্ট নয়, কারণ দ্বিতীয় খোঁজ নির্ভর করে প্রথম খোঁজের ফলাফলের ওপর। <strong>মাল্টি-হপ রিট্রিভাল</strong>-এ মডেল খোঁজে, ভাবে, আবার খোঁজে।",
+          "words": [
+            {
+              "term": "মাল্টি-হপ প্রশ্ন (multi-hop question)",
+              "meaning": "এমন প্রশ্ন, যার উত্তর পেতে একাধিক ডকুমেন্ট লাগে, আর প্রতিটি খোঁজ নির্ভর করে আগের খোঁজের ওপর।"
+            },
+            {
+              "term": "HotpotQA",
+              "meaning": "১১৩ হাজার Wikipedia প্রশ্নোত্তরের একটি পরীক্ষার সেট, যেগুলোর উত্তরে একাধিক ডকুমেন্ট জুড়ে যুক্তি করতে হয়।"
+            },
+            {
+              "term": "চেইন-অফ-থট (chain-of-thought, CoT)",
+              "meaning": "উত্তর দেওয়ার আগে মডেলের ধাপে ধাপে নিজের যুক্তি লিখে ফেলা।"
+            },
+            {
+              "term": "IRCoT",
+              "meaning": "যে পদ্ধতি খোঁজা আর CoT-এর ধাপ পালা করে চালায়। প্রতিটি যুক্তির বাক্য পরের খোঁজের কুয়েরি হয়।"
+            },
+            {
+              "term": "ReAct",
+              "meaning": "যে পদ্ধতি যুক্তির ধাপের সাথে Wikipedia লুকআপের মতো অ্যাকশন মিশিয়ে চলে।"
+            },
+            {
+              "term": "রিফ্লেকশন টোকেন (reflection tokens)",
+              "meaning": "বিশেষ টোকেন, যা দিয়ে Self-RAG পদ্ধতির মডেল পাওয়া লেখাগুলো আর নিজের উত্তর যাচাই করে।"
+            },
+            {
+              "term": "CRAG (Corrective RAG)",
+              "meaning": "যে পদ্ধতিতে একটি ছোট ইভ্যালুয়েটর রিট্রিভাল কতটা ভালো তা মাপে। খারাপ হলে সিস্টেম ওয়েবে খোঁজে।"
+            },
+            {
+              "term": "Adaptive-RAG",
+              "meaning": "যে পদ্ধতিতে একটি ছোট ক্লাসিফায়ার প্রশ্ন কতটা কঠিন তা আন্দাজ করে, তারপর রিট্রিভাল-ছাড়া, এক-ধাপ বা বহু-ধাপের পথ বেছে দেয়।"
+            }
+          ],
+          "remember": [
+            "IRCoT-তে প্রতিটি যুক্তির বাক্য পরের কুয়েরি হয়। পেপারে রিট্রিভালে ১১-২১ পয়েন্ট উন্নতির কথা আছে।",
+            "Self-RAG-এ মডেল নিজেই ঠিক করে কখন রিট্রিভ করবে, আর নিজের উত্তর যাচাই করে।",
+            "কর্পাস থেকে রিট্রিভাল যথেষ্ট ভালো না হলে CRAG ওয়েব সার্চে ফিরে যায়।",
+            "Adaptive-RAG প্রতিটি প্রশ্নকে তার জটিলতা অনুযায়ী আলাদা পথে পাঠায়।"
+          ]
+        }
       },
       "body": [
         {
@@ -1852,6 +2524,78 @@
         "title": "এজেন্টিক রিট্রিভাল: ওয়ার্কফ্লো, এজেন্ট আর তার খরচ",
         "sub": "<strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফলাফল যথেষ্ট ভালো কি না, আর কখন থামবে। এর দাম: বেশি LLM কল, বেশি ল্যাটেন্সি, আর সিস্টেম ডিবাগ করা কঠিন।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Agentic retrieval</strong> lets the model decide whether to search, what to search for, and when to stop. It can help, but it costs more calls and time, and it is harder to debug.",
+          "words": [
+            {
+              "term": "Agentic retrieval",
+              "meaning": "Retrieval where the model itself decides whether to retrieve, what to search for, and whether the results are good enough."
+            },
+            {
+              "term": "Workflow",
+              "meaning": "A system where the LLM and tools follow steps that your code fixed in advance."
+            },
+            {
+              "term": "Agent",
+              "meaning": "A system where the LLM directs its own steps and its own use of tools."
+            },
+            {
+              "term": "<code>file_search</code>",
+              "meaning": "OpenAI's hosted search tool in the Responses API. The model chooses when to call it, and it searches by meaning and by keywords."
+            },
+            {
+              "term": "Subagent",
+              "meaning": "A helper agent started by a lead agent. Several subagents can search at the same time."
+            },
+            {
+              "term": "Step limit and stopping rule",
+              "meaning": "A hard cap on how many rounds a loop may run, plus a rule that says when to stop."
+            }
+          ],
+          "remember": [
+            "Start simple. One well-tuned LLM call with retrieval is often enough.",
+            "Anthropic reports that its agents used about 4x the tokens of chat, and its multi-agent system about 15x.",
+            "Give every loop a hard step limit and a stopping rule, or a confused model keeps searching.",
+            "Track cost per answered question, because agentic systems multiply tokens and latency."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>এজেন্টিক রিট্রিভাল</strong>-এ মডেল নিজেই ঠিক করে খুঁজবে কি না, কী খুঁজবে, আর কখন থামবে। এতে ভালো ফল আসতে পারে, কিন্তু কল আর সময় বেশি লাগে, ডিবাগও কঠিন হয়।",
+          "words": [
+            {
+              "term": "এজেন্টিক রিট্রিভাল (agentic retrieval)",
+              "meaning": "যে রিট্রিভালে মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, আর ফল যথেষ্ট ভালো কি না।"
+            },
+            {
+              "term": "ওয়ার্কফ্লো (workflow)",
+              "meaning": "যে সিস্টেমে LLM আর টুল এমন ধাপে চলে, যা আপনার কোড আগে থেকেই ঠিক করে রেখেছে।"
+            },
+            {
+              "term": "এজেন্ট (agent)",
+              "meaning": "যে সিস্টেমে LLM নিজের ধাপ আর নিজের টুল ব্যবহার নিজেই ঠিক করে।"
+            },
+            {
+              "term": "<code>file_search</code>",
+              "meaning": "OpenAI-এর Responses API-র হোস্টেড সার্চ টুল। মডেল নিজে ঠিক করে কখন ডাকবে; এটি অর্থ আর কিওয়ার্ড দুই ভাবেই খোঁজে।"
+            },
+            {
+              "term": "সাবএজেন্ট (subagent)",
+              "meaning": "প্রধান এজেন্টের চালু করা সহকারী এজেন্ট। কয়েকটি সাবএজেন্ট একসাথে খুঁজতে পারে।"
+            },
+            {
+              "term": "ধাপের সীমা ও থামার শর্ত (step limit, stopping rule)",
+              "meaning": "লুপ সর্বোচ্চ কত রাউন্ড চলবে তার কড়া সীমা, আর কখন থামতে হবে তার নিয়ম।"
+            }
+          ],
+          "remember": [
+            "সহজ থেকে শুরু করুন। রিট্রিভাল সহ একটি ভালোভাবে সাজানো LLM কলই প্রায়ই যথেষ্ট।",
+            "Anthropic-এর রিপোর্টে তাদের এজেন্ট চ্যাটের প্রায় ৪x টোকেন খরচ করেছে, আর তাদের মাল্টি-এজেন্ট সিস্টেম প্রায় ১৫x।",
+            "প্রতিটি লুপে কড়া ধাপের সীমা আর থামার শর্ত দিন, নইলে বিভ্রান্ত মডেল খুঁজতেই থাকে।",
+            "প্রতিটি উত্তরের খরচ মাপুন, কারণ এজেন্টিক সিস্টেমে টোকেন আর ল্যাটেন্সি কয়েক গুণ বাড়ে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2029,6 +2773,80 @@
         "title": "রিরেংকার কীভাবে স্কোর করে: বাই-এনকোডার, ক্রস-এনকোডার আর লেট ইন্টারঅ্যাকশন",
         "sub": "প্রথম ধাপের রিট্রিভাল (BM25, ডেন্স ভেক্টর, বা দুটোই) বিশাল কর্পাসে দ্রুত চলার জন্য বানানো। তাই সে প্রতিটি ডকুমেন্টের স্কোর দেয় কুয়েরি আর ডকুমেন্ট একসাথে না দেখেই। <strong>রিরেংকার</strong> দ্বিতীয় ধাপের মডেল, যে দুটো একসাথে দেখে: ছোট ক্যান্ডিডেট তালিকা নিয়ে আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে সেটা নতুন করে সাজায়।"
       },
+      "basics": {
+        "en": {
+          "idea": "A quick first search is fast but not very exact. A <strong>reranker</strong> takes its short list and re-orders it with a more accurate score, by reading the question and each document together.",
+          "words": [
+            {
+              "term": "Reranker",
+              "meaning": "A second-stage model that looks at the question and a document together, then re-orders the short candidate list by relevance."
+            },
+            {
+              "term": "Bi-encoder",
+              "meaning": "A model that turns each text into numbers separately, then compares the two lists of numbers by how similar they are. It is fast."
+            },
+            {
+              "term": "Cross-encoder",
+              "meaning": "A model that reads the question and document together and outputs one score. It is more accurate but slower."
+            },
+            {
+              "term": "Late interaction (ColBERT)",
+              "meaning": "A middle way. Question and document are encoded separately, so document vectors can be computed ahead of time, but matching happens per token."
+            },
+            {
+              "term": "MaxSim",
+              "meaning": "For each question token, find its best match among the document's tokens, then add up those best scores."
+            },
+            {
+              "term": "FLOPs (floating-point operations)",
+              "meaning": "A count of how many arithmetic steps a computer must do. Fewer FLOPs means less work."
+            }
+          ],
+          "remember": [
+            "A full system is a first-stage retriever followed by a reranker.",
+            "A cross-encoder needs about 50 million comparisons, roughly 65 hours, to cluster 10,000 sentences.",
+            "ColBERT reports about 170x faster and 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality.",
+            "These speed figures come from the paper's own setup, not your hardware.",
+            "Late interaction stores one vector per token, which costs index space."
+          ]
+        },
+        "bn": {
+          "idea": "প্রথম ধাপের খোঁজ দ্রুত, কিন্তু খুব নিখুঁত নয়। <strong>রিরেংকার</strong> সেই ছোট তালিকা নেয় এবং প্রশ্ন আর প্রতিটি ডকুমেন্ট একসাথে পড়ে আরও নিখুঁত স্কোর দিয়ে নতুন করে সাজায়।",
+          "words": [
+            {
+              "term": "রিরেংকার (reranker)",
+              "meaning": "দ্বিতীয় ধাপের মডেল, যা প্রশ্ন আর ডকুমেন্ট একসাথে দেখে ছোট ক্যান্ডিডেট তালিকাটি প্রাসঙ্গিকতা অনুযায়ী নতুন করে সাজায়।"
+            },
+            {
+              "term": "বাই-এনকোডার (bi-encoder)",
+              "meaning": "যে মডেল প্রতিটি লেখাকে আলাদাভাবে সংখ্যায় বদলায়, তারপর সংখ্যার দুটি তালিকা কতটা মিলে যায় তা মাপে। এটি দ্রুত।"
+            },
+            {
+              "term": "ক্রস-এনকোডার (cross-encoder)",
+              "meaning": "যে মডেল প্রশ্ন আর ডকুমেন্ট একসাথে পড়ে একটি স্কোর দেয়। এটি বেশি নিখুঁত, কিন্তু ধীর।"
+            },
+            {
+              "term": "লেট ইন্টারঅ্যাকশন (late interaction, ColBERT)",
+              "meaning": "মাঝামাঝি পথ। প্রশ্ন আর ডকুমেন্ট আলাদা এনকোড হয়, তাই ডকুমেন্টের ভেক্টর আগেই হিসাব করে রাখা যায়, কিন্তু মেলানো হয় টোকেন ধরে ধরে।"
+            },
+            {
+              "term": "MaxSim",
+              "meaning": "প্রশ্নের প্রতিটি টোকেনের জন্য ডকুমেন্টের সবচেয়ে ভালো মেলা টোকেন খুঁজে, সেই সেরা স্কোরগুলো যোগ করা।"
+            },
+            {
+              "term": "FLOPs (floating-point operations)",
+              "meaning": "কম্পিউটারকে কতগুলো হিসাবের ধাপ করতে হয়, তার গণনা। FLOPs কম মানে কাজ কম।"
+            }
+          ],
+          "remember": [
+            "পুরো সিস্টেম হলো প্রথম ধাপের রিট্রিভার, তারপর একটি রিরেংকার।",
+            "ক্রস-এনকোডারে ১০,০০০ বাক্য ক্লাস্টার করতে প্রায় ৫ কোটি তুলনা লাগে, প্রায় ৬৫ ঘণ্টা।",
+            "ColBERT-এর রিপোর্টে BERT রিরেংকারের চেয়ে প্রতি কুয়েরিতে প্রায় ১৭০x দ্রুত আর ১৪,০০০x কম FLOPs, কাছাকাছি মান বজায় রেখেই।",
+            "এই গতির হিসাব পেপারের নিজস্ব সেটআপ থেকে নেওয়া, আপনার হার্ডওয়্যারের নয়।",
+            "লেট ইন্টারঅ্যাকশনে প্রতি টোকেনে একটি ভেক্টর রাখতে হয়, তাই ইনডেক্সের জায়গা বেশি লাগে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2151,6 +2969,86 @@
       "bn": {
         "title": "রিরেংকার ব্যবহার করা: দুই ধাপের ফানেল, Cohere, Voyage আর BGE",
         "sub": "Sentence-Transformers এটাকেই সুপারিশ করা প্যাটার্ন হিসেবে লিখেছে: বাই-এনকোডার টপ-k ক্যান্ডিডেট রিট্রিভ করে, তারপর ক্রস-এনকোডার তাদের রিরেংক করে।<a class=\"cite\" href=\"#src43\">[৪৩]</a> হোস্টেড অপশনের মধ্যে আছে Cohere Rerank আর Voyage রিরেংকার, আর ওপেন-ওয়েটের মধ্যে BAAI-র BGE রিরেংকার।<a class=\"cite\" href=\"#src44\">[৪৪]</a><a class=\"cite\" href=\"#src45\">[৪৫]</a><a class=\"cite\" href=\"#src46\">[৪৬]</a>"
+      },
+      "basics": {
+        "en": {
+          "idea": "A good setup works in two stages: a cheap search over everything, then a <strong>reranker</strong> on only the survivors. You tune how many results to pass on, using your own test questions.",
+          "words": [
+            {
+              "term": "Two-stage funnel",
+              "meaning": "A cheap first search over the whole corpus, then a reranker on only the N survivors. The top k go to the LLM."
+            },
+            {
+              "term": "Cross-encoder",
+              "meaning": "A model that reads the question and one document together. It makes one pass per pair, so its cost grows in line with N."
+            },
+            {
+              "term": "<code>top_n</code>",
+              "meaning": "Cohere's optional setting for how many top-ranked documents to return."
+            },
+            {
+              "term": "<code>max_tokens_per_doc</code>",
+              "meaning": "Cohere's setting for the most tokens read from each document. The default is 4,096."
+            },
+            {
+              "term": "<code>truncation</code>",
+              "meaning": "Voyage's setting for cutting a document that is too long."
+            },
+            {
+              "term": "Sigmoid",
+              "meaning": "A math function that squeezes any score into the range 0 to 1."
+            },
+            {
+              "term": "<code>use_fp16</code>",
+              "meaning": "A BGE setting that makes the model run faster, with slightly lower quality."
+            }
+          ],
+          "remember": [
+            "Tune N and k on your own evaluation set; doubling N roughly doubles reranking latency and cost.",
+            "A reranker can only re-order what stage 1 returned. It cannot recover a missing passage.",
+            "Rerank chunks, not whole files, because token limits cut long documents.",
+            "Scores from different rerankers share no common scale, so pick score thresholds per model and per corpus."
+          ]
+        },
+        "bn": {
+          "idea": "ভালো সেটআপ দুই ধাপে চলে: আগে সব কিছুর ওপর সস্তা খোঁজ, তারপর শুধু টিকে থাকাগুলোর ওপর <strong>রিরেংকার</strong>। কয়টি ফল পরের ধাপে যাবে, তা নিজের টেস্ট প্রশ্ন দিয়ে ঠিক করুন।",
+          "words": [
+            {
+              "term": "দুই ধাপের ফানেল (two-stage funnel)",
+              "meaning": "পুরো কর্পাসে সস্তা প্রথম খোঁজ, তারপর টিকে থাকা N-টির ওপর রিরেংকার। সেরা k-টি যায় LLM-এর কাছে।"
+            },
+            {
+              "term": "ক্রস-এনকোডার (cross-encoder)",
+              "meaning": "যে মডেল প্রশ্ন আর একটি ডকুমেন্ট একসাথে পড়ে। প্রতি জোড়ায় একবার চলে, তাই খরচ N-এর সাথে সমান তালে বাড়ে।"
+            },
+            {
+              "term": "<code>top_n</code>",
+              "meaning": "Cohere-র ঐচ্ছিক সেটিং, যা ঠিক করে সেরা কয়টি ডকুমেন্ট ফেরত আসবে।"
+            },
+            {
+              "term": "<code>max_tokens_per_doc</code>",
+              "meaning": "Cohere-র সেটিং, যা ঠিক করে প্রতিটি ডকুমেন্টের সর্বোচ্চ কত টোকেন পড়া হবে। ডিফল্ট ৪,০৯৬।"
+            },
+            {
+              "term": "<code>truncation</code>",
+              "meaning": "Voyage-এর সেটিং, যা বেশি লম্বা ডকুমেন্ট কেটে ছোট করে।"
+            },
+            {
+              "term": "সিগময়েড (sigmoid)",
+              "meaning": "একটি গাণিতিক ফাংশন, যা যেকোনো স্কোরকে ০ থেকে ১-এর মধ্যে নিয়ে আসে।"
+            },
+            {
+              "term": "<code>use_fp16</code>",
+              "meaning": "BGE-র সেটিং, যাতে মডেল দ্রুত চলে, তবে মান সামান্য কমে।"
+            }
+          ],
+          "remember": [
+            "নিজের ইভ্যালুয়েশন সেটে N আর k ঠিক করুন; N দ্বিগুণ করলে রিরেংকিংয়ের ল্যাটেন্সি আর খরচ প্রায় দ্বিগুণ হয়।",
+            "রিরেংকার শুধু প্রথম ধাপের আনা ফলই নতুন করে সাজায়। যে অংশ আসেনি, তা ফেরাতে পারে না।",
+            "পুরো ফাইলের বদলে চাঙ্ক রিরেংক করুন, কারণ টোকেন সীমায় লম্বা ডকুমেন্ট কাটা পড়ে।",
+            "আলাদা রিরেংকারের স্কোর একই স্কেলে নয়, তাই থ্রেশহোল্ড মডেল আর কর্পাস ধরে ঠিক করুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -2348,6 +3246,86 @@
       "bn": {
         "title": "ভেক্টর সার্চে ফিল্টার: প্রি-ফিল্টার, পোস্ট-ফিল্টার আর প্রতিটি ইঞ্জিনের আচরণ",
         "sub": "আসল প্রশ্নে অর্থের সাথে শর্তও মেশানো থাকে: “২০২৫ সালে <em>এন্টারপ্রাইজ</em> কাস্টমারদের রিফান্ড পলিসি” বা “2000-এর পরের, রেটিং 8-এর বেশি সায়েন্স-ফিকশন সিনেমা”। শুধু ভেক্টর সিমিলারিটি দিয়ে <code>year &gt; 2000</code> জোর করে খাটানো যায় না। তাই প্রোডাকশন রিট্রিভাল প্রতিটি চাঙ্কে মেটাডেটা জুড়ে তার উপর ফিল্টার করে। কঠিন দিকটা হলো, ফিল্টার অ্যাপ্রক্সিমেট নিয়ারেস্ট-নেইবার (ANN) ইনডেক্সের সাথে ভালোভাবে কাজ করে না, আর প্রতিটি ভেক্টর ডেটাবেস এটা আলাদা ভাবে সামলায়।<a class=\"cite\" href=\"#src50\">[৫০]</a><a class=\"cite\" href=\"#src51\">[৫১]</a>"
+      },
+      "basics": {
+        "en": {
+          "idea": "Real questions mix meaning with hard rules, like a year or a rating. Each piece of text carries labels, and a <strong>metadata filter</strong> uses them. But filtering can disturb the fast search, and each engine handles that differently.",
+          "words": [
+            {
+              "term": "Metadata",
+              "meaning": "Labels stored with each piece of text, such as year or customer type. A filter uses them to keep only the right pieces."
+            },
+            {
+              "term": "Approximate nearest-neighbour (ANN) index",
+              "meaning": "A structure for fast search that finds points (text stored as vectors) very close to the query, though not always the exact closest ones."
+            },
+            {
+              "term": "HNSW graph",
+              "meaning": "A linked map of points. The search walks along its links to find close matches."
+            },
+            {
+              "term": "Pre-filtering",
+              "meaning": "Keeping only matching points before the search runs. At scale, Qdrant says it breaks too many links in the graph and lowers accuracy."
+            },
+            {
+              "term": "Post-filtering",
+              "meaning": "Searching first, then throwing away results that do not match. A strict filter can leave fewer results than you asked for, or none."
+            },
+            {
+              "term": "Filterable HNSW",
+              "meaning": "Qdrant's fix: it adds extra links between the points that are left after filtering."
+            },
+            {
+              "term": "ACORN",
+              "meaning": "A method that repairs the graph's connections at query time, so filtered search still works. Weaviate uses it by default from v1.34+."
+            }
+          ],
+          "remember": [
+            "Vector similarity alone cannot enforce a hard rule like a year after 2000, so you filter on metadata.",
+            "Post-filtering can return fewer results than you asked for (k), or none, and then the LLM answers from nothing.",
+            "Check the number of results, not only the scores.",
+            "Index the fields you filter on. Without an index, filtering forces scans or fallbacks."
+          ]
+        },
+        "bn": {
+          "idea": "বাস্তব প্রশ্নে অর্থের সাথে কঠিন শর্তও থাকে, যেমন সাল বা রেটিং। প্রতিটি লেখার টুকরোর সাথে লেবেল থাকে, আর <strong>মেটাডেটা ফিল্টার</strong> সেগুলো কাজে লাগায়। কিন্তু ফিল্টার দ্রুত সার্চে বাধা দিতে পারে, আর প্রতিটি ইঞ্জিন তা আলাদাভাবে সামলায়।",
+          "words": [
+            {
+              "term": "মেটাডেটা (metadata)",
+              "meaning": "প্রতিটি লেখার টুকরোর সাথে রাখা লেবেল, যেমন সাল বা গ্রাহকের ধরন। ফিল্টার এগুলো দিয়ে শুধু সঠিক টুকরো রাখে।"
+            },
+            {
+              "term": "ANN (approximate nearest-neighbour) ইনডেক্স",
+              "meaning": "দ্রুত সার্চের কাঠামো, যা প্রশ্নের খুব কাছের পয়েন্ট (ভেক্টর হিসেবে রাখা লেখা) খোঁজে, তবে সবসময় ঠিক সবচেয়ে কাছেরটি নয়।"
+            },
+            {
+              "term": "HNSW গ্রাফ (HNSW graph)",
+              "meaning": "পয়েন্টদের লিংক দিয়ে জোড়া একটি মানচিত্র। সার্চ সেই লিংক ধরে চলে কাছের মিল খোঁজে।"
+            },
+            {
+              "term": "প্রি-ফিল্টার (pre-filtering)",
+              "meaning": "সার্চের আগেই শুধু মিলে যাওয়া পয়েন্ট রাখা। Qdrant বলছে, বড় স্কেলে এতে গ্রাফের অনেক লিংক ভেঙে অ্যাকিউরেসি কমে।"
+            },
+            {
+              "term": "পোস্ট-ফিল্টার (post-filtering)",
+              "meaning": "আগে সার্চ, পরে না-মেলা ফল বাদ দেওয়া। কড়া ফিল্টারে চাওয়ার চেয়ে কম ফল থাকতে পারে, এমনকি শূন্যও।"
+            },
+            {
+              "term": "ফিল্টারেবল HNSW (filterable HNSW)",
+              "meaning": "Qdrant-এর সমাধান: ফিল্টারের পরে যে পয়েন্টগুলো থাকে, তাদের মধ্যে বাড়তি লিংক বসানো।"
+            },
+            {
+              "term": "ACORN",
+              "meaning": "কুয়েরির সময় গ্রাফের সংযোগ মেরামত করার পদ্ধতি, যাতে ফিল্টার করা সার্চও কাজ করে। Weaviate v1.34+ থেকে এটি ডিফল্ট রেখেছে।"
+            }
+          ],
+          "remember": [
+            "শুধু ভেক্টর সিমিলারিটি দিয়ে ২০০০ সালের পরের মতো কঠিন শর্ত মানানো যায় না, তাই মেটাডেটা দিয়ে ফিল্টার করতে হয়।",
+            "পোস্ট-ফিল্টারে যতগুলো ফল চেয়েছেন (k) তার চেয়ে কম আসতে পারে, এমনকি শূন্য, আর তখন LLM ফাঁকা থেকে উত্তর বানায়।",
+            "শুধু স্কোর নয়, কয়টি ফল এল তাও দেখুন।",
+            "যে ফিল্ডে ফিল্টার দেবেন তার ইনডেক্স রাখুন। ইনডেক্স না থাকলে স্ক্যান বা ফলব্যাকে নামতে হয়।"
+          ]
+        }
       },
       "body": [
         {
@@ -2588,6 +3566,78 @@
         "title": "সেলফ-কুয়েরি আর টেক্সট-টু-SQL: LLM-কে দিয়ে ফিল্টার বা কুয়েরি লেখানো",
         "sub": "ব্যবহারকারী প্রাকৃতিক ভাষায় লেখে, ফিল্টার JSON-এ নয়, তাই প্রোডাকশন রিট্রিভাল LLM-কে দিয়েই ফিল্টারটা লিখিয়ে নিতে পারে (সেলফ-কুয়েরি)। গোনা বা মোট বের করার প্রশ্ন হলে কাজটা ডেটাবেসকে দিয়ে দেয়।"
       },
+      "basics": {
+        "en": {
+          "idea": "Users type plain sentences, not filter code. In <strong>self-querying</strong>, an LLM turns the sentence into a search plus a filter. For counts and totals, a database does the exact work.",
+          "words": [
+            {
+              "term": "Self-querying",
+              "meaning": "An LLM reads the user's sentence and splits it into a search query and a structured filter, then runs both."
+            },
+            {
+              "term": "Metadata filter",
+              "meaning": "A rule on the labels stored with each piece of text, such as year above 2000."
+            },
+            {
+              "term": "Schema",
+              "meaning": "The description of which fields exist, their types and allowed operators; for a database, its tables and columns. The LLM must be told it."
+            },
+            {
+              "term": "Text-to-SQL",
+              "meaning": "An LLM writes a database query in SQL from a plain question. It suits exact work like counts, sums and joins (combining tables)."
+            },
+            {
+              "term": "Spider",
+              "meaning": "The standard test for text-to-SQL, with 10,181 questions over 200 databases. Its test databases have schemas the model never saw."
+            },
+            {
+              "term": "Read-only credentials",
+              "meaning": "A database login that can read data but cannot change it."
+            }
+          ],
+          "remember": [
+            "Check the filter the LLM writes against the schema before it reaches the database.",
+            "Counts, sums and joins are exact computations. Use text-to-SQL, not similarity search.",
+            "In Elasticsearch, put the filter inside <code>knn</code> so the number of results you asked for (k) comes back.",
+            "Check generated SQL: read-only credentials, allow-listed tables, row limits. Log every query."
+          ]
+        },
+        "bn": {
+          "idea": "ব্যবহারকারী সাধারণ বাক্য লেখে, ফিল্টার কোড নয়। <strong>সেলফ-কুয়েরিতে</strong> LLM সেই বাক্যকে একটি সার্চ আর একটি ফিল্টারে ভাঙে। গণনা বা যোগফলের নির্ভুল কাজটি করে ডেটাবেস।",
+          "words": [
+            {
+              "term": "সেলফ-কুয়েরি (self-querying)",
+              "meaning": "LLM ব্যবহারকারীর বাক্য পড়ে একটি সার্চ কুয়েরি আর একটি স্ট্রাকচার্ড ফিল্টারে ভাগ করে, তারপর দুটোই চালায়।"
+            },
+            {
+              "term": "মেটাডেটা ফিল্টার (metadata filter)",
+              "meaning": "প্রতিটি লেখার টুকরোর সাথে রাখা লেবেলের ওপর শর্ত, যেমন সাল ২০০০-এর বেশি।"
+            },
+            {
+              "term": "স্কিমা (schema)",
+              "meaning": "কোন ফিল্ড আছে, তাদের ধরন কী, আর কোন অপারেটর চলবে তার বর্ণনা; ডেটাবেসের ক্ষেত্রে তার টেবিল ও কলাম। LLM-কে এটা জানাতে হয়।"
+            },
+            {
+              "term": "টেক্সট-টু-SQL (text-to-SQL)",
+              "meaning": "সাধারণ প্রশ্ন থেকে LLM ডেটাবেসের SQL কুয়েরি লেখে। গণনা, যোগফল, জয়েনের (টেবিল জোড়া লাগানো) মতো নির্ভুল কাজে এটা লাগে।"
+            },
+            {
+              "term": "Spider",
+              "meaning": "টেক্সট-টু-SQL-এর প্রচলিত পরীক্ষা, ২০০টি ডেটাবেসে ১০,১৮১টি প্রশ্ন। টেস্ট ডেটাবেসের স্কিমা মডেল আগে দেখেনি।"
+            },
+            {
+              "term": "রিড-অনলি অধিকার (read-only credentials)",
+              "meaning": "ডেটাবেসে এমন লগইন, যা দিয়ে ডেটা পড়া যায় কিন্তু বদলানো যায় না।"
+            }
+          ],
+          "remember": [
+            "LLM-এর লেখা ফিল্টার ডেটাবেসে যাওয়ার আগে স্কিমার সাথে মিলিয়ে যাচাই করুন।",
+            "গণনা, যোগফল, জয়েন নির্ভুল হিসাব। এতে টেক্সট-টু-SQL লাগে, সিমিলারিটি সার্চ নয়।",
+            "Elasticsearch-এ ফিল্টার <code>knn</code>-এর ভেতরে দিলে যতগুলো ফল চেয়েছেন (k), ততগুলোই আসে।",
+            "বানানো SQL যাচাই করুন: রিড-অনলি অধিকার, অনুমোদিত টেবিল, সারির সীমা। প্রতিটি কুয়েরি লগ করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2702,6 +3752,86 @@
       "bn": {
         "title": "GraphRAG আর নলেজ গ্রাফ দিয়ে শক্তিবৃদ্ধি",
         "sub": "ভেক্টর সার্চ এমন চাঙ্ক ফেরত দেয় যা দেখতে কুয়েরির মতো। কিন্তু “এই ডেটাসেটের মূল বিষয়গুলো কী?” — এমন “গ্লোবাল” প্রশ্নে সে হোঁচট খায়, কারণ কোনো একটি চাঙ্কই এর উত্তর দেয় না। Microsoft-এর GraphRAG এটাকে কুয়েরি-কেন্দ্রিক সামারাইজেশন হিসেবে দেখে: একটি LLM এন্টিটি নলেজ গ্রাফ বানায়, সম্পর্কিত এন্টিটির দলগুলোর (কমিউনিটি) সারসংক্ষেপ আগে থেকেই তৈরি করে রাখে, আর কুয়েরির সময় সেই সারসংক্ষেপ থেকে আংশিক উত্তর জুড়ে দেয়।<a class=\"cite\" href=\"#src37\">[৩৭]</a> হালকা ধরনগুলো (LightRAG<a class=\"cite\" href=\"#src38\">[৩৮]</a>, HippoRAG<a class=\"cite\" href=\"#src39\">[৩৯]</a>) আর গ্রাফ-ডেটাবেস টুলিং (Neo4j<a class=\"cite\" href=\"#src40\">[৪০]</a>) একই ফাঁক পূরণ করতে চায়, তবে খরচের হিসাব আলাদা।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Vector search finds pieces of text that look like the question, but no single piece answers big questions like the main themes of a dataset. <strong>GraphRAG</strong> builds a map of connected things and pre-writes summaries of it.",
+          "words": [
+            {
+              "term": "Query-focused summarization",
+              "meaning": "Writing a summary aimed at answering one question. GraphRAG treats whole-dataset questions this way."
+            },
+            {
+              "term": "Knowledge graph",
+              "meaning": "A map of entities, such as people or companies, and how they relate to each other."
+            },
+            {
+              "term": "Community",
+              "meaning": "A group of related entities in the graph. GraphRAG writes a summary for each group before any question arrives."
+            },
+            {
+              "term": "Leiden clustering",
+              "meaning": "A method that groups closely connected points in the graph, layer by layer."
+            },
+            {
+              "term": "Global and local search",
+              "meaning": "Global search reasons over community summaries. Local search starts from matched entities and expands to their neighbours."
+            },
+            {
+              "term": "Multi-hop question",
+              "meaning": "A question that needs several linked facts about connected entities to answer."
+            },
+            {
+              "term": "Personalized PageRank",
+              "meaning": "Scores which graph points matter most relative to chosen starting points, such as entities in the question. HippoRAG uses it on an LLM-built graph."
+            }
+          ],
+          "remember": [
+            "Graph papers report their gains on whole-corpus and multi-hop questions. For simple lookups, a plain vector or hybrid pipeline is the natural default.",
+            "The main cost is LLM extraction and summarization at index time. Microsoft warns it can be expensive.",
+            "Start on a small slice of the corpus, and compare against a plain hybrid baseline.",
+            "Missed or merged entities hurt everything after, and summaries go stale when documents change unless you re-index."
+          ]
+        },
+        "bn": {
+          "idea": "ভেক্টর সার্চ প্রশ্নের মতো দেখতে লেখার টুকরো আনে, কিন্তু ডেটাসেটের প্রধান থিমের মতো বড় প্রশ্নের উত্তর কোনো একটি টুকরোয় থাকে না। <strong>GraphRAG</strong> সম্পর্কিত বিষয়ের একটি মানচিত্র বানায় আর তার সারসংক্ষেপ আগেই লিখে রাখে।",
+          "words": [
+            {
+              "term": "কুয়েরি-ফোকাসড সামারাইজেশন (query-focused summarization)",
+              "meaning": "একটি প্রশ্নের উত্তর দেওয়ার লক্ষ্যে সারসংক্ষেপ লেখা। GraphRAG পুরো ডেটাসেটের প্রশ্নকে এভাবে দেখে।"
+            },
+            {
+              "term": "নলেজ গ্রাফ (knowledge graph)",
+              "meaning": "এন্টিটির, যেমন মানুষ বা কোম্পানির, মানচিত্র, আর তাদের মধ্যে সম্পর্ক।"
+            },
+            {
+              "term": "কমিউনিটি (community)",
+              "meaning": "গ্রাফে সম্পর্কিত এন্টিটির একটি দল। প্রশ্ন আসার আগেই GraphRAG প্রতিটি দলের সারসংক্ষেপ লিখে রাখে।"
+            },
+            {
+              "term": "Leiden ক্লাস্টারিং (Leiden clustering)",
+              "meaning": "গ্রাফে ঘনিষ্ঠভাবে যুক্ত পয়েন্টদের স্তরে স্তরে দলে ভাগ করার পদ্ধতি।"
+            },
+            {
+              "term": "গ্লোবাল ও লোকাল সার্চ (global search, local search)",
+              "meaning": "গ্লোবাল সার্চ কমিউনিটি সারসংক্ষেপ থেকে ভাবে। লোকাল সার্চ মিলে যাওয়া এন্টিটি থেকে শুরু করে প্রতিবেশীতে ছড়ায়।"
+            },
+            {
+              "term": "মাল্টি-হপ প্রশ্ন (multi-hop question)",
+              "meaning": "যে প্রশ্নের উত্তরে সংযুক্ত এন্টিটির কয়েকটি জোড়া তথ্য লাগে।"
+            },
+            {
+              "term": "Personalized PageRank",
+              "meaning": "বেছে নেওয়া শুরুর পয়েন্ট (যেমন প্রশ্নের এন্টিটি) থেকে দেখলে গ্রাফের কোন পয়েন্ট বেশি গুরুত্বপূর্ণ, তা মাপার পদ্ধতি। HippoRAG এটি LLM-এর বানানো গ্রাফে ব্যবহার করে।"
+            }
+          ],
+          "remember": [
+            "গ্রাফ নিয়ে পেপারগুলো পুরো কর্পাস আর মাল্টি-হপ প্রশ্নে তাদের উন্নতির কথা জানায়। সাধারণ তথ্য খোঁজায় ভেক্টর বা হাইব্রিড পাইপলাইনই স্বাভাবিক ডিফল্ট।",
+            "মূল খরচ ইনডেক্সের সময়ের LLM এক্সট্র্যাকশন ও সামারাইজেশন। Microsoft নিজেই বলেছে তা ব্যয়বহুল হতে পারে।",
+            "কর্পাসের ছোট অংশ দিয়ে শুরু করুন, আর সাধারণ হাইব্রিড বেসলাইনের সাথে তুলনা করুন।",
+            "এন্টিটি মিস বা গুলিয়ে গেলে পরের সব কাজ নষ্ট হয়, আর ডকুমেন্ট বদলালে রি-ইনডেক্স না করলে সারসংক্ষেপ পুরোনো হয়ে যায়।"
+          ]
+        }
       },
       "body": [
         {
@@ -3020,6 +4150,78 @@
         "title": "ডকুমেন্ট পার্সিং পাইপলাইন: Docling, Unstructured, LlamaParse-এর তুলনা",
         "sub": "RAG সিস্টেম ততটাই ভালো, ইনডেক্স করা টেক্সট যতটা ভালো। অথচ কোম্পানির বেশিরভাগ জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ডেক আর স্প্রেডশিটে, পরিষ্কার স্ট্রিংয়ে নয়। <strong>পার্সিং পাইপলাইন</strong> এই ফাইলগুলোকে স্ট্রাকচার্ড এলিমেন্টে (হেডিং, প্যারাগ্রাফ, টেবিল, ফিগার) বদলায়, তারপর Markdown বা JSON-এ, যাতে চাঙ্কার সেটাকে বুদ্ধি করে ভাঙতে পারে। তিনটি বহুল ব্যবহৃত অপশন: Docling (IBM Research, MIT লাইসেন্স)<a class=\"cite\" href=\"#src58\">[৫৮]</a>, ওপেন-সোর্স Unstructured পার্টিশনার<a class=\"cite\" href=\"#src59\">[৫৯]</a> আর LlamaIndex-এর LlamaParse<a class=\"cite\" href=\"#src60\">[৬০]</a>।"
       },
+      "basics": {
+        "en": {
+          "idea": "A RAG system is only as good as the text it indexes. A <strong>parsing pipeline</strong> turns PDFs, scans and slides into clean, structured text before that text is split into pieces.",
+          "words": [
+            {
+              "term": "Parsing pipeline",
+              "meaning": "The steps that read a file and turn it into headings, paragraphs and tables, then into Markdown or JSON."
+            },
+            {
+              "term": "Chunker",
+              "meaning": "The tool that splits parsed text into smaller pieces for search."
+            },
+            {
+              "term": "Page layout and reading order",
+              "meaning": "Where headings, text and tables sit on a page, and the order in which a person would read them."
+            },
+            {
+              "term": "OCR (optical character recognition)",
+              "meaning": "Reading the text from a picture of a page, such as a scan."
+            },
+            {
+              "term": "DocLayNet",
+              "meaning": "The layout model Docling uses to work out where headings, text and tables sit on a page."
+            },
+            {
+              "term": "Strategy",
+              "meaning": "A setting in Unstructured that picks how a PDF is read: auto, fast, hi_res or ocr_only."
+            }
+          ],
+          "remember": [
+            "Everything after parsing builds on the parser's output, so garbled text means garbled answers.",
+            "Docling, Unstructured and LlamaParse differ in where they run, which files they read, and how they treat tables and scans.",
+            "In Unstructured, <code>hi_res</code> uses a layout model, and <code>ocr_only</code> is for scans.",
+            "The comparison comes from each project's own documentation or paper. It is not a benchmark."
+          ]
+        },
+        "bn": {
+          "idea": "RAG সিস্টেম ততটাই ভালো, যতটা ভালো টেক্সট সে ইনডেক্স করে। <strong>পার্সিং পাইপলাইন</strong> PDF, স্ক্যান ও স্লাইডকে পরিষ্কার, সাজানো টেক্সটে বদলায়, তারপর সেই টেক্সট টুকরো করা হয়।",
+          "words": [
+            {
+              "term": "পার্সিং পাইপলাইন (parsing pipeline)",
+              "meaning": "যে ধাপগুলো ফাইল পড়ে হেডিং, প্যারাগ্রাফ ও টেবিলে ভাঙে, তারপর Markdown বা JSON বানায়।"
+            },
+            {
+              "term": "চাঙ্কার (chunker)",
+              "meaning": "যে টুল পার্স করা টেক্সটকে সার্চের জন্য ছোট টুকরোয় ভাগ করে।"
+            },
+            {
+              "term": "পেজ লেআউট ও পড়ার ক্রম (page layout, reading order)",
+              "meaning": "পাতায় হেডিং, লেখা আর টেবিল কোথায় আছে, আর একজন মানুষ কোন ক্রমে সেগুলো পড়বে।"
+            },
+            {
+              "term": "OCR (optical character recognition)",
+              "meaning": "পাতার ছবি, যেমন স্ক্যান, থেকে লেখা পড়ে নেওয়া।"
+            },
+            {
+              "term": "DocLayNet",
+              "meaning": "Docling-এর লেআউট মডেল। পাতায় হেডিং, লেখা আর টেবিল কোথায় আছে তা এটি বোঝে।"
+            },
+            {
+              "term": "স্ট্র্যাটেজি (strategy)",
+              "meaning": "Unstructured-এর একটি সেটিং, যা ঠিক করে PDF কীভাবে পড়া হবে: auto, fast, hi_res বা ocr_only।"
+            }
+          ],
+          "remember": [
+            "পার্সিংয়ের পরের সব কাজ পার্সারের ফলের ওপর দাঁড়ায়, তাই গুলিয়ে যাওয়া টেক্সট মানে গুলিয়ে যাওয়া উত্তর।",
+            "Docling, Unstructured ও LlamaParse আলাদা হয় কোথায় চলে, কোন ফাইল পড়ে, আর টেবিল ও স্ক্যান কীভাবে সামলায় তাতে।",
+            "Unstructured-এ <code>hi_res</code> লেআউট মডেল ব্যবহার করে, আর <code>ocr_only</code> স্ক্যানের জন্য।",
+            "তুলনাটি প্রতিটি প্রজেক্টের নিজস্ব ডকুমেন্টেশন বা পেপার থেকে নেওয়া। এটি বেঞ্চমার্ক নয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -3197,6 +4399,94 @@
       "bn": {
         "title": "পার্সিং স্ট্র্যাটেজি বাছা আর ব্যর্থতার জন্য তৈরি থাকা",
         "sub": "কোন পার্সিং স্ট্র্যাটেজি মানাবে, তা ফাইলের ওপর নির্ভর করে: শুধু টেক্সটের PDF, টেবিলওয়ালা নথি, না স্ক্যান। পার্সিং ব্যর্থ হওয়ার কিছু উপায় ডকুমেন্টেশনেই লেখা আছে, তাই ইনডেক্স করার আগে একটা ফলব্যাক ঠিক করে রাখুন।"
+      },
+      "basics": {
+        "en": {
+          "idea": "The right way to read a file depends on the file: plain text, tables, or a scan. Reading can also fail in known ways, so plan a <strong>fallback</strong> before you build your search index.",
+          "words": [
+            {
+              "term": "Parsing",
+              "meaning": "Reading a file and turning its content into clean text and parts that a program can use."
+            },
+            {
+              "term": "Unstructured",
+              "meaning": "A tool that reads documents and returns typed pieces, such as text and tables. It lets you pick a strategy."
+            },
+            {
+              "term": "<code>hi_res</code>",
+              "meaning": "The Unstructured strategy for files with tables; the <code>auto</code> setting chooses it when tables are needed."
+            },
+            {
+              "term": "<code>fast</code>",
+              "meaning": "A strategy that only reads the selectable text layer already in the PDF."
+            },
+            {
+              "term": "<code>ocr_only</code>",
+              "meaning": "A strategy that only reads text from the picture of the page, so it can handle scans."
+            },
+            {
+              "term": "OCR (Optical Character Recognition)",
+              "meaning": "A way to turn a picture of text, such as a scan, into real text."
+            },
+            {
+              "term": "Text layer",
+              "meaning": "The real, selectable text stored inside a PDF. A plain scan has no such layer."
+            },
+            {
+              "term": "Docling",
+              "meaning": "An open-source toolkit that converts PDFs using a layout model and a table model."
+            }
+          ],
+          "remember": [
+            "Pick the strategy by file type: text-only, tables, or scan.",
+            "<code>fast</code> needs a text layer, so a scanned PDF gives nothing useful and shows no error.",
+            "Plan an OCR fallback: if the result is empty, re-run with <code>ocr_only</code> or a parser that reads page layout.",
+            "Check multi-column documents by eye, and test parsers on your own documents."
+          ]
+        },
+        "bn": {
+          "idea": "কোন ফাইল কীভাবে পড়তে হবে, তা ফাইলের ধরনের ওপর নির্ভর করে: সাধারণ টেক্সট, টেবিল, নাকি স্ক্যান। পড়তে গিয়ে জানা কিছু উপায়ে ভুলও হয়, তাই ইনডেক্স বানানোর আগেই একটি <strong>বিকল্প উপায়</strong> ঠিক করে রাখুন।",
+          "words": [
+            {
+              "term": "পার্সিং (parsing)",
+              "meaning": "ফাইল পড়ে তার ভেতরের লেখাকে পরিষ্কার টেক্সট ও অংশে বদলানো, যা প্রোগ্রাম কাজে লাগাতে পারে।"
+            },
+            {
+              "term": "Unstructured",
+              "meaning": "যে টুল ডকুমেন্ট পড়ে টেক্সট, টেবিলের মতো ধরন-ঠিক-করা অংশ ফেরত দেয়। এতে স্ট্র্যাটেজি বেছে নেওয়া যায়।"
+            },
+            {
+              "term": "<code>hi_res</code>",
+              "meaning": "টেবিলওয়ালা ফাইলের জন্য Unstructured-এর স্ট্র্যাটেজি; টেবিল দরকার হলে <code>auto</code> সেটিং এটি বেছে নেয়।"
+            },
+            {
+              "term": "<code>fast</code>",
+              "meaning": "যে স্ট্র্যাটেজি শুধু PDF-এ আগে থেকে থাকা, সিলেক্ট করা যায় এমন টেক্সট লেয়ার পড়ে।"
+            },
+            {
+              "term": "<code>ocr_only</code>",
+              "meaning": "যে স্ট্র্যাটেজি শুধু পাতার ছবি থেকে লেখা পড়ে, তাই স্ক্যানও সামলাতে পারে।"
+            },
+            {
+              "term": "OCR (Optical Character Recognition)",
+              "meaning": "লেখার ছবি, যেমন স্ক্যান, থেকে আসল টেক্সট বের করার উপায়।"
+            },
+            {
+              "term": "টেক্সট লেয়ার (text layer)",
+              "meaning": "PDF-এর ভেতরে থাকা আসল, সিলেক্ট করা যায় এমন টেক্সট। সাধারণ স্ক্যানে এই লেয়ার থাকে না।"
+            },
+            {
+              "term": "Docling",
+              "meaning": "ওপেন-সোর্স টুলকিট, যা লেআউট মডেল ও টেবিল মডেল দিয়ে PDF রূপান্তর করে।"
+            }
+          ],
+          "remember": [
+            "ফাইলের ধরন দেখে স্ট্র্যাটেজি বাছুন: শুধু টেক্সট, টেবিল, নাকি স্ক্যান।",
+            "<code>fast</code>-এর টেক্সট লেয়ার লাগে, তাই স্ক্যান করা PDF থেকে কাজের কিছু আসে না, অথচ কোনো এররও দেখায় না।",
+            "OCR বিকল্প রাখুন: ফল ফাঁকা হলে <code>ocr_only</code> বা পাতার লেআউট পড়তে পারে এমন পার্সার দিয়ে আবার চালান।",
+            "একাধিক কলামের নথি চোখে দেখে নিন, আর নিজের নথিতে পার্সার পরীক্ষা করুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -3377,6 +4667,86 @@
       "bn": {
         "title": "মাল্টিমোডাল RAG: ছবি, টেবিল, চার্ট",
         "sub": "উত্তর কোনো চার্ট, স্ক্যান করা টেবিল বা স্লাইডে থাকলে শুধু টেক্সট-ভিত্তিক RAG অন্ধ হয়ে যায়। মাল্টিমোডাল RAG এই জিনিসগুলোকে খোঁজার যোগ্য রাখে। তিনটি বড় নকশা আছে: সবকিছুকে টেক্সট বানিয়ে ফেলা, ছবিকে সরাসরি একটি শেয়ার্ড ভেক্টর স্পেসে এমবেড করা, অথবা লেট ইন্টারঅ্যাকশন দিয়ে পাতার ছবি রিট্রিভ করে ভিশন-সক্ষম মডেলকে পড়তে দেওয়া।<a class=\"cite\" href=\"#src63\">[৬৩]</a><a class=\"cite\" href=\"#src62\">[৬২]</a>"
+      },
+      "basics": {
+        "en": {
+          "idea": "Text-only search cannot answer when the answer sits in a chart, a scanned table, or a slide. <strong>Multimodal RAG</strong> keeps those things searchable: turn them into text, embed images directly, or search page images.",
+          "words": [
+            {
+              "term": "Multimodal",
+              "meaning": "Able to work with more than one kind of data, such as text and images."
+            },
+            {
+              "term": "CLIP",
+              "meaning": "A model that puts images and text into one shared vector space. It learned from 400M image-text pairs."
+            },
+            {
+              "term": "Multi-vector retriever",
+              "meaning": "A search setup where the item that gets searched (a summary) is separate from the one the model answers from (the raw image or table)."
+            },
+            {
+              "term": "Late interaction",
+              "meaning": "Compares each query token (a small piece of the question) with one vector for each small patch of the page, keeps each token's best match, then adds them up."
+            },
+            {
+              "term": "ColPali",
+              "meaning": "A model that makes many vectors straight from a page image, so it skips text extraction."
+            },
+            {
+              "term": "ViDoRe",
+              "meaning": "A benchmark, or shared test, for finding visually rich documents, introduced with ColPali."
+            },
+            {
+              "term": "RAG-Anything",
+              "meaning": "An open-source framework that handles text, images, tables and equations together."
+            }
+          ],
+          "remember": [
+            "LangChain lists three options: embed raw images, embed text summaries, or embed summaries and keep raw objects for answering.",
+            "Summaries can hide detail. If a summary leaves out a number, no query can find it.",
+            "Of the two summary designs, prefer the one keeping the raw object, so the answering model sees the original.",
+            "ColPali stores many vectors per page, so measure index size; its gains come from the authors' benchmark, so test on your own documents."
+          ]
+        },
+        "bn": {
+          "idea": "উত্তর যখন চার্ট, স্ক্যান করা টেবিল বা স্লাইডে থাকে, তখন শুধু টেক্সট-সার্চ কাজ করে না। <strong>মাল্টিমোডাল RAG</strong> সেগুলোকেও সার্চযোগ্য রাখে: সব কিছু টেক্সটে বদলে, ছবি সরাসরি এমবেড করে, বা পাতার ছবি খুঁজে।",
+          "words": [
+            {
+              "term": "মাল্টিমোডাল (multimodal)",
+              "meaning": "একাধিক ধরনের ডেটা নিয়ে কাজ করতে পারা, যেমন টেক্সট আর ছবি।"
+            },
+            {
+              "term": "CLIP",
+              "meaning": "যে মডেল ছবি আর টেক্সটকে একই ভেক্টর স্পেসে আনে। এটি ৪০ কোটি ছবি-টেক্সট জোড়া থেকে শিখেছে।"
+            },
+            {
+              "term": "মাল্টি-ভেক্টর রিট্রিভার (multi-vector retriever)",
+              "meaning": "এমন সার্চ ব্যবস্থা, যেখানে যেটার মধ্যে খোঁজা হয় (সারসংক্ষেপ) আর উত্তর বানাতে মডেলকে যা দেওয়া হয় (কাঁচা ছবি বা টেবিল), তা আলাদা।"
+            },
+            {
+              "term": "লেট ইন্টারঅ্যাকশন (late interaction)",
+              "meaning": "প্রশ্নের প্রতিটি টোকেনকে (প্রশ্নের ছোট টুকরো) পাতার প্রতিটি ছোট অংশের একটি করে ভেক্টরের সাথে মেলানো, প্রতিটি টোকেনের সেরা মিলটি রেখে সেগুলো যোগ করা।"
+            },
+            {
+              "term": "ColPali",
+              "meaning": "যে মডেল পাতার ছবি থেকেই সরাসরি অনেক ভেক্টর বানায়, তাই টেক্সট এক্সট্র্যাকশন লাগে না।"
+            },
+            {
+              "term": "ViDoRe",
+              "meaning": "ছবি-ভরা নথি খোঁজার একটি বেঞ্চমার্ক, মানে মাপার জন্য সবার একই পরীক্ষা, যা ColPali-র সাথে এসেছে।"
+            },
+            {
+              "term": "RAG-Anything",
+              "meaning": "ওপেন-সোর্স ফ্রেমওয়ার্ক, যা টেক্সট, ছবি, টেবিল ও সমীকরণ একসাথে সামলায়।"
+            }
+          ],
+          "remember": [
+            "LangChain তিনটি অপশন দেখায়: কাঁচা ছবি এমবেড করা, টেক্সট সারসংক্ষেপ এমবেড করা, বা সারসংক্ষেপ এমবেড করে উত্তরের জন্য মূল জিনিস রাখা।",
+            "সারসংক্ষেপ খুঁটিনাটি লুকিয়ে ফেলতে পারে। সারসংক্ষেপে কোনো সংখ্যা বাদ পড়লে কোনো প্রশ্নেই তা মেলে না।",
+            "সারসংক্ষেপের দুটি নকশার মধ্যে যেটি মূল জিনিস রাখে সেটি বাছুন, তাহলে উত্তর-দেওয়া মডেল মূলটি দেখতে পায়।",
+            "ColPali প্রতি পাতায় অনেক ভেক্টর রাখে, তাই ইনডেক্সের আকার মাপুন; এর ফলাফল লেখকদের নিজেদের বেঞ্চমার্কে, তাই নিজের নথিতে পরীক্ষা করুন।"
+          ]
+        }
       },
       "body": [
         {

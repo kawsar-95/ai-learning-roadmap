@@ -16,6 +16,86 @@
         "title": "মাল্টিমোডাল ইঞ্জিনিয়ারিং: ভিশন, ভয়েস আর ভিডিও",
         "sub": "টেক্সট ছিল প্রথম মোডালিটি। ২০২৫ সালে প্রতিটা প্রোডাকশন AI অ্যাপ <strong>ভিশন</strong>, <strong>ভয়েস</strong>, <strong>ইমেজ জেনারেশন</strong> আর <strong>ভিডিও জেনারেশন</strong>-এর অন্তত দুটো একসাথে ব্যবহার করে। মাল্টিমোডাল ইঞ্জিনিয়ারিং হলো প্রতিটার জন্য মডেল, ল্যাটেন্সি বাজেট আর পাইপলাইন বেছে নেওয়ার কাজ।"
       },
+      "basics": {
+        "en": {
+          "idea": "Modern AI apps combine at least two of: seeing images, voice, making images, and making video. <strong>Multimodal engineering</strong> is choosing the right models, time limits, and steps for each one.",
+          "words": [
+            {
+              "term": "OCR-via-LLM",
+              "meaning": "Reading the text in an image by asking an LLM. It beats a classic OCR tool like Tesseract on messy photos, handwritten notes, and forms."
+            },
+            {
+              "term": "STT and TTS",
+              "meaning": "STT turns speech into text. TTS turns text into speech. A voice pipeline runs STT, then an LLM, then TTS."
+            },
+            {
+              "term": "Realtime APIs",
+              "meaning": "Services that stream audio in both directions, skipping the step-by-step STT→LLM→TTS loop. Sub-500 ms turn-taking (the gap before the AI replies) is now possible."
+            },
+            {
+              "term": "LoRA",
+              "meaning": "A small trained add-on for an image model. It teaches a style or a consistent character."
+            },
+            {
+              "term": "ControlNet",
+              "meaning": "Makes an image follow a structure you give it, such as a pose, a depth map, or an outline of edges."
+            },
+            {
+              "term": "Inpainting",
+              "meaning": "Regenerating only a part you mark on an image, so you can edit it."
+            },
+            {
+              "term": "ComfyUI",
+              "meaning": "A tool where you connect boxes on screen to link image steps into pipelines you can repeat. Teams track changes to its saved workflow files."
+            }
+          ],
+          "remember": [
+            "In 2025, every production AI app combines at least two of vision, voice, image generation, and video generation.",
+            "Models that take images directly often need no separate OCR step, and they beat Tesseract on messy photos.",
+            "A voice pipeline is STT → LLM → TTS. Realtime APIs stream audio both ways instead.",
+            "Pick image and video models by what you need: licence, photorealism, clip length, character consistency, price, and speed."
+          ]
+        },
+        "bn": {
+          "idea": "আজকের AI অ্যাপ অন্তত দুটি কাজ মেলায়: ছবি দেখা, ভয়েস, ছবি বানানো আর ভিডিও বানানো। <strong>মাল্টিমোডাল ইঞ্জিনিয়ারিং</strong> মানে প্রতিটির জন্য ঠিক মডেল, সময়ের সীমা আর ধাপ বেছে নেওয়া।",
+          "words": [
+            {
+              "term": "OCR-via-LLM",
+              "meaning": "LLM-কে দিয়ে ছবির লেখা পড়ানো। অগোছালো ছবি, হাতের লেখা নোট আর ফর্মে এটা Tesseract-এর মতো প্রচলিত OCR টুলকে ছাড়িয়ে যায়।"
+            },
+            {
+              "term": "STT আর TTS (speech-to-text, text-to-speech)",
+              "meaning": "STT কথাকে লেখায় বদলায়। TTS লেখাকে কথায় বদলায়। ভয়েস পাইপলাইনে আগে STT, তারপর LLM, তারপর TTS চলে।"
+            },
+            {
+              "term": "রিয়েলটাইম API (Realtime APIs)",
+              "meaning": "যে সার্ভিস দুই দিকেই অডিও স্ট্রিম করে, ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে। এখন ৫০০ ms-এর কমে পালা বদল (AI উত্তর দেওয়ার আগের বিরতি) সম্ভব।"
+            },
+            {
+              "term": "LoRA",
+              "meaning": "ইমেজ মডেলের জন্য একটি ছোট প্রশিক্ষিত অ্যাড-অন। এটা একটি স্টাইল বা একই চরিত্র ধরে রাখা শেখায়।"
+            },
+            {
+              "term": "ControlNet",
+              "meaning": "আপনার দেওয়া কাঠামো মেনে ছবি বানায়, যেমন একটি পোজ, ডেপথ ম্যাপ বা কিনারার রেখাচিত্র।"
+            },
+            {
+              "term": "ইনপেইন্টিং (inpainting)",
+              "meaning": "ছবির শুধু আপনার চিহ্নিত অংশ আবার বানানো, যাতে আপনি ছবি এডিট করতে পারেন।"
+            },
+            {
+              "term": "ComfyUI",
+              "meaning": "এমন টুল, যেখানে স্ক্রিনে বাক্স জুড়ে ইমেজের ধাপগুলো দিয়ে বারবার চালানো যায় এমন পাইপলাইন বানানো হয়। টিমগুলো এর সেভ করা ওয়ার্কফ্লো ফাইলের পরিবর্তনের হিসাব রাখে।"
+            }
+          ],
+          "remember": [
+            "২০২৫-এ প্রতিটি প্রোডাকশন AI অ্যাপ ভিশন, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশনের অন্তত দুটি মেলায়।",
+            "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে Tesseract-কে হারায়।",
+            "ভয়েস পাইপলাইন হলো STT → LLM → TTS। রিয়েলটাইম API তার বদলে দুই দিকে অডিও স্ট্রিম করে।",
+            "প্রয়োজন দেখে ইমেজ ও ভিডিও মডেল বাছুন: লাইসেন্স, ফটোরিয়ালিজম, ক্লিপের দৈর্ঘ্য, চরিত্রের ধারাবাহিকতা, দাম আর গতি।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",

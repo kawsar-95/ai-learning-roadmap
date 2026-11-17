@@ -16,6 +16,78 @@
         "title": "এজেন্ট আসলে কী",
         "sub": "একটা কাজ চালানোর মতো সংজ্ঞা, \"এজেন্ট\" আর \"ওয়ার্কফ্লো\"-এর মধ্যে সীমারেখা, আর যেকোনো প্রোডাকশন এজেন্টে অন্তত কী কী কম্পোনেন্ট থাকতেই হবে।"
       },
+      "basics": {
+        "en": {
+          "idea": "An <strong>agent</strong> is a loop: the AI looks at the state, decides what to do, acts, and repeats until the job is done. Knowing its parts helps you build one that is safe and easy to debug.",
+          "words": [
+            {
+              "term": "Agent",
+              "meaning": "A program that runs an LLM in a loop. It chooses its next step itself, acts, and checks the result."
+            },
+            {
+              "term": "Workflow",
+              "meaning": "A fixed map of LLM calls and tool calls. Every step and branch is written by a person in advance."
+            },
+            {
+              "term": "Tool surface",
+              "meaning": "The set of tools an agent can call. Keep it small and clear, so no dangerous tool runs by accident without a safety check."
+            },
+            {
+              "term": "Scratchpad",
+              "meaning": "A place to keep notes across turns, so they survive even when the model's short memory (context window) runs out."
+            },
+            {
+              "term": "Exit predicate",
+              "meaning": "The rule that tells the agent it is done, like: I think I have enough; here is the answer."
+            },
+            {
+              "term": "Observability",
+              "meaning": "Recording every step with its prompt, tool call, result, cost, and latency, so you can debug later."
+            }
+          ],
+          "remember": [
+            "Every agent is a loop: take the state, ask the LLM, run the answer, feed the result back.",
+            "In a workflow, people write every step. In an agent, the LLM picks at least one step while it runs.",
+            "Give every loop a hard step cap and a wall-clock timeout. Unbounded loops can burn $10k overnight.",
+            "No exit rule: the agent runs forever. No recorded steps: you cannot debug it."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>এজেন্ট</strong> হলো একটি লুপ: AI স্টেট দেখে, কী করবে ঠিক করে, কাজ করে, আর কাজ শেষ না হওয়া পর্যন্ত আবার করে। এর অংশগুলো জানলে নিরাপদ আর ডিবাগ করা সহজ এজেন্ট বানানো যায়।",
+          "words": [
+            {
+              "term": "এজেন্ট (agent)",
+              "meaning": "যে প্রোগ্রাম একটি LLM-কে লুপে চালায়। পরের ধাপ সে নিজে বাছে, কাজ করে, আর ফল দেখে।"
+            },
+            {
+              "term": "ওয়ার্কফ্লো (workflow)",
+              "meaning": "LLM কল আর টুল কলের একটি নির্দিষ্ট মানচিত্র। প্রতিটি ধাপ ও শাখা আগে থেকে মানুষ লিখে রাখে।"
+            },
+            {
+              "term": "টুল সারফেস (tool surface)",
+              "meaning": "এজেন্ট যে টুলগুলো কল করতে পারে তার সেট। এটা ছোট আর স্পষ্ট রাখুন, যাতে নিরাপত্তা যাচাই (guardrail) পার না হয়ে ভুল করে বিপজ্জনক টুল কল না হয়।"
+            },
+            {
+              "term": "স্ক্র্যাচপ্যাড (scratchpad)",
+              "meaning": "টার্নের পর টার্ন নোট রাখার জায়গা, যাতে মডেলের ছোট স্মৃতি (কনটেক্সট উইন্ডো) ফুরিয়ে গেলেও নোট থাকে।"
+            },
+            {
+              "term": "এগজিট প্রেডিকেট (exit predicate)",
+              "meaning": "যে নিয়ম এজেন্টকে বলে কাজ শেষ, যেমন: আমার যথেষ্ট তথ্য আছে; এই নিন উত্তর।"
+            },
+            {
+              "term": "অবজারভেবিলিটি (observability)",
+              "meaning": "প্রতিটি ধাপ প্রম্পট, টুল কল, ফল, খরচ আর লেটেন্সিসহ রেকর্ড করা, যাতে পরে ডিবাগ করা যায়।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি এজেন্ট একটি লুপ: স্টেট নিন, LLM-কে জিজ্ঞেস করুন, উত্তর চালান, ফল ফিরিয়ে দিন।",
+            "ওয়ার্কফ্লোতে মানুষ প্রতিটি ধাপ লেখে। এজেন্টে অন্তত একটি ধাপ LLM চলার সময় নিজেই বাছে।",
+            "প্রতিটি লুপে কড়া ধাপ-সীমা আর ঘড়ির টাইমআউট দিন। সীমাহীন লুপ এক রাতে ১০ হাজার ডলার পুড়িয়ে দিতে পারে।",
+            "থামার নিয়ম না থাকলে এজেন্ট চলতেই থাকে। ধাপের রেকর্ড না থাকলে ডিবাগ করা যায় না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -296,6 +368,72 @@
       "bn": {
         "title": "চারটা প্রচলিত এজেন্ট লুপ",
         "sub": "প্রোডাকশনে যত এজেন্ট লুপ দেখবেন, সবই এই চারটা প্যাটার্নের কোনো একটার রকমফের। কাজের ধরন দেখে বেছে নিন, হাইপ দেখে নয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Every agent loop in production is a version of four patterns. Pick the <strong>loop</strong> that fits the shape of your task, not the one that is popular.",
+          "words": [
+            {
+              "term": "ReAct",
+              "meaning": "The simplest loop. The model writes a thought, picks an action, sees the result, and repeats."
+            },
+            {
+              "term": "Scratchpad",
+              "meaning": "The model's private notes, where it writes its thoughts. The user sees only the final answer."
+            },
+            {
+              "term": "Plan-and-Execute",
+              "meaning": "A planner makes a list of steps. A worker then carries out each step."
+            },
+            {
+              "term": "Reflexion",
+              "meaning": "After an attempt, the model thinks about what went wrong. It saves that note for the next try."
+            },
+            {
+              "term": "ReWOO (Reasoning Without Observation)",
+              "meaning": "The model plans all tool calls up front. A worker runs them all in parallel, then a solver reads the evidence."
+            }
+          ],
+          "remember": [
+            "ReAct is the default loop. Its readable scratchpad shows why the model chose each action.",
+            "Plan-and-Execute can redo only the failed step, which is cheap.",
+            "Reflexion beats plain ReAct by 10–20 percentage points in benchmarks, but costs 2–3× ReAct.",
+            "ReWOO uses 4–6× fewer tokens than ReAct, but is hard to debug.",
+            "Match the task: ReAct for short, tool-heavy tasks; ReWOO for look-up-heavy tasks with many parallel tool calls."
+          ]
+        },
+        "bn": {
+          "idea": "প্রোডাকশনের প্রতিটি এজেন্ট লুপ চারটি প্যাটার্নের একটির রূপ। যে <strong>লুপ</strong> আপনার কাজের ধরনের সাথে মেলে তাকে বাছুন, যেটা জনপ্রিয় সেটাকে নয়।",
+          "words": [
+            {
+              "term": "ReAct",
+              "meaning": "সবচেয়ে সহজ লুপ। মডেল চিন্তা লেখে, অ্যাকশন বাছে, ফল দেখে, আর আবার করে।"
+            },
+            {
+              "term": "স্ক্র্যাচপ্যাড (scratchpad)",
+              "meaning": "মডেলের নিজস্ব নোট, যেখানে সে চিন্তা লেখে। ব্যবহারকারী শুধু শেষ উত্তর দেখে।"
+            },
+            {
+              "term": "Plan-and-Execute",
+              "meaning": "একজন প্ল্যানার ধাপের তালিকা বানায়। তারপর একজন ওয়ার্কার প্রতিটি ধাপ করে।"
+            },
+            {
+              "term": "Reflexion",
+              "meaning": "একবার চেষ্টার পর মডেল ভাবে কী ভুল হলো। সেই নোট পরের চেষ্টার জন্য রেখে দেয়।"
+            },
+            {
+              "term": "ReWOO (Reasoning Without Observation)",
+              "meaning": "মডেল সব টুল কল আগেই প্ল্যান করে। একজন ওয়ার্কার সবগুলো প্যারালালে চালায়, তারপর সলভার প্রমাণ পড়ে।"
+            }
+          ],
+          "remember": [
+            "ReAct ডিফল্ট লুপ। এর পড়ার মতো স্ক্র্যাচপ্যাড দেখায় মডেল কেন প্রতিটি অ্যাকশন বাছল।",
+            "Plan-and-Execute শুধু ব্যর্থ ধাপটি আবার করতে পারে, যা সস্তা।",
+            "বেঞ্চমার্কে Reflexion সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।",
+            "ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।",
+            "কাজ দেখে বাছুন: ছোট, টুল-নির্ভর কাজে ReAct; অনেক প্যারালাল টুল কলসহ খোঁজাখুঁজি-ভারী কাজে ReWOO।"
+          ]
+        }
       },
       "body": [
         {
@@ -605,6 +743,78 @@
         "title": "সিঙ্গেল-এজেন্ট বনাম মাল্টি-এজেন্ট অর্কেস্ট্রেশন",
         "sub": "এজেন্ট ইঞ্জিনিয়ারিংয়ের সবচেয়ে দামি ভুল হলো: ভালোভাবে টিউন করা একটা এজেন্টই যথেষ্ট ছিল, অথচ মাল্টি-এজেন্ট সেটআপ বেছে নেওয়া।"
       },
+      "basics": {
+        "en": {
+          "idea": "One well-tuned agent often does the job, and a team of agents costs more. The costliest mistake is building a <strong>multi-agent</strong> setup just because it sounds advanced, when one agent would do.",
+          "words": [
+            {
+              "term": "Single agent",
+              "meaning": "One LLM in one loop with one set of tools. You debug by reading one trace."
+            },
+            {
+              "term": "Multi-agent",
+              "meaning": "Several agents, each with its own prompt and tools, working together on one task."
+            },
+            {
+              "term": "Orchestrator",
+              "meaning": "The agent that hands out work to the others and puts their results together."
+            },
+            {
+              "term": "Worker",
+              "meaning": "A specialised agent, such as a researcher, writer, critic, or coder, that does one part of the job."
+            },
+            {
+              "term": "Shared scratchpad (blackboard)",
+              "meaning": "One shared file or in-memory dict that all agents read from and write to."
+            },
+            {
+              "term": "Message passing",
+              "meaning": "The orchestrator sends messages in a fixed format to the workers."
+            }
+          ],
+          "remember": [
+            "Multi-agent costs 2–5× more tokens than single-agent.",
+            "Debugging a single agent means reading one trace. Multi-agent means matching N traces.",
+            "Use a single agent for 5 tools or fewer in one domain. Use multi-agent for distinct roles and high stakes.",
+            "Do not build a multi-agent system just because it sounds advanced."
+          ]
+        },
+        "bn": {
+          "idea": "একটি ভালোভাবে টিউন করা এজেন্টই প্রায়ই কাজ করে দেয়, আর এজেন্টের দলে খরচ বেশি। সবচেয়ে দামি ভুল হলো একটি এজেন্টে কাজ চললেও শুধু উন্নত শোনায় বলে <strong>মাল্টি-এজেন্ট</strong> সেটআপ বানানো।",
+          "words": [
+            {
+              "term": "সিঙ্গেল এজেন্ট (single agent)",
+              "meaning": "একটি লুপে একটি LLM, একসেট টুলসহ। একটি ট্রেস পড়েই ডিবাগ করা যায়।"
+            },
+            {
+              "term": "মাল্টি-এজেন্ট (multi-agent)",
+              "meaning": "একাধিক এজেন্ট, প্রত্যেকের নিজের প্রম্পট ও টুল, একটি কাজে একসাথে চলে।"
+            },
+            {
+              "term": "অর্কেস্ট্রেটর (orchestrator)",
+              "meaning": "যে এজেন্ট অন্যদের কাজ ভাগ করে দেয় এবং তাদের ফল জোড়া লাগায়।"
+            },
+            {
+              "term": "ওয়ার্কার (worker)",
+              "meaning": "বিশেষায়িত এজেন্ট, যেমন গবেষক, লেখক, সমালোচক বা কোডার, যে কাজের একটি অংশ করে।"
+            },
+            {
+              "term": "শেয়ার্ড স্ক্র্যাচপ্যাড (shared scratchpad, blackboard)",
+              "meaning": "একটি শেয়ার করা ফাইল বা ইন-মেমরি ডিক্ট, যেখান থেকে সব এজেন্ট পড়ে ও লেখে।"
+            },
+            {
+              "term": "মেসেজ পাসিং (message passing)",
+              "meaning": "অর্কেস্ট্রেটর ওয়ার্কারদের কাছে নির্দিষ্ট ফরম্যাটে মেসেজ পাঠায়।"
+            }
+          ],
+          "remember": [
+            "মাল্টি-এজেন্টে সিঙ্গেল-এজেন্টের চেয়ে ২–৫ গুণ বেশি টোকেন লাগে।",
+            "সিঙ্গেল এজেন্ট ডিবাগে একটি ট্রেস পড়তে হয়। মাল্টি-এজেন্টে N-টি ট্রেস মেলাতে হয়।",
+            "একটি ডোমেইনে ৫টি বা কম টুলে সিঙ্গেল এজেন্ট নিন। আলাদা ভূমিকা আর বড় ঝুঁকিতে মাল্টি-এজেন্ট নিন।",
+            "শুধু উন্নত শোনায় বলে মাল্টি-এজেন্ট সিস্টেম বানাবেন না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -881,6 +1091,80 @@
         "title": "স্টেট মেশিন আর ওয়ার্কফ্লো গ্রাফ",
         "sub": "সহজ নয় এমন এজেন্টের ক্ষেত্রে অদৃশ্য লুপের জায়গায় একটা পরিষ্কার <strong>গ্রাফ</strong> বানান। এর নোড হবে LLM কল, টুল কল বা মানুষের অনুমোদন, আর এজ হবে শর্ত অনুযায়ী এক ধাপ থেকে আরেক ধাপে পৌঁছানো। এভাবেই প্রোডাকশন সিস্টেমে ডিবাগ করা সহজ থাকে।"
       },
+      "basics": {
+        "en": {
+          "idea": "For bigger agents, draw the steps as a clear <strong>graph</strong> instead of hiding them in one loop. Every step has a name and every move is recorded, so you can debug it.",
+          "words": [
+            {
+              "term": "Implicit loop",
+              "meaning": "A plain loop where the path is hidden. After 30 tool calls, you cannot tell which path the model took."
+            },
+            {
+              "term": "Graph",
+              "meaning": "A map of nodes (steps) joined by edges (moves). Each edge can have a condition."
+            },
+            {
+              "term": "LangGraph",
+              "meaning": "LangChain's graph framework. It lets the agent go back to an earlier step."
+            },
+            {
+              "term": "Checkpointer",
+              "meaning": "A LangGraph feature that lets you resume from any past state."
+            },
+            {
+              "term": "Durable",
+              "meaning": "Able to survive crashes, retries, and pauses for a human, which long-running agents need."
+            },
+            {
+              "term": "Temporal and Restate",
+              "meaning": "Workflow engines adapted to run long agents."
+            }
+          ],
+          "remember": [
+            "An implicit loop is fast to write but impossible to debug. An explicit graph shows every path.",
+            "LangGraph suits Python or TypeScript teams already using LangChain.",
+            "Agents that run for minutes to hours need a durable graph.",
+            "Temporal fits multi-day workflows, and Mastra suits teams who write TypeScript.",
+            "Inngest starts work when an event happens, and you pay for each step."
+          ]
+        },
+        "bn": {
+          "idea": "বড় এজেন্টের ধাপগুলো একটি লুপে লুকিয়ে না রেখে স্পষ্ট <strong>গ্রাফ</strong> হিসেবে আঁকুন। প্রতিটি ধাপের নাম থাকে আর প্রতিটি চলন রেকর্ড হয়, তাই ডিবাগ করা যায়।",
+          "words": [
+            {
+              "term": "ইমপ্লিসিট লুপ (implicit loop)",
+              "meaning": "সাধারণ লুপ, যেখানে পথ লুকানো থাকে। ৩০টি টুল কলের পর বোঝা যায় না মডেল কোন পথে গেছে।"
+            },
+            {
+              "term": "গ্রাফ (graph)",
+              "meaning": "নোড (ধাপ) আর এজ (চলন) দিয়ে জোড়া মানচিত্র। প্রতিটি এজে শর্ত থাকতে পারে।"
+            },
+            {
+              "term": "LangGraph",
+              "meaning": "LangChain-এর গ্রাফ ফ্রেমওয়ার্ক। এটি এজেন্টকে আগের ধাপে ফিরে যেতে দেয়।"
+            },
+            {
+              "term": "চেকপয়েন্টার (checkpointer)",
+              "meaning": "LangGraph-এর একটি ফিচার, যা দিয়ে যেকোনো আগের স্টেট থেকে আবার শুরু করা যায়।"
+            },
+            {
+              "term": "ডিউরেবল (durable)",
+              "meaning": "ক্র্যাশ, রিট্রাই আর মানুষের জন্য থামা সামলে টিকে থাকতে পারা, যা দীর্ঘ-চলমান এজেন্টের দরকার।"
+            },
+            {
+              "term": "Temporal আর Restate",
+              "meaning": "ওয়ার্কফ্লো ইঞ্জিন, যা দীর্ঘ এজেন্ট চালাতে মানিয়ে নেওয়া হয়েছে।"
+            }
+          ],
+          "remember": [
+            "ইমপ্লিসিট লুপ লেখা দ্রুত, কিন্তু ডিবাগ অসম্ভব। এক্সপ্লিসিট গ্রাফ প্রতিটি পথ দেখায়।",
+            "যে Python বা TypeScript টিম আগে থেকেই LangChain ব্যবহার করে, LangGraph তাদের জন্য ভালো।",
+            "কয়েক মিনিট থেকে কয়েক ঘণ্টা চলা এজেন্টের জন্য ডিউরেবল গ্রাফ দরকার।",
+            "Temporal কয়েক দিনের ওয়ার্কফ্লোর জন্য, আর TypeScript-এ কাজ করা টিমের জন্য Mastra ভালো।",
+            "Inngest কোনো ইভেন্ট ঘটলে কাজ শুরু করে, আর প্রতি ধাপের জন্য দাম দিতে হয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1153,6 +1437,78 @@
         "title": "এজেন্টের মেমরি: স্ক্র্যাচপ্যাড, সেম্যান্টিক, প্রসিডিউরাল",
         "sub": "এজেন্ট নিয়ে লেখা গবেষণায় বারবার তিন ধরনের মেমরি আসে।<a class=\"cite\" href=\"#src8\">[৮]</a>"
       },
+      "basics": {
+        "en": {
+          "idea": "This section explains three main memory types: <strong>scratchpad</strong>, semantic, and procedural memory. It lists two more and shows where memory breaks.",
+          "words": [
+            {
+              "term": "Scratchpad (working memory)",
+              "meaning": "The model's private notes for the current run. When the run ends, they are thrown away."
+            },
+            {
+              "term": "Semantic memory",
+              "meaning": "Long-term facts the agent has learned about the user, the project, or the world."
+            },
+            {
+              "term": "Vector store",
+              "meaning": "A database that finds items by meaning, not by exact words."
+            },
+            {
+              "term": "Procedural memory",
+              "meaning": "The agent's playbook of how to do a task. It is kept as versioned prompt templates or Markdown checklists."
+            },
+            {
+              "term": "Episodic memory",
+              "meaning": "A record of past runs and what happened in them."
+            },
+            {
+              "term": "Context window",
+              "meaning": "The most text a model can handle in one call. A scratchpad can live there."
+            }
+          ],
+          "remember": [
+            "The scratchpad is thrown away when the run ends.",
+            "Too much memory makes the agent trust stale facts.",
+            "Too little memory makes the agent re-derive the same conclusion every turn.",
+            "Conflicting memory means two facts disagree."
+          ]
+        },
+        "bn": {
+          "idea": "এই সেকশনে তিনটি প্রধান ধরনের মেমরি ব্যাখ্যা করা হয়েছে: <strong>স্ক্র্যাচপ্যাড</strong>, সেম্যান্টিক আর প্রসিডিউরাল। আরও দুটি ধরনের নাম আছে, আর মেমরি কোথায় ভেঙে পড়ে, সেটাও দেখানো হয়েছে।",
+          "words": [
+            {
+              "term": "স্ক্র্যাচপ্যাড (scratchpad, working memory)",
+              "meaning": "বর্তমান রানের জন্য মডেলের নিজস্ব নোট। রান শেষ হলে এগুলো ফেলে দেওয়া হয়।"
+            },
+            {
+              "term": "সেম্যান্টিক মেমরি (semantic memory)",
+              "meaning": "ব্যবহারকারী, প্রজেক্ট বা দুনিয়া সম্পর্কে এজেন্ট যে দীর্ঘমেয়াদি তথ্য শিখেছে।"
+            },
+            {
+              "term": "ভেক্টর স্টোর (vector store)",
+              "meaning": "যে ডেটাবেস হুবহু শব্দ দিয়ে নয়, অর্থ দিয়ে জিনিস খুঁজে বের করে।"
+            },
+            {
+              "term": "প্রসিডিউরাল মেমরি (procedural memory)",
+              "meaning": "কোনো কাজ কীভাবে করতে হয়, তার প্লেবুক। ভার্সন করা প্রম্পট টেমপ্লেট বা Markdown চেকলিস্ট হিসেবে রাখা হয়।"
+            },
+            {
+              "term": "এপিসোডিক মেমরি (episodic memory)",
+              "meaning": "আগের রানগুলো আর সেগুলোতে কী ঘটেছিল, তার রেকর্ড।"
+            },
+            {
+              "term": "কনটেক্সট উইন্ডো (context window)",
+              "meaning": "এক কলে মডেল সর্বোচ্চ যত লেখা সামলাতে পারে। স্ক্র্যাচপ্যাড সেখানে থাকতে পারে।"
+            }
+          ],
+          "remember": [
+            "রান শেষ হলে স্ক্র্যাচপ্যাড ফেলে দেওয়া হয়।",
+            "খুব বেশি মেমরি থাকলে এজেন্ট পুরোনো তথ্যের ওপর ভরসা করে।",
+            "খুব কম মেমরি থাকলে এজেন্ট প্রতিবার একই সিদ্ধান্ত নতুন করে বের করে।",
+            "মেমরি পরস্পরবিরোধী হলে দুটি তথ্য একে অপরের সাথে মেলে না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1406,6 +1762,70 @@
         "title": "হিউম্যান-ইন-দ্য-লুপ চেকপয়েন্ট (মানুষের অনুমোদনের ধাপ)",
         "sub": "বেশিরভাগ প্রোডাকশন এজেন্টে অন্তত একটা অনুমোদনের ধাপ লাগে।"
       },
+      "basics": {
+        "en": {
+          "idea": "Most production agents need at least one step where a person approves an action. The riskier the action, the more <strong>human approval</strong> it needs.",
+          "words": [
+            {
+              "term": "Risk ladder",
+              "meaning": "A ranking of actions from safe to dangerous. The higher the step, the stricter the approval."
+            },
+            {
+              "term": "Auto-approve",
+              "meaning": "Letting the agent do an action without asking a person."
+            },
+            {
+              "term": "Two-person rule",
+              "meaning": "Two people must agree before a destructive action, such as deleting a record, can happen."
+            },
+            {
+              "term": "Checkpoint primitive",
+              "meaning": "A built-in way for a workflow to stop and wait for a human. In LangGraph it is <code>interrupt</code>."
+            },
+            {
+              "term": "SLA (service-level agreement)",
+              "meaning": "A promise about the level of service a system will give."
+            }
+          ],
+          "remember": [
+            "Read-only actions are auto-approved. Money actions need approval per call plus a daily cap.",
+            "Deleting a record needs the two-person rule.",
+            "The hard part is the UI, not the protocol. Budget at least 30% of project time for it.",
+            "If no human answers, you can reject, approve with rollback, or escalate to a backup approver."
+          ]
+        },
+        "bn": {
+          "idea": "বেশিরভাগ প্রোডাকশন এজেন্টের অন্তত একটি ধাপ লাগে, যেখানে একজন মানুষ কাজটি অনুমোদন করে। কাজ যত ঝুঁকিপূর্ণ, তত বেশি <strong>মানুষের অনুমোদন</strong> দরকার।",
+          "words": [
+            {
+              "term": "রিস্ক ল্যাডার (risk ladder)",
+              "meaning": "নিরাপদ থেকে বিপজ্জনক কাজের ক্রম। ধাপ যত ওপরে, অনুমোদনের নিয়ম তত কড়া।"
+            },
+            {
+              "term": "অটো-অ্যাপ্রুভ (auto-approve)",
+              "meaning": "কোনো মানুষকে না জিজ্ঞেস করে এজেন্টকে কাজটি করতে দেওয়া।"
+            },
+            {
+              "term": "টু-পারসন রুল (two-person rule)",
+              "meaning": "রেকর্ড মুছে ফেলার মতো ধ্বংসাত্মক কাজ হওয়ার আগে দুজন মানুষকে রাজি হতে হয়।"
+            },
+            {
+              "term": "চেকপয়েন্ট প্রিমিটিভ (checkpoint primitive)",
+              "meaning": "ওয়ার্কফ্লো থামিয়ে মানুষের জন্য অপেক্ষা করার বিল্ট-ইন উপায়। LangGraph-এ এটি <code>interrupt</code>।"
+            },
+            {
+              "term": "SLA (service-level agreement)",
+              "meaning": "একটি সিস্টেম কোন মানের সার্ভিস দেবে, তা নিয়ে একটি প্রতিশ্রুতি।"
+            }
+          ],
+          "remember": [
+            "শুধু পড়ার কাজ অটো-অ্যাপ্রুভ হয়। টাকার কাজে প্রতি কলে অনুমোদন আর দৈনিক সীমা লাগে।",
+            "রেকর্ড মুছতে টু-পারসন রুল লাগে।",
+            "কঠিন অংশ UI, প্রটোকল নয়। এর জন্য প্রজেক্ট সময়ের অন্তত ৩০% রাখুন।",
+            "কোনো মানুষ সাড়া না দিলে বাতিল করা, রোলব্যাকসহ অনুমোদন করা, বা ব্যাকআপ অ্যাপ্রুভারের কাছে পাঠানো যায়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1626,6 +2046,78 @@
         "title": "সাবএজেন্ট আর ডেলিগেশন প্যাটার্ন",
         "sub": "একটা এজেন্টের কাজের তালিকা যখন এক কনটেক্সট উইন্ডোর জন্য বেশি বড় হয়ে যায়, তখন স্বাভাবিক সমাধান হলো কাজ ভাগ করে অন্যকে দেওয়া (ডেলিগেট)।"
       },
+      "basics": {
+        "en": {
+          "idea": "When one agent has too much to do for one context window, it can hand work to a <strong>subagent</strong>. The parent waits and gets back only a final result.",
+          "words": [
+            {
+              "term": "Subagent",
+              "meaning": "An agent started by another agent. It has its own prompt, tools, loop, and end point."
+            },
+            {
+              "term": "Manager–worker",
+              "meaning": "The parent gives a job and waits. It does not poll or watch progress. It gets one result."
+            },
+            {
+              "term": "Fork/join",
+              "meaning": "A pattern where work splits into parallel branches that are later merged. The section says not to picture subagents this way."
+            },
+            {
+              "term": "Context window",
+              "meaning": "The most text a model can handle in one call. Subagents keep the parent's window clean."
+            },
+            {
+              "term": "<code>Task</code> tool",
+              "meaning": "The tool in Claude Code that the model calls to start a subagent. The subagent returns a summary."
+            },
+            {
+              "term": "Crew (CrewAI)",
+              "meaning": "In CrewAI, the team of agents. Agents are roles, tasks are the work, and a process sets how tasks are run."
+            }
+          ],
+          "remember": [
+            "A subagent returns a final result to the parent, not its intermediate steps.",
+            "The parent does not poll or stream the subagent. Its context window stays clean.",
+            "Use a subagent when the task is well-defined, needs different tools, or its steps would pollute the parent's context.",
+            "Use one when you want independent retries or a separate cost centre."
+          ]
+        },
+        "bn": {
+          "idea": "একটি এজেন্টের কাজ এক কনটেক্সট উইন্ডোর জন্য বেশি হয়ে গেলে সে কাজ দিতে পারে একটি <strong>সাবএজেন্ট</strong>কে। প্যারেন্ট অপেক্ষা করে আর শুধু চূড়ান্ত ফলাফল ফেরত পায়।",
+          "words": [
+            {
+              "term": "সাবএজেন্ট (subagent)",
+              "meaning": "অন্য এজেন্টের চালু করা একটি এজেন্ট। তার নিজের প্রম্পট, টুল, লুপ আর শেষ করার নিয়ম আছে।"
+            },
+            {
+              "term": "ম্যানেজার–ওয়ার্কার (manager–worker)",
+              "meaning": "প্যারেন্ট কাজ দিয়ে অপেক্ষা করে। সে বারবার খোঁজ নেয় না, অগ্রগতিও দেখে না। একটিমাত্র ফলাফল পায়।"
+            },
+            {
+              "term": "ফর্ক/জয়েন (fork/join)",
+              "meaning": "একটি প্যাটার্ন, যেখানে কাজ সমান্তরাল শাখায় ভাগ হয়, পরে আবার এক করা হয়। এই সেকশন বলে, সাবএজেন্টকে এভাবে ভাববেন না।"
+            },
+            {
+              "term": "কনটেক্সট উইন্ডো (context window)",
+              "meaning": "এক কলে মডেল সর্বোচ্চ যত লেখা সামলাতে পারে। সাবএজেন্ট প্যারেন্টের উইন্ডো পরিষ্কার রাখে।"
+            },
+            {
+              "term": "<code>Task</code> টুল (<code>Task</code> tool)",
+              "meaning": "Claude Code-এর যে টুল মডেল ডেকে সাবএজেন্ট চালু করে। সাবএজেন্ট একটি সারাংশ ফেরত দেয়।"
+            },
+            {
+              "term": "ক্রু (crew, CrewAI)",
+              "meaning": "CrewAI-তে এজেন্টদের দল। এজেন্ট হলো ভূমিকা, টাস্ক হলো কাজ, আর প্রসেস ঠিক করে কাজগুলো কীভাবে চলবে।"
+            }
+          ],
+          "remember": [
+            "সাবএজেন্ট প্যারেন্টকে চূড়ান্ত ফলাফল ফেরত দেয়, মাঝের ধাপ নয়।",
+            "প্যারেন্ট সাবএজেন্টকে পোল বা স্ট্রিম করে না। তাই তার কনটেক্সট উইন্ডো পরিষ্কার থাকে।",
+            "কাজটি স্পষ্টভাবে সংজ্ঞায়িত হলে, ভিন্ন টুল লাগলে, বা তার মাঝের ধাপ প্যারেন্টের কনটেক্সট দূষিত করলে সাবএজেন্ট ব্যবহার করুন।",
+            "আলাদাভাবে রিট্রাই বা আলাদা খরচ-কেন্দ্র চাইলেও এটি ব্যবহার করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1845,6 +2337,86 @@
       "bn": {
         "title": "এরর রিকভারি, রিট্রাই আর সেলফ-কারেকশন",
         "sub": "তিন ধাপের উপায়, ধাপে ধাপে বড় হয়: একই কল আবার করা, অন্য একটা উপায়ে যাওয়া (ফলব্যাক), অথবা ব্যর্থতাটা নিয়ে ভেবে (রিফ্লেক্ট) ঠিক করে নেওয়া। রিট্রাইয়ের একটা সীমা সবসময় বেঁধে দিন।"
+      },
+      "basics": {
+        "en": {
+          "idea": "When an agent's call fails, there are three layers of response: retry, fall back, or reflect. The key rule is to always <strong>bound retries</strong>, so a bad input cannot burn your budget.",
+          "words": [
+            {
+              "term": "Transient failure",
+              "meaning": "A short-lived problem, like a rate limit or a network blip, that often goes away on its own."
+            },
+            {
+              "term": "Exponential backoff",
+              "meaning": "Waiting longer after each failed try: 1s, 2s, 4s, 8s. The wait doubles each time."
+            },
+            {
+              "term": "Jitter",
+              "meaning": "A small random extra wait, so many callers do not all retry at the same moment."
+            },
+            {
+              "term": "Fallback",
+              "meaning": "Switching to a different tool or model when retrying the same call is pointless."
+            },
+            {
+              "term": "Reflexion",
+              "meaning": "A named method that formalises feeding a failure back to the model and asking it to revise."
+            },
+            {
+              "term": "Wall-clock timeout",
+              "meaning": "A limit on the real time that passes, like watching a clock on the wall. When time runs out, the work stops."
+            },
+            {
+              "term": "Circuit breaker",
+              "meaning": "A guard that stops calls to a failing service. After 5 failures of the same kind in a row, it fails calls fast for 60 seconds."
+            }
+          ],
+          "remember": [
+            "Retry only transient failures, and cap attempts at 3–5.",
+            "Use a fallback when the failure is not transient.",
+            "Use reflection when the model made a reasoning error, like wrong arguments.",
+            "Always set a retry cap, a wall-clock timeout, and a circuit breaker."
+          ]
+        },
+        "bn": {
+          "idea": "এজেন্টের কল ব্যর্থ হলে সাড়া দেওয়ার তিনটি স্তর আছে: রিট্রাই, ফলব্যাক বা রিফ্লেক্ট। মূল নিয়ম হলো সবসময় <strong>রিট্রাইয়ের সীমা</strong> বেঁধে দেওয়া, যাতে একটি খারাপ ইনপুট আপনার বাজেট শেষ করতে না পারে।",
+          "words": [
+            {
+              "term": "ট্রানজিয়েন্ট ফেইলিওর (transient failure)",
+              "meaning": "রেট লিমিট বা নেটওয়ার্কের ক্ষণিক সমস্যার মতো স্বল্পস্থায়ী ঝামেলা, যা প্রায়ই নিজে থেকে মিটে যায়।"
+            },
+            {
+              "term": "এক্সপোনেনশিয়াল ব্যাকঅফ (exponential backoff)",
+              "meaning": "প্রতিবার ব্যর্থ হলে আগের চেয়ে বেশি অপেক্ষা করা: ১ সেকেন্ড, ২, ৪, ৮। অপেক্ষা প্রতিবার দ্বিগুণ হয়।"
+            },
+            {
+              "term": "জিটার (jitter)",
+              "meaning": "অল্প একটু এলোমেলো বাড়তি অপেক্ষা, যাতে অনেক কলার একই মুহূর্তে আবার চেষ্টা না করে।"
+            },
+            {
+              "term": "ফলব্যাক (fallback)",
+              "meaning": "একই কল আবার করা অর্থহীন হলে অন্য টুল বা মডেলে সরে যাওয়া।"
+            },
+            {
+              "term": "রিফ্লেক্সন (Reflexion)",
+              "meaning": "নির্দিষ্ট নামের একটি পদ্ধতি, যা ব্যর্থতা মডেলকে ফেরত দিয়ে তাকে শুধরে নিতে বলার কাজটিকে আনুষ্ঠানিক রূপ দেয়।"
+            },
+            {
+              "term": "ওয়াল-ক্লক টাইমআউট (wall-clock timeout)",
+              "meaning": "আসলে কতটা সময় পেরোল তার একটি সীমা, দেয়াল ঘড়ি দেখার মতো। সময় শেষ হলে কাজটি থেমে যায়।"
+            },
+            {
+              "term": "সার্কিট ব্রেকার (circuit breaker)",
+              "meaning": "ব্যর্থ হতে থাকা সার্ভিসে কল থামানোর পাহারা। একই ধরনের ব্যর্থতা পরপর ৫ বার হলে ৬০ সেকেন্ড কলগুলো সঙ্গে সঙ্গে ব্যর্থ হয়।"
+            }
+          ],
+          "remember": [
+            "শুধু ট্রানজিয়েন্ট ব্যর্থতায় রিট্রাই করুন, আর চেষ্টা ৩–৫ বারে সীমিত রাখুন।",
+            "ব্যর্থতা ট্রানজিয়েন্ট না হলে ফলব্যাক ব্যবহার করুন।",
+            "মডেল যুক্তিতে ভুল করলে, যেমন ভুল আর্গুমেন্ট দিলে, রিফ্লেক্ট ব্যবহার করুন।",
+            "সবসময় রিট্রাইয়ের সীমা, ওয়াল-ক্লক টাইমআউট আর সার্কিট ব্রেকার রাখুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -2069,6 +2641,78 @@
       "bn": {
         "title": "দীর্ঘক্ষণ চলা এজেন্ট আর ডিউরেবল এক্সিকিউশন",
         "sub": "যে এজেন্ট কয়েক মিনিট বা কয়েক ঘণ্টা চলে, তার তিনটা সমস্যা সাধারণ Python লুপ সামলাতে পারে না: ক্র্যাশ হলে স্টেট হারিয়ে যায়, রেট লিমিটের জন্য অপেক্ষা করতে হয়, আর মানুষের অনুমোদনের জন্য থামতে হয়। ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটারই সমাধান দেয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Agents that run for minutes or hours can crash, hit rate limits, or wait for a human. <strong>Durable execution</strong> saves each step, so the agent can pick up where it stopped.",
+          "words": [
+            {
+              "term": "Checkpoint",
+              "meaning": "Saving the state of your work at one moment, so you can come back to it later."
+            },
+            {
+              "term": "Durable execution engine",
+              "meaning": "A runtime that writes every step's plan and result to a safe store. After a crash, it resumes from the next step that has not run."
+            },
+            {
+              "term": "Durable store",
+              "meaning": "A place that keeps data even if the program stops, such as a database, a journal, or a queue."
+            },
+            {
+              "term": "Human-in-the-loop",
+              "meaning": "A setup where a person must answer or approve before the agent goes on."
+            },
+            {
+              "term": "Side effect",
+              "meaning": "A change the agent makes outside itself, like sending money or deleting records."
+            },
+            {
+              "term": "Temporal",
+              "meaning": "A durable engine the section suggests for long, multi-day workflows."
+            }
+          ],
+          "remember": [
+            "Messages alone are not enough; also save in-flight tool calls, partial writes to external services, approvals, and retry counters.",
+            "After a crash, a durable engine resumes from the next un-run step, not from the beginning.",
+            "Use it if the agent runs over about 30 seconds, waits for humans, or has irreversible side effects.",
+            "Four engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS."
+          ]
+        },
+        "bn": {
+          "idea": "যে এজেন্ট কয়েক মিনিট বা ঘণ্টা চলে, সে ক্র্যাশ করতে পারে, রেট লিমিটে আটকাতে পারে, বা মানুষের জন্য অপেক্ষা করতে পারে। <strong>ডিউরেবল এক্সিকিউশন</strong> প্রতিটি ধাপ সেভ করে রাখে, তাই এজেন্ট যেখানে থেমেছিল সেখান থেকে আবার শুরু করতে পারে।",
+          "words": [
+            {
+              "term": "চেকপয়েন্ট (checkpoint)",
+              "meaning": "কাজের অবস্থা কোনো এক মুহূর্তে সেভ করে রাখা, যাতে পরে সেখানে ফিরে আসা যায়।"
+            },
+            {
+              "term": "ডিউরেবল এক্সিকিউশন ইঞ্জিন (durable execution engine)",
+              "meaning": "যে রানটাইম প্রতিটি ধাপের পরিকল্পনা আর ফলাফল নিরাপদ জায়গায় লেখে। ক্র্যাশের পর পরের যে ধাপ চলেনি, সেখান থেকে আবার চলে।"
+            },
+            {
+              "term": "ডিউরেবল স্টোর (durable store)",
+              "meaning": "যে জায়গা প্রোগ্রাম থেমে গেলেও ডেটা ধরে রাখে, যেমন ডেটাবেস, জার্নাল বা কিউ।"
+            },
+            {
+              "term": "হিউম্যান-ইন-দ্য-লুপ (human-in-the-loop)",
+              "meaning": "এমন ব্যবস্থা, যেখানে এজেন্ট এগোনোর আগে একজন মানুষকে উত্তর দিতে বা অনুমোদন দিতে হয়।"
+            },
+            {
+              "term": "সাইড ইফেক্ট (side effect)",
+              "meaning": "এজেন্ট নিজের বাইরে যে পরিবর্তন ঘটায়, যেমন টাকা পাঠানো বা রেকর্ড মুছে ফেলা।"
+            },
+            {
+              "term": "Temporal",
+              "meaning": "সেকশনে লম্বা, বহু-দিনের ওয়ার্কফ্লোর জন্য পরামর্শ দেওয়া একটি ডিউরেবল ইঞ্জিন।"
+            }
+          ],
+          "remember": [
+            "শুধু মেসেজ সেভ করলে যথেষ্ট নয়; চলমান টুল কল, বাইরের সার্ভিসে আংশিক লেখা, অনুমোদন আর রিট্রাই কাউন্টারও সেভ করুন।",
+            "ক্র্যাশের পর ডিউরেবল ইঞ্জিন শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।",
+            "এজেন্ট প্রায় ৩০ সেকেন্ডের বেশি চললে, মানুষের জন্য অপেক্ষা করলে, বা ফেরানো যায় না এমন সাইড ইফেক্ট থাকলে এটি ব্যবহার করুন।",
+            "সেকশনে যে চারটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।"
+          ]
+        }
       },
       "body": [
         {
@@ -2301,6 +2945,86 @@
       "bn": {
         "title": "ব্রাউজার আর কম্পিউটার-ইউজ এজেন্ট",
         "sub": "এটা এজেন্টের সবচেয়ে নতুন ধরন। এখানে মডেল স্ক্রিনশট দেখতে পারে, আর মাউস/কীবোর্ডের মতো মৌলিক কাজ দিয়ে কাজ করে। উদাহরণ হিসেবে সবচেয়ে পরিচিত OpenAI-র Operator আর Anthropic-এর \"computer use\"। এরা নিখুঁত হওয়ার বদলে সবকিছুতে কাজ করতে পারাকে বেছে নেয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A <strong>computer-use agent</strong> looks at a screenshot and acts with the mouse and keyboard. It can work where no API exists, but it costs more, is slower, and breaks more easily.",
+          "words": [
+            {
+              "term": "Computer use",
+              "meaning": "A model sees a screenshot of the desktop and picks mouse or keyboard actions, in a loop, until it is done."
+            },
+            {
+              "term": "Screenshot",
+              "meaning": "A picture of what is on the screen at one moment. The model reads it to decide what to do next."
+            },
+            {
+              "term": "API",
+              "meaning": "A way for one program to talk to another program directly, without clicking on a screen."
+            },
+            {
+              "term": "Vision tokens",
+              "meaning": "The small pieces a model uses to read an image. Every screenshot adds them, which raises the cost."
+            },
+            {
+              "term": "Latency",
+              "meaning": "The waiting time before you get a result. Low latency means fast; high latency means slow."
+            },
+            {
+              "term": "Browser agent",
+              "meaning": "An agent that can only see and act inside one browser tab, not the whole desktop."
+            },
+            {
+              "term": "Sandboxed VM",
+              "meaning": "A virtual computer kept apart from your real one, so a wrong click cannot reach the host system."
+            }
+          ],
+          "remember": [
+            "Computer use wins with no API, a hostile (costly or badly documented) API, one-off tasks, or cross-app work.",
+            "It loses on cost (5–30× an API call), latency (1–5 seconds per cycle), reliability, and security.",
+            "If you can frame the task in a browser, prefer a browser agent. Its smaller surface makes it more reliable.",
+            "Have the model write a plan up front, checkpoint each step, and run in a VM or separate browser profile."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>কম্পিউটার-ইউজ এজেন্ট</strong> স্ক্রিনশট দেখে মাউস আর কিবোর্ড দিয়ে কাজ করে। যেখানে API নেই সেখানে সে কাজ করতে পারে, কিন্তু খরচ বেশি, গতি ধীর, আর সহজে ভেঙে যায়।",
+          "words": [
+            {
+              "term": "কম্পিউটার ইউজ (computer use)",
+              "meaning": "মডেল ডেস্কটপের স্ক্রিনশট দেখে মাউস বা কিবোর্ডের কাজ বাছে, কাজ শেষ না হওয়া পর্যন্ত বারবার।"
+            },
+            {
+              "term": "স্ক্রিনশট (screenshot)",
+              "meaning": "কোনো এক মুহূর্তে স্ক্রিনে যা আছে তার ছবি। মডেল এটা পড়ে পরের কাজ ঠিক করে।"
+            },
+            {
+              "term": "API",
+              "meaning": "এক প্রোগ্রামের সরাসরি আরেক প্রোগ্রামের সঙ্গে কথা বলার উপায়, স্ক্রিনে ক্লিক না করেই।"
+            },
+            {
+              "term": "ভিশন টোকেন (vision tokens)",
+              "meaning": "ছবি পড়তে মডেল যে ছোট ছোট টুকরো ব্যবহার করে। প্রতিটি স্ক্রিনশটে এগুলো যোগ হয়, তাই খরচ বাড়ে।"
+            },
+            {
+              "term": "ল্যাটেন্সি (latency)",
+              "meaning": "ফল পেতে কতক্ষণ অপেক্ষা করতে হয়। ল্যাটেন্সি কম মানে দ্রুত, বেশি মানে ধীর।"
+            },
+            {
+              "term": "ব্রাউজার এজেন্ট (browser agent)",
+              "meaning": "যে এজেন্ট শুধু একটি ব্রাউজার ট্যাবের ভেতরে দেখতে ও কাজ করতে পারে, পুরো ডেস্কটপে নয়।"
+            },
+            {
+              "term": "স্যান্ডবক্সড VM (sandboxed VM)",
+              "meaning": "আপনার আসল কম্পিউটার থেকে আলাদা রাখা একটি ভার্চুয়াল কম্পিউটার, যাতে ভুল ক্লিক হোস্ট সিস্টেমে পৌঁছাতে না পারে।"
+            }
+          ],
+          "remember": [
+            "API না থাকলে, API প্রতিকূল (দামি বা বাজে ডকুমেন্টেশনসহ) হলে, কাজ একবারের হলে, বা একাধিক অ্যাপে ছড়ালে কম্পিউটার ইউজ জেতে।",
+            "খরচ (API কলের ৫–৩০ গুণ), ল্যাটেন্সি (প্রতি চক্রে ১–৫ সেকেন্ড), নির্ভরযোগ্যতা আর নিরাপত্তায় এটি হারে।",
+            "কাজটা ব্রাউজারে করা গেলে ব্রাউজার এজেন্ট বেছে নিন। এর পরিসর ছোট, তাই এটি বেশি নির্ভরযোগ্য।",
+            "মডেলকে দিয়ে আগে প্ল্যান লেখান, প্রতিটি ধাপ চেকপয়েন্ট করুন, আর VM বা আলাদা ব্রাউজার প্রোফাইলে চালান।"
+          ]
+        }
       },
       "body": [
         {

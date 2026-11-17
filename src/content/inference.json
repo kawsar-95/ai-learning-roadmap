@@ -16,6 +16,78 @@
         "title": "হোস্টেড না সেলফ-হোস্টেড: ইনফারেন্স সার্ভার",
         "sub": "প্রতিটা LLM কলের দুই দিক: আপনার পাঠানো <strong>রিকোয়েস্ট</strong>, আর সেটা যে <strong>ইনফারেন্স</strong> সামলায়। বেশিরভাগ টিম শুরুতে ভাড়া নেয় (Together, Fireworks, Groq, Cerebras, Replicate, AWS Bedrock)। ব্যবহার যথেষ্ট বাড়লে তারা vLLM, TGI, SGLang, Ollama বা llama.cpp দিয়ে নিজে হোস্ট করে।"
       },
+      "basics": {
+        "en": {
+          "idea": "Most teams start by renting a hosted API. When usage grows, they may run their own model on an <strong>inference server</strong>, the program that loads the model onto a GPU and answers requests.",
+          "words": [
+            {
+              "term": "Hosted API",
+              "meaning": "A model that a vendor runs for you. You send requests and pay for what you use."
+            },
+            {
+              "term": "Self-hosted",
+              "meaning": "Running the model yourself on your own GPU, so you control the setup and the data."
+            },
+            {
+              "term": "Inference server",
+              "meaning": "The program that loads model weights into GPU memory and answers requests."
+            },
+            {
+              "term": "PagedAttention",
+              "meaning": "A vLLM method that stores the model's working memory in small pages, so little memory is wasted."
+            },
+            {
+              "term": "Continuous batching",
+              "meaning": "Mixing tokens from many requests together, so the GPU does not sit idle waiting for one slow request."
+            },
+            {
+              "term": "GGUF",
+              "meaning": "A single-file model format used by llama.cpp. It runs on a CPU, a GPU, or both."
+            }
+          ],
+          "remember": [
+            "Start with a hosted API. It takes minutes, while self-hosting takes weeks.",
+            "Self-hosting costs less per token at scale and gives you full control of your data.",
+            "Move to self-hosting when your bill exceeds the cost of a half-time ML engineer plus two H100s.",
+            "Five main servers in 2025 are vLLM, TGI, SGLang, Ollama and llama.cpp, plus TensorRT-LLM / Triton: fastest, but most ops work."
+          ]
+        },
+        "bn": {
+          "idea": "বেশিরভাগ টিম আগে হোস্টেড API ভাড়া করে শুরু করে। ব্যবহার বাড়লে তারা <strong>ইনফারেন্স সার্ভার</strong> দিয়ে নিজেরা মডেল চালাতে পারে। এটি সেই প্রোগ্রাম, যা মডেলকে GPU-তে তুলে রিকোয়েস্টের উত্তর দেয়।",
+          "words": [
+            {
+              "term": "হোস্টেড API (hosted API)",
+              "meaning": "যে মডেল কোনো ভেন্ডর আপনার হয়ে চালায়। আপনি রিকোয়েস্ট পাঠান, আর যত ব্যবহার করেন তত টাকা দেন।"
+            },
+            {
+              "term": "সেলফ-হোস্টেড (self-hosted)",
+              "meaning": "নিজের GPU-তে নিজেই মডেল চালানো, ফলে সেটআপ আর ডেটা আপনার হাতে থাকে।"
+            },
+            {
+              "term": "ইনফারেন্স সার্ভার (inference server)",
+              "meaning": "যে প্রোগ্রাম মডেলের ওয়েট GPU মেমরিতে তোলে আর রিকোয়েস্টের উত্তর দেয়।"
+            },
+            {
+              "term": "PagedAttention",
+              "meaning": "vLLM-এর একটি পদ্ধতি, যা মডেলের কাজের মেমরি ছোট ছোট পেজে রাখে, ফলে মেমরি কম নষ্ট হয়।"
+            },
+            {
+              "term": "কন্টিনিউয়াস ব্যাচিং (continuous batching)",
+              "meaning": "অনেক রিকোয়েস্টের টোকেন মিলিয়ে চালানো, যাতে একটি ধীর রিকোয়েস্টের জন্য GPU বসে না থাকে।"
+            },
+            {
+              "term": "GGUF",
+              "meaning": "llama.cpp-এর একটি সিঙ্গেল-ফাইল মডেল ফরম্যাট। এটি CPU, GPU বা দুটোতেই চলে।"
+            }
+          ],
+          "remember": [
+            "আগে হোস্টেড API দিয়ে শুরু করুন। এতে মিনিট লাগে, আর সেলফ-হোস্টে লাগে কয়েক সপ্তাহ।",
+            "স্কেলে সেলফ-হোস্টে প্রতি টোকেনের খরচ কম, আর ডেটার পুরো নিয়ন্ত্রণ আপনার হাতে থাকে।",
+            "বিল আধা-সময়ের ML ইঞ্জিনিয়ার আর দুটি H100-এর খরচ ছাড়ালে সেলফ-হোস্টে যান।",
+            "২০২৫-এ পাঁচটি প্রধান সার্ভার হলো vLLM, TGI, SGLang, Ollama আর llama.cpp, সাথে TensorRT-LLM / Triton: সবচেয়ে দ্রুত, কিন্তু সবচেয়ে বেশি অপস কাজ লাগে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -324,6 +396,88 @@
         "title": "ইনফারেন্সের খরচ: GPU-র অর্থনীতি, এজ ডিভাইস আর প্রোভাইডার",
         "sub": "একটা GPU ভাড়া বা কেনার খরচ আর সেটা কত রিকোয়েস্ট সামলায়, ইউজারের ডিভাইসে ছোট মডেল চালালে কী ছাড়তে হয়, আর কোন হোস্টেড প্রোভাইডার থেকে ভাড়া নেবেন।"
       },
+      "basics": {
+        "en": {
+          "idea": "Running your own model costs real money for GPUs, so it helps to know the numbers. Small models on the user's device cost nothing in server fees but are weaker. Hosted <strong>providers</strong> are another option.",
+          "words": [
+            {
+              "term": "H100",
+              "meaning": "A top-end Nvidia GPU used to run large AI models."
+            },
+            {
+              "term": "70B",
+              "meaning": "A model with 70 billion parameters. Parameters are the numbers a model learns during training."
+            },
+            {
+              "term": "Concurrent requests",
+              "meaning": "Requests the server handles at the same moment."
+            },
+            {
+              "term": "Latency",
+              "meaning": "How long a user waits for an answer."
+            },
+            {
+              "term": "Edge inference",
+              "meaning": "Running small models on the user's own device, like a phone, instead of on a server."
+            },
+            {
+              "term": "SLA (service-level agreement)",
+              "meaning": "A written promise from a provider about how reliable and fast its service will be."
+            },
+            {
+              "term": "LPU (Language Processing Unit)",
+              "meaning": "Groq's own chip, built for very fast model inference."
+            }
+          ],
+          "remember": [
+            "An H100 rents for $2–$4/hr on the major clouds and costs about $30k to buy.",
+            "With a 70B model, you can serve about 30 concurrent requests before latency collapses.",
+            "Fully loaded, this costs about $0.10 per 1k generated tokens.",
+            "Edge inference has zero server cost, but quality and capability are limited.",
+            "Many hosted providers offer the same models, so pick by model, price and SLA."
+          ]
+        },
+        "bn": {
+          "idea": "নিজের মডেল চালাতে GPU-র পেছনে সত্যিকারের টাকা লাগে, তাই সংখ্যাগুলো জানা কাজে দেয়। ইউজারের ডিভাইসে ছোট মডেল চালালে সার্ভার খরচ নেই, কিন্তু মডেল দুর্বল। আরেকটি পথ হলো হোস্টেড <strong>প্রোভাইডার</strong>।",
+          "words": [
+            {
+              "term": "H100",
+              "meaning": "Nvidia-র একটি সেরা মানের GPU, যা বড় AI মডেল চালাতে ব্যবহার হয়।"
+            },
+            {
+              "term": "৭০B (70B)",
+              "meaning": "৭০ বিলিয়ন প্যারামিটারের একটি মডেল। প্যারামিটার হলো ট্রেনিংয়ের সময় মডেলের শেখা সংখ্যাগুলো।"
+            },
+            {
+              "term": "একসাথে চলা রিকোয়েস্ট (concurrent requests)",
+              "meaning": "সার্ভার একই মুহূর্তে যত রিকোয়েস্ট সামলায়।"
+            },
+            {
+              "term": "ল্যাটেন্সি (latency)",
+              "meaning": "উত্তরের জন্য ইউজারকে কতক্ষণ অপেক্ষা করতে হয়।"
+            },
+            {
+              "term": "এজ ইনফারেন্স (edge inference)",
+              "meaning": "সার্ভারের বদলে ইউজারের নিজের ডিভাইসে, যেমন ফোনে, ছোট মডেল চালানো।"
+            },
+            {
+              "term": "SLA (service-level agreement)",
+              "meaning": "প্রোভাইডারের লিখিত প্রতিশ্রুতি যে তার সেবা কতটা নির্ভরযোগ্য আর দ্রুত হবে।"
+            },
+            {
+              "term": "LPU (Language Processing Unit)",
+              "meaning": "Groq-এর নিজের চিপ, যা খুব দ্রুত মডেল ইনফারেন্সের জন্য বানানো।"
+            }
+          ],
+          "remember": [
+            "H100 প্রধান ক্লাউডে ঘণ্টায় $২–$৪-এ ভাড়া পাওয়া যায়, আর কিনতে প্রায় $৩০k লাগে।",
+            "৭০B মডেলে ল্যাটেন্সি ভেঙে পড়ার আগে প্রায় ৩০টি একসাথে চলা রিকোয়েস্ট সামলানো যায়।",
+            "পুরো লোডে এর খরচ প্রতি ১k জেনারেটেড টোকেনে প্রায় $০.১০।",
+            "এজ ইনফারেন্সে সার্ভার খরচ শূন্য, কিন্তু মান আর সামর্থ্য সীমিত।",
+            "অনেক হোস্টেড প্রোভাইডার একই মডেল দেয়, তাই মডেল, দাম আর SLA দেখে বাছুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -445,6 +599,94 @@
       "bn": {
         "title": "দ্রুত ও সস্তা ইনফারেন্স: কোয়ান্টাইজেশন, ক্যাশিং, ব্যাচিং আর মেট্রিক",
         "sub": "নিজে হোস্ট করলে অপ্টিমাইজেশনের একদম নতুন শব্দভান্ডার শিখতে হয়: KV ক্যাশ, প্রিফিক্স ক্যাশিং, স্পেকুলেটিভ ডিকোডিং, কন্টিনিউয়াস ব্যাচিং।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Teams that self-host use a few tricks to make inference faster and cheaper. <strong>Quantization</strong> shrinks the model, caching skips repeated work, and batching keeps the GPU busy.",
+          "words": [
+            {
+              "term": "Quantization",
+              "meaning": "Storing model weights with fewer bits, like 4 instead of 16. The model gets smaller and faster, with a small loss in quality."
+            },
+            {
+              "term": "KV cache",
+              "meaning": "Saved work from earlier tokens, so the model does not redo it for each new token."
+            },
+            {
+              "term": "Prefix caching",
+              "meaning": "Reusing the saved work for a long shared beginning of the prompt, like a system prompt, across many requests."
+            },
+            {
+              "term": "Speculative decoding",
+              "meaning": "A tiny draft model guesses the next few tokens, and the big model checks them all at once."
+            },
+            {
+              "term": "Throughput",
+              "meaning": "The total tokens the server produces per second, across all users."
+            },
+            {
+              "term": "Continuous batching",
+              "meaning": "Mixing tokens from many requests together, so the GPU never sits idle waiting for one slow request."
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "How long the user waits until the first word appears."
+            },
+            {
+              "term": "p99 latency",
+              "meaning": "The wait time for the slowest 1% of requests."
+            }
+          ],
+          "remember": [
+            "Quantization cuts GPU memory by 2–4× for a small loss in quality.",
+            "Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part.",
+            "Speculative decoding makes throughput 2–3× higher with no quality loss.",
+            "Continuous batching alone typically gives 5–20× higher throughput."
+          ]
+        },
+        "bn": {
+          "idea": "যারা সেলফ-হোস্ট করে, তারা ইনফারেন্স দ্রুত আর সস্তা করতে কয়েকটি কৌশল ব্যবহার করে। <strong>কোয়ান্টাইজেশন</strong> মডেল ছোট করে, ক্যাশিং একই কাজ আবার করা এড়ায়, আর ব্যাচিং GPU-কে ব্যস্ত রাখে।",
+          "words": [
+            {
+              "term": "কোয়ান্টাইজেশন (quantization)",
+              "meaning": "মডেলের ওয়েট কম বিটে রাখা, যেমন ১৬-এর বদলে ৪। মডেল ছোট ও দ্রুত হয়, মান সামান্য কমে।"
+            },
+            {
+              "term": "KV ক্যাশ (KV cache)",
+              "meaning": "আগের টোকেনের জন্য করা কাজ জমিয়ে রাখা, যাতে প্রতিটি নতুন টোকেনে মডেলকে আবার তা করতে না হয়।"
+            },
+            {
+              "term": "প্রিফিক্স ক্যাশিং (prefix caching)",
+              "meaning": "অনেক রিকোয়েস্টে একই থাকা প্রম্পটের দীর্ঘ শুরুর অংশের (যেমন সিস্টেম প্রম্পটের) জমানো কাজ আবার ব্যবহার করা।"
+            },
+            {
+              "term": "স্পেকুলেটিভ ডিকোডিং (speculative decoding)",
+              "meaning": "একটি ছোট ড্রাফট মডেল পরের কয়েকটি টোকেন আন্দাজ করে, আর বড় মডেল সেগুলো একসাথে যাচাই করে।"
+            },
+            {
+              "term": "থ্রুপুট (throughput)",
+              "meaning": "সব ইউজার মিলিয়ে সার্ভার প্রতি সেকেন্ডে মোট কত টোকেন তৈরি করে।"
+            },
+            {
+              "term": "কন্টিনিউয়াস ব্যাচিং (continuous batching)",
+              "meaning": "অনেক রিকোয়েস্টের টোকেন মিলিয়ে চালানো, যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো বসে না থাকে।"
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "প্রথম শব্দ দেখা পর্যন্ত ইউজারকে কতক্ষণ অপেক্ষা করতে হয়।"
+            },
+            {
+              "term": "p99 ল্যাটেন্সি (p99 latency)",
+              "meaning": "সবচেয়ে ধীর ১% রিকোয়েস্টের অপেক্ষার সময়।"
+            }
+          ],
+          "remember": [
+            "কোয়ান্টাইজেশন সামান্য মান কমিয়ে GPU মেমরি ২–৪× কমায়।",
+            "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।",
+            "স্পেকুলেটিভ ডিকোডিং মান না কমিয়ে থ্রুপুট ২–৩× বেশি করে।",
+            "শুধু কন্টিনিউয়াস ব্যাচিংই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়।"
+          ]
+        }
       },
       "body": [
         {

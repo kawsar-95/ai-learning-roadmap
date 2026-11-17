@@ -18,6 +18,78 @@
         "title": "Linux আর শেল",
         "sub": "বেশিরভাগ মডেল সার্ভার, কনটেইনার আর CI runner Linux-এ চলে। একটা মেশিন কী করছে তা জানতে AI ইঞ্জিনিয়ার যে কমান্ড আর অভ্যাস ব্যবহার করেন, এখানে সেগুলো।"
       },
+      "basics": {
+        "en": {
+          "idea": "Most AI systems run on Linux servers. When one is slow, full or gone, you use a few <strong>shell</strong> commands to see what the machine is doing before you try to fix it.",
+          "words": [
+            {
+              "term": "Shell",
+              "meaning": "A text window where you type instructions to the computer instead of clicking."
+            },
+            {
+              "term": "<code>nvidia-smi</code>",
+              "meaning": "A command that shows how busy the GPU is, how much GPU memory is used, and which processes use it."
+            },
+            {
+              "term": "Pipe (<code>|</code>)",
+              "meaning": "A mark that sends the output of one command into the next command, like passing a note along a line."
+            },
+            {
+              "term": "SIGTERM and SIGKILL",
+              "meaning": "Two stop signals. SIGTERM asks a process to exit and clean up. SIGKILL (<code>kill -9</code>) cannot be caught, so use it last."
+            },
+            {
+              "term": "<code>journalctl</code>",
+              "meaning": "A command that reads logs. With <code>-u</code> and a name, it shows the log of one service under systemd."
+            },
+            {
+              "term": "Out-of-memory killer",
+              "meaning": "When RAM runs out, the kernel may kill a process to free memory. The process can vanish without any error in its own log."
+            }
+          ],
+          "remember": [
+            "Read the machine first with commands like <code>nvidia-smi</code>, <code>df -h</code> and <code>free -h</code>, then fix it.",
+            "Use <code>kill</code> first, which sends SIGTERM. Use <code>kill -9</code> last.",
+            "Never print environment variables into logs, because they can hold secrets.",
+            "If a model server vanishes with no error, look for an out-of-memory message with <code>dmesg</code>."
+          ]
+        },
+        "bn": {
+          "idea": "বেশিরভাগ AI সিস্টেম Linux সার্ভারে চলে। কিছু ধীর, ভরা বা বন্ধ হয়ে গেলে ঠিক করার আগে কয়েকটা <strong>শেল</strong> কমান্ড দিয়ে দেখে নিন মেশিন কী করছে।",
+          "words": [
+            {
+              "term": "শেল (shell)",
+              "meaning": "একটি টেক্সট উইন্ডো, যেখানে ক্লিক না করে কম্পিউটারকে লিখে নির্দেশ দেওয়া হয়।"
+            },
+            {
+              "term": "<code>nvidia-smi</code>",
+              "meaning": "যে কমান্ড দেখায় GPU কতটা ব্যস্ত, কতটা GPU মেমোরি ব্যবহার হচ্ছে, আর কোন প্রসেস সেটা ব্যবহার করছে।"
+            },
+            {
+              "term": "পাইপ (pipe, <code>|</code>)",
+              "meaning": "যে চিহ্ন এক কমান্ডের আউটপুট পরের কমান্ডে পাঠায়, লাইনে একটা চিরকুট হাতে হাতে পাঠানোর মতো।"
+            },
+            {
+              "term": "SIGTERM আর SIGKILL",
+              "meaning": "দুটি বন্ধ করার সংকেত। SIGTERM প্রসেসকে গুছিয়ে বন্ধ হতে বলে। SIGKILL (<code>kill -9</code>) আটকানো যায় না, তাই শেষে ব্যবহার করুন।"
+            },
+            {
+              "term": "<code>journalctl</code>",
+              "meaning": "লগ পড়ার কমান্ড। <code>-u</code> আর নাম দিলে systemd-এর অধীনে একটি সার্ভিসের লগ দেখায়।"
+            },
+            {
+              "term": "আউট-অব-মেমোরি কিলার (out-of-memory killer)",
+              "meaning": "RAM ফুরিয়ে গেলে কার্নেল জায়গা খালি করতে কোনো প্রসেস মেরে ফেলতে পারে। প্রসেসটি নিজের লগে কোনো এরর না রেখেই উধাও হতে পারে।"
+            }
+          ],
+          "remember": [
+            "আগে <code>nvidia-smi</code>, <code>df -h</code>, <code>free -h</code>-এর মতো কমান্ডে মেশিন দেখুন, তারপর ঠিক করুন।",
+            "আগে <code>kill</code> দিন, যা SIGTERM পাঠায়। <code>kill -9</code> শেষ উপায়।",
+            "এনভায়রনমেন্ট ভেরিয়েবল কখনো লগে প্রিন্ট করবেন না, কারণ তাতে সিক্রেট থাকতে পারে।",
+            "মডেল সার্ভার কোনো এরর ছাড়া উধাও হলে <code>dmesg</code> দিয়ে out-of-memory বার্তা খুঁজুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -179,6 +251,78 @@
         "title": "Git আর GitHub",
         "sub": "Git আপনার কোড, প্রম্পট আর সেটিংসের প্রতিটি পরিবর্তন মনে রাখে। GitHub যোগ করে রিভিউ, অটোমেশন আর কাজ করার ভাগ করা জায়গা। AI-এর কাজে দুটোই লাগে, সাথে সিক্রেট আর বড় ফাইল নিয়ে কয়েকটা বাড়তি নিয়ম।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Git</strong> records every change to your code, prompts and settings. GitHub adds review and automatic checks. AI work also needs care with secrets and large files.",
+          "words": [
+            {
+              "term": "Commit",
+              "meaning": "A snapshot of the project saved with a message, like a save point in a game."
+            },
+            {
+              "term": "Branch",
+              "meaning": "A movable name for a commit. Making one is cheap, so you can try changes safely."
+            },
+            {
+              "term": "Pull request",
+              "meaning": "A request to merge your branch into <code>main</code> after people review it and automatic checks pass."
+            },
+            {
+              "term": "Git LFS",
+              "meaning": "A way to keep large files outside normal Git history. It suits things like model weights."
+            },
+            {
+              "term": "<code>git worktree</code>",
+              "meaning": "A command that checks out more than one branch of one repository into separate folders."
+            },
+            {
+              "term": "Rebase",
+              "meaning": "Tidying your own unpublished branch by rewriting its commits. Merge keeps shared history as it was."
+            }
+          ],
+          "remember": [
+            "Keep code, prompts, eval cases and config in Git. Keep API keys, <code>.env</code> files and model weights out.",
+            "Give each parallel coding agent its own worktree and branch, so they cannot overwrite each other's files.",
+            "Never rebase a branch that other people have pulled.",
+            "A secret you commit is a secret you leaked. Revoke the key at the provider first."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>Git</strong> আপনার কোড, প্রম্পট আর সেটিংসের প্রতিটি পরিবর্তন লিখে রাখে। GitHub যোগ করে রিভিউ আর অটোমেটিক চেক। AI কাজে সিক্রেট আর বড় ফাইল নিয়েও সতর্ক থাকতে হয়।",
+          "words": [
+            {
+              "term": "কমিট (commit)",
+              "meaning": "একটি বার্তাসহ প্রজেক্টের সংরক্ষিত স্ন্যাপশট, খেলার সেভ পয়েন্টের মতো।"
+            },
+            {
+              "term": "ব্রাঞ্চ (branch)",
+              "meaning": "একটি কমিটের সরানো যায় এমন নাম। বানানো সস্তা, তাই নিরাপদে পরিবর্তন চেষ্টা করা যায়।"
+            },
+            {
+              "term": "পুল রিকোয়েস্ট (pull request)",
+              "meaning": "রিভিউ হওয়ার আর অটোমেটিক চেক পাস করার পর আপনার ব্রাঞ্চ <code>main</code>-এ মার্জ করার অনুরোধ।"
+            },
+            {
+              "term": "Git LFS",
+              "meaning": "বড় ফাইল সাধারণ Git ইতিহাসের বাইরে রাখার একটি উপায়। মডেল ওয়েটের মতো জিনিসের জন্য উপযোগী।"
+            },
+            {
+              "term": "<code>git worktree</code>",
+              "meaning": "যে কমান্ড একই রিপোজিটরির একাধিক ব্রাঞ্চ আলাদা আলাদা ফোল্ডারে চেক আউট করে।"
+            },
+            {
+              "term": "রিবেস (rebase)",
+              "meaning": "নিজের অপ্রকাশিত ব্রাঞ্চের কমিট নতুন করে লিখে গুছিয়ে নেওয়া। মার্জ শেয়ার করা ইতিহাস যেমন ছিল তেমন রাখে।"
+            }
+          ],
+          "remember": [
+            "কোড, প্রম্পট, ইভ্যাল কেস আর কনফিগ Git-এ রাখুন। API key, <code>.env</code> ফাইল আর মডেল ওয়েট রাখবেন না।",
+            "সমান্তরাল প্রতিটি কোডিং এজেন্টকে আলাদা worktree আর ব্রাঞ্চ দিন, যাতে একে অপরের ফাইল বদলে না ফেলে।",
+            "অন্যরা যে ব্রাঞ্চ নামিয়ে নিয়েছে, তা কখনো রিবেস করবেন না।",
+            "কমিট করা সিক্রেট মানে ফাঁস হয়ে যাওয়া সিক্রেট। আগে provider-এ key বাতিল করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -321,6 +465,86 @@
       "bn": {
         "title": "নেটওয়ার্কিংয়ের মূল কথা",
         "sub": "একটা মডেল API কল DNS, TCP, TLS, HTTP আর সাধারণত একটা প্রক্সির ভেতর দিয়ে যায়। ক্রমটা জানলে কিছু ভাঙলে কোথায় দেখতে হবে বোঝা যায়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "One call to a model API passes through several steps in a fixed order. Knowing that <strong>request path</strong> tells you where to look when a call fails.",
+          "words": [
+            {
+              "term": "DNS",
+              "meaning": "The step that turns a name like <code>api.example.com</code> into an IP address."
+            },
+            {
+              "term": "TCP",
+              "meaning": "The step that opens a connection to that address and port."
+            },
+            {
+              "term": "TLS",
+              "meaning": "The step that encrypts the connection and checks the server's certificate."
+            },
+            {
+              "term": "Proxy or load balancer",
+              "meaning": "A middle machine that forwards each request to a server that is healthy."
+            },
+            {
+              "term": "Idle timeout",
+              "meaning": "A limit on how long a connection may stay quiet before it is closed."
+            },
+            {
+              "term": "Server-sent events",
+              "meaning": "A long-lived HTTP response, used to stream an answer to you piece by piece."
+            },
+            {
+              "term": "Backoff",
+              "meaning": "Waiting longer before each retry, with a little randomness, instead of retrying in a tight loop."
+            }
+          ],
+          "remember": [
+            "The order is DNS, TCP, TLS, then HTTP; a proxy or load balancer sits in between and forwards the request.",
+            "A proxy that buffers (saves up the answer) holds tokens back, and a short idle timeout cuts long answers.",
+            "For streaming, turn buffering off and set timeouts longer than your slowest answer.",
+            "Retry with backoff on <code>429</code> (rate limit) and <code>5xx</code> (server errors), and only for requests that are safe to repeat."
+          ]
+        },
+        "bn": {
+          "idea": "একটি মডেল API কল নির্দিষ্ট ক্রমে কয়েকটা ধাপ পেরিয়ে যায়। এই <strong>রিকোয়েস্ট পাথ</strong> জানলে কল ব্যর্থ হলে কোথায় দেখতে হবে বোঝা যায়।",
+          "words": [
+            {
+              "term": "DNS",
+              "meaning": "যে ধাপ <code>api.example.com</code>-এর মতো নামকে IP ঠিকানায় বদলে দেয়।"
+            },
+            {
+              "term": "TCP",
+              "meaning": "যে ধাপ সেই ঠিকানা আর পোর্টে একটি সংযোগ খোলে।"
+            },
+            {
+              "term": "TLS",
+              "meaning": "যে ধাপ সংযোগ এনক্রিপ্ট করে আর সার্ভারের সার্টিফিকেট যাচাই করে।"
+            },
+            {
+              "term": "প্রক্সি বা লোড ব্যালান্সার (proxy or load balancer)",
+              "meaning": "মাঝখানের একটি মেশিন, যা প্রতিটি অনুরোধ একটি সুস্থ সার্ভারে পাঠায়।"
+            },
+            {
+              "term": "Idle timeout",
+              "meaning": "সংযোগ কতক্ষণ চুপ থাকলে বন্ধ করে দেওয়া হবে, তার একটা সীমা।"
+            },
+            {
+              "term": "Server-sent events",
+              "meaning": "একটি দীর্ঘ HTTP রেসপন্স, যা দিয়ে উত্তর টুকরো টুকরো করে আপনার কাছে স্ট্রিম হয়।"
+            },
+            {
+              "term": "ব্যাকঅফ (backoff)",
+              "meaning": "ঘন ঘন চেষ্টা না করে প্রতিবার চেষ্টার আগে একটু এলোমেলো করে আরও বেশি অপেক্ষা করা।"
+            }
+          ],
+          "remember": [
+            "ক্রমটা হলো DNS, TCP, TLS, তারপর HTTP; মাঝখানে বসা প্রক্সি বা লোড ব্যালান্সার অনুরোধটা এগিয়ে দেয়।",
+            "যে প্রক্সি বাফার করে (মানে উত্তর জমিয়ে রাখে), সে টোকেন আটকে রাখে, আর ছোট idle timeout লম্বা উত্তর কেটে দেয়।",
+            "স্ট্রিমিংয়ে বাফারিং বন্ধ করুন আর timeout সবচেয়ে ধীর উত্তরের চেয়ে বড় রাখুন।",
+            "<code>429</code> (রেট লিমিট) আর <code>5xx</code> (সার্ভার এরর) পেলে ব্যাকঅফ দিয়ে আবার চেষ্টা করুন, শুধু যে অনুরোধ দুবার চালালে ক্ষতি নেই তার জন্য।"
+          ]
+        }
       },
       "body": [
         {
@@ -473,6 +697,78 @@
         "title": "পাইপলাইনের জন্য Python আর YAML",
         "sub": "Python AI সিস্টেমের অংশগুলো জোড়া লাগায়, আর YAML দিয়ে তার চারপাশের বেশিরভাগ টুলের কনফিগ লেখা হয়। কিছু অভ্যাস দুটোকেই নিঃশব্দে ভাঙা থেকে বাঁচায়।"
       },
+      "basics": {
+        "en": {
+          "idea": "Python glues AI systems together, and <strong>YAML</strong> configures most of the tools around them. A few habits keep both from breaking in quiet ways.",
+          "words": [
+            {
+              "term": "Virtual environment",
+              "meaning": "A separate set of packages for one project, so two projects do not fight over versions."
+            },
+            {
+              "term": "Lock file",
+              "meaning": "A file that pins exact versions, so a build next month installs what you installed today."
+            },
+            {
+              "term": "uv",
+              "meaning": "A newer tool that does the same job as pip and venv, but faster, and writes a lock file."
+            },
+            {
+              "term": "YAML",
+              "meaning": "A settings file format where indentation with spaces shows what belongs to what."
+            },
+            {
+              "term": "Anchors and aliases (<code>&name</code>, <code>*name</code>)",
+              "meaning": "A way to reuse a block of YAML. Keep them rare, because they make a file hard to read."
+            },
+            {
+              "term": "<code>yamllint</code>",
+              "meaning": "A linter, which is a checker that reads your YAML file and flags mistakes."
+            }
+          ],
+          "remember": [
+            "Install each project's packages in its own virtual environment, and pin versions in a lock file.",
+            "YAML uses spaces for indentation. Tabs are not allowed.",
+            "Quote values that could be misread: <code>1.10</code> becomes a number, and in YAML 1.1 <code>no</code> and <code>on</code> are booleans.",
+            "One misplaced space can move a key, yet the file parses; run a linter and check what the tool loaded."
+          ]
+        },
+        "bn": {
+          "idea": "Python AI সিস্টেমের অংশগুলো জোড়া লাগায়, আর বেশিরভাগ টুলের কনফিগ হয় <strong>YAML</strong>-এ। কয়েকটা অভ্যাস দুটোকেই নিঃশব্দে ভেঙে যাওয়া থেকে বাঁচায়।",
+          "words": [
+            {
+              "term": "ভার্চুয়াল এনভায়রনমেন্ট (virtual environment)",
+              "meaning": "একটি প্রজেক্টের জন্য আলাদা প্যাকেজের সেট, যাতে দুই প্রজেক্টের ভার্সন না মেশে।"
+            },
+            {
+              "term": "লক ফাইল (lock file)",
+              "meaning": "যে ফাইল নির্দিষ্ট ভার্সন পিন করে রাখে, তাই এক মাস পরের বিল্ডেও আজকের জিনিসই ইনস্টল হয়।"
+            },
+            {
+              "term": "uv",
+              "meaning": "একটি নতুন টুল, যা pip আর venv-এর কাজই আরও দ্রুত করে এবং একটি লক ফাইল লেখে।"
+            },
+            {
+              "term": "YAML",
+              "meaning": "সেটিংস ফাইলের একটি ফরম্যাট, যেখানে স্পেস দিয়ে ইন্ডেন্টেশন দেখায় কোনটা কার অংশ।"
+            },
+            {
+              "term": "অ্যাংকর আর অ্যালিয়াস (anchors, aliases: <code>&name</code>, <code>*name</code>)",
+              "meaning": "YAML-এর একটি ব্লক আবার ব্যবহার করার উপায়। কম ব্যবহার করুন, কারণ ফাইল পড়া কঠিন হয়ে যায়।"
+            },
+            {
+              "term": "<code>yamllint</code>",
+              "meaning": "একটি লিন্টার, মানে এমন চেকার যা আপনার YAML ফাইল পড়ে ভুল ধরিয়ে দেয়।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি প্রজেক্টের প্যাকেজ আলাদা ভার্চুয়াল এনভায়রনমেন্টে বসান, আর ভার্সন লক ফাইলে পিন করুন।",
+            "YAML-এ ইন্ডেন্টেশন হয় স্পেস দিয়ে। ট্যাব চলে না।",
+            "যে মান ভুলভাবে পড়া হতে পারে তা কোটেশনে রাখুন: <code>1.10</code> সংখ্যা হয়ে যায়, আর YAML 1.1-এ <code>no</code> ও <code>on</code> বুলিয়ান।",
+            "একটা ভুল জায়গার স্পেস কোনো কী সরিয়ে দিতে পারে, তবু ফাইল পার্স হয়; লিন্টার চালান আর দেখুন টুল আসলে কী লোড করেছে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -599,6 +895,86 @@
       "bn": {
         "title": "Docker আর কনটেইনার",
         "sub": "কনটেইনার আপনার কোড আর তার ডিপেন্ডেন্সি একসাথে প্যাক করে, তাই ল্যাপটপ, CI আর প্রোডাকশনে একই ভাবে চলে। AI-এর কাজে তিনটে প্রশ্ন বাড়ে: ওয়েট, GPU আর অন্য সার্ভিস।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A <strong>container</strong> packs your code with everything it needs, so it runs the same on a laptop, in CI (automatic build and test) and in production. For AI, also plan for model weights, GPUs and other services.",
+          "words": [
+            {
+              "term": "Image",
+              "meaning": "The packed recipe for a container, built in read-only layers."
+            },
+            {
+              "term": "Container",
+              "meaning": "A running copy of an image."
+            },
+            {
+              "term": "Dockerfile",
+              "meaning": "A file that lists the steps that build an image."
+            },
+            {
+              "term": "Weights",
+              "meaning": "The saved numbers that make up a model. They can take many gigabytes."
+            },
+            {
+              "term": "Volume",
+              "meaning": "A storage place outside the image that you attach to a container, so big files need not sit inside the image."
+            },
+            {
+              "term": "NVIDIA Container Toolkit",
+              "meaning": "Software on the host that, with the NVIDIA driver, lets a container see and use the GPUs."
+            },
+            {
+              "term": "Compose",
+              "meaning": "A tool that starts several services together from one file, with <code>docker compose up</code>."
+            }
+          ],
+          "remember": [
+            "Put the lines that change least first, so a rebuild reuses the cached layers.",
+            "Never bake secrets into an image. Anyone who can pull the image can read its layers.",
+            "Baked-in weights give reproducible, offline starts but slow pulls; mounting or downloading avoids that, so choose on purpose.",
+            "A container is not a virtual machine. It shares the host's kernel, so it isolates less."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>কনটেইনার</strong> আপনার কোড আর তার দরকারি সবকিছু একসাথে প্যাক করে, তাই ল্যাপটপ, CI (স্বয়ংক্রিয় বিল্ড ও টেস্ট) আর প্রোডাকশনে একই ভাবে চলে। AI-র কাজে মডেল ওয়েট, GPU আর অন্য সার্ভিসের কথাও ভাবতে হয়।",
+          "words": [
+            {
+              "term": "ইমেজ (image)",
+              "meaning": "কনটেইনারের প্যাক করা রেসিপি, যা শুধু-পড়া লেয়ার দিয়ে তৈরি।"
+            },
+            {
+              "term": "কনটেইনার (container)",
+              "meaning": "একটি ইমেজের চলমান কপি।"
+            },
+            {
+              "term": "Dockerfile",
+              "meaning": "যে ফাইলে ইমেজ বানানোর ধাপগুলো লেখা থাকে।"
+            },
+            {
+              "term": "ওয়েট (weights)",
+              "meaning": "মডেল যে সংখ্যাগুলো দিয়ে তৈরি, সেগুলোর সংরক্ষিত রূপ। এতে অনেক গিগাবাইট লাগতে পারে।"
+            },
+            {
+              "term": "ভলিউম (volume)",
+              "meaning": "ইমেজের বাইরের একটি সংরক্ষণের জায়গা, যা কনটেইনারে জুড়ে দেওয়া হয়, যাতে বড় ফাইল ইমেজের ভেতরে রাখতে না হয়।"
+            },
+            {
+              "term": "NVIDIA Container Toolkit",
+              "meaning": "হোস্টের সফটওয়্যার, যা NVIDIA ড্রাইভারের সাথে মিলে কনটেইনারকে GPU দেখতে ও ব্যবহার করতে দেয়।"
+            },
+            {
+              "term": "কম্পোজ (Compose)",
+              "meaning": "একটি ফাইল থেকে একসাথে অনেক সার্ভিস চালু করার টুল, <code>docker compose up</code> দিয়ে।"
+            }
+          ],
+          "remember": [
+            "যে লাইন কম বদলায় আগে রাখুন, যাতে রিবিল্ডে ক্যাশ করা লেয়ার কাজে লাগে।",
+            "ইমেজে কখনও সিক্রেট ঢোকাবেন না। ইমেজ পুল করতে পারলেই তার লেয়ার পড়া যায়।",
+            "ওয়েট ইমেজে ঢোকালে প্রতিবার একই ভাবে আর অফলাইনে চালু হয়, কিন্তু পুল ধীর হয়; মাউন্ট করা বা চালুর সময় নামানো এটা এড়ায়, তাই ইচ্ছা করে বেছে নিন।",
+            "কনটেইনার ভার্চুয়াল মেশিন নয়। এটা হোস্টের কার্নেল ভাগ করে, তাই আইসোলেশন কম।"
+          ]
+        }
       },
       "body": [
         {
@@ -729,6 +1105,96 @@
       "bn": {
         "title": "Kubernetes",
         "sub": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বর্ণনা করা অবস্থায় ধরে রাখে। AI-এর জন্য এতে যোগ হয় GPU শিডিউলিং আর মডেল লোড হতে সময় লাগার সমস্যা।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>Kubernetes</strong> runs containers across many machines and keeps them in the shape you describe. For AI, it must also place GPU work and wait while a large model loads.",
+          "words": [
+            {
+              "term": "Cluster",
+              "meaning": "A group of machines. Kubernetes manages the work across them."
+            },
+            {
+              "term": "Pod",
+              "meaning": "One or more containers that run together, such as a model server container."
+            },
+            {
+              "term": "Deployment",
+              "meaning": "Keeps N copies of a Pod running and rolls out new versions."
+            },
+            {
+              "term": "Service",
+              "meaning": "A stable name and address in front of Pods that keep changing."
+            },
+            {
+              "term": "Ingress",
+              "meaning": "Sends HTTP traffic from outside to the right Service."
+            },
+            {
+              "term": "Device plugin",
+              "meaning": "Software from the GPU maker that the cluster needs, so a Pod can ask for a GPU."
+            },
+            {
+              "term": "<code>startupProbe</code>",
+              "meaning": "A check that gives a slow-loading model time. Until it passes, the Pod gets no traffic."
+            },
+            {
+              "term": "HorizontalPodAutoscaler",
+              "meaning": "Changes the number of copies of a Pod, based on a metric you choose."
+            }
+          ],
+          "remember": [
+            "You describe the state you want. If a container dies, Kubernetes starts another.",
+            "Ask for a GPU as a resource limit, and set <code>requests</code> and <code>limits</code> for CPU and memory.",
+            "A model can take minutes to load, so add a <code>startupProbe</code>.",
+            "CPU is a poor signal for a GPU service. Scale on request rate or queue length.",
+            "One service on one machine rarely needs Kubernetes; it pays off with many services, rolling updates, or teams sharing GPUs."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>Kubernetes</strong> অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে। AI-র জন্য তাকে GPU-র কাজও ঠিক জায়গায় বসাতে হয়, আর বড় মডেল লোড হওয়া পর্যন্ত অপেক্ষা করতে হয়।",
+          "words": [
+            {
+              "term": "ক্লাস্টার (cluster)",
+              "meaning": "কয়েকটি মেশিনের একটি দল। Kubernetes এই দলের কাজ সামলায়।"
+            },
+            {
+              "term": "Pod",
+              "meaning": "একসাথে চলা এক বা একাধিক কনটেইনার, যেমন একটি মডেল সার্ভার কনটেইনার।"
+            },
+            {
+              "term": "Deployment",
+              "meaning": "একটি Pod-এর N কপি চালু রাখে আর নতুন ভার্সন ছাড়ে।"
+            },
+            {
+              "term": "Service",
+              "meaning": "বদলাতে থাকা Pod-গুলোর সামনে একটি স্থির নাম আর ঠিকানা।"
+            },
+            {
+              "term": "Ingress",
+              "meaning": "বাইরের HTTP ট্রাফিককে সঠিক Service-এ পাঠায়।"
+            },
+            {
+              "term": "ডিভাইস প্লাগইন (device plugin)",
+              "meaning": "GPU বানানো কোম্পানির সফটওয়্যার, যা ক্লাস্টারে থাকতে হয়, যাতে Pod GPU চাইতে পারে।"
+            },
+            {
+              "term": "<code>startupProbe</code>",
+              "meaning": "ধীরে লোড হওয়া মডেলকে সময় দেওয়ার একটি পরীক্ষা। এটা পাশ না করা পর্যন্ত Pod ট্রাফিক পায় না।"
+            },
+            {
+              "term": "HorizontalPodAutoscaler",
+              "meaning": "আপনার বেছে নেওয়া একটি মাপকাঠি দেখে Pod-এর কপির সংখ্যা বদলায়।"
+            }
+          ],
+          "remember": [
+            "আপনি চাওয়া অবস্থাটা বলে দেন। কনটেইনার মরে গেলে Kubernetes নতুন একটা চালু করে।",
+            "GPU চাইতে হয় resource limit হিসেবে, আর CPU ও মেমরির জন্য <code>requests</code> ও <code>limits</code> দিতে হয়।",
+            "মডেল লোড হতে কয়েক মিনিট লাগতে পারে, তাই <code>startupProbe</code> দিন।",
+            "GPU সার্ভিসে CPU ঠিক সংকেত নয়। রিকোয়েস্ট রেট বা কিউ দৈর্ঘ্য দেখে স্কেল করুন।",
+            "একটা মেশিনে একটা সার্ভিসে সাধারণত Kubernetes লাগে না; অনেক সার্ভিস, রোলিং আপডেট বা টিমগুলোর মধ্যে GPU ভাগ করতে এটা কাজে আসে।"
+          ]
+        }
       },
       "body": [
         {
@@ -910,6 +1376,88 @@
         "title": "CI/CD আর GitOps",
         "sub": "CI প্রতিটি পরিবর্তন বিল্ড আর টেস্ট করে, CD সেটা পাঠিয়ে দেয়। AI সিস্টেমে টেস্টের মধ্যে মডেলের আচরণও পড়ে, আর GitOps Git-কে বানায় কী চলছে তার রেকর্ড।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>CI/CD</strong> builds and tests every change automatically and ships every change that passes. For an AI system, the tests also check the model's behaviour, and GitOps makes Git the record of what runs.",
+          "words": [
+            {
+              "term": "Continuous integration (CI)",
+              "meaning": "A practice where every change is built and tested automatically, so a mistake shows up fast."
+            },
+            {
+              "term": "Continuous delivery or deployment (CD)",
+              "meaning": "Shipping a change that passed its tests to an environment."
+            },
+            {
+              "term": "Evaluation set",
+              "meaning": "A small fixed list of questions used to score how well the AI system answers."
+            },
+            {
+              "term": "Baseline",
+              "meaning": "The score you compare against. A new score below it means things got worse."
+            },
+            {
+              "term": "GitOps",
+              "meaning": "A way of working where the Git repository is the source of truth for what runs."
+            },
+            {
+              "term": "Controller",
+              "meaning": "A program inside the cluster, such as Argo CD or Flux, that removes any difference between the cluster and the repository."
+            },
+            {
+              "term": "LLM judge",
+              "meaning": "A language model that scores answers. Its scores can be noisy."
+            }
+          ],
+          "remember": [
+            "A pipeline lints, tests, builds an image tagged with the commit, runs evals, then deploys to staging.",
+            "Fail the build when the eval score drops below the baseline.",
+            "In GitOps, you deploy by merging a change and roll back by reverting it.",
+            "An LLM judge is noisy: use a fixed set, pin the judge model, compare with a baseline measured on <code>main</code>.",
+            "Keep secrets out of the repository."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>CI/CD</strong> প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর যে পরিবর্তন পাশ করে তা ডিপ্লয় করে। AI সিস্টেমে টেস্টে মডেলের আচরণও যাচাই হয়, আর GitOps-এ কী চলবে তার রেকর্ড থাকে Git-এ।",
+          "words": [
+            {
+              "term": "কন্টিনিউয়াস ইন্টিগ্রেশন (Continuous integration, CI)",
+              "meaning": "এমন একটি পদ্ধতি, যেখানে প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট হয়, ফলে ভুল তাড়াতাড়ি ধরা পড়ে।"
+            },
+            {
+              "term": "কন্টিনিউয়াস ডেলিভারি বা ডিপ্লয়মেন্ট (Continuous delivery or deployment, CD)",
+              "meaning": "টেস্টে পাশ করা পরিবর্তন কোনো এনভায়রনমেন্টে পাঠিয়ে দেওয়া।"
+            },
+            {
+              "term": "ইভ্যালুয়েশন সেট (evaluation set)",
+              "meaning": "প্রশ্নের একটি ছোট নির্দিষ্ট তালিকা, যা দিয়ে AI সিস্টেমের উত্তর কেমন তা স্কোর করা হয়।"
+            },
+            {
+              "term": "বেসলাইন (baseline)",
+              "meaning": "যে স্কোরের সাথে তুলনা করা হয়। নতুন স্কোর এর নিচে নামলে বোঝা যায় অবস্থা খারাপ হয়েছে।"
+            },
+            {
+              "term": "GitOps",
+              "meaning": "কাজের একটি ধরন, যেখানে কী চলবে তার সত্যের উৎস Git রিপোজিটরি।"
+            },
+            {
+              "term": "কন্ট্রোলার (controller)",
+              "meaning": "ক্লাস্টারের ভেতরের প্রোগ্রাম, যেমন Argo CD বা Flux, যা ক্লাস্টার আর রিপোজিটরির তফাত মিটিয়ে দেয়।"
+            },
+            {
+              "term": "LLM জাজ (LLM judge)",
+              "meaning": "যে ল্যাঙ্গুয়েজ মডেল উত্তরের স্কোর দেয়। তার স্কোর কিছুটা এলোমেলো হতে পারে।"
+            }
+          ],
+          "remember": [
+            "পাইপলাইন লিন্ট ও টেস্ট চালায়, কমিট ট্যাগ দিয়ে ইমেজ বানায়, ইভ্যাল চালায়, তারপর staging-এ ডিপ্লয় করে।",
+            "ইভ্যাল স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করান।",
+            "GitOps-এ পরিবর্তন মার্জ করে ডিপ্লয় করেন, আর revert করে রোলব্যাক করেন।",
+            "LLM জাজ কিছুটা এলোমেলো: নির্দিষ্ট সেট ব্যবহার করুন, জাজ মডেল পিন করুন, আর <code>main</code>-এ মাপা বেসলাইনের সাথে তুলনা করুন।",
+            "সিক্রেট রিপোজিটরিতে রাখবেন না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1072,6 +1620,86 @@
         "title": "ইনফ্রাস্ট্রাকচার অ্যাজ কোড",
         "sub": "IaC সার্ভার, নেটওয়ার্ক আর ডেটাবেসকে কোডের মতো রিভিউ আর ভার্সন করা ফাইলে বর্ণনা করে। AI-এর জন্য এভাবেই GPU নোড আর তার চারপাশের সার্ভিস প্রতিবার একই ভাবে বানানো হয়।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Infrastructure as code</strong> describes servers, networks and databases in files that you review and version like code. So GPU nodes and the services around them are built the same way every time.",
+          "words": [
+            {
+              "term": "Infrastructure as code (IaC)",
+              "meaning": "Files that you review, version and run again, instead of clicking in a cloud console. The same files give the same result."
+            },
+            {
+              "term": "Terraform",
+              "meaning": "A tool that creates cloud resources, such as GPU nodes, networks, buckets and databases, from files. OpenTofu is its open-source fork."
+            },
+            {
+              "term": "Declarative",
+              "meaning": "A style where you describe the end state you want, not the steps to reach it."
+            },
+            {
+              "term": "Ansible",
+              "meaning": "A tool that sets up drivers, packages and services on machines that already exist, by running ordered steps with no agent on the machine."
+            },
+            {
+              "term": "Plan and apply",
+              "meaning": "Plan shows what would change. Apply makes the change, after you approve it."
+            },
+            {
+              "term": "State",
+              "meaning": "Terraform's record of what it manages. It can hold sensitive values and the team shares it."
+            },
+            {
+              "term": "Drift",
+              "meaning": "When someone changes a resource by hand and the files no longer match reality."
+            }
+          ],
+          "remember": [
+            "Files replace clicking in a console, and they give the same result each time.",
+            "Run <code>terraform plan</code> to see the change, then <code>terraform apply</code> to make it.",
+            "Keep state in a remote backend with locking (shared storage, one change at a time), never in Git.",
+            "GPUs cost a lot and <code>terraform destroy</code> is as easy as apply. Tag every resource with an owner and an expiry."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ইনফ্রাস্ট্রাকচার অ্যাজ কোড</strong> সার্ভার, নেটওয়ার্ক আর ডেটাবেসকে ফাইলে লিখে রাখে, যা কোডের মতো রিভিউ ও ভার্সন করা যায়। তাই GPU নোড আর তার চারপাশের সার্ভিস প্রতিবার একই ভাবে তৈরি হয়।",
+          "words": [
+            {
+              "term": "ইনফ্রাস্ট্রাকচার অ্যাজ কোড (Infrastructure as code, IaC)",
+              "meaning": "ক্লাউড কনসোলে ক্লিক করার বদলে ফাইল, যা আপনি রিভিউ করেন, ভার্সন রাখেন আর আবার চালান। একই ফাইল একই ফল দেয়।"
+            },
+            {
+              "term": "Terraform",
+              "meaning": "যে টুল ফাইল থেকে ক্লাউড রিসোর্স বানায়, যেমন GPU নোড, নেটওয়ার্ক, বাকেট, ডেটাবেস। OpenTofu তার ওপেন-সোর্স ফর্ক।"
+            },
+            {
+              "term": "ডিক্লারেটিভ (declarative)",
+              "meaning": "যে ধরনে আপনি শেষ অবস্থাটা বর্ণনা করেন, সেখানে পৌঁছানোর ধাপ নয়।"
+            },
+            {
+              "term": "Ansible",
+              "meaning": "যে টুল আগে থেকে থাকা মেশিনে ড্রাইভার, প্যাকেজ আর সার্ভিস সেট আপ করে, ক্রমানুসারে ধাপ চালিয়ে। মেশিনে কোনো এজেন্ট লাগে না।"
+            },
+            {
+              "term": "প্ল্যান আর অ্যাপ্লাই (plan, apply)",
+              "meaning": "প্ল্যান দেখায় কী বদলাবে। আপনি মেনে নিলে অ্যাপ্লাই সেই বদল করে।"
+            },
+            {
+              "term": "স্টেট (state)",
+              "meaning": "Terraform যা সামলায় তার রেকর্ড। এতে সংবেদনশীল মান থাকতে পারে, আর পুরো টিম এটা ভাগ করে।"
+            },
+            {
+              "term": "ড্রিফট (drift)",
+              "meaning": "কেউ হাতে কোনো রিসোর্স বদলালে ফাইল আর বাস্তব অবস্থা আর মেলে না।"
+            }
+          ],
+          "remember": [
+            "কনসোলে ক্লিক করার বদলে ফাইল ব্যবহার হয়, আর প্রতিবার একই ফল দেয়।",
+            "বদল দেখতে <code>terraform plan</code> চালান, তারপর বদলটা করতে <code>terraform apply</code> চালান।",
+            "স্টেট লকিংসহ remote backend-এ (শেয়ার করা স্টোরেজ, একবারে একটাই বদল) রাখুন, কখনও Git-এ নয়।",
+            "GPU দামি, আর <code>terraform destroy</code> চালানো apply-এর মতোই সহজ। প্রতিটি রিসোর্সে মালিক আর মেয়াদের ট্যাগ দিন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1222,6 +1850,78 @@
         "title": "ক্লাউড প্ল্যাটফর্ম আর ম্যানেজড AI সার্ভিস",
         "sub": "ক্লাউড কম্পিউটার, স্টোরেজ আর নেটওয়ার্ক ঘণ্টা হিসেবে ভাড়া দেয়। AI-এর জন্য আপনি একটা স্তর বেছে নেন: হোস্টেড মডেল API, ম্যানেজড প্ল্যাটফর্ম, বা নিজে চালানো GPU।"
       },
+      "basics": {
+        "en": {
+          "idea": "With AI, you can rent at three levels. Each level is a trade between a fast start and more control. A <strong>cloud</strong> also has a few basics that catch beginners.",
+          "words": [
+            {
+              "term": "Hosted model API",
+              "meaning": "The model company's own service. You send prompts and data, and you depend on their limits and prices."
+            },
+            {
+              "term": "Managed platform",
+              "meaning": "A cloud service that runs models behind your own cloud account's identity, private networking and billing."
+            },
+            {
+              "term": "Identity and access management (IAM)",
+              "meaning": "The system that decides who and what may call a model or read a storage bucket (a folder of files in the cloud)."
+            },
+            {
+              "term": "Region",
+              "meaning": "The place where the cloud's machines are. It affects speed, data rules and which models you can use."
+            },
+            {
+              "term": "Quota",
+              "meaning": "A cap on how many requests or tokens you can use per minute in a region."
+            },
+            {
+              "term": "Egress",
+              "meaning": "Data that leaves the cloud. The cloud bills you for it."
+            }
+          ],
+          "remember": [
+            "A hosted API starts fastest. Rented GPUs give the most control and the most work.",
+            "Give each service its own role with the least access it needs.",
+            "Ask for a quota increase before a launch, not during it.",
+            "Keep the model, the vector database and the app in one region when you can."
+          ]
+        },
+        "bn": {
+          "idea": "AI-এর জন্য তিন স্তরে ভাড়া নেওয়া যায়। প্রতিটি স্তরে দ্রুত শুরু আর বেশি নিয়ন্ত্রণের মধ্যে একটা বেছে নিতে হয়। <strong>ক্লাউডে</strong> আরও কিছু মৌলিক বিষয় আছে, যাতে নতুনরা আটকে যায়।",
+          "words": [
+            {
+              "term": "হোস্টেড মডেল API (hosted model API)",
+              "meaning": "মডেল কোম্পানির নিজের সার্ভিস। আপনি প্রম্পট আর ডেটা পাঠান, আর তাদের সীমা আর দামের ওপর নির্ভর করেন।"
+            },
+            {
+              "term": "ম্যানেজড প্ল্যাটফর্ম (managed platform)",
+              "meaning": "যে ক্লাউড সার্ভিস আপনার ক্লাউড অ্যাকাউন্টের পরিচয়, প্রাইভেট নেটওয়ার্ক আর বিলিংয়ের ভেতরে মডেল চালায়।"
+            },
+            {
+              "term": "আইডেন্টিটি অ্যান্ড অ্যাক্সেস ম্যানেজমেন্ট (identity and access management, IAM)",
+              "meaning": "যে ব্যবস্থা ঠিক করে কে বা কোন সার্ভিস মডেল কল করতে বা স্টোরেজ বাকেট (ক্লাউডে ফাইল রাখার ফোল্ডার) পড়তে পারবে।"
+            },
+            {
+              "term": "রিজিয়ন (region)",
+              "meaning": "ক্লাউডের মেশিনগুলো যেখানে আছে সেই জায়গা। এটা গতি, ডেটা রাখার আইন আর কোন মডেল পাওয়া যাবে তাতে প্রভাব ফেলে।"
+            },
+            {
+              "term": "কোটা (quota)",
+              "meaning": "কোনো রিজিয়নে প্রতি মিনিটে কত রিকোয়েস্ট বা টোকেন ব্যবহার করা যাবে, তার সীমা।"
+            },
+            {
+              "term": "ইগ্রেস (egress)",
+              "meaning": "ক্লাউডের বাইরে যাওয়া ডেটা। এর জন্য ক্লাউড আপনাকে বিল করে।"
+            }
+          ],
+          "remember": [
+            "হোস্টেড API সবচেয়ে দ্রুত শুরু হয়। ভাড়া করা GPU-তে নিয়ন্ত্রণ সবচেয়ে বেশি, কাজও সবচেয়ে বেশি।",
+            "প্রতিটি সার্ভিসকে নিজের রোল দিন, ততটুকু অ্যাক্সেস সহ যতটুকু লাগে।",
+            "লঞ্চের আগে কোটা বাড়ানোর অনুরোধ করুন, লঞ্চের সময় নয়।",
+            "পারলে মডেল, ভেক্টর ডেটাবেস আর অ্যাপ এক রিজিয়নে রাখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1370,6 +2070,86 @@
         "title": "MLOps",
         "sub": "MLOps DevOps-এর অভ্যাসগুলো মেশিন লার্নিং সিস্টেমে লাগায়, যেখানে মডেল এমন ডেটার ওপর নির্ভর করে যা বদলাতে থাকে। নিজে ট্রেন, ফাইন-টিউন বা সার্ভ করলে এটা সবচেয়ে বেশি কাজে লাগে।"
       },
+      "basics": {
+        "en": {
+          "idea": "A model can get worse even when nobody changes the code, because its data keeps changing. <strong>MLOps</strong> applies DevOps habits to keep such models tracked, deployed and watched.",
+          "words": [
+            {
+              "term": "MLOps",
+              "meaning": "DevOps habits applied to machine-learning systems, where the model depends on data that keeps changing."
+            },
+            {
+              "term": "Experiment tracking",
+              "meaning": "Recording the parameters, metrics and files of every training run."
+            },
+            {
+              "term": "Model registry",
+              "meaning": "A place that versions each trained model and marks which one is in staging or production."
+            },
+            {
+              "term": "Orchestration",
+              "meaning": "Running the steps in order, on a schedule or when new data arrives."
+            },
+            {
+              "term": "Feature store",
+              "meaning": "A service that gives the same input values (features) in training and in production."
+            },
+            {
+              "term": "Data drift",
+              "meaning": "The inputs no longer look like the data the model was trained on."
+            },
+            {
+              "term": "Concept drift",
+              "meaning": "The right answer for the same input has changed."
+            }
+          ],
+          "remember": [
+            "The loop is: collect data, train, evaluate, register, deploy, monitor, and retrain.",
+            "Automate each step, so a new model reaches production the same way every time.",
+            "Watch the statistics of the inputs and, when true labels arrive later, the live accuracy.",
+            "If you only call a hosted model, there is no retraining loop. This section matters when you fine-tune or serve your own."
+          ]
+        },
+        "bn": {
+          "idea": "কোড কেউ না বদলালেও মডেল খারাপ হতে পারে, কারণ তার ডেটা বদলাতে থাকে। <strong>MLOps</strong> এমন মডেলকে ট্র্যাক, ডিপ্লয় আর পর্যবেক্ষণে রাখতে DevOps-এর অভ্যাস কাজে লাগায়।",
+          "words": [
+            {
+              "term": "MLOps",
+              "meaning": "মেশিন-লার্নিং সিস্টেমে DevOps-এর অভ্যাস প্রয়োগ, যেখানে মডেল এমন ডেটার ওপর নির্ভর করে যা বদলাতে থাকে।"
+            },
+            {
+              "term": "এক্সপেরিমেন্ট ট্র্যাকিং (experiment tracking)",
+              "meaning": "প্রতিটি ট্রেনিং রানের প্যারামিটার, মেট্রিক আর ফাইল লিখে রাখা।"
+            },
+            {
+              "term": "মডেল রেজিস্ট্রি (model registry)",
+              "meaning": "যে জায়গা প্রতিটি ট্রেন করা মডেলের ভার্সন রাখে আর চিহ্নিত করে কোনটা স্টেজিং বা প্রোডাকশনে আছে।"
+            },
+            {
+              "term": "অর্কেস্ট্রেশন (orchestration)",
+              "meaning": "ধাপগুলো ক্রমে চালানো, নির্দিষ্ট সময়ে বা নতুন ডেটা এলে।"
+            },
+            {
+              "term": "ফিচার স্টোর (feature store)",
+              "meaning": "যে সার্ভিস ট্রেনিংয়ে আর প্রোডাকশনে একই ইনপুট মান (ফিচার) দেয়।"
+            },
+            {
+              "term": "ডেটা ড্রিফট (data drift)",
+              "meaning": "ইনপুট আর মডেলের ট্রেনিং ডেটার মতো দেখতে নেই।"
+            },
+            {
+              "term": "কনসেপ্ট ড্রিফট (concept drift)",
+              "meaning": "একই ইনপুটের সঠিক উত্তর বদলে গেছে।"
+            }
+          ],
+          "remember": [
+            "চক্রটা হলো: ডেটা সংগ্রহ, ট্রেনিং, ইভ্যালুয়েশন, রেজিস্ট্রিতে রাখা, ডিপ্লয়, মনিটর, আর আবার ট্রেনিং।",
+            "প্রতিটি ধাপ অটোমেট করুন, যাতে নতুন মডেল প্রতিবার একই পথে প্রোডাকশনে যায়।",
+            "ইনপুটের পরিসংখ্যান দেখুন, আর আসল লেবেল পরে এলে লাইভ accuracy দেখুন।",
+            "শুধু হোস্টেড মডেল কল করলে রিট্রেনিং চক্র নেই। নিজে ফাইন-টিউন বা সার্ভ করলে এই সেকশন কাজে লাগে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1513,6 +2293,94 @@
       "bn": {
         "title": "মেট্রিক, লগ আর অবজার্ভেবিলিটি স্ট্যাক",
         "sub": "অবজার্ভেবিলিটি মানে একটা চলমান সিস্টেম কেন এমন আচরণ করছে, তা সে নিজে যে ডেটা ছাড়ে তা দিয়ে জিজ্ঞেস করতে পারা। AI সার্ভিসের নিচের স্ট্যাকটা সাধারণ স্ট্যাকই, সাথে মডেল আর GPU-র নির্দিষ্ট কয়েকটা সংখ্যা।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>Observability</strong> means you can ask a running system why it behaves as it does, using the data it sends out. An AI service uses the ordinary tools, plus a few numbers for models and GPUs.",
+          "words": [
+            {
+              "term": "Metrics",
+              "meaning": "Numbers measured over time. They show that something changed."
+            },
+            {
+              "term": "Logs",
+              "meaning": "Records of events. They give the detail of one failure."
+            },
+            {
+              "term": "Traces",
+              "meaning": "The path of one request through the system. They show where a slow request spent its time."
+            },
+            {
+              "term": "Prometheus",
+              "meaning": "A tool that scrapes numbers from your services and stores them."
+            },
+            {
+              "term": "OpenTelemetry",
+              "meaning": "A tool that produces traces."
+            },
+            {
+              "term": "Saturation",
+              "meaning": "How close a part of the system is to its limit, like a road so full that no more cars fit."
+            },
+            {
+              "term": "Time to first token",
+              "meaning": "How long a user waits before the first piece of the answer appears."
+            },
+            {
+              "term": "DCGM exporter",
+              "meaning": "NVIDIA's tool that publishes GPU use, memory and temperature as Prometheus metrics."
+            }
+          ],
+          "remember": [
+            "The three signals are metrics, logs and traces.",
+            "Measure the four golden signals: latency, traffic, errors and saturation.",
+            "For an LLM service, also track time to first token, tokens per second, queue length and cost per request.",
+            "Alert on what users feel, such as error rate and slow answers, not on every internal cause."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>অবজার্ভেবিলিটি</strong> মানে চলমান সিস্টেম নিজে যে ডেটা পাঠায় তা দিয়ে জিজ্ঞেস করতে পারা যে সে কেন এমন আচরণ করছে। AI সার্ভিসে সাধারণ টুলই লাগে, সঙ্গে মডেল আর GPU-র কিছু বিশেষ সংখ্যা।",
+          "words": [
+            {
+              "term": "মেট্রিক (metrics)",
+              "meaning": "সময়ের সাথে মাপা সংখ্যা। এগুলো দেখায় কিছু বদলেছে।"
+            },
+            {
+              "term": "লগ (logs)",
+              "meaning": "ঘটনার রেকর্ড। এগুলো একটা ব্যর্থতার খুঁটিনাটি দেয়।"
+            },
+            {
+              "term": "ট্রেস (traces)",
+              "meaning": "একটা অনুরোধ সিস্টেমের ভেতর দিয়ে যে পথে যায়। এগুলো দেখায় ধীর অনুরোধ কোথায় সময় কাটিয়েছে।"
+            },
+            {
+              "term": "Prometheus",
+              "meaning": "যে টুল আপনার সার্ভিস থেকে সংখ্যা তুলে জমা রাখে।"
+            },
+            {
+              "term": "OpenTelemetry",
+              "meaning": "যে টুল ট্রেস তৈরি করে।"
+            },
+            {
+              "term": "স্যাচুরেশন (saturation)",
+              "meaning": "সিস্টেমের কোনো অংশ তার সীমার কত কাছে আছে, যেমন রাস্তা এত ভরা যে আর গাড়ি ঢোকার জায়গা নেই।"
+            },
+            {
+              "term": "প্রথম টোকেন আসতে সময় (time to first token)",
+              "meaning": "উত্তরের প্রথম অংশ আসার আগে ব্যবহারকারীকে কতক্ষণ অপেক্ষা করতে হয়।"
+            },
+            {
+              "term": "DCGM exporter",
+              "meaning": "NVIDIA-র টুল, যা GPU-র ব্যবহার, মেমরি আর তাপমাত্রা Prometheus মেট্রিক হিসেবে প্রকাশ করে।"
+            }
+          ],
+          "remember": [
+            "তিনটে সংকেত হলো মেট্রিক, লগ আর ট্রেস।",
+            "চারটে golden signal মাপুন: latency, traffic, errors আর saturation।",
+            "LLM সার্ভিসে প্রথম টোকেন আসতে সময়, প্রতি সেকেন্ডে টোকেন, কিউ কত লম্বা আর প্রতি রিকোয়েস্টে খরচও দেখুন।",
+            "ব্যবহারকারী যা টের পায় তার ওপর অ্যালার্ট দিন, যেমন এরর রেট আর ধীর উত্তর; প্রতিটি ভেতরের কারণে নয়।"
+          ]
+        }
       },
       "body": [
         {
@@ -1669,6 +2537,86 @@
         "title": "DevSecOps আর প্ল্যাটফর্ম সিকিউরিটি",
         "sub": "DevSecOps টেস্টের একই পাইপলাইনে সিকিউরিটি চেক বসায়। AI-এর জন্য আরও তিনটে জিনিস রক্ষা করতে হয়: API key, মডেল ফাইল আর এজেন্ট যে টুল কল করতে পারে সেগুলো।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>DevSecOps</strong> puts security checks into the same pipeline as the tests, so problems are found when a change is made. For AI, you also protect API keys, model files and an agent's tools.",
+          "words": [
+            {
+              "term": "Secrets manager",
+              "meaning": "A safe place for API keys and passwords. The service gets them when it starts."
+            },
+            {
+              "term": "Least privilege",
+              "meaning": "Each service gets only the access it needs, and nothing more."
+            },
+            {
+              "term": "Software bill of materials (SBOM)",
+              "meaning": "A list of all the parts and dependencies that your software is made of."
+            },
+            {
+              "term": "NetworkPolicy",
+              "meaning": "A Kubernetes rule that can deny traffic by default and open only what a service needs; it works only if a network plugin enforces it."
+            },
+            {
+              "term": "Pickle",
+              "meaning": "A Python file format that can run code when you load it."
+            },
+            {
+              "term": "Safetensors",
+              "meaning": "A model file format that holds only tensors, so it is safer to load."
+            },
+            {
+              "term": "Prompt injection",
+              "meaning": "Text that slips instructions into what a model reads, which can make it misuse a tool you gave it."
+            }
+          ],
+          "remember": [
+            "Find security problems when a change is made, not after it ships.",
+            "Never put API keys in Git or in an image.",
+            "Load model weights only from sources you trust, and prefer safetensors.",
+            "Limit each tool, log every call, and ask a human before any action that cannot be undone."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>DevSecOps</strong> নিরাপত্তার চেক টেস্টের একই পাইপলাইনে রাখে, যাতে পরিবর্তনের সময়ই সমস্যা ধরা পড়ে। AI-এর জন্য API key, মডেল ফাইল আর এজেন্টের টুলও সুরক্ষিত রাখতে হয়।",
+          "words": [
+            {
+              "term": "সিক্রেট ম্যানেজার (secrets manager)",
+              "meaning": "API key আর পাসওয়ার্ড রাখার নিরাপদ জায়গা। সার্ভিস চালুর সময় সেগুলো পায়।"
+            },
+            {
+              "term": "লিস্ট প্রিভিলেজ (least privilege)",
+              "meaning": "প্রতিটি সার্ভিস শুধু ততটুকু অ্যাক্সেস পায় যতটুকু লাগে, তার বেশি নয়।"
+            },
+            {
+              "term": "SBOM (software bill of materials)",
+              "meaning": "আপনার সফটওয়্যার যেসব অংশ আর ডিপেন্ডেন্সি দিয়ে তৈরি, তার তালিকা।"
+            },
+            {
+              "term": "NetworkPolicy",
+              "meaning": "Kubernetes-এর নিয়ম, যা ডিফল্টে সব ট্রাফিক বন্ধ রাখতে আর সার্ভিসের দরকারটুকুই খুলতে পারে; তবে কোনো নেটওয়ার্ক প্লাগইন এটা প্রয়োগ করলেই কেবল কাজ করে।"
+            },
+            {
+              "term": "pickle",
+              "meaning": "Python-এর একটি ফাইল ফরম্যাট, যা লোড করার সময় কোড চালাতে পারে।"
+            },
+            {
+              "term": "safetensors",
+              "meaning": "মডেল ফাইল ফরম্যাট, যা শুধু টেন্সর রাখে, তাই লোড করা বেশি নিরাপদ।"
+            },
+            {
+              "term": "প্রম্পট ইনজেকশন (prompt injection)",
+              "meaning": "এমন লেখা, যা মডেল যা পড়ে তার ভেতরে নির্দেশ ঢুকিয়ে দেয়; এতে মডেল আপনার দেওয়া টুলের অপব্যবহার করতে পারে।"
+            }
+          ],
+          "remember": [
+            "নিরাপত্তার সমস্যা পরিবর্তনের সময়ই ধরুন, ডিপ্লয়ের পরে নয়।",
+            "API key কখনো Git-এ বা ইমেজে রাখবেন না।",
+            "মডেলের ওয়েট শুধু বিশ্বস্ত উৎস থেকে নিন, আর safetensors বেছে নিন।",
+            "প্রতিটি টুল সীমিত করুন, প্রতিটি কল লগ করুন, আর যা ফেরানো যায় না তার আগে মানুষের অনুমতি নিন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1810,6 +2758,86 @@
       "bn": {
         "title": "সিস্টেম ডিজাইন আর ডেটা ইনফ্রাস্ট্রাকচার",
         "sub": "AI ফিচার হলো একটা সাধারণ সিস্টেমের মাঝখানে একটা ধীর, দামি কল, তাই সাধারণ সিস্টেম ডিজাইনের টুলই খাটে। AI অ্যাপ্লিকেশনের আর্কিটেকচার পার্ট ১৪-তে। এটা তার নিচের ইনফ্রাস্ট্রাকচারের টুলবক্স।"
+      },
+      "basics": {
+        "en": {
+          "idea": "An AI feature is a slow, costly call inside an ordinary system, so ordinary tools help. This section gives the <strong>infrastructure toolbox</strong>: queues, caches, limits and safe retries.",
+          "words": [
+            {
+              "term": "Queue",
+              "meaning": "A waiting line for jobs. Each job joins the line, and workers take jobs from it one by one."
+            },
+            {
+              "term": "Semantic cache",
+              "meaning": "A store of past answers that also returns an answer when a new question is similar, not only identical."
+            },
+            {
+              "term": "Rate limiting and backpressure",
+              "meaning": "Rate limiting caps how many requests are allowed. Backpressure slows or refuses new work when the system is full."
+            },
+            {
+              "term": "Connection pooler",
+              "meaning": "A tool that shares a small set of database connections between many clients."
+            },
+            {
+              "term": "Change data capture (CDC)",
+              "meaning": "Streaming each change in a database row to another system, such as a search index."
+            },
+            {
+              "term": "Idempotent",
+              "meaning": "An operation that has the same effect when it runs twice as when it runs once."
+            },
+            {
+              "term": "Consistent hashing",
+              "meaning": "A way to spread cache keys over many nodes, so adding a node moves only a small share of the keys."
+            }
+          ],
+          "remember": [
+            "Send slow model calls to a queue. Workers call the model and store the result.",
+            "A cache returns a stored answer when the same question arrives again.",
+            "Set a timeout on every call, and retry with backoff: wait a little longer before each retry.",
+            "Make operations idempotent, and keep state in a database or cache, not inside the process."
+          ]
+        },
+        "bn": {
+          "idea": "AI ফিচার একটা সাধারণ সিস্টেমের মাঝখানে ধীর আর দামি কল, তাই সাধারণ টুলই কাজে লাগে। এই সেকশনে আছে <strong>ইনফ্রাস্ট্রাকচার টুলবক্স</strong>: কিউ, ক্যাশ, সীমা আর নিরাপদ রিট্রাই।",
+          "words": [
+            {
+              "term": "কিউ (queue)",
+              "meaning": "কাজের অপেক্ষার লাইন। প্রতিটি কাজ লাইনে দাঁড়ায়, আর ওয়ার্কাররা একটা একটা করে কাজ তুলে নেয়।"
+            },
+            {
+              "term": "সেমান্টিক ক্যাশ (semantic cache)",
+              "meaning": "আগের উত্তরের ভান্ডার, যা হুবহু এক না হলেও মিল থাকা নতুন প্রশ্নের উত্তর ফেরত দেয়।"
+            },
+            {
+              "term": "রেট লিমিটিং আর ব্যাকপ্রেশার (rate limiting, backpressure)",
+              "meaning": "রেট লিমিটিং কত রিকোয়েস্ট চলবে তার সীমা বাঁধে। সিস্টেম ভরে গেলে ব্যাকপ্রেশার নতুন কাজ ধীর করে বা ফিরিয়ে দেয়।"
+            },
+            {
+              "term": "কানেকশন পুলার (connection pooler)",
+              "meaning": "যে টুল ডেটাবেসের অল্প কিছু সংযোগ অনেক ক্লায়েন্টের মধ্যে ভাগ করে দেয়।"
+            },
+            {
+              "term": "চেঞ্জ ডেটা ক্যাপচার (change data capture, CDC)",
+              "meaning": "ডেটাবেসের প্রতিটি সারির পরিবর্তন অন্য সিস্টেমে, যেমন সার্চ ইনডেক্সে, স্ট্রিম করে পাঠানো।"
+            },
+            {
+              "term": "আইডেমপোটেন্ট (idempotent)",
+              "meaning": "যে কাজ দুবার চললেও একবার চলার মতোই ফল দেয়।"
+            },
+            {
+              "term": "কনসিস্টেন্ট হ্যাশিং (consistent hashing)",
+              "meaning": "ক্যাশ কী অনেক নোডে ছড়ানোর পদ্ধতি, যাতে নতুন নোড যোগ করলে অল্প কী-ই সরে।"
+            }
+          ],
+          "remember": [
+            "ধীর মডেল কল কিউতে পাঠান। ওয়ার্কার মডেল কল করে ফল জমা রাখে।",
+            "একই প্রশ্ন আবার এলে ক্যাশ জমানো উত্তর ফেরত দেয়।",
+            "প্রতিটি কলে timeout দিন, আর backoff দিয়ে রিট্রাই করুন: প্রতিবার রিট্রাইয়ের আগে একটু বেশি অপেক্ষা করুন।",
+            "কাজ আইডেমপোটেন্ট বানান, আর state রাখুন ডেটাবেস বা ক্যাশে, প্রসেসের ভেতরে নয়।"
+          ]
+        }
       },
       "body": [
         {
@@ -1969,6 +2997,78 @@
         "title": "AIOps",
         "sub": "AIOps মেশিন লার্নিং আর সম্প্রতি ভাষা মডেল ব্যবহার করে IT সিস্টেম চালাতে সাহায্য করে। এটা সফটওয়্যার চালাতে AI ব্যবহার, যা AI চালানো থেকে আলাদা জিনিস।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>AIOps</strong> uses AI to help run IT systems: it sorts alerts and logs so engineers can find and fix problems faster. Add it safely, because a confident wrong fix does harm.",
+          "words": [
+            {
+              "term": "AIOps",
+              "meaning": "Using machine learning and language models to help run IT systems. It is AI that helps operate software."
+            },
+            {
+              "term": "Threshold",
+              "meaning": "A fixed number. When a metric crosses it, an alert fires."
+            },
+            {
+              "term": "Runbook",
+              "meaning": "A written guide with the steps to follow when a known problem happens."
+            },
+            {
+              "term": "Read-only",
+              "meaning": "Allowed to look and explain, but not to change anything."
+            },
+            {
+              "term": "Time to detect and time to resolve",
+              "meaning": "How long it takes to notice a problem, and how long it takes to fix it."
+            },
+            {
+              "term": "MLOps and LLMOps",
+              "meaning": "The work of running AI systems. This is a different thing from AIOps."
+            }
+          ],
+          "remember": [
+            "Start read-only: let the assistant look and explain, not change anything.",
+            "Keep a human approval step for every change, such as a restart, a scale-up or a rollback.",
+            "Log every action and its evidence, and review the log after each incident.",
+            "A confident wrong fix is worse than none. Check its claim against a metric or a log line."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>AIOps</strong> IT সিস্টেম চালাতে AI-এর সাহায্য নেয়: অ্যালার্ট আর লগ বাছাই করে, যাতে ইঞ্জিনিয়ার দ্রুত সমস্যা ধরতে আর সারাতে পারে। নিরাপদে যোগ করুন, কারণ আত্মবিশ্বাসী ভুল সমাধান ক্ষতি করে।",
+          "words": [
+            {
+              "term": "AIOps",
+              "meaning": "IT সিস্টেম চালাতে মেশিন লার্নিং আর ভাষা মডেল ব্যবহার করা। এটা সফটওয়্যার চালাতে AI ব্যবহার।"
+            },
+            {
+              "term": "থ্রেশহোল্ড (threshold)",
+              "meaning": "একটা নির্দিষ্ট সংখ্যা। কোনো মেট্রিক সেটা পার করলে অ্যালার্ট বাজে।"
+            },
+            {
+              "term": "রানবুক (runbook)",
+              "meaning": "চেনা সমস্যা হলে কোন ধাপগুলো মানতে হবে, তার লেখা গাইড।"
+            },
+            {
+              "term": "রিড-অনলি (read-only)",
+              "meaning": "দেখা আর ব্যাখ্যা করার অনুমতি আছে, কিছু বদলানোর নেই।"
+            },
+            {
+              "term": "ধরতে আর সারাতে সময় (time to detect, time to resolve)",
+              "meaning": "সমস্যা টের পেতে কত সময় লাগে, আর সারাতে কত সময় লাগে।"
+            },
+            {
+              "term": "MLOps আর LLMOps",
+              "meaning": "AI সিস্টেম চালানোর কাজ। এটা AIOps থেকে আলাদা জিনিস।"
+            }
+          ],
+          "remember": [
+            "রিড-অনলি দিয়ে শুরু করুন: অ্যাসিস্ট্যান্ট দেখবে আর ব্যাখ্যা করবে, কিছু বদলাবে না।",
+            "প্রতিটি পরিবর্তনে মানুষের অনুমোদন রাখুন, যেমন রিস্টার্ট, স্কেল-আপ বা রোলব্যাক।",
+            "প্রতিটি কাজ আর তার প্রমাণ লগ করুন, আর প্রতিটি ঘটনার পরে লগ রিভিউ করুন।",
+            "আত্মবিশ্বাসী ভুল সমাধান কোনো সমাধান না থাকার চেয়ে খারাপ। দাবি মেট্রিক বা লগ লাইনের সাথে মিলিয়ে নিন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2118,6 +3218,86 @@
       "bn": {
         "title": "AI কোডিং অ্যাসিস্ট্যান্ট",
         "sub": "Claude Code, Cursor, GitHub Copilot, Gemini CLI আর Codex CLI-এর মতো টুল আপনার রিপোজিটরি পড়ে, ফাইল বদলায়, কমান্ড চালায় আর বারবার চেষ্টা করে। এদের একজন দ্রুত জুনিয়র ইঞ্জিনিয়ারের মতো ধরলে সবচেয়ে বেশি কাজ হয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "An <strong>AI coding assistant</strong> reads your repository, edits files and runs commands. Treat it like a fast junior engineer: give it context and limits, and review its work.",
+          "words": [
+            {
+              "term": "Context file",
+              "meaning": "A file in the repository that tells the tool how the project works and what not to touch."
+            },
+            {
+              "term": "<code>AGENTS.md</code>",
+              "meaning": "An open convention for a context file that several tools read."
+            },
+            {
+              "term": "MCP server",
+              "meaning": "A program that lets a tool call outside systems, such as issue trackers, databases and browsers, through one protocol."
+            },
+            {
+              "term": "Attack surface",
+              "meaning": "The places where an attacker could get in. Every added part can make it bigger."
+            },
+            {
+              "term": "Branch",
+              "meaning": "A separate line of work in the repository. Its changes stay apart from the main code, so a bad one is easy to throw away."
+            },
+            {
+              "term": "Worktree",
+              "meaning": "A separate working copy of the repository, so several agents can work at once without clashing."
+            },
+            {
+              "term": "Diff",
+              "meaning": "The list of exact lines that a change adds and removes."
+            }
+          ],
+          "remember": [
+            "Give the tool a short, true context file and clear permissions.",
+            "Give each task its own branch, and work in small, checkable steps.",
+            "Read the diff and the tests it ran, not only the summary.",
+            "Never paste secrets into a prompt. Keep tests, types and a human reviewer in the loop."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>AI কোডিং অ্যাসিস্ট্যান্ট</strong> আপনার রিপোজিটরি পড়ে, ফাইল বদলায় আর কমান্ড চালায়। একে দ্রুত জুনিয়র ইঞ্জিনিয়ারের মতো ধরুন: কনটেক্সট আর সীমা দিন, আর তার কাজ রিভিউ করুন।",
+          "words": [
+            {
+              "term": "কনটেক্সট ফাইল (context file)",
+              "meaning": "রিপোজিটরির একটা ফাইল, যা টুলকে জানায় প্রজেক্ট কীভাবে চলে আর কী ছোঁয়া যাবে না।"
+            },
+            {
+              "term": "<code>AGENTS.md</code>",
+              "meaning": "কনটেক্সট ফাইলের একটা খোলা রীতি, যা কয়েকটা টুল পড়ে।"
+            },
+            {
+              "term": "MCP সার্ভার (MCP server)",
+              "meaning": "যে প্রোগ্রাম টুলকে একটা প্রটোকলে বাইরের সিস্টেম কল করতে দেয়, যেমন ইস্যু ট্র্যাকার, ডেটাবেস আর ব্রাউজার।"
+            },
+            {
+              "term": "অ্যাটাক সারফেস (attack surface)",
+              "meaning": "যেসব জায়গা দিয়ে আক্রমণকারী ঢুকতে পারে। নতুন অংশ যোগ হলে এটা বড় হতে পারে।"
+            },
+            {
+              "term": "ব্রাঞ্চ (branch)",
+              "meaning": "রিপোজিটরিতে কাজের আলাদা একটা ধারা। এর পরিবর্তন মূল কোড থেকে আলাদা থাকে, তাই খারাপ হলে সহজে ফেলে দেওয়া যায়।"
+            },
+            {
+              "term": "ওয়ার্কট্রি (worktree)",
+              "meaning": "রিপোজিটরির আলাদা কাজের কপি, যাতে একসাথে অনেক এজেন্ট ঝামেলা ছাড়া কাজ করতে পারে।"
+            },
+            {
+              "term": "ডিফ (diff)",
+              "meaning": "একটা পরিবর্তনে ঠিক কোন লাইনগুলো যোগ আর বাদ হলো, তার তালিকা।"
+            }
+          ],
+          "remember": [
+            "টুলকে ছোট ও সত্য কনটেক্সট ফাইল আর পরিষ্কার অনুমতির সীমা দিন।",
+            "প্রতিটি কাজ আলাদা ব্রাঞ্চে করান, আর ছোট ছোট যাচাইযোগ্য ধাপে এগোন।",
+            "শুধু সারাংশ নয়, ডিফ আর সে যে টেস্ট চালিয়েছে তা পড়ুন।",
+            "প্রম্পটে কখনও সিক্রেট দেবেন না। টেস্ট, টাইপ আর একজন মানুষ রিভিউয়ার রাখুন।"
+          ]
+        }
       },
       "body": [
         {

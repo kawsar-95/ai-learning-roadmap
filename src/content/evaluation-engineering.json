@@ -16,6 +16,86 @@
         "title": "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং: মডেল মাপার কাজ",
         "sub": "মাপতে না পারলে উন্নতি করা যায় না। <strong>ইভ্যালুয়েশন ইঞ্জিনিয়ারিং</strong> হলো \"মডেল আজ খারাপ লাগছে\" কথাটাকে সংখ্যায় বদলানোর কাজ। তারপর সেই সংখ্যাকে CI-র একটা সিগন্যাল বানানো হয়, যা প্রতিটা প্রম্পট বা মডেল বদলানোর আগে পরীক্ষা করে।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Evaluation engineering</strong> turns the feeling that a model got worse into numbers. Those numbers then act as a signal in CI that checks every prompt or model change before it ships.",
+          "words": [
+            {
+              "term": "Golden dataset",
+              "meaning": "A fixed set of inputs paired with the answers you expect. You run the model on it after every change."
+            },
+            {
+              "term": "CI",
+              "meaning": "A setup that runs checks automatically on every change. If a check fails, the release can be blocked."
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "Using a strong LLM to score another model's answers, when simple rules like regex cannot judge the quality."
+            },
+            {
+              "term": "Pairwise comparison",
+              "meaning": "Showing the judge two answers, A and B, and asking which one is better."
+            },
+            {
+              "term": "Faithfulness",
+              "meaning": "A metric that asks if the answer sticks to the text pieces the system found, or makes things up."
+            },
+            {
+              "term": "Trajectory match",
+              "meaning": "An agent check: did the agent take a reasonable path, with the same tools and a similar number of steps?"
+            },
+            {
+              "term": "Red teaming",
+              "meaning": "Trying to break your own system with attacks like prompt injection and jailbreaks, to find its weak spots."
+            }
+          ],
+          "remember": [
+            "Build a golden dataset, grow it from real failures, and block the release if accuracy drops below the threshold.",
+            "Pairwise judging beats absolute scoring, because relative judgements are easier than absolute ones.",
+            "For agents, check how the answer was reached, not only whether the final answer is right.",
+            "Always check synthetic questions for contamination (questions that copy the training data), or you test memorisation instead of capability."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ইভ্যালুয়েশন ইঞ্জিনিয়ারিং</strong> মডেল খারাপ হয়েছে এমন অনুভূতিকে সংখ্যায় বদলে দেয়। সেই সংখ্যা CI-তে সংকেতের কাজ করে, আর প্রতিটি প্রম্পট বা মডেল পরিবর্তন শিপ হওয়ার আগে যাচাই করে।",
+          "words": [
+            {
+              "term": "গোল্ডেন ডেটাসেট (golden dataset)",
+              "meaning": "ইনপুট আর তার প্রত্যাশিত উত্তরের একটি নির্দিষ্ট সেট। প্রতিটি পরিবর্তনের পর মডেলকে এটা দিয়ে চালান।"
+            },
+            {
+              "term": "CI",
+              "meaning": "যে ব্যবস্থা প্রতিটি পরিবর্তনে নিজে নিজে চেক চালায়। চেক ফেল করলে রিলিজ আটকে দেওয়া যায়।"
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "একটি শক্তিশালী LLM দিয়ে অন্য মডেলের উত্তর স্কোর করা, যখন regex-এর মতো সহজ নিয়মে মান বিচার করা যায় না।"
+            },
+            {
+              "term": "পেয়ারওয়াইজ তুলনা (pairwise comparison)",
+              "meaning": "জাজকে দুটি উত্তর, A ও B, দেখিয়ে জিজ্ঞেস করা কোনটি ভালো।"
+            },
+            {
+              "term": "ফেইথফুলনেস (faithfulness)",
+              "meaning": "একটি মেট্রিক: উত্তর কি সিস্টেমের খুঁজে আনা লেখার অংশের সাথে মেলে, নাকি বানিয়ে বলছে।"
+            },
+            {
+              "term": "ট্রাজেক্টরি ম্যাচ (trajectory match)",
+              "meaning": "এজেন্টের একটি যাচাই: এজেন্ট কি যুক্তিসংগত পথে গেছে, একই টুল আর কাছাকাছি ধাপ সংখ্যা নিয়ে?"
+            },
+            {
+              "term": "রেড টিমিং (red teaming)",
+              "meaning": "প্রম্পট ইনজেকশন আর জেইলব্রেকের মতো আক্রমণ দিয়ে নিজের সিস্টেম ভাঙার চেষ্টা করা, দুর্বল জায়গা খুঁজে বের করতে।"
+            }
+          ],
+          "remember": [
+            "গোল্ডেন ডেটাসেট বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর অ্যাকুরেসি (accuracy) সীমার নিচে নামলে রিলিজ আটকে দিন।",
+            "পেয়ারওয়াইজ বিচার পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।",
+            "এজেন্টের ক্ষেত্রে শুধু চূড়ান্ত উত্তর নয়, উত্তরে কীভাবে পৌঁছেছে সেটাও দেখুন।",
+            "সিনথেটিক প্রশ্নে কন্টামিনেশন (contamination) (ট্রেনিং ডেটার নকল প্রশ্ন) সবসময় যাচাই করুন, নইলে সক্ষমতার বদলে মুখস্থ বিদ্যার পরীক্ষা হয়ে যায়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",

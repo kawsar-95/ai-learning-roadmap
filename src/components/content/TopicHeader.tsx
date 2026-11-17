@@ -3,7 +3,7 @@ import type { Topic } from "@/lib/topics";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { progressKey } from "@/lib/progress";
-import { readingMinutes } from "@/lib/search";
+import { basicsBlocks, readingMinutes } from "@/lib/search";
 import { TopicDoneButton } from "@/components/progress/ProgressWidgets";
 import { PAGE_TITLE } from "@/components/layout/PageHeader";
 import { Inline } from "./Inline";
@@ -17,8 +17,9 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
   const ui = UI[lang];
   const text = topicText(topic, lang);
   // The voice each language shows first: বাংলা on the Bangla site, the technical one in English.
+  // Each section's "Start here" box shows above it in the same language.
   const minutes = readingMinutes(
-    topic.sections.flatMap((s) => (lang === "bn" ? s.bangla : s.body)),
+    topic.sections.flatMap((s) => [...basicsBlocks(s.basics?.[lang]), ...(lang === "bn" ? s.bangla : s.body)]),
     stripTags,
   );
   return (

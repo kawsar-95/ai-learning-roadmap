@@ -16,6 +16,86 @@
         "title": "খরচ আর পারফরম্যান্স অপ্টিমাইজেশন",
         "sub": "LLM-এর বিল ব্যবহারের সাথে বাড়ে। মান না কমিয়ে খরচ ৫–৫০ গুণ কমানোর তিনটা উপায় আছে: <strong>ক্যাসকেড</strong> (সস্তা মডেল থেকে দামি মডেলে পাঠানো), <strong>ক্যাশ</strong> (সেম্যান্টিক, প্রিফিক্স, আউটপুট), আর <strong>কম্প্রেস</strong> (প্রম্পট কম্প্রেশন, ডিস্টিলেশন)।"
       },
+      "basics": {
+        "en": {
+          "idea": "LLM bills grow with usage. Three ideas cut the <strong>cost</strong> by 5–50× without losing quality: send easy work to cheap models, reuse past work, and shrink what you send or use a smaller model.",
+          "words": [
+            {
+              "term": "Model cascading",
+              "meaning": "Sending easy requests to a small, cheap model, and moving to a large, expensive one only when the small model is not confident."
+            },
+            {
+              "term": "Semantic cache",
+              "meaning": "Saves answers, and returns a saved one when a new prompt is almost the same in meaning as an earlier prompt."
+            },
+            {
+              "term": "Prompt cache",
+              "meaning": "The provider reuses its work on the start of your prompt, like the system prompt, across calls. That part gets an 80–90% discount."
+            },
+            {
+              "term": "Batch API",
+              "meaning": "A way to submit many requests in one file and get results within 24h at half the cost. It suits work that can wait."
+            },
+            {
+              "term": "Distillation",
+              "meaning": "Training a small model on a big model's answers, so the small one does similar work. It cuts cost and delay, and lets you run it yourself."
+            },
+            {
+              "term": "Prompt compression",
+              "meaning": "Removing filler and low-value words from a prompt. Tools like LLMLingua often shrink it 5–20× with under 3% quality loss."
+            },
+            {
+              "term": "Model gateway",
+              "meaning": "A middle layer between your app and all LLM providers. It gives one API, cost tracking, retries, and backup providers."
+            }
+          ],
+          "remember": [
+            "A well-tuned cascade often reaches top quality at 30–70% of the cost.",
+            "Caching is the single most powerful cost lever.",
+            "Batch APIs give half price for work that can wait up to 24h.",
+            "Give each feature a monthly token budget: alert at 80%, throttle at 100%."
+          ]
+        },
+        "bn": {
+          "idea": "LLM-এর বিল ব্যবহারের সাথে বাড়ে। তিনটি উপায়ে মান না হারিয়ে <strong>খরচ</strong> ৫–৫০× কমানো যায়: সহজ কাজ সস্তা মডেলে পাঠান, আগের কাজ আবার ব্যবহার করুন, আর যা পাঠান তা ছোট করুন বা ছোট মডেল ব্যবহার করুন।",
+          "words": [
+            {
+              "term": "মডেল ক্যাসকেডিং (model cascading)",
+              "meaning": "সহজ অনুরোধ ছোট, সস্তা মডেলে পাঠানো। ছোট মডেল নিশ্চিত না হলেই কেবল বড়, দামি মডেলে নেওয়া।"
+            },
+            {
+              "term": "সেম্যান্টিক ক্যাশ (semantic cache)",
+              "meaning": "উত্তর জমিয়ে রাখে। নতুন প্রম্পট আগের কোনো প্রম্পটের সাথে অর্থে প্রায় একই হলে জমানো উত্তর ফেরত দেয়।"
+            },
+            {
+              "term": "প্রম্পট ক্যাশ (prompt cache)",
+              "meaning": "প্রম্পটের শুরুর অংশ (যেমন সিস্টেম প্রম্পট) নিয়ে করা কাজ প্রোভাইডার কলের পর কলে আবার ব্যবহার করে। সেই অংশে ৮০–৯০% ছাড় মেলে।"
+            },
+            {
+              "term": "ব্যাচ API (Batch API)",
+              "meaning": "একটি ফাইলে অনেক অনুরোধ জমা দিয়ে ২৪ ঘণ্টার মধ্যে অর্ধেক খরচে ফল পাওয়ার উপায়। যে কাজ অপেক্ষা করতে পারে, তার জন্য ভালো।"
+            },
+            {
+              "term": "ডিস্টিলেশন (distillation)",
+              "meaning": "বড় মডেলের উত্তর দিয়ে ছোট মডেলকে শেখানো, যাতে ছোটটি একই রকম কাজ করে। খরচ ও দেরি কমে, আর নিজে চালানো যায়।"
+            },
+            {
+              "term": "প্রম্পট কম্প্রেশন (prompt compression)",
+              "meaning": "প্রম্পট থেকে ফিলার আর কম দরকারি শব্দ বাদ দেওয়া। LLMLingua-র মতো টুলে প্রায়ই ৫–২০× ছোট হয়, মান কমে ৩%-এরও কম।"
+            },
+            {
+              "term": "মডেল গেটওয়ে (model gateway)",
+              "meaning": "আপনার অ্যাপ আর সব LLM প্রোভাইডারের মাঝের স্তর। এটি দেয় একটি API, খরচের হিসাব, রিট্রাই আর বিকল্প প্রোভাইডার।"
+            }
+          ],
+          "remember": [
+            "ভালোভাবে সাজানো ক্যাসকেড প্রায়ই খরচের ৩০–৭০%-এ সেরা মানে পৌঁছায়।",
+            "ক্যাশিংই খরচ কমানোর সবচেয়ে শক্তিশালী উপায়।",
+            "যে কাজ ২৪ ঘণ্টা অপেক্ষা করতে পারে, ব্যাচ API-তে তার দাম অর্ধেক।",
+            "প্রতিটি ফিচারের জন্য মাসিক টোকেন বাজেট রাখুন: ৮০%-এ সতর্কতা, ১০০%-এ থ্রটল।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",

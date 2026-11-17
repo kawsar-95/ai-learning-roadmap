@@ -3,7 +3,7 @@
 // topics.ts or zod here.
 
 import MiniSearch from "minisearch";
-import type { Block, TopicFile } from "./content-schema.ts";
+import type { BasicsText, Block, TopicFile } from "./content-schema.ts";
 import type { Lang } from "./i18n.ts";
 
 export type SearchDoc = {
@@ -58,9 +58,23 @@ export function blockText(block: Block, strip: (html: string) => string): string
 }
 
 /**
- * One doc per section. English docs use the Technical voice. Bangla docs
- * use the Bangla titles and the বাংলা voice, plus the Technical text, so a
- * search for an English term such as "token" works on the Bangla site too.
+ * A section's "Start here" box as blocks, so reading time and search count
+ * it like the voice text under it. No box gives no blocks.
+ */
+export function basicsBlocks(basics: BasicsText | undefined): Block[] {
+  if (!basics) return [];
+  return [
+    { type: "paragraph", html: basics.idea },
+    { type: "list", ordered: false, items: basics.words.map((w) => `${w.term} ${w.meaning}`) },
+    { type: "list", ordered: false, items: basics.remember },
+  ];
+}
+
+/**
+ * One doc per section. English docs use the "Start here" box and the
+ * Technical voice. Bangla docs use the Bangla titles, the Bangla box, and the
+ * বাংলা voice, plus the Technical text, so a search for an English term such
+ * as "token" works on the Bangla site too.
  */
 export function buildSearchDocs(
   topics: (TopicFile & { part: number })[],
@@ -70,7 +84,9 @@ export function buildSearchDocs(
   const bn = lang === "bn";
   return topics.flatMap((topic) =>
     topic.sections.map((section) => {
-      const blocks = bn ? [...section.bangla, ...section.body] : section.body;
+      const blocks = bn
+        ? [...basicsBlocks(section.basics?.bn), ...section.bangla, ...section.body]
+        : [...basicsBlocks(section.basics?.en), ...section.body];
       return {
         id: `${topic.slug}#${section.id}`,
         href: `${bn ? "/bn" : ""}/topics/${topic.slug}#${section.id}`,

@@ -11,6 +11,7 @@ import { EmbedList } from "./EmbedList";
 import { Inline } from "./Inline";
 import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
+import { SectionBasics } from "./SectionBasics";
 import { VideoList } from "./VideoList";
 import { BookmarkButton, SectionDoneButton } from "@/components/progress/ProgressWidgets";
 import { createStore } from "@/components/progress/createStore";
@@ -111,8 +112,10 @@ function VoicePanel({
  * The Technical voice renders as plain prose. The Layman's and Bangla voices
  * render in panels. One voice shows at a time. The choice is saved and every
  * section follows it. With no saved choice, on the Bangla site a section opens in বাংলা and
- * its title, intro, practice tasks, and labels are in Bangla. The section
- * ends with a "Mark as done" toggle for the reading progress (`doneKey`).
+ * its title, intro, practice tasks, and labels are in Bangla. A section with a
+ * "Start here" box shows it above every voice, in the language of the
+ * practice tasks. The section ends with a "Mark as done" toggle for the
+ * reading progress (`doneKey`).
  */
 export function SectionView({ section, lang, doneKey }: { section: Section; lang: Lang; doneKey: string }) {
   const ui = UI[lang];
@@ -130,6 +133,8 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
   };
   const show = (v: Exclude<Voice, "all">) =>
     (voice === v || voice === "all") && available.includes(v);
+  // The "Start here" box and the practice tasks follow the voice's language.
+  const extrasLang = practiceLang(voice, lang);
 
   // A link to a heading of the Technical body (for example a TOC entry)
   // must work in every voice. If this section shows only Layman's or
@@ -215,6 +220,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
         key={voice}
         className="voice-fade mt-4 space-y-6 text-[16px] leading-[1.8] sm:text-[17px]"
       >
+        <SectionBasics basics={section.basics?.[extrasLang]} sectionId={section.id} lang={extrasLang} />
         {show("main") && (
           <div className="[&>:last-child]:mb-0">
             <ProseBlocks blocks={section.body} />
@@ -236,7 +242,7 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
             blocks={section.bangla}
           />
         )}
-        <PracticeList sectionId={section.id} practice={section.practice} lang={practiceLang(voice, lang)} />
+        <PracticeList sectionId={section.id} practice={section.practice} lang={extrasLang} />
         <VideoList sectionId={section.id} videos={videosForVoice(section.videos, voice, lang)} lang={lang} />
       </div>
 
