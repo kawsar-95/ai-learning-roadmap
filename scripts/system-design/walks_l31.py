@@ -1,0 +1,303 @@
+"""Walk-through of lesson 31, Batch & Stream Processing.
+
+Example numbers (mine, checked by script): 10,000 views a second = 864 million a day. A scan of a day's rows at 10 million rows a second = 86.4 s.
+MapReduce: 100 mappers read 8.64 million events each; 50 reducers at 30,000 pairs a second: 864M / 50 / 30,000 = 576 s, about 10 minutes.
+Skew: one video has 40% = 345.6 million pairs on one reducer = 11,520 s = 3.2 h; the other 49 get 10.6 million each = 353 s, about 6 minutes.
+Combiner: 100 partial counts instead of 345.6 million pairs; the shuffle 864 million -> about 10 million. Salting into 10 parts: 34.56 million each = 1,152 s, about 19 minutes.
+A bot farm adds 2 million fake views an hour: 33,000 in a minute, 48 million in a day.
+Stream: 3 instances x 4,000 = 12,000 a second. A surge of 30,000 a second: backlog +18,000 a second = 1.08 million a minute. 12 partitions, 12 instances = 48,000 a second;
+spare 18,000 a second clears 1.08 million in 60 s. Windows: 1 minute = 600,000 views; last 5 minutes = 3 million.
+Unique viewers: 50 million x 8 bytes = 400 MB; HyperLogLog about 1.5 KB, about 2% error (1 million); 400 MB / 1.5 KB = about 270,000 times.
+"""
+from walkkit import node, sh, ln, st, walk
+
+NODES = [
+    node("app", "user", ("Video app", "Video app"), 85, 170),
+    node("db", "database", ("Production DB", "Production DB"), 340, 170),
+    node("dash", "chart", ("Dashboard", "Dashboard"), 610, 170),
+    node("store", "storage", ("Object storage", "Object storage"), 285, 170),
+    node("batch", "service", ("Nightly job", "Nightly job"), 490, 170),
+    node("stream", "queue", ("Event stream", "Event stream"), 285, 170),
+    node("proc", "service", ("Stream processor", "Stream processor"), 490, 170),
+    node("m1", "service", ("Mapper", "Mapper"), 280, 60),
+    node("m2", "service", ("Mapper", "Mapper"), 280, 170),
+    node("m3", "service", ("Mapper", "Mapper"), 280, 280),
+    node("r1", "service", ("Reducer", "Reducer"), 560, 60),
+    node("r2", "service", ("Reducer", "Reducer"), 560, 170),
+    node("r3", "service", ("Reducer", "Reducer"), 560, 280),
+    node("n-trend", "note", ("Trending", "Trending"), 130, 170),
+    node("n-bot", "note", ("Bot farm", "Bot farm"), 380, 170),
+    node("n-fraud", "note", ("Wanted: minutes", "চাই: মিনিট"), 630, 170),
+    node("n-tumb", "note", ("Tumbling", "Tumbling"), 130, 170),
+    node("n-slide", "note", ("Sliding", "Sliding"), 380, 170),
+    node("n-sess", "note", ("Session", "Session"), 630, 170),
+    node("phone", "user", ("Offline phone", "ফোন"), 95, 170),
+    node("wm", "clock", ("Watermark", "Watermark"), 390, 290),
+    node("n-dup", "note", ("Event id", "Event id"), 390, 60),
+    node("lag", "chart", ("Consumer lag", "Consumer lag"), 640, 170),
+    node("n-idle", "note", ("A 13th instance", "১৩তম instance"), 400, 290),
+    node("viewers", "user", ("50M viewers", "৫ কোটি দর্শক"), 90, 170),
+    node("set", "database", ("Exact set", "Exact set"), 380, 70),
+    node("hll", "chart", ("HyperLogLog", "HyperLogLog"), 380, 270),
+    node("log", "queue", ("Event log", "Event log"), 90, 170),
+    node("fast", "service", ("Stream layer", "Stream layer"), 380, 60),
+    node("slow", "service", ("Batch layer", "Batch layer"), 380, 280),
+]
+METRICS = [("Freshness", "Freshness"), ("Prod DB load", "Prod DB-র load"), ("Job time", "Job-এর সময়"), ("Exact?", "নির্ভুল?")]
+CAPTION = ("Example numbers: 10,000 views a second, which is 864 million a day.",
+           "উদাহরণের সংখ্যা: সেকেন্ডে ১০,০০০ view, মানে দিনে ৮৬.৪ কোটি।")
+
+DAY_OLD = ("a day old", "এক দিনের পুরোনো")
+UNTOUCHED = ("not touched", "ছোঁয়া হয় না")
+OVERNIGHT = ("overnight", "রাতভর")
+YES = ("yes", "হ্যাঁ")
+SECONDS = ("seconds", "সেকেন্ড কয়েক")
+ALWAYS = ("always on", "সবসময় চালু")
+USUALLY = ("usually", "সাধারণত")
+NOTQUITE = ("not quite", "পুরোপুরি নয়")
+
+MR_LINKS = [ln("store", m, "to", 900, "hot") for m in ("m1", "m2", "m3")]
+SHUFFLE = lambda state="hot", hot=None: [ln(m, r, "to", 1200, (("warn" if r == hot else state)), None) for m in ("m1", "m2", "m3") for r in ("r1", "r2", "r3")]
+
+
+def shuffle_links(label_on=None, hot=None):
+    out = []
+    for m in ("m1", "m2", "m3"):
+        for r in ("r1", "r2", "r3"):
+            label = ("shuffle", "shuffle") if (label_on == (m, r)) else None
+            out.append(ln(m, r, "to", 1200, "warn" if r == hot else "hot", label))
+    return out
+
+
+STEPS = [
+    st(("Live DB", "Live DB"),
+       ("Analytics on the production database", "Production database-এ analytics"),
+       [("Every view of every video is a row in the production database: 10,000 a second, 864 million a day. A dashboard shows the views per video, recomputed every minute with a query over the day's rows.",
+         "প্রতিটি ভিডিওর প্রতিটি view production database-এ একটা row: সেকেন্ডে ১০,০০০, দিনে ৮৬.৪ কোটি। একটা dashboard ভিডিও-পিছু view দেখায়, প্রতি মিনিটে নতুন করে হিসাব করে দিনের row-গুলোর ওপর একটা query দিয়ে।"),
+        ("At 10 million rows a second, scanning 864 million rows takes about 86 seconds, so each run is still going when the next one starts, and the database spends its time on analytics instead of on users. Counting last month's views scans billions of rows.",
+         "সেকেন্ডে ১ কোটি row ধরলে ৮৬.৪ কোটি row স্ক্যান করতে লাগে প্রায় ৮৬ সেকেন্ড, তাই পরের run শুরুর সময়ও আগেরটা চলতে থাকে, আর database তার সময় খরচ করে ব্যবহারকারীর বদলে analytics-এ। গত মাসের view গুনতে স্ক্যান করতে হয় শত শত কোটি row।")],
+       [sh("app", "hot"), sh("db", "warn", ("overloaded", "অতিভারাক্রান্ত")), sh("dash", "warn", ("every minute", "প্রতি মিনিটে"), x=625)],
+       [ln("app", "db", "to", 700, "hot", ("10,000/s", "১০,০০০/s")), ln("dash", "db", "both", 1600, "warn", ("scan: 86 s", "স্ক্যান: ৮৬ s"))],
+       [("86 s per run", "প্রতি run ৮৬ s"), ("overloaded", "অতিভারাক্রান্ত"), None, YES],
+       note=("warn",
+             "A query over billions of rows competes with the queries your users are waiting for. Heavy analytics does not belong on the production database.",
+             "শত শত কোটি row-এর একটা query সেই query-গুলোর সাথে পাল্লা দেয়, যেগুলোর জন্য আপনার ব্যবহারকারীরা অপেক্ষা করছে। ভারী analytics production database-এর জায়গা নয়।"),
+       changes=[("-", "10,000 views a second written to the production database", "সেকেন্ডে ১০,০০০ view production database-এ লেখা হয়"),
+                ("-", "An 86-second scan every minute competes with the users", "প্রতি মিনিটে ৮৬ সেকেন্ডের একটা scan ব্যবহারকারীদের সাথে পাল্লা দেয়")]),
+
+    st(("Batch", "Batch"),
+       ("Batch: collect now, compute later", "Batch: এখন জমান, পরে হিসাব"),
+       [("Instead, the app appends every view as an event to cheap object storage: files, not database rows. Once a night a batch job reads the whole day's files and computes the results in one run.",
+         "বদলে app প্রতিটি view একটা event হিসেবে জোড়ে সস্তা object storage-এ: file, database-এর row নয়। রাতে একবার একটা batch job পুরো দিনের file পড়ে আর এক run-এ ফলাফল হিসাব করে।"),
+        ("The production database never sees the analytics load. The price is freshness: the dashboard shows yesterday's numbers, up to a day old. For a report that is read the next morning, that is perfectly fine.",
+         "Production database কখনো analytics-এর load দেখে না। দাম হলো তাজা-ভাব: dashboard দেখায় গতকালের সংখ্যা, এক দিন পর্যন্ত পুরোনো। পরদিন সকালে পড়া রিপোর্টের জন্য সেটা পুরোপুরি ঠিক।")],
+       [sh("app", "hot"), sh("store", "hot", ("files, not rows", "file, row নয়")), sh("batch", "hot", ("once a night", "রাতে একবার")), sh("dash", "hot", ("yesterday's", "গতকালের"), x=680)],
+       [ln("app", "store", "to", 900, "hot"), ln("store", "batch", "to", 1200, "hot"), ln("batch", "dash", "to", 1200, "hot")],
+       [DAY_OLD, UNTOUCHED, OVERNIGHT, YES],
+       note=("insight",
+             "Batch trades freshness for cost and simplicity: a finished, fixed dataset can be processed cheaply and exactly.",
+             "Batch তাজা-ভাব ছেড়ে দিয়ে পায় কম খরচ আর সরলতা: শেষ-হওয়া, স্থির একটা dataset সস্তায় আর নির্ভুলভাবে প্রক্রিয়া করা যায়।"),
+       changes=[("+", "Every view is appended to files in object storage", "প্রতিটি view object storage-এর file-এ জোড়া হয়"),
+                ("+", "A nightly batch job computes the results", "রাতের একটা batch job ফলাফল হিসাব করে"),
+                ("~", "The production database is not touched; results are up to a day old", "Production database ছোঁয়া হয় না; ফলাফল এক দিন পর্যন্ত পুরোনো")]),
+
+    st(("Map/reduce", "Map/reduce"),
+       ("Split the work: map, shuffle, reduce", "কাজ ভাগ: map, shuffle, reduce"),
+       [("864 million events will not fit through one machine quickly, so the job is split. Map: each of 100 workers reads its own chunk, about 8.6 million events, and emits a pair <code>(video_id, 1)</code> for each view.",
+         "৮৬.৪ কোটি event একটা machine দিয়ে দ্রুত যাবে না, তাই কাজ ভাগ করা হয়। Map: ১০০ জন worker-এর প্রতিটি নিজের chunk পড়ে, প্রায় ৮৬ লাখ event, আর প্রতিটি view-এর জন্য একটা <code>(video_id, 1)</code> জোড়া বের করে।"),
+        ("Shuffle: the system brings all pairs with the same key to one reducer. Reduce: each of 50 reducers sums the values for its keys. If a reducer handles 30,000 pairs a second, a balanced job takes about 10 minutes.",
+         "Shuffle: সিস্টেম একই key-র সব জোড়া এনে দেয় একটাই reducer-এর কাছে। Reduce: ৫০টি reducer-এর প্রতিটি তার key-গুলোর মান যোগ করে। একটা reducer সেকেন্ডে ৩০,০০০ জোড়া সামলালে একটা সুষম job-এ লাগে প্রায় ১০ মিনিট।")],
+       [sh("store", "hot", ("day's files", "দিনের file"), x=80)] + [sh(m, "hot", ("counts its chunk", "নিজের chunk গোনে"), badge="×100") for m in ("m1", "m2", "m3")] + [sh(r, "hot", ("sums per video", "video-পিছু যোগ"), badge="×50") for r in ("r1", "r2", "r3")],
+       MR_LINKS + shuffle_links(label_on=("m2", "r2")),
+       [DAY_OLD, UNTOUCHED, ("10 min", "১০ মিনিট"), YES],
+       note=("tip",
+             "Map and reduce are the only two things you write. The system does the splitting and the shuffle for you.",
+             "Map আর reduce-ই আপনার লেখার দুটো জিনিস। ভাগ করা আর shuffle করা সিস্টেম আপনার হয়ে করে দেয়।"),
+       changes=[("+", "Map: 100 workers read chunks and emit <code>(video_id, 1)</code>", "Map: ১০০ জন worker chunk পড়ে আর <code>(video_id, 1)</code> বের করে"),
+                ("+", "Shuffle: pairs with the same key meet at one reducer", "Shuffle: একই key-র জোড়া একটা reducer-এ মিলিত হয়"),
+                ("+", "Reduce: 50 reducers sum their keys: about 10 minutes", "Reduce: ৫০টি reducer তাদের key যোগ করে: প্রায় ১০ মিনিট")]),
+
+    st(("Skew", "Skew"),
+       ("Case: one video, one exhausted reducer", "ঘটনা: একটা ভিডিও, একটা ক্লান্ত reducer"),
+       [("One video went viral and had 40% of yesterday's views: 345.6 million. In the shuffle, every pair for that key goes to the same reducer. That reducer works for 3.2 hours.",
+         "একটা ভিডিও ভাইরাল হয়ে গতকালের ৪০% view পেয়েছে: ৩৪.৫৬ কোটি। Shuffle-এ ওই key-র প্রতিটি জোড়া যায় একই reducer-এর কাছে। সেই reducer কাজ করে ৩.২ ঘণ্টা।"),
+        ("The other 49 reducers get about 10.6 million pairs each and finish in 6 minutes, then sit idle. The job is as slow as its slowest reducer: 3.2 hours instead of 10 minutes.",
+         "বাকি ৪৯টি reducer পায় প্রায় ১.০৬ কোটি জোড়া করে, শেষ করে ৬ মিনিটে, তারপর অলস বসে থাকে। Job ততটাই ধীর যতটা তার সবচেয়ে ধীর reducer: ১০ মিনিটের বদলে ৩.২ ঘণ্টা।")],
+       [sh("store", "hot", x=80)] + [sh(m, "hot", ("counts its chunk", "নিজের chunk গোনে")) for m in ("m1", "m2", "m3")] +
+       [sh("r1", "warn", ("40%: 3.2 hours", "৪০%: ৩.২ ঘণ্টা")), sh("r2", "hot", ("6 minutes", "৬ মিনিট")), sh("r3", "hot", ("6 minutes", "৬ মিনিট"))],
+       MR_LINKS + shuffle_links(hot="r1"),
+       [DAY_OLD, UNTOUCHED, ("3.2 hours", "৩.২ ঘণ্টা"), YES],
+       note=("warn",
+             "Uneven keys defeat parallelism. Adding more reducers does not help, because the hot key still goes to one of them.",
+             "অসম key সমান্তরালতাকে হারিয়ে দেয়। আরও reducer যোগ করলে লাভ হয় না, কারণ গরম key তবু তাদের একটার কাছেই যায়।"),
+       changes=[("-", "One key has 40% of the views: 345.6 million pairs", "একটা key-র ৪০% view: ৩৪.৫৬ কোটি জোড়া"),
+                ("-", "One reducer works 3.2 hours; the other 49 finish in 6 minutes", "একটা reducer কাজ করে ৩.২ ঘণ্টা; বাকি ৪৯টি শেষ করে ৬ মিনিটে"),
+                ("-", "The job takes 3.2 hours instead of 10 minutes", "Job লাগে ১০ মিনিটের বদলে ৩.২ ঘণ্টা")]),
+
+    st(("Combine", "Combine"),
+       ("Combine early, split hot keys", "আগে মিলিয়ে নিন, গরম key ভাঙুন"),
+       [("A combiner pre-aggregates on the map side. Each mapper sends one partial count per video instead of millions of ones. For the viral video that is 100 partial counts instead of 345.6 million pairs, and the whole shuffle shrinks from 864 million pairs to about 10 million.",
+         "Combiner map-এর দিকেই আগে যোগ করে নেয়। প্রতিটি mapper video-পিছু একটা আংশিক গণনা পাঠায়, লক্ষ লক্ষ ১-এর বদলে। ভাইরাল ভিডিওর জন্য সেটা ৩৪.৫৬ কোটি জোড়ার বদলে ১০০টি আংশিক গণনা, আর পুরো shuffle ৮৬.৪ কোটি জোড়া থেকে সঙ্কুচিত হয় প্রায় ১ কোটিতে।"),
+        ("For hot keys a combiner cannot shrink, salting splits a key into several, such as 10 parts, and a second step adds up the parts. Each part then gets 34.6 million pairs and takes 19 minutes, instead of 3.2 hours.",
+         "যে গরম key-কে combiner ছোট করতে পারে না, তার জন্য salting একটা key-কে ভাঙে কয়েকটায়, যেমন ১০ অংশে, আর দ্বিতীয় একটা ধাপ অংশগুলো যোগ করে। প্রতিটি অংশ পায় ৩.৪৬ কোটি জোড়া আর লাগে ১৯ মিনিট, ৩.২ ঘণ্টার বদলে।")],
+       [sh("store", "hot", x=80)] + [sh(m, "hot", ("combines first", "আগে মিলিয়ে নেয়")) for m in ("m1", "m2", "m3")] +
+       [sh("r1", "hot", ("100 partials", "১০০টি আংশিক")), sh("r2", "hot", ("light work", "হালকা কাজ")), sh("r3", "hot", ("light work", "হালকা কাজ"))],
+       MR_LINKS + shuffle_links(),
+       [DAY_OLD, UNTOUCHED, ("minutes", "কয়েক মিনিট"), YES],
+       note=("tip",
+             "Combine whenever the operation can be summed in pieces, such as counts and sums. Salt the keys that stay hot.",
+             "যেখানেই অপারেশন টুকরো টুকরো করে যোগ করা যায়, যেমন গণনা আর যোগফল, সেখানেই combine করুন। যে key গরম থেকে যায় তাকে salt করুন।"),
+       changes=[("+", "A combiner: 100 partial counts instead of 345.6 million pairs", "একটা combiner: ৩৪.৫৬ কোটি জোড়ার বদলে ১০০টি আংশিক গণনা"),
+                ("~", "The whole shuffle: 864 million pairs → about 10 million", "পুরো shuffle: ৮৬.৪ কোটি জোড়া → প্রায় ১ কোটি"),
+                ("+", "Salting: 10 parts of 34.6 million, then one small sum", "Salting: ৩.৪৬ কোটির ১০টি অংশ, তারপর একটা ছোট যোগ")]),
+
+    st(("Too late", "বড্ড দেরি"),
+       ("A day late is too late", "এক দিন দেরি মানে বড্ড দেরি"),
+       [("Some questions cannot wait for tonight. A video going viral should show up in Trending now. A bot farm faking views should be caught within minutes.",
+         "কিছু প্রশ্ন আজ রাত পর্যন্ত অপেক্ষা করতে পারে না। একটা ভিডিও ভাইরাল হলে Trending-এ তা এখনই দেখা যাওয়া উচিত। ভুয়া view বানানো একটা bot farm ধরা পড়া উচিত কয়েক মিনিটে।"),
+        ("Say a bot farm adds 2 million fake views an hour. Caught within a minute, that is about 33,000 fake views. Caught by the next morning's batch, it is 48 million.",
+         "ধরুন একটা bot farm ঘণ্টায় ২০ লাখ ভুয়া view যোগ করে। এক মিনিটে ধরা পড়লে সেটা প্রায় ৩৩,০০০ ভুয়া view। পরদিন সকালের batch-এ ধরা পড়লে ৪.৮ কোটি।")],
+       [sh("n-trend", "warn", ("a day late", "এক দিন দেরি")), sh("n-bot", "warn", ("48M by morning", "সকালে ৪.৮ কোটি")), sh("n-fraud", "hot", ("33,000 at 1 min", "এক মিনিটে ৩৩,০০০"))],
+       [],
+       [DAY_OLD, UNTOUCHED, OVERNIGHT, YES],
+       note=("warn",
+             "The nightly batch answers every question about yesterday. Questions about now need a different tool.",
+             "রাতের batch গতকাল নিয়ে সব প্রশ্নের উত্তর দেয়। এখন নিয়ে প্রশ্নের জন্য লাগে আলাদা টুল।"),
+       changes=[("-", "Trending would be a day late", "Trending এক দিন দেরিতে হতো"),
+                ("-", "A bot farm caught the next morning: 48 million fake views, not 33,000", "পরদিন সকালে ধরা পড়া bot farm: ৩৩,০০০ নয়, ৪.৮ কোটি ভুয়া view")]),
+
+    st(("Stream", "Stream"),
+       ("Stream processing: compute as events arrive", "Stream processing: event আসতেই হিসাব"),
+       [("Now the app publishes each view to an event stream. A stream processor reads the events as they arrive and updates the results at once, so Trending and the fraud check have fresh numbers within seconds.",
+         "এখন app প্রতিটি view publish করে একটা event stream-এ। একটা stream processor event-গুলো আসতে আসতেই পড়ে আর সাথে সাথে ফলাফল হালনাগাদ করে, তাই Trending আর fraud check কয়েক সেকেন্ডের মধ্যে পায় টাটকা সংখ্যা।"),
+        ("At 10,000 events a second, 3 processor instances handling 4,000 each have a capacity of 12,000, enough with some room to spare. The batch job and the stream answer different questions: the batch one about finished days, the stream one about now.",
+         "সেকেন্ডে ১০,০০০ event-এ ৩টি processor instance, প্রতিটি ৪,০০০ সামলালে, সক্ষমতা ১২,০০০, খানিকটা বাড়তি জায়গা রেখে যথেষ্ট। Batch job আর stream আলাদা প্রশ্নের উত্তর দেয়: batch শেষ-হওয়া দিন নিয়ে, stream এখন নিয়ে।")],
+       [sh("app", "hot"), sh("stream", "hot", ("10,000/s", "১০,০০০/s")), sh("proc", "hot", ("3 instances", "৩টি instance")), sh("dash", "hot", ("seconds old", "টাটকা সংখ্যা"), x=680)],
+       [ln("app", "stream", "to", 900, "hot"), ln("stream", "proc", "to", 900, "hot"), ln("proc", "dash", "to", 900, "hot")],
+       [SECONDS, UNTOUCHED, ALWAYS, USUALLY],
+       note=("insight",
+             "A stream computes as data arrives, so results are seconds old. In exchange it must cope with data that arrives late, twice or too fast.",
+             "Stream ডেটা আসতে আসতেই হিসাব করে, তাই ফলাফল কয়েক সেকেন্ডের পুরোনো। বিনিময়ে তাকে সামলাতে হয় এমন ডেটা, যা দেরিতে আসে, দুবার আসে বা খুব দ্রুত আসে।"),
+       changes=[("+", "Each view is published to an event stream", "প্রতিটি view একটা event stream-এ publish হয়"),
+                ("+", "A stream processor updates the results as events arrive", "Stream processor event আসতেই ফলাফল হালনাগাদ করে"),
+                ("~", "Results are seconds old, not a day", "ফলাফল কয়েক সেকেন্ডের পুরোনো, এক দিনের নয়")]),
+
+    st(("Windows", "Window"),
+       ("Counting in windows", "Window-তে গণনা"),
+       [("A stream never ends, so “count the views” needs a time frame: a window. Tumbling windows cut time into fixed, separate slices: views per minute, which is 600,000 per window at 10,000 a second.",
+         "একটা stream কখনো শেষ হয় না, তাই “view গোনা”র জন্য দরকার একটা সময়ের কাঠামো: window। Tumbling window সময়কে কাটে নির্দিষ্ট, আলাদা টুকরোয়: মিনিট-পিছু view, সেকেন্ডে ১০,০০০ হলে প্রতি window-তে ৬,০০,০০০।"),
+        ("Sliding windows overlap, such as the last 5 minutes recomputed every minute: 3 million views in each. Session windows close after a period of inactivity, such as 30 quiet minutes, and follow one viewer's visit rather than the clock.",
+         "Sliding window একটা আরেকটার সাথে মিশে যায়, যেমন প্রতি মিনিটে নতুন করে হিসাব-করা শেষ ৫ মিনিট: প্রতিটিতে ৩০ লাখ view। Session window বন্ধ হয় কিছুক্ষণ নিষ্ক্রিয়তার পর, যেমন ৩০ মিনিট চুপ থাকলে, আর অনুসরণ করে ঘড়ির বদলে একজন দর্শকের একটা সফর।")],
+       [sh("n-tumb", "hot", ("every minute: 600,000", "প্রতি মিনিটে: ৬,০০,০০০")), sh("n-slide", "hot", ("last 5 min, each minute", "শেষ ৫ মিনিট, প্রতি মিনিটে")), sh("n-sess", "hot", ("ends after 30 min quiet", "৩০ মিনিট চুপে শেষ"))],
+       [],
+       [SECONDS, UNTOUCHED, ALWAYS, USUALLY],
+       note=("tip",
+             "Pick the window that matches the question: fixed slices for reports, sliding for a smooth live number, session for behaviour.",
+             "প্রশ্নের সাথে মেলে এমন window বাছুন: রিপোর্টের জন্য স্থির টুকরো, মসৃণ লাইভ সংখ্যার জন্য sliding, আচরণের জন্য session।"),
+       changes=[("+", "Tumbling: fixed slices, 600,000 views a minute", "Tumbling: স্থির টুকরো, মিনিটে ৬,০০,০০০ view"),
+                ("+", "Sliding: overlapping windows, the last 5 minutes every minute", "Sliding: মিশে-যাওয়া window, প্রতি মিনিটে শেষ ৫ মিনিট"),
+                ("+", "Session: closes after 30 minutes of quiet", "Session: ৩০ মিনিট চুপ থাকলে বন্ধ হয়")]),
+
+    st(("Late events", "দেরির event"),
+       ("Case: late and duplicate events", "ঘটনা: দেরিতে আসা আর দ্বিতীয়বার আসা event"),
+       [("A phone watches videos in the subway with no signal and uploads its 40 views two hours later. Count by event time, when the view happened, not by processing time, when it arrived.",
+         "একটা ফোন মেট্রোতে সিগন্যাল ছাড়া ভিডিও দেখে আর তার ৪০টি view আপলোড করে দুই ঘণ্টা পরে। গুনুন event time ধরে, view যখন ঘটেছে, প্রক্রিয়ার সময় ধরে নয়, যখন তা পৌঁছেছে।"),
+        ("A watermark tells the processor how far event time has progressed, so it knows when a window is probably complete. With 5 minutes of allowed lateness, the 12:04 window closes at 12:10. Views two hours late miss it and are fixed by the nightly batch. Retries also deliver some events twice: give every event an id and drop repeats.",
+         "Watermark প্রসেসরকে জানায় event time কতদূর এগিয়েছে, যাতে সে জানে একটা window সম্ভবত সম্পূর্ণ কখন। ৫ মিনিট অনুমোদিত দেরিতে ১২:০৪-এর window বন্ধ হয় ১২:১০-এ। দুই ঘণ্টা দেরির view সেটা মিস করে আর ঠিক হয় রাতের batch-এ। Retry কিছু event দুবারও পৌঁছে দেয়: প্রতিটি event-কে একটা id দিন আর পুনরাবৃত্তি বাদ দিন।")],
+       [sh("phone", "warn", ("40 views", "অফলাইন, ৪০টি")), sh("proc", "hot", ("by event time", "event time ধরে"), x=400), sh("dash", "hot", x=660), sh("wm", "hot", ("12:04 closes at 12:10", "১২:০৪ বন্ধ ১২:১০-এ")), sh("n-dup", "hot", ("repeats are dropped", "পুনরাবৃত্তি বাদ"))],
+       [ln("phone", "proc", "to", 1800, "warn", ("2 h late", "২ ঘণ্টা দেরি")), ln("proc", "dash", "to", 900, "hot"), ln("wm", "proc", None, None, "dim"), ln("n-dup", "proc", None, None, "dim")],
+       [SECONDS, UNTOUCHED, ALWAYS, NOTQUITE],
+       note=("warn",
+             "Counting by arrival time puts the views in the wrong minute. Counting by event time needs a watermark and a rule for what is too late.",
+             "পৌঁছানোর সময় ধরে গুনলে view ভুল মিনিটে পড়ে। Event time ধরে গুনতে লাগে watermark আর কোনটা বেশি দেরি তার একটা নিয়ম।"),
+       changes=[("~", "Count by event time, not by arrival time", "গুনুন event time ধরে, পৌঁছানোর সময় ধরে নয়"),
+                ("+", "A watermark: the 12:04 window closes at 12:10", "একটা watermark: ১২:০৪-এর window বন্ধ হয় ১২:১০-এ"),
+                ("+", "An event id, so repeats are dropped", "একটা event id, যাতে পুনরাবৃত্তি বাদ পড়ে")]),
+
+    st(("Lag", "Lag"),
+       ("Case: the processor falls behind", "ঘটনা: processor পিছিয়ে পড়ে"),
+       [("A celebrity live stream triples traffic for an hour: 30,000 events a second. The 3 instances can process only 12,000, so the unprocessed events pile up in the stream: the backlog grows by 18,000 events a second, 1.08 million a minute.",
+         "একজন তারকার live stream এক ঘণ্টা traffic তিনগুণ করে: সেকেন্ডে ৩০,০০০ event। ৩টি instance প্রক্রিয়া করতে পারে মাত্র ১২,০০০, তাই অপ্রক্রিয়াজাত event stream-এ জমে: backlog বাড়ে সেকেন্ডে ১৮,০০০, মিনিটে ১০.৮ লাখ।"),
+        ("That growing gap between the newest event and the processed position is consumer lag. The dashboard now shows numbers that get older every minute. Watch the lag: it tells you the processor is falling behind before users notice.",
+         "নতুনতম event আর প্রক্রিয়া-করা অবস্থানের মধ্যে এই বাড়তে-থাকা ফাঁকটাই consumer lag। Dashboard এখন দেখায় এমন সংখ্যা, যা প্রতি মিনিটে আরও পুরোনো হয়। Lag নজরে রাখুন: ব্যবহারকারী টের পাওয়ার আগেই সে বলে processor পিছিয়ে পড়ছে।")],
+       [sh("stream", "warn", ("30,000/s in", "সেকেন্ডে ৩০,০০০"), x=95), sh("proc", "warn", ("12,000/s capacity", "সক্ষমতা ১২,০০০/s"), x=370), sh("lag", "warn", ("+1.08M a minute", "মিনিটে +১০.৮ লাখ"))],
+       [ln("stream", "proc", "to", 500, "warn"), ln("proc", "lag", None, None, "warn")],
+       [("falling behind", "পিছিয়ে পড়ছে"), UNTOUCHED, ALWAYS, NOTQUITE],
+       note=("warn",
+             "Lag is the queue depth of a stream: the number to alert on. If it only grows, you are running out of capacity.",
+             "Lag হলো stream-এর queue-র গভীরতা: alert দেওয়ার সংখ্যা। শুধু বাড়তে থাকলে আপনার সক্ষমতা ফুরাচ্ছে।"),
+       changes=[("-", "30,000 events a second arrive; 3 instances process 12,000", "সেকেন্ডে ৩০,০০০ event আসে; ৩টি instance প্রক্রিয়া করে ১২,০০০"),
+                ("-", "The backlog grows by 1.08 million a minute", "Backlog মিনিটে ১০.৮ লাখ করে বাড়ে"),
+                ("-", "The dashboard numbers get older every minute", "Dashboard-এর সংখ্যা প্রতি মিনিটে আরও পুরোনো হয়")]),
+
+    st(("Partitions", "Partition"),
+       ("Scale out across partitions", "Partition জুড়ে scale out"),
+       [("The stream is split into partitions, here 12, by video id, so each video's events stay in order. Each processor instance owns some partitions, so adding instances adds capacity: 12 instances at 4,000 each handle 48,000 a second.",
+         "Stream ভাগ করা হয় partition-এ, এখানে ১২টি, video id ধরে, যাতে প্রতিটি ভিডিওর event ক্রমে থাকে। প্রতিটি processor instance কিছু partition-এর মালিক, তাই instance বাড়ালে সক্ষমতা বাড়ে: প্রতিটি ৪,০০০ করে ১২টি instance সামলায় সেকেন্ডে ৪৮,০০০।"),
+        ("Against 30,000 arriving, that leaves 18,000 a second of spare capacity, so the 1.08 million backlog clears in 60 seconds. A 13th instance would sit idle, because there is no partition left for it to read.",
+         "আসা ৩০,০০০-এর তুলনায় এতে সেকেন্ডে ১৮,০০০ বাড়তি সক্ষমতা থাকে, তাই ১০.৮ লাখের backlog পরিষ্কার হয় ৬০ সেকেন্ডে। ১৩তম instance বসে থাকত অলস, কারণ তার পড়ার জন্য কোনো partition বাকি নেই।")],
+       [sh("stream", "hot", ("12 partitions", "১২টি partition"), x=120), sh("proc", "hot", ("one per partition", "প্রতি partition-এ একটা"), x=400, badge="×12"), sh("dash", "hot", ("backlog: 60 s", "backlog: ৬০ s"), x=650), sh("n-idle", "dim", ("no partition: idle", "partition নেই: অলস"))],
+       [ln("stream", "proc", "to", 700, "hot"), ln("proc", "dash", "to", 900, "hot")],
+       [("recovering", "সেরে উঠছে"), UNTOUCHED, ALWAYS, NOTQUITE],
+       note=("tip",
+             "Choose the partition count with growth in mind: it caps the number of instances that can work in parallel.",
+             "বৃদ্ধির কথা ভেবে partition-সংখ্যা বাছুন: সমান্তরালে কাজ করতে পারা instance-সংখ্যার সীমা সেটাই ঠিক করে।"),
+       changes=[("+", "12 partitions by video id: each video stays in order", "video id ধরে ১২টি partition: প্রতিটি ভিডিও ক্রমে থাকে"),
+                ("~", "12 instances × 4,000 = 48,000 a second", "১২টি instance × ৪,০০০ = সেকেন্ডে ৪৮,০০০"),
+                ("~", "The backlog clears in 60 seconds", "Backlog পরিষ্কার হয় ৬০ সেকেন্ডে"),
+                ("-", "A 13th instance would sit idle", "১৩তম instance অলস বসে থাকত")]),
+
+    st(("Unique", "অনন্য গোনা"),
+       ("Case: counting unique viewers", "ঘটনা: অনন্য দর্শক গোনা"),
+       [("Views are easy to count. Unique viewers are not: to count exactly you must remember every viewer id you have seen. For a popular video with 50 million viewers, 8 bytes each, that is 400 MB for one video.",
+         "View গোনা সহজ। অনন্য দর্শক গোনা নয়: ঠিকঠাক গুনতে দেখা প্রতিটি দর্শকের id মনে রাখতে হয়। ৫ কোটি দর্শকের একটা জনপ্রিয় ভিডিওর জন্য, প্রতিটি ৮ বাইট, সেটা একটা ভিডিওর জন্যই ৪০০ MB।"),
+        ("HyperLogLog counts well beyond a billion distinct items with about 2% error in 1.5 kilobytes of memory. For 50 million viewers, 2% is about 1 million off, from 270,000 times less memory.",
+         "HyperLogLog ১০০ কোটির অনেক বেশি অনন্য জিনিস গোনে প্রায় ২% ভুলে, মাত্র ১.৫ কিলোবাইট memory-তে। ৫ কোটি দর্শকের জন্য ২% মানে প্রায় ১০ লাখ ভুল, ২,৭০,০০০ গুণ কম memory থেকে।")],
+       [sh("viewers", "hot"), sh("set", "warn", ("50M ids = 400 MB", "৫ কোটি id = ৪০০ MB")), sh("hll", "hot", ("1.5 KB, about 2% off", "১.৫ KB, প্রায় ২% ভুল"))],
+       [ln("viewers", "set", "to", 1200, "warn", ("every id", "প্রতিটি id")), ln("viewers", "hll", "to", 1200, "hot", ("a tiny sketch", "ছোট sketch"))],
+       [SECONDS, UNTOUCHED, ALWAYS, ("2% off", "২% ভুল")],
+       note=("tip",
+             "When “about right” is enough, a sketch gives you a number in a tiny, fixed amount of memory. When it must be exact, pay for the memory.",
+             "“প্রায় ঠিক” যথেষ্ট হলে একটা sketch ছোট, স্থির memory-তে সংখ্যাটা দেয়। নির্ভুল হতে হলে memory-র দাম দিন।"),
+       changes=[("-", "Exact: every id remembered, 50 million × 8 bytes = 400 MB", "নির্ভুল: প্রতিটি id মনে রাখা, ৫ কোটি × ৮ বাইট = ৪০০ MB"),
+                ("+", "HyperLogLog: about 1.5 KB, about 2% error", "HyperLogLog: প্রায় ১.৫ KB, প্রায় ২% ভুল"),
+                ("~", "270,000 times less memory for about 1 million of error", "প্রায় ১০ লাখ ভুলের বিনিময়ে ২,৭০,০০০ গুণ কম memory")]),
+
+    st(("Both", "দুটোই"),
+       ("Batch and stream, together", "Batch আর stream, একসাথে"),
+       [("Many systems run both. The Lambda architecture has a stream layer for fast, approximate answers and a nightly batch layer that recomputes the exact numbers from the full log, at the cost of writing the logic twice.",
+         "অনেক সিস্টেম দুটোই চালায়। Lambda architecture-এ আছে দ্রুত, আনুমানিক উত্তরের জন্য একটা stream স্তর, আর পুরো log থেকে নির্ভুল সংখ্যা নতুন করে হিসাব-করা একটা রাতের batch স্তর, যুক্তি দুবার লেখার দামে।"),
+        ("The Kappa architecture does it all as a stream: when the logic changes, replay the log through the new code. That keeps one codebase, if your log keeps enough history. Late phone views and the HyperLogLog estimate are the kind of thing the nightly pass corrects.",
+         "Kappa architecture সবটাই করে stream হিসেবে: যুক্তি বদলালে log-কে নতুন কোডের মধ্য দিয়ে আবার চালান। এতে একটাই codebase থাকে, যদি আপনার log যথেষ্ট ইতিহাস রাখে। দেরিতে আসা ফোনের view আর HyperLogLog-এর অনুমান এমন জিনিস, যা রাতের পাসে ঠিক হয়।")],
+       [sh("log", "hot"), sh("fast", "hot", ("fast, rough", "দ্রুত, মোটামুটি")), sh("slow", "hot", ("exact, nightly", "নির্ভুল, প্রতি রাতে")), sh("dash", "hot", x=650)],
+       [ln("log", "fast", "to", 1100, "hot"), ln("log", "slow", "to", 1100, "hot"), ln("fast", "dash", "to", 1100, "hot", ("fast answer", "দ্রুত উত্তর")), ln("slow", "dash", "to", 1100, "hot", ("exact answer", "নির্ভুল উত্তর"))],
+       [SECONDS, UNTOUCHED, ("both", "দুটোই"), ("nightly", "প্রতি রাতে")],
+       note=("insight",
+             "Use the stream for what must be fast and the batch for what must be exact. Writing the logic twice is the price of having both.",
+             "যা দ্রুত হতে হবে তার জন্য stream, যা নির্ভুল হতে হবে তার জন্য batch। যুক্তি দুবার লেখাই দুটোই পাওয়ার দাম।"),
+       changes=[("+", "Lambda: a fast stream layer and an exact nightly batch layer", "Lambda: দ্রুত stream স্তর আর নির্ভুল রাতের batch স্তর"),
+                ("~", "The logic is written twice", "যুক্তি লেখা হয় দুবার"),
+                ("~", "Kappa: one stream, replay the log when the logic changes", "Kappa: একটাই stream, যুক্তি বদলালে log আবার চালানো")]),
+
+    st(("Recap", "সারাংশ"),
+       ("Keep analytics away from production", "Analytics-কে production থেকে দূরে রাখুন"),
+       [("Pick batch for finished data and cheap exactness, stream for fresh answers, and both when you need both.",
+         "শেষ-হওয়া ডেটা আর সস্তা নির্ভুলতার জন্য batch, টাটকা উত্তরের জন্য stream, আর দুটোই দরকার হলে দুটোই বাছুন।")],
+       [sh("log", "hot"), sh("fast", "hot"), sh("slow", "hot"), sh("dash", "hot", x=650)],
+       [ln("log", "fast", "to", 1100, "hot"), ln("log", "slow", "to", 1100, "hot"), ln("fast", "dash", "to", 1100, "hot"), ln("slow", "dash", "to", 1100, "hot")],
+       [None, None, None, None],
+       points=[("Keep heavy analytics <strong>off the production database</strong>.",
+                "ভারী analytics রাখুন <strong>production database-এর বাইরে</strong>।"),
+               ("<strong>Batch</strong>: process large, finished datasets cheaply. Results are hours old.",
+                "<strong>Batch</strong>: বড়, শেষ-হওয়া dataset সস্তায় প্রক্রিয়া করুন। ফলাফল কয়েক ঘণ্টার পুরোনো।"),
+               ("<strong>Stream</strong>: process events as they arrive. Results are seconds old, but you must handle late, duplicate and backed-up events.",
+                "<strong>Stream</strong>: event আসতেই প্রক্রিয়া করুন। ফলাফল কয়েক সেকেন্ডের পুরোনো, কিন্তু দেরিতে আসা, দ্বিতীয়বার আসা আর জমে-যাওয়া event সামলাতে হয়।"),
+               ("<strong>Map, shuffle, reduce</strong>: watch for <strong>skew</strong>, and use combiners and salting.",
+                "<strong>Map, shuffle, reduce</strong>: <strong>skew</strong>-এর দিকে নজর রাখুন, আর ব্যবহার করুন combiner ও salting।"),
+               ("Scale a stream with <strong>partitions</strong>, and alert on <strong>lag</strong>.",
+                "Stream scale করুন <strong>partition</strong> দিয়ে, আর alert দিন <strong>lag</strong>-এ।"),
+               ("Use <strong>sketches</strong> such as HyperLogLog when about right is enough, and <strong>Lambda</strong> or <strong>Kappa</strong> to combine both.",
+                "প্রায়-ঠিক যথেষ্ট হলে ব্যবহার করুন HyperLogLog-এর মতো <strong>sketch</strong>, আর দুটো মেলাতে <strong>Lambda</strong> বা <strong>Kappa</strong>।")]),
+]
+
+WALKS = {"batch-stream": walk(760, 340, NODES, METRICS, CAPTION, STEPS)}

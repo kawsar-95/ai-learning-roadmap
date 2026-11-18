@@ -39,6 +39,7 @@ Where things are:
 | Pages, components, search, progress, offline, theme | [docs/architecture.md](docs/architecture.md) |
 | The deploy | [docs/deployment.md](docs/deployment.md) |
 | Videos | [docs/content-guide.md](docs/content-guide.md#videos), [scripts/video-curation/README.md](scripts/video-curation/README.md) |
+| Part 18, System Design, and its walk-throughs | [scripts/system-design/README.md](scripts/system-design/README.md): the Part is generated, so edit the generator, not `src/content/system-design.json` |
 
 ## Making a change
 
@@ -59,7 +60,7 @@ Run all three before you push. All three must pass.
 
 | Command | What it checks |
 | --- | --- |
-| `npm test` | 158 tests in `tests/`: the libraries, and rules for the real content (quizzes, videos, interview questions, lessons) |
+| `npm test` | 182 tests in `tests/`: the libraries, and rules for the real content (quizzes, videos, interview questions, lessons), and that `src/content/system-design.json` is what `scripts/system-design` builds |
 | `npm run lint` | ESLint with the Next.js core web vitals and TypeScript rules |
 | `npm run build` | The type check, every content file against its schema, and every page in both languages |
 

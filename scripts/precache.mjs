@@ -22,6 +22,8 @@ const KEEP = [
   /^_next\/static\//,
   /^icons\//,
   /(^|\/)search-index\.json$/,
+  // One file for each walk-through (see src/app/walkthroughs), so a Part works offline.
+  /^walkthroughs\/[^/]+\/[^/]+\.json$/,
   /^manifest\.webmanifest$/,
   /^favicon\.ico$/,
   /^icon\.svg$/,

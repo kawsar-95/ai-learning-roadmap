@@ -212,6 +212,24 @@ const SHOTS = {
     return compose(`<div id="frame" style="display:inline-flex;gap:28px;background:#faf7f2">${imgs}</div>`, 2400);
   },
 
+  // A walk-through of Part 18, section 7 (Caching), at step 4: the readouts, the diagram, the step strip, the text.
+  walkthrough: () =>
+    capture("/topics/system-design/#s7", {
+      ...DESKTOP,
+      act: async (page) => {
+        await unstickHeader(page);
+        // The walk-through is a file the section loads when it is first shown, so wait for the player.
+        const player = page.locator("[role=group][aria-labelledby='s7-walk']");
+        await player.waitFor({ state: "visible", timeout: 10000 });
+        await player.locator("ol li button").nth(3).click();
+        // The boxes glide to their places and the dots start along the lines.
+        await page.waitForTimeout(900);
+        await player.scrollIntoViewIfNeeded();
+        const b = await box(player);
+        return clipBetween(b, b.y - 12, b.bottom + 12, 16);
+      },
+    }),
+
   // The practice panel of section 1, open, down to the end of its first step.
   practice: () =>
     capture("/topics/llm-fundamentals/", {

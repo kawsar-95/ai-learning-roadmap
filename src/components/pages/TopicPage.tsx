@@ -5,6 +5,7 @@ import { TOPIC_ORDER, getNavItems, getNeighbors, getOutline, getTopic, sectionTe
 import { progressKey } from "@/lib/progress";
 import { UI, fmtNum } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
+import { walkthroughPath } from "@/lib/walkthrough";
 import { PrevNext } from "@/components/content/PrevNext";
 import { SectionPager } from "@/components/content/SectionPager";
 import type { Step } from "@/components/content/SectionPager";
@@ -48,8 +49,17 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
   const items = getNavItems(lang);
   const outline = getOutline(topic, lang);
 
-  const sectionViews = topic.sections.map((s) => (
-    <SectionView key={s.id} section={s} lang={lang} doneKey={progressKey(topic.slug, s.id)} />
+  // A walk-through is not sent with its section: the section gets the path of
+  // its JSON file and the player loads it when the section is shown. That keeps
+  // the data out of the page's HTML and RSC payload.
+  const sectionViews = topic.sections.map(({ walkthrough, ...s }) => (
+    <SectionView
+      key={s.id}
+      section={s}
+      lang={lang}
+      doneKey={progressKey(topic.slug, s.id)}
+      walkthroughPath={walkthrough ? walkthroughPath(topic.slug, s.id) : undefined}
+    />
   ));
   const quizSection = topic.quiz && <QuizSection slug={topic.slug} questions={topic.quiz} lang={lang} />;
   // Below the sections, a rule sets the quiz apart. As a pager step it opens under the step bar, like a section.

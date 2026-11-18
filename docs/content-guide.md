@@ -15,6 +15,7 @@ change a Part without breaking a reader's saved progress.
 - [Block types](#block-types)
 - [Code blocks](#code-blocks)
 - [Diagrams](#diagrams)
+- [Walk-throughs](#walk-throughs)
 - [Citations and sources](#citations-and-sources)
 - [Videos](#videos)
 - [Live views](#live-views)
@@ -27,7 +28,8 @@ change a Part without breaking a reader's saved progress.
 
 | Path | What | Edit by hand? |
 | --- | --- | --- |
-| `src/content/<slug>.json` | One Part: its sections in three voices, sources, quiz | Yes |
+| `src/content/<slug>.json` | One Part: its sections in three voices, sources, quiz | Yes, except `system-design.json`: it is generated |
+| `scripts/system-design/` | The Python files that build `src/content/system-design.json` (Part 18) and its interview entry | Yes. Edit these, then run the build ([Walk-throughs](#walk-throughs)) |
 | `src/content/interview.json` | Three interview questions for each Part | Yes |
 | `src/data/roadmap-phases.json` | Roadmap stages and phase summaries | Yes ([roadmap.md](roadmap.md)) |
 | `src/data/roadmap-lessons.json` | Every roadmap phase and lesson | No, generated |
@@ -50,6 +52,8 @@ The writing rules for every voice are in
   - every Part and section has its Bangla title and intro;
   - every section has a [Start here box](#start-here-box) that follows its
     rules;
+  - every [walk-through](#walk-throughs) says the same in English and in
+    Bangla, and its boxes fit the diagram;
   - every video follows the [video rules](#videos);
   - `interview.json` has 3 questions per Part, in Part order, each tied to a
     real section.
@@ -104,7 +108,8 @@ The Part number is not in the file. It is the slug's position in
   "bangla": [],
   "videos": [],
   "embeds": [],
-  "practice": []
+  "practice": [],
+  "walkthrough": {}
 }
 ```
 
@@ -120,6 +125,7 @@ The Part number is not in the file. It is the slug's position in
 | `videos` | Optional. See [Videos](#videos). |
 | `embeds` | Optional. See [Live views](#live-views). |
 | `practice` | Optional, at least one task when present. See [Practice tasks](#practice-tasks). |
+| `walkthrough` | Optional. A step-by-step diagram of the section. See [Walk-throughs](#walk-throughs). It is not sent with the page: the build writes it to a file of its own. |
 
 A voice with an empty list has no tab. The voice switcher shows only when a
 section has two or more voices.
@@ -302,6 +308,97 @@ sections of a Part are on one page.
 | Accents (fill or stroke) | `#22d3ee`, `#34d399`, `#a78bfa`, `#fbbf24`, `#fb7185`, `#f472b6` |
 
 Low-alpha `rgba()` tints work on both grounds and stay as they are.
+
+## Walk-throughs
+
+A walk-through is a diagram of a section that changes step by step. A row of
+readouts sits above it, and each step has its own text in English and in
+Bangla. It shows under the section intro. Part 18 has one for each of its 40
+sections. No other Part has one, and a section does not need one.
+
+Part 18 is generated. `src/content/system-design.json` is the output of
+`scripts/system-design/`, and its walk-throughs are written there in Python
+([README](../scripts/system-design/README.md)). Edit those files and run
+`python3 scripts/system-design/build.py`. `npm test` fails when the JSON is
+not what they build. The format below is what the JSON follows, and what a
+walk-through written by hand must follow.
+
+```json
+"walkthrough": {
+  "width": 760,
+  "height": 340,
+  "nodes": [
+    { "id": "app", "kind": "server", "label": { "en": "App", "bn": "অ্যাপ" }, "x": 270, "y": 175 },
+    { "id": "cache", "kind": "cache", "label": { "en": "Cache", "bn": "Cache" }, "x": 480, "y": 70 }
+  ],
+  "metrics": [{ "en": "p95", "bn": "p95" }, { "en": "Hit rate", "bn": "Hit rate" }],
+  "caption": { "en": "Example numbers: a hit takes 2 ms.", "bn": "উদাহরণের সংখ্যা: hit-এ ২ ms।" },
+  "steps": [
+    {
+      "en": {
+        "short": "Hit rate",
+        "title": "Hit rate is everything",
+        "body": ["The database sees only the misses."],
+        "note": { "kind": "tip", "html": "Cache the right things, and give the cache enough memory." },
+        "changes": [{ "sign": "~", "html": "Hit rate: 90% → 99%" }]
+      },
+      "bn": {
+        "short": "Hit rate",
+        "title": "Hit rate-ই আসল",
+        "body": ["ডেটাবেস শুধু miss-গুলো দেখে।"],
+        "note": { "kind": "tip", "html": "ঠিক জিনিস cache করুন, আর cache-কে যথেষ্ট মেমরি দিন।" },
+        "changes": [{ "sign": "~", "html": "Hit rate: ৯০% → ৯৯%" }]
+      },
+      "show": [
+        { "id": "app", "state": "hot" },
+        { "id": "cache", "state": "hot", "sub": { "en": "hit: 2 ms", "bn": "hit: ২ ms" } }
+      ],
+      "links": [{ "from": "app", "to": "cache", "flow": "both", "ms": 800, "state": "hot" }],
+      "values": ["2 ms", "99%"]
+    }
+  ]
+}
+```
+
+The example shows one step to stay short. A walk-through has at least two.
+
+| Field | Rule |
+| --- | --- |
+| `width`, `height` | The size of the diagram in diagram units, whole numbers: width 320 to 1200, height 160 to 800. The diagram scales to the column. Below 540 px it scrolls sideways and follows the boxes the step is about. |
+| `nodes` | The boxes, each at its home place. `id` is lowercase letters, digits, and hyphens, starting with a letter. `kind` picks the icon: `user`, `browser`, `dns`, `server`, `database`, `cache`, `cdn`, `balancer`, `queue`, `storage`, `service`, `lock`, `key`, `shield`, `clock`, `chart`, `file`, or `note`. `label` is plain text in both languages. `x` and `y` are the middle of the box. |
+| `metrics` | The labels of the readouts above the diagram, in both languages. At most 6. |
+| `caption` | Optional. A line under the readouts, for example to say that the numbers are an example. |
+| `steps` | At least 2. |
+
+Each step has these fields:
+
+| Field | Rule |
+| --- | --- |
+| `en`, `bn` | The words of the step. `short` is the label on the step strip, and `title` is the heading: both plain text. `body` is the paragraphs, inline HTML, at least one. Optional: `note` (its `kind` is `insight`, `tip`, or `warn`), `changes` (a `sign` of `+` for added, `-` for taken away, `~` for changed, then the text), and `points` (what to remember, for a recap step). |
+| `show` | The boxes this step shows. A box that is not listed is hidden. `state` is `hot` (the step is about it), `warn` (slow or failing), or `dim`. `sub` is a small second line in both languages. `badge` is a count in a corner, such as `×40`. `x` and `y` give the box a place for this step only, and it glides there. |
+| `links` | The lines between two shown boxes. `flow` is `to` (dots go from `from` to `to`), `back`, or `both`. `ms` is how long one dot takes to cross, from 200 to 10000, so a slow link has slow dots. `state` is as for a box. `label` is in both languages. |
+| `values` | One entry for each readout, in the same order. A string is the same in both languages, and its digits turn Bangla on the Bangla site. An `{ "en", "bn" }` pair is for words such as yes and no. `null` shows a dash. A readout that changed since the step before is marked. |
+
+The build and `tests/walkthrough.test.ts` enforce these rules:
+
+- A step has no link and no citation. The section text has them.
+- English text has no Bangla letters. Bangla text has Bangla digits, except
+  inside code.
+- A string in `values` has no Bangla letters, so both sites can show it.
+- English and Bangla say the same: the same number of paragraphs, points, and
+  changes (with the same signs), and the same kind of note.
+- In every step and both languages, each shown box fits in the diagram and no
+  two shown boxes overlap. A box is as wide as its longest line, up to 240
+  units. The generator of Part 18 also rejects a label or a `sub` of more than
+  32 characters, and a `short` of more than 24.
+- A step cannot show a box twice, show a box that does not exist, link two
+  boxes that it does not show, or have a number of values that differs from the
+  number of readouts.
+
+A walk-through is not part of the page data. `TopicPage` takes it out of the
+section, and the build writes it to `walkthroughs/<slug>/<section id>.json`.
+The section loads that file when it is first shown, and the offline list saves
+it ([architecture](architecture.md#walk-throughs)).
 
 ## Citations and sources
 
@@ -492,7 +589,9 @@ The quiz format is in [quizzes.md](quizzes.md). The tests add these rules:
      `src/app/manifest.ts`;
    - `tests/roadmap.test.ts` (the Part count) and `tests/interview.test.ts`
      (`PART_ORDER`);
-   - the counts and the Parts table in `README.md`.
+   - the counts and the Parts table in `README.md`;
+   - the Part and page counts in `docs/architecture.md`: the route table,
+     the page count under it, the content loader, and the file layout.
 6. Run `npm test`, `npm run lint`, and `npm run build`, then read the new
    Part in both languages and both themes.
 7. Retake the README screenshots that show the list of Parts
