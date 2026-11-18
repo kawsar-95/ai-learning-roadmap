@@ -270,6 +270,11 @@ const en = {
   banglaTitle: "বাংলা ব্যাখ্যা",
   banglaNote: "সহজ ভাষায় বিস্তারিত",
 
+  // The "Start here" box above the voices of a section.
+  basicsTitle: "Start here",
+  basicsWords: "Words to know",
+  basicsRemember: "Remember",
+
   // Videos.
   watch: (n: number) => `Watch · ${n} ${n === 1 ? "video" : "videos"}`,
   playVideo: (title: string) => `Play video: ${title}`,
@@ -481,6 +486,10 @@ const bn: Dict = {
   laymanNote: "সহজ English-এ, জার্গন ছাড়া",
   banglaTitle: "বাংলা ব্যাখ্যা",
   banglaNote: "সহজ ভাষায় বিস্তারিত",
+
+  basicsTitle: "এখান থেকে শুরু করুন",
+  basicsWords: "শব্দগুলো চিনে নিন",
+  basicsRemember: "মনে রাখুন",
 
   watch: (n: number) => `ভিডিও দেখুন · ${fmtNum("bn", n)}টি`,
   playVideo: (title: string) => `ভিডিও চালান: ${title}`,

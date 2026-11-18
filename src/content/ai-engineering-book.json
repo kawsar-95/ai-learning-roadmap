@@ -18,6 +18,78 @@
         "title": "ফাউন্ডেশন মডেল দিয়ে AI অ্যাপ্লিকেশন বানানোর ভূমিকা",
         "sub": "কীভাবে foundation model AI প্রোডাক্ট বানানোকে এমন একটা কাজে পরিণত করলো, যা এখন প্রায় সবাই করতে পারে"
       },
+      "basics": {
+        "en": {
+          "idea": "A <strong>foundation model</strong> is a large, general-purpose model that many products can build on. Labs offer them through APIs, so you can build AI products without training a model yourself.",
+          "words": [
+            {
+              "term": "Language model",
+              "meaning": "A system that guesses which small piece of text (token) is likely to come next."
+            },
+            {
+              "term": "Self-supervision",
+              "meaning": "Training where the text itself gives the answers. Each word is the answer to predict from the words before it."
+            },
+            {
+              "term": "Foundation model",
+              "meaning": "A large, general-purpose model that can be adapted to many different applications, not just one narrow task."
+            },
+            {
+              "term": "Model as a service",
+              "meaning": "A few large labs train the models and offer them through APIs, so others can use them without training anything."
+            },
+            {
+              "term": "AI engineering",
+              "meaning": "The work of building applications on top of readily available foundation models."
+            },
+            {
+              "term": "Last mile problem",
+              "meaning": "Going from a demo that is 60% working to a product that is 95%+ reliable takes far longer than the demo."
+            }
+          ],
+          "remember": [
+            "You can build on an existing model through an API instead of training your own.",
+            "Before building, define success with concrete business metrics and set a usefulness threshold to clear before going live.",
+            "The stack has three layers: application development, model development, and infrastructure. Most engineers work in application development.",
+            "Plan for change: models, prices, and abilities shift fast, so build so you can swap models or providers."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ফাউন্ডেশন মডেল</strong> হলো বড় আর সাধারণ কাজের মডেল, যার ওপর অনেক ধরনের প্রোডাক্ট বানানো যায়। ল্যাবগুলো এগুলো API দিয়ে দেয়, তাই নিজে মডেল ট্রেইন না করেই AI প্রোডাক্ট বানানো যায়।",
+          "words": [
+            {
+              "term": "ল্যাঙ্গুয়েজ মডেল (language model)",
+              "meaning": "যে সিস্টেম অনুমান করে লেখার পরের ছোট টুকরোটা (টোকেন) কী হতে পারে।"
+            },
+            {
+              "term": "সেলফ-সুপারভিশন (self-supervision)",
+              "meaning": "যে ট্রেনিংয়ে লেখাটাই উত্তর জোগায়। আগের শব্দগুলো দেখে প্রতিটি শব্দ অনুমান করাই মডেলের কাজ।"
+            },
+            {
+              "term": "ফাউন্ডেশন মডেল (foundation model)",
+              "meaning": "বড় আর সাধারণ কাজের মডেল, যাকে অনেক ধরনের অ্যাপ্লিকেশনের জন্য মানিয়ে নেওয়া যায়, শুধু একটা সরু কাজের জন্য নয়।"
+            },
+            {
+              "term": "মডেল অ্যাজ আ সার্ভিস (model as a service)",
+              "meaning": "কিছু বড় ল্যাব মডেল ট্রেইন করে API দিয়ে দেয়, যাতে অন্যরা কিছু ট্রেইন না করেই ব্যবহার করতে পারে।"
+            },
+            {
+              "term": "AI ইঞ্জিনিয়ারিং (AI engineering)",
+              "meaning": "সহজে পাওয়া ফাউন্ডেশন মডেলের ওপর অ্যাপ্লিকেশন বানানোর কাজ।"
+            },
+            {
+              "term": "লাস্ট মাইল প্রবলেম (last mile problem)",
+              "meaning": "৬০% কাজ করা ডেমো থেকে ৯৫%+ নির্ভরযোগ্য প্রোডাক্টে যেতে ডেমোর চেয়ে অনেক বেশি সময় লাগে।"
+            }
+          ],
+          "remember": [
+            "নিজের মডেল ট্রেইন না করে API দিয়ে আগে থেকে থাকা মডেলের ওপর বানানো যায়।",
+            "বানানোর আগে স্পষ্ট বিজনেস মেট্রিক দিয়ে সফলতা ঠিক করুন, আর লাইভে যাওয়ার আগে একটা উপযোগিতার সীমা রাখুন।",
+            "স্ট্যাকে তিন লেয়ার: অ্যাপ্লিকেশন ডেভেলপমেন্ট, মডেল ডেভেলপমেন্ট আর ইনফ্রাস্ট্রাকচার। বেশিরভাগ ইঞ্জিনিয়ার অ্যাপ্লিকেশন ডেভেলপমেন্টে কাজ করেন।",
+            "বদলের জন্য তৈরি থাকুন: মডেল, দাম আর সক্ষমতা দ্রুত বদলায়, তাই মডেল বা প্রোভাইডার বদলানোর সুযোগ রেখে বানান।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -299,6 +371,86 @@
         "title": "ফাউন্ডেশন মডেল বোঝা: ট্রেনিং ডেটা, আর্কিটেকচার আর সাইজ",
         "sub": "ট্রেনিং ডেটা, আর্কিটেকচার আর মডেলের সাইজ আসলে একটা মডেল সম্পর্কে কী ঠিক করে দেয়"
       },
+      "basics": {
+        "en": {
+          "idea": "A model is shaped by its training data, its architecture, and its size. Data decides which languages and topics it handles well, and the <strong>transformer</strong> design still dominates.",
+          "words": [
+            {
+              "term": "Low-resource language",
+              "meaning": "A language with little text in the training data. Models usually do worse on it."
+            },
+            {
+              "term": "Seq2seq",
+              "meaning": "An older design that squeezes the whole input into one summary, then writes the output from that summary."
+            },
+            {
+              "term": "Transformer",
+              "meaning": "The newer design from 2017 that most models still use. It reads the input in parallel instead of one piece at a time."
+            },
+            {
+              "term": "Attention mechanism",
+              "meaning": "It lets the model look directly at every earlier piece of text when writing the next, like flipping to any page of a book."
+            },
+            {
+              "term": "Parameter count",
+              "meaning": "The number of parameters in a model. It is a rough sign of how much the model can learn."
+            },
+            {
+              "term": "Chinchilla scaling law",
+              "meaning": "A rule: compute-optimal training (the best use of a fixed compute budget) needs about 20 training tokens per parameter. Model size and data grow together."
+            },
+            {
+              "term": "Mixture-of-experts (MoE)",
+              "meaning": "It runs only a few parameter groups, called experts, per token. A 46.7-billion-parameter model can run at roughly the cost and speed of a 12.9-billion one."
+            }
+          ],
+          "remember": [
+            "A model is only as good as its data. No Vietnamese text in training means no Vietnamese translation.",
+            "The same meaning needs about 7 tokens in English, 32 in Hindi, and 72 in Burmese, so costs differ.",
+            "Attention lets the model look at every earlier token, not just a summary. Transformers still dominate.",
+            "Bigger is not always better: a large model on too little data can lose to a smaller, well-trained one."
+          ]
+        },
+        "bn": {
+          "idea": "একটা মডেল গড়ে ওঠে তার ট্রেনিং ডেটা, আর্কিটেকচার আর সাইজ দিয়ে। ডেটা ঠিক করে মডেল কোন ভাষা আর বিষয়ে ভালো, আর <strong>ট্রান্সফরমার</strong> ডিজাইনই এখনো সবচেয়ে এগিয়ে।",
+          "words": [
+            {
+              "term": "লো-রিসোর্স ল্যাঙ্গুয়েজ (low-resource language)",
+              "meaning": "যে ভাষার লেখা ট্রেনিং ডেটায় কম। মডেল সাধারণত এতে দুর্বল পারফর্ম করে।"
+            },
+            {
+              "term": "seq2seq",
+              "meaning": "আগের একটা ডিজাইন, যা পুরো ইনপুটকে একটা সারাংশে চেপে ফেলে, তারপর সেই সারাংশ থেকে আউটপুট লেখে।"
+            },
+            {
+              "term": "ট্রান্সফরমার (transformer)",
+              "meaning": "২০১৭ সালের নতুন ডিজাইন, যা এখনো বেশিরভাগ মডেল ব্যবহার করে। এটা ইনপুট একটা একটা করে না পড়ে একসাথে পড়ে।"
+            },
+            {
+              "term": "অ্যাটেনশন মেকানিজম (attention mechanism)",
+              "meaning": "পরের অংশ লেখার সময় মডেল আগের প্রতিটি টুকরোর দিকে সরাসরি তাকাতে পারে, যেন বইয়ের যেকোনো পাতা উল্টে দেখা।"
+            },
+            {
+              "term": "প্যারামিটার সংখ্যা (parameter count)",
+              "meaning": "মডেলে কতগুলো প্যারামিটার আছে তার সংখ্যা। এটা মডেল কতটা শিখতে পারে তার মোটামুটি ইঙ্গিত।"
+            },
+            {
+              "term": "চিনচিলা স্কেলিং ল (Chinchilla scaling law)",
+              "meaning": "একটা নিয়ম: কম্পিউট-অপটিমাল ট্রেনিংয়ে (নির্দিষ্ট কম্পিউট বাজেটের সবচেয়ে ভালো ব্যবহার) প্রতি প্যারামিটারে প্রায় ২০টি ট্রেনিং টোকেন লাগে। মডেল আর ডেটা একসাথে বাড়াতে হয়।"
+            },
+            {
+              "term": "মিক্সচার-অব-এক্সপার্টস (mixture-of-experts, MoE)",
+              "meaning": "প্রতি টোকেনে এটা প্যারামিটারের মাত্র কয়েকটা গ্রুপ (এক্সপার্ট) চালায়। তাই ৪৬.৭ বিলিয়ন প্যারামিটারের মডেল মোটামুটি ১২.৯ বিলিয়নের মডেলের খরচ আর গতিতে চলতে পারে।"
+            }
+          ],
+          "remember": [
+            "মডেল তার ডেটার চেয়ে ভালো হয় না। ট্রেনিংয়ে ভিয়েতনামি লেখা না থাকলে ভিয়েতনামিতে অনুবাদ হয় না।",
+            "একই অর্থে ইংরেজিতে প্রায় ৭, হিন্দিতে ৩২ আর বর্মিজে ৭২টি টোকেন লাগে, তাই খরচ আলাদা হয়।",
+            "অ্যাটেনশন শুধু সারাংশ নয়, আগের প্রতিটি টোকেন দেখতে দেয়। ট্রান্সফরমার এখনো এগিয়ে।",
+            "বড় মানেই ভালো নয়: কম ডেটায় ট্রেইন করা বড় মডেল, ভালোভাবে ট্রেইন করা ছোট মডেলের কাছে হারতে পারে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -531,6 +683,94 @@
         "title": "ফাউন্ডেশন মডেল বোঝা: পোস্ট-ট্রেনিং, স্যাম্পলিং আর hallucination",
         "sub": "পোস্ট-ট্রেনিং আর স্যাম্পলিং আসলে একটা মডেল সম্পর্কে কী ঠিক করে দেয়, আর কেন উত্তর কখনো অসংগত বা বানানো হতে পারে"
       },
+      "basics": {
+        "en": {
+          "idea": "After pre-training, a model is tuned to act like an assistant. When it writes, it uses <strong>sampling</strong>, so answers can differ between runs, and models can also make things up.",
+          "words": [
+            {
+              "term": "Post-training",
+              "meaning": "Training after pre-training, so the model acts like an assistant and copies less of the rudeness and misinformation in its data."
+            },
+            {
+              "term": "Supervised finetuning (SFT)",
+              "meaning": "Finetuning means training an existing model further. SFT uses (prompt, response) pairs from trained labelers, so the model learns to act like an assistant."
+            },
+            {
+              "term": "Preference finetuning",
+              "meaning": "Tuning a model toward the answers people prefer. RLHF, reinforcement learning from human feedback, is the classic way to do it."
+            },
+            {
+              "term": "Sampling",
+              "meaning": "How a model picks the next token from its probabilities. Most systems pick the next token at random, weighted by its probability."
+            },
+            {
+              "term": "Temperature",
+              "meaning": "A setting that flattens or sharpens the odds of the next token. Higher means more creative but less predictable."
+            },
+            {
+              "term": "Top-k and top-p (nucleus sampling)",
+              "meaning": "Top-k samples only from the k most likely tokens. Top-p keeps the fewest tokens whose total probability passes a threshold p."
+            },
+            {
+              "term": "Test time compute",
+              "meaning": "Making several candidate answers at answer time and picking the best. It helps up to a point, then only costs more."
+            },
+            {
+              "term": "Hallucination",
+              "meaning": "When a model confidently states something false or unverifiable."
+            }
+          ],
+          "remember": [
+            "Post-training has two stages: supervised finetuning first, then preference finetuning.",
+            "The same prompt can give different answers. Fixing temperature, top-p, top-k, and a seed helps but never removes this.",
+            "For a required output format, finetuning is the most reliable fix and the most expensive. Prompting is the least reliable.",
+            "RLHF does not reliably fix hallucination. On some benchmarks it made InstructGPT's hallucination rate worse."
+          ]
+        },
+        "bn": {
+          "idea": "প্রি-ট্রেনিংয়ের পর মডেলকে অ্যাসিস্ট্যান্টের মতো আচরণ করতে শেখানো হয়। লেখার সময় সে <strong>স্যাম্পলিং</strong> করে, তাই প্রতিবার উত্তর আলাদা হতে পারে, আর মডেল কিছু বানিয়েও বলতে পারে।",
+          "words": [
+            {
+              "term": "পোস্ট-ট্রেনিং (post-training)",
+              "meaning": "প্রি-ট্রেনিংয়ের পরের ট্রেনিং, যাতে মডেল অ্যাসিস্ট্যান্টের মতো চলে আর ডেটার রূঢ়তা ও ভুল তথ্য কম নকল করে।"
+            },
+            {
+              "term": "সুপারভাইজড ফাইনটিউনিং (supervised finetuning, SFT)",
+              "meaning": "ফাইনটিউনিং মানে আগে থেকে থাকা মডেলকে আরও ট্রেইন করা। SFT-তে প্রশিক্ষিত লেবেলারদের লেখা (prompt, response) জোড়া লাগে, যাতে মডেল অ্যাসিস্ট্যান্টের মতো আচরণ শেখে।"
+            },
+            {
+              "term": "প্রেফারেন্স ফাইনটিউনিং (preference finetuning)",
+              "meaning": "মানুষ যে উত্তর বেশি পছন্দ করে, মডেলকে সেদিকে টিউন করা। এর প্রচলিত উপায় RLHF, মানে মানুষের ফিডব্যাক দিয়ে রিইনফোর্সমেন্ট লার্নিং।"
+            },
+            {
+              "term": "স্যাম্পলিং (sampling)",
+              "meaning": "মডেল সম্ভাব্যতা থেকে পরের টোকেন কীভাবে বাছে। বেশিরভাগ সিস্টেম সম্ভাব্যতা অনুযায়ী এলোমেলোভাবে পরের টোকেন বাছে।"
+            },
+            {
+              "term": "টেম্পারেচার (temperature)",
+              "meaning": "একটা সেটিং, যা পরের টোকেনের সম্ভাবনা আরও সমান বা তীক্ষ্ণ করে। বেশি হলে উত্তর বেশি সৃজনশীল, কিন্তু কম অনুমানযোগ্য।"
+            },
+            {
+              "term": "top-k আর top-p (নিউক্লিয়াস স্যাম্পলিং, nucleus sampling)",
+              "meaning": "top-k শুধু সবচেয়ে সম্ভাব্য k-টা টোকেন থেকে বাছে। top-p সবচেয়ে কম টোকেন রাখে, যাদের মোট সম্ভাব্যতা একটা সীমা p পার হয়।"
+            },
+            {
+              "term": "টেস্ট টাইম কম্পিউট (test time compute)",
+              "meaning": "উত্তর দেওয়ার সময় কয়েকটা প্রার্থী উত্তর বানিয়ে সেরাটা বাছা। একটা সীমা পর্যন্ত কাজে দেয়, তারপর শুধু খরচ বাড়ে।"
+            },
+            {
+              "term": "হ্যালুসিনেশন (hallucination)",
+              "meaning": "মডেল আত্মবিশ্বাসের সাথে এমন কিছু বলে, যা ভুল বা যাচাই করা যায় না।"
+            }
+          ],
+          "remember": [
+            "পোস্ট-ট্রেনিংয়ে দুই ধাপ: আগে সুপারভাইজড ফাইনটিউনিং, তারপর প্রেফারেন্স ফাইনটিউনিং।",
+            "একই প্রম্পটে আলাদা উত্তর আসতে পারে। temperature, top-p, top-k আর সিড ঠিক করলে কমে, কিন্তু পুরো যায় না।",
+            "নির্দিষ্ট ফরম্যাটের আউটপুটের জন্য ফাইনটিউনিং সবচেয়ে নির্ভরযোগ্য ও সবচেয়ে দামি। প্রম্পটিং সবচেয়ে কম নির্ভরযোগ্য।",
+            "RLHF হ্যালুসিনেশন নির্ভরযোগ্যভাবে ঠিক করে না। কিছু বেঞ্চমার্কে InstructGPT-এর হ্যালুসিনেশন বরং বেড়েছিল।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -678,6 +918,86 @@
       "bn": {
         "title": "ইভ্যালুয়েশন মেথডোলজি: ল্যাঙ্গুয়েজ মডেলিং মেট্রিক আর এক্সাক্ট স্কোরিং",
         "sub": "ওপেন-এন্ডেড মডেল আউটপুট মাপার উপায়: ল্যাঙ্গুয়েজ মডেলিং মেট্রিক, এক্সাক্ট স্কোরিং আর এমবেডিং"
+      },
+      "basics": {
+        "en": {
+          "idea": "Model answers are open-ended, so checking them is hard. This section shows ways to score them: how well a model predicts text, and <strong>exact evaluation</strong>, which gives a clear right or wrong.",
+          "words": [
+            {
+              "term": "Cross entropy",
+              "meaning": "A measure of how hard it is for a trained model to predict what comes next in a dataset."
+            },
+            {
+              "term": "Perplexity",
+              "meaning": "A score calculated from cross entropy. The more unsure a model is about the next token, the higher it is."
+            },
+            {
+              "term": "Functional correctness",
+              "meaning": "Checking whether a system really does its task, for example by running generated code against test cases."
+            },
+            {
+              "term": "<code>pass@k</code>",
+              "meaning": "A score for how often at least one of k generated samples passes all the tests."
+            },
+            {
+              "term": "Lexical similarity",
+              "meaning": "Comparing a response with references by how much their words overlap, using metrics like BLEU or ROUGE."
+            },
+            {
+              "term": "Semantic similarity",
+              "meaning": "Comparing meaning instead of words, using embeddings and cosine similarity."
+            },
+            {
+              "term": "Embedding",
+              "meaning": "A list of numbers that tries to capture the meaning of data. Similar inputs sit closer together."
+            }
+          ],
+          "remember": [
+            "Open-ended tasks have no single correct output, and good answers get harder to judge as models improve.",
+            "Lower perplexity means better prediction, but it is less reliable after post-training (SFT/RLHF).",
+            "When you can, run generated code against tests. Otherwise, compare with reference answers.",
+            "Each comparison method has a weakness: exact match misses other valid phrasings, and semantic similarity depends on the embedding model."
+          ]
+        },
+        "bn": {
+          "idea": "মডেলের উত্তর খোলা ধরনের, তাই যাচাই করা কঠিন। এই সেকশনে স্কোর করার কয়েকটা উপায় আছে: মডেল লেখা কতটা ভালো অনুমান করে, আর <strong>এক্সাক্ট ইভ্যালুয়েশন</strong>, যা পরিষ্কার ঠিক বা ভুল বলে দেয়।",
+          "words": [
+            {
+              "term": "ক্রস এন্ট্রপি (cross entropy)",
+              "meaning": "একটা ডেটাসেটে পরে কী আসবে, ট্রেইন করা মডেলের পক্ষে তা অনুমান করা কতটা কঠিন, তার মাপ।"
+            },
+            {
+              "term": "পারপ্লেক্সিটি (perplexity)",
+              "meaning": "ক্রস এন্ট্রপি থেকে হিসাব করা একটা স্কোর। পরের টোকেন নিয়ে মডেল যত অনিশ্চিত, এটা তত বেশি।"
+            },
+            {
+              "term": "ফাংশনাল করেক্টনেস (functional correctness)",
+              "meaning": "সিস্টেম সত্যিই কাজটা করছে কি না যাচাই করা, যেমন বানানো কোড টেস্ট কেসের বিপরীতে চালিয়ে।"
+            },
+            {
+              "term": "<code>pass@k</code>",
+              "meaning": "একটা স্কোর, যা বলে বানানো k সংখ্যক নমুনার অন্তত একটা কতবার সব টেস্ট পাস করে।"
+            },
+            {
+              "term": "লেক্সিক্যাল সিমিলারিটি (lexical similarity)",
+              "meaning": "রেফারেন্সের সাথে উত্তরের শব্দ কতটা মেলে তা দেখা, BLEU বা ROUGE-এর মতো মেট্রিক দিয়ে।"
+            },
+            {
+              "term": "সেমান্টিক সিমিলারিটি (semantic similarity)",
+              "meaning": "শব্দ নয়, অর্থের মিল দেখা, এমবেডিং আর কোসাইন সিমিলারিটি দিয়ে।"
+            },
+            {
+              "term": "এমবেডিং (embedding)",
+              "meaning": "ডেটার অর্থ ধরার চেষ্টা করা সংখ্যার তালিকা। কাছাকাছি অর্থের ইনপুট কাছাকাছি থাকে।"
+            }
+          ],
+          "remember": [
+            "খোলা ধরনের কাজে একটাই সঠিক আউটপুট থাকে না, আর মডেল উন্নত হলে ভালো উত্তর যাচাই করা আরও কঠিন হয়।",
+            "পারপ্লেক্সিটি কম মানে ভালো অনুমান, কিন্তু পোস্ট-ট্রেনিংয়ের (SFT/RLHF) পর এটা কম নির্ভরযোগ্য।",
+            "পারলে বানানো কোড টেস্ট দিয়ে চালান। না পারলে রেফারেন্স উত্তরের সাথে মেলান।",
+            "প্রতিটি তুলনার পদ্ধতির দুর্বলতা আছে: এক্সাক্ট ম্যাচ অন্য সঠিক বাক্য ধরে না, আর সেমান্টিক সিমিলারিটি এমবেডিং মডেলের ওপর নির্ভর করে।"
+          ]
+        }
       },
       "body": [
         {
@@ -850,6 +1170,78 @@
         "title": "ইভ্যালুয়েশন মেথডোলজি: AI judge আর তুলনামূলক র‍্যাংকিং",
         "sub": "AI judge হিসেবে মডেলের স্কোর, আর উত্তর পাশাপাশি তুলনা করে মডেলের র‍্যাংকিং"
       },
+      "basics": {
+        "en": {
+          "idea": "Teams often use one AI model to score another model's answers, or rank models by comparing answers side by side. <strong>AI as a judge</strong> is fast and cheap, but it has flaws you must know.",
+          "words": [
+            {
+              "term": "AI as a judge",
+              "meaning": "Using one AI model to score or compare the outputs of another AI model, or of itself."
+            },
+            {
+              "term": "Self-bias",
+              "meaning": "A judge liking its own answers more than other answers, whatever their real quality."
+            },
+            {
+              "term": "Verbosity bias",
+              "meaning": "A judge giving better scores to longer answers, even when they are not better."
+            },
+            {
+              "term": "Reward model",
+              "meaning": "A special judge that gives a score to a pair made of a prompt and a response."
+            },
+            {
+              "term": "Comparative evaluation",
+              "meaning": "Showing two models' answers to the same prompt side by side and picking a winner, instead of scoring each alone."
+            },
+            {
+              "term": "Elo",
+              "meaning": "A rating method that turns the results of many head-to-head matches into one overall ranking."
+            }
+          ],
+          "remember": [
+            "AI judges are fast and cheap, and can judge on any criteria you describe.",
+            "Judges can be inconsistent and biased toward their own answers, the first option, or longer answers.",
+            "Comparative evaluation ranks models from many head-to-head wins, and it does not saturate like fixed benchmarks.",
+            "Knowing model B beats model A does not tell you if either one is good enough."
+          ]
+        },
+        "bn": {
+          "idea": "টিমগুলো প্রায়ই এক AI মডেল দিয়ে আরেক মডেলের উত্তর স্কোর করায়, বা উত্তর পাশাপাশি রেখে মডেলদের র‍্যাংক করে। <strong>এআই জাজ (AI as a judge)</strong> দ্রুত আর সস্তা, কিন্তু এর কিছু দুর্বলতা জানা দরকার।",
+          "words": [
+            {
+              "term": "এআই জাজ (AI as a judge)",
+              "meaning": "একটি AI মডেল দিয়ে অন্য AI মডেলের, বা নিজের, আউটপুট স্কোর করানো বা তুলনা করানো।"
+            },
+            {
+              "term": "সেলফ-বায়াস (self-bias)",
+              "meaning": "জাজ নিজের তৈরি উত্তরকে বেশি পছন্দ করে, উত্তরের আসল মান যা-ই হোক।"
+            },
+            {
+              "term": "ভার্বোসিটি বায়াস (verbosity bias)",
+              "meaning": "জাজ লম্বা উত্তরকে বেশি নম্বর দেয়, উত্তরটা ভালো না হলেও।"
+            },
+            {
+              "term": "রিওয়ার্ড মডেল (reward model)",
+              "meaning": "বিশেষ ধরনের জাজ, যে একটি প্রম্পট আর তার উত্তরের জোড়াকে স্কোর দেয়।"
+            },
+            {
+              "term": "কমপ্যারেটিভ ইভ্যালুয়েশন (comparative evaluation)",
+              "meaning": "একই প্রম্পটের জন্য দুই মডেলের উত্তর পাশাপাশি দেখিয়ে বিজয়ী বাছা, প্রতিটিকে আলাদা স্কোর না দিয়ে।"
+            },
+            {
+              "term": "Elo",
+              "meaning": "এক ধরনের রেটিং পদ্ধতি, যা অনেক মুখোমুখি ম্যাচের ফল থেকে একটি সামগ্রিক র‍্যাংক বানায়।"
+            }
+          ],
+          "remember": [
+            "এআই জাজ দ্রুত আর সস্তা, আর আপনার বলে দেওয়া যেকোনো মানদণ্ডে বিচার করতে পারে।",
+            "জাজ অসঙ্গত হতে পারে, আর নিজের উত্তর, প্রথম অপশন বা লম্বা উত্তরের দিকে ঝুঁকতে পারে।",
+            "কমপ্যারেটিভ ইভ্যালুয়েশন অনেক মুখোমুখি জয় থেকে মডেলদের র‍্যাংক করে, আর নির্দিষ্ট বেঞ্চমার্কের মতো স্যাচুরেট হয়ে পড়ে না।",
+            "মডেল B মডেল A-কে হারিয়েছে জানলেও বোঝা যায় না, দুটোর কোনোটা যথেষ্ট ভালো কিনা।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1019,6 +1411,86 @@
       "bn": {
         "title": "AI সিস্টেম মূল্যায়ন",
         "sub": "evaluation criteria থেকে model selection আর একটা বিশ্বাসযোগ্য evaluation pipeline পর্যন্ত"
+      },
+      "basics": {
+        "en": {
+          "idea": "Before building, decide how you will check that an AI application works. This section turns those checks into a way to pick a model and to build a trustworthy <strong>evaluation pipeline</strong>.",
+          "words": [
+            {
+              "term": "Evaluation-driven development",
+              "meaning": "Writing your checks before you build the system, so you know what <em>working</em> means."
+            },
+            {
+              "term": "Factual consistency",
+              "meaning": "Whether the output matches the given context or the real world."
+            },
+            {
+              "term": "Self-verification",
+              "meaning": "Asking a model for several answers and seeing if they agree with each other."
+            },
+            {
+              "term": "Evaluation pipeline",
+              "meaning": "Your own set of steps that score a model's outputs for your application, using your own criteria, methods, and data."
+            },
+            {
+              "term": "Open-weight model",
+              "meaning": "A model whose weights are shared publicly, so you can host it yourself."
+            },
+            {
+              "term": "Data contamination",
+              "meaning": "A model having seen benchmark questions during training, which inflates its scores without real skill."
+            },
+            {
+              "term": "Simpson's paradox",
+              "meaning": "A model wins on every subgroup of the data but still loses overall."
+            }
+          ],
+          "remember": [
+            "Pick the best model for your own application, not the best model overall.",
+            "A public benchmark score is a useful filter, never a guarantee.",
+            "Build your own evaluation pipeline, and score every part of the system, not only the final output.",
+            "Keep monitoring the model in production, and evaluate the pipeline itself too."
+          ]
+        },
+        "bn": {
+          "idea": "বানানো শুরুর আগে ঠিক করুন, AI অ্যাপ্লিকেশন ঠিকমতো কাজ করছে কিনা কীভাবে যাচাই করবেন। এই সেকশন সেই যাচাইকে মডেল বাছাইয়ের পদ্ধতিতে আর ভরসাযোগ্য <strong>ইভ্যালুয়েশন পাইপলাইনে (evaluation pipeline)</strong> রূপ দেয়।",
+          "words": [
+            {
+              "term": "ইভ্যালুয়েশন-ড্রিভেন ডেভেলপমেন্ট (evaluation-driven development)",
+              "meaning": "সিস্টেম বানানোর আগেই যাচাইয়ের নিয়ম লিখে ফেলা, যাতে আপনি জানেন <em>কাজ করছে</em> মানে আসলে কী।"
+            },
+            {
+              "term": "ফ্যাকচুয়াল কনসিস্টেন্সি (factual consistency)",
+              "meaning": "আউটপুট দেওয়া কনটেক্সটের সাথে বা বাস্তব দুনিয়ার সাথে মেলে কিনা।"
+            },
+            {
+              "term": "সেলফ-ভেরিফিকেশন (self-verification)",
+              "meaning": "মডেলকে দিয়ে কয়েকটি উত্তর বানিয়ে দেখা, সেগুলো একে অপরের সাথে মেলে কিনা।"
+            },
+            {
+              "term": "ইভ্যালুয়েশন পাইপলাইন (evaluation pipeline)",
+              "meaning": "আপনার নিজের কিছু ধাপ, যা নিজের মানদণ্ড, পদ্ধতি আর ডেটা দিয়ে আপনার অ্যাপ্লিকেশনের জন্য মডেলের আউটপুটকে স্কোর দেয়।"
+            },
+            {
+              "term": "ওপেন-ওয়েট মডেল (open-weight model)",
+              "meaning": "যে মডেলের ওয়েট সবার জন্য প্রকাশ করা থাকে, তাই আপনি নিজেই সেটা হোস্ট করতে পারেন।"
+            },
+            {
+              "term": "ডেটা কন্টামিনেশন (data contamination)",
+              "meaning": "ট্রেনিংয়ের সময় মডেল বেঞ্চমার্কের প্রশ্ন দেখে ফেলেছে, ফলে আসল দক্ষতা ছাড়াই স্কোর ফুলে যায়।"
+            },
+            {
+              "term": "সিম্পসনের প্যারাডক্স (Simpson's paradox)",
+              "meaning": "ডেটার প্রতিটি উপদলে মডেল জেতে, অথচ সব মিলিয়ে হেরে যায়।"
+            }
+          ],
+          "remember": [
+            "পুরো দুনিয়ার সেরা মডেল নয়, আপনার নিজের অ্যাপ্লিকেশনের জন্য সেরা মডেল বাছুন।",
+            "পাবলিক বেঞ্চমার্কের স্কোর কাজের ফিল্টার, কিন্তু কখনোই গ্যারান্টি নয়।",
+            "নিজের ইভ্যালুয়েশন পাইপলাইন বানান, আর শুধু শেষ আউটপুট নয়, সিস্টেমের প্রতিটি অংশ মূল্যায়ন করুন।",
+            "প্রোডাকশনে মডেলকে নজরে রাখুন, আর পাইপলাইনটাকেও মূল্যায়ন করুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -1352,6 +1824,78 @@
         "title": "প্রম্পট ইঞ্জিনিয়ারিং: প্রম্পট, in-context learning আর context length",
         "sub": "মডেলের weight না বদলেই তাকে দিয়ে কাজ করিয়ে নেওয়ার কৌশল: প্রম্পটে কী থাকে, উদাহরণ থেকে শেখা, আর লম্বা context"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Prompt engineering</strong> gets a model to do what you want by changing only what you feed it, not the model. This section shows what a prompt holds and why a long context is not used equally well.",
+          "words": [
+            {
+              "term": "Prompt engineering",
+              "meaning": "Adapting a model to your task by changing only the prompt. It is the cheapest and fastest way."
+            },
+            {
+              "term": "In-context learning",
+              "meaning": "Teaching a model a new behavior with examples placed inside the prompt, with no change to the model."
+            },
+            {
+              "term": "Shot (zero-shot, few-shot)",
+              "meaning": "One example in the prompt. Zero-shot means no examples; 5-shot means five examples."
+            },
+            {
+              "term": "System prompt",
+              "meaning": "The part of a prompt with the task description and persona, usually set by the developer."
+            },
+            {
+              "term": "Chat template",
+              "meaning": "The model-specific format used to join the system prompt and the user prompt into one text."
+            },
+            {
+              "term": "Needle-in-a-haystack (NIAH)",
+              "meaning": "A test that hides one fact in a long prompt and checks whether the model can find it."
+            }
+          ],
+          "remember": [
+            "A prompt usually has a task description, optional examples, and the actual task.",
+            "Try good prompting before fine-tuning. It changes nothing inside the model itself.",
+            "A wrong chat template causes silent performance drops that are hard to debug.",
+            "Models recall the start and end of a prompt better than the middle."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>প্রম্পট ইঞ্জিনিয়ারিং (prompt engineering)</strong> মডেলকে বদলায় না, শুধু মডেলকে যা দেওয়া হয় তা বদলে কাজ করিয়ে নেয়। এই সেকশনে দেখবেন প্রম্পটে কী থাকে, আর লম্বা কনটেক্সটের সব অংশ কেন সমানভাবে কাজে লাগে না।",
+          "words": [
+            {
+              "term": "প্রম্পট ইঞ্জিনিয়ারিং (prompt engineering)",
+              "meaning": "শুধু প্রম্পট বদলে মডেলকে আপনার কাজের উপযোগী করা। এটাই সবচেয়ে সস্তা আর দ্রুত উপায়।"
+            },
+            {
+              "term": "ইন-কনটেক্সট লার্নিং (in-context learning)",
+              "meaning": "প্রম্পটের ভেতরে উদাহরণ দিয়ে মডেলকে নতুন আচরণ শেখানো, মডেল নিজে না বদলিয়ে।"
+            },
+            {
+              "term": "শট (shot: zero-shot, few-shot)",
+              "meaning": "প্রম্পটে দেওয়া একটি উদাহরণ। zero-shot মানে কোনো উদাহরণ নেই; ৫-shot মানে ৫টি উদাহরণ।"
+            },
+            {
+              "term": "সিস্টেম প্রম্পট (system prompt)",
+              "meaning": "প্রম্পটের যে অংশে কাজের বর্ণনা আর persona থাকে, সাধারণত ডেভেলপার ঠিক করে দেন।"
+            },
+            {
+              "term": "চ্যাট টেমপ্লেট (chat template)",
+              "meaning": "মডেলের নিজস্ব ফরম্যাট, যা দিয়ে সিস্টেম প্রম্পট আর ইউজার প্রম্পট জুড়ে একটি লেখা বানানো হয়।"
+            },
+            {
+              "term": "নিডল-ইন-আ-হেস্ট্যাক (needle-in-a-haystack, NIAH)",
+              "meaning": "লম্বা প্রম্পটে একটি তথ্য লুকিয়ে রেখে দেখা হয়, মডেল সেটা খুঁজে পায় কিনা।"
+            }
+          ],
+          "remember": [
+            "প্রম্পটে সাধারণত থাকে কাজের বর্ণনা, চাইলে কিছু উদাহরণ (ঐচ্ছিক), আর আসল কাজ।",
+            "ফাইন-টিউনিংয়ের আগে ভালো প্রম্পটিং করে দেখুন। এতে মডেলের ভেতরে কিছুই বদলায় না।",
+            "চ্যাট টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়, আর ধরা কঠিন।",
+            "মডেল প্রম্পটের শুরু আর শেষের তথ্য মাঝের চেয়ে ভালো মনে রাখে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1473,6 +2017,94 @@
       "bn": {
         "title": "প্রম্পট ইঞ্জিনিয়ারিং: ভালো অভ্যাস আর আক্রমণ থেকে সুরক্ষা",
         "sub": "prompt নির্ভরযোগ্য করার অভ্যাস, prompt-এর version রাখা, আর prompt আক্রমণ ঠেকানো"
+      },
+      "basics": {
+        "en": {
+          "idea": "Good habits make prompts reliable, and a deployed app must also defend against bad users. This section covers both, including <strong>prompt injection</strong>, where hidden instructions trick the model.",
+          "words": [
+            {
+              "term": "Chain-of-thought (CoT)",
+              "meaning": "Asking the model to think step by step. It pushes the model toward more careful reasoning."
+            },
+            {
+              "term": "Prompt extraction",
+              "meaning": "An attack that gets the model to reveal its hidden system prompt."
+            },
+            {
+              "term": "Jailbreaking",
+              "meaning": "An attack that gets the model to skip its safety behavior."
+            },
+            {
+              "term": "Prompt injection",
+              "meaning": "Hiding malicious instructions inside data the model reads, to make it do something unsafe."
+            },
+            {
+              "term": "Indirect prompt injection",
+              "meaning": "Planting bad instructions in a web page, email, or database, which the model reads later and mistakes for real instructions."
+            },
+            {
+              "term": "Instruction hierarchy",
+              "meaning": "Training a model to trust system prompts over user prompts, and user prompts over tool outputs."
+            },
+            {
+              "term": "Violation rate",
+              "meaning": "How often attacks succeed."
+            },
+            {
+              "term": "False refusal rate",
+              "meaning": "How often safe requests are wrongly blocked."
+            }
+          ],
+          "remember": [
+            "Write clear instructions, give enough context, split big tasks into subtasks, and let the model think.",
+            "Keep prompts out of application code, and version them so teams can reuse and test them.",
+            "Attacks come in three groups: prompt extraction, jailbreaking and prompt injection, and information extraction.",
+            "No single defense layer is foolproof. Track the violation rate and the false refusal rate together."
+          ]
+        },
+        "bn": {
+          "idea": "ভালো অভ্যাস প্রম্পটকে ভরসাযোগ্য করে, আর চালু অ্যাপকে খারাপ ব্যবহারকারীর হাত থেকেও বাঁচাতে হয়। এই সেকশনে দুটোই আছে, সঙ্গে <strong>প্রম্পট ইনজেকশন (prompt injection)</strong>, যেখানে লুকানো নির্দেশ মডেলকে ধোঁকা দেয়।",
+          "words": [
+            {
+              "term": "চেইন-অফ-থট (chain-of-thought, CoT)",
+              "meaning": "মডেলকে ধাপে ধাপে ভাবতে বলা। এতে সে আরও গুছিয়ে যুক্তি করার দিকে ঝোঁকে।"
+            },
+            {
+              "term": "প্রম্পট এক্সট্রাকশন (prompt extraction)",
+              "meaning": "যে আক্রমণে মডেলকে দিয়ে তার লুকানো সিস্টেম প্রম্পট বলিয়ে নেওয়া হয়।"
+            },
+            {
+              "term": "জেইলব্রেকিং (jailbreaking)",
+              "meaning": "যে আক্রমণে মডেলের নিরাপত্তা-আচরণ এড়িয়ে যাওয়া হয়।"
+            },
+            {
+              "term": "প্রম্পট ইনজেকশন (prompt injection)",
+              "meaning": "মডেল যে ডেটা পড়ে তার ভেতরে ক্ষতিকর নির্দেশ লুকিয়ে রেখে অনিরাপদ কাজ করানো।"
+            },
+            {
+              "term": "ইনডাইরেক্ট প্রম্পট ইনজেকশন (indirect prompt injection)",
+              "meaning": "ওয়েব পেজ, ইমেইল বা ডেটাবেসে খারাপ নির্দেশ রেখে দেওয়া, যা মডেল পরে পড়ে আসল নির্দেশ ভেবে ভুল করে।"
+            },
+            {
+              "term": "ইনস্ট্রাকশন হায়ারার্কি (instruction hierarchy)",
+              "meaning": "মডেলকে এমনভাবে ট্রেইন করা, যাতে সে ইউজার প্রম্পটের চেয়ে সিস্টেম প্রম্পটকে, আর টুল আউটপুটের চেয়ে ইউজার প্রম্পটকে বেশি গুরুত্ব দেয়।"
+            },
+            {
+              "term": "ভায়োলেশন রেট (violation rate)",
+              "meaning": "আক্রমণ কতবার সফল হয়।"
+            },
+            {
+              "term": "ফলস রিফিউজাল রেট (false refusal rate)",
+              "meaning": "নিরাপদ অনুরোধ কতবার ভুলে আটকে দেওয়া হয়।"
+            }
+          ],
+          "remember": [
+            "স্পষ্ট নির্দেশ লিখুন, যথেষ্ট কনটেক্সট দিন, বড় কাজ ছোট subtask-এ ভাঙুন, আর মডেলকে ভাবার সুযোগ দিন।",
+            "প্রম্পট অ্যাপের কোড থেকে আলাদা রাখুন আর version করুন, যাতে টিমগুলো আবার ব্যবহার ও পরীক্ষা করতে পারে।",
+            "আক্রমণ তিন ধরনের: প্রম্পট এক্সট্রাকশন, জেইলব্রেকিং ও প্রম্পট ইনজেকশন, আর ইনফরমেশন এক্সট্রাকশন।",
+            "কোনো একটি সুরক্ষা স্তরই নিশ্চিত নয়। violation rate আর false refusal rate একসাথে নজরে রাখুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -1669,6 +2301,86 @@
         "title": "RAG এবং Agents: retrieval-augmented generation",
         "sub": "foundation model-কে সঠিক context দেওয়া: retriever, retrieval-এর উন্নতি আর টেক্সটের বাইরে RAG"
       },
+      "basics": {
+        "en": {
+          "idea": "A model needs the right facts to answer a specific question well. <strong>RAG</strong> finds relevant information first and gives it to the model, so it does not have to guess.",
+          "words": [
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "Pulling in relevant documents first, then letting the model write its answer using them."
+            },
+            {
+              "term": "Retriever",
+              "meaning": "The part of a RAG system that finds useful pieces of data in an outside store, like a librarian."
+            },
+            {
+              "term": "Generator",
+              "meaning": "The part that writes the response, using what the retriever found."
+            },
+            {
+              "term": "Chunk",
+              "meaning": "A small piece of a long document. Only the most relevant chunks go to the model."
+            },
+            {
+              "term": "Embedding-based retrieval",
+              "meaning": "Search by meaning. It turns the query and documents into lists of numbers and compares them."
+            },
+            {
+              "term": "Hybrid search",
+              "meaning": "Running a cheap retriever first, then reranking with a more precise one."
+            },
+            {
+              "term": "Text-to-SQL",
+              "meaning": "Turning a question into a database query, running it, and giving the result to the generator."
+            }
+          ],
+          "remember": [
+            "Instructions tell a model how to behave; context gives it the facts for one question.",
+            "Keyword search is fast and exact. Embedding search finds meaning but costs more.",
+            "Combining both kinds of retrieval often works better in real systems.",
+            "Better chunking, reranking, query rewriting, and contextual retrieval all improve what the model receives."
+          ]
+        },
+        "bn": {
+          "idea": "একটি প্রশ্নের ভালো উত্তর দিতে মডেলের সঠিক তথ্য দরকার। <strong>RAG</strong> আগে প্রাসঙ্গিক তথ্য খুঁজে মডেলকে দেয়, যাতে তাকে আন্দাজ করতে না হয়।",
+          "words": [
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "আগে প্রাসঙ্গিক ডকুমেন্ট এনে তারপর মডেলকে সেগুলো দিয়ে উত্তর লিখতে দেওয়া।"
+            },
+            {
+              "term": "রিট্রিভার (retriever)",
+              "meaning": "RAG সিস্টেমের যে অংশ বাইরের ভান্ডার থেকে কাজের তথ্য খোঁজে, লাইব্রেরিয়ানের মতো।"
+            },
+            {
+              "term": "জেনারেটর (generator)",
+              "meaning": "যে অংশ রিট্রিভারের পাওয়া তথ্য দিয়ে উত্তর লেখে।"
+            },
+            {
+              "term": "চাংক (chunk)",
+              "meaning": "লম্বা ডকুমেন্টের একটি ছোট টুকরো। শুধু সবচেয়ে প্রাসঙ্গিক চাংকগুলো মডেলে যায়।"
+            },
+            {
+              "term": "এমবেডিং-ভিত্তিক রিট্রিভাল (embedding-based retrieval)",
+              "meaning": "অর্থ ধরে খোঁজা। প্রশ্ন আর ডকুমেন্টকে সংখ্যার তালিকা বানিয়ে তুলনা করা হয়।"
+            },
+            {
+              "term": "হাইব্রিড সার্চ (hybrid search)",
+              "meaning": "আগে সস্তা রিট্রিভার চালানো, তারপর আরও নির্ভুল একটি দিয়ে আবার সাজানো।"
+            },
+            {
+              "term": "টেক্সট-টু-SQL (text-to-SQL)",
+              "meaning": "প্রশ্নকে ডেটাবেজ কোয়েরিতে বদলে চালানো, আর ফলাফল জেনারেটরকে দেওয়া।"
+            }
+          ],
+          "remember": [
+            "ইনস্ট্রাকশন মডেলকে বলে কীভাবে চলবে; কনটেক্সট দেয় একটি প্রশ্নের তথ্য।",
+            "কিওয়ার্ড সার্চ দ্রুত, আর হুবহু শব্দ মেলায়। এমবেডিং সার্চ অর্থ ধরে, কিন্তু খরচ বেশি।",
+            "দুই ধরনের রিট্রিভাল মেলালে বাস্তব সিস্টেমে প্রায়ই ভালো কাজ হয়।",
+            "ভালো চাংকিং, রির‍্যাঙ্কিং, কোয়েরি রিরাইটিং আর কনটেক্সচুয়াল রিট্রিভাল মডেলের পাওয়া তথ্য আরও ভালো করে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1836,6 +2548,86 @@
       "bn": {
         "title": "RAG এবং Agents: tool, planning, failure mode আর memory",
         "sub": "foundation model-কে কাজ করার ক্ষমতা দেওয়া: tool, planning, failure mode আর memory"
+      },
+      "basics": {
+        "en": {
+          "idea": "An <strong>agent</strong> does more than talk: it uses tools and takes steps to get a job done. More steps and tools mean more ways to fail, so you must plan, check, and track errors.",
+          "words": [
+            {
+              "term": "Agent",
+              "meaning": "Anything that senses an environment and acts on it, using a set of tools."
+            },
+            {
+              "term": "Function calling",
+              "meaning": "Using a tool through a model API. You declare the tool, and the model decides when to call it."
+            },
+            {
+              "term": "Write action",
+              "meaning": "A tool that changes something, like sending an email, instead of only reading data."
+            },
+            {
+              "term": "Plan",
+              "meaning": "The list of actions meant to reach a goal. It is best checked before it runs."
+            },
+            {
+              "term": "Reflection",
+              "meaning": "The agent, or another checker, looks over the plan or the result and points out problems."
+            },
+            {
+              "term": "Short-term and long-term memory",
+              "meaning": "Short-term is the context window: fast, limited, and reset between tasks. Long-term is outside storage that lasts across sessions."
+            },
+            {
+              "term": "FIFO (first in, first out)",
+              "meaning": "A simple rule: the oldest item leaves first, like a queue."
+            }
+          ],
+          "remember": [
+            "Errors add up across steps: 95% accuracy per step drops to about 60% after 10 steps.",
+            "Make a plan, validate it, and only then run it, so a bad plan wastes nothing.",
+            "Agents fail through invalid tools, wrong parameters, missed constraints, costly plans, or tools that give wrong results or are missing.",
+            "Log every tool call and its output. It is the best habit for debugging an agent."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>এজেন্ট (agent)</strong> শুধু কথা বলে না: কাজ শেষ করতে টুল ব্যবহার করে আর ধাপে ধাপে এগোয়। ধাপ আর টুল বাড়লে ভুলের সুযোগও বাড়ে, তাই প্ল্যান, যাচাই আর ভুল ট্র্যাক করা দরকার।",
+          "words": [
+            {
+              "term": "এজেন্ট (agent)",
+              "meaning": "যা কোনো পরিবেশ বুঝতে পারে এবং একগুচ্ছ টুল দিয়ে সেখানে কাজ করে।"
+            },
+            {
+              "term": "ফাংশন কলিং (function calling)",
+              "meaning": "মডেল API দিয়ে টুল ব্যবহার করা। টুলটি ঘোষণা করা হয়, আর মডেল ঠিক করে কখন ডাকবে।"
+            },
+            {
+              "term": "রাইট অ্যাকশন (write action)",
+              "meaning": "যে টুল শুধু ডেটা পড়ে না, কিছু বদলায়, যেমন ইমেইল পাঠানো।"
+            },
+            {
+              "term": "প্ল্যান (plan)",
+              "meaning": "লক্ষ্যে পৌঁছানোর জন্য কাজের তালিকা। চালানোর আগে যাচাই করাই ভালো।"
+            },
+            {
+              "term": "রিফ্লেকশন (reflection)",
+              "meaning": "এজেন্ট নিজে বা আলাদা কেউ প্ল্যান বা ফল দেখে সমস্যা ধরিয়ে দেয়।"
+            },
+            {
+              "term": "শর্ট-টার্ম ও লং-টার্ম মেমরি (short-term memory, long-term memory)",
+              "meaning": "শর্ট-টার্ম হলো কনটেক্সট উইন্ডো: দ্রুত, সীমিত, কাজ শেষে মুছে যায়। লং-টার্ম হলো বাইরের স্টোরেজ, যা সেশন পেরিয়েও থাকে।"
+            },
+            {
+              "term": "FIFO (first in, first out)",
+              "meaning": "সহজ নিয়ম: সবচেয়ে পুরনোটা আগে বেরিয়ে যায়, লাইনের মতো।"
+            }
+          ],
+          "remember": [
+            "ভুল ধাপে ধাপে জমে: প্রতি ধাপে ৯৫% নির্ভুলতা ১০ ধাপ পরে প্রায় ৬০% হয়ে যায়।",
+            "আগে প্ল্যান বানান, যাচাই করুন, তারপর চালান, যাতে ভুল প্ল্যানে কিছু নষ্ট না হয়।",
+            "এজেন্ট ব্যর্থ হয় অবৈধ টুল, ভুল প্যারামিটার, শর্ত মিস, অতিরিক্ত খরচের প্ল্যান, বা ভুল ফল দেওয়া কিংবা না-থাকা টুলের কারণে।",
+            "প্রতিটি টুল কল আর তার আউটপুট লগ করুন। ডিবাগের জন্য এটাই সবচেয়ে কাজের অভ্যাস।"
+          ]
+        }
       },
       "body": [
         {
@@ -2008,6 +2800,86 @@
       "bn": {
         "title": "ফাইন-টিউনিং: কখন করবেন, আর কত মেমরি লাগে",
         "sub": "কখন fine-tuning দরকার, আর এর পেছনের মেমরি গণিত ও quantization"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>Finetuning</strong> is extra training on your own data, on top of a model that is already trained. It costs data, compute, and ML expertise, so usually try prompting (and RAG for missing facts) first.",
+          "words": [
+            {
+              "term": "Finetuning",
+              "meaning": "Extra training of an already-trained model on your own task data, to move what it knows toward your task."
+            },
+            {
+              "term": "Supervised finetuning",
+              "meaning": "Training on pairs of input and the right output, so the model follows instructions and uses the right format."
+            },
+            {
+              "term": "Preference finetuning",
+              "meaning": "Training on comparisons of a better and a worse response, so the model writes answers people prefer."
+            },
+            {
+              "term": "Forward pass and backward pass",
+              "meaning": "The forward pass computes the output. The backward pass works out how wrong each parameter was (its gradient) and adjusts it."
+            },
+            {
+              "term": "Trainable parameter",
+              "meaning": "A model value that training is allowed to change. It needs extra memory for its gradient and extra values the update rule (optimizer) keeps."
+            },
+            {
+              "term": "Quantization",
+              "meaning": "Storing each value in fewer bits. It saves memory and often speeds things up, but loses some precision."
+            },
+            {
+              "term": "Mixed precision",
+              "meaning": "Training in low precision while keeping sensitive values, like gradients, in a higher-precision format."
+            }
+          ],
+          "remember": [
+            "Finetuning is for form; RAG is for facts.",
+            "Try prompting, more examples, and RAG before finetuning.",
+            "Full finetuning of a 16-bit 7B model needs about 56 GB, versus about 14 GB just to load the weights for inference.",
+            "Fewer trainable parameters or fewer bits per value both cut the memory bill."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ফাইন-টিউনিং (finetuning)</strong> মানে আগে থেকে ট্রেইন করা মডেলকে আপনার নিজের ডেটায় বাড়তি ট্রেনিং দেওয়া। এতে ডেটা, কম্পিউট আর ML দক্ষতা লাগে, তাই সাধারণত আগে প্রম্পটিং (আর তথ্যের ঘাটতিতে RAG) চেষ্টা করুন।",
+          "words": [
+            {
+              "term": "ফাইন-টিউনিং (finetuning)",
+              "meaning": "আগে ট্রেইন করা মডেলকে নিজের কাজের ডেটায় বাড়তি ট্রেনিং দেওয়া, যাতে তার জ্ঞান আপনার কাজের দিকে ঝোঁকে।"
+            },
+            {
+              "term": "সুপারভাইজড ফাইন-টিউনিং (supervised finetuning)",
+              "meaning": "ইনপুট আর সঠিক আউটপুটের জোড়া দিয়ে ট্রেনিং, যাতে মডেল নির্দেশ মানে আর ঠিক ফরম্যাটে লেখে।"
+            },
+            {
+              "term": "প্রেফারেন্স ফাইন-টিউনিং (preference finetuning)",
+              "meaning": "একটি ভালো আর একটি খারাপ উত্তরের তুলনা দিয়ে ট্রেনিং, যাতে মডেল মানুষের পছন্দের উত্তর লেখে।"
+            },
+            {
+              "term": "ফরওয়ার্ড পাস আর ব্যাকওয়ার্ড পাস (forward pass, backward pass)",
+              "meaning": "ফরওয়ার্ড পাসে আউটপুট বের হয়। ব্যাকওয়ার্ড পাসে প্রতিটি প্যারামিটার কতটা ভুল ছিল (তার গ্রেডিয়েন্ট) হিসাব করে তা ঠিক করা হয়।"
+            },
+            {
+              "term": "ট্রেইনেবল প্যারামিটার (trainable parameter)",
+              "meaning": "মডেলের যে মান ট্রেনিংয়ে বদলানো যায়। এর গ্রেডিয়েন্ট আর আপডেটের নিয়ম (অপটিমাইজার) যে বাড়তি মান রাখে, তার জন্য বাড়তি মেমরি লাগে।"
+            },
+            {
+              "term": "কোয়ান্টাইজেশন (quantization)",
+              "meaning": "প্রতিটি মান কম বিটে রাখা। মেমরি বাঁচে, প্রায়ই গতিও বাড়ে, কিন্তু কিছুটা প্রিসিশন কমে।"
+            },
+            {
+              "term": "মিক্সড প্রিসিশন (mixed precision)",
+              "meaning": "কম প্রিসিশনে ট্রেনিং করা, কিন্তু গ্রেডিয়েন্টের মতো সংবেদনশীল মান বেশি প্রিসিশনে রাখা।"
+            }
+          ],
+          "remember": [
+            "ফাইন-টিউনিং ফর্মের জন্য; RAG তথ্যের জন্য।",
+            "ফাইন-টিউনিংয়ের আগে প্রম্পটিং, বেশি উদাহরণ আর RAG চেষ্টা করুন।",
+            "১৬-বিটের ৭B মডেলের পুরো ফাইন-টিউনিংয়ে প্রায় ৫৬ GB লাগে, আর ইনফারেন্সের জন্য শুধু ওয়েট লোড করতে লাগে প্রায় ১৪ GB।",
+            "ট্রেইনেবল প্যারামিটার কমালে বা প্রতিটি মান কম বিটে রাখলে মেমরির খরচ কমে।"
+          ]
+        }
       },
       "body": [
         {
@@ -2202,6 +3074,86 @@
         "title": "ফাইন-টিউনিং: PEFT, LoRA, মডেল মার্জিং আর কৌশল",
         "sub": "PEFT, LoRA, মডেল মার্জিং আর প্র্যাকটিক্যাল কৌশল দিয়ে foundation model কাস্টমাইজ করা"
       },
+      "basics": {
+        "en": {
+          "idea": "Updating a whole model takes a lot of memory. <strong>PEFT</strong> methods like LoRA train only a tiny add-on, and model merging joins finetuned models into one.",
+          "words": [
+            {
+              "term": "Parameter-efficient finetuning (PEFT)",
+              "meaning": "Finetuning methods that aim to match the quality of full finetuning (updating every parameter) with far fewer trainable parameters, by adding small trainable modules (adapters)."
+            },
+            {
+              "term": "LoRA (Low-Rank Adaptation)",
+              "meaning": "The most used PEFT method. For a weight matrix, it trains two small matrices whose product approximates the update, and leaves the base weights alone."
+            },
+            {
+              "term": "QLoRA",
+              "meaning": "LoRA with the base model stored in 4-bit precision. It lets one consumer-grade GPU finetune very large models."
+            },
+            {
+              "term": "Model merging",
+              "meaning": "Combining several finetuned models into one, without necessarily needing a GPU."
+            },
+            {
+              "term": "Catastrophic forgetting",
+              "meaning": "When training on tasks one after another makes the model forget the earlier tasks."
+            },
+            {
+              "term": "Learning rate",
+              "meaning": "The step size of training. Too high and training turns unstable; too low and it crawls."
+            },
+            {
+              "term": "Overfitting",
+              "meaning": "Fitting training data so closely that the model does worse on new data. It shows when held-out (validation) error rises while training error falls."
+            }
+          ],
+          "remember": [
+            "For a weight matrix, LoRA trains only two small matrices, so far fewer values are trained and memory drops.",
+            "Many LoRA adapters can share one base model, for per-customer or per-task models.",
+            "Merging lets you finetune each task separately, then combine the results into one multi-skilled model.",
+            "Start with an adapter like LoRA. Move to full finetuning only with enough data and a need for extra quality."
+          ]
+        },
+        "bn": {
+          "idea": "পুরো মডেল আপডেট করতে অনেক মেমরি লাগে। LoRA-র মতো <strong>PEFT</strong> পদ্ধতি শুধু একটি ছোট অ্যাড-অন ট্রেইন করে, আর মডেল মার্জিং ফাইন-টিউন করা মডেলগুলোকে এক করে।",
+          "words": [
+            {
+              "term": "প্যারামিটার-এফিশিয়েন্ট ফাইন-টিউনিং (PEFT)",
+              "meaning": "ফাইন-টিউনিংয়ের এমন পদ্ধতি, যা ছোট ট্রেইনেবল মডিউল (অ্যাডাপ্টার) যোগ করে অনেক কম ট্রেইনেবল প্যারামিটারে পুরো ফাইন-টিউনিংয়ের (সব প্যারামিটার আপডেট করা) মানে পৌঁছানোর লক্ষ্য রাখে।"
+            },
+            {
+              "term": "LoRA (Low-Rank Adaptation)",
+              "meaning": "সবচেয়ে চালু PEFT পদ্ধতি। একটি ওয়েট ম্যাট্রিক্সের জন্য দুটি ছোট ম্যাট্রিক্স ট্রেইন করে, যাদের গুণফল বদলের মোটামুটি রূপ দেয়; মূল ওয়েট ছোঁয়া হয় না।"
+            },
+            {
+              "term": "QLoRA",
+              "meaning": "যে LoRA-তে বেস মডেল ৪-বিট প্রিসিশনে রাখা হয়। এতে একটি সাধারণ GPU-তে খুব বড় মডেল ফাইন-টিউন করা যায়।"
+            },
+            {
+              "term": "মডেল মার্জিং (model merging)",
+              "meaning": "ফাইন-টিউন করা একাধিক মডেলকে একটিতে মেলানো, GPU ছাড়াও সম্ভব।"
+            },
+            {
+              "term": "ক্যাটাস্ট্রফিক ফরগেটিং (catastrophic forgetting)",
+              "meaning": "একের পর এক কাজে ট্রেনিং করলে মডেল আগের কাজগুলো ভুলে যায়।"
+            },
+            {
+              "term": "লার্নিং রেট (learning rate)",
+              "meaning": "ট্রেনিংয়ের ধাপের মাপ। বেশি হলে ট্রেনিং অস্থির হয়; কম হলে খুব ধীরে এগোয়।"
+            },
+            {
+              "term": "ওভারফিটিং (overfitting)",
+              "meaning": "মডেল ট্রেনিং ডেটার সাথে এত বেশি মিলে যায় যে নতুন ডেটায় খারাপ করে। আলাদা রাখা (ভ্যালিডেশন) ডেটায় ভুল বাড়ে অথচ ট্রেনিংয়ের ভুল কমে, তখন এটা ধরা পড়ে।"
+            }
+          ],
+          "remember": [
+            "একটি ওয়েট ম্যাট্রিক্সের জন্য LoRA শুধু দুটি ছোট ম্যাট্রিক্স ট্রেইন করে, তাই অনেক কম মান ট্রেইন হয় আর মেমরি কমে।",
+            "একটি বেস মডেলে অনেক LoRA অ্যাডাপ্টার চলতে পারে, প্রতি কাস্টমার বা কাজের জন্য আলাদা মডেল হিসেবে।",
+            "মার্জিংয়ে প্রতিটি কাজ আলাদা ফাইন-টিউন করে পরে এক বহুমুখী মডেলে মেলানো যায়।",
+            "শুরুতে LoRA-র মতো অ্যাডাপ্টার ব্যবহার করুন। যথেষ্ট ডেটা থাকলে আর বাড়তি মান লাগলে তবেই পুরো ফাইন-টিউনিং করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2342,6 +3294,86 @@
       "bn": {
         "title": "ডেটাসেট ইঞ্জিনিয়ারিং",
         "sub": "ফাইন-টিউন করা মডেলের মান যে ডেটার ওপর নির্ভর করে, সেই ডেটা কিউরেট, সিন্থেসাইজ আর প্রসেস করার পদ্ধতি"
+      },
+      "basics": {
+        "en": {
+          "idea": "No amount of compute or skill can fix bad data. <strong>Dataset engineering</strong> means building data that is good, covers real use, and is big enough, within your budget.",
+          "words": [
+            {
+              "term": "Data-centric AI",
+              "meaning": "Keeping the model fixed and improving results by improving the data."
+            },
+            {
+              "term": "Data coverage",
+              "meaning": "How well your training data spans the range of inputs the model will see in real use. Also called data diversity."
+            },
+            {
+              "term": "Data synthesis",
+              "meaning": "Making data that mimics real data without being built from one specific real example. It can be made with rules, simulation, or an AI model."
+            },
+            {
+              "term": "Reverse instruction",
+              "meaning": "Start from good existing text, such as a book chapter, and ask the model to write the instruction that would have produced it."
+            },
+            {
+              "term": "Model collapse",
+              "meaning": "A model gets worse over generations when it is trained again and again on AI-made data, as rare patterns fade."
+            },
+            {
+              "term": "Model distillation",
+              "meaning": "Training a small student model to imitate a large teacher model, usually on data the teacher made."
+            },
+            {
+              "term": "Deduplication",
+              "meaning": "Removing exact and near-duplicate examples from the data."
+            }
+          ],
+          "remember": [
+            "A few thousand careful examples can match or beat hundreds of thousands of messy ones.",
+            "To judge how much data you need, finetune on 25%, 50%, and 100% of it and plot the results.",
+            "Synthetic data still needs checking: run code tests, use an AI judge, or filter with simple rules.",
+            "Before training, inspect, deduplicate, clean, and format the data to match what the target model expects."
+          ]
+        },
+        "bn": {
+          "idea": "কোনো কম্পিউট বা দক্ষতা দিয়েই খারাপ ডেটা ঠিক করা যায় না। <strong>ডেটাসেট ইঞ্জিনিয়ারিং</strong> মানে বাজেটের মধ্যে এমন ডেটা বানানো, যা ভালোমানের, বাস্তব ব্যবহারের সব দিক ছোঁয়, আর যথেষ্ট বড়।",
+          "words": [
+            {
+              "term": "ডেটা-সেন্ট্রিক AI (data-centric AI)",
+              "meaning": "মডেল একই রেখে ডেটা ভালো করে ফল ভালো করা।"
+            },
+            {
+              "term": "ডেটা কভারেজ (data coverage)",
+              "meaning": "বাস্তবে মডেল যত ধরনের ইনপুট পাবে, আপনার ট্রেনিং ডেটা তার কতটা ছুঁয়ে আছে। একে data diversity-ও বলে।"
+            },
+            {
+              "term": "ডেটা সিন্থেসিস (data synthesis)",
+              "meaning": "কোনো একটি নির্দিষ্ট আসল উদাহরণ থেকে তৈরি না করে আসল ডেটার মতো ডেটা বানানো। এটা নিয়ম, সিমুলেশন বা একটি AI মডেল দিয়ে বানানো যায়।"
+            },
+            {
+              "term": "রিভার্স ইনস্ট্রাকশন (reverse instruction)",
+              "meaning": "বইয়ের একটি অধ্যায়ের মতো ভালো লেখা নিয়ে শুরু করুন, আর মডেলকে বলুন সেই লেখা তৈরি করতে পারে এমন ইনস্ট্রাকশন লিখতে।"
+            },
+            {
+              "term": "মডেল কোলাপ্স (model collapse)",
+              "meaning": "বারবার AI-র বানানো ডেটায় ট্রেনিং করালে মডেল প্রজন্মের পর প্রজন্মে খারাপ হয়, কারণ বিরল প্যাটার্ন মিলিয়ে যায়।"
+            },
+            {
+              "term": "মডেল ডিস্টিলেশন (model distillation)",
+              "meaning": "একটি ছোট student মডেলকে বড় teacher মডেলের নকল করতে শেখানো, সাধারণত teacher-এর বানানো ডেটা দিয়ে।"
+            },
+            {
+              "term": "ডিডুপ্লিকেশন (deduplication)",
+              "meaning": "হুবহু এক বা প্রায় একই রকম উদাহরণ ডেটা থেকে সরিয়ে ফেলা।"
+            }
+          ],
+          "remember": [
+            "কয়েক হাজার যত্নে লেখা উদাহরণ কয়েক লাখ এলোমেলো উদাহরণের সমান বা তার চেয়ে ভালো ফল দিতে পারে।",
+            "কত ডেটা লাগবে বুঝতে ডেটার ২৫%, ৫০% আর ১০০% দিয়ে ফাইন-টিউন করে ফল প্লট করুন।",
+            "synthetic ডেটাও যাচাই করতে হয়: কোড টেস্ট চালান, AI judge ব্যবহার করুন, বা সহজ নিয়মে ছেঁকে নিন।",
+            "ট্রেনিংয়ের আগে ডেটা inspect, deduplicate, clean আর format করুন, যাতে টার্গেট মডেলের চাহিদার সাথে মেলে।"
+          ]
+        }
       },
       "body": [
         {
@@ -2697,6 +3729,96 @@
         "title": "ইনফারেন্স অপ্টিমাইজেশন: bottleneck, মেট্রিক আর accelerator",
         "sub": "ট্রেইন করা মডেল কেন ধীর বা দামি চলে: bottleneck, মেট্রিক আর hardware"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Inference</strong> means running a trained model to answer real requests. If it is too slow or too costly, people cannot use it. So you need to know what slows it down and how to measure it.",
+          "words": [
+            {
+              "term": "Compute-bound",
+              "meaning": "A task limited by how many calculations the hardware can do. A chip with more raw calculating power speeds it up."
+            },
+            {
+              "term": "Memory bandwidth-bound",
+              "meaning": "A task limited by how fast data moves between memory and the processor, not by calculation."
+            },
+            {
+              "term": "Prefill and decode",
+              "meaning": "Prefill reads the whole prompt at once. Decode then writes the answer one token at a time, reloading the model's weights each step."
+            },
+            {
+              "term": "Throughput",
+              "meaning": "How much the service produces: output tokens per second across all requests. It is directly tied to compute cost."
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "How long until the first token of the answer appears. It depends on prefill and input length."
+            },
+            {
+              "term": "TPOT (time per output token)",
+              "meaning": "How quickly each later token arrives. It depends on decode."
+            },
+            {
+              "term": "Goodput",
+              "meaning": "Requests per second that meet a latency target, not just requests finished."
+            },
+            {
+              "term": "Accelerator",
+              "meaning": "A chip built for one kind of workload. GPUs lead in AI because they pack thousands of smaller cores."
+            }
+          ],
+          "remember": [
+            "Optimization can target the model, the hardware, or the service, and most systems combine more than one.",
+            "Prefill is compute-bound. Decode is memory bandwidth-bound, and it dominates response time for long outputs.",
+            "Total latency is roughly TTFT plus TPOT times the number of output tokens.",
+            "Latency is a spread, not one number. Teams report percentiles such as p50, p90, p95, and p99.",
+            "Compare chips on computational capability, memory size and bandwidth, and power consumption."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ইনফারেন্স (inference)</strong> মানে ট্রেইন করা মডেল চালিয়ে আসল রিকোয়েস্টের উত্তর দেওয়া। এটা খুব ধীর বা খুব খরচের হলে মানুষ ব্যবহার করতে পারে না। তাই কী ধীর করে আর কীভাবে মাপতে হয়, জানা দরকার।",
+          "words": [
+            {
+              "term": "কম্পিউট-বাউন্ড (compute-bound)",
+              "meaning": "যে কাজ আটকে থাকে হার্ডওয়্যার কতগুলো হিসাব করতে পারে তার ওপর। বেশি হিসাবের ক্ষমতার চিপ এটা দ্রুত করে।"
+            },
+            {
+              "term": "মেমোরি ব্যান্ডউইথ-বাউন্ড (memory bandwidth-bound)",
+              "meaning": "যে কাজ আটকে থাকে মেমোরি আর প্রসেসরের মধ্যে ডেটা কত দ্রুত যায় তার ওপর, হিসাবের ওপর নয়।"
+            },
+            {
+              "term": "প্রিফিল আর ডিকোড (prefill, decode)",
+              "meaning": "প্রিফিল পুরো প্রম্পট একবারে পড়ে। ডিকোড তারপর একবারে একটি টোকেন করে উত্তর লেখে, প্রতি ধাপে মডেলের ওয়েট আবার লোড করে।"
+            },
+            {
+              "term": "থ্রুপুট (throughput)",
+              "meaning": "সার্ভিস কতটা তৈরি করে: সব রিকোয়েস্ট মিলিয়ে প্রতি সেকেন্ডে কতগুলো আউটপুট টোকেন। এটা সরাসরি কম্পিউটের খরচের সাথে জড়িত।"
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "উত্তরের প্রথম টোকেন আসতে কত সময় লাগে। এটা প্রিফিল আর ইনপুটের দৈর্ঘ্যের ওপর নির্ভর করে।"
+            },
+            {
+              "term": "TPOT (time per output token)",
+              "meaning": "পরের প্রতিটি টোকেন কত দ্রুত আসে। এটা ডিকোডের ওপর নির্ভর করে।"
+            },
+            {
+              "term": "গুডপুট (goodput)",
+              "meaning": "প্রতি সেকেন্ডে কতগুলো রিকোয়েস্ট latency লক্ষ্য পূরণ করে। শুধু শেষ হওয়া রিকোয়েস্ট গোনা হয় না।"
+            },
+            {
+              "term": "অ্যাক্সিলারেটর (accelerator)",
+              "meaning": "একটি বিশেষ ধরনের কাজের জন্য বানানো চিপ। GPU-তে হাজার হাজার ছোট কোর থাকে, তাই AI-তে GPU এগিয়ে।"
+            }
+          ],
+          "remember": [
+            "অপ্টিমাইজেশন হতে পারে মডেল, হার্ডওয়্যার বা সার্ভিসে, আর বেশিরভাগ সিস্টেম একাধিক স্তর মিলিয়ে ব্যবহার করে।",
+            "প্রিফিল compute-bound। ডিকোড memory bandwidth-bound, আর লম্বা আউটপুটে ডিকোডই বেশি সময় নেয়।",
+            "মোট latency মোটামুটি TTFT আর (TPOT × আউটপুট টোকেনের সংখ্যা) যোগ করলে পাওয়া যায়।",
+            "latency একটি সংখ্যা নয়, একটি বিস্তার। টিমগুলো p50, p90, p95, p99 এর মতো পারসেন্টাইল জানায়।",
+            "চিপ তুলনা করুন হিসাবের ক্ষমতা, মেমোরির আকার ও ব্যান্ডউইথ, আর বিদ্যুৎ খরচ দেখে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2895,6 +4017,86 @@
       "bn": {
         "title": "ইনফারেন্স অপ্টিমাইজেশন: মডেল আর সার্ভিস লেভেলের কৌশল",
         "sub": "ট্রেইন করা মডেলকে প্রোডাকশনে দ্রুত আর সস্তায় চালানো: compression, দ্রুত decoding, kernel, batching আর parallelism"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>Inference optimization</strong> makes a trained model faster and cheaper to run. You can shrink the model, speed up how it writes answers, or manage many requests better on the same hardware.",
+          "words": [
+            {
+              "term": "Pruning",
+              "meaning": "Removing or zeroing out the least useful parameters of a model so it becomes sparser. It is harder to do well."
+            },
+            {
+              "term": "Speculative decoding",
+              "meaning": "A small, fast draft model proposes several tokens. The large model checks them all in one pass and keeps the longest correct run."
+            },
+            {
+              "term": "KV cache",
+              "meaning": "A store of numbers the model computed for earlier tokens, so they are not redone each step. It can use a lot of memory."
+            },
+            {
+              "term": "Kernel",
+              "meaning": "Hardware-specific code for a repeated, performance-critical operation, such as matrix multiplication or attention."
+            },
+            {
+              "term": "Continuous batching",
+              "meaning": "Requests are grouped together. Each response returns the moment it finishes and a new request takes its place, so no capacity is wasted."
+            },
+            {
+              "term": "Prompt caching",
+              "meaning": "Text shared across requests, like a system prompt or a long document, is processed once and reused. This cuts latency and cost."
+            },
+            {
+              "term": "Tensor parallelism",
+              "meaning": "Splitting single operations, such as a matrix multiply, across several devices so a large model fits and runs faster."
+            }
+          ],
+          "remember": [
+            "Service-level techniques manage compute and memory across requests without touching output quality. Model-level changes can shift quality.",
+            "Decode is slow because it goes one token at a time. Speculative decoding checks guesses in parallel; parallel decoding breaks that chain.",
+            "The KV cache can dominate memory use, so attention redesigns and smarter cache management help.",
+            "Judge an inference provider's cost and speed together with its output quality, not alone."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>ইনফারেন্স অপ্টিমাইজেশন (inference optimization)</strong> ট্রেইন করা মডেলকে দ্রুত আর সস্তা করে চালায়। আপনি মডেল ছোট করতে পারেন, উত্তর লেখা দ্রুত করতে পারেন, বা একই হার্ডওয়্যারে অনেক রিকোয়েস্ট ভালোভাবে সামলাতে পারেন।",
+          "words": [
+            {
+              "term": "প্রুনিং (pruning)",
+              "meaning": "মডেলের সবচেয়ে কম কাজের প্যারামিটার সরিয়ে বা শূন্য করে মডেলকে ফাঁকা (sparse) করা। ভালোভাবে করা কঠিন।"
+            },
+            {
+              "term": "স্পেকুলেটিভ ডিকোডিং (speculative decoding)",
+              "meaning": "একটি ছোট, দ্রুত draft মডেল কয়েকটি টোকেন প্রস্তাব করে। বড় মডেল এক পাসে সব যাচাই করে সবচেয়ে লম্বা সঠিক অংশ রাখে।"
+            },
+            {
+              "term": "KV cache",
+              "meaning": "আগের টোকেনগুলোর জন্য মডেলের হিসাব করা সংখ্যার ভান্ডার, যাতে প্রতি ধাপে আবার হিসাব করতে না হয়। এটা অনেক মেমোরি নিতে পারে।"
+            },
+            {
+              "term": "কার্নেল (kernel)",
+              "meaning": "বারবার চলা, পারফরম্যান্স-সংবেদনশীল কাজের জন্য হার্ডওয়্যার-নির্দিষ্ট কোড, যেমন ম্যাট্রিক্স গুণ বা attention।"
+            },
+            {
+              "term": "কন্টিনিউয়াস ব্যাচিং (continuous batching)",
+              "meaning": "রিকোয়েস্টগুলো একসাথে করা হয়। একটির উত্তর শেষ হলেই সেটা ফেরত যায় আর নতুন রিকোয়েস্ট জায়গা নেয়, তাই ক্ষমতা নষ্ট হয় না।"
+            },
+            {
+              "term": "প্রম্পট ক্যাশিং (prompt caching)",
+              "meaning": "একাধিক রিকোয়েস্টে এক থাকা লেখা, যেমন system prompt বা লম্বা ডকুমেন্ট, একবার প্রসেস করে আবার ব্যবহার করা। এতে latency আর খরচ কমে।"
+            },
+            {
+              "term": "টেনসর প্যারালেলিজম (tensor parallelism)",
+              "meaning": "ম্যাট্রিক্স গুণের মতো একেকটি অপারেশন কয়েকটি ডিভাইসে ভাগ করা, যাতে বড় মডেল ধরে আর দ্রুত চলে।"
+            }
+          ],
+          "remember": [
+            "সার্ভিস লেভেলের কৌশল আউটপুট কোয়ালিটি না ছুঁয়ে কম্পিউট আর মেমোরি সামলায়। মডেল লেভেলের পরিবর্তনে কোয়ালিটি বদলাতে পারে।",
+            "ডিকোড ধীর, কারণ এটা একবারে একটি টোকেন করে চলে। স্পেকুলেটিভ ডিকোডিং অনুমানগুলো একসাথে যাচাই করে; প্যারালাল ডিকোডিং সেই শিকলটাই ভাঙে।",
+            "KV cache মেমোরির বড় অংশ নিতে পারে, তাই attention-এর নতুন নকশা আর ভালো cache ম্যানেজমেন্ট কাজে আসে।",
+            "কোনো inference provider-এর খরচ আর গতি আউটপুট কোয়ালিটির সাথে মিলিয়ে বিচার করুন, আলাদাভাবে নয়।"
+          ]
+        }
       },
       "body": [
         {
@@ -3096,6 +4298,86 @@
         "title": "AI ইঞ্জিনিয়ারিং আর্কিটেকচার এবং ইউজার ফিডব্যাক: প্ল্যাটফর্ম তৈরি",
         "sub": "একটা সিঙ্গেল মডেল কলের অ্যাপ কীভাবে ধাপে ধাপে ফুল প্ল্যাটফর্ম হয়ে ওঠে"
       },
+      "basics": {
+        "en": {
+          "idea": "A real <strong>AI platform</strong> grows from a single model call, one layer at a time. Each layer solves a specific pain point, not a wish for complexity.",
+          "words": [
+            {
+              "term": "Context construction",
+              "meaning": "Feeding the model the information it needs for a query, through retrieval (finding relevant data) and tool use (web search, SQL, APIs)."
+            },
+            {
+              "term": "Guardrails",
+              "meaning": "Checks that protect the system and the user. Input guardrails stop bad inputs; output guardrails catch bad answers after generation."
+            },
+            {
+              "term": "Router",
+              "meaning": "A small, fast part that decides where each query goes: a cheap model, a specialized model, or a human."
+            },
+            {
+              "term": "Gateway",
+              "meaning": "One unified interface between an application and all the models it uses. It centralizes access control, usage monitoring, cost limits, and fallback."
+            },
+            {
+              "term": "Exact caching",
+              "meaning": "Reusing a stored result only when the query is identical."
+            },
+            {
+              "term": "Semantic caching",
+              "meaning": "Reusing a stored answer when a query is only similar. It compares embeddings, number lists that capture meaning, against a similarity threshold."
+            },
+            {
+              "term": "Write action",
+              "meaning": "An action that changes something in the real world, such as sending an email, placing an order, or updating a database."
+            }
+          ],
+          "remember": [
+            "Layers are added one at a time: context, guardrails, router and gateway, caches, then agent patterns. Each solves a real problem.",
+            "Guardrails add latency, and a system can be too safe. Track wrong refusals of safe requests, not only security failures.",
+            "Exact caching can serve one user's personalized response to someone else. A bad semantic threshold returns a plausible wrong answer.",
+            "Write actions make a system more capable but riskier, because a mistake becomes a real-world side effect."
+          ]
+        },
+        "bn": {
+          "idea": "একটি আসল <strong>AI প্ল্যাটফর্ম</strong> একটিমাত্র মডেল কল থেকে শুরু হয়ে একে একে স্তর যোগ করে বড় হয়। প্রতিটি স্তর একটি নির্দিষ্ট সমস্যা মেটায়, জটিলতার শখে যোগ হয় না।",
+          "words": [
+            {
+              "term": "কনটেক্সট কনস্ট্রাকশন (context construction)",
+              "meaning": "retrieval (দরকারি ডেটা খোঁজা) আর tool use (web search, SQL, API) দিয়ে মডেলকে প্রশ্নের জন্য দরকারি তথ্য দেওয়া।"
+            },
+            {
+              "term": "গার্ডরেইল (guardrails)",
+              "meaning": "সিস্টেম আর ইউজারকে বাঁচানোর চেক। input guardrail খারাপ ইনপুট ঠেকায়; output guardrail তৈরি হওয়ার পর খারাপ উত্তর ধরে।"
+            },
+            {
+              "term": "রাউটার (router)",
+              "meaning": "ছোট, দ্রুত একটি অংশ, যে ঠিক করে প্রতিটি query কোথায় যাবে: সস্তা মডেল, বিশেষায়িত মডেল, নাকি মানুষ।"
+            },
+            {
+              "term": "গেটওয়ে (gateway)",
+              "meaning": "অ্যাপ্লিকেশন আর তার ব্যবহার করা সব মডেলের মাঝের একটিমাত্র ইন্টারফেস। এটা access control, ব্যবহার মনিটরিং, খরচের সীমা আর fallback এক জায়গায় রাখে।"
+            },
+            {
+              "term": "এক্স্যাক্ট ক্যাশিং (exact caching)",
+              "meaning": "query হুবহু এক হলেই আগে জমানো ফল আবার ব্যবহার করা।"
+            },
+            {
+              "term": "সেমান্টিক ক্যাশিং (semantic caching)",
+              "meaning": "query শুধু কাছাকাছি হলেও জমানো উত্তর আবার ব্যবহার করা। এটা embedding, মানে অর্থ ধরে রাখা সংখ্যার তালিকা, সিমিলারিটি threshold-এর সাথে মিলিয়ে দেখে।"
+            },
+            {
+              "term": "রাইট অ্যাকশন (write action)",
+              "meaning": "যে কাজ বাস্তব জগতে কিছু বদলায়, যেমন ইমেইল পাঠানো, অর্ডার বসানো, বা ডেটাবেস আপডেট করা।"
+            }
+          ],
+          "remember": [
+            "স্তরগুলো একে একে যোগ হয়: context, guardrails, router আর gateway, cache, তারপর agent pattern। প্রতিটি একটি আসল সমস্যা মেটায়।",
+            "গার্ডরেইল ল্যাটেন্সি বাড়ায়, আর সিস্টেম অতিরিক্ত নিরাপদও হয়ে যেতে পারে। শুধু সিকিউরিটি ব্যর্থতা নয়, নিরাপদ অনুরোধ ভুল করে ফিরিয়ে দেওয়াও মাপুন।",
+            "exact caching একজনের জন্য বানানো উত্তর অন্যজনকে দিয়ে ফেলতে পারে। ভুল semantic threshold বিশ্বাসযোগ্য দেখতে ভুল উত্তর দেয়।",
+            "write action সিস্টেমকে বেশি সক্ষম করে, কিন্তু ঝুঁকিও বাড়ায়, কারণ ভুল তখন বাস্তব জগতে প্রভাব ফেলে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -3279,6 +4561,88 @@
       "bn": {
         "title": "AI ইঞ্জিনিয়ারিং আর্কিটেকচার এবং ইউজার ফিডব্যাক: মনিটরিং আর ফিডব্যাক",
         "sub": "প্রোডাকশনে সিস্টেম মনিটর করা, component চেইন করা, আর ইউজাররা কীভাবে একে উন্নত হতে শেখায়"
+      },
+      "basics": {
+        "en": {
+          "idea": "Once an AI system is live, you need to see how it behaves and learn from its users. <strong>Observability</strong> shows where it breaks, and user feedback helps it improve, but that feedback is biased.",
+          "words": [
+            {
+              "term": "Observability",
+              "meaning": "Being able to work out what is happening inside a system from its logs and metrics, without writing new code just to find a problem."
+            },
+            {
+              "term": "Change failure rate (CFR)",
+              "meaning": "The share of deployments that need a fix or a rollback."
+            },
+            {
+              "term": "Trace",
+              "meaning": "The full path of one request, step by step, with timing and cost. It shows which step went wrong."
+            },
+            {
+              "term": "Drift",
+              "meaning": "An unnoticed change in how the system behaves or is used, such as users slowly changing how they phrase requests."
+            },
+            {
+              "term": "Orchestrator",
+              "meaning": "The part that connects all the components and sets the order of the steps."
+            },
+            {
+              "term": "Implicit feedback",
+              "meaning": "Feedback you infer from what a user does, such as regenerating an answer, instead of asking directly."
+            },
+            {
+              "term": "Degenerate feedback loop",
+              "meaning": "Popular outputs get shown more, get more clicks, and grow more popular, while outputs that are never shown get no chance."
+            }
+          ],
+          "remember": [
+            "Use traces to find exactly which step failed, with metrics and logs to spot and debug problems.",
+            "Watch for drift, including a model that changes silently behind an unchanged API.",
+            "Users give feedback through actions like regenerating or correcting. Make giving feedback nearly free for them.",
+            "Feedback is biased: leniency bias, position bias, and preference bias all distort it.",
+            "Starting without a heavy orchestration framework is often the better default."
+          ]
+        },
+        "bn": {
+          "idea": "একটি AI সিস্টেম চালু হলে দেখতে হয় সেটা কেমন আচরণ করছে, আর ইউজারদের কাছ থেকে শিখতে হয়। <strong>অবজারভেবিলিটি</strong> দেখায় কোথায় ভেঙেছে, আর ইউজার ফিডব্যাক সিস্টেমকে ভালো হতে সাহায্য করে, তবে সেই ফিডব্যাকে পক্ষপাত থাকে।",
+          "words": [
+            {
+              "term": "অবজারভেবিলিটি (observability)",
+              "meaning": "শুধু সমস্যা খুঁজতে নতুন কোড না লিখেও লগ আর মেট্রিক থেকে সিস্টেমের ভেতরে কী হচ্ছে বুঝতে পারা।"
+            },
+            {
+              "term": "চেঞ্জ ফেইলিওর রেট (change failure rate, CFR)",
+              "meaning": "মোট ডিপ্লয়মেন্টের মধ্যে যতগুলোতে ফিক্স বা রোলব্যাক লাগে, তার অনুপাত।"
+            },
+            {
+              "term": "ট্রেস (trace)",
+              "meaning": "একটি রিকোয়েস্টের পুরো পথ, ধাপে ধাপে, সময় আর খরচসহ। এতে বোঝা যায় কোন ধাপে সমস্যা হয়েছে।"
+            },
+            {
+              "term": "ড্রিফট (drift)",
+              "meaning": "সিস্টেমের আচরণ বা ব্যবহারে এমন পরিবর্তন যা কেউ খেয়াল করে না, যেমন ইউজাররা ধীরে ধীরে অনুরোধের ভাষা বদলে ফেলে।"
+            },
+            {
+              "term": "অর্কেস্ট্রেটর (orchestrator)",
+              "meaning": "যে অংশ সব কম্পোনেন্ট জুড়ে দেয় আর ধাপগুলোর ক্রম ঠিক করে।"
+            },
+            {
+              "term": "ইমপ্লিসিট ফিডব্যাক (implicit feedback)",
+              "meaning": "সরাসরি জিজ্ঞেস না করে ইউজারের কাজ থেকে বোঝা ফিডব্যাক, যেমন উত্তর আবার জেনারেট করানো।"
+            },
+            {
+              "term": "ডিজেনারেট ফিডব্যাক লুপ (degenerate feedback loop)",
+              "meaning": "জনপ্রিয় আউটপুট বেশি দেখানো হয়, বেশি ক্লিক পায়, আরও জনপ্রিয় হয়। যা কখনো দেখানো হয় না, সে সুযোগই পায় না।"
+            }
+          ],
+          "remember": [
+            "ঠিক কোন ধাপ ব্যর্থ হয়েছে তা খুঁজতে ট্রেস ব্যবহার করুন, আর সমস্যা ধরতে ও ডিবাগ করতে মেট্রিক ও লগ কাজে লাগান।",
+            "ড্রিফটের দিকে নজর রাখুন, এমনকি API একই থাকলেও মডেল চুপচাপ বদলে যেতে পারে।",
+            "ইউজার রিজেনারেট বা সংশোধনের মতো কাজের মাধ্যমে ফিডব্যাক দেয়। ফিডব্যাক দেওয়াটা প্রায় কোনো বাড়তি ঝামেলা ছাড়াই করে দিন।",
+            "ফিডব্যাকে পক্ষপাত থাকে: লেনিয়েন্সি বায়াস (leniency bias), পজিশন বায়াস (position bias) আর প্রেফারেন্স বায়াস (preference bias) সবই ফল বিকৃত করে।",
+            "ভারী অর্কেস্ট্রেশন ফ্রেমওয়ার্ক ছাড়া শুরু করাই প্রায়ই ভালো ডিফল্ট।"
+          ]
+        }
       },
       "body": [
         {

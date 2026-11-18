@@ -1,4 +1,4 @@
-type InlineTag = "span" | "p" | "div" | "li" | "td" | "th" | "h3" | "h4";
+type InlineTag = "span" | "p" | "div" | "li" | "td" | "th" | "h3" | "h4" | "dt" | "dd";
 
 type InlineProps = {
   html: string;

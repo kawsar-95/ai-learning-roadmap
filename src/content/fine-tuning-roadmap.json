@@ -18,6 +18,78 @@
         "title": "ফেজ ১ — ডেটার জন্য Python",
         "sub": "pandas, ডেটা হাইজিন, আর কেন ডেটাই আসল মুদ্রা (৩–৪ সপ্তাহ)"
       },
+      "basics": {
+        "en": {
+          "idea": "A fine-tuned model cannot be better than the data it sees. This phase teaches you to read and clean data with <strong>pandas</strong> before any AI work begins.",
+          "words": [
+            {
+              "term": "pandas",
+              "meaning": "A Python tool for reading, cleaning, and reshaping tables of data. Think of a spreadsheet with superpowers."
+            },
+            {
+              "term": "Data hygiene",
+              "meaning": "Keeping data clean: removing duplicates, fixing bad labels, and handling missing values."
+            },
+            {
+              "term": "Train / validation / test splits",
+              "meaning": "Dividing data into three parts: one to learn from, one to check progress, and one for the final test."
+            },
+            {
+              "term": "Class imbalance",
+              "meaning": "When some kinds of label have far more examples than others. This can skew training."
+            },
+            {
+              "term": "Hyperparameters",
+              "meaning": "Settings you choose before training starts, such as how fast the model learns."
+            },
+            {
+              "term": "Split leakage",
+              "meaning": "When the same or nearly the same examples land in both train and test. It makes your test results look better than they really are."
+            }
+          ],
+          "remember": [
+            "A fine-tuned model cannot be better than the data it is shown.",
+            "500 clean, correctly labeled examples usually beat 5,000 noisy ones.",
+            "Auditing your data pays off more than tuning hyperparameters.",
+            "Split data so similar examples do not leak across splits."
+          ]
+        },
+        "bn": {
+          "idea": "ফাইন-টিউন করা মডেল কখনো তার ডেটার চেয়ে ভালো হতে পারে না। AI-এর কাজ শুরুর আগে এই ধাপে <strong>pandas</strong> দিয়ে ডেটা পড়া আর পরিষ্কার করা শেখা হয়।",
+          "words": [
+            {
+              "term": "pandas",
+              "meaning": "ডেটার টেবিল পড়া, পরিষ্কার করা আর নতুন করে সাজানোর একটি Python টুল। ভাবুন সুপারপাওয়ারওয়ালা স্প্রেডশিট।"
+            },
+            {
+              "term": "ডেটা হাইজিন (data hygiene)",
+              "meaning": "ডেটা পরিষ্কার রাখার কাজ: ডুপ্লিকেট সরানো, ভুল লেবেল ঠিক করা আর মিসিং ভ্যালু সামলানো।"
+            },
+            {
+              "term": "ট্রেন/ভ্যালিডেশন/টেস্ট স্প্লিট (train / validation / test splits)",
+              "meaning": "ডেটাকে তিন ভাগ করা: একভাগ থেকে শেখা, একভাগে অগ্রগতি দেখা, আর একভাগ শেষ পরীক্ষার জন্য।"
+            },
+            {
+              "term": "ক্লাস ইমব্যালান্স (class imbalance)",
+              "meaning": "যখন কিছু ধরনের লেবেলের উদাহরণ অন্যগুলোর চেয়ে অনেক বেশি থাকে। এতে ট্রেইনিং একদিকে ঝুঁকে যেতে পারে।"
+            },
+            {
+              "term": "হাইপারপ্যারামিটার (hyperparameters)",
+              "meaning": "ট্রেইনিং শুরুর আগে আপনি যে সেটিংগুলো ঠিক করেন, যেমন মডেল কত দ্রুত শিখবে।"
+            },
+            {
+              "term": "স্প্লিট লিকেজ (split leakage)",
+              "meaning": "একই বা প্রায় একই উদাহরণ ট্রেন আর টেস্ট দুই দিকেই চলে যাওয়া। এতে টেস্টের ফল আসলের চেয়ে ভালো দেখায়।"
+            }
+          ],
+          "remember": [
+            "ফাইন-টিউন করা মডেল তাকে দেখানো ডেটার চেয়ে ভালো হতে পারে না।",
+            "৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো।",
+            "হাইপারপ্যারামিটার ঠিক করার চেয়ে ডেটা যাচাই করায় বেশি লাভ হয়।",
+            "ডেটা এমনভাবে ভাগ করুন, যাতে একই ধরনের উদাহরণ দুই ভাগে ফাঁস না হয়।"
+          ]
+        }
+      },
       "body": [
         { "type": "heading", "level": 3, "id": "s1-why-data-first", "html": "Why data comes first" },
         {
@@ -142,6 +214,78 @@
         "title": "ফেজ ২ — নিউরাল নেট কীভাবে ট্রেইন হয়",
         "sub": "loss, gradient, আর overfitting ধারণাগতভাবে, ম্যাথ প্রুফ হিসেবে নয় (৪–৬ সপ্তাহ)"
       },
+      "basics": {
+        "en": {
+          "idea": "Training is a loop: the model guesses, a number shows how wrong it was, and small steps shrink that number. You need this picture, not the hard math. Watch for <strong>overfitting</strong>.",
+          "words": [
+            {
+              "term": "Loss function",
+              "meaning": "A rule that gives one number for how wrong the model's current guess is."
+            },
+            {
+              "term": "Gradient descent",
+              "meaning": "Repeatedly nudging the model's weights, one small step at a time, to make the loss smaller."
+            },
+            {
+              "term": "Weights",
+              "meaning": "The numbers inside a model that it adjusts while it learns."
+            },
+            {
+              "term": "Epoch / batch / learning rate",
+              "meaning": "An epoch is one pass over the training data. A batch is a small group of examples. The learning rate is the step size."
+            },
+            {
+              "term": "Overfitting",
+              "meaning": "When a model memorizes its training examples instead of learning the subject. It looks perfect on practice and fails on new cases."
+            },
+            {
+              "term": "Validation curves",
+              "meaning": "Charts of the model's score on held-back validation data as training goes on. They give an early warning that overfitting has started."
+            }
+          ],
+          "remember": [
+            "Loss is one number for how wrong a guess was. Gradient descent nudges weights to shrink it.",
+            "Overfitting means memorizing training examples instead of generalizing.",
+            "Validation curves warn you early that overfitting has started.",
+            "Do small <code>PyTorch</code> exercises: train a tiny model on a toy dataset end to end."
+          ]
+        },
+        "bn": {
+          "idea": "ট্রেইনিং একটা চক্র: মডেল অনুমান করে, একটা সংখ্যা দেখায় অনুমান কতটা ভুল, আর ছোট ছোট ধাপে সেই সংখ্যা কমানো হয়। কঠিন ম্যাথ নয়, এই ছবিটা দরকার। সাবধান থাকুন <strong>ওভারফিটিং</strong> নিয়ে।",
+          "words": [
+            {
+              "term": "লস ফাংশন (loss function)",
+              "meaning": "একটা নিয়ম, যা মডেলের এই মুহূর্তের অনুমান কতটা ভুল তা একটা সংখ্যায় দেয়।"
+            },
+            {
+              "term": "গ্রেডিয়েন্ট ডিসেন্ট (gradient descent)",
+              "meaning": "loss কমাতে মডেলের ওয়েট বারবার, ছোট ছোট ধাপে সামান্য বদলানো।"
+            },
+            {
+              "term": "ওয়েট (weights)",
+              "meaning": "মডেলের ভেতরের সংখ্যা, যা সে শেখার সময় বদলায়।"
+            },
+            {
+              "term": "এপক / ব্যাচ / লার্নিং রেট (epoch, batch, learning rate)",
+              "meaning": "এপক মানে ট্রেইনিং ডেটার ওপর একবার পুরো ঘোরা। ব্যাচ হলো উদাহরণের ছোট দল। লার্নিং রেট হলো ধাপের মাপ।"
+            },
+            {
+              "term": "ওভারফিটিং (overfitting)",
+              "meaning": "মডেল বিষয়টা না শিখে ট্রেইনিং উদাহরণ মুখস্থ করে ফেলা। প্র্যাকটিসে নিখুঁত দেখায়, নতুন ক্ষেত্রে আটকে যায়।"
+            },
+            {
+              "term": "ভ্যালিডেশন কার্ভ (validation curves)",
+              "meaning": "ট্রেইনিং চলার সময় আলাদা করে রাখা ভ্যালিডেশন ডেটায় মডেলের স্কোরের চার্ট। ওভারফিটিং শুরু হলে এটা আগেভাগে সতর্ক করে।"
+            }
+          ],
+          "remember": [
+            "লস হলো অনুমান কতটা ভুল তার একটা সংখ্যা। গ্রেডিয়েন্ট ডিসেন্ট ওয়েট বদলে সেটা কমায়।",
+            "ওভারফিটিং মানে সাধারণভাবে শেখার বদলে ট্রেইনিং উদাহরণ মুখস্থ করা।",
+            "ভ্যালিডেশন কার্ভ আগেভাগে জানায় যে ওভারফিটিং শুরু হয়েছে।",
+            "ছোট <code>PyTorch</code> অনুশীলন করুন: খেলনা ডেটাসেটে একটা ছোট মডেল শুরু থেকে শেষ পর্যন্ত ট্রেইন করুন।"
+          ]
+        }
+      },
       "body": [
         { "type": "heading", "level": 3, "id": "s2-loss-gradients-overfitting", "html": "Loss, gradients, and overfitting" },
         {
@@ -264,6 +408,86 @@
       "bn": {
         "title": "ফেজ ৩ — ওপেন মডেল ফাইন-টিউনিং",
         "sub": "Hugging Face transformers/datasets, আর PEFT দিয়ে LoRA/QLoRA (৬–৮ সপ্তাহ)"
+      },
+      "basics": {
+        "en": {
+          "idea": "Instead of changing every weight in a model, you freeze it and train a small add-on. This method, <strong>LoRA</strong>, fits on a free GPU for small models.",
+          "words": [
+            {
+              "term": "<code>transformers</code>",
+              "meaning": "A library that loads the base model, the original model you start from, and its tokenizer. The tokenizer splits text into pieces the model reads."
+            },
+            {
+              "term": "<code>datasets</code>",
+              "meaning": "A library that loads your cleaned data and gets it ready so the model can use it."
+            },
+            {
+              "term": "PEFT",
+              "meaning": "A library for fine-tuning by training only a small number of weights instead of all of them."
+            },
+            {
+              "term": "LoRA",
+              "meaning": "A method that freezes the base model and trains a small add-on of extra weights beside it."
+            },
+            {
+              "term": "QLoRA",
+              "meaning": "LoRA on a 4-bit quantized base model. It needs the least GPU memory."
+            },
+            {
+              "term": "Full fine-tune",
+              "meaning": "Updating every weight in the model. It needs a large GPU."
+            },
+            {
+              "term": "Quantized",
+              "meaning": "Stored with fewer bits per number, so the model takes less memory."
+            }
+          ],
+          "remember": [
+            "LoRA freezes the base model and trains a small add-on. QLoRA does this on a 4-bit model.",
+            "A full fine-tune trains every weight, which is out of reach on a free GPU for most models.",
+            "A free Colab GPU is generally enough for small models, roughly 1–3B parameters.",
+            "These libraries change fast. Follow current official docs, not an old tutorial."
+          ]
+        },
+        "bn": {
+          "idea": "মডেলের প্রতিটা ওয়েট বদলানোর বদলে মডেলটা ফ্রিজ করে একটা ছোট অতিরিক্ত অংশ ট্রেইন করা হয়। এই পদ্ধতি <strong>LoRA</strong>, ছোট মডেলের জন্য ফ্রি GPU-তেই চলে।",
+          "words": [
+            {
+              "term": "<code>transformers</code>",
+              "meaning": "যে লাইব্রেরি বেস মডেল, মানে যে মূল মডেল থেকে শুরু করছেন, আর তার টোকেনাইজার লোড করে। টোকেনাইজার লেখাকে মডেলের পড়ার মতো টুকরোয় ভাগ করে।"
+            },
+            {
+              "term": "<code>datasets</code>",
+              "meaning": "যে লাইব্রেরি আপনার পরিষ্কার করা ডেটা লোড করে আর তৈরি করে দেয়, যাতে মডেল তা ব্যবহার করতে পারে।"
+            },
+            {
+              "term": "PEFT",
+              "meaning": "এমন একটি লাইব্রেরি, যাতে সব ওয়েটের বদলে শুধু অল্প কিছু ওয়েট ট্রেইন করে ফাইন-টিউন করা হয়।"
+            },
+            {
+              "term": "LoRA",
+              "meaning": "যে পদ্ধতিতে বেস মডেল ফ্রিজ থাকে আর পাশে অতিরিক্ত ওয়েটের একটা ছোট অংশ ট্রেইন হয়।"
+            },
+            {
+              "term": "QLoRA",
+              "meaning": "৪-বিট কোয়ান্টাইজড বেস মডেলের ওপর LoRA। এতে GPU মেমরি সবচেয়ে কম লাগে।"
+            },
+            {
+              "term": "ফুল ফাইন-টিউন (full fine-tune)",
+              "meaning": "মডেলের প্রতিটা ওয়েট আপডেট করা। এতে বড় GPU লাগে।"
+            },
+            {
+              "term": "কোয়ান্টাইজড (quantized)",
+              "meaning": "প্রতিটি সংখ্যা কম বিটে রাখা, ফলে মডেল কম মেমরি নেয়।"
+            }
+          ],
+          "remember": [
+            "LoRA বেস মডেল ফ্রিজ করে ছোট অংশ ট্রেইন করে। QLoRA একই কাজ ৪-বিট মডেলে করে।",
+            "ফুল ফাইন-টিউনে প্রতিটা ওয়েট ট্রেইন হয়, যা বেশির ভাগ মডেলের জন্য ফ্রি GPU-তে সম্ভব নয়।",
+            "ছোট মডেলের জন্য একটা ফ্রি Colab GPU সাধারণত যথেষ্ট, মোটামুটি ১–৩ বিলিয়ন প্যারামিটার পর্যন্ত।",
+            "এই লাইব্রেরিগুলো দ্রুত বদলায়। পুরনো টিউটোরিয়ালের বদলে বর্তমান অফিসিয়াল ডকুমেন্টেশন অনুসরণ করুন।"
+          ]
+        }
       },
       "body": [
         { "type": "heading", "level": 3, "id": "s3-lora-qlora-peft", "html": "LoRA and QLoRA through PEFT" },
@@ -412,6 +636,78 @@
         "title": "ফেজ ৪ — ইভ্যালুয়েশন",
         "sub": "সবচেয়ে গুরুত্বপূর্ণ ফেজ, আর মডেলের জন্য অনেকটা QA-র মতোই কাজ (২–৩ সপ্তাহ)"
       },
+      "basics": {
+        "en": {
+          "idea": "You can only tell whether fine-tuning helped by testing it. Build a test set the model never saw, then compare the base and fine-tuned models on the same inputs. This is <strong>evaluation</strong>.",
+          "words": [
+            {
+              "term": "Held-out test set",
+              "meaning": "Test examples kept apart from everything used in training, so the model has never seen them."
+            },
+            {
+              "term": "Exact-match scoring",
+              "meaning": "Counting an answer as right only if it matches the correct answer exactly."
+            },
+            {
+              "term": "Rubric scoring",
+              "meaning": "Scoring an answer against a checklist of what a good answer must have."
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "Using a language model to score another model's answers when there is no single right answer."
+            },
+            {
+              "term": "Regression suite",
+              "meaning": "A growing set of tests built from past failures, rerun to check that old mistakes do not come back."
+            },
+            {
+              "term": "QA (quality assurance)",
+              "meaning": "Testing software to find faults before users do. Here, the same idea is applied to models."
+            }
+          ],
+          "remember": [
+            "Without a held-out test set, you cannot tell whether fine-tuning helped.",
+            "Use exact-match or rubric scoring for clear answers, and LLM-as-judge with human spot-checks for open-ended ones.",
+            "Add every failure you find to a running regression suite.",
+            "Do not trust an output just because it reads fluently."
+          ]
+        },
+        "bn": {
+          "idea": "ফাইন-টিউনিং কাজে লেগেছে কিনা, তা শুধু টেস্ট করেই বোঝা যায়। মডেল কখনো দেখেনি এমন একটা টেস্ট সেট বানিয়ে একই ইনপুটে বেস আর ফাইন-টিউন করা মডেল তুলনা করুন। এটাই <strong>ইভ্যালুয়েশন</strong>।",
+          "words": [
+            {
+              "term": "হেল্ড-আউট টেস্ট সেট (held-out test set)",
+              "meaning": "ট্রেইনিংয়ে ব্যবহার হওয়া সবকিছু থেকে আলাদা রাখা টেস্ট উদাহরণ, তাই মডেল সেগুলো কখনো দেখেনি।"
+            },
+            {
+              "term": "এক্সাক্ট-ম্যাচ স্কোরিং (exact-match scoring)",
+              "meaning": "উত্তর সঠিক ধরা হয় শুধু তখন, যখন তা সঠিক উত্তরের সাথে হুবহু মেলে।"
+            },
+            {
+              "term": "রুব্রিক স্কোরিং (rubric scoring)",
+              "meaning": "ভালো উত্তরে কী কী থাকতে হবে তার একটা চেকলিস্টের সাথে মিলিয়ে নম্বর দেওয়া।"
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "একটি ল্যাঙ্গুয়েজ মডেল দিয়ে অন্য মডেলের উত্তরে নম্বর দেওয়া, যখন একটাই সঠিক উত্তর থাকে না।"
+            },
+            {
+              "term": "রিগ্রেশন স্যুট (regression suite)",
+              "meaning": "আগের ব্যর্থতা থেকে বানানো ক্রমে বাড়তে থাকা টেস্টের সেট, যা বারবার চালিয়ে দেখা হয় পুরনো ভুল ফিরে আসছে কিনা।"
+            },
+            {
+              "term": "QA (quality assurance)",
+              "meaning": "ব্যবহারকারী ধরার আগেই সফটওয়্যারের ত্রুটি খুঁজে বের করার টেস্টিং। এখানে একই ধারণা মডেলে খাটানো হয়।"
+            }
+          ],
+          "remember": [
+            "হেল্ড-আউট টেস্ট সেট ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং কাজে লেগেছে কিনা।",
+            "স্পষ্ট উত্তরের জন্য exact-match বা রুব্রিক স্কোরিং, আর ওপেন-এন্ডেড উত্তরের জন্য মানুষের স্পট-চেকসহ LLM-as-judge ব্যবহার করুন।",
+            "খুঁজে পাওয়া প্রতিটা ব্যর্থতা একটা চলমান রিগ্রেশন স্যুটে যোগ করুন।",
+            "আউটপুট ফ্লুয়েন্ট শোনায় বলেই তাকে বিশ্বাস করবেন না।"
+          ]
+        }
+      },
       "body": [
         { "type": "heading", "level": 3, "id": "s4-building-test-sets", "html": "Building test sets and comparing models" },
         {
@@ -512,6 +808,86 @@
       "bn": {
         "title": "ফেজ ৫ — লোকালি চালানো আর শিপ করা",
         "sub": "GGUF-এ কোয়ান্টাইজ, llama.cpp বা Ollama দিয়ে সার্ভ, তারপর র‍্যাপ করে ডিপ্লয় (৩–৪ সপ্তাহ)"
+      },
+      "basics": {
+        "en": {
+          "idea": "After fine-tuning, you shrink the model with <strong>quantization</strong> so it runs on ordinary hardware. Then you serve it, wrap it in an API, and deploy it.",
+          "words": [
+            {
+              "term": "Quantization",
+              "meaning": "Storing the model's numbers with fewer bits so the file gets smaller. Like compressing a video file."
+            },
+            {
+              "term": "GGUF",
+              "meaning": "A file format for quantized models that tools like <code>llama.cpp</code> and <code>Ollama</code> can run."
+            },
+            {
+              "term": "llama.cpp",
+              "meaning": "A tool that runs quantized models on ordinary hardware."
+            },
+            {
+              "term": "Ollama",
+              "meaning": "A tool that runs quantized local models behind a simple API."
+            },
+            {
+              "term": "Q4, Q5, Q8",
+              "meaning": "Quantization levels. The number is roughly the bits stored for each of the model's numbers, so a smaller number means a smaller model."
+            },
+            {
+              "term": "API",
+              "meaning": "A doorway that lets other programs send the model a request and get its answer."
+            },
+            {
+              "term": "Docker container",
+              "meaning": "A package that holds your app and everything it needs, so it runs the same way on any machine."
+            }
+          ],
+          "remember": [
+            "A quantized GGUF model, run with <code>llama.cpp</code> or <code>Ollama</code>, can run on ordinary hardware without a dedicated GPU server.",
+            "Q8 is closest to the original quality; Q4, the smallest and fastest of the common levels, loses a bit more.",
+            "Test the quantized model against your Phase 4 test set.",
+            "The steps are: convert, quantize, wrap behind an API, put in Docker, deploy."
+          ]
+        },
+        "bn": {
+          "idea": "ফাইন-টিউনিংয়ের পর <strong>কোয়ান্টাইজেশন</strong> দিয়ে মডেলকে ছোট করা হয়, যাতে সাধারণ হার্ডওয়্যারে চলে। তারপর মডেল সার্ভ করা, API-র পেছনে র‍্যাপ করা আর ডিপ্লয় করা হয়।",
+          "words": [
+            {
+              "term": "কোয়ান্টাইজেশন (quantization)",
+              "meaning": "মডেলের সংখ্যাগুলো কম বিটে রাখা, যাতে ফাইল ছোট হয়। ভিডিও ফাইল কমপ্রেস করার মতো।"
+            },
+            {
+              "term": "GGUF",
+              "meaning": "কোয়ান্টাইজড মডেলের একটি ফাইল ফরম্যাট, যেটা <code>llama.cpp</code> আর <code>Ollama</code>-র মতো টুল দিয়ে চালানো যায়।"
+            },
+            {
+              "term": "llama.cpp",
+              "meaning": "কোয়ান্টাইজড মডেলকে সাধারণ হার্ডওয়্যারে চালানোর একটি টুল।"
+            },
+            {
+              "term": "Ollama",
+              "meaning": "একটি সহজ API-র পেছনে কোয়ান্টাইজড লোকাল মডেল চালানোর টুল।"
+            },
+            {
+              "term": "Q4, Q5, Q8",
+              "meaning": "কোয়ান্টাইজেশনের স্তর। সংখ্যাটা মোটামুটি মডেলের প্রতিটি সংখ্যার জন্য রাখা বিট, তাই সংখ্যা ছোট মানে মডেল ছোট।"
+            },
+            {
+              "term": "API",
+              "meaning": "একটি দরজার মতো, যা দিয়ে অন্য প্রোগ্রাম মডেলকে অনুরোধ পাঠাতে আর তার উত্তর পেতে পারে।"
+            },
+            {
+              "term": "ডকার কন্টেইনার (Docker container)",
+              "meaning": "একটি প্যাকেজ, যাতে আপনার অ্যাপ আর তার দরকারি সবকিছু থাকে, ফলে যেকোনো মেশিনে একইভাবে চলে।"
+            }
+          ],
+          "remember": [
+            "কোয়ান্টাইজ করা GGUF মডেল <code>llama.cpp</code> বা <code>Ollama</code> দিয়ে চালালে আলাদা GPU সার্ভার ছাড়াই সাধারণ হার্ডওয়্যারে চলতে পারে।",
+            "Q8 আসল মানের সবচেয়ে কাছে; প্রচলিত স্তরগুলোর মধ্যে Q4 সবচেয়ে ছোট আর দ্রুত, কিন্তু মান একটু বেশি কমে।",
+            "কোয়ান্টাইজড মডেলকে Phase ৪-এর টেস্ট সেটে যাচাই করুন।",
+            "ধাপগুলো: কনভার্ট, কোয়ান্টাইজ, API-র পেছনে র‍্যাপ, Docker-এ রাখা, ডিপ্লয়।"
+          ]
+        }
       },
       "body": [
         { "type": "heading", "level": 3, "id": "s5-quantize-and-serve", "html": "Quantize, serve, wrap, deploy" },
@@ -659,6 +1035,78 @@
       "bn": {
         "title": "ক্যাপস্টোন আর পুরো টাইমলাইন",
         "sub": "একটা বাস্তবসম্মত প্রজেক্ট আইডিয়া, শুধু সিন্থেটিক ডেটা দিয়ে, মোট আনুমানিক ৫–৭ মাস"
+      },
+      "basics": {
+        "en": {
+          "idea": "A good <strong>capstone</strong> is a realistic project built only on anonymized or synthetic data. The full roadmap takes roughly 5–7 months part-time, but that is an estimate, not a deadline.",
+          "words": [
+            {
+              "term": "Capstone",
+              "meaning": "A final project that pulls together everything you learned and shows your skill."
+            },
+            {
+              "term": "Fine-tune",
+              "meaning": "Train an existing model a bit more on your own examples, so it does one job well."
+            },
+            {
+              "term": "Classify",
+              "meaning": "Give each item a label, such as putting a bug report into a group."
+            },
+            {
+              "term": "Anonymized data",
+              "meaning": "Real data with the names and personal details removed, so no one can be identified."
+            },
+            {
+              "term": "Synthetic data",
+              "meaning": "Made-up examples, not taken from real people or companies."
+            },
+            {
+              "term": "Data hygiene",
+              "meaning": "Keeping your data clean and correct before you use it."
+            }
+          ],
+          "remember": [
+            "For the capstone, fine-tune a small model to turn requirements into test cases or to classify bug reports.",
+            "Never fine-tune on real company or employee data. Use anonymized or synthetic examples.",
+            "The full timeline takes roughly 5–7 months, part-time.",
+            "The total is an estimate. Good Phase 1 data hygiene shortens every later phase."
+          ]
+        },
+        "bn": {
+          "idea": "ভালো <strong>ক্যাপস্টোন</strong> হলো একটা বাস্তবসম্মত প্রজেক্ট, যা শুধু অ্যানোনিমাইজড বা সিন্থেটিক ডেটার উপর দাঁড়িয়ে। পুরো রোডম্যাপে পার্ট-টাইমে আনুমানিক ৫–৭ মাস লাগে, তবে সেটা হিসাব, ডেডলাইন নয়।",
+          "words": [
+            {
+              "term": "ক্যাপস্টোন (capstone)",
+              "meaning": "শেষের প্রজেক্ট, যেখানে যা শিখেছেন সব একসাথে কাজে লাগে আর আপনার দক্ষতা দেখা যায়।"
+            },
+            {
+              "term": "ফাইন-টিউন (fine-tune)",
+              "meaning": "আগে থেকে তৈরি একটা মডেলকে নিজের উদাহরণ দিয়ে আরেকটু ট্রেইন করা, যাতে সে একটা কাজ ভালো করে।"
+            },
+            {
+              "term": "ক্লাসিফাই (classify)",
+              "meaning": "প্রতিটি জিনিসকে একটি লেবেল দেওয়া, যেমন বাগ রিপোর্টকে একটা দলে রাখা।"
+            },
+            {
+              "term": "অ্যানোনিমাইজড ডেটা (anonymized data)",
+              "meaning": "আসল ডেটা থেকে নাম আর ব্যক্তিগত তথ্য সরানো, যাতে কাউকে চেনা না যায়।"
+            },
+            {
+              "term": "সিন্থেটিক ডেটা (synthetic data)",
+              "meaning": "কাল্পনিক উদাহরণ, আসল মানুষ বা কোম্পানি থেকে নেওয়া নয়।"
+            },
+            {
+              "term": "ডেটা হাইজিন (data hygiene)",
+              "meaning": "ডেটা ব্যবহারের আগে তা পরিষ্কার আর ঠিক রাখা।"
+            }
+          ],
+          "remember": [
+            "ক্যাপস্টোনের জন্য, ছোট একটা মডেল ফাইন-টিউন করুন, যা রিকোয়ারমেন্ট থেকে টেস্ট কেস বানায় বা বাগ রিপোর্ট ক্লাসিফাই করে।",
+            "আসল কোম্পানি বা কর্মীর ডেটা দিয়ে কখনো ফাইন-টিউন করবেন না। অ্যানোনিমাইজড বা সিন্থেটিক উদাহরণ ব্যবহার করুন।",
+            "পুরো টাইমলাইনে পার্ট-টাইমে আনুমানিক ৫–৭ মাস লাগে।",
+            "মোট সময় একটা হিসাব। Phase ১-এ ভালো ডেটা হাইজিন পরের প্রতিটা ফেজের সময় কমায়।"
+          ]
+        }
       },
       "body": [
         { "type": "heading", "level": 3, "id": "s6-capstone-idea", "html": "Capstone idea" },

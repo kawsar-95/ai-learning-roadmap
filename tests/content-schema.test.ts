@@ -105,3 +105,51 @@ test("TopicFileSchema accepts quiz text with a less-than sign that is not a tag"
   const file = topicWithQuiz([tf("q1", { en: { q: "Is 3 < 5 and 7 > 6?", why: "Yes: a < b is not a tag." } })]);
   assert.doesNotThrow(() => TopicFileSchema.parse(file));
 });
+
+const basicsText = (over: Record<string, unknown> = {}) => ({
+  idea: "A model reads <strong>tokens</strong>.",
+  words: [
+    { term: "Token", meaning: "A small piece of text." },
+    { term: "<code>top_p</code>", meaning: "Keep the likely tokens." },
+  ],
+  remember: ["You pay per token.", "Shorter prompts cost less."],
+  ...over,
+});
+const topicWithBasics = (basics: unknown) => ({
+  slug: "x",
+  title: "X",
+  lede: "L",
+  bn: { title: "X", lede: "L" },
+  sources: [],
+  sections: [{ id: "s1", num: "01", title: "T", sub: "", bn: { title: "T", sub: "" }, basics, layman: [], bangla: [], body: [] }],
+});
+
+test("TopicFileSchema accepts a section with a Start here box", () => {
+  const file = topicWithBasics({ en: basicsText(), bn: basicsText({ idea: "মডেল <strong>টোকেন</strong> পড়ে।" }) });
+  assert.deepEqual(TopicFileSchema.parse(file), file);
+});
+
+test("TopicFileSchema rejects a bad Start here box", () => {
+  const one = { term: "Token", meaning: "A piece." };
+  const bad: [string, unknown][] = [
+    ["no bn", { en: basicsText() }],
+    ["an extra language", { en: basicsText(), bn: basicsText(), hi: basicsText() }],
+    ["an unknown key", { en: basicsText({ summary: "x" }), bn: basicsText() }],
+    ["an empty idea", { en: basicsText({ idea: " " }), bn: basicsText() }],
+    ["one word", { en: basicsText({ words: [one] }), bn: basicsText({ words: [one] }) }],
+    ["nine words", { en: basicsText({ words: Array(9).fill(one) }), bn: basicsText({ words: Array(9).fill(one) }) }],
+    ["six points", { en: basicsText({ remember: Array(6).fill("x") }), bn: basicsText({ remember: Array(6).fill("x") }) }],
+    ["word counts differ", { en: basicsText(), bn: basicsText({ words: [one, one, one] }) }],
+    ["point counts differ", { en: basicsText(), bn: basicsText({ remember: ["x", "y", "z"] }) }],
+    ["a citation", { en: basicsText({ idea: 'Tokens <a class="cite" href="#src1">[1]</a>.' }), bn: basicsText() }],
+    ["a link", { en: basicsText(), bn: basicsText({ remember: ['<a href="https://example.com">x</a>', "y"] }) }],
+    ["a tag outside the allowlist", { en: basicsText({ words: [{ term: "<b>Token</b>", meaning: "x" }, one] }), bn: basicsText() }],
+  ];
+  for (const [name, basics] of bad) {
+    assert.throws(
+      () => TopicFileSchema.parse(topicWithBasics(basics)),
+      (err: { issues?: { path: unknown[] }[] }) => !!err.issues?.some((issue) => issue.path.includes("basics")),
+      name,
+    );
+  }
+});

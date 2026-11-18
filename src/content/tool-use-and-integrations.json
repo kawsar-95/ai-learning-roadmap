@@ -16,6 +16,80 @@
         "title": "টুল ইউজ: স্কিমা, প্যারালাল কল, API র‍্যাপার আর ফলাফলের ফরম্যাট",
         "sub": "টুল না দেওয়া পর্যন্ত LLM শুধু একটা টেক্সট জেনারেটর। <strong>টুল</strong> মানে এমন একটা উপায়, যাতে সে আপনার API কল করতে, কোড চালাতে, ডেটাবেসে কুয়েরি করতে বা ফাইল পড়তে পারে। চ্যাটবটের ডেমো আর প্রোডাকশন সিস্টেমের মধ্যে তফাত গড়ে দেয় টুল ডিজাইন। সবচেয়ে বড় প্রভাব ফেলার সিদ্ধান্ত হলো আপনার টুল ডেসক্রিপশনের মান।"
       },
+      "basics": {
+        "en": {
+          "idea": "A model can only write text until you give it <strong>tools</strong>, ways to call an API, run code, or read a file. Clear tool descriptions and good tool design make the difference between a demo and a real system.",
+          "words": [
+            {
+              "term": "Tool",
+              "meaning": "A function the model is allowed to call, such as searching a wiki or querying a database."
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "A fixed way to describe what inputs a tool accepts: the names, the types, and which ones are required."
+            },
+            {
+              "term": "Enum",
+              "meaning": "A short fixed list of allowed values for a field. The model must pick one from the list."
+            },
+            {
+              "term": "Parallel tool calling",
+              "meaning": "Asking for several independent tool calls in one turn, so they run at the same time instead of one by one."
+            },
+            {
+              "term": "API wrapper",
+              "meaning": "A small function around an API endpoint. It says what the endpoint does, takes typed input, and returns a result or an error."
+            },
+            {
+              "term": "Context window",
+              "meaning": "The most text a model can handle in one call. A huge tool result can overflow it."
+            }
+          ],
+          "remember": [
+            "Write each tool description to say what it does, when to use it, and what it returns.",
+            "Use a tight schema with clear types and enums. Avoid <code>any</code>.",
+            "More than about 20 tools in one prompt hurts how well the model picks the right one.",
+            "Make independent tool calls in one turn so they run at the same time.",
+            "Tool output is prompt content: trim it, format it for reading, add a summary when the result is not obvious."
+          ]
+        },
+        "bn": {
+          "idea": "টুল না দিলে মডেল শুধু লেখা তৈরি করতে পারে। <strong>টুল</strong> পেলে সে API কল করতে, কোড চালাতে বা ফাইল পড়তে পারে। স্পষ্ট টুল ডেসক্রিপশন আর ভালো টুল ডিজাইনই ডেমো আর আসল সিস্টেমের পার্থক্য গড়ে।",
+          "words": [
+            {
+              "term": "টুল (tool)",
+              "meaning": "যে ফাংশন মডেল কল করতে পারে, যেমন উইকিতে খোঁজা বা ডেটাবেসে কুয়েরি দেওয়া।"
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "টুল কী কী ইনপুট নেয় তা বর্ণনা করার নির্দিষ্ট নিয়ম: নাম, টাইপ আর কোনগুলো আবশ্যিক।"
+            },
+            {
+              "term": "এনাম (enum)",
+              "meaning": "কোনো ফিল্ডের জন্য অনুমোদিত মানের ছোট নির্দিষ্ট তালিকা। মডেলকে তালিকা থেকেই একটি বাছতে হয়।"
+            },
+            {
+              "term": "প্যারালাল টুল কলিং (parallel tool calling)",
+              "meaning": "একে অপরের ওপর নির্ভর করে না এমন কয়েকটি টুল কল এক টার্নে চাওয়া, যাতে সেগুলো একসাথে চলে, একটার পর একটা নয়।"
+            },
+            {
+              "term": "API র‍্যাপার (API wrapper)",
+              "meaning": "API এন্ডপয়েন্টের চারপাশে ছোট একটি ফাংশন। সে কাজ বর্ণনা করে, টাইপ করা ইনপুট নেয়, আর ফলাফল বা এরর ফেরত দেয়।"
+            },
+            {
+              "term": "কনটেক্সট উইন্ডো (context window)",
+              "meaning": "এক কলে মডেল সর্বোচ্চ কতটা লেখা সামলাতে পারে। খুব বড় টুল ফলাফল এটা ভরিয়ে ফেলতে পারে।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি টুলের ডেসক্রিপশনে লিখুন সে কী করে, কখন ব্যবহার করবেন আর কী ফেরত দেয়।",
+            "স্পষ্ট টাইপ আর এনাম দিয়ে স্কিমা আঁটসাঁট রাখুন। <code>any</code> এড়িয়ে চলুন।",
+            "একটি প্রম্পটে প্রায় ২০-এর বেশি টুল দিলে মডেল ঠিক টুল বাছতে কম পারে।",
+            "একে অপরের ওপর নির্ভর করে না এমন টুল কল এক টার্নে দিন, যাতে সেগুলো একসাথে চলে।",
+            "টুলের আউটপুট প্রম্পটেরই অংশ: ছাঁটুন, পড়ার মতো ফরম্যাট করুন, আর ফলাফল অস্পষ্ট হলে সারমর্ম যোগ করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -401,6 +475,78 @@
       "bn": {
         "title": "MCP (Model Context Protocol) আর স্যান্ডবক্সে কোড চালানো",
         "sub": "এখন একটি MCP সার্ভার (যেমন Postgres-এর জন্য) লিখলে সেটা সব MCP-কম্প্যাটিবল ক্লায়েন্ট — Claude Code, Cursor, VS Code, কাস্টম এজেন্ট — ব্যবহার করতে পারে। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>MCP</strong> lets you write one server for a data source and reuse it from every compatible client. A sandbox lets the model write and run code without reaching your files or network.",
+          "words": [
+            {
+              "term": "MCP (Model Context Protocol)",
+              "meaning": "An open standard for connecting models to data and tools. Write one server and any compatible client can use it."
+            },
+            {
+              "term": "MCP server",
+              "meaning": "The program run by the data or tool provider. The model side is the client that talks to it."
+            },
+            {
+              "term": "Tools, resources, and prompts",
+              "meaning": "The three things a server offers: functions to call, read-only data to fetch, and named prompt templates."
+            },
+            {
+              "term": "Sandbox",
+              "meaning": "A locked space where code can run without touching your real files or network."
+            },
+            {
+              "term": "Firecracker microVM",
+              "meaning": "A lightweight virtual machine, like a tiny separate computer. E2B uses it to run code."
+            },
+            {
+              "term": "Edge isolate",
+              "meaning": "A small, walled-off place to run code, close to the user. Cloudflare uses it for fast start and low delay."
+            }
+          ],
+          "remember": [
+            "Before MCP, every app needed custom code for every data source. Now one MCP server works with many clients.",
+            "An MCP server offers three things: tools, resources, and prompts.",
+            "Letting the model write and run code avoids tool explosion (a separate tool per small task) and gives correct arithmetic.",
+            "Run model-written code in a sandbox, such as E2B, Modal, Daytona, or Cloudflare Workers."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>MCP</strong> দিয়ে একটি ডেটা সোর্সের জন্য একটাই সার্ভার লিখলে সব সামঞ্জস্যপূর্ণ ক্লায়েন্ট সেটা ব্যবহার করতে পারে। স্যান্ডবক্সে মডেল কোড লিখে চালাতে পারে, অথচ আপনার ফাইল বা নেটওয়ার্কে হাত দিতে পারে না।",
+          "words": [
+            {
+              "term": "MCP (Model Context Protocol)",
+              "meaning": "মডেলকে ডেটা আর টুলের সাথে জোড়ার একটি খোলা মানদণ্ড। একটি সার্ভার লিখলে যেকোনো সামঞ্জস্যপূর্ণ ক্লায়েন্ট তা ব্যবহার করতে পারে।"
+            },
+            {
+              "term": "MCP সার্ভার (MCP server)",
+              "meaning": "ডেটা বা টুল প্রদানকারীর চালানো প্রোগ্রাম। মডেলের দিকটা হলো ক্লায়েন্ট, যে এর সাথে কথা বলে।"
+            },
+            {
+              "term": "টুলস, রিসোর্সেস আর প্রম্পটস (tools, resources, prompts)",
+              "meaning": "সার্ভারের দেওয়া তিন জিনিস: কল করার ফাংশন, আনার মতো শুধু-পড়ার তথ্য, আর নাম দেওয়া প্রম্পট টেমপ্লেট।"
+            },
+            {
+              "term": "স্যান্ডবক্স (sandbox)",
+              "meaning": "তালাবদ্ধ জায়গা, যেখানে কোড চলে কিন্তু আপনার আসল ফাইল বা নেটওয়ার্কে পৌঁছাতে পারে না।"
+            },
+            {
+              "term": "Firecracker microVM",
+              "meaning": "হালকা ভার্চুয়াল মেশিন, মানে ছোট আলাদা কম্পিউটারের মতো। E2B কোড চালাতে এটা ব্যবহার করে।"
+            },
+            {
+              "term": "এজ আইসোলেট (edge isolate)",
+              "meaning": "ব্যবহারকারীর কাছাকাছি কোড চালানোর ছোট, আলাদা করে ঘেরা জায়গা। Cloudflare এটা ব্যবহার করে দ্রুত শুরু আর কম দেরির জন্য।"
+            }
+          ],
+          "remember": [
+            "MCP-এর আগে প্রতিটি ডেটা সোর্সের জন্য প্রতিটি অ্যাপে কাস্টম কোড লাগত। এখন একটি MCP সার্ভার অনেক ক্লায়েন্টে চলে।",
+            "MCP সার্ভার তিনটি জিনিস দেয়: টুলস, রিসোর্সেস আর প্রম্পটস।",
+            "মডেলকে কোড লিখে চালাতে দিলে টুলের বিস্ফোরণ (প্রতিটি ছোট কাজের জন্য আলাদা টুল) এড়ানো যায় আর গাণিতিক হিসাব নির্ভুল হয়।",
+            "মডেলের লেখা কোড স্যান্ডবক্সে চালান, যেমন E2B, Modal, Daytona বা Cloudflare Workers।"
+          ]
+        }
       },
       "body": [
         {

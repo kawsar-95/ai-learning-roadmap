@@ -47,7 +47,8 @@ Desktop shots are 1440 × 900 at 1x in the light theme. Phone shots are
 | --- | --- | --- | --- |
 | `home` | `/` | The hero, cropped below the counts | top |
 | `topic-page` | `/topics/llm-fundamentals/` | The first screen of Part 1 | Read one section at a time |
-| `voices` | `/topics/llm-fundamentals/` | Section 1 in each voice, three crops side by side | Three voices |
+| `start-here` | `/topics/llm-fundamentals/` | Section 1's Start here box, under the voice tabs | Start here |
+| `voices` | `/topics/llm-fundamentals/` | Section 1 in each voice, three crops side by side, with the Start here box hidden | Three voices |
 | `practice` | `/topics/llm-fundamentals/` | Section 1's practice panel, open, to the end of step 1 | Practice, videos, and a quiz |
 | `videos` | `/topics/llm-fundamentals/` | Section 1's Watch list, open: three videos, then three Shorts | Practice, videos, and a quiz |
 | `quiz` | `/topics/llm-fundamentals/#quiz` | The quiz answered with question 4 wrong, then checked: questions 4 and 5 and the score | Practice, videos, and a quiz |

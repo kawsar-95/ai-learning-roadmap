@@ -18,6 +18,86 @@
         "title": "টোকেন, টোকেনাইজেশন আর কনটেক্সটের খরচ",
         "sub": "মডেল যা কিছু করে — অ্যাটেনশন, জেনারেশন, খরচ — সবকিছুর হিসাব হয় <strong>টোকেন</strong> দিয়ে, অক্ষর বা শব্দ দিয়ে নয়। আপনার প্রম্পট যদি ৮০০ টোকেন থেকে কমে ২০০ টোকেন হয়, তাহলে খরচ কমল ৭৫%, আর ল্যাটেন্সিও উল্লেখযোগ্যভাবে কমল। আপনার হাতে থাকা সবচেয়ে বড় ইঞ্জিনিয়ারিং সুবিধা এটাই।"
       },
+      "basics": {
+        "en": {
+          "idea": "A model does not read whole words. It reads <strong>tokens</strong>, small pieces of text. Every token you send and every token you get back costs money and time.",
+          "words": [
+            {
+              "term": "Token",
+              "meaning": "One small piece of text, often part of a word. In English, one token is about 4 characters."
+            },
+            {
+              "term": "Vocabulary",
+              "meaning": "The fixed list of all the tokens a model knows. It often holds 32k to 200k tokens."
+            },
+            {
+              "term": "Tokenizer",
+              "meaning": "The tool that cuts text into tokens before the model reads it."
+            },
+            {
+              "term": "Byte-Pair Encoding (BPE)",
+              "meaning": "The most common way to build the token list. It keeps joining the pairs of pieces that appear side by side most often."
+            },
+            {
+              "term": "Context window",
+              "meaning": "The most tokens a model can handle in one call, counting your input and its output together."
+            },
+            {
+              "term": "Prefill and decode",
+              "meaning": "The two steps of a call. Prefill reads your whole prompt; decode writes the answer one token at a time."
+            },
+            {
+              "term": "Prompt caching",
+              "meaning": "Reusing the work done on the start of a prompt that repeats. It cuts the cost of that part by about 80–90%."
+            }
+          ],
+          "remember": [
+            "You pay per token, not per word or per character.",
+            "Output tokens usually cost 3–5 times more than input tokens.",
+            "A shorter prompt costs less: going from 800 to 200 tokens cuts the cost by 75%.",
+            "A bigger context window does not mean better answers. Measure on your own work."
+          ]
+        },
+        "bn": {
+          "idea": "মডেল পুরো শব্দ পড়ে না। সে পড়ে <strong>টোকেন</strong>, মানে লেখার ছোট ছোট টুকরো। আপনি যত টোকেন পাঠান আর যত টোকেন ফেরত পান, প্রতিটির জন্য টাকা আর সময় দুটোই লাগে।",
+          "words": [
+            {
+              "term": "টোকেন (token)",
+              "meaning": "লেখার একটি ছোট টুকরো, প্রায়ই একটি শব্দের অংশ। ইংরেজিতে ১ টোকেন মোটামুটি ৪ অক্ষর।"
+            },
+            {
+              "term": "ভোকাবুলারি (vocabulary)",
+              "meaning": "মডেল যত টোকেন চেনে, তার নির্দিষ্ট তালিকা। প্রায়ই এতে ৩২k থেকে ২০০k টোকেন থাকে।"
+            },
+            {
+              "term": "টোকেনাইজার (tokenizer)",
+              "meaning": "যে টুল মডেল পড়ার আগে লেখাকে টোকেনে কেটে নেয়।"
+            },
+            {
+              "term": "BPE (Byte-Pair Encoding)",
+              "meaning": "টোকেনের তালিকা বানানোর সবচেয়ে চালু পদ্ধতি। যে জোড়া টুকরো সবচেয়ে বেশি পাশাপাশি আসে, সেগুলোকে বারবার জুড়ে দেয়।"
+            },
+            {
+              "term": "কনটেক্সট উইন্ডো (context window)",
+              "meaning": "এক কলে মডেল সর্বোচ্চ কত টোকেন সামলাতে পারে, ইনপুট আর আউটপুট মিলিয়ে।"
+            },
+            {
+              "term": "প্রিফিল আর ডিকোড (prefill, decode)",
+              "meaning": "একটি কলের দুই ধাপ। প্রিফিলে মডেল পুরো প্রম্পট পড়ে; ডিকোডে উত্তর লেখে, একবারে একটি টোকেন করে।"
+            },
+            {
+              "term": "প্রম্পট ক্যাশিং (prompt caching)",
+              "meaning": "প্রম্পটের যে শুরুর অংশ বারবার আসে, তার জন্য করা কাজ আবার ব্যবহার করা। এতে সেই অংশের খরচ প্রায় ৮০–৯০% কমে।"
+            }
+          ],
+          "remember": [
+            "দাম হয় টোকেন ধরে, শব্দ বা অক্ষর ধরে নয়।",
+            "আউটপুট টোকেন সাধারণত ইনপুট টোকেনের চেয়ে ৩–৫ গুণ দামি।",
+            "প্রম্পট ছোট করলে খরচ কমে: ৮০০ থেকে ২০০ টোকেনে নামালে খরচ ৭৫% কমে।",
+            "বড় কনটেক্সট উইন্ডো মানেই ভালো উত্তর নয়। নিজের কাজে মেপে দেখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -318,6 +398,86 @@
       "bn": {
         "title": "মডেল ফ্যামিলি আর ট্রেড-অফ",
         "sub": "২০২৫ সালে ফ্রন্টিয়ারে পাঁচটি ফ্যামিলির দাপট। প্রতিটির আর্কিটেকচার আর ব্যবসার দর্শন আলাদা। “সেরা মডেল কোনটা” — এই প্রশ্নটাই ভুল। সঠিক প্রশ্ন হলো: <em>কোন ট্রেড-অফ আপনার ওয়ার্কলোডের মূল চাহিদার সাথে মেলে</em>।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A few big companies make most of the top models, and each family is good at different things. Do not ask which model is best. Ask which trade-off fits your work.",
+          "words": [
+            {
+              "term": "Open weights",
+              "meaning": "The model file is published, so anyone can download it and run it on their own machines."
+            },
+            {
+              "term": "Parameter",
+              "meaning": "One of the many numbers inside a model, learned in training."
+            },
+            {
+              "term": "Dense model",
+              "meaning": "A model that uses all of its parameters for every token. Its compute is predictable, and it is simple to serve."
+            },
+            {
+              "term": "Mixture-of-Experts (MoE)",
+              "meaning": "A model that sends each token to only a few of its <em>expert</em> parts. It is cheaper to run but needs more memory."
+            },
+            {
+              "term": "Attention",
+              "meaning": "The step where the model looks back at the other tokens to decide which ones matter most."
+            },
+            {
+              "term": "KV cache",
+              "meaning": "Stored notes about the earlier tokens that attention reuses. Long inputs make it big; DeepSeek's MLA compresses it to save memory."
+            },
+            {
+              "term": "Sliding-window attention",
+              "meaning": "Each token looks only at a window of nearby tokens, not all of them, which makes the model cheaper to run."
+            }
+          ],
+          "remember": [
+            "There is no single best model. Pick the trade-off that fits your work.",
+            "Llama, Qwen, DeepSeek, and Mistral's small models publish their weights, so you can host them yourself.",
+            "MoE models are large in total but use only a small part for each token, so they are cheaper to run.",
+            "Tricks like MLA and sliding-window attention make long inputs cheaper to handle."
+          ]
+        },
+        "bn": {
+          "idea": "সেরা মডেলগুলোর বেশিরভাগ বানায় অল্প কয়েকটি বড় কোম্পানি, আর প্রতিটি ফ্যামিলি আলাদা কাজে ভালো। কোন মডেল সেরা, তা জিজ্ঞেস করবেন না। জিজ্ঞেস করুন, কোন ট্রেড-অফ আপনার কাজের সাথে মেলে।",
+          "words": [
+            {
+              "term": "ওপেন ওয়েট (open weights)",
+              "meaning": "মডেলের ফাইল প্রকাশ করা হয়, তাই যে কেউ ডাউনলোড করে নিজের মেশিনে চালাতে পারে।"
+            },
+            {
+              "term": "প্যারামিটার (parameter)",
+              "meaning": "মডেলের ভেতরের অসংখ্য সংখ্যার একটি, যা সে ট্রেনিংয়ে শিখেছে।"
+            },
+            {
+              "term": "ডেন্স মডেল (dense model)",
+              "meaning": "যে মডেল প্রতিটি টোকেনের জন্য তার সব প্যারামিটার ব্যবহার করে। এর কম্পিউট আগে থেকে বোঝা যায়, চালানোও সহজ।"
+            },
+            {
+              "term": "মিক্সচার-অফ-এক্সপার্টস (Mixture-of-Experts, MoE)",
+              "meaning": "যে মডেল প্রতিটি টোকেনকে তার অল্প কয়েকটি <em>এক্সপার্ট</em> অংশে পাঠায়। চালাতে সস্তা, তবে মেমরি বেশি লাগে।"
+            },
+            {
+              "term": "অ্যাটেনশন (attention)",
+              "meaning": "যে ধাপে মডেল অন্য টোকেনগুলোর দিকে ফিরে তাকিয়ে ঠিক করে কোনগুলো বেশি দরকারি।"
+            },
+            {
+              "term": "KV ক্যাশ (KV cache)",
+              "meaning": "আগের টোকেনগুলো নিয়ে জমিয়ে রাখা নোট, যা অ্যাটেনশন আবার ব্যবহার করে। লম্বা ইনপুটে এটা বড় হয়; DeepSeek-এর MLA একে ছোট করে মেমরি বাঁচায়।"
+            },
+            {
+              "term": "স্লাইডিং-উইন্ডো অ্যাটেনশন (sliding-window attention)",
+              "meaning": "প্রতিটি টোকেন সব টোকেন না দেখে শুধু কাছের কিছু টোকেনের একটা উইন্ডো দেখে, তাই মডেল চালানো সস্তা হয়।"
+            }
+          ],
+          "remember": [
+            "একক কোনো সেরা মডেল নেই। আপনার কাজের সাথে মেলে এমন ট্রেড-অফ বাছুন।",
+            "Llama, Qwen, DeepSeek আর Mistral-এর ছোট মডেলগুলো তাদের ওয়েট প্রকাশ করে, তাই নিজে হোস্ট করা যায়।",
+            "MoE মডেল মোট আকারে বড়, কিন্তু প্রতিটি টোকেনে অল্প একটা অংশ চলে, তাই চালাতে সস্তা।",
+            "MLA আর স্লাইডিং-উইন্ডো অ্যাটেনশনের মতো কৌশল লম্বা ইনপুট সামলানো সস্তা করে।"
+          ]
+        }
       },
       "body": [
         {
@@ -633,6 +793,86 @@
         "title": "ক্লোজড বনাম ওপেন-ওয়েট মডেল",
         "sub": "“Open” দুই দলে ভাগ হয়, আর ইঞ্জিনিয়াররাও প্রায়ই দুটো গুলিয়ে ফেলেন: <strong>ওপেন-ওয়েট</strong> (মডেল ডাউনলোড করে নিজে চালাতে পারবেন) আর <strong>ওপেন-সোর্স</strong> (এর সাথে ট্রেনিং কোড, ডেটা, আর বদলে আবার বিলি করার লাইসেন্সও পাবেন)। বেশিরভাগ “open” LLM আসলে ওপেন-ওয়েট।"
       },
+      "basics": {
+        "en": {
+          "idea": "A closed model is hosted behind an API, and you cannot download it. An open-weight model can be downloaded and run on your own machines, but then running it is your job.",
+          "words": [
+            {
+              "term": "API",
+              "meaning": "A way for your program to send a request to another company's service and get an answer back."
+            },
+            {
+              "term": "Open-weight",
+              "meaning": "The trained model file is public, so you can download and run it. Most <em>open</em> models are this kind."
+            },
+            {
+              "term": "Open-source",
+              "meaning": "Open weights plus the training code, the data, and the right to change and share them."
+            },
+            {
+              "term": "Vendor lock-in",
+              "meaning": "Being tied to one company: you live with its prices, its rules, and its changes."
+            },
+            {
+              "term": "Fine-tuning",
+              "meaning": "Training a model a little more on your own data, so it fits your task."
+            },
+            {
+              "term": "Distillation",
+              "meaning": "Training a small model on the answers of a big model, so the small one learns its skill."
+            },
+            {
+              "term": "Routing",
+              "meaning": "Sending easy questions to a small, cheap model and hard ones to a big one."
+            }
+          ],
+          "remember": [
+            "Most <em>open</em> LLMs are open-weight, not open-source.",
+            "Closed models are the most capable and need no servers of your own, but your data leaves your network.",
+            "Open-weight models keep your data in-house and have no per-token fees, but you run the GPUs.",
+            "Many teams mix both: easy questions go to a small local model, hard ones to a frontier API."
+          ]
+        },
+        "bn": {
+          "idea": "ক্লোজড মডেল থাকে API-র পেছনে, আর সেটা ডাউনলোড করা যায় না। ওপেন-ওয়েট মডেল ডাউনলোড করে নিজের মেশিনে চালানো যায়, তবে তখন চালানোর দায়িত্বও আপনার।",
+          "words": [
+            {
+              "term": "API",
+              "meaning": "আপনার প্রোগ্রাম যেভাবে অন্য কোম্পানির সার্ভিসে অনুরোধ পাঠিয়ে উত্তর ফেরত পায়।"
+            },
+            {
+              "term": "ওপেন-ওয়েট (open-weight)",
+              "meaning": "ট্রেনিং শেষ হওয়া মডেলের ফাইল প্রকাশ্য, তাই ডাউনলোড করে চালানো যায়। বেশিরভাগ <em>ওপেন</em> মডেল এই ধরনের।"
+            },
+            {
+              "term": "ওপেন-সোর্স (open-source)",
+              "meaning": "ওপেন ওয়েটের সাথে ট্রেনিং কোড, ডেটা আর সেগুলো বদলে আবার বিলি করার অনুমতিও থাকে।"
+            },
+            {
+              "term": "ভেন্ডর লক-ইন (vendor lock-in)",
+              "meaning": "একটি কোম্পানির সাথে বাঁধা পড়ে যাওয়া: তার দাম, তার নিয়ম আর তার বদল মেনে নিতে হয়।"
+            },
+            {
+              "term": "ফাইন-টিউনিং (fine-tuning)",
+              "meaning": "নিজের ডেটায় মডেলকে আরেকটু ট্রেন করা, যাতে সে আপনার কাজের সাথে মানিয়ে যায়।"
+            },
+            {
+              "term": "ডিস্টিলেশন (distillation)",
+              "meaning": "বড় মডেলের উত্তর দিয়ে ছোট মডেলকে ট্রেন করা, যাতে ছোটটা বড়টার দক্ষতা শেখে।"
+            },
+            {
+              "term": "রাউটিং (routing)",
+              "meaning": "সহজ প্রশ্ন ছোট, সস্তা মডেলে আর কঠিন প্রশ্ন বড় মডেলে পাঠানো।"
+            }
+          ],
+          "remember": [
+            "বেশিরভাগ <em>ওপেন</em> LLM আসলে ওপেন-ওয়েট, ওপেন-সোর্স নয়।",
+            "ক্লোজড মডেল সবচেয়ে সক্ষম আর নিজের সার্ভার লাগে না, কিন্তু আপনার ডেটা আপনার নেটওয়ার্কের বাইরে যায়।",
+            "ওপেন-ওয়েট মডেলে ডেটা নিজের কাছে থাকে আর টোকেন-প্রতি ফি নেই, কিন্তু GPU চালাতে হয় আপনাকেই।",
+            "অনেক টিম দুটোই মেলায়: সহজ প্রশ্ন যায় লোকাল ছোট মডেলে, কঠিন প্রশ্ন ফ্রন্টিয়ার API-তে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -860,6 +1100,92 @@
       "bn": {
         "title": "স্যাম্পলিং প্যারামিটারের ব্যবহার",
         "sub": "মডেল তার ভোকাবুলারির প্রতিটি টোকেনের উপর একটি প্রোবাবিলিটি ডিস্ট্রিবিউশন দেয়। <em>স্যাম্পলিং</em> হলো সেই ডিস্ট্রিবিউশন থেকে টেক্সট বানানোর উপায়। একই লজিটস থেকে যান্ত্রিক তালিকা, সৃজনশীল গদ্য, কিংবা বানানো ভুল তথ্য (হ্যালুসিনেশন) — যেকোনোটি আসতে পারে, পাঁচটি নব কীভাবে ঘোরান তার উপর।"
+      },
+      "basics": {
+        "en": {
+          "idea": "At each step, the model gives every possible next token a chance of being picked. <strong>Sampling</strong> settings decide how it picks: always the safest token, or sometimes a less likely one.",
+          "words": [
+            {
+              "term": "Probability distribution",
+              "meaning": "The list of every possible next token with its chance of being picked. All the chances add up to 100%."
+            },
+            {
+              "term": "Logits",
+              "meaning": "The raw scores the model gives each token before they are turned into chances."
+            },
+            {
+              "term": "Sampling",
+              "meaning": "Picking the next token from that list of chances."
+            },
+            {
+              "term": "<code>temperature</code>",
+              "meaning": "The randomness dial. Low (0) makes answers predictable; above 1 makes them more varied."
+            },
+            {
+              "term": "<code>top_k</code>",
+              "meaning": "Keep only the k most likely tokens and pick among them. <code>k=1</code> always takes the top one."
+            },
+            {
+              "term": "<code>top_p</code> (nucleus)",
+              "meaning": "Keep the fewest top tokens whose chances add up to at least p, such as 0.9, and pick among them."
+            },
+            {
+              "term": "<code>min_p</code>",
+              "meaning": "Drop tokens whose chance is below <code>min_p</code> times the top token's chance."
+            },
+            {
+              "term": "Penalties",
+              "meaning": "<code>frequency_penalty</code> discourages repeating the same tokens; <code>presence_penalty</code> pushes toward new topics."
+            }
+          ],
+          "remember": [
+            "Use <code>temperature</code> 0 for code, JSON, classification, and math, and about 0.7–1.0 for chat.",
+            "Raise <code>temperature</code> to 1.0–2.0 for creative writing and brainstorming.",
+            "Pair <code>temperature</code> with <code>top_p</code> or <code>min_p</code>. Do not stack tight <code>top_k</code> and <code>top_p</code> values."
+          ]
+        },
+        "bn": {
+          "idea": "প্রতিটি ধাপে মডেল সম্ভাব্য প্রতিটি পরের টোকেনকে বাছাই হওয়ার একটা সম্ভাবনা দেয়। <strong>স্যাম্পলিং</strong> সেটিংস ঠিক করে সে কীভাবে বাছবে: সবসময় সবচেয়ে নিরাপদ টোকেন, নাকি মাঝে মাঝে কম সম্ভাব্য কোনোটা।",
+          "words": [
+            {
+              "term": "প্রোবাবিলিটি ডিস্ট্রিবিউশন (probability distribution)",
+              "meaning": "পরের সম্ভাব্য প্রতিটি টোকেন আর তার বাছাই হওয়ার সম্ভাবনার তালিকা। সব সম্ভাবনা যোগ করলে ১০০% হয়।"
+            },
+            {
+              "term": "লজিট (logits)",
+              "meaning": "সম্ভাবনায় বদলানোর আগে মডেল প্রতিটি টোকেনকে যে কাঁচা স্কোর দেয়।"
+            },
+            {
+              "term": "স্যাম্পলিং (sampling)",
+              "meaning": "সম্ভাবনার সেই তালিকা থেকে পরের টোকেন বেছে নেওয়া।"
+            },
+            {
+              "term": "<code>temperature</code>",
+              "meaning": "র‍্যান্ডমনেসের নব। কম (০) দিলে উত্তর আগে থেকে আন্দাজ করা যায়; ১-এর বেশি দিলে উত্তরে বৈচিত্র্য বাড়ে।"
+            },
+            {
+              "term": "<code>top_k</code>",
+              "meaning": "শুধু সবচেয়ে সম্ভাব্য k-টি টোকেন রেখে তার মধ্য থেকে বাছা। <code>k=1</code> মানে সবসময় সবার উপরেরটা।"
+            },
+            {
+              "term": "<code>top_p</code> (nucleus)",
+              "meaning": "উপরের দিকের সবচেয়ে কম সংখ্যক টোকেন রাখা, যাদের সম্ভাবনা যোগ করলে অন্তত p হয় (যেমন ০.৯), তারপর তাদের মধ্য থেকে বাছা।"
+            },
+            {
+              "term": "<code>min_p</code>",
+              "meaning": "যেসব টোকেনের সম্ভাবনা শীর্ষ টোকেনের সম্ভাবনার <code>min_p</code> গুণের চেয়ে কম, সেগুলো বাদ দেওয়া।"
+            },
+            {
+              "term": "পেনাল্টি (penalties)",
+              "meaning": "<code>frequency_penalty</code> একই টোকেন বারবার বলা কমায়; <code>presence_penalty</code> নতুন বিষয়ের দিকে ঠেলে দেয়।"
+            }
+          ],
+          "remember": [
+            "কোড, JSON, ক্লাসিফিকেশন আর গণিতে <code>temperature</code> ০ দিন; চ্যাটে মোটামুটি ০.৭–১.০।",
+            "সৃজনশীল লেখা আর ব্রেইনস্টর্মিংয়ে <code>temperature</code> বাড়িয়ে ১.০–২.০ করুন।",
+            "<code>temperature</code>-এর সাথে <code>top_p</code> বা <code>min_p</code> জুড়ুন। কড়া <code>top_k</code> আর <code>top_p</code> একসাথে চাপাবেন না।"
+          ]
+        }
       },
       "body": [
         {
@@ -1141,6 +1467,68 @@
         "title": "স্ট্রিমিং বনাম নন-স্ট্রিমিং",
         "sub": "জেনারেশন ধাপে ধাপে হয় — টোকেন আসে একটা একটা করে। স্ট্রিমিং মানে টোকেন তৈরি হওয়ার সাথে সাথেই <em>পাঠিয়ে দেওয়া</em>, Server-Sent Events বা chunked HTTP দিয়ে। ফলে বাকিটা তৈরি হতে থাকার মধ্যেই UI প্রথম শব্দটা দেখাতে পারে। নন-স্ট্রিমিং পুরো রেসপন্স তৈরি হওয়া পর্যন্ত অপেক্ষা করে।"
       },
+      "basics": {
+        "en": {
+          "idea": "A model writes its answer one token at a time. <strong>Streaming</strong> shows each piece as soon as it is ready; non-streaming waits and sends the whole answer at the end.",
+          "words": [
+            {
+              "term": "Streaming",
+              "meaning": "Sending the answer in small pieces while the model is still writing it."
+            },
+            {
+              "term": "Server-Sent Events (SSE)",
+              "meaning": "A simple way for a server to keep pushing new pieces of text to a page over one connection."
+            },
+            {
+              "term": "Latency",
+              "meaning": "How long the user waits. Streaming does not cut the total time; it cuts the wait before the first word."
+            },
+            {
+              "term": "Pipeline",
+              "meaning": "A chain of programs where one step's output is the next step's input, with no person reading in between."
+            },
+            {
+              "term": "Batch job",
+              "meaning": "Work that runs in the background over many items, with no one watching the screen."
+            }
+          ],
+          "remember": [
+            "Streaming makes an answer feel faster, but the model does the same work.",
+            "Stream any chat or text that a person reads as it arrives.",
+            "Skip streaming when code needs the full answer first, such as to parse or check JSON, and in batch jobs."
+          ]
+        },
+        "bn": {
+          "idea": "মডেল উত্তর লেখে একবারে একটি টোকেন করে। <strong>স্ট্রিমিং</strong> প্রতিটি টুকরো তৈরি হওয়ামাত্র দেখায়; নন-স্ট্রিমিং অপেক্ষা করে, আর শেষে পুরো উত্তর একসাথে পাঠায়।",
+          "words": [
+            {
+              "term": "স্ট্রিমিং (streaming)",
+              "meaning": "মডেল লিখতে থাকার সময়েই উত্তরটা ছোট ছোট টুকরোয় পাঠানো।"
+            },
+            {
+              "term": "Server-Sent Events (SSE)",
+              "meaning": "একটি সহজ উপায়, যাতে সার্ভার একটি কানেকশন দিয়েই পাতায় একের পর এক নতুন টুকরো পাঠাতে থাকে।"
+            },
+            {
+              "term": "ল্যাটেন্সি (latency)",
+              "meaning": "ব্যবহারকারী কতক্ষণ অপেক্ষা করে। স্ট্রিমিং মোট সময় কমায় না; প্রথম শব্দের আগের অপেক্ষাটা কমায়।"
+            },
+            {
+              "term": "পাইপলাইন (pipeline)",
+              "meaning": "প্রোগ্রামের একটা শিকল, যেখানে এক ধাপের আউটপুট পরের ধাপের ইনপুট; মাঝে কোনো মানুষ পড়ে না।"
+            },
+            {
+              "term": "ব্যাচ জব (batch job)",
+              "meaning": "অনেকগুলো জিনিসের ওপর পেছনে চলা কাজ, যেটা কেউ স্ক্রিনে বসে দেখে না।"
+            }
+          ],
+          "remember": [
+            "স্ট্রিমিংয়ে উত্তর দ্রুত মনে হয়, কিন্তু মডেলের কাজ একই থাকে।",
+            "মানুষ আসতে আসতেই পড়বে এমন যেকোনো চ্যাট বা লেখা স্ট্রিম করুন।",
+            "কোডের যখন আগে পুরো উত্তর দরকার, যেমন JSON পার্স বা যাচাই করতে, আর ব্যাচ জবে, স্ট্রিমিং বন্ধ রাখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "diagram",
@@ -1360,6 +1748,76 @@
         "title": "স্ট্রাকচার্ড আউটপুট আর JSON মোড",
         "sub": "ইচ্ছেমতো লেখা টেক্সটকে নির্দিষ্ট টাইপের স্কিমায় বাঁধলে LLM বড় পাইপলাইনের একটি ভরসাযোগ্য অংশ হয়ে ওঠে। এর তিনটি উপায় আছে, একটার চেয়ে আরেকটা ধাপে ধাপে বেশি কঠোর।"
       },
+      "basics": {
+        "en": {
+          "idea": "Instead of free text, you can make a model answer in a fixed shape, such as JSON with the fields you named. Then your code can use the answer directly, with no guessing.",
+          "words": [
+            {
+              "term": "JSON",
+              "meaning": "A plain-text format for data: names and values inside curly braces, which almost any programming language can read."
+            },
+            {
+              "term": "Schema",
+              "meaning": "A description of the exact shape you want: which fields, and what type each one is, such as text or a number."
+            },
+            {
+              "term": "Parse",
+              "meaning": "To read text and turn it into data that a program can use."
+            },
+            {
+              "term": "JSON mode",
+              "meaning": "The model is told to reply in JSON. It is the loosest of the three levels."
+            },
+            {
+              "term": "Schema-constrained decoding",
+              "meaning": "At each step, the model is blocked from any token that would break the schema, so the output always fits."
+            },
+            {
+              "term": "Typed parsing",
+              "meaning": "Your code turns the answer into a typed object, such as an object of a Pydantic class in Python, and reads the fields directly."
+            }
+          ],
+          "remember": [
+            "Use structured outputs whenever you can.",
+            "Schema-constrained output always parses, so you need no regex, no retry loops, and no extra checks on the shape.",
+            "It adds a little time, but far less than the checking it saves."
+          ]
+        },
+        "bn": {
+          "idea": "খোলামেলা লেখার বদলে মডেলকে একটা নির্দিষ্ট আকারে উত্তর দিতে বলা যায়, যেমন আপনার বলে দেওয়া ফিল্ডসহ JSON। তখন আপনার কোড কোনো আন্দাজ ছাড়াই সরাসরি উত্তরটা ব্যবহার করতে পারে।",
+          "words": [
+            {
+              "term": "JSON",
+              "meaning": "ডেটা লেখার একটি সাধারণ টেক্সট ফরম্যাট: কার্লি ব্র্যাকেটের ভেতরে নাম আর মান, যা প্রায় সব প্রোগ্রামিং ভাষা পড়তে পারে।"
+            },
+            {
+              "term": "স্কিমা (schema)",
+              "meaning": "আপনি ঠিক কোন আকার চান তার বর্ণনা: কোন কোন ফিল্ড, আর প্রতিটি কোন টাইপের, যেমন লেখা বা সংখ্যা।"
+            },
+            {
+              "term": "পার্স (parse)",
+              "meaning": "লেখা পড়ে সেটাকে প্রোগ্রামের ব্যবহারযোগ্য ডেটায় বদলানো।"
+            },
+            {
+              "term": "JSON মোড (JSON mode)",
+              "meaning": "মডেলকে JSON-এ উত্তর দিতে বলা হয়। তিনটি স্তরের মধ্যে এটাই সবচেয়ে ঢিলেঢালা।"
+            },
+            {
+              "term": "স্কিমা-কনস্ট্রেইনড ডিকোডিং (schema-constrained decoding)",
+              "meaning": "প্রতিটি ধাপে মডেলকে এমন কোনো টোকেন বাছতে দেওয়া হয় না যা স্কিমা ভাঙবে, তাই আউটপুট সবসময় খাপ খায়।"
+            },
+            {
+              "term": "টাইপড পার্সিং (typed parsing)",
+              "meaning": "আপনার কোড উত্তরটাকে একটি টাইপড অবজেক্টে বদলায়, যেমন Python-এ একটি Pydantic ক্লাসের অবজেক্ট, আর ফিল্ডগুলো সরাসরি পড়ে।"
+            }
+          ],
+          "remember": [
+            "যখনই পারেন, স্ট্রাকচার্ড আউটপুট ব্যবহার করুন।",
+            "স্কিমা-কনস্ট্রেইনড আউটপুট সবসময় পার্স হয়, তাই regex, রিট্রাই লুপ বা আকার যাচাই লাগে না।",
+            "এতে সামান্য বাড়তি সময় লাগে, কিন্তু যত যাচাই বাঁচে তার তুলনায় তা অনেক কম।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1561,6 +2019,84 @@
       "bn": {
         "title": "ফাংশন কলিং আর টুল ইউজ",
         "sub": "ফাংশন কলিংয়ে মডেল সাধারণ গদ্য না লিখে একটি <em>স্ট্রাকচার্ড</em> অনুরোধ পাঠায়, যাতে একটি টুল চালানো যায় (ফাংশন, API, বা ডেটাবেস কুয়েরি)। মডেল নিজে চালায় না — সে <strong>ঠিক করে কোনটা কল করবে আর কী আর্গুমেন্ট দিয়ে</strong>। আপনার কোড টুল চালায় এবং ফলাফল মডেলকে ফেরত দেয়। প্রতিটি LLM এজেন্টের ভিত্তি এটাই।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A model cannot run anything itself. With <strong>tool use</strong>, it asks for a tool by name, such as <code>get_weather</code>, and your code runs the tool and hands the result back.",
+          "words": [
+            {
+              "term": "Tool",
+              "meaning": "Something your code can run for the model: a function, an API, or a database query."
+            },
+            {
+              "term": "Function calling",
+              "meaning": "The model replies with a structured request to call a tool, with its arguments, instead of plain text."
+            },
+            {
+              "term": "Arguments",
+              "meaning": "The values a tool needs to run, such as the city name for a weather tool."
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "A standard format for describing the shape of JSON data; here it describes each tool's parameters."
+            },
+            {
+              "term": "Agent",
+              "meaning": "A program where the model calls tools in a loop until the task is done."
+            },
+            {
+              "term": "Parallel tool calls",
+              "meaning": "Several independent tool calls in one turn, so they can run at the same time."
+            },
+            {
+              "term": "Computer use",
+              "meaning": "The model looks at screenshots and asks for mouse and keyboard actions, which your code carries out."
+            }
+          ],
+          "remember": [
+            "The model only decides which tool to call and with which arguments. Your code runs the tool.",
+            "The loop: the model asks for a tool, your code runs it, the result goes back, and it repeats.",
+            "Clear tool names and descriptions matter as much as the model you pick."
+          ]
+        },
+        "bn": {
+          "idea": "মডেল নিজে কিছু চালাতে পারে না। <strong>টুল ইউজে</strong> সে নাম ধরে একটা টুল চায়, যেমন <code>get_weather</code>; আপনার কোড টুলটা চালায় আর ফলাফল মডেলকে ফেরত দেয়।",
+          "words": [
+            {
+              "term": "টুল (tool)",
+              "meaning": "আপনার কোড মডেলের হয়ে যা চালাতে পারে: একটি ফাংশন, একটি API বা একটি ডেটাবেস কোয়েরি।"
+            },
+            {
+              "term": "ফাংশন কলিং (function calling)",
+              "meaning": "মডেল সাধারণ লেখার বদলে আর্গুমেন্টসহ একটি টুল চালানোর গোছানো অনুরোধ লেখে।"
+            },
+            {
+              "term": "আর্গুমেন্ট (arguments)",
+              "meaning": "টুল চালাতে যে মানগুলো লাগে, যেমন আবহাওয়ার টুলের জন্য শহরের নাম।"
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "JSON ডেটার আকার বর্ণনা করার একটি প্রচলিত ফরম্যাট; এখানে এটি প্রতিটি টুলের প্যারামিটার বর্ণনা করে।"
+            },
+            {
+              "term": "এজেন্ট (agent)",
+              "meaning": "এমন প্রোগ্রাম, যেখানে কাজ শেষ না হওয়া পর্যন্ত মডেল লুপে টুল ডাকতে থাকে।"
+            },
+            {
+              "term": "প্যারালাল টুল কল (parallel tool calls)",
+              "meaning": "এক টার্নে কয়েকটি আলাদা টুল কল, যাতে সেগুলো একসাথে চলতে পারে।"
+            },
+            {
+              "term": "কম্পিউটার ইউজ (computer use)",
+              "meaning": "মডেল স্ক্রিনশট দেখে মাউস আর কিবোর্ডের কাজ চায়, আর আপনার কোড সেই কাজগুলো করে।"
+            }
+          ],
+          "remember": [
+            "মডেল শুধু ঠিক করে কোন টুল ডাকবে আর কোন আর্গুমেন্ট দেবে। টুল চালায় আপনার কোড।",
+            "লুপটা এমন: মডেল টুল চায়, আপনার কোড চালায়, ফলাফল ফেরত যায়, তারপর আবার।",
+            "টুলের স্পষ্ট নাম আর বর্ণনা মডেল বাছাইয়ের মতোই জরুরি।"
+          ]
+        }
       },
       "body": [
         {
@@ -1815,6 +2351,78 @@
       "bn": {
         "title": "মাল্টিমোডাল ইনপুট (ছবি, অডিও, PDF)",
         "sub": "আধুনিক ফ্রন্টিয়ার মডেল শুধু টেক্সট নয়, আরও অনেক কিছু নেয়: ছবি, অডিও, ভিডিও ফ্রেম, আর PDF-এর পাতা। এগুলো টোকেন হয়ে যায়, যার উপর ট্রান্সফর্মার অ্যাটেনশন দিতে পারে। মূল কৌশলটা এক: <strong>যেকোনো মোডালিটিকে এমবেডিং ভেক্টরের একটি সিকোয়েন্সে বদলে</strong> টেক্সট সিকোয়েন্সের সাথে জুড়ে দেওয়া হয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Many models now take images, audio, video frames, and PDF pages, not just text. Each kind of input is turned into the same kind of numbers as text, so one model can read them all.",
+          "words": [
+            {
+              "term": "Modality",
+              "meaning": "A kind of input, such as text, images, audio, or video."
+            },
+            {
+              "term": "Embedding vector",
+              "meaning": "A list of numbers that stands for a piece of input. The model reads these numbers, not pixels or sound."
+            },
+            {
+              "term": "Encoder",
+              "meaning": "A model that turns one kind of input, such as an image, into numbers that are then mapped into the main model's input."
+            },
+            {
+              "term": "OCR (optical character recognition)",
+              "meaning": "Software that reads the letters in a picture of text, such as a scanned page."
+            },
+            {
+              "term": "Hallucinate",
+              "meaning": "To state something wrong as if it were true, such as misreading a tiny number."
+            },
+            {
+              "term": "Text extraction",
+              "meaning": "Pulling the plain text out of a PDF. It is fast and cheap, but it loses the layout and the pictures."
+            }
+          ],
+          "remember": [
+            "Every kind of input ends up as numbers that the same model reads next to the text.",
+            "Vision models still misread tiny text, exact numbers, and rotated pages.",
+            "To read invoices or IDs exactly, use a dedicated OCR engine, then give the text to the LLM.",
+            "For PDFs, production systems mix text extraction with page images for tables and figures."
+          ]
+        },
+        "bn": {
+          "idea": "এখন অনেক মডেল শুধু লেখা নয়, ছবি, অডিও, ভিডিওর ফ্রেম আর PDF-এর পাতাও নেয়। প্রতিটি ইনপুটকে লেখার মতোই একই ধরনের সংখ্যায় বদলানো হয়, তাই একটি মডেলই সব পড়তে পারে।",
+          "words": [
+            {
+              "term": "মোডালিটি (modality)",
+              "meaning": "ইনপুটের ধরন, যেমন লেখা, ছবি, অডিও বা ভিডিও।"
+            },
+            {
+              "term": "এমবেডিং ভেক্টর (embedding vector)",
+              "meaning": "ইনপুটের একটি অংশকে বোঝানো সংখ্যার তালিকা। মডেল এই সংখ্যাগুলোই পড়ে, পিক্সেল বা শব্দ নয়।"
+            },
+            {
+              "term": "এনকোডার (encoder)",
+              "meaning": "একটি মডেল, যে এক ধরনের ইনপুটকে (যেমন ছবি) সংখ্যায় বদলায়; পরে সেই সংখ্যাগুলো মূল মডেলের ইনপুটে রূপান্তর করা হয়।"
+            },
+            {
+              "term": "OCR (optical character recognition)",
+              "meaning": "যে সফটওয়্যার লেখার ছবি (যেমন স্ক্যান করা পাতা) থেকে অক্ষর পড়ে।"
+            },
+            {
+              "term": "হ্যালুসিনেট করা (hallucinate)",
+              "meaning": "ভুল কিছুকে সত্যের মতো করে বলা, যেমন ছোট একটা সংখ্যা ভুল পড়া।"
+            },
+            {
+              "term": "টেক্সট এক্সট্র্যাকশন (text extraction)",
+              "meaning": "PDF থেকে শুধু লেখাটা বের করা। এটা দ্রুত আর সস্তা, কিন্তু লেআউট আর ছবি হারিয়ে যায়।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি ইনপুট শেষে সংখ্যা হয়ে যায়, যা একই মডেল লেখার পাশাপাশি পড়ে।",
+            "ভিশন মডেল এখনো ছোট লেখা, নিখুঁত সংখ্যা আর ঘোরানো পাতা ভুল পড়ে।",
+            "ইনভয়েস বা আইডি নিখুঁতভাবে পড়তে আলাদা OCR ইঞ্জিন ব্যবহার করুন, তারপর লেখাটা LLM-কে দিন।",
+            "PDF-এর জন্য প্রোডাকশন সিস্টেম টেক্সট এক্সট্র্যাকশনের সাথে টেবিল আর ছবির জন্য পাতার ইমেজ মেলায়।"
+          ]
+        }
       },
       "body": [
         {
@@ -2098,6 +2706,84 @@
         "title": "এমবেডিং মডেল আর রিরেংকার মডেল",
         "sub": "দুটি বিশেষ ধরনের মডেল। LLM-এর সাথে মিলে এরা রিট্রিভাল-অগমেন্টেড জেনারেশন (RAG)-এর স্ট্যান্ডার্ড স্ট্যাক বানায়। <strong>এমবেডিং</strong> টেক্সটকে একটি ভেক্টরে চেপে আনে, যাতে একই অর্থের জিনিস কাছাকাছি থাকে। <strong>রিরেংকার</strong> ক্রস-অ্যাটেনশন দিয়ে (কুয়েরি, ডকুমেন্ট) জোড়ার স্কোর দেয়, ফলে আরও নিখুঁত ফলাফল মেলে।"
       },
+      "basics": {
+        "en": {
+          "idea": "To answer from your own documents, a system first finds the right pieces fast, then checks them carefully. An <strong>embedding model</strong> does the fast search; a <strong>reranker</strong> does the careful check.",
+          "words": [
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "Finding the relevant text first and giving it to the LLM, so it answers from that text."
+            },
+            {
+              "term": "Embedding",
+              "meaning": "A list of numbers that stands for the meaning of a text. Texts with similar meanings get similar numbers."
+            },
+            {
+              "term": "Vector",
+              "meaning": "Another name for that list of numbers."
+            },
+            {
+              "term": "Cosine similarity",
+              "meaning": "A score for how much two vectors point the same way. A high score means the texts have similar meanings."
+            },
+            {
+              "term": "Reranker (cross-encoder)",
+              "meaning": "A model that reads the question and one document together and scores how well they match."
+            },
+            {
+              "term": "BM25",
+              "meaning": "A classic keyword score: documents that share the question's words score higher."
+            },
+            {
+              "term": "Hybrid retrieval",
+              "meaning": "Using keyword search and embedding search together. On standard retrieval tests, it usually beats either one alone."
+            }
+          ],
+          "remember": [
+            "Stage 1: embeddings narrow millions of documents down to a few hundred, fast.",
+            "Stage 2: a reranker picks the best few. It is more accurate, but slower.",
+            "On standard tests, keyword search (BM25) plus embeddings usually beats either alone."
+          ]
+        },
+        "bn": {
+          "idea": "নিজের ডকুমেন্ট থেকে উত্তর দিতে সিস্টেম আগে দ্রুত ঠিক অংশগুলো খোঁজে, তারপর যত্ন করে যাচাই করে। দ্রুত খোঁজার কাজ করে <strong>এমবেডিং মডেল</strong>; যত্ন করে যাচাই করে <strong>রিরেংকার</strong>।",
+          "words": [
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "আগে দরকারি লেখা খুঁজে LLM-কে দেওয়া, যাতে সে সেই লেখা থেকে উত্তর দেয়।"
+            },
+            {
+              "term": "এমবেডিং (embedding)",
+              "meaning": "একটি লেখার অর্থ বোঝানো সংখ্যার তালিকা। কাছাকাছি অর্থের লেখা কাছাকাছি সংখ্যা পায়।"
+            },
+            {
+              "term": "ভেক্টর (vector)",
+              "meaning": "সংখ্যার সেই তালিকারই আরেক নাম।"
+            },
+            {
+              "term": "কোসাইন সিমিলারিটি (cosine similarity)",
+              "meaning": "দুটি ভেক্টর কতটা একই দিকে তাক করে আছে তার স্কোর। স্কোর বেশি মানে লেখা দুটোর অর্থ কাছাকাছি।"
+            },
+            {
+              "term": "রিরেংকার (reranker, cross-encoder)",
+              "meaning": "যে মডেল প্রশ্ন আর একটি ডকুমেন্ট একসাথে পড়ে, আর দুটো কতটা মেলে তার স্কোর দেয়।"
+            },
+            {
+              "term": "BM25",
+              "meaning": "কিওয়ার্ড দিয়ে খোঁজার পুরনো স্কোর: প্রশ্নের শব্দ যে ডকুমেন্টে আছে, সেটা বেশি স্কোর পায়।"
+            },
+            {
+              "term": "হাইব্রিড রিট্রিভাল (hybrid retrieval)",
+              "meaning": "কিওয়ার্ড সার্চ আর এমবেডিং সার্চ একসাথে ব্যবহার করা। প্রচলিত রিট্রিভাল পরীক্ষায় এটা সাধারণত যেকোনো একটার চেয়ে ভালো করে।"
+            }
+          ],
+          "remember": [
+            "ধাপ ১: এমবেডিং লাখ লাখ ডকুমেন্ট থেকে দ্রুত কয়েকশোতে নামিয়ে আনে।",
+            "ধাপ ২: রিরেংকার সেরা কয়েকটি বাছে। এটা বেশি নির্ভুল, কিন্তু ধীর।",
+            "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে সাধারণত যেকোনো একটার চেয়ে ভালো ফল আসে।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -2375,6 +3061,84 @@
       "bn": {
         "title": "রিজনিং মডেল আর এক্সটেন্ডেড থিংকিং",
         "sub": "নতুন ধরনের মডেল, যাদের শেখানো হয়েছে কঠিন সমস্যায় <em>ইনফারেন্সের সময় বেশি কম্পিউট</em> খরচ করতে। সাথে সাথে উত্তর না দিয়ে এরা ভেতরে একটি চিন্তার ধারা (“থিংকিং টোকেন”) লেখে, তারপর চূড়ান্ত উত্তর দেয়। GPT-4-এর পর এটাই সবচেয়ে গুরুত্বপূর্ণ সক্ষমতার পরিবর্তন।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A <strong>reasoning model</strong> thinks before it answers. It writes out its working steps first, which helps on hard problems like math and code, but it costs more and takes longer.",
+          "words": [
+            {
+              "term": "Inference",
+              "meaning": "Running a trained model to get an answer, as opposed to training it."
+            },
+            {
+              "term": "Thinking tokens",
+              "meaning": "The model's working notes, written before the final answer. They count as tokens too."
+            },
+            {
+              "term": "Chain of thought",
+              "meaning": "A step-by-step line of reasoning, like showing your working in a math test."
+            },
+            {
+              "term": "Reinforcement learning (RL)",
+              "meaning": "Training by reward: the model tries, gets a score, and learns to do more of what scored well."
+            },
+            {
+              "term": "Thinking budget",
+              "meaning": "A cap on how many thinking tokens the model may use, to control cost and waiting time."
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "How long it takes until the model's first output appears."
+            },
+            {
+              "term": "Distillation",
+              "meaning": "Training a small model on a big model's outputs, so it learns the skill."
+            }
+          ],
+          "remember": [
+            "Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions.",
+            "They can use 5–50 times more tokens, so set a thinking budget.",
+            "For most chat, extraction, and RAG, a standard model with careful prompting wins."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>রিজনিং মডেল</strong> উত্তর দেওয়ার আগে ভাবে। সে আগে নিজের কাজের ধাপগুলো লিখে নেয়, যা গণিত আর কোডের মতো কঠিন সমস্যায় কাজে দেয়, কিন্তু খরচ আর সময় দুটোই বেশি লাগে।",
+          "words": [
+            {
+              "term": "ইনফারেন্স (inference)",
+              "meaning": "ট্রেন করা মডেল চালিয়ে উত্তর পাওয়া; ট্রেনিং নয়।"
+            },
+            {
+              "term": "থিংকিং টোকেন (thinking tokens)",
+              "meaning": "চূড়ান্ত উত্তরের আগে লেখা মডেলের খসড়া নোট। এগুলোও টোকেন হিসেবে গোনা হয়।"
+            },
+            {
+              "term": "চেইন অফ থট (chain of thought)",
+              "meaning": "ধাপে ধাপে যুক্তি, যেমন অঙ্ক পরীক্ষায় পুরো কাজ দেখিয়ে লেখা।"
+            },
+            {
+              "term": "রিইনফোর্সমেন্ট লার্নিং (reinforcement learning, RL)",
+              "meaning": "পুরস্কার দিয়ে ট্রেনিং: মডেল চেষ্টা করে, স্কোর পায়, আর যেটায় ভালো স্কোর আসে সেটা বেশি করতে শেখে।"
+            },
+            {
+              "term": "থিংকিং বাজেট (thinking budget)",
+              "meaning": "মডেল সর্বোচ্চ কত থিংকিং টোকেন খরচ করতে পারবে তার সীমা, যাতে খরচ আর অপেক্ষা নিয়ন্ত্রণে থাকে।"
+            },
+            {
+              "term": "TTFT (time to first token)",
+              "meaning": "মডেলের প্রথম আউটপুট দেখা দিতে কত সময় লাগে।"
+            },
+            {
+              "term": "ডিস্টিলেশন (distillation)",
+              "meaning": "বড় মডেলের আউটপুট দিয়ে ছোট মডেলকে ট্রেন করা, যাতে সে দক্ষতাটা শেখে।"
+            }
+          ],
+          "remember": [
+            "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন; চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়।",
+            "এরা ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
+            "বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এ ভালো প্রম্পটিংসহ সাধারণ মডেলই সবচেয়ে ভালো কাজ করে।"
+          ]
+        }
       },
       "body": [
         {

@@ -135,6 +135,19 @@ These rules come from the readability passes in the history.
 - In quizzes, write plain numbers in Bangla digits. Digits inside a name or
   a code word (GPT-4o, H100, `top_p`) stay Latin.
 
+**Start here box**
+
+- It is for a reader who finds the section hard: the big idea, the words to
+  know, and what to remember, in everyday words.
+- Choose the words a beginner needs to follow the Technical text, and write
+  each one as the section writes it. Explain each in a sentence or two that
+  uses no other unexplained term.
+- State only what the section states, and keep its numbers. A general
+  definition (what an API is) is fine; a new claim about the topic is not.
+- The Bangla version has the same terms and points, in the same order, with
+  plain numbers in Bangla digits. The format and the checks are in
+  [docs/content-guide.md](docs/content-guide.md#start-here-box).
+
 **Quizzes and interview questions**
 
 - Quiz text is plain text. Write the `why` for the right answer.

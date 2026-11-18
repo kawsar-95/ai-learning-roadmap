@@ -171,6 +171,9 @@ and `bangla` (বাংলা). `SectionView.tsx` shows one at a time.
   The saved choice does not change.
 - Practice tasks follow the language: Bangla on the Bangla site, and Bangla
   on the English site when the voice is বাংলা (`practiceLang`).
+- Every section opens with a **Start here** box (`SectionBasics.tsx`) above
+  the voice text: the big idea, the words to know, and the points to
+  remember. It follows the language the same way as the practice tasks.
 - Videos follow the voice (`videosForVoice`). On the English site, Technical
   and Layman's show the English videos, and বাংলা shows the Bangla videos
   first, then the English ones. The Bangla site shows Bangla videos first in
@@ -191,7 +194,8 @@ The text column is at most 720 px wide.
 - `TopicHeader.tsx` opens the page: the Part number, the reading time,
   **Mark as read**, **Go to quiz**, then the title, tagline, and intro.
   The reading time counts 200 words a minute over the voice each site shows
-  first: Technical in English, বাংলা in Bangla. **Mark as read** marks every
+  first, Technical in English and বাংলা in Bangla, plus the Start here box
+  of each section in the same language. **Mark as read** marks every
   section of the Part as done, and a second click clears them.
 - A Part with more than one section shows one section at a time
   (`SectionPager.tsx`): a step bar ("Section 1 of 10"), then the section,
@@ -208,11 +212,11 @@ The text column is at most 720 px wide.
 The build writes two static JSON files from route handlers with
 `dynamic = "force-static"`:
 
-- `/search-index.json`: one document per section, with the English titles
-  and the Technical text.
+- `/search-index.json`: one document per section, with the English titles,
+  the Start here box, and the Technical text.
 - `/bn/search-index.json`: one document per section, with the Bangla titles,
-  the বাংলা text, and the Technical text. An English term such as "token"
-  still finds Bangla sections.
+  the Bangla Start here box, the বাংলা text, and the Technical text. An
+  English term such as "token" still finds Bangla sections.
 
 `SearchPalette.tsx` is the header button and the dialog. <kbd>Ctrl</kbd>+<kbd>K</kbd>
 or <kbd>⌘</kbd>+<kbd>K</kbd> opens it from any page. On the first open it
@@ -392,7 +396,8 @@ modules in `src/lib/` directly, and some read the real content files.
 
 | File | Covers |
 | --- | --- |
-| `content-schema.test.ts` | The inline tag allowlist and `TopicFileSchema` |
+| `basics-content.test.ts` | Rules for the real Start here boxes: one in every section, the language of each version, Bangla digits, word limits, terms from the section |
+| `content-schema.test.ts` | The inline tag allowlist and `TopicFileSchema`, the Start here box included |
 | `embed.test.ts` | Live view hosts and the embed fields |
 | `i18n.test.ts` | Paths in both languages, the language script, the dictionaries, Bangla digits, Bangla titles in the content |
 | `icons.test.ts` | `icon.svg` colors and validity, `favicon.ico` sizes, icons in the offline list |
@@ -404,7 +409,7 @@ modules in `src/lib/` directly, and some read the real content files.
 | `quiz.test.ts` | Scoring and the saved best scores |
 | `quiz-content.test.ts` | Rules for the real quizzes: 5 questions, Bangla digits, answer positions |
 | `roadmap.test.ts` | The roadmap files, lesson keys and links, durations |
-| `search.test.ts` | Search documents in both languages, block text, reading time |
+| `search.test.ts` | Search documents in both languages, the Start here box in them, block text, reading time |
 | `theme.test.ts` | `resolveTheme` and the theme script |
 | `video-check.test.ts` | The title and channel matching of `npm run check:videos` |
 | `video-curation-scripts.test.ts` | The two shell steps of the video curation |
@@ -457,6 +462,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   ├── components/
 │   │   ├── content/
 │   │   │   ├── SectionView.tsx          one section: intro, live views, voices, practice, videos, done
+│   │   │   ├── SectionBasics.tsx        the Start here box: the big idea, words to know, what to remember
 │   │   │   ├── SectionPager.tsx         one section at a time, with the step bar
 │   │   │   ├── VoiceSwitcher.tsx        the voice tabs
 │   │   │   ├── ProseBlocks.tsx          renders a block list, one component per block type
@@ -500,7 +506,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │   ├── roadmap-lessons.json         every phase and lesson (generated)
 │   │   └── roadmap-phases.json          stages, summaries, links to the Parts (by hand)
 │   └── lib/
-│       ├── content-schema.ts            block, section, Part, video, embed, practice, and quiz schemas
+│       ├── content-schema.ts            block, section, Start here box, Part, video, embed, practice, and quiz schemas
 │       ├── topics.ts                    loads the Parts; TOPIC_ORDER (server only)
 │       ├── roadmap.ts                   loads the roadmap (server only)
 │       ├── roadmap-schema.ts            roadmap schemas, buildRoadmap, lesson URLs, durations

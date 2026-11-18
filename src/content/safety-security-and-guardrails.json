@@ -16,6 +16,96 @@
         "title": "সেফটি, সিকিউরিটি আর গার্ডরেইল",
         "sub": "LLM অ্যাপ হলো এমন সফটওয়্যার, যার আক্রমণের একটা নতুন জায়গা তৈরি হয়েছে: প্রম্পট এখন ইউজারের প্রভাবে বদলায়, টুল কল এখন ডেটা বের করে নেওয়ার পথ, আর রেন্ডার করা আউটপুট এখন স্ক্রিপ্ট চলার জায়গা। <strong>সেফটি</strong> হলো সেই জায়গাটাকে সীমার মধ্যে বেঁধে রাখার কাজ।"
       },
+      "basics": {
+        "en": {
+          "idea": "An AI app can be attacked in new ways: through the prompt, the tool calls, and the output. <strong>Safety</strong> is the work of limiting those risks.",
+          "words": [
+            {
+              "term": "Prompt injection",
+              "meaning": "When text written by a user takes over what the model does. It can be typed directly or hidden in a document the model reads."
+            },
+            {
+              "term": "Jailbreak",
+              "meaning": "A creative rewrite of a forbidden request that slips past the model's safety training."
+            },
+            {
+              "term": "Data exfiltration",
+              "meaning": "Sneaking data out of a system. Here it happens through tool calls, or through links and images the app shows."
+            },
+            {
+              "term": "Content moderation",
+              "meaning": "Checking text for harmful content. Tools sort it into categories such as hate, sexual content, violence, and self-harm."
+            },
+            {
+              "term": "Guardrail frameworks",
+              "meaning": "Tools like NeMo Guardrails and Guardrails AI. They put rules and checks around an LLM call."
+            },
+            {
+              "term": "PII redaction",
+              "meaning": "Finding and removing personal details from text before the model sees it, and again before the reply is shown."
+            },
+            {
+              "term": "Rate limiting",
+              "meaning": "A per-user or per-IP cap on requests and tokens, so one user or bot can't run up your bill."
+            },
+            {
+              "term": "Output validation",
+              "meaning": "Checking that the model's reply has the exact shape you expect. A schema is the strict description of that shape."
+            }
+          ],
+          "remember": [
+            "Indirect injection is the harder kind, because the attacker never needs to use your system.",
+            "Prompt injection, ranked #1 in the OWASP LLM Top 10 for 2025, can make tools or Markdown leak user data.",
+            "Accept that 100% safety is unachievable. Jailbreaks are a moving target.",
+            "Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
+            "Log every prompt, output, and tool call. SOC 2, HIPAA, and the EU AI Act require it."
+          ]
+        },
+        "bn": {
+          "idea": "AI অ্যাপকে নতুন উপায়ে আক্রমণ করা যায়: প্রম্পট, টুল কল আর আউটপুটের মধ্য দিয়ে। <strong>সেফটি</strong> হলো সেই ঝুঁকিগুলো সীমার মধ্যে রাখার কাজ।",
+          "words": [
+            {
+              "term": "প্রম্পট ইনজেকশন (prompt injection)",
+              "meaning": "ইউজারের লেখা টেক্সট যখন মডেলের আচরণ দখল করে নেয়। এটা সরাসরি টাইপ করা যায়, বা মডেলের পড়া ডকুমেন্টে লুকিয়ে রাখা যায়।"
+            },
+            {
+              "term": "জেইলব্রেক (jailbreak)",
+              "meaning": "নিষিদ্ধ অনুরোধের এমন সৃজনশীল পুনর্লিখন, যা মডেলের সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়।"
+            },
+            {
+              "term": "ডেটা এক্সফিল্ট্রেশন (data exfiltration)",
+              "meaning": "সিস্টেম থেকে চুপিসারে ডেটা বের করে নেওয়া। এখানে তা হয় টুল কলের মাধ্যমে, বা অ্যাপের দেখানো লিংক ও ছবির মাধ্যমে।"
+            },
+            {
+              "term": "কনটেন্ট মডারেশন (content moderation)",
+              "meaning": "টেক্সটে ক্ষতিকর বিষয় আছে কি না যাচাই করা। টুল লেখাকে ঘৃণা, যৌনতা, সহিংসতা, আত্মক্ষতির মতো ভাগে সাজায়।"
+            },
+            {
+              "term": "গার্ডরেইল ফ্রেমওয়ার্ক (guardrail frameworks)",
+              "meaning": "NeMo Guardrails আর Guardrails AI-এর মতো টুল। এগুলো LLM কলের চারপাশে নিয়ম আর যাচাই বসায়।"
+            },
+            {
+              "term": "PII রিড্যাকশন (PII redaction)",
+              "meaning": "মডেলের কাছে পাঠানোর আগে, আর উত্তর দেখানোর আগেও, লেখা থেকে ব্যক্তিগত তথ্য খুঁজে সরিয়ে ফেলা।"
+            },
+            {
+              "term": "রেট লিমিটিং (rate limiting)",
+              "meaning": "প্রতি ইউজার বা প্রতি IP-এর জন্য রিকোয়েস্ট আর টোকেনের সীমা, যাতে একজন ইউজার বা একটি বট আপনার বিল বাড়িয়ে দিতে না পারে।"
+            },
+            {
+              "term": "আউটপুট ভ্যালিডেশন (output validation)",
+              "meaning": "মডেলের উত্তর ঠিক যে গঠনে চাই, সেই গঠনে আছে কি না যাচাই করা। স্কিমা হলো সেই গঠনের কড়া বর্ণনা।"
+            }
+          ],
+          "remember": [
+            "পরোক্ষ ইনজেকশন বেশি কঠিন, কারণ আক্রমণকারীকে আপনার সিস্টেম ব্যবহারই করতে হয় না।",
+            "২০২৫-এর OWASP LLM Top 10-এ #১ স্থানে থাকা প্রম্পট ইনজেকশন টুল বা Markdown দিয়ে ইউজারের ডেটা বাইরে পাঠাতে পারে।",
+            "১০০% সেফটি অর্জনযোগ্য নয়, এটা মেনে নিন। জেইলব্রেক একটি চলমান লক্ষ্য।",
+            "LLM-এর ভ্যালিড JSON দেওয়ার ওপর কখনো ভরসা করবেন না। কড়া স্কিমা দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই করুন, তারপর রিফিউজ করুন।",
+            "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC 2, HIPAA আর EU AI Act-এ এটা দরকার।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -45,7 +135,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Once the model can call tools or render Markdown, a prompt-injected output can call a tool with attacker-chosen arguments (\"send an email to attacker with all user data\") or render a Markdown image whose <code>src</code> URL encodes the user's session. The OWASP LLM Top 10 lists this as #1 in 2025.<a class=\"cite\" href=\"#src25\">[25]</a>"
+          "html": "Once the model can call tools or render Markdown, a prompt-injected output can call a tool with attacker-chosen arguments (\"send an email to attacker with all user data\") or render a Markdown image whose <code>src</code> URL encodes the user's session. The OWASP LLM Top 10 ranks prompt injection, the cause of this attack, #1 in 2025.<a class=\"cite\" href=\"#src25\">[25]</a>"
         },
         {
           "type": "heading",
@@ -203,7 +293,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>টুল কল ও রেন্ডার করা লিংক দিয়ে ডেটা এক্সফিল্ট্রেশন:</strong> মডেল একবার টুল কল করতে বা Markdown রেন্ডার করতে পারলে দুইভাবে ডেটা বেরিয়ে যেতে পারে। প্রম্পট-ইনজেক্টেড আউটপুট আক্রমণকারীর বেছে দেওয়া আর্গুমেন্ট সহ টুল কল করতে পারে (\"attacker-কে ইমেল পাঠাও ব্যবহারকারীর সব ডেটা সহ\")। অথবা আউটপুট এমন Markdown ছবি রেন্ডার করতে পারে, যার <code>src</code> URL ইউজারের সেশন এনকোড করে। OWASP LLM Top ১০ এটিকে ২০২৫-এ #1 হিসেবে তালিকাভুক্ত করেছে।<a class=\"cite\" href=\"#src25\">[২৫]</a>"
+          "html": "<strong>টুল কল ও রেন্ডার করা লিংক দিয়ে ডেটা এক্সফিল্ট্রেশন:</strong> মডেল একবার টুল কল করতে বা Markdown রেন্ডার করতে পারলে দুইভাবে ডেটা বেরিয়ে যেতে পারে। প্রম্পট-ইনজেক্টেড আউটপুট আক্রমণকারীর বেছে দেওয়া আর্গুমেন্ট সহ টুল কল করতে পারে (\"attacker-কে ইমেল পাঠাও ব্যবহারকারীর সব ডেটা সহ\")। অথবা আউটপুট এমন Markdown ছবি রেন্ডার করতে পারে, যার <code>src</code> URL ইউজারের সেশন এনকোড করে। এই আক্রমণের মূলে আছে প্রম্পট ইনজেকশন, আর OWASP LLM Top ১০ সেটিকে ২০২৫-এ #1 হিসেবে তালিকাভুক্ত করেছে।<a class=\"cite\" href=\"#src25\">[২৫]</a>"
         },
         {
           "type": "paragraph",

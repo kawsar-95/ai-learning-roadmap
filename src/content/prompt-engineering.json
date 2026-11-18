@@ -16,6 +16,78 @@
         "title": "সিস্টেম, ইউজার আর অ্যাসিস্ট্যান্ট মেসেজের ডিজাইন",
         "sub": "আজকের প্রতিটি চ্যাট API <strong>মেসেজের</strong> একটি অ্যারে নেয়, আর প্রতিটির গায়ে একটি <em>রোল</em> লাগানো থাকে। এই রোলগুলোর মধ্যে নির্দেশ কীভাবে ভাগ করবেন, তার উপরই নির্ভরযোগ্য প্রম্পটিং দাঁড়িয়ে আছে। এটা ঠিকঠাক করতে পারলে পরের সব কৌশল (ফিউ-শট, টুল, এজেন্ট) সহজ হয়ে যায়।"
       },
+      "basics": {
+        "en": {
+          "idea": "Every message you send to a chat model has a <strong>role</strong>: system, user, or assistant. Where you put each instruction decides how reliable the answers are, and it makes later techniques easier.",
+          "words": [
+            {
+              "term": "Role",
+              "meaning": "A tag on each message that says who is speaking: <code>system</code>, <code>user</code>, or <code>assistant</code>."
+            },
+            {
+              "term": "System message",
+              "meaning": "The app's fixed rules for every call: how the model should act, the output format, and safety limits. Think of it as the app's instruction sheet."
+            },
+            {
+              "term": "User message",
+              "meaning": "The real task for this turn: the request, the data to work on, and any retrieved text. Be specific and give all inputs."
+            },
+            {
+              "term": "Assistant message",
+              "meaning": "The model's own earlier replies. In a multi-turn chat, you send this history again each turn."
+            },
+            {
+              "term": "RAG",
+              "meaning": "Finding the relevant text first and putting it in the prompt, so the model answers from that text."
+            },
+            {
+              "term": "Lost in the middle",
+              "meaning": "Models notice information in the middle of a long text less reliably than information at the start or end."
+            }
+          ],
+          "remember": [
+            "Put what is true for every call in the system message. Put the specific request and its data in the user message.",
+            "Hard rules, like the output format and what the model must refuse, go in system. Soft style wishes go in user, next to the request.",
+            "A 4,000-token system message gives worse results than a short, focused one.",
+            "Put your most important instructions at the beginning or end, not in the middle."
+          ]
+        },
+        "bn": {
+          "idea": "চ্যাট মডেলে পাঠানো প্রতিটি মেসেজের একটা <strong>রোল (role)</strong> থাকে: system, user বা assistant। কোন নির্দেশ কোন রোলে বসাবেন, তার ওপর উত্তর কতটা নির্ভরযোগ্য হবে তা নির্ভর করে, আর পরের কৌশলগুলোও সহজ হয়।",
+          "words": [
+            {
+              "term": "রোল (role)",
+              "meaning": "প্রতিটি মেসেজে লাগানো ট্যাগ, যা বলে কে কথা বলছে: <code>system</code>, <code>user</code> বা <code>assistant</code>।"
+            },
+            {
+              "term": "সিস্টেম মেসেজ (system message)",
+              "meaning": "প্রতিটি কলেই যা সত্যি, সেই স্থির নিয়ম: মডেল কীভাবে আচরণ করবে, আউটপুট ফরম্যাট, সেফটি সীমা। এটা অ্যাপের নির্দেশিকার মতো।"
+            },
+            {
+              "term": "ইউজার মেসেজ (user message)",
+              "meaning": "এই টার্নের আসল কাজ: অনুরোধ, কাজ করার ডেটা আর খুঁজে আনা লেখা। স্পষ্ট হতে হবে, দরকারি সব ইনপুট দিতে হবে।"
+            },
+            {
+              "term": "অ্যাসিস্ট্যান্ট মেসেজ (assistant message)",
+              "meaning": "মডেলের নিজের আগের উত্তর। মাল্টি-টার্ন চ্যাটে এই ইতিহাস প্রতি টার্নে আবার পাঠাতে হয়।"
+            },
+            {
+              "term": "RAG",
+              "meaning": "আগে দরকারি লেখা খুঁজে প্রম্পটে দেওয়া, যাতে মডেল সেই লেখা থেকে উত্তর দেয়।"
+            },
+            {
+              "term": "লস্ট ইন দ্য মিডল (lost in the middle)",
+              "meaning": "লম্বা লেখার মাঝখানের তথ্য মডেল শুরু বা শেষের তথ্যের চেয়ে কম নির্ভরযোগ্যভাবে খেয়াল করে।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি কলে যা সত্যি, তা সিস্টেম মেসেজে রাখুন। নির্দিষ্ট অনুরোধ আর তার ডেটা রাখুন ইউজার মেসেজে।",
+            "কঠিন নিয়ম, যেমন আউটপুট ফরম্যাট আর মডেল কী প্রত্যাখ্যান করবে, থাকবে সিস্টেমে। নরম স্টাইলের পছন্দ থাকবে ইউজার মেসেজে, অনুরোধের পাশেই।",
+            "৪,০০০ টোকেনের সিস্টেম মেসেজ ছোট ও ফোকাসড মেসেজের চেয়ে খারাপ ফল দেয়।",
+            "সবচেয়ে জরুরি নির্দেশ শুরুতে বা শেষে রাখুন, মাঝখানে নয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -311,6 +383,78 @@
       "bn": {
         "title": "ফিউ-শট, রোল প্রম্পটিং আর পারসোনা",
         "sub": "মডেল কেমন আচরণ করবে, তা ঠিক হয় <em>আপনি তাকে কী দেখান</em> তা দিয়ে। তিনটি সম্পর্কিত কৌশল: <strong>ফিউ-শট</strong> উদাহরণ (বলার বদলে দেখান), <strong>রোল প্রম্পটিং</strong> (একটি পরিচয় দিন), আর <strong>পারসোনা ডিজাইন</strong> (সেই পরিচয়কে বিস্তারিত করুন)।"
+      },
+      "basics": {
+        "en": {
+          "idea": "You can shape a model by showing it examples, giving it a role, or both. <strong>Few-shot</strong> examples are more reliable than a long description, and a detailed persona beats a vague one.",
+          "words": [
+            {
+              "term": "Few-shot examples",
+              "meaning": "A few sample input and output pairs, 2–8, placed in the prompt. The model finds the pattern and follows it."
+            },
+            {
+              "term": "Edge case",
+              "meaning": "A tricky input, like sarcasm or mixed feelings, that the easy pattern does not cover."
+            },
+            {
+              "term": "Role prompting",
+              "meaning": "Telling the model who to be, for example a senior copyeditor. It changes style, how much it hedges (holds back or softens claims), and depth."
+            },
+            {
+              "term": "Persona",
+              "meaning": "A detailed role with level, vocabulary, and tone. It works best in the system message."
+            },
+            {
+              "term": "RAG",
+              "meaning": "Finding the relevant text first and giving it to the model, so it answers from that text."
+            },
+            {
+              "term": "Hallucination",
+              "meaning": "When a model gives a wrong answer that sounds sure."
+            }
+          ],
+          "remember": [
+            "Examples are the spec: 2–8 pairs work better than describing the task in prose.",
+            "Cover the common case, tricky edge cases, and format traps like multi-line input in your examples.",
+            "A detailed persona beats a vague one, and it belongs in the system message.",
+            "A persona gives style, not knowledge. When expertise matters, add retrieved knowledge (RAG)."
+          ]
+        },
+        "bn": {
+          "idea": "উদাহরণ দেখিয়ে, রোল দিয়ে বা দুটোই করে মডেলের আচরণ গড়া যায়। লম্বা বর্ণনার চেয়ে <strong>ফিউ-শট (few-shot)</strong> উদাহরণ বেশি নির্ভরযোগ্য, আর বিস্তারিত পারসোনা ঝাপসা পারসোনার চেয়ে ভালো।",
+          "words": [
+            {
+              "term": "ফিউ-শট উদাহরণ (few-shot examples)",
+              "meaning": "প্রম্পটে দেওয়া কয়েকটি নমুনা ইনপুট ও আউটপুটের জোড়া, ২–৮টি। মডেল প্যাটার্ন ধরে নিয়ে সেটা মেনে চলে।"
+            },
+            {
+              "term": "এজ কেস (edge case)",
+              "meaning": "কঠিন ইনপুট, যেমন স্যারকাজম বা মিশ্র অনুভূতি, যা সহজ প্যাটার্নে ধরা পড়ে না।"
+            },
+            {
+              "term": "রোল প্রম্পটিং (role prompting)",
+              "meaning": "মডেলকে বলে দেওয়া সে কী সাজবে, যেমন সিনিয়র কপিএডিটর। এতে স্টাইল, সে কতটা দাবি নরম করে বা সংযত থাকে, আর গভীরতা বদলে যায়।"
+            },
+            {
+              "term": "পারসোনা (persona)",
+              "meaning": "স্তর, শব্দভান্ডার আর সুরসহ বিস্তারিত রোল। সিস্টেম মেসেজে এটা সবচেয়ে ভালো কাজ করে।"
+            },
+            {
+              "term": "RAG",
+              "meaning": "আগে দরকারি লেখা খুঁজে মডেলকে দেওয়া, যাতে সে সেই লেখা থেকে উত্তর দেয়।"
+            },
+            {
+              "term": "হ্যালুসিনেশন (hallucination)",
+              "meaning": "মডেল যখন আত্মবিশ্বাসের সাথে ভুল উত্তর দেয়।"
+            }
+          ],
+          "remember": [
+            "উদাহরণই স্পেক: কথায় বর্ণনার চেয়ে ২–৮টি জোড়া বেশি ভালো কাজ করে।",
+            "উদাহরণে সাধারণ কেস, কঠিন এজ কেস আর মাল্টি-লাইন ইনপুটের মতো ফরম্যাট ট্র্যাপ রাখুন।",
+            "বিস্তারিত পারসোনা ঝাপসা পারসোনার চেয়ে ভালো, আর তা থাকবে সিস্টেম মেসেজে।",
+            "পারসোনা স্টাইল দেয়, জ্ঞান দেয় না। বিশেষজ্ঞতা দরকার হলে রিট্রিভ করা জ্ঞান (RAG) যোগ করুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -623,6 +767,78 @@
         "title": "চেইন-অফ-থট, ReAct আর রিফ্লেকশন প্যাটার্ন",
         "sub": "এই তিনটি প্যাটার্ন মডেলের মধ্যে <em>রিজনিং</em> জাগিয়ে তোলে, অর্থাৎ উত্তর দেওয়ার আগে AI “জোরে জোরে ভাবে”। এগুলো ছাড়া কঠিন, বহুধাপের সমস্যায় মডেল আন্দাজে উত্তর দেয়। এগুলো থাকলে সে পরিকল্পনা করতে পারে, কিছু খুঁজে দেখতে পারে, আর নিজের ভুল শুধরে নিতে পারে।"
       },
+      "basics": {
+        "en": {
+          "idea": "These patterns let a model think out loud before it answers. <strong>Chain-of-thought</strong> writes out the steps, ReAct adds tool use, and reflection learns from mistakes. Without them, a model guesses at hard multi-step problems.",
+          "words": [
+            {
+              "term": "Chain-of-Thought (CoT)",
+              "meaning": "Making the model write its reasoning steps before the final answer. The extra tokens give the hard part more computation."
+            },
+            {
+              "term": "Zero-shot CoT",
+              "meaning": "Adding the phrase <code>Let's think step by step</code> to the prompt, with no examples at all."
+            },
+            {
+              "term": "Self-consistency",
+              "meaning": "Asking for N separate reasoning chains and taking the answer that most of them give."
+            },
+            {
+              "term": "Tree of Thoughts",
+              "meaning": "Trying several reasoning branches, going back when one fails, and dropping weak ones. Costly, but strong on hard puzzles."
+            },
+            {
+              "term": "ReAct",
+              "meaning": "Reason plus act. The model loops: a thought, an action like a search, then an observation of the result."
+            },
+            {
+              "term": "Reflexion",
+              "meaning": "After each try, the model writes down what went wrong in memory, so the next try learns from it."
+            }
+          ],
+          "remember": [
+            "Showing worked steps, or adding <code>Let's think step by step</code>, improves math, logic, and multi-step answers.",
+            "ReAct loops think, act, observe. It is the pattern behind every modern AI agent.",
+            "On a task benchmark, Reflexion scored ~91% where plain ReAct scored ~40%.",
+            "A reasoning trace can be 10–50× longer than a direct answer. Use it only for hard tasks."
+          ]
+        },
+        "bn": {
+          "idea": "এই প্যাটার্নগুলো মডেলকে উত্তরের আগে জোরে জোরে ভাবতে দেয়। <strong>চেইন-অফ-থট (chain-of-thought)</strong> ধাপগুলো লিখে ফেলে, ReAct টুল ব্যবহার যোগ করে, আর রিফ্লেকশন ভুল থেকে শেখে। নইলে কঠিন মাল্টি-স্টেপ সমস্যায় মডেল আন্দাজে উত্তর দেয়।",
+          "words": [
+            {
+              "term": "চেইন-অফ-থট (Chain-of-Thought, CoT)",
+              "meaning": "চূড়ান্ত উত্তরের আগে মডেলকে তার যুক্তির ধাপ লিখতে বলা। বাড়তি টোকেন কঠিন অংশের জন্য বেশি কম্পিউটেশন দেয়।"
+            },
+            {
+              "term": "জিরো-শট CoT (zero-shot CoT)",
+              "meaning": "কোনো উদাহরণ ছাড়াই প্রম্পটে শুধু <code>Let's think step by step</code> বাক্যটা যোগ করা।"
+            },
+            {
+              "term": "সেলফ-কনসিস্টেন্সি (self-consistency)",
+              "meaning": "N-টা আলাদা যুক্তির চেইন চেয়ে, যে উত্তরটা বেশিরভাগ চেইনে আসে সেটা নেওয়া।"
+            },
+            {
+              "term": "ট্রি অফ থটস (Tree of Thoughts)",
+              "meaning": "কয়েকটি যুক্তির শাখা চেষ্টা করা, ব্যর্থ হলে ফিরে আসা, দুর্বলগুলো ছেঁটে ফেলা। খরচ বেশি, কিন্তু কঠিন ধাঁধায় শক্তিশালী।"
+            },
+            {
+              "term": "ReAct",
+              "meaning": "Reason আর Act মিলিয়ে। মডেল পালা করে চলে: একটা ভাবনা, একটা অ্যাকশন যেমন সার্চ, তারপর ফলাফলের পর্যবেক্ষণ।"
+            },
+            {
+              "term": "Reflexion",
+              "meaning": "প্রতিটি চেষ্টার পর মডেল কোথায় ভুল হলো তা মেমরিতে লিখে রাখে, যাতে পরের চেষ্টা সেখান থেকে শেখে।"
+            }
+          ],
+          "remember": [
+            "কাজের ধাপ দেখালে বা <code>Let's think step by step</code> যোগ করলে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ উত্তর ভালো হয়।",
+            "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।",
+            "একটা টাস্ক বেঞ্চমার্কে Reflexion ~৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে ~৪০%।",
+            "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -891,6 +1107,78 @@
         "title": "নির্ভরযোগ্য পার্সিংয়ের জন্য XML / Markdown স্ট্রাকচারিং",
         "sub": "মানুষের জন্য সাধারণ গদ্যই চলে, কিন্তু সফটওয়্যারের দরকার স্ট্রাকচার্ড আউটপুট। Markdown আর XML মডেলকে একটি <em>চোখে দেখা কাঠামো</em> দেয়, যা একই সাথে <em>পার্সিংয়ের চুক্তি</em>ও বটে — মডেল সেকশনগুলোতে লেবেল দিতে পারে, আর আপনি সেগুলো নির্ভুলভাবে তুলে নিতে পারেন।"
       },
+      "basics": {
+        "en": {
+          "idea": "Software needs output it can read reliably. Labeled sections in Markdown or XML give the model a clear shape to follow and give your code clear parts to pull out. This is <strong>structured output</strong>.",
+          "words": [
+            {
+              "term": "Anchoring",
+              "meaning": "The model pays more attention to content that has a label, such as a heading <code>## Summary</code>."
+            },
+            {
+              "term": "Parsing",
+              "meaning": "Reading an output and pulling out the parts you need. Labeled sections make this simple."
+            },
+            {
+              "term": "Regex (regular expression)",
+              "meaning": "A short pattern that finds matching text. One regex can pull out a whole labeled section."
+            },
+            {
+              "term": "Markdown sections",
+              "meaning": "Headings like <code>## Answer</code>. They work for any model, are easy to read, and suit chat-facing output."
+            },
+            {
+              "term": "XML tags",
+              "meaning": "Named tags such as <code>analysis</code> and <code>answer</code> that open and close a block. The boundaries are stricter, and blocks can sit inside blocks."
+            },
+            {
+              "term": "Prompt pattern",
+              "meaning": "A reusable prompt template, such as Persona or Flipped Interaction."
+            }
+          ],
+          "remember": [
+            "Labeled sections help the model and let your code pull out parts with one regex instead of parsing English.",
+            "Labels also show which section failed when an output is wrong.",
+            "Use Markdown for chat-facing output. Use XML tags for agents and tool pipelines.",
+            "Reuse the skeleton: role → context → task → output format → rules."
+          ]
+        },
+        "bn": {
+          "idea": "সফটওয়্যারের দরকার এমন আউটপুট, যা নির্ভরযোগ্যভাবে পড়া যায়। Markdown বা XML-এর লেবেল দেওয়া সেকশন মডেলকে স্পষ্ট কাঠামো দেয়, আর আপনার কোডকে দেয় তুলে আনার মতো স্পষ্ট অংশ। একেই বলে <strong>স্ট্রাকচার্ড আউটপুট (structured output)</strong>।",
+          "words": [
+            {
+              "term": "অ্যাংকরিং (anchoring)",
+              "meaning": "লেবেল দেওয়া অংশে মডেল বেশি মনোযোগ দেয়, যেমন <code>## Summary</code> হেডিং।"
+            },
+            {
+              "term": "পার্সিং (parsing)",
+              "meaning": "আউটপুট পড়ে দরকারি অংশগুলো তুলে আনা। লেবেল দেওয়া সেকশন থাকলে এটা সহজ হয়।"
+            },
+            {
+              "term": "রেজেক্স (regex, regular expression)",
+              "meaning": "মিলে যাওয়া লেখা খুঁজে বের করার একটা ছোট প্যাটার্ন। একটা রেজেক্সেই পুরো লেবেল দেওয়া সেকশন তোলা যায়।"
+            },
+            {
+              "term": "Markdown সেকশন (Markdown sections)",
+              "meaning": "<code>## Answer</code>-এর মতো হেডিং। সব মডেলে কাজ করে, পড়তে সহজ, আর ব্যবহারকারীর দিকের আউটপুটে ভালো।"
+            },
+            {
+              "term": "XML ট্যাগ (XML tags)",
+              "meaning": "<code>analysis</code> ও <code>answer</code>-এর মতো নামওয়ালা ট্যাগ, যা একটা ব্লক খোলে ও বন্ধ করে। সীমানা বেশি কঠোর, আর ব্লকের ভেতরে ব্লক রাখা যায়।"
+            },
+            {
+              "term": "প্রম্পট প্যাটার্ন (prompt pattern)",
+              "meaning": "প্রম্পটের পুনর্ব্যবহারযোগ্য টেমপ্লেট, যেমন Persona বা Flipped Interaction।"
+            }
+          ],
+          "remember": [
+            "লেবেল দেওয়া সেকশন মডেলকে সাহায্য করে, আর একটা রেজেক্সেই অংশ তোলা যায়, ইংরেজি বাক্য বিশ্লেষণ করতে হয় না।",
+            "আউটপুট ভুল হলে লেবেল দেখে বোঝা যায় ঠিক কোন সেকশন ব্যর্থ হয়েছে।",
+            "ব্যবহারকারীর দিকের আউটপুটে Markdown, আর এজেন্ট ও টুল পাইপলাইনে XML ট্যাগ ব্যবহার করুন।",
+            "এই কাঠামো বারবার ব্যবহার করুন: রোল → কনটেক্সট → টাস্ক → আউটপুট ফরম্যাট → নিয়ম।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1147,6 +1435,86 @@
       "bn": {
         "title": "প্রম্পট টেমপ্লেটিং আর ভেরিয়েবল ইনজেকশন",
         "sub": "আসল প্রম্পট একটা সাধারণ স্ট্রিং নয়। এগুলো ভেরিয়েবল-সহ <strong>টেমপ্লেট</strong> — ইউজারের ইনপুট, রিট্রিভ করা কনটেক্সট, আজকের তারিখ, মডেলের আগের উত্তর — যা কল করার সময় বসানো হয়। এগুলোকে কোডের মতো দেখুন: কাঠামোবদ্ধ, টাইপ-যুক্ত, আর টেস্ট করার যোগ্য।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Real prompts are <strong>templates</strong>: text with blanks that get filled in when you call the model. Treat them like code: well structured, checked, and tested.",
+          "words": [
+            {
+              "term": "Template",
+              "meaning": "A prompt with blanks, called variables, such as user input or today's date. You fill them in at call time."
+            },
+            {
+              "term": "f-string",
+              "meaning": "A quick Python way to put variables into text. Fine for prototypes, but curly braces <code>{ }</code> in JSON content can cause trouble."
+            },
+            {
+              "term": "Jinja2",
+              "meaning": "A template engine. It fills in many variables and also supports loops, conditions, and reusable parts."
+            },
+            {
+              "term": "Pydantic / Zod",
+              "meaning": "Tools that check your inputs have the right shape before you send them to the model."
+            },
+            {
+              "term": "Sentinel",
+              "meaning": "A marker that will not collide with your data, such as triple quotes, a custom token, or a random ID."
+            },
+            {
+              "term": "Prompt injection",
+              "meaning": "Sneaking fake instructions into a variable so the model follows them instead of your rules."
+            },
+            {
+              "term": "Golden outputs",
+              "meaning": "Saved correct answers. A unit test compares the prompt's new output against them."
+            }
+          ],
+          "remember": [
+            "The production pattern is a function that returns the whole list of messages.",
+            "Wrap untrusted input in XML tags, and let the system message tell the model it is data, not instructions.",
+            "Never trust f-strings with user input. It is a real prompt injection path.",
+            "Summarise or truncate big input first. Store templates as files, then version, lint (auto-check for mistakes), and test them."
+          ]
+        },
+        "bn": {
+          "idea": "বাস্তব প্রম্পট হলো <strong>টেমপ্লেট</strong>: ফাঁকা ঘরওয়ালা লেখা, যা মডেলকে কল করার সময় ভরা হয়। একে কোডের মতো দেখুন: গোছানো, যাচাই করা আর পরীক্ষা করা।",
+          "words": [
+            {
+              "term": "টেমপ্লেট (template)",
+              "meaning": "ফাঁকা ঘর, মানে ভেরিয়েবলওয়ালা প্রম্পট, যেমন ইউজারের ইনপুট বা আজকের তারিখ। কল করার সময় ঘরগুলো ভরা হয়।"
+            },
+            {
+              "term": "f-string",
+              "meaning": "লেখার ভেতরে ভেরিয়েবল বসানোর দ্রুত Python পদ্ধতি। প্রোটোটাইপে ঠিক আছে, তবে JSON-এর কার্লি ব্রেস <code>{ }</code> নিয়ে ঝামেলা হতে পারে।"
+            },
+            {
+              "term": "Jinja2",
+              "meaning": "একটি টেমপ্লেট ইঞ্জিন। এটা অনেক ভেরিয়েবল বসায়, আর লুপ, কন্ডিশন ও পুনর্ব্যবহারযোগ্য অংশও সামলায়।"
+            },
+            {
+              "term": "Pydantic / Zod",
+              "meaning": "যেসব টুল মডেলে পাঠানোর আগেই ইনপুটের আকার ঠিক আছে কি না যাচাই করে।"
+            },
+            {
+              "term": "সেন্টিনেল (sentinel)",
+              "meaning": "এমন চিহ্ন যা ডেটার সাথে মিলে যাবে না, যেমন ট্রিপল কোট, কাস্টম টোকেন বা র‍্যান্ডম ID।"
+            },
+            {
+              "term": "প্রম্পট ইনজেকশন (prompt injection)",
+              "meaning": "ভেরিয়েবলের ভেতরে নকল নির্দেশ ঢুকিয়ে দেওয়া, যাতে মডেল আপনার নিয়মের বদলে সেটা মানে।"
+            },
+            {
+              "term": "গোল্ডেন আউটপুট (golden outputs)",
+              "meaning": "আগে থেকে রাখা সঠিক উত্তর। ইউনিট টেস্ট প্রম্পটের নতুন আউটপুট এর সাথে মিলিয়ে দেখে।"
+            }
+          ],
+          "remember": [
+            "প্রোডাকশনের প্যাটার্ন হলো এমন ফাংশন, যা পুরো মেসেজ তালিকা ফেরত দেয়।",
+            "আনট্রাস্টেড ইনপুট XML ট্যাগে মুড়ুন, আর সিস্টেম মেসেজে মডেলকে বলে দিন যে এটা ডেটা, নির্দেশ নয়।",
+            "ইউজারের ইনপুটে f-string-কে বিশ্বাস করবেন না। এটা প্রম্পট ইনজেকশনের বাস্তব পথ।",
+            "বড় ইনপুট আগে সামারাইজ বা ট্রাঙ্কেট করুন। টেমপ্লেট ফাইলে রেখে ভার্সন, লিন্ট (ভুল খোঁজার স্বয়ংক্রিয় যাচাই) ও টেস্ট করুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -1419,6 +1787,86 @@
         "title": "প্রম্পট ভার্সনিং — প্রম্পটও কোড",
         "sub": "ডিপ্লয় করা প্রম্পট একটি ডিপ্লয় করা জিনিসই। তাই সেভাবেই দেখুন: ভার্সন কন্ট্রোল, কোড রিভিউ, রিগ্রেশন টেস্ট, স্টেজিং এনভায়রনমেন্ট, ক্যানারি রোলআউট। “প্রোডাকশনেই প্রম্পটটা একটু বদলে দিই” — এভাবেই প্রোডাকশনের AI ফিচার ভেঙে পড়ে।"
       },
+      "basics": {
+        "en": {
+          "idea": "A prompt that ships is like deployed code. <strong>Prompt versioning</strong> means every change is reviewed, tested, and rolled out with care, not edited live in production.",
+          "words": [
+            {
+              "term": "Regression",
+              "meaning": "When a change breaks something that used to work."
+            },
+            {
+              "term": "Canary rollout",
+              "meaning": "Sending a new version to a small group of users first, to catch problems before everyone gets it."
+            },
+            {
+              "term": "Pin the model version",
+              "meaning": "Fix an exact model version, like <code>claude-opus-4-5-20250929</code>, instead of a moving label like latest."
+            },
+            {
+              "term": "Golden test cases",
+              "meaning": "Pairs of an input and the output you expect. You run them on every prompt change."
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "Using another LLM to grade the outputs, beyond a simple exact-match check."
+            },
+            {
+              "term": "A/B in production",
+              "meaning": "Send a small part of traffic to the new prompt, measure business metrics, then promote it."
+            },
+            {
+              "term": "OPRO",
+              "meaning": "A tool that lets a model search for better prompts automatically."
+            }
+          ],
+          "remember": [
+            "Keep prompts as files in source control. Every change is a pull request you can review.",
+            "Pin the model, the temperature, and the prompt. Without all three, you cannot reproduce a good output.",
+            "Run golden test cases on every prompt change to catch regressions before users do.",
+            "Log <code>(prompt, output, user_feedback)</code> for every call, then mine the failures."
+          ]
+        },
+        "bn": {
+          "idea": "যে প্রম্পট ইউজারের কাছে পৌঁছে গেছে, সেটা ডিপ্লয় করা কোডের মতো। <strong>প্রম্পট ভার্সনিং</strong> মানে প্রতিটি পরিবর্তন যত্ন করে রিভিউ, টেস্ট আর রোলআউট করা, সরাসরি প্রোডাকশনে বদলানো নয়।",
+          "words": [
+            {
+              "term": "রিগ্রেশন (regression)",
+              "meaning": "কোনো পরিবর্তনের ফলে আগে ঠিকঠাক চলা জিনিস ভেঙে যাওয়া।"
+            },
+            {
+              "term": "ক্যানারি রোলআউট (canary rollout)",
+              "meaning": "নতুন ভার্সন আগে অল্প কিছু ইউজারকে দেওয়া, যাতে সবার কাছে যাওয়ার আগেই সমস্যা ধরা পড়ে।"
+            },
+            {
+              "term": "মডেল ভার্সন পিন (pin the model version)",
+              "meaning": "latest-এর মতো বদলে যাওয়া নামের বদলে <code>claude-opus-4-5-20250929</code>-এর মতো নির্দিষ্ট মডেল ভার্সন বেঁধে রাখা।"
+            },
+            {
+              "term": "গোল্ডেন টেস্ট কেস (golden test cases)",
+              "meaning": "ইনপুট আর প্রত্যাশিত আউটপুটের জোড়া। প্রতিটি প্রম্পট পরিবর্তনে এগুলো চালানো হয়।"
+            },
+            {
+              "term": "LLM-as-judge",
+              "meaning": "শুধু হুবহু মিলানোর বদলে আরেকটা LLM দিয়ে আউটপুটের মান যাচাই করানো।"
+            },
+            {
+              "term": "প্রোডাকশনে A/B (A/B in production)",
+              "meaning": "ট্রাফিকের ছোট অংশ নতুন প্রম্পটে পাঠানো, বিজনেস মেট্রিক মাপা, তারপর সেটা চালু করা।"
+            },
+            {
+              "term": "OPRO",
+              "meaning": "যে টুল দিয়ে মডেল নিজেই স্বয়ংক্রিয়ভাবে ভালো প্রম্পট খুঁজে নেয়।"
+            }
+          ],
+          "remember": [
+            "প্রম্পট সোর্স কন্ট্রোলে ফাইল হিসেবে রাখুন। প্রতিটি পরিবর্তন হবে পর্যালোচনাযোগ্য পুল রিকোয়েস্ট।",
+            "মডেল, টেম্পারেচার আর প্রম্পট, তিনটাই পিন করুন। নইলে ভালো আউটপুট আবার বানানো যায় না।",
+            "প্রতিটি প্রম্পট পরিবর্তনে গোল্ডেন টেস্ট কেস চালান, যাতে রিগ্রেশন ইউজারের আগে ধরা পড়ে।",
+            "প্রতিটি কলের <code>(prompt, output, user_feedback)</code> লগ করুন, তারপর ব্যর্থতাগুলো খুঁড়ে দেখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1632,6 +2080,86 @@
       "bn": {
         "title": "আউটপুট পার্সার আর ব্যর্থতা সামলানো",
         "sub": "মডেল একটি সম্ভাব্যতার যন্ত্র। কোনো না কোনো সময় সে এমন কিছু দেবে যা আপনার পার্সার আশা করেনি — ভাঙা JSON, খালি তালিকা, প্রত্যাখ্যান (রিফিউজাল), বা হাজার টোকেনের বকবকানি। আপনার কাজ <em>সেই অবস্থা সামলানো</em>, এমন ভান করা নয় যে এটা ঘটবেই না।"
+      },
+      "basics": {
+        "en": {
+          "idea": "A model will sometimes give output your code does not expect. Good apps use <strong>graceful failure handling</strong>: they constrain the output, check it, and recover when it is wrong.",
+          "words": [
+            {
+              "term": "Structured outputs / JSON mode",
+              "meaning": "Settings that force the model to answer in a fixed shape, so the format cannot fail by construction."
+            },
+            {
+              "term": "Validation",
+              "meaning": "A runtime check that the output matches the shape you expect, using tools like Pydantic, Zod, or JSON Schema."
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "A written description of the shape your JSON must have, so code can check it."
+            },
+            {
+              "term": "Hallucinated value",
+              "meaning": "A value the model invents that is not in the input."
+            },
+            {
+              "term": "Refusal",
+              "meaning": "The model declines to answer, for example when a safety rule fires on a phrase."
+            },
+            {
+              "term": "Truncation",
+              "meaning": "The output is cut off because it hits the length limit before it is finished."
+            },
+            {
+              "term": "Retry with backoff",
+              "meaning": "Trying a failed call again, and waiting a little longer before each new try."
+            }
+          ],
+          "remember": [
+            "Use three layers: constrain the model, validate the output, then recover gracefully.",
+            "Even constrained output needs validation. It can still have a wrong field or an invented value.",
+            "When validation fails, retry with a stricter prompt, fall back to defaults, or tell the user you do not know.",
+            "Never use <code>eval()</code> on model output. The model can be tricked into writing harmful code."
+          ]
+        },
+        "bn": {
+          "idea": "মডেল মাঝে মাঝে এমন আউটপুট দেবে, যা আপনার কোড আশা করেনি। ভালো অ্যাপ <strong>সুন্দরভাবে ব্যর্থতা সামলায়</strong>: আউটপুট বেঁধে দেয়, যাচাই করে, আর ভুল হলে ঠিক করে নেয়।",
+          "words": [
+            {
+              "term": "স্ট্রাকচার্ড আউটপুট / JSON মোড (structured outputs, JSON mode)",
+              "meaning": "যে সেটিং মডেলকে নির্দিষ্ট আকারে উত্তর দিতে বাধ্য করে, তাই ফরম্যাট গঠনগতভাবেই ব্যর্থ হয় না।"
+            },
+            {
+              "term": "ভ্যালিডেশন (validation)",
+              "meaning": "আউটপুট আপনার প্রত্যাশিত আকারের সাথে মেলে কি না, রানটাইমে তার যাচাই, যেমন Pydantic, Zod বা JSON Schema দিয়ে।"
+            },
+            {
+              "term": "JSON Schema",
+              "meaning": "আপনার JSON-এর আকার কেমন হবে তার লিখিত বিবরণ, যা দেখে কোড যাচাই করতে পারে।"
+            },
+            {
+              "term": "হ্যালুসিনেটেড মান (hallucinated value)",
+              "meaning": "মডেল নিজে বানিয়ে ফেলা মান, যা ইনপুটে ছিল না।"
+            },
+            {
+              "term": "রিফিউজাল (refusal)",
+              "meaning": "মডেল উত্তর দিতে অস্বীকার করে, যেমন কোনো শব্দে নিরাপত্তা নিয়ম চালু হয়ে গেলে।"
+            },
+            {
+              "term": "ট্রাঙ্কেশন (truncation)",
+              "meaning": "শেষ হওয়ার আগেই দৈর্ঘ্যের সীমায় পৌঁছে আউটপুট মাঝপথে কেটে যাওয়া।"
+            },
+            {
+              "term": "ব্যাকঅফ-সহ রিট্রাই (retry with backoff)",
+              "meaning": "ব্যর্থ কল আবার চেষ্টা করা, আর প্রতিবার নতুন চেষ্টার আগে আগের চেয়ে একটু বেশি অপেক্ষা করা।"
+            }
+          ],
+          "remember": [
+            "তিন স্তর ব্যবহার করুন: মডেলকে কনস্ট্রেইন করুন, আউটপুট ভ্যালিডেট করুন, তারপর সুন্দরভাবে রিকভার করুন।",
+            "কনস্ট্রেইন করা আউটপুটেও ভ্যালিডেশন লাগে। তাতে তবু ভুল ফিল্ড বা বানানো মান আসতে পারে।",
+            "ভ্যালিডেশন ব্যর্থ হলে কড়া প্রম্পটে রিট্রাই করুন, ডিফল্টে ফিরুন, বা ইউজারকে জানান যে আপনি জানেন না।",
+            "মডেলের আউটপুটে কখনো <code>eval()</code> চালাবেন না। মডেলকে ফাঁকি দিয়ে ক্ষতিকর কোড লেখানো যায়।"
+          ]
+        }
       },
       "body": [
         {
@@ -1996,6 +2524,86 @@
       "bn": {
         "title": "প্রম্পট লেয়ারে প্রম্পট ইনজেকশন থেকে রক্ষা",
         "sub": "LLM-যুক্ত অ্যাপের সবচেয়ে বড় নিরাপত্তা সমস্যা হলো <strong>প্রম্পট ইনজেকশন</strong>। কোনো ইউজার (বা আরও খারাপ, যে আক্রমণকারী রিট্রিভ করা ডেটা নিয়ন্ত্রণ করে) ডেটার ভেতরে নির্দেশ লিখে দেয়, মডেলকে হাইজ্যাক করার জন্য। নিচের প্রম্পট-লেয়ারের প্রতিরক্ষা ঝুঁকি কমায়, কিন্তু পুরোপুরি শেষ করে না।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>Prompt injection</strong> is when instructions hidden inside data try to hijack the model. Prompt-layer defenses lower the risk but never remove it, so use several together.",
+          "words": [
+            {
+              "term": "Prompt injection",
+              "meaning": "Hiding instructions inside data so the model follows them instead of your rules."
+            },
+            {
+              "term": "Indirect injection",
+              "meaning": "The attacker does not type the prompt. They poison the data the model reads, such as a retrieved document."
+            },
+            {
+              "term": "Defence in depth",
+              "meaning": "Using many layers of protection, so that one broken layer does not break everything."
+            },
+            {
+              "term": "Data wrapping",
+              "meaning": "Putting untrusted input inside clearly labeled tags, and telling the model that the tags hold data, not instructions."
+            },
+            {
+              "term": "Sandwich",
+              "meaning": "Instructions, then data, then the instructions again. The repeated rules at the end get strong attention."
+            },
+            {
+              "term": "Allowlist",
+              "meaning": "A list of the only tools allowed to run. Anything not on the list is refused."
+            },
+            {
+              "term": "Jailbreak",
+              "meaning": "A trick that gets a model to break its rules."
+            }
+          ],
+          "remember": [
+            "No prompt-layer defense is bulletproof. Use them together, and add system-layer defenses too.",
+            "Wrap untrusted input in tags, and tell the model in the system prompt that it is data.",
+            "Enforce the tool allowlist in your own code, not by trusting the model.",
+            "Cap injected content, for example 4K tokens, and check the output for signs of a hijack."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>প্রম্পট ইনজেকশন</strong> হলো ডেটার ভেতরে লুকানো নির্দেশ দিয়ে মডেলকে হাইজ্যাক করার চেষ্টা। প্রম্পট-স্তরের প্রতিরক্ষা ঝুঁকি কমায়, শেষ করে না, তাই একসাথে কয়েকটা ব্যবহার করুন।",
+          "words": [
+            {
+              "term": "প্রম্পট ইনজেকশন (prompt injection)",
+              "meaning": "ডেটার ভেতরে নির্দেশ লুকিয়ে দেওয়া, যাতে মডেল আপনার নিয়মের বদলে সেটা মানে।"
+            },
+            {
+              "term": "ইনডাইরেক্ট ইনজেকশন (indirect injection)",
+              "meaning": "আক্রমণকারী নিজে প্রম্পট লেখে না। মডেলের পড়া ডেটা, যেমন খুঁজে আনা কোনো ডকুমেন্ট, সে বিষিয়ে রাখে।"
+            },
+            {
+              "term": "ডিফেন্স ইন ডেপথ (defence in depth)",
+              "meaning": "অনেক স্তরের সুরক্ষা ব্যবহার করা, যাতে এক স্তর ভাঙলেও সব না ভাঙে।"
+            },
+            {
+              "term": "ডেটা র‍্যাপিং (data wrapping)",
+              "meaning": "আনট্রাস্টেড ইনপুট স্পষ্ট নামের ট্যাগে মুড়ে মডেলকে বলে দেওয়া যে ট্যাগের ভেতরটা ডেটা, নির্দেশ নয়।"
+            },
+            {
+              "term": "স্যান্ডউইচ (sandwich)",
+              "meaning": "নির্দেশ, তারপর ডেটা, তারপর আবার নির্দেশ। শেষে আবার বলা নিয়মে মডেল বেশি মনোযোগ দেয়।"
+            },
+            {
+              "term": "অ্যালাউলিস্ট (allowlist)",
+              "meaning": "শুধু যেসব টুল চালানোর অনুমতি আছে তার তালিকা। তালিকায় না থাকলে প্রত্যাখ্যান করা হয়।"
+            },
+            {
+              "term": "জেইলব্রেক (jailbreak)",
+              "meaning": "এমন কৌশল, যা দিয়ে মডেলকে তার নিয়ম ভাঙানো হয়।"
+            }
+          ],
+          "remember": [
+            "কোনো প্রম্পট-স্তরের প্রতিরক্ষাই অভেদ্য নয়। এগুলো একসাথে ব্যবহার করুন, সাথে সিস্টেম-স্তরের প্রতিরক্ষাও যোগ করুন।",
+            "আনট্রাস্টেড ইনপুট ট্যাগে মুড়ুন, আর সিস্টেম প্রম্পটে মডেলকে বলে দিন যে এটা ডেটা।",
+            "টুল অ্যালাউলিস্ট নিজের কোডে প্রয়োগ করুন, মডেলের ওপর ভরসা করে নয়।",
+            "ইনজেক্ট করা কনটেন্টের সীমা দিন, যেমন ৪K টোকেন, আর হাইজ্যাকের লক্ষণ আছে কি না আউটপুটে দেখুন।"
+          ]
+        }
       },
       "body": [
         {

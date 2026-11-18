@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import type { Block, TopicFile } from "../src/lib/content-schema.ts";
-import { blockText, buildSearchDocs, createIndex, readingMinutes, runSearch } from "../src/lib/search.ts";
+import type { BasicsText, Block, TopicFile } from "../src/lib/content-schema.ts";
+import { basicsBlocks, blockText, buildSearchDocs, createIndex, readingMinutes, runSearch } from "../src/lib/search.ts";
 
 const strip = (h: string) => h.replace(/<[^>]+>/g, "");
 
@@ -100,4 +100,30 @@ test("readingMinutes gives at least 1 minute", () => {
 test("readingMinutes counts 200 words per minute", () => {
   const html = Array(600).fill("word").join(" ");
   assert.equal(readingMinutes([{ type: "paragraph", html }], strip), 3);
+});
+
+const box = (idea: string): BasicsText => ({
+  idea,
+  words: [
+    { term: "<strong>Reranker</strong>", meaning: "a careful second look" },
+    { term: "BM25", meaning: "a keyword score" },
+  ],
+  remember: ["first fast", "then careful"],
+});
+
+test("basicsBlocks: no box gives no blocks; a box gives its idea, words, and points", () => {
+  assert.deepEqual(basicsBlocks(undefined), []);
+  const text = basicsBlocks(box("Find fast, then check."))
+    .map((block) => blockText(block, strip))
+    .join(" ");
+  assert.equal(text, "Find fast, then check. Reranker a careful second look BM25 a keyword score first fast then careful");
+});
+
+test("buildSearchDocs puts the Start here box of each language before the voice text", () => {
+  const [section] = topics[0].sections;
+  const withBox = [{ ...topics[0], sections: [{ ...section, basics: { en: box("Find fast."), bn: box("দ্রুত খুঁজুন।") } }] }];
+  const [en] = buildSearchDocs(withBox, strip);
+  assert.match(en.text, /^Cross-encoders Find fast\. Reranker .* BM25 first$/);
+  const [bn] = buildSearchDocs(withBox, strip, "bn");
+  assert.match(bn.text, /^Cross-encoder দ্রুত খুঁজুন। Reranker .* সহজ ব্যাখ্যা BM25 first$/);
 });

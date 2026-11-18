@@ -18,6 +18,86 @@
         "title": "কনটেক্সট উইন্ডোর বাজেটিং",
         "sub": "মডেলের কাজ করার স্মৃতির আকার নির্দিষ্ট। আপনি যে বাইটই বরাদ্দ করেন, সে অন্য সব বাইটের সাথে জায়গার জন্য প্রতিযোগিতা করে। কনটেক্সট ইঞ্জিনিয়ারিং হলো <em>কী কোথায় থাকবে তা ঠিক করার</em> কৌশল — সিস্টেম প্রম্পট, হিস্ট্রি, টুলের সংজ্ঞা, রিট্রিভ করা ডকুমেন্ট, আগের আউটপুট, আর ইউজারের আসল অনুরোধ।"
       },
+      "basics": {
+        "en": {
+          "idea": "A model can only hold so much text at once. <strong>Context window budgeting</strong> means deciding in advance how much room each part gets, because every part competes for the same space.",
+          "words": [
+            {
+              "term": "Context window",
+              "meaning": "The fixed amount of text a model can read at once. Everything you send, and the answer, must fit inside."
+            },
+            {
+              "term": "Tokens",
+              "meaning": "The small pieces of text a model reads and counts, such as a word or part of a word."
+            },
+            {
+              "term": "System prompt",
+              "meaning": "The standing instructions at the start: the persona, the output format, and the hard rules."
+            },
+            {
+              "term": "Tool definitions",
+              "meaning": "Descriptions of the tools the model may call. Include only the tools the current step might need."
+            },
+            {
+              "term": "Retrieval",
+              "meaning": "Finding pieces of documents and putting them in the prompt. Cap the number of pieces, and prefer quality over quantity."
+            },
+            {
+              "term": "Output reservation",
+              "meaning": "Setting aside tokens for the answer before you fill the window. Without it, the answer gets cut off and fails silently."
+            },
+            {
+              "term": "Lost in the Middle",
+              "meaning": "A research finding: models recall the start and end of a long prompt well, but do close to random in the middle."
+            }
+          ],
+          "remember": [
+            "A system prompt needs a floor of ~1–2K tokens. Tool definitions need ~1–3K.",
+            "Put the most important information at the start or the end of the prompt, not the middle.",
+            "Keep history small and cap retrieval chunks. Quality beats quantity.",
+            "Always reserve tokens for the answer, or it is cut off and fails silently."
+          ]
+        },
+        "bn": {
+          "idea": "মডেল একবারে সীমিত লেখাই ধরে রাখতে পারে। <strong>কনটেক্সট উইন্ডো বাজেটিং</strong> মানে আগে থেকেই ঠিক করা, কোন অংশ কতটা জায়গা পাবে, কারণ সব অংশ একই জায়গার জন্য টানাটানি করে।",
+          "words": [
+            {
+              "term": "কনটেক্সট উইন্ডো (context window)",
+              "meaning": "মডেল একবারে যতটুকু লেখা পড়তে পারে তার নির্দিষ্ট সীমা। আপনার পাঠানো সবকিছু আর উত্তর, এর ভেতরেই ধরাতে হয়।"
+            },
+            {
+              "term": "টোকেন (tokens)",
+              "meaning": "লেখার ছোট ছোট টুকরো, যা মডেল পড়ে আর গোনে, যেমন একটি শব্দ বা শব্দের অংশ।"
+            },
+            {
+              "term": "সিস্টেম প্রম্পট (system prompt)",
+              "meaning": "শুরুর স্থায়ী নির্দেশ: পারসোনা, আউটপুটের কাঠামো আর কড়া নিয়ম।"
+            },
+            {
+              "term": "টুল ডেফিনিশন (tool definitions)",
+              "meaning": "মডেল কোন টুল ডাকতে পারে তার বর্ণনা। শুধু সেই টুলই রাখুন, যা এই ধাপে লাগতে পারে।"
+            },
+            {
+              "term": "রিট্রিভাল (retrieval)",
+              "meaning": "ডকুমেন্টের অংশ খুঁজে এনে প্রম্পটে দেওয়া। অংশের সংখ্যা সীমিত রাখুন, আর পরিমাণের চেয়ে মানকে বেশি গুরুত্ব দিন।"
+            },
+            {
+              "term": "আউটপুট রিজার্ভেশন (output reservation)",
+              "meaning": "উইন্ডো ভরার আগেই উত্তরের জন্য টোকেন আলাদা করে রাখা। না রাখলে উত্তর কেটে যায় আর নীরবে ব্যর্থ হয়।"
+            },
+            {
+              "term": "Lost in the Middle",
+              "meaning": "একটি গবেষণার ফল: লম্বা প্রম্পটের শুরু আর শেষের তথ্য মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে ফল প্রায় র‍্যান্ডমের কাছাকাছি।"
+            }
+          ],
+          "remember": [
+            "সিস্টেম প্রম্পটে কমপক্ষে ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।",
+            "যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।",
+            "হিস্ট্রি ছোট রাখুন আর রিট্রিভালের অংশ সীমিত করুন। পরিমাণের চেয়ে মান ভালো।",
+            "উত্তরের জন্য টোকেন আগেই রাখুন, নইলে উত্তর কেটে গিয়ে নীরবে ব্যর্থ হয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -277,6 +357,78 @@
       "bn": {
         "title": "কনভার্সেশন সামারাইজেশন আর রোলিং মেমরি",
         "sub": "৫০ বার কথা বলা চ্যাটের আকার ১ বারের চ্যাটের ৫০ গুণ। এই টোকেনগুলোর বেশিরভাগই <em>অপ্রয়োজনীয়</em> — শুভেচ্ছা, “একটু বুঝিয়ে বলবেন?”, আধা-শেষ চিন্তা। সামারাইজেশন কাঁচা হিস্ট্রির বদলে সংক্ষেপিত অবস্থা রাখে। এতে খরচ সমানে না বেড়েও মডেলের কথার ধারা ঠিক থাকে।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Long chats use many tokens, and most of them are noise. <strong>Summarization</strong> squeezes old turns into a short summary, so the model stays on track without the growing cost.",
+          "words": [
+            {
+              "term": "Rolling memory",
+              "meaning": "Old turns are condensed into a summary block, while the recent turns stay word for word."
+            },
+            {
+              "term": "Semantic trigger",
+              "meaning": "Summarising when the topic shifts, for example when the new message looks far from the recent history."
+            },
+            {
+              "term": "Structured schema",
+              "meaning": "A fixed template of fields for the summary, such as the user goal, decisions made, and open questions."
+            },
+            {
+              "term": "Hierarchical summarisation",
+              "meaning": "Three levels: a summary of the oldest turns, a medium-detail summary of the middle turns, and recent turns word for word."
+            },
+            {
+              "term": "Lossy compression",
+              "meaning": "Making something smaller by losing some detail, like shrinking a photo. Decisions, exact numbers, and quotes vanish first."
+            },
+            {
+              "term": "Structured slot",
+              "meaning": "A separate place for key facts, kept outside the summary so they survive summarising."
+            }
+          ],
+          "remember": [
+            "There are three triggers to summarise: a token budget, a turn count, or a topic shift.",
+            "A plain request to summarise the chat gives mush. Use a structured schema instead.",
+            "Summaries lose detail: decisions, exact numbers, and quoted text disappear first.",
+            "Treat the summary as an index, not the source of truth. Keep full transcripts for high-stakes chats."
+          ]
+        },
+        "bn": {
+          "idea": "লম্বা চ্যাটে অনেক টোকেন লাগে, আর তার বেশিরভাগই অপ্রয়োজনীয়। <strong>সামারাইজেশন</strong> পুরোনো টার্নকে ছোট সারসংক্ষেপে চেপে ফেলে, ফলে মডেল ঠিক পথে থাকে অথচ খরচ বাড়তে থাকে না।",
+          "words": [
+            {
+              "term": "রোলিং মেমরি (rolling memory)",
+              "meaning": "পুরোনো টার্ন সংক্ষেপ হয়ে একটি সারসংক্ষেপ ব্লকে পরিণত হয়, আর সাম্প্রতিক টার্নগুলো হুবহু থাকে।"
+            },
+            {
+              "term": "সেম্যান্টিক ট্রিগার (semantic trigger)",
+              "meaning": "বিষয় বদলালে সামারাইজ করা, যেমন নতুন বার্তা সাম্প্রতিক কথোপকথন থেকে অনেক দূরের মনে হলে।"
+            },
+            {
+              "term": "স্ট্রাকচার্ড স্কিমা (structured schema)",
+              "meaning": "সারসংক্ষেপের জন্য ঘর ঠিক করা একটি ছক, যেমন ইউজারের লক্ষ্য, নেওয়া সিদ্ধান্ত আর খোলা প্রশ্ন।"
+            },
+            {
+              "term": "হায়ারার্কিক্যাল সামারাইজেশন (hierarchical summarisation)",
+              "meaning": "তিন স্তর: সবচেয়ে পুরোনো টার্নের সারসংক্ষেপ, মাঝের টার্নের মাঝারি বিস্তারের সারসংক্ষেপ, আর সাম্প্রতিক টার্ন হুবহু।"
+            },
+            {
+              "term": "লসি কমপ্রেশন (lossy compression)",
+              "meaning": "ছবি ছোট করার মতো, কিছু খুঁটিনাটি হারিয়ে ছোট করা। সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়।"
+            },
+            {
+              "term": "স্ট্রাকচার্ড স্লট (structured slot)",
+              "meaning": "গুরুত্বপূর্ণ তথ্যের জন্য সারসংক্ষেপের বাইরে আলাদা জায়গা, যাতে সামারাইজ করার পরেও তথ্য টিকে থাকে।"
+            }
+          ],
+          "remember": [
+            "সামারাইজ করার তিনটি ট্রিগার: টোকেন-বাজেট, টার্নের সংখ্যা, আর বিষয় বদল।",
+            "শুধু চ্যাট সারসংক্ষেপ করতে বললে ঝাপসা ফল আসে। বদলে স্ট্রাকচার্ড স্কিমা ব্যবহার করুন।",
+            "সারসংক্ষেপে তথ্য হারায়: সিদ্ধান্ত, নির্দিষ্ট সংখ্যা আর উদ্ধৃতি সবার আগে যায়।",
+            "সারসংক্ষেপ সূচির মতো, সত্যের উৎস নয়। গুরুত্বপূর্ণ কথোপকথনের পুরো ট্রান্সক্রিপ্ট রাখুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -550,6 +702,70 @@
       "bn": {
         "title": "প্রম্পট ক্যাশিংয়ের কৌশল",
         "sub": "ফ্রন্টিয়ার প্রোভাইডাররা আপনার <strong>প্রম্পটের শুরুর অংশ ক্যাশ করতে</strong> দেয়: রিকোয়েস্টের শুরুতে একই টোকেন থাকলে খরচ অনেক কম আর গতি বেশি। যে অ্যাপের সিস্টেম প্রম্পট স্থির আর রিট্রিভাল অংশ লম্বা, সেখানে ভালোভাবে করলে ইনপুটের বিলের ৮০–৯০% কমে যায়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Providers let you save the unchanged start of a prompt. <strong>Prompt caching</strong> can cut 80–90% of the input bill for apps with stable instructions and long fetched documents, but only if that start stays exactly the same.",
+          "words": [
+            {
+              "term": "Prefix",
+              "meaning": "The first part of a prompt. If it is identical across calls, the provider can reuse its earlier work."
+            },
+            {
+              "term": "Cache breakpoint",
+              "meaning": "A marker in the prompt. Everything before it is cached; everything after is rebuilt each call. Anthropic allows up to 4."
+            },
+            {
+              "term": "Cache hit",
+              "meaning": "A call whose start matches the cache, so the saved work is reused. In Anthropic's API, <code>response.usage.cache_read_input_tokens</code> above 0 means a hit."
+            },
+            {
+              "term": "TTL (time to live)",
+              "meaning": "How long a cache entry is kept. For Anthropic it is 5 minutes, and it refreshes on a hit."
+            },
+            {
+              "term": "Cache invalidation",
+              "meaning": "The cache breaking because of a change. One new character in the cached part breaks the cache for everything after it."
+            }
+          ],
+          "remember": [
+            "Put stable parts first (system prompt, tools, reused documents) and changing parts, like the user message, last.",
+            "If cached tokens cost about 10× less, repeated calls with a 60K-token prefix and 4K-token message save about 85% on input.",
+            "One changed character breaks the cache for everything after it, so keep the prefix byte-identical and free of timestamps.",
+            "Keep a fingerprint (hash) of the system prompt in your automatic test pipeline (CI); alert if it changes."
+          ]
+        },
+        "bn": {
+          "idea": "প্রোভাইডাররা প্রম্পটের না-বদলানো শুরুর অংশ ক্যাশ করতে দেয়। স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে <strong>প্রম্পট ক্যাশিং</strong> ইনপুট বিলের ৮০–৯০% কমাতে পারে, তবে শুরুর অংশ হুবহু একই থাকতে হবে।",
+          "words": [
+            {
+              "term": "প্রিফিক্স (prefix)",
+              "meaning": "প্রম্পটের শুরুর অংশ। কলের পর কলে হুবহু এক থাকলে প্রোভাইডার আগের কাজ আবার ব্যবহার করতে পারে।"
+            },
+            {
+              "term": "ক্যাশ ব্রেকপয়েন্ট (cache breakpoint)",
+              "meaning": "প্রম্পটের একটি চিহ্ন। এর আগের অংশ ক্যাশ হয়, পরের অংশ প্রতি কলে নতুন করে বানানো হয়। Anthropic-এ সর্বোচ্চ ৪টি।"
+            },
+            {
+              "term": "ক্যাশ হিট (cache hit)",
+              "meaning": "যে কলে প্রম্পটের শুরু ক্যাশের সাথে মেলে, তাই আগের কাজ আবার ব্যবহার হয়। Anthropic-এর API-তে <code>response.usage.cache_read_input_tokens</code> ০-এর বেশি হলে হিট।"
+            },
+            {
+              "term": "TTL (time to live)",
+              "meaning": "ক্যাশ কতক্ষণ থাকে। Anthropic-এ ৫ মিনিট, আর হিট হলে সময় নতুন করে শুরু হয়।"
+            },
+            {
+              "term": "ক্যাশ ইনভ্যালিডেশন (cache invalidation)",
+              "meaning": "বদলের কারণে ক্যাশ নষ্ট হওয়া। ক্যাশ করা অংশে একটি অক্ষর বদলালেও তার পরের সবকিছুর ক্যাশ বাতিল হয়।"
+            }
+          ],
+          "remember": [
+            "স্থির অংশ আগে রাখুন (সিস্টেম প্রম্পট, টুল, বারবার ব্যবহৃত ডকুমেন্ট), বদলানো অংশ, যেমন ইউজারের বার্তা, শেষে।",
+            "ক্যাশ করা টোকেন প্রায় ১০ গুণ সস্তা হলে, ৬০K টোকেনের প্রিফিক্স আর ৪K টোকেনের বার্তায় বারবার কলে ইনপুট খরচ প্রায় ৮৫% কমে।",
+            "একটি অক্ষর বদলালেই তার পরের সবকিছুর ক্যাশ ভাঙে, তাই প্রিফিক্স বাইট-টু-বাইট হুবহু আর টাইমস্ট্যাম্প ছাড়া রাখুন।",
+            "স্বয়ংক্রিয় টেস্ট পাইপলাইনে (CI) সিস্টেম প্রম্পটের একটি ফিঙ্গারপ্রিন্ট (হ্যাশ) রাখুন; তা বদলালে সতর্কতা দিন।"
+          ]
+        }
       },
       "body": [
         {
@@ -866,6 +1082,86 @@
         "title": "হায়ারার্কিক্যাল মেমরি (স্তরভাগ করা স্মৃতি)",
         "sub": "মানুষের স্মৃতি একরকম নয় — ওয়ার্কিং মেমরি, শর্ট-টার্ম, এপিসোডিক, আর প্রসিডিউরাল স্তর আছে। যে AI সিস্টেম দীর্ঘ সময়ের কাজ করতে চায়, তারও এমন স্তরভাগ দরকার। <strong>হায়ারার্কিক্যাল মেমরি</strong> মানে বিভিন্ন ধরনের অবস্থা বিভিন্ন সময়সীমায় রাখা, আর প্রতিটি স্তরে সারসংক্ষেপ করা।"
       },
+      "basics": {
+        "en": {
+          "idea": "Long-running AI needs more than one kind of memory. <strong>Hierarchical memory</strong> keeps different information in different places: small, always-seen layers near the model, huge layers far away.",
+          "words": [
+            {
+              "term": "Working memory",
+              "meaning": "The current prompt: system, tools, retrieved text, and the current request. Small, rebuilt every call, and always in focus."
+            },
+            {
+              "term": "Short-term memory",
+              "meaning": "Recent turns, tool results, and decisions of this session. It lives in a session store, and older turns become short summaries."
+            },
+            {
+              "term": "Long-term memory",
+              "meaning": "User preferences, known facts, and project context. It updates slowly, when explicit facts are extracted."
+            },
+            {
+              "term": "Vector store",
+              "meaning": "A database that keeps the meaning of each text as a list of numbers, so related texts can be found."
+            },
+            {
+              "term": "Episodic memory",
+              "meaning": "Short memories distilled from past sessions: lessons learned and what worked. Written at the end of a session or when triggered."
+            },
+            {
+              "term": "MemGPT",
+              "meaning": "A 2023 idea (Packer et al.): the model itself decides what to move out of its prompt and what to bring back, using tool calls like <code>recall</code>."
+            },
+            {
+              "term": "Evict and page in",
+              "meaning": "Evict means moving information from working memory to external storage. Paging in means bringing it back when needed."
+            }
+          ],
+          "remember": [
+            "The layers are working, short-term, long-term, and episodic memory, plus external storage for everything else.",
+            "Closer to the model means smaller but always seen. Farther means unbounded but fetched only on demand.",
+            "Long-term memories can go stale or contradict the user. Tag each with a timestamp and a confidence score.",
+            "Ask the user to confirm doubtful old memories, or favor newer memories when retrieving."
+          ]
+        },
+        "bn": {
+          "idea": "দীর্ঘ সময় চলা AI-এর একধরনের স্মৃতি যথেষ্ট নয়। <strong>হায়ারার্কিক্যাল মেমরি</strong> ভিন্ন তথ্য ভিন্ন জায়গায় রাখে: মডেলের কাছে ছোট ও সবসময় দেখা স্তর, দূরে বিশাল স্তর।",
+          "words": [
+            {
+              "term": "ওয়ার্কিং মেমরি (working memory)",
+              "meaning": "বর্তমান প্রম্পট: সিস্টেম, টুল, খুঁজে আনা লেখা আর বর্তমান অনুরোধ। ছোট, প্রতি কলে নতুন, আর সবসময় মনোযোগে থাকে।"
+            },
+            {
+              "term": "শর্ট-টার্ম মেমরি (short-term memory)",
+              "meaning": "এই সেশনের সাম্প্রতিক টার্ন, টুলের ফল আর সিদ্ধান্ত। সেশন স্টোরে থাকে, আর পুরোনো টার্ন ছোট সারসংক্ষেপ হয়ে যায়।"
+            },
+            {
+              "term": "লং-টার্ম মেমরি (long-term memory)",
+              "meaning": "ইউজারের পছন্দ, জানা তথ্য আর প্রজেক্টের প্রসঙ্গ। স্পষ্ট তথ্য বের করা হলে তবেই ধীরে আপডেট হয়।"
+            },
+            {
+              "term": "ভেক্টর স্টোর (vector store)",
+              "meaning": "যে ডেটাবেসে প্রতিটি লেখার অর্থ সংখ্যার তালিকা হিসেবে রাখা হয়, যাতে সম্পর্কিত লেখা খুঁজে পাওয়া যায়।"
+            },
+            {
+              "term": "এপিসোডিক মেমরি (episodic memory)",
+              "meaning": "আগের সেশন থেকে ছেঁকে নেওয়া ছোট স্মৃতি: কী শেখা গেল, কী কাজ করল। সেশন শেষে বা ট্রিগার হলে লেখা হয়।"
+            },
+            {
+              "term": "MemGPT",
+              "meaning": "২০২৩ সালের একটি ধারণা (Packer et al.): মডেল নিজেই ঠিক করে প্রম্পট থেকে কী সরাবে আর কী ফিরিয়ে আনবে, <code>recall</code>-এর মতো টুল কল দিয়ে।"
+            },
+            {
+              "term": "ইভিক্ট ও পেজ ইন (evict, page in)",
+              "meaning": "ইভিক্ট মানে তথ্য ওয়ার্কিং মেমরি থেকে বাইরের স্টোরেজে সরানো। পেজ ইন মানে দরকারে তা ফিরিয়ে আনা।"
+            }
+          ],
+          "remember": [
+            "স্তরগুলো হলো ওয়ার্কিং, শর্ট-টার্ম, লং-টার্ম ও এপিসোডিক মেমরি, আর বাকি সবকিছুর জন্য এক্সটার্নাল স্টোরেজ।",
+            "মডেলের যত কাছে, স্তর তত ছোট কিন্তু সবসময় দেখা। যত দূরে, তত সীমাহীন কিন্তু শুধু প্রয়োজনে আনা হয়।",
+            "লং-টার্ম মেমরি পুরোনো বা ইউজারের কথার সাথে স্ববিরোধী হতে পারে। প্রতিটিতে টাইমস্ট্যাম্প ও কনফিডেন্স স্কোর রাখুন।",
+            "সন্দেহজনক পুরোনো মেমরি ইউজারকে দিয়ে নিশ্চিত করান, অথবা রিট্রিভালের সময় নতুন মেমরিকে বেশি ওজন দিন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1127,6 +1423,94 @@
       "bn": {
         "title": "কনটেক্সট কমপ্রেশন আর প্রুনিং",
         "sub": "সামারাইজেশন যখন বেশি তথ্য হারায় আর হাতে সময়ও নেই, তখন <strong>কমপ্রেশন</strong> বাড়তি পুনরাবৃত্তি সরায় আর <strong>প্রুনিং</strong> অপ্রাসঙ্গিক টোকেন ফেলে দেয়। লক্ষ্য: তথ্যের ঘনত্ব একই থাকবে, টোকেন কমবে।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Long prompts cost money and time. <strong>Compression</strong> shortens text while keeping the meaning as much as possible, and pruning drops the parts that do not matter. The goal is the same information in fewer tokens.",
+          "words": [
+            {
+              "term": "Compression",
+              "meaning": "Making text shorter by removing repeated or empty parts, while keeping as much of the meaning as possible."
+            },
+            {
+              "term": "Pruning",
+              "meaning": "Deleting the parts that do not matter for the current task, like cutting dead branches off a tree."
+            },
+            {
+              "term": "LLMLingua",
+              "meaning": "A method where a small classifier cuts low-information words from a prompt. It can shrink prompts 5–20×."
+            },
+            {
+              "term": "Self-information (perplexity)",
+              "meaning": "A measure of how surprising a phrase is. Phrases that add little new information can be dropped."
+            },
+            {
+              "term": "Chunk",
+              "meaning": "A small piece of a longer document, like one paragraph cut out of a book."
+            },
+            {
+              "term": "Token-budget knapsack",
+              "meaning": "Adding chunks in order of relevance until the token limit is full, then stopping."
+            },
+            {
+              "term": "Deduplication",
+              "meaning": "Finding near-copies of the same text and keeping only one."
+            },
+            {
+              "term": "Cross-encoder",
+              "meaning": "A model that reads the question and a chunk together and scores their match. It is used to re-rank, or sort the chunks again."
+            }
+          ],
+          "remember": [
+            "Compression shrinks everything; pruning removes only what is not relevant. They work well together.",
+            "A good recipe: retrieve 20 chunks, re-rank, prune to the top 5, then compress if still over budget.",
+            "Pruning keeps information density, or useful facts per token; compression reduces absolute size.",
+            "Deduplication keeps one copy of near-duplicate chunks (cosine > 0.95)."
+          ]
+        },
+        "bn": {
+          "idea": "লম্বা প্রম্পটে টাকা আর সময় দুটোই লাগে। <strong>কমপ্রেশন</strong> অর্থ যথাসম্ভব রেখে লেখা ছোট করে, আর প্রুনিং অপ্রয়োজনীয় অংশ বাদ দেয়। লক্ষ্য হলো একই তথ্য কম টোকেনে রাখা।",
+          "words": [
+            {
+              "term": "কমপ্রেশন (compression)",
+              "meaning": "পুনরাবৃত্তি বা ফাঁপা অংশ সরিয়ে লেখা ছোট করা, অর্থ যথাসম্ভব ঠিক রেখে।"
+            },
+            {
+              "term": "প্রুনিং (pruning)",
+              "meaning": "বর্তমান কাজে যে অংশ লাগে না, তা বাদ দেওয়া। গাছের মরা ডাল ছাঁটার মতো।"
+            },
+            {
+              "term": "LLMLingua",
+              "meaning": "একটি পদ্ধতি, যেখানে ছোট ক্লাসিফায়ার প্রম্পট থেকে কম-তথ্যের শব্দ কেটে দেয়। এতে প্রম্পট ৫–২০× পর্যন্ত ছোট হতে পারে।"
+            },
+            {
+              "term": "সেলফ-ইনফরমেশন (self-information, perplexity)",
+              "meaning": "একটি বাক্যাংশ কতটা নতুন বা চমকপ্রদ, তার মাপ। যা নতুন কিছু জানায় না, সেটা বাদ দেওয়া যায়।"
+            },
+            {
+              "term": "চাঙ্ক (chunk)",
+              "meaning": "লম্বা ডকুমেন্টের একটি ছোট টুকরো, যেমন বই থেকে কেটে নেওয়া একটি অনুচ্ছেদ।"
+            },
+            {
+              "term": "টোকেন-বাজেট ন্যাপস্যাক (token-budget knapsack)",
+              "meaning": "প্রাসঙ্গিকতার ক্রমে চাঙ্ক নিতে থাকা, টোকেনের সীমা ভরলে থামা।"
+            },
+            {
+              "term": "ডিডুপ্লিকেশন (deduplication)",
+              "meaning": "একই লেখার প্রায় হুবহু কপি খুঁজে শুধু একটি রাখা।"
+            },
+            {
+              "term": "ক্রস-এনকোডার (cross-encoder)",
+              "meaning": "যে মডেল প্রশ্ন আর একটি চাঙ্ক একসাথে পড়ে, দুটো কতটা মেলে তার স্কোর দেয়। রিরেংক, মানে চাঙ্কগুলো আবার সাজাতে এটি লাগে।"
+            }
+          ],
+          "remember": [
+            "কমপ্রেশন সবকিছু ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে। দুটো একসাথে ভালো কাজ করে।",
+            "ভালো পদ্ধতি: ২০টি চাঙ্ক রিট্রিভ করুন, রিরেংক করুন, সেরা ৫টিতে প্রুন করুন, তখনও বেশি হলে কমপ্রেস করুন।",
+            "প্রুনিং তথ্যের ঘনত্ব, মানে প্রতি টোকেনে কাজের তথ্য, ধরে রাখে; কমপ্রেশন মোট আকার কমায়।",
+            "ডিডুপ্লিকেশন প্রায় একই চাঙ্কগুলো (কসাইন > ০.৯৫) থেকে একটি কপি রাখে।"
+          ]
+        }
       },
       "body": [
         {
@@ -1462,6 +1846,78 @@
         "title": "টুল রেজাল্ট ট্রাঙ্কেশনের কৌশল",
         "sub": "একটি টুল কল ১০০K টোকেন ফেরত দিতে পারে — লম্বা কোড ফাইল, হাজার সারির ডেটাবেস ফলাফল, ৫০ পাতার ওয়েব পেজ। আটকে না রাখলে একটি টুল রেজাল্টই পুরো কনটেক্সট উইন্ডো ভরে ফেলতে পারে। ট্রাঙ্কেশন হলো টুল রেজাল্টকে <em>কাজের কিন্তু সীমিত</em> রাখার কৌশল।"
       },
+      "basics": {
+        "en": {
+          "idea": "One tool call can return 100K tokens and fill your whole context window. <strong>Truncation</strong> keeps tool results useful but limited in size.",
+          "words": [
+            {
+              "term": "Tool result",
+              "meaning": "The data a tool sends back to the model after a call, such as a file or database rows."
+            },
+            {
+              "term": "Truncation",
+              "meaning": "Cutting a long result down to a smaller size, and keeping the parts that matter."
+            },
+            {
+              "term": "Head/tail",
+              "meaning": "Keeping the first K and last K tokens, and dropping the middle."
+            },
+            {
+              "term": "Pagination",
+              "meaning": "Returning results in small slices, so the agent asks for the next slice only if needed."
+            },
+            {
+              "term": "Cursor",
+              "meaning": "A marker the tool returns to show where the next slice starts."
+            },
+            {
+              "term": "Just-in-time",
+              "meaning": "Saving the data outside the prompt, giving a reference, and fetching it only when needed."
+            }
+          ],
+          "remember": [
+            "Never return the whole result at once. Return a small slice plus a cursor, and let the agent ask for more.",
+            "For database results, return the schema, the first 10 rows, and the count.",
+            "Reserve room for tool results in your token budget.",
+            "Do not cut code or JSON in the middle. Stop at function ends, closing braces, or line endings."
+          ]
+        },
+        "bn": {
+          "idea": "একটি টুল কল ১০০K টোকেন ফেরত দিয়ে পুরো কনটেক্সট উইন্ডো ভরে ফেলতে পারে। <strong>ট্রাঙ্কেশন</strong> টুলের ফলাফল কাজের উপযোগী রাখে, কিন্তু আকারে সীমিত রাখে।",
+          "words": [
+            {
+              "term": "টুল রেজাল্ট (tool result)",
+              "meaning": "কল করার পর টুল মডেলকে যে ডেটা ফেরত পাঠায়, যেমন ফাইল বা ডেটাবেসের সারি।"
+            },
+            {
+              "term": "ট্রাঙ্কেশন (truncation)",
+              "meaning": "লম্বা ফলাফল ছোট করে কেটে নেওয়া, আর দরকারি অংশ রাখা।"
+            },
+            {
+              "term": "হেড/টেইল (head/tail)",
+              "meaning": "শুরুর K আর শেষের K টোকেন রাখা, মাঝখান বাদ দেওয়া।"
+            },
+            {
+              "term": "পেজিনেশন (pagination)",
+              "meaning": "ফলাফল ছোট ছোট অংশে দেওয়া, যাতে এজেন্ট দরকার হলেই পরের অংশ চায়।"
+            },
+            {
+              "term": "কার্সর (cursor)",
+              "meaning": "টুল যে চিহ্ন ফেরত দেয়, যা দেখায় পরের অংশ কোথা থেকে শুরু।"
+            },
+            {
+              "term": "জাস্ট-ইন-টাইম (just-in-time)",
+              "meaning": "ডেটা প্রম্পটের বাইরে রেখে একটি রেফারেন্স দেওয়া, আর দরকার হলেই আনা।"
+            }
+          ],
+          "remember": [
+            "পুরো ফলাফল একসাথে দেবেন না। ছোট একটি স্লাইস আর কার্সর দিন, এজেন্ট দরকারে আরও চাইবে।",
+            "ডেটাবেসের ফলাফলে স্কিমা, প্রথম ১০ সারি আর মোট সংখ্যা দিন।",
+            "টোকেন বাজেটে টুল রেজাল্টের জন্য জায়গা আগেই রাখুন।",
+            "কোড বা JSON মাঝপথে কাটবেন না। ফাংশনের শেষ, বন্ধনী বন্ধ হওয়া বা লাইনের শেষে থামুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",
@@ -1747,6 +2203,86 @@
       "bn": {
         "title": "Lost in the Middle আর তার সমাধান",
         "sub": "Liu et al. (২০২৩) একটি পাকা ঘটনা দেখিয়েছেন: ল্যাঙ্গুয়েজ মডেল ইনপুটের <em>শুরু</em> আর <em>শেষ</em> অংশের তথ্যে জোরালো অ্যাটেনশন দেয়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় এলোমেলো উত্তর দেয়। কনটেক্সট যত লম্বা, মাঝখানের অবস্থা তত খারাপ। এই একটি আবিষ্কার প্রম্পট সাজানোর ধরনটাই বদলে দেয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Models remember the start and end of a long input well, but they often miss facts in the middle. This is <strong>Lost in the Middle</strong>, and it changes how you should arrange a prompt.",
+          "words": [
+            {
+              "term": "Lost in the Middle",
+              "meaning": "The finding that models use the start and end of their input well, but do badly on the middle."
+            },
+            {
+              "term": "Needle fact",
+              "meaning": "A single fact hidden at a chosen spot in a long text, used to test whether the model can find it."
+            },
+            {
+              "term": "U-shaped curve",
+              "meaning": "A graph that is high at the start, low in the middle, and high again at the end."
+            },
+            {
+              "term": "Attention",
+              "meaning": "How a model decides which tokens to focus on when it reads the input."
+            },
+            {
+              "term": "Sandwich",
+              "meaning": "Putting key content at the start of the prompt and repeating it at the end."
+            },
+            {
+              "term": "Delimiter",
+              "meaning": "A marker such as <code>&lt;important&gt;</code> tags that wraps and highlights a part of the prompt."
+            },
+            {
+              "term": "Multi-hop reasoning",
+              "meaning": "Answering by joining several facts found in different places."
+            }
+          ],
+          "remember": [
+            "Put facts that must be recalled in the first 10% or the last 10% of the context.",
+            "If you cannot, repeat them at both ends. Sandwich the key content.",
+            "Shorter context gives better recall. If it fits in 8K, do not use 50K.",
+            "Better models flatten the U-shape, but it never fully goes away."
+          ]
+        },
+        "bn": {
+          "idea": "লম্বা ইনপুটের শুরু আর শেষ মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্য প্রায়ই হারিয়ে ফেলে। একে বলে <strong>Lost in the Middle</strong>, আর এটি প্রম্পট সাজানোর নিয়ম বদলে দেয়।",
+          "words": [
+            {
+              "term": "Lost in the Middle",
+              "meaning": "এই আবিষ্কার যে মডেল ইনপুটের শুরু আর শেষ ভালো কাজে লাগায়, কিন্তু মাঝখানে খারাপ করে।"
+            },
+            {
+              "term": "নিডল ফ্যাক্ট (needle fact)",
+              "meaning": "লম্বা লেখার বেছে নেওয়া জায়গায় লুকিয়ে রাখা একটি তথ্য। মডেল সেটি খুঁজে পায় কি না, তা পরীক্ষা করতে লাগে।"
+            },
+            {
+              "term": "ইউ-আকৃতির কার্ভ (U-shaped curve)",
+              "meaning": "যে গ্রাফ শুরুতে উঁচু, মাঝখানে নিচু, আর শেষে আবার উঁচু।"
+            },
+            {
+              "term": "অ্যাটেনশন (attention)",
+              "meaning": "ইনপুট পড়ার সময় মডেল কোন টোকেনে মনোযোগ দেবে, তা ঠিক করার উপায়।"
+            },
+            {
+              "term": "স্যান্ডউইচ (sandwich)",
+              "meaning": "জরুরি অংশ প্রম্পটের শুরুতে রাখা আর শেষে আবার বলা।"
+            },
+            {
+              "term": "ডিলিমিটার (delimiter)",
+              "meaning": "প্রম্পটের কোনো অংশ ঘিরে চিহ্নিত করার মার্কার, যেমন <code>&lt;important&gt;</code> ট্যাগ।"
+            },
+            {
+              "term": "মাল্টি-হপ রিজনিং (multi-hop reasoning)",
+              "meaning": "আলাদা আলাদা জায়গার কয়েকটি তথ্য জুড়ে উত্তর বের করা।"
+            }
+          ],
+          "remember": [
+            "যে তথ্য মনে রাখাতে চান, তা কনটেক্সটের প্রথম ১০% বা শেষ ১০%-এ রাখুন।",
+            "না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন। জরুরি অংশ স্যান্ডউইচ করুন।",
+            "ছোট কনটেক্সটে রিকল ভালো। ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
+            "ভালো মডেলে ইউ-আকৃতি চ্যাপ্টা হয়, কিন্তু পুরোপুরি যায় না।"
+          ]
+        }
       },
       "body": [
         {

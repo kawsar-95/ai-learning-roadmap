@@ -16,6 +16,94 @@
         "title": "LLMOps আর অবজারভেবিলিটি",
         "sub": "পুরোনো DevOps জিজ্ঞেস করে, \"রিকোয়েস্ট কি ২০০ ফেরত দিয়েছে?\" LLM অ্যাপে আরও গভীর প্রশ্ন লাগে: <em>মডেল কি সঠিক উত্তর দিয়েছে, ঠিক খরচে, ঠিক সুরে, কোনো তথ্য ফাঁস না করে?</em> এই প্রশ্নগুলোর উত্তর খোঁজার কাজকে বলে <strong>LLMOps</strong>, আর এর নিজস্ব টুলচেইন আছে।"
       },
+      "basics": {
+        "en": {
+          "idea": "A normal app shows a red error when it breaks. An AI app can return 200 (success) and still give wrong or costly answers. <strong>LLMOps</strong> is the set of habits and tools that watch for this.",
+          "words": [
+            {
+              "term": "LLMOps",
+              "meaning": "Running and watching an LLM app in real use. It asks if answers are right, cheap enough, and safe."
+            },
+            {
+              "term": "Trace",
+              "meaning": "A record of one request as a tree of steps: the prompt, the model call, each tool use, and the result."
+            },
+            {
+              "term": "Span",
+              "meaning": "One step inside a trace, such as a single model call or a single tool call."
+            },
+            {
+              "term": "Eval",
+              "meaning": "A test that checks the quality of a model's output, like grading an answer on an exam."
+            },
+            {
+              "term": "Time to first token (TTFT)",
+              "meaning": "How long you wait until the first piece of the answer arrives."
+            },
+            {
+              "term": "A/B testing",
+              "meaning": "Sending some users to version A and others to version B, then comparing the results to see which is better."
+            },
+            {
+              "term": "Replay",
+              "meaning": "Running the exact same request again against a different model or prompt, to check that a fix works."
+            },
+            {
+              "term": "Drift",
+              "meaning": "A quiet change in a model's answers that your usual tests do not catch."
+            }
+          ],
+          "remember": [
+            "Record tokens, cost, latency, and cache hit (a reused saved result) for every request; tag with <code>user_id</code>, <code>feature</code>, and <code>experiment</code>.",
+            "Treat prompts like code: keep them in git, give each version an ID, and put that ID on every trace.",
+            "To catch drift, send 1–5% of live traffic through old and new models, compare evals, and alert when they differ.",
+            "Save thumbs-down failures into your eval set. Real failures are worth more than synthetic, made-up ones."
+          ]
+        },
+        "bn": {
+          "idea": "সাধারণ অ্যাপ ভেঙে গেলে লাল এরর দেখায়। কিন্তু AI অ্যাপ ২০০ (সফল) ফেরত দিয়েও ভুল বা ব্যয়বহুল উত্তর দিতে পারে। <strong>LLMOps</strong> হলো সেটা নজরে রাখার অভ্যাস আর টুলের সমষ্টি।",
+          "words": [
+            {
+              "term": "LLMOps",
+              "meaning": "বাস্তব ব্যবহারে একটি LLM অ্যাপ চালানো আর নজরে রাখা। উত্তর ঠিক, সস্তা আর নিরাপদ কি না, তা দেখা।"
+            },
+            {
+              "term": "ট্রেস (trace)",
+              "meaning": "একটি রিকোয়েস্টের ধাপগুলোর গাছের মতো রেকর্ড: প্রম্পট, মডেল কল, প্রতিটি টুল ব্যবহার আর ফলাফল।"
+            },
+            {
+              "term": "স্প্যান (span)",
+              "meaning": "ট্রেসের ভেতরের একটি ধাপ, যেমন একটি মডেল কল বা একটি টুল কল।"
+            },
+            {
+              "term": "ইভ্যাল (eval)",
+              "meaning": "মডেলের উত্তরের মান যাচাই করার একটি পরীক্ষা, যেমন পরীক্ষার খাতায় উত্তরে নম্বর দেওয়া।"
+            },
+            {
+              "term": "টাইম টু ফার্স্ট টোকেন (time to first token, TTFT)",
+              "meaning": "উত্তরের প্রথম টুকরো আসা পর্যন্ত কতক্ষণ অপেক্ষা করতে হয়।"
+            },
+            {
+              "term": "A/B টেস্টিং (A/B testing)",
+              "meaning": "কিছু ইউজারকে ভার্সন A আর বাকিদের ভার্সন B দিয়ে ফলাফল তুলনা করা, কোনটা ভালো দেখতে।"
+            },
+            {
+              "term": "রিপ্লে (replay)",
+              "meaning": "হুবহু একই রিকোয়েস্ট অন্য মডেল বা প্রম্পটে আবার চালানো, ফিক্স কাজ করছে কি না যাচাই করতে।"
+            },
+            {
+              "term": "ড্রিফট (drift)",
+              "meaning": "মডেলের উত্তরে চুপচাপ আসা বদল, যা আপনার সাধারণ টেস্টে ধরা পড়ে না।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি রিকোয়েস্টে টোকেন, খরচ, ল্যাটেন্সি আর ক্যাশ হিট (আগে জমানো ফল আবার কাজে লাগা) রেকর্ড করুন; <code>user_id</code>, <code>feature</code>, <code>experiment</code> দিয়ে ট্যাগ করুন।",
+            "প্রম্পটকে কোডের মতো দেখুন: git-এ রাখুন, প্রতি ভার্সনে ID দিন, আর প্রতিটি ট্রেসে সেই ID রাখুন।",
+            "ড্রিফট ধরতে লাইভ ট্র্যাফিকের ১–৫% পুরোনো ও নতুন দুই মডেলে চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন।",
+            "থাম্বস-ডাউন পাওয়া ব্যর্থতা ইভ্যাল সেটে জমান। সিনথেটিক, মানে বানানো ব্যর্থতার চেয়ে বাস্তব ব্যর্থতার মূল্য বেশি।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",

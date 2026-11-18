@@ -16,6 +16,96 @@
         "title": "AI অ্যাপ্লিকেশনের আর্কিটেকচার",
         "sub": "একটা LLM কল আসলে শুধু একটা HTTP রিকোয়েস্ট। এর চারপাশে একটা <em>প্রোডাক্ট</em> বানাতে আধুনিক যেকোনো অ্যাপের মতো একই কাঠামো লাগে, সঙ্গে কয়েকটা নতুন জিনিস: স্ট্রিমিং, রিজিউমেবিলিটি, মাল্টি-টেন্যান্সি, ফলব্যাক, ফিচার ফ্ল্যাগ, আর পার্শিয়াল রেজাল্টের জন্য বানানো API।"
       },
+      "basics": {
+        "en": {
+          "idea": "An AI product is more than one model call. It needs extra building blocks, like <strong>streaming</strong>, safe retries, and fallbacks, so users get fast and reliable answers.",
+          "words": [
+            {
+              "term": "SSE (Server-Sent Events)",
+              "meaning": "A simple way for a server to push data to the browser one piece at a time. It only goes one way."
+            },
+            {
+              "term": "WebSockets",
+              "meaning": "A two-way connection between browser and server. It is needed for voice and apps where several people work together."
+            },
+            {
+              "term": "Queue",
+              "meaning": "A waiting line for tasks. A long job goes in the line and runs in the background."
+            },
+            {
+              "term": "Idempotency key",
+              "meaning": "A unique ID on each request. If the same ID comes again, the server rejects it as a duplicate."
+            },
+            {
+              "term": "Checkpoint",
+              "meaning": "A saved copy of the agent's progress, so a restart repeats only the steps that failed."
+            },
+            {
+              "term": "Multi-tenant",
+              "meaning": "Serving many customers from one system, where each customer has its own prompts, keys and limits."
+            },
+            {
+              "term": "Fallback chain",
+              "meaning": "An ordered list of backup providers. If one fails, the request goes to the next."
+            },
+            {
+              "term": "Feature flag",
+              "meaning": "A switch that turns a prompt or model on for only some users, so you can roll it out slowly."
+            }
+          ],
+          "remember": [
+            "Stream the answer so users see words as the model writes them, not after a pause.",
+            "Push any task over ~10 seconds to a queue and return a <code>job_id</code>.",
+            "Use an idempotency key and checkpoints so retries do not double the work or the bill.",
+            "Never hard-code a tenant's prompt in their codebase; store it in a <code>tenant_config</code> row.",
+            "Route to a backup provider when one fails; roll out new prompts to 1% first, and roll back instantly."
+          ]
+        },
+        "bn": {
+          "idea": "একটি AI প্রোডাক্ট মানে শুধু একটি মডেল কল নয়। এতে <strong>স্ট্রিমিং</strong>, নিরাপদ রিট্রাই আর ফলব্যাকের মতো বাড়তি অংশ লাগে, যাতে ইউজার দ্রুত আর নির্ভরযোগ্য উত্তর পায়।",
+          "words": [
+            {
+              "term": "SSE (Server-Sent Events)",
+              "meaning": "সার্ভার থেকে ব্রাউজারে একটু একটু করে ডেটা পাঠানোর সহজ উপায়। এটা শুধু একদিকে চলে।"
+            },
+            {
+              "term": "ওয়েবসকেট (WebSockets)",
+              "meaning": "ব্রাউজার আর সার্ভারের মধ্যে দুই দিকের সংযোগ। ভয়েস আর যেখানে কয়েকজন একসাথে কাজ করে এমন অ্যাপের জন্য এটা লাগে।"
+            },
+            {
+              "term": "কিউ (queue)",
+              "meaning": "কাজের অপেক্ষার সারি। লম্বা কাজ এই সারিতে ঢোকে আর ব্যাকগ্রাউন্ডে চলে।"
+            },
+            {
+              "term": "আইডেমপোটেন্সি কী (idempotency key)",
+              "meaning": "প্রতিটি রিকোয়েস্টের একটি আলাদা আইডি। একই আইডি আবার এলে সার্ভার সেটাকে ডুপ্লিকেট বলে ফিরিয়ে দেয়।"
+            },
+            {
+              "term": "চেকপয়েন্ট (checkpoint)",
+              "meaning": "এজেন্টের কাজের অগ্রগতির সংরক্ষিত কপি, যাতে আবার চালালে শুধু ব্যর্থ ধাপগুলো দ্বিতীয়বার হয়।"
+            },
+            {
+              "term": "মাল্টি-টেন্যান্ট (multi-tenant)",
+              "meaning": "একটি সিস্টেম থেকে অনেক গ্রাহককে সেবা দেওয়া, যেখানে প্রত্যেকের নিজের প্রম্পট, কী আর লিমিট থাকে।"
+            },
+            {
+              "term": "ফলব্যাক চেইন (fallback chain)",
+              "meaning": "ব্যাকআপ প্রোভাইডারের সাজানো তালিকা। একটি ব্যর্থ হলে রিকোয়েস্ট পরেরটিতে যায়।"
+            },
+            {
+              "term": "ফিচার ফ্ল্যাগ (feature flag)",
+              "meaning": "একটি সুইচ, যা প্রম্পট বা মডেল শুধু কিছু ইউজারের জন্য চালু করে, ফলে ধীরে ধীরে রোল আউট করা যায়।"
+            }
+          ],
+          "remember": [
+            "উত্তর স্ট্রিম করুন, যাতে ইউজার বিরতির পরে নয়, মডেল লেখার সাথে সাথে শব্দ দেখে।",
+            "~১০ সেকেন্ডের বেশি লাগে এমন কাজ কিউতে পাঠান আর একটি <code>job_id</code> ফেরত দিন।",
+            "আইডেমপোটেন্সি কী আর চেকপয়েন্ট ব্যবহার করুন, যাতে রিট্রাইয়ে কাজ বা বিল দ্বিগুণ না হয়।",
+            "টেন্যান্টের প্রম্পট কখনো তাদের কোডবেসে হার্ড-কোড করবেন না; <code>tenant_config</code> রো-তে রাখুন।",
+            "একটি প্রোভাইডার ব্যর্থ হলে ব্যাকআপ প্রোভাইডারে রাউট করুন; নতুন প্রম্পট আগে ১%-এ রোল আউট করুন, আর দরকারে সাথে সাথে রোল ব্যাক করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "heading",

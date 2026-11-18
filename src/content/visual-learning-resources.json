@@ -18,6 +18,86 @@
         "title": "Transformer Explainer: মডেল কীভাবে পরের টোকেন অনুমান করে",
         "sub": "আপনার ব্রাউজারে চলা একটি আসল GPT-2। টোকেন, এমবেডিং, অ্যাটেনশন আর স্যাম্পলিং ঠিক যে ক্রমে ঘটে সেই ক্রমে দেখুন।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>Transformer Explainer</strong> is a free web page that runs a small GPT-2 model in your browser. It shows each stage that turns your text into a guess for the next token, so you can see how a transformer works.",
+          "words": [
+            {
+              "term": "GPT-2 (small)",
+              "meaning": "A 2019 language model with 124 million parameters. Its basic design matches modern chat models, but it is much smaller, and newer models change parts."
+            },
+            {
+              "term": "Embedding",
+              "meaning": "A list of numbers that stands for one token. Here each token gets 768 numbers, and position values are added into them to show order."
+            },
+            {
+              "term": "Attention",
+              "meaning": "The step where each token looks at earlier tokens and takes in the useful ones. Several heads, or copies of this step, run in parallel."
+            },
+            {
+              "term": "MLP",
+              "meaning": "A small network that refines each token on its own, after attention."
+            },
+            {
+              "term": "Softmax",
+              "meaning": "A step that turns a list of scores into probabilities, one for each token in the vocabulary."
+            },
+            {
+              "term": "Temperature",
+              "meaning": "A setting that changes how bold the pick is. A low value favors the top token; a high value flattens the list."
+            },
+            {
+              "term": "Top-k and top-p",
+              "meaning": "Two settings that limit the pick. Top-k keeps the k likeliest tokens. Top-p keeps the smallest group whose chances add up to at least p."
+            }
+          ],
+          "remember": [
+            "The model writes one token at a time: it picks a token, adds it, and repeats.",
+            "Low temperature gives safe words; high temperature gives more creative text and also more mistakes.",
+            "Setting top-k to <code>1</code> gives the same output every time. This is greedy decoding.",
+            "GPT-2 (small) shows the shape of a transformer, not the quality of a modern model."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>Transformer Explainer</strong> একটি ফ্রি ওয়েব পাতা। এটি ব্রাউজারে একটি ছোট GPT-2 মডেল চালায়। আপনার লেখা কীভাবে পরের টোকেনের অনুমানে পৌঁছায়, প্রতিটি ধাপ দেখিয়ে দেয়, তাই ট্রান্সফর্মার কীভাবে কাজ করে বোঝা যায়।",
+          "words": [
+            {
+              "term": "GPT-2 (small)",
+              "meaning": "২০১৯ সালের একটি ল্যাঙ্গুয়েজ মডেল, ১২৪ মিলিয়ন প্যারামিটারের। মূল নকশা আজকের চ্যাট মডেলের মতো, তবে এটি অনেক ছোট, আর নতুন মডেলগুলো কিছু অংশ বদলেছে।"
+            },
+            {
+              "term": "এমবেডিং (embedding)",
+              "meaning": "একটি টোকেনকে বোঝানো সংখ্যার তালিকা। এখানে প্রতি টোকেন ৭৬৮টি সংখ্যা পায়, আর ক্রম বোঝাতে পজিশনের মান এই সংখ্যাগুলোর সাথেই যোগ করা হয়।"
+            },
+            {
+              "term": "অ্যাটেনশন (attention)",
+              "meaning": "যে ধাপে প্রতিটি টোকেন আগের টোকেনগুলোর দিকে তাকিয়ে দরকারি তথ্য নেয়। কয়েকটি হেড, মানে এই ধাপের কয়েকটি কপি, একসাথে কাজ করে।"
+            },
+            {
+              "term": "MLP",
+              "meaning": "অ্যাটেনশনের পর একটি ছোট নেটওয়ার্ক, যা প্রতিটি টোকেনকে আলাদাভাবে পরিশোধন করে।"
+            },
+            {
+              "term": "সফটম্যাক্স (softmax)",
+              "meaning": "যে ধাপ স্কোরের তালিকাকে সম্ভাবনায় বদলায়, ভোকাবুলারির প্রতিটি টোকেনের জন্য একটি।"
+            },
+            {
+              "term": "টেম্পারেচার (temperature)",
+              "meaning": "বাছাই কতটা সাহসী হবে তা ঠিক করার সেটিং। কম হলে সেরা টোকেন এগিয়ে যায়; বেশি হলে তালিকা সমান হয়ে আসে।"
+            },
+            {
+              "term": "top-k আর top-p",
+              "meaning": "বাছাই সীমিত করার দুটি সেটিং। top-k সবচেয়ে সম্ভাব্য kটি টোকেন রাখে। top-p এমন ছোট দল রাখে, যার সম্ভাবনার যোগফল অন্তত p।"
+            }
+          ],
+          "remember": [
+            "মডেল একবারে একটি টোকেন লেখে: একটি বাছে, জুড়ে দেয়, আবার চলে।",
+            "টেম্পারেচার কম হলে নিরাপদ শব্দ আসে; বেশি হলে সৃজনশীল লেখা আসে, ভুলও বাড়ে।",
+            "top-k <code>1</code> করলে প্রতিবার একই আউটপুট আসে। একে গ্রিডি ডিকোডিং বলে।",
+            "GPT-2 (small) ট্রান্সফর্মারের গঠন দেখায়, আজকের মডেলের মান নয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -334,6 +414,86 @@
         "title": "LLM Visualization: GPT-র ভেতরে 3D ভ্রমণ",
         "sub": "GPT-ধরনের মডেলের লেয়ারের ভেতর দিয়ে উড়ে যান। প্রতিটি ম্যাট্রিক্সের আসল আকার দেখুন এবং একটি টোকেনকে ইনপুট থেকে আউটপুট পর্যন্ত অনুসরণ করুন।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>LLM Visualization</strong> is a 3D tour inside a GPT-style model, where every number is a small cube. It helps you see how big each part is and follow one token from input to output.",
+          "words": [
+            {
+              "term": "Parameters",
+              "meaning": "The numbers inside a model that it learns. The page shows models from about 86K to about 175B of them."
+            },
+            {
+              "term": "Position (T)",
+              "meaning": "One slot in the input. The data is a table with one row for each position."
+            },
+            {
+              "term": "Width (C)",
+              "meaning": "How many numbers each position's row holds. GPT-2 (small) has 768."
+            },
+            {
+              "term": "Block",
+              "meaning": "One repeat of attention plus MLP. GPT-2 (small) stacks 12 identical blocks."
+            },
+            {
+              "term": "Q, K and V",
+              "meaning": "Three matrices used in self-attention. They let each token compare itself with earlier tokens."
+            },
+            {
+              "term": "Causal mask",
+              "meaning": "A rule that hides later positions, so a token cannot read the future."
+            },
+            {
+              "term": "Logits",
+              "meaning": "The raw scores at the end of the model. Softmax turns them into probabilities."
+            }
+          ],
+          "remember": [
+            "Four models share one design; only the numbers get bigger, from nano-GPT to GPT-3.",
+            "Seeing sizes and data flow in 3D shows what a formula hides.",
+            "Once you understand one block, you understand all of them, because the same block repeats.",
+            "The page shows one forward pass of fixed models. It does not train, and it skips newer parts."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>LLM Visualization</strong> হলো GPT-ধরনের মডেলের ভেতরে একটি 3D ভ্রমণ, যেখানে প্রতিটি সংখ্যা একটি ছোট কিউব। এতে প্রতিটি অংশ কত বড় তা দেখা যায় এবং একটি টোকেনকে ইনপুট থেকে আউটপুট পর্যন্ত অনুসরণ করা যায়।",
+          "words": [
+            {
+              "term": "প্যারামিটার (parameters)",
+              "meaning": "মডেলের ভেতরের যে সংখ্যাগুলো সে শেখে। পাতায় প্রায় ৮৬ হাজার থেকে প্রায় ১৭৫ বিলিয়ন প্যারামিটারের মডেল আছে।"
+            },
+            {
+              "term": "পজিশন (position, T)",
+              "meaning": "ইনপুটের একটি ঘর। ডেটা একটি টেবিল, যেখানে প্রতি পজিশনে একটি সারি।"
+            },
+            {
+              "term": "প্রস্থ (width, C)",
+              "meaning": "প্রতিটি পজিশনের সারিতে কয়টি সংখ্যা থাকে। GPT-2 (small)-এ ৭৬৮টি।"
+            },
+            {
+              "term": "ব্লক (block)",
+              "meaning": "অ্যাটেনশন আর MLP-এর একটি পুনরাবৃত্তি। GPT-2 (small)-এ ১২টি একই রকম ব্লক সাজানো।"
+            },
+            {
+              "term": "Q, K ও V",
+              "meaning": "সেলফ-অ্যাটেনশনে ব্যবহৃত তিনটি ম্যাট্রিক্স। এগুলো দিয়ে প্রতিটি টোকেন আগের টোকেনগুলোর সাথে নিজেকে মেলায়।"
+            },
+            {
+              "term": "কজাল মাস্ক (causal mask)",
+              "meaning": "পরের পজিশনগুলো লুকিয়ে রাখার নিয়ম, যাতে টোকেন ভবিষ্যৎ পড়তে না পারে।"
+            },
+            {
+              "term": "লজিট (logits)",
+              "meaning": "মডেলের শেষে পাওয়া কাঁচা স্কোর। সফটম্যাক্স এগুলোকে সম্ভাবনায় বদলায়।"
+            }
+          ],
+          "remember": [
+            "চারটি মডেলের নকশা একই; nano-GPT থেকে GPT-3 পর্যন্ত শুধু সংখ্যা বড় হয়।",
+            "3D ছবিতে আকার আর ডেটার চলাচল দেখা যায়, যা সূত্রে লুকিয়ে থাকে।",
+            "একটি ব্লক বুঝলে সবগুলো বোঝা যায়, কারণ একই ব্লক বারবার আসে।",
+            "পাতাটি স্থির মডেলের একটি ফরওয়ার্ড পাস দেখায়। এটি ট্রেনিং দেখায় না, নতুন অংশগুলোও দেখায় না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -645,6 +805,86 @@
       "bn": {
         "title": "3Blue1Brown: অ্যানিমেশনে নিউরাল নেটওয়ার্ক আর ট্রান্সফর্মার",
         "sub": "সাতটি ছোট পাঠ। একটি নিউরন থেকে শুরু করে LLM-এর অ্যাটেনশন আর MLP লেয়ার পর্যন্ত।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>3Blue1Brown</strong> has a seven-chapter animated series on neural networks. It builds from one small network to the attention and MLP layers of an LLM, and it is a good first stop before the code.",
+          "words": [
+            {
+              "term": "Weights and biases",
+              "meaning": "The knobs of a network. Training turns them. A network for handwritten digits has about 13,000 of them."
+            },
+            {
+              "term": "Cost function",
+              "meaning": "A score for how wrong the network is. Training tries to make it smaller."
+            },
+            {
+              "term": "Gradient descent",
+              "meaning": "A loop that measures the slope of the cost (loss) and moves a weight a little downhill. It repeats this many times."
+            },
+            {
+              "term": "Backpropagation",
+              "meaning": "The method that finds how much to nudge every weight in one pass."
+            },
+            {
+              "term": "Chain rule",
+              "meaning": "A rule from calculus that explains why backpropagation works."
+            },
+            {
+              "term": "Attention",
+              "meaning": "The step where each token looks at other tokens. It uses queries, keys, values, a causal mask, and many heads."
+            },
+            {
+              "term": "MLP layers",
+              "meaning": "Layers that hold much of the model's knowledge. Many ideas share the same neurons."
+            }
+          ],
+          "remember": [
+            "Chapters 1 to 4 build one small network and teach how it learns. Chapters 5 to 7 cover the transformer.",
+            "Gradient descent: measure the slope, step downhill a little, and repeat. A real network does this for billions of weights.",
+            "Pause before each result and guess the next picture. Watch chapter 5 together with section 1.",
+            "The videos teach ideas, not production code, and they skip newer designs."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>3Blue1Brown</strong>-এর নিউরাল নেটওয়ার্ক নিয়ে সাত অধ্যায়ের অ্যানিমেটেড সিরিজ আছে। এটি একটি ছোট নেটওয়ার্ক থেকে শুরু করে LLM-এর অ্যাটেনশন আর MLP লেয়ার পর্যন্ত যায়। কোডের আগে এটি ভালো প্রথম ধাপ।",
+          "words": [
+            {
+              "term": "ওয়েট আর বায়াস (weights, biases)",
+              "meaning": "নেটওয়ার্কের নব। ট্রেনিং এগুলো ঘোরায়। হাতে-লেখা অঙ্ক চেনার নেটওয়ার্কে এমন প্রায় ১৩,০০০টি থাকে।"
+            },
+            {
+              "term": "কস্ট ফাংশন (cost function)",
+              "meaning": "নেটওয়ার্ক কতটা ভুল করছে তার স্কোর। ট্রেনিং এটিকে ছোট করতে চায়।"
+            },
+            {
+              "term": "গ্রেডিয়েন্ট ডিসেন্ট (gradient descent)",
+              "meaning": "যে লুপ কস্টের (লস) ঢাল মাপে এবং ওয়েটকে একটু নিচের দিকে সরায়। এটি বারবার চলে।"
+            },
+            {
+              "term": "ব্যাকপ্রপাগেশন (backpropagation)",
+              "meaning": "যে পদ্ধতি এক পাসেই বের করে প্রতিটি ওয়েটকে কতটা ঠেলতে হবে।"
+            },
+            {
+              "term": "চেইন রুল (chain rule)",
+              "meaning": "ক্যালকুলাসের একটি নিয়ম, যা ব্যাকপ্রপাগেশন কেন কাজ করে তা বোঝায়।"
+            },
+            {
+              "term": "অ্যাটেনশন (attention)",
+              "meaning": "যে ধাপে প্রতিটি টোকেন অন্য টোকেনের দিকে তাকায়। এতে কুয়েরি, কী, ভ্যালু, কজাল মাস্ক আর একাধিক হেড থাকে।"
+            },
+            {
+              "term": "MLP লেয়ার (MLP layers)",
+              "meaning": "যে লেয়ারে মডেলের অনেক জ্ঞান থাকে। একই নিউরন অনেক ধারণার কাজে লাগে।"
+            }
+          ],
+          "remember": [
+            "১ থেকে ৪ অধ্যায়ে একটি ছোট নেটওয়ার্ক ও তার শেখা, ৫ থেকে ৭-এ ট্রান্সফর্মার।",
+            "গ্রেডিয়েন্ট ডিসেন্ট: ঢাল মাপুন, একটু নিচে নামুন, আবার করুন। আসল নেটওয়ার্ক কয়েক বিলিয়ন ওয়েটের জন্য এটি করে।",
+            "প্রতিটি ফলের আগে থেমে পরের ছবি অনুমান করুন। ৫ নম্বর অধ্যায় সেকশন ১-এর সাথে দেখুন।",
+            "ভিডিও ধারণা শেখায়, প্রোডাকশন কোড নয়, আর নতুন নকশাও দেখায় না।"
+          ]
+        }
       },
       "body": [
         {
@@ -993,6 +1233,86 @@
       "bn": {
         "title": "The Illustrated Transformer: ছবিতে Q, K আর V",
         "sub": "Jay Alammar-এর বিখ্যাত ট্রান্সফর্মার ব্যাখ্যা। অ্যাটেনশনের প্রতিটি ধাপের জন্য একটি করে ছবি।"
+      },
+      "basics": {
+        "en": {
+          "idea": "<strong>The Illustrated Transformer</strong> is a blog post that explains the transformer with one drawing for each step. Many readers find it the clearest explanation of how queries, keys and values work in attention.",
+          "words": [
+            {
+              "term": "Query (Q)",
+              "meaning": "A vector that says what this token is looking for."
+            },
+            {
+              "term": "Key (K)",
+              "meaning": "A vector that works as a label for what this token offers."
+            },
+            {
+              "term": "Value (V)",
+              "meaning": "The content a token hands over when another token picks it."
+            },
+            {
+              "term": "Scale factor",
+              "meaning": "Scores are divided by this number so they do not grow too large. In the base model it is √64 = 8."
+            },
+            {
+              "term": "Multi-head attention",
+              "meaning": "Running several copies of attention with different weights. Outputs are joined and turned into one vector of the model's width (512 in the base model)."
+            },
+            {
+              "term": "Residual connection",
+              "meaning": "A shortcut that adds a layer's input to its output. The post pairs it with layer normalisation, which keeps the numbers in a steady range."
+            },
+            {
+              "term": "Encoder and decoder",
+              "meaning": "The two stacks of the original model, made for translation. Most LLMs today keep only the decoder."
+            }
+          ],
+          "remember": [
+            "Each token makes a query, a key and a value from its own embedding.",
+            "Scores come from comparing a query with keys. Softmax makes weights that add up to 1.",
+            "The output is a weighted sum of values, so it leans toward the values of tokens whose keys match best.",
+            "Most LLMs today are decoder only, and many heads share K and V."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>The Illustrated Transformer</strong> একটি ব্লগ পোস্ট, যা প্রতিটি ধাপের একটি করে ছবি দিয়ে ট্রান্সফর্মার বোঝায়। অনেকের মতে অ্যাটেনশনে কুয়েরি, কী আর ভ্যালু কীভাবে কাজ করে, তার সবচেয়ে পরিষ্কার ব্যাখ্যা এটিই।",
+          "words": [
+            {
+              "term": "কুয়েরি (query, Q)",
+              "meaning": "একটি ভেক্টর, যা বলে এই টোকেন কী খুঁজছে।"
+            },
+            {
+              "term": "কী (key, K)",
+              "meaning": "একটি ভেক্টর, যা এই টোকেন কী দিতে পারে তার লেবেলের কাজ করে।"
+            },
+            {
+              "term": "ভ্যালু (value, V)",
+              "meaning": "অন্য টোকেন এই টোকেনকে বাছলে সে যে বিষয়বস্তু দেয়।"
+            },
+            {
+              "term": "স্কেল ফ্যাক্টর (scale factor)",
+              "meaning": "স্কোরগুলোকে এই সংখ্যা দিয়ে ভাগ করা হয়, যাতে সেগুলো খুব বড় না হয়ে যায়। বেস মডেলে এটি √৬৪ = ৮।"
+            },
+            {
+              "term": "মাল্টি-হেড অ্যাটেনশন (multi-head attention)",
+              "meaning": "আলাদা ওয়েটসহ অ্যাটেনশনের কয়েকটি কপি চালানো। ফলগুলো জুড়ে মডেলের প্রস্থের একটি ভেক্টরে আনা হয় (বেস মডেলে ৫১২)।"
+            },
+            {
+              "term": "রেসিডুয়াল কানেকশন (residual connection)",
+              "meaning": "একটি শর্টকাট, যা লেয়ারের ইনপুট তার আউটপুটের সাথে যোগ করে। পোস্টে এর সাথে লেয়ার নরমালাইজেশনও আছে, যা সংখ্যাগুলোকে একটি স্থির সীমার মধ্যে রাখে।"
+            },
+            {
+              "term": "এনকোডার ও ডিকোডার (encoder, decoder)",
+              "meaning": "মূল মডেলের দুটি স্তূপ, অনুবাদের জন্য বানানো। আজকের বেশিরভাগ LLM শুধু ডিকোডার রাখে।"
+            }
+          ],
+          "remember": [
+            "প্রতিটি টোকেন নিজের এমবেডিং থেকে একটি কুয়েরি, একটি কী ও একটি ভ্যালু বানায়।",
+            "কুয়েরিকে কী-এর সাথে মিলিয়ে স্কোর আসে। সফটম্যাক্স এমন ওজন দেয়, যার যোগফল ১।",
+            "ফল হলো ভ্যালুগুলোর ওজনযুক্ত যোগফল, তাই যে টোকেনগুলোর কী বেশি মেলে, ফল সেগুলোর ভ্যালুর দিকে ঝোঁকে।",
+            "আজকের বেশিরভাগ LLM শুধু ডিকোডার, আর অনেক হেড একই K ও V ভাগ করে।"
+          ]
+        }
       },
       "body": [
         {
@@ -1380,6 +1700,86 @@
         "title": "TensorFlow Playground: একটি ছোট নেটওয়ার্ক ট্রেন করুন এবং ভেঙে দেখুন",
         "sub": "আপনার ব্রাউজারে একটি ছোট নিউরাল নেটওয়ার্ক। একবারে একটি সেটিং বদলান এবং দেখুন শেখার উপর তার কী প্রভাব পড়ে।"
       },
+      "basics": {
+        "en": {
+          "idea": "<strong>TensorFlow Playground</strong> lets you train a tiny network in your browser. Change one setting at a time to see what helps it learn and what breaks it.",
+          "words": [
+            {
+              "term": "Features",
+              "meaning": "The inputs the network sees, such as X1, X2 or X1². A good input can make a hard problem easy."
+            },
+            {
+              "term": "Hidden layers",
+              "meaning": "The middle layers of a network. Each neuron in them draws one line or curve."
+            },
+            {
+              "term": "Activation",
+              "meaning": "The curve applied after each neuron. With a Linear activation, the boundary stays a straight line."
+            },
+            {
+              "term": "Learning rate",
+              "meaning": "How big each learning step is. 0.03 learns well, but 10 makes the loss jump around."
+            },
+            {
+              "term": "Regularization (L1, L2)",
+              "meaning": "A penalty on large weights. L2 calms a network that fits the noise."
+            },
+            {
+              "term": "Loss",
+              "meaning": "A number that says how wrong the network's output is. Training tries to lower it."
+            },
+            {
+              "term": "Overfitting",
+              "meaning": "When a network learns the noise in the data instead of the pattern. Test loss ends up much higher than training loss."
+            }
+          ],
+          "remember": [
+            "One neuron can only draw a straight line, so a circle needs more than that.",
+            "A good feature, like X1² and X2², can replace depth and drop the loss to near zero.",
+            "Many Linear layers stacked together still make one straight boundary.",
+            "The playground is a gym for the training loop. It cannot show attention, tokens, or scale."
+          ]
+        },
+        "bn": {
+          "idea": "<strong>TensorFlow Playground</strong> দিয়ে আপনি ব্রাউজারে একটি ছোট নেটওয়ার্ক ট্রেন করতে পারেন। একবারে একটি সেটিং বদলে দেখুন কীসে শেখা ভালো হয় আর কীসে ভেঙে যায়।",
+          "words": [
+            {
+              "term": "ফিচার (features)",
+              "meaning": "নেটওয়ার্ক যেসব ইনপুট দেখে, যেমন X1, X2 বা X1²। ভালো ইনপুট কঠিন সমস্যাকে সহজ করতে পারে।"
+            },
+            {
+              "term": "হিডেন লেয়ার (hidden layers)",
+              "meaning": "নেটওয়ার্কের মাঝের স্তর। এর প্রতিটি নিউরন একটি রেখা বা বক্ররেখা আঁকে।"
+            },
+            {
+              "term": "অ্যাক্টিভেশন (activation)",
+              "meaning": "প্রতিটি নিউরনের পরে যে বক্ররেখা লাগানো হয়। Linear দিলে সীমারেখা সোজা থাকে।"
+            },
+            {
+              "term": "লার্নিং রেট (learning rate)",
+              "meaning": "শেখার প্রতিটি ধাপ কত বড়। ০.০৩ দিলে ভালো শেখে, কিন্তু ১০ হলে লস লাফায়।"
+            },
+            {
+              "term": "রেগুলারাইজেশন (regularization, L1, L2)",
+              "meaning": "বড় ওয়েটের ওপর শাস্তি। L2 এমন নেটওয়ার্ককে শান্ত করে, যে নয়েজের সাথে মিলে যাচ্ছে।"
+            },
+            {
+              "term": "লস (loss)",
+              "meaning": "একটি সংখ্যা, যা বলে নেটওয়ার্কের আউটপুট কতটা ভুল। ট্রেনিং এটি কমাতে চায়।"
+            },
+            {
+              "term": "ওভারফিটিং (overfitting)",
+              "meaning": "নেটওয়ার্ক যখন প্যাটার্ন না শিখে ডেটার নয়েজ শেখে। তখন টেস্ট লস ট্রেনিং লসের চেয়ে অনেক বেশি হয়।"
+            }
+          ],
+          "remember": [
+            "একটি নিউরন শুধু সোজা রেখা আঁকতে পারে, তাই বৃত্তের জন্য আরও কিছু লাগে।",
+            "X1² আর X2²-এর মতো ভালো ফিচার গভীরতার কাজ করে দিতে পারে এবং লস প্রায় শূন্যে নামায়।",
+            "অনেকগুলো Linear লেয়ার একসাথে দিলেও সীমারেখা একটি সোজা রেখাই থাকে।",
+            "Playground ট্রেনিং লুপের জিম। এটি অ্যাটেনশন, টোকেন বা স্কেল দেখাতে পারে না।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -1703,6 +2103,86 @@
         "title": "অ্যাটেনশন ভ্যারিয়েন্টের ভিজ্যুয়াল গাইড: MHA, GQA, MLA, স্লাইডিং উইন্ডো ও আরও",
         "sub": "লম্বা ইনপুটের জন্য আধুনিক LLM কীভাবে অ্যাটেনশন সস্তা করে, পাশাপাশি তুলনা।"
       },
+      "basics": {
+        "en": {
+          "idea": "Modern LLMs use many kinds of <strong>attention</strong> designs. Each one tries to make long inputs cheaper, in memory, in compute, or both. This guide compares them side by side.",
+          "words": [
+            {
+              "term": "KV cache",
+              "meaning": "The stored keys and values of every earlier token, so the model does not recompute them for each new token."
+            },
+            {
+              "term": "MHA (multi-head attention)",
+              "meaning": "The standard design and the baseline. Every head keeps its own keys and values, so it saves nothing."
+            },
+            {
+              "term": "GQA (grouped-query attention)",
+              "meaning": "Several query heads share one set of keys and values. This saves KV cache memory."
+            },
+            {
+              "term": "MLA (multi-head latent attention)",
+              "meaning": "Stores one compressed form and rebuilds the keys and values when needed. This also saves KV cache memory."
+            },
+            {
+              "term": "Sliding window attention (SWA)",
+              "meaning": "Each token reads only a window of recent tokens, not the whole text. This saves compute and memory at long length."
+            },
+            {
+              "term": "DSA (DeepSeek sparse attention)",
+              "meaning": "A learned selector keeps only the useful earlier tokens. This saves compute at long length."
+            },
+            {
+              "term": "Hybrid",
+              "meaning": "Mostly cheap linear layers, with a few full-attention layers mixed in."
+            }
+          ],
+          "remember": [
+            "Standard attention has two costs that grow with input length: the KV cache and the compute.",
+            "Each variant attacks one of these costs: KV cache memory, compute, or both.",
+            "GQA and MLA shrink the KV cache; sliding window and DSA cut compute at long length.",
+            "MHA is the baseline; every other variant is compared against it."
+          ]
+        },
+        "bn": {
+          "idea": "আধুনিক LLM নানা রকম <strong>অ্যাটেনশন</strong> নকশা ব্যবহার করে। প্রতিটির লক্ষ্য লম্বা ইনপুট সস্তা করা, মেমরিতে বা কম্পিউটে বা দুটিতেই। এই গাইড সেগুলো পাশাপাশি তুলনা করে।",
+          "words": [
+            {
+              "term": "KV ক্যাশ (KV cache)",
+              "meaning": "আগের প্রতিটি টোকেনের জমা রাখা কি (key) আর ভ্যালু (value), যাতে নতুন টোকেনের জন্য আবার হিসাব করতে না হয়।"
+            },
+            {
+              "term": "MHA (multi-head attention)",
+              "meaning": "মূল নকশা, তুলনার ভিত্তি। প্রতিটি হেড নিজের কী আর ভ্যালু রাখে, তাই কিছু বাঁচে না।"
+            },
+            {
+              "term": "GQA (grouped-query attention)",
+              "meaning": "কয়েকটি কুয়েরি হেড একসেট কী আর ভ্যালু ভাগ করে নেয়। এতে KV ক্যাশের মেমরি বাঁচে।"
+            },
+            {
+              "term": "MLA (multi-head latent attention)",
+              "meaning": "একটি সংকুচিত রূপ জমা রাখে এবং দরকারে কী আর ভ্যালু আবার বানায়। এতেও KV ক্যাশের মেমরি বাঁচে।"
+            },
+            {
+              "term": "স্লাইডিং উইন্ডো অ্যাটেনশন (sliding window attention, SWA)",
+              "meaning": "প্রতিটি টোকেন পুরো লেখা নয়, শুধু কাছের কয়েকটি টোকেনের একটি উইন্ডো পড়ে। লম্বা ইনপুটে কম্পিউট ও মেমরি বাঁচে।"
+            },
+            {
+              "term": "DSA (DeepSeek sparse attention)",
+              "meaning": "একটি শেখা সিলেক্টর শুধু কাজের আগের টোকেনগুলো রাখে। লম্বা ইনপুটে কম্পিউট বাঁচে।"
+            },
+            {
+              "term": "হাইব্রিড (hybrid)",
+              "meaning": "বেশিরভাগ লেয়ার সস্তা লিনিয়ার ধরনের, মাঝে কয়েকটি ফুল অ্যাটেনশন লেয়ার।"
+            }
+          ],
+          "remember": [
+            "সাধারণ অ্যাটেনশনের দুটি খরচ ইনপুটের দৈর্ঘ্যের সাথে বাড়ে: KV ক্যাশ আর কম্পিউট।",
+            "প্রতিটি ভ্যারিয়েন্ট এই খরচগুলোর একটি কমায়: KV ক্যাশের মেমরি, কম্পিউট, বা দুটিই।",
+            "GQA আর MLA KV ক্যাশ ছোট করে; স্লাইডিং উইন্ডো আর DSA লম্বা ইনপুটে কম্পিউট কমায়।",
+            "MHA হলো মূল রূপ; বাকি সব ভ্যারিয়েন্ট এর সাথে তুলনা করা হয়।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -1896,6 +2376,88 @@
       "bn": {
         "title": "অ্যাটেনশনের হিসাব: KV ক্যাশের আকার, স্লাইডিং উইন্ডো আর হাইব্রিড",
         "sub": "KV ক্যাশ কত বড় হয়, key আর value ভাগ করে বা সংকুচিত করে রাখলে কতটা কমে, স্লাইডিং উইন্ডো, স্পার্স অ্যাটেনশন আর হাইব্রিড লেয়ার কীভাবে কম্পিউট কমায়, আর গাইডটা কীভাবে পড়বেন।"
+      },
+      "basics": {
+        "en": {
+          "idea": "The <strong>KV cache</strong> can grow to many gigabytes for long inputs. This section shows the numbers, how sharing or compressing keys and values shrinks it, and how cheaper attention cuts compute.",
+          "words": [
+            {
+              "term": "KV cache",
+              "meaning": "The keys and values the model stores for every earlier token, for every layer, so it does not recompute them."
+            },
+            {
+              "term": "FP16",
+              "meaning": "A way to store each number in 2 bytes."
+            },
+            {
+              "term": "GQA (grouped-query attention)",
+              "meaning": "Several query heads share one KV head (one K and one V per layer). Llama 3 8B uses 8, so its cache is smaller."
+            },
+            {
+              "term": "MQA (multi-query attention)",
+              "meaning": "The extreme case where all query heads share just 1 KV head. It has the smallest cache."
+            },
+            {
+              "term": "MLA (multi-head latent attention)",
+              "meaning": "Goes further than GQA by storing one compressed form and rebuilding the keys and values."
+            },
+            {
+              "term": "Sliding window",
+              "meaning": "A token reads only a fixed number of recent tokens, not all earlier ones. This cuts compute at long length."
+            },
+            {
+              "term": "Hybrid",
+              "meaning": "Most layers are cheap at long length, and every few layers a full-attention layer lets the model look up any earlier token exactly."
+            }
+          ],
+          "remember": [
+            "For a Llama 3 8B-shaped model (32 layers, head size 128, FP16), the cache grows with KV heads and tokens.",
+            "At 128K tokens, it needs 64 GiB with 32 KV heads, 16 GiB with 8, 2 GiB with 1.",
+            "DeepSeek-V2 reports a KV cache that is 93.3% smaller than its earlier dense model.",
+            "Gemma 3 uses a window of 1,024 tokens. Qwen3-Next uses a 3 : 1 hybrid mix.",
+            "For each variant, ask what it saves and what it gives up. Real speed also depends on software and GPU."
+          ]
+        },
+        "bn": {
+          "idea": "লম্বা ইনপুটে <strong>KV ক্যাশ</strong> অনেক গিগাবাইট পর্যন্ত বড় হতে পারে। এই সেকশনে সংখ্যাগুলো আছে, আর আছে কী আর ভ্যালু ভাগ বা সংকুচিত করলে ক্যাশ কীভাবে ছোট হয় এবং সস্তা অ্যাটেনশন কীভাবে কম্পিউট কমায়।",
+          "words": [
+            {
+              "term": "KV ক্যাশ (KV cache)",
+              "meaning": "মডেল প্রতিটি আগের টোকেনের জন্য, প্রতিটি লেয়ারে যে কী আর ভ্যালু জমা রাখে, যাতে আবার হিসাব করতে না হয়।"
+            },
+            {
+              "term": "FP16",
+              "meaning": "প্রতিটি সংখ্যা ২ বাইটে জমা রাখার একটি উপায়।"
+            },
+            {
+              "term": "GQA (grouped-query attention)",
+              "meaning": "কয়েকটি কুয়েরি হেড একটি KV হেড (প্রতি লেয়ারে একটি K ও একটি V) ভাগ করে নেয়। Llama 3 8B ৮টি ব্যবহার করে, তাই ক্যাশ ছোট।"
+            },
+            {
+              "term": "MQA (multi-query attention)",
+              "meaning": "চরম রূপ, যেখানে সব কুয়েরি হেড মাত্র ১টি KV হেড ভাগ করে। এর ক্যাশ সবচেয়ে ছোট।"
+            },
+            {
+              "term": "MLA (multi-head latent attention)",
+              "meaning": "GQA-এর চেয়েও এগিয়ে যায়: একটি সংকুচিত রূপ জমা রাখে এবং কী আর ভ্যালু আবার বানায়।"
+            },
+            {
+              "term": "স্লাইডিং উইন্ডো (sliding window)",
+              "meaning": "টোকেন আগের সবগুলো নয়, শুধু নির্দিষ্ট সংখ্যক সাম্প্রতিক টোকেন পড়ে। লম্বা ইনপুটে কম্পিউট কমে।"
+            },
+            {
+              "term": "হাইব্রিড (hybrid)",
+              "meaning": "বেশিরভাগ লেয়ার লম্বা ইনপুটে সস্তা, আর কয়েক লেয়ার পরপর একটি ফুল অ্যাটেনশন লেয়ার মডেলকে আগের যেকোনো টোকেন নির্ভুলভাবে খুঁজে দেখতে দেয়।"
+            }
+          ],
+          "remember": [
+            "Llama 3 8B-র মতো আকারের মডেলে (৩২ লেয়ার, হেড সাইজ ১২৮, FP16) ক্যাশ KV হেড আর টোকেনের সাথে বাড়ে।",
+            "১২৮K টোকেনে লাগে ৩২ KV হেডে ৬৪ GiB, ৮টিতে ১৬ GiB, আর ১টিতে ২ GiB।",
+            "DeepSeek-V2 জানায়, তার KV ক্যাশ আগের ডেন্স মডেলের চেয়ে ৯৩.৩% ছোট।",
+            "Gemma 3-এ উইন্ডো ১,০২৪ টোকেন। Qwen3-Next-এ হাইব্রিড অনুপাত ৩ : ১।",
+            "প্রতিটি ভ্যারিয়েন্টে জিজ্ঞেস করুন কী বাঁচে আর কী ছাড়তে হয়। আসল গতি সফটওয়্যার আর GPU-র ওপরও নির্ভর করে।"
+          ]
+        }
       },
       "body": [
         {
@@ -2093,6 +2655,86 @@
       "bn": {
         "title": "মিক্সচার অফ এক্সপার্টসের ভিজ্যুয়াল গাইড: রাউটার, এক্সপার্ট আর লোড ব্যালেন্সিং",
         "sub": "আজকের অনেক LLM কেন প্রতিটি টোকেনের জন্য মাত্র কয়েকটি এক্সপার্ট ব্যবহার করে, এবং রাউটারকে কীভাবে ন্যায্য রাখা হয়।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Many modern LLMs use a <strong>Mixture of Experts</strong>: a big layer where only a few parts work for each token. A small router chooses which parts, and it must be kept fair.",
+          "words": [
+            {
+              "term": "Feed-forward network (FFN)",
+              "meaning": "The part of a transformer block that refines each token after attention. It holds most of the block's parameters."
+            },
+            {
+              "term": "Expert",
+              "meaning": "One of many FFNs in an MoE layer. Experts seem to handle patterns of tokens and syntax, not subjects."
+            },
+            {
+              "term": "Router",
+              "meaning": "A small network that scores the experts for each token and picks a few. The others do no work for that token."
+            },
+            {
+              "term": "Top-k",
+              "meaning": "Keeping only the k largest router values, for example 2, and setting the others to zero."
+            },
+            {
+              "term": "Load balancing",
+              "meaning": "Keeping all experts busy, so a few experts do not get most tokens while the rest hardly train."
+            },
+            {
+              "term": "Sparse (total) parameters",
+              "meaning": "The size that counts every expert in the model. All of them must be loaded into memory."
+            },
+            {
+              "term": "Active parameters",
+              "meaning": "The size that counts only the experts that run for one token."
+            }
+          ],
+          "remember": [
+            "The router scores the experts, keeps the top k, and adds their outputs using the router probabilities.",
+            "Without balancing, popular experts learn faster and get even more tokens. Fixes include a balancing loss and expert capacity.",
+            "Mixtral 8x7B has about 47B total parameters but about 13B active per token.",
+            "Compute is like a small model, but memory is like a large one. Check total and active size before you compare costs."
+          ]
+        },
+        "bn": {
+          "idea": "অনেক আধুনিক LLM <strong>মিক্সচার অফ এক্সপার্টস (Mixture of Experts)</strong> ব্যবহার করে: একটি বড় লেয়ার, যার মাত্র কয়েকটি অংশ প্রতিটি টোকেনের জন্য কাজ করে। একটি ছোট রাউটার অংশগুলো বাছে, আর তাকে ন্যায্য রাখতে হয়।",
+          "words": [
+            {
+              "term": "ফিড-ফরওয়ার্ড নেটওয়ার্ক (feed-forward network, FFN)",
+              "meaning": "ট্রান্সফর্মার ব্লকের যে অংশ অ্যাটেনশনের পর প্রতিটি টোকেনকে পরিশোধন করে। ব্লকের বেশিরভাগ প্যারামিটার এতেই থাকে।"
+            },
+            {
+              "term": "এক্সপার্ট (expert)",
+              "meaning": "MoE লেয়ারের অনেকগুলো FFN-এর একটি। এক্সপার্টরা বিষয় নয়, টোকেন আর সিনট্যাক্সের ধরন সামলায় বলে মনে হয়।"
+            },
+            {
+              "term": "রাউটার (router)",
+              "meaning": "একটি ছোট নেটওয়ার্ক, যে প্রতিটি টোকেনের জন্য এক্সপার্টদের স্কোর দেয় এবং কয়েকটি বাছে। বাকিরা সেই টোকেনের জন্য কাজ করে না।"
+            },
+            {
+              "term": "Top-k",
+              "meaning": "রাউটারের সবচেয়ে বড় k-টি মান রাখা, যেমন ২টি, আর বাকিগুলো শূন্য করে দেওয়া।"
+            },
+            {
+              "term": "লোড ব্যালেন্সিং (load balancing)",
+              "meaning": "সব এক্সপার্টকে ব্যস্ত রাখা, যাতে কয়েকজন বেশিরভাগ টোকেন না পায় আর বাকিরা প্রায় ট্রেন না হয়।"
+            },
+            {
+              "term": "স্পার্স (মোট) প্যারামিটার (sparse parameters)",
+              "meaning": "যে আকারে মডেলের প্রতিটি এক্সপার্ট গোনা হয়। সবগুলোকেই মেমরিতে লোড করতে হয়।"
+            },
+            {
+              "term": "অ্যাকটিভ প্যারামিটার (active parameters)",
+              "meaning": "যে আকারে শুধু সেই এক্সপার্টরা গোনা হয়, যারা একটি টোকেনের জন্য চলে।"
+            }
+          ],
+          "remember": [
+            "রাউটার এক্সপার্টদের স্কোর দেয়, সেরা k-টি রাখে এবং রাউটারের সম্ভাবনা দিয়ে তাদের আউটপুট যোগ করে।",
+            "ব্যালেন্সিং ছাড়া জনপ্রিয় এক্সপার্টরা দ্রুত শেখে আর আরও টোকেন পায়। সমাধান: ব্যালেন্সিং লস, এক্সপার্ট ক্যাপাসিটি।",
+            "Mixtral 8x7B-তে মোট প্যারামিটার প্রায় ৪৭B, কিন্তু প্রতি টোকেনে সক্রিয় প্রায় ১৩B।",
+            "কম্পিউট ছোট মডেলের মতো, কিন্তু মেমরি বড় মডেলের মতো। খরচ তুলনার আগে মোট আর অ্যাকটিভ আকার দেখুন।"
+          ]
+        }
       },
       "body": [
         {
@@ -2441,6 +3083,94 @@
         "title": "LLM Inference Handbook: প্রম্পট থেকে প্রথম টোকেন এবং তার পরে",
         "sub": "টোকেনাইজ, শিডিউল, প্রিফিল ও ডিকোড, আর সার্ভিং দ্রুত ও সস্তা করার কৌশল।"
       },
+      "basics": {
+        "en": {
+          "idea": "This free handbook explains everything that happens between your prompt and the answer. It teaches the steps of <strong>inference</strong> and the tricks that make serving faster and cheaper.",
+          "words": [
+            {
+              "term": "Inference",
+              "meaning": "The computation itself: tokens go in, a probability for the next token comes out, and this repeats until the answer is done."
+            },
+            {
+              "term": "Inference server",
+              "meaning": "The software that loads the model, uses the GPU, and handles requests. It also offers batching, streaming, scaling, and monitoring."
+            },
+            {
+              "term": "Serving",
+              "meaning": "The whole production service around the model: API, queues, load balancing, autoscaling, versions, and health checks."
+            },
+            {
+              "term": "Inference optimization",
+              "meaning": "Techniques that make inference faster, cheaper, or both, without lowering quality much."
+            },
+            {
+              "term": "Prefill and decode",
+              "meaning": "Prefill reads the whole prompt in one pass. Decode then makes the answer one token per step."
+            },
+            {
+              "term": "KV cache",
+              "meaning": "A memory of saved results for every token so far, so the model can look back at them while it writes."
+            },
+            {
+              "term": "TTFT and TPOT",
+              "meaning": "TTFT is how long you wait for the first token. TPOT is the gap between the later tokens."
+            },
+            {
+              "term": "Quantization",
+              "meaning": "Storing the model's weights in fewer bits, such as INT8 or FP8, so decode reads fewer bytes."
+            }
+          ],
+          "remember": [
+            "Inference, inference server, serving, and inference optimization are four different things. The difference matters when you design infrastructure.",
+            "One request goes through five steps: tokenize, schedule, prefill, decode, and stream.",
+            "Each technique helps certain things most, such as TTFT, TPOT, throughput (how much work the server finishes per second), or memory.",
+            "Speed numbers depend on the model, the GPU, the batch size, and the prompt length. Measure your own system."
+          ]
+        },
+        "bn": {
+          "idea": "এই ফ্রি হ্যান্ডবুক বোঝায়, আপনার প্রম্পট থেকে উত্তর আসা পর্যন্ত কী কী ঘটে। এখানে <strong>ইনফারেন্সের</strong> ধাপগুলো আছে, আর সার্ভিং দ্রুত ও সস্তা করার কৌশলও আছে।",
+          "words": [
+            {
+              "term": "ইনফারেন্স (inference)",
+              "meaning": "গণনা নিজে: টোকেন ঢোকে, পরের টোকেনের সম্ভাবনা বেরোয়, আর উত্তর শেষ না হওয়া পর্যন্ত এটা চলে।"
+            },
+            {
+              "term": "ইনফারেন্স সার্ভার (inference server)",
+              "meaning": "যে সফটওয়্যার মডেল লোড করে, GPU ব্যবহার করে এবং রিকোয়েস্ট সামলায়। এতে ব্যাচিং, স্ট্রিমিং, স্কেলিং ও মনিটরিংও থাকে।"
+            },
+            {
+              "term": "সার্ভিং (serving)",
+              "meaning": "মডেলকে ঘিরে পুরো প্রোডাকশন সেবা: API, কিউ, লোড ব্যালেন্সিং, অটোস্কেলিং, ভার্সন ও হেলথ চেক।"
+            },
+            {
+              "term": "ইনফারেন্স অপটিমাইজেশন (inference optimization)",
+              "meaning": "যেসব কৌশল ইনফারেন্সকে দ্রুত, সস্তা বা দুটোই করে, মান খুব বেশি না কমিয়ে।"
+            },
+            {
+              "term": "প্রিফিল আর ডিকোড (prefill, decode)",
+              "meaning": "প্রিফিল একবারে পুরো প্রম্পট পড়ে। ডিকোড তারপর প্রতি ধাপে একটি টোকেন করে উত্তর বানায়।"
+            },
+            {
+              "term": "KV ক্যাশ (KV cache)",
+              "meaning": "এখন পর্যন্ত আসা প্রতিটি টোকেনের হিসাবের ফল জমিয়ে রাখার জায়গা, যাতে মডেল লেখার সময় সেগুলো দেখে নিতে পারে।"
+            },
+            {
+              "term": "TTFT আর TPOT",
+              "meaning": "TTFT হলো প্রথম টোকেনের জন্য অপেক্ষার সময়। TPOT হলো পরের টোকেনগুলোর মাঝের সময়।"
+            },
+            {
+              "term": "কোয়ান্টাইজেশন (quantization)",
+              "meaning": "মডেলের ওয়েট কম বিটে রাখা, যেমন INT8 বা FP8, যাতে ডিকোডে কম বাইট পড়তে হয়।"
+            }
+          ],
+          "remember": [
+            "ইনফারেন্স, ইনফারেন্স সার্ভার, সার্ভিং আর ইনফারেন্স অপটিমাইজেশন চারটি আলাদা জিনিস। ইনফ্রাস্ট্রাকচার বানানোর সময় এই পার্থক্য কাজে লাগে।",
+            "একটি রিকোয়েস্ট পাঁচ ধাপ পার হয়: টোকেনাইজ, শিডিউল, প্রিফিল, ডিকোড ও স্ট্রিম।",
+            "প্রতিটি কৌশল কিছু নির্দিষ্ট জিনিস সবচেয়ে বেশি ভালো করে, যেমন TTFT, TPOT, থ্রুপুট (সার্ভার এক সেকেন্ডে কতটা কাজ শেষ করে) বা মেমরি।",
+            "গতির সংখ্যা নির্ভর করে মডেল, GPU, ব্যাচ সাইজ ও প্রম্পটের দৈর্ঘ্যের উপর। নিজের সিস্টেমে মেপে দেখুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -2787,6 +3517,78 @@
         "title": "Neuronpedia: মডেলের ভেতরের ফিচারের অর্থ দেখুন",
         "sub": "স্পার্স অটোএনকোডার ল্যাঙ্গুয়েজ মডেলের ভেতরে যে ফিচার খুঁজে পায়, তা দেখা, পরীক্ষা করা ও স্টিয়ার করার একটি ওপেন প্ল্যাটফর্ম।"
       },
+      "basics": {
+        "en": {
+          "idea": "Neuronpedia is an open site where you can look inside AI models. It shows <strong>features</strong>, the ideas a model holds inside, and lets you test what each one means.",
+          "words": [
+            {
+              "term": "Feature",
+              "meaning": "A direction inside a model that stands for an idea, such as a place, a language, or a style."
+            },
+            {
+              "term": "Superposition",
+              "meaning": "A model packs many ideas into the same neurons, in overlapping ways. So one neuron fires for several unrelated things."
+            },
+            {
+              "term": "Activation",
+              "meaning": "The numbers that a part of the model produces while it processes text."
+            },
+            {
+              "term": "Sparse autoencoder (SAE)",
+              "meaning": "A small network that turns an activation into a wide vector with only a few active entries, then rebuilds the activation."
+            },
+            {
+              "term": "Gemma Scope",
+              "meaning": "A set of open SAEs that Google DeepMind trained on Gemma 2."
+            },
+            {
+              "term": "Steering",
+              "meaning": "Adding a scaled copy of a feature's direction to the activation while the model writes, to test whether the feature matters."
+            }
+          ],
+          "remember": [
+            "One neuron often means several unrelated things, so a sparse autoencoder splits the activity into clearer features.",
+            "Read a feature page by checking its top examples and weak examples. The explanation is a first guess, not a fact.",
+            "With steering, a small steering strength (α) leans toward the idea. A too large α makes the text break down.",
+            "Features are hypotheses. Check a claim with examples and with steering before you rely on it."
+          ]
+        },
+        "bn": {
+          "idea": "Neuronpedia একটি ওপেন সাইট, যেখানে AI মডেলের ভেতরটা দেখা যায়। এখানে <strong>ফিচার</strong> দেখা যায়, মানে মডেল ভেতরে যে ধারণাগুলো ধরে রাখে, আর প্রতিটির অর্থ পরীক্ষা করা যায়।",
+          "words": [
+            {
+              "term": "ফিচার (feature)",
+              "meaning": "মডেলের ভেতরের এমন একটি দিক, যা একটি ধারণা বোঝায়, যেমন একটি জায়গা, একটি ভাষা বা একটি ঢং।"
+            },
+            {
+              "term": "সুপারপজিশন (superposition)",
+              "meaning": "মডেল অনেক ধারণা একই নিউরনে জড়িয়ে রাখে। তাই একটি নিউরন কয়েকটি সম্পর্কহীন জিনিসে সক্রিয় হয়।"
+            },
+            {
+              "term": "অ্যাক্টিভেশন (activation)",
+              "meaning": "লেখা প্রসেস করার সময় মডেলের একটি অংশ যে সংখ্যাগুলো বানায়।"
+            },
+            {
+              "term": "স্পার্স অটোএনকোডার (sparse autoencoder, SAE)",
+              "meaning": "একটি ছোট নেটওয়ার্ক, যা অ্যাক্টিভেশনকে চওড়া ভেক্টরে বদলায়, যেখানে মাত্র কয়েকটি ঘর সক্রিয়। তারপর সে অ্যাক্টিভেশন আবার বানায়।"
+            },
+            {
+              "term": "Gemma Scope",
+              "meaning": "ওপেন SAE-র একটি সেট, যা Google DeepMind Gemma 2-এর উপর ট্রেন করেছে।"
+            },
+            {
+              "term": "স্টিয়ারিং (steering)",
+              "meaning": "মডেল লেখার সময় অ্যাক্টিভেশনে ফিচারের দিকের একটি মাপমতো কপি যোগ করা, যাতে বোঝা যায় ফিচারটি আসলে কাজে লাগে কিনা।"
+            }
+          ],
+          "remember": [
+            "একটি নিউরন প্রায়ই কয়েকটি সম্পর্কহীন জিনিস বোঝায়, তাই স্পার্স অটোএনকোডার সক্রিয়তাকে পরিষ্কার ফিচারে ভাগ করে।",
+            "ফিচার পাতা পড়তে সবচেয়ে সক্রিয় আর দুর্বল উদাহরণ দেখুন। ব্যাখ্যা প্রথম অনুমান, তথ্য নয়।",
+            "স্টিয়ারিংয়ের শক্তি (α) ছোট হলে লেখা ধারণার দিকে একটু ঝোঁকে। α খুব বড় হলে লেখা ভেঙে পড়ে।",
+            "ফিচার হলো অনুমান। ভরসা করার আগে উদাহরণ আর স্টিয়ারিং দিয়ে যাচাই করুন।"
+          ]
+        }
+      },
       "body": [
         {
           "type": "paragraph",
@@ -3092,6 +3894,86 @@
       "bn": {
         "title": "Apple-এর Embedding Atlas: আপনার এমবেডিংয়ের ভিজ্যুয়াল মানচিত্র",
         "sub": "টেক্সট, ছবি বা শব্দের একটি টেবিলকে মানচিত্রে বদলান। ক্লাস্টার, প্রতিবেশী আর আউটলায়ার দেখুন, এবং লিংকড চার্ট দিয়ে ফিল্টার করুন।"
+      },
+      "basics": {
+        "en": {
+          "idea": "Embedding Atlas turns a big table of text, images, or audio into a map. Similar rows sit close together, so you can understand data that is too big to read. Its core idea is the <strong>embedding</strong>.",
+          "words": [
+            {
+              "term": "Embedding",
+              "meaning": "A list of numbers that stands for the meaning of a piece of data. Rows with similar meaning get similar numbers."
+            },
+            {
+              "term": "Vector",
+              "meaning": "Another name for that list of numbers. A table of 100,000 rows becomes 100,000 vectors."
+            },
+            {
+              "term": "UMAP",
+              "meaning": "A method that moves points from many dimensions to two and keeps nearby points near each other."
+            },
+            {
+              "term": "Clustering",
+              "meaning": "Finding dense groups of similar rows. The tool also names each group with a label."
+            },
+            {
+              "term": "Cross-filtering",
+              "meaning": "Linked charts where a filter on one chart or on the map also filters the others."
+            },
+            {
+              "term": "MCP (Model Context Protocol) server",
+              "meaning": "A part that lets an AI agent query the data, make charts, and take screenshots."
+            },
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "Finding relevant text first and giving it to the LLM, so it answers from that text."
+            }
+          ],
+          "remember": [
+            "The tool embeds each row, then UMAP reduces each vector to two numbers, so every row becomes a point.",
+            "For files loaded on the website, the docs say your browser builds the embedding and map, and data stays local.",
+            "Use it to debug RAG, clean a dataset, check evaluation coverage, and compare embedding models.",
+            "A 2D map loses information. Automatic labels are guesses, so open some rows to check a region."
+          ]
+        },
+        "bn": {
+          "idea": "Embedding Atlas টেক্সট, ছবি বা শব্দের একটি বড় টেবিলকে মানচিত্রে বদলায়। একই ধরনের সারি পাশাপাশি বসে, তাই পড়ে শেষ করা যায় না এমন ডেটাও বোঝা যায়। এর মূল ধারণা <strong>এমবেডিং</strong>।",
+          "words": [
+            {
+              "term": "এমবেডিং (embedding)",
+              "meaning": "একটি তথ্যের অর্থ বোঝানো সংখ্যার তালিকা। একই অর্থের সারির সংখ্যাও কাছাকাছি হয়।"
+            },
+            {
+              "term": "ভেক্টর (vector)",
+              "meaning": "সংখ্যার সেই তালিকারই আরেক নাম। ১,০০,০০০ সারির টেবিল থেকে ১,০০,০০০টি ভেক্টর হয়।"
+            },
+            {
+              "term": "UMAP",
+              "meaning": "অনেক মাত্রা থেকে বিন্দুকে দুই মাত্রায় আনার একটি পদ্ধতি, যা কাছাকাছি বিন্দুগুলোকে কাছাকাছিই রাখে।"
+            },
+            {
+              "term": "ক্লাস্টারিং (clustering)",
+              "meaning": "একই ধরনের সারির ঘন দল খুঁজে বের করা। টুল প্রতিটি দলের একটি লেবেলও দেয়।"
+            },
+            {
+              "term": "ক্রস-ফিল্টারিং (cross-filtering)",
+              "meaning": "যুক্ত চার্ট, যেখানে একটি চার্টে বা মানচিত্রে ফিল্টার দিলে অন্যগুলোও ফিল্টার হয়।"
+            },
+            {
+              "term": "MCP সার্ভার (MCP server)",
+              "meaning": "যে অংশের মাধ্যমে AI এজেন্ট ডেটায় কুয়েরি করতে, চার্ট বানাতে ও স্ক্রিনশট নিতে পারে।"
+            },
+            {
+              "term": "RAG (retrieval-augmented generation)",
+              "meaning": "আগে দরকারি লেখা খুঁজে LLM-কে দেওয়া, যাতে সে সেই লেখা থেকে উত্তর দেয়।"
+            }
+          ],
+          "remember": [
+            "টুল প্রতিটি সারিকে এমবেড করে, তারপর UMAP প্রতিটি ভেক্টরকে দুটি সংখ্যায় নামায়, ফলে প্রতিটি সারি একটি বিন্দু হয়।",
+            "ওয়েবসাইটে ফাইল লোড করলে, ডকস অনুযায়ী আপনার ব্রাউজারই এমবেডিং আর মানচিত্র বানায়, ডেটা আপনার মেশিন ছেড়ে যায় না।",
+            "RAG ডিবাগ, ডেটাসেট পরিষ্কার, ইভ্যালুয়েশনের কাভারেজ যাচাই আর এমবেডিং মডেল তুলনায় এটা ব্যবহার করুন।",
+            "২D মানচিত্রে কিছু তথ্য হারায়। স্বয়ংক্রিয় লেবেল অনুমান, তাই একটি অঞ্চল যাচাই করতে কিছু সারি খুলে পড়ুন।"
+          ]
+        }
       },
       "body": [
         {

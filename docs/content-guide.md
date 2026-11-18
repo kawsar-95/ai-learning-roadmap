@@ -9,6 +9,7 @@ change a Part without breaking a reader's saved progress.
 - [What checks the content](#what-checks-the-content)
 - [The Part file](#the-part-file)
 - [Sections](#sections)
+- [Start here box](#start-here-box)
 - [Keep ids stable](#keep-ids-stable)
 - [Inline HTML](#inline-html)
 - [Block types](#block-types)
@@ -47,6 +48,8 @@ The writing rules for every voice are in
   - every Part has a quiz of 5 questions that follows the
     [quiz rules](#quizzes);
   - every Part and section has its Bangla title and intro;
+  - every section has a [Start here box](#start-here-box) that follows its
+    rules;
   - every video follows the [video rules](#videos);
   - `interview.json` has 3 questions per Part, in Part order, each tied to a
     real section.
@@ -95,6 +98,7 @@ The Part number is not in the file. It is the slug's position in
   "title": "Tokens, tokenization & context cost",
   "sub": "The section intro. Inline HTML.",
   "bn": { "title": "টোকেন, টোকেনাইজেশন আর কনটেক্সটের খরচ", "sub": "Bangla intro." },
+  "basics": { "en": {}, "bn": {} },
   "body": [],
   "layman": [],
   "bangla": [],
@@ -109,6 +113,7 @@ The Part number is not in the file. It is the slug's position in
 | `id` | The section's address (`#s1`) and its progress key. Never change it: see [Keep ids stable](#keep-ids-stable). |
 | `num` | The number readers see, two digits, in reading order: `"01"`, `"02"`. It may differ from the id. |
 | `title`, `sub`, `bn` | The title and intro in each language. `bn.title` must not be empty. |
+| `basics` | The "Start here" box, in English and Bangla. See [Start here box](#start-here-box). |
 | `body` | The Technical voice: a list of [blocks](#block-types). |
 | `layman` | The Layman's voice: plain English, analogies, no jargon. |
 | `bangla` | The বাংলা voice. |
@@ -118,6 +123,61 @@ The Part number is not in the file. It is the slug's position in
 
 A voice with an empty list has no tab. The voice switcher shows only when a
 section has two or more voices.
+
+## Start here box
+
+Every section opens with a "Start here" box (এখান থেকে শুরু করুন): the big
+idea in plain words, the words the section uses, and the points to remember.
+It shows above every voice, so a reader meets the words before the text uses
+them. Its language follows the practice tasks: Bangla on the Bangla site and
+with the বাংলা voice, English otherwise.
+
+```json
+"basics": {
+  "en": {
+    "idea": "A model does not read whole words. It reads <strong>tokens</strong>, small pieces of text.",
+    "words": [
+      { "term": "Token", "meaning": "One small piece of text, often part of a word." },
+      { "term": "Context window", "meaning": "The most tokens a model can handle in one call." }
+    ],
+    "remember": ["You pay per token, not per word or per character.", "A bigger context window does not mean better answers."]
+  },
+  "bn": {
+    "idea": "মডেল পুরো শব্দ পড়ে না। সে পড়ে <strong>টোকেন</strong>, মানে লেখার ছোট ছোট টুকরো।",
+    "words": [
+      { "term": "টোকেন (token)", "meaning": "লেখার একটি ছোট টুকরো, প্রায়ই একটি শব্দের অংশ।" },
+      { "term": "কনটেক্সট উইন্ডো (context window)", "meaning": "এক কলে মডেল সর্বোচ্চ কত টোকেন সামলাতে পারে।" }
+    ],
+    "remember": ["দাম হয় টোকেন ধরে, শব্দ বা অক্ষর ধরে নয়।", "বড় কনটেক্সট উইন্ডো মানেই ভালো উত্তর নয়।"]
+  }
+}
+```
+
+| Field | Rule |
+| --- | --- |
+| `idea` | One to three short sentences, at most 45 words. What the section is about and why it matters. |
+| `words` | 2 to 8 terms, usually 6 or 7, in the order the section uses them. Write each term as the section writes it, and spell out an abbreviation. Each `meaning` is at most 30 words and leans on no other unexplained term. |
+| `remember` | 2 to 5 points, usually 4, each one or two short sentences of at most 25 words. |
+| `en`, `bn` | The same terms and points in the same order. |
+
+All fields are [inline HTML](#inline-html) without links or citations: the
+section text carries those. The build rejects a link, a citation, or a
+different number of terms or points in the two languages. `npm test` checks
+the content rules in `tests/basics-content.test.ts`:
+
+- The English box has no Bangla letters. The Bangla idea is mostly Bangla
+  letters, and every Bangla meaning and point has Bangla in it.
+- The Bangla box writes plain numbers in Bangla digits, as the quizzes do.
+- Every English term shares a word with its section's text, so the box
+  explains words the reader really meets.
+- The word limits in the table above.
+
+Write it like the Layman's voice: state only what the section states, and
+keep its numbers. A meaning may define a general term (what an API is) in
+general words, but it adds no claim about the topic. Each Bangla term gives
+the Bangla form, then the English term in brackets:
+`কনটেক্সট উইন্ডো (context window)`. A name or an abbreviation that stays
+Latin, such as `BM25`, is written once.
 
 ## Keep ids stable
 
@@ -415,8 +475,9 @@ The quiz format is in [quizzes.md](quizzes.md). The tests add these rules:
 
 ## Adding a Part
 
-1. Write `src/content/<slug>.json`, with sections in all three voices,
-   sources, and a 5-question quiz.
+1. Write `src/content/<slug>.json`, with sections in all three voices, a
+   [Start here box](#start-here-box) for each section, sources, and a
+   5-question quiz.
 2. In `src/lib/topics.ts`, import the file, add it to `FILES`, and put the
    slug in `TOPIC_ORDER` where it belongs. The position sets the Part
    number.

@@ -121,6 +121,25 @@ export type PracticeText = {
 /** A hands-on task that a reader does in any free AI chat, in English and Bangla. */
 export type Practice = { en: PracticeText; bn: PracticeText };
 
+/** A word the section uses, and what it means in plain words. */
+export type BasicsWord = { term: Inline; meaning: Inline };
+
+/** The "Start here" box of a section in one language. */
+export type BasicsText = {
+  /** The big idea of the section, in one to three plain sentences. */
+  idea: Inline;
+  /** The words of the section that a beginner may not know, in reading order. */
+  words: BasicsWord[];
+  /** The few points to take away. */
+  remember: Inline[];
+};
+
+/**
+ * A plain-words start to a section, in English and Bangla. It shows above
+ * every voice, so the reader meets the words before the text uses them.
+ */
+export type Basics = { en: BasicsText; bn: BasicsText };
+
 export type Section = {
   id: string;
   num: string;
@@ -128,6 +147,7 @@ export type Section = {
   sub: Inline;
   /** The Bangla title and intro, for the Bangla site. */
   bn: { title: string; sub: Inline };
+  basics?: Basics;
   body: Block[];
   layman: Block[];
   bangla: Block[];
@@ -295,12 +315,31 @@ const PracticeTextSchema = z.strictObject({
 
 const PracticeSchema = z.strictObject({ en: PracticeTextSchema, bn: PracticeTextSchema });
 
+// The box restates its section in plain words. The section text carries the
+// citations, so the box has no citation and no link.
+const BasicsInlineSchema = FilledInlineSchema.refine((s) => !/<a[\s>]/.test(s), {
+  message: "A Start here box has no links and no citations",
+});
+
+const BasicsTextSchema = z.strictObject({
+  idea: BasicsInlineSchema,
+  words: z.array(z.strictObject({ term: BasicsInlineSchema, meaning: BasicsInlineSchema })).min(2).max(8),
+  remember: z.array(BasicsInlineSchema).min(2).max(5),
+});
+
+const BasicsSchema = z
+  .strictObject({ en: BasicsTextSchema, bn: BasicsTextSchema })
+  .refine((b) => b.en.words.length === b.bn.words.length && b.en.remember.length === b.bn.remember.length, {
+    message: "en and bn must have the same number of words and of points to remember",
+  });
+
 export const SectionSchema: z.ZodType<Section> = z.strictObject({
   id: z.string(),
   num: z.string(),
   title: z.string(),
   sub: InlineSchema,
   bn: z.strictObject({ title: PlainTextSchema, sub: InlineSchema }),
+  basics: BasicsSchema.optional(),
   body: z.array(BlockSchema),
   layman: z.array(BlockSchema),
   bangla: z.array(BlockSchema),
