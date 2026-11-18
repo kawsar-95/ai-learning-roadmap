@@ -645,6 +645,44 @@
           }
         }
       ]
+    },
+    {
+      "topic": "system-design",
+      "items": [
+        {
+          "section": "s7",
+          "en": {
+            "q": "What is the cache-aside pattern, and how do you stop it from serving stale data?",
+            "a": "The application reads the cache first. On a miss it reads the database and stores the result in the cache with an expiry time. On a write it updates the database and deletes the cached key, and the expiry time limits how long a missed delete can serve old data."
+          },
+          "bn": {
+            "q": "Cache-aside প্যাটার্ন কী, আর এটা যেন পুরনো (stale) ডেটা না দেখায় সেজন্য কী করবেন?",
+            "a": "অ্যাপ্লিকেশন আগে ক্যাশে খোঁজে। না পেলে ডেটাবেস থেকে পড়ে, আর ফলাফলটা মেয়াদসহ ক্যাশে রাখে। Write-এর সময় ডেটাবেস আপডেট করে ক্যাশের key মুছে দেয়, আর কোনো delete বাদ পড়লে মেয়াদ (TTL) ঠিক করে দেয় পুরনো ডেটা কতক্ষণ দেখা যেতে পারে।"
+          }
+        },
+        {
+          "section": "s17",
+          "en": {
+            "q": "Why does a consensus protocol such as Raft need a majority, and why do clusters usually have 3 or 5 nodes?",
+            "a": "Any two majorities of the same cluster share at least one node, so two candidates cannot both win the same term, and an entry counts as committed only once a majority stores it. A cluster of 3 keeps working with 1 node down and a cluster of 5 with 2 down. An even size adds a node without adding failure tolerance, so clusters use odd sizes."
+          },
+          "bn": {
+            "q": "Raft-এর মতো consensus protocol-এ majority কেন লাগে, আর cluster-এ সাধারণত ৩ বা ৫টি node কেন থাকে?",
+            "a": "একই cluster-এর যেকোনো দুটি majority-তে অন্তত একটা node মিলে যায়, তাই একই term-এ দুজন candidate জিততে পারে না, আর কোনো entry তখনই committed হয় যখন majority সেটা জমা রাখে। ৩টি node-এর cluster একটা node বন্ধ থাকলেও চলে, আর ৫টির cluster দুটি বন্ধ থাকলেও। জোড় সংখ্যায় একটা node বাড়ে কিন্তু ব্যর্থতা সহ্য করার ক্ষমতা বাড়ে না, তাই বিজোড় সংখ্যা রাখা হয়।"
+          }
+        },
+        {
+          "section": "s39",
+          "en": {
+            "q": "In a news feed, when do you fan out on write, and when on read?",
+            "a": "Fan-out on write pushes each new post id into every follower's stored feed, so reading a feed is one cheap lookup. It breaks for accounts with millions of followers, because one post becomes millions of writes. A hybrid pushes posts from most accounts and pulls posts from the few very large accounts when the feed is read."
+          },
+          "bn": {
+            "q": "নিউজ ফিডে কখন fan-out on write করবেন, আর কখন fan-out on read?",
+            "a": "Fan-out on write প্রতিটি নতুন পোস্টের id প্রত্যেক follower-এর জমা রাখা ফিডে ঢুকিয়ে দেয়, তাই ফিড পড়া একটা সস্তা lookup। লাখ লাখ follower-ওয়ালা অ্যাকাউন্টে এটা ভেঙে পড়ে, কারণ একটা পোস্ট লাখ লাখ write হয়ে যায়। Hybrid পদ্ধতিতে বেশিরভাগ অ্যাকাউন্টের পোস্ট push করা হয়, আর অল্প কয়েকটি বিশাল অ্যাকাউন্টের পোস্ট ফিড পড়ার সময় pull করা হয়।"
+          }
+        }
+      ]
     }
   ]
 }

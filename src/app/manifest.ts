@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Learn AI — All Necessary Topics",
     short_name: "Learn AI",
     description:
-      "Fourteen reference parts for applied AI engineers. Each topic in three voices: technical, layman, and বাংলা.",
+      "Eighteen reference parts for applied AI engineers. Each topic in three voices: technical, layman, and বাংলা.",
     start_url: "./",
     scope: "./",
     display: "standalone",

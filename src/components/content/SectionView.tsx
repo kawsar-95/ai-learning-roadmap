@@ -12,6 +12,7 @@ import { Inline } from "./Inline";
 import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
 import { SectionBasics } from "./SectionBasics";
+import { StepPlayer } from "./StepPlayer";
 import { VideoList } from "./VideoList";
 import { BookmarkButton, SectionDoneButton } from "@/components/progress/ProgressWidgets";
 import { createStore } from "@/components/progress/createStore";
@@ -114,7 +115,8 @@ function VoicePanel({
  * section follows it. With no saved choice, on the Bangla site a section opens in বাংলা and
  * its title, intro, practice tasks, and labels are in Bangla. A section with a
  * "Start here" box shows it above every voice, in the language of the
- * practice tasks. The section ends with a "Mark as done" toggle for the
+ * practice tasks. A section with a step-by-step walk-through shows it under
+ * the intro, in the same language. The section ends with a "Mark as done" toggle for the
  * reading progress (`doneKey`).
  */
 export function SectionView({ section, lang, doneKey }: { section: Section; lang: Lang; doneKey: string }) {
@@ -203,6 +205,12 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
           className="mt-2 text-[16px] leading-[1.7] text-pretty text-text-dim sm:text-[17px]"
         />
       </header>
+
+      {section.walkthrough && (
+        <div className="mt-5">
+          <StepPlayer walkthrough={section.walkthrough} sectionId={section.id} lang={extrasLang} />
+        </div>
+      )}
 
       {section.embeds && section.embeds.length > 0 && (
         <div className="mt-5">

@@ -72,10 +72,10 @@ export function langInitScript(basePath: string): string {
 const en = {
   siteName: "Learn AI",
   skipLink: "Skip to content",
-  footer: "17 parts · citations verified against each publisher's metadata.",
+  footer: "18 parts · citations verified against each publisher's metadata.",
   metaTitle: "Learn AI — All Necessary Topics",
   metaDescription:
-    "Sixteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
+    "Eighteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
 
   // Language and theme switches.
   langSwitchText: "বাংলা",
@@ -95,9 +95,9 @@ const en = {
 
   // Search.
   search: "Search",
-  searchAll: "Search all 17 parts",
+  searchAll: "Search all 18 parts",
   searchUnavailable: "Search is unavailable.",
-  searchType: "Type to search 17 parts.",
+  searchType: "Type to search 18 parts.",
   searchLoading: "Loading…",
   searchNone: "No results.",
   searchClose: "Close search",
@@ -156,7 +156,7 @@ const en = {
       text: "A warm paper theme for the day and a dark theme for the night. It follows your device.",
     },
   ] as Feature[],
-  partsTitle: "The 17 parts",
+  partsTitle: "The 18 parts",
   partsIntro: "Read in order, or jump to the part you need. Each part stands on its own.",
   sectionCount: (n: number) => `${n} ${n === 1 ? "section" : "sections"}`,
 
@@ -275,6 +275,21 @@ const en = {
   basicsWords: "Words to know",
   basicsRemember: "Remember",
 
+  // The step-by-step walk-through of a section.
+  walkTitle: "Walk-through",
+  walkStepOf: (i: number, n: number) => `Step ${i} of ${n}`,
+  walkBack: "Back",
+  walkNext: "Next",
+  walkReplay: "Replay",
+  walkPause: "Pause",
+  walkPlay: "Play",
+  walkSteps: "Steps",
+  walkKeys: "Use ← and → to move between steps.",
+  walkChanges: "What changed",
+  walkPoints: "Remember",
+  walkNote: { insight: "Key idea", tip: "Tip", warn: "Watch out" } as Record<"insight" | "tip" | "warn", string>,
+  walkDiagram: (title: string) => `Diagram: ${title}`,
+
   // Videos.
   watch: (n: number) => `Watch · ${n} ${n === 1 ? "video" : "videos"}`,
   playVideo: (title: string) => `Play video: ${title}`,
@@ -290,7 +305,7 @@ const en = {
 
   // 404.
   notFoundTitle: "Page not found",
-  notFoundText: "That page does not exist. All 17 parts are listed on the home page.",
+  notFoundText: "That page does not exist. All 18 parts are listed on the home page.",
   notFoundBack: "← Back to all parts",
 };
 
@@ -299,10 +314,10 @@ export type Dict = typeof en;
 const bn: Dict = {
   siteName: "Learn AI",
   skipLink: "মূল লেখায় যান",
-  footer: "১৭টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
+  footer: "১৮টি পার্ট · প্রতিটি সোর্স প্রকাশকের তথ্যের সাথে মিলিয়ে যাচাই করা।",
   metaTitle: "Learn AI — দরকারি সব বিষয়, বাংলায়",
   metaDescription:
-    "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৭টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
+    "অ্যাপ্লাইড AI ইঞ্জিনিয়ারের দরকারি সব বিষয় ১৮টি পার্টে: LLM-এর মূল ধারণা, প্রম্পট ইঞ্জিনিয়ারিং থেকে এজেন্ট, ইনফারেন্স, ইভ্যালুয়েশন, সেফটি আর AI অ্যাপ আর্কিটেকচার পর্যন্ত। প্রতিটি বিষয় সহজ বাংলা ব্যাখ্যা, প্র্যাকটিস টাস্ক আর ভিডিও সহ।",
 
   langSwitchText: "English",
   langSwitchLabel: "Read in English",
@@ -319,9 +334,9 @@ const bn: Dict = {
   prevNextNav: "আগের আর পরের পার্ট",
 
   search: "খুঁজুন",
-  searchAll: "১৭টি পার্টে খুঁজুন",
+  searchAll: "১৮টি পার্টে খুঁজুন",
   searchUnavailable: "এখন সার্চ কাজ করছে না।",
-  searchType: "১৭টি পার্টে খুঁজতে লিখুন।",
+  searchType: "১৮টি পার্টে খুঁজতে লিখুন।",
   searchLoading: "লোড হচ্ছে…",
   searchNone: "কিছু পাওয়া যায়নি।",
   searchClose: "সার্চ বন্ধ করুন",
@@ -379,7 +394,7 @@ const bn: Dict = {
       text: "দিনের জন্য কাগজের মতো লাইট থিম, রাতের জন্য ডার্ক থিম। আপনার ডিভাইসের সেটিং মেনে চলে।",
     },
   ],
-  partsTitle: "১৭টি পার্ট",
+  partsTitle: "১৮টি পার্ট",
   partsIntro: "ক্রম অনুযায়ী পড়ুন, অথবা যে পার্ট দরকার সেখানে যান। প্রতিটি পার্ট নিজে নিজেই সম্পূর্ণ।",
   sectionCount: (n: number) => `${fmtNum("bn", n)}টি সেকশন`,
 
@@ -491,6 +506,20 @@ const bn: Dict = {
   basicsWords: "শব্দগুলো চিনে নিন",
   basicsRemember: "মনে রাখুন",
 
+  walkTitle: "ধাপে ধাপে",
+  walkStepOf: (i: number, n: number) => `ধাপ ${fmtNum("bn", i)}/${fmtNum("bn", n)}`,
+  walkBack: "আগের ধাপ",
+  walkNext: "পরের ধাপ",
+  walkReplay: "আবার চালান",
+  walkPause: "থামান",
+  walkPlay: "চালান",
+  walkSteps: "ধাপগুলো",
+  walkKeys: "ধাপ বদলাতে ← আর → চাপুন।",
+  walkChanges: "কী বদলাল",
+  walkPoints: "মনে রাখুন",
+  walkNote: { insight: "মূল কথা", tip: "টিপ", warn: "সাবধান" },
+  walkDiagram: (title: string) => `ডায়াগ্রাম: ${title}`,
+
   watch: (n: number) => `ভিডিও দেখুন · ${fmtNum("bn", n)}টি`,
   playVideo: (title: string) => `ভিডিও চালান: ${title}`,
   shorts: "শর্টস",
@@ -503,7 +532,7 @@ const bn: Dict = {
   liveWide: "বড় স্ক্রিনে সবচেয়ে ভালো কাজ করে।",
 
   notFoundTitle: "পাতাটি পাওয়া যায়নি",
-  notFoundText: "এই পাতাটি নেই। হোম পেজে ১৭টি পার্টের তালিকা আছে।",
+  notFoundText: "এই পাতাটি নেই। হোম পেজে ১৮টি পার্টের তালিকা আছে।",
   notFoundBack: "← সব পার্টে ফিরে যান",
 };
 

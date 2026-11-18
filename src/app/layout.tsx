@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: "%s — Learn AI",
   },
   description:
-    "Fourteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
+    "Eighteen reference parts covering every topic an applied AI engineer needs, from LLM fundamentals and prompt engineering to agents, inference, evaluation, safety, and AI application architecture. Each topic in three voices: technical, layman, and বাংলা.",
   appleWebApp: {
     capable: true,
     title: "Learn AI",

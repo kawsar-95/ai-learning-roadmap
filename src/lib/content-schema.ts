@@ -50,6 +50,7 @@ export const FRAMEABLE_HOSTS: readonly string[] = [
 export const LINK_ONLY_HOSTS: readonly string[] = [
   "magazine.sebastianraschka.com",
   "newsletter.maartengrootendorst.com",
+  "designed-to-scale.vercel.app",
 ];
 
 /** The host of an https URL, or null for any other URL. */
@@ -140,6 +141,102 @@ export type BasicsText = {
  */
 export type Basics = { en: BasicsText; bn: BasicsText };
 
+/** A short label in English and Bangla. Plain text. */
+export type Bilingual = { en: string; bn: string };
+
+/** The kind of a box in a walk-through diagram. It picks the icon. */
+export const WALK_NODE_KINDS = [
+  "user",
+  "browser",
+  "dns",
+  "server",
+  "database",
+  "cache",
+  "cdn",
+  "balancer",
+  "queue",
+  "storage",
+  "service",
+  "lock",
+  "key",
+  "shield",
+  "clock",
+  "chart",
+  "file",
+  "note",
+] as const;
+export type WalkNodeKind = (typeof WALK_NODE_KINDS)[number];
+
+/** A box of a walk-through diagram, at its home position in the scene. */
+export type WalkNode = { id: string; kind: WalkNodeKind; label: Bilingual; x: number; y: number };
+
+/** How a box looks in one step. A box that a step does not list is hidden. */
+export type WalkShow = {
+  id: string;
+  /** hot: the step is about it. warn: slow or failing. dim: there, but not in focus. */
+  state?: "hot" | "warn" | "dim";
+  /** A small second line, such as a time or a place. */
+  sub?: Bilingual;
+  /** A count in a corner, such as "×40". */
+  badge?: string;
+  /** A position for this step only, when the box moves. */
+  x?: number;
+  y?: number;
+};
+
+/** A line between two shown boxes. With `flow`, dots travel along it. */
+export type WalkLink = {
+  from: string;
+  to: string;
+  /** to: dots go from `from` to `to`. back: the other way. both: there and back. */
+  flow?: "to" | "back" | "both";
+  /** How long one dot takes to cross, in ms. A slow link has slow dots. */
+  ms?: number;
+  state?: "hot" | "warn" | "dim";
+  label?: Bilingual;
+};
+
+/** The words of one walk-through step in one language. No links or citations: the section text has them. */
+export type WalkText = {
+  /** The label on the step strip. */
+  short: string;
+  title: string;
+  body: Inline[];
+  note?: { kind: "insight" | "tip" | "warn"; html: Inline };
+  /** What the step added (+), took away (-) or changed (~). */
+  changes?: { sign: "+" | "-" | "~"; html: Inline }[];
+  /** The points to take away, for a recap step. */
+  points?: Inline[];
+};
+
+export type WalkStep = {
+  en: WalkText;
+  bn: WalkText;
+  show: WalkShow[];
+  links: WalkLink[];
+  /**
+   * One value per readout. A string is the same in both languages (its digits
+   * turn Bangla on the Bangla site). null shows a dash.
+   */
+  values?: (string | Bilingual | null)[];
+};
+
+/**
+ * A step-by-step walk-through of a section: a diagram that changes with each
+ * step, a row of readouts, and the words of each step in English and Bangla.
+ */
+export type Walkthrough = {
+  /** The size of the diagram, in diagram units. */
+  width: number;
+  height: number;
+  nodes: WalkNode[];
+  /** The labels of the readouts above the diagram. */
+  metrics: Bilingual[];
+  /** A line under the readouts, for example to say that the numbers are an example. */
+  caption?: Bilingual;
+  steps: WalkStep[];
+};
+
 export type Section = {
   id: string;
   num: string;
@@ -148,6 +245,7 @@ export type Section = {
   /** The Bangla title and intro, for the Bangla site. */
   bn: { title: string; sub: Inline };
   basics?: Basics;
+  walkthrough?: Walkthrough;
   body: Block[];
   layman: Block[];
   bangla: Block[];
@@ -333,6 +431,99 @@ const BasicsSchema = z
     message: "en and bn must have the same number of words and of points to remember",
   });
 
+// A walk-through restates its section step by step. The section text carries
+// the citations, so the steps have no citation and no link.
+const WalkInlineSchema = FilledInlineSchema.refine((s) => !/<a[\s>]/.test(s), {
+  message: "A walk-through step has no links and no citations",
+});
+const BilingualSchema = z.strictObject({ en: PlainTextSchema, bn: PlainTextSchema });
+
+const WalkTextSchema = z.strictObject({
+  short: PlainTextSchema,
+  title: PlainTextSchema,
+  body: z.array(WalkInlineSchema).min(1),
+  note: z.strictObject({ kind: z.enum(["insight", "tip", "warn"]), html: WalkInlineSchema }).optional(),
+  changes: z.array(z.strictObject({ sign: z.enum(["+", "-", "~"]), html: WalkInlineSchema })).min(1).optional(),
+  points: z.array(WalkInlineSchema).min(1).optional(),
+});
+
+const WalkStepSchema = z.strictObject({
+  en: WalkTextSchema,
+  bn: WalkTextSchema,
+  show: z
+    .array(
+      z.strictObject({
+        id: z.string(),
+        state: z.enum(["hot", "warn", "dim"]).optional(),
+        sub: BilingualSchema.optional(),
+        badge: PlainTextSchema.optional(),
+        x: z.number().optional(),
+        y: z.number().optional(),
+      }),
+    )
+    .min(1),
+  links: z.array(
+    z.strictObject({
+      from: z.string(),
+      to: z.string(),
+      flow: z.enum(["to", "back", "both"]).optional(),
+      ms: z.number().int().min(200).max(10000).optional(),
+      state: z.enum(["hot", "warn", "dim"]).optional(),
+      label: BilingualSchema.optional(),
+    }),
+  ),
+  values: z.array(z.union([PlainTextSchema, BilingualSchema]).nullable()).optional(),
+});
+
+const WalkthroughSchema = z
+  .strictObject({
+    width: z.number().int().min(320).max(1200),
+    height: z.number().int().min(160).max(800),
+    nodes: z
+      .array(
+        z.strictObject({
+          id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+          kind: z.enum(WALK_NODE_KINDS),
+          label: BilingualSchema,
+          x: z.number(),
+          y: z.number(),
+        }),
+      )
+      .min(1),
+    metrics: z.array(BilingualSchema).max(6),
+    caption: BilingualSchema.optional(),
+    steps: z.array(WalkStepSchema).min(2),
+  })
+  .superRefine((w, ctx) => {
+    const ids = new Set<string>();
+    for (const node of w.nodes) {
+      if (ids.has(node.id)) ctx.addIssue({ code: "custom", message: `duplicate node id ${node.id}` });
+      ids.add(node.id);
+    }
+    w.steps.forEach((step, i) => {
+      const where = `step ${i + 1}`;
+      const shown = new Set<string>();
+      for (const s of step.show) {
+        if (!ids.has(s.id)) ctx.addIssue({ code: "custom", message: `${where}: unknown node ${s.id}` });
+        if (shown.has(s.id)) ctx.addIssue({ code: "custom", message: `${where}: ${s.id} is shown twice` });
+        shown.add(s.id);
+        const x = s.x ?? w.nodes.find((n) => n.id === s.id)?.x ?? 0;
+        const y = s.y ?? w.nodes.find((n) => n.id === s.id)?.y ?? 0;
+        if (x < 0 || x > w.width || y < 0 || y > w.height) {
+          ctx.addIssue({ code: "custom", message: `${where}: ${s.id} is outside the diagram` });
+        }
+      }
+      for (const link of step.links) {
+        if (!shown.has(link.from) || !shown.has(link.to) || link.from === link.to) {
+          ctx.addIssue({ code: "custom", message: `${where}: a link must join two shown boxes (${link.from} → ${link.to})` });
+        }
+      }
+      if ((step.values?.length ?? 0) !== w.metrics.length) {
+        ctx.addIssue({ code: "custom", message: `${where}: needs one value per readout` });
+      }
+    });
+  });
+
 export const SectionSchema: z.ZodType<Section> = z.strictObject({
   id: z.string(),
   num: z.string(),
@@ -340,6 +531,7 @@ export const SectionSchema: z.ZodType<Section> = z.strictObject({
   sub: InlineSchema,
   bn: z.strictObject({ title: PlainTextSchema, sub: InlineSchema }),
   basics: BasicsSchema.optional(),
+  walkthrough: WalkthroughSchema.optional(),
   body: z.array(BlockSchema),
   layman: z.array(BlockSchema),
   bangla: z.array(BlockSchema),

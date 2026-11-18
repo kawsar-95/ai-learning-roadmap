@@ -1,0 +1,152 @@
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readdirSync, readFileSync } from "node:fs";
+import type { TopicFile, Walkthrough } from "../src/lib/content-schema.ts";
+import { NODE_H, boxExit, boxWidth, changedValues, focusX, linkEnds, localDigits, nodeWidths, valueText } from "../src/lib/walkthrough.ts";
+
+test("localDigits writes Bangla digits on the Bangla site only", () => {
+  assert.equal(localDigits("1,085 ms", "bn"), "১,০৮৫ ms");
+  assert.equal(localDigits("1,085 ms", "en"), "1,085 ms");
+});
+
+test("valueText: a shared string gets local digits, a bilingual value picks its language, null is a dash", () => {
+  assert.equal(valueText("40%", "bn"), "৪০%");
+  assert.equal(valueText({ en: "10 + spares", bn: "১০ + বাড়তি" }, "bn"), "১০ + বাড়তি");
+  assert.equal(valueText(null, "en"), null);
+  assert.equal(valueText(undefined, "en"), null);
+});
+
+test("boxWidth grows with the longest line and stays within its bounds", () => {
+  assert.equal(boxWidth(["DB"]), 112);
+  assert.ok(boxWidth(["Search front end"]) > boxWidth(["Server"]));
+  assert.equal(boxWidth(["x".repeat(200)]), 240);
+});
+
+test("boxExit and linkEnds stop at the edges of the boxes", () => {
+  const a = { x: 100, y: 100, w: 120, h: 56 };
+  const b = { x: 400, y: 100, w: 120, h: 56 };
+  assert.deepEqual(boxExit(a, 400, 100), [160, 100]);
+  assert.deepEqual(boxExit(a, 100, 300), [100, 128]);
+  assert.deepEqual(linkEnds(a, b), { x1: 166, y1: 100, x2: 334, y2: 100 });
+  // Boxes that touch give a zero-length line, not a reversed one.
+  const c = { x: 220, y: 100, w: 120, h: 56 };
+  const ends = linkEnds(a, c);
+  assert.equal(ends.x1, 160);
+  assert.equal(ends.x2, 160);
+});
+
+test("changedValues marks only the readouts that changed since the step before", () => {
+  assert.deepEqual(changedValues(undefined, ["1", null]), [false, false]);
+  assert.deepEqual(changedValues(["1", null], ["1", "2"]), [false, true]);
+  assert.deepEqual(changedValues([{ en: "a", bn: "ক" }], [{ en: "a", bn: "ক" }]), [false]);
+});
+
+test("focusX is the middle of the boxes a step is about, with moved boxes at their new place", () => {
+  const label = { en: "x", bn: "x" };
+  const walk: Walkthrough = {
+    width: 760,
+    height: 300,
+    nodes: [
+      { id: "a", kind: "server", label, x: 100, y: 100 },
+      { id: "b", kind: "server", label, x: 500, y: 100 },
+    ],
+    metrics: [],
+    steps: [],
+  };
+  const text = { short: "s", title: "t", body: ["b"] };
+  const step = (show: Walkthrough["steps"][number]["show"]) => ({ en: text, bn: text, show, links: [] });
+  assert.equal(focusX(walk, step([{ id: "a", state: "hot" }, { id: "b", state: "warn" }])), 300);
+  assert.equal(focusX(walk, step([{ id: "a" }, { id: "b", state: "hot", x: 700 }])), 700);
+  assert.equal(focusX(walk, step([{ id: "a", state: "dim" }])), null);
+});
+
+// Rules for the real walk-throughs, read from disk like the quiz rules.
+const dir = new URL("../src/content/", import.meta.url);
+const walks = readdirSync(dir)
+  .filter((name) => name.endsWith(".json") && name !== "interview.json")
+  .map((name) => JSON.parse(readFileSync(new URL(name, dir), "utf8")) as TopicFile)
+  .flatMap((part) =>
+    part.sections.flatMap((section) =>
+      section.walkthrough ? [{ key: `${part.slug}#${section.id}`, walk: section.walkthrough }] : [],
+    ),
+  );
+
+const BANGLA = /[\u0980-\u09FF]/u;
+// The quiz rule: digits inside a name or a code word (TLS 1.3, H100, top_p) stay Latin.
+const plainNumber = /(?<![A-Za-z0-9_\-/.:#@%+])(?<![A-Za-z][\w.\-]*\s)[0-9]+(?:[.,][0-9]+)*(?![A-Za-z0-9_\-/])/;
+const outsideCode = (html: string) => html.replace(/<code>.*?<\/code>/g, " ").replace(/<[^>]*>/g, "");
+
+/** Every text of one language of a walk-through. */
+function texts(walk: Walkthrough, lang: "en" | "bn"): string[] {
+  const out = [...walk.nodes.map((n) => n.label[lang]), ...walk.metrics.map((m) => m[lang])];
+  if (walk.caption) out.push(walk.caption[lang]);
+  for (const step of walk.steps) {
+    const t = step[lang];
+    out.push(t.short, t.title, ...t.body, ...(t.points ?? []), ...(t.changes ?? []).map((c) => c.html));
+    if (t.note) out.push(t.note.html);
+    for (const s of step.show) if (s.sub) out.push(s.sub[lang]);
+    for (const l of step.links) if (l.label) out.push(l.label[lang]);
+    for (const v of step.values ?? []) if (v && typeof v !== "string") out.push(v[lang]);
+  }
+  return out;
+}
+
+test("there are walk-throughs to check", () => {
+  assert.ok(walks.length > 0);
+});
+
+test("a walk-through says the same thing in English and Bangla", () => {
+  for (const { key, walk } of walks) {
+    walk.steps.forEach((step, i) => {
+      const { en, bn } = step;
+      const where = `${key} step ${i + 1}`;
+      assert.equal(en.body.length, bn.body.length, `${where}: paragraphs`);
+      assert.equal(en.points?.length ?? 0, bn.points?.length ?? 0, `${where}: points`);
+      assert.deepEqual(en.changes?.map((c) => c.sign), bn.changes?.map((c) => c.sign), `${where}: changes`);
+      assert.equal(en.note?.kind, bn.note?.kind, `${where}: note`);
+    });
+    for (const text of texts(walk, "en")) assert.ok(!BANGLA.test(text), `${key}: Bangla in English: ${text}`);
+    for (const text of texts(walk, "bn")) {
+      assert.ok(!plainNumber.test(outsideCode(text)), `${key}: Latin digits in Bangla: ${text}`);
+    }
+  }
+});
+
+test("shared readout values have no Bangla, so both sites can show them", () => {
+  for (const { key, walk } of walks) {
+    for (const step of walk.steps) {
+      for (const v of step.values ?? []) {
+        if (typeof v === "string") assert.ok(!BANGLA.test(v), `${key}: ${v}`);
+      }
+    }
+  }
+});
+
+test("in every step, in both languages, the shown boxes fit the diagram and do not overlap", () => {
+  for (const { key, walk } of walks) {
+    for (const lang of ["en", "bn"] as const) {
+      const widths = nodeWidths(walk, lang);
+      walk.steps.forEach((step, i) => {
+        const boxes = step.show.map((s) => {
+          const node = walk.nodes.find((n) => n.id === s.id);
+          assert.ok(node, `${key}: unknown node ${s.id}`);
+          return { id: s.id, x: s.x ?? node.x, y: s.y ?? node.y, w: widths.get(s.id) ?? 0, h: NODE_H };
+        });
+        for (const b of boxes) {
+          const where = `${key} step ${i + 1} (${lang}): ${b.id}`;
+          // Badges stick out 9 units above a box.
+          assert.ok(b.x - b.w / 2 >= 0 && b.x + b.w / 2 <= walk.width, `${where} is cut off left or right`);
+          assert.ok(b.y - b.h / 2 - 9 >= 0 && b.y + b.h / 2 <= walk.height, `${where} is cut off top or bottom`);
+        }
+        for (let p = 0; p < boxes.length; p++) {
+          for (let q = p + 1; q < boxes.length; q++) {
+            const a = boxes[p];
+            const b = boxes[q];
+            const apart = Math.abs(a.x - b.x) >= (a.w + b.w) / 2 + 8 || Math.abs(a.y - b.y) >= (a.h + b.h) / 2 + 8;
+            assert.ok(apart, `${key} step ${i + 1} (${lang}): ${a.id} and ${b.id} overlap`);
+          }
+        }
+      });
+    }
+  }
+});

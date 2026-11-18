@@ -209,7 +209,8 @@
         "llmops-and-observability",
         "cost-and-performance-optimization",
         "ai-application-architecture",
-        "deploying-and-operating-ai-systems"
+        "deploying-and-operating-ai-systems",
+        "system-design"
       ],
       "summary": "Serving, scaling, observability and cost control for AI systems in production.",
       "bn": "প্রোডাকশনে AI সিস্টেমের serving, scaling, observability আর খরচ নিয়ন্ত্রণ।"
@@ -224,7 +225,7 @@
     {
       "phase": 19,
       "core": true,
-      "topics": ["ai-application-architecture"],
+      "topics": ["ai-application-architecture", "system-design"],
       "summary": "Capstone projects, from a terminal coding agent to a stateless MCP server.",
       "bn": "ক্যাপস্টোন প্রজেক্ট, টার্মিনাল coding agent থেকে stateless MCP server পর্যন্ত।"
     }
