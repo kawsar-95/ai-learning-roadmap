@@ -12,7 +12,7 @@ import { Inline } from "./Inline";
 import { PracticeList } from "./PracticeList";
 import { ProseBlocks } from "./ProseBlocks";
 import { SectionBasics } from "./SectionBasics";
-import { StepPlayer } from "./StepPlayer";
+import { LazyStepPlayer } from "./LazyStepPlayer";
 import { VideoList } from "./VideoList";
 import { BookmarkButton, SectionDoneButton } from "@/components/progress/ProgressWidgets";
 import { createStore } from "@/components/progress/createStore";
@@ -119,7 +119,18 @@ function VoicePanel({
  * the intro, in the same language. The section ends with a "Mark as done" toggle for the
  * reading progress (`doneKey`).
  */
-export function SectionView({ section, lang, doneKey }: { section: Section; lang: Lang; doneKey: string }) {
+export function SectionView({
+  section,
+  lang,
+  doneKey,
+  walkthroughPath,
+}: {
+  section: Section;
+  lang: Lang;
+  doneKey: string;
+  /** Where the section's walk-through file is, when it has one. The data is not in `section`, to keep it out of the page. */
+  walkthroughPath?: string;
+}) {
   const ui = UI[lang];
   const text = lang === "bn" ? section.bn : section;
   const available = availableVoices(section, lang);
@@ -206,9 +217,9 @@ export function SectionView({ section, lang, doneKey }: { section: Section; lang
         />
       </header>
 
-      {section.walkthrough && (
+      {walkthroughPath && (
         <div className="mt-5">
-          <StepPlayer walkthrough={section.walkthrough} sectionId={section.id} lang={extrasLang} />
+          <LazyStepPlayer path={walkthroughPath} sectionId={section.id} lang={extrasLang} />
         </div>
       )}
 

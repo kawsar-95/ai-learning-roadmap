@@ -91,3 +91,26 @@ export function changedValues(
   if (!prev) return cur.map(() => false);
   return cur.map((value, i) => valueText(value, "en") !== valueText(prev[i], "en"));
 }
+
+/** Where a section's walk-through is served from, as a path from the site root. The caller adds the basePath. */
+export function walkthroughPath(slug: string, sectionId: string): string {
+  return `/walkthroughs/${slug}/${sectionId}.json`;
+}
+
+type WithWalkthroughs = { slug: string; sections: readonly { id: string; walkthrough?: Walkthrough }[] };
+
+/**
+ * The static params of the walk-through route: one file for each section that
+ * has a walk-through. `file` keeps the `.json` extension, so the export writes
+ * `walkthroughs/<slug>/<id>.json` and a static host serves it as JSON.
+ */
+export function walkthroughParams(topics: readonly WithWalkthroughs[]): { slug: string; file: string }[] {
+  return topics.flatMap((t) => t.sections.filter((s) => s.walkthrough).map((s) => ({ slug: t.slug, file: `${s.id}.json` })));
+}
+
+/** The walk-through that `walkthroughPath` points at, or undefined. */
+export function findWalkthrough(topics: readonly WithWalkthroughs[], slug: string, file: string): Walkthrough | undefined {
+  if (!file.endsWith(".json")) return undefined;
+  const id = file.slice(0, -".json".length);
+  return topics.find((t) => t.slug === slug)?.sections.find((s) => s.id === id)?.walkthrough;
+}

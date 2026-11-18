@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import type { TopicFile, Walkthrough } from "../src/lib/content-schema.ts";
-import { NODE_H, boxExit, boxWidth, changedValues, focusX, linkEnds, localDigits, nodeWidths, valueText } from "../src/lib/walkthrough.ts";
+import { NODE_H, boxExit, boxWidth, changedValues, findWalkthrough, focusX, linkEnds, localDigits, nodeWidths, valueText, walkthroughParams, walkthroughPath } from "../src/lib/walkthrough.ts";
 
 test("localDigits writes Bangla digits on the Bangla site only", () => {
   assert.equal(localDigits("1,085 ms", "bn"), "১,০৮৫ ms");
@@ -93,6 +93,27 @@ function texts(walk: Walkthrough, lang: "en" | "bn"): string[] {
 
 test("there are walk-throughs to check", () => {
   assert.ok(walks.length > 0);
+});
+
+// The walk-throughs are not in the page: each is a JSON file that the player loads (src/app/walkthroughs).
+const parts = readdirSync(dir)
+  .filter((name) => name.endsWith(".json") && name !== "interview.json")
+  .map((name) => JSON.parse(readFileSync(new URL(name, dir), "utf8")) as TopicFile);
+
+test("every walk-through is served at the path its section is given, and nothing else is", () => {
+  const params = walkthroughParams(parts);
+  assert.equal(params.length, walks.length, "one file for each walk-through");
+  assert.equal(new Set(params.map((p) => `${p.slug}/${p.file}`)).size, params.length, "no file is listed twice");
+  for (const { slug, file } of params) {
+    assert.match(file, /^[A-Za-z0-9_-]+\.json$/);
+    const section = parts.find((p) => p.slug === slug)?.sections.find((s) => `${s.id}.json` === file);
+    assert.ok(section?.walkthrough, `${slug}/${file} is a section with a walk-through`);
+    assert.equal(findWalkthrough(parts, slug, file), section.walkthrough);
+    assert.equal(walkthroughPath(slug, section.id), `/walkthroughs/${slug}/${file}`);
+  }
+  assert.equal(findWalkthrough(parts, "system-design", "s999.json"), undefined);
+  assert.equal(findWalkthrough(parts, "system-design", "s1"), undefined, "the extension is required");
+  assert.equal(findWalkthrough(parts, "no-such-part", "s1.json"), undefined);
 });
 
 test("a walk-through says the same thing in English and Bangla", () => {

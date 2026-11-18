@@ -41,6 +41,8 @@ function makeOut() {
     "topics/inference/index.txt": "rsc",
     "_next/static/chunks/app.js": "js",
     "search-index.json": "{}",
+    "walkthroughs/inference/s1.json": "{}",
+    "walkthroughs/inference/notes.txt": "not a walk-through",
     "sw.js": swSource,
     "next.svg": "<svg/>",
     "_not-found/index.html": "nf",
@@ -55,9 +57,17 @@ function makeOut() {
   return dir;
 }
 
-test("precache: lists pages as their folder URL, their RSC index.txt and the files they need, not sw.js or lesson pages", () => {
+test("precache: lists pages as their folder URL, their RSC index.txt, the walk-through files and the files they need, not sw.js or lesson pages", () => {
   const urls = buildManifest(makeOut()).map((e: { url: string }) => e.url);
-  assert.deepEqual(urls, ["", "_next/static/chunks/app.js", "roadmap/", "search-index.json", "topics/inference/", "topics/inference/index.txt"]);
+  assert.deepEqual(urls, [
+    "",
+    "_next/static/chunks/app.js",
+    "roadmap/",
+    "search-index.json",
+    "topics/inference/",
+    "topics/inference/index.txt",
+    "walkthroughs/inference/s1.json",
+  ]);
 });
 
 test("precache: the revision changes only when the file changes", () => {

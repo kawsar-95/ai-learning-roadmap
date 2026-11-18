@@ -289,6 +289,9 @@ const en = {
   walkPoints: "Remember",
   walkNote: { insight: "Key idea", tip: "Tip", warn: "Watch out" } as Record<"insight" | "tip" | "warn", string>,
   walkDiagram: (title: string) => `Diagram: ${title}`,
+  walkLoading: "Loading the walk-through…",
+  walkLoadFailed: "The walk-through did not load.",
+  walkRetry: "Try again",
 
   // Videos.
   watch: (n: number) => `Watch · ${n} ${n === 1 ? "video" : "videos"}`,
@@ -519,6 +522,9 @@ const bn: Dict = {
   walkPoints: "মনে রাখুন",
   walkNote: { insight: "মূল কথা", tip: "টিপ", warn: "সাবধান" },
   walkDiagram: (title: string) => `ডায়াগ্রাম: ${title}`,
+  walkLoading: "ধাপে ধাপে অংশটা লোড হচ্ছে…",
+  walkLoadFailed: "ধাপে ধাপে অংশটা লোড হয়নি।",
+  walkRetry: "আবার চেষ্টা করুন",
 
   watch: (n: number) => `ভিডিও দেখুন · ${fmtNum("bn", n)}টি`,
   playVideo: (title: string) => `ভিডিও চালান: ${title}`,
