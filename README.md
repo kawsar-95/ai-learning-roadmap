@@ -6,10 +6,10 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A free, citation-backed reference for applied AI engineers. It is a static
-Next.js site with 17 Parts, from LLM fundamentals to deploying and operating
-AI systems. Every section opens with a plain-words **Start here** box and
-comes in three voices: Technical, Layman's, and বাংলা. Every page exists in
-English and in Bangla.
+Next.js site with 18 Parts, from LLM fundamentals to deploying and operating
+AI systems, and a last Part on system design. Every section opens with a
+plain-words **Start here** box and comes in three voices: Technical,
+Layman's, and বাংলা. Every page exists in English and in Bangla.
 
 **Live site:** <https://kawsar-95.github.io/ai-learning-roadmap/> ·
 **বাংলা:** <https://kawsar-95.github.io/ai-learning-roadmap/bn/>
@@ -20,7 +20,7 @@ English and in Bangla.
 
 - [At a glance](#at-a-glance)
 - [Features](#features)
-- [The 17 Parts](#the-17-parts)
+- [The 18 Parts](#the-18-parts)
 - [Quick start](#quick-start)
 - [How it works](#how-it-works)
 - [Project structure](#project-structure)
@@ -33,16 +33,17 @@ English and in Bangla.
 
 | What | Count |
 | --- | --- |
-| Parts | 17 |
-| Sections | 113 |
-| Start here boxes | 113, one per section: the big idea, the words to know, and what to remember |
-| Cited sources | 484, from 95 sites (215 of them arXiv papers) |
+| Parts | 18 |
+| Sections | 153 |
+| Start here boxes | 153, one per section: the big idea, the words to know, and what to remember |
+| Walk-throughs | 40, with 445 steps: one for each section of Part 18 |
+| Cited sources | 666, from 162 sites (218 of them arXiv papers) |
 | Voices in each section | 3: Technical, Layman's, বাংলা |
 | Languages | English and Bangla, page for page |
-| Quiz questions | 85: a 5-question quiz at the end of every Part |
+| Quiz questions | 90: a 5-question quiz at the end of every Part |
 | Practice tasks | 87, done in any free AI chat |
 | YouTube clips | 408: 325 videos and 83 Shorts |
-| Interview questions | 51: 3 for each Part |
+| Interview questions | 54: 3 for each Part |
 | Study roadmap | 7 stages, 20 phases, 542 lessons, 8 learning paths |
 | Accounts, analytics, back end | None. Progress stays in your browser. |
 
@@ -93,6 +94,31 @@ in Bangla (এখান থেকে শুরু করুন).
 Pick a voice once. Every section follows your choice, and the browser
 remembers it.
 
+### Step-by-step walk-throughs
+
+![A walk-through in Part 18, section 7, Caching, at step 4 of 13: three readouts (p95, hit rate, and database load) marked as changed above a diagram of users, an app, a cache, and a database, then the step's text with a tip and the list of what changed, and the strip of step names](screenshots/walkthrough.png)
+
+Each of the 40 sections of Part 18 has a walk-through under its intro: a
+diagram that changes with every step, drawn for this site.
+
+- A row of **readouts** (such as the p95 latency or the hit rate) shows how
+  the numbers change from step to step. A changed one is marked.
+- **Back** / **Next**, the strip of step names, or the <kbd>←</kbd> and
+  <kbd>→</kbd> keys move between steps. **Pause** stops the dots that travel
+  along the lines, and **Replay** starts them again from the beginning. With
+  reduced motion on, the boxes do not glide, there are no dots, and those two
+  buttons are hidden.
+- Each step has a title and its text, and often a note (Key idea, Tip, or
+  Watch out) and a list of what changed. A recap step lists the points to
+  remember. The text is in English or in Bangla, with the site.
+- The walk-through is a file of its own, not part of the page. The section
+  loads it when it is first shown, and the offline list saves it.
+
+The Part follows [Dilum Sanjaya's System Design course](https://designed-to-scale.vercel.app/)
+in its lessons, their order and titles, and the number and names of the
+steps. The pictures, the words, and the numbers of the walk-throughs are
+this site's own, and each section links to the original lesson.
+
 ### Practice, videos, and a quiz
 
 <table>
@@ -138,7 +164,7 @@ lessons off to see how much time is left.
 
 <table>
   <tr>
-    <td width="50%" valign="top"><img src="screenshots/contents.png" alt="The All contents page: 13 sections done of 113, 12% complete, Continue reading, and Part 01 with every section checked and Best: 5 / 5"></td>
+    <td width="50%" valign="top"><img src="screenshots/contents.png" alt="The All contents page: 13 sections done of 153, 8% complete, Continue reading, and Part 01 with every section checked and Best: 5 / 5"></td>
     <td width="50%" valign="top"><img src="screenshots/dashboard.png" alt="The dashboard: a Continue reading card for the next unread section, and three bookmarks with Remove buttons"></td>
   </tr>
 </table>
@@ -211,7 +237,7 @@ lessons, so the Parts, the roadmap, and search work offline.
 
 </details>
 
-## The 17 Parts
+## The 18 Parts
 
 | # | Part | Sections | Sources | Clips |
 | ---: | --- | ---: | ---: | ---: |
@@ -232,6 +258,7 @@ lessons, so the Parts, the roadmap, and search work offline.
 | 15 | [Visual Learning Resources](https://kawsar-95.github.io/ai-learning-roadmap/topics/visual-learning-resources/) | 11 | 32 | 38 |
 | 16 | [AI Engineering: Building Applications with Foundation Models](https://kawsar-95.github.io/ai-learning-roadmap/topics/ai-engineering-book/) | 17 | 3 | 30 |
 | 17 | [Deploying and Operating AI Systems](https://kawsar-95.github.io/ai-learning-roadmap/topics/deploying-and-operating-ai-systems/) | 15 | 36 | 52 |
+| 18 | [System Design](https://kawsar-95.github.io/ai-learning-roadmap/topics/system-design/) | 40 | 182 | 0 |
 
 "Clips" counts videos and Shorts. A clip can be listed in more than one
 Part: Part 16 follows Chip Huyen's book *AI Engineering* chapter by chapter
@@ -239,6 +266,10 @@ and lists some clips of the earlier Parts again. Part 15 walks through
 interactive explainers such as the Transformer Explainer and LLM
 Visualization. Part 17 covers the platform skills behind an AI app, from
 Linux and Git to Docker, Kubernetes, CI/CD, MLOps, and observability.
+Part 18 follows the 40 lessons of Dilum Sanjaya's
+[System Design course](https://designed-to-scale.vercel.app/), from how a
+request travels to designing a chat system. It has a walk-through of its own
+for each section, and no clips.
 
 The order is set in one place: `TOPIC_ORDER` in
 [`src/lib/topics.ts`](src/lib/topics.ts).
@@ -259,7 +290,7 @@ npm run dev        # http://localhost:3000
 | `npm run dev` | Starts the dev server at <http://localhost:3000>. The service worker is off in development. |
 | `npm run build` | Validates all content, writes the static site to `out/`, then writes the offline file list into `out/sw.js`. |
 | `npx serve@latest out` | Serves the static build at <http://localhost:3000>. |
-| `npm test` | Runs the 158 tests in `tests/` with Node's built-in test runner. |
+| `npm test` | Runs the 182 tests in `tests/` with Node's built-in test runner. |
 | `npm run lint` | Runs ESLint. |
 | `npm run check:videos` | Asks YouTube whether every listed video still exists and can be embedded. It needs the network, so `npm test` and the deploy do not run it. |
 
@@ -270,7 +301,7 @@ has no server build to serve.
 
 ```mermaid
 flowchart LR
-  A["src/content/*.json<br>17 Parts and the interview questions"] -->|Zod schemas| C["next build<br>output: export"]
+  A["src/content/*.json<br>18 Parts and the interview questions"] -->|Zod schemas| C["next build<br>output: export"]
   B["src/data/roadmap-*.json<br>src/content/lessons/*.md"] -->|buildRoadmap, marked, KaTeX| C
   C --> D["out/<br>HTML for every page<br>two search indexes"]
   D -->|scripts/precache.mjs| E["out/sw.js<br>offline file list"]
@@ -314,13 +345,14 @@ Node's test runner.
 │   │   ├── navigation/       search palette, "On this page"
 │   │   ├── pages/            one component per page, shared by both languages
 │   │   └── progress/         reading progress, bookmarks, roadmap ticks
-│   ├── content/              the 17 Part files, interview.json, and lessons/
+│   ├── content/              the 18 Part files, interview.json, and lessons/
 │   │                         (the copied curriculum lessons)
 │   ├── data/                 the roadmap: lessons (generated) and phases (by hand)
 │   └── lib/                  schemas, data loaders, i18n, search, progress, theme
 ├── tests/                    node:test suites for the libraries and the content
 ├── scripts/                  roadmap import, offline list, video check,
-│                             video curation, screenshots
+│                             video curation, screenshots, the System Design
+│                             generator
 ├── public/                   the service worker and the app icons
 ├── docs/                     guides, the quiz format, and the video records
 ├── screenshots/              the images in this README
@@ -342,6 +374,7 @@ A file-by-file map is in
 | [docs/video-coverage.md](docs/video-coverage.md) | The channels the clips come from, and the topics Part 17 was added to cover |
 | [docs/video-review-log.md](docs/video-review-log.md) | Every clip that was added, and every clip that was read and left out, with the reason |
 | [scripts/video-curation/README.md](scripts/video-curation/README.md) | The scripts that found and verified the clips |
+| [scripts/system-design/README.md](scripts/system-design/README.md) | The generator that builds Part 18 (edit it there, not in the JSON), its checks, and the browser audits of the walk-throughs |
 | [scripts/screenshots/README.md](scripts/screenshots/README.md) | Retaking the screenshots in this README |
 | [docs/superpowers/](docs/superpowers/) | Design specs and plans of past redesigns (historical) |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to make a change, the checks to run, the code conventions, and the writing rules |
@@ -368,6 +401,12 @@ first. In short:
 - **Live views** in Part 15 are other people's interactive pages, for
   example Polo Club's Transformer Explainer and Brendan Bycroft's LLM
   Visualization. They load in a sandboxed frame.
+- **System Design (Part 18)** follows the lessons of
+  [System Design — an interactive course](https://designed-to-scale.vercel.app/)
+  by Dilum Sanjaya, which is free: its order, its titles, and the number and
+  names of its steps. The text, the sources, the Bangla, and the walk-throughs
+  are written for this site, and each section links to the original lesson.
+  None of the course's text, drawings, animations, or code is copied.
 - **Sources:** every Part lists the papers, documentation, and posts it
   cites.
 - Built and maintained by [Nuruddin Kawsar](https://github.com/kawsar-95).

@@ -134,8 +134,8 @@ function Hero({ lang }: { lang: Lang }) {
 
 /**
  * The Parts as a numbered index, like the contents of a book: number, title,
- * one line, and the section count (or the reader's progress). Seventeen
- * boxed cards were too much to scan; a ruled list is not.
+ * one line, and the section count (or the reader's progress). Boxed cards
+ * were too much to scan once there were this many Parts; a ruled list is not.
  */
 function Parts({ lang }: { lang: Lang }) {
   const ui = UI[lang];

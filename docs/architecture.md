@@ -13,6 +13,7 @@ The last part is a map of every file.
 - [Languages](#languages)
 - [Voices](#voices)
 - [The topic page](#the-topic-page)
+- [Walk-throughs](#walk-throughs)
 - [Search](#search)
 - [Reader state](#reader-state)
 - [Offline use](#offline-use)
@@ -46,8 +47,8 @@ group, so it adds nothing to the URL.
 
 | English URL | Bangla URL | Page component | What it shows |
 | --- | --- | --- | --- |
-| `/` | `/bn/` | `HomePage` | The hero, the counts, the features, and the 17 Parts as a numbered index |
-| `/topics/<slug>/` | `/bn/topics/<slug>/` | `TopicPage` | One Part (17 pages) |
+| `/` | `/bn/` | `HomePage` | The hero, the counts, the features, and the 18 Parts as a numbered index |
+| `/topics/<slug>/` | `/bn/topics/<slug>/` | `TopicPage` | One Part (18 pages) |
 | `/contents/` | `/bn/contents/` | `ContentsPage` | Every section with a check mark, overall progress, best quiz scores |
 | `/dashboard/` | `/bn/dashboard/` | `DashboardPage` | Continue reading, and the bookmarks |
 | `/interview/` | `/bn/interview/` | `InterviewPage` | Three questions for each Part |
@@ -55,6 +56,7 @@ group, so it adds nothing to the URL.
 | `/roadmap/<phase>/<lesson>/` | `/bn/roadmap/<phase>/<lesson>/` | `LessonPage` | One curriculum lesson (542 pages) |
 | `/resources/` | `/bn/resources/` | `ResourcesPage` | 20 open-source repositories in 5 groups |
 | `/search-index.json` | `/bn/search-index.json` | route handler | The search documents of one language |
+| `/walkthroughs/<slug>/<section>.json` | the same file | route handler | The walk-through of one section, with English and Bangla in one file (40 files) |
 
 The build also writes these files:
 
@@ -65,8 +67,8 @@ The build also writes these files:
 | `favicon.ico`, `icon.svg`, `apple-icon.png` | `src/app/` | The tab and home screen icons |
 | `sw.js`, `icons/` | `public/` | The service worker and the app icons |
 
-Each language has 565 pages: the home page, 5 single pages, 17 Parts, and 542
-lessons. That makes 1,130 pages, plus the 404 page.
+Each language has 566 pages: the home page, 5 single pages, 18 Parts, and 542
+lessons. That makes 1,132 pages, plus the 404 page.
 
 Dynamic routes set `dynamicParams = false`, and `generateStaticParams` lists
 every slug. A URL that is not in the list is a 404, not a page made on
@@ -108,7 +110,7 @@ Two modules load the data, and only server code may import them:
 
 | Module | Loads | Checks |
 | --- | --- | --- |
-| `src/lib/topics.ts` | the 17 Part files | `TopicFileSchema.parse` on each file. The `slug` in the file must match its place in `TOPIC_ORDER`. |
+| `src/lib/topics.ts` | the 18 Part files | `TopicFileSchema.parse` on each file. The `slug` in the file must match its place in `TOPIC_ORDER`. |
 | `src/lib/roadmap.ts` | `roadmap-lessons.json`, `roadmap-phases.json` | `buildRoadmap`: both schemas, no gaps, no repeats, every phase in exactly one stage |
 
 `InterviewPage.tsx` parses `src/content/interview.json` the same way. It
@@ -207,6 +209,41 @@ The text column is at most 720 px wide.
   level 3 headings of the Technical text.
 - Each section ends with **Bookmark** and **Mark as done**.
 
+## Walk-throughs
+
+A section can carry a walk-through: a diagram that changes step by step, a
+row of readouts above it, and the text of each step in English and in Bangla.
+Part 18 has one for each of its 40 sections. The data model is `Walkthrough`
+in `src/lib/content-schema.ts`, and the format is in the
+[content guide](content-guide.md#walk-throughs).
+
+The walk-throughs are most of Part 18's data, so the page does not carry
+them:
+
+1. `TopicPage.tsx` takes the `walkthrough` out of each section before it
+   hands the section to `SectionView`, and passes the path of its file
+   instead (`walkthroughPath` in `src/lib/walkthrough.ts`).
+2. `src/app/walkthroughs/[slug]/[file]/route.ts` is a static route handler
+   (`dynamic = "force-static"`, `dynamicParams = false`). Its
+   `generateStaticParams` lists one file for each section that has a
+   walk-through. The param keeps the `.json` extension, so the export writes
+   `s7.json` and a static host serves it as JSON. English and Bangla are in
+   the same file.
+3. `LazyStepPlayer.tsx` loads the file when its section first comes into view
+   (an `IntersectionObserver` with a 300 px margin). The pager keeps the
+   other sections hidden, and a hidden section has no box, so it loads
+   nothing. A file is fetched once for both languages. A failed fetch shows a
+   message with a **Try again** button. The URL starts with
+   `NEXT_PUBLIC_BASE_PATH`, as the search index's does.
+4. `StepPlayer.tsx` draws the diagram and the text. The geometry (box widths,
+   where a line leaves a box, the middle of the boxes a step is about, which
+   readouts changed) is in `src/lib/walkthrough.ts`, so `node --test` can
+   check it.
+
+The offline list saves the files (`scripts/precache.mjs`). Part 18 is
+generated, so a change to a walk-through starts in `scripts/system-design/`
+(see its [README](../scripts/system-design/README.md)).
+
 ## Search
 
 The build writes two static JSON files from route handlers with
@@ -280,6 +317,7 @@ of the file. The build prints `sw.js: N files saved for offline use`.
 | each page's `index.txt`, the RSC payload a link click fetches | the `__next.*` prefetch segments |
 | `_next/static/` | `sw.js` itself |
 | both search indexes, the manifest, the icons | the unused starter SVGs in `public/` |
+| the walk-through files, `walkthroughs/<slug>/<section>.json` | |
 
 **What the worker does** (`public/sw.js`):
 
@@ -410,11 +448,13 @@ modules in `src/lib/` directly, and some read the real content files.
 | `quiz-content.test.ts` | Rules for the real quizzes: 5 questions, Bangla digits, answer positions |
 | `roadmap.test.ts` | The roadmap files, lesson keys and links, durations |
 | `search.test.ts` | Search documents in both languages, the Start here box in them, block text, reading time |
+| `system-design-generator.test.ts` | That `system-design.json` and Part 18's interview entry are what `scripts/system-design` builds, and that a hand edit is caught (skipped without Python 3.10 or newer) |
 | `theme.test.ts` | `resolveTheme` and the theme script |
 | `video-check.test.ts` | The title and channel matching of `npm run check:videos` |
 | `video-curation-scripts.test.ts` | The two shell steps of the video curation |
 | `video-data.test.ts` | Rules for the real videos: no repeats in a section, clean titles, Short lengths |
 | `videos.test.ts` | The video schema, `videosForVoice`, and length formats |
+| `walkthrough.test.ts` | The walk-through geometry, the file each walk-through is served at, and rules for the real walk-throughs: English and Bangla say the same, shared readout values have no Bangla, the boxes fit the diagram and do not overlap |
 
 ## File layout
 
@@ -448,6 +488,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   ├── precache.mjs                     writes the offline file list into out/sw.js
 │   ├── check-videos.mjs                 `npm run check:videos`: asks YouTube about every listed video
 │   ├── screenshots/                     takes the README screenshots (see its README)
+│   ├── system-design/                   generates Part 18 and audits its walk-throughs in a browser (see its README)
 │   └── video-curation/                  the scripts that found and verified the clips (see its README)
 ├── src/
 │   ├── app/
@@ -457,12 +498,15 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │   ├── manifest.ts                  the web app manifest
 │   │   ├── favicon.ico, icon.svg, apple-icon.png
 │   │   ├── search-index.json/route.ts   the English search index
+│   │   ├── walkthroughs/[slug]/[file]/route.ts   one walk-through as a static JSON file
 │   │   ├── (en)/                        English routes; layout.tsx wraps them in SiteShell
 │   │   └── bn/                          Bangla routes, the same set, and bn/search-index.json
 │   ├── components/
 │   │   ├── content/
 │   │   │   ├── SectionView.tsx          one section: intro, live views, voices, practice, videos, done
 │   │   │   ├── SectionBasics.tsx        the Start here box: the big idea, words to know, what to remember
+│   │   │   ├── LazyStepPlayer.tsx       loads a section's walk-through when the section is shown
+│   │   │   ├── StepPlayer.tsx           a walk-through: readouts, the diagram, the steps
 │   │   │   ├── SectionPager.tsx         one section at a time, with the step bar
 │   │   │   ├── VoiceSwitcher.tsx        the voice tabs
 │   │   │   ├── ProseBlocks.tsx          renders a block list, one component per block type
@@ -499,7 +543,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │       ├── RoadmapWidgets.tsx       lesson toggles, phase bars, the roadmap summary and filter
 │   │       └── ReadingBar.tsx           the scroll bar under the header
 │   ├── content/
-│   │   ├── <slug>.json                  the 17 Parts
+│   │   ├── <slug>.json                  the 18 Parts (system-design.json is generated)
 │   │   ├── interview.json               the interview questions
 │   │   └── lessons/                     the copied curriculum lessons, LICENSE, source.json
 │   ├── data/
@@ -519,6 +563,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │       ├── theme.ts                     the theme rule and the theme script
 │       ├── practice.ts                  the language of the practice tasks
 │       ├── videos.ts                    which videos a voice shows; length formats
+│       ├── walkthrough.ts               walk-through geometry, and the path of each walk-through file
 │       └── video-check.ts               the pure helpers of `npm run check:videos`
 ├── tests/                               node:test suites (see Tests above)
 └── tsconfig.json                        strict TypeScript; `@/*` maps to `src/*`
