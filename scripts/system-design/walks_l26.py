@@ -38,7 +38,7 @@ CAPTION = ("Example numbers: checkout has 200 threads and serves 100 requests a 
 CHAIN = dict(user=dict(x=85), co=dict(x=270), brk=dict(x=460), recs=dict(x=660), fb=dict(x=270, y=285))
 
 STEPS = [
-    st(("Slow call", "Slow call"),
+    st(("Slow call", "ধীর call"),
        ("One slow service takes down another", "একটা ধীর সার্ভিস আরেকটাকে ডুবিয়ে দেয়"),
        [("Checkout calls a recommendations service to fill the page. Checkout has 200 threads, serves 100 requests a second, and each call normally holds a thread for 50 ms: about 5 threads are busy at any moment.",
          "Checkout পেজ ভরাতে recommendations সার্ভিসকে call করে। Checkout-এর আছে ২০০টি thread, সে সেকেন্ডে ১০০ request সামলায়, আর প্রতিটি call সাধারণত একটা thread ধরে রাখে ৫০ ms: যেকোনো মুহূর্তে প্রায় ৫টি thread ব্যস্ত।"),
@@ -86,7 +86,7 @@ STEPS = [
                 ("~", "Success: 99% → 99.99%", "সফলতা: ৯৯% → ৯৯.৯৯%"),
                 ("~", "Calls to recommendations: 800 → 808 a second", "Recommendations-এ call: সেকেন্ডে ৮০০ → ৮০৮")]),
 
-    st(("Retry storm", "Retry storm"),
+    st(("Retry storm", "Retry-র ঝড়"),
        ("Retries become a storm", "Retry হয়ে ওঠে ঝড়"),
        [("But retries add load at the worst moment, and retries at several layers multiply. If each of three layers tries three times, one failed user request becomes 3 × 3 × 3 = 27 calls to the service at the bottom.",
          "কিন্তু retry load বাড়ায় সবচেয়ে খারাপ মুহূর্তে, আর কয়েক স্তরের retry গুণ হয়ে যায়। তিন স্তরের প্রতিটি তিনবার চেষ্টা করলে একটা ব্যর্থ ব্যবহারকারী-request হয়ে যায় ৩ × ৩ × ৩ = ২৭টি call, একেবারে নিচের সার্ভিসে।"),
@@ -107,7 +107,7 @@ STEPS = [
        [("Wait before retrying, and wait longer each time: 100 ms, 200 ms, 400 ms. That is exponential backoff. But if 1,000 clients all failed at the same instant and back off on the same schedule, they all retry at the same moments: three spikes of 1,000 calls, at 100, 300 and 700 ms.",
          "আবার চেষ্টার আগে অপেক্ষা করুন, আর প্রতিবার বেশি সময় অপেক্ষা করুন: ১০০ ms, ২০০ ms, ৪০০ ms। এর নাম exponential backoff। কিন্তু ১,০০০ client একই মুহূর্তে ব্যর্থ হয়ে একই সূচিতে পিছিয়ে গেলে সবাই আবার চেষ্টা করে একই মুহূর্তগুলোতে: ১০০, ৩০০ আর ৭০০ ms-এ ১,০০০ call-এর তিনটি spike।"),
         ("Add randomness, called jitter: each client sleeps a random time up to its backoff. In a simulation of those 1,000 clients, the busiest 10 ms window falls from 1,000 calls to about 150. Together with retrying at one layer and a cap of three tries, the 40 failing requests add only 80 calls a second: 880, or 88%.",
-         "এলোমেলো ভাব যোগ করুন, যার নাম jitter: প্রতিটি client তার backoff-এর মধ্যে একটা এলোমেলো সময় ঘুমায়। ওই ১,০০০ client-এর simulation-এ সবচেয়ে ব্যস্ত ১০ ms-এর জানালা ১,০০০ call থেকে নেমে আসে প্রায় ১৫০-এ। এক স্তরে retry আর তিনবারের সীমার সাথে মিলিয়ে, ব্যর্থ ৪০টি request যোগ করে সেকেন্ডে মোট ৮০টি call: ৮৮০, মানে ৮৮%।")],
+         "এলোমেলো ভাব যোগ করুন, যার নাম jitter: প্রতিটি client তার backoff-এর মধ্যে একটা এলোমেলো সময় ঘুমায়। ওই ১,০০০ client-এর simulation-এ সবচেয়ে ব্যস্ত ১০ ms-এর জানালা ১,০০০ call থেকে নেমে আসে প্রায় ১৫০-এ। এক স্তরে retry আর তিনবারের সীমার সাথে মিলিয়ে, ব্যর্থ ৪০টি request সেকেন্ডে মাত্র ৮০টি বাড়তি call যোগ করে: মোট ৮৮০, মানে ৮৮%।")],
        [sh("clients", "warn", ("fail together", "একসাথে ব্যর্থ")), sh("recs", "hot", ("88% busy", "৮৮% ব্যস্ত")), sh("n-sync", "warn", ("3 spikes of 1,000", "১,০০০-এর ৩টি spike")), sh("n-jit", "hot", ("busiest: about 150", "সর্বোচ্চ: প্রায় ১৫০"))],
        [ln("clients", "recs", "to", 1500, "hot")],
        [None, None, "88%", None],
@@ -167,12 +167,12 @@ STEPS = [
                 ("+", "The same idempotency key on every attempt", "প্রতিটি চেষ্টায় একই idempotency key"),
                 ("~", "The server returns the stored result: $40, once", "Server রাখা ফলাফল ফেরত দেয়: ৪০ ডলার, একবার")]),
 
-    st(("Deadlines", "Deadlines"),
+    st(("Deadlines", "Deadline"),
        ("Pass the deadline along", "Deadline সাথে পাঠিয়ে দিন"),
        [("The shopper's browser gives up after 2 seconds. But checkout has already spent 1.7 seconds when it calls payments, and payments has its own 800 ms timeout. It would keep working for up to 500 ms after the shopper has gone.",
          "ক্রেতার ব্রাউজার ২ সেকেন্ড পরে হাল ছাড়ে। কিন্তু checkout যখন payments-কে call করে, তখন সে ইতিমধ্যে ১.৭ সেকেন্ড খরচ করে ফেলেছে, আর payments-এর নিজের timeout ৮০০ ms। ক্রেতা চলে যাওয়ার পরেও সে আরও ৫০০ ms পর্যন্ত কাজ করে যেত।"),
         ("Pass the deadline along. Checkout tells payments “300 ms left”, and payments stops when the time is up. A call three services deep should not wait 10 seconds when the user's request has 2 left.",
-         "Deadline সাথে পাঠিয়ে দিন। Checkout payments-কে বলে “৩০০ ms বাকি”, আর সময় শেষ হলে payments থেমে যায়। ব্যবহারকারীর request-এর হাতে ২ সেকেন্ড থাকলে তিন সার্ভিস গভীরের একটা call ১০ সেকেন্ড অপেক্ষা করবে না।")],
+         "Deadline সাথে পাঠিয়ে দিন। Checkout payments-কে বলে “৩০০ ms বাকি”, আর সময় শেষ হলে payments থেমে যায়। ব্যবহারকারীর request-এর হাতে মাত্র ২ সেকেন্ড বাকি থাকলে, তিন ধাপ নিচের কোনো সার্ভিসের call-এর ১০ সেকেন্ড অপেক্ষা করা উচিত নয়।")],
        [sh("browser", "warn", ("gives up at 2 s", "২ s-এ হাল ছাড়ে")), sh("co", "hot", ("used 1.7 s", "১.৭ s গেছে"), x=280), sh("pay", "hot", ("stops at 300 ms", "৩০০ ms-এ থামে"), x=560)],
        [ln("browser", "co", "to", 1500, "warn"), ln("co", "pay", "to", 900, "hot", ("300 ms left", "৩০০ ms বাকি"))],
        [None, None, None, None],
@@ -183,7 +183,7 @@ STEPS = [
                 ("+", "The deadline travels with the call: 300 ms left", "Deadline call-এর সাথে যায়: ৩০০ ms বাকি"),
                 ("~", "Work stops once nobody is waiting", "কেউ অপেক্ষা না করলে কাজ থেমে যায়")]),
 
-    st(("Bulkheads", "Bulkheads"),
+    st(("Bulkheads", "Bulkhead"),
        ("Bulkheads: separate pools", "Bulkhead: আলাদা pool"),
        [("Remember step 1, when slow recommendations used up all 200 threads? Checkout can also protect itself by giving each dependency its own pool: say 40 threads for recommendations, 100 for payments and 60 for everything else.",
          "মনে আছে ধাপ ১, যখন ধীর recommendations ২০০টি thread-ই খেয়ে ফেলেছিল? Checkout নিজেকে রক্ষা করতে পারে প্রতিটি dependency-কে আলাদা pool দিয়েও: ধরুন recommendations-এর জন্য ৪০টি thread, payments-এর জন্য ১০০টি আর বাকি সবকিছুর জন্য ৬০টি।"),
@@ -201,7 +201,7 @@ STEPS = [
                 ("~", "A slow dependency fills only its own pool", "ধীর dependency ভরে শুধু নিজের pool"),
                 ("~", "Busy threads: 40 of 200, and payments is unaffected", "ব্যস্ত thread: ২০০-র ৪০, আর payments অক্ষত")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("A timeout, a fallback, and a limit on retries", "Timeout, fallback আর retry-র সীমা"),
        [("Assume every remote call can be slow or fail, and decide in advance what happens then.",
          "ধরে নিন প্রতিটি remote call ধীর হতে পারে বা ব্যর্থ হতে পারে, আর আগেই ঠিক করে রাখুন তখন কী হবে।")],

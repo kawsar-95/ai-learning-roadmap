@@ -50,7 +50,7 @@ PATH = [ln("user", "gw", "to", 1100), ln("gw", "co", "to", 1100), ln("co", "pay"
         ln("pay", "db1", "to", 1100), ln("inv", "db2", "to", 1100)]
 
 STEPS = [
-    st(("It’s slow", "It’s slow"),
+    st(("It’s slow", "ধীর লাগছে"),
        ("“Checkout is slow.” Where?", "“Checkout ধীর।” কোথায়?"),
        [("Support tickets pile up: checkout takes about a second, where it used to take a tenth of that. A checkout request passes the gateway, the checkout service, payments, inventory, two databases and a cache.",
          "Support ticket জমছে: checkout লাগছে প্রায় এক সেকেন্ড, যেখানে আগে লাগত তার দশ ভাগের এক ভাগ। একটা checkout request পার হয় gateway, checkout সার্ভিস, payments, inventory, দুটো database আর একটা cache।"),
@@ -80,7 +80,7 @@ STEPS = [
                 ("~", "Inventory (900 ms) and its database (880 ms) stand out", "Inventory (৯০০ ms) আর তার database (৮৮০ ms) আলাদা হয়ে চোখে পড়ে"),
                 ("~", "Checkout and the gateway only inherit the delay", "Checkout আর gateway শুধু দেরিটা উত্তরাধিকারে পায়")]),
 
-    st(("Alerts", "Alerts"),
+    st(("Alerts", "Alert"),
        ("Alert on what users feel", "যা ব্যবহারকারী টের পায়, তাতে alert"),
        [("CPU at 90% may be fine; a checkout error rate of 5% is not. Define a service level objective (SLO), such as “99.9% of checkouts succeed in under 1 second”, and alert on what users feel.",
          "CPU ৯০% থাকা ঠিক থাকতে পারে; checkout-এর error rate ৫% মোটেই ঠিক নয়। একটা service level objective (SLO) ঠিক করুন, যেমন “৯৯.৯% checkout ১ সেকেন্ডের নিচে সফল হয়”, আর alert দিন যা ব্যবহারকারী টের পায় তার ওপর।"),
@@ -94,9 +94,9 @@ STEPS = [
              "CPU-র ওপর alert সারাক্ষণ বাজে আর প্রায়ই কিছু বোঝায় না। Alert দিন ব্যবহারকারী যে উপসর্গ টের পায় তার ওপর, আর error budget কত দ্রুত পুড়ছে তার ওপর।"),
        changes=[("+", "SLO: 99.9% of checkouts succeed in under 1 second", "SLO: ৯৯.৯% checkout ১ সেকেন্ডের নিচে সফল হয়"),
                 ("~", "Error budget: 0.1%, or 259,200 failures in 30 days", "Error budget: ০.১%, মানে ৩০ দিনে ২,৫৯,২০০টি ব্যর্থতা"),
-                ("~", "5% errors burn the budget 50 times too fast: gone in 14.4 hours", "৫% error budget পোড়ায় ৫০ গুণ দ্রুত: ফুরায় ১৪.৪ ঘণ্টায়")]),
+                ("~", "5% errors burn the budget 50 times too fast: gone in 14.4 hours", "৫% error-এ budget পোড়ে ৫০ গুণ দ্রুত: ফুরায় ১৪.৪ ঘণ্টায়")]),
 
-    st(("Logs", "Logs"),
+    st(("Logs", "Log"),
        ("Logs: the story, line by line", "Log: গল্পটা, লাইন ধরে ধরে"),
        [("Metrics say where; logs say what happened. Each service writes timestamped events. Write them as structured logs, with key-value fields instead of free text, and put a request id in every line.",
          "Metrics বলে কোথায়; log বলে কী ঘটেছিল। প্রতিটি সার্ভিস সময়-ছাপ-সহ event লেখে। সেগুলো লিখুন structured log হিসেবে, free text-এর বদলে key-value field দিয়ে, আর প্রতিটি লাইনে রাখুন একটা request id।"),
@@ -112,12 +112,12 @@ STEPS = [
                 ("+", "A request id in every line", "প্রতিটি লাইনে একটা request id"),
                 ("~", "One search pulls out every line of one checkout", "একটা search তুলে আনে এক checkout-এর সব লাইন")]),
 
-    st(("Traces", "Traces"),
+    st(("Traces", "Trace"),
        ("Traces: follow one request everywhere", "Trace: একটা request-কে সর্বত্র অনুসরণ"),
        [("A trace records every hop of one request as a span, with a start time and a duration. All the spans of a request share one trace id, and together they form a tree.",
          "একটা trace একটা request-এর প্রতিটি ধাপ রেকর্ড করে এক-একটা span হিসেবে, সাথে থাকে শুরুর সময় আর duration। একটা request-এর সব span একই trace id ভাগ করে, আর একসাথে তারা একটা গাছ হয়ে ওঠে।"),
-        ("Here the checkout span is 1,000 ms: about 20 ms of its own work, 80 ms for payments and 900 ms for inventory. Inside inventory, one database query takes 880 ms. A trace shows at a glance that 900 ms of a 1-second checkout went to one inventory query.",
-         "এখানে checkout span ১,০০০ ms: নিজের কাজ প্রায় ২০ ms, payments-এ ৮০ ms আর inventory-তে ৯০০ ms। Inventory-র ভেতরে একটা database query নেয় ৮৮০ ms। একটা trace এক নজরে দেখিয়ে দেয়, ১ সেকেন্ডের checkout-এর ৯০০ ms গেছে inventory-র একটা query-তে।")],
+        ("Here the checkout span is 1,000 ms: about 20 ms of its own work, 80 ms for payments and 900 ms for inventory. Inside inventory, one database query takes 880 ms. A trace shows at a glance that 900 ms of a 1-second checkout went to inventory, 880 ms of it to a single query.",
+         "এখানে checkout span ১,০০০ ms: নিজের কাজ প্রায় ২০ ms, payments-এ ৮০ ms আর inventory-তে ৯০০ ms। Inventory-র ভেতরে একটা database query নেয় ৮৮০ ms। একটা trace এক নজরে দেখিয়ে দেয়, ১ সেকেন্ডের checkout-এর ৯০০ ms গেছে inventory-তে, তার ৮৮০ ms একটা query-তে।")],
        [sh("co", "hot", ("1,000 ms", "১,০০০ ms"), x=110), sh("pay", "hot", ("80 ms", "৮০ ms"), x=390, y=70), sh("inv", "warn", ("900 ms", "৯০০ ms"), x=390), sh("db2", "warn", ("880 ms query", "৮৮০ ms query"), x=650),
         sh("tid", "hot", ("on every span", "প্রতিটি span-এ"))],
        [ln("co", "pay", "to", 1000, "hot"), ln("co", "inv", "to", 1400, "warn"), ln("inv", "db2", "to", 1600, "warn"), ln("tid", "co", None, None, "dim")],
@@ -129,7 +129,7 @@ STEPS = [
                 ("~", "Checkout 1,000 ms = 20 + 80 payments + 900 inventory", "Checkout ১,০০০ ms = ২০ + ৮০ payments + ৯০০ inventory"),
                 ("~", "Inventory 900 ms = 20 + one 880 ms query", "Inventory ৯০০ ms = ২০ + একটা ৮৮০ ms-এর query")]),
 
-    st(("Fixed", "Fixed"),
+    st(("Fixed", "সারানো"),
        ("Fix it, then prove it", "সারান, তারপর প্রমাণ করুন"),
        [("With the cause known, the fix is quick. Say the query scans the whole stock table: add an index. The query drops from 880 ms to about 5 ms.",
          "কারণ জানা থাকলে সমাধান দ্রুত। ধরুন query পুরো stock table স্ক্যান করে: একটা index যোগ করুন। Query ৮৮০ ms থেকে নেমে আসে প্রায় ৫ ms-এ।"),
@@ -177,7 +177,7 @@ STEPS = [
                 ("+", "Impact: 2,520 failed checkouts, about 1% of the budget", "প্রভাব: ২,৫২০টি ব্যর্থ checkout, budget-এর প্রায় ১%"),
                 ("+", "Actions that prevent a repeat", "পুনরাবৃত্তি ঠেকানোর কাজ")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Three signals, one question each", "তিনটি signal, প্রতিটির একটা প্রশ্ন"),
        [("Metrics find where, logs explain what, and traces show where the time went.",
          "Metrics খোঁজে কোথায়, log ব্যাখ্যা করে কী, আর trace দেখায় সময় গেল কোথায়।")],

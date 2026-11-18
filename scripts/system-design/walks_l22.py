@@ -28,7 +28,6 @@ METRICS = [("Checkout time", "Checkout-এর সময়"), ("Calls it makes",
 CAPTION = ("Example numbers: checkout does 50 ms of work, and each call to another service takes 100 ms.",
            "উদাহরণের সংখ্যা: checkout নিজে ৫০ ms কাজ করে, আর অন্য সার্ভিসে প্রতিটি call-এ লাগে ১০০ ms।")
 
-FINE = ("fine", "ঠিক আছে")
 NOEFF = ("no effect", "প্রভাব নেই")
 OWN = ("own copy", "নিজের কপি")
 
@@ -38,11 +37,11 @@ STEPS = [
        [("When an order is placed, four other things must happen: send a confirmation email, reserve stock, record analytics, add loyalty points. Checkout calls each service, one after another.",
          "অর্ডার হলে আরও চারটা কাজ করতে হয়: নিশ্চিতকরণ ইমেইল পাঠানো, স্টক রিজার্ভ, analytics লেখা, loyalty পয়েন্ট যোগ। Checkout প্রতিটি সার্ভিসকে call করে, একটার পর একটা।"),
         ("Checkout is now as slow as all of them together: 50 ms of its own work plus four calls of 100 ms is 450 ms. And it is as fragile as the weakest one.",
-         "Checkout এখন তাদের সবার মিলিত গতির মতো ধীর: নিজের ৫০ ms কাজ আর ১০০ ms-এর চারটি call মিলে ৪৫০ ms। আর সে সবচেয়ে দুর্বলটার মতোই ভঙ্গুর।")],
+         "Checkout এখন তাদের সবার মোট সময়ের সমান ধীর: নিজের ৫০ ms কাজ আর ১০০ ms-এর চারটি call মিলে ৪৫০ ms। আর সে সবচেয়ে দুর্বলটার মতোই ভঙ্গুর।")],
        [sh("checkout", "hot", ("450 ms in all", "মোট ৪৫০ ms")), sh("email"), sh("stock"), sh("analytics"), sh("loyalty")],
        [ln("checkout", "email", "both", 1200, "hot", ("1", "১")), ln("checkout", "stock", "both", 1200, "hot", ("2", "২")),
         ln("checkout", "analytics", "both", 1200, "hot", ("3", "৩")), ln("checkout", "loyalty", "both", 1200, "hot", ("4", "৪"))],
-       [("450 ms", "৪৫০ ms"), "4", FINE, None],
+       [("450 ms", "৪৫০ ms"), "4", None, None],
        note=("insight",
              "Every extra thing that must happen after an order makes checkout slower, and gives it one more way to fail.",
              "অর্ডারের পর যা-ই যোগ করতে হয়, তাতে checkout আরও ধীর হয় আর ব্যর্থ হওয়ার আরেকটা পথ পায়।")),
@@ -50,7 +49,7 @@ STEPS = [
     st(("Email down", "Email বন্ধ"),
        ("Email is down, so nobody can buy", "Email বন্ধ, তাই কেউ কিনতে পারে না"),
        [("The email provider has an outage. The order service's call to it fails, and because checkout waits on every call, checkout fails.",
-         "Email provider-এর outage হয়। Order সার্ভিসের সেটাকে call ব্যর্থ হয়, আর checkout প্রতিটি call-এর জন্য অপেক্ষা করে বলে checkout ব্যর্থ হয়।"),
+         "Email provider-এর outage হয়। Order সার্ভিস থেকে সেটাকে করা call ব্যর্থ হয়, আর checkout প্রতিটি call-এর জন্য অপেক্ষা করে বলে checkout ব্যর্থ হয়।"),
         ("Nobody can buy, though nothing is wrong with orders, stock or loyalty. The shop lost sales because of a confirmation email.",
          "কেউ কিনতে পারে না, অথচ অর্ডার, স্টক বা loyalty-তে কিছুই ভুল নেই। একটা নিশ্চিতকরণ ইমেইলের জন্য দোকান বিক্রি হারাল।")],
        [sh("checkout", "warn", ("fails", "ব্যর্থ")), sh("email", "warn", ("outage", "outage")), sh("stock", "dim", ("never reached", "ডাকাই হয়নি")),
@@ -64,7 +63,7 @@ STEPS = [
                 ("-", "Checkout fails, so no order is placed", "Checkout ব্যর্থ হয়, তাই কোনো অর্ডার হয় না")]),
 
     st(("Publish", "Publish"),
-       ("Publish an event instead", "বদলে একটা event publish করুন"),
+       ("Publish an event instead", "তার বদলে একটা event publish করুন"),
        [("The order service now saves the order and publishes one event, OrderPlaced, to a topic on an event bus, then answers the shopper straight away. The messaging service delivers the event to every service that subscribed to the topic.",
          "Order সার্ভিস এখন অর্ডার সেভ করে আর একটা event bus-এর topic-এ একটাই event publish করে, OrderPlaced, তারপর ক্রেতাকে সাথে সাথে উত্তর দেয়। Messaging সার্ভিস event-টা পৌঁছে দেয় সেই topic-এ subscribe করা প্রতিটি সার্ভিসের কাছে।"),
         ("Checkout takes about 60 ms: its own 50 ms plus about 10 ms to publish. It no longer knows, or cares, who is listening.",
@@ -114,10 +113,11 @@ STEPS = [
          "Email আবার বন্ধ। এবার checkout টেরই পায় না: event bus email-এর event-গুলোর কপি তার subscription-এ রেখে দেয়, সে ফিরে না আসা পর্যন্ত।"),
         ("Email can be down for an hour: its events wait, and it catches up when it returns. Nobody lost a sale, and nobody lost an email.",
          "Email এক ঘণ্টা বন্ধ থাকতে পারে: তার event অপেক্ষা করে, আর সে ফিরলে ধরে ফেলে। কেউ বিক্রি হারায়নি, আর কেউ ইমেইলও হারায়নি।")],
-       [sh("checkout", "hot", ("60 ms", "৬০ ms")), sh("bus", "hot", ("keeps its copy", "কপি রাখে")), sh("email", "warn", ("down for 1 h", "১ ঘণ্টা বন্ধ")),
-        sh("stock", "hot", OWN), sh("analytics", "hot", OWN), sh("loyalty", "hot", OWN)],
-       [ln("checkout", "bus", "to", 1000, "hot"), ln("bus", "email", None, None, "warn"), ln("bus", "stock", "to", 1200, "hot"), ln("bus", "analytics", "to", 1200, "hot"), ln("bus", "loyalty", "to", 1200, "hot")],
-       [("60 ms", "৬০ ms"), "1", NOEFF, "4"],
+       [sh("checkout", "hot", ("60 ms", "৬০ ms")), sh("bus", "hot", ("keeps its copy", "কপি রাখে")), sh("email", "warn", ("down for 1 h", "১ ঘণ্টা বন্ধ"), x=565, y=40),
+        sh("stock", "hot", OWN, x=591, y=105), sh("analytics", "hot", OWN, x=600, y=170), sh("loyalty", "hot", OWN, x=591, y=235), sh("fraud", "hot", OWN, x=565, y=300)],
+       [ln("checkout", "bus", "to", 1000, "hot"), ln("bus", "email", None, None, "warn"), ln("bus", "stock", "to", 1200, "hot"), ln("bus", "analytics", "to", 1200, "hot"), ln("bus", "loyalty", "to", 1200, "hot"),
+        ln("bus", "fraud", "to", 1200, "hot")],
+       [("60 ms", "৬০ ms"), "1", NOEFF, "5"],
        note=("insight",
              "The outage moved from checkout to one subscriber, where it costs a delayed email instead of a lost sale.",
              "Outage সরে গেল checkout থেকে একটা subscriber-এ, যেখানে দাম একটা দেরি-হওয়া ইমেইল, হারানো বিক্রি নয়।"),

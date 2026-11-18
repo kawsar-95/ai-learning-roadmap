@@ -141,7 +141,7 @@ REQUEST = {
                 "Inside one data center that hop is short. Here the query takes 15 ms.",
             ], note=("insight", "A slow query here slows every page that needs it. Step 8 shows how much."),
                 changes=[("+", "Database"), ("+", "Query: 15 ms")]),
-            text("ডেটা আনা", "সার্ভার ডেটাবেসে জিজ্ঞেস করে", [
+            text("ডেটা আনা", "সার্ভার ডেটাবেসকে জিজ্ঞেস করে", [
                 "পণ্যের তথ্য থাকে ডেটাবেসে, ওয়েব সার্ভারে নয়। সার্ভার একটা query পাঠিয়ে সারিগুলোর জন্য অপেক্ষা করে।",
                 "একই data center-এর ভেতরে এই পথ ছোট। এখানে query-তে লাগে ১৫ ms।",
             ], note=("insight", "এখানে query ধীর হলে যে পেজেরই এই ডেটা লাগে, সেটাই ধীর হয়। ৮ নম্বর ধাপে দেখুন কতটা।"),
@@ -168,12 +168,12 @@ REQUEST = {
         step(
             text("More files", "One page, dozens of requests", [
                 "The HTML names more files: stylesheets, scripts, images and fonts. This page needs 40 of them.",
-                "The browser reuses the open connection, so it pays the handshakes once per server, not once per file.",
+                "With HTTP/2 or HTTP/3, the browser reuses the open connection, so it pays the handshakes once per server, not once per file.",
             ], note=("tip", "Each extra server that a page uses, such as a separate image host, pays its own handshakes again."),
                 changes=[("+", "40 more requests: CSS, JS, images, fonts"), ("~", "Same connection, no new handshakes")]),
             text("আরও ফাইল", "এক পেজে কয়েক ডজন রিকোয়েস্ট", [
                 "HTML-এর ভেতরে আরও ফাইলের নাম থাকে: CSS, script, ছবি আর font। এই পেজে লাগে এমন ৪০টি ফাইল।",
-                "ব্রাউজার খোলা connection-টাই আবার ব্যবহার করে। তাই handshake-এর খরচ দিতে হয় প্রতিটি সার্ভারে একবার, প্রতিটি ফাইলে নয়।",
+                "HTTP/2 বা HTTP/3-এ ব্রাউজার খোলা connection-টাই আবার ব্যবহার করে। তাই handshake-এর খরচ দিতে হয় প্রতিটি সার্ভারে একবার, প্রতিটি ফাইলে নয়।",
             ], note=("tip", "পেজ যত নতুন সার্ভার ব্যবহার করে, যেমন ছবির আলাদা সার্ভার, প্রতিটির জন্য আবার handshake লাগে।"),
                 changes=[("+", "আরও ৪০টি রিকোয়েস্ট: CSS, JS, ছবি, font"), ("~", "একই connection, নতুন handshake নেই")]),
             [show("browser", "hot", badge="+40"), show("dns", "dim"), show("server", "hot", _code), show("db", sub=_query)],
@@ -198,12 +198,12 @@ REQUEST = {
         step(
             text("Far away", "Case: a user far away", [
                 "Back to the fast query. Now the user is in Europe and the server is in the US. A packet there and back takes about 150 ms, not 50.",
-                "The two handshakes and the request cost three round trips: 450 ms before the server does any work. Same server, same code, and the first byte comes 2.5 times later.",
+                "The two handshakes and the request with its response cost three round trips: 450 ms of network time, against 20 ms of server work. Same server, same code, and the first byte takes 2.5 times as long: 500 ms instead of 200 ms.",
             ], note=("tip", "Cut round trips and shorten the distance: reuse connections, and serve content from close to the users (see Content Delivery)."),
                 changes=[("~", "Round trip: 50 ms → 150 ms"), ("~", "Connect: 100 ms → 300 ms"), ("~", "Total: 200 ms → 500 ms")]),
             text("দূরের ব্যবহারকারী", "ঘটনা: দূরের ব্যবহারকারী", [
                 "Query আবার দ্রুত। এবার ব্যবহারকারী ইউরোপে, সার্ভার যুক্তরাষ্ট্রে। একটা প্যাকেটের যাওয়া-আসায় লাগে প্রায় ১৫০ ms, ৫০ নয়।",
-                "দুটো handshake আর রিকোয়েস্ট মিলে তিনটি round trip: সার্ভার কাজ শুরুর আগেই ৪৫০ ms। একই সার্ভার, একই কোড, অথচ প্রথম বাইট আসে আড়াই গুণ দেরিতে।",
+                "দুটো handshake আর রিকোয়েস্ট-রেসপন্স মিলে তিনটি round trip: নেটওয়ার্কের সময় ৪৫০ ms, সার্ভারের কাজ ২০ ms। একই সার্ভার, একই কোড, অথচ প্রথম বাইট আসতে আড়াই গুণ সময় লাগে: ২০০ ms-এর জায়গায় ৫০০ ms।",
             ], note=("tip", "Round trip কমান আর দূরত্ব কমান: connection আবার ব্যবহার করুন, আর কনটেন্ট রাখুন ব্যবহারকারীর কাছাকাছি (Content Delivery অংশ দেখুন)।"),
                 changes=[("~", "Round trip: ৫০ ms → ১৫০ ms"), ("~", "Connection: ১০০ ms → ৩০০ ms"), ("~", "মোট: ২০০ ms → ৫০০ ms")]),
             [show("browser", "warn", ("in Europe", "ইউরোপে")), show("dns", "dim", ("nearby", "কাছেই")),
@@ -342,12 +342,12 @@ LATENCY = {
         step(
             text("Distance", "Distance is latency too", [
                 "Now the users are in Europe and the server is in the US. The server is just as fast, but a packet there and back takes about 150 ms.",
-                "Every request pays that before the server even starts, so the p50 goes from 6 ms to 156 ms.",
+                "Every request pays that on the way there and back, so the p50 goes from 6 ms to 156 ms.",
             ], note=("insight", "No server upgrade beats distance. Put the data closer to the users: caches, CDNs, more regions."),
                 changes=[("+", "150 ms round trip"), ("~", "p50: 6 ms → 156 ms"), ("~", "In flight: 0.7 → 13, most of them on the wire")]),
             text("দূরত্ব", "দূরত্বও latency", [
                 "এবার ব্যবহারকারীরা ইউরোপে, সার্ভার যুক্তরাষ্ট্রে। সার্ভার আগের মতোই দ্রুত, কিন্তু একটা প্যাকেটের যাওয়া-আসায় লাগে প্রায় ১৫০ ms।",
-                "সার্ভার কাজ শুরুর আগেই প্রতিটি রিকোয়েস্টকে এই সময় দিতে হয়, তাই p50 ৬ ms থেকে হয় ১৫৬ ms।",
+                "যাওয়া-আসার পথে প্রতিটি রিকোয়েস্টকে এই সময় দিতে হয়, তাই p50 ৬ ms থেকে হয় ১৫৬ ms।",
             ], note=("insight", "কোনো সার্ভার আপগ্রেড দূরত্বকে হারাতে পারে না। ডেটা রাখুন ব্যবহারকারীর কাছাকাছি: cache, CDN, আরও region।"),
                 changes=[("+", "১৫০ ms round trip"), ("~", "p50: ৬ ms → ১৫৬ ms"), ("~", "চলমান: ০.৭ → ১৩, বেশিরভাগই পথে")]),
             [show("users", "warn", ("in Europe", "ইউরোপে")), show("server", sub=("in the US", "যুক্তরাষ্ট্রে"))],
@@ -579,7 +579,7 @@ NAPKIN = {
         ),
         step(
             text("Recap", "Recap", [
-                "Five quick sums sized the whole site.",
+                "Six quick sums sized the whole site.",
             ], points=[
                 "<strong>Users × actions ÷ 100,000 seconds</strong> = average requests per second.",
                 "Multiply by <strong>3 to 5</strong> for the peak, and size for that.",
@@ -588,7 +588,7 @@ NAPKIN = {
                 "Estimate <strong>network</strong> and <strong>memory</strong> too. They often decide the design.",
             ]),
             text("সারাংশ", "সারাংশ", [
-                "পাঁচটা ছোট হিসাবেই পুরো সাইটের মাপ পাওয়া গেল।",
+                "ছয়টা ছোট হিসাবেই পুরো সাইটের মাপ পাওয়া গেল।",
             ], points=[
                 "<strong>ব্যবহারকারী × কাজ ÷ ১,০০,০০০ সেকেন্ড</strong> = সেকেন্ডে গড় রিকোয়েস্ট।",
                 "পিকের জন্য <strong>৩ থেকে ৫</strong> দিয়ে গুণ করুন, আর সেই মাপে সাজান।",

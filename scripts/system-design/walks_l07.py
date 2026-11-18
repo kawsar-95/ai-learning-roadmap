@@ -17,7 +17,7 @@ NODES = [
 ]
 METRICS = [("p95", "p95"), ("Hit rate", "Hit rate"), ("Database load", "ডেটাবেসের লোড"), ("Data is fresh", "ডেটা তাজা")]
 CAPTION = ("Example numbers: 1,000 reads a second, a cache hit takes 2 ms, and a miss on an idle database takes 40 ms.",
-           "উদাহরণের সংখ্যা: সেকেন্ডে ১,০০০ read, cache hit-এ ২ ms, আর ফাঁকা ডেটাবেসে miss-এ ৪০ ms।")
+           "উদাহরণের সংখ্যা: সেকেন্ডে ১,০০০ read, cache hit-এ ২ ms, আর চাপহীন ডেটাবেসে miss-এ ৪০ ms।")
 
 YES = ("yes", "হ্যাঁ")
 NO = ("no", "না")
@@ -80,7 +80,7 @@ STEPS = [
        [("The hit rate is the share of reads the cache answers. The database sees only the misses.",
          "Hit rate হলো cache যত ভাগ read-এর উত্তর দেয়। ডেটাবেস শুধু miss-গুলো দেখে।"),
         ("At 90% the database serves 1 read in 10. At 99% it serves 1 in 100: a tenfold drop from a change that looks small. The p95 drops too, because fewer than 5% of the reads are slow.",
-         "৯০%-এ ডেটাবেস ১০টির মধ্যে ১টি read সামলায়। ৯৯%-এ ১০০টির মধ্যে ১টি: ছোট দেখতে একটা পরিবর্তনে দশ গুণ কমে যায়। p95-ও নেমে আসে, কারণ ধীর read ৫%-এর কম।")],
+         "৯০%-এ ডেটাবেস ১০টির মধ্যে ১টি read সামলায়। ৯৯%-এ ১০০টির মধ্যে ১টি: ছোট দেখতে একটা পরিবর্তনে ডেটাবেসের কাজ দশ গুণ কমে যায়। p95-ও নেমে আসে, কারণ ধীর read ৫%-এর কম।")],
        [sh("users", sub=U), sh("app", "hot"), sh("cache", "hot", HIT), sh("db", sub=busy(1))],
        BASE + [ln("app", "cache", "both", 800, "hot"), ln("app", "db", "to", 3600, "dim", ("miss", "miss"))],
        ["2 ms", "99%", "1%", YES],
@@ -180,8 +180,8 @@ STEPS = [
        BASE + [ln("app", "cache", "both", 900), ln("app", "db", "to", 900, "warn")],
        ["1.2 s", "51%", "85%", YES],
        note=("warn",
-             "Cache-aside only remembers answers. “Not found” is an answer too. Requests for ids that do not exist always miss and always reach the database.",
-             "Cache-aside শুধু উত্তর মনে রাখে। “পাওয়া যায়নি”-ও একটা উত্তর। যে id নেই তার জন্য রিকোয়েস্ট সবসময় miss করে আর সবসময় ডেটাবেসে পৌঁছায়।"),
+             "Basic cache-aside stores only the values it finds. But “not found” is an answer too. Requests for ids that do not exist always miss and always reach the database.",
+             "সাধারণ cache-aside শুধু যে মান পায় সেটাই রাখে। কিন্তু “পাওয়া যায়নি”-ও একটা উত্তর। যে id নেই তার জন্য রিকোয়েস্ট সবসময় miss করে আর সবসময় ডেটাবেসে পৌঁছায়।"),
        changes=[("+", "900 requests a second for ids that do not exist", "সেকেন্ডে ৯০০টি রিকোয়েস্ট এমন id-র জন্য যা নেই"),
                 ("~", "Hit rate: 97% → 51%", "Hit rate: ৯৭% → ৫১%"),
                 ("~", "Database: 3% → 85% busy", "ডেটাবেস: ৩% → ৮৫% ব্যস্ত")]),
@@ -230,8 +230,8 @@ STEPS = [
                 "<strong>Cache-aside</strong>: আগে cache দেখুন, না পেলে ডেটাবেস, তারপর cache ভরুন।"),
                ("The <strong>hit rate</strong> drives both speed and database load.",
                 "<strong>Hit rate</strong>-ই ঠিক করে গতি আর ডেটাবেসের লোড।"),
-               ("Plan for staleness: <strong>invalidate on write</strong>, add a <strong>TTL</strong>, evict with <strong>LRU</strong>.",
-                "পুরোনো ডেটার জন্য তৈরি থাকুন: <strong>লেখার সময় invalidate</strong>, একটা <strong>TTL</strong> দিন, আর <strong>LRU</strong> দিয়ে সরান।"),
+               ("Plan for staleness: <strong>invalidate on write</strong> and add a <strong>TTL</strong>. When memory is full, evict with <strong>LRU</strong>.",
+                "পুরোনো ডেটার জন্য তৈরি থাকুন: <strong>লেখার সময় invalidate</strong> করুন আর একটা <strong>TTL</strong> দিন। মেমরি ভরে গেলে <strong>LRU</strong> দিয়ে সরান।"),
                ("Protect hot keys from <strong>stampedes</strong>: let one request refill the key.",
                 "জনপ্রিয় key-কে <strong>stampede</strong> থেকে বাঁচান: একটা রিকোয়েস্টকেই key আবার ভরতে দিন।"),
                ("Cache the <strong>“not found”</strong> too, and screen impossible keys with a <strong>Bloom filter</strong>.",

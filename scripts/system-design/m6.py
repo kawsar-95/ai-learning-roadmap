@@ -17,7 +17,7 @@ SECTIONS = [
                 "The whole app scales as one, even when only search needs more machines.",
             ),
             h("Split by business capability"),
-            p("Microservices split the system into small services, each built around a business capability such as payments, catalogue or shipping, and each owned by a team that can deploy it on its own [[fowler-microservices]]. Each service owns its data: other services may not read its tables, only call its API [[db-per-service]]."),
+            p("Microservices split the system into small services, each built around a business capability such as payments, catalog or shipping, and each owned by a team that can deploy it on its own [[fowler-microservices]]. Each service owns its data: other services may not read its tables, only call its API [[db-per-service]]."),
             h("The network is in the middle now"),
             p("Every former function call is now a network call that can be slow, fail, or arrive twice. You need timeouts, retries and idempotency (section 26), tracing (section 27), and a way to deploy and run many services. Transactions across services are gone (section 30)."),
             h("The distributed monolith"),
@@ -41,8 +41,8 @@ SECTIONS = [
         ],
         [
             p("Monolith মানে একটা কোডবেস, যা একসাথে build আর deploy হয়, সাধারণত একটা ডেটাবেস নিয়ে। মডিউলগুলোর মধ্যে কল মানে function call: দ্রুত, আর একটা transaction-এর ভেতরে। নতুন প্রোডাক্ট আর ছোট টিমের জন্য এটাই সাধারণত সঠিক শুরু।"),
-            p("বড় হলে সমস্যা দেখা দেয়: পঞ্চাশজন একই কোড বদলায়, প্রতিটি রিলিজে সবার জন্য অপেক্ষা করতে হয়, আর একটা ছোট ফিচারের bug পুরো অ্যাপ বন্ধ করে দেয়। Microservices-এ সিস্টেম ভাগ হয় ব্যবসার কাজ ধরে, যেমন পেমেন্ট, ক্যাটালগ বা শিপিং; প্রতিটির নিজের টিম, নিজের deploy আর নিজের ডেটাবেস। অন্য সার্ভিস তার টেবিল পড়তে পারে না, শুধু API কল করতে পারে।"),
-            p("এর দাম আছে: আগের function call এখন network call, যা ধীর হতে পারে, ব্যর্থ হতে পারে, দুবার পৌঁছাতে পারে। সার্ভিসগুলো একসাথে deploy করতে হলে বা একই ডেটাবেস শেয়ার করলে সেটা distributed monolith: খরচ সব আছে, সুবিধা নেই। কয়েক সার্ভিসের ডেটা লাগে এমন পেজের জন্য ইভেন্ট থেকে আপডেট হওয়া একটা লোকাল read কপি রাখুন। Consumer-driven contract এক টিমের পরিবর্তনে অন্য টিমের সার্ভিস ভাঙা আটকায়। আর পুরো monolith একবারে নতুন করে লিখবেন না; strangler fig পদ্ধতিতে একটা একটা অংশ নতুন সার্ভিসে সরান।"),
+            p("বড় হলে সমস্যা দেখা দেয়: পঞ্চাশজন একই কোড বদলায়, প্রতিটি রিলিজে সবার জন্য অপেক্ষা করতে হয়, আর একটা ছোট ফিচারের memory leak পুরো অ্যাপ বন্ধ করে দিতে পারে। Microservices-এ সিস্টেম ভাগ হয় ব্যবসার কাজ ধরে, যেমন পেমেন্ট, ক্যাটালগ বা শিপিং; প্রতিটির নিজের টিম, নিজের deploy আর নিজের ডেটাবেস। অন্য সার্ভিস তার টেবিল পড়তে পারে না, শুধু API কল করতে পারে।"),
+            p("এর দাম আছে: আগের function call এখন network call, যা ধীর হতে পারে, ব্যর্থ হতে পারে, দুবার পৌঁছাতে পারে। সার্ভিসগুলো একসাথে deploy করতে হলে, একই ডেটাবেস শেয়ার করলে, বা লম্বা synchronous chain-এ একে অপরকে call করলে সেটা distributed monolith: খরচ সব আছে, সুবিধা নেই। কয়েক সার্ভিসের ডেটা লাগে এমন পেজের জন্য ইভেন্ট থেকে আপডেট হওয়া একটা লোকাল read কপি রাখুন। Consumer-driven contract এক টিমের পরিবর্তনে অন্য টিমের সার্ভিস ভাঙা আটকায়। আর পুরো monolith একবারে নতুন করে লিখবেন না; strangler fig পদ্ধতিতে একটা একটা অংশ নতুন সার্ভিসে সরান।"),
             analogy("<strong>রেস্টুরেন্ট আর ফুড কোর্ট:</strong> একটা রান্নাঘর হলো monolith, প্রতিটি স্টল একটা microservice, আর একটা একটা করে স্টল খোলা হলো strangler fig।"),
         ],
     ),
@@ -78,9 +78,9 @@ SECTIONS = [
             analogy("<strong>An office reception.</strong> The directory is the service registry, \"not ready for visitors yet\" is a readiness probe, and the front desk for outsiders is the API gateway."),
         ],
         [
-            p("Orders সার্ভিস config ফাইলে লেখা ঠিকানায় payments-কে কল করে। কিন্তু autoscaling, deploy আর মেশিন নষ্ট হওয়ায় payments-এর instance বারবার বদলায়, তাই লেখা ঠিকানা পুরনো হয়ে যায় আর কল ব্যর্থ হয়।"),
-            p("Service registry হলো সার্ভিস আর তাদের instance-এর ঠিকানার একটা তালিকা। Instance চালু হলে নিজেকে নিবন্ধন করে, বন্ধ হলে নাম সরিয়ে নেয়। Client-side discovery-তে caller নিজে registry জিজ্ঞেস করে instance বাছে; server-side discovery-তে একটা router বা লোড ব্যালান্সার সেটা করে। Kubernetes-এ প্রতিটি Service-এর একটা স্থায়ী DNS নাম থাকে। তবে DNS-এর উত্তর বেশিক্ষণ ক্যাশ করলে বন্ধ হয়ে যাওয়া instance-এ কল যেতে থাকে।"),
-            p("নতুন instance প্রস্তুত হওয়ার আগে ট্রাফিক পেলে প্রথম রিকোয়েস্টগুলো ব্যর্থ হয়। তাই readiness probe পাস না করা পর্যন্ত তাকে ট্রাফিক দেওয়া হয় না, আর slow start ধীরে ধীরে ট্রাফিক বাড়ায়। Registry নিজেই সবচেয়ে জরুরি সার্ভিস, তাই একে replicated cluster-এ চালান। Retry, timeout, এনক্রিপশন আর metrics প্রতিটি সার্ভিসে বারবার না লিখে service mesh-এর proxy-কে দিন। আর বাইরের client-দের জন্য একটাই দরজা রাখুন, API gateway, যা রিকোয়েস্ট সঠিক সার্ভিসে পাঠায় আর authentication ও rate limiting সামলায়।"),
+            p("Orders সার্ভিস config ফাইলে লেখা ঠিকানায় payments-কে কল করে। কিন্তু autoscaling, deploy আর মেশিন নষ্ট হওয়ায় payments-এর instance বারবার বদলায়, তাই লেখা ঠিকানা পুরোনো হয়ে যায় আর কল ব্যর্থ হয়।"),
+            p("Service registry হলো সার্ভিস আর তাদের instance-এর ঠিকানার একটা তালিকা। Instance চালু হলে নিজেকে নিবন্ধিত করে, বন্ধ হলে নাম সরিয়ে নেয়। Client-side discovery-তে caller নিজে registry জিজ্ঞেস করে instance বাছে; server-side discovery-তে একটা router বা লোড ব্যালান্সার সেটা করে। Kubernetes-এ প্রতিটি Service-এর একটা স্থায়ী DNS নাম থাকে। তবে DNS-এর উত্তর বেশিক্ষণ ক্যাশ করলে বন্ধ হয়ে যাওয়া instance-এ কল যেতে থাকে।"),
+            p("নতুন instance প্রস্তুত হওয়ার আগে ট্রাফিক পেলে প্রথম রিকোয়েস্টগুলো ব্যর্থ হয়। তাই readiness probe পাস না করা পর্যন্ত তাকে ট্রাফিক দেওয়া হয় না, আর slow start ধীরে ধীরে ট্রাফিক বাড়ায়। প্রতিটি call যদি registry-র ওপর নির্ভর করে, তবে registry-ই আপনার সবচেয়ে জরুরি সার্ভিস। একে replicated cluster-এ চালান, আর client-দের শেষ জানা instance-এর তালিকা রাখতে দিন, যাতে registry কিছুক্ষণ বন্ধ থাকলেও traffic না থামে। Retry, timeout, এনক্রিপশন আর metrics প্রতিটি সার্ভিসে বারবার না লিখে service mesh-এর proxy-কে দিন। আর বাইরের client-দের জন্য একটাই দরজা রাখুন, API gateway, যা রিকোয়েস্ট সঠিক সার্ভিসে পাঠায় আর authentication ও rate limiting সামলায়।"),
             analogy("<strong>অফিসের রিসেপশন:</strong> ডিরেক্টরি হলো service registry, “এখনো অতিথি নেওয়ার জন্য তৈরি নয়” হলো readiness probe, আর বাইরের অতিথির সামনের ডেস্ক হলো API gateway।"),
         ],
     ),
@@ -103,7 +103,7 @@ SECTIONS = [
                 "<strong>Choreography.</strong> There is no central controller. Each service listens for events and publishes its own, and the flow comes from these reactions. It is loosely coupled, but harder to follow as the steps grow [[ms-saga]].",
             ),
             h("The catch: no isolation"),
-            p("Between steps, other users can see a half-finished state, such as a hotel booked for a trip whose flight is not yet confirmed. Sagas give up the isolation of a database transaction. Model the in-between states explicitly, such as <code>PENDING</code>, so that other code knows not to rely on them."),
+            p("Between steps, other users can see a half-finished state, such as a flight booked for a trip whose hotel and car are not yet confirmed. Sagas give up the isolation of a database transaction. Model the in-between states explicitly, such as <code>PENDING</code>, so that other code knows not to rely on them."),
             h("When things go wrong mid-saga"),
             ul(
                 "<strong>A crash.</strong> Store the saga's state after every step, so that a restarted orchestrator resumes where it stopped instead of starting again.",
@@ -120,7 +120,7 @@ SECTIONS = [
         [
             p("একটা ট্রিপ বুক করতে ফ্লাইট, হোটেল আর গাড়ি রিজার্ভ করতে হয়, প্রতিটি আলাদা সার্ভিস আর আলাদা ডেটাবেসে। ফ্লাইট আর হোটেল সফল হওয়ার পর গাড়ি ব্যর্থ হলে গ্রাহক পায় অর্ধেক ট্রিপ। একটা ডেটাবেস transaction তিনটি সার্ভিস জুড়ে চলতে পারে না।"),
             p("Two-phase commit-এ একজন coordinator প্রথমে সবাইকে প্রস্তুত হতে বলে, তারপর একসাথে commit বা abort করতে বলে। কিন্তু প্রস্তুতির পর coordinator বন্ধ হয়ে গেলে অংশগ্রহণকারীরা ফল জানে না, তাই lock ধরে অপেক্ষা করতে থাকে। Saga অন্য পথ নেয়: প্রতিটি ধাপ নিজের সার্ভিসে commit হয়, আর কোনো ধাপ ব্যর্থ হলে আগের ধাপগুলো উল্টো ক্রমে compensating transaction দিয়ে বাতিল হয়, যেমন হোটেল ক্যানসেল বা টাকা ফেরত।"),
-            p("Orchestration-এ একজন orchestrator প্রতিটি ধাপ চালায়, তাই প্রবাহ এক জায়গায় দেখা যায়। Choreography-তে প্রতিটি সার্ভিস ইভেন্ট শুনে নিজের কাজ করে; সংযোগ ঢিলেঢালা, কিন্তু অনুসরণ করা কঠিন। Saga-তে মাঝের অর্ধেক-শেষ অবস্থা অন্যরা দেখতে পায়, তাই <code>PENDING</code>-এর মতো অবস্থা স্পষ্ট রাখুন। প্রতিটি ধাপের পর অবস্থা জমা রাখুন, যাতে crash-এর পর আবার শুরু করা যায়। বাতিল করার কাজও ব্যর্থ হতে পারে, তাই সেটা idempotent রাখুন আর সফল না হওয়া পর্যন্ত চেষ্টা করুন। আর timeout মানে ব্যর্থতা নয়, মানে “জানি না”; আগে অবস্থা জিজ্ঞেস করুন।"),
+            p("Orchestration-এ একজন orchestrator প্রতিটি ধাপ চালায়, তাই প্রবাহ এক জায়গায় দেখা যায়। Choreography-তে প্রতিটি সার্ভিস ইভেন্ট শুনে নিজের কাজ করে; সংযোগ ঢিলেঢালা, কিন্তু ধাপ বাড়লে অনুসরণ করা কঠিন। Saga-তে মাঝের অর্ধেক-শেষ অবস্থা অন্যরা দেখতে পায়, তাই <code>PENDING</code>-এর মতো অবস্থা স্পষ্ট রাখুন। প্রতিটি ধাপের পর অবস্থা জমা রাখুন, যাতে crash-এর পর আবার শুরু করা যায়। বাতিল করার কাজও ব্যর্থ হতে পারে, তাই সেটা idempotent রাখুন আর সফল না হওয়া পর্যন্ত চেষ্টা করুন। আর timeout মানে ব্যর্থতা নয়, মানে “জানি না”; আগে অবস্থা জিজ্ঞেস করুন।"),
             analogy("<strong>ছুটির বুকিং:</strong> প্রতিটি বুকিং একটা local transaction, প্রতিটি ক্যানসেল একটা compensating transaction, আর চেকলিস্ট হাতে আপনি হলেন orchestrator।"),
         ],
     ),
@@ -148,7 +148,7 @@ SECTIONS = [
             ul(
                 "<strong>Late events.</strong> A phone that was offline sends its events hours later. Count by event time, when it happened, not by processing time, when it arrived. A watermark tells the processor how far event time has progressed, so it knows when a window is probably complete [[flink-time]].",
                 "<strong>Duplicates.</strong> Retries deliver some events twice. Give every event an id and drop repeats.",
-                "<strong>Lag.</strong> If the processor falls behind, the gap between the newest event and the processed position grows. Add consumers to the consumer group so that they read the partitions in parallel; consumers beyond the number of partitions can sit idle [[confluent-consumer]].",
+                "<strong>Lag.</strong> If the processor falls behind, the gap between the newest event and the processed position grows. Add consumers to the consumer group so that they read the partitions in parallel; consumers beyond the number of partitions sit idle [[confluent-consumer]].",
             ),
             h("Counting unique viewers"),
             p("Counting distinct users exactly needs memory for every id. HyperLogLog estimates the number of distinct items in a small, fixed amount of memory. Its authors show it counting well beyond a billion distinct items with about 2% error, using 1.5 kilobytes [[hll]]."),
@@ -163,7 +163,7 @@ SECTIONS = [
         [
             p("গত মাসে প্রতিটি ভিডিও কতবার দেখা হয়েছে, এমন query কোটি কোটি সারি পড়ে। Production ডেটাবেসে চালালে এটা ব্যবহারকারীদের সাথে প্রতিযোগিতা করে, তাই ইভেন্টগুলো বিশ্লেষণের জন্য আলাদা storage-এ কপি করুন।"),
             p("Batch processing একটা নির্দিষ্ট ডেটাসেট, যেমন গতকালের সব ইভেন্ট, একবারে হিসাব করে। MapReduce-এ map ধাপ প্রতিটি ইভেন্ট থেকে <code>(video_id, 1)</code>-এর মতো জোড়া বানায়, shuffle একই key-গুলো এক জায়গায় আনে, আর reduce সেগুলো যোগ করে। একটা ভাইরাল ভিডিওর key একজন reducer-কে ঘণ্টার পর ঘণ্টা ব্যস্ত রাখে; combiner map-এর দিকেই আংশিক যোগ করে, আর salting গরম key-কে কয়েক ভাগে ভাগ করে।"),
-            p("Stream processing ইভেন্ট আসার সাথে সাথে ফল আপডেট করে, আর window ধরে গোনে: প্রতি মিনিটের fixed window, ওভারল্যাপ করা sliding window, বা নিষ্ক্রিয়তায় বন্ধ হওয়া session window। দেরিতে আসা ইভেন্ট গুনুন ঘটনার সময় ধরে, আসার সময় ধরে নয়; watermark জানায় কখন একটা window প্রায় সম্পূর্ণ। Duplicate বাদ দিতে প্রতিটি ইভেন্টের id রাখুন, আর পিছিয়ে পড়লে partition বাড়িয়ে consumer বাড়ান। ইউনিক দর্শক গুনতে HyperLogLog প্রায় ১.৫ KB মেমরিতে প্রায় ২% ভুলে শত কোটির বেশি আলাদা আইটেম অনুমান করতে পারে। Lambda architecture batch আর stream দুটোই চালায়; Kappa শুধু stream চালায়, আর দরকার হলে log আবার চালিয়ে পুরনো ডেটা নতুন করে হিসাব করে।"),
+            p("Stream processing ইভেন্ট আসার সাথে সাথে ফল আপডেট করে, আর window ধরে গোনে: প্রতি মিনিটের fixed window, ওভারল্যাপ করা sliding window, বা নিষ্ক্রিয়তায় বন্ধ হওয়া session window। দেরিতে আসা ইভেন্ট গুনুন ঘটনার সময় ধরে, আসার সময় ধরে নয়; watermark জানায় কখন একটা window প্রায় সম্পূর্ণ। Duplicate বাদ দিতে প্রতিটি ইভেন্টের id রাখুন, আর পিছিয়ে পড়লে consumer group-এ consumer বাড়ান; partition-এর সংখ্যার বেশি consumer অলস বসে থাকে। ইউনিক দর্শক গুনতে HyperLogLog প্রায় ১.৫ KB মেমরিতে প্রায় ২% ভুলে শত কোটির বেশি আলাদা আইটেম অনুমান করতে পারে। Lambda architecture batch আর stream দুটোই চালায়; Kappa শুধু stream চালায়, আর দরকার হলে log আবার চালিয়ে পুরোনো ডেটা নতুন করে হিসাব করে।"),
             analogy("<strong>দোকানের বিক্রি গোনা:</strong> রাতে একবার গোনা হলো batch, সারাদিন চলতি হিসাব রাখা stream, আর দেরিতে আসা সকালের রসিদ হলো late event।"),
         ],
     ),

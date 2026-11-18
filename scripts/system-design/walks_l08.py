@@ -81,8 +81,8 @@ STEPS = [
         ln("edge-lon", "origin", "to", 3200, "dim"), ln("edge-syd", "origin", "both", 3200, "warn", ("miss", "miss"))],
        ["10 ms", "215 ms", "3,300/s", "45%"],
        note=("insight",
-             "This is cache-aside again, spread over the planet.",
-             "এটা আবার সেই cache-aside, শুধু পৃথিবীজুড়ে ছড়ানো।"),
+             "This is a read-through cache, spread over the planet.",
+             "এটা একটা read-through cache, শুধু পৃথিবীজুড়ে ছড়ানো।"),
        changes=[("~", "Sydney edge: cold, filling from the origin", "সিডনির edge: ঠান্ডা, origin থেকে ভরছে"),
                 ("~", "Sydney image: 15 ms → 215 ms for now", "সিডনির ছবি: ১৫ ms → আপাতত ২১৫ ms")]),
 
@@ -120,7 +120,7 @@ STEPS = [
              "Build tools can add these content hashes to the file names for you.",
              "Build tool এই content hash ফাইলের নামে নিজেই বসিয়ে দিতে পারে।"),
        changes=[("~", "logo.png → logo.3f9a.png", "logo.png → logo.3f9a.png"),
-                ("~", "Cache lifetime: a day → a year", "Cache-এর মেয়াদ: একদিন → এক বছর"),
+                ("~", "Cache lifetime: a year, now safe", "Cache-এর মেয়াদ: এক বছর, এখন নিরাপদ"),
                 ("-", "No more old logos", "পুরোনো লোগো আর নেই")]),
 
     st(("Spike", "Spike"),

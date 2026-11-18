@@ -20,7 +20,7 @@ NODES = [
     node("lb", "balancer", ("Load balancer", "Load balancer"), 100, 170),
     node("orders", "service", ("Orders", "Orders"), 365, 170),
     node("pay", "service", ("Payments", "Payments"), 640, 170),
-    node("bad", "user", ("Compromised box", "আপস-হওয়া মেশিন"), 365, 50),
+    node("bad", "user", ("Compromised box", "হ্যাক-হওয়া মেশিন"), 365, 50),
     node("db", "database", ("Database", "Database"), 105, 170),
     node("bucket", "storage", ("Public bucket", "পাবলিক bucket"), 390, 170),
     node("thief", "user", ("Thief", "চোর"), 650, 170),
@@ -52,7 +52,7 @@ PLAIN = ("plain", "সাধারণ লেখা")
 
 
 STEPS = [
-    st(("Café Wi-Fi", "Café Wi-Fi"),
+    st(("Café Wi-Fi", "ক্যাফের Wi-Fi"),
        ("Plain HTTP on café Wi-Fi", "ক্যাফের Wi-Fi-তে সাধারণ HTTP"),
        [("Alice logs in from a café. The site uses plain <code>http://</code>, so her password and her session cookie travel as readable text through the café's router and past every other device on the same Wi-Fi: 40 of them.",
          "Alice একটা ক্যাফে থেকে লগইন করে। সাইটটা সাধারণ <code>http://</code> ব্যবহার করে, তাই তার পাসওয়ার্ড আর session cookie পড়া-যায় এমন লেখা হিসেবে চলে ক্যাফের router দিয়ে, আর একই Wi-Fi-তে থাকা প্রতিটি ডিভাইসের পাশ দিয়ে: ৪০টি।"),
@@ -69,8 +69,8 @@ STEPS = [
 
     st(("TLS", "TLS"),
        ("TLS: encrypt the wire", "TLS: তারের পথটা এনক্রিপ্ট করুন"),
-       [("With HTTPS, TLS encrypts everything between Alice's browser and the site. During the handshake the server presents a certificate, signed by a certificate authority. Alice's browser checks the signature, the domain name and the expiry date, and only then do the two agree on a key.",
-         "HTTPS-এ TLS Alice-এর ব্রাউজার আর সাইটের মাঝের সবকিছু এনক্রিপ্ট করে। Handshake-এর সময় server একটা certificate দেখায়, যাতে সই করেছে একটা certificate authority। Alice-এর ব্রাউজার সই, ডোমেইনের নাম আর মেয়াদের তারিখ যাচাই করে, আর তারপরই দুজনে একটা key ঠিক করে।"),
+       [("With HTTPS, TLS encrypts everything between Alice's browser and the site. During the handshake the server presents a certificate, signed by a certificate authority. Alice's browser checks the signature, the domain name and the expiry date, and goes on only if all three are valid.",
+         "HTTPS-এ TLS Alice-এর ব্রাউজার আর সাইটের মাঝের সবকিছু এনক্রিপ্ট করে। Handshake-এর সময় server একটা certificate দেখায়, যাতে সই করেছে একটা certificate authority। Alice-এর ব্রাউজার সই, ডোমেইনের নাম আর মেয়াদের তারিখ যাচাই করে, আর তিনটিই ঠিক থাকলে তবেই এগোয়।"),
         ("From then on the café's router and its 40 devices see only scrambled bytes. Because the certificate proves the site's identity, Alice also knows she is talking to the real site, not a copy of it.",
          "তারপর থেকে ক্যাফের router আর ৪০টি ডিভাইস দেখে শুধু এলোমেলো বাইট। Certificate সাইটের পরিচয় প্রমাণ করে বলে Alice এটাও জানে যে সে আসল সাইটের সাথেই কথা বলছে, তার কোনো নকলের সাথে নয়।")],
        [sh("alice", "hot", ("checks the site", "সাইট যাচাই করে")), sh("wifi", "hot", ("sees noise", "দেখে noise"), x=365), sh("site", "hot", ("certificate", "certificate")),
@@ -84,7 +84,7 @@ STEPS = [
                 ("+", "The browser checks the signature, the name and the expiry date", "ব্রাউজার সই, নাম আর মেয়াদের তারিখ যাচাই করে"),
                 ("~", "The café's 40 devices see only scrambled bytes", "ক্যাফের ৪০টি ডিভাইস দেখে শুধু এলোমেলো বাইট")]),
 
-    st(("Expired", "Expired"),
+    st(("Expired", "মেয়াদ শেষ"),
        ("Case: the certificate expired at 3 a.m.", "ঘটনা: certificate-এর মেয়াদ ফুরাল রাত ৩টায়"),
        [("Certificates have an expiry date. This one was renewed by hand once a year, by someone who has since left the company. At 03:00 it expires, and every browser shows a full-page security warning instead of the site.",
          "Certificate-এর একটা মেয়াদ থাকে। এটা বছরে একবার হাতে নবায়ন করা হতো, এমন একজনের হাতে যিনি এখন কোম্পানি ছেড়ে গেছেন। রাত ৩টায় মেয়াদ ফুরায়, আর প্রতিটি ব্রাউজার সাইটের বদলে পুরো-পেজের একটা নিরাপত্তা-সতর্কবার্তা দেখায়।"),
@@ -96,16 +96,16 @@ STEPS = [
        [BLOCKED, None, None],
        note=("warn",
              "Nobody was careless on purpose: a once-a-year manual task is a task that gets forgotten. Anything that expires must renew itself, and alert long before it fails.",
-             "ইচ্ছে করে কেউ অসাবধান হয়নি: বছরে একবারের হাতের কাজ ভুলে যাওয়ারই কাজ। যা-কিছুর মেয়াদ ফুরায় তাকে নিজে থেকে নবায়ন হতে হবে, আর ব্যর্থ হওয়ার অনেক আগে alert দিতে হবে।"),
+             "ইচ্ছে করে কেউ অসাবধান হয়নি: বছরে একবারের হাতের কাজ ভুলে যাওয়াই স্বাভাবিক। যা-কিছুর মেয়াদ ফুরায়, তা যেন নিজে থেকে নবায়ন হয়, আর নবায়ন ব্যর্থ হলে মেয়াদ ফুরানোর অনেক আগেই alert আসে।"),
        changes=[("-", "Manual yearly renewal by someone who left", "হাতে বছরে একবার নবায়ন, এমন একজনের হাতে যিনি চলে গেছেন"),
                 ("-", "At 03:00 the certificate expires and browsers block the site", "রাত ৩টায় certificate-এর মেয়াদ ফুরায় আর ব্রাউজার সাইট আটকে দেয়"),
                 ("-", "90 minutes down at 5,000 requests a second: 27 million failed requests", "সেকেন্ডে ৫,০০০ request-এ ৯০ মিনিট বন্ধ: ২.৭ কোটি ব্যর্থ request"),
                 ("+", "The fix: automated renewal, and an alert long before expiry", "সমাধান: স্বয়ংক্রিয় নবায়ন, আর মেয়াদ ফুরানোর অনেক আগে alert")]),
 
-    st(("Inside too", "Inside too"),
+    st(("Inside too", "ভেতরেও"),
        ("Encrypt inside the data center too", "ডেটা সেন্টারের ভেতরেও এনক্রিপ্ট করুন"),
        [("The load balancer terminates TLS and, traditionally, sends plain traffic onward, trusting the internal network. But one compromised machine inside, say a forgotten test server, can then listen to the traffic between all 12 services.",
-         "Load balancer TLS শেষ করে আর, চিরাচরিতভাবে, ভেতরের নেটওয়ার্ককে বিশ্বাস করে সাধারণ ট্র্যাফিক এগিয়ে দেয়। কিন্তু ভেতরের একটা আপস-হওয়া মেশিন, ধরুন ভুলে-যাওয়া একটা test server, তখন ১২টি সার্ভিসের সবার মাঝের ট্র্যাফিক শুনতে পারে।"),
+         "Load balancer TLS শেষ করে আর, চিরাচরিতভাবে, ভেতরের নেটওয়ার্ককে বিশ্বাস করে সাধারণ ট্র্যাফিক এগিয়ে দেয়। কিন্তু ভেতরের একটা হ্যাক-হওয়া মেশিন, ধরুন ভুলে-যাওয়া একটা test server, তখন ১২টি সার্ভিসের সবার মাঝের ট্র্যাফিক শুনতে পারে।"),
         ("Zero trust drops the assumption that anything inside the network can be trusted. Each service gets its own certificate and every call uses mutual TLS: both sides prove who they are, and the traffic is encrypted. Often a service mesh sets this up for you.",
          "Zero trust এই ধারণা বাদ দেয় যে নেটওয়ার্কের ভেতরের সবকিছু বিশ্বাসযোগ্য। প্রতিটি সার্ভিস পায় নিজের certificate, আর প্রতিটি call চলে mutual TLS-এ: দুই পক্ষই প্রমাণ করে তারা কারা, আর ট্র্যাফিক এনক্রিপ্টেড থাকে। প্রায়ই service mesh এটা আপনার হয়ে সেট আপ করে দেয়।")],
        [sh("lb", "hot", ("ends TLS here", "এখানে TLS শেষ")), sh("orders", "hot", ("own certificate", "নিজের certificate")), sh("pay", "hot", ("own certificate", "নিজের certificate")),
@@ -116,10 +116,10 @@ STEPS = [
              "Assume the attacker is already inside. Then every internal call must prove identity and be encrypted, not just the calls from the internet.",
              "ধরে নিন আক্রমণকারী ইতিমধ্যে ভেতরে। তাহলে প্রতিটি অভ্যন্তরীণ call-কে পরিচয় প্রমাণ করতে হবে আর এনক্রিপ্টেড হতে হবে, শুধু ইন্টারনেট থেকে আসা call নয়।"),
        changes=[("+", "Mutual TLS: both sides present certificates and verify each other", "Mutual TLS: দুই পক্ষই certificate দেখায় আর একে অপরকে যাচাই করে"),
-                ("~", "A compromised machine inside hears only scrambled bytes", "ভেতরের একটা আপস-হওয়া মেশিন শোনে শুধু এলোমেলো বাইট"),
+                ("~", "A compromised machine inside hears only scrambled bytes", "ভেতরের একটা হ্যাক-হওয়া মেশিন শোনে শুধু এলোমেলো বাইট"),
                 ("~", "No traffic is trusted just for being inside the network", "নেটওয়ার্কের ভেতরে আছে বলেই কোনো ট্র্যাফিক বিশ্বাস করা হয় না")]),
 
-    st(("Stolen backup", "Stolen backup"),
+    st(("Stolen backup", "চুরি-যাওয়া backup"),
        ("The stolen backup", "চুরি-যাওয়া backup"),
        [("Every byte on the wire is now safe. Then a nightly database backup, 200 GB, is left in a storage bucket that was accidentally made public, and someone copies it.",
          "তারের প্রতিটি বাইট এখন নিরাপদ। তারপর রাতের একটা database backup, ২০০ GB, পড়ে থাকে এমন একটা storage bucket-এ যা ভুলে পাবলিক করে দেওয়া হয়েছিল, আর কেউ সেটা কপি করে নেয়।"),
@@ -135,7 +135,7 @@ STEPS = [
                 ("-", "It holds plain records of 1,000,000 customers", "তাতে আছে ১০,০০,০০০ গ্রাহকের সাধারণ-লেখা রেকর্ড"),
                 ("-", "TLS on the wire does not help: the file was copied at rest", "তারের TLS কাজে আসে না: ফাইলটা কপি হয়েছে জমে-থাকা অবস্থায়")]),
 
-    st(("At rest", "At rest"),
+    st(("At rest", "জমানো অবস্থায়"),
        ("Encrypt at rest, keep keys elsewhere", "জমানো অবস্থায় এনক্রিপ্ট করুন, চাবি রাখুন অন্য জায়গায়"),
        [("Encrypt disks, database files and backups. The trick is the key: if it sits next to the data, a thief takes both. So the keys live in a separate key management service, a KMS.",
          "ডিস্ক, database ফাইল আর backup এনক্রিপ্ট করুন। কৌশল হলো চাবিতে: সেটা ডেটার পাশে থাকলে চোর দুটোই নিয়ে যায়। তাই চাবি থাকে আলাদা একটা key management service-এ, একটা KMS-এ।"),
@@ -169,7 +169,7 @@ STEPS = [
                 ("~", "New data uses version 2, old data still opens with version 1", "নতুন ডেটা চলে সংস্করণ ২-এ, পুরোনো ডেটা এখনো খোলে সংস্করণ ১-এ"),
                 ("~", "Re-wrapping 10,000 data keys takes about 20 seconds", "১০,০০০টি data key আবার মুড়তে লাগে প্রায় ২০ সেকেন্ড")]),
 
-    st(("Leaked key", "Leaked key"),
+    st(("Leaked key", "ফাঁস-হওয়া key"),
        ("Case: a secret in the code", "ঘটনা: কোডের ভেতরে একটা গোপন জিনিস"),
        [("A developer hard-codes the payment provider's API key in the source to test something, and pushes it to a public repository. Eighteen minutes later a new commit deletes the line.",
          "একজন ডেভেলপার কিছু পরীক্ষা করতে পেমেন্ট provider-এর API key সোর্সে সরাসরি লিখে দেয় আর একটা পাবলিক repository-তে push করে। আঠারো মিনিট পর একটা নতুন commit লাইনটা মুছে দেয়।"),
@@ -214,7 +214,7 @@ STEPS = [
        [MTLS, ENCRYPTED, ("tokens", "token")],
        note=("insight",
              "A token is a stand-in with no value outside the vault. Systems that never see the real number cannot leak it, and they fall outside much of the compliance scope.",
-             "Token একটা বদলি, যার vault-এর বাইরে কোনো মূল্য নেই। যে সিস্টেম আসল নম্বর কখনো দেখে না সে তা ফাঁসও করতে পারে না, আর সে সম্মতির আওতার বড় অংশের বাইরে চলে যায়।"),
+             "Token একটা বদলি, যার vault-এর বাইরে কোনো মূল্য নেই। যে সিস্টেম আসল নম্বর কখনো দেখে না সে তা ফাঁসও করতে পারে না, আর সে compliance-এর আওতার বড় অংশের বাইরে চলে যায়।"),
        changes=[("-", "30 systems touch card numbers and fall under the card rules", "৩০টি সিস্টেম কার্ড নম্বর ছোঁয় আর কার্ডের নিয়মের আওতায় পড়ে"),
                 ("+", "A token replaces each card number; a hardened vault keeps the mapping", "প্রতিটি কার্ড নম্বরের জায়গায় বসে একটা token; শক্ত-করা একটা vault রাখে ম্যাপিং"),
                 ("~", "1 system holds card numbers; the other 29 see only tokens", "১টি সিস্টেম কার্ড নম্বর রাখে; বাকি ২৯টি দেখে শুধু token")]),
@@ -235,7 +235,7 @@ STEPS = [
                 ("~", "The server relays ciphertext it cannot open", "Server বয়ে নেয় এমন ciphertext যা সে খুলতে পারে না"),
                 ("-", "The server cannot search, scan or recover the messages", "Server বার্তাগুলো খুঁজতে, স্ক্যান করতে বা উদ্ধার করতে পারে না")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Encrypt twice, keep keys apart", "দুই জায়গায় এনক্রিপ্ট করুন, চাবি আলাদা রাখুন"),
        [("Encrypt data on the wire and at rest, and keep keys and secrets out of the places an attacker can copy.",
          "তারে আর জমানো অবস্থায় ডেটা এনক্রিপ্ট করুন, আর key ও গোপন জিনিস রাখুন সেসব জায়গার বাইরে, যেখান থেকে আক্রমণকারী কপি করতে পারে।")],
@@ -251,9 +251,9 @@ STEPS = [
                ("Keep <strong>secrets out of code</strong>: use a secrets manager and short-lived credentials.",
                 "<strong>গোপন জিনিস কোডের বাইরে</strong> রাখুন: একটা secrets manager আর স্বল্পস্থায়ী credential ব্যবহার করুন।"),
                ("<strong>Tokenize</strong> card numbers to shrink the compliance scope.",
-                "কার্ড নম্বর <strong>tokenize</strong> করে সম্মতির আওতা ছোট করুন।"),
+                "কার্ড নম্বর <strong>tokenize</strong> করে compliance-এর আওতা ছোট করুন।"),
                ("Use <strong>end-to-end</strong> encryption when even the server must not read the data.",
-                "যখন server-ও ডেটা পড়বে না, তখন <strong>end-to-end</strong> encryption ব্যবহার করুন।")]),
+                "যখন server-এরও ডেটা পড়া চলবে না, তখন <strong>end-to-end</strong> encryption ব্যবহার করুন।")]),
 ]
 
 WALKS = {"encryption": walk(760, 340, NODES, METRICS, CAPTION, STEPS)}

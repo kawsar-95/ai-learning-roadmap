@@ -19,7 +19,7 @@ SECTIONS = [
                 "The web server checks the session, runs the code and asks the database for the rows. Inside one data center that hop is short, but a slow query is not.",
                 "The server builds the page and sends it back. The browser starts reading before the last byte arrives.",
             ),
-            p("The HTML names more files: stylesheets, scripts, images and fonts, so one page can need dozens of requests. The browser reuses open connections, so the handshakes are paid once per server, not once per file [[mdn-browsers]]."),
+            p("The HTML names more files: stylesheets, scripts, images and fonts, so one page can need dozens of requests. The browser reuses open connections, so the handshakes are paid once per connection, not once per file [[mdn-browsers]]."),
             h("Where the time goes"),
             table(
                 ["Step", "Round trips", "At 50 ms RTT"],
@@ -32,7 +32,7 @@ SECTIONS = [
             p("Only 20 ms of those 200 ms is server work. Two cases show how to read such a table:"),
             ul(
                 "<strong>A slow query.</strong> If the database spends 900 ms scanning a whole table, nothing else matters. Fix the query first (section 10, Indexes).",
-                "<strong>A distant user.</strong> A packet from the US to Europe and back takes about 150 ms [[norvig]]. At that RTT the three round trips above cost 450 ms before the server does any work. Moving content closer to users helps (section 8, Content Delivery).",
+                "<strong>A distant user.</strong> A packet from California to the Netherlands and back takes about 150 ms [[norvig]]. At that RTT the three round trips above cost 450 ms in the network alone, however fast the server is. Moving content closer to users helps (section 8, Content Delivery).",
             ),
             note("info", "<strong>Count round trips first.</strong> Each new connection to a new server pays its handshakes again. Fewer round trips, reused connections and shorter distances usually save more time than a faster CPU."),
         ],
@@ -43,7 +43,7 @@ SECTIONS = [
         ],
         [
             p("ব্রাউজারে ঠিকানা লিখে Enter চাপলে প্রথমে নামটাকে IP address-এ বদলাতে হয়। এই কাজটা করে DNS resolver। উত্তরের সাথে একটা TTL থাকে। মেয়াদ শেষ না হওয়া পর্যন্ত ব্রাউজার ক্যাশ করা উত্তরই ব্যবহার করে, তাই পরের বার এই ধাপে সময় লাগে না।"),
-            p("এরপর ব্রাউজার TCP connection খোলে। এর handshake-এ একটা round trip লাগে, মানে প্যাকেটের যাওয়া আর ফিরে আসা। HTTPS হলে TLS handshake-এ আরও একটা round trip লাগে। তারপর ব্রাউজার রিকোয়েস্ট পাঠায়, সার্ভার কোড চালায়, ডেটাবেস থেকে ডেটা আনে আর উত্তর ফেরত পাঠায়। HTML-এর ভেতরে আরও CSS, script আর ছবির ফাইলের নাম থাকে, তাই একটা পেজে অনেক রিকোয়েস্ট হয়। খোলা connection আবার ব্যবহার করলে handshake বারবার দিতে হয় না।"),
+            p("এরপর ব্রাউজার TCP connection খোলে। এর handshake-এ একটা round trip লাগে, মানে প্যাকেটের যাওয়া আর ফিরে আসা। HTTPS হলে TLS 1.3 handshake-এ আরও একটা round trip লাগে। তারপর ব্রাউজার রিকোয়েস্ট পাঠায়, সার্ভার কোড চালায়, ডেটাবেস থেকে ডেটা আনে আর উত্তর ফেরত পাঠায়। HTML-এর ভেতরে আরও CSS, script আর ছবির ফাইলের নাম থাকে, তাই একটা পেজে অনেক রিকোয়েস্ট হয়। খোলা connection আবার ব্যবহার করলে handshake বারবার দিতে হয় না।"),
             p("৫০ ms round-trip time (RTT) ধরলে প্রথম বাইট আসতে প্রায় ২০০ ms লাগে, যার মধ্যে সার্ভারের কাজ মাত্র ২০ ms। দুটো ঘটনা মনে রাখুন। একটা ধীর query একাই পুরো পেজকে ধীর করে দিতে পারে। আর ব্যবহারকারী দূরে থাকলে প্রতিটি round trip-ই লম্বা হয়। তাই আগে round trip গুনুন, তারপর দেখুন সময় কোথায় যাচ্ছে।"),
             analogy("<strong>ফোনে দোকানে অর্ডার:</strong> ফোন বই হলো DNS, শুরুর হ্যালো হলো handshake, গুদাম হলো ডেটাবেস, আর বিদেশের দোকান হলো দূরের ব্যবহারকারী।"),
         ],
@@ -56,7 +56,7 @@ SECTIONS = [
         "Latency মানে একটা রিকোয়েস্টে কত সময় লাগে। Throughput মানে প্রতি সেকেন্ডে কতগুলো রিকোয়েস্ট শেষ হয়। সার্ভার পুরো ব্যস্ত হওয়ার অনেক আগেই ধীর হতে শুরু করে।",
         [
             h("Two different questions"),
-            p("<strong>Latency</strong> is the time from sending a request to getting the answer, in milliseconds. <strong>Throughput</strong> is the number of requests the system completes per second. A road shows the difference: the time for one car to cross the city is latency, and cars per hour is throughput. A change can raise one and lower the other."),
+            p("<strong>Latency</strong> is the time from sending a request to getting the answer, in milliseconds. <strong>Throughput</strong> is the number of requests the system completes per second. A road shows the difference: the time for one car to cross the city is latency, and cars per hour is throughput. A change can improve one and make the other worse."),
             h("Why busy servers get slow"),
             p("Requests arrive at uneven moments, so a busy server makes some of them wait in a queue. In the simplest queueing model, a single server with random arrivals (M/M/1), the average time in the system is the service time divided by (1 − utilization) [[little-50]]:"),
             table(
@@ -70,7 +70,7 @@ SECTIONS = [
             h("Read percentiles, not averages"),
             p("An average hides the slow requests. The median (p50) is the time that half the requests beat. The 99th percentile (p99) is the time that 99 of 100 requests beat. Large services watch the tail, because users feel it [[tail-at-scale]]."),
             h("Distance sets a floor"),
-            p("A packet from the US to Europe and back takes about 150 ms [[norvig]]. No server upgrade changes that, so a user far away pays it on every round trip."),
+            p("A packet from California to the Netherlands and back takes about 150 ms [[norvig]]. No server upgrade changes that, so a user far away pays it on every round trip."),
             h("Little's Law: how much is in flight"),
             p("Little's Law says that the average number of requests in a system equals the arrival rate times the average time each one spends there: L = λW [[little-50]]. At 2,000 requests per second and 50 ms each, about 100 requests are in flight. If a slow database doubles the time, 200 are in flight, and a pool of 150 connections runs out."),
             h("Fan-out makes the tail common"),
@@ -85,10 +85,10 @@ SECTIONS = [
             analogy("<strong>A coffee shop.</strong> Cups per hour is throughput, your wait is latency, a nearly full shop is a busy server, and an order from many counters is a request that fans out."),
         ],
         [
-            p("Latency হলো একটা রিকোয়েস্টের উত্তর পেতে কত সময় লাগে। Throughput হলো প্রতি সেকেন্ডে সিস্টেম কতগুলো রিকোয়েস্ট শেষ করে। দুটো আলাদা প্রশ্ন, আর একটা বাড়াতে গেলে অন্যটা কমে যেতে পারে।"),
-            p("সার্ভার যত ব্যস্ত, নতুন রিকোয়েস্টকে তত বেশি queue-তে অপেক্ষা করতে হয়। সবচেয়ে সহজ queueing মডেলে সার্ভার ৫০% ব্যস্ত থাকলে সময় লাগে কাজের ২ গুণ, ৯০% হলে ১০ গুণ, ৯৯% হলে ১০০ গুণ। তাই latency অনেকক্ষণ সমান থাকে, তারপর পুরো লোডের কাছে এসে হঠাৎ লাফিয়ে বাড়ে।"),
-            p("গড় দেখে ভুল হয়। p50 মানে অর্ধেক রিকোয়েস্ট এর চেয়ে দ্রুত, আর p99 মানে ১০০টির মধ্যে ৯৯টি এর চেয়ে দ্রুত। একটা রিকোয়েস্ট যদি ১০০টি সার্ভারের উত্তরের অপেক্ষা করে, আর প্রতিটি সার্ভার ১০০ বারে একবার ধীর হয়, তাহলে ৬৩% রিকোয়েস্টই ধীর হয়। Little's Law বলে, সিস্টেমে একসাথে থাকা রিকোয়েস্ট = আসার হার × প্রতিটির সময়। আর batching throughput বাড়ায়, কিন্তু প্রতিটি রিকোয়েস্টকে একটু বেশি অপেক্ষা করায়।"),
-            analogy("<strong>কফির দোকান:</strong> ঘণ্টায় কত কাপ হলো throughput, আপনার অপেক্ষা হলো latency, আর প্রায় ভরা দোকান হলো ব্যস্ত সার্ভার।"),
+            p("Latency হলো একটা রিকোয়েস্টের উত্তর পেতে কত সময় লাগে। Throughput হলো প্রতি সেকেন্ডে সিস্টেম কতগুলো রিকোয়েস্ট শেষ করে। দুটো আলাদা প্রশ্ন, আর একটা ভালো করতে গেলে অন্যটা খারাপ হয়ে যেতে পারে।"),
+            p("সার্ভার যত ব্যস্ত, নতুন রিকোয়েস্টকে তত বেশি queue-তে অপেক্ষা করতে হয়। সবচেয়ে সহজ queueing মডেলে সার্ভার ৫০% ব্যস্ত থাকলে গড়ে সময় লাগে কাজের ২ গুণ, ৯০% হলে ১০ গুণ, ৯৯% হলে ১০০ গুণ। তাই latency অনেকক্ষণ সমান থাকে, তারপর পুরো লোডের কাছে এসে হঠাৎ লাফিয়ে বাড়ে।"),
+            p("গড় দেখে ভুল হয়। p50 হলো সেই সময়, যার আগে অর্ধেক রিকোয়েস্ট শেষ হয়; আর p99 হলো সেই সময়, যার আগে ১০০টির মধ্যে ৯৯টি শেষ হয়। একটা রিকোয়েস্ট যদি ১০০টি সার্ভারের উত্তরের অপেক্ষা করে, আর প্রতিটি সার্ভার ১০০ বারে একবার ধীর হয়, তাহলে ৬৩% রিকোয়েস্টই ধীর হয়। Little's Law বলে, সিস্টেমে গড়ে একসাথে থাকা রিকোয়েস্ট = আসার হার × প্রতিটির গড় সময়। আর batching throughput বাড়ায়, কিন্তু প্রতিটি রিকোয়েস্টকে একটু বেশি অপেক্ষা করায়।"),
+            analogy("<strong>কফির দোকান:</strong> ঘণ্টায় কত কাপ হলো throughput, আপনার অপেক্ষা হলো latency, প্রায় ভরা দোকান হলো ব্যস্ত সার্ভার, আর অনেক কাউন্টার থেকে জিনিস লাগে এমন অর্ডার হলো fan-out করা রিকোয়েস্ট।"),
         ],
     ),
     S(
@@ -123,7 +123,7 @@ SECTIONS = [
                 ["Read 1 MB sequentially from memory", "250 µs"],
                 ["Disk seek", "8 ms"],
                 ["Read 1 MB sequentially from disk", "20 ms"],
-                ["Packet from the US to Europe and back", "150 ms"],
+                ["Packet from California to the Netherlands and back", "150 ms"],
             ),
             p("These figures come from Peter Norvig's table [[norvig]]. Storage hardware has improved since it was written, but the gaps between the rows still guide a design: memory is much faster than storage, and storage is much faster than a long network round trip."),
             note("info", "<strong>Round hard and write the units.</strong> 86,400 becomes 100,000, and 3.6 TB becomes \"a few terabytes\". If two estimates differ by 10×, find the assumption that differs. That is usually where the design decision is."),
@@ -136,8 +136,8 @@ SECTIONS = [
         [
             p("কোনো ডিজাইন বেছে নেওয়ার আগে দেখে নিন একটা মেশিনেই কাজ চলবে কি না। ধরুন একটা রেসিপি সাইটে প্রতিদিন ৫০ লাখ ব্যবহারকারী আসে। প্রত্যেকে ২০টি পেজ দেখে আর একটা রেসিপি সেভ করে।"),
             p("তাহলে দিনে ১০ কোটি পেজ ভিউ। দিনে ৮৬,৪০০ সেকেন্ড, হিসাবের সুবিধায় ধরুন ১,০০,০০০। তাহলে গড়ে প্রতি সেকেন্ডে প্রায় ১,০০০টি read আর প্রায় ৫০টি write। ট্রাফিক সারাদিন সমান থাকে না, তাই গড়ের ৩ থেকে ৫ গুণ peak ধরে হিসাব করুন।"),
-            p("একটা সার্ভার যদি সেকেন্ডে ৫০০ রিকোয়েস্ট সামলায়, peak-এ লাগবে প্রায় ১০টি, সাথে কিছু বাড়তি। প্রতিটি রেসিপি ২ KB হলে দিনে ১০ GB, বছরে প্রায় ৩.৬ TB, আর তিনটি কপি রাখলে তার তিন গুণ। কিছু সংখ্যা মনে রাখুন: মেমরি থেকে পড়া প্রায় ১০০ ns, ডিস্ক seek প্রায় ৮ ms, আমেরিকা থেকে ইউরোপ গিয়ে ফিরে আসা প্রায় ১৫০ ms। জোর দিয়ে round করুন আর একক (unit) লিখুন।"),
-            analogy("<strong>বিয়ের আয়োজন:</strong> কেউ চালের প্রতিটি দানা গোনে না। অতিথির সংখ্যা, মাথাপিছু প্লেট আর বুফেতে সবচেয়ে ভিড়ের সময়টা আন্দাজ করে, সাথে কিছু বাড়তি রাখে।"),
+            p("একটা সার্ভার যদি সেকেন্ডে ৫০০ রিকোয়েস্ট সামলায়, peak-এ লাগবে প্রায় ১০টি, সাথে কিছু বাড়তি। প্রতিটি রেসিপি ২ KB হলে দিনে ১০ GB, বছরে প্রায় ৩.৬ TB, আর তিনটি কপি রাখলে তার তিন গুণ। কিছু সংখ্যা মনে রাখুন: মেমরি থেকে পড়া প্রায় ১০০ ns, ডিস্ক seek প্রায় ৮ ms, ক্যালিফোর্নিয়া থেকে নেদারল্যান্ডসে গিয়ে ফিরে আসা প্রায় ১৫০ ms। জোর দিয়ে round করুন আর একক (unit) লিখুন।"),
+            analogy("<strong>বিয়ের আয়োজন:</strong> কেউ চালের প্রতিটি দানা গোনে না। বরং আয়োজকেরা অতিথির সংখ্যা, মাথাপিছু প্লেট আর বুফেতে সবচেয়ে ভিড়ের সময়টা আন্দাজ করেন, সাথে কিছু বাড়তি রাখেন।"),
         ],
     ),
 ]

@@ -612,7 +612,7 @@ def main():
             if re.search(r"</?[a-zA-Z][^>]*>", t):
                 err(f"quiz {q['id']}: HTML in quiz text")
         for t in texts:
-            if plain.search(re.sub(r"<code[^>]*>.*?</code>", "", t)):
+            if plain.search(re.sub(r"<code[^>]*>.*?</code>", "", t)):  # the rule of tests/quiz-content.test.ts: Bangla digits, even in a version number
                 err(f"quiz {q['id']}: Latin digits in Bangla text: {t}")
             if re.search(r"\b(Text|Topic)\b", t):
                 err(f"quiz {q['id']}: Text/Topic in Bangla")

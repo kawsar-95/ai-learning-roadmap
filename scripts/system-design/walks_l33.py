@@ -50,7 +50,7 @@ BOTH = ("API + database", "API + database")
 
 
 STEPS = [
-    st(("Change the URL", "Change the URL"),
+    st(("Change the URL", "URL বদলান"),
        ("Logged in is not the same as allowed", "লগইন করা মানেই অনুমতি পাওয়া নয়"),
        [("Alice works at Acme and is logged in. She opens her order at <code>/orders/1001</code>, changes the number to 1002 and sees a stranger's order. The server checked who she was, but never asked whether order 1002 is hers.",
          "Alice কাজ করে Acme-তে আর লগইন করা আছে। সে তার অর্ডার খোলে <code>/orders/1001</code>-এ, নম্বরটা বদলে ১০০২ করে আর দেখে একজন অচেনা লোকের অর্ডার। Server দেখেছিল সে কে, কিন্তু অর্ডার ১০০২ তার কি না তা কখনো জিজ্ঞেস করেনি।"),
@@ -66,7 +66,7 @@ STEPS = [
        changes=[("-", "The server checks who she is, never whose order it is", "Server দেখে সে কে, কিন্তু অর্ডারটা কার তা কখনো দেখে না"),
                 ("-", "Counting-up numbers: a script reads all 1,000,000 orders in 2.8 hours", "বাড়তে-থাকা নম্বর: একটা script ২.৮ ঘণ্টায় ১০,০০,০০০টি অর্ডারই পড়ে ফেলে")]),
 
-    st(("Ownership", "Ownership"),
+    st(("Ownership", "মালিকানা"),
        ("Check ownership on every request", "প্রতিটি request-এ মালিকানা যাচাই করুন"),
        [("Every lookup must be scoped to who is asking. The query becomes <code>WHERE id = 1002 AND owner_id = Acme</code>, not just <code>WHERE id = 1002</code>. For order 1001 it finds the row. For 1002 it finds nothing, and Alice gets an error instead of a stranger's order.",
          "প্রতিটি খোঁজ বাঁধতে হবে যে জিজ্ঞেস করছে তার সাথে। Query হয় শুধু <code>WHERE id = 1002</code> নয়, বরং <code>WHERE id = 1002 AND owner_id = Acme</code>। অর্ডার ১০০১-এ সে সারিটা পায়। ১০০২-এ কিছুই পায় না, আর Alice অচেনা লোকের অর্ডারের বদলে পায় একটা error।"),
@@ -83,7 +83,7 @@ STEPS = [
                 ("~", "Order 1002 is not found for Alice: she reaches 12 of 1,000,000", "Alice-এর জন্য অর্ডার ১০০২ মেলে না: সে ছুঁতে পারে ১০,০০,০০০-এর মধ্যে ১২টি"),
                 ("+", "The check lives in the API, not only in the interface", "Check থাকে API-তে, শুধু interface-এ নয়")]),
 
-    st(("Mass assign", "Mass assign"),
+    st(("Mass assign", "Mass assignment"),
        ("Case: “role”: “admin”", "ঘটনা: “role”: “admin”"),
        [("Alice edits her own profile, which is allowed. But the API takes the JSON body and copies every field in it into her user record. So she adds “role”: “admin” to the request, and the API saves it.",
          "Alice তার নিজের profile বদলায়, যা অনুমোদিত। কিন্তু API JSON body নিয়ে তার প্রতিটি field user record-এ কপি করে। তাই সে request-এ যোগ করে দেয় “role”: “admin”, আর API সেটা সংরক্ষণ করে ফেলে।"),
@@ -117,10 +117,10 @@ STEPS = [
                 ("~", "Applied to all 200 queries, including the one that forgot its WHERE", "সব ২০০টি query-তে প্রয়োগ হয়, যে query তার WHERE ভুলেছে তাতেও"),
                 ("~", "A missing WHERE returns Acme's 12 rows, not 1,000,000", "WHERE না থাকলে ফেরত আসে Acme-র ১২টি row, ১০,০০,০০০টি নয়")]),
 
-    st(("Roles", "Roles"),
+    st(("Roles", "Role"),
        ("Roles: what each kind of user may do", "Role: প্রতিটি ধরনের ব্যবহারকারী কী করতে পারে"),
        [("Inside Acme, people need different powers: some only view orders, some edit them, a few approve large ones. Listing permissions per person does not scale: 500 users × 4 permissions is 2,000 separate grants to keep right.",
-         "Acme-র ভেতরে মানুষের দরকার আলাদা আলাদা ক্ষমতা: কেউ শুধু order দেখে, কেউ বদলায়, কেউ কেউ বড়গুলো অনুমোদন করে। মানুষ-পিছু permission তালিকা বড় হয় না: ৫০০ ব্যবহারকারী × ৪টি permission মানে ২,০০০টি আলাদা grant ঠিক রাখা।"),
+         "Acme-র ভেতরে মানুষের দরকার আলাদা আলাদা ক্ষমতা: কেউ শুধু order দেখে, কেউ বদলায়, কেউ কেউ বড়গুলো অনুমোদন করে। মানুষ-পিছু permission তালিকা রাখা বড় পরিসরে সামলানো যায় না: ৫০০ ব্যবহারকারী × ৪টি permission মানে ২,০০০টি আলাদা grant ঠিক রাখা।"),
         ("Role-based access control (RBAC) grants permissions to roles, such as viewer, editor and admin, and gives roles to users. That is 3 roles plus 500 assignments, 503 entries instead of 2,000. To change what editors may do, edit one role, not 300 people.",
          "Role-based access control (RBAC) permission দেয় role-কে, যেমন viewer, editor আর admin, আর role দেয় ব্যবহারকারীকে। অর্থাৎ ৩টি role আর ৫০০টি নিয়োগ, ২,০০০-এর বদলে ৫০৩টি entry। Editor-রা কী করতে পারবে তা বদলাতে একটা role সম্পাদনা করুন, ৩০০ জন মানুষকে নয়।")],
        [sh("alice", "hot", ("an editor", "একজন editor")), sh("r-view", "dim", ("view only", "শুধু দেখা")),
@@ -135,7 +135,7 @@ STEPS = [
                 ("+", "Users get roles: Alice is an editor", "ব্যবহারকারী পায় role: Alice একজন editor"),
                 ("~", "503 entries to keep right instead of 2,000", "ঠিক রাখার entry ২,০০০-এর বদলে ৫০৩টি")]),
 
-    st(("Sharing", "Sharing"),
+    st(("Sharing", "শেয়ারিং"),
        ("Relationships: sharing and teams", "সম্পর্ক: শেয়ারিং আর দল"),
        [("Roles struggle with sharing: “Alice can see this folder because it was shared with her team.” Sharing a document with a person or a team needs permissions that follow relationships. A system in the style of Google's Zanzibar stores them as small facts and answers “may this user do this to that object?” by following the chain.",
          "Role শেয়ারিংয়ে হিমশিম খায়: “Alice এই folder দেখতে পারে, কারণ তা শেয়ার করা হয়েছে তার দলের সাথে।” একজন মানুষ বা একটা দলের সাথে document শেয়ার করতে লাগে এমন permission, যা সম্পর্ক অনুসরণ করে। Google-এর Zanzibar-এর ধাঁচের একটা সিস্টেম সেগুলো রাখে ছোট ছোট fact হিসেবে আর শৃঙ্খল ধরে এগিয়ে উত্তর দেয় “এই ব্যবহারকারী কি ওই object-এ এটা করতে পারে?”।"),
@@ -171,8 +171,8 @@ STEPS = [
 
     st(("Master key", "Master key"),
        ("Case: a service with keys to everything", "ঘটনা: সবকিছুর চাবি-ওয়ালা একটা service"),
-       [("The export service connects to the database with the admin account and holds keys to all 12 storage buckets, because that was quickest to set up. Then a SQL-injection bug is found in one of its report filters.",
-         "Export service database-এ যুক্ত হয় admin অ্যাকাউন্ট দিয়ে আর তার কাছে আছে সব ১২টি storage bucket-এর চাবি, কারণ সেটাই ছিল সেট আপ করার সবচেয়ে দ্রুত উপায়। তারপর তার একটা report filter-এ একটা SQL-injection bug ধরা পড়ে।"),
+       [("The export service connects to the database with the admin account and holds keys to all 12 storage buckets, because that was quickest to set up. Then a command-injection bug is found in one of its report filters.",
+         "Export service database-এ যুক্ত হয় admin অ্যাকাউন্ট দিয়ে আর তার কাছে আছে সব ১২টি storage bucket-এর চাবি, কারণ সেটাই ছিল সেট আপ করার সবচেয়ে দ্রুত উপায়। তারপর তার একটা report filter-এ একটা command-injection bug ধরা পড়ে।"),
         ("Because the service can do anything, so can an attacker who uses the bug: all 30 tables are readable and writable, and every bucket is open. A bug in a small feature has become a full breach.",
          "Service সবকিছু করতে পারে বলে bug ব্যবহার করা আক্রমণকারীও পারে: সব ৩০টি table পড়া ও লেখা যায়, আর প্রতিটি bucket খোলা। একটা ছোট ফিচারের bug পরিণত হয়েছে পুরো ভাঙনে।")],
        [sh("atk", "warn"), sh("exp", "warn", ("admin + all keys", "admin + সব চাবি")), sh("xdb", "warn", ("30 tables, all open", "৩০টি table, সব খোলা")),
@@ -185,13 +185,13 @@ STEPS = [
        changes=[("-", "The service has the admin account and keys to 12 buckets", "Service-এর আছে admin অ্যাকাউন্ট আর ১২টি bucket-এর চাবি"),
                 ("-", "One injection bug exposes all 30 tables and every bucket", "একটা injection bug প্রকাশ করে দেয় সব ৩০টি table আর প্রতিটি bucket")]),
 
-    st(("Least privilege", "Least privilege"),
-       ("Least privilege", "সর্বনিম্ন সুবিধা"),
+    st(("Least privilege", "ন্যূনতম অনুমতি"),
+       ("Least privilege", "ন্যূনতম অনুমতি"),
        [("Give every service, and every person, only the access its job needs. The export service gets a read-only database account that sees one view of 4 columns, and a key to one bucket instead of 12.",
          "প্রতিটি service-কে, আর প্রতিটি মানুষকে, দিন শুধু ততটুকু প্রবেশ যতটুকু তার কাজের জন্য লাগে। Export service পায় একটা read-only database অ্যাকাউন্ট, যা ৪টি column-এর একটা view দেখে, আর ১২টির বদলে একটা bucket-এর চাবি।"),
-        ("The same SQL-injection bug now exposes one read-only view, not 30 tables, and one bucket, not 12. The cost is some setup work; the gain is that the next bug has a much smaller blast radius.",
-         "একই SQL-injection bug এখন প্রকাশ করে একটা read-only view, ৩০টি table নয়, আর একটা bucket, ১২টি নয়। দাম কিছু সেট-আপের কাজ; লাভ হলো পরের bug-এর ক্ষতির পরিসর অনেক ছোট।")],
-       [sh("atk", "warn"), sh("exp", "hot", ("least privilege", "সর্বনিম্ন সুবিধা")), sh("xdb", "hot", ("1 view, read-only", "১টি view, শুধু পড়া")),
+        ("The same command-injection bug now exposes one read-only view, not 30 tables, and one bucket, not 12. The cost is some setup work; the gain is that the next bug has a much smaller blast radius.",
+         "একই command-injection bug এখন প্রকাশ করে একটা read-only view, ৩০টি table নয়, আর একটা bucket, ১২টি নয়। দাম কিছু সেট-আপের কাজ; লাভ হলো পরের bug-এর ক্ষতির পরিসর অনেক ছোট।")],
+       [sh("atk", "warn"), sh("exp", "hot", ("least privilege", "ন্যূনতম অনুমতি")), sh("xdb", "hot", ("1 view, read-only", "১টি view, শুধু পড়া")),
         sh("bkt", "hot", ("1 bucket: exports", "১টি bucket: exports"))],
        [ln("atk", "exp", "to", 900, "warn", ("injection", "injection")), ln("exp", "xdb", "to", 1100, "hot"), ln("exp", "bkt", "to", 1100, "hot")],
        [None, None, None, ("read 1 view", "১টি view পড়া")],
@@ -218,7 +218,7 @@ STEPS = [
        changes=[("-", "The service fetches by name, with its own rights", "Service নাম ধরে ফাইল আনে, নিজের অধিকারে"),
                 ("-", "Alice reaches 5,000 files instead of her company's 25", "Alice ছুঁতে পারে তার কোম্পানির ২৫টির বদলে ৫,০০০টি ফাইল")]),
 
-    st(("On behalf", "On behalf"),
+    st(("On behalf", "ব্যবহারকারীর হয়ে"),
        ("Act as the user, not as yourself", "নিজের নয়, ব্যবহারকারীর হয়ে কাজ করুন"),
        [("Pass the user's identity along. The API forwards Alice's token to the export service, or exchanges it for a narrower token, as OAuth 2.0 Token Exchange defines, and the service asks for the file as Alice.",
          "ব্যবহারকারীর পরিচয় সঙ্গে পাঠান। API Alice-এর token export service-কে এগিয়ে দেয়, বা OAuth 2.0 Token Exchange যেভাবে বলে সেভাবে তাকে বদলে নেয় একটা সরু token-এ, আর service ফাইলটা চায় Alice হিসেবে।"),
@@ -239,7 +239,7 @@ STEPS = [
        [("Record who did what to which object, and when, especially for reads of sensitive data and for changes to permissions. Every entry says who, what, when and from where, so that after an incident you can answer “who saw this?”.",
          "লিখে রাখুন কে কোন object-এ কী করেছে, আর কখন, বিশেষ করে সংবেদনশীল ডেটা পড়া আর permission বদলের ক্ষেত্রে। প্রতিটি entry বলে কে, কী, কখন আর কোথা থেকে, যাতে ঘটনার পর উত্তর দেওয়া যায় “এটা কে দেখেছে?”।"),
         ("Protect the log from tampering, including by the people whose actions it records: store it append-only, where the app can add entries but no one can edit or delete them. It is cheap: 1,000 sensitive reads a day at about 200 bytes each is 365,000 entries and about 73 MB a year.",
-         "Log-কে রক্ষা করুন কারসাজি থেকে, যাদের কাজ সে লিখে রাখে তাদের হাত থেকেও: রাখুন append-only করে, যেখানে অ্যাপ entry যোগ করতে পারে কিন্তু কেউ সম্পাদনা বা মুছতে পারে না। খরচ কম: দিনে ১,০০০টি সংবেদনশীল পড়া, প্রতিটি প্রায় ২০০ বাইট, মানে বছরে ৩,৬৫,০০০টি entry আর প্রায় ৭৩ MB।")],
+         "Log-কে রক্ষা করুন কারসাজি থেকে, যাদের কাজ সে লিখে রাখে তাদের হাত থেকেও: রাখুন append-only করে, যেখানে অ্যাপ entry যোগ করতে পারে কিন্তু কেউ সম্পাদনা করতে বা মুছতে পারে না। খরচ কম: দিনে ১,০০০টি সংবেদনশীল পড়া, প্রতিটি প্রায় ২০০ বাইট, মানে বছরে ৩,৬৫,০০০টি entry আর প্রায় ৭৩ MB।")],
        [sh("alice", "hot"), sh("api", "hot", ("writes an entry", "entry লেখে")), sh("log", "hot", ("append-only", "শুধু যোগ করা")),
         sh("adm", "warn", ("can't edit it", "সম্পাদনা করতে পারে না"))],
        [ln("alice", "api", "to", 900, "hot"), ln("api", "log", "to", 1100, "hot"), ln("adm", "log", "to", 900, "warn")],
@@ -248,10 +248,10 @@ STEPS = [
              "An audit log does not stop an attack, but it tells you what happened and who did it, and that is worth little unless nobody can change it.",
              "Audit log আক্রমণ থামায় না, কিন্তু সে বলে দেয় কী ঘটেছে আর কে করেছে, আর কেউ বদলাতে পারলে সেটার দাম খুব কম।"),
        changes=[("+", "Each entry records who, what, when and from where", "প্রতিটি entry লেখে কে, কী, কখন আর কোথা থেকে"),
-                ("+", "Append-only storage: nobody can edit or delete entries", "Append-only storage: কেউ entry সম্পাদনা বা মুছতে পারে না"),
+                ("+", "Append-only storage: nobody can edit or delete entries", "Append-only storage: কেউ entry সম্পাদনা করতে বা মুছতে পারে না"),
                 ("~", "About 365,000 entries and 73 MB a year: cheap", "বছরে প্রায় ৩,৬৫,০০০টি entry আর ৭৩ MB: সস্তা")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Check the object, scope the power", "Object যাচাই করুন, ক্ষমতা ছোট রাখুন"),
        [("Check every object on every request, and give every service only the power it needs.",
          "প্রতিটি request-এ প্রতিটি object যাচাই করুন, আর প্রতিটি service-কে দিন শুধু ততটুকু ক্ষমতা যতটুকু তার লাগে।")],
@@ -267,7 +267,7 @@ STEPS = [
                ("Use <strong>roles</strong> for kinds of users, <strong>relationships</strong> for sharing, and decide in <strong>one policy</strong>.",
                 "ব্যবহারকারীর ধরনের জন্য <strong>role</strong>, শেয়ারিংয়ের জন্য <strong>সম্পর্ক</strong>, আর সিদ্ধান্ত নিন <strong>একটা policy</strong>-তে।"),
                ("Grant <strong>least privilege</strong>, and act <strong>as the user</strong> to avoid the confused deputy.",
-                "দিন <strong>সর্বনিম্ন সুবিধা</strong>, আর confused deputy এড়াতে কাজ করুন <strong>ব্যবহারকারীর হয়ে</strong>।"),
+                "দিন <strong>ন্যূনতম অনুমতি</strong>, আর confused deputy এড়াতে কাজ করুন <strong>ব্যবহারকারীর হয়ে</strong>।"),
                ("Keep an <strong>append-only audit log</strong> of access to sensitive data.",
                 "সংবেদনশীল ডেটায় প্রবেশের একটা <strong>append-only audit log</strong> রাখুন।")]),
 ]

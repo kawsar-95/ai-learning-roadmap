@@ -38,7 +38,7 @@ SECTIONS = [
         [
             p("API ঠিক করে কোন কাজগুলো করা যায়, প্রতিটি কী নেয়, কী ফেরত দেয় আর কোন error হতে পারে। অন্যরা এর ওপর নির্ভর করলে এটা একটা চুক্তি, আর চুক্তি ভাঙলে তাদের অ্যাপও ভাঙে।"),
             p("REST-এ সবকিছু resource, প্রতিটির একটা URL, আর HTTP method দিয়ে কাজ: <code>GET</code> পড়ে, <code>POST</code> বানায়, <code>DELETE</code> মোছে। এটা সহজ আর ক্যাশ করা যায়। কিন্তু একটা স্ক্রিনের জন্য কয়েকটা রিকোয়েস্ট লাগতে পারে, আর প্রতিটি উত্তরে অদরকারি ফিল্ডও আসে, যা ধীর মোবাইল নেটওয়ার্কে কষ্ট দেয়। GraphQL-এ client এক query-তেই বলে দেয় ঠিক কোন ফিল্ডগুলো চায়, আর এক উত্তরেই পায়। তবে গভীর nested query খুব দামি হতে পারে, তাই সার্ভারকে depth আর complexity-র সীমা দিতে হয়।"),
-            p("ভেতরের সার্ভিসগুলোর মধ্যে gRPC-এর মতো RPC বেশি চলে: Protocol Buffers-এ চুক্তি লেখা হয়, আর কোড তৈরি হয় স্বয়ংক্রিয়ভাবে। লম্বা তালিকায় offset-এর বদলে cursor দিয়ে pagination করুন, কারণ গভীর পাতায় offset ধীর হয়, আর নতুন সারি এলে আইটেম বাদ পড়ে বা দুবার আসে। আর পুরনো ফিল্ডের নাম বদলাবেন না; নতুন ফিল্ড যোগ করুন, কারণ পুরনো অ্যাপ এখনো পুরনো নাম পড়ে।"),
+            p("ভেতরের সার্ভিসগুলোর মধ্যে gRPC-এর মতো RPC বেশি চলে: Protocol Buffers-এ চুক্তি লেখা হয়, আর কোড তৈরি হয় স্বয়ংক্রিয়ভাবে। লম্বা তালিকায় offset-এর বদলে cursor দিয়ে pagination করুন, কারণ গভীর পাতায় offset ধীর হয়, আর নতুন সারি এলে আইটেম বাদ পড়তে বা দুবার আসতে পারে। আর পুরোনো ফিল্ডের নাম বদলাবেন না; নতুন ফিল্ড যোগ করুন, কারণ পুরোনো অ্যাপ এখনো পুরোনো নাম পড়ে।"),
             analogy("<strong>রেস্টুরেন্টে অর্ডার:</strong> নির্দিষ্ট মেনু হলো REST, নিজের মতো সাজানো প্লেট হলো GraphQL, আর রান্নাঘরের ভেতরে বাবুর্চিদের ছোট ছোট ডাক হলো RPC।"),
         ],
     ),
@@ -140,7 +140,7 @@ SECTIONS = [
             h("WebSockets"),
             p("A WebSocket starts as an HTTP request and is upgraded to a long-lived connection on which both sides can send messages at any time [[rfc6455]]. It suits chat, games and collaborative editing."),
             h("Many servers: which one has Alice?"),
-            p("A persistent connection is tied to one server. When Bob's message reaches server 7 and Alice is connected to server 31, server 7 must find her. The usual answers are a registry of which user is connected where, or a pub/sub channel per user that all servers listen to. Section 40 builds this out for a chat system."),
+            p("A persistent connection is tied to one server. When Bob's message reaches server 7 and Alice is connected to server 31, server 7 must find her. The usual answers are a registry of which user is connected where, or a pub/sub channel per user, which only the server holding that user's connection listens to. Section 40 builds this out for a chat system."),
             h("Offline users and presence"),
             ul(
                 "<strong>Offline.</strong> If Alice's phone has no connection, store the message and deliver it when she reconnects. A push notification through a service such as Firebase Cloud Messaging can wake her app [[fcm]].",
@@ -161,7 +161,7 @@ SECTIONS = [
         ],
         [
             p("Bob Alice-কে message পাঠাল, সার্ভার সেটা রাখল। কিন্তু সাধারণ HTTP-তে সবসময় client আগে প্রশ্ন করে, তাই সার্ভার নিজে থেকে Alice-এর অ্যাপকে খবর দিতে পারে না।"),
-            p("Polling-এ অ্যাপ কয়েক সেকেন্ড পরপর জিজ্ঞেস করে, “নতুন কিছু আছে?” এটা সহজ, কিন্তু বেশিরভাগ উত্তর খালি। ১০ লাখ ফোন ৫ সেকেন্ড পরপর জিজ্ঞেস করলে সার্ভারে সেকেন্ডে ২ লাখ রিকোয়েস্ট আসে, যার প্রায় সবই অদরকারি। Long polling-এ সার্ভার রিকোয়েস্ট খোলা রেখে খবর আসা পর্যন্ত অপেক্ষা করে। Server-Sent Events (SSE) একটা HTTP উত্তর খোলা রেখে তাতে একের পর এক ইভেন্ট পাঠায়, শুধু সার্ভার থেকে client-এর দিকে। WebSocket HTTP দিয়ে শুরু হয়ে দুই দিকের স্থায়ী connection-এ বদলে যায়, তাই চ্যাট আর গেমের জন্য ভালো।"),
+            p("Polling-এ অ্যাপ কয়েক সেকেন্ড পরপর জিজ্ঞেস করে, “নতুন কিছু আছে?” এটা সহজ, কিন্তু বেশিরভাগ উত্তর খালি। ১০ লাখ ফোন ৫ সেকেন্ড পরপর জিজ্ঞেস করলে সার্ভারে সেকেন্ডে ২ লাখ রিকোয়েস্ট আসে, যার প্রায় সবই অদরকারি। Long polling-এ সার্ভার রিকোয়েস্ট খোলা রেখে খবর আসা বা timeout হওয়া পর্যন্ত অপেক্ষা করে। Server-Sent Events (SSE) একটা HTTP উত্তর খোলা রেখে তাতে একের পর এক ইভেন্ট পাঠায়, শুধু সার্ভার থেকে client-এর দিকে। WebSocket HTTP দিয়ে শুরু হয়ে দুই দিকের স্থায়ী connection-এ বদলে যায়, তাই চ্যাট আর গেমের জন্য ভালো।"),
             p("স্থায়ী connection একটা নির্দিষ্ট সার্ভারে বাঁধা, তাই Bob-এর message যে সার্ভারে এল, তাকে খুঁজে বের করতে হয় Alice কোন সার্ভারে যুক্ত; এর জন্য registry বা pub/sub লাগে। Alice offline থাকলে message জমা রাখুন, আর push notification দিয়ে তার অ্যাপকে জাগান। “Online” দেখানো হয় heartbeat দিয়ে: শেষ heartbeat সাম্প্রতিক হলে ব্যবহারকারী online।"),
             analogy("<strong>পার্সেলের অপেক্ষা:</strong> বারবার দরজায় গিয়ে দেখা হলো polling, দরজায় দাঁড়িয়ে থাকা long polling, শুধু শোনার রেডিও SSE, আর দুই দিকের ফোনকল WebSocket।"),
         ],

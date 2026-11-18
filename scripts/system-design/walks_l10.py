@@ -117,7 +117,7 @@ STEPS = [
                 ("+", "A city-only query falls back to a scan", "শুধু city-র query স্ক্যানে ফিরে যায়")]),
 
     st(("Wildcards", "Wildcard"),
-       ("Case: queries the index cannot help", "ঘটনা: যে query index সাহায্য করতে পারে না"),
+       ("Case: queries the index cannot help", "ঘটনা: যে query-তে index কাজে আসে না"),
        [("Marketing wants every Gmail user: <code>LIKE '%@gmail.com'</code>. A pattern that starts with a wildcard says nothing about the start of the value, so the index cannot narrow it down. <code>LIKE 'ana%'</code> can use a B-tree index, because it is anchored to the beginning.",
          "মার্কেটিং চায় সব Gmail ব্যবহারকারী: <code>LIKE '%@gmail.com'</code>। যে pattern wildcard দিয়ে শুরু হয়, সে মানের শুরু সম্পর্কে কিছু বলে না, তাই index খোঁজ ছোট করতে পারে না। <code>LIKE 'ana%'</code> B-tree index কাজে লাগাতে পারে, কারণ সেটা শুরুর সাথে আটকানো।"),
         ("The same happens with a function on the column: <code>lower(email) = ?</code> skips a plain index on email.",
@@ -164,8 +164,8 @@ STEPS = [
 
     st(("Covering", "Covering"),
        ("Covering indexes: skip the table", "Covering index: table এড়িয়ে যান"),
-       [("The login page needs only the user's id and name. If the index also holds those columns, the database can answer from the index alone, with an index-only scan, and never visits the table.",
-         "লগইন পেজের দরকার শুধু ব্যবহারকারীর id আর নাম। Index-এ যদি সেই column-গুলোও থাকে, ডেটাবেস শুধু index থেকেই উত্তর দিতে পারে, index-only scan দিয়ে, আর table-এ যায়ই না।"),
+       [("The login page needs only the user's id and name. If the index also holds those columns, the database can answer from the index alone, with an index-only scan, and usually does not need to visit the table.",
+         "লগইন পেজের দরকার শুধু ব্যবহারকারীর id আর নাম। Index-এ যদি সেই column-গুলোও থাকে, ডেটাবেস শুধু index থেকেই উত্তর দিতে পারে, index-only scan দিয়ে, আর সাধারণত table-এ যেতেই হয় না।"),
         ("In PostgreSQL, <code>INCLUDE</code> adds extra columns to an index for this. It makes the index bigger, so cover only your hot queries.",
          "PostgreSQL-এ এর জন্য <code>INCLUDE</code> index-এ বাড়তি column যোগ করে। এতে index বড় হয়, তাই শুধু জনপ্রিয় query-গুলোই cover করুন।")],
        [sh("app", sub=LOGIN), sh("idx", "hot", ("email, id, name", "email, id, name")), sh("table", "dim", ("not visited", "ছোঁয়া হয় না"))],

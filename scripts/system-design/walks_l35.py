@@ -66,7 +66,7 @@ MINUTES = ("minutes", "কয়েক মিনিট")
 
 
 STEPS = [
-    st(("Is it safe?", "Is it safe?"),
+    st(("Is it safe?", "নিরাপদ তো?"),
        ("Is this change safe?", "এই বদলটা কি নিরাপদ?"),
        [("A checkout service applies discount codes. It reads and writes an orders database, charges cards through an outside payment provider, and asks another team's inventory service whether items are in stock.",
          "একটা checkout সার্ভিস ডিসকাউন্ট কোড প্রয়োগ করে। সে একটা orders database পড়ে ও লেখে, বাইরের একটা পেমেন্ট provider-এর মাধ্যমে কার্ড চার্জ করে, আর অন্য দলের inventory সার্ভিসকে জিজ্ঞেস করে জিনিসগুলো মজুত আছে কি না।"),
@@ -81,7 +81,7 @@ STEPS = [
              "নিচের প্রতিটি ধরনের test একটা প্রশ্নের উত্তর দেয়: এই বদলে কিছু ভেঙেছে কি না তা কত দ্রুত জানতে পারি, আর সেই উত্তর সিস্টেমের কতটা জুড়ে?"),
        changes=[("~", "A change to how discounts are rounded, checked by clicking around", "ডিসকাউন্ট কীভাবে round হয় তাতে একটা বদল, যাচাই করা হয়েছে ক্লিক করে ঘুরে")]),
 
-    st(("By hand", "By hand"),
+    st(("By hand", "হাতে পরীক্ষা"),
        ("Clicking around misses things", "ঘুরে ঘুরে ক্লিক করলে অনেক কিছু ফসকে যায়"),
        [("Nobody tried three items at 9.99 with a 10% code. The basket is 29.97, and 10% off should give 26.973, so 26.97. The new code rounds the discount down to 2.99 first, so customers pay 26.98: one cent too much.",
          "তিনটি জিনিস ৯.৯৯ করে আর ১০% কোড দিয়ে কেউ চেষ্টা করেনি। ঝুড়ির দাম ২৯.৯৭, আর ১০% ছাড়ে হওয়া উচিত ২৬.৯৭৩, মানে ২৬.৯৭। নতুন কোড আগে ছাড়টাকে নিচের দিকে round করে ২.৯৯ করে, তাই গ্রাহক দেয় ২৬.৯৮: এক সেন্ট বেশি।"),
@@ -98,7 +98,7 @@ STEPS = [
                 ("-", "Charged 26.98 instead of 26.97: a cent too much", "২৬.৯৭-এর বদলে ২৬.৯৮ চার্জ: এক সেন্ট বেশি"),
                 ("-", "10,000 orders × 1 cent = 100.00 overcharged", "১০,০০০ অর্ডার × ১ সেন্ট = ১০০.০০ বেশি নেওয়া")]),
 
-    st(("Unit tests", "Unit tests"),
+    st(("Unit tests", "Unit test"),
        ("Unit tests: one piece, in isolation", "Unit test: একটা অংশ, আলাদা করে"),
        [("A unit test calls one function with known inputs and checks the result. It needs no database and no network, so it runs in milliseconds, and a project can run thousands of them on every change.",
          "একটা unit test একটা function-কে জানা ইনপুট দিয়ে ডাকে আর ফলাফল মেলায়। তার database বা নেটওয়ার্ক লাগে না, তাই সে চলে মিলিসেকেন্ডে, আর একটা প্রজেক্ট প্রতিটি বদলে হাজার হাজার test চালাতে পারে।"),
@@ -114,12 +114,12 @@ STEPS = [
                 ("~", "On the buggy code it fails in about 2 ms: 26.98 ≠ 26.97", "Bug-ওয়ালা কোডে সেটা প্রায় ২ ms-এ ব্যর্থ হয়: ২৬.৯৮ ≠ ২৬.৯৭"),
                 ("~", "5,000 tests at 2 ms each: 10 seconds", "৫,০০০ test প্রতিটি ২ ms: ১০ সেকেন্ড")]),
 
-    st(("Test doubles", "Test doubles"),
+    st(("Test doubles", "Test double"),
        ("Test doubles stand in for the rest", "Test double বাকি অংশের বদলি"),
        [("Checkout cannot run without its neighbours, so tests swap them for test doubles. There are five kinds: a dummy is passed around but never used; a fake is a working shortcut, like an in-memory database; a stub gives canned answers, like a provider that always says “approved”.",
          "Checkout তার প্রতিবেশী ছাড়া চলে না, তাই test সেগুলোকে বদলে দেয় test double দিয়ে। পাঁচ রকম আছে: dummy হাতবদল হয় কিন্তু কখনো ব্যবহার হয় না; fake একটা কাজ-চালানো shortcut, যেমন মেমরিতে থাকা database; stub তৈরি-করা উত্তর দেয়, যেমন এমন provider যে সবসময় বলে “approved”।"),
         ("A spy is a stub that also records how it was called. A mock is pre-programmed with the calls it expects, such as “charge this card exactly once”. The catch: a double knows only what you told it. If the real provider renames a field, every unit test still passes.",
-         "Spy হলো এমন stub যে কীভাবে তাকে ডাকা হয়েছে তাও লিখে রাখে। Mock আগে থেকে প্রোগ্রাম-করা থাকে যে call-গুলো সে আশা করে তা নিয়ে, যেমন “এই কার্ড ঠিক একবার চার্জ করো”। ধরা পড়ার জায়গা: double জানে শুধু যা আপনি তাকে বলেছেন। আসল provider একটা field-এর নাম বদলালে প্রতিটি unit test তবু পাস করে।")],
+         "Spy হলো এমন stub যে কীভাবে তাকে ডাকা হয়েছে তাও লিখে রাখে। Mock আগে থেকে প্রোগ্রাম-করা থাকে যে call-গুলো সে আশা করে তা নিয়ে, যেমন “এই কার্ড ঠিক একবার চার্জ করো”। তবে সমস্যা হলো: double জানে শুধু যা আপনি তাকে বলেছেন। আসল provider একটা field-এর নাম বদলালে প্রতিটি unit test তবু পাস করে।")],
        [sh("checkout", "hot", ("code under test", "পরীক্ষার কোড")), sh("dummy", "dim", ("never used", "কখনো ব্যবহার হয় না")), sh("fake", "hot", ("in memory", "মেমরিতে")), sh("stub", "hot", ("always approved", "সবসময় approved")),
         sh("spy", "hot", ("records calls", "call লিখে রাখে")), sh("mock", "hot", ("expects 1 charge", "চায় ১টি charge")), sh("n-catch", "warn")],
        [ln("checkout", "dummy", None, None, "dim"), ln("checkout", "fake", "both", 900, "hot"), ln("checkout", "stub", "to", 900, "hot"), ln("checkout", "spy", "to", 900, "hot"), ln("checkout", "mock", "to", 900, "hot")],
@@ -139,7 +139,7 @@ STEPS = [
          "এই test ধরে SQL-এর ভুল, ভাঙা migration আর মিলহীন type, কিন্তু তাদের লাগে মিলিসেকেন্ডের বদলে সেকেন্ড: ৩০০টি, প্রতিটি ২ সেকেন্ড, মানে ১০ মিনিট। পেমেন্ট provider stub-ই থাকে, কারণ আসল কার্ড চার্জ করা যায় না।")],
        [sh("itest", "hot", ("runs the code", "কোড চালায়")), sh("checkout", "hot"), sh("rdb", "hot", ("fresh container", "নতুন container")), sh("pstub", "dim", ("still a stub", "এখনো stub")), sh("n-table", "hot")],
        [ln("itest", "checkout", "to", 900, "hot", ("runs", "চালায়")), ln("checkout", "rdb", "both", 1100, "hot", ("SQL", "SQL")), ln("checkout", "pstub", "to", 900, "dim")],
-       [SECONDS, ("real database", "আসল database"), ("hundreds", "শ'খানেক")],
+       [SECONDS, ("real database", "আসল database"), ("hundreds", "কয়েকশ")],
        note=("insight",
              "Integration tests prove that your code and a real database agree. They cost seconds, so you run fewer of them than unit tests.",
              "Integration test প্রমাণ করে আপনার কোড আর একটা আসল database একমত। তাদের খরচ সেকেন্ডে, তাই unit test-এর চেয়ে কম চালাতে হয়।"),
@@ -147,12 +147,12 @@ STEPS = [
                 ("~", "Catches SQL mistakes, broken migrations and mismatched types", "ধরে SQL-এর ভুল, ভাঙা migration আর মিলহীন type"),
                 ("~", "300 tests × 2 seconds = 10 minutes", "৩০০ test × ২ সেকেন্ড = ১০ মিনিট")]),
 
-    st(("Contracts", "Contracts"),
+    st(("Contracts", "Contract"),
        ("Contract tests: between teams", "Contract test: দুই দলের মাঝে"),
        [("Checkout depends on the inventory service, which another team deploys on its own schedule. If they rename <code>in_stock</code> to <code>available</code>, Checkout's stub never notices.",
          "Checkout নির্ভর করে inventory সার্ভিসের ওপর, যেটা অন্য দল নিজের সময়সূচিতে deploy করে। তারা <code>in_stock</code> বদলে <code>available</code> করে দিলে Checkout-এর stub তা কখনো টের পায় না।"),
         ("With consumer-driven contract tests, Checkout writes tests for all the data it needs from the interface and publishes them. The Inventory team runs them in its own build, so the rename fails there, before it ships. Pact is a common tool for this.",
-         "Consumer-driven contract test-এ Checkout ইন্টারফেস থেকে তার দরকারি সব ডেটার test লেখে আর প্রকাশ করে। Inventory দল সেগুলো চালায় নিজের build-এ, তাই নাম-বদল সেখানেই ব্যর্থ হয়, পাঠানোর আগেই। Pact এর জন্য একটা প্রচলিত টুল।")],
+         "Consumer-driven contract test-এ Checkout ইন্টারফেস থেকে তার দরকারি সব ডেটার test লেখে আর প্রকাশ করে। Inventory দল সেগুলো চালায় নিজের build-এ, তাই নাম-বদল সেখানেই ব্যর্থ হয়, পাঠানোর আগেই। এ কাজের জন্য Pact একটা প্রচলিত টুল।")],
        [sh("checkout", "hot", ("consumer", "consumer"), x=90), sh("contract", "hot", ("needs in_stock", "লাগে in_stock")), sh("inv", "hot", ("provider team", "provider দল"), x=640, y=170), sh("n-fail", "warn"), sh("n-stub", "dim")],
        [ln("checkout", "contract", "to", 1000, "hot", ("publishes", "প্রকাশ করে")), ln("contract", "inv", "to", 1000, "hot", ("their build", "ওদের build")), ln("inv", "n-fail", "to", 900, "warn")],
        [SECONDS, ("two teams", "দুই দল"), ("1 set each", "প্রতিটির ১ সেট")],
@@ -179,7 +179,7 @@ STEPS = [
                 ("~", "The only test that proves everything works together", "একমাত্র test যা প্রমাণ করে সবকিছু একসাথে কাজ করে"),
                 ("-", "Slow and fragile: 8 tests × 3 minutes = 24 minutes", "ধীর ও ভঙ্গুর: ৮টি test × ৩ মিনিট = ২৪ মিনিট")]),
 
-    st(("Pyramid", "Pyramid"),
+    st(("Pyramid", "পিরামিড"),
        ("The test pyramid", "Test পিরামিড"),
        [("Together the suites form a pyramid: many more low-level unit tests than broad tests that drive the whole application. Here, 5,000 unit tests run in 10 seconds, 300 integration tests in 10 minutes, 20 contract tests in a minute, and 8 end-to-end tests in 24 minutes.",
          "সব suite মিলে একটা পিরামিড গড়ে: নিচের স্তরের unit test অনেক বেশি, পুরো অ্যাপ্লিকেশন চালানো প্রশস্ত test-এর চেয়ে। এখানে ৫,০০০টি unit test চলে ১০ সেকেন্ডে, ৩০০টি integration test ১০ মিনিটে, ২০টি contract test এক মিনিটে, আর ৮টি end-to-end test ২৪ মিনিটে।"),
@@ -211,9 +211,9 @@ STEPS = [
        changes=[("-", "A fixed 2-second wait; the email sometimes takes 3", "স্থির ২ সেকেন্ডের অপেক্ষা; ইমেইল কখনো নেয় ৩"),
                 ("-", "20 such tests: a run is green only 36% of the time", "এমন ২০টি test: একটা run সবুজ থাকে মাত্র ৩৬% সময়"),
                 ("+", "Wait for a condition, control the clock, isolate the data", "শর্তের জন্য অপেক্ষা, ঘড়ি নিয়ন্ত্রণ, ডেটা আলাদা"),
-                ("+", "Track flaky tests; quarantine what cannot be fixed yet", "flaky test হিসাব রাখুন; যা এখনো ঠিক হয়নি তা quarantine")]),
+                ("+", "Track flaky tests; quarantine what cannot be fixed yet", "flaky test-এর হিসাব রাখুন; যা এখনো ঠিক হয়নি তা quarantine")]),
 
-    st(("Load & failure", "Load & failure"),
+    st(("Load & failure", "Load ও ব্যর্থতা"),
        ("Testing for load and for failure", "লোড আর ব্যর্থতার জন্য test"),
        [("Correct is not enough. A load test sends production-like traffic to a copy of the system and finds where latency turns upward before your users do. In this example the knee is at 800 requests a second, and the busiest expected day is 400.",
          "ঠিক হওয়াই যথেষ্ট নয়। একটা load test সিস্টেমের একটা কপিতে production-এর মতো traffic পাঠায় আর খুঁজে বের করে কোথায় latency ওপরে উঠতে শুরু করে, আপনার ব্যবহারকারীরা টের পাওয়ার আগে। এই উদাহরণে সেই বাঁক সেকেন্ডে ৮০০ request-এ; সবচেয়ে ব্যস্ত প্রত্যাশিত দিনে ৪০০।"),
@@ -229,7 +229,7 @@ STEPS = [
                 ("+", "Failure tests: stop a replica, slow the provider to 5 seconds", "Failure test: replica বন্ধ করা, provider-কে ৫ সেকেন্ডে ধীর করা"),
                 ("~", "Chaos engineering: the same idea, on the live system", "Chaos engineering: একই ধারণা, চালু সিস্টেমে")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Many fast tests, few slow ones", "অনেক দ্রুত test, কয়েকটা ধীর"),
        [("Push every check as low as it can go: fast and precise at the bottom, a few journeys at the top.",
          "প্রতিটি যাচাই যতটা সম্ভব নিচে নামান: নিচে দ্রুত ও নিখুঁত, ওপরে কয়েকটা যাত্রা।")],

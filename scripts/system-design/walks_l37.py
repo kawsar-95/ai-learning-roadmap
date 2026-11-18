@@ -47,7 +47,7 @@ STORES = ("services, stores", "service, store")
 
 
 STEPS = [
-    st(("Two levels", "Two levels"),
+    st(("Two levels", "দুটো স্তর"),
        ("One system, two zoom levels", "একটা সিস্টেম, দুটো জুম-স্তর"),
        [("Take a food-delivery app. From far away it is a handful of services, such as Orders, Couriers and Payments, each with its own data, talking through an API gateway and a stream of events. Up close, each of those boxes is a program of its own, with modules, tables and rules.",
          "একটা খাবার-ডেলিভারি অ্যাপ ধরুন। দূর থেকে সেটা মুষ্টিমেয় কয়েকটা সার্ভিস, যেমন Orders, Couriers আর Payments, প্রতিটির নিজের ডেটা, কথা বলছে একটা API gateway আর event-এর একটা stream দিয়ে। কাছ থেকে ওই প্রতিটি বাক্স নিজেই একটা প্রোগ্রাম, তার মডিউল, টেবিল আর নিয়ম নিয়ে।"),
@@ -62,7 +62,7 @@ STEPS = [
        changes=[("+", "Far view: services, data and how they connect (HLD)", "দূরের দৃশ্য: service, ডেটা আর তাদের সংযোগ (HLD)"),
                 ("+", "Close view: modules, tables and rules inside one box (LLD)", "কাছের দৃশ্য: একটা বাক্সের ভেতরের মডিউল, টেবিল আর নিয়ম (LLD)")]),
 
-    st(("The map", "The map"),
+    st(("The map", "মানচিত্র"),
        ("High-level design: the map", "High-level design: মানচিত্র"),
        [("HLD decides what the parts are and how they connect: which services exist and what each one owns, how they talk (a call or an event), where each kind of data lives, and what happens when traffic grows or a part fails.",
          "HLD ঠিক করে অংশগুলো কী আর কীভাবে জোড়া লাগে: কোন সার্ভিস থাকবে ও প্রতিটি কিসের মালিক, তারা কীভাবে কথা বলবে (call না event), প্রতিটি ধরনের ডেটা কোথায় থাকবে, আর traffic বাড়লে বা কোনো অংশ ভাঙলে কী হবে।"),
@@ -77,7 +77,7 @@ STEPS = [
        changes=[("+", "5 boxes: a gateway, 3 services and an event stream", "৫টি বাক্স: একটা gateway, ৩টি সার্ভিস আর একটা event stream"),
                 ("+", "Each arrow is a call or an event; each box owns its data", "প্রতিটি তীর একটা call বা event; প্রতিটি বাক্স নিজের ডেটার মালিক")]),
 
-    st(("Trade-offs", "Trade-offs"),
+    st(("Trade-offs", "ট্রেড-অফ"),
        ("HLD decisions are trade-offs", "HLD-র সিদ্ধান্ত মানেই ট্রেড-অফ"),
        [("Placing an order should not wait until a courier is found, so Orders publishes an event and Couriers picks it up when it can. Payments need transactions, so they get a relational database.",
          "অর্ডার দেওয়া যেন কুরিয়ার খুঁজে পাওয়া পর্যন্ত অপেক্ষা না করে, তাই Orders একটা event publish করে আর Couriers তা তুলে নেয় যখন পারে। Payments-এ লাগে transaction, তাই তারা পায় একটা relational database।"),
@@ -94,7 +94,7 @@ STEPS = [
                 ("+", "A relational database for payments: they need transactions", "payment-এর জন্য একটা relational database: তাদের লাগে transaction"),
                 ("+", "A key-value store for 40,000 location writes a second", "সেকেন্ডে ৪০,০০০ location লেখার জন্য একটা key-value store")]),
 
-    st(("Zoom in", "Zoom in"),
+    st(("Zoom in", "ভেতরে যান"),
        ("Low-level design: inside one box", "Low-level design: একটা বাক্সের ভেতরে"),
        [("Now open the Orders box. LLD decides how one component is built: its modules or classes, the interfaces between them, its tables and indexes, its algorithms and its error handling.",
          "এবার Orders বাক্সটা খুলুন। LLD ঠিক করে একটা component কীভাবে বানানো: তার মডিউল বা class, তাদের মাঝের interface, তার টেবিল ও index, তার algorithm আর error handling।"),
@@ -110,7 +110,7 @@ STEPS = [
                 ("+", "Interfaces between them, and the tables behind the repository", "তাদের মাঝে interface, আর repository-র পেছনের টেবিল"),
                 ("~", "Core rules can be unit tested without a database", "মূল নিয়ম database ছাড়াই unit test করা যায়")]),
 
-    st(("LLD decisions", "LLD decisions"),
+    st(("LLD decisions", "LLD-র সিদ্ধান্ত"),
        ("LLD decisions: states, schemas, edge cases", "LLD-র সিদ্ধান্ত: state, schema, প্রান্তিক ঘটনা"),
        [("An order moves through states, and LLD pins down which moves are allowed: placed, paid, preparing, on the way, delivered. It can be cancelled while it is placed or paid, but not once the kitchen has started.",
          "একটা অর্ডার state-এর মধ্য দিয়ে এগোয়, আর LLD ঠিক করে কোন চালগুলো অনুমোদিত: placed, paid, preparing, on the way, delivered। সেটা বাতিল করা যায় placed বা paid থাকা অবস্থায়, কিন্তু রান্নাঘর শুরু করে দিলে নয়।"),
@@ -123,13 +123,13 @@ STEPS = [
        [NEAR, ("states, schemas", "state, schema"), ("edge cases", "প্রান্তিক ঘটনা")],
        note=("warn",
              "Many production bugs live at this level: a state change nobody allowed for, a missing index, a retry that charges twice.",
-             "অনেক production bug বাস করে এই স্তরে: কেউ অনুমোদন দেয়নি এমন একটা state-বদল, একটা হারানো index, একটা retry যা দুবার চার্জ করে।"),
+             "অনেক production bug বাস করে এই স্তরে: কেউ অনুমোদন দেয়নি এমন একটা state-বদল, একটা না-থাকা index, একটা retry যা দুবার চার্জ করে।"),
        changes=[("+", "Allowed moves: placed → paid → preparing → on the way → delivered", "অনুমোদিত চাল: placed → paid → preparing → on the way → delivered"),
                 ("+", "Cancel only from placed or paid, not once the kitchen has started", "বাতিল শুধু placed বা paid থেকে, রান্নাঘর শুরু করলে নয়"),
                 ("+", "An index on <code>(user_id, created_at)</code> for “my orders”", "“আমার order”-এর জন্য <code>(user_id, created_at)</code>-এর ওপর একটা index"),
                 ("+", "An idempotency key on <code>POST /orders</code> for a repeated order", "একই order আবার এলে <code>POST /orders</code>-এ একটা idempotency key")]),
 
-    st(("Contracts", "Contracts"),
+    st(("Contracts", "চুক্তি"),
        ("Where they meet: contracts", "যেখানে দুটো মেলে: চুক্তি"),
        [("The two levels meet at the edge of each box. HLD fixes what a component promises: its API and the events it publishes. LLD decides how it keeps that promise.",
          "দুই স্তর মেলে প্রতিটি বাক্সের প্রান্তে। HLD ঠিক করে একটা component কী প্রতিশ্রুতি দেয়: তার API আর যেসব event সে publish করে। LLD ঠিক করে সে সেই প্রতিশ্রুতি কীভাবে রাখে।"),
@@ -162,7 +162,7 @@ STEPS = [
                 ("-", "Another: perfect boxes, no answer to “charged twice?”", "আরেকজন: নিখুঁত বাক্স, “দুবার চার্জ?”-র কোনো উত্তর নেই"),
                 ("+", "Top-down: requirements, estimates, API, data, HLD, deep dives, failures", "ওপর থেকে নিচে: requirement, estimate, API, ডেটা, HLD, গভীর আলোচনা, failure")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Zoom out first, then zoom in", "আগে দূর থেকে দেখুন, তারপর কাছে যান"),
        [("HLD is the map and LLD is the inside of one box. They meet at contracts and change at different speeds.",
          "HLD হলো মানচিত্র আর LLD একটা বাক্সের ভেতরটা। তারা মেলে চুক্তিতে আর বদলায় আলাদা গতিতে।")],

@@ -43,7 +43,7 @@ SECTIONS = [
             p("Availability মানে সার্ভিস কত শতাংশ সময় চালু থাকে। ৯৯.৯% মানে বছরে প্রায় ৮.৮ ঘণ্টা বন্ধ, ৯৯.৯৯% মানে প্রায় ৫৩ মিনিট। Google-এর SRE বই বলে ১০০% লক্ষ্য রাখা ভুল; লক্ষ্যের বাইরের ফাঁকটুকু error budget, যা রিলিজ আর পরীক্ষায় খরচ করা যায়।"),
             p("রিকোয়েস্টের পথে যে জিনিস মাত্র একটা আছে, যেমন একটা লোড ব্যালান্সার বা একটা ডেটাবেস, সেটাই single point of failure। প্রতিটির অন্তত দুটো রাখুন, আর একটা থেকে অন্যটায় যাওয়ার উপায় রাখুন। একই র‍্যাকের দুটো সার্ভার একসাথে নষ্ট হতে পারে, তাই কপিগুলো আলাদা availability zone-এ রাখুন, যাদের বিদ্যুৎ, ঠান্ডা রাখার ব্যবস্থা আর নেটওয়ার্ক আলাদা।"),
             p("দুটো লক্ষ্য ঠিক করুন: RTO, মানে কত দ্রুত সার্ভিস ফেরাতে হবে, আর RPO, মানে কতটুকু সময়ের ডেটা হারানো চলবে। যে failover কখনো চালানো হয়নি, সেটা দরকারের সময় কাজ করে না; Netflix-এর Chaos Monkey ইচ্ছা করে production-এ সার্ভার বন্ধ করে দুর্বলতা খুঁজে বের করে। আর একই খারাপ রিলিজ সব কপিতে পৌঁছালে redundancy কাজে আসে না, তাই canary release-এ নতুন ভার্সন আগে অল্প কিছু ট্রাফিকে চালিয়ে দেখুন। পুরো region বন্ধ হওয়ার ঝুঁকি থাকলে দুই region-এ চালান, তবে খরচ আর জটিলতা বাড়ে।"),
-            analogy("<strong>হাসপাতালের বিদ্যুৎ:</strong> দুটো জেনারেটর হলো redundancy, আলাদা ঘরে রাখা হলো availability zone, আর প্রতি মাসের পরীক্ষা হলো failover drill।"),
+            analogy("<strong>হাসপাতালের বিদ্যুৎ:</strong> দুটো জেনারেটর হলো redundancy, আলাদা ঘরে রাখা হলো availability zone, প্রতি মাসের পরীক্ষা হলো failover drill, আর একটা ওয়ার্ডে আগে নতুন নিয়ম চালিয়ে দেখা হলো canary release।"),
         ],
     ),
     S(
@@ -91,7 +91,7 @@ class TokenBucket:
             analogy("<strong>Water for a town.</strong> The pipe width is the rate limit, the jar of ride tokens is the token bucket, and cutting garden watering first is load shedding."),
         ],
         [
-            p("একজন গ্রাহকের ভুল script সেকেন্ডে ৫,০০০ বার আপনার API কল করছে। সার্ভারের সব ক্ষমতা তাতেই খরচ হচ্ছে, আর বাকি সবাই timeout দেখছে। Rate limiter প্রতিটি client-এর (API key, user বা IP) রিকোয়েস্ট গোনে, আর সীমা ছাড়ালে <code>429 Too Many Requests</code> ফেরত দেয়, সাথে <code>Retry-After</code> দিয়ে জানায় কখন আবার চেষ্টা করা যাবে।"),
+            p("একজন গ্রাহকের ভুল script সেকেন্ডে ৫,০০০ বার আপনার API কল করছে। সার্ভারের সব ক্ষমতা তাতেই খরচ হচ্ছে, আর বাকি সবাই timeout দেখছে। Rate limiter প্রতিটি client-এর (API key, user বা IP) রিকোয়েস্ট গোনে, আর সীমা ছাড়ালে <code>429 Too Many Requests</code> ফেরত দেয়, আদর্শভাবে সাথে <code>Retry-After</code> দিয়ে জানায় কখন আবার চেষ্টা করা যাবে।"),
             p("সবচেয়ে প্রচলিত পদ্ধতি token bucket। প্রত্যেক client-এর একটা বালতিতে সর্বোচ্চ B-টা token থাকে, আর প্রতি সেকেন্ডে r-টা করে ভরে। প্রতিটি রিকোয়েস্টে একটা token খরচ হয়; বালতি খালি হলে রিকোয়েস্ট বাতিল। তাই অল্প সময়ের জন্য B-টা পর্যন্ত একসাথে পাঠানো যায়, কিন্তু লম্বা সময়ে গড় হার r। Fixed window সহজ, কিন্তু মিনিটের সীমানায় দ্বিগুণ রিকোয়েস্ট ঢুকে যেতে পারে; sliding window এই সমস্যা কমায়।"),
             p("অনেক gateway থাকলে counter Redis-এর মতো শেয়ার করা জায়গায় রাখুন। একজন ব্যবসায়িক গ্রাহকের নিজেরই হাজার হাজার ব্যবহারকারী থাকলে প্রতি গ্রাহকের জন্যও quota দিন। আর পুরো সিস্টেম চাপে পড়লে load shedding করুন: কম গুরুত্বপূর্ণ কাজ আগে বাদ দিন, জরুরি কাজের জন্য জায়গা রাখুন।"),
             analogy("<strong>শহরের পানি সরবরাহ:</strong> পাইপের মাপ হলো rate limit, ধীরে ভরা টোকেনের বয়াম হলো token bucket, আর খরায় আগে বাগানে পানি দেওয়া বন্ধ করা হলো load shedding।"),
@@ -161,7 +161,7 @@ def call_with_retries(call, attempts=4, base=0.1, cap=2.0):
             h("Logs and traces"),
             ul(
                 "<strong>Logs</strong> tell the story, line by line. Write structured logs, with key-value fields instead of free text, and put a request id in every line so you can find all the lines of one request.",
-                "<strong>Traces</strong> follow one request across services. Each step is a span with a start time and a duration, and all the spans of a request share one trace id [[otel-traces]]. Google's Dapper paper showed tracing at the scale of a whole company [[dapper]]. A trace shows at a glance that 900 ms of a 1-second checkout went to one inventory query.",
+                "<strong>Traces</strong> follow one request across services. Each step is a span with a start time and a duration, and all the spans of a request share one trace id [[otel-traces]]. Google's Dapper paper showed tracing at the scale of a whole company [[dapper]]. A trace shows at a glance that 900 ms of a 1-second checkout went to inventory, 880 ms of it to a single query.",
             ),
             h("Fix it, then prove it"),
             p("After a fix, the metric that showed the problem must show it gone: p99 back to normal and the error rate down. Until it does, the fix is a guess."),

@@ -55,8 +55,8 @@ STEPS = [
 
     st(("Scale up", "Scale up"),
        ("Way one: a bigger machine", "প্রথম উপায়: আরও বড় মেশিন"),
-       [("Move to a machine with four times the CPU: 16 vCPU instead of 4. The code does not change, and the service does not notice.",
-         "চার গুণ CPU-র একটা মেশিনে যান: ৪ vCPU-র জায়গায় ১৬ vCPU। কোড বদলাতে হয় না, সার্ভিস টেরও পায় না।"),
+       [("Move to a machine with four times the CPU: 16 vCPU instead of 4. The code does not change, though the move usually means a short restart.",
+         "চার গুণ CPU-র একটা মেশিনে যান: ৪ vCPU-র জায়গায় ১৬ vCPU। কোড বদলাতে হয় না, তবে সরানোর সময় সাধারণত একটা ছোট restart লাগে।"),
         ("This is vertical scaling, or scaling up. Capacity rises to about 1,200 requests a second, and the CPU drops to 38%.",
          "একে বলে vertical scaling বা scale up। Capacity বেড়ে হয় সেকেন্ডে প্রায় ১,২০০টি রিকোয়েস্ট, আর CPU নেমে আসে ৩৮%-এ।")],
        [sh("users", sub=("450 req/s", "৪৫০ req/s")), sh("app", "hot", ("16 vCPU, 38%", "১৬ vCPU, ৩৮%"))],
@@ -96,7 +96,7 @@ STEPS = [
        ["3,500", "0", None, "100%", "$4,800"],
        note=("warn",
              "However big the machine is, it is always one failure away from a full outage.",
-             "মেশিন যত বড়ই হোক, পুরো আউটেজ থেকে সে একটা ব্যর্থতা দূরেই থাকে।"),
+             "মেশিন যত বড়ই হোক, মাত্র একটা ব্যর্থতাতেই পুরো আউটেজ হতে পারে।"),
        changes=[("-", "App server down", "অ্যাপ সার্ভার বন্ধ"),
                 ("~", "Error rate: 14% → 100%", "Error-এর হার: ১৪% → ১০০%")]),
 
@@ -182,7 +182,7 @@ STEPS = [
        ["3,500", "3,600", "45 ms", "25%", "$1,600"],
        note=("insight",
              "That something is a load balancer, the subject of the next lesson.",
-             "সেই কেউ একজন হলো load balancer, পরের লেসনের বিষয়।"),
+             "সেই কাজটা করে load balancer, যা পরের লেসনের বিষয়।"),
        changes=[("-", "Server B down", "সার্ভার B বন্ধ"),
                 ("~", "Error rate: 0% → 25%", "Error-এর হার: ০% → ২৫%")]),
 

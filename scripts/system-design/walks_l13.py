@@ -19,7 +19,7 @@ NODES = [
     node("s-d", "database", ("Shard D", "Shard D"), 620, 285),
     node("s-e", "database", ("Shard E", "Shard E"), 670, 230),
 ]
-METRICS = [("Shards", "Shard"), ("Writes per shard", "প্রতি shard-এ write"), ("Busiest shard", "সবচেয়ে ব্যস্ত shard"), ("Data per shard", "প্রতি shard-এ ডেটা")]
+METRICS = [("Shards", "Shard"), ("Avg writes per shard", "প্রতি shard-এ গড় write"), ("Busiest shard", "সবচেয়ে ব্যস্ত shard"), ("Data per shard", "প্রতি shard-এ ডেটা")]
 CAPTION = ("Example numbers: 8 TB, 40,000 writes a second, and a machine that tops out at about 25,000 writes a second.",
            "উদাহরণের সংখ্যা: ৮ TB, সেকেন্ডে ৪০,০০০ write, আর একটা মেশিন যা সর্বোচ্চ সেকেন্ডে প্রায় ২৫,০০০ write নিতে পারে।")
 
@@ -66,7 +66,7 @@ STEPS = [
        [("User ids grow over time, so if the key is an id or a timestamp, every new signup lands in the last range. New users are also the most active, so the last shard ends up with most of the writes.",
          "ব্যবহারকারীর id সময়ের সাথে বাড়ে, তাই key যদি id বা timestamp হয়, প্রতিটি নতুন সাইন-আপ গিয়ে পড়ে শেষ পরিসরে। নতুন ব্যবহারকারীরাই সবচেয়ে সক্রিয়, তাই শেষ shard-এ জমে বেশিরভাগ write।"),
         ("In this example Shard D takes 70% of the writes: 28,000 a second, 112% of what it can take, while the other three sit at 16%.",
-         "এই উদাহরণে Shard D নেয় write-এর ৭০%: সেকেন্ডে ২৮,০০০, যা সে সামলাতে পারার ১১২%, আর বাকি তিনটি আছে ১৬%-এ।")],
+         "এই উদাহরণে Shard D নেয় write-এর ৭০%: সেকেন্ডে ২৮,০০০, যা সে যতটা সামলাতে পারে তার ১১২%, আর বাকি তিনটি আছে ১৬%-এ।")],
        [sh("app"), sh("route", sub=("by id range", "id-র পরিসর অনুযায়ী")), sh("s-a", "dim", ("16% busy", "১৬% ব্যস্ত")), sh("s-b", "dim", ("16% busy", "১৬% ব্যস্ত")),
         sh("s-c", "dim", ("16% busy", "১৬% ব্যস্ত")), sh("s-d", "warn", ("112% busy", "১১২% ব্যস্ত"))],
        [ln("app", "route", "both", 1000, "warn", ("signups", "সাইন-আপ"))] + to_all("dim", 1400, skip=("s-d",)) + [ln("route", "s-d", "to", 600, "warn")],
@@ -96,8 +96,8 @@ STEPS = [
 
     st(("Celebrity", "সেলিব্রিটি"),
        ("Case: the celebrity", "ঘটনা: সেলিব্রিটি"),
-       [("Hashing spreads keys evenly, not traffic. A pop star's profile lives on Shard C like anyone else's, and a viral post receives a large share of all traffic. Every view of it goes to that one shard.",
-         "Hash key সমানভাবে ছড়ায়, traffic নয়। একজন পপ-তারকার প্রোফাইল অন্য সবার মতোই Shard C-তে থাকে, আর একটা ভাইরাল পোস্ট সব traffic-এর বড় একটা অংশ পায়। সেটার প্রতিটি ভিউ যায় সেই একটাই shard-এ।"),
+       [("Hashing spreads keys evenly, not traffic. A pop star's profile lives on Shard C like anyone else's, and when it goes viral it receives a large share of all traffic. Every view of it goes to that one shard.",
+         "Hash key সমানভাবে ছড়ায়, traffic নয়। একজন পপ-তারকার প্রোফাইল অন্য সবার মতোই Shard C-তে থাকে, আর ভাইরাল হলে সেটা সব traffic-এর বড় একটা অংশ পায়। সেটার প্রতিটি ভিউ যায় সেই একটাই shard-এ।"),
         ("In this example Shard C is at 130% of what it can take, while the other three are at 40%.",
          "এই উদাহরণে Shard C আছে সে যা সামলাতে পারে তার ১৩০%-এ, আর বাকি তিনটি ৪০%-এ।")],
        [sh("app"), sh("route"), sh("s-a", "dim", ("40% busy", "৪০% ব্যস্ত")), sh("s-b", "dim", ("40% busy", "৪০% ব্যস্ত")),
@@ -114,8 +114,8 @@ STEPS = [
        ("Cache it, or split it", "Cache করুন, নয়তো ভাগ করুন"),
        [("For a key that is read a lot, put a cache in front of the shard, so most views never reach it. For a key that is written a lot, such as a like counter, split it into ten sub-keys: <code>likes:post42:0</code> to <code>likes:post42:9</code>.",
          "যে key অনেক বেশি পড়া হয়, তার shard-এর সামনে একটা cache বসান, যাতে বেশিরভাগ ভিউ সেখানে পৌঁছায়ই না। যে key অনেক বেশি লেখা হয়, যেমন লাইক counter, তাকে দশটি sub-key-তে ভাগ করুন: <code>likes:post42:0</code> থেকে <code>likes:post42:9</code>।"),
-        ("Each sub-key hashes to a different shard, so the writes spread out. Reading the total means adding up the ten sub-keys.",
-         "প্রতিটি sub-key hash হয়ে আলাদা shard-এ যায়, তাই write ছড়িয়ে পড়ে। মোট পড়তে হলে দশটি sub-key যোগ করতে হয়।")],
+        ("Hashing spreads the ten sub-keys across the shards, so the writes spread out. Reading the total means adding up the ten sub-keys.",
+         "দশটি sub-key hash হয়ে বিভিন্ন shard-এ ছড়িয়ে যায়, তাই write ছড়িয়ে পড়ে। মোট পড়তে হলে দশটি sub-key যোগ করতে হয়।")],
        [sh("app"), sh("route", "hot", ("hash of the sub-key", "sub-key-র hash")), sh("s-a", "hot", ("3 sub-keys", "৩টি sub-key")), sh("s-b", "hot", ("2 sub-keys", "২টি sub-key")),
         sh("s-c", "hot", ("3 sub-keys", "৩টি sub-key")), sh("s-d", "hot", ("2 sub-keys", "২টি sub-key"))],
        [ln("app", "route", "both", 900, "hot", ("likes:post42:n", "likes:post42:n"))] + to_all("hot", 900),
@@ -132,7 +132,7 @@ STEPS = [
        [("Looking up one user is fast: hash the id and ask one shard. But “top 10 users by followers” is not keyed by user, so the app must ask every shard and merge the answers.",
          "একজন ব্যবহারকারীকে খোঁজা দ্রুত: id hash করে একটা shard-কে জিজ্ঞেস করুন। কিন্তু “সবচেয়ে বেশি ফলোয়ারের ১০ জন” ব্যবহারকারী অনুযায়ী key করা নয়, তাই অ্যাপকে প্রতিটি shard-কে জিজ্ঞেস করে উত্তরগুলো মিলিয়ে নিতে হয়।"),
         ("That is slow, and it is only as fast as the slowest shard. In this example three shards answer in 40 ms and one takes 120 ms, so the query takes about 120 ms.",
-         "সেটা ধীর, আর সবচেয়ে ধীর shard-এর মতোই দ্রুত। এই উদাহরণে তিনটি shard উত্তর দেয় ৪০ ms-এ আর একটি নেয় ১২০ ms, তাই query-তে লাগে প্রায় ১২০ ms।")],
+         "সেটা ধীর, আর সবচেয়ে ধীর shard যত সময় নেয়, পুরো query-তেও তত সময় লাগে। এই উদাহরণে তিনটি shard উত্তর দেয় ৪০ ms-এ আর একটি নেয় ১২০ ms, তাই query-তে লাগে প্রায় ১২০ ms।")],
        [sh("app"), sh("route", "hot", ("ask all, merge", "সবাইকে জিজ্ঞেস, মেলান")), sh("s-a", "hot", ("40 ms", "৪০ ms")), sh("s-b", "hot", ("40 ms", "৪০ ms")),
         sh("s-c", "hot", ("40 ms", "৪০ ms")), sh("s-d", "warn", ("120 ms", "১২০ ms"))],
        [ln("app", "route", "both", 1000, "hot", ("top 10", "শীর্ষ ১০"))]
@@ -147,7 +147,7 @@ STEPS = [
     st(("Add a shard", "Shard যোগ"),
        ("Adding a shard moves almost everything", "Shard যোগ করলে প্রায় সবকিছু সরে যায়"),
        [("The shards fill up, so you add a fifth. But <code>hash % 4</code> becomes <code>hash % 5</code>, and for about 80% of the keys the remainder changes. Four rows in five have to move to a different shard.",
-         "Shard গুলো ভরে যায়, তাই আপনি পঞ্চমটা যোগ করেন। কিন্তু <code>hash % 4</code> হয়ে যায় <code>hash % 5</code>, আর প্রায় ৮০% key-র ভাগশেষ বদলে যায়। প্রতি পাঁচটি row-র চারটিকেই অন্য shard-এ সরতে হয়।"),
+         "Shard-গুলো ভরে যায়, তাই আপনি পঞ্চমটা যোগ করেন। কিন্তু <code>hash % 4</code> হয়ে যায় <code>hash % 5</code>, আর প্রায় ৮০% key-র ভাগশেষ বদলে যায়। প্রতি পাঁচটি row-র চারটিকেই অন্য shard-এ সরতে হয়।"),
         ("Two common fixes: consistent hashing, which here moves only about one key in five, the share the new shard takes over, and many small logical shards mapped onto fewer machines, so growing means moving whole logical shards.",
          "দুটো প্রচলিত সমাধান: consistent hashing, যা এখানে সরায় প্রায় পাঁচটির একটি key, নতুন shard যতটুকু নেয় ততটুকু, আর অনেক ছোট logical shard কম মেশিনে বসানো, যাতে বাড়ানো মানে গোটা logical shard সরানো।")],
        [sh("app", y=80), sh("route", "warn", ("by remainder", "ভাগশেষ অনুযায়ী"), x=370, y=80),

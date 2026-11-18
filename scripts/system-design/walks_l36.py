@@ -1,7 +1,7 @@
 """Walk-through of lesson 36, CI/CD & Deployments.
 
 Example numbers (mine, checked by script): a team that releases once a week with about 30 changes in each release.
-A change merged on Monday waits 4 days for the Friday release, one merged on Thursday waits 1, on average 3.5 days.
+A change merged right after a release waits 7 days, one merged right before the next waits about 0: on average 3.5 days.
 1 release in 4 fails (4 weekly releases a month: one ruined Friday a month) and takes 4 hours to put right.
 After a year of work: 5 deploys a day, 40 minutes of lead time, 1 in 20 fails, 1 minute to recover (blue-green switch or a flag).
 Rolling deploy of 8 servers with 2 on v42 and 6 on v41: 6 of 8 = 75% of requests hit the old code. Canary 5% / 95%, then 5, 25, 50, 100%.
@@ -51,12 +51,12 @@ MIN1 = ("1 minute", "১ মিনিট")
 
 
 STEPS = [
-    st(("By hand", "By hand"),
-       ("Shipping by hand", "হাতে হাতে পাঠানো"),
+    st(("By hand", "হাতে করে"),
+       ("Shipping by hand", "হাতে করে পাঠানো"),
        [("Once a week, on Friday evening, a developer builds the app on a laptop, copies it to the production server over SSH and restarts it. Then the team stays late to watch it.",
          "সপ্তাহে একবার, শুক্রবার সন্ধ্যায়, একজন ডেভেলপার নিজের ল্যাপটপে অ্যাপ build করে, SSH দিয়ে production server-এ কপি করে আর রিস্টার্ট দেয়। তারপর দল দেরি করে বসে থাকে সেটা দেখতে।"),
-        ("About 30 changes from the week go out at once. A change merged on Monday waits 4 days, and one merged on Thursday waits 1, so on average a change waits 3.5 days. When something breaks, nobody knows which of the 30 did it.",
-         "সপ্তাহের প্রায় ৩০টি বদল একসাথে বের হয়। সোমবারে merge হওয়া একটা বদল অপেক্ষা করে ৪ দিন, আর বৃহস্পতিবারেরটা ১ দিন, তাই গড়ে একটা বদল অপেক্ষা করে ৩.৫ দিন। কিছু ভাঙলে কেউ জানে না ৩০টির কোনটা করেছে।")],
+        ("About 30 changes from the week go out at once. A change merged just after a release waits a whole week, and one merged just before the next waits almost nothing, so on average a change waits about 3.5 days. When something breaks, nobody knows which of the 30 did it.",
+         "সপ্তাহের প্রায় ৩০টি বদল একসাথে বের হয়। একটা release-এর ঠিক পরে merge হওয়া বদল অপেক্ষা করে পুরো এক সপ্তাহ, আর পরের release-এর ঠিক আগেরটা প্রায় কিছুই না, তাই গড়ে একটা বদল অপেক্ষা করে প্রায় ৩.৫ দিন। কিছু ভাঙলে কেউ জানে না ৩০টির কোনটা করেছে।")],
        [sh("dev", "hot", ("builds locally", "লোকালে build")), sh("laptop", "hot", ("the only build", "একমাত্র build")), sh("prod", "hot", ("Friday evening", "শুক্রবার সন্ধ্যা")), sh("n-30", "warn")],
        [ln("dev", "laptop", "to", 900, "hot"), ln("laptop", "prod", "to", 1400, "hot", ("SSH copy", "SSH কপি"))],
        [WEEKLY, LEAD_OLD, None, None],
@@ -99,7 +99,7 @@ STEPS = [
                 ("+", "Every push builds and tests on a clean machine", "প্রতিটি push একটা পরিষ্কার মেশিনে build ও test করে"),
                 ("~", "Keep the build near 10 minutes, or people batch again", "build ১০ মিনিটের কাছাকাছি রাখুন, নইলে মানুষ আবার জমিয়ে রাখে")]),
 
-    st(("One artifact", "One artifact"),
+    st(("One artifact", "একটাই artifact"),
        ("Build once, promote the same artifact", "একবার build, একই artifact এগিয়ে নেওয়া"),
        [("The first stage of the pipeline compiles the code and packages the result as an immutable artifact: today usually a container image, tagged with the commit it came from, such as <code>checkout:3f9c2a1</code>.",
          "Pipeline-এর প্রথম ধাপ কোড compile করে আর ফলাফলকে প্যাকেজ করে একটা অপরিবর্তনীয় artifact হিসেবে: আজকাল সাধারণত একটা container image, যে commit থেকে এসেছে তার ট্যাগ দিয়ে, যেমন <code>checkout:3f9c2a1</code>।"),
@@ -122,7 +122,7 @@ STEPS = [
         ("Because releasing is cheap, the team can deploy daily. Each deploy holds a few changes instead of 30, so it is easy to review, easy to blame and easy to undo. Lead time falls from 3.5 days to about an hour.",
          "Release করা সস্তা হওয়ায় দল প্রতিদিন deploy করতে পারে। প্রতিটি deploy-এ থাকে ৩০টির বদলে কয়েকটা বদল, তাই তা পর্যালোচনা, দোষ ধরা আর ফেরানো সহজ। Lead time ৩.৫ দিন থেকে নেমে আসে প্রায় এক ঘণ্টায়।")],
        [sh("ci", "hot", ("tests pass", "test পাস")), sh("staging", "hot", ("smoke tests", "smoke test")), sh("prod", "hot")],
-       [ln("ci", "staging", "to", 1100, "hot", ("auto deploy", "নিজে deploy")), ln("staging", "prod", "to", 1100, "hot", ("one press", "একটা চাপ"))],
+       [ln("ci", "staging", "to", 1100, "hot", ("auto deploy", "auto deploy")), ln("staging", "prod", "to", 1100, "hot", ("one press", "একটা চাপ"))],
        [DAILY, LEAD_HOUR, FAIL_OLD, HOURS4],
        note=("tip",
              "Delivery means a release is always possible. Shipping becomes a business choice, not a technical project.",
@@ -133,7 +133,7 @@ STEPS = [
                 ("~", "Lead time: 3.5 days → about 1 hour", "Lead time: ৩.৫ দিন → প্রায় ১ ঘণ্টা")]),
 
     st(("Blue-green", "Blue-green"),
-       ("Blue-green: switch, don't replace", "Blue-green: বদলান নয়, সুইচ করুন"),
+       ("Blue-green: switch, don't replace", "Blue-green: প্রতিস্থাপন নয়, সুইচ করুন"),
        [("With blue-green deployment there are two identical production environments. Blue is live on v41. The new version, v42, is deployed to green and tested there, while all users stay on blue.",
          "Blue-green deployment-এ থাকে দুটো অভিন্ন production পরিবেশ। Blue চালু আছে v41 নিয়ে। নতুন সংস্করণ v42 deploy হয় green-এ আর সেখানে test হয়, যখন সব ব্যবহারকারী থাকে blue-তে।"),
         ("Then the router switches all incoming requests to green. If anything goes wrong, switch back to blue, which is still running untouched: about a minute. The cost is double capacity during the release.",
@@ -165,12 +165,12 @@ STEPS = [
                 ("+", "Error rate and latency are compared with the old version", "Error rate আর latency পুরোনো সংস্করণের সাথে তুলনা করা হয়"),
                 ("~", "Worse: automatic rollback. Better: 5% → 25% → 50% → 100%", "খারাপ হলে: স্বয়ংক্রিয় rollback। ভালো হলে: ৫% → ২৫% → ৫০% → ১০০%")]),
 
-    st(("Migrations", "Migrations"),
+    st(("Migrations", "Migration"),
        ("Case: the migration that breaks the old version", "ঘটনা: যে migration পুরোনো সংস্করণ ভেঙে দেয়"),
        [("v42 renames a column from <code>name</code> to <code>full_name</code>. The migration runs and v42 is happy, but during the rollout most servers still run v41, which asks for <code>name</code> and fails: with 2 of 8 servers updated, 6 requests in 8 hit the old code.",
          "v42 একটা column-এর নাম <code>name</code> থেকে বদলে <code>full_name</code> করে। Migration চলে আর v42 খুশি, কিন্তু rollout-এর সময় বেশিরভাগ server এখনো v41 চালায়, যে <code>name</code> চায় আর ব্যর্থ হয়: ৮টি server-এর ২টি হালনাগাদ হলে ৮টি request-এর ৬টি পুরোনো কোডে পড়ে।"),
         ("During any deploy, old and new code run side by side against the same database, so every schema change must work with both. The fix is parallel change, also called expand and contract: three phases, each its own deploy. Expand: add <code>full_name</code> and write both. Migrate: backfill old rows, switch reads. Contract: drop <code>name</code> once no running version reads it.",
-         "যেকোনো deploy-এর সময় পুরোনো ও নতুন কোড একই database-এর বিপরীতে পাশাপাশি চলে, তাই প্রতিটি schema বদলকে দুটোর সাথেই কাজ করতে হবে। সমাধান parallel change, যাকে expand and contract-ও বলে: তিনটি ধাপ, প্রতিটি নিজস্ব deploy। Expand: <code>full_name</code> যোগ করুন আর দুটোতেই লিখুন। Migrate: পুরোনো row ভরুন, read সরান। Contract: কোনো চালু সংস্করণ <code>name</code> না পড়লে সেটা ফেলে দিন।")],
+         "যেকোনো deploy-এর সময় পুরোনো ও নতুন কোড একই database ব্যবহার করে পাশাপাশি চলে, তাই প্রতিটি schema বদলকে দুটোর সাথেই কাজ করতে হবে। সমাধান parallel change, যাকে expand and contract-ও বলে: তিনটি ধাপ, প্রতিটি নিজস্ব deploy। Expand: <code>full_name</code> যোগ করুন আর দুটোতেই লিখুন। Migrate: পুরোনো row ভরুন, তারপর read <code>full_name</code>-এ সরিয়ে নিন। Contract: কোনো চালু সংস্করণ <code>name</code> না পড়লে সেটা ফেলে দিন।")],
        [sh("old", "warn", ("asks for name", "name চায়"), x=90, y=50), sh("new", "hot", ("wants full_name", "full_name চায়"), x=90, y=290), sh("db", "warn", ("name + full_name", "name + full_name")), sh("n-fix", "hot")],
        [ln("old", "db", "to", 1000, "warn", ("asks name", "name চায়")), ln("new", "db", "to", 1000, "hot", ("full_name", "full_name")), ln("db", "n-fix", None, None, "hot")],
        [DAILY, LEAD_HOUR, FAIL_OLD, MIN1],
@@ -181,7 +181,7 @@ STEPS = [
                 ("+", "Fix: parallel change in three deploys: expand, migrate, contract", "সমাধান: তিনটি deploy-এ parallel change: expand, migrate, contract"),
                 ("~", "Drop the old column only when no running version reads it", "পুরোনো column ফেলুন কেবল যখন কোনো চালু সংস্করণ তা পড়ে না")]),
 
-    st(("Flags", "Flags"),
+    st(("Flags", "Flag"),
        ("Feature flags: deploy is not release", "Feature flag: deploy মানে release নয়"),
        [("The new checkout page is merged and deployed weeks before launch, switched off. A feature flag decides per request who sees it: first the team, then 1% of users, then everyone.",
          "নতুন checkout পেজ launch-এর কয়েক সপ্তাহ আগেই merge ও deploy হয়ে যায়, বন্ধ অবস্থায়। একটা feature flag প্রতিটি request-এ ঠিক করে কে সেটা দেখবে: প্রথমে দল, তারপর ১% ব্যবহারকারী, তারপর সবাই।"),
@@ -198,12 +198,12 @@ STEPS = [
                 ("~", "Off is a setting, not a deploy: fixed in seconds", "বন্ধ করা একটা সেটিং, deploy নয়: কয়েক সেকেন্ডে ঠিক"),
                 ("-", "Remove each toggle within a week or two: flags are debt", "প্রতিটি toggle এক-দুই সপ্তাহে সরান: flag একটা ঋণ")]),
 
-    st(("Measure", "Measure"),
+    st(("Measure", "মাপা"),
        ("Measure the delivery itself", "Delivery-কেই মাপুন"),
        [("DORA measures software delivery with throughput metrics (change lead time, deployment frequency, failed deployment recovery time) and instability metrics (change fail rate and deployment rework rate). Four of them are on the dashboard here.",
          "DORA সফটওয়্যার delivery মাপে throughput-এর মেট্রিক (change lead time, deployment frequency, failed deployment recovery time) আর অস্থিরতার মেট্রিক (change fail rate ও deployment rework rate) দিয়ে। এখানে ড্যাশবোর্ডে আছে তাদের চারটি।"),
         ("For this team, a year of small steps took it from 1 deploy a week to 5 a day, lead time from 3.5 days to 40 minutes, the change fail rate from 1 in 4 to 1 in 20, and recovery from 4 hours to 1 minute. DORA's research finds that speed and stability are not trade-offs: top performers do well on all of them.",
-         "এই দলের ক্ষেত্রে এক বছরের ছোট ছোট পদক্ষেপ deploy সপ্তাহে ১টি থেকে দিনে ৫টিতে, lead time ৩.৫ দিন থেকে ৪০ মিনিটে, change fail rate ৪টির ১টি থেকে ২০টির ১টিতে, আর পুনরুদ্ধার ৪ ঘণ্টা থেকে ১ মিনিটে নামিয়েছে। DORA-র গবেষণা বলে গতি আর স্থিতিশীলতা একটা আরেকটার বিনিময় নয়: সেরা দলগুলো সবকটিতেই ভালো করে।")],
+         "এই দলের ক্ষেত্রে এক বছরের ছোট ছোট পদক্ষেপে deploy সপ্তাহে ১টি থেকে বেড়ে দিনে ৫টি হয়েছে, আর lead time ৩.৫ দিন থেকে নেমে ৪০ মিনিটে, change fail rate ৪টির ১টি থেকে ২০টির ১টিতে, এবং পুনরুদ্ধারের সময় ৪ ঘণ্টা থেকে ১ মিনিটে নেমেছে। DORA-র গবেষণা বলে গতি আর স্থিতিশীলতা একটা আরেকটার বিনিময় নয়: সেরা দলগুলো সবকটিতেই ভালো করে।")],
        [sh("dash", "hot"), sh("n-freq", "hot"), sh("n-lead", "hot"), sh("n-fail", "hot"), sh("n-rest", "hot")],
        [ln("n-freq", "dash", "to", 900, "hot"), ln("n-lead", "dash", "to", 900, "hot"), ln("n-fail", "dash", "to", 900, "hot"), ln("n-rest", "dash", "to", 900, "hot")],
        [("5 a day", "দিনে ৫টি"), ("40 min", "৪০ মিনিট"), ("1 in 20", "২০টির ১টি"), ("1 min", "১ মিনিট")],
@@ -215,7 +215,7 @@ STEPS = [
                 ("~", "Change fail rate: 1 in 4 → 1 in 20", "Change fail rate: ৪টির ১টি → ২০টির ১টি"),
                 ("~", "Recovery time: 4 hours → 1 minute", "পুনরুদ্ধারের সময়: ৪ ঘণ্টা → ১ মিনিট")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Small, frequent, reversible", "ছোট, ঘন ঘন, ফেরানো-যায়"),
        [("Ship small changes often, from one tested artifact, and make every release easy to undo.",
          "ছোট বদল ঘন ঘন পাঠান, একটা test-করা artifact থেকে, আর প্রতিটি release ফেরানো সহজ রাখুন।")],

@@ -64,10 +64,10 @@ SCRAMBLED = ("scrambled", "scramble-করা")
 
 
 STEPS = [
-    st(("The brief", "The brief"),
+    st(("The brief", "কাজটা"),
        ("The brief: a link shortener", "কাজটা: একটা লিংক-শর্টেনার"),
        [("Build a service like bit.ly. Paste a long URL, get a short one back, such as <code>sho.rt/x7Kp2Qa</code>, and anyone who opens it is redirected to the original. It must create short links and redirect. It should expire links and count clicks.",
-         "bit.ly-র মতো একটা সার্ভিস বানান। একটা লম্বা URL পেস্ট করুন, ফেরত পান একটা ছোট URL, যেমন <code>sho.rt/x7Kp2Qa</code>, আর যে-ই সেটা খোলে তাকে আসল পেজে redirect করা হয়। সার্ভিসটাকে ছোট লিংক বানাতে ও redirect করতে হবে। লিংকের মেয়াদ শেষ করা আর click গোনাও করা উচিত।"),
+         "bit.ly-র মতো একটা সার্ভিস বানান। একটা লম্বা URL পেস্ট করুন, ফেরত পান একটা ছোট URL, যেমন <code>sho.rt/x7Kp2Qa</code>, আর যে-ই সেটা খোলে তাকে আসল পেজে redirect করা হয়। সার্ভিসটাকে ছোট লিংক বানাতে ও redirect করতে হবে। লিংকের মেয়াদ শেষ করা আর click গোনার কাজও সার্ভিসটার করা উচিত।"),
         ("Redirects have to be fast and almost never fail, because a dead shortener breaks every link ever shared, while creating a link may take a moment longer. Requirements first: what it must do, what it should do, and what matters most.",
          "Redirect-কে হতে হবে দ্রুত আর প্রায় কখনো ব্যর্থ নয়, কারণ একটা মরা শর্টেনার আজ পর্যন্ত শেয়ার-করা প্রতিটি লিংক ভেঙে দেয়, অথচ লিংক বানাতে একটু বেশি সময় লাগলে চলে। আগে requirement: কী করতেই হবে, কী করা উচিত, আর কোনটা সবচেয়ে জরুরি।")],
        [sh("alice", "hot", ("long URL in", "লম্বা URL দেয়")), sh("bob", "hot", ("opens it", "খোলে")), sh("svc", "hot", ("sho.rt/x7Kp2Qa", "sho.rt/x7Kp2Qa")), sh("site", "hot")],
@@ -80,12 +80,12 @@ STEPS = [
                 ("+", "Should: expire links and count clicks", "উচিত: লিংকের মেয়াদ শেষ করা আর click গোনা"),
                 ("~", "Redirects must be fast and almost never fail; creating a link can take a moment longer", "Redirect দ্রুত ও প্রায় কখনো ব্যর্থ নয়; লিংক বানাতে একটু বেশি সময় লাগলে চলে")]),
 
-    st(("Numbers", "Numbers"),
+    st(("Numbers", "সংখ্যা"),
        ("Put numbers on it", "সংখ্যা বসান"),
        [("Say 100 million new links a month, about 40 writes a second. If each link is opened about 100 times, redirects average 4,000 a second, with peaks near 12,000.",
          "ধরুন মাসে ১০ কোটি নতুন লিংক, মানে সেকেন্ডে প্রায় ৪০ write। প্রতিটি লিংক প্রায় ১০০ বার খোলা হলে redirect গড়ে সেকেন্ডে ৪,০০০, চূড়ায় প্রায় ১২,০০০।"),
         ("Kept for five years, that is 6 billion links; at about 500 bytes each, 3 TB. Two things stand out: the system reads a hundred times more than it writes, and the data is large but very simple. “100 reads per write” says cache; “3 TB of key-value rows” says spread across machines.",
-         "পাঁচ বছর রাখলে সেটা ৬০০ কোটি লিংক; প্রতিটি প্রায় ৫০০ বাইট ধরে ৩ TB। দুটো জিনিস চোখে পড়ে: সিস্টেম write-এর চেয়ে একশো গুণ বেশি read করে, আর ডেটা বিশাল কিন্তু খুবই সরল। “প্রতি write-এ ১০০ read” বলে cache; “৩ TB key-value row” বলে অনেক মেশিনে ছড়িয়ে দাও।")],
+         "পাঁচ বছর রাখলে সেটা ৬০০ কোটি লিংক; প্রতিটি প্রায় ৫০০ বাইট ধরে ৩ TB। দুটো জিনিস চোখে পড়ে: সিস্টেম write-এর চেয়ে একশো গুণ বেশি read করে, আর ডেটা বিশাল কিন্তু খুবই সরল। “প্রতি write-এ ১০০ read” বলে cache; “৩ TB key-value row” বলে অনেক মেশিনে ছড়িয়ে দিন।")],
        [sh("wr", "hot", ("40 a second", "সেকেন্ডে ৪০")), sh("rd", "hot", ("4,000 a second", "সেকেন্ডে ৪,০০০")), sh("stg", "hot", ("6 billion links", "৬০০ কোটি লিংক")), sh("n-ratio", "hot"), sh("n-size", "hot")],
        [],
        [None, None, None, BILLION6],
@@ -96,7 +96,7 @@ STEPS = [
                 ("+", "100 opens per link: 4,000 redirects a second, peaks near 12,000", "প্রতি লিংকে ১০০ বার খোলা: সেকেন্ডে ৪,০০০ redirect, চূড়ায় প্রায় ১২,০০০"),
                 ("+", "Five years: 6 billion links × 500 bytes = 3 TB", "পাঁচ বছর: ৬০০ কোটি লিংক × ৫০০ বাইট = ৩ TB")]),
 
-    st(("First draft", "First draft"),
+    st(("First draft", "প্রথম খসড়া"),
        ("The simplest thing that works", "সবচেয়ে সরল যা কাজ করে"),
        [("Two endpoints: <code>POST /links</code> stores a URL and returns a code, and <code>GET /x7Kp2Qa</code> looks the code up and answers with a redirect. One table holds the code (the primary key), the long URL, and its created and expiry times.",
          "দুটো endpoint: <code>POST /links</code> একটা URL সংরক্ষণ করে ফেরত দেয় একটা code, আর <code>GET /x7Kp2Qa</code> code খুঁজে উত্তর দেয় একটা redirect দিয়ে। একটা টেবিল রাখে code (primary key), লম্বা URL, আর তৈরি ও মেয়াদের সময়।"),
@@ -113,7 +113,7 @@ STEPS = [
                 ("+", "One table: code (primary key), long URL, created and expiry times", "একটা টেবিল: code (primary key), লম্বা URL, তৈরি ও মেয়াদের সময়"),
                 ("~", "Open: where codes come from, and 12,000 reads a second on one database", "খোলা প্রশ্ন: code কোথা থেকে আসে, আর একটা database-এ সেকেন্ডে ১২,০০০ read")]),
 
-    st(("Hash it?", "Hash it?"),
+    st(("Hash it?", "Hash দিয়ে?"),
        ("Where do codes come from? Try a hash", "Code আসে কোথা থেকে? একটা hash চেষ্টা করুন"),
        [("First idea: hash the long URL and keep the first seven characters. But seven characters cannot hold a whole hash, so different URLs will sometimes get the same code, and every insert has to check for a clash and retry.",
          "প্রথম ধারণা: লম্বা URL hash করুন আর প্রথম সাতটি অক্ষর রাখুন। কিন্তু সাতটি অক্ষরে পুরো hash ধরে না, তাই আলাদা URL মাঝে মাঝে একই code পাবে, আর প্রতিটি insert-কে সংঘর্ষ দেখে আবার চেষ্টা করতে হবে।"),
@@ -129,7 +129,7 @@ STEPS = [
                 ("-", "At 40 writes a second, that is under 14 hours of traffic", "সেকেন্ডে ৪০ write-এ সেটা ১৪ ঘণ্টারও কম traffic"),
                 ("-", "Two users shortening one URL share one code: no separate expiry or stats", "একই URL শর্ট করা দুজন একই code ভাগ করে: আলাদা মেয়াদ বা পরিসংখ্যান নেই")]),
 
-    st(("Count it", "Count it"),
+    st(("Count it", "গুনে নিন"),
        ("Count, then encode", "আগে গুনুন, তারপর encode করুন"),
        [("Better: give every link a unique number and write it in base 62, using digits, lowercase and uppercase letters. A unique number in means a unique code out, with nothing to check. For example, 125 = 2 × 62 + 1, so 125 encodes as <code>21</code>.",
          "আরও ভালো: প্রতিটি লিংককে দিন একটা অনন্য সংখ্যা আর সেটা লিখুন base ৬২-এ, অঙ্ক, ছোট ও বড় হাতের অক্ষর দিয়ে। অনন্য সংখ্যা ঢুকলে অনন্য code বেরোয়, কিছু দেখার নেই। যেমন ১২৫ = ২ × ৬২ + ১, তাই ১২৫ এনকোড হয় <code>21</code>।"),
@@ -146,7 +146,7 @@ STEPS = [
                 ("~", "Each API server reserves a block of 1,000 ids: one counter call per 1,000 links", "প্রতিটি API server ১,০০০ id-র একটা block নেয়: প্রতি ১,০০০ লিংকে একবার counter call"),
                 ("+", "No clash checks at all", "সংঘর্ষ যাচাই একেবারেই নেই")]),
 
-    st(("Guessable", "Guessable"),
+    st(("Guessable", "অনুমানযোগ্য"),
        ("Case: codes you can count", "ঘটনা: যে code গুনে ফেলা যায়"),
        [("Counter codes come out in order: <code>tn1e</code>, <code>tn1f</code>, <code>tn1g</code>. Anyone can walk through the whole space and collect every link ever made, including private document links that people shortened. A scraper at 1,000 requests a second gets all 6 billion in 69 days, and every guess hits.",
          "Counter code বেরোয় ক্রমে: <code>tn1e</code>, <code>tn1f</code>, <code>tn1g</code>। যে কেউ পুরো পরিসর হেঁটে আজ পর্যন্ত বানানো প্রতিটি লিংক জোগাড় করতে পারে, মানুষের শর্ট-করা ব্যক্তিগত ডকুমেন্ট-লিংকসহ। সেকেন্ডে ১,০০০ request-এর একটা scraper ৬০০ কোটিই পায় ৬৯ দিনে, আর প্রতিটি অনুমান লেগে যায়।"),
@@ -214,7 +214,7 @@ STEPS = [
                 ("+", "Three copies of every partition, in different zones: 9 TB of disk in all", "প্রতিটি partition-এর তিন কপি, আলাদা zone-এ: মোট ৯ TB ডিস্ক"),
                 ("-", "Partitioning by creation date would put nearly all traffic on today's partition", "তৈরির তারিখ ধরে partition করলে প্রায় সব traffic পড়ত আজকের partition-এ")]),
 
-    st(("Clicks", "Clicks"),
+    st(("Clicks", "Click গোনা"),
        ("Counting clicks without slowing them", "ধীর না করে click গোনা"),
        [("Product wants click counts per link. Running <code>UPDATE links SET clicks = clicks + 1</code> on every redirect would turn 4,000 cheap reads a second into 4,000 writes, all on the hottest rows.",
          "Product চায় লিংক-পিছু click সংখ্যা। প্রতিটি redirect-এ <code>UPDATE links SET clicks = clicks + 1</code> চালালে সেকেন্ডে ৪,০০০ সস্তা read হয়ে যেত ৪,০০০ write, সবই সবচেয়ে গরম row-তে।"),
@@ -228,14 +228,14 @@ STEPS = [
              "গণনাকে critical path-এর বাইরে রাখুন। Redirect উত্তর দেয় সাথে সাথে; গণনা কয়েক সেকেন্ড পরে নাগাল ধরে।"),
        changes=[("-", "<code>UPDATE ... clicks + 1</code> on every redirect: 4,000 writes a second on the hottest rows", "প্রতিটি redirect-এ <code>UPDATE ... clicks + 1</code>: সবচেয়ে গরম row-তে সেকেন্ডে ৪,০০০ write"),
                 ("+", "A click event on a stream; the redirect is answered at once", "একটা stream-এ click event; redirect-এর উত্তর যায় সাথে সাথে"),
-                ("~", "A job sums 5-second windows: about 400 writes a second, not 4,000", "একটা job ৫ সেকেন্ডের window যোগ করে: প্রায় সেকেন্ডে ৪০০ write, ৪,০০০ নয়")]),
+                ("~", "A job sums 5-second windows: about 400 writes a second, not 4,000", "একটা job ৫ সেকেন্ডের window যোগ করে: সেকেন্ডে প্রায় ৪০০ write, ৪,০০০ নয়")]),
 
-    st(("Abuse", "Abuse"),
+    st(("Abuse", "অপব্যবহার"),
        ("Case: spammers love shorteners", "ঘটনা: spammer-রা শর্টেনার ভালোবাসে"),
        [("A short link hides where it goes, which makes it ideal for phishing. A script starts creating 5,000 links a minute that point at fake bank pages: about twice the normal 2,400 a minute. Your domain lands on blocklists, and every customer's links stop working.",
          "একটা ছোট লিংক লুকিয়ে রাখে সে কোথায় যায়, তাই ফিশিংয়ের জন্য আদর্শ। একটা script মিনিটে ৫,০০০ লিংক বানাতে শুরু করে, যা নকল ব্যাংক-পেজে নিয়ে যায়: স্বাভাবিক মিনিটে ২,৪০০-র প্রায় দ্বিগুণ। আপনার ডোমেইন blocklist-এ ওঠে, আর প্রতিটি গ্রাহকের লিংক কাজ করা বন্ধ করে দেয়।"),
         ("Defend in layers. Rate-limit link creation per account and per IP address: with 10 a minute, 5,000 becomes 10. Check destinations when a link is created and again later, for example against Google Safe Browsing's lists of unsafe sites. Expire links, so abandoned ones stop being a liability.",
-         "স্তরে স্তরে প্রতিরক্ষা করুন। অ্যাকাউন্ট আর IP address-পিছু লিংক বানানোর rate limit দিন: মিনিটে ১০টি হলে ৫,০০০ হয়ে যায় ১০। লিংক বানানোর সময় আর পরেও গন্তব্য যাচাই করুন, যেমন Google Safe Browsing-এর অনিরাপদ সাইটের তালিকার বিপরীতে। লিংকের মেয়াদ শেষ করুন, যাতে ফেলে-রাখা লিংক আর ঝুঁকি না থাকে।")],
+         "স্তরে স্তরে প্রতিরক্ষা করুন। অ্যাকাউন্ট আর IP address-পিছু লিংক বানানোর rate limit দিন: মিনিটে ১০টি হলে ৫,০০০ হয়ে যায় ১০। লিংক বানানোর সময় আর পরেও গন্তব্য যাচাই করুন, যেমন Google Safe Browsing-এর অনিরাপদ সাইটের তালিকার সাথে মিলিয়ে। লিংকের মেয়াদ শেষ করুন, যাতে ফেলে-রাখা লিংক আর ঝুঁকি না থাকে।")],
        [sh("spam", "warn", ("5,000/min", "৫,০০০/মিনিট")), sh("lim", "hot", ("10 a minute", "মিনিটে ১০টি")), sh("svc", "hot", None, x=640, y=170), sh("chk", "hot", ("at creation, later", "বানানোর সময়, পরেও")), sh("exp", "hot", ("abandoned links go", "ফেলে-রাখা লিংক যায়"))],
        [ln("spam", "lim", "to", 800, "warn", ("5,000/min", "৫,০০০/মিনিট")), ln("lim", "svc", "to", 1000, "hot", ("10/min", "১০/মিনিট")), ln("svc", "chk", "both", 1000, "hot"), ln("svc", "exp", "to", 1000, "hot")],
        [MS1, READS_LOW, SCRAMBLED, BILLION6],
@@ -247,7 +247,7 @@ STEPS = [
                 ("+", "Check destinations when a link is created and again later", "লিংক বানানোর সময় আর পরেও গন্তব্য যাচাই করুন"),
                 ("+", "Expire links so abandoned ones stop being a liability", "লিংকের মেয়াদ শেষ করুন, যাতে ফেলে-রাখা লিংক আর ঝুঁকি না থাকে")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("The finished design", "সম্পূর্ণ নকশা"),
        [("Notice the method more than the answer: requirements, numbers, the simplest design, find the bottleneck, fix it, and repeat.",
          "উত্তরের চেয়ে পদ্ধতিটা বেশি খেয়াল করুন: requirement, সংখ্যা, সবচেয়ে সরল নকশা, bottleneck খোঁজা, সারানো, আর পুনরাবৃত্তি।")],

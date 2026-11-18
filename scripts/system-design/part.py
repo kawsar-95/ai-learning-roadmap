@@ -32,9 +32,9 @@ QUIZ = [
             "why": "Each step costs one round trip: the TCP handshake, the TLS 1.3 handshake, and the request with its response. Three round trips of 250 ms are 750 ms.",
         },
         "bn": {
-            "q": "একজন ব্যবহারকারী সার্ভার থেকে ২৫০ ms দূরে (round-trip time)। পেজটার জন্য একটা TCP handshake, একটা TLS handshake আর একটা রিকোয়েস্ট লাগে। DNS আর সার্ভারের সময় বাদ দিলে পেজের প্রথম বাইট কখন আসে?",
+            "q": "একজন ব্যবহারকারী সার্ভার থেকে ২৫০ ms দূরে (round-trip time)। পেজটার জন্য একটা TCP handshake, একটা TLS ১.৩ handshake আর একটা রিকোয়েস্ট লাগে। DNS আর সার্ভারের সময় বাদ দিলে পেজের প্রথম বাইট কখন আসে?",
             "options": ["প্রায় ২৫০ ms পরে", "প্রায় ৫০০ ms পরে", "প্রায় ৭৫০ ms পরে"],
-            "why": "প্রতিটি ধাপে একটা করে round trip লাগে: TCP handshake, TLS handshake, আর রিকোয়েস্ট ও তার উত্তর। ২৫০ ms-এর তিনটি round trip মিলে ৭৫০ ms।",
+            "why": "প্রতিটি ধাপে একটা করে round trip লাগে: TCP handshake, TLS ১.৩ handshake, আর রিকোয়েস্ট ও তার উত্তর। ২৫০ ms-এর তিনটি round trip মিলে ৭৫০ ms।",
         },
     },
     {
@@ -49,7 +49,7 @@ QUIZ = [
         "bn": {
             "q": "hash(key) % ১০ দিয়ে ক্যাশের key-গুলো ১০টি সার্ভারে ছড়ানো। আপনি ১১ নম্বর সার্ভার যোগ করে hash(key) % ১১ ব্যবহার শুরু করলেন। মোটামুটি কত key এখন অন্য সার্ভারে যায়?",
             "options": ["প্রায় ১১টির মধ্যে ১টি", "প্রায় অর্ধেক", "প্রায় ১১টির মধ্যে ১০টি"],
-            "why": "Modulus বদলালে প্রায় সব key-ই সরে যায়, তাই বদলের পর ক্যাশ প্রায় খালি হয়ে যায়। Consistent hashing-এ সরে মাত্র প্রায় ১১টির মধ্যে ১টি, নতুন সার্ভার যে অংশটা নেয় সেটুকু।",
+            "why": "Modulus বদলালে প্রায় সব key-ই সরে যায়, তাই বদলের পর ক্যাশ প্রায় খালি হয়ে যায়। Consistent hashing-এ মোটামুটি ১১টির মধ্যে মাত্র ১টি key সরে, নতুন সার্ভার যে অংশটা নেয় সেটুকু।",
         },
     },
     {
@@ -61,8 +61,8 @@ QUIZ = [
             "why": "2 + 2 is more than 3, so any set of 2 replicas that took the write and any set of 2 that answer the read share at least one replica. That is the quorum rule R + W > N.",
         },
         "bn": {
-            "q": "৩টি replica থাকলে, যদি প্রতিটি write ২টির নিশ্চয়তার অপেক্ষা করে আর প্রতিটি read ২টিকে জিজ্ঞেস করে, তাহলে প্রতিটি read অন্তত এমন একটা replica-তে পৌঁছায় যেখানে শেষ সফল write আছে।",
-            "why": "২ + ২ সংখ্যাটা ৩-এর চেয়ে বেশি, তাই write নেওয়া যেকোনো ২টি replica আর read-এর উত্তর দেওয়া যেকোনো ২টির মধ্যে অন্তত একটা মিল থাকে। এটাই quorum-এর নিয়ম R + W > N।",
+            "q": "৩টি replica থাকলে, যদি প্রতিটি write ২টি replica-র সাড়া (acknowledgement) পাওয়া পর্যন্ত অপেক্ষা করে আর প্রতিটি read ২টিকে জিজ্ঞেস করে, তাহলে প্রতিটি read অন্তত এমন একটা replica-তে পৌঁছায় যেখানে শেষ সফল write আছে।",
+            "why": "২ + ২ সংখ্যাটা ৩-এর চেয়ে বেশি, তাই write নেওয়া যেকোনো ২টি replica আর read-এর উত্তর দেওয়া যেকোনো ২টির মধ্যে অন্তত একটা replica দুই দলেই থাকে। এটাই quorum-এর নিয়ম R + W > N।",
         },
     },
     {
@@ -111,8 +111,8 @@ INTERVIEW = [
             "a": "The application reads the cache first. On a miss it reads the database and stores the result in the cache with an expiry time. On a write it updates the database and deletes the cached key, and the expiry time limits how long a missed delete can serve old data.",
         },
         "bn": {
-            "q": "Cache-aside প্যাটার্ন কী, আর এটা যেন পুরনো (stale) ডেটা না দেখায় সেজন্য কী করবেন?",
-            "a": "অ্যাপ্লিকেশন আগে ক্যাশে খোঁজে। না পেলে ডেটাবেস থেকে পড়ে, আর ফলাফলটা মেয়াদসহ ক্যাশে রাখে। Write-এর সময় ডেটাবেস আপডেট করে ক্যাশের key মুছে দেয়, আর কোনো delete বাদ পড়লে মেয়াদ (TTL) ঠিক করে দেয় পুরনো ডেটা কতক্ষণ দেখা যেতে পারে।",
+            "q": "Cache-aside প্যাটার্ন কী, আর এটা যেন পুরোনো (stale) ডেটা না দেখায় সেজন্য কী করবেন?",
+            "a": "অ্যাপ্লিকেশন আগে ক্যাশে খোঁজে। না পেলে ডেটাবেস থেকে পড়ে, আর ফলাফলটা মেয়াদসহ ক্যাশে রাখে। Write-এর সময় ডেটাবেস আপডেট করে ক্যাশের key মুছে দেয়, আর কোনো delete বাদ পড়লে মেয়াদ (TTL) ঠিক করে দেয় পুরোনো ডেটা কতক্ষণ দেখা যেতে পারে।",
         },
     },
     {

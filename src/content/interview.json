@@ -656,8 +656,8 @@
             "a": "The application reads the cache first. On a miss it reads the database and stores the result in the cache with an expiry time. On a write it updates the database and deletes the cached key, and the expiry time limits how long a missed delete can serve old data."
           },
           "bn": {
-            "q": "Cache-aside প্যাটার্ন কী, আর এটা যেন পুরনো (stale) ডেটা না দেখায় সেজন্য কী করবেন?",
-            "a": "অ্যাপ্লিকেশন আগে ক্যাশে খোঁজে। না পেলে ডেটাবেস থেকে পড়ে, আর ফলাফলটা মেয়াদসহ ক্যাশে রাখে। Write-এর সময় ডেটাবেস আপডেট করে ক্যাশের key মুছে দেয়, আর কোনো delete বাদ পড়লে মেয়াদ (TTL) ঠিক করে দেয় পুরনো ডেটা কতক্ষণ দেখা যেতে পারে।"
+            "q": "Cache-aside প্যাটার্ন কী, আর এটা যেন পুরোনো (stale) ডেটা না দেখায় সেজন্য কী করবেন?",
+            "a": "অ্যাপ্লিকেশন আগে ক্যাশে খোঁজে। না পেলে ডেটাবেস থেকে পড়ে, আর ফলাফলটা মেয়াদসহ ক্যাশে রাখে। Write-এর সময় ডেটাবেস আপডেট করে ক্যাশের key মুছে দেয়, আর কোনো delete বাদ পড়লে মেয়াদ (TTL) ঠিক করে দেয় পুরোনো ডেটা কতক্ষণ দেখা যেতে পারে।"
           }
         },
         {

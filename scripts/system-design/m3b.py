@@ -18,10 +18,11 @@ SECTIONS = [
             p("A time-ordered id starts with a timestamp, so new ids sort after old ones and inserts go to the end of the index."),
             ul(
                 "<strong>UUIDv7</strong> starts with a 48-bit Unix timestamp in milliseconds, followed by random bits [[rfc9562]].",
-                "<strong>Snowflake</strong>, built at Twitter, packs the id into 64 bits: 41 bits of milliseconds since a custom epoch, a 10-bit machine id and a 12-bit sequence number [[snowflake]]. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted).",
+                "<strong>Snowflake</strong>, built at Twitter, packs the id into 64 bits: one unused sign bit, then 41 bits of milliseconds since a custom epoch, a 10-bit machine id and a 12-bit sequence number [[snowflake]]. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted).",
             ),
             table(
                 ["Bits", "Snowflake field"],
+                ["1", "Unused (the sign bit)"],
                 ["41", "Milliseconds since a custom epoch"],
                 ["10", "Machine id"],
                 ["12", "Sequence number within the millisecond"],
@@ -45,8 +46,8 @@ SECTIONS = [
         ],
         [
             p("একটা ডেটাবেসে auto-increment counter দিয়ে id দেওয়া সহজ: ১, ২, ৩। কিন্তু sharding-এর পর প্রতিটি shard-এর নিজের counter থাকে, আর দুটো shard একই id বানিয়ে ফেলে।"),
-            p("প্রথম উপায় ticket server: একটা আলাদা ডেটাবেস সবাইকে id দেয়। Flickr দুটো এমন সার্ভার চালাত, একটা বিজোড় আর একটা জোড় সংখ্যা দিত। প্রতিটি id-র জন্য network round trip লাগে, তাই অ্যাপ সার্ভার একবারে এক হাজার id-এর একটা ব্লক নিয়ে রাখে। দ্বিতীয় উপায় এলোমেলো UUID (version 4): যেকোনো মেশিন কাউকে না জিজ্ঞেস করেই বানাতে পারে। কিন্তু এলোমেলো key B-tree ইনডেক্সের সব জায়গায় ছড়িয়ে পড়ে, তাই insert ধীর হয়।"),
-            p("তৃতীয় উপায় সময়কে সামনে রাখা। UUIDv7 শুরু হয় মিলিসেকেন্ডের timestamp দিয়ে। Twitter-এর Snowflake ৬৪ বিটের id বানায়: ৪১ বিট সময়, ১০ বিট মেশিন আর ১২ বিট sequence, তাই নতুন id পুরনোর পরে সাজানো থাকে। তবে ঘড়ি পিছিয়ে গেলে duplicate হতে পারে, তাই Snowflake তখন id বানানো থামিয়ে রাখে। আর ক্রমিক id ব্যবসার তথ্য ফাঁস করে, যেমন দিনে কতগুলো অর্ডার হয়, তাই বাইরে দেখানোর জন্য আলাদা random id রাখুন।"),
+            p("প্রথম উপায় ticket server: একটা আলাদা ডেটাবেস সবাইকে id দেয়। Flickr দুটো এমন সার্ভার চালাত, একটা বিজোড় আর একটা জোড় সংখ্যা দিত। প্রতিটি id-র জন্য network round trip লাগে, তাই অ্যাপ সার্ভার প্রায়ই একবারে id-এর একটা ব্লক নিয়ে রাখে, যেমন এক হাজারটির। দ্বিতীয় উপায় এলোমেলো UUID (version 4): যেকোনো মেশিন কাউকে না জিজ্ঞেস করেই বানাতে পারে। কিন্তু এলোমেলো key B-tree ইনডেক্সের সব জায়গায় ছড়িয়ে পড়ে, তাই insert ধীর হয়।"),
+            p("তৃতীয় উপায় সময়কে সামনে রাখা। UUIDv7 শুরু হয় মিলিসেকেন্ডের timestamp দিয়ে। Twitter-এর Snowflake ৬৪ বিটের id বানায়: একটা অব্যবহৃত sign bit, ৪১ বিট সময়, ১০ বিট মেশিন আর ১২ বিট sequence, আর id-গুলো মোটামুটি সময় অনুযায়ী সাজানো থাকে। তবে ঘড়ি পিছিয়ে গেলে duplicate হতে পারে, তাই Snowflake তখন id বানানো থামিয়ে রাখে। আর ক্রমিক id ব্যবসার তথ্য ফাঁস করে, যেমন দিনে কতগুলো অর্ডার হয়, তাই বাইরে দেখানোর জন্য আলাদা random id রাখুন।"),
             analogy("<strong>হাসপাতালের রিস্টব্যান্ড:</strong> কেন্দ্রীয় ডেস্ক হলো ticket server, এলোমেলো নম্বর হলো UUID, আর সময় + ওয়ার্ড + ক্রমিক নম্বর হলো Snowflake id।"),
         ],
     ),
@@ -82,7 +83,7 @@ SECTIONS = [
         ],
         [
             p("ধরুন একটা সার্ভিসের ডেটার এক কপি ইউরোপে, আরেক কপি এশিয়ায়। হঠাৎ দুই অঞ্চলের সংযোগ ছিন্ন হলো, কিন্তু দুই পাশই চালু। একে network partition বলে। তখন প্রতিটি পাশকে বেছে নিতে হয়।"),
-            p("Consistency বাছলে যে পাশ অন্যটার সাথে যোগাযোগ করতে পারছে না, সে write আর পুরনো হতে পারে এমন read প্রত্যাখ্যান করে, তাই ব্যবহারকারী error দেখে। Availability বাছলে দুই পাশই কাজ চালিয়ে যায়, কিন্তু কপিগুলো আলাদা হয়ে যায়, পরে মেলাতে হয়। CAP theorem বলে partition চলাকালীন দুটো একসাথে পাওয়া যায় না। তবে Brewer নিজেই বলেছেন, partition বিরল, তাই আসল প্রশ্ন হলো partition-এর সময় কী করবেন আর পরে কীভাবে মেলাবেন।"),
+            p("Consistency বাছলে যে পাশ অন্যটার সাথে যোগাযোগ করতে পারছে না, সে write আর পুরোনো হতে পারে এমন read প্রত্যাখ্যান করে, তাই ব্যবহারকারী error দেখে। Availability বাছলে দুই পাশই কাজ চালিয়ে যায়, কিন্তু কপিগুলো আলাদা হয়ে যায়, পরে মেলাতে হয়। CAP theorem বলে partition চলাকালীন দুটো একসাথে পাওয়া যায় না। তবে Brewer নিজেই বলেছেন, partition বিরল, তাই আসল প্রশ্ন হলো partition-এর সময় কী করবেন আর পরে কীভাবে মেলাবেন।"),
             p("সংযোগ ফিরলে কপিগুলো মিলে যায়; একে eventual consistency বলে। একই রেকর্ড দুই পাশে বদলালে conflict হয়। শুধু timestamp দেখে শেষটা রাখলে একটা write নীরবে হারায়, আর মেশিনের ঘড়িও মেলে না। Quorum দিয়ে মাঝামাঝি পথ নেওয়া যায়: N কপির মধ্যে W-টা write নিশ্চিত করলে আর R-টা থেকে পড়লে, R + W > N হলে প্রতিটি read সর্বশেষ write দেখে। Cassandra-র মতো সিস্টেমে প্রতিটি query নিজের consistency level বাছতে পারে: পেমেন্টে QUORUM, লাইক গোনায় ONE।"),
             analogy("<strong>ফোন লাইন কাটা দুই শাখা:</strong> কাটা লাইন হলো partition, বিক্রি বন্ধ রাখা হলো consistency, আর বিক্রি চালিয়ে যাওয়া হলো availability।"),
         ],
@@ -128,7 +129,7 @@ SECTIONS = [
         [
             p("সাধারণ failover নিয়মে leader-এর heartbeat না এলে একজন follower-কে leader বানানো হয়। কিন্তু leader যদি শুধু ধীর হয়, বা নেটওয়ার্কের একটা অংশ থেকে বিচ্ছিন্ন থাকে, সে তখনো চলছে। ফলে দুজন নিজেকে leader ভাবে আর দুজনেই write নেয়। একে split brain বলে, আর এতে ডেটা নষ্ট হয়।"),
             p("সমাধানের মূল নিয়ম majority। একই দলের যেকোনো দুটি majority-তে অন্তত একজন সদস্য মিলে যায়, তাই majority-র ভোট ছাড়া কেউ leader হতে না পারলে একসাথে দুজন জিততে পারে না। Raft-এ সময় ভাগ থাকে নম্বর দেওয়া term-এ। Leader-এর খবর না পেলে follower এলোমেলো সময় অপেক্ষা করে candidate হয়, নতুন term শুরু করে ভোট চায়; প্রতি term-এ প্রত্যেকে একবারই ভোট দেয়। Leader প্রতিটি write নিজের log-এ লিখে পাঠায়, আর majority জমা রাখলে তবেই সেটা committed হয়।"),
-            p("৩টি node-এর cluster একটা ব্যর্থতা সহ্য করে, ৫টির cluster দুটি। ৪টি node ৩টির চেয়ে বেশি সহ্য করে না, তাই বিজোড় সংখ্যা রাখা হয়। Garbage collection-এর মতো কারণে থেমে থাকা পুরনো leader জেগে উঠে write করতে পারে; fencing token, মানে প্রতিটি নতুন lease-এর সাথে বাড়তে থাকা একটা নম্বর, পুরনো write আটকে দেয়। Consensus-এ প্রতিটি write-এ majority-র round trip লাগে, তাই এটা ধীর। সাধারণত আমরা etcd-এর মতো তৈরি সিস্টেমের মাধ্যমে এটা ব্যবহার করি; যেমন Kubernetes তার সব তথ্য etcd-তে রাখে।"),
+            p("৩টি node-এর cluster একটা ব্যর্থতা সহ্য করে, ৫টির cluster দুটি। ৪টি node ৩টির চেয়ে বেশি সহ্য করে না, তাই বিজোড় সংখ্যা রাখা হয়। Garbage collection-এর মতো কারণে থেমে থাকা পুরোনো leader জেগে উঠে write করতে পারে; fencing token, মানে প্রতিটি নতুন lease-এর সাথে বাড়তে থাকা একটা নম্বর, পুরোনো write আটকে দেয়। Consensus-এ প্রতিটি write-এ majority-র round trip লাগে, তাই এটা ধীর। সাধারণত আমরা etcd-এর মতো তৈরি সিস্টেমের মাধ্যমে এটা ব্যবহার করি; যেমন Kubernetes তার cluster-এর সব ডেটা etcd-তে রাখে।"),
             analogy("<strong>কমিটির সভাপতি:</strong> সভাপতি হলো leader, কার্যবিবরণী হলো log, আর অর্ধেকের বেশি সদস্যের ভোট হলো majority।"),
         ],
     ),
@@ -173,7 +174,7 @@ WHERE id = 42 AND seats_left > 0;
         [
             p("দুটো রিকোয়েস্ট একই সময়ে <code>seats_left = 1</code> পড়ল। দুজনেই খালি সিট দেখল, দুজনেই এক কমিয়ে লিখল, আর ফ্লাইট oversold হলো। শুধু transaction দিয়ে এটা আটকায় না, কারণ PostgreSQL-এর default isolation level, Read Committed-এ দুটো transaction একই সংখ্যা পড়তে পারে।"),
             p("সমাধান: এক statement-এ যাচাই আর পরিবর্তন করুন (<code>UPDATE ... WHERE seats_left &gt; 0</code>), তারপর দেখুন কয়টা সারি বদলেছে। অথবা <code>SELECT ... FOR UPDATE</code> দিয়ে সারিটা lock করুন, যাতে দ্বিতীয়জন অপেক্ষা করে। অথবা version নম্বর রাখুন, আর version না মিললে আবার চেষ্টা করুন (optimistic concurrency)। Serializable level-এ ফল এমন হয় যেন transaction-গুলো একটার পর একটা চলেছে; তবে ব্যর্থ হলে application-কে আবার চেষ্টা করতে হয়।"),
-            p("যে সারি এখনো নেই তাকে ঘিরেও race হয়: দুটো বুকিং একই রুম একই সময়ে খালি দেখে দুটোই insert করল। একে write skew বলে। দুটো transaction উল্টো ক্রমে lock নিলে deadlock হয়, আর ডেটাবেস তখন একটাকে বাতিল করে। Constraint শেষ রক্ষাকবচ: <code>CHECK</code> আর unique constraint থাকলে কোডে bug থাকলেও oversell commit হয় না। আর পেমেন্টের অপেক্ষায় lock ধরে রাখবেন না: মেয়াদসহ একটা hold রাখুন, পেমেন্ট নিন, তারপর বুকিং নিশ্চিত করুন।"),
+            p("যে সারি এখনো নেই তাকে ঘিরেও race হয়: দুটো বুকিং একই রুম একই সময়ে খালি দেখে দুটোই insert করল। নতুন এই row-কে phantom বলে; snapshot isolation-এ এই ধরনের anomaly-কে বলে write skew। দুটো transaction উল্টো ক্রমে lock নিলে deadlock হয়, আর ডেটাবেস তখন একটাকে বাতিল করে। Constraint শেষ রক্ষাকবচ: <code>CHECK</code> আর unique constraint থাকলে কোডে bug থাকলেও oversell commit হয় না। আর পেমেন্টের অপেক্ষায় lock ধরে রাখবেন না: মেয়াদসহ একটা hold রাখুন, পেমেন্ট নিন, তারপর বুকিং নিশ্চিত করুন।"),
             analogy("<strong>সিনেমার শেষ টিকিট:</strong> টিকিটে হাত রাখা হলো lock, “এখনো থাকলে তবেই বিক্রি” হলো atomic update, আর টিকিটের গায়ে “৩:১০ পর্যন্ত রাখা” লেখা হলো মেয়াদি hold।"),
         ],
     ),
@@ -205,14 +206,14 @@ WHERE id = 42 AND seats_left > 0;
             p("A bucket made public by mistake exposes every file in it. Keep buckets private, turn on S3 Block Public Access [[s3-bpa]], and give out access through the CDN or through presigned download links."),
         ],
         [
-            p("A museum does not keep its paintings in the filing cabinet with the catalogue cards. The cards say what each painting is and where it hangs, and the paintings live in the galleries. Your database is the card catalogue, and object storage is the gallery."),
+            p("A museum does not keep its paintings in the filing cabinet with the catalog cards. The cards say what each painting is and where it hangs, and the paintings live in the galleries. Your database is the card catalog, and object storage is the gallery."),
             p("Deliveries do not go through the director's office either. The office issues a signed delivery pass, and the van drives straight to the loading dock. Popular pieces get copies in branch museums near the visitors, and old pieces move to cheaper storage in the basement."),
             analogy("<strong>A museum.</strong> Catalogue cards are database rows, the galleries are object storage, the signed pass is a presigned URL, and the branch museums are the CDN."),
         ],
         [
             p("ছবি আর ভিডিও ডেটাবেসে binary কলাম হিসেবে রাখলে ডেটাবেস, তার backup আর replica সবকটাই বিশাল হয়ে যায়। তার চেয়ে ফাইলের বাইট রাখুন S3-এর মতো object storage-এ, আর ডেটাবেসে প্রতিটি ফাইলের জন্য একটা সারি রাখুন: মালিক, object key, আকার, ধরন আর status।"),
             p("আপলোড অ্যাপ সার্ভারের ভেতর দিয়ে গেলে ফোনের ধীর নেটওয়ার্কে ২ GB-র ভিডিও একটা সার্ভারকে কয়েক মিনিট আটকে রাখে। তাই সার্ভার শুধু অনুমতি যাচাই করে একটা presigned URL দেয়: একটা সই করা লিংক, যা নির্দিষ্ট সময় পর্যন্ত একটা নির্দিষ্ট key-তে আপলোডের অনুমতি দেয়। Client সরাসরি storage-এ ফাইল পাঠায়। বড় ফাইল multipart upload-এ টুকরো টুকরো যায়, তাই একটা টুকরো ব্যর্থ হলে শুধু সেটাই আবার পাঠাতে হয়।"),
-            p("আপলোড শেষে queue-র একটা কাজ thumbnail আর ছোট সংস্করণ বানায়, আর CDN সেগুলো ব্যবহারকারীর কাছ থেকে দেয়। ভিডিওর জন্য HLS-এর মতো adaptive streaming একই ভিডিও কয়েকটা bit rate-এ রাখে, আর player নেটওয়ার্ক বুঝে বদলায়। সারিতে <code>pending</code> বা <code>ready</code> status রাখুন, যাতে অসম্পূর্ণ আপলোড ধরা পড়ে। Lifecycle rule পুরনো ফাইল সস্তা storage-এ সরায়। আর bucket কখনো public রাখবেন না; Block Public Access চালু রাখুন।"),
+            p("আপলোড শেষে queue-র একটা কাজ thumbnail আর ছোট সংস্করণ বানায়, আর CDN সেগুলো ব্যবহারকারীর কাছাকাছি থেকে দেয়। ভিডিওর জন্য HLS-এর মতো adaptive streaming একই ভিডিও কয়েকটা bit rate-এ রাখে, আর player নেটওয়ার্ক বুঝে বদলায়। সারিতে <code>pending</code> বা <code>ready</code> status রাখুন, যাতে অসম্পূর্ণ আপলোড ধরা পড়ে। Lifecycle rule পুরোনো ফাইল সস্তা storage-এ সরায়। আর bucket কখনো public রাখবেন না; Block Public Access চালু রাখুন।"),
             analogy("<strong>জাদুঘর:</strong> ক্যাটালগ কার্ড হলো ডেটাবেসের সারি, গ্যালারি হলো object storage, আর সই করা ডেলিভারি পাস হলো presigned URL।"),
         ],
     ),

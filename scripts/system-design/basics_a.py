@@ -103,7 +103,7 @@ BASICS = {
             ("অটোস্কেলিং (autoscaling)", "লোড বাড়লে নিজে থেকে সার্ভার যোগ করা, আর কমলে সরিয়ে নেওয়া।"),
         ],
         [
-            "বড় মেশিন সবচেয়ে দ্রুত সমাধান, যতক্ষণ না সবচেয়ে বড় মেশিনও যথেষ্ট না হয়।",
+            "বড় মেশিন সবচেয়ে দ্রুত সমাধান, যতক্ষণ না সবচেয়ে বড় মেশিনও অপর্যাপ্ত হয়ে পড়ে।",
             "বেশি সার্ভারে ছড়াতে হলে সার্ভারগুলো যেন নিজের কাছে ব্যবহারকারীর অবস্থা না রাখে।",
             "একটা সার্ভার চাপে আছে কি না বুঝতে CPU, মেমরি, latency আর error দেখুন।",
         ],
@@ -181,7 +181,7 @@ BASICS = {
             ("স্ট্যাম্পিড (stampede)", "মেয়াদ শেষ হওয়া একই key অনেক রিকোয়েস্ট একসাথে না পেয়ে সবাই ডেটাবেসে ছুটে যাওয়া।"),
         ],
         [
-            "মূল ডেটা বদলালে ক্যাশের কপি মুছুন বা মেয়াদ দিন, নইলে ব্যবহারকারী পুরনো উত্তর দেখে।",
+            "মূল ডেটা বদলালে ক্যাশের কপি মুছুন বা মেয়াদ দিন, নইলে ব্যবহারকারী পুরোনো উত্তর দেখে।",
             "মেমরি ভরে গেলে ক্যাশ কিছু এন্ট্রি সরায়, প্রায়ই যেটা সবচেয়ে কম সাম্প্রতিক ব্যবহার হয়েছে।",
             "“পাওয়া যায়নি” উত্তরও ক্যাশ করুন, যাতে বারবার একই খোঁজ ডেটাবেসে না যায়।",
         ],
@@ -207,7 +207,7 @@ BASICS = {
             ("অরিজিন শিল্ড (origin shield)", "অতিরিক্ত একটা ক্যাশ স্তর, অরিজিনে যাওয়ার আগে সব এজ যাকে জিজ্ঞেস করে।"),
         ],
         [
-            "ফাইলের নামে ভার্সন রাখুন, যাতে বদলানো ফাইল নতুন নাম পায় আর পুরনো কপি থেকে না যায়।",
+            "ফাইলের নামে ভার্সন রাখুন, যাতে বদলানো ফাইল নতুন নাম পায় আর পুরোনো কপি থেকে না যায়।",
             "একজনের ব্যক্তিগত ডেটা, যেমন কার্ট, কখনো শেয়ার করা ক্যাশে রাখতে দেবেন না।",
             "জনপ্রিয় ফাইল দ্রুত এজে পৌঁছে যায়, তাই ট্রাফিক বাড়লে হিট রেটও বাড়ে।",
         ],
@@ -265,7 +265,7 @@ BASICS = {
         ],
     ),
     "storage-engines": basics(
-        "A database writes every change to a <strong>write-ahead log</strong> on disk before it says \"saved\", so a crash loses nothing that was confirmed. B-trees update data in place and suit reads; LSM-trees only append and suit heavy writes.",
+        "A database writes every change to a <strong>write-ahead log</strong> on disk before it says \"saved\", so, with the default settings, a crash loses nothing that was confirmed. B-trees update data in place and suit reads; LSM-trees only append and suit heavy writes.",
         [
             ("Write-ahead log (WAL)", "A file on disk where each change is written first, so it can be replayed after a crash."),
             ("Checkpoint", "Writing changed pages from memory to the data files, so the log can be trimmed."),
@@ -277,7 +277,7 @@ BASICS = {
             "Group commit flushes many transactions at once to keep writes fast and safe.",
             "Row stores suit transactions; column stores suit analytics over many rows.",
         ],
-        "“Saved” বলার আগে ডেটাবেস প্রতিটি পরিবর্তন ডিস্কের <strong>write-ahead log</strong>-এ লেখে, তাই crash হলেও নিশ্চিত করা কিছু হারায় না। B-tree ডেটা নিজের জায়গায় বদলায় আর read-এর জন্য ভালো; LSM-tree শুধু শেষে যোগ করে আর প্রচুর write-এর জন্য ভালো।",
+        "“Saved” বলার আগে ডেটাবেস প্রতিটি পরিবর্তন ডিস্কের <strong>write-ahead log</strong>-এ লেখে, তাই ডিফল্ট সেটিংসে crash হলেও নিশ্চিত করা কিছু হারায় না। B-tree ডেটা নিজের জায়গায় বদলায় আর read-এর জন্য ভালো; LSM-tree শুধু শেষে যোগ করে আর প্রচুর write-এর জন্য ভালো।",
         [
             ("রাইট-অ্যাহেড লগ (WAL)", "ডিস্কের একটা ফাইল, যেখানে প্রতিটি পরিবর্তন আগে লেখা হয়, যাতে crash-এর পর আবার চালানো যায়।"),
             ("চেকপয়েন্ট (checkpoint)", "মেমরির বদলানো পাতাগুলো ডেটা ফাইলে লিখে ফেলা, যাতে লগ ছোট করা যায়।"),
@@ -301,19 +301,19 @@ BASICS = {
         [
             "Asynchronous copies are fast but can lose the last writes if the leader dies.",
             "A replica is not a backup: a mistaken delete reaches every copy.",
-            "Read a user's own writes from the leader, so they see their change at once.",
+            "For a short time after a user writes, read their own data from the leader, so they see their change at once.",
         ],
         "<strong>Replication</strong> ডেটাবেসের কপি কয়েকটা মেশিনে রাখে। একটা leader write নেয়, আর follower-রা সেটা কপি করে। এতে read ছড়ানো যায় আর একটা মেশিন হারালেও চলে, তবে দেরি (lag) আর failover-এর ঝামেলা আছে।",
         [
             ("লিডার আর ফলোয়ার (leader and followers)", "একটা কপি write নেয়; বাকিগুলো পরে একই পরিবর্তন নিজের মধ্যে লেখে।"),
             ("রিড রেপ্লিকা (read replica)", "যে follower read সামলায়, যাতে leader write-এর জন্য বেশি জায়গা পায়।"),
-            ("রেপ্লিকেশন ল্যাগ (replication lag)", "একটা follower leader থেকে কতটা পিছিয়ে, তাই সে একটু পুরনো ডেটা দেখাতে পারে।"),
-            ("ফেইলওভার (failover)", "পুরনো leader বন্ধ হলে একটা follower-কে নতুন leader বানানো।"),
+            ("রেপ্লিকেশন ল্যাগ (replication lag)", "একটা follower leader থেকে কতটা পিছিয়ে, তাই সে একটু পুরোনো ডেটা দেখাতে পারে।"),
+            ("ফেইলওভার (failover)", "পুরোনো leader বন্ধ হলে একটা follower-কে নতুন leader বানানো।"),
         ],
         [
             "Asynchronous কপি দ্রুত, কিন্তু leader বন্ধ হলে শেষ কয়েকটা write হারাতে পারে।",
-            "Replica backup নয়: ভুল করে মোছা ডেটা প্রতিটি কপিতে পৌঁছে যায়।",
-            "ব্যবহারকারীর নিজের লেখা ডেটা leader থেকে পড়ুন, যাতে সে নিজের পরিবর্তন সাথে সাথে দেখে।",
+            "Replica backup নয়: ভুল করে চালানো delete প্রতিটি কপিতে পৌঁছে যায়।",
+            "write করার পর অল্প কিছুক্ষণ ব্যবহারকারীর নিজের লেখা ডেটা leader থেকে পড়ুন, যাতে সে নিজের পরিবর্তন সাথে সাথে দেখে।",
         ],
     ),
     "sharding": basics(
@@ -385,7 +385,7 @@ BASICS = {
         [
             ("টিকিট সার্ভার (ticket server)", "একটা কেন্দ্রীয় counter, যা id দেয়, প্রায়ই ব্লকে, যাতে সার্ভারদের কম জিজ্ঞেস করতে হয়।"),
             ("ইউইউআইডি (UUID)", "১২৮ বিটের একটা id, পুরো বা আংশিক এলোমেলো, তাই কাউকে না জিজ্ঞেস করেই বানানো যায়।"),
-            ("UUIDv7", "যে UUID সময় দিয়ে শুরু হয়, তাই নতুন id পুরনোগুলোর পরে সাজানো থাকে।"),
+            ("UUIDv7", "যে UUID সময় দিয়ে শুরু হয়, তাই নতুন id পুরোনোগুলোর পরে সাজানো থাকে।"),
             ("স্নোফ্লেক (Snowflake)", "৬৪ বিটের id, যাতে থাকে সময়, মেশিনের id আর একটা ক্রমিক নম্বর।"),
         ],
         [
@@ -407,12 +407,12 @@ BASICS = {
             "Choose per operation: a payment can require a quorum, while a like counter accepts one copy.",
             "After the split heals, conflicting writes must be merged.",
         ],
-        "আপনার ডেটার কপিগুলোর মাঝের নেটওয়ার্ক ভেঙে গেলে প্রতিটি কপিকে বেছে নিতে হয়: উত্তর দেবে না, নাকি এমন উত্তর দেবে যা পুরনো হতে পারে। এটাই <strong>CAP</strong>-এর মূল কথা, আর বেশিরভাগ সিস্টেম এই সিদ্ধান্ত নেয় প্রতিটি কাজ ধরে।",
+        "আপনার ডেটার কপিগুলোর মাঝের নেটওয়ার্ক ভেঙে গেলে প্রতিটি কপিকে বেছে নিতে হয়: উত্তর দেবে না, নাকি এমন উত্তর দেবে যা পুরোনো হতে পারে। এটাই <strong>CAP</strong>-এর মূল কথা, আর বেশিরভাগ সিস্টেম এই সিদ্ধান্ত নেয় প্রতিটি কাজ ধরে।",
         [
             ("নেটওয়ার্ক পার্টিশন (network partition)", "এমন ভাঙন, যাতে কিছু সার্ভার বাকিদের কাছে পৌঁছাতে পারে না, অথচ দুই পাশই চালু থাকে।"),
             ("কনসিস্টেন্সি (consistency)", "প্রতিটি read সর্বশেষ write দেখে, যেন কপি একটাই।"),
             ("অ্যাভেইলেবিলিটি (availability)", "Partition চলার সময়ও প্রতিটি রিকোয়েস্ট উত্তর পায়।"),
-            ("কোরাম (quorum)", "প্রতিটি read আর write-এ এত কপিকে জিজ্ঞেস করা যাতে দুটো মিলে যায়, যেমন R + W > N।"),
+            ("কোরাম (quorum)", "প্রতিটি read আর write-এ এত কপিকে জিজ্ঞেস করা, যাতে read-এর দল আর write-এর দল অন্তত একটা কপিতে মিলে যায় (overlap করে), যেমন R + W > N।"),
         ],
         [
             "Partition চলার সময় consistency আর availability দুটো একসাথে পাওয়া যায় না।",
@@ -438,7 +438,7 @@ BASICS = {
             ("স্প্লিট ব্রেইন (split brain)", "দুটো সার্ভার একসাথে leader হয়ে কাজ করছে, আর প্রত্যেকে আলাদা write নিচ্ছে।"),
             ("মেজরিটি (majority)", "অর্ধেকের বেশি node। যেকোনো দুটো majority-তে অন্তত একটা node মিলে যায়।"),
             ("র‍্যাফট (Raft)", "একটা consensus algorithm, যা ভোটে leader বেছে নেয় আর তার log follower-দের কাছে কপি করে।"),
-            ("ফেন্সিং টোকেন (fencing token)", "প্রতিটি নতুন leader-এর সাথে বাড়া একটা নম্বর, যাতে storage পুরনো leader-এর write বাতিল করতে পারে।"),
+            ("ফেন্সিং টোকেন (fencing token)", "প্রতিটি নতুন leader-এর সাথে বাড়া একটা নম্বর, যাতে storage পুরোনো leader-এর write বাতিল করতে পারে।"),
         ],
         [
             "Majority কোনো write জমা রাখলে তবেই সেটা committed।",
@@ -490,7 +490,7 @@ BASICS = {
             ("অবজেক্ট স্টোরেজ (object storage)", "Amazon S3-এর মতো সার্ভিস, যা ফাইলকে bucket-এ object হিসেবে কম খরচে আর টেকসইভাবে রাখে।"),
             ("প্রিসাইনড ইউআরএল (presigned URL)", "স্বল্পমেয়াদি একটা লিংক, যা দিয়ে একজন client একটা object সরাসরি আপলোড বা ডাউনলোড করতে পারে।"),
             ("মাল্টিপার্ট আপলোড (multipart upload)", "বড় ফাইল কয়েক ভাগে পাঠানো, যাতে প্রতিটি ভাগ আলাদাভাবে আবার পাঠানো যায়।"),
-            ("লাইফসাইকেল রুল (lifecycle rule)", "যে নিয়ম পুরনো ফাইলকে সস্তা স্টোরেজে সরায়, বা কিছু সময় পরে মুছে ফেলে।"),
+            ("লাইফসাইকেল রুল (lifecycle rule)", "যে নিয়ম পুরোনো ফাইলকে সস্তা স্টোরেজে সরায়, বা কিছু সময় পরে মুছে ফেলে।"),
         ],
         [
             "ডেটাবেসে ফাইলের key, আকার আর মালিকের তথ্য রাখুন, বাইট নয়।",

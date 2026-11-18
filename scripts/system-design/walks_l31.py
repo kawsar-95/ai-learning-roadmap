@@ -96,7 +96,7 @@ STEPS = [
        [DAY_OLD, UNTOUCHED, OVERNIGHT, YES],
        note=("insight",
              "Batch trades freshness for cost and simplicity: a finished, fixed dataset can be processed cheaply and exactly.",
-             "Batch তাজা-ভাবের বিনিময়ে নেয় খরচ আর সরলতা: শেষ-হওয়া, স্থির একটা dataset সস্তায় আর নির্ভুলভাবে প্রক্রিয়া করা যায়।"),
+             "Batch তাজা-ভাব ছেড়ে দিয়ে পায় কম খরচ আর সরলতা: শেষ-হওয়া, স্থির একটা dataset সস্তায় আর নির্ভুলভাবে প্রক্রিয়া করা যায়।"),
        changes=[("+", "Every view is appended to files in object storage", "প্রতিটি view object storage-এর file-এ জোড়া হয়"),
                 ("+", "A nightly batch job computes the results", "রাতের একটা batch job ফলাফল হিসাব করে"),
                 ("~", "The production database is not touched; results are up to a day old", "Production database ছোঁয়া হয় না; ফলাফল এক দিন পর্যন্ত পুরোনো")]),
@@ -151,7 +151,7 @@ STEPS = [
                 ("~", "The whole shuffle: 864 million pairs → about 10 million", "পুরো shuffle: ৮৬.৪ কোটি জোড়া → প্রায় ১ কোটি"),
                 ("+", "Salting: 10 parts of 34.6 million, then one small sum", "Salting: ৩.৪৬ কোটির ১০টি অংশ, তারপর একটা ছোট যোগ")]),
 
-    st(("Too late", "Too late"),
+    st(("Too late", "বড্ড দেরি"),
        ("A day late is too late", "এক দিন দেরি মানে বড্ড দেরি"),
        [("Some questions cannot wait for tonight. A video going viral should show up in Trending now. A bot farm faking views should be caught within minutes.",
          "কিছু প্রশ্ন আজ রাত পর্যন্ত অপেক্ষা করতে পারে না। একটা ভিডিও ভাইরাল হলে Trending-এ তা এখনই দেখা যাওয়া উচিত। ভুয়া view বানানো একটা bot farm ধরা পড়া উচিত কয়েক মিনিটে।"),
@@ -182,7 +182,7 @@ STEPS = [
                 ("+", "A stream processor updates the results as events arrive", "Stream processor event আসতেই ফলাফল হালনাগাদ করে"),
                 ("~", "Results are seconds old, not a day", "ফলাফল কয়েক সেকেন্ডের পুরোনো, এক দিনের নয়")]),
 
-    st(("Windows", "Windows"),
+    st(("Windows", "Window"),
        ("Counting in windows", "Window-তে গণনা"),
        [("A stream never ends, so “count the views” needs a time frame: a window. Tumbling windows cut time into fixed, separate slices: views per minute, which is 600,000 per window at 10,000 a second.",
          "একটা stream কখনো শেষ হয় না, তাই “view গোনা”র জন্য দরকার একটা সময়ের কাঠামো: window। Tumbling window সময়কে কাটে নির্দিষ্ট, আলাদা টুকরোয়: মিনিট-পিছু view, সেকেন্ডে ১০,০০০ হলে প্রতি window-তে ৬,০০,০০০।"),
@@ -198,7 +198,7 @@ STEPS = [
                 ("+", "Sliding: overlapping windows, the last 5 minutes every minute", "Sliding: মিশে-যাওয়া window, প্রতি মিনিটে শেষ ৫ মিনিট"),
                 ("+", "Session: closes after 30 minutes of quiet", "Session: ৩০ মিনিট চুপ থাকলে বন্ধ হয়")]),
 
-    st(("Late events", "Late events"),
+    st(("Late events", "দেরির event"),
        ("Case: late and duplicate events", "ঘটনা: দেরিতে আসা আর দ্বিতীয়বার আসা event"),
        [("A phone watches videos in the subway with no signal and uploads its 40 views two hours later. Count by event time, when the view happened, not by processing time, when it arrived.",
          "একটা ফোন মেট্রোতে সিগন্যাল ছাড়া ভিডিও দেখে আর তার ৪০টি view আপলোড করে দুই ঘণ্টা পরে। গুনুন event time ধরে, view যখন ঘটেছে, প্রক্রিয়ার সময় ধরে নয়, যখন তা পৌঁছেছে।"),
@@ -230,12 +230,12 @@ STEPS = [
                 ("-", "The backlog grows by 1.08 million a minute", "Backlog মিনিটে ১০.৮ লাখ করে বাড়ে"),
                 ("-", "The dashboard numbers get older every minute", "Dashboard-এর সংখ্যা প্রতি মিনিটে আরও পুরোনো হয়")]),
 
-    st(("Partitions", "Partitions"),
+    st(("Partitions", "Partition"),
        ("Scale out across partitions", "Partition জুড়ে scale out"),
        [("The stream is split into partitions, here 12, by video id, so each video's events stay in order. Each processor instance owns some partitions, so adding instances adds capacity: 12 instances at 4,000 each handle 48,000 a second.",
          "Stream ভাগ করা হয় partition-এ, এখানে ১২টি, video id ধরে, যাতে প্রতিটি ভিডিওর event ক্রমে থাকে। প্রতিটি processor instance কিছু partition-এর মালিক, তাই instance বাড়ালে সক্ষমতা বাড়ে: প্রতিটি ৪,০০০ করে ১২টি instance সামলায় সেকেন্ডে ৪৮,০০০।"),
         ("Against 30,000 arriving, that leaves 18,000 a second of spare capacity, so the 1.08 million backlog clears in 60 seconds. A 13th instance would sit idle, because there is no partition left for it to read.",
-         "আসা ৩০,০০০-এর বিপরীতে এতে সেকেন্ডে ১৮,০০০ বাড়তি সক্ষমতা থাকে, তাই ১০.৮ লাখের backlog পরিষ্কার হয় ৬০ সেকেন্ডে। ১৩তম instance বসে থাকত অলস, কারণ তার পড়ার জন্য কোনো partition বাকি নেই।")],
+         "আসা ৩০,০০০-এর তুলনায় এতে সেকেন্ডে ১৮,০০০ বাড়তি সক্ষমতা থাকে, তাই ১০.৮ লাখের backlog পরিষ্কার হয় ৬০ সেকেন্ডে। ১৩তম instance বসে থাকত অলস, কারণ তার পড়ার জন্য কোনো partition বাকি নেই।")],
        [sh("stream", "hot", ("12 partitions", "১২টি partition"), x=120), sh("proc", "hot", ("one per partition", "প্রতি partition-এ একটা"), x=400, badge="×12"), sh("dash", "hot", ("backlog: 60 s", "backlog: ৬০ s"), x=650), sh("n-idle", "dim", ("no partition: idle", "partition নেই: অলস"))],
        [ln("stream", "proc", "to", 700, "hot"), ln("proc", "dash", "to", 900, "hot")],
        [("recovering", "সেরে উঠছে"), UNTOUCHED, ALWAYS, NOTQUITE],
@@ -247,7 +247,7 @@ STEPS = [
                 ("~", "The backlog clears in 60 seconds", "Backlog পরিষ্কার হয় ৬০ সেকেন্ডে"),
                 ("-", "A 13th instance would sit idle", "১৩তম instance অলস বসে থাকত")]),
 
-    st(("Unique", "Unique"),
+    st(("Unique", "অনন্য গোনা"),
        ("Case: counting unique viewers", "ঘটনা: অনন্য দর্শক গোনা"),
        [("Views are easy to count. Unique viewers are not: to count exactly you must remember every viewer id you have seen. For a popular video with 50 million viewers, 8 bytes each, that is 400 MB for one video.",
          "View গোনা সহজ। অনন্য দর্শক গোনা নয়: ঠিকঠাক গুনতে দেখা প্রতিটি দর্শকের id মনে রাখতে হয়। ৫ কোটি দর্শকের একটা জনপ্রিয় ভিডিওর জন্য, প্রতিটি ৮ বাইট, সেটা একটা ভিডিওর জন্যই ৪০০ MB।"),
@@ -263,7 +263,7 @@ STEPS = [
                 ("+", "HyperLogLog: about 1.5 KB, about 2% error", "HyperLogLog: প্রায় ১.৫ KB, প্রায় ২% ভুল"),
                 ("~", "270,000 times less memory for about 1 million of error", "প্রায় ১০ লাখ ভুলের বিনিময়ে ২,৭০,০০০ গুণ কম memory")]),
 
-    st(("Both", "Both"),
+    st(("Both", "দুটোই"),
        ("Batch and stream, together", "Batch আর stream, একসাথে"),
        [("Many systems run both. The Lambda architecture has a stream layer for fast, approximate answers and a nightly batch layer that recomputes the exact numbers from the full log, at the cost of writing the logic twice.",
          "অনেক সিস্টেম দুটোই চালায়। Lambda architecture-এ আছে দ্রুত, আনুমানিক উত্তরের জন্য একটা stream স্তর, আর পুরো log থেকে নির্ভুল সংখ্যা নতুন করে হিসাব-করা একটা রাতের batch স্তর, যুক্তি দুবার লেখার দামে।"),
@@ -279,7 +279,7 @@ STEPS = [
                 ("~", "The logic is written twice", "যুক্তি লেখা হয় দুবার"),
                 ("~", "Kappa: one stream, replay the log when the logic changes", "Kappa: একটাই stream, যুক্তি বদলালে log আবার চালানো")]),
 
-    st(("Recap", "Recap"),
+    st(("Recap", "সারাংশ"),
        ("Keep analytics away from production", "Analytics-কে production থেকে দূরে রাখুন"),
        [("Pick batch for finished data and cheap exactness, stream for fresh answers, and both when you need both.",
          "শেষ-হওয়া ডেটা আর সস্তা নির্ভুলতার জন্য batch, টাটকা উত্তরের জন্য stream, আর দুটোই দরকার হলে দুটোই বাছুন।")],

@@ -112,7 +112,7 @@ STEPS = [
              "Choosing NoSQL for a scale you do not have yet can mean rebuilding joins and transactions by hand.",
              "এখনো নেই এমন scale-এর জন্য NoSQL বাছলে হাতে করে join আর transaction আবার বানাতে হতে পারে।")),
 
-    st(("Use both", "দুটোই"),
+    st(("Use both", "মিলিয়ে ব্যবহার"),
        ("Use each where it fits", "যেটা যেখানে মানায়"),
        [("Real systems mix them. Orders and payments stay relational for transactions, the catalog lives in documents, and sessions go to a key–value store.",
          "বাস্তব সিস্টেম এগুলো মিশিয়ে ব্যবহার করে। অর্ডার আর পেমেন্ট থাকে রিলেশনাল ডেটাবেসে transaction-এর জন্য, ক্যাটালগ থাকে document-এ, আর session যায় key–value store-এ।"),
@@ -156,7 +156,7 @@ STEPS = [
        [None, None, None, None],
        note=("insight",
              "Start with a relational database unless a clear need points elsewhere. Add a specialist for the one job it does better.",
-             "স্পষ্ট প্রয়োজন না থাকলে রিলেশনাল ডেটাবেস দিয়েই শুরু করুন। একটা specialist যোগ করুন শুধু সেই একটা কাজের জন্য, যা সে ভালো পারে।")),
+             "স্পষ্ট প্রয়োজন না থাকলে রিলেশনাল ডেটাবেস দিয়েই শুরু করুন। একটা specialist যোগ করুন শুধু সেই একটা কাজের জন্য, যেটা সে মূল ডেটাবেসের চেয়ে ভালো পারে।")),
 
     st(("Recap", "সারাংশ"),
        ("Pick the store by the data", "ডেটা দেখে store বাছুন"),
