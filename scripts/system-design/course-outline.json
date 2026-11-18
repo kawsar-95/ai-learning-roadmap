@@ -1,0 +1,777 @@
+{
+ "source": "https://designed-to-scale.vercel.app/ by Dilum Sanjaya: lesson order, titles, lengths and step names only",
+ "modules": [
+  {
+   "id": "foundations",
+   "lessons": [
+    "request-lifecycle",
+    "latency-throughput",
+    "napkin-math"
+   ]
+  },
+  {
+   "id": "scaling",
+   "lessons": [
+    "vertical-horizontal",
+    "load-balancing",
+    "stateless",
+    "caching",
+    "cdn"
+   ]
+  },
+  {
+   "id": "data",
+   "lessons": [
+    "sql-nosql",
+    "indexes",
+    "storage-engines",
+    "replication",
+    "sharding",
+    "consistent-hashing",
+    "unique-ids",
+    "cap",
+    "consensus",
+    "transactions",
+    "files"
+   ]
+  },
+  {
+   "id": "communication",
+   "lessons": [
+    "apis",
+    "queues",
+    "pubsub",
+    "realtime"
+   ]
+  },
+  {
+   "id": "reliability",
+   "lessons": [
+    "redundancy",
+    "rate-limiting",
+    "timeouts-retries",
+    "observability"
+   ]
+  },
+  {
+   "id": "architecture",
+   "lessons": [
+    "microservices",
+    "service-discovery",
+    "sagas",
+    "batch-stream"
+   ]
+  },
+  {
+   "id": "security",
+   "lessons": [
+    "authentication",
+    "authorization",
+    "encryption"
+   ]
+  },
+  {
+   "id": "shipping",
+   "lessons": [
+    "testing",
+    "cicd"
+   ]
+  },
+  {
+   "id": "design",
+   "lessons": [
+    "hld-lld",
+    "design-url-shortener",
+    "design-news-feed",
+    "design-chat"
+   ]
+  }
+ ],
+ "lessons": {
+  "request-lifecycle": {
+   "title": "How a Request Travels",
+   "minutes": 10,
+   "steps": [
+    "Hit Enter",
+    "Find address",
+    "Connect",
+    "Request",
+    "Fetch data",
+    "Response",
+    "More files",
+    "Slow query",
+    "Far away",
+    "Recap"
+   ]
+  },
+  "latency-throughput": {
+   "title": "Latency & Throughput",
+   "minutes": 11,
+   "steps": [
+    "Two numbers",
+    "Busier",
+    "Hockey stick",
+    "Averages lie",
+    "Add capacity",
+    "Distance",
+    "In flight",
+    "Fan-out",
+    "Batching",
+    "Recap"
+   ]
+  },
+  "napkin-math": {
+   "title": "Napkin Math",
+   "minutes": 10,
+   "steps": [
+    "The question",
+    "Requests / s",
+    "Peak",
+    "Servers",
+    "Storage",
+    "Bandwidth",
+    "Cache size",
+    "Numbers",
+    "Recap"
+   ]
+  },
+  "vertical-horizontal": {
+   "title": "Vertical vs Horizontal Scaling",
+   "minutes": 11,
+   "steps": [
+    "One server",
+    "Viral spike",
+    "Scale up",
+    "The ceiling",
+    "One failure",
+    "Scale out",
+    "Night time",
+    "Autoscale",
+    "Flash sale",
+    "Who routes?",
+    "Recap"
+   ]
+  },
+  "load-balancing": {
+   "title": "Load Balancing",
+   "minutes": 12,
+   "steps": [
+    "Hot spot",
+    "Add an LB",
+    "Round robin",
+    "Heavy work",
+    "Least conns",
+    "Health checks",
+    "LB fails",
+    "Standby",
+    "Failover",
+    "By path",
+    "Deploy",
+    "Recap"
+   ]
+  },
+  "stateless": {
+   "title": "Stateless Services",
+   "minutes": 10,
+   "steps": [
+    "Logged in",
+    "Logged out",
+    "Sticky",
+    "A dies",
+    "Shared store",
+    "Lose one",
+    "Tokens",
+    "Uploads",
+    "Object store",
+    "Recap"
+   ]
+  },
+  "caching": {
+   "title": "Caching",
+   "minutes": 14,
+   "steps": [
+    "DB melts",
+    "Same reads",
+    "Add cache",
+    "Hit rate",
+    "Stale",
+    "Invalidate",
+    "Eviction",
+    "Stampede",
+    "One fetch",
+    "Missing keys",
+    "Bloom filter",
+    "Layers",
+    "Recap"
+   ]
+  },
+  "cdn": {
+   "title": "Content Delivery",
+   "minutes": 10,
+   "steps": [
+    "Far away",
+    "Same bytes",
+    "Edges",
+    "Cold edge",
+    "Old files",
+    "Versioning",
+    "Spike",
+    "Private",
+    "Shield",
+    "Recap"
+   ]
+  },
+  "sql-nosql": {
+   "title": "SQL vs NoSQL",
+   "minutes": 11,
+   "steps": [
+    "Tables",
+    "Transactions",
+    "Growing pains",
+    "Documents",
+    "Key–value",
+    "Trade-offs",
+    "Use both",
+    "Search",
+    "Specialists",
+    "Recap"
+   ]
+  },
+  "indexes": {
+   "title": "Indexes",
+   "minutes": 12,
+   "steps": [
+    "Slow query",
+    "Phone book",
+    "Add index",
+    "Why shallow",
+    "Writes pay",
+    "Column order",
+    "Wildcards",
+    "Selectivity",
+    "EXPLAIN",
+    "Covering",
+    "Recap"
+   ]
+  },
+  "storage-engines": {
+   "title": "Storage Engines",
+   "minutes": 14,
+   "steps": [
+    "Two places",
+    "Crash",
+    "Log first",
+    "How sure?",
+    "Checkpoint",
+    "B-tree",
+    "Firehose",
+    "LSM-tree",
+    "Find a key",
+    "Compaction",
+    "Choosing",
+    "Columns",
+    "Recap"
+   ]
+  },
+  "replication": {
+   "title": "Replication",
+   "minutes": 12,
+   "steps": [
+    "One DB",
+    "Copies",
+    "Read replicas",
+    "Lag",
+    "Read your writes",
+    "Leader dies",
+    "Failover",
+    "Reports",
+    "Not a backup",
+    "Styles",
+    "Recap"
+   ]
+  },
+  "sharding": {
+   "title": "Sharding",
+   "minutes": 11,
+   "steps": [
+    "Too big",
+    "Split by range",
+    "Hot spot",
+    "Hash it",
+    "Celebrity",
+    "Split key",
+    "Cross-shard",
+    "Add a shard",
+    "Recap"
+   ]
+  },
+  "consistent-hashing": {
+   "title": "Consistent Hashing",
+   "minutes": 10,
+   "steps": [
+    "The problem",
+    "The ring",
+    "Keys",
+    "Add a server",
+    "Remove one",
+    "Uneven",
+    "Virtual nodes",
+    "Replicas",
+    "Cache fleet",
+    "Recap"
+   ]
+  },
+  "unique-ids": {
+   "title": "Unique IDs at Scale",
+   "minutes": 13,
+   "steps": [
+    "One counter",
+    "Shards collide",
+    "Ticket server",
+    "Blocks",
+    "UUIDs",
+    "Random hurts",
+    "Time first",
+    "Snowflake",
+    "Clock",
+    "Leaks",
+    "Choosing",
+    "Recap"
+   ]
+  },
+  "cap": {
+   "title": "CAP & Consistency",
+   "minutes": 12,
+   "steps": [
+    "Two regions",
+    "Partition",
+    "Choose C",
+    "Choose A",
+    "Heal",
+    "Clocks",
+    "CAP",
+    "Quorums",
+    "Per operation",
+    "Models",
+    "Recap"
+   ]
+  },
+  "consensus": {
+   "title": "Consensus & Leader Election",
+   "minutes": 14,
+   "steps": [
+    "One leader",
+    "Split brain",
+    "Majority",
+    "Election",
+    "Commit",
+    "Heal",
+    "How many",
+    "Zombie",
+    "Fencing",
+    "The price",
+    "In practice",
+    "Recap"
+   ]
+  },
+  "transactions": {
+   "title": "Transactions & Isolation",
+   "minutes": 14,
+   "steps": [
+    "Last seat",
+    "Race",
+    "Not enough",
+    "Lock",
+    "Atomic",
+    "Versions",
+    "Levels",
+    "Phantom",
+    "Deadlock",
+    "Constraint",
+    "Slow lock",
+    "Hold",
+    "Recap"
+   ]
+  },
+  "files": {
+   "title": "Files & Media",
+   "minutes": 14,
+   "steps": [
+    "BLOBs",
+    "It chokes",
+    "Object storage",
+    "Through servers",
+    "Presigned",
+    "In parts",
+    "Processing",
+    "CDN",
+    "Video",
+    "In step",
+    "Lifecycle",
+    "Public bucket",
+    "Recap"
+   ]
+  },
+  "apis": {
+   "title": "REST, RPC & GraphQL",
+   "minutes": 11,
+   "steps": [
+    "Contract",
+    "REST",
+    "On 4G",
+    "GraphQL",
+    "The catch",
+    "RPC",
+    "Pagination",
+    "Versions",
+    "Choosing",
+    "Recap"
+   ]
+  },
+  "queues": {
+   "title": "Message Queues",
+   "minutes": 12,
+   "steps": [
+    "Slow upload",
+    "Add a queue",
+    "Spike",
+    "More workers",
+    "Crash",
+    "Acks",
+    "Poison",
+    "Order",
+    "Partitions",
+    "Backpressure",
+    "Recap"
+   ]
+  },
+  "pubsub": {
+   "title": "Pub/Sub & Events",
+   "minutes": 10,
+   "steps": [
+    "Call everyone",
+    "Email down",
+    "Publish",
+    "Queue vs topic",
+    "New subscriber",
+    "Catch up",
+    "Trade-offs",
+    "Outbox",
+    "Replay",
+    "Recap"
+   ]
+  },
+  "realtime": {
+   "title": "Real-time Updates",
+   "minutes": 11,
+   "steps": [
+    "No way in",
+    "Polling",
+    "At scale",
+    "Long polling",
+    "SSE",
+    "WebSockets",
+    "Many servers",
+    "Offline",
+    "Presence",
+    "Recap"
+   ]
+  },
+  "redundancy": {
+   "title": "Redundancy & Failover",
+   "minutes": 12,
+   "steps": [
+    "Nines",
+    "SPOFs",
+    "Two of each",
+    "One building",
+    "Zones",
+    "Zone fails",
+    "RTO & RPO",
+    "Chaos",
+    "Bad deploy",
+    "Canary",
+    "Regions",
+    "Recap"
+   ]
+  },
+  "rate-limiting": {
+   "title": "Rate Limiting",
+   "minutes": 10,
+   "steps": [
+    "Runaway",
+    "Limit",
+    "Token bucket",
+    "Algorithms",
+    "Many gateways",
+    "Back off",
+    "Tenants",
+    "Shedding",
+    "Recap"
+   ]
+  },
+  "timeouts-retries": {
+   "title": "Timeouts & Retries",
+   "minutes": 11,
+   "steps": [
+    "Slow call",
+    "Timeout",
+    "Retry",
+    "Retry storm",
+    "Backoff",
+    "Breaker",
+    "Closed",
+    "Idempotency",
+    "Deadlines",
+    "Bulkheads",
+    "Recap"
+   ]
+  },
+  "observability": {
+   "title": "Observability",
+   "minutes": 11,
+   "steps": [
+    "It’s slow",
+    "Metrics",
+    "Alerts",
+    "Logs",
+    "Traces",
+    "Fixed",
+    "Incident",
+    "Post-mortem",
+    "Recap"
+   ]
+  },
+  "microservices": {
+   "title": "Monolith vs Microservices",
+   "minutes": 14,
+   "steps": [
+    "Monolith",
+    "Growing pains",
+    "Split",
+    "Own data",
+    "Network",
+    "Distributed monolith",
+    "Joins?",
+    "Local copy",
+    "Contracts",
+    "Choosing",
+    "Strangler",
+    "Recap"
+   ]
+  },
+  "service-discovery": {
+   "title": "Service Discovery & Gateways",
+   "minutes": 13,
+   "steps": [
+    "Config",
+    "Churn",
+    "Registry",
+    "Churn again",
+    "Who balances",
+    "DNS",
+    "Too early",
+    "Ready",
+    "Registry down",
+    "Plumbing",
+    "Mesh",
+    "Gateway",
+    "Recap"
+   ]
+  },
+  "sagas": {
+   "title": "Sagas & Distributed Transactions",
+   "minutes": 13,
+   "steps": [
+    "Half a trip",
+    "2PC",
+    "Blocked",
+    "Saga",
+    "Orchestration",
+    "Choreography",
+    "In between",
+    "Resume",
+    "Undo fails",
+    "Unknown",
+    "Recap"
+   ]
+  },
+  "batch-stream": {
+   "title": "Batch & Stream Processing",
+   "minutes": 15,
+   "steps": [
+    "Live DB",
+    "Batch",
+    "Map/reduce",
+    "Skew",
+    "Combine",
+    "Too late",
+    "Stream",
+    "Windows",
+    "Late events",
+    "Lag",
+    "Partitions",
+    "Unique",
+    "Both",
+    "Recap"
+   ]
+  },
+  "authentication": {
+   "title": "Authentication",
+   "minutes": 13,
+   "steps": [
+    "Plain text",
+    "Hashing",
+    "Session",
+    "Reset",
+    "Stuffing",
+    "Slow down",
+    "2nd factor",
+    "Phishing",
+    "Passkeys",
+    "Use a provider",
+    "Tokens",
+    "Recap"
+   ]
+  },
+  "authorization": {
+   "title": "Authorization",
+   "minutes": 13,
+   "steps": [
+    "Change the URL",
+    "Ownership",
+    "Mass assign",
+    "Row-level",
+    "Roles",
+    "Sharing",
+    "Policy",
+    "Master key",
+    "Least privilege",
+    "Deputy",
+    "On behalf",
+    "Audit",
+    "Recap"
+   ]
+  },
+  "encryption": {
+   "title": "Encryption & Secrets",
+   "minutes": 13,
+   "steps": [
+    "Café Wi-Fi",
+    "TLS",
+    "Expired",
+    "Inside too",
+    "Stolen backup",
+    "At rest",
+    "Rotation",
+    "Leaked key",
+    "Vault",
+    "Tokenize",
+    "End-to-end",
+    "Recap"
+   ]
+  },
+  "testing": {
+   "title": "Testing",
+   "minutes": 12,
+   "steps": [
+    "Is it safe?",
+    "By hand",
+    "Unit tests",
+    "Test doubles",
+    "Integration",
+    "Contracts",
+    "End-to-end",
+    "Pyramid",
+    "Flaky",
+    "Load & failure",
+    "Recap"
+   ]
+  },
+  "cicd": {
+   "title": "CI/CD & Deployments",
+   "minutes": 13,
+   "steps": [
+    "By hand",
+    "Friday",
+    "CI",
+    "One artifact",
+    "CD",
+    "Blue-green",
+    "Canary",
+    "Migrations",
+    "Flags",
+    "Measure",
+    "Recap"
+   ]
+  },
+  "hld-lld": {
+   "title": "HLD & LLD",
+   "minutes": 8,
+   "steps": [
+    "Two levels",
+    "The map",
+    "Trade-offs",
+    "Zoom in",
+    "LLD decisions",
+    "Contracts",
+    "Top-down",
+    "Recap"
+   ]
+  },
+  "design-url-shortener": {
+   "title": "Design a URL Shortener",
+   "minutes": 14,
+   "steps": [
+    "The brief",
+    "Numbers",
+    "First draft",
+    "Hash it?",
+    "Count it",
+    "Guessable",
+    "Cache",
+    "301 or 302",
+    "Storage",
+    "Clicks",
+    "Abuse",
+    "Recap"
+   ]
+  },
+  "design-news-feed": {
+   "title": "Design a News Feed",
+   "minutes": 14,
+   "steps": [
+    "The brief",
+    "Numbers",
+    "Pull",
+    "Wrong side",
+    "Push",
+    "Ids only",
+    "Celebrity",
+    "Hybrid",
+    "Idle users",
+    "Scrolling",
+    "Cache lost",
+    "Recap"
+   ]
+  },
+  "design-chat": {
+   "title": "Design a Chat System",
+   "minutes": 14,
+   "steps": [
+    "The brief",
+    "Numbers",
+    "One server",
+    "Where is Bob?",
+    "Registry",
+    "Store first",
+    "Offline",
+    "Duplicates",
+    "Groups",
+    "Presence",
+    "Gateway dies",
+    "Recap"
+   ]
+  }
+ }
+}
