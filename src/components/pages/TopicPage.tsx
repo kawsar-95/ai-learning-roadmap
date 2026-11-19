@@ -17,6 +17,7 @@ import { OutlineDetails } from "@/components/navigation/OutlineDetails";
 import { SectionNav } from "@/components/navigation/SectionNav";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { SidebarList } from "@/components/layout/SidebarList";
+import { PanelToggle } from "@/components/layout/PanelToggle";
 import { ReadingBar } from "@/components/progress/ReadingBar";
 
 export type TopicParams = { slug: string };
@@ -94,18 +95,23 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
 
   // Three columns like a book chapter: the Parts, the text (720px at most),
   // and "On this page". Below `lg` only the text shows; the Parts are in the
-  // header drawer.
+  // header drawer. A reader can fold each side column to a rail, and the text
+  // then grows to use the room (.topic-grid in globals.css, src/lib/panels.ts).
   return (
     <>
       {/* A Part with steps shows its own progress bar. */}
       {steps.length === 0 && <ReadingBar />}
-      <div className="mx-auto w-full max-w-[1400px] lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[240px_minmax(0,1fr)_260px]">
-        <aside className="hidden lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] lg:self-start lg:overflow-y-auto">
-          <Suspense fallback={<SidebarList items={items} lang={lang} activeSlug={null} />}>
-            <Sidebar items={items} lang={lang} />
-          </Suspense>
+      <div className="topic-grid mx-auto w-full max-w-[1400px] lg:grid lg:grid-cols-[var(--parts-w)_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[var(--parts-w)_minmax(0,1fr)_var(--toc-w)]">
+        <aside className="hidden lg:sticky lg:top-16 lg:block lg:h-[calc(100vh-4rem)] lg:self-start">
+          {/* The button stays when the list is folded, so it sits outside the part that scrolls and hides. top-2 centres it on the "Parts" label and stops it above the first row. */}
+          <PanelToggle panel="parts" lang={lang} controls="parts-panel" className="absolute top-2 right-2 z-10 bg-bg" />
+          <div id="parts-panel" className="h-full overflow-y-auto parts-collapsed:hidden">
+            <Suspense fallback={<SidebarList items={items} lang={lang} activeSlug={null} />}>
+              <Sidebar items={items} lang={lang} />
+            </Suspense>
+          </div>
         </aside>
-        <article className="mx-auto w-full max-w-[720px] min-w-0 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 lg:px-0">
+        <article className="mx-auto w-full max-w-[var(--text-w)] min-w-0 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
           {/* The "On this page" column shows from `xl`. Below it, this closed list does the same job. */}
           {outline.length > 1 && <OutlineDetails items={outline} lang={lang} className="mb-6" />}
@@ -117,7 +123,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
             </>
           )}
         </article>
-        <aside className="hidden py-12 pr-6 xl:block">
+        <aside className="hidden py-12 pr-6 toc-collapsed:pr-0 xl:block">
           <SectionNav items={outline} lang={lang} />
         </aside>
       </div>

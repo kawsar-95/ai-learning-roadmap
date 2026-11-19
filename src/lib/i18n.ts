@@ -91,6 +91,11 @@ const en = {
   openParts: "Open the list of parts",
   closeParts: "Close the list of parts",
   onThisPage: "On this page",
+  // The buttons that fold the two side columns of a topic page (src/lib/panels.ts).
+  partsHide: "Hide the list of parts",
+  partsShow: "Show the list of parts",
+  tocHide: "Hide \"On this page\"",
+  tocShow: "Show \"On this page\"",
   prevNextNav: "Previous and next Part",
 
   // Search.
@@ -334,6 +339,10 @@ const bn: Dict = {
   openParts: "পার্টের তালিকা খুলুন",
   closeParts: "পার্টের তালিকা বন্ধ করুন",
   onThisPage: "এই পাতায়",
+  partsHide: "পার্টের তালিকা লুকান",
+  partsShow: "পার্টের তালিকা দেখান",
+  tocHide: "এই পাতার তালিকা লুকান",
+  tocShow: "এই পাতার তালিকা দেখান",
   prevNextNav: "আগের আর পরের পার্ট",
 
   search: "খুঁজুন",

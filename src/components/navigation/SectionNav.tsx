@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PanelToggle } from "@/components/layout/PanelToggle";
 import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 
@@ -70,35 +71,40 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
   }, [items]);
 
   return (
-    <nav
-      aria-label={UI[lang].onThisPage}
-      className="sticky top-20 max-h-[calc(100vh-7rem)] overflow-y-auto pb-6"
-    >
-      <p className="mb-4 font-mono text-xs uppercase tracking-[0.16em] text-text-faint">
-        {UI[lang].onThisPage}
-      </p>
-      <ol className="m-0 list-none border-l border-border p-0">
-        {items.map((item) => {
-          const isActive = item.id === active;
-          return (
-            <li key={item.id}>
-              <a
-                href={`#${item.id}`}
-                aria-current={isActive ? "location" : undefined}
-                className={
-                  "-ml-px block border-l-2 py-1 pr-2 leading-snug no-underline transition-colors " +
-                  (item.level === 3 ? "pl-7 text-[12.5px] " : "pl-4 text-[13.5px] ") +
-                  (isActive
-                    ? "border-accent text-text"
-                    : "border-transparent text-text-dim hover:border-border-strong hover:text-text")
-                }
-              >
-                {item.title}
-              </a>
-            </li>
-          );
-        })}
-      </ol>
+    <nav aria-label={UI[lang].onThisPage} className="sticky top-20 pb-6">
+      {/* The header row stays when the list is folded, so it sits outside the part that scrolls and hides.
+          -mt-2 and mb-2 keep the label and the list where they were: the button is taller than the label. When
+          folded, pl-2 centres the button in the 3rem rail. */}
+      <div className="-mt-2 mb-2 flex items-center justify-between gap-2 toc-collapsed:pl-2">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-faint toc-collapsed:hidden">
+          {UI[lang].onThisPage}
+        </p>
+        <PanelToggle panel="toc" lang={lang} controls="toc-panel" />
+      </div>
+      <div id="toc-panel" className="max-h-[calc(100vh-11rem)] overflow-y-auto toc-collapsed:hidden">
+        <ol className="m-0 list-none border-l border-border p-0">
+          {items.map((item) => {
+            const isActive = item.id === active;
+            return (
+              <li key={item.id}>
+                <a
+                  href={`#${item.id}`}
+                  aria-current={isActive ? "location" : undefined}
+                  className={
+                    "-ml-px block border-l-2 py-1 pr-2 leading-snug no-underline transition-colors " +
+                    (item.level === 3 ? "pl-7 text-[12.5px] " : "pl-4 text-[13.5px] ") +
+                    (isActive
+                      ? "border-accent text-text"
+                      : "border-transparent text-text-dim hover:border-border-strong hover:text-text")
+                  }
+                >
+                  {item.title}
+                </a>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
     </nav>
   );
 }

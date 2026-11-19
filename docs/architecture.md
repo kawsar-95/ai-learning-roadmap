@@ -278,6 +278,8 @@ storage and no cookie.
 | `voice` | `main`, `layman`, or `bangla` | the voice switcher |
 | `theme` | `light` or `dark` | the theme button |
 | `lang` | `en` or `bn` | the language link |
+| `panel-parts` | `collapsed` while the Parts column is folded; no key while it is open | the arrow button on the Parts column |
+| `panel-toc` | `collapsed` while "On this page" is folded; no key while it is open | the arrow button on "On this page" |
 
 - `src/lib/progress.ts` and `src/lib/quiz.ts` hold the pure logic: parse,
   serialize, toggle, count, and pick the first undone section. Bad or
@@ -441,6 +443,7 @@ modules in `src/lib/` directly, and some read the real content files.
 | `icons.test.ts` | `icon.svg` colors and validity, `favicon.ico` sizes, icons in the offline list |
 | `interview.test.ts` | The interview checker and the real `interview.json` |
 | `lesson-markdown.test.ts` | Lesson rendering, escaping, math, links, and every real lesson |
+| `panels.test.ts` | The saved keys of the two side columns, the head script that folds them, and the selectors in `globals.css` that it feeds |
 | `practice.test.ts` | The practice task schema and `practiceLang` |
 | `progress.test.ts` | Progress and bookmark keys and counts |
 | `pwa.test.ts` | The manifest, the offline list, and the service worker (run against a fake cache) |
@@ -528,6 +531,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │   │   ├── PageHeader.tsx           the title and intro of a secondary page
 │   │   │   ├── LanguageSwitch.tsx       the link to the same page in the other language
 │   │   │   ├── ThemeToggle.tsx          the sun/moon button
+│   │   │   ├── PanelToggle.tsx          the arrow button that folds a side column
 │   │   │   ├── InstallButton.tsx        the install button (Chromium)
 │   │   │   └── ServiceWorker.tsx        registers sw.js in production
 │   │   ├── navigation/
@@ -561,6 +565,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │       ├── progress.ts                  progress and bookmark logic and keys
 │       ├── quiz.ts                      quiz scoring and best scores
 │       ├── theme.ts                     the theme rule and the theme script
+│       ├── panels.ts                    the keys of the folded side columns, and the head script that applies them
 │       ├── practice.ts                  the language of the practice tasks
 │       ├── videos.ts                    which videos a voice shows; length formats
 │       ├── walkthrough.ts               walk-through geometry, and the path of each walk-through file

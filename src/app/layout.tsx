@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Crimson_Pro, Inter, JetBrains_Mono, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { PANEL_INIT_SCRIPT } from "@/lib/panels";
 import { langInitScript } from "@/lib/i18n";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
 
@@ -57,9 +58,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    // The inline scripts change data-theme and lang before React hydrates,
-    // so React must accept the DOM values (suppressHydrationWarning). The
-    // header, sidebar, and footer come from SiteShell in each language layout.
+    // The inline scripts change data-theme, lang, and the folded side columns
+    // (data-parts, data-toc) before React hydrates, so React must accept the
+    // DOM values (suppressHydrationWarning). The header, sidebar, and footer
+    // come from SiteShell in each language layout.
     <html
       lang="en"
       data-theme="dark"
@@ -68,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: PANEL_INIT_SCRIPT }} />
         <script dangerouslySetInnerHTML={{ __html: langInitScript(BASE_PATH) }} />
       </head>
       <body className="min-h-full bg-bg text-text">

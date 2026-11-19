@@ -172,6 +172,10 @@ const SHOTS = {
   // A topic page: the Parts, the section pager and voice switcher, "On this page".
   "topic-page": () => capture("/topics/llm-fundamentals/", DESKTOP),
 
+  // The same screen with both side columns folded to rails. The saved folds are localStorage "panel-parts" and "panel-toc".
+  "topic-folded": () =>
+    capture("/topics/llm-fundamentals/", { ...DESKTOP, seed: { "panel-parts": "collapsed", "panel-toc": "collapsed" } }),
+
   // Section 1's Start here box, with the voice tabs above it.
   "start-here": () =>
     capture("/topics/llm-fundamentals/", {
