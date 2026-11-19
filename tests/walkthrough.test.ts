@@ -1,8 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readdirSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { WALK_NODE_KINDS } from "../src/lib/content-schema.ts";
 import type { TopicFile, Walkthrough } from "../src/lib/content-schema.ts";
+import { attachWalkthroughs } from "../src/lib/walkthrough-files.ts";
 import { NODE_H, NODE_ROLE, boxExit, boxWidth, changedValues, findWalkthrough, focusX, labelPads, linkEnds, localDigits, nodeWidths, roundedRectPath, valueText, walkUses, walkthroughParams, walkthroughPath } from "../src/lib/walkthrough.ts";
 
 test("localDigits writes Bangla digits on the Bangla site only", () => {
@@ -67,6 +68,10 @@ test("every kind of box has a color role, and a role names no kind that does not
   assert.equal(NODE_ROLE.cache, "memory");
   assert.equal(NODE_ROLE.database, "data");
   assert.equal(NODE_ROLE.note, "note");
+  // The two kinds for AI topics: the model has a color of its own, and a tool is drawn like the guards.
+  assert.ok((WALK_NODE_KINDS as readonly string[]).includes("model") && (WALK_NODE_KINDS as readonly string[]).includes("tool"));
+  assert.equal(NODE_ROLE.model, "model");
+  assert.equal(NODE_ROLE.tool, "guard");
 });
 
 test("walkUses says what a whole walk-through draws, so the key under the diagram does not change from step to step", () => {
@@ -104,16 +109,31 @@ test("roundedRectPath is a closed path that starts on the top edge", () => {
   assert.ok(d.endsWith("Z"));
 });
 
-// Rules for the real walk-throughs, read from disk like the quiz rules.
+// Rules for the real walk-throughs, read from disk like the quiz rules. A Part keeps its walk-throughs inline in its file
+// (Part 18) or in files of their own, src/content/walkthroughs/<Part>/<section>.json (scripts/walkthroughs builds those).
 const dir = new URL("../src/content/", import.meta.url);
-const walks = readdirSync(dir)
-  .filter((name) => name.endsWith(".json") && name !== "interview.json")
-  .map((name) => JSON.parse(readFileSync(new URL(name, dir), "utf8")) as TopicFile)
-  .flatMap((part) =>
-    part.sections.flatMap((section) =>
-      section.walkthrough ? [{ key: `${part.slug}#${section.id}`, walk: section.walkthrough }] : [],
-    ),
+const ownDir = new URL("walkthroughs/", dir);
+const readJson = (url: URL) => JSON.parse(readFileSync(url, "utf8"));
+const ownFiles = (slug: string): Record<string, unknown> => {
+  const folder = new URL(`${slug}/`, ownDir);
+  if (!existsSync(folder)) return {};
+  return Object.fromEntries(
+    readdirSync(folder)
+      .filter((name) => name.endsWith(".json"))
+      .map((name) => [name.slice(0, -".json".length), readJson(new URL(name, folder))]),
   );
+};
+const parts = readdirSync(dir)
+  .filter((name) => name.endsWith(".json") && name !== "interview.json")
+  .map((name) => {
+    const part = readJson(new URL(name, dir)) as TopicFile;
+    return attachWalkthroughs(part, ownFiles(part.slug));
+  });
+const walks = parts.flatMap((part) =>
+  part.sections.flatMap((section) =>
+    section.walkthrough ? [{ key: `${part.slug}#${section.id}`, walk: section.walkthrough }] : [],
+  ),
+);
 
 const BANGLA = /[\u0980-\u09FF]/u;
 // The quiz rule: digits inside a name or a code word (TLS 1.3, H100, top_p) stay Latin.
@@ -139,11 +159,51 @@ test("there are walk-throughs to check", () => {
   assert.ok(walks.length > 0);
 });
 
-// The walk-throughs are not in the page: each is a JSON file that the player loads (src/app/walkthroughs).
-const parts = readdirSync(dir)
-  .filter((name) => name.endsWith(".json") && name !== "interview.json")
-  .map((name) => JSON.parse(readFileSync(new URL(name, dir), "utf8")) as TopicFile);
+// A Part's own walk-through files and the generated index that imports them must list the same files.
+test("src/content/walkthroughs/index.ts imports every walk-through file, and only those", () => {
+  const onDisk = readdirSync(ownDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .flatMap((entry) =>
+      readdirSync(new URL(`${entry.name}/`, ownDir))
+        .filter((name) => name.endsWith(".json"))
+        .map((name) => `${entry.name}/${name}`),
+    )
+    .sort();
+  const index = readFileSync(new URL("index.ts", ownDir), "utf8");
+  const imported = [...index.matchAll(/^import \w+ from "\.\/([^"]+\.json)";$/gm)].map((m) => m[1]).sort();
+  assert.deepEqual(imported, onDisk);
+});
 
+// attachWalkthroughs gives a section the walk-through that has its own file (src/lib/walkthrough-files.ts).
+const miniText = { short: "s", title: "t", body: ["b"] };
+const miniStep = { en: miniText, bn: miniText, show: [{ id: "a" }], links: [] };
+const miniWalk = {
+  width: 400,
+  height: 200,
+  nodes: [{ id: "a", kind: "server", label: { en: "x", bn: "ক" }, x: 200, y: 100 }],
+  metrics: [],
+  steps: [miniStep, miniStep],
+};
+const miniTopic = (...sections: { id: string; walkthrough?: unknown }[]) => ({ slug: "p", sections }) as unknown as TopicFile;
+
+test("attachWalkthroughs gives a section its own file and leaves the other sections alone", () => {
+  const topic = miniTopic({ id: "s1" }, { id: "s2" });
+  const attached = attachWalkthroughs(topic, { s1: miniWalk });
+  assert.deepEqual(attached.sections[0].walkthrough, miniWalk);
+  assert.equal(attached.sections[1].walkthrough, undefined);
+  assert.equal(attachWalkthroughs(topic, undefined), topic, "a Part with no files is returned as it is");
+});
+
+test("attachWalkthroughs refuses a file with no section, a section with two walk-throughs, and a bad file", () => {
+  assert.throws(() => attachWalkthroughs(miniTopic({ id: "s1" }), { s9: miniWalk }), /walkthroughs\/p\/s9\.json: p has no section "s9"/);
+  assert.throws(
+    () => attachWalkthroughs(miniTopic({ id: "s1", walkthrough: miniWalk }), { s1: miniWalk }),
+    /section "s1" has a walk-through in its Part file and in walkthroughs\/p\/s1\.json/,
+  );
+  assert.throws(() => attachWalkthroughs(miniTopic({ id: "s1" }), { s1: { ...miniWalk, steps: [] } }), /walkthroughs\/p\/s1\.json/);
+});
+
+// The walk-throughs are not in the page: each is a JSON file that the player loads (src/app/walkthroughs).
 test("every walk-through is served at the path its section is given, and nothing else is", () => {
   const params = walkthroughParams(parts);
   assert.equal(params.length, walks.length, "one file for each walk-through");

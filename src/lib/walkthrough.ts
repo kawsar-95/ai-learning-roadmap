@@ -82,8 +82,8 @@ export function focusX(w: Walkthrough, step: WalkStep): number | null {
   return (Math.min(...xs) + Math.max(...xs)) / 2;
 }
 
-/** What a box is, which picks its color: people, your services, fast memory, data, queues, guards, measures, notes. */
-export type WalkRole = "people" | "compute" | "memory" | "data" | "queue" | "guard" | "measure" | "note";
+/** What a box is, which picks its color: people, your services, fast memory, data, queues, guards, models, measures, notes. */
+export type WalkRole = "people" | "compute" | "memory" | "data" | "queue" | "guard" | "model" | "measure" | "note";
 
 /**
  * The role of each kind of box. The record is exhaustive on purpose: a kind added to
@@ -105,6 +105,8 @@ export const NODE_ROLE: Record<WalkNodeKind, WalkRole> = {
   lock: "guard",
   key: "guard",
   shield: "guard",
+  tool: "guard",
+  model: "model",
   clock: "measure",
   chart: "measure",
   note: "note",

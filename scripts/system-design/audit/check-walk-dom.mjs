@@ -1,17 +1,14 @@
-// Checks every walk-through of the System Design part in a real browser, in both
+// Checks every walk-through of one Part (PART=<slug>, default system-design) in a real browser, in both
 // languages and on every step: no text sticks out of its box, no box leaves the
 // diagram, no line label sits on a box or on another label, no readout is cut.
 // Reduced motion is on, so every box is at its final place when it is measured.
-// Usage: node scripts/system-design/audit/check-walk-dom.mjs <base-url> [sectionId ...]   (see ../README.md)
+// Usage: [PART=<slug>] node scripts/system-design/audit/check-walk-dom.mjs <base-url> [sectionId ...]   (see ../README.md)
 import { launch } from "./browser.mjs";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { partWalks, slug } from "./part.mjs";
 
 const [base, ...only] = process.argv.slice(2);
-const jsonPath = fileURLToPath(new URL("../../../src/content/system-design.json", import.meta.url));
-const topic = JSON.parse(readFileSync(jsonPath, "utf8"));
-const walks = topic.sections
-  .filter((s) => s.walkthrough && (!only.length || only.includes(s.id)))
+const walks = partWalks()
+  .filter((s) => !only.length || only.includes(s.id))
   .map((s) => ({ id: s.id, steps: s.walkthrough.steps.length }));
 
 const browser = await launch();
@@ -54,7 +51,7 @@ for (const [prefix, lang] of [["", "en"], ["/bn", "bn"]]) {
   const p = await ctx.newPage();
   p.on("pageerror", (e) => problems.push(`[${lang}] pageerror: ${e.message}`));
   p.on("console", (m) => m.type() === "error" && problems.push(`[${lang}] console: ${m.text()}`));
-  const page = `${base}${prefix}/topics/system-design/`;
+  const page = `${base}${prefix}/topics/${slug}/`;
   await p.goto(page, { waitUntil: "networkidle" });
   if (lang === "en" && walks.length) {
     // Negative control: a label that is too long for its box must be reported, or this check proves nothing.
