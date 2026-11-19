@@ -47,6 +47,7 @@ Desktop shots are 1440 × 900 at 1x in the light theme. Phone shots are
 | --- | --- | --- | --- |
 | `home` | `/` | The hero, cropped below the counts | top |
 | `topic-page` | `/topics/llm-fundamentals/` | The first screen of Part 1 | Read one section at a time |
+| `topic-folded` | `/topics/llm-fundamentals/` | The same screen with the Parts list and "On this page" folded to rails | Read one section at a time |
 | `start-here` | `/topics/llm-fundamentals/` | Section 1's Start here box, under the voice tabs | Start here |
 | `voices` | `/topics/llm-fundamentals/` | Section 1 in each voice, three crops side by side, with the Start here box hidden | Three voices |
 | `walkthrough` | `/topics/system-design/#s7` | The walk-through of Part 18, section 7 (Caching), at step 4: the readouts, the diagram, the step strip, and the text | Step-by-step walk-throughs |
@@ -81,6 +82,7 @@ progress pages have something to show:
 | `quiz-scores` | Part 1: 5 / 5, Part 2: 4 / 5 |
 | `roadmap-progress` | lessons 1 to 6 of Phase 0 and 1 to 3 of Phase 1: 9 done |
 | `voice` | `main`, `layman`, or `bangla`, for the three crops of `voices` |
+| `panel-parts`, `panel-toc` | `collapsed` for both, for `topic-folded` only |
 
 The keys and their formats are in
 [docs/architecture.md](../../docs/architecture.md#reader-state).

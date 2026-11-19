@@ -51,8 +51,14 @@ export async function LessonPage({ params, lang }: { params: Promise<LessonParam
 
   // From `xl` the lesson keeps its centred column, and "On this page" sits to its right as on a topic page.
   return (
-    <div className="mx-auto w-full xl:grid xl:max-w-[1400px] xl:grid-cols-[minmax(0,1fr)_48rem_minmax(0,1fr)] xl:gap-8">
-      <article className="mx-auto w-full max-w-3xl min-w-0 px-4 pt-10 pb-20 sm:px-6 sm:pt-14 xl:col-start-2">
+    <div
+      className={
+        "mx-auto w-full [--lesson-w:48rem] xl:grid xl:max-w-[1400px] xl:grid-cols-[minmax(0,1fr)_var(--lesson-w)_minmax(0,1fr)] xl:gap-8" +
+        // With "On this page" folded, the text grows to use the room. A lesson without that list has nothing to fold.
+        (showOutline ? " toc-collapsed:xl:[--lesson-w:60rem]" : "")
+      }
+    >
+      <article className="mx-auto w-full max-w-3xl min-w-0 px-4 pt-10 pb-20 sm:px-6 sm:pt-14 xl:col-start-2 xl:max-w-[var(--lesson-w)]">
         {/* It opens like a topic page (TopicHeader): one meta line with the actions on the right, then the title. */}
         <header>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">

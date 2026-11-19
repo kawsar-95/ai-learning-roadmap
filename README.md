@@ -63,8 +63,13 @@ counts at build time.
   opens the step that holds the heading.
 - The Parts list is on the left. **On this page** is on the right on wide
   screens and becomes a collapsed list on narrow ones.
+- Fold the Parts list or **On this page** with the arrow button at the top
+  of its column, and the text grows to use the room. The site remembers
+  what you folded.
 - Each section ends with **Bookmark** and **Mark as done**. Each Part ends
   with its numbered sources and links to the previous and next Part.
+
+![The same topic page with the Parts list and "On this page" folded: each is a narrow rail with an arrow button, and the text column is wider, with the Part header, the step bar, the voice switcher, and the top of the Start here box](screenshots/topic-folded.png)
 
 ### Start here
 
@@ -290,7 +295,7 @@ npm run dev        # http://localhost:3000
 | `npm run dev` | Starts the dev server at <http://localhost:3000>. The service worker is off in development. |
 | `npm run build` | Validates all content, writes the static site to `out/`, then writes the offline file list into `out/sw.js`. |
 | `npx serve@latest out` | Serves the static build at <http://localhost:3000>. |
-| `npm test` | Runs the 182 tests in `tests/` with Node's built-in test runner. |
+| `npm test` | Runs the 189 tests in `tests/` with Node's built-in test runner. |
 | `npm run lint` | Runs ESLint. |
 | `npm run check:videos` | Asks YouTube whether every listed video still exists and can be embedded. It needs the network, so `npm test` and the deploy do not run it. |
 
@@ -316,7 +321,8 @@ flowchart LR
   `src/lib/roadmap.ts` load and validate the files. Client components get the
   data as props.
 - **Reader state lives in the browser.** Progress, bookmarks, quiz scores,
-  the voice, the theme, and the language are `localStorage` keys.
+  the voice, the theme, the language, and the folded side columns are
+  `localStorage` keys.
 - **Search is static.** The build writes `search-index.json` (and the Bangla
   `bn/search-index.json`). The browser loads it on the first search and
   builds a [MiniSearch](https://github.com/lucaong/minisearch) index.

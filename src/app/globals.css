@@ -3,6 +3,11 @@
 /* `light:` applies a utility only in the light theme. */
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
+/* `parts-collapsed:` and `toc-collapsed:` apply a utility while that side column of a topic page is folded.
+   The inline script in src/lib/panels.ts sets data-parts and data-toc on <html> before the first paint. */
+@custom-variant parts-collapsed (&:where([data-parts="collapsed"], [data-parts="collapsed"] *));
+@custom-variant toc-collapsed (&:where([data-toc="collapsed"], [data-toc="collapsed"] *));
+
 /* ─────────────────────────────────────────────────────────────────────────
    Design tokens. Two themes on <html data-theme>: dark and light. With no
    saved choice, src/lib/theme.ts follows the device before the first paint.
@@ -131,6 +136,34 @@ html {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Topic page columns (src/components/pages/TopicPage.tsx). The Parts column
+   shows from `lg` (64rem) and "On this page" from `xl` (80rem). A folded
+   column shrinks to a 3rem rail and the text column grows to use the room:
+   to 60rem when one is folded, to 70rem when both are. These are variables
+   and not utilities because the three cases need a cascade.
+   ───────────────────────────────────────────────────────────────────────── */
+.topic-grid {
+  --parts-w: 240px;
+  --toc-w: 260px;
+  --text-w: 720px;
+}
+@media (min-width: 64rem) {
+  [data-parts="collapsed"] .topic-grid {
+    --parts-w: 3rem;
+    --text-w: 60rem;
+  }
+}
+@media (min-width: 80rem) {
+  [data-toc="collapsed"] .topic-grid {
+    --toc-w: 3rem;
+    --text-w: 60rem;
+  }
+  [data-parts="collapsed"][data-toc="collapsed"] .topic-grid {
+    --text-w: 70rem;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
