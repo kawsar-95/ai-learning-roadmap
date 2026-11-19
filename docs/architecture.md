@@ -239,6 +239,10 @@ them:
    where a line leaves a box, the middle of the boxes a step is about, which
    readouts changed) is in `src/lib/walkthrough.ts`, so `node --test` can
    check it.
+   The look is the `.wk-*` rules and the `--wk-*` colors (one set for each
+   theme) in `globals.css`. `NODE_ROLE` in `walkthrough.ts` gives each kind of
+   box its color, and the record is exhaustive, so a new kind of box does not
+   compile until it has one.
 
 The offline list saves the files (`scripts/precache.mjs`). Part 18 is
 generated, so a change to a walk-through starts in `scripts/system-design/`
@@ -457,7 +461,7 @@ modules in `src/lib/` directly, and some read the real content files.
 | `video-curation-scripts.test.ts` | The two shell steps of the video curation |
 | `video-data.test.ts` | Rules for the real videos: no repeats in a section, clean titles, Short lengths |
 | `videos.test.ts` | The video schema, `videosForVoice`, and length formats |
-| `walkthrough.test.ts` | The walk-through geometry, the file each walk-through is served at, and rules for the real walk-throughs: English and Bangla say the same, shared readout values have no Bangla, the boxes fit the diagram and do not overlap |
+| `walkthrough.test.ts` | The walk-through geometry (including the pill behind a line label), the color role of each kind of box, what the key under the diagram shows, the file each walk-through is served at, and rules for the real walk-throughs: English and Bangla say the same, shared readout values have no Bangla, the boxes fit the diagram and do not overlap |
 
 ## File layout
 

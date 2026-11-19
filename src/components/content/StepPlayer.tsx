@@ -1,28 +1,39 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent, RefObject } from "react";
 import type { WalkLink, WalkNode, WalkNodeKind, WalkShow, WalkStep, Walkthrough } from "@/lib/content-schema";
 import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
-import { DIAGRAM_PAD, NODE_H, changedValues, focusX, linkEnds, localDigits, nodeWidths, valueText } from "@/lib/walkthrough";
+import {
+  DIAGRAM_PAD,
+  NODE_H,
+  NODE_ROLE,
+  changedValues,
+  focusX,
+  labelPads,
+  linkEnds,
+  localDigits,
+  nodeWidths,
+  roundedRectPath,
+  valueText,
+  walkUses,
+} from "@/lib/walkthrough";
 import type { Box } from "@/lib/walkthrough";
 import { Inline } from "./Inline";
 
-const STATE_COLOR = { hot: "var(--accent)", warn: "var(--warn)" } as const;
-const NOTE_COLOR = { insight: "var(--accent)", tip: "var(--good)", warn: "var(--warn)" } as const;
-const SIGN = {
-  "+": { mark: "+", color: "var(--good)" },
-  "-": { mark: "−", color: "var(--danger)" },
-  "~": { mark: "~", color: "var(--warn)" },
-} as const;
+// The look of the diagram and of the card around it is in globals.css (`.wk-*` and the `--wk-*` colors).
+const BOX_R = 14;
+const NOTE_R = 10;
+const DOT_R = 5.5;
+const SIGN = { "+": "+", "-": "−", "~": "~" } as const;
 
 /** A 20 × 20 line icon for each kind of box. */
 function Icon({ kind }: { kind: WalkNodeKind }) {
   const line = {
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.6,
+    strokeWidth: 1.7,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
@@ -152,50 +163,83 @@ function Icon({ kind }: { kind: WalkNodeKind }) {
   }
 }
 
-/** One box. Every box is drawn in every step, so it can fade in, fade out and move. */
+/** A 20 × 20 line icon for each kind of callout. */
+function NoteIcon({ kind }: { kind: "insight" | "tip" | "warn" }) {
+  switch (kind) {
+    case "insight":
+      return (
+        <svg viewBox="0 0 20 20" aria-hidden>
+          <path d="M10 2.5a5.2 5.2 0 0 0-3 9.5c.6.5.9 1.1.9 1.8v.4h4.2v-.4c0-.7.3-1.3.9-1.8A5.2 5.2 0 0 0 10 2.5zM8 16.5h4M8.8 18.2h2.4" />
+        </svg>
+      );
+    case "tip":
+      return (
+        <svg viewBox="0 0 20 20" aria-hidden>
+          <circle cx="10" cy="10" r="7.5" />
+          <path d="m6.6 10.3 2.3 2.3 4.5-4.9" />
+        </svg>
+      );
+    case "warn":
+      return (
+        <svg viewBox="0 0 20 20" aria-hidden>
+          <path d="M10 3 2.5 16.5h15z" />
+          <path d="M10 8v4M10 14.2h.01" />
+        </svg>
+      );
+  }
+}
+
+/**
+ * One box. Every box is drawn in every step, so it can fade in, fade out and move. Its look is in
+ * globals.css (`.wk-*`): the state and the role are data attributes. The first <rect> is the box
+ * and the texts are direct children of the group, because the browser audits read them that way.
+ */
 function SceneNode({ node, show, box, lang }: { node: WalkNode; show: WalkShow | undefined; box: Box; lang: Lang }) {
   const state = show?.state;
-  const color = state === "hot" || state === "warn" ? STATE_COLOR[state] : undefined;
   const sub = show?.sub?.[lang];
-  const textX = node.kind === "note" ? 14 : 40;
+  const note = node.kind === "note";
+  const textX = note ? 14 : 40;
   const badge = show?.badge ? localDigits(show.badge, lang) : null;
   const badgeW = badge ? 14 + [...badge].length * 7 : 0;
   return (
     <g
       data-node={node.id}
-      className="transition-[transform,opacity] duration-[420ms] ease-[cubic-bezier(.2,.7,.2,1)] motion-reduce:transition-none"
+      data-role={NODE_ROLE[node.kind]}
+      data-state={show ? (state ?? "plain") : "off"}
+      className="wk-node"
       style={{
-        transform: `translate(${box.x - box.w / 2}px, ${box.y - box.h / 2}px)`,
+        translate: `${box.x - box.w / 2}px ${box.y - box.h / 2}px`,
         opacity: show ? (state === "dim" ? 0.5 : 1) : 0,
       }}
     >
-      <rect
-        width={box.w}
-        height={box.h}
-        rx={10}
-        strokeWidth={color ? 1.8 : 1.2}
-        style={{
-          fill: color ? `color-mix(in srgb, ${color} 12%, var(--bg-raised))` : "var(--bg-raised)",
-          stroke: color ?? "var(--border-strong)",
-        }}
-      />
-      {node.kind !== "note" && (
-        <g transform={`translate(12 ${box.h / 2 - 10})`} style={{ color: color ?? "var(--text-dim)" }}>
-          <Icon kind={node.kind} />
-        </g>
+      {!note && <path className="wk-shadow" d={roundedRectPath(3, 4, box.w, box.h, BOX_R)} />}
+      <rect className="wk-box" width={box.w} height={box.h} rx={note ? NOTE_R : BOX_R} />
+      {!note && (
+        <>
+          <circle className="wk-disc" cx={22} cy={box.h / 2} r={14} />
+          <g className="wk-icon" transform={`translate(12 ${box.h / 2 - 10})`}>
+            <Icon kind={node.kind} />
+          </g>
+        </>
       )}
-      <text x={textX} y={sub ? 24 : 33} className="fill-text text-[13px] font-medium">
+      <text className="wk-label" x={textX} y={sub ? 24 : 33}>
         {node.label[lang]}
       </text>
       {sub && (
-        <text x={textX} y={42} className="fill-text-dim text-[11.5px]">
+        <text className="wk-sub" x={textX} y={42}>
           {sub}
         </text>
       )}
+      {state === "warn" && !note && (
+        <g className="wk-mark" transform="translate(5 1)">
+          <circle r={9} />
+          <text y={4.5}>!</text>
+        </g>
+      )}
       {badge && (
-        <g transform={`translate(${box.w - badgeW + 6} -9)`}>
-          <rect width={badgeW} height={18} rx={9} style={{ fill: color ?? "var(--accent)" }} />
-          <text x={badgeW / 2} y={12.5} textAnchor="middle" className="fill-on-accent font-mono text-[11px] font-semibold">
+        <g className="wk-badge" transform={`translate(${box.w - badgeW + 6} -9)`}>
+          <rect width={badgeW} height={18} rx={9} />
+          <text x={badgeW / 2} y={12.5} textAnchor="middle">
             {badge}
           </text>
         </g>
@@ -205,56 +249,115 @@ function SceneNode({ node, show, box, lang }: { node: WalkNode; show: WalkShow |
 }
 
 /**
- * A dot that travels along `path` again and again, from the moment the
- * diagram starts. Readers who ask for reduced motion see no dots.
+ * A dot that travels along `path` again and again, from the moment the diagram starts. A dot that
+ * goes out is a circle and one that comes back is a square: the shape says it as well as the
+ * color, because orange and green are the same lightness. Readers who ask for reduced motion see
+ * no dots.
  */
-function Dot({ path, ms, delay, color }: { path: string; ms: number; delay: number; color: string }) {
+function Dot({ path, ms, delay, back }: { path: string; ms: number; delay: number; back: boolean }) {
   const dur = `${ms / 1000}s`;
   const begin = `${delay / 1000}s`;
-  return (
-    <circle r={4.5} opacity={0} className="motion-reduce:hidden" style={{ fill: color }}>
+  const motion = (
+    <>
       <animateMotion dur={dur} begin={begin} repeatCount="indefinite" path={path} />
       <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.88;1" dur={dur} begin={begin} repeatCount="indefinite" />
+    </>
+  );
+  const half = DOT_R - 0.7;
+  return back ? (
+    <rect className="wk-dot wk-dot-back motion-reduce:hidden" x={-half} y={-half} width={2 * half} height={2 * half} rx={2.5} opacity={0}>
+      {motion}
+    </rect>
+  ) : (
+    <circle className="wk-dot motion-reduce:hidden" r={DOT_R} opacity={0}>
+      {motion}
     </circle>
   );
 }
 
-function SceneLink({ link, from, to, lang, markerId }: { link: WalkLink; from: Box; to: Box; lang: Lang; markerId: (state: string) => string }) {
+/**
+ * The text on a line, on a pill. The pill is sized from the text, so it is measured once the text is
+ * drawn and again when its size changes (the web fonts arrive; a hidden player is shown). Where a box
+ * stands beside the label the pill gives way, so it never touches a box. The text never moves.
+ */
+function LineLabel({ text, x, y, obstacles }: { text: string; x: number; y: number; obstacles: Box[] }) {
+  const textRef = useRef<SVGTextElement>(null);
+  const pillRef = useRef<SVGRectElement>(null);
+  const shadowRef = useRef<SVGRectElement>(null);
+  useLayoutEffect(() => {
+    const label = textRef.current;
+    const pill = pillRef.current;
+    const shadow = shadowRef.current;
+    if (!label || !pill || !shadow) return;
+    const fit = () => {
+      let b: DOMRect;
+      try {
+        b = label.getBBox();
+      } catch {
+        return; // not rendered yet (Firefox throws for a hidden element); the observer calls this again
+      }
+      const { left, right } = labelPads({ x: b.x, y: b.y, w: b.width, h: b.height }, obstacles);
+      const h = b.height + 2;
+      for (const [el, dx, dy] of [[pill, 0, 0], [shadow, 1.5, 2]] as const) {
+        el.setAttribute("x", String(b.x - left + dx));
+        el.setAttribute("y", String(b.y - 1 + dy));
+        el.setAttribute("width", String(b.width + left + right));
+        el.setAttribute("height", String(h));
+        el.setAttribute("rx", String(h / 2));
+      }
+    };
+    fit();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(fit);
+    observer.observe(label);
+    return () => observer.disconnect();
+  }, [text, x, y, obstacles]);
+  return (
+    <>
+      <rect ref={shadowRef} className="wk-pill-shadow" />
+      <rect ref={pillRef} className="wk-pill" />
+      <text ref={textRef} className="wk-link-label" x={x} y={y} textAnchor="middle">
+        {text}
+      </text>
+    </>
+  );
+}
+
+function SceneLink({
+  link,
+  from,
+  to,
+  lang,
+  markerId,
+  obstacles,
+}: {
+  link: WalkLink;
+  from: Box;
+  to: Box;
+  lang: Lang;
+  markerId: (state: string) => string;
+  obstacles: Box[];
+}) {
   const { x1, y1, x2, y2 } = linkEnds(from, to);
   const forward = `M${x1} ${y1} L${x2} ${y2}`;
   const backward = `M${x2} ${y2} L${x1} ${y1}`;
   const state = link.state ?? "plain";
-  const strong = state === "hot" || state === "warn";
-  const dotColor = strong ? STATE_COLOR[state] : "var(--accent)";
   const ms = link.ms ?? 1400;
   const flow = link.flow;
   const label = link.label?.[lang];
   return (
-    <g data-link={`${link.from}>${link.to}`}>
+    <g data-link={`${link.from}>${link.to}`} data-state={state} className="wk-link">
       <g opacity={state === "dim" ? 0.45 : 1}>
         <path
+          className="wk-line"
           d={forward}
-          fill="none"
-          strokeWidth={state === "hot" ? 2 : 1.5}
-          strokeDasharray={state === "dim" ? "5 5" : undefined}
-          style={{ stroke: strong ? STATE_COLOR[state] : "var(--border-strong)" }}
           markerEnd={flow === "to" || flow === "both" ? `url(#${markerId(state)})` : undefined}
           markerStart={flow === "back" || flow === "both" ? `url(#${markerId(state)})` : undefined}
         />
-        {(flow === "to" || flow === "both") && <Dot path={forward} ms={ms} delay={0} color={dotColor} />}
-        {(flow === "back" || flow === "both") && <Dot path={backward} ms={ms} delay={flow === "both" ? ms / 2 : 0} color={dotColor} />}
+        {(flow === "to" || flow === "both") && <Dot path={forward} ms={ms} delay={0} back={false} />}
+        {(flow === "back" || flow === "both") && <Dot path={backward} ms={ms} delay={flow === "both" ? ms / 2 : 0} back />}
       </g>
-      {label && (
-        <text
-          x={(x1 + x2) / 2}
-          y={(y1 + y2) / 2 - 8}
-          textAnchor="middle"
-          className="fill-text-dim text-[11.5px]"
-          style={{ paintOrder: "stroke", stroke: "var(--bg)", strokeWidth: 5, strokeLinejoin: "round" }}
-        >
-          {label}
-        </text>
-      )}
+      {label && <LineLabel text={label} x={(x1 + x2) / 2} y={(y1 + y2) / 2 - 8} obstacles={obstacles} />}
     </g>
   );
 }
@@ -275,11 +378,27 @@ function Scene({
   label: string;
 }) {
   const widths = useMemo(() => nodeWidths(walk, lang), [walk, lang]);
-  const shown = new Map(step.show.map((s) => [s.id, s]));
-  const box = (node: WalkNode): Box => {
-    const s = shown.get(node.id);
-    return { x: s?.x ?? node.x, y: s?.y ?? node.y, w: widths.get(node.id) ?? 112, h: NODE_H };
-  };
+  const shown = useMemo(() => new Map(step.show.map((s) => [s.id, s])), [step]);
+  const boxes = useMemo(
+    () =>
+      new Map<string, Box>(
+        walk.nodes.map((n) => {
+          const s = shown.get(n.id);
+          return [n.id, { x: s?.x ?? n.x, y: s?.y ?? n.y, w: widths.get(n.id) ?? 112, h: NODE_H }];
+        }),
+      ),
+    [walk, shown, widths],
+  );
+  // The boxes a line label has to keep clear of: the ones this step shows.
+  const obstacles = useMemo(
+    () =>
+      walk.nodes.flatMap((n) => {
+        const b = boxes.get(n.id);
+        return b && shown.has(n.id) ? [b] : [];
+      }),
+    [walk, boxes, shown],
+  );
+  const at = (id: string): Box => boxes.get(id) ?? { x: 0, y: 0, w: 112, h: NODE_H };
   const byId = new Map(walk.nodes.map((n) => [n.id, n]));
   const markerId = (state: string) => `${idBase}-arrow-${state}`;
   return (
@@ -291,33 +410,32 @@ function Scene({
       className="block h-auto w-full min-w-[540px]"
     >
       <defs>
-        <pattern id={`${idBase}-grid`} width="24" height="24" patternUnits="userSpaceOnUse">
-          <circle cx="1.5" cy="1.5" r="1" style={{ fill: "var(--border-strong)" }} />
+        <pattern id={`${idBase}-lattice`} width="48" height="24" patternUnits="userSpaceOnUse">
+          <path className="wk-lattice" d="M0 0L48 24M0 24L48 0" />
         </pattern>
         {(["plain", "dim", "hot", "warn"] as const).map((state) => (
           <marker
             key={state}
             id={markerId(state)}
+            className={`wk-arrow wk-arrow-${state}`}
             viewBox="0 0 10 10"
             refX="8.5"
             refY="5"
-            markerWidth="7"
-            markerHeight="7"
+            markerWidth="8"
+            markerHeight="8"
             orient="auto-start-reverse"
           >
-            <path d="M0 1 9 5 0 9z" style={{ fill: state === "hot" || state === "warn" ? STATE_COLOR[state] : "var(--text-faint)" }} />
+            <path d="M0 1 9 5 0 9z" />
           </marker>
         ))}
       </defs>
-      <rect x={-DIAGRAM_PAD} width={walk.width + 2 * DIAGRAM_PAD} height={walk.height} fill={`url(#${idBase}-grid)`} />
+      <rect x={-DIAGRAM_PAD} width={walk.width + 2 * DIAGRAM_PAD} height={walk.height} fill={`url(#${idBase}-lattice)`} />
       {step.links.map((link, i) => {
-        const from = byId.get(link.from);
-        const to = byId.get(link.to);
-        if (!from || !to) return null;
-        return <SceneLink key={`${link.from}-${link.to}-${i}`} link={link} from={box(from)} to={box(to)} lang={lang} markerId={markerId} />;
+        if (!byId.has(link.from) || !byId.has(link.to)) return null;
+        return <SceneLink key={`${link.from}-${link.to}-${i}`} link={link} from={at(link.from)} to={at(link.to)} lang={lang} markerId={markerId} obstacles={obstacles} />;
       })}
       {walk.nodes.map((node) => (
-        <SceneNode key={node.id} node={node} show={shown.get(node.id)} box={box(node)} lang={lang} />
+        <SceneNode key={node.id} node={node} show={shown.get(node.id)} box={at(node.id)} lang={lang} />
       ))}
     </svg>
   );
@@ -326,7 +444,7 @@ function Scene({
 /**
  * A step-by-step walk-through of a section: readouts, a diagram that changes
  * with each step (dots show requests moving), and the words of the step.
- * Back and Next, the step strip, and the Left and Right keys move between
+ * Back and Next, the numbered steps, and the Left and Right keys move between
  * steps. Pause stops the dots. Readers who ask for reduced motion get the
  * same steps without dots or sliding boxes.
  */
@@ -341,11 +459,13 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
   const step = steps[index];
   const text = step[lang];
   const changed = changedValues(index > 0 ? steps[index - 1].values : undefined, step.values);
+  const uses = useMemo(() => walkUses(walkthrough), [walkthrough]);
   const headingId = `${sectionId}-walk`;
   const bangla = lang === "bn";
   const label = bangla ? "text-[14px] font-semibold" : "font-mono text-xs font-medium uppercase tracking-[0.16em]";
   const first = index === 0;
   const last = index === steps.length - 1;
+  const nextShort = last ? null : steps[index + 1][lang].short;
 
   const go = (i: number) => setIndex(Math.max(0, Math.min(steps.length - 1, i)));
 
@@ -357,13 +477,13 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
     else svg.unpauseAnimations();
   }, [paused]);
 
-  // Keep the current step visible in the strip, without scrolling the page.
+  // Keep the current step visible in the numbered steps, without scrolling the page.
   // On a narrow screen the diagram scrolls sideways too: bring the boxes the
   // step is about into view.
   useEffect(() => {
     const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
     const strip = stripRef.current;
-    const current = strip?.querySelector<HTMLElement>('[aria-current="step"]');
+    const current = strip?.querySelector<HTMLElement>('[aria-current="step"]')?.closest("li");
     if (strip && current) {
       const left = current.offsetLeft;
       const right = left + current.offsetWidth;
@@ -414,10 +534,8 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
     go(next);
   }
 
-  const navButton =
-    "inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border-strong bg-bg px-3 py-1.5 text-[13px] font-medium text-text transition-colors hover:border-accent hover:text-accent aria-disabled:cursor-not-allowed aria-disabled:opacity-40 aria-disabled:hover:border-border-strong aria-disabled:hover:text-text";
-  const toolButton =
-    "inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-[12.5px] text-text-dim transition-colors hover:border-accent hover:text-accent";
+  const navButton = "wk-btn inline-flex min-w-0 items-center gap-1.5 px-3 py-1.5 text-[13px]";
+  const toolButton = "wk-btn inline-flex items-center gap-1.5 px-2.5 py-1 text-[12.5px]";
 
   return (
     <div
@@ -425,14 +543,14 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
       aria-labelledby={headingId}
       onKeyDown={onKeyDown}
       lang={lang}
-      className={"rounded-2xl border border-border bg-bg-raised px-4 py-4 sm:px-5 sm:py-5 " + (bangla ? "font-bengali" : "")}
+      className={"wk-card rounded-2xl bg-bg-raised px-4 py-4 sm:px-5 sm:py-5 " + (bangla ? "font-bengali" : "")}
     >
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-        <div className="flex flex-wrap items-baseline gap-x-2">
+        <div className="flex flex-wrap items-center gap-x-2">
           <h3 id={headingId} className={`${label} text-accent`}>
             {ui.walkTitle}
           </h3>
-          <span className={`${label} text-text-faint`}>· {ui.walkStepOf(index + 1, steps.length)}</span>
+          <span className={`wk-stepchip ${label}`}>{ui.walkStepOf(index + 1, steps.length)}</span>
         </div>
         <div className="flex gap-1.5 motion-reduce:hidden">
           <button type="button" onClick={replay} className={toolButton}>
@@ -456,13 +574,9 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
             const value = valueText(step.values?.[i], lang);
             const fresh = changed[i] && value !== null;
             return (
-              <div
-                key={i}
-                className="min-w-0 rounded-lg border border-border bg-bg px-3 py-2 transition-colors"
-                style={fresh ? { borderColor: "color-mix(in srgb, var(--accent) 60%, var(--border))" } : undefined}
-              >
+              <div key={i} className="wk-metric min-w-0 px-3 py-2" data-fresh={fresh ? "" : undefined}>
                 <dt className="truncate text-[12px] text-text-faint">{metric[lang]}</dt>
-                <dd className={"m-0 font-mono text-[15px] tabular-nums " + (fresh ? "text-accent" : value ? "text-text" : "text-text-faint")}>
+                <dd className={"m-0 font-mono text-[16px] font-bold tabular-nums " + (fresh ? "text-accent" : value ? "text-text" : "text-text-faint")}>
                   {value ?? "—"}
                 </dd>
               </div>
@@ -472,9 +586,37 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
       )}
       {walkthrough.caption && <p className="mt-1.5 text-[12px] text-text-faint">{walkthrough.caption[lang]}</p>}
 
-      <div ref={frameRef} className="mt-3 overflow-x-auto rounded-xl border border-border bg-bg">
+      <div ref={frameRef} className="wk-frame mt-3 overflow-x-auto rounded-xl">
         <Scene walk={walkthrough} step={step} lang={lang} svgRef={svgRef} idBase={headingId} label={ui.walkDiagram(text.title)} />
       </div>
+      <p className="wk-key mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-text-dim">
+        <span>
+          <i aria-hidden className="wk-key-focus" />
+          {ui.walkKeyFocus}
+        </span>
+        <span>
+          <i aria-hidden className="wk-key-plain" />
+          {ui.walkKeyOther}
+        </span>
+        {uses.warn && (
+          <span>
+            <i aria-hidden className="wk-key-red" />
+            {ui.walkKeyBad}
+          </span>
+        )}
+        {uses.out && (
+          <span>
+            <i aria-hidden className="wk-key-out" />
+            {ui.walkKeyOut}
+          </span>
+        )}
+        {uses.back && (
+          <span>
+            <i aria-hidden className="wk-key-back" />
+            {ui.walkKeyBack}
+          </span>
+        )}
+      </p>
 
       <p aria-live="polite" className="sr-only">
         {ui.walkStepOf(index + 1, steps.length)}: {text.title}
@@ -492,17 +634,13 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
           </ul>
         )}
         {text.note && (
-          <div
-            className="mt-4 rounded-[10px] border-l-[3px] px-4 py-3 text-[15px] leading-relaxed text-text"
-            style={{
-              borderLeftColor: NOTE_COLOR[text.note.kind],
-              backgroundColor: `color-mix(in srgb, ${NOTE_COLOR[text.note.kind]} 8%, transparent)`,
-            }}
-          >
-            <span className="mr-2 font-semibold" style={{ color: NOTE_COLOR[text.note.kind] }}>
-              {ui.walkNote[text.note.kind]}
+          <div className="wk-note mt-4 text-[15px] leading-relaxed" data-kind={text.note.kind}>
+            <span className="wk-note-icon">
+              <NoteIcon kind={text.note.kind} />
             </span>
-            <Inline html={text.note.html} />
+            <div>
+              <b className="wk-note-tag">{ui.walkNote[text.note.kind]}</b> <Inline html={text.note.html} />
+            </div>
           </div>
         )}
         {text.changes && (
@@ -510,9 +648,9 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
             <p className={`${label} text-text-faint`}>{ui.walkChanges}</p>
             <ul className="mt-1.5 space-y-1 text-[15px] leading-relaxed text-text-dim">
               {text.changes.map((change, i) => (
-                <li key={i} className="flex gap-2.5">
-                  <span aria-hidden className="w-3 shrink-0 text-center font-mono font-semibold" style={{ color: SIGN[change.sign].color }}>
-                    {SIGN[change.sign].mark}
+                <li key={i} className="wk-change flex gap-2.5" data-sign={change.sign}>
+                  <span aria-hidden className="wk-sign">
+                    {SIGN[change.sign]}
                   </span>
                   <Inline html={change.html} />
                 </li>
@@ -522,41 +660,27 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
         )}
       </div>
 
-      <div className="mt-5 flex items-center gap-2 border-t border-border pt-4">
-        <button type="button" onClick={() => go(index - 1)} aria-disabled={first} className={navButton}>
-          <span aria-hidden>←</span>
-          <span className="sr-only sm:not-sr-only">{ui.walkBack}</span>
-        </button>
-        <ol ref={stripRef} aria-label={ui.walkSteps} className="relative flex min-w-0 flex-1 gap-1 overflow-x-auto px-0.5 py-1">
-          {steps.map((s, i) => {
-            const active = i === index;
-            return (
-              <li key={i} className="shrink-0">
-                <button
-                  type="button"
-                  onClick={() => go(i)}
-                  aria-current={active ? "step" : undefined}
-                  title={s[lang].title}
-                  className={
-                    "flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-1 text-[12.5px] transition-colors " +
-                    (active
-                      ? "border-accent bg-accent text-on-accent"
-                      : i < index
-                        ? "border-border-strong text-text-dim hover:text-text"
-                        : "border-border text-text-faint hover:text-text")
-                  }
-                >
-                  <span className="font-mono text-[11px]">{localDigits(String(i + 1).padStart(2, "0"), lang)}</span>
-                  <span>{s[lang].short}</span>
-                </button>
-              </li>
-            );
-          })}
+      <div className="wk-nav mt-5 pt-4">
+        <ol ref={stripRef} aria-label={ui.walkSteps} className="wk-track">
+          {steps.map((s, i) => (
+            <li key={i} className="wk-tk" data-state={i === index ? "on" : i < index ? "done" : "todo"}>
+              <button type="button" onClick={() => go(i)} aria-current={i === index ? "step" : undefined} title={s[lang].title}>
+                <span className="wk-tkc">{localDigits(String(i + 1), lang)}</span>
+                <span className="wk-tkl">{s[lang].short}</span>
+              </button>
+            </li>
+          ))}
         </ol>
-        <button type="button" onClick={() => go(index + 1)} aria-disabled={last} className={navButton}>
-          <span className="sr-only sm:not-sr-only">{ui.walkNext}</span>
-          <span aria-hidden>→</span>
-        </button>
+        <div className="mt-3.5 flex items-center justify-between gap-2">
+          <button type="button" onClick={() => go(index - 1)} aria-disabled={first} className={navButton}>
+            <span aria-hidden>←</span>
+            <span className="truncate">{ui.walkBack}</span>
+          </button>
+          <button type="button" onClick={() => go(index + 1)} aria-disabled={last} className={navButton + " wk-next"}>
+            <span className="truncate">{nextShort ? `${ui.walkNext}: ${nextShort}` : ui.walkNext}</span>
+            <span aria-hidden>→</span>
+          </button>
+        </div>
       </div>
       <p className="mt-2 hidden text-[12px] text-text-faint sm:block">{ui.walkKeys}</p>
     </div>

@@ -375,7 +375,7 @@ Each step has these fields:
 | Field | Rule |
 | --- | --- |
 | `en`, `bn` | The words of the step. `short` is the label on the step strip, and `title` is the heading: both plain text. `body` is the paragraphs, inline HTML, at least one. Optional: `note` (its `kind` is `insight`, `tip`, or `warn`), `changes` (a `sign` of `+` for added, `-` for taken away, `~` for changed, then the text), and `points` (what to remember, for a recap step). |
-| `show` | The boxes this step shows. A box that is not listed is hidden. `state` is `hot` (the step is about it), `warn` (slow or failing), or `dim`. `sub` is a small second line in both languages. `badge` is a count in a corner, such as `×40`. `x` and `y` give the box a place for this step only, and it glides there. |
+| `show` | The boxes this step shows. A box that is not listed is hidden. `state` is `hot` (the step is about it, so the box is colored), `warn` (a problem here: slow, failing, or stale, so the box is red), or `dim`. `sub` is a small second line in both languages. `badge` is a count in a corner, such as `×40`. `x` and `y` give the box a place for this step only, and it glides there. |
 | `links` | The lines between two shown boxes. `flow` is `to` (dots go from `from` to `to`), `back`, or `both`. `ms` is how long one dot takes to cross, from 200 to 10000, so a slow link has slow dots. `state` is as for a box. `label` is in both languages. |
 | `values` | One entry for each readout, in the same order. A string is the same in both languages, and its digits turn Bangla on the Bangla site. An `{ "en", "bn" }` pair is for words such as yes and no. `null` shows a dash. A readout that changed since the step before is marked. |
 

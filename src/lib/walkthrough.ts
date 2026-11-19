@@ -2,7 +2,7 @@
 // `node --test` can load it.
 
 import type { Lang } from "./i18n.ts";
-import type { Bilingual, WalkStep, Walkthrough } from "./content-schema.ts";
+import type { Bilingual, WalkNodeKind, WalkStep, Walkthrough } from "./content-schema.ts";
 
 /** The height of a box in the diagram, in diagram units. */
 export const NODE_H = 56;
@@ -80,6 +80,79 @@ export function focusX(w: Walkthrough, step: WalkStep): number | null {
     .filter((x): x is number => x !== undefined);
   if (!xs.length) return null;
   return (Math.min(...xs) + Math.max(...xs)) / 2;
+}
+
+/** What a box is, which picks its color: people, your services, fast memory, data, queues, guards, measures, notes. */
+export type WalkRole = "people" | "compute" | "memory" | "data" | "queue" | "guard" | "measure" | "note";
+
+/**
+ * The role of each kind of box. The record is exhaustive on purpose: a kind added to
+ * WALK_NODE_KINDS does not compile until it is given a color here.
+ */
+export const NODE_ROLE: Record<WalkNodeKind, WalkRole> = {
+  user: "people",
+  browser: "people",
+  dns: "compute",
+  server: "compute",
+  service: "compute",
+  balancer: "compute",
+  cache: "memory",
+  cdn: "memory",
+  database: "data",
+  storage: "data",
+  file: "data",
+  queue: "queue",
+  lock: "guard",
+  key: "guard",
+  shield: "guard",
+  clock: "measure",
+  chart: "measure",
+  note: "note",
+};
+
+/**
+ * What a whole walk-through draws, so the key under the diagram does not change from step
+ * to step: whether a box or a line is ever in the warn state, and whether a line ever
+ * sends a dot out or back.
+ */
+export function walkUses(w: Walkthrough): { warn: boolean; out: boolean; back: boolean } {
+  const uses = { warn: false, out: false, back: false };
+  for (const step of w.steps) {
+    if (step.show.some((s) => s.state === "warn")) uses.warn = true;
+    for (const link of step.links) {
+      if (link.state === "warn") uses.warn = true;
+      if (link.flow === "to" || link.flow === "both") uses.out = true;
+      if (link.flow === "back" || link.flow === "both") uses.back = true;
+    }
+  }
+  return uses;
+}
+
+/** A rounded rectangle as a path: the hard shadow of a box. A path and not a <rect>, so the first <rect> of a box stays the box itself. */
+export function roundedRectPath(x: number, y: number, w: number, h: number, r: number): string {
+  return `M${x + r} ${y}H${x + w - r}A${r} ${r} 0 0 1 ${x + w} ${y + r}V${y + h - r}A${r} ${r} 0 0 1 ${x + w - r} ${y + h}H${x + r}A${r} ${r} 0 0 1 ${x} ${y + h - r}V${y + r}A${r} ${r} 0 0 1 ${x + r} ${y}Z`;
+}
+
+/**
+ * The padding left and right of a line label's pill: `base` units each side, less where a box
+ * stands beside the label, so the pill stays `clear` units off every box. The text never moves;
+ * only the pill gives way. `label` is the text's box (x, y, w, h) in diagram units.
+ */
+export function labelPads(label: { x: number; y: number; w: number; h: number }, boxes: Box[], base = 4, clear = 1.5): { left: number; right: number } {
+  let left = base;
+  let right = base;
+  const top = label.y - 1;
+  const bottom = label.y + label.h + 1;
+  for (const b of boxes) {
+    const l = b.x - b.w / 2 - clear;
+    const r = b.x + b.w / 2 + clear;
+    const t = b.y - b.h / 2 - clear;
+    const u = b.y + b.h / 2 + clear;
+    if (t >= bottom || u <= top) continue;
+    if (l >= label.x + label.w) right = Math.max(0, Math.min(right, l - (label.x + label.w)));
+    else if (r <= label.x) left = Math.max(0, Math.min(left, label.x - r));
+  }
+  return { left, right };
 }
 
 /** For each readout, whether its text differs from the step before. The first step marks none. */
