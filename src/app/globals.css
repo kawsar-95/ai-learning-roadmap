@@ -42,6 +42,28 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
+
+  /* The walk-through diagram: ink and paper, a hard shadow, and a color for each kind of box. */
+  --wk-ink: #ece6d8;
+  --wk-paper: #1d2128;
+  --wk-canvas: #12151a;
+  --wk-shadow: #4b4b4b;
+  --wk-soft: color-mix(in srgb, #ece6d8 24%, transparent);
+  --wk-out: #ffa24d;
+  --wk-out-ink: #05070a;
+  --wk-back: #3fd07a;
+  --wk-red: #c31313;
+  --wk-red-line: #ff7a66;
+  --wk-red-dot: #ff7a66;
+  --wk-badge: #e8b923;
+  --wk-on-badge: #1a1d1f;
+  --wk-people: #6c5b17;
+  --wk-compute: #2b5688;
+  --wk-memory: #25623f;
+  --wk-data: #54438a;
+  --wk-queue: #8f4c22;
+  --wk-guard: #8a3556;
+  --wk-measure: #383d45;
 }
 
 :root[data-theme="light"] {
@@ -69,6 +91,27 @@
   --shadow-sm: 0 1px 2px rgba(20, 20, 20, 0.04), 0 1px 3px rgba(20, 20, 20, 0.06);
   --shadow-md: 0 4px 12px rgba(20, 20, 20, 0.06), 0 8px 24px rgba(20, 20, 20, 0.06);
   --shadow-lg: 0 12px 40px rgba(20, 20, 20, 0.1);
+
+  --wk-ink: #1a1d1f;
+  --wk-paper: #fffdf8;
+  --wk-canvas: #f6efe3;
+  --wk-shadow: #1a1d1f;
+  --wk-soft: color-mix(in srgb, #1a1d1f 24%, transparent);
+  --wk-out: #ff9433;
+  --wk-out-ink: #1a1d1f;
+  --wk-back: #35c46b;
+  --wk-red: #f4604f;
+  --wk-red-line: #c4261b;
+  --wk-red-dot: #f4604f;
+  --wk-badge: #ffd54a;
+  --wk-on-badge: #1a1d1f;
+  --wk-people: #f7dd85;
+  --wk-compute: #a9cef6;
+  --wk-memory: #a8ddb6;
+  --wk-data: #d0c2f1;
+  --wk-queue: #f8bb88;
+  --wk-guard: #f5aac4;
+  --wk-measure: #ece3d1;
 }
 
 /* The font variables (--font-crimson, --font-inter, --font-mono-jb,
@@ -343,4 +386,436 @@ html {
 }
 .practice-label:lang(bn) {
   font-size: 12px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Walk-through (src/components/content/StepPlayer.tsx). A sticker look: paper
+   boxes with an ink outline and a hard shadow, on a lattice. Color says two
+   things: what a box is (the disc behind its icon) and what the step is about
+   (the box is filled). A red box is slow or failing. A dot that goes out is a
+   circle and one that comes back is a square.
+
+   Text on a fill is 4.5:1 or more and a line, outline or dot is 3:1 or more
+   (1.5:1 for a dot with its own outline), in both themes. The red is at least
+   30 apart (CIE76) from every other box color. See scripts/system-design/README.md
+   for the browser audits that read this.
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --wk-mono: var(--font-mono-jb), var(--font-noto-bengali), ui-monospace, monospace;
+}
+
+.wk-card {
+  border: 1.5px solid var(--wk-soft);
+}
+.wk-frame {
+  background: var(--wk-canvas);
+  border: 1.5px solid var(--wk-soft);
+}
+.wk-lattice {
+  fill: none;
+  stroke: var(--wk-ink);
+  stroke-opacity: 0.075;
+  stroke-width: 1;
+}
+
+/* A box. `data-role` is what it is, `data-state` is what the step does with it. */
+.wk-node {
+  --role: var(--wk-measure);
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transition:
+    translate 0.42s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.42s;
+}
+.wk-node[data-state="off"] {
+  scale: 0.8;
+}
+.wk-node[data-state="dim"] {
+  filter: saturate(0.45);
+}
+.wk-node[data-role="people"] {
+  --role: var(--wk-people);
+}
+.wk-node[data-role="compute"] {
+  --role: var(--wk-compute);
+}
+.wk-node[data-role="memory"] {
+  --role: var(--wk-memory);
+}
+.wk-node[data-role="data"] {
+  --role: var(--wk-data);
+}
+.wk-node[data-role="queue"] {
+  --role: var(--wk-queue);
+}
+.wk-node[data-role="guard"] {
+  --role: var(--wk-guard);
+}
+.wk-node[data-role="measure"] {
+  --role: var(--wk-measure);
+}
+.wk-node[data-role="note"] {
+  --role: var(--wk-people);
+}
+.wk-shadow {
+  fill: var(--wk-shadow);
+}
+.wk-box {
+  fill: var(--wk-paper);
+  stroke: var(--wk-ink);
+  stroke-width: 2px;
+}
+.wk-disc {
+  fill: var(--role);
+  stroke: var(--wk-ink);
+  stroke-width: 1.75px;
+}
+.wk-icon {
+  color: var(--wk-ink);
+}
+.wk-node[data-state="hot"] .wk-box {
+  fill: var(--role);
+  stroke-width: 2.5px;
+}
+.wk-node[data-state="warn"] .wk-box {
+  fill: var(--wk-red);
+  stroke-width: 2.5px;
+}
+.wk-node[data-state="hot"] .wk-disc,
+.wk-node[data-state="warn"] .wk-disc {
+  fill: var(--wk-paper);
+}
+.wk-node[data-role="note"] .wk-box {
+  stroke-dasharray: 5 4;
+  stroke-width: 1.75px;
+}
+.wk-node[data-role="note"][data-state="hot"] .wk-box,
+.wk-node[data-role="note"][data-state="warn"] .wk-box {
+  stroke-dasharray: none;
+  stroke-width: 2px;
+}
+.wk-label {
+  font: 600 11.5px var(--wk-mono);
+  fill: var(--wk-ink);
+}
+.wk-sub {
+  font: 500 11.5px var(--wk-mono);
+  fill: var(--wk-ink);
+}
+.wk-badge rect {
+  fill: var(--wk-badge);
+  stroke: var(--wk-ink);
+  stroke-width: 1.5px;
+}
+.wk-badge text {
+  fill: var(--wk-on-badge);
+  font: 700 11px var(--wk-mono);
+}
+.wk-mark circle {
+  fill: var(--wk-badge);
+  stroke: var(--wk-ink);
+  stroke-width: 2px;
+}
+.wk-mark text {
+  fill: var(--wk-on-badge);
+  font: 800 12px var(--wk-mono);
+  text-anchor: middle;
+}
+
+/* A line, its arrowheads, its dots and its label. */
+.wk-line {
+  fill: none;
+  stroke: color-mix(in srgb, var(--wk-ink) 60%, var(--wk-canvas));
+  stroke-width: 1.75px;
+  stroke-linecap: round;
+}
+.wk-link[data-state="hot"] .wk-line {
+  stroke: var(--wk-ink);
+  stroke-width: 2.5px;
+}
+.wk-link[data-state="warn"] .wk-line {
+  stroke: var(--wk-red-line);
+  stroke-width: 2.5px;
+}
+.wk-link[data-state="dim"] .wk-line {
+  stroke-dasharray: 5 5;
+  stroke-width: 1.5px;
+}
+.wk-arrow path {
+  fill: color-mix(in srgb, var(--wk-ink) 60%, var(--wk-canvas));
+}
+.wk-arrow-hot path {
+  fill: var(--wk-ink);
+}
+.wk-arrow-warn path {
+  fill: var(--wk-red-line);
+}
+.wk-dot {
+  fill: var(--wk-out);
+  stroke: var(--wk-out-ink);
+  stroke-width: 2px;
+}
+.wk-dot-back {
+  fill: var(--wk-back);
+}
+.wk-link[data-state="warn"] .wk-dot {
+  fill: var(--wk-red-dot);
+}
+.wk-pill {
+  fill: var(--wk-paper);
+  stroke: var(--wk-ink);
+  stroke-width: 1.5px;
+}
+.wk-pill-shadow {
+  fill: var(--wk-shadow);
+}
+.wk-link-label {
+  font: 600 10.5px var(--wk-mono);
+  fill: var(--wk-ink);
+}
+
+/* The card around the diagram. */
+.wk-stepchip {
+  border: 2px solid var(--wk-ink);
+  border-radius: 999px;
+  padding: 1px 10px;
+  background: var(--wk-paper);
+  color: var(--wk-ink);
+  box-shadow: 1.5px 2px 0 var(--wk-shadow);
+}
+.wk-btn {
+  border: 2px solid var(--wk-ink);
+  background: var(--wk-paper);
+  color: var(--wk-ink);
+  border-radius: 10px;
+  box-shadow: 2px 2.5px 0 var(--wk-shadow);
+  font-weight: 600;
+  transition:
+    transform 0.08s,
+    box-shadow 0.08s;
+}
+.wk-btn:active:not([aria-disabled="true"]) {
+  transform: translate(1.5px, 2px);
+  box-shadow: 0.5px 0.5px 0 var(--wk-shadow);
+}
+.wk-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.wk-next:not([aria-disabled="true"]) {
+  background: var(--wk-memory);
+}
+.wk-metric {
+  background: var(--wk-paper);
+  border: 1.5px solid var(--wk-soft);
+  border-left: 5px solid var(--wk-soft);
+  border-radius: 10px;
+}
+.wk-metric[data-fresh] {
+  border-left-color: var(--accent);
+}
+.wk-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.wk-key i {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border: 1.75px solid var(--wk-ink);
+  border-radius: 5px;
+}
+.wk-key i.wk-key-focus {
+  background: var(--wk-compute);
+}
+.wk-key i.wk-key-plain {
+  background: var(--wk-paper);
+}
+.wk-key i.wk-key-red {
+  background: var(--wk-red);
+}
+.wk-key i.wk-key-out {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--wk-out-ink);
+  border-radius: 50%;
+  background: var(--wk-out);
+}
+.wk-key i.wk-key-back {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--wk-out-ink);
+  border-radius: 3px;
+  background: var(--wk-back);
+}
+.wk-note {
+  position: relative;
+  border: 1.5px solid color-mix(in srgb, var(--wk-ink) 40%, transparent);
+  border-radius: 12px;
+  padding: 12px 14px 12px 56px;
+  background: color-mix(in srgb, var(--nr) 45%, var(--wk-paper));
+  color: var(--wk-ink);
+}
+.wk-note[data-kind="insight"] {
+  --nr: var(--wk-data);
+}
+.wk-note[data-kind="tip"] {
+  --nr: var(--wk-memory);
+}
+.wk-note[data-kind="warn"] {
+  --nr: var(--wk-red);
+}
+.wk-note-icon {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1.75px solid var(--wk-ink);
+  border-radius: 9px;
+  background: var(--wk-paper);
+}
+.wk-note-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--wk-ink);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wk-note-tag {
+  display: block;
+  margin: 0 0 2px;
+  font: 700 10.5px var(--wk-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Bangla is a joined script: no letter-spacing, and a size it can be read at. */
+.wk-card[lang="bn"] .wk-note-tag {
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.wk-sign {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border: 1.75px solid var(--wk-ink);
+  border-radius: 6px;
+  background: var(--sgb);
+  color: var(--wk-ink);
+  font: 600 13px/17px var(--wk-mono);
+  text-align: center;
+}
+.wk-change[data-sign="+"] {
+  --sgb: var(--wk-memory);
+}
+.wk-change[data-sign="-"] {
+  --sgb: var(--wk-red);
+}
+.wk-change[data-sign="~"] {
+  --sgb: var(--wk-people);
+}
+
+/* The numbered steps: a line through the circles, the name under each. */
+.wk-nav {
+  border-top: 1.5px solid var(--wk-soft);
+}
+.wk-track {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  /* The strip scrolls sideways, so it clips on top too: leave room for the ring around the current step (5px). */
+  padding-top: 7px;
+}
+.wk-tk {
+  position: relative;
+  /* 84px: the longest step name in Part 18 ("Choreography") is 78px at this size, and two neighbours must not touch. */
+  flex: 1 0 84px;
+  min-width: 84px;
+  text-align: center;
+}
+.wk-tk + .wk-tk::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: -50%;
+  width: 100%;
+  height: 2px;
+  background: var(--wk-soft);
+}
+.wk-tk[data-state="done"]::before,
+.wk-tk[data-state="on"]::before {
+  top: 13px;
+  height: 3px;
+  background: var(--wk-ink);
+}
+.wk-tk button {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.wk-tkc {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--wk-ink);
+  border-radius: 50%;
+  background: var(--wk-paper);
+  color: var(--wk-ink);
+  font: 700 12px var(--wk-mono);
+}
+.wk-tk[data-state="done"] .wk-tkc,
+.wk-tk[data-state="on"] .wk-tkc {
+  background: var(--wk-memory);
+}
+.wk-tk[data-state="on"] .wk-tkc {
+  box-shadow:
+    0 0 0 3px var(--wk-paper),
+    0 0 0 5px var(--accent);
+}
+.wk-tk[data-state="todo"] .wk-tkc {
+  border-color: var(--wk-soft);
+  color: var(--text-faint);
+}
+.wk-tkl {
+  max-width: 84px;
+  color: var(--text-faint);
+  font-size: 11.5px;
+  line-height: 1.25;
+}
+.wk-tk[data-state="done"] .wk-tkl {
+  color: var(--text-dim);
+}
+.wk-tk[data-state="on"] .wk-tkl,
+.wk-tk button:hover .wk-tkl {
+  color: var(--wk-ink);
+}
+.wk-tk[data-state="on"] .wk-tkl {
+  font-weight: 700;
+}
+
+/* Readers who ask for reduced motion get the steps without glide, pop or press. */
+@media (prefers-reduced-motion: reduce) {
+  .wk-node,
+  .wk-btn {
+    transition: none;
+  }
 }

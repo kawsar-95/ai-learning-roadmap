@@ -1,8 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
+import { WALK_NODE_KINDS } from "../src/lib/content-schema.ts";
 import type { TopicFile, Walkthrough } from "../src/lib/content-schema.ts";
-import { NODE_H, boxExit, boxWidth, changedValues, findWalkthrough, focusX, linkEnds, localDigits, nodeWidths, valueText, walkthroughParams, walkthroughPath } from "../src/lib/walkthrough.ts";
+import { NODE_H, NODE_ROLE, boxExit, boxWidth, changedValues, findWalkthrough, focusX, labelPads, linkEnds, localDigits, nodeWidths, roundedRectPath, valueText, walkUses, walkthroughParams, walkthroughPath } from "../src/lib/walkthrough.ts";
 
 test("localDigits writes Bangla digits on the Bangla site only", () => {
   assert.equal(localDigits("1,085 ms", "bn"), "১,০৮৫ ms");
@@ -58,6 +59,49 @@ test("focusX is the middle of the boxes a step is about, with moved boxes at the
   assert.equal(focusX(walk, step([{ id: "a", state: "hot" }, { id: "b", state: "warn" }])), 300);
   assert.equal(focusX(walk, step([{ id: "a" }, { id: "b", state: "hot", x: 700 }])), 700);
   assert.equal(focusX(walk, step([{ id: "a", state: "dim" }])), null);
+});
+
+test("every kind of box has a color role, and a role names no kind that does not exist", () => {
+  for (const kind of WALK_NODE_KINDS) assert.ok(NODE_ROLE[kind], `no role for ${kind}`);
+  assert.deepEqual(Object.keys(NODE_ROLE).sort(), [...WALK_NODE_KINDS].sort());
+  assert.equal(NODE_ROLE.cache, "memory");
+  assert.equal(NODE_ROLE.database, "data");
+  assert.equal(NODE_ROLE.note, "note");
+});
+
+test("walkUses says what a whole walk-through draws, so the key under the diagram does not change from step to step", () => {
+  const label = { en: "x", bn: "x" };
+  const text = { short: "s", title: "t", body: ["b"] };
+  type Step = Walkthrough["steps"][number];
+  const step = (show: Step["show"], links: Step["links"]): Step => ({ en: text, bn: text, show, links });
+  const walk = (steps: Step[]): Walkthrough => ({ width: 760, height: 300, nodes: [{ id: "a", kind: "server", label, x: 100, y: 100 }], metrics: [], steps });
+  assert.deepEqual(walkUses(walk([step([{ id: "a" }], [])])), { warn: false, out: false, back: false });
+  assert.deepEqual(
+    walkUses(walk([step([{ id: "a" }], [{ from: "a", to: "a", flow: "to" }]), step([{ id: "a", state: "warn" }], [])])),
+    { warn: true, out: true, back: false },
+  );
+  assert.deepEqual(walkUses(walk([step([], [{ from: "a", to: "a", flow: "both", state: "warn" }])])), { warn: true, out: true, back: true });
+  assert.deepEqual(walkUses(walk([step([], [{ from: "a", to: "a", flow: "back" }])])), { warn: false, out: false, back: true });
+});
+
+test("labelPads keeps a line label's pill off the boxes beside it, and never asks the text to move", () => {
+  const label = { x: 100, y: 50, w: 40, h: 13 }; // the text spans x 100 to 140
+  const box = (x: number, y: number) => ({ x, y, w: 100, h: 56 });
+  assert.deepEqual(labelPads(label, []), { left: 4, right: 4 });
+  // A box whose edge is 2 units from the text leaves 0.5 for the pill, after 1.5 of clearance.
+  assert.deepEqual(labelPads(label, [box(192, 56)]), { left: 4, right: 0.5 });
+  assert.deepEqual(labelPads(label, [box(48, 56)]), { left: 0.5, right: 4 });
+  // A box that leaves exactly the clearance takes the whole padding of that side.
+  assert.deepEqual(labelPads(label, [box(191.5, 56)]), { left: 4, right: 0 });
+  // A box far to the side, or above or below the label, changes nothing.
+  assert.deepEqual(labelPads(label, [box(400, 56)]), { left: 4, right: 4 });
+  assert.deepEqual(labelPads(label, [box(192, 200)]), { left: 4, right: 4 });
+});
+
+test("roundedRectPath is a closed path that starts on the top edge", () => {
+  const d = roundedRectPath(3, 4, 100, 56, 14);
+  assert.ok(d.startsWith("M17 4H89A14 14 0 0 1 103 18"));
+  assert.ok(d.endsWith("Z"));
 });
 
 // Rules for the real walk-throughs, read from disk like the quiz rules.

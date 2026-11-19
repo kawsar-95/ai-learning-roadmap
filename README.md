@@ -101,13 +101,17 @@ remembers it.
 
 ### Step-by-step walk-throughs
 
-![A walk-through in Part 18, section 7, Caching, at step 4 of 13: three readouts (p95, hit rate, and database load) marked as changed above a diagram of users, an app, a cache, and a database, then the step's text with a tip and the list of what changed, and the strip of step names](screenshots/walkthrough.png)
+![A walk-through in Part 18, section 7, Caching, at step 4 of 13: three readouts (p95, hit rate, and database load) marked as changed above a diagram of users, an app, a cache, and a database, drawn in color with a key under it, then the step's text with a tip and the list of what changed, and the numbered steps](screenshots/walkthrough.png)
 
 Each of the 40 sections of Part 18 has a walk-through under its intro: a
 diagram that changes with every step, drawn for this site.
 
 - A row of **readouts** (such as the p95 latency or the hit rate) shows how
   the numbers change from step to step. A changed one is marked.
+- A **key** under the diagram says what the colors mean: a colored box is
+  what the step is about, a red box is where something goes wrong, and the
+  orange circles that go out along a line are told apart from the green
+  squares that come back by their shape as well as their color.
 - **Back** / **Next**, the strip of step names, or the <kbd>←</kbd> and
   <kbd>→</kbd> keys move between steps. **Pause** stops the dots that travel
   along the lines, and **Replay** starts them again from the beginning. With
@@ -295,7 +299,7 @@ npm run dev        # http://localhost:3000
 | `npm run dev` | Starts the dev server at <http://localhost:3000>. The service worker is off in development. |
 | `npm run build` | Validates all content, writes the static site to `out/`, then writes the offline file list into `out/sw.js`. |
 | `npx serve@latest out` | Serves the static build at <http://localhost:3000>. |
-| `npm test` | Runs the 189 tests in `tests/` with Node's built-in test runner. |
+| `npm test` | Runs the 193 tests in `tests/` with Node's built-in test runner. |
 | `npm run lint` | Runs ESLint. |
 | `npm run check:videos` | Asks YouTube whether every listed video still exists and can be embedded. It needs the network, so `npm test` and the deploy do not run it. |
 
