@@ -2,12 +2,15 @@
 // "use client" file; pass the data down as props.
 //
 // Each file goes through TopicFileSchema.parse at module load, so bad content
-// fails `next build`.
+// fails `next build`. A Part's own walk-through files are attached to their
+// sections here, and go through their schema the same way.
 
 import { TopicFileSchema } from "@/lib/content-schema";
 import type { Section, TopicFile } from "@/lib/content-schema";
 import type { Lang } from "@/lib/i18n";
+import { attachWalkthroughs } from "@/lib/walkthrough-files";
 
+import { WALKTHROUGH_FILES } from "@/content/walkthroughs";
 import llmFundamentals from "@/content/llm-fundamentals.json";
 import promptEngineering from "@/content/prompt-engineering.json";
 import fineTuningRoadmap from "@/content/fine-tuning-roadmap.json";
@@ -74,8 +77,13 @@ const FILES: Record<string, unknown> = {
   "system-design": systemDesign,
 };
 
+for (const slug of Object.keys(WALKTHROUGH_FILES)) {
+  if (!TOPIC_ORDER.includes(slug)) throw new Error(`walkthroughs/${slug}/: "${slug}" is not a Part`);
+}
+
 export const TOPICS: Topic[] = TOPIC_ORDER.map((slug, i) => {
-  const topic = TopicFileSchema.parse(FILES[slug]);
+  // A Part's walk-throughs are inline in its file (Part 18) or in files of their own (src/content/walkthroughs).
+  const topic = attachWalkthroughs(TopicFileSchema.parse(FILES[slug]), WALKTHROUGH_FILES[slug]);
   if (topic.slug !== slug) {
     throw new Error(`Topic file for "${slug}" has slug "${topic.slug}"`);
   }

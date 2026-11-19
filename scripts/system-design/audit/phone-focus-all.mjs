@@ -1,16 +1,13 @@
-// Phone check of the System Design walk-throughs, every step, both languages: the diagram frame
+// Phone check of the walk-throughs of one Part (PART=<slug>, default system-design), every step, both languages: the diagram frame
 // scrolls sideways, and on each step the middle of the boxes the step is about (hot or warn) must
 // be at the middle of the visible frame, or at least inside it where the scroll is stopped at an end.
 // A negative control shifts the frame by hand and expects the check to notice.
-// Usage: node scripts/system-design/audit/phone-focus-all.mjs <base-url> [sectionId ...]   (see ../README.md)
+// Usage: [PART=<slug>] node scripts/system-design/audit/phone-focus-all.mjs <base-url> [sectionId ...]   (see ../README.md)
 import { launch } from "./browser.mjs";
-import { readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { partWalks, slug } from "./part.mjs";
 
 const [base, ...only] = process.argv.slice(2);
-const jsonPath = fileURLToPath(new URL("../../../src/content/system-design.json", import.meta.url));
-const topic = JSON.parse(readFileSync(jsonPath, "utf8"));
-const walks = topic.sections.filter((s) => s.walkthrough && (!only.length || only.includes(s.id)));
+const walks = partWalks().filter((s) => !only.length || only.includes(s.id));
 
 /** Runs in the page: where the hot boxes are, and where the frame is scrolled. */
 function probe(root, ids) {
@@ -41,7 +38,7 @@ for (const [prefix, lang] of [["", "en"], ["/bn", "bn"]]) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "reduce" });
   const p = await ctx.newPage();
   p.on("pageerror", (e) => problems.push(`[${lang}] pageerror: ${e.message}`));
-  const page = `${base}${prefix}/topics/system-design/`;
+  const page = `${base}${prefix}/topics/${slug}/`;
   await p.goto(page, { waitUntil: "networkidle" });
   let controlDone = lang !== "en";
   for (const s of walks) {

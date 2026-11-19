@@ -36,7 +36,7 @@ Layman's, and বাংলা. Every page exists in English and in Bangla.
 | Parts | 18 |
 | Sections | 153 |
 | Start here boxes | 153, one per section: the big idea, the words to know, and what to remember |
-| Walk-throughs | 40, with 445 steps: one for each section of Part 18 |
+| Walk-throughs | 44, with 477 steps: one for each section of Part 18, and four in Part 1 |
 | Cited sources | 666, from 162 sites (218 of them arXiv papers) |
 | Voices in each section | 3: Technical, Layman's, বাংলা |
 | Languages | English and Bangla, page for page |
@@ -104,7 +104,8 @@ remembers it.
 ![A walk-through in Part 18, section 7, Caching, at step 4 of 13: three readouts (p95, hit rate, and database load) marked as changed above a diagram of users, an app, a cache, and a database, drawn in color with a key under it, then the step's text with a tip and the list of what changed, and the numbered steps](screenshots/walkthrough.png)
 
 Each of the 40 sections of Part 18 has a walk-through under its intro: a
-diagram that changes with every step, drawn for this site.
+diagram that changes with every step, drawn for this site. Part 1 has four,
+for Tokens, Function calling, Embedding models, and Reasoning models.
 
 - A row of **readouts** (such as the p95 latency or the hit rate) shows how
   the numbers change from step to step. A changed one is marked.
@@ -299,7 +300,7 @@ npm run dev        # http://localhost:3000
 | `npm run dev` | Starts the dev server at <http://localhost:3000>. The service worker is off in development. |
 | `npm run build` | Validates all content, writes the static site to `out/`, then writes the offline file list into `out/sw.js`. |
 | `npx serve@latest out` | Serves the static build at <http://localhost:3000>. |
-| `npm test` | Runs the 193 tests in `tests/` with Node's built-in test runner. |
+| `npm test` | Runs the 213 tests in `tests/` with Node's built-in test runner. |
 | `npm run lint` | Runs ESLint. |
 | `npm run check:videos` | Asks YouTube whether every listed video still exists and can be embedded. It needs the network, so `npm test` and the deploy do not run it. |
 
@@ -385,6 +386,7 @@ A file-by-file map is in
 | [docs/video-review-log.md](docs/video-review-log.md) | Every clip that was added, and every clip that was read and left out, with the reason |
 | [scripts/video-curation/README.md](scripts/video-curation/README.md) | The scripts that found and verified the clips |
 | [scripts/system-design/README.md](scripts/system-design/README.md) | The generator that builds Part 18 (edit it there, not in the JSON), its checks, and the browser audits of the walk-throughs |
+| [scripts/walkthroughs/README.md](scripts/walkthroughs/README.md) | The builder of the walk-throughs of Parts 1 to 17, the rules it checks, and how to add one |
 | [scripts/screenshots/README.md](scripts/screenshots/README.md) | Retaking the screenshots in this README |
 | [docs/superpowers/](docs/superpowers/) | Design specs and plans of past redesigns (historical) |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to make a change, the checks to run, the code conventions, and the writing rules |

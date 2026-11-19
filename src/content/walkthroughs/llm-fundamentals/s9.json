@@ -1,0 +1,534 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ব্যবহারকারী"
+      },
+      "x": 90,
+      "y": 75
+    },
+    {
+      "id": "docs",
+      "kind": "storage",
+      "label": {
+        "en": "Your documents",
+        "bn": "আপনার ডকুমেন্ট"
+      },
+      "x": 90,
+      "y": 250
+    },
+    {
+      "id": "embed",
+      "kind": "model",
+      "label": {
+        "en": "Embedding model",
+        "bn": "এমবেডিং মডেল"
+      },
+      "x": 285,
+      "y": 75
+    },
+    {
+      "id": "index",
+      "kind": "database",
+      "label": {
+        "en": "Vector index",
+        "bn": "ভেক্টর ইনডেক্স"
+      },
+      "x": 475,
+      "y": 75
+    },
+    {
+      "id": "rerank",
+      "kind": "model",
+      "label": {
+        "en": "Reranker",
+        "bn": "রিরেংকার"
+      },
+      "x": 670,
+      "y": 75
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 670,
+      "y": 250
+    },
+    {
+      "id": "bm25",
+      "kind": "service",
+      "label": {
+        "en": "BM25 keywords",
+        "bn": "BM25 কিওয়ার্ড"
+      },
+      "x": 285,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Documents left",
+      "bn": "বাকি ডকুমেন্ট"
+    },
+    {
+      "en": "Time for one pair",
+      "bn": "এক জোড়ার সময়"
+    }
+  ],
+  "caption": {
+    "en": "Example numbers from this section.",
+    "bn": "উদাহরণের সংখ্যাগুলো এই সেকশন থেকে নেওয়া।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Question",
+        "title": "A question about your own documents",
+        "body": [
+          "A user asks a question that your own documents can answer. There are 10 million of them.",
+          "A system cannot read them all for every question. It first finds the right pieces fast, then checks them carefully."
+        ]
+      },
+      "bn": {
+        "short": "প্রশ্ন",
+        "title": "আপনার নিজের ডকুমেন্ট নিয়ে একটি প্রশ্ন",
+        "body": [
+          "ব্যবহারকারী এমন একটি প্রশ্ন করে, যার উত্তর আপনার নিজের ডকুমেন্টে আছে। ডকুমেন্ট আছে ১ কোটি।",
+          "প্রতিটি প্রশ্নের জন্য সবগুলো ডকুমেন্ট পড়া সম্ভব নয়। তাই সিস্টেম আগে দ্রুত ঠিক অংশগুলো খোঁজে, তারপর যত্ন করে যাচাই করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "asks a question",
+            "bn": "প্রশ্ন করে"
+          }
+        },
+        {
+          "id": "docs",
+          "sub": {
+            "en": "10 million",
+            "bn": "১ কোটি"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "10 million",
+          "bn": "১ কোটি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Embed",
+        "title": "An embedding model turns text into numbers",
+        "body": [
+          "The embedding model turns the question and each document into an embedding: a list of numbers that stands for the meaning of a text. This list is also called a vector.",
+          "Texts with similar meanings get similar numbers."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Each side, the question and the document, is turned into numbers on its own."
+        }
+      },
+      "bn": {
+        "short": "এমবেডিং",
+        "title": "এমবেডিং মডেল লেখাকে সংখ্যায় বদলায়",
+        "body": [
+          "এমবেডিং মডেল প্রশ্ন আর প্রতিটি ডকুমেন্টকে এমবেডিংয়ে বদলায়। এমবেডিং হলো একটি লেখার অর্থ বোঝানো সংখ্যার তালিকা, যাকে ভেক্টরও বলে।",
+          "কাছাকাছি অর্থের লেখা কাছাকাছি সংখ্যা পায়।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "প্রশ্ন আর ডকুমেন্ট, প্রত্যেকটাকে আলাদাভাবে সংখ্যায় বদলানো হয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "docs",
+          "state": "dim",
+          "sub": {
+            "en": "10 million",
+            "bn": "১ কোটি"
+          }
+        },
+        {
+          "id": "embed",
+          "state": "hot",
+          "sub": {
+            "en": "text → numbers",
+            "bn": "লেখা → সংখ্যা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "embed",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "docs",
+          "to": "embed",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "10 million",
+          "bn": "১ কোটি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Search",
+        "title": "Stage 1: find candidates fast",
+        "body": [
+          "The question's numbers are compared with the documents' numbers. Cosine similarity scores how much two vectors point the same way: a high score means similar meanings.",
+          "This is fast enough to search billions of vectors. It narrows 10 million documents to about 100 candidates."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "10 million documents → about 100 candidates"
+          }
+        ]
+      },
+      "bn": {
+        "short": "খোঁজা",
+        "title": "স্টেজ ১: দ্রুত ক্যান্ডিডেট খোঁজা",
+        "body": [
+          "প্রশ্নের সংখ্যার সঙ্গে ডকুমেন্টগুলোর সংখ্যা মিলিয়ে দেখা হয়। কোসাইন সিমিলারিটি বলে দুটি ভেক্টর কতটা একই দিকে তাক করে আছে; স্কোর বেশি মানে অর্থ কাছাকাছি।",
+          "এটা এত দ্রুত যে বিলিয়ন-স্কেল ভেক্টরেও খোঁজা যায়। ১ কোটি ডকুমেন্ট থেকে প্রায় ১০০টি ক্যান্ডিডেটে নেমে আসে।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "১ কোটি ডকুমেন্ট → প্রায় ১০০ ক্যান্ডিডেট"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "embed",
+          "state": "dim"
+        },
+        {
+          "id": "index",
+          "state": "hot",
+          "sub": {
+            "en": "100 candidates",
+            "bn": "১০০ ক্যান্ডিডেট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "embed",
+          "to": "index",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "100",
+        {
+          "en": "fast",
+          "bn": "দ্রুত"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Rerank",
+        "title": "Stage 2: a reranker reads each pair together",
+        "body": [
+          "A reranker, also called a cross-encoder, reads the question and one document together and scores how well they match.",
+          "This is more accurate but slower: about 50–200 ms for each pair. So it only sees the 100 candidates, not the 10 million documents."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Each candidate gets a careful score"
+          }
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "স্টেজ ২: রিরেংকার প্রতিটি জোড়া একসাথে পড়ে",
+        "body": [
+          "রিরেংকার, যাকে ক্রস-এনকোডারও বলে, প্রশ্ন আর একটি ডকুমেন্ট একসাথে পড়ে এবং দুটো কতটা মেলে তার স্কোর দেয়।",
+          "এটা বেশি নির্ভুল, কিন্তু ধীর: প্রতি জোড়ায় প্রায় ৫০–২০০ ms। তাই রিরেংকার শুধু ১০০টি ক্যান্ডিডেট দেখে, ১ কোটি ডকুমেন্ট নয়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "প্রতিটি ক্যান্ডিডেট যত্ন করে স্কোর পায়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "index",
+          "state": "dim",
+          "sub": {
+            "en": "100 candidates",
+            "bn": "১০০ ক্যান্ডিডেট"
+          }
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "careful, slower",
+            "bn": "যত্ন করে, ধীরে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "index",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "100",
+        "50–200 ms"
+      ]
+    },
+    {
+      "en": {
+        "short": "Answer",
+        "title": "The best few go to the LLM",
+        "body": [
+          "The reranker picks the best 5 of the 100. The LLM reads those 5 pieces and writes the final answer.",
+          "This is retrieval-augmented generation, RAG: find the relevant text first, then answer from that text."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "100 candidates → the best 5"
+          }
+        ]
+      },
+      "bn": {
+        "short": "উত্তর",
+        "title": "সেরা কয়েকটি LLM পায়",
+        "body": [
+          "রিরেংকার ১০০টির মধ্য থেকে সেরা ৫টি বাছে। LLM সেই ৫টি অংশ পড়ে আর চূড়ান্ত উত্তর লেখে।",
+          "একেই বলে রিট্রিভাল-অগমেন্টেড জেনারেশন, RAG: আগে দরকারি লেখা খুঁজে নেওয়া, তারপর সেই লেখা থেকে উত্তর দেওয়া।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "১০০ ক্যান্ডিডেট → সেরা ৫টি"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "rerank",
+          "state": "dim",
+          "sub": {
+            "en": "best 5",
+            "bn": "সেরা ৫টি"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "reads 5 pieces",
+            "bn": "৫টি অংশ পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rerank",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "best 5",
+            "bn": "সেরা ৫"
+          }
+        }
+      ],
+      "values": [
+        "5",
+        "50–200 ms"
+      ]
+    },
+    {
+      "en": {
+        "short": "Hybrid",
+        "title": "Keywords and meaning work better together",
+        "body": [
+          "BM25 is a classic keyword score: documents that share the question's words score higher. Hybrid retrieval uses it together with embedding search.",
+          "On standard retrieval tests, this usually beats either one alone."
+        ]
+      },
+      "bn": {
+        "short": "হাইব্রিড",
+        "title": "কিওয়ার্ড আর অর্থ একসাথে ভালো কাজ করে",
+        "body": [
+          "BM25 কিওয়ার্ড দিয়ে খোঁজার পুরনো স্কোর: প্রশ্নের শব্দ যে ডকুমেন্টে আছে, সেটা বেশি স্কোর পায়। হাইব্রিড রিট্রিভাল এটাকে এমবেডিং সার্চের সঙ্গে একসাথে ব্যবহার করে।",
+          "প্রচলিত রিট্রিভাল পরীক্ষায় এটা সাধারণত যেকোনো একটার চেয়ে ভালো করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "docs",
+          "state": "dim",
+          "sub": {
+            "en": "10 million",
+            "bn": "১ কোটি"
+          }
+        },
+        {
+          "id": "embed",
+          "state": "hot"
+        },
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "keyword score",
+            "bn": "কিওয়ার্ড স্কোর"
+          }
+        },
+        {
+          "id": "index",
+          "state": "hot",
+          "sub": {
+            "en": "100 candidates",
+            "bn": "১০০ ক্যান্ডিডেট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "docs",
+          "to": "embed",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "docs",
+          "to": "bm25",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "embed",
+          "to": "index",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bm25",
+          "to": "index",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Two stages, one pipeline: a fast search first, a careful check second."
+        ],
+        "points": [
+          "Stage 1: embeddings narrow millions of documents down to a few hundred, fast.",
+          "Stage 2: a reranker picks the best few. It is more accurate, but slower.",
+          "On standard tests, keyword search (BM25) plus embeddings usually beats either alone."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "দুই স্টেজ, একটাই পাইপলাইন: আগে দ্রুত খোঁজা, তারপর যত্ন করে যাচাই।"
+        ],
+        "points": [
+          "স্টেজ ১: এমবেডিং লাখ লাখ ডকুমেন্ট থেকে দ্রুত কয়েকশোতে নামিয়ে আনে।",
+          "স্টেজ ২: রিরেংকার সেরা কয়েকটি বাছে। এটা বেশি নির্ভুল, কিন্তু ধীর।",
+          "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে সাধারণত যেকোনো একটার চেয়ে ভালো ফল আসে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "embed"
+        },
+        {
+          "id": "index"
+        },
+        {
+          "id": "rerank"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "embed",
+          "flow": "to"
+        },
+        {
+          "from": "embed",
+          "to": "index",
+          "flow": "to"
+        },
+        {
+          "from": "index",
+          "to": "rerank",
+          "flow": "to"
+        },
+        {
+          "from": "rerank",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

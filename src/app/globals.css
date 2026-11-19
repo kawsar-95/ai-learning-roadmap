@@ -63,6 +63,7 @@
   --wk-data: #54438a;
   --wk-queue: #8f4c22;
   --wk-guard: #8a3556;
+  --wk-model: #00696f;
   --wk-measure: #383d45;
 }
 
@@ -111,6 +112,7 @@
   --wk-data: #d0c2f1;
   --wk-queue: #f8bb88;
   --wk-guard: #f5aac4;
+  --wk-model: #76e2e9;
   --wk-measure: #ece3d1;
 }
 
@@ -451,6 +453,9 @@ html {
 }
 .wk-node[data-role="guard"] {
   --role: var(--wk-guard);
+}
+.wk-node[data-role="model"] {
+  --role: var(--wk-model);
 }
 .wk-node[data-role="measure"] {
   --role: var(--wk-measure);

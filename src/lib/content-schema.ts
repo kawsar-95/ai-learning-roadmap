@@ -163,6 +163,8 @@ export const WALK_NODE_KINDS = [
   "clock",
   "chart",
   "file",
+  "model",
+  "tool",
   "note",
 ] as const;
 export type WalkNodeKind = (typeof WALK_NODE_KINDS)[number];
@@ -475,7 +477,7 @@ const WalkStepSchema = z.strictObject({
   values: z.array(z.union([PlainTextSchema, BilingualSchema]).nullable()).optional(),
 });
 
-const WalkthroughSchema = z
+export const WalkthroughSchema = z
   .strictObject({
     width: z.number().int().min(320).max(1200),
     height: z.number().int().min(160).max(800),

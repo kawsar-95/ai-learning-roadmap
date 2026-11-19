@@ -158,6 +158,23 @@ function Icon({ kind }: { kind: WalkNodeKind }) {
           <path d="M11.5 2.5V6H15M7.5 10h5M7.5 13h5" />
         </g>
       );
+    case "model":
+      return (
+        <g {...line}>
+          <circle cx="10" cy="10" r="2.4" />
+          <circle cx="3.8" cy="4.5" r="1.8" />
+          <circle cx="16.2" cy="4.5" r="1.8" />
+          <circle cx="3.8" cy="15.5" r="1.8" />
+          <circle cx="16.2" cy="15.5" r="1.8" />
+          <path d="M5.3 5.6l3 2.7M14.7 5.6l-3 2.7M5.3 14.4l3-2.7M14.7 14.4l-3-2.7" />
+        </g>
+      );
+    case "tool":
+      return (
+        <g {...line}>
+          <path d="M7.6 3.2c-1.8 0-2.6.9-2.6 2.6v1.7c0 1.1-.7 2-1.9 2.5 1.2.5 1.9 1.4 1.9 2.5v1.7c0 1.7.8 2.6 2.6 2.6M12.4 3.2c1.8 0 2.6.9 2.6 2.6v1.7c0 1.1.7 2 1.9 2.5-1.2.5-1.9 1.4-1.9 2.5v1.7c0 1.7-.8 2.6-2.6 2.6" />
+        </g>
+      );
     case "note":
       return null;
   }

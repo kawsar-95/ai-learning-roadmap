@@ -111,6 +111,14 @@ node scripts/system-design/audit/phone-focus-all.mjs  http://127.0.0.1:8941/ai-l
 node scripts/system-design/audit/lazy-walk-check.mjs  http://127.0.0.1:8941/ai-learning-roadmap
 ```
 
+Each script takes `PART=<slug>` to check the walk-throughs of another Part, as in
+`PART=llm-fundamentals node scripts/system-design/audit/check-walk-dom.mjs <base-url>`. Without it they check Part 18.
+The offline check counts the walk-through files of every Part.
+
+`npm run build` runs `next build` and then `scripts/precache.mjs`, which writes the offline list into `out/sw.js`. If
+`next build` exits 1, the second step does not run, and the offline check then finds no files. Run `node scripts/precache.mjs`
+after the build to get what a clean `npm run build` writes.
+
 | Script | What it checks | Where it looks |
 | --- | --- | --- |
 | `check-walk-dom.mjs` | On every step of every walk-through, in both languages: text inside its box, boxes inside the diagram, no label on a box or on another label, no readout cut. It tests itself first with an over-long label | Desktop width |
