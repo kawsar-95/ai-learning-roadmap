@@ -30,6 +30,7 @@ change a Part without breaking a reader's saved progress.
 | --- | --- | --- |
 | `src/content/<slug>.json` | One Part: its sections in three voices, sources, quiz | Yes, except `system-design.json`: it is generated |
 | `scripts/system-design/` | The Python files that build `src/content/system-design.json` (Part 18) and its interview entry | Yes. Edit these, then run the build ([Walk-throughs](#walk-throughs)) |
+| `scripts/walkthroughs/` | The Python files that build the walk-throughs of Parts 1 to 17, into `src/content/walkthroughs/` | Yes. Edit these, then run the build ([Walk-throughs](#walk-throughs)) |
 | `src/content/interview.json` | Three interview questions for each Part | Yes |
 | `src/data/roadmap-phases.json` | Roadmap stages and phase summaries | Yes ([roadmap.md](roadmap.md)) |
 | `src/data/roadmap-lessons.json` | Every roadmap phase and lesson | No, generated |
@@ -314,7 +315,7 @@ Low-alpha `rgba()` tints work on both grounds and stay as they are.
 A walk-through is a diagram of a section that changes step by step. A row of
 readouts sits above it, and each step has its own text in English and in
 Bangla. It shows under the section intro. Part 18 has one for each of its 40
-sections. No other Part has one, and a section does not need one.
+sections, and Part 1 has four. A section does not need one.
 
 Part 18 is generated. `src/content/system-design.json` is the output of
 `scripts/system-design/`, and its walk-throughs are written there in Python
@@ -322,6 +323,13 @@ Part 18 is generated. `src/content/system-design.json` is the output of
 `python3 scripts/system-design/build.py`. `npm test` fails when the JSON is
 not what they build. The format below is what the JSON follows, and what a
 walk-through written by hand must follow.
+
+The walk-throughs of Parts 1 to 17 are not in the Part's JSON. Each one is a Python
+file, `scripts/walkthroughs/<Part>/<section>.py`, that builds
+`src/content/walkthroughs/<Part>/<section>.json`
+([README](../scripts/walkthroughs/README.md)). Run
+`python3 scripts/walkthroughs/build.py` after an edit. `npm test` fails when a file
+is not what its source builds.
 
 ```json
 "walkthrough": {
@@ -365,7 +373,7 @@ The example shows one step to stay short. A walk-through has at least two.
 | Field | Rule |
 | --- | --- |
 | `width`, `height` | The size of the diagram in diagram units, whole numbers: width 320 to 1200, height 160 to 800. The diagram scales to the column. Below 540 px it scrolls sideways and follows the boxes the step is about. |
-| `nodes` | The boxes, each at its home place. `id` is lowercase letters, digits, and hyphens, starting with a letter. `kind` picks the icon: `user`, `browser`, `dns`, `server`, `database`, `cache`, `cdn`, `balancer`, `queue`, `storage`, `service`, `lock`, `key`, `shield`, `clock`, `chart`, `file`, or `note`. `label` is plain text in both languages. `x` and `y` are the middle of the box. |
+| `nodes` | The boxes, each at its home place. `id` is lowercase letters, digits, and hyphens, starting with a letter. `kind` picks the icon: `user`, `browser`, `dns`, `server`, `database`, `cache`, `cdn`, `balancer`, `queue`, `storage`, `service`, `lock`, `key`, `shield`, `clock`, `chart`, `file`, `model`, `tool`, or `note`. `label` is plain text in both languages. `x` and `y` are the middle of the box. |
 | `metrics` | The labels of the readouts above the diagram, in both languages. At most 6. |
 | `caption` | Optional. A line under the readouts, for example to say that the numbers are an example. |
 | `steps` | At least 2. |
