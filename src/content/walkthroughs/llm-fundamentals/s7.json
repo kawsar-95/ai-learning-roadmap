@@ -1,0 +1,786 @@
+{
+  "width": 760,
+  "height": 350,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ব্যবহারকারী"
+      },
+      "x": 100,
+      "y": 175
+    },
+    {
+      "id": "app",
+      "kind": "server",
+      "label": {
+        "en": "Your code",
+        "bn": "আপনার কোড"
+      },
+      "x": 345,
+      "y": 175
+    },
+    {
+      "id": "tools",
+      "kind": "file",
+      "label": {
+        "en": "Tool list",
+        "bn": "টুলের তালিকা"
+      },
+      "x": 345,
+      "y": 52
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 610,
+      "y": 52
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "get_weather",
+        "bn": "get_weather"
+      },
+      "x": 455,
+      "y": 300
+    },
+    {
+      "id": "tool2",
+      "kind": "tool",
+      "label": {
+        "en": "get_weather",
+        "bn": "get_weather"
+      },
+      "x": 660,
+      "y": 300
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Model calls",
+      "bn": "মডেল কল"
+    },
+    {
+      "en": "Tool runs",
+      "bn": "টুল চলেছে"
+    },
+    {
+      "en": "Who runs the tool",
+      "bn": "টুল কে চালায়"
+    }
+  ],
+  "caption": {
+    "en": "Example: the question is “Weather in Dhaka?” and the tool is get_weather.",
+    "bn": "উদাহরণ: প্রশ্ন হলো “Weather in Dhaka?” আর টুল হলো get_weather।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Tools",
+        "title": "List the tools",
+        "body": [
+          "Start with a list of tools. Each tool has a name, a description, and its parameters, written as JSON Schema.",
+          "Your code holds this list. The model has not seen it yet."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Tool names and descriptions go into the prompt as you write them. Give them the care you give a prompt."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "A tool list with one tool: <code>get_weather</code>"
+          }
+        ]
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "টুলগুলোর তালিকা বানান",
+        "body": [
+          "শুরুতে টুলের একটা তালিকা বানান। প্রতিটি টুলের থাকে নাম, বর্ণনা আর প্যারামিটার, যা JSON Schema আকারে লেখা হয়।",
+          "তালিকাটা থাকে আপনার কোডের কাছে। মডেল এখনো সেটা দেখেনি।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "টুলের নাম আর বর্ণনা যেমন লিখবেন, প্রম্পটে হুবহু তেমনই বসে যায়। প্রম্পটের মতো যত্ন নিয়ে সেগুলো লিখুন।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "একটা টুলসহ টুলের তালিকা: <code>get_weather</code>"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "tools",
+          "state": "hot",
+          "sub": {
+            "en": "JSON Schema",
+            "bn": "JSON Schema"
+          }
+        },
+        {
+          "id": "app"
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "tools",
+          "to": "app",
+          "flow": "to",
+          "ms": 1200,
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "0",
+        "0",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Ask",
+        "title": "Send the question and the tools",
+        "body": [
+          "The user asks, “Weather in Dhaka?” Your code sends the question to the model together with the tool list.",
+          "The model reads the tool names and descriptions as part of its prompt."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The model gets the question and the tool list"
+          }
+        ]
+      },
+      "bn": {
+        "short": "প্রশ্ন",
+        "title": "প্রশ্ন আর টুলের তালিকা পাঠান",
+        "body": [
+          "ব্যবহারকারী জিজ্ঞেস করে, “Weather in Dhaka?” আপনার কোড প্রশ্নটা টুলের তালিকাসহ মডেলের কাছে পাঠায়।",
+          "মডেল টুলের নাম আর বর্ণনা তার প্রম্পটের অংশ হিসেবেই পড়ে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মডেল প্রশ্ন আর টুলের তালিকা পেল"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "Weather in Dhaka?",
+            "bn": "Weather in Dhaka?"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "tools"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "reads the tools",
+            "bn": "টুলগুলো পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "app",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot"
+        },
+        {
+          "from": "tools",
+          "to": "app",
+          "flow": "to",
+          "ms": 1200
+        },
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to",
+          "ms": 1400,
+          "state": "hot",
+          "label": {
+            "en": "question + tools",
+            "bn": "প্রশ্ন + টুল"
+          }
+        }
+      ],
+      "values": [
+        "1",
+        "0",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Decide",
+        "title": "The model asks for a tool",
+        "body": [
+          "The model does not answer yet. Instead of plain text, it replies with a structured request: a tool name and its arguments.",
+          "Here the request is <code>get_weather</code> with the argument <code>location</code> set to <code>Dhaka</code>."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "The model decides what to call and with which arguments. It does not run anything."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The reply is a tool call, not text"
+          }
+        ]
+      },
+      "bn": {
+        "short": "সিদ্ধান্ত",
+        "title": "মডেল একটা টুল চায়",
+        "body": [
+          "মডেল এখনই উত্তর দেয় না। সাধারণ লেখার বদলে সে একটা গোছানো অনুরোধ ফেরত দেয়: টুলের নাম আর তার আর্গুমেন্ট।",
+          "এখানে অনুরোধটা হলো <code>get_weather</code>, আর <code>location</code> আর্গুমেন্টের মান <code>Dhaka</code>।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "কী কল হবে আর কোন আর্গুমেন্ট দিয়ে, সেটা মডেল ঠিক করে। সে নিজে কিছু চালায় না।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "উত্তরটা টুল কল, সাধারণ লেখা নয়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "app"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "asks for a tool",
+            "bn": "টুল চায়"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "app",
+          "flow": "to",
+          "ms": 1200,
+          "state": "hot",
+          "label": {
+            "en": "tool call",
+            "bn": "টুল কল"
+          }
+        }
+      ],
+      "values": [
+        "1",
+        "0",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Run",
+        "title": "Your code runs the tool",
+        "body": [
+          "Your code reads the request and calls the function itself, with the arguments the model gave.",
+          "The model cannot run anything. It only asked."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "This is the whole idea of tool use: the model asks, and your code does the work."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The tool ran inside your code"
+          }
+        ]
+      },
+      "bn": {
+        "short": "চালানো",
+        "title": "আপনার কোড টুলটা চালায়",
+        "body": [
+          "আপনার কোড অনুরোধটা পড়ে, মডেলের দেওয়া আর্গুমেন্ট দিয়ে ফাংশনটা নিজেই কল করে।",
+          "মডেল কিছুই চালাতে পারে না। সে শুধু চেয়েছে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "টুল ব্যবহারের মূল কথা এটাই: মডেল চায়, আর কাজটা করে আপনার কোড।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "টুলটা চলল আপনার কোডের ভেতরে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "runs the tool",
+            "bn": "টুলটা চালায়"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "location: Dhaka",
+            "bn": "location: Dhaka"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "tool",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot",
+          "label": {
+            "en": "call",
+            "bn": "কল"
+          }
+        }
+      ],
+      "values": [
+        "1",
+        "1",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Result",
+        "title": "The tool returns a result",
+        "body": [
+          "The function returns its result to your code. The model has not seen the result yet."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Your code now holds the result"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ফলাফল",
+        "title": "টুল একটা ফলাফল ফেরত দেয়",
+        "body": [
+          "ফাংশনটা তার ফলাফল আপনার কোডকে ফেরত দেয়। মডেল এখনো ফলাফলটা দেখেনি।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ফলাফল এখন আপনার কোডের কাছে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "location: Dhaka",
+            "bn": "location: Dhaka"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "app",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot",
+          "label": {
+            "en": "result",
+            "bn": "ফলাফল"
+          }
+        }
+      ],
+      "values": [
+        "1",
+        "1",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Feed back",
+        "title": "Send the result back",
+        "body": [
+          "Your code adds the result to the conversation and calls the model again.",
+          "That is the loop: the model asks, your code runs the tool, and the result goes back."
+        ],
+        "changes": [
+          {
+            "sign": "~",
+            "html": "Model calls: 1 → 2"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ফেরত পাঠান",
+        "title": "ফলাফল মডেলকে ফেরত পাঠান",
+        "body": [
+          "আপনার কোড ফলাফলটা কথোপকথনে যোগ করে আবার মডেলকে কল করে।",
+          "এটাই লুপ: মডেল টুল চায়, আপনার কোড সেটা চালায়, আর ফলাফল ফিরে যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "~",
+            "html": "মডেল কল: ১ → ২"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "second call",
+            "bn": "দ্বিতীয় কল"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to",
+          "ms": 1400,
+          "state": "hot",
+          "label": {
+            "en": "result",
+            "bn": "ফলাফল"
+          }
+        }
+      ],
+      "values": [
+        "2",
+        "1",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Answer",
+        "title": "The model writes the answer",
+        "body": [
+          "With the result in hand, the model answers in plain text. This time it asks for no tool.",
+          "Your code passes the answer to the user. Had the model asked for another tool, the loop would go round again."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The user gets the answer"
+          }
+        ]
+      },
+      "bn": {
+        "short": "উত্তর",
+        "title": "মডেল উত্তর লেখে",
+        "body": [
+          "ফলাফল হাতে পেয়ে মডেল এবার সাধারণ লেখায় উত্তর দেয়। এবার সে কোনো টুল চায় না।",
+          "আপনার কোড উত্তরটা ব্যবহারকারীকে দেয়। মডেল আরেকটা টুল চাইলে লুপ আবার ঘুরত।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ব্যবহারকারী উত্তর পেল"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "gets the answer",
+            "bn": "উত্তর পায়"
+          }
+        },
+        {
+          "id": "app"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "final answer",
+            "bn": "চূড়ান্ত উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "app",
+          "flow": "to",
+          "ms": 1200,
+          "state": "hot",
+          "label": {
+            "en": "answer",
+            "bn": "উত্তর"
+          }
+        },
+        {
+          "from": "app",
+          "to": "user",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "2",
+        "1",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "In parallel",
+        "title": "Several calls in one turn",
+        "body": [
+          "A model can ask for several independent calls in one reply, such as the weather in two cities.",
+          "Your code can run them at the same time. The model decides which calls are independent."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Two calls in one reply"
+          },
+          {
+            "sign": "+",
+            "html": "Two tool runs at the same time"
+          }
+        ]
+      },
+      "bn": {
+        "short": "একসাথে",
+        "title": "এক টার্নে কয়েকটা কল",
+        "body": [
+          "মডেল এক উত্তরেই কয়েকটা স্বাধীন কল চাইতে পারে, যেমন দুটো শহরের আবহাওয়া।",
+          "আপনার কোড সেগুলো একই সময়ে চালাতে পারে। কোন কলগুলো স্বাধীন, সেটা মডেল ঠিক করে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "এক উত্তরে দুটো কল"
+          },
+          {
+            "sign": "+",
+            "html": "একই সময়ে দুটো টুল চলে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "asks for two",
+            "bn": "দুটো চায়"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "location: Dhaka",
+            "bn": "location: Dhaka"
+          }
+        },
+        {
+          "id": "tool2",
+          "state": "hot",
+          "sub": {
+            "en": "location: Sylhet",
+            "bn": "location: Sylhet"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "app",
+          "flow": "to",
+          "ms": 1200,
+          "state": "hot",
+          "label": {
+            "en": "2 calls",
+            "bn": "২টি কল"
+          }
+        },
+        {
+          "from": "app",
+          "to": "tool",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "tool2",
+          "flow": "to",
+          "ms": 1000,
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "1",
+        "2",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Tool use is a loop between the model and your code."
+        ],
+        "points": [
+          "The model only decides which tool to call and with which arguments. Your code runs the tool.",
+          "The loop: the model asks for a tool, your code runs it, the result goes back, and it repeats.",
+          "Clear tool names and descriptions matter as much as the model you pick."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখার কথা",
+        "body": [
+          "টুল ব্যবহার মানে মডেল আর আপনার কোডের মধ্যে একটা লুপ।"
+        ],
+        "points": [
+          "মডেল শুধু ঠিক করে কোন টুল ডাকবে আর কোন আর্গুমেন্ট দেবে। টুল চালায় আপনার কোড।",
+          "লুপটা এমন: মডেল টুল চায়, আপনার কোড চালায়, ফলাফল ফেরত যায়, তারপর আবার।",
+          "টুলের স্পষ্ট নাম আর বর্ণনা মডেল বাছাইয়ের মতোই জরুরি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "tool"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "both",
+          "ms": 1600
+        },
+        {
+          "from": "app",
+          "to": "tool",
+          "flow": "both",
+          "ms": 1400
+        },
+        {
+          "from": "user",
+          "to": "app",
+          "flow": "both",
+          "ms": 1200
+        }
+      ],
+      "values": [
+        "2",
+        "1",
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        }
+      ]
+    }
+  ]
+}

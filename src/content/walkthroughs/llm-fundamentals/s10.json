@@ -1,0 +1,775 @@
+{
+  "width": 760,
+  "height": 330,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ব্যবহারকারী"
+      },
+      "x": 80,
+      "y": 165
+    },
+    {
+      "id": "std",
+      "kind": "model",
+      "label": {
+        "en": "Standard model",
+        "bn": "স্ট্যান্ডার্ড মডেল"
+      },
+      "x": 270,
+      "y": 165
+    },
+    {
+      "id": "rsn",
+      "kind": "model",
+      "label": {
+        "en": "Reasoning model",
+        "bn": "রিজনিং মডেল"
+      },
+      "x": 270,
+      "y": 165
+    },
+    {
+      "id": "think",
+      "kind": "note",
+      "label": {
+        "en": "Thinking tokens",
+        "bn": "থিংকিং টোকেন"
+      },
+      "x": 484,
+      "y": 165
+    },
+    {
+      "id": "ans",
+      "kind": "file",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 668,
+      "y": 165
+    },
+    {
+      "id": "budget",
+      "kind": "lock",
+      "label": {
+        "en": "Thinking budget",
+        "bn": "থিংকিং বাজেট"
+      },
+      "x": 484,
+      "y": 45
+    },
+    {
+      "id": "bill",
+      "kind": "chart",
+      "label": {
+        "en": "Bill",
+        "bn": "বিল"
+      },
+      "x": 484,
+      "y": 285
+    },
+    {
+      "id": "clock",
+      "kind": "clock",
+      "label": {
+        "en": "First output (TTFT)",
+        "bn": "প্রথম আউটপুট (TTFT)"
+      },
+      "x": 270,
+      "y": 285
+    },
+    {
+      "id": "reward",
+      "kind": "chart",
+      "label": {
+        "en": "Reward",
+        "bn": "পুরস্কার"
+      },
+      "x": 270,
+      "y": 45
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Tokens used",
+      "bn": "ব্যবহৃত টোকেন"
+    },
+    {
+      "en": "Wait for first output",
+      "bn": "প্রথম আউটপুটের অপেক্ষা"
+    },
+    {
+      "en": "Hard math answers",
+      "bn": "কঠিন গণিতের উত্তর"
+    }
+  ],
+  "caption": {
+    "en": "Typical ranges from this section. They depend on the task.",
+    "bn": "এই সেকশনের সাধারণ সীমা। কাজ অনুযায়ী বদলায়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Standard",
+        "title": "A standard model answers right away",
+        "body": [
+          "A standard model answers right away. It reads a hard problem and writes an answer at once.",
+          "On hard math, that quick answer is often poor."
+        ]
+      },
+      "bn": {
+        "short": "সাধারণ",
+        "title": "সাধারণ মডেল সাথে সাথে উত্তর দেয়",
+        "body": [
+          "সাধারণ মডেল সাথে সাথে উত্তর দেয়। কঠিন সমস্যাটা পড়েই সে এক্ষুনি একটা উত্তর লিখে ফেলে।",
+          "কঠিন গণিতে সেই তাড়াতাড়ির উত্তর প্রায়ই খারাপ হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "hard problem",
+            "bn": "কঠিন সমস্যা"
+          }
+        },
+        {
+          "id": "std",
+          "state": "hot",
+          "sub": {
+            "en": "answers right away",
+            "bn": "সাথে সাথে উত্তর"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "warn",
+          "sub": {
+            "en": "may be wrong",
+            "bn": "ভুল হতে পারে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "std",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "std",
+          "to": "ans",
+          "flow": "to",
+          "ms": 700,
+          "state": "warn"
+        }
+      ],
+      "values": [
+        "1×",
+        {
+          "en": "short",
+          "bn": "কম"
+        },
+        {
+          "en": "poor",
+          "bn": "দুর্বল"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Think first",
+        "title": "A reasoning model thinks first",
+        "body": [
+          "A reasoning model thinks before it answers. It first writes out its working steps, called thinking tokens.",
+          "Only then does it write the final answer. On hard problems like math and code, this helps."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Thinking tokens are the model's working notes, like showing your working in a math test."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Thinking tokens come before the answer"
+          },
+          {
+            "sign": "+",
+            "html": "Better answers on hard math"
+          }
+        ]
+      },
+      "bn": {
+        "short": "আগে ভাবে",
+        "title": "রিজনিং মডেল আগে ভাবে",
+        "body": [
+          "রিজনিং মডেল উত্তর দেওয়ার আগে ভাবে। সে আগে নিজের কাজের ধাপগুলো লিখে নেয়, যাকে থিংকিং টোকেন বলে।",
+          "তারপরই সে চূড়ান্ত উত্তর লেখে। গণিত আর কোডের মতো কঠিন সমস্যায় এটা কাজে দেয়।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "থিংকিং টোকেন হলো মডেলের খসড়া নোট, যেমন অঙ্ক পরীক্ষায় পুরো কাজ দেখিয়ে লেখা।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "উত্তরের আগে থিংকিং টোকেন আসে"
+          },
+          {
+            "sign": "+",
+            "html": "কঠিন গণিতে ভালো উত্তর"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "sub": {
+            "en": "hard problem",
+            "bn": "কঠিন সমস্যা"
+          }
+        },
+        {
+          "id": "rsn",
+          "state": "hot",
+          "sub": {
+            "en": "thinks first",
+            "bn": "আগে ভাবে"
+          }
+        },
+        {
+          "id": "think",
+          "state": "hot"
+        },
+        {
+          "id": "ans",
+          "state": "hot",
+          "sub": {
+            "en": "final answer",
+            "bn": "চূড়ান্ত উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "rsn",
+          "flow": "to"
+        },
+        {
+          "from": "rsn",
+          "to": "think",
+          "flow": "to",
+          "ms": 1800,
+          "state": "hot"
+        },
+        {
+          "from": "think",
+          "to": "ans",
+          "flow": "to",
+          "ms": 1200,
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "5–50×",
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "Thinking costs tokens",
+        "body": [
+          "Thinking tokens count as tokens too, so you pay for them and wait for them.",
+          "A reasoning model can use 5–50 times more tokens for one query. That is why it costs more."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Every thinking token is billed"
+          }
+        ]
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "ভাবতেও টোকেন লাগে",
+        "body": [
+          "থিংকিং টোকেনও টোকেন হিসেবে গোনা হয়, তাই এগুলোর জন্যও টাকা দিতে হয়, সময়ও লাগে।",
+          "একটি প্রশ্নে রিজনিং মডেল ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে। তাই খরচও বেশি।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "প্রতিটি থিংকিং টোকেনের দাম দিতে হয়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "rsn",
+          "state": "dim"
+        },
+        {
+          "id": "think",
+          "state": "hot",
+          "sub": {
+            "en": "count as tokens",
+            "bn": "এগুলোও টোকেন"
+          }
+        },
+        {
+          "id": "bill",
+          "state": "warn",
+          "sub": {
+            "en": "5–50× more",
+            "bn": "৫–৫০ গুণ বেশি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rsn",
+          "to": "think",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "think",
+          "to": "bill",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        "5–50×",
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Wait",
+        "title": "The first output comes later",
+        "body": [
+          "Thinking also changes the wait. TTFT, the time until the first output appears, is often slower, because the prefill is longer.",
+          "Streaming the thinking tokens as they are written can help the user experience."
+        ],
+        "changes": [
+          {
+            "sign": "~",
+            "html": "The first output appears later"
+          }
+        ]
+      },
+      "bn": {
+        "short": "অপেক্ষা",
+        "title": "প্রথম আউটপুট আসে দেরিতে",
+        "body": [
+          "ভাবার ফলে অপেক্ষার সময়ও বদলায়। TTFT, মানে প্রথম আউটপুট দেখা দিতে যে সময় লাগে, তা প্রায়ই বেশি হয়, কারণ প্রিফিল লম্বা হয়।",
+          "থিংকিং টোকেন লেখা হওয়ার সঙ্গে সঙ্গে স্ট্রিম করলে ব্যবহারকারীর অভিজ্ঞতা ভালো হয়।"
+        ],
+        "changes": [
+          {
+            "sign": "~",
+            "html": "প্রথম আউটপুট দেরিতে আসে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "rsn",
+          "state": "hot"
+        },
+        {
+          "id": "think",
+          "sub": {
+            "en": "can be streamed",
+            "bn": "স্ট্রিম করা যায়"
+          }
+        },
+        {
+          "id": "clock",
+          "state": "warn",
+          "sub": {
+            "en": "often slower",
+            "bn": "প্রায়ই ধীর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "rsn",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "rsn",
+          "to": "think",
+          "flow": "to"
+        },
+        {
+          "from": "rsn",
+          "to": "clock",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        "5–50×",
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Budget",
+        "title": "A thinking budget sets the cap",
+        "body": [
+          "A thinking budget caps how many thinking tokens the model may use. It controls cost and waiting time.",
+          "In the section's code, <code>budget_tokens</code> is 10,000. Set it to your latency and cost ceiling."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "An easy question can finish before the cap. A hard one can use all of it."
+        },
+        "changes": [
+          {
+            "sign": "-",
+            "html": "Thinking tokens stop at the budget"
+          }
+        ]
+      },
+      "bn": {
+        "short": "বাজেট",
+        "title": "থিংকিং বাজেট সীমা ঠিক করে",
+        "body": [
+          "থিংকিং বাজেট ঠিক করে দেয় মডেল সর্বোচ্চ কত থিংকিং টোকেন খরচ করতে পারবে। এতে খরচ আর অপেক্ষা নিয়ন্ত্রণে থাকে।",
+          "এই সেকশনের কোডে <code>budget_tokens</code> হলো ১০,০০০। এটা আপনার ল্যাটেন্সি আর খরচের সীমায় ঠিক করে দিন।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "সহজ প্রশ্নে সীমা আসার আগেই শেষ হয়ে যায়। কঠিন প্রশ্নে পুরো সীমাই খরচ হতে পারে।"
+        },
+        "changes": [
+          {
+            "sign": "-",
+            "html": "বাজেটে পৌঁছালে থিংকিং টোকেন থেমে যায়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "rsn",
+          "state": "hot"
+        },
+        {
+          "id": "think",
+          "state": "hot",
+          "sub": {
+            "en": "stops at the cap",
+            "bn": "সীমায় থামে"
+          }
+        },
+        {
+          "id": "budget",
+          "state": "hot",
+          "sub": {
+            "en": "10,000 tokens",
+            "bn": "১০,০০০ টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rsn",
+          "to": "think",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "budget",
+          "to": "think",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "capped",
+          "bn": "সীমিত"
+        },
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Where",
+        "title": "Use it where it pays off",
+        "body": [
+          "Use a reasoning model for math, hard coding, and planning.",
+          "Do not use one for chat, summaries, or simple questions. A standard model is best there, and a reasoning model would only cost more."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Do not reach for a reasoning model by reflex."
+        }
+      },
+      "bn": {
+        "short": "কোথায়",
+        "title": "যেখানে লাভ, সেখানেই ব্যবহার করুন",
+        "body": [
+          "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন।",
+          "চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়। সেখানে সাধারণ মডেলই সবচেয়ে ভালো, রিজনিং মডেলে শুধু খরচ বাড়ে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "অভ্যাসবশে রিজনিং মডেল নেবেন না।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "x": 380,
+          "y": 50
+        },
+        {
+          "id": "std",
+          "state": "hot",
+          "sub": {
+            "en": "chat, summaries",
+            "bn": "চ্যাট, সারাংশ"
+          },
+          "x": 190,
+          "y": 235
+        },
+        {
+          "id": "rsn",
+          "state": "hot",
+          "sub": {
+            "en": "math, code, planning",
+            "bn": "গণিত, কোড, পরিকল্পনা"
+          },
+          "x": 570,
+          "y": 235
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "std",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "easy",
+            "bn": "সহজ"
+          }
+        },
+        {
+          "from": "user",
+          "to": "rsn",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "hard",
+            "bn": "কঠিন"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "capped",
+          "bn": "সীমিত"
+        },
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Training",
+        "title": "How a model learns to think",
+        "body": [
+          "A reasoning model is trained by reward, called reinforcement learning: it tries, gets a score, and learns to do more of what scored well.",
+          "Trained this way on chains of thought, step-by-step lines of reasoning, a model learns to think longer on hard problems."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "A small model can learn the skill from a big model's outputs. This is called distillation."
+        }
+      },
+      "bn": {
+        "short": "ট্রেনিং",
+        "title": "মডেল কীভাবে ভাবতে শেখে",
+        "body": [
+          "রিজনিং মডেলকে ট্রেন করা হয় পুরস্কার দিয়ে, যাকে রিইনফোর্সমেন্ট লার্নিং বলে: মডেল চেষ্টা করে, স্কোর পায়, আর যেটায় ভালো স্কোর আসে সেটা বেশি করতে শেখে।",
+          "চেইন অফ থটের ওপর, মানে ধাপে ধাপে যুক্তির ওপর, এভাবে ট্রেন করলে মডেল কঠিন সমস্যায় বেশি সময় ধরে ভাবতে শেখে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "ছোট মডেল বড় মডেলের আউটপুট থেকে দক্ষতাটা শিখতে পারে। একে ডিস্টিলেশন বলে।"
+        }
+      },
+      "show": [
+        {
+          "id": "rsn",
+          "state": "hot"
+        },
+        {
+          "id": "reward",
+          "state": "hot",
+          "sub": {
+            "en": "a score",
+            "bn": "একটি স্কোর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rsn",
+          "to": "reward",
+          "flow": "both",
+          "ms": 1400,
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "capped",
+          "bn": "সীমিত"
+        },
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A reasoning model trades cost and waiting time for better answers on hard problems."
+        ],
+        "points": [
+          "Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions.",
+          "They can use 5–50 times more tokens, so set a thinking budget.",
+          "For most chat, extraction, and RAG, a standard model with careful prompting wins."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "রিজনিং মডেল কঠিন সমস্যায় ভালো উত্তরের বদলে খরচ আর অপেক্ষার সময় বাড়ায়।"
+        ],
+        "points": [
+          "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন; চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়।",
+          "এরা ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
+          "বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এ ভালো প্রম্পটিংসহ সাধারণ মডেলই সবচেয়ে ভালো কাজ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "rsn",
+          "x": 270,
+          "y": 85
+        },
+        {
+          "id": "std",
+          "x": 270,
+          "y": 245
+        },
+        {
+          "id": "ans"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "rsn",
+          "flow": "to"
+        },
+        {
+          "from": "user",
+          "to": "std",
+          "flow": "to"
+        },
+        {
+          "from": "rsn",
+          "to": "ans",
+          "flow": "to"
+        },
+        {
+          "from": "std",
+          "to": "ans",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "capped",
+          "bn": "সীমিত"
+        },
+        {
+          "en": "longer",
+          "bn": "বেশি"
+        },
+        {
+          "en": "best",
+          "bn": "সেরা"
+        }
+      ]
+    }
+  ]
+}
