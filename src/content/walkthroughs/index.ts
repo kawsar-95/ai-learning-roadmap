@@ -17,6 +17,7 @@ import agentsAndAgenticSystemsS2 from "./agents-and-agentic-systems/s2.json";
 import agentsAndAgenticSystemsS6 from "./agents-and-agentic-systems/s6.json";
 import agentsAndAgenticSystemsS8 from "./agents-and-agentic-systems/s8.json";
 import agentsAndAgenticSystemsS9 from "./agents-and-agentic-systems/s9.json";
+import toolUseAndIntegrationsS3 from "./tool-use-and-integrations/s3.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -47,5 +48,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s6: agentsAndAgenticSystemsS6,
     s8: agentsAndAgenticSystemsS8,
     s9: agentsAndAgenticSystemsS9,
+  },
+  "tool-use-and-integrations": {
+    s3: toolUseAndIntegrationsS3,
   },
 };

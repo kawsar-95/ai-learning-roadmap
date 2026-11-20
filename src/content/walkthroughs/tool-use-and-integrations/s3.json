@@ -1,0 +1,593 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "c1",
+      "kind": "browser",
+      "label": {
+        "en": "Claude Code",
+        "bn": "Claude Code"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "c2",
+      "kind": "browser",
+      "label": {
+        "en": "Cursor",
+        "bn": "Cursor"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "mcp",
+      "kind": "server",
+      "label": {
+        "en": "MCP server",
+        "bn": "MCP সার্ভার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "d1",
+      "kind": "database",
+      "label": {
+        "en": "Postgres",
+        "bn": "Postgres"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "tools",
+      "kind": "tool",
+      "label": {
+        "en": "Tools",
+        "bn": "টুলস"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "resources",
+      "kind": "file",
+      "label": {
+        "en": "Resources",
+        "bn": "রিসোর্সেস"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "prompts",
+      "kind": "note",
+      "label": {
+        "en": "Prompts",
+        "bn": "প্রম্পটস"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "sandbox",
+      "kind": "lock",
+      "label": {
+        "en": "Sandbox",
+        "bn": "স্যান্ডবক্স"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "files",
+      "kind": "storage",
+      "label": {
+        "en": "Files, network",
+        "bn": "ফাইল, নেটওয়ার্ক"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Servers",
+      "bn": "সার্ভার"
+    },
+    {
+      "en": "Clients",
+      "bn": "ক্লায়েন্ট"
+    },
+    {
+      "en": "Primitives",
+      "bn": "প্রিমিটিভ"
+    }
+  ],
+  "caption": {
+    "en": "Example: MCP clients and one MCP server for Postgres, and a model that writes code to run in a sandbox.",
+    "bn": "উদাহরণ: MCP ক্লায়েন্ট আর Postgres-এর জন্য একটি MCP সার্ভার, এবং স্যান্ডবক্সে চালানোর কোড লেখা একটি মডেল।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Before",
+        "title": "Custom code for every pair",
+        "body": [
+          "Before MCP, every IDE and agent app wrote custom integrations for every data source."
+        ]
+      },
+      "bn": {
+        "short": "আগে",
+        "title": "প্রতিটি জোড়ার জন্য আলাদা কোড",
+        "body": [
+          "MCP-এর আগে প্রতিটি IDE আর এজেন্ট অ্যাপ প্রতিটি ডেটা সোর্সের জন্য কাস্টম ইন্টিগ্রেশন লিখত।"
+        ]
+      },
+      "show": [
+        {
+          "id": "c1",
+          "state": "hot",
+          "sub": {
+            "en": "own glue code",
+            "bn": "নিজের গ্লু কোড"
+          }
+        },
+        {
+          "id": "c2",
+          "state": "hot",
+          "sub": {
+            "en": "own glue code",
+            "bn": "নিজের গ্লু কোড"
+          }
+        },
+        {
+          "id": "d1",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "c1",
+          "to": "d1",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "c2",
+          "to": "d1",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "MCP",
+        "title": "One server, many clients",
+        "body": [
+          "MCP, the Model Context Protocol, is an open standard for connecting models to data and tools. Anthropic introduced it in late 2024, and OpenAI, Google and the major IDE vendors have adopted it.",
+          "Now you write one MCP server, for Postgres say, and every MCP-compatible client can use it: Claude Code, Cursor, VS Code, or a custom agent."
+        ]
+      },
+      "bn": {
+        "short": "MCP",
+        "title": "একটি সার্ভার, অনেক ক্লায়েন্ট",
+        "body": [
+          "MCP (Model Context Protocol) মডেলকে ডেটা আর টুলের সাথে জোড়ার একটি খোলা মানদণ্ড। Anthropic এটি ২০২৪-এর শেষে চালু করে, আর এখন OpenAI, Google ও প্রধান IDE ভেন্ডররা এটি গ্রহণ করেছে।",
+          "এখন একটি MCP সার্ভার লিখলে, ধরুন Postgres-এর জন্য, সব MCP-কম্প্যাটিবল ক্লায়েন্ট সেটা ব্যবহার করতে পারে: Claude Code, Cursor, VS Code, বা কাস্টম এজেন্ট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "c1",
+          "state": "hot"
+        },
+        {
+          "id": "c2",
+          "state": "hot"
+        },
+        {
+          "id": "mcp",
+          "state": "hot",
+          "sub": {
+            "en": "written once",
+            "bn": "একবারই লেখা"
+          }
+        },
+        {
+          "id": "d1",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "c1",
+          "to": "mcp",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "c2",
+          "to": "mcp",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mcp",
+          "to": "d1",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one",
+          "bn": "একটি"
+        },
+        {
+          "en": "many",
+          "bn": "অনেক"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Primitives",
+        "title": "A server offers three things",
+        "body": [
+          "The model is the client, and the data or tool provider runs the MCP server. The server exposes three primitives.",
+          "Tools are functions the model can call. Resources are read-only data the client can fetch on demand. Prompts are named templates the host can list, so the user can invoke one by name."
+        ]
+      },
+      "bn": {
+        "short": "প্রিমিটিভ",
+        "title": "সার্ভার তিনটি জিনিস দেয়",
+        "body": [
+          "মডেল হলো ক্লায়েন্ট, আর ডেটা বা টুল প্রদানকারী MCP সার্ভার চালায়। সার্ভার তিনটি প্রিমিটিভ প্রকাশ করে।",
+          "টুলস হলো মডেল যে ফাংশন কল করতে পারে। রিসোর্সেস হলো শুধু-পড়ার তথ্য, যা ক্লায়েন্ট দরকারমতো আনতে পারে। প্রম্পটস হলো নাম দেওয়া টেমপ্লেট, যা হোস্ট তালিকা করতে পারে, যাতে ব্যবহারকারী নাম ধরে ব্যবহার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "the client",
+            "bn": "ক্লায়েন্ট"
+          }
+        },
+        {
+          "id": "mcp",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot",
+          "sub": {
+            "en": "functions to call",
+            "bn": "কল করার ফাংশন"
+          }
+        },
+        {
+          "id": "resources",
+          "state": "hot",
+          "sub": {
+            "en": "read-only data",
+            "bn": "শুধু-পড়ার তথ্য"
+          }
+        },
+        {
+          "id": "prompts",
+          "state": "hot",
+          "sub": {
+            "en": "named templates",
+            "bn": "নাম দেওয়া টেমপ্লেট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "mcp",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mcp",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mcp",
+          "to": "resources",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mcp",
+          "to": "prompts",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one",
+          "bn": "একটি"
+        },
+        {
+          "en": "many",
+          "bn": "অনেক"
+        },
+        {
+          "en": "three",
+          "bn": "তিনটি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Code",
+        "title": "Let the model write code",
+        "body": [
+          "Many agent tasks are easiest to express as code, such as “compute the average of column X”.",
+          "Letting the model write and run code avoids tool explosion, a separate tool for every small task, and gives correct arithmetic."
+        ]
+      },
+      "bn": {
+        "short": "কোড",
+        "title": "মডেলকে কোড লিখতে দিন",
+        "body": [
+          "অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায়, যেমন “কলাম X-এর গড় বের করো”।",
+          "মডেলকে কোড লিখে চালাতে দিলে টুলের বিস্ফোরণ (প্রতিটি ছোট কাজের জন্য আলাদা টুল) এড়ানো যায়, আর গাণিতিক হিসাব নির্ভুল হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "writes the code",
+            "bn": "কোড লেখে"
+          }
+        },
+        {
+          "id": "sandbox",
+          "state": "hot",
+          "sub": {
+            "en": "runs the code",
+            "bn": "কোড চালায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "sandbox",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Sandbox",
+        "title": "Run it in a sandbox",
+        "body": [
+          "A sandbox is a locked space where code can run without touching your real files or network. Run model-written code in a sandbox."
+        ]
+      },
+      "bn": {
+        "short": "স্যান্ডবক্স",
+        "title": "স্যান্ডবক্সে চালান",
+        "body": [
+          "স্যান্ডবক্স একটি তালাবদ্ধ জায়গা, যেখানে কোড চলে কিন্তু আপনার আসল ফাইল বা নেটওয়ার্কে পৌঁছাতে পারে না। মডেলের লেখা কোড স্যান্ডবক্সে চালান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "sandbox",
+          "state": "hot",
+          "sub": {
+            "en": "locked space",
+            "bn": "তালাবদ্ধ জায়গা"
+          }
+        },
+        {
+          "id": "files",
+          "state": "dim",
+          "sub": {
+            "en": "out of reach",
+            "bn": "নাগালের বাইরে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "sandbox",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Options",
+        "title": "Four sandbox options",
+        "body": [
+          "The section lists four production options in 2025, each with its own best use."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "E2B: hosted Firecracker microVMs, for sub-second Python and an easy REST API"
+          },
+          {
+            "sign": "+",
+            "html": "Modal: hosted containers and GPUs, for long-running compute and ML inference"
+          },
+          {
+            "sign": "+",
+            "html": "Daytona: hosted dev environments, for full git and REPL workflows and AI agents"
+          },
+          {
+            "sign": "+",
+            "html": "Cloudflare Workers / Sandbox: edge isolates, for low-latency JS and Wasm with fast cold starts"
+          }
+        ]
+      },
+      "bn": {
+        "short": "বিকল্প",
+        "title": "চারটি স্যান্ডবক্স বিকল্প",
+        "body": [
+          "সেকশনে ২০২৫-এর চারটি প্রোডাকশন বিকল্প আছে, প্রতিটির নিজস্ব সেরা ব্যবহার আছে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "E2B: হোস্টেড Firecracker microVM, সাব-সেকেন্ড Python আর সহজ REST API-র জন্য"
+          },
+          {
+            "sign": "+",
+            "html": "Modal: হোস্টেড কনটেইনার আর GPU, দীর্ঘ কম্পিউট আর ML ইনফারেন্সের জন্য"
+          },
+          {
+            "sign": "+",
+            "html": "Daytona: হোস্টেড ডেভ এনভায়রনমেন্ট, পুরো git ও REPL ওয়ার্কফ্লো আর AI এজেন্টের জন্য"
+          },
+          {
+            "sign": "+",
+            "html": "Cloudflare Workers / Sandbox: এজ আইসোলেট, কম দেরির JS ও Wasm আর দ্রুত কোল্ড-স্টার্টের জন্য"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "sandbox",
+          "state": "hot",
+          "sub": {
+            "en": "one of four",
+            "bn": "চারটির একটি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "sandbox",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Write one MCP server and many clients can use it. Run the code a model writes in a sandbox."
+        ],
+        "points": [
+          "Before MCP, every app needed custom code for every data source. Now one MCP server works with many clients.",
+          "An MCP server offers three things: tools, resources, and prompts.",
+          "Letting the model write and run code avoids tool explosion (a separate tool per small task) and gives correct arithmetic.",
+          "Run model-written code in a sandbox, such as E2B, Modal, Daytona, or Cloudflare Workers."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একটি MCP সার্ভার লিখুন, অনেক ক্লায়েন্ট তা ব্যবহার করবে। মডেলের লেখা কোড চালান স্যান্ডবক্সে।"
+        ],
+        "points": [
+          "MCP-এর আগে প্রতিটি ডেটা সোর্সের জন্য প্রতিটি অ্যাপে কাস্টম কোড লাগত। এখন একটি MCP সার্ভার অনেক ক্লায়েন্টে চলে।",
+          "MCP সার্ভার তিনটি জিনিস দেয়: টুলস, রিসোর্সেস আর প্রম্পটস।",
+          "মডেলকে কোড লিখে চালাতে দিলে টুলের বিস্ফোরণ (প্রতিটি ছোট কাজের জন্য আলাদা টুল) এড়ানো যায় আর গাণিতিক হিসাব নির্ভুল হয়।",
+          "মডেলের লেখা কোড স্যান্ডবক্সে চালান, যেমন E2B, Modal, Daytona বা Cloudflare Workers।"
+        ]
+      },
+      "show": [
+        {
+          "id": "c1"
+        },
+        {
+          "id": "c2"
+        },
+        {
+          "id": "mcp"
+        },
+        {
+          "id": "d1"
+        }
+      ],
+      "links": [
+        {
+          "from": "c1",
+          "to": "mcp",
+          "flow": "to"
+        },
+        {
+          "from": "c2",
+          "to": "mcp",
+          "flow": "to"
+        },
+        {
+          "from": "mcp",
+          "to": "d1",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
