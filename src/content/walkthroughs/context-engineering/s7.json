@@ -1,0 +1,806 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "start",
+      "kind": "note",
+      "label": {
+        "en": "Start of prompt",
+        "bn": "প্রম্পটের শুরু"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "mid",
+      "kind": "note",
+      "label": {
+        "en": "Middle",
+        "bn": "মাঝখান"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "end",
+      "kind": "note",
+      "label": {
+        "en": "End of prompt",
+        "bn": "প্রম্পটের শেষ"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "needle",
+      "kind": "file",
+      "label": {
+        "en": "Needle fact",
+        "bn": "নিডল ফ্যাক্ট"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "attn",
+      "kind": "model",
+      "label": {
+        "en": "Attention",
+        "bn": "অ্যাটেনশন"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "pretrain",
+      "kind": "database",
+      "label": {
+        "en": "Training data",
+        "bn": "ট্রেনিং ডেটা"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "bias",
+      "kind": "user",
+      "label": {
+        "en": "Primacy & recency",
+        "bn": "প্রাইমেসি ও রিসেন্সি"
+      },
+      "x": 650,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Start",
+      "bn": "শুরু"
+    },
+    {
+      "en": "Middle",
+      "bn": "মাঝখান"
+    },
+    {
+      "en": "End",
+      "bn": "শেষ"
+    },
+    {
+      "en": "Context",
+      "bn": "কনটেক্সট"
+    }
+  ],
+  "caption": {
+    "en": "Where a fact sits in a long prompt matters as much as what the fact is.",
+    "bn": "লম্বা প্রম্পটে তথ্য কোথায় বসে, সেটা কী তথ্য তার মতোই গুরুত্বপূর্ণ।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Finding",
+        "title": "The middle gets lost",
+        "body": [
+          "Models remember the start and end of a long input well, but they often miss facts in the middle. This is Lost in the Middle.",
+          "It changes how you should arrange a prompt."
+        ]
+      },
+      "bn": {
+        "short": "আবিষ্কার",
+        "title": "মাঝখানটা হারিয়ে যায়",
+        "body": [
+          "লম্বা ইনপুটের শুরু আর শেষ মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্য প্রায়ই হারিয়ে ফেলে। একে বলে Lost in the Middle।",
+          "এটি প্রম্পট সাজানোর নিয়ম বদলে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot",
+          "sub": {
+            "en": "well recalled",
+            "bn": "ভালো মনে থাকে"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "often missed",
+            "bn": "প্রায়ই বাদ পড়ে"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot",
+          "sub": {
+            "en": "well recalled",
+            "bn": "ভালো মনে থাকে"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Test",
+        "title": "The needle test",
+        "body": [
+          "Liu et al. (2023) hid “needle” facts at varying positions in a long context and measured retrieval accuracy. A needle fact is a single fact hidden at a chosen spot, to test whether the model can find it.",
+          "The result is a U-shaped curve: recall is high at the start, collapses in the middle, and recovers at the end."
+        ]
+      },
+      "bn": {
+        "short": "পরীক্ষা",
+        "title": "নিডল পরীক্ষা",
+        "body": [
+          "Liu et al. (২০২৩) লম্বা কনটেক্সটের বিভিন্ন অবস্থানে “নিডল” তথ্য বসিয়ে রিট্রিভাল অ্যাকুরেসি মেপেছিলেন। নিডল ফ্যাক্ট মানে বেছে নেওয়া জায়গায় লুকিয়ে রাখা একটি তথ্য, মডেল সেটি খুঁজে পায় কি না তা পরীক্ষা করতে।",
+          "ফল একটি ইউ-আকৃতির কার্ভ: শুরুতে রিকল উঁচু, মাঝখানে ধস, শেষে আবার উঠে আসে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "warn"
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        },
+        {
+          "id": "needle",
+          "state": "hot",
+          "sub": {
+            "en": "hidden in the text",
+            "bn": "লেখার ভেতরে লুকানো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "needle",
+          "to": "start",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "needle",
+          "to": "mid",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "needle",
+          "to": "end",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "high",
+          "bn": "উঁচু"
+        },
+        {
+          "en": "low",
+          "bn": "নিচু"
+        },
+        {
+          "en": "high",
+          "bn": "উঁচু"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Longer",
+        "title": "Longer and weaker is worse",
+        "body": [
+          "The effect is worse for longer contexts and weaker models. The longer the context, the worse the middle.",
+          "But it persists even in frontier models with 100K+ context windows."
+        ]
+      },
+      "bn": {
+        "short": "লম্বা",
+        "title": "যত লম্বা আর দুর্বল, তত খারাপ",
+        "body": [
+          "কনটেক্সট যত লম্বা বা মডেল যত দুর্বল, মাঝের সমস্যা তত বেশি।",
+          "তবে ১০০K+ কনটেক্সটের ফ্রন্টিয়ার মডেলেও এটি থেকে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "worse when long",
+            "bn": "লম্বা হলে আরও খারাপ"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "100K+ window",
+            "bn": "১০০K+ উইন্ডো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "high",
+          "bn": "উঁচু"
+        },
+        {
+          "en": "low",
+          "bn": "নিচু"
+        },
+        {
+          "en": "high",
+          "bn": "উঁচু"
+        },
+        {
+          "en": "100K+",
+          "bn": "১০০K+"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Why",
+        "title": "Why it happens",
+        "body": [
+          "Attention is biased by position. Long-context extensions such as RoPE, ALiBi and YaRN help, but do not fully fix it.",
+          "Most pre-training data had shorter contexts, so models never learned to join information across long distances. And models weight the first and last positions more heavily, a bias humans have too."
+        ]
+      },
+      "bn": {
+        "short": "কেন",
+        "title": "কেন এমন হয়",
+        "body": [
+          "অ্যাটেনশনে অবস্থানগত পক্ষপাত আছে; RoPE, ALiBi, YaRN-এর মতো লং-কনটেক্সট এক্সটেনশন সাহায্য করলেও পুরো সমাধান করে না।",
+          "প্রিট্রেনিং ডেটায় বেশিরভাগ কনটেক্সট ছোট ছিল, তাই মডেল দূরের তথ্য জোড়া দিতে শেখেনি। আর মডেল প্রথম ও শেষ অবস্থানকে বেশি গুরুত্ব দেয়, যে প্রবণতা মানুষের মধ্যেও দেখা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "attn",
+          "state": "hot",
+          "sub": {
+            "en": "biased by position",
+            "bn": "অবস্থানে পক্ষপাত"
+          }
+        },
+        {
+          "id": "pretrain",
+          "state": "hot",
+          "sub": {
+            "en": "mostly short texts",
+            "bn": "বেশিরভাগ ছোট কনটেক্সট"
+          }
+        },
+        {
+          "id": "bias",
+          "state": "hot",
+          "sub": {
+            "en": "first and last",
+            "bn": "প্রথম ও শেষ"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "gets missed",
+            "bn": "বাদ পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "attn",
+          "to": "mid",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pretrain",
+          "to": "mid",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bias",
+          "to": "mid",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "low",
+          "bn": "নিচু"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Ends",
+        "title": "Put it at the ends",
+        "body": [
+          "Sandwich it: put the key content at the start of the prompt and repeat it at the end. That hits both attention peaks.",
+          "Re-order documents: if you retrieved 10 documents, put the most relevant at the start and the end, and the least relevant in the middle."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The key content appears at both ends"
+          }
+        ]
+      },
+      "bn": {
+        "short": "প্রান্ত",
+        "title": "রাখুন দুই প্রান্তে",
+        "body": [
+          "স্যান্ডউইচ করুন: জরুরি অংশ প্রম্পটের শুরুতে রাখুন আর শেষে আবার বলুন। এতে অ্যাটেনশনের দুই চূড়াই ধরা যায়।",
+          "ডকুমেন্ট নতুন করে সাজান: ১০টি ডকুমেন্ট পেলে সবচেয়ে প্রাসঙ্গিকগুলো শুরুতে ও শেষে রাখুন, কম প্রাসঙ্গিকগুলো মাঝখানে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "জরুরি অংশ দুই প্রান্তেই থাকে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot",
+          "sub": {
+            "en": "key content",
+            "bn": "জরুরি অংশ"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "dim",
+          "sub": {
+            "en": "least relevant",
+            "bn": "কম প্রাসঙ্গিক"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot",
+          "sub": {
+            "en": "repeated",
+            "bn": "আবার বলা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Shorter",
+        "title": "Cut it shorter, and mark it",
+        "body": [
+          "Shorter context gives better recall. If it fits in 8K tokens, do not use 50K.",
+          "Mark the important part: wrap critical information in <code>&lt;important&gt;</code> tags. Strong models pay attention to marked regions."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "A prompt of 50K tokens shrinks to 8K"
+          },
+          {
+            "sign": "+",
+            "html": "The critical part is wrapped in tags"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ছোট",
+        "title": "ছোট করুন, আর চিহ্নিত করুন",
+        "body": [
+          "ছোট কনটেক্সটে রিকল ভালো। ৮K টোকেনে আঁটলে ৫০K ব্যবহার করবেন না।",
+          "জরুরি অংশ চিহ্নিত করুন: জরুরি তথ্য <code>&lt;important&gt;</code> ট্যাগে মুড়ুন। শক্তিশালী মডেল চিহ্নিত অংশে মনোযোগ দেয়।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "৫০K টোকেনের প্রম্পট ছোট হয়ে ৮K হয়"
+          },
+          {
+            "sign": "+",
+            "html": "জরুরি অংশ ট্যাগে মোড়া"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "dim"
+        },
+        {
+          "id": "mid",
+          "state": "hot",
+          "sub": {
+            "en": "marked",
+            "bn": "চিহ্নিত"
+          }
+        },
+        {
+          "id": "end",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "shorter input",
+            "bn": "ছোট ইনপুট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "8K tokens",
+          "bn": "৮K টোকেন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Again",
+        "title": "Look again, and point back",
+        "body": [
+          "Re-query when unsure: if the model does not find the answer in one pass, ask it to look again with what it learned. Two short passes beat one long one.",
+          "Add an “answer here” marker: end the prompt with “based on the above, your answer:”. This nudges the model to look back over the whole context once more before it responds."
+        ]
+      },
+      "bn": {
+        "short": "আবার",
+        "title": "আবার দেখুন, পেছনে তাকান",
+        "body": [
+          "অনিশ্চিত হলে আবার কুয়েরি করুন: এক চেষ্টায় উত্তর না পেলে, যা শিখেছে তা নিয়ে আবার দেখতে বলুন। দুটো ছোট কুয়েরি একটি লম্বা কুয়েরির চেয়ে ভালো।",
+          "“উত্তর এখানে” মার্কার দিন: প্রম্পট শেষ করুন “based on the above, your answer:” দিয়ে। এতে মডেল উত্তরের আগে পুরো কনটেক্সটে আরেকবার চোখ বোলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "dim"
+        },
+        {
+          "id": "mid",
+          "state": "dim"
+        },
+        {
+          "id": "end",
+          "state": "hot",
+          "sub": {
+            "en": "your answer:",
+            "bn": "your answer:"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "looks back",
+            "bn": "পেছনে তাকায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Later",
+        "title": "Later work: better, never gone",
+        "body": [
+          "Follow-up work (RULER, Summary-of-a-Haystack and BABILong, all in 2024) refined the picture. The U-curve flattens with better models and longer-context training, but never fully goes away.",
+          "Variable-length tasks are harder than fixed-length ones, and multi-hop reasoning across long contexts is still an open problem. RAG and long context are complementary, not redundant."
+        ]
+      },
+      "bn": {
+        "short": "পরে",
+        "title": "পরের গবেষণা: ভালো, তবু যায়নি",
+        "body": [
+          "পরের গবেষণা (RULER, Summary-of-a-Haystack, BABILong, ২০২৪) ছবিটি আরও পরিষ্কার করেছে। ভালো মডেল আর লম্বা-কনটেক্সট ট্রেনিংয়ে ইউ-কার্ভ চ্যাপ্টা হয়, কিন্তু পুরোপুরি যায় না।",
+          "পরিবর্তনশীল দৈর্ঘ্যের কাজ নির্দিষ্ট দৈর্ঘ্যের কাজের চেয়ে কঠিন, আর দীর্ঘ কনটেক্সট জুড়ে মাল্টি-হপ রিজনিং এখনও খোলা সমস্যা। RAG আর লং-কনটেক্সট একে অপরের পরিপূরক।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "flatter, not gone",
+            "bn": "চ্যাপ্টা, তবু আছে"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "better models",
+            "bn": "ভালো মডেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "If neither works, the model genuinely cannot handle that fact. Use a smaller context, external retrieval, or a different architecture."
+        ],
+        "points": [
+          "Put facts that must be recalled in the first 10% or the last 10% of the context.",
+          "If you cannot, repeat them at both ends. Sandwich the key content.",
+          "Shorter context gives better recall. If it fits in 8K, do not use 50K.",
+          "Better models flatten the U-shape, but it never fully goes away."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "তাতেও না হলে মডেল সত্যিই সেই তথ্য সামলাতে পারছে না। ছোট কনটেক্সট, এক্সটার্নাল রিট্রিভাল বা ভিন্ন আর্কিটেকচার ব্যবহার করুন।"
+        ],
+        "points": [
+          "যে তথ্য মনে রাখাতে চান, তা কনটেক্সটের প্রথম ১০% বা শেষ ১০%-এ রাখুন।",
+          "না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন। জরুরি অংশ স্যান্ডউইচ করুন।",
+          "ছোট কনটেক্সটে রিকল ভালো। ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
+          "ভালো মডেলে ইউ-আকৃতি চ্যাপ্টা হয়, কিন্তু পুরোপুরি যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start"
+        },
+        {
+          "id": "mid"
+        },
+        {
+          "id": "end"
+        },
+        {
+          "id": "model"
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "mid",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "end",
+          "to": "model",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

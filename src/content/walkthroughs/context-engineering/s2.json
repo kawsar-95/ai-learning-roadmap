@@ -1,0 +1,739 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "turns",
+      "kind": "queue",
+      "label": {
+        "en": "Old turns",
+        "bn": "পুরোনো টার্ন"
+      },
+      "x": 100,
+      "y": 75
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 290,
+      "y": 75
+    },
+    {
+      "id": "summary",
+      "kind": "note",
+      "label": {
+        "en": "Summary block",
+        "bn": "সারসংক্ষেপ ব্লক"
+      },
+      "x": 490,
+      "y": 75
+    },
+    {
+      "id": "window",
+      "kind": "file",
+      "label": {
+        "en": "Prompt",
+        "bn": "প্রম্পট"
+      },
+      "x": 680,
+      "y": 75
+    },
+    {
+      "id": "log",
+      "kind": "storage",
+      "label": {
+        "en": "Full log",
+        "bn": "পুরো লগ"
+      },
+      "x": 100,
+      "y": 250
+    },
+    {
+      "id": "trigger",
+      "kind": "clock",
+      "label": {
+        "en": "Trigger",
+        "bn": "ট্রিগার"
+      },
+      "x": 290,
+      "y": 250
+    },
+    {
+      "id": "slot",
+      "kind": "database",
+      "label": {
+        "en": "Key facts",
+        "bn": "মূল তথ্য"
+      },
+      "x": 490,
+      "y": 250
+    },
+    {
+      "id": "mid",
+      "kind": "note",
+      "label": {
+        "en": "Mid summary",
+        "bn": "মাঝারি সারসংক্ষেপ"
+      },
+      "x": 490,
+      "y": 250
+    },
+    {
+      "id": "recent",
+      "kind": "queue",
+      "label": {
+        "en": "Recent",
+        "bn": "সাম্প্রতিক"
+      },
+      "x": 670,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Chat size",
+      "bn": "চ্যাটের আকার"
+    },
+    {
+      "en": "Compression",
+      "bn": "কমপ্রেশন"
+    },
+    {
+      "en": "Trigger",
+      "bn": "ট্রিগার"
+    }
+  ],
+  "caption": {
+    "en": "Example: a 50-turn chat that is summarized as it grows.",
+    "bn": "উদাহরণ: ৫০ টার্নের একটি চ্যাট, যা বড় হতে হতে সারসংক্ষেপ করা হয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Growth",
+        "title": "A long chat costs more and more",
+        "body": [
+          "A 50-turn chat is 50× the size of a 1-turn chat. Most of those tokens are noise: greetings, “can you clarify”, half-finished thoughts.",
+          "Summarization squeezes old turns into a short summary, so the model stays on track without the growing cost."
+        ]
+      },
+      "bn": {
+        "short": "বাড়তে থাকা",
+        "title": "লম্বা চ্যাটের খরচ বাড়তেই থাকে",
+        "body": [
+          "৫০ বার কথা বলা চ্যাটের আকার ১ বারের চ্যাটের ৫০ গুণ। এই টোকেনগুলোর বেশিরভাগই অপ্রয়োজনীয়: শুভেচ্ছা, “একটু বুঝিয়ে বলবেন?”, আধা-শেষ চিন্তা।",
+          "সামারাইজেশন পুরোনো টার্নকে ছোট সারসংক্ষেপে চেপে ফেলে, ফলে মডেল ঠিক পথে থাকে অথচ খরচ বাড়তে থাকে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "turns",
+          "state": "warn",
+          "sub": {
+            "en": "50 turns",
+            "bn": "৫০ টার্ন"
+          }
+        },
+        {
+          "id": "window",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "turns",
+          "to": "window",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        "50×",
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Roll",
+        "title": "Rolling memory: summarize the old, keep the new",
+        "body": [
+          "Rolling memory condenses old turns into a summary block, while the recent turns stay word for word.",
+          "The summary goes back at the front of the conversation, as if it were the first thing you said."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "Old turns shrink into one block"
+          },
+          {
+            "sign": "+",
+            "html": "Recent turns stay as they were"
+          }
+        ]
+      },
+      "bn": {
+        "short": "রোলিং",
+        "title": "রোলিং মেমরি: পুরোনোটা সংক্ষেপ, নতুনটা হুবহু",
+        "body": [
+          "রোলিং মেমরিতে পুরোনো টার্ন সংক্ষেপ হয়ে একটি সারসংক্ষেপ ব্লকে পরিণত হয়, আর সাম্প্রতিক টার্নগুলো হুবহু থাকে।",
+          "সারসংক্ষেপটা কথোপকথনের সামনে ফিরে বসে, যেন সেটাই আপনার বলা প্রথম কথা।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "পুরোনো টার্ন একটি ব্লকে ছোট হয়ে যায়"
+          },
+          {
+            "sign": "+",
+            "html": "সাম্প্রতিক টার্ন যেমন ছিল তেমনই থাকে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "turns",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "condenses",
+            "bn": "সংক্ষেপ করে"
+          }
+        },
+        {
+          "id": "summary",
+          "state": "hot"
+        },
+        {
+          "id": "window",
+          "state": "hot"
+        },
+        {
+          "id": "recent",
+          "state": "hot",
+          "sub": {
+            "en": "word for word",
+            "bn": "হুবহু"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "turns",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "summary",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "summary",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "recent",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Trigger",
+        "title": "Three triggers say when to summarize",
+        "body": [
+          "A token-budget trigger summarizes when the history is over N tokens, for example 4K. A turn-count trigger summarizes every K turns: the earliest K−1 go into one block.",
+          "A semantic trigger summarizes when the topic shifts, for example when a new message looks far from the recent history."
+        ]
+      },
+      "bn": {
+        "short": "ট্রিগার",
+        "title": "তিনটি ট্রিগার বলে কখন সামারাইজ করবেন",
+        "body": [
+          "টোকেন-বাজেট ট্রিগার: হিস্ট্রি N টোকেন, যেমন ৪K, পার হলে সামারাইজ করে। টার্ন-কাউন্ট ট্রিগার: প্রতি K টার্ন পরপর আগের K−১ টার্ন একটি ব্লকে নেয়।",
+          "সেম্যান্টিক ট্রিগার: বিষয় বদলালে সামারাইজ করে, যেমন নতুন বার্তা সাম্প্রতিক কথোপকথন থেকে অনেক দূরের মনে হলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "turns",
+          "state": "dim"
+        },
+        {
+          "id": "trigger",
+          "state": "hot",
+          "sub": {
+            "en": "three triggers",
+            "bn": "তিনটি ট্রিগার"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "starts to summarize",
+            "bn": "সামারাইজ শুরু করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "turns",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "trigger",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "4K tokens",
+          "bn": "৪K টোকেন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Schema",
+        "title": "Ask for a structured summary",
+        "body": [
+          "A plain request to summarize the chat gives mush. Use a structured schema instead: a fixed template of fields.",
+          "It holds the user goal, the decisions made, the open questions, the facts learned, the entities, the preferences and the tool results to remember."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Goal, decisions and open questions each have a field"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্কিমা",
+        "title": "সারসংক্ষেপ চান স্ট্রাকচার্ড আকারে",
+        "body": [
+          "শুধু চ্যাট সারসংক্ষেপ করতে বললে ঝাপসা ফল আসে। বদলে স্ট্রাকচার্ড স্কিমা ব্যবহার করুন: ফিল্ডের একটি স্থির ছক।",
+          "এতে থাকে ইউজারের লক্ষ্য, নেওয়া সিদ্ধান্ত, খোলা প্রশ্ন, জানা তথ্য, নাম-আইডি, পছন্দ আর মনে রাখার মতো টুলের ফলাফল।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "লক্ষ্য, সিদ্ধান্ত আর খোলা প্রশ্নের প্রত্যেকের নিজের ঘর"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "turns",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "fills the schema",
+            "bn": "ছক ভরে"
+          }
+        },
+        {
+          "id": "summary",
+          "state": "hot",
+          "sub": {
+            "en": "not mush",
+            "bn": "ঝাপসা নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "turns",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "model",
+          "to": "summary",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Levels",
+        "title": "Hierarchical summaries keep both",
+        "body": [
+          "Hierarchical summarisation has three levels: a summary of the oldest turns, a medium-detail summary of the middle turns, and the recent turns word for word.",
+          "This keeps both the long arc of the chat and the recent detail."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Three levels of detail"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "স্তরভিত্তিক সারসংক্ষেপে দুটোই থাকে",
+        "body": [
+          "হায়ারার্কিক্যাল সামারাইজেশনে তিন স্তর: সবচেয়ে পুরোনো টার্নের সারসংক্ষেপ, মাঝের টার্নের মাঝারি বিস্তারের সারসংক্ষেপ, আর সাম্প্রতিক টার্ন হুবহু।",
+          "এতে চ্যাটের দীর্ঘ ধারাবাহিকতা আর সাম্প্রতিক খুঁটিনাটি, দুটোই থাকে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "তিন স্তরের বিস্তার"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "summary",
+          "state": "hot",
+          "sub": {
+            "en": "oldest turns",
+            "bn": "সবচেয়ে পুরোনো"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "hot",
+          "sub": {
+            "en": "middle turns",
+            "bn": "মাঝের টার্ন"
+          }
+        },
+        {
+          "id": "recent",
+          "state": "hot",
+          "sub": {
+            "en": "word for word",
+            "bn": "হুবহু"
+          }
+        },
+        {
+          "id": "window",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "summary",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "recent",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Loss",
+        "title": "Summaries lose detail",
+        "body": [
+          "Summarisation is lossy compression, like shrinking a photo. Decisions, exact numbers and quoted text are the first things to disappear.",
+          "The compression ratio is usually 5–20×, but the price is lost detail."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Decisions, exact numbers and quoted text vanish first."
+        }
+      },
+      "bn": {
+        "short": "হারানো",
+        "title": "সারসংক্ষেপে তথ্য হারায়",
+        "body": [
+          "সামারাইজেশন লসি কমপ্রেশন, ছবি ছোট করার মতো। সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়।",
+          "সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সিদ্ধান্ত, নির্দিষ্ট সংখ্যা আর উদ্ধৃতি সবার আগে হারায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "summary",
+          "state": "warn",
+          "sub": {
+            "en": "details lost",
+            "bn": "খুঁটিনাটি হারায়"
+          }
+        },
+        {
+          "id": "window",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "summary",
+          "to": "window",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        "5–20×",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Slot",
+        "title": "Keep key facts in a slot of their own",
+        "body": [
+          "Put the key facts in a separate structured slot, kept outside the summary, so they survive summarizing.",
+          "If something matters a lot, pull it out before you summarize."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Key facts survive the summary"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্লট",
+        "title": "মূল তথ্য রাখুন আলাদা স্লটে",
+        "body": [
+          "গুরুত্বপূর্ণ তথ্য রাখুন সারসংক্ষেপের বাইরে আলাদা স্ট্রাকচার্ড স্লটে, যাতে সামারাইজ করার পরেও তথ্য টিকে থাকে।",
+          "কোনো কিছু খুব জরুরি হলে সামারাইজ করার আগেই সেটা আলাদা করে নিন।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মূল তথ্য সারসংক্ষেপের পরেও টিকে থাকে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "slot",
+          "state": "hot",
+          "sub": {
+            "en": "kept apart",
+            "bn": "আলাদা রাখা"
+          }
+        },
+        {
+          "id": "summary",
+          "state": "dim"
+        },
+        {
+          "id": "window",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "slot",
+          "to": "window",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "summary",
+          "to": "window",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Index",
+        "title": "The summary is an index, not the truth",
+        "body": [
+          "Treat the summary as an index, not the source of truth. When a detail matters, retrieve it from the original log.",
+          "For high-stakes chats, keep the full transcript, even after summarizing into the prompt."
+        ]
+      },
+      "bn": {
+        "short": "সূচি",
+        "title": "সারসংক্ষেপ সূচির মতো, সত্যের উৎস নয়",
+        "body": [
+          "সারসংক্ষেপকে সূচির মতো ভাবুন, সত্যের উৎস নয়। কোনো খুঁটিনাটি জরুরি হলে মূল লগ থেকে ফিরে দেখুন।",
+          "গুরুত্বপূর্ণ কথোপকথনের পুরো ট্রান্সক্রিপ্ট রাখুন, প্রম্পটে সামারাইজ করার পরেও।"
+        ]
+      },
+      "show": [
+        {
+          "id": "summary",
+          "state": "hot",
+          "sub": {
+            "en": "an index",
+            "bn": "সূচি"
+          }
+        },
+        {
+          "id": "log",
+          "state": "hot",
+          "sub": {
+            "en": "source of truth",
+            "bn": "সত্যের উৎস"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "summary",
+          "to": "log",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "look up",
+            "bn": "ফিরে দেখা"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Squeeze the old, keep the recent word for word, and keep the truth somewhere you can go back to."
+        ],
+        "points": [
+          "There are three triggers to summarise: a token budget, a turn count, or a topic shift.",
+          "A plain request to summarise the chat gives mush. Use a structured schema instead.",
+          "Summaries lose detail: decisions, exact numbers, and quoted text disappear first.",
+          "Treat the summary as an index, not the source of truth. Keep full transcripts for high-stakes chats."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "পুরোনোটা চেপে ছোট করুন, সাম্প্রতিকটা হুবহু রাখুন, আর সত্যটা এমন জায়গায় রাখুন যেখানে ফিরে যাওয়া যায়।"
+        ],
+        "points": [
+          "সামারাইজ করার তিনটি ট্রিগার: টোকেন-বাজেট, টার্নের সংখ্যা, আর বিষয় বদল।",
+          "শুধু চ্যাট সারসংক্ষেপ করতে বললে ঝাপসা ফল আসে। বদলে স্ট্রাকচার্ড স্কিমা ব্যবহার করুন।",
+          "সারসংক্ষেপে তথ্য হারায়: সিদ্ধান্ত, নির্দিষ্ট সংখ্যা আর উদ্ধৃতি সবার আগে যায়।",
+          "সারসংক্ষেপ সূচির মতো, সত্যের উৎস নয়। গুরুত্বপূর্ণ কথোপকথনের পুরো ট্রান্সক্রিপ্ট রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "turns"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "summary"
+        },
+        {
+          "id": "window"
+        },
+        {
+          "id": "recent"
+        },
+        {
+          "id": "slot"
+        },
+        {
+          "id": "log"
+        }
+      ],
+      "links": [
+        {
+          "from": "turns",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "summary",
+          "flow": "to"
+        },
+        {
+          "from": "summary",
+          "to": "window",
+          "flow": "to"
+        },
+        {
+          "from": "recent",
+          "to": "window",
+          "flow": "to"
+        },
+        {
+          "from": "slot",
+          "to": "window",
+          "flow": "to"
+        },
+        {
+          "from": "summary",
+          "to": "log",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
