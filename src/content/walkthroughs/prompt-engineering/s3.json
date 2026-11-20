@@ -1,0 +1,772 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ব্যবহারকারী"
+      },
+      "x": 90,
+      "y": 75
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 280,
+      "y": 75
+    },
+    {
+      "id": "steps",
+      "kind": "note",
+      "label": {
+        "en": "Reasoning steps",
+        "bn": "যুক্তির ধাপ"
+      },
+      "x": 490,
+      "y": 75
+    },
+    {
+      "id": "answer",
+      "kind": "file",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 680,
+      "y": 75
+    },
+    {
+      "id": "memory",
+      "kind": "database",
+      "label": {
+        "en": "Memory",
+        "bn": "মেমরি"
+      },
+      "x": 280,
+      "y": 250
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "get_weather",
+        "bn": "get_weather"
+      },
+      "x": 490,
+      "y": 250
+    },
+    {
+      "id": "vote",
+      "kind": "chart",
+      "label": {
+        "en": "Majority answer",
+        "bn": "বেশিরভাগের উত্তর"
+      },
+      "x": 660,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "17 × 24",
+      "bn": "১৭ × ২৪"
+    },
+    {
+      "en": "ReAct score",
+      "bn": "ReAct স্কোর"
+    },
+    {
+      "en": "Reflexion score",
+      "bn": "Reflexion স্কোর"
+    },
+    {
+      "en": "Trace vs direct answer",
+      "bn": "ট্রেস বনাম সরাসরি উত্তর"
+    }
+  ],
+  "caption": {
+    "en": "Example: a weather question, and a few numbers from this section.",
+    "bn": "উদাহরণ: একটি আবহাওয়ার প্রশ্ন, আর এই সেকশনের কয়েকটি সংখ্যা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Question",
+        "title": "A hard question with several steps",
+        "body": [
+          "A user asks a hard question that takes several steps. Without help, the model guesses at the answer.",
+          "Three patterns fix this. They let the model think out loud before it answers."
+        ]
+      },
+      "bn": {
+        "short": "প্রশ্ন",
+        "title": "কয়েক ধাপের একটি কঠিন প্রশ্ন",
+        "body": [
+          "ব্যবহারকারী এমন একটি কঠিন প্রশ্ন করে, যার উত্তরে কয়েক ধাপ লাগে। সাহায্য ছাড়া মডেল আন্দাজে উত্তর দেয়।",
+          "তিনটি প্যাটার্ন এর সমাধান দেয়। এগুলো মডেলকে উত্তরের আগে জোরে জোরে ভাবতে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "asks",
+            "bn": "প্রশ্ন করে"
+          }
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "answer",
+          "state": "warn",
+          "sub": {
+            "en": "a guess",
+            "bn": "আন্দাজ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "answer",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Steps",
+        "title": "Chain-of-thought: write the steps first",
+        "body": [
+          "Chain-of-thought makes the model write its reasoning steps before the final answer. The extra tokens give the hard part more computation.",
+          "A worked example: 17 × 24 is 17 × 20 = 340, then 17 × 4 = 68, then 340 + 68 = 408."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "The model must write these steps as tokens. That is what gives the hard part more computation."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Reasoning steps come before the answer"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ধাপ",
+        "title": "চেইন-অফ-থট: আগে ধাপগুলো লেখা",
+        "body": [
+          "চেইন-অফ-থট মডেলকে চূড়ান্ত উত্তরের আগে যুক্তির ধাপ লিখতে বলে। বাড়তি টোকেন কঠিন অংশের জন্য বেশি কম্পিউটেশন দেয়।",
+          "একটা ওয়ার্কড উদাহরণ: ১৭ × ২৪ হলো ১৭ × ২০ = ৩৪০, তারপর ১৭ × ৪ = ৬৮, তারপর ৩৪০ + ৬৮ = ৪০৮।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "মডেলকে এই ধাপগুলো টোকেন হিসেবে লিখতে হয়। তাতেই কঠিন অংশ বেশি কম্পিউটেশন পায়।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "উত্তরের আগে যুক্তির ধাপ আসে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "writes steps",
+            "bn": "ধাপ লেখে"
+          }
+        },
+        {
+          "id": "steps",
+          "state": "hot",
+          "sub": {
+            "en": "17×20=340, 17×4=68",
+            "bn": "১৭×২০=৩৪০, ১৭×৪=৬৮"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "408",
+            "bn": "৪০৮"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "model",
+          "to": "steps",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "steps",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "408",
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Phrase",
+        "title": "One phrase can ask for the steps",
+        "body": [
+          "Zero-shot chain-of-thought adds the phrase <em>Let's think step by step</em> to the prompt, with no examples at all.",
+          "Showing worked steps, or adding this phrase, improves math, logic and multi-step answers."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "No examples are needed"
+          }
+        ]
+      },
+      "bn": {
+        "short": "বাক্য",
+        "title": "একটি বাক্যেই ধাপ চাওয়া যায়",
+        "body": [
+          "জিরো-শট CoT প্রম্পটে শুধু <em>Let's think step by step</em> বাক্যটা যোগ করে, কোনো উদাহরণ ছাড়াই।",
+          "কাজের ধাপ দেখালে বা এই বাক্য যোগ করলে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ উত্তর ভালো হয়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "কোনো উদাহরণ লাগে না"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "adds a phrase",
+            "bn": "বাক্য যোগ করে"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "steps",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "steps",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Vote",
+        "title": "Self-consistency: take the majority answer",
+        "body": [
+          "Self-consistency asks for N separate reasoning chains and takes the answer that most of them give.",
+          "On GSM8K this gives about +10%."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "About +10% on GSM8K"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ভোট",
+        "title": "সেলফ-কনসিস্টেন্সি: বেশিরভাগের উত্তর নেওয়া",
+        "body": [
+          "সেলফ-কনসিস্টেন্সি N-টা আলাদা যুক্তির চেইন চায় আর যে উত্তরটা বেশিরভাগ চেইনে আসে সেটা নেয়।",
+          "GSM8K-তে এতে প্রায় +১০% পাওয়া যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "GSM8K-তে প্রায় +১০%"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "steps",
+          "state": "hot",
+          "sub": {
+            "en": "N separate chains",
+            "bn": "N-টা আলাদা চেইন"
+          }
+        },
+        {
+          "id": "vote",
+          "state": "hot"
+        },
+        {
+          "id": "answer",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "steps",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "steps",
+          "to": "vote",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vote",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Act",
+        "title": "ReAct: think, then act",
+        "body": [
+          "ReAct stands for reason plus act. The model loops: a thought, an action like a search, then an observation of the result.",
+          "Thought 1: I need the current weather in Dhaka to answer. Action 1: <code>get_weather(\"Dhaka\")</code>."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The model asked a tool for the weather"
+          }
+        ]
+      },
+      "bn": {
+        "short": "অ্যাকশন",
+        "title": "ReAct: আগে ভাবা, তারপর করা",
+        "body": [
+          "ReAct মানে Reason আর Act মিলিয়ে। মডেল পালা করে চলে: একটা ভাবনা, একটা অ্যাকশন যেমন সার্চ, তারপর ফলাফলের পর্যবেক্ষণ।",
+          "ভাবনা ১: উত্তর দিতে ঢাকার এখনকার আবহাওয়া দরকার। অ্যাকশন ১: <code>get_weather(\"Dhaka\")</code>।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মডেল একটা টুলের কাছে আবহাওয়া চাইল"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "Thought 1",
+            "bn": "ভাবনা ১"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "location: Dhaka",
+            "bn": "location: Dhaka"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "Action 1",
+            "bn": "অ্যাকশন ১"
+          }
+        }
+      ],
+      "values": [
+        null,
+        "~40%",
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Observe",
+        "title": "The result comes back and the model finishes",
+        "body": [
+          "The tool's result returns as an observation: 32°C, partly cloudy, humidity 78%. The second thought is: now I can answer.",
+          "The model finishes with the answer: it’s 32°C and humid in Dhaka right now."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "ReAct loops think, act, observe. It is the pattern behind every modern AI agent."
+        }
+      },
+      "bn": {
+        "short": "পর্যবেক্ষণ",
+        "title": "ফলাফল ফিরে আসে, আর মডেল শেষ করে",
+        "body": [
+          "টুলের ফলাফল পর্যবেক্ষণ হয়ে ফিরে আসে: ৩২°C, আংশিক মেঘলা, আর্দ্রতা ৭৮%। দ্বিতীয় ভাবনা: এখন সরাসরি উত্তর দেওয়া যায়।",
+          "মডেল উত্তর দিয়ে শেষ করে: ঢাকায় এখন ৩২°C আর আর্দ্র আবহাওয়া।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।"
+        }
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "32°C, partly cloudy",
+            "bn": "৩২°C, আংশিক মেঘলা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "Thought 2",
+            "bn": "ভাবনা ২"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "finish",
+            "bn": "finish"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "model",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "Observation 1",
+            "bn": "পর্যবেক্ষণ ১"
+          }
+        },
+        {
+          "from": "model",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "finish",
+            "bn": "finish"
+          }
+        }
+      ],
+      "values": [
+        null,
+        "~40%",
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reflect",
+        "title": "Reflexion: write down what went wrong",
+        "body": [
+          "After each try, the model writes down what went wrong in memory. The next try learns from it.",
+          "On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The next try starts from what went wrong"
+          }
+        ]
+      },
+      "bn": {
+        "short": "রিফ্লেকশন",
+        "title": "রিফ্লেকশন: কোথায় ভুল হলো তা লিখে রাখা",
+        "body": [
+          "প্রতিটি চেষ্টার পর মডেল কোথায় ভুল হলো তা মেমরিতে লিখে রাখে, যাতে পরের চেষ্টা সেখান থেকে শেখে।",
+          "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "পরের চেষ্টা শুরু হয় ভুলের শিক্ষা থেকে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "reflects",
+            "bn": "ভেবে দেখে"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "what went wrong",
+            "bn": "কোথায় ভুল হলো"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "memory",
+          "flow": "both",
+          "state": "hot",
+          "label": {
+            "en": "reflection",
+            "bn": "রিফ্লেকশন"
+          }
+        },
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        "~40%",
+        "~91%",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "Thinking costs tokens",
+        "body": [
+          "A reasoning trace can be 10–50× longer than a direct answer. All three patterns cost more tokens, and so more money and time.",
+          "Use them for hard tasks: math, planning, debugging, multi-hop reasoning. For extraction or simple Q&amp;A, a direct answer is faster and cheaper."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Use it only when the task justifies it. For simple questions, a direct answer is faster and cheaper."
+        }
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "ভাবনার খরচ আছে",
+        "body": [
+          "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। তিনটি প্যাটার্নেই টোকেন বেশি লাগে, তাই খরচ আর সময়ও বেশি।",
+          "কঠিন কাজেই এগুলো ব্যবহার করুন: অঙ্ক, প্ল্যানিং, ডিবাগিং, মাল্টি-হপ রিজনিং। এক্সট্রাকশন বা সহজ Q&amp;A-তে সরাসরি উত্তরই দ্রুত ও সস্তা।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "কাজটা দাবি করলে তবেই ব্যবহার করুন। সহজ প্রশ্নে সরাসরি উত্তরই দ্রুত ও সস্তা।"
+        }
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "steps",
+          "state": "warn",
+          "sub": {
+            "en": "10–50× longer",
+            "bn": "১০–৫০ গুণ লম্বা"
+          }
+        },
+        {
+          "id": "answer"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "steps",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "steps",
+          "to": "answer",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        "10–50×"
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Three patterns, one idea: let the model think out loud before it answers."
+        ],
+        "points": [
+          "Showing worked steps, or adding Let's think step by step, improves math, logic, and multi-step answers.",
+          "ReAct loops think, act, observe. It is the pattern behind every modern AI agent.",
+          "On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%.",
+          "A reasoning trace can be 10–50× longer than a direct answer. Use it only for hard tasks."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "তিনটি প্যাটার্ন, একটাই কথা: উত্তরের আগে মডেলকে জোরে জোরে ভাবতে দিন।"
+        ],
+        "points": [
+          "কাজের ধাপ দেখালে বা Let's think step by step যোগ করলে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ উত্তর ভালো হয়।",
+          "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।",
+          "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।",
+          "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "steps"
+        },
+        {
+          "id": "answer"
+        },
+        {
+          "id": "tool"
+        },
+        {
+          "id": "memory"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "steps",
+          "flow": "to"
+        },
+        {
+          "from": "steps",
+          "to": "answer",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "memory",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

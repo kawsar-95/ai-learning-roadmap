@@ -315,7 +315,8 @@ Low-alpha `rgba()` tints work on both grounds and stay as they are.
 A walk-through is a diagram of a section that changes step by step. A row of
 readouts sits above it, and each step has its own text in English and in
 Bangla. It shows under the section intro. Part 18 has one for each of its 40
-sections, and Part 1 has four. A section does not need one.
+sections, and Parts 1 to 17 have one for each section that shows a
+process. A section does not need one.
 
 Part 18 is generated. `src/content/system-design.json` is the output of
 `scripts/system-design/`, and its walk-throughs are written there in Python

@@ -41,6 +41,7 @@ for (const [prefix, lang] of [["", "en"], ["/bn", "bn"]]) {
   const page = `${base}${prefix}/topics/${slug}/`;
   await p.goto(page, { waitUntil: "networkidle" });
   let controlDone = lang !== "en";
+  let controlTried = false;
   for (const s of walks) {
     await p.goto(`${page}#${s.id}`, { waitUntil: "load" });
     const player = p.locator(`[aria-labelledby="${s.id}-walk"]`);
@@ -62,20 +63,25 @@ for (const [prefix, lang] of [["", "en"], ["/bn", "bn"]]) {
       const v = verdict(m);
       if (v) problems.push(`[${lang}] ${s.id} step ${i + 1}: ${v}`);
       if (!controlDone && m.max > 40 && m.centres.length && !v) {
-        // Negative control: move the frame far from the focus and the verdict must change.
+        // Negative control: move the frame far from the focus and the verdict must change. A focus that spans the whole
+        // diagram (a box at each end) stays in view wherever the frame stops, so the control tries each step until one
+        // can show the defect, and fails only when none of them can.
         const moved = await player.evaluate((root) => {
           const f = root.querySelector("div.overflow-x-auto");
           f.scrollLeft = f.scrollLeft > f.scrollWidth / 4 ? 0 : f.scrollWidth;
           return null;
         }).then(() => player.evaluate(probe, ids));
-        if (verdict(moved) === null && Math.abs(moved.sl - m.sl) > 20) problems.push("SELF-TEST FAILED: a frame scrolled away from the focus was not reported");
-        else if (Math.abs(moved.sl - m.sl) > 20) {
-          console.log("self-test ok: a frame scrolled away from the focus is reported");
-          controlDone = true;
+        if (Math.abs(moved.sl - m.sl) > 20) {
+          controlTried = true;
+          if (verdict(moved) !== null) {
+            console.log("self-test ok: a frame scrolled away from the focus is reported");
+            controlDone = true;
+          }
         }
       }
     }
   }
+  if (controlTried && !controlDone) problems.push("SELF-TEST FAILED: a frame scrolled away from the focus was not reported on any step");
   await ctx.close();
 }
 await browser.close();

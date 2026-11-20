@@ -36,7 +36,7 @@ Layman's, and বাংলা. Every page exists in English and in Bangla.
 | Parts | 18 |
 | Sections | 153 |
 | Start here boxes | 153, one per section: the big idea, the words to know, and what to remember |
-| Walk-throughs | 44, with 477 steps: one for each section of Part 18, and four in Part 1 |
+| Walk-throughs | 45, with 486 steps: one for each section of Part 18, and 5 in Parts 1 to 17 |
 | Cited sources | 666, from 162 sites (218 of them arXiv papers) |
 | Voices in each section | 3: Technical, Layman's, বাংলা |
 | Languages | English and Bangla, page for page |
@@ -104,8 +104,8 @@ remembers it.
 ![A walk-through in Part 18, section 7, Caching, at step 4 of 13: three readouts (p95, hit rate, and database load) marked as changed above a diagram of users, an app, a cache, and a database, drawn in color with a key under it, then the step's text with a tip and the list of what changed, and the numbered steps](screenshots/walkthrough.png)
 
 Each of the 40 sections of Part 18 has a walk-through under its intro: a
-diagram that changes with every step, drawn for this site. Part 1 has four,
-for Tokens, Function calling, Embedding models, and Reasoning models.
+diagram that changes with every step, drawn for this site. Parts 1 to 17 have
+one for the sections that show a process or numbers that change.
 
 - A row of **readouts** (such as the p95 latency or the hit rate) shows how
   the numbers change from step to step. A changed one is marked.

@@ -56,7 +56,7 @@ group, so it adds nothing to the URL.
 | `/roadmap/<phase>/<lesson>/` | `/bn/roadmap/<phase>/<lesson>/` | `LessonPage` | One curriculum lesson (542 pages) |
 | `/resources/` | `/bn/resources/` | `ResourcesPage` | 20 open-source repositories in 5 groups |
 | `/search-index.json` | `/bn/search-index.json` | route handler | The search documents of one language |
-| `/walkthroughs/<slug>/<section>.json` | the same file | route handler | The walk-through of one section, with English and Bangla in one file (44 files) |
+| `/walkthroughs/<slug>/<section>.json` | the same file | route handler | The walk-through of one section, with English and Bangla in one file (45 files) |
 
 The build also writes these files:
 
@@ -213,7 +213,7 @@ The text column is at most 720 px wide.
 
 A section can carry a walk-through: a diagram that changes step by step, a
 row of readouts above it, and the text of each step in English and in Bangla.
-Part 18 has one for each of its 40 sections, and Part 1 has four. The data model is `Walkthrough`
+Part 18 has one for each of its 40 sections, and Parts 1 to 17 have one for each section that shows a process. The data model is `Walkthrough`
 in `src/lib/content-schema.ts`, and the format is in the
 [content guide](content-guide.md#walk-throughs).
 
