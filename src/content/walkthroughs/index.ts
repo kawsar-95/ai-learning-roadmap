@@ -5,6 +5,7 @@ import llmFundamentalsS7 from "./llm-fundamentals/s7.json";
 import llmFundamentalsS9 from "./llm-fundamentals/s9.json";
 import llmFundamentalsS10 from "./llm-fundamentals/s10.json";
 import promptEngineeringS3 from "./prompt-engineering/s3.json";
+import fineTuningRoadmapS2 from "./fine-tuning-roadmap/s2.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -15,5 +16,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "prompt-engineering": {
     s3: promptEngineeringS3,
+  },
+  "fine-tuning-roadmap": {
+    s2: fineTuningRoadmapS2,
   },
 };
