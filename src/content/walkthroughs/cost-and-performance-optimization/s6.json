@@ -1,0 +1,753 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "app",
+      "kind": "server",
+      "label": {
+        "en": "App",
+        "bn": "অ্যাপ"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "prompt",
+      "kind": "note",
+      "label": {
+        "en": "Long prompt",
+        "bn": "লম্বা প্রম্পট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "small",
+      "kind": "model",
+      "label": {
+        "en": "Small model",
+        "bn": "ছোট মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "cache",
+      "kind": "cache",
+      "label": {
+        "en": "Cache",
+        "bn": "ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "batch",
+      "kind": "queue",
+      "label": {
+        "en": "Batch file",
+        "bn": "ব্যাচ ফাইল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "squeeze",
+      "kind": "tool",
+      "label": {
+        "en": "Compressor",
+        "bn": "কম্প্রেসর"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "budget",
+      "kind": "chart",
+      "label": {
+        "en": "Token budget",
+        "bn": "টোকেন বাজেট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "gateway",
+      "kind": "balancer",
+      "label": {
+        "en": "Gateway",
+        "bn": "গেটওয়ে"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "big",
+      "kind": "model",
+      "label": {
+        "en": "Large model",
+        "bn": "বড় মডেল"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Quality",
+      "bn": "মান"
+    },
+    {
+      "en": "Prompt",
+      "bn": "প্রম্পট"
+    }
+  ],
+  "caption": {
+    "en": "LLM bills scale with usage. Three knobs cut the cost without losing quality: cascade, cache, and compress.",
+    "bn": "LLM-এর বিল ব্যবহারের সাথে বাড়ে। তিনটি উপায়ে মান না হারিয়ে খরচ কমে: ক্যাসকেড, ক্যাশ আর কম্প্রেস।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Knobs",
+        "title": "Three knobs for the bill",
+        "body": [
+          "LLM bills grow with usage. Three ideas cut the cost by 5–50× without losing quality: send easy work to cheap models, reuse past work, and shrink what you send or use a smaller model."
+        ]
+      },
+      "bn": {
+        "short": "উপায়",
+        "title": "বিল কমানোর তিন উপায়",
+        "body": [
+          "LLM-এর বিল ব্যবহারের সাথে বাড়ে। তিনটি উপায়ে মান না হারিয়ে খরচ ৫–৫০× কমানো যায়: সহজ কাজ সস্তা মডেলে পাঠান, আগের কাজ আবার ব্যবহার করুন, আর যা পাঠান তা ছোট করুন বা ছোট মডেল ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "send easy work here",
+            "bn": "সহজ কাজ এখানে"
+          },
+          "y": 75
+        },
+        {
+          "id": "cache",
+          "state": "hot",
+          "sub": {
+            "en": "reuse past work",
+            "bn": "আগের কাজ আবার"
+          }
+        },
+        {
+          "id": "squeeze",
+          "state": "hot",
+          "sub": {
+            "en": "shrink what you send",
+            "bn": "যা পাঠান তা ছোট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "cache",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "squeeze",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "5–50× less",
+          "bn": "৫–৫০× কম"
+        },
+        {
+          "en": "kept",
+          "bn": "বজায় থাকে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cascade",
+        "title": "Cheap first, expensive only if needed",
+        "body": [
+          "Route easy requests to a small, cheap model. Only escalate to a large, expensive one when the small model's confidence is low.",
+          "A well-tuned cascade often reaches frontier quality at 30–70% of the cost."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "To tell how confident the small model is, use logprobs, self-critique, or a separate classifier."
+        }
+      },
+      "bn": {
+        "short": "ক্যাসকেড",
+        "title": "আগে সস্তা, দরকারে দামি",
+        "body": [
+          "সহজ অনুরোধ ছোট, সস্তা মডেলে পাঠান। ছোট মডেলের আত্মবিশ্বাস কম হলেই কেবল বড়, দামি মডেলে নিন।",
+          "ভালোভাবে সাজানো ক্যাসকেড প্রায়ই খরচের ৩০–৭০%-এ সেরা মানে পৌঁছায়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "ছোট মডেল কতটা নিশ্চিত তা বুঝতে logprobs, সেলফ-ক্রিটিক বা আলাদা একটি ক্লাসিফায়ার ব্যবহার করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "tries first",
+            "bn": "আগে চেষ্টা করে"
+          }
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "if not confident",
+            "bn": "নিশ্চিত না হলে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "small",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "30–70% of it",
+          "bn": "এর ৩০–৭০%"
+        },
+        {
+          "en": "frontier",
+          "bn": "সেরা মান"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cache",
+        "title": "Caching: the biggest lever",
+        "body": [
+          "Caching is the single most powerful cost lever. Three kinds:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Semantic cache: if a near-identical prompt was answered recently (cosine above 0.95), return the cached answer."
+          },
+          {
+            "sign": "+",
+            "html": "Output cache: for deterministic tasks (extraction, classification with <code>temperature=0</code>), a key-value cache keyed on the input."
+          },
+          {
+            "sign": "+",
+            "html": "Prompt cache: provider-level, it reuses the KV of the system prompt across calls, with an 80–90% discount on the cached prefix."
+          }
+        ]
+      },
+      "bn": {
+        "short": "ক্যাশ",
+        "title": "ক্যাশিং: সবচেয়ে বড় উপায়",
+        "body": [
+          "ক্যাশিংই খরচ কমানোর সবচেয়ে শক্তিশালী উপায়। তিন ধরন:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "সেম্যান্টিক ক্যাশ: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হলে (কোসাইন ০.৯৫-এর বেশি) জমানো উত্তর ফেরত দিন।"
+          },
+          {
+            "sign": "+",
+            "html": "আউটপুট ক্যাশ: নির্ধারিত কাজে (এক্সট্র্যাকশন, <code>temperature=0</code> দিয়ে ক্লাসিফিকেশন) ইনপুট ধরে কী-ভ্যালু ক্যাশ।"
+          },
+          {
+            "sign": "+",
+            "html": "প্রম্পট ক্যাশ: প্রোভাইডার-স্তরের; কলের পর কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে, ক্যাশ করা প্রিফিক্সে ৮০–৯০% ছাড়।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "cache",
+          "state": "hot",
+          "sub": {
+            "en": "saved answers",
+            "bn": "জমানো উত্তর"
+          }
+        },
+        {
+          "id": "big",
+          "sub": {
+            "en": "only on a miss",
+            "bn": "না মিললে তবেই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "cache",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cache",
+          "to": "big",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Batch",
+        "title": "Batch APIs for work that can wait",
+        "body": [
+          "OpenAI's <code>/v1/batches</code>, Google Batch, and Together batch let you submit a JSONL file and get results within 24h, at half the cost.",
+          "Use them for nightly evals, bulk labeling, backfills, and anything that doesn't need an answer in the next 5 seconds."
+        ]
+      },
+      "bn": {
+        "short": "ব্যাচ",
+        "title": "যে কাজ অপেক্ষা করতে পারে তার ব্যাচ API",
+        "body": [
+          "OpenAI-র <code>/v1/batches</code>, Google Batch আর Together batch-এ একটি JSONL ফাইল জমা দিলে ২৪ ঘণ্টার মধ্যে অর্ধেক খরচে ফল পাওয়া যায়।",
+          "রাতের ইভ্যাল, বাল্ক লেবেলিং, ব্যাকফিল আর যে কাজে পরের ৫ সেকেন্ডের মধ্যে উত্তর লাগে না, তার জন্য এগুলো ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "batch",
+          "state": "hot",
+          "sub": {
+            "en": "one JSONL file",
+            "bn": "একটি JSONL ফাইল"
+          }
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "results in 24h",
+            "bn": "২৪ ঘণ্টায় ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "batch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "batch",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "half",
+          "bn": "অর্ধেক"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Distill",
+        "title": "Distillation: a small model from a big one",
+        "body": [
+          "Take 50,000 <code>(prompt, big_model_answer)</code> pairs from production (with consent) and fine-tune a small open model on them.",
+          "Distillation is the only technique that simultaneously cuts cost and latency and unlocks self-hosting."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "DeepSeek-R1's “distilled Qwen” line showed that a well-distilled 7B beats an un-distilled 12B on reasoning benchmarks."
+        }
+      },
+      "bn": {
+        "short": "ডিস্টিল",
+        "title": "ডিস্টিলেশন: বড় মডেল থেকে ছোট মডেল",
+        "body": [
+          "প্রোডাকশন থেকে (সম্মতি নিয়ে) ৫০,০০০ <code>(prompt, big_model_answer)</code> জোড়া নিন আর একটি ছোট ওপেন মডেলকে সেগুলো দিয়ে ফাইন-টিউন করুন।",
+          "ডিস্টিলেশনই একমাত্র কৌশল, যা একসাথে খরচ ও ল্যাটেন্সি কমায় আর সেলফ-হোস্টিংয়ের পথ খুলে দেয়।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "DeepSeek-R1-এর “distilled Qwen” লাইন দেখিয়েছে, ভালোভাবে ডিস্টিল করা একটি 7B রিজনিং বেঞ্চমার্কে ডিস্টিল না করা 12B-কে ছাড়িয়ে যায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "50,000 answers",
+            "bn": "৫০,০০০ উত্তর"
+          },
+          "x": 110
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "fine-tuned on them",
+            "bn": "এগুলোতে ফাইন-টিউন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "big",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Compress",
+        "title": "Prompt compression",
+        "body": [
+          "Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens: often 5–20× compression with under 3% quality loss.",
+          "This is particularly powerful for long RAG contexts, where most chunks are filler."
+        ]
+      },
+      "bn": {
+        "short": "কম্প্রেস",
+        "title": "প্রম্পট কম্প্রেশন",
+        "body": [
+          "LLMLingua-র মতো টুল স্টপওয়ার্ড বাদ দেয়, বিস্তারিত অংশ সংক্ষেপে বলে, আর কম তথ্যের টোকেন ফেলে দেয়: প্রায়ই ৫–২০× কম্প্রেশন, মান কমে ৩%-এরও কম।",
+          "লম্বা RAG কনটেক্সটে এটি বিশেষভাবে কাজের, যেখানে বেশিরভাগ অংশই ফিলার।"
+        ]
+      },
+      "show": [
+        {
+          "id": "prompt",
+          "state": "hot",
+          "sub": {
+            "en": "full of filler",
+            "bn": "ফিলারে ভরা"
+          }
+        },
+        {
+          "id": "squeeze",
+          "state": "hot",
+          "sub": {
+            "en": "LLMLingua-style",
+            "bn": "LLMLingua-ধাঁচের"
+          },
+          "y": 162
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "gets the short one",
+            "bn": "ছোটটি পায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "prompt",
+          "to": "squeeze",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "squeeze",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "under 3% loss",
+          "bn": "৩%-এরও কম ক্ষতি"
+        },
+        {
+          "en": "5–20× smaller",
+          "bn": "৫–২০× ছোট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Budget",
+        "title": "A token budget per feature",
+        "body": [
+          "Allocate a monthly token budget per feature, alert at 80%, throttle at 100%.",
+          "This is the operational layer that prevents one runaway feature from blowing the company's bill."
+        ]
+      },
+      "bn": {
+        "short": "বাজেট",
+        "title": "প্রতিটি ফিচারের টোকেন বাজেট",
+        "body": [
+          "প্রতিটি ফিচারের জন্য মাসিক টোকেন বাজেট দিন: ৮০%-এ সতর্কতা, ১০০%-এ থ্রটল।",
+          "এটিই সেই অপারেশনাল স্তর, যা একটি বেপরোয়া ফিচারকে কোম্পানির বিল ফুলিয়ে ফেলতে দেয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "one feature",
+            "bn": "একটি ফিচার"
+          }
+        },
+        {
+          "id": "budget",
+          "state": "hot",
+          "sub": {
+            "en": "alert at 80%",
+            "bn": "৮০%-এ সতর্কতা"
+          }
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "throttled at 100%",
+            "bn": "১০০%-এ থ্রটল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "budget",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "budget",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Gateway",
+        "title": "A model gateway",
+        "body": [
+          "A model gateway sits between your app and every LLM provider. It gives you one API for OpenAI, Anthropic, Together, and your own vLLM, plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching out of the box."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "The three major options are LiteLLM (a Python proxy), Portkey (a production-grade SaaS), and OpenRouter (a consumer-grade aggregator)."
+        }
+      },
+      "bn": {
+        "short": "গেটওয়ে",
+        "title": "মডেল গেটওয়ে",
+        "body": [
+          "মডেল গেটওয়ে আপনার অ্যাপ আর প্রতিটি LLM প্রোভাইডারের মাঝে বসে। এটি দেয় OpenAI, Anthropic, Together আর আপনার নিজের vLLM-এর জন্য একটি API, সঙ্গে প্রতি-কী রেট লিমিট, খরচের হিসাব, রিট্রাই, ফলব্যাক আর রেডিমেড সেম্যান্টিক ক্যাশিং।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "তিনটি প্রধান বিকল্প হলো LiteLLM (Python প্রক্সি), Portkey (প্রোডাকশন-মানের SaaS) আর OpenRouter (কনজিউমার-মানের অ্যাগ্রিগেটর)।"
+        }
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "gateway",
+          "state": "hot",
+          "sub": {
+            "en": "one API",
+            "bn": "একটি API"
+          }
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "OpenAI, Anthropic",
+            "bn": "OpenAI, Anthropic"
+          },
+          "y": 75
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "your own vLLM",
+            "bn": "আপনার নিজের vLLM"
+          },
+          "x": 650,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "gateway",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gateway",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gateway",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Cascade, cache, and compress are the three knobs that cut the cost without losing quality."
+        ],
+        "points": [
+          "A well-tuned cascade often reaches top quality at 30–70% of the cost.",
+          "Caching is the single most powerful cost lever.",
+          "Batch APIs give half price for work that can wait up to 24h.",
+          "Give each feature a monthly token budget: alert at 80%, throttle at 100%."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ক্যাসকেড, ক্যাশ আর কম্প্রেস: মান না হারিয়ে খরচ কমানোর তিনটি উপায়।"
+        ],
+        "points": [
+          "ভালোভাবে সাজানো ক্যাসকেড প্রায়ই খরচের ৩০–৭০%-এ সেরা মানে পৌঁছায়।",
+          "ক্যাশিংই খরচ কমানোর সবচেয়ে শক্তিশালী উপায়।",
+          "যে কাজ ২৪ ঘণ্টা অপেক্ষা করতে পারে, ব্যাচ API-তে তার দাম অর্ধেক।",
+          "প্রতিটি ফিচারের জন্য মাসিক টোকেন বাজেট রাখুন: ৮০%-এ সতর্কতা, ১০০%-এ থ্রটল।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "cache",
+          "x": 380,
+          "y": 75
+        },
+        {
+          "id": "small",
+          "x": 380,
+          "y": 250
+        },
+        {
+          "id": "big"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "cache",
+          "flow": "to"
+        },
+        {
+          "from": "cache",
+          "to": "big",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "small",
+          "flow": "to"
+        },
+        {
+          "from": "small",
+          "to": "big",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

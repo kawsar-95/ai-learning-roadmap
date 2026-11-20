@@ -21,6 +21,7 @@ import toolUseAndIntegrationsS3 from "./tool-use-and-integrations/s3.json";
 import inferenceS4 from "./inference/s4.json";
 import llmopsAndObservabilityS4 from "./llmops-and-observability/s4.json";
 import evaluationEngineeringS5 from "./evaluation-engineering/s5.json";
+import costAndPerformanceOptimizationS6 from "./cost-and-performance-optimization/s6.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -63,5 +64,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "evaluation-engineering": {
     s5: evaluationEngineeringS5,
+  },
+  "cost-and-performance-optimization": {
+    s6: costAndPerformanceOptimizationS6,
   },
 };
