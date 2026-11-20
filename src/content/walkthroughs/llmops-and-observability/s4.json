@@ -1,0 +1,752 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "git",
+      "kind": "storage",
+      "label": {
+        "en": "Git",
+        "bn": "Git"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "app",
+      "kind": "server",
+      "label": {
+        "en": "LLM app",
+        "bn": "LLM অ্যাপ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "router",
+      "kind": "balancer",
+      "label": {
+        "en": "Router",
+        "bn": "রাউটার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "store",
+      "kind": "database",
+      "label": {
+        "en": "Trace store",
+        "bn": "ট্রেস স্টোর"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "evals",
+      "kind": "chart",
+      "label": {
+        "en": "Evals",
+        "bn": "ইভ্যাল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "dataset",
+      "kind": "database",
+      "label": {
+        "en": "Eval set",
+        "bn": "ইভ্যাল সেট"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool",
+        "bn": "টুল"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "other",
+      "kind": "model",
+      "label": {
+        "en": "Other model",
+        "bn": "অন্য মডেল"
+      },
+      "x": 650,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Status",
+      "bn": "স্ট্যাটাস"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Latency",
+      "bn": "ল্যাটেন্সি"
+    },
+    {
+      "en": "Traffic sampled",
+      "bn": "নমুনা ট্র্যাফিক"
+    }
+  ],
+  "caption": {
+    "en": "LLMOps: running and watching an LLM app in real use, to see if answers are right, cheap enough, and safe.",
+    "bn": "LLMOps: বাস্তব ব্যবহারে একটি LLM অ্যাপ চালানো আর নজরে রাখা, দেখা উত্তর ঠিক, সস্তা আর নিরাপদ কি না।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Problem",
+        "title": "A 200 that is still wrong",
+        "body": [
+          "A normal app shows a red error when it breaks. An AI app can return 200 (success) and still give wrong or costly answers.",
+          "LLMOps is the set of habits and tools that watch for this."
+        ]
+      },
+      "bn": {
+        "short": "সমস্যা",
+        "title": "২০০ ফেরত দিয়েও ভুল",
+        "body": [
+          "সাধারণ অ্যাপ ভেঙে গেলে লাল এরর দেখায়। কিন্তু AI অ্যাপ ২০০ (সফল) ফেরত দিয়েও ভুল বা ব্যয়বহুল উত্তর দিতে পারে।",
+          "LLMOps হলো সেটা নজরে রাখার অভ্যাস আর টুলের সমষ্টি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "wrong or costly",
+            "bn": "ভুল বা ব্যয়বহুল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "app",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "200 (success)",
+          "bn": "২০০ (সফল)"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Trace",
+        "title": "A trace is a tree of spans",
+        "body": [
+          "An LLM trace is a tree of spans: the user request, the system prompt assembly, the LLM call, every tool invocation, the result.",
+          "A span is one step inside a trace, such as a single model call or a single tool call."
+        ]
+      },
+      "bn": {
+        "short": "ট্রেস",
+        "title": "ট্রেস হলো স্প্যানের গাছ",
+        "body": [
+          "একটি LLM ট্রেস হলো স্প্যানের গাছ: ইউজার রিকোয়েস্ট, সিস্টেম প্রম্পট তৈরি, LLM কল, প্রতিটি টুল ব্যবহার আর ফলাফল।",
+          "স্প্যান হলো ট্রেসের ভেতরের একটি ধাপ, যেমন একটি মডেল কল বা একটি টুল কল।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "request",
+            "bn": "রিকোয়েস্ট"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "prompt assembly",
+            "bn": "প্রম্পট তৈরি"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "LLM call",
+            "bn": "LLM কল"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "tool call",
+            "bn": "টুল কল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Record",
+        "title": "Record every request",
+        "body": [
+          "Every request must record: input tokens, output tokens, model, cost (computed from the vendor's pricing), latency (time to first token, or TTFT, and total), and cache hit."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Tag each request with <code>user_id</code>, <code>feature</code>, and <code>experiment</code>. This data is the substrate for every other LLMOps question."
+        }
+      },
+      "bn": {
+        "short": "রেকর্ড",
+        "title": "প্রতিটি রিকোয়েস্ট রেকর্ড করুন",
+        "body": [
+          "প্রতিটি রিকোয়েস্ট রেকর্ড করুক: ইনপুট টোকেন, আউটপুট টোকেন, মডেল, খরচ (ভেন্ডরের প্রাইসিং থেকে হিসাব), ল্যাটেন্সি (TTFT, মোট) ও ক্যাশ হিট।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "প্রতিটি রিকোয়েস্ট <code>user_id</code>, <code>feature</code> আর <code>experiment</code> দিয়ে ট্যাগ করুন। এই ডেটাই অন্য প্রতিটি LLMOps প্রশ্নের ভিত্তি।"
+        }
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "tokens, cost, time",
+            "bn": "টোকেন, খরচ, সময়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "from pricing",
+          "bn": "প্রাইসিং থেকে"
+        },
+        {
+          "en": "TTFT and total",
+          "bn": "TTFT আর মোট"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Version",
+        "title": "Prompts are code",
+        "body": [
+          "Treat prompts like code: store them in git, version them, review them via PR, and deploy them via CI.",
+          "Each prompt version gets a stable ID, and every trace carries the prompt ID. When something breaks, you can answer “what prompt version were users on?” instantly."
+        ]
+      },
+      "bn": {
+        "short": "ভার্সন",
+        "title": "প্রম্পট মানে কোড",
+        "body": [
+          "প্রম্পট হলো কোড। কোডের মতোই git-এ রাখুন, ভার্সন করুন, PR-এ রিভিউ করুন, CI দিয়ে ডিপ্লয় করুন।",
+          "প্রতিটি প্রম্পট ভার্সনের একটি স্থিত ID থাকবে; প্রতিটি ট্রেস সেই প্রম্পট ID বহন করবে। কিছু ভেঙে গেলে “ইউজাররা কোন প্রম্পট ভার্সনে ছিল?” প্রশ্নের উত্তর সঙ্গে সঙ্গে দেওয়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git",
+          "state": "hot",
+          "sub": {
+            "en": "PR review",
+            "bn": "PR রিভিউ"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "CI deploy",
+            "bn": "CI ডিপ্লয়"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "prompt ID on trace",
+            "bn": "ট্রেসে প্রম্পট ID"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "A/B test",
+        "title": "A/B test by user_id hash",
+        "body": [
+          "Route traffic between two prompt versions (or two models) by user_id hash. Measure cost, latency, evals run on the output, and user feedback.",
+          "Stop the experiment when one variant wins on the metric you chose, not after one bad afternoon."
+        ]
+      },
+      "bn": {
+        "short": "A/B টেস্ট",
+        "title": "user_id হ্যাশ দিয়ে A/B টেস্ট",
+        "body": [
+          "user_id হ্যাশ দিয়ে দুটি প্রম্পট ভার্সন (বা দুটি মডেল)-এর মধ্যে ট্র্যাফিক রাউট করুন। খরচ, ল্যাটেন্সি, আউটপুটে চালানো ইভ্যাল আর ইউজারের প্রতিক্রিয়া মাপুন।",
+          "নির্বাচিত মেট্রিকে একটি ভ্যারিয়েন্ট জিতলে পরীক্ষা বন্ধ করুন, একটা খারাপ বিকেল দেখে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "router",
+          "state": "hot",
+          "sub": {
+            "en": "by user_id hash",
+            "bn": "user_id হ্যাশে"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "version A",
+            "bn": "ভার্সন A"
+          },
+          "y": 75
+        },
+        {
+          "id": "other",
+          "state": "hot",
+          "sub": {
+            "en": "version B",
+            "bn": "ভার্সন B"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "router",
+          "flow": "to"
+        },
+        {
+          "from": "router",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "other",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Replay",
+        "title": "Replay and debugging",
+        "body": [
+          "When a user complains, pull the trace, see every prompt and every model reply, and identify the failure.",
+          "Then replay the exact request against a different model or prompt to verify the fix. Langfuse, Helicone, and LangSmith all give you a replay button."
+        ]
+      },
+      "bn": {
+        "short": "রিপ্লে",
+        "title": "রিপ্লে আর ডিবাগিং",
+        "body": [
+          "ইউজার অভিযোগ করলে ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন, আর ব্যর্থতা চিহ্নিত করুন।",
+          "তারপর সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে রিপ্লে করে ফিক্স যাচাই করুন। Langfuse, Helicone আর LangSmith সবই রিপ্লে বোতাম দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "complains",
+            "bn": "অভিযোগ করে"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "pull the trace",
+            "bn": "ট্রেস টানুন"
+          },
+          "x": 380
+        },
+        {
+          "id": "other",
+          "state": "hot",
+          "sub": {
+            "en": "same request",
+            "bn": "একই রিকোয়েস্ট"
+          },
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "store",
+          "to": "other",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Drift",
+        "title": "Drift detection",
+        "body": [
+          "When OpenAI swaps GPT-4 for GPT-4-0613, or Anthropic bumps the weights of a “same-named” model, your outputs drift in ways your offline evals won't catch.",
+          "The fix: run a small fraction of production traffic (1–5%) through both the old and the new model, compare evals, and alert on delta. Arize Phoenix and Braintrust automate this."
+        ]
+      },
+      "bn": {
+        "short": "ড্রিফট",
+        "title": "ড্রিফট ডিটেকশন",
+        "body": [
+          "OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic “একই নামের” মডেলের ওয়েটস আপডেট করলে আপনার আউটপুট এমনভাবে ড্রিফট করে, যা আপনার অফলাইন ইভ্যাল ধরতে পারে না।",
+          "সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়েই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন। Arize Phoenix আর Braintrust এটি স্বয়ংক্রিয় করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "live traffic",
+            "bn": "লাইভ ট্র্যাফিক"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "old",
+            "bn": "পুরোনো"
+          },
+          "x": 380,
+          "y": 75
+        },
+        {
+          "id": "other",
+          "state": "hot",
+          "sub": {
+            "en": "new",
+            "bn": "নতুন"
+          },
+          "x": 380
+        },
+        {
+          "id": "evals",
+          "state": "hot",
+          "sub": {
+            "en": "compare, then alert",
+            "bn": "তুলনা, তারপর সতর্ক"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "user",
+          "to": "other",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "evals",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "other",
+          "to": "evals",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "1–5%",
+          "bn": "১–৫%"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Feedback",
+        "title": "Feedback loops",
+        "body": [
+          "Capture thumbs-up and thumbs-down (or richer signals) and feed the failures into your eval dataset."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "After three months you'll have a thousand real failures, worth more than ten thousand synthetic ones."
+        }
+      },
+      "bn": {
+        "short": "ফিডব্যাক",
+        "title": "ফিডব্যাক লুপ",
+        "body": [
+          "থাম্বস-আপ / থাম্বস-ডাউন (বা সমৃদ্ধ সংকেত) ক্যাপচার করুন এবং ব্যর্থতাগুলো আপনার ইভ্যাল ডেটাসেটে ফিড করুন।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "তিন মাস পর আপনার কাছে এক হাজার বাস্তব ব্যর্থতা থাকবে, যা দশ হাজার সিনথেটিকের চেয়ে বেশি মূল্যবান।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "thumbs-down",
+            "bn": "থাম্বস-ডাউন"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "the exact trace",
+            "bn": "সেই ট্রেস"
+          },
+          "x": 380
+        },
+        {
+          "id": "dataset",
+          "state": "hot",
+          "sub": {
+            "en": "real failures",
+            "bn": "বাস্তব ব্যর্থতা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "store",
+          "to": "dataset",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "LLMOps is the set of habits and tools that watch for wrong or costly answers, even when the request returns 200."
+        ],
+        "points": [
+          "Record tokens, cost, latency, and cache hit (a reused saved result) for every request; tag with user_id, feature, and experiment.",
+          "Treat prompts like code: keep them in git, give each version an ID, and put that ID on every trace.",
+          "To catch drift, send 1–5% of live traffic through old and new models, compare evals, and alert when they differ.",
+          "Save thumbs-down failures into your eval set. Real failures are worth more than synthetic, made-up ones."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "LLMOps হলো সেই অভ্যাস আর টুলের সমষ্টি, যা রিকোয়েস্ট ২০০ ফেরত দিলেও ভুল বা ব্যয়বহুল উত্তর নজরে রাখে।"
+        ],
+        "points": [
+          "প্রতিটি রিকোয়েস্টে টোকেন, খরচ, ল্যাটেন্সি আর ক্যাশ হিট (আগে জমানো ফল আবার কাজে লাগা) রেকর্ড করুন; user_id, feature, experiment দিয়ে ট্যাগ করুন।",
+          "প্রম্পটকে কোডের মতো দেখুন: git-এ রাখুন, প্রতি ভার্সনে ID দিন, আর প্রতিটি ট্রেসে সেই ID রাখুন।",
+          "ড্রিফট ধরতে লাইভ ট্র্যাফিকের ১–৫% পুরোনো ও নতুন দুই মডেলে চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন।",
+          "থাম্বস-ডাউন পাওয়া ব্যর্থতা ইভ্যাল সেটে জমান। সিনথেটিক, মানে বানানো ব্যর্থতার চেয়ে বাস্তব ব্যর্থতার মূল্য বেশি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git"
+        },
+        {
+          "id": "app"
+        },
+        {
+          "id": "store"
+        },
+        {
+          "id": "dataset",
+          "x": 380,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "app",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "store",
+          "flow": "to"
+        },
+        {
+          "from": "store",
+          "to": "dataset",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
