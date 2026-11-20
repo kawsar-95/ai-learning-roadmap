@@ -1,0 +1,943 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "app",
+      "kind": "server",
+      "label": {
+        "en": "App",
+        "bn": "অ্যাপ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "vision",
+      "kind": "model",
+      "label": {
+        "en": "Vision",
+        "bn": "ভিশন"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "voice",
+      "kind": "service",
+      "label": {
+        "en": "Voice",
+        "bn": "ভয়েস"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "imagegen",
+      "kind": "tool",
+      "label": {
+        "en": "Image model",
+        "bn": "ইমেজ মডেল"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "videogen",
+      "kind": "queue",
+      "label": {
+        "en": "Video model",
+        "bn": "ভিডিও মডেল"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "input",
+      "kind": "note",
+      "label": {
+        "en": "Input",
+        "bn": "ইনপুট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "output",
+      "kind": "file",
+      "label": {
+        "en": "Output",
+        "bn": "আউটপুট"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "stt",
+      "kind": "tool",
+      "label": {
+        "en": "STT",
+        "bn": "STT"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tts",
+      "kind": "tool",
+      "label": {
+        "en": "TTS",
+        "bn": "TTS"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "addon",
+      "kind": "tool",
+      "label": {
+        "en": "Add-ons",
+        "bn": "অ্যাড-অন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "host",
+      "kind": "cdn",
+      "label": {
+        "en": "Hosted API",
+        "bn": "হোস্টেড API"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Modalities",
+      "bn": "মোডালিটি"
+    },
+    {
+      "en": "Turn-taking",
+      "bn": "পালা বদল"
+    },
+    {
+      "en": "Sora clip",
+      "bn": "Sora ক্লিপ"
+    }
+  ],
+  "caption": {
+    "en": "Text was the first modality. Multimodal engineering is choosing the models, time limits, and steps for each of the others.",
+    "bn": "টেক্সট ছিল প্রথম মোডালিটি। মাল্টিমোডাল ইঞ্জিনিয়ারিং মানে বাকিগুলোর প্রতিটির জন্য মডেল, সময়ের সীমা আর ধাপ বেছে নেওয়া।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Modalities",
+        "title": "More than text",
+        "body": [
+          "Modern AI apps combine at least two of: seeing images, voice, making images, and making video. Multimodal engineering is choosing the right models, time limits, and steps for each one."
+        ]
+      },
+      "bn": {
+        "short": "মোডালিটি",
+        "title": "শুধু টেক্সট নয়",
+        "body": [
+          "আজকের AI অ্যাপ অন্তত দুটি কাজ মেলায়: ছবি দেখা, ভয়েস, ছবি বানানো আর ভিডিও বানানো। মাল্টিমোডাল ইঞ্জিনিয়ারিং মানে প্রতিটির জন্য ঠিক মডেল, সময়ের সীমা আর ধাপ বেছে নেওয়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "vision",
+          "state": "hot",
+          "sub": {
+            "en": "sees images",
+            "bn": "ছবি দেখে"
+          }
+        },
+        {
+          "id": "voice",
+          "state": "hot",
+          "sub": {
+            "en": "hears and talks",
+            "bn": "শোনে ও বলে"
+          }
+        },
+        {
+          "id": "imagegen",
+          "state": "hot",
+          "sub": {
+            "en": "makes images",
+            "bn": "ছবি বানায়"
+          }
+        },
+        {
+          "id": "videogen",
+          "state": "hot",
+          "sub": {
+            "en": "makes video",
+            "bn": "ভিডিও বানায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "vision",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "voice",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "imagegen",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "videogen",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "at least two",
+          "bn": "অন্তত দুটি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Vision",
+        "title": "Models that see",
+        "body": [
+          "Native multimodal models (GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL) take images directly.",
+          "OCR-via-LLM beats Tesseract on messy photos, handwritten notes, and structured forms, and often needs no separate OCR step."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Document AI: PDF understanding with layout awareness (Claude, Mistral OCR, Qwen2-VL)"
+          },
+          {
+            "sign": "+",
+            "html": "Chart and diagram extraction: ask the model to read a chart and emit JSON"
+          },
+          {
+            "sign": "+",
+            "html": "Visual Q&amp;A: “what's wrong with this screenshot?”"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ভিশন",
+        "title": "যে মডেল দেখে",
+        "body": [
+          "GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL-এর মতো নেটিভ মাল্টিমোডাল মডেল সরাসরি ছবি নেয়।",
+          "OCR-via-LLM অগোছালো ছবি, হাতের লেখা নোট আর কাঠামোবদ্ধ ফর্মে Tesseract-কে ছাড়িয়ে যায়, আর প্রায়ই আলাদা OCR ধাপের দরকার হয় না।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ডকুমেন্ট AI: লেআউট বুঝে PDF পড়া (Claude, Mistral OCR, Qwen2-VL)"
+          },
+          {
+            "sign": "+",
+            "html": "চার্ট ও ডায়াগ্রাম থেকে ডেটা বের করা: মডেলকে চার্ট পড়ে JSON দিতে বলুন"
+          },
+          {
+            "sign": "+",
+            "html": "ভিজ্যুয়াল Q&amp;A: “এই স্ক্রিনশটে কী ভুল?”"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "input",
+          "state": "hot",
+          "sub": {
+            "en": "an image",
+            "bn": "একটি ছবি"
+          }
+        },
+        {
+          "id": "vision",
+          "state": "hot",
+          "sub": {
+            "en": "takes images",
+            "bn": "ছবি নেয়"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "output",
+          "state": "hot",
+          "sub": {
+            "en": "text or JSON",
+            "bn": "টেক্সট বা JSON"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "input",
+          "to": "vision",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vision",
+          "to": "output",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Voice",
+        "title": "The voice pipeline",
+        "body": [
+          "A voice pipeline is STT (speech-to-text) → LLM → TTS (text-to-speech). Each stage has its own leading options:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "STT: Whisper, Deepgram, AssemblyAI, ElevenLabs Scribe"
+          },
+          {
+            "sign": "+",
+            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ভয়েস",
+        "title": "ভয়েস পাইপলাইন",
+        "body": [
+          "ভয়েস পাইপলাইন হলো STT (স্পিচ-টু-টেক্সট) → LLM → TTS (টেক্সট-টু-স্পিচ)। প্রতিটি ধাপের নিজস্ব সেরা বিকল্প আছে:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "STT: Whisper, Deepgram, AssemblyAI, ElevenLabs Scribe"
+          },
+          {
+            "sign": "+",
+            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "stt",
+          "state": "hot",
+          "sub": {
+            "en": "speech to text",
+            "bn": "কথা থেকে লেখা"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "the reply",
+            "bn": "উত্তর"
+          }
+        },
+        {
+          "id": "tts",
+          "state": "hot",
+          "sub": {
+            "en": "text to speech",
+            "bn": "লেখা থেকে কথা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "stt",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "tts",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Realtime",
+        "title": "Realtime APIs",
+        "body": [
+          "Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio in both directions. Sub-500 ms turn-taking is now achievable."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Options include the OpenAI Realtime API, LiveKit Agents, Vapi, Retell, and Daily. LiveKit and Vapi ship full agent frameworks on top of these."
+        }
+      },
+      "bn": {
+        "short": "রিয়েলটাইম",
+        "title": "রিয়েলটাইম API",
+        "body": [
+          "রিয়েলটাইম API ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে দুই দিকেই অডিও স্ট্রিম করে। এখন ৫০০ ms-এর কমে পালা বদল সম্ভব।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "বিকল্পের মধ্যে আছে OpenAI Realtime API, LiveKit Agents, Vapi, Retell আর Daily। LiveKit আর Vapi এগুলোর ওপর পূর্ণ এজেন্ট ফ্রেমওয়ার্ক দেয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "input",
+          "state": "hot",
+          "sub": {
+            "en": "the caller",
+            "bn": "কলকারী"
+          }
+        },
+        {
+          "id": "voice",
+          "state": "hot",
+          "sub": {
+            "en": "streams both ways",
+            "bn": "দুই দিকে স্ট্রিম"
+          },
+          "x": 380,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "input",
+          "to": "voice",
+          "flow": "both",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "sub-500 ms",
+          "bn": "৫০০ ms-এর কমে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Images",
+        "title": "Image models",
+        "body": [
+          "The models differ in license and in what they do best. Open models can be fine-tuned, for example with LoRA; others lead on photorealism, on following instructions, or on typography and design."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Flux (Black Forest Labs): open-weights availability, strong prompt fidelity"
+          },
+          {
+            "sign": "+",
+            "html": "SDXL / SD3 (Stability): open, fine-tuneable with LoRA"
+          },
+          {
+            "sign": "+",
+            "html": "Imagen 3 (Google): photorealism, available via Vertex"
+          },
+          {
+            "sign": "+",
+            "html": "DALL-E 3 / GPT-Image-1 (OpenAI): polished, instruction-following"
+          },
+          {
+            "sign": "+",
+            "html": "Ideogram, Recraft, Reve: typography and design-oriented"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ছবি",
+        "title": "ইমেজ মডেল",
+        "body": [
+          "মডেলগুলো লাইসেন্সে আর কোনটা সবচেয়ে ভালো করে তাতে আলাদা। ওপেন মডেল ফাইন-টিউন করা যায়, যেমন LoRA দিয়ে; অন্যগুলো ফটোরিয়ালিজম, নির্দেশ মানা, বা টাইপোগ্রাফি আর ডিজাইনে এগিয়ে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Flux (Black Forest Labs): ওপেন-ওয়েটস, প্রম্পটের প্রতি দৃঢ় বিশ্বস্ততা"
+          },
+          {
+            "sign": "+",
+            "html": "SDXL / SD3 (Stability): ওপেন, LoRA দিয়ে ফাইন-টিউন করা যায়"
+          },
+          {
+            "sign": "+",
+            "html": "Imagen 3 (Google): ফটোরিয়ালিজম, Vertex-এ পাওয়া যায়"
+          },
+          {
+            "sign": "+",
+            "html": "DALL-E 3 / GPT-Image-1 (OpenAI): পরিপাটি, নির্দেশ-অনুসারী"
+          },
+          {
+            "sign": "+",
+            "html": "Ideogram, Recraft, Reve: টাইপোগ্রাফি আর ডিজাইনমুখী"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "input",
+          "state": "hot",
+          "sub": {
+            "en": "a prompt",
+            "bn": "একটি প্রম্পট"
+          }
+        },
+        {
+          "id": "imagegen",
+          "state": "hot",
+          "sub": {
+            "en": "pick by strengths",
+            "bn": "গুণ দেখে বাছুন"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "output",
+          "state": "hot",
+          "sub": {
+            "en": "an image",
+            "bn": "একটি ছবি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "input",
+          "to": "imagegen",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "imagegen",
+          "to": "output",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Add-ons",
+        "title": "Workflow add-ons",
+        "body": [
+          "These common add-ons shape how an image is generated. ComfyUI lets you wire them into reproducible pipelines."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ControlNet conditions the image on a structure: a pose, a depth map, or canny edges (an edge-detected outline)"
+          },
+          {
+            "sign": "+",
+            "html": "LoRA adds a small trained adapter for a style or a consistent character"
+          },
+          {
+            "sign": "+",
+            "html": "Inpainting regenerates only a masked part of an image, for edits"
+          },
+          {
+            "sign": "+",
+            "html": "IP-Adapter uses a reference image as part of the prompt"
+          }
+        ]
+      },
+      "bn": {
+        "short": "অ্যাড-অন",
+        "title": "ওয়ার্কফ্লোর অ্যাড-অন",
+        "body": [
+          "এই প্রচলিত অ্যাড-অনগুলো ঠিক করে ছবি কীভাবে তৈরি হবে। ComfyUI দিয়ে এগুলোকে বারবার চালানো যায় এমন পাইপলাইনে জুড়ে দেওয়া যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ControlNet ছবিকে একটি কাঠামো মানতে বাধ্য করে: পোজ, ডেপথ ম্যাপ বা ক্যানি এজ (কিনারা-শনাক্ত রেখাচিত্র)"
+          },
+          {
+            "sign": "+",
+            "html": "LoRA একটি স্টাইল বা একই চরিত্রের জন্য ছোট প্রশিক্ষিত অ্যাডাপ্টার যোগ করে"
+          },
+          {
+            "sign": "+",
+            "html": "ইনপেইন্টিং ছবির শুধু মাস্ক করা অংশ আবার বানায়, এডিটের জন্য"
+          },
+          {
+            "sign": "+",
+            "html": "IP-Adapter একটি রেফারেন্স ছবিকে প্রম্পটের অংশ হিসেবে ব্যবহার করে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "addon",
+          "state": "hot",
+          "sub": {
+            "en": "ControlNet, LoRA",
+            "bn": "ControlNet, LoRA"
+          }
+        },
+        {
+          "id": "imagegen",
+          "state": "hot",
+          "sub": {
+            "en": "makes images",
+            "bn": "ছবি বানায়"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "output",
+          "state": "hot",
+          "sub": {
+            "en": "an image",
+            "bn": "একটি ছবি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "addon",
+          "to": "imagegen",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "imagegen",
+          "to": "output",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Video",
+        "title": "Video models",
+        "body": [
+          "Video models differ in clip length, built-in audio and resolution, in how well a character stays the same from shot to shot, and in price and speed."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Sora (OpenAI): up to 20 s, strong physics"
+          },
+          {
+            "sign": "+",
+            "html": "Veo 3 (Google): native audio + 4K, prompt-adherent"
+          },
+          {
+            "sign": "+",
+            "html": "Runway Gen-4: reference-image continuity for character"
+          },
+          {
+            "sign": "+",
+            "html": "Kling 2.0 (Kuaishou): long-form, motion quality"
+          },
+          {
+            "sign": "+",
+            "html": "Pika, Luma, Hailuo: smaller, cheaper, faster"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ভিডিও",
+        "title": "ভিডিও মডেল",
+        "body": [
+          "ভিডিও মডেলগুলো ক্লিপের দৈর্ঘ্য, বিল্ট-ইন অডিও আর রেজোলিউশনে, এক শট থেকে আরেক শটে চরিত্র কতটা একই থাকে তাতে, আর দাম ও গতিতে আলাদা।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Sora (OpenAI): ২০ সেকেন্ড পর্যন্ত, শক্তিশালী ফিজিক্স"
+          },
+          {
+            "sign": "+",
+            "html": "Veo 3 (Google): নেটিভ অডিও + 4K, প্রম্পট-অনুসারী"
+          },
+          {
+            "sign": "+",
+            "html": "Runway Gen-4: চরিত্রের জন্য রেফারেন্স-ছবির ধারাবাহিকতা"
+          },
+          {
+            "sign": "+",
+            "html": "Kling 2.0 (Kuaishou): দীর্ঘ ক্লিপ, গতির মান"
+          },
+          {
+            "sign": "+",
+            "html": "Pika, Luma, Hailuo: ছোট, সস্তা, দ্রুত"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "input",
+          "state": "hot",
+          "sub": {
+            "en": "a prompt",
+            "bn": "একটি প্রম্পট"
+          }
+        },
+        {
+          "id": "videogen",
+          "state": "hot",
+          "sub": {
+            "en": "length, audio",
+            "bn": "দৈর্ঘ্য, অডিও"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "output",
+          "state": "hot",
+          "sub": {
+            "en": "a clip",
+            "bn": "একটি ক্লিপ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "input",
+          "to": "videogen",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "videogen",
+          "to": "output",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "up to 20 s",
+          "bn": "২০ সেকেন্ড পর্যন্ত"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Pipelines",
+        "title": "Tools for media pipelines",
+        "body": [
+          "These tools cover media pipelines:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ComfyUI: a node-based UI for Stable Diffusion and Flux workflows, the “Figma for diffusion”; production teams version-control the JSON graphs"
+          },
+          {
+            "sign": "+",
+            "html": "Replicate: a pay-per-second API for any open-source model, the fastest way to deploy something you found on Hugging Face"
+          },
+          {
+            "sign": "+",
+            "html": "Fal: fast hosted inference for diffusion, with streaming partial results"
+          }
+        ]
+      },
+      "bn": {
+        "short": "পাইপলাইন",
+        "title": "মিডিয়া পাইপলাইনের টুল",
+        "body": [
+          "মিডিয়া পাইপলাইনের জন্য এই টুলগুলো:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ComfyUI: Stable Diffusion আর Flux ওয়ার্কফ্লোর নোড-ভিত্তিক UI, “ডিফিউশনের জন্য Figma”; প্রোডাকশন টিম JSON গ্রাফের ভার্সন-কন্ট্রোল রাখে"
+          },
+          {
+            "sign": "+",
+            "html": "Replicate: যেকোনো ওপেন-সোর্স মডেলের জন্য প্রতি-সেকেন্ডের API; Hugging Face-এ পাওয়া কিছু ডিপ্লয় করার দ্রুততম উপায়"
+          },
+          {
+            "sign": "+",
+            "html": "Fal: ডিফিউশনের জন্য দ্রুত হোস্টেড ইনফারেন্স, আংশিক ফল স্ট্রিম করে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "host",
+          "state": "hot",
+          "sub": {
+            "en": "Replicate, Fal",
+            "bn": "Replicate, Fal"
+          }
+        },
+        {
+          "id": "output",
+          "state": "hot",
+          "sub": {
+            "en": "the result",
+            "bn": "ফলাফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "host",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "host",
+          "to": "output",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Multimodal engineering is the discipline of choosing models, latency budgets, and pipelines for each modality."
+        ],
+        "points": [
+          "In 2025, every production AI app combines at least two of vision, voice, image generation, and video generation.",
+          "Models that take images directly often need no separate OCR step, and they beat Tesseract on messy photos.",
+          "A voice pipeline is STT → LLM → TTS. Realtime APIs stream audio both ways instead.",
+          "Pick image and video models by what you need: license, photorealism, clip length, character consistency, price, and speed."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "মাল্টিমোডাল ইঞ্জিনিয়ারিং মানে প্রতিটির জন্য মডেল, ল্যাটেন্সি বাজেট আর পাইপলাইন বেছে নেওয়ার কাজ।"
+        ],
+        "points": [
+          "২০২৫-এ প্রতিটি প্রোডাকশন AI অ্যাপ ভিশন, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশনের অন্তত দুটি মেলায়।",
+          "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে Tesseract-কে হারায়।",
+          "ভয়েস পাইপলাইন হলো STT → LLM → TTS। রিয়েলটাইম API তার বদলে দুই দিকে অডিও স্ট্রিম করে।",
+          "প্রয়োজন দেখে ইমেজ ও ভিডিও মডেল বাছুন: লাইসেন্স, ফটোরিয়ালিজম, ক্লিপের দৈর্ঘ্য, চরিত্রের ধারাবাহিকতা, দাম আর গতি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "vision"
+        },
+        {
+          "id": "voice"
+        },
+        {
+          "id": "imagegen"
+        },
+        {
+          "id": "videogen"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "vision",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "voice",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "imagegen",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "videogen",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
