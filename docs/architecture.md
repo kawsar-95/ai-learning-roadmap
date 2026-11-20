@@ -56,7 +56,7 @@ group, so it adds nothing to the URL.
 | `/roadmap/<phase>/<lesson>/` | `/bn/roadmap/<phase>/<lesson>/` | `LessonPage` | One curriculum lesson (542 pages) |
 | `/resources/` | `/bn/resources/` | `ResourcesPage` | 20 open-source repositories in 5 groups |
 | `/search-index.json` | `/bn/search-index.json` | route handler | The search documents of one language |
-| `/walkthroughs/<slug>/<section>.json` | the same file | route handler | The walk-through of one section, with English and Bangla in one file (57 files) |
+| `/walkthroughs/<slug>/<section>.json` | the same file | route handler | The walk-through of one section, with English and Bangla in one file (58 files) |
 
 The build also writes these files:
 
