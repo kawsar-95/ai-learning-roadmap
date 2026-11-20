@@ -1,0 +1,703 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "change",
+      "kind": "file",
+      "label": {
+        "en": "Change",
+        "bn": "পরিবর্তন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "baseline",
+      "kind": "chart",
+      "label": {
+        "en": "Baseline",
+        "bn": "বেসলাইন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "git",
+      "kind": "storage",
+      "label": {
+        "en": "Git repo",
+        "bn": "Git রিপো"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "test",
+      "kind": "tool",
+      "label": {
+        "en": "Tests",
+        "bn": "টেস্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "evals",
+      "kind": "shield",
+      "label": {
+        "en": "Evals",
+        "bn": "ইভ্যাল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "judge",
+      "kind": "model",
+      "label": {
+        "en": "LLM judge",
+        "bn": "LLM জাজ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ctrl",
+      "kind": "tool",
+      "label": {
+        "en": "Controller",
+        "bn": "কন্ট্রোলার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "build",
+      "kind": "service",
+      "label": {
+        "en": "Image",
+        "bn": "ইমেজ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "staging",
+      "kind": "server",
+      "label": {
+        "en": "Staging",
+        "bn": "Staging"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "cluster",
+      "kind": "server",
+      "label": {
+        "en": "Cluster",
+        "bn": "ক্লাস্টার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "vault",
+      "kind": "lock",
+      "label": {
+        "en": "Secrets manager",
+        "bn": "সিক্রেটস ম্যানেজার"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Build",
+      "bn": "বিল্ড"
+    },
+    {
+      "en": "Deploy",
+      "bn": "ডিপ্লয়"
+    },
+    {
+      "en": "Roll back",
+      "bn": "রোলব্যাক"
+    }
+  ],
+  "caption": {
+    "en": "CI/CD builds and tests every change automatically and ships every change that passes. For an AI system, the tests also check the model's behavior, and GitOps makes Git the record of what runs.",
+    "bn": "CI/CD প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর যে পরিবর্তন পাশ করে তা ডিপ্লয় করে। AI সিস্টেমে টেস্টে মডেলের আচরণও যাচাই হয়, আর GitOps-এ কী চলবে তার রেকর্ড থাকে Git-এ।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "CI/CD",
+        "title": "Build, test, ship",
+        "body": [
+          "CI/CD builds and tests every change automatically and ships every change that passes. For an AI system, the tests also check the model's behavior, and GitOps makes Git the record of what runs.",
+          "Continuous integration (CI) builds and tests every change automatically. Continuous delivery or deployment (CD) ships a passing change to an environment."
+        ]
+      },
+      "bn": {
+        "short": "CI/CD",
+        "title": "বিল্ড, টেস্ট, ডিপ্লয়",
+        "body": [
+          "CI/CD প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর যে পরিবর্তন পাশ করে তা ডিপ্লয় করে। AI সিস্টেমে টেস্টে মডেলের আচরণও যাচাই হয়, আর GitOps-এ কী চলবে তার রেকর্ড থাকে Git-এ।",
+          "কন্টিনিউয়াস ইন্টিগ্রেশন (CI) প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে। কন্টিনিউয়াস ডেলিভারি বা ডিপ্লয়মেন্ট (CD) টেস্টে পাশ করা পরিবর্তন কোনো এনভায়রনমেন্টে পাঠিয়ে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "change",
+          "state": "hot"
+        },
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "builds and tests",
+            "bn": "বিল্ড আর টেস্ট"
+          }
+        },
+        {
+          "id": "staging",
+          "state": "hot",
+          "sub": {
+            "en": "an environment",
+            "bn": "একটি এনভায়রনমেন্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "change",
+          "to": "test",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "CI",
+            "bn": "CI"
+          }
+        },
+        {
+          "from": "test",
+          "to": "staging",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "CD",
+            "bn": "CD"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pipeline",
+        "title": "A pipeline for an AI service",
+        "body": [
+          "A typical pipeline for an AI service has these stages:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Lint and run the unit tests."
+          },
+          {
+            "sign": "+",
+            "html": "Build the container image and tag it with the commit."
+          },
+          {
+            "sign": "+",
+            "html": "Run a small evaluation set against the prompt, the model version and the retrieval settings. Fail the build when the score drops below a baseline."
+          },
+          {
+            "sign": "+",
+            "html": "Deploy to staging, check it, then promote it."
+          }
+        ]
+      },
+      "bn": {
+        "short": "পাইপলাইন",
+        "title": "AI সার্ভিসের পাইপলাইন",
+        "body": [
+          "AI সার্ভিসের পাইপলাইনে সাধারণত থাকে:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "লিন্ট আর ইউনিট টেস্ট চালানো।"
+          },
+          {
+            "sign": "+",
+            "html": "কমিট ট্যাগ দিয়ে কনটেইনার ইমেজ বিল্ড করা।"
+          },
+          {
+            "sign": "+",
+            "html": "প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালানো; স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করানো।"
+          },
+          {
+            "sign": "+",
+            "html": "staging-এ ডিপ্লয় করে দেখে নিয়ে প্রোডাকশনে তোলা।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "change",
+          "state": "hot",
+          "y": 75
+        },
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "lint, unit tests",
+            "bn": "লিন্ট, ইউনিট টেস্ট"
+          },
+          "y": 75
+        },
+        {
+          "id": "build",
+          "state": "hot",
+          "sub": {
+            "en": "tagged with commit",
+            "bn": "কমিট ট্যাগ"
+          },
+          "y": 75
+        },
+        {
+          "id": "evals",
+          "state": "hot",
+          "sub": {
+            "en": "a small eval set",
+            "bn": "ছোট ইভ্যাল সেট"
+          },
+          "x": 650,
+          "y": 250
+        },
+        {
+          "id": "staging",
+          "state": "hot",
+          "sub": {
+            "en": "check, then promote",
+            "bn": "দেখে, তারপর তোলা"
+          },
+          "x": 380,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "change",
+          "to": "test",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "test",
+          "to": "build",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "build",
+          "to": "evals",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "evals",
+          "to": "staging",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Gate",
+        "title": "Fail below the baseline",
+        "body": [
+          "Run a small evaluation set against the prompt, the model version and the retrieval settings.",
+          "Fail the build when the score drops below the baseline: a new score below it means things got worse."
+        ]
+      },
+      "bn": {
+        "short": "গেট",
+        "title": "বেসলাইনের নিচে ফেল",
+        "body": [
+          "প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালান।",
+          "ইভ্যাল স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করান: নতুন স্কোর এর নিচে নামলে বোঝা যায় অবস্থা খারাপ হয়েছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "baseline",
+          "state": "hot",
+          "sub": {
+            "en": "the score to compare",
+            "bn": "তুলনার স্কোর"
+          }
+        },
+        {
+          "id": "evals",
+          "state": "hot",
+          "sub": {
+            "en": "a small fixed set",
+            "bn": "ছোট নির্দিষ্ট সেট"
+          }
+        },
+        {
+          "id": "build",
+          "state": "warn",
+          "sub": {
+            "en": "fails if below",
+            "bn": "নিচে নামলে ফেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "baseline",
+          "to": "evals",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "evals",
+          "to": "build",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "fail",
+            "bn": "ফেল"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "Fails below baseline",
+          "bn": "বেসলাইনের নিচে ফেল"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Judge",
+        "title": "A noisy judge",
+        "body": [
+          "An LLM judge is a language model that scores answers. In CI it is noisy.",
+          "Run it on a fixed set, pin the judge model, and compare with a baseline measured on main instead of a single magic number."
+        ]
+      },
+      "bn": {
+        "short": "জাজ",
+        "title": "এলোমেলো জাজ",
+        "body": [
+          "LLM জাজ হলো যে ল্যাঙ্গুয়েজ মডেল উত্তরের স্কোর দেয়। CI-তে সে কিছুটা এলোমেলো ফল দেয়।",
+          "নির্দিষ্ট একটা সেটে চালান, জাজ মডেল পিন করুন, আর একটা জাদুর সংখ্যার বদলে main-এ মাপা বেসলাইনের সাথে তুলনা করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "evals",
+          "state": "hot",
+          "sub": {
+            "en": "a fixed set",
+            "bn": "নির্দিষ্ট সেট"
+          },
+          "x": 110
+        },
+        {
+          "id": "judge",
+          "state": "warn",
+          "sub": {
+            "en": "pin the judge model",
+            "bn": "জাজ মডেল পিন করুন"
+          }
+        },
+        {
+          "id": "baseline",
+          "state": "hot",
+          "sub": {
+            "en": "measured on main",
+            "bn": "main-এ মাপা"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "evals",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "baseline",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GitOps",
+        "title": "Git is the source of truth",
+        "body": [
+          "In GitOps the Git repository is the source of truth for what runs.",
+          "A controller inside the cluster, such as Argo CD or Flux, compares the cluster with the repository and removes the difference."
+        ]
+      },
+      "bn": {
+        "short": "GitOps",
+        "title": "Git-ই সত্যের উৎস",
+        "body": [
+          "GitOps-এ Git রিপোজিটরিই সত্যের উৎস: কী চলবে তা সেখানে লেখা থাকে।",
+          "ক্লাস্টারের ভেতরের একটা কন্ট্রোলার (Argo CD বা Flux) ক্লাস্টারের সাথে রিপোজিটরি মিলিয়ে তফাত মিটিয়ে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git",
+          "state": "hot",
+          "sub": {
+            "en": "source of truth",
+            "bn": "সত্যের উৎস"
+          }
+        },
+        {
+          "id": "ctrl",
+          "state": "hot",
+          "sub": {
+            "en": "removes the difference",
+            "bn": "তফাত মিটিয়ে দেয়"
+          }
+        },
+        {
+          "id": "cluster",
+          "state": "hot",
+          "sub": {
+            "en": "what runs",
+            "bn": "যা চলছে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "ctrl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ctrl",
+          "to": "cluster",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Merge",
+        "title": "Merge to deploy, revert to roll back",
+        "body": [
+          "To deploy, you merge a change. To roll back, you revert it."
+        ]
+      },
+      "bn": {
+        "short": "মার্জ",
+        "title": "ডিপ্লয় মার্জে, রোলব্যাক revert-এ",
+        "body": [
+          "ডিপ্লয় করতে পরিবর্তন মার্জ করুন, রোলব্যাক করতে সেটা revert করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "change",
+          "state": "hot",
+          "sub": {
+            "en": "a merge",
+            "bn": "একটি মার্জ"
+          }
+        },
+        {
+          "id": "git",
+          "state": "hot",
+          "x": 380
+        },
+        {
+          "id": "cluster",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "change",
+          "to": "git",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "merge",
+            "bn": "মার্জ"
+          }
+        },
+        {
+          "from": "git",
+          "to": "cluster",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Merge a change",
+          "bn": "পরিবর্তন মার্জ"
+        },
+        {
+          "en": "Revert it",
+          "bn": "revert করুন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Secrets",
+        "title": "Secrets stay out of Git",
+        "body": [
+          "Keep secrets out of the repository. Store a reference, or an encrypted value, in Git, and keep the secret itself in a secrets manager."
+        ]
+      },
+      "bn": {
+        "short": "সিক্রেট",
+        "title": "সিক্রেট Git-এর বাইরে",
+        "body": [
+          "সিক্রেট রিপোজিটরিতে রাখবেন না। Git-এ একটি রেফারেন্স বা এনক্রিপ্ট করা মান রাখুন, আর সিক্রেট নিজে রাখুন একটি সিক্রেটস ম্যানেজারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git",
+          "state": "hot",
+          "sub": {
+            "en": "a reference",
+            "bn": "একটি রেফারেন্স"
+          }
+        },
+        {
+          "id": "vault",
+          "state": "hot",
+          "sub": {
+            "en": "the secret itself",
+            "bn": "সিক্রেট নিজে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "vault",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "reference",
+            "bn": "রেফারেন্স"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "CI/CD builds and tests every change automatically and ships every change that passes. For an AI system, the tests also check the model's behavior, and GitOps makes Git the record of what runs."
+        ],
+        "points": [
+          "A pipeline lints, tests, builds an image tagged with the commit, runs evals, then deploys to staging.",
+          "Fail the build when the eval score drops below the baseline.",
+          "In GitOps, you deploy by merging a change and roll back by reverting it.",
+          "An LLM judge is noisy: use a fixed set, pin the judge model, compare with a baseline measured on main.",
+          "Keep secrets out of the repository."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "CI/CD প্রতিটি পরিবর্তন নিজে নিজে বিল্ড আর টেস্ট করে, আর যে পরিবর্তন পাশ করে তা ডিপ্লয় করে। AI সিস্টেমে টেস্টে মডেলের আচরণও যাচাই হয়, আর GitOps-এ কী চলবে তার রেকর্ড থাকে Git-এ।"
+        ],
+        "points": [
+          "পাইপলাইন লিন্ট ও টেস্ট চালায়, কমিট ট্যাগ দিয়ে ইমেজ বানায়, ইভ্যাল চালায়, তারপর staging-এ ডিপ্লয় করে।",
+          "ইভ্যাল স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করান।",
+          "GitOps-এ পরিবর্তন মার্জ করে ডিপ্লয় করেন, আর revert করে রোলব্যাক করেন।",
+          "LLM জাজ কিছুটা এলোমেলো: নির্দিষ্ট সেট ব্যবহার করুন, জাজ মডেল পিন করুন, আর main-এ মাপা বেসলাইনের সাথে তুলনা করুন।",
+          "সিক্রেট রিপোজিটরিতে রাখবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "change"
+        },
+        {
+          "id": "git",
+          "x": 380
+        },
+        {
+          "id": "cluster"
+        }
+      ],
+      "links": [
+        {
+          "from": "change",
+          "to": "git",
+          "flow": "to"
+        },
+        {
+          "from": "git",
+          "to": "cluster",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
