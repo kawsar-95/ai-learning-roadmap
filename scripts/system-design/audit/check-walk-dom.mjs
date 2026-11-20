@@ -59,7 +59,9 @@ for (const [prefix, lang] of [["", "en"], ["/bn", "bn"]]) {
     const probe = p.locator(`[aria-labelledby="${walks[0].id}-walk"]`);
     await probe.waitFor({ state: "visible", timeout: 8000 });
     const flagged = await probe.evaluate((root, fn) => {
-      const text = root.querySelector("[data-node] > text");
+      // A box that is hidden in this step is not measured, so the control probes the first one that is shown.
+      const shown = [...root.querySelectorAll("[data-node]")].find((g) => Number(getComputedStyle(g).opacity) > 0.05);
+      const text = shown.querySelector(":scope > text");
       const before = text.textContent;
       text.textContent = "a label that is far too long for its box ".repeat(2);
       const found = new Function(`return (${fn})`)()(root);
