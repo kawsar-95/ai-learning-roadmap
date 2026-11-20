@@ -4,6 +4,7 @@ import llmFundamentalsS1 from "./llm-fundamentals/s1.json";
 import llmFundamentalsS7 from "./llm-fundamentals/s7.json";
 import llmFundamentalsS9 from "./llm-fundamentals/s9.json";
 import llmFundamentalsS10 from "./llm-fundamentals/s10.json";
+import promptEngineeringS3 from "./prompt-engineering/s3.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -11,5 +12,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s7: llmFundamentalsS7,
     s9: llmFundamentalsS9,
     s10: llmFundamentalsS10,
+  },
+  "prompt-engineering": {
+    s3: promptEngineeringS3,
   },
 };
