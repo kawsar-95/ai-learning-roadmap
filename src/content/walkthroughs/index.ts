@@ -10,6 +10,8 @@ import contextEngineeringS1 from "./context-engineering/s1.json";
 import contextEngineeringS2 from "./context-engineering/s2.json";
 import contextEngineeringS3 from "./context-engineering/s3.json";
 import contextEngineeringS7 from "./context-engineering/s7.json";
+import ragKnowledgeSystemsS3 from "./rag-knowledge-systems/s3.json";
+import ragKnowledgeSystemsS7 from "./rag-knowledge-systems/s7.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -29,5 +31,9 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s2: contextEngineeringS2,
     s3: contextEngineeringS3,
     s7: contextEngineeringS7,
+  },
+  "rag-knowledge-systems": {
+    s3: ragKnowledgeSystemsS3,
+    s7: ragKnowledgeSystemsS7,
   },
 };

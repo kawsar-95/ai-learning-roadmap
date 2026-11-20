@@ -1,0 +1,741 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "query",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "কুয়েরি"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "bm25",
+      "kind": "database",
+      "label": {
+        "en": "BM25 search",
+        "bn": "BM25 সার্চ"
+      },
+      "x": 335,
+      "y": 75
+    },
+    {
+      "id": "dense",
+      "kind": "model",
+      "label": {
+        "en": "Vector search",
+        "bn": "ভেক্টর সার্চ"
+      },
+      "x": 335,
+      "y": 250
+    },
+    {
+      "id": "fusion",
+      "kind": "service",
+      "label": {
+        "en": "Fusion",
+        "bn": "ফিউশন"
+      },
+      "x": 575,
+      "y": 162
+    },
+    {
+      "id": "es",
+      "kind": "server",
+      "label": {
+        "en": "Elasticsearch",
+        "bn": "Elasticsearch"
+      },
+      "x": 130,
+      "y": 75
+    },
+    {
+      "id": "os",
+      "kind": "server",
+      "label": {
+        "en": "OpenSearch",
+        "bn": "OpenSearch"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "qd",
+      "kind": "server",
+      "label": {
+        "en": "Qdrant",
+        "bn": "Qdrant"
+      },
+      "x": 630,
+      "y": 75
+    },
+    {
+      "id": "wv",
+      "kind": "server",
+      "label": {
+        "en": "Weaviate",
+        "bn": "Weaviate"
+      },
+      "x": 380,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "k",
+      "bn": "k"
+    },
+    {
+      "en": "Doc B",
+      "bn": "ডকুমেন্ট B"
+    },
+    {
+      "en": "Doc A",
+      "bn": "ডকুমেন্ট A"
+    },
+    {
+      "en": "alpha",
+      "bn": "alpha"
+    }
+  ],
+  "caption": {
+    "en": "Example: two ranked lists of documents A to G, merged by reciprocal rank fusion. The ranks are invented for the arithmetic.",
+    "bn": "উদাহরণ: A থেকে G পর্যন্ত ডকুমেন্টের দুটি র‍্যাংক করা তালিকা, রেসিপ্রোকাল র‍্যাংক ফিউশনে মেলানো। র‍্যাংকগুলো হিসাবের জন্য বানানো।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Two",
+        "title": "Keyword and meaning fail differently",
+        "body": [
+          "BM25 is a classic keyword score. It needs the query's exact words to appear in a document, so it is great at product codes and names but misses rephrased ideas.",
+          "A dense retriever turns the query into a vector and matches meaning, not exact words. It is great at ideas, but it can blur rare identifiers, names and codes."
+        ]
+      },
+      "bn": {
+        "short": "দুই সার্চ",
+        "title": "কীওয়ার্ড আর অর্থ, ব্যর্থ হয় ভিন্নভাবে",
+        "body": [
+          "BM25 কীওয়ার্ড দিয়ে খোঁজার ক্লাসিক স্কোর। কুয়েরির হুবহু শব্দ ডকুমেন্টে থাকতে হয়, তাই প্রোডাক্ট কোড আর নামে ভালো, কিন্তু অন্যভাবে বলা ধারণা ধরতে পারে না।",
+          "ডেন্স রিট্রিভার কুয়েরিকে ভেক্টর বানিয়ে শব্দ নয়, অর্থ মেলায়। ধারণায় সে ভালো, কিন্তু বিরল আইডেন্টিফায়ার, নাম আর কোড ঝাপসা করে ফেলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "needs exact words",
+            "bn": "হুবহু শব্দ লাগে"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "matches meaning",
+            "bn": "অর্থ মেলায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "bm25",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "query",
+          "to": "dense",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hybrid",
+        "title": "Run both, then merge",
+        "body": [
+          "Hybrid search runs both searches and merges the results. Weaviate, for one, runs the vector and BM25 searches in parallel and then fuses them.",
+          "The catch is that the two retrievers' scores live on different scales. Rank-based fusion sidesteps exactly that problem."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Two result lists become one"
+          }
+        ]
+      },
+      "bn": {
+        "short": "হাইব্রিড",
+        "title": "দুটোই চালান, তারপর মেলান",
+        "body": [
+          "হাইব্রিড সার্চ দুটোই চালিয়ে ফল মেলায়। যেমন Weaviate ভেক্টর আর BM25 সার্চ সমান্তরালে চালিয়ে তারপর ফিউজ করে।",
+          "সমস্যা হলো, দুই রিট্রিভারের স্কোর আলাদা মাপের। র‍্যাংক-ভিত্তিক ফিউশন ঠিক এই সমস্যাটাই এড়িয়ে যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "দুটি ফলের তালিকা হয়ে যায় একটি"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "bm25",
+          "state": "hot"
+        },
+        {
+          "id": "dense",
+          "state": "hot"
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "merges the lists",
+            "bn": "তালিকা মেলায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "bm25",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "query",
+          "to": "dense",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "RRF",
+        "title": "Reciprocal rank fusion: ranks only",
+        "body": [
+          "Reciprocal rank fusion (RRF) ignores raw scores. It combines only each document's rank in each list: every list gives a document points based on its rank, and the points add up.",
+          "A document's score is a sum over every ranking that contains it. Each ranking adds 1 / (k + r), where r is the document's rank in that list."
+        ]
+      },
+      "bn": {
+        "short": "RRF",
+        "title": "রেসিপ্রোকাল র‍্যাংক ফিউশন: শুধু র‍্যাংক",
+        "body": [
+          "রেসিপ্রোকাল র‍্যাংক ফিউশন (RRF) কাঁচা স্কোর দেখে না। শুধু প্রতিটি তালিকায় ডকুমেন্টের র‍্যাংক মেলায়: প্রতিটি তালিকা র‍্যাংক ধরে পয়েন্ট দেয়, আর পয়েন্ট যোগ হয়।",
+          "ডকুমেন্টের স্কোর হলো যতগুলো তালিকায় সে আছে, সবগুলোর যোগফল। প্রতিটি তালিকা যোগ করে ১ / (k + r), যেখানে r হলো ওই তালিকায় ডকুমেন্টের র‍্যাংক।"
+        ]
+      },
+      "show": [
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "a ranked list",
+            "bn": "র‍্যাংক করা তালিকা"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "a ranked list",
+            "bn": "র‍্যাংক করা তালিকা"
+          }
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "adds 1 / (k + r)",
+            "bn": "যোগ করে ১ / (k + r)"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Doc B",
+        "title": "Worked by hand: document B",
+        "body": [
+          "Take k = 60, with ranks invented for the arithmetic. Document B is at rank 2 in both lists.",
+          "So B scores 1/62 + 1/62 = 0.032258."
+        ]
+      },
+      "bn": {
+        "short": "ডক B",
+        "title": "হাতে কষা: ডকুমেন্ট B",
+        "body": [
+          "k = ৬০ ধরুন, আর র‍্যাংকগুলো হিসাবের জন্য বানানো। ডকুমেন্ট B দুই তালিকাতেই র‍্যাংক ২-এ।",
+          "তাই B-এর স্কোর ১/৬২ + ১/৬২ = ০.০৩২২৫৮।"
+        ]
+      },
+      "show": [
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "B at rank 2",
+            "bn": "B র‍্যাংক ২-এ"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "B at rank 2",
+            "bn": "B র‍্যাংক ২-এ"
+          }
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "B: 0.032258",
+            "bn": "B: ০.০৩২২৫৮"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "60",
+        "0.032258",
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Doc A",
+        "title": "Worked by hand: document A",
+        "body": [
+          "Document A is first in BM25 (1/61) but fifth in the dense list (1/65). That is 0.031778 in all, so A comes third.",
+          "Documents that both retrievers rank well, B and C, overtake it."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Fused order: B, C, A, E, D, F, G"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ডক A",
+        "title": "হাতে কষা: ডকুমেন্ট A",
+        "body": [
+          "ডকুমেন্ট A BM25-তে প্রথম (১/৬১) কিন্তু ডেন্সে পঞ্চম (১/৬৫)। মোট ০.০৩১৭৭৮, তাই A তৃতীয় হয়।",
+          "দুই রিট্রিভারই যে ডকুমেন্টকে ভালো র‍্যাংক দেয়, সেই B আর C, A-কে ছাড়িয়ে যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মেলানো ক্রম: B, C, A, E, D, F, G"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "A at rank 1",
+            "bn": "A র‍্যাংক ১-এ"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "A at rank 5",
+            "bn": "A র‍্যাংক ৫-এ"
+          }
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "A: 0.031778",
+            "bn": "A: ০.০৩১৭৭৮"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "60",
+        "0.032258",
+        "0.031778",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "k",
+        "title": "A small k favors the top",
+        "body": [
+          "In the formula, k is a constant. A small k gives the top ranks much more weight.",
+          "At k = 60, a rank-10 hit keeps 87% of a rank-1 hit's weight. At k = 2, it keeps only 25%."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "k = 60: rank 10 keeps 87% of rank 1"
+          },
+          {
+            "sign": "-",
+            "html": "k = 2: rank 10 keeps only 25%"
+          }
+        ]
+      },
+      "bn": {
+        "short": "k",
+        "title": "ছোট k ওপরের র‍্যাংককে বেশি গুরুত্ব দেয়",
+        "body": [
+          "সূত্রে k একটি ধ্রুবক। k ছোট হলে উপরের র‍্যাংক অনেক বেশি গুরুত্ব পায়।",
+          "k = ৬০-এ র‍্যাংক ১০ পায় র‍্যাংক ১-এর প্রায় ৮৭%; k = ২-এ মাত্র ২৫%।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "k = ৬০: র‍্যাংক ১০ পায় র‍্যাংক ১-এর ৮৭%"
+          },
+          {
+            "sign": "-",
+            "html": "k = ২: র‍্যাংক ১০ পায় মাত্র ২৫%"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "bm25",
+          "state": "dim"
+        },
+        {
+          "id": "dense",
+          "state": "dim"
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "k sets the weight",
+            "bn": "k ঠিক করে ওজন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "60 or 2",
+          "bn": "৬০ বা ২"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Engines",
+        "title": "Engines disagree on k",
+        "body": [
+          "The paper fixed k = 60, and Elasticsearch and OpenSearch default to 60. Qdrant's docs state that k is set to 2 by default.",
+          "Weaviate's rankedFusion uses 1/(RANK+60)."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The same two lists can fuse differently across engines. Check the default before comparing results, and set k explicitly where the API allows it."
+        }
+      },
+      "bn": {
+        "short": "ইঞ্জিন",
+        "title": "ইঞ্জিনভেদে k আলাদা",
+        "body": [
+          "পেপারে k = ৬০ ঠিক করা, আর Elasticsearch ও OpenSearch-এর ডিফল্টও ৬০। Qdrant-এর ডকসে লেখা, k ডিফল্টে ২।",
+          "Weaviate-এর rankedFusion ব্যবহার করে 1/(RANK+60)।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "একই দুটি তালিকা ইঞ্জিনভেদে আলাদাভাবে মিশতে পারে। ফল তুলনার আগে ডিফল্ট দেখুন, আর API দিলে k নিজে ঠিক করে দিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "es",
+          "state": "hot",
+          "sub": {
+            "en": "k = 60 by default",
+            "bn": "ডিফল্ট k = ৬০"
+          }
+        },
+        {
+          "id": "os",
+          "state": "hot",
+          "sub": {
+            "en": "k = 60 by default",
+            "bn": "ডিফল্ট k = ৬০"
+          }
+        },
+        {
+          "id": "qd",
+          "state": "warn",
+          "sub": {
+            "en": "k = 2 in its docs",
+            "bn": "ডকসে k = ২"
+          }
+        },
+        {
+          "id": "wv",
+          "state": "hot",
+          "sub": {
+            "en": "rankedFusion: 1/(RANK+60)",
+            "bn": "rankedFusion: 1/(RANK+60)"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "60 or 2",
+          "bn": "৬০ বা ২"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Scores",
+        "title": "The score-based alternative",
+        "body": [
+          "Weaviate's default hybrid method is relativeScoreFusion. It scales each search's scores to 0–1, then weights them with alpha: 0 is keyword only, 1 is vector only, and the server default is 0.75.",
+          "rankedFusion is the rank-based alternative. Qdrant supports RRF and DBSF, and its docs advise RRF as the default when you have no evaluation set."
+        ]
+      },
+      "bn": {
+        "short": "স্কোর",
+        "title": "স্কোর-ভিত্তিক বিকল্প",
+        "body": [
+          "Weaviate-এর ডিফল্ট হাইব্রিড পদ্ধতি relativeScoreFusion। এটি প্রতিটি সার্চের স্কোর ০–১ স্কেলে আনে, তারপর alpha দিয়ে ওজন দেয়: ০ মানে শুধু কীওয়ার্ড, ১ মানে শুধু ভেক্টর, সার্ভারের ডিফল্ট ০.৭৫।",
+          "rankedFusion হলো র‍্যাংক-ভিত্তিক বিকল্প। Qdrant RRF আর DBSF দুটোই দেয়, আর ইভ্যাল সেট না থাকলে ডিফল্ট হিসেবে RRF-কে পরামর্শ দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "scaled to 0–1",
+            "bn": "০–১ স্কেলে"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "scaled to 0–1",
+            "bn": "০–১ স্কেলে"
+          }
+        },
+        {
+          "id": "fusion",
+          "state": "hot",
+          "sub": {
+            "en": "weighted by alpha",
+            "bn": "alpha-র ওজন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        "0.75"
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Hybrid search runs a keyword search and a vector search, then merges the two lists."
+        ],
+        "points": [
+          "RRF merges lists using only ranks, so different score scales do not matter.",
+          "The k default differs: 60 in the paper, Elasticsearch and OpenSearch; 2 in Qdrant's docs.",
+          "Check the engine's default before comparing results, and set k explicitly where the API allows.",
+          "RRF is a fusion method, not a synonym for hybrid search."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "হাইব্রিড সার্চ একটি কীওয়ার্ড সার্চ আর একটি ভেক্টর সার্চ চালিয়ে দুটি তালিকা মেলায়।"
+        ],
+        "points": [
+          "RRF শুধু র‍্যাংক ব্যবহার করে, তাই আলাদা স্কেলের স্কোর মেশানোর ঝামেলা নেই।",
+          "k-এর ডিফল্ট আলাদা: পেপার, Elasticsearch আর OpenSearch-এ ৬০; Qdrant-এর ডকসে ২।",
+          "ফল তুলনার আগে ইঞ্জিনের ডিফল্ট দেখুন, আর API দিলে k নিজে ঠিক করে দিন।",
+          "RRF একটি ফিউশন পদ্ধতি, হাইব্রিড সার্চের সমার্থক নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query"
+        },
+        {
+          "id": "bm25"
+        },
+        {
+          "id": "dense"
+        },
+        {
+          "id": "fusion"
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "bm25",
+          "flow": "to"
+        },
+        {
+          "from": "query",
+          "to": "dense",
+          "flow": "to"
+        },
+        {
+          "from": "bm25",
+          "to": "fusion",
+          "flow": "to"
+        },
+        {
+          "from": "dense",
+          "to": "fusion",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

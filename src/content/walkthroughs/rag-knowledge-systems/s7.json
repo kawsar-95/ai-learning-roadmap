@@ -1,0 +1,721 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "query",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "first",
+      "kind": "database",
+      "label": {
+        "en": "Quick search",
+        "bn": "দ্রুত সার্চ"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "cands",
+      "kind": "file",
+      "label": {
+        "en": "Short list",
+        "bn": "ছোট তালিকা"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "rerank",
+      "kind": "model",
+      "label": {
+        "en": "Reranker",
+        "bn": "রিরেংকার"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "sorted",
+      "kind": "note",
+      "label": {
+        "en": "Best first",
+        "bn": "সেরা আগে"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "doc",
+      "kind": "file",
+      "label": {
+        "en": "Document",
+        "bn": "ডকুমেন্ট"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "encq",
+      "kind": "model",
+      "label": {
+        "en": "Encoder",
+        "bn": "এনকোডার"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "encd",
+      "kind": "model",
+      "label": {
+        "en": "Encoder",
+        "bn": "এনকোডার"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "cross",
+      "kind": "model",
+      "label": {
+        "en": "Cross-encoder",
+        "bn": "ক্রস-এনকোডার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "score",
+      "kind": "chart",
+      "label": {
+        "en": "Score",
+        "bn": "স্কোর"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Sentences",
+      "bn": "বাক্য"
+    },
+    {
+      "en": "Comparisons",
+      "bn": "তুলনা"
+    },
+    {
+      "en": "Time",
+      "bn": "সময়"
+    },
+    {
+      "en": "ColBERT",
+      "bn": "ColBERT"
+    }
+  ],
+  "caption": {
+    "en": "Example: a question, a short list of documents, and how each kind of model scores a pair.",
+    "bn": "উদাহরণ: একটি প্রশ্ন, ডকুমেন্টের ছোট তালিকা, আর প্রতিটি ধরনের মডেল একটি জোড়ায় কীভাবে স্কোর দেয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Stages",
+        "title": "A quick search, then a careful second look",
+        "body": [
+          "First-stage retrieval (BM25, dense vectors, or both) is built to be fast over a huge corpus. It scores each document without ever looking at the question and the document together.",
+          "A reranker is a second-stage model that does look at them together. It takes the short candidate list and re-orders it by a more accurate relevance score."
+        ]
+      },
+      "bn": {
+        "short": "দুই ধাপ",
+        "title": "আগে দ্রুত খোঁজ, তারপর যত্ন করে আরেকবার",
+        "body": [
+          "প্রথম ধাপের রিট্রিভাল (BM25, ডেন্স ভেক্টর, বা দুটোই) বিশাল কর্পাসে দ্রুত চলার জন্য বানানো। সে প্রতিটি ডকুমেন্টের স্কোর দেয় প্রশ্ন আর ডকুমেন্ট একসাথে না দেখেই।",
+          "রিরেংকার দ্বিতীয় ধাপের মডেল, যে দুটো একসাথে দেখে। ছোট ক্যান্ডিডেট তালিকা নিয়ে আরও নিখুঁত রেলেভেন্স স্কোর দিয়ে সেটা নতুন করে সাজায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "first",
+          "state": "hot",
+          "sub": {
+            "en": "fast, not very exact",
+            "bn": "দ্রুত, তবে খুব নিখুঁত নয়"
+          }
+        },
+        {
+          "id": "cands",
+          "state": "hot"
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "reads both together",
+            "bn": "দুটো একসাথে পড়ে"
+          }
+        },
+        {
+          "id": "sorted",
+          "state": "hot",
+          "sub": {
+            "en": "re-ordered",
+            "bn": "নতুন করে সাজানো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "first",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "first",
+          "to": "cands",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cands",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rerank",
+          "to": "sorted",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bi-encoder",
+        "title": "Bi-encoder: apart until the end",
+        "body": [
+          "A bi-encoder embeds each text on its own, then compares the two vectors with cosine similarity. The question and the document never meet until that last comparison.",
+          "It is fast, because the document vectors can be made ahead of time."
+        ]
+      },
+      "bn": {
+        "short": "বাই-এনকোডার",
+        "title": "বাই-এনকোডার: শেষ পর্যন্ত আলাদা",
+        "body": [
+          "বাই-এনকোডার প্রতিটি লেখাকে আলাদাভাবে এমবেড করে, তারপর দুটি ভেক্টর কোসাইন সিমিলারিটি দিয়ে মেলায়। শেষ তুলনার আগে প্রশ্ন আর ডকুমেন্ট কখনো মেলে না।",
+          "এটি দ্রুত, কারণ ডকুমেন্টের ভেক্টর আগে থেকেই তৈরি করে রাখা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "encq",
+          "state": "hot",
+          "sub": {
+            "en": "embeds alone",
+            "bn": "একা এমবেড করে"
+          }
+        },
+        {
+          "id": "encd",
+          "state": "hot",
+          "sub": {
+            "en": "embeds alone",
+            "bn": "একা এমবেড করে"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot",
+          "sub": {
+            "en": "cosine at the end",
+            "bn": "শেষে কোসাইন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "encq",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "encd",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encq",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encd",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cross-encoder",
+        "title": "Cross-encoder: together, but slow",
+        "body": [
+          "A cross-encoder reads the question and the document together, inside one model, and outputs a single score. It produces no reusable embedding, so it is more accurate but slower.",
+          "The Sentence-Transformers docs give a cost example: clustering 10,000 sentences with a cross-encoder needs about 50 million comparisons, roughly 65 hours."
+        ]
+      },
+      "bn": {
+        "short": "ক্রস-এনকোডার",
+        "title": "ক্রস-এনকোডার: একসাথে, কিন্তু ধীর",
+        "body": [
+          "ক্রস-এনকোডার প্রশ্ন আর ডকুমেন্ট একসাথে একটি মডেলের ভেতরে পড়ে একটি স্কোর দেয়। এ থেকে আবার ব্যবহার করার মতো এমবেডিং তৈরি হয় না, তাই এটি বেশি নিখুঁত, কিন্তু ধীর।",
+          "Sentence-Transformers-এর উদাহরণ: ক্রস-এনকোডারে ১০,০০০ বাক্য ক্লাস্টার করতে প্রায় ৫ কোটি তুলনা লাগে, প্রায় ৬৫ ঘণ্টা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "cross",
+          "state": "hot",
+          "sub": {
+            "en": "reads both together",
+            "bn": "দুটো একসাথে পড়ে"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot",
+          "sub": {
+            "en": "one score",
+            "bn": "একটি স্কোর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "cross",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "cross",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cross",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "10,000",
+          "bn": "১০,০০০"
+        },
+        {
+          "en": "~50 million",
+          "bn": "~৫ কোটি"
+        },
+        {
+          "en": "~65 hours",
+          "bn": "~৬৫ ঘণ্টা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Late interaction",
+        "title": "ColBERT: apart, then matched per token",
+        "body": [
+          "ColBERT sits in between. BERT encodes the query and the document independently, so document representations can be computed offline.",
+          "The score is MaxSim: for each query token, take its best match among the document's tokens, then add up those best scores."
+        ]
+      },
+      "bn": {
+        "short": "লেট ইন্টারঅ্যাকশন",
+        "title": "ColBERT: আলাদা এনকোড, টোকেন ধরে মেলানো",
+        "body": [
+          "ColBERT মাঝামাঝি। BERT প্রশ্ন আর ডকুমেন্ট আলাদাভাবে এনকোড করে, তাই ডকুমেন্টের রিপ্রেজেন্টেশন অফলাইনে হিসাব করে রাখা যায়।",
+          "স্কোর হলো MaxSim: প্রশ্নের প্রতিটি টোকেনের জন্য ডকুমেন্টের সবচেয়ে ভালো মেলা টোকেন খুঁজে, সেই সেরা স্কোরগুলো যোগ করা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "encq",
+          "state": "hot",
+          "sub": {
+            "en": "encodes alone",
+            "bn": "একা এনকোড করে"
+          }
+        },
+        {
+          "id": "encd",
+          "state": "hot",
+          "sub": {
+            "en": "computed offline",
+            "bn": "অফলাইনে হিসাব"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot",
+          "sub": {
+            "en": "MaxSim per token",
+            "bn": "টোকেন ধরে MaxSim"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "encq",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "encd",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encq",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encd",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Speed",
+        "title": "ColBERT's speed, and its price",
+        "body": [
+          "The paper reports ColBERT at competitive quality on MS MARCO and TREC CAR, compared with BERT rerankers. FLOPs count the arithmetic steps a computer must do."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Late interaction stores one vector per token, which costs index space. These speed figures come from the paper's own setup, not your hardware."
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "About 170x faster per query than BERT rerankers"
+          },
+          {
+            "sign": "+",
+            "html": "About 14,000x fewer FLOPs per query"
+          }
+        ]
+      },
+      "bn": {
+        "short": "গতি",
+        "title": "ColBERT-এর গতি আর তার মূল্য",
+        "body": [
+          "পেপারের রিপোর্টে MS MARCO আর TREC CAR-এ ColBERT BERT রিরেংকারের কাছাকাছি মানের। FLOPs মানে কম্পিউটারকে কতগুলো হিসাবের ধাপ করতে হয়, তার গণনা।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "লেট ইন্টারঅ্যাকশনে প্রতি টোকেনে একটি ভেক্টর রাখতে হয়, তাই ইনডেক্সের জায়গা বেশি লাগে। এই গতির হিসাব পেপারের নিজস্ব সেটআপ থেকে নেওয়া, আপনার হার্ডওয়্যারের নয়।"
+        },
+        "changes": [
+          {
+            "sign": "+",
+            "html": "BERT রিরেংকারের চেয়ে প্রতি কুয়েরিতে প্রায় ১৭০x দ্রুত"
+          },
+          {
+            "sign": "+",
+            "html": "প্রতি কুয়েরিতে প্রায় ১৪,০০০x কম FLOPs"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "encq",
+          "state": "hot"
+        },
+        {
+          "id": "encd",
+          "state": "warn",
+          "sub": {
+            "en": "one vector per token",
+            "bn": "প্রতি টোকেনে একটি ভেক্টর"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "encq",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "encd",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encq",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "encd",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "170x faster",
+          "bn": "১৭০x দ্রুত"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "System",
+        "title": "Retriever first, reranker second",
+        "body": [
+          "A full system is a first-stage retriever followed by a reranker.",
+          "Qdrant exposes the same idea: prefetch cheap dense candidates, then rescore the top candidates with a multivector, ColBERT-style, model."
+        ]
+      },
+      "bn": {
+        "short": "সিস্টেম",
+        "title": "আগে রিট্রিভার, তারপর রিরেংকার",
+        "body": [
+          "পুরো সিস্টেম হলো প্রথম ধাপের রিট্রিভার, তারপর একটি রিরেংকার।",
+          "Qdrant একই ধারণা দেয়: সস্তা ডেন্স ক্যান্ডিডেট আগে তুলে আনুন, তারপর মাল্টিভেক্টর (ColBERT-ধাঁচের) মডেল দিয়ে সেরা ক্যান্ডিডেটদের আবার স্কোর করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "first",
+          "state": "hot",
+          "sub": {
+            "en": "cheap first pass",
+            "bn": "সস্তা প্রথম পাস"
+          }
+        },
+        {
+          "id": "cands",
+          "state": "hot"
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "rescores the top",
+            "bn": "সেরাদের আবার স্কোর"
+          }
+        },
+        {
+          "id": "sorted",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "first",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "first",
+          "to": "cands",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cands",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rerank",
+          "to": "sorted",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A reranker is slower and costs money for every document you ask it to read, so you can only afford to show it a short pile."
+        ],
+        "points": [
+          "A full system is a first-stage retriever followed by a reranker.",
+          "A cross-encoder needs about 50 million comparisons, roughly 65 hours, to cluster 10,000 sentences.",
+          "ColBERT reports about 170x faster and 14,000x fewer FLOPs per query than BERT rerankers, at competitive quality.",
+          "These speed figures come from the paper's own setup, not your hardware.",
+          "Late interaction stores one vector per token, which costs index space."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "রিরেংকার ধীর, আর যত ডকুমেন্ট পড়তে দেবেন প্রতিটির জন্য খরচ হয়; তাই তাকে শুধু ছোট একটি স্তূপই দেখানো পোষায়।"
+        ],
+        "points": [
+          "পুরো সিস্টেম হলো প্রথম ধাপের রিট্রিভার, তারপর একটি রিরেংকার।",
+          "ক্রস-এনকোডারে ১০,০০০ বাক্য ক্লাস্টার করতে প্রায় ৫ কোটি তুলনা লাগে, প্রায় ৬৫ ঘণ্টা।",
+          "ColBERT-এর রিপোর্টে BERT রিরেংকারের চেয়ে প্রতি কুয়েরিতে প্রায় ১৭০x দ্রুত আর ১৪,০০০x কম FLOPs, কাছাকাছি মান বজায় রেখেই।",
+          "এই গতির হিসাব পেপারের নিজস্ব সেটআপ থেকে নেওয়া, আপনার হার্ডওয়্যারের নয়।",
+          "লেট ইন্টারঅ্যাকশনে প্রতি টোকেনে একটি ভেক্টর রাখতে হয়, তাই ইনডেক্সের জায়গা বেশি লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query"
+        },
+        {
+          "id": "first"
+        },
+        {
+          "id": "cands"
+        },
+        {
+          "id": "rerank"
+        },
+        {
+          "id": "sorted"
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "first",
+          "flow": "to"
+        },
+        {
+          "from": "first",
+          "to": "cands",
+          "flow": "to"
+        },
+        {
+          "from": "cands",
+          "to": "rerank",
+          "flow": "to"
+        },
+        {
+          "from": "rerank",
+          "to": "sorted",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
