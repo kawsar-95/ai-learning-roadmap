@@ -1,0 +1,641 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "tok",
+      "kind": "note",
+      "label": {
+        "en": "Token",
+        "bn": "টোকেন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "q",
+      "kind": "model",
+      "label": {
+        "en": "Query heads",
+        "bn": "কুয়েরি হেড"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "latent",
+      "kind": "storage",
+      "label": {
+        "en": "Compressed",
+        "bn": "সংকুচিত"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "cheap",
+      "kind": "tool",
+      "label": {
+        "en": "Cheap layers",
+        "bn": "সস্তা লেয়ার"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "kv",
+      "kind": "cache",
+      "label": {
+        "en": "KV cache",
+        "bn": "KV ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "win",
+      "kind": "clock",
+      "label": {
+        "en": "Window",
+        "bn": "উইন্ডো"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "full",
+      "kind": "model",
+      "label": {
+        "en": "Full attention",
+        "bn": "ফুল অ্যাটেনশন"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "mem",
+      "kind": "server",
+      "label": {
+        "en": "GPU memory",
+        "bn": "GPU মেমরি"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "KV heads",
+      "bn": "KV হেড"
+    },
+    {
+      "en": "Per token",
+      "bn": "প্রতি টোকেন"
+    },
+    {
+      "en": "At 128K tokens",
+      "bn": "১২৮K টোকেনে"
+    },
+    {
+      "en": "DeepSeek-V2",
+      "bn": "DeepSeek-V2"
+    }
+  ],
+  "caption": {
+    "en": "A model shaped like Llama 3 8B: 32 layers, 32 query heads, head size 128, FP16. The cache figures below are the section's own.",
+    "bn": "Llama 3 8B-র মতো আকারের মডেল: ৩২ লেয়ার, ৩২ কুয়েরি হেড, হেড সাইজ ১২৮, FP16। নিচের ক্যাশের হিসাব সেকশনেরই।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Growth",
+        "title": "The KV cache can grow huge",
+        "body": [
+          "The KV cache holds the keys and values the model stores for every earlier token, for every layer, so it does not recompute them.",
+          "For long inputs it can grow to many gigabytes. This section shows the numbers, how sharing or compressing keys and values shrinks it, and how cheaper attention cuts compute."
+        ]
+      },
+      "bn": {
+        "short": "বড় হওয়া",
+        "title": "KV ক্যাশ অনেক বড় হতে পারে",
+        "body": [
+          "KV ক্যাশ মডেল প্রতিটি আগের টোকেনের জন্য, প্রতিটি লেয়ারে যে কী আর ভ্যালু জমা রাখে, তা ধরে রাখে, যাতে আবার হিসাব করতে না হয়।",
+          "লম্বা ইনপুটে এটি অনেক গিগাবাইট পর্যন্ত বড় হতে পারে। এই সেকশনে সংখ্যাগুলো আছে, আর আছে কী আর ভ্যালু ভাগ বা সংকুচিত করলে ক্যাশ কীভাবে ছোট হয় এবং সস্তা অ্যাটেনশন কীভাবে কম্পিউট কমায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tok",
+          "state": "hot",
+          "sub": {
+            "en": "every earlier one",
+            "bn": "প্রতিটি আগেরটি"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "keys and values",
+            "bn": "কী আর ভ্যালু"
+          }
+        },
+        {
+          "id": "mem",
+          "state": "warn",
+          "sub": {
+            "en": "many gigabytes",
+            "bn": "অনেক গিগাবাইট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "kv",
+          "to": "mem",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Counting",
+        "title": "Counting the cache",
+        "body": [
+          "Take a model shaped like Llama 3 8B: 32 layers, 32 query heads, head size 128, FP16 (2 bytes per number).",
+          "For each token and layer, the cache holds one K and one V for each KV head."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "The formula is <code>2 × layers × kv_heads × head_size × bytes × tokens</code>."
+        }
+      },
+      "bn": {
+        "short": "হিসাব",
+        "title": "ক্যাশের হিসাব",
+        "body": [
+          "Llama 3 8B-র মতো আকারের একটি মডেল ধরুন: ৩২ লেয়ার, ৩২ কুয়েরি হেড, হেড সাইজ ১২৮, FP16 (প্রতি সংখ্যায় ২ বাইট)।",
+          "প্রতিটি টোকেন আর লেয়ারে ক্যাশ প্রতিটি KV হেডের জন্য একটি K আর একটি V ধরে রাখে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "সূত্র: <code>2 × layer × kv_head × head_size × byte × token</code>।"
+        }
+      },
+      "show": [
+        {
+          "id": "tok",
+          "state": "hot"
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "one K and one V",
+            "bn": "K আর V"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "MHA",
+        "title": "MHA: 32 KV heads",
+        "body": [
+          "MHA has 32 KV heads. The cache costs 512 KiB per token, and 64 GiB at 128K tokens."
+        ]
+      },
+      "bn": {
+        "short": "MHA",
+        "title": "MHA: ৩২টি KV হেড",
+        "body": [
+          "MHA-তে ৩২টি KV হেড। ক্যাশে প্রতি টোকেনে ৫১২ KiB লাগে, আর ১২৮K টোকেনে ৬৪ GiB।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "32 query heads",
+            "bn": "৩২ কুয়েরি হেড"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "32 KV heads",
+            "bn": "৩২ KV হেড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "32",
+          "bn": "৩২"
+        },
+        {
+          "en": "512 KiB",
+          "bn": "৫১২ KiB"
+        },
+        {
+          "en": "64 GiB",
+          "bn": "৬৪ GiB"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GQA",
+        "title": "GQA: several query heads share one",
+        "body": [
+          "GQA (grouped-query attention) lets several query heads share one KV head. Llama 3 8B uses 8, so its cache is smaller: 128 KiB per token and 16 GiB at 128K tokens."
+        ]
+      },
+      "bn": {
+        "short": "GQA",
+        "title": "GQA: কয়েকটি কুয়েরি হেড একটি ভাগ করে",
+        "body": [
+          "GQA (গ্রুপড-কুয়েরি অ্যাটেনশন) কয়েকটি কুয়েরি হেডকে একটি KV হেড ভাগ করতে দেয়। Llama 3 8B ৮টি ব্যবহার করে, তাই ক্যাশ ছোট: প্রতি টোকেনে ১২৮ KiB, আর ১২৮K টোকেনে ১৬ GiB।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "32 query heads",
+            "bn": "৩২ কুয়েরি হেড"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "8 KV heads",
+            "bn": "৮টি KV হেড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "8",
+          "bn": "৮"
+        },
+        {
+          "en": "128 KiB",
+          "bn": "১২৮ KiB"
+        },
+        {
+          "en": "16 GiB",
+          "bn": "১৬ GiB"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "MQA",
+        "title": "MQA: all query heads share one",
+        "body": [
+          "MQA (multi-query attention) is the extreme case: all query heads share just 1 KV head. It has the smallest cache: 16 KiB per token and 2 GiB at 128K tokens."
+        ]
+      },
+      "bn": {
+        "short": "MQA",
+        "title": "MQA: সব কুয়েরি হেড একটি ভাগ করে",
+        "body": [
+          "MQA (মাল্টি-কুয়েরি অ্যাটেনশন) হলো চরম রূপ: সব কুয়েরি হেড মাত্র ১টি KV হেড ভাগ করে। এর ক্যাশ সবচেয়ে ছোট: প্রতি টোকেনে ১৬ KiB, আর ১২৮K টোকেনে ২ GiB।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "32 query heads",
+            "bn": "৩২ কুয়েরি হেড"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "1 KV head",
+            "bn": "১টি KV হেড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "1",
+          "bn": "১"
+        },
+        {
+          "en": "16 KiB",
+          "bn": "১৬ KiB"
+        },
+        {
+          "en": "2 GiB",
+          "bn": "২ GiB"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "MLA",
+        "title": "MLA: store one compressed form",
+        "body": [
+          "MLA (multi-head latent attention) goes further than GQA: it stores one compressed form and rebuilds the keys and values.",
+          "The DeepSeek-V2 paper reports a KV cache that is 93.3% smaller than that of its earlier dense model, DeepSeek 67B."
+        ]
+      },
+      "bn": {
+        "short": "MLA",
+        "title": "MLA: একটি সংকুচিত রূপ জমা রাখে",
+        "body": [
+          "MLA (মাল্টি-হেড ল্যাটেন্ট অ্যাটেনশন) GQA-এর চেয়েও এগিয়ে যায়: একটি সংকুচিত রূপ জমা রাখে এবং কী আর ভ্যালু আবার বানায়।",
+          "DeepSeek-V2 পেপার জানায়, তার KV ক্যাশ আগের ডেন্স মডেল DeepSeek 67B-এর চেয়ে ৯৩.৩% ছোট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "latent",
+          "state": "hot",
+          "sub": {
+            "en": "one stored form",
+            "bn": "একটি জমানো রূপ"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "keys and values",
+            "bn": "কী আর ভ্যালু"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "latent",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "rebuilds",
+            "bn": "আবার বানায়"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "93.3% smaller",
+          "bn": "৯৩.৩% ছোট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Window",
+        "title": "A sliding window",
+        "body": [
+          "In a sliding window, a token reads only the last w tokens. Gemma 3 uses five local layers for each global layer, with a window of 1,024 tokens.",
+          "The guide notes that its ablation shows only a small loss in quality."
+        ]
+      },
+      "bn": {
+        "short": "উইন্ডো",
+        "title": "স্লাইডিং উইন্ডো",
+        "body": [
+          "স্লাইডিং উইন্ডোতে একটি টোকেন শুধু শেষ w টোকেন পড়ে। Gemma 3 প্রতিটি গ্লোবাল লেয়ারের জন্য পাঁচটি লোকাল লেয়ার ব্যবহার করে, উইন্ডো ১,০২৪ টোকেনের।",
+          "গাইডটি জানায়, এর অ্যাবলেশনে মানের ক্ষতি সামান্য।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tok",
+          "state": "hot",
+          "sub": {
+            "en": "one token",
+            "bn": "একটি টোকেন"
+          }
+        },
+        {
+          "id": "win",
+          "state": "hot",
+          "sub": {
+            "en": "1,024 tokens",
+            "bn": "১,০২৪ টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Sparse and hybrid",
+        "title": "Fewer pairs, or fewer full layers",
+        "body": [
+          "Cheaper attention can also use fewer pairs or fewer full layers:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "DeepSeek sparse attention: the window is not fixed. A small indexer scores earlier tokens, and a selector keeps the best ones."
+          },
+          {
+            "sign": "+",
+            "html": "Hybrid: most layers use a linear or state-space mixer that costs little at long length. Every few layers, a full-attention layer restores exact lookup."
+          },
+          {
+            "sign": "+",
+            "html": "Qwen3-Next uses a 3 : 1 mix. The guide notes a small quality trade-off."
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্পার্স আর হাইব্রিড",
+        "title": "কম জোড়া, বা কম ফুল লেয়ার",
+        "body": [
+          "সস্তা অ্যাটেনশনে জোড়া কমানো যায়, বা ফুল লেয়ার কমানো যায়:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "DeepSeek স্পার্স অ্যাটেনশন: উইন্ডো স্থির নয়। একটি ছোট ইনডেক্সার আগের টোকেনগুলোকে স্কোর দেয়, আর একটি সিলেক্টর সেরাগুলো রাখে।"
+          },
+          {
+            "sign": "+",
+            "html": "হাইব্রিড: বেশিরভাগ লেয়ার লিনিয়ার বা স্টেট-স্পেস মিক্সার ব্যবহার করে, যা লম্বা ইনপুটে খরচ কম। কয়েক লেয়ার পরপর একটি ফুল-অ্যাটেনশন লেয়ার নির্ভুল খুঁজে দেখা ফিরিয়ে আনে।"
+          },
+          {
+            "sign": "+",
+            "html": "Qwen3-Next-এ ৩ : ১ মিশ্রণ। গাইডটি জানায়, মানের সামান্য বিনিময় আছে।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "cheap",
+          "state": "hot",
+          "sub": {
+            "en": "cheap at long length",
+            "bn": "লম্বা ইনপুটে সস্তা"
+          }
+        },
+        {
+          "id": "full",
+          "state": "hot",
+          "sub": {
+            "en": "exact lookup",
+            "bn": "নির্ভুল খোঁজা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "cheap",
+          "to": "full",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Know the limit: the guide explains architecture ideas, and it does not rank the models."
+        ],
+        "points": [
+          "For a Llama 3 8B-shaped model (32 layers, head size 128, FP16), the cache grows with KV heads and tokens.",
+          "At 128K tokens, it needs 64 GiB with 32 KV heads, 16 GiB with 8, 2 GiB with 1.",
+          "DeepSeek-V2 reports a KV cache that is 93.3% smaller than its earlier dense model.",
+          "Gemma 3 uses a window of 1,024 tokens. Qwen3-Next uses a 3 : 1 hybrid mix.",
+          "For each variant, ask what it saves and what it gives up. Real speed also depends on software and GPU."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "সীমা: আর্টিকেলটি নকশার ধারণা ব্যাখ্যা করে। এটি মডেলগুলোর র‍্যাংকিং করে না।"
+        ],
+        "points": [
+          "Llama 3 8B-র মতো আকারের মডেলে (৩২ লেয়ার, হেড সাইজ ১২৮, FP16) ক্যাশ KV হেড আর টোকেনের সাথে বাড়ে।",
+          "১২৮K টোকেনে লাগে ৩২ KV হেডে ৬৪ GiB, ৮টিতে ১৬ GiB, আর ১টিতে ২ GiB।",
+          "DeepSeek-V2 জানায়, তার KV ক্যাশ আগের ডেন্স মডেলের চেয়ে ৯৩.৩% ছোট।",
+          "Gemma 3-এ উইন্ডো ১,০২৪ টোকেন। Qwen3-Next-এ হাইব্রিড অনুপাত ৩ : ১।",
+          "প্রতিটি ভ্যারিয়েন্টে জিজ্ঞেস করুন কী বাঁচে আর কী ছাড়তে হয়। আসল গতি সফটওয়্যার আর GPU-র ওপরও নির্ভর করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tok"
+        },
+        {
+          "id": "kv"
+        },
+        {
+          "id": "mem"
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "kv",
+          "flow": "to"
+        },
+        {
+          "from": "kv",
+          "to": "mem",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
