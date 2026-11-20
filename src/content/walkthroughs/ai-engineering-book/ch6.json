@@ -1,0 +1,825 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "query",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "প্রশ্ন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tools",
+      "kind": "tool",
+      "label": {
+        "en": "Tools",
+        "bn": "টুল"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "retriever",
+      "kind": "service",
+      "label": {
+        "en": "Retriever",
+        "bn": "রিট্রিভার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "keyword",
+      "kind": "file",
+      "label": {
+        "en": "Keyword search",
+        "bn": "কিওয়ার্ড সার্চ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "vectors",
+      "kind": "database",
+      "label": {
+        "en": "Vector database",
+        "bn": "ভেক্টর ডেটাবেজ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "embedder",
+      "kind": "model",
+      "label": {
+        "en": "Embedding model",
+        "bn": "এমবেডিং মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "sql",
+      "kind": "tool",
+      "label": {
+        "en": "Text-to-SQL",
+        "bn": "text-to-SQL"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "rerank",
+      "kind": "service",
+      "label": {
+        "en": "Rerank",
+        "bn": "রির‍্যাঙ্ক"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "memory",
+      "kind": "storage",
+      "label": {
+        "en": "External memory",
+        "bn": "বাইরের মেমরি"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "generator",
+      "kind": "model",
+      "label": {
+        "en": "Generator",
+        "bn": "জেনারেটর"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Speed",
+      "bn": "গতি"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Finds",
+      "bn": "খোঁজে"
+    }
+  ],
+  "caption": {
+    "en": "RAG finds relevant information first and gives it to the model, so it does not have to guess.",
+    "bn": "RAG আগে প্রাসঙ্গিক তথ্য খুঁজে মডেলকে দেয়, যাতে তাকে আন্দাজ করতে না হয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Context",
+        "title": "Give the model the facts",
+        "body": [
+          "A model's instructions tell it how to behave; its context gives it the facts it needs for a specific query. Without relevant context, even a well-instructed model will guess or hallucinate.",
+          "Two dominant patterns build this context automatically. RAG (retrieval-augmented generation) pulls in relevant documents. The agentic pattern lets a model call tools to fetch information or take action."
+        ]
+      },
+      "bn": {
+        "short": "কনটেক্সট",
+        "title": "মডেলকে তথ্য দিন",
+        "body": [
+          "মডেলের ইনস্ট্রাকশন বলে কীভাবে চলতে হবে; তার কনটেক্সট দেয় একটি নির্দিষ্ট প্রশ্নের জন্য দরকারি তথ্য। প্রাসঙ্গিক কনটেক্সট ছাড়া ভালো ইনস্ট্রাকশন পাওয়া মডেলও আন্দাজ করবে, নয়তো ভুল তথ্য বানাবে।",
+          "দুটি প্রধান পদ্ধতি এই কনটেক্সট নিজে থেকে বানায়। RAG (retrieval-augmented generation) প্রাসঙ্গিক ডকুমেন্ট এনে দেয়। এজেন্ট পদ্ধতিতে মডেল টুল ডেকে তথ্য আনে বা কাজ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "retriever",
+          "state": "hot",
+          "sub": {
+            "en": "RAG pulls in documents",
+            "bn": "RAG ডকুমেন্ট আনে"
+          },
+          "y": 75
+        },
+        {
+          "id": "tools",
+          "state": "hot",
+          "sub": {
+            "en": "fetch or take action",
+            "bn": "তথ্য আনে বা কাজ করে"
+          }
+        },
+        {
+          "id": "generator",
+          "state": "hot",
+          "sub": {
+            "en": "needs the facts",
+            "bn": "তথ্য দরকার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "retriever",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "query",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "retriever",
+          "to": "generator",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tools",
+          "to": "generator",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Two parts",
+        "title": "A retriever and a generator",
+        "body": [
+          "A RAG system has two parts. A retriever finds relevant chunks of data in an external memory (documents, tables, chat history). A generator writes a response using what was retrieved.",
+          "Long documents are split into smaller chunks so that only the most relevant pieces are fed into the model, keeping the prompt short and focused."
+        ]
+      },
+      "bn": {
+        "short": "দুই অংশ",
+        "title": "রিট্রিভার আর জেনারেটর",
+        "body": [
+          "একটি RAG সিস্টেমে দুটি অংশ থাকে। রিট্রিভার বাইরের মেমরি (ডকুমেন্ট, টেবিল, চ্যাট হিস্টরি) থেকে প্রাসঙ্গিক চাংক খোঁজে। জেনারেটর যা পাওয়া গেছে তা দিয়ে উত্তর লেখে।",
+          "লম্বা ডকুমেন্ট ছোট চাংকে ভাগ করা হয়, যাতে শুধু সবচেয়ে প্রাসঙ্গিক টুকরোগুলো মডেলে যায় এবং প্রম্পট ছোট ও কেন্দ্রীভূত থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query"
+        },
+        {
+          "id": "retriever",
+          "state": "hot",
+          "sub": {
+            "en": "finds chunks",
+            "bn": "চাংক খোঁজে"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot"
+        },
+        {
+          "id": "generator",
+          "state": "hot",
+          "sub": {
+            "en": "writes the response",
+            "bn": "উত্তর লেখে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "retriever",
+          "flow": "to"
+        },
+        {
+          "from": "memory",
+          "to": "retriever",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "chunks",
+            "bn": "চাংক"
+          }
+        },
+        {
+          "from": "retriever",
+          "to": "generator",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Keywords",
+        "title": "Term-based retrieval",
+        "body": [
+          "Retrievers rank documents by relevance using one of two broad mechanisms. Term-based retrieval (lexical search) matches keywords; algorithms such as TF-IDF and BM25 score documents by how often and how distinctively a term appears.",
+          "It is fast to index and query, cheap, and strong out of the box, with exact keyword matches."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Its weakness: it misses semantic similarity."
+        }
+      },
+      "bn": {
+        "short": "কিওয়ার্ড",
+        "title": "টার্ম-ভিত্তিক রিট্রিভাল",
+        "body": [
+          "রিট্রিভার দুটি বড় পদ্ধতির একটি দিয়ে ডকুমেন্টকে প্রাসঙ্গিকতা অনুযায়ী সাজায়। টার্ম-ভিত্তিক রিট্রিভাল (লেক্সিক্যাল সার্চ) কিওয়ার্ড মেলায়; TF-IDF আর BM25-এর মতো অ্যালগরিদম দেখে একটি টার্ম কত বার আর কতটা স্বতন্ত্রভাবে আসে, সেই অনুযায়ী ডকুমেন্টকে স্কোর দেয়।",
+          "এটি ইনডেক্স আর কোয়েরি করতে দ্রুত, সস্তা, আর হুবহু কিওয়ার্ড মেলানোয় শুরু থেকেই ভালো।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "দুর্বলতা: অর্থের মিল ধরতে পারে না।"
+        }
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "keyword",
+          "state": "hot",
+          "sub": {
+            "en": "TF-IDF, BM25",
+            "bn": "TF-IDF, BM25"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "documents",
+            "bn": "ডকুমেন্ট"
+          },
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "keyword",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "keyword",
+          "to": "memory",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Fast",
+          "bn": "দ্রুত"
+        },
+        {
+          "en": "Cheap",
+          "bn": "সস্তা"
+        },
+        {
+          "en": "Exact words",
+          "bn": "হুবহু শব্দ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Meaning",
+        "title": "Embedding-based retrieval",
+        "body": [
+          "Embedding-based retrieval (semantic search) compares the meaning of the query and the documents using vector embeddings. The embeddings are stored and searched in a vector database, with approximate nearest-neighbor algorithms such as HNSW, IVF, or product quantization.",
+          "It captures meaning and handles paraphrased queries. It is slower, since it needs embedding generation and vector search, and it can be expensive at scale."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "It can blur exact codes and names into fuzzy meaning."
+        }
+      },
+      "bn": {
+        "short": "অর্থ",
+        "title": "এমবেডিং-ভিত্তিক রিট্রিভাল",
+        "body": [
+          "এমবেডিং-ভিত্তিক রিট্রিভাল (সেম্যান্টিক সার্চ) ভেক্টর এমবেডিং দিয়ে প্রশ্ন আর ডকুমেন্টের অর্থ তুলনা করে। এমবেডিংগুলো ভেক্টর ডেটাবেজে জমা থাকে আর সেখানে খোঁজা হয়, HNSW, IVF বা প্রোডাক্ট কোয়ান্টাইজেশনের মতো approximate nearest-neighbor অ্যালগরিদম দিয়ে।",
+          "এটি অর্থ ধরে এবং অন্য শব্দে ঘুরিয়ে বলা প্রশ্নও সামলায়। এটি ধীর, কারণ এতে এমবেডিং বানাতে হয় আর ভেক্টর সার্চ করতে হয়, আর বড় স্কেলে খরচ বাড়তে পারে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "এটি হুবহু কোড আর নামকে ঝাপসা অর্থে মিশিয়ে ফেলতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "vectors",
+          "state": "hot",
+          "sub": {
+            "en": "compares meaning",
+            "bn": "অর্থ তুলনা করে"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "documents",
+            "bn": "ডকুমেন্ট"
+          },
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "vectors",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vectors",
+          "to": "memory",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Slower",
+          "bn": "ধীর"
+        },
+        {
+          "en": "Costly at scale",
+          "bn": "বড় স্কেলে ব্যয়বহুল"
+        },
+        {
+          "en": "Meaning",
+          "bn": "অর্থ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Hybrid",
+        "title": "Combine them",
+        "body": [
+          "Because each approach has blind spots, production systems often combine them.",
+          "Running a cheap retriever first and reranking with a more precise one is called hybrid search. Reciprocal rank fusion can merge rankings from multiple retrievers into one list."
+        ]
+      },
+      "bn": {
+        "short": "হাইব্রিড",
+        "title": "দুটোকে মেলান",
+        "body": [
+          "প্রতিটি পদ্ধতির অন্ধ জায়গা আছে, তাই প্রোডাকশন সিস্টেমে প্রায়ই দুটোকে মেলানো হয়।",
+          "আগে একটি সস্তা রিট্রিভার চালিয়ে তারপর আরও নির্ভুল একটি দিয়ে আবার সাজানোকে বলে হাইব্রিড সার্চ। Reciprocal rank fusion অনেক রিট্রিভারের র‍্যাংকিং মিলিয়ে একটি তালিকা বানাতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query"
+        },
+        {
+          "id": "keyword",
+          "state": "hot",
+          "sub": {
+            "en": "cheap, first",
+            "bn": "সস্তা, আগে"
+          },
+          "y": 75
+        },
+        {
+          "id": "vectors",
+          "state": "hot",
+          "sub": {
+            "en": "another retriever",
+            "bn": "আরেকটি রিট্রিভার"
+          },
+          "y": 250
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "one merged list",
+            "bn": "একটি মেলানো তালিকা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "keyword",
+          "flow": "to"
+        },
+        {
+          "from": "query",
+          "to": "vectors",
+          "flow": "to"
+        },
+        {
+          "from": "keyword",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "ranking",
+            "bn": "র‍্যাংকিং"
+          }
+        },
+        {
+          "from": "vectors",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "ranking",
+            "bn": "র‍্যাংকিং"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Optimize",
+        "title": "Improve what the model receives",
+        "body": [
+          "Better chunking, reranking, query rewriting, and contextual retrieval all improve what the model receives."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Chunking strategy: split documents by fixed size, by sentence or paragraph boundaries, or recursively; overlap chunk boundaries so key sentences are not cut in half."
+          },
+          {
+            "sign": "+",
+            "html": "Reranking: after an initial cheap retrieval, rerank candidates for accuracy, recency, or better placement in the context window."
+          },
+          {
+            "sign": "+",
+            "html": "Query rewriting: rewrite an ambiguous follow-up question (for example, “How about Emily Doe?”) into a self-contained query before retrieval."
+          },
+          {
+            "sign": "+",
+            "html": "Contextual retrieval: attach metadata, keywords, or an AI-generated summary to each chunk so it stays findable even out of its original context."
+          }
+        ]
+      },
+      "bn": {
+        "short": "উন্নতি",
+        "title": "মডেল যা পায় তা ভালো করুন",
+        "body": [
+          "ভালো চাংকিং, রির‍্যাঙ্কিং, কোয়েরি রিরাইটিং আর কনটেক্সচুয়াল রিট্রিভাল মডেলের পাওয়া তথ্য আরও ভালো করে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "চাংকিং কৌশল: ডকুমেন্ট ভাগ করুন নির্দিষ্ট আকারে, বাক্য বা অনুচ্ছেদের সীমানায়, বা রিকার্সিভভাবে; চাংকের সীমানা ওভারল্যাপ করুন, যাতে গুরুত্বপূর্ণ বাক্য মাঝখানে কেটে না যায়।"
+          },
+          {
+            "sign": "+",
+            "html": "রির‍্যাঙ্কিং: প্রাথমিক সস্তা রিট্রিভালের পরে ক্যান্ডিডেটদের আবার সাজান নির্ভুলতা, সাম্প্রতিকতা বা কনটেক্সট উইন্ডোতে ভালো অবস্থানের জন্য।"
+          },
+          {
+            "sign": "+",
+            "html": "কোয়েরি রিরাইটিং: অস্পষ্ট ফলো-আপ প্রশ্নকে (যেমন “How about Emily Doe?”) রিট্রিভালের আগে নিজে পূর্ণ একটি কোয়েরিতে বদলান।"
+          },
+          {
+            "sign": "+",
+            "html": "কনটেক্সচুয়াল রিট্রিভাল: প্রতিটি চাংকে মেটাডেটা, কিওয়ার্ড বা AI-তৈরি সারাংশ জুড়ুন, যাতে আসল কনটেক্সটের বাইরেও সেটি খুঁজে পাওয়া যায়।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot",
+          "sub": {
+            "en": "rewritten first",
+            "bn": "আগে নতুন করে লেখা"
+          }
+        },
+        {
+          "id": "retriever",
+          "state": "hot"
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "split into chunks",
+            "bn": "চাংকে ভাগ"
+          },
+          "y": 250
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "candidates reranked",
+            "bn": "আবার সাজানো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "retriever",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "memory",
+          "to": "retriever",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "retriever",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Beyond text",
+        "title": "Images, audio and video too",
+        "body": [
+          "RAG is not limited to plain text. Multimodal RAG retrieves images, audio, or video alongside text using a shared multimodal embedding model such as CLIP."
+        ]
+      },
+      "bn": {
+        "short": "টেক্সটের বাইরে",
+        "title": "ছবি, অডিও আর ভিডিওও",
+        "body": [
+          "RAG শুধু সাধারণ টেক্সটে সীমাবদ্ধ নয়। মাল্টিমোডাল RAG টেক্সটের সাথে ছবি, অডিও বা ভিডিও খুঁজে আনে, CLIP-এর মতো একটি যৌথ মাল্টিমোডাল এমবেডিং মডেল ব্যবহার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "embedder",
+          "state": "hot",
+          "sub": {
+            "en": "such as CLIP",
+            "bn": "যেমন CLIP"
+          }
+        },
+        {
+          "id": "vectors",
+          "state": "hot",
+          "sub": {
+            "en": "images, audio, video",
+            "bn": "ছবি, অডিও, ভিডিও"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "embedder",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "embedder",
+          "to": "vectors",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tables",
+        "title": "Text-to-SQL for tables",
+        "body": [
+          "RAG with tabular data works differently. Instead of embedding rows, the system translates the question into a SQL query (text-to-SQL), runs it against the database, and feeds the result back to the generator."
+        ]
+      },
+      "bn": {
+        "short": "টেবিল",
+        "title": "টেবিলের জন্য text-to-SQL",
+        "body": [
+          "টেবিল ডেটার জন্য RAG আলাদাভাবে কাজ করে। সারি এমবেড না করে সিস্টেম প্রশ্নকে একটি SQL কোয়েরিতে বদলায় (text-to-SQL), সেটি ডেটাবেজে চালায়, আর ফলাফল জেনারেটরকে ফেরত দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "sql",
+          "state": "hot",
+          "sub": {
+            "en": "question to SQL query",
+            "bn": "প্রশ্ন থেকে SQL"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "the database",
+            "bn": "ডেটাবেজ"
+          },
+          "y": 75
+        },
+        {
+          "id": "generator",
+          "state": "hot",
+          "sub": {
+            "en": "gets the result",
+            "bn": "ফলাফল পায়"
+          },
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "sql",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sql",
+          "to": "memory",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "memory",
+          "to": "generator",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "result",
+            "bn": "ফলাফল"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A model needs the right facts to answer a specific question well. RAG finds relevant information first and gives it to the model, so it does not have to guess."
+        ],
+        "points": [
+          "Instructions tell a model how to behave; context gives it the facts for one question.",
+          "Keyword search is fast and exact. Embedding search finds meaning but costs more.",
+          "Combining both kinds of retrieval often works better in real systems.",
+          "Better chunking, reranking, query rewriting, and contextual retrieval all improve what the model receives."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একটি প্রশ্নের ভালো উত্তর দিতে মডেলের সঠিক তথ্য দরকার। RAG আগে প্রাসঙ্গিক তথ্য খুঁজে মডেলকে দেয়, যাতে তাকে আন্দাজ করতে না হয়।"
+        ],
+        "points": [
+          "ইনস্ট্রাকশন মডেলকে বলে কীভাবে চলবে; কনটেক্সট দেয় একটি প্রশ্নের তথ্য।",
+          "কিওয়ার্ড সার্চ দ্রুত, আর হুবহু শব্দ মেলায়। এমবেডিং সার্চ অর্থ ধরে, কিন্তু খরচ বেশি।",
+          "দুই ধরনের রিট্রিভাল মেলালে বাস্তব সিস্টেমে প্রায়ই ভালো কাজ হয়।",
+          "ভালো চাংকিং, রির‍্যাঙ্কিং, কোয়েরি রিরাইটিং আর কনটেক্সচুয়াল রিট্রিভাল মডেলের পাওয়া তথ্য আরও ভালো করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query"
+        },
+        {
+          "id": "retriever"
+        },
+        {
+          "id": "memory",
+          "y": 250
+        },
+        {
+          "id": "generator"
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "retriever",
+          "flow": "to"
+        },
+        {
+          "from": "memory",
+          "to": "retriever",
+          "flow": "to"
+        },
+        {
+          "from": "retriever",
+          "to": "generator",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
