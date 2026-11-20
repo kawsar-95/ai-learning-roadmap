@@ -1,0 +1,604 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "storage",
+      "label": {
+        "en": "Training data",
+        "bn": "ট্রেইনিং ডেটা"
+      },
+      "x": 100,
+      "y": 75
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 290,
+      "y": 75
+    },
+    {
+      "id": "loss",
+      "kind": "chart",
+      "label": {
+        "en": "Loss",
+        "bn": "লস"
+      },
+      "x": 500,
+      "y": 75
+    },
+    {
+      "id": "new",
+      "kind": "file",
+      "label": {
+        "en": "New cases",
+        "bn": "নতুন ক্ষেত্র"
+      },
+      "x": 670,
+      "y": 75
+    },
+    {
+      "id": "valid",
+      "kind": "storage",
+      "label": {
+        "en": "Validation data",
+        "bn": "ভ্যালিডেশন ডেটা"
+      },
+      "x": 100,
+      "y": 250
+    },
+    {
+      "id": "curve",
+      "kind": "chart",
+      "label": {
+        "en": "Validation curve",
+        "bn": "ভ্যালিডেশন কার্ভ"
+      },
+      "x": 290,
+      "y": 250
+    },
+    {
+      "id": "gd",
+      "kind": "service",
+      "label": {
+        "en": "Gradient descent",
+        "bn": "গ্রেডিয়েন্ট ডিসেন্ট"
+      },
+      "x": 500,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Loss",
+      "bn": "লস"
+    },
+    {
+      "en": "Practice score",
+      "bn": "প্র্যাকটিসের স্কোর"
+    },
+    {
+      "en": "New cases",
+      "bn": "নতুন ক্ষেত্র"
+    }
+  ],
+  "caption": {
+    "en": "An example of the training loop. The readouts say in words what happens.",
+    "bn": "ট্রেইনিং চক্রের একটি উদাহরণ। রিডআউট কথায় বলে কী ঘটছে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Guess",
+        "title": "Training is a loop that starts with a guess",
+        "body": [
+          "Training is a loop. First, the model makes a guess.",
+          "A number then shows how wrong the guess was, and small steps shrink that number. You need this picture, not the hard math."
+        ]
+      },
+      "bn": {
+        "short": "অনুমান",
+        "title": "ট্রেইনিং একটা চক্র, শুরু হয় অনুমান দিয়ে",
+        "body": [
+          "ট্রেইনিং একটা চক্র। প্রথমে মডেল একটা অনুমান করে।",
+          "তারপর একটা সংখ্যা দেখায় অনুমান কতটা ভুল ছিল, আর ছোট ছোট ধাপে সেই সংখ্যা কমানো হয়। কঠিন ম্যাথ নয়, এই ছবিটা দরকার।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "examples",
+            "bn": "উদাহরণ"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "makes a guess",
+            "bn": "অনুমান করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Loss",
+        "title": "A loss function scores the guess",
+        "body": [
+          "A loss function is a rule that gives one number for how wrong the model's current guess is.",
+          "Training tries to make this number smaller."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Loss is a single number measuring how wrong a prediction was."
+        }
+      },
+      "bn": {
+        "short": "লস",
+        "title": "লস ফাংশন অনুমানের নম্বর দেয়",
+        "body": [
+          "লস ফাংশন একটা নিয়ম, যা মডেলের এই মুহূর্তের অনুমান কতটা ভুল তা একটা সংখ্যায় দেয়।",
+          "ট্রেইনিং এই সংখ্যাটা ছোট করার চেষ্টা করে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "লস হলো অনুমান কতটা ভুল তার একটা সংখ্যা।"
+        }
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "the guess",
+            "bn": "অনুমান"
+          }
+        },
+        {
+          "id": "loss",
+          "state": "hot",
+          "sub": {
+            "en": "how wrong",
+            "bn": "কতটা ভুল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "model",
+          "to": "loss",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one number",
+          "bn": "একটা সংখ্যা"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Nudge",
+        "title": "Gradient descent nudges the weights",
+        "body": [
+          "Gradient descent nudges the model's weights, one small step at a time, to make the loss smaller. The weights are the numbers inside the model that it adjusts while it learns.",
+          "It is like finding the bottom of a valley while blindfolded: you feel which way the ground slopes down and take a small step that way."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "The loss gets smaller"
+          }
+        ]
+      },
+      "bn": {
+        "short": "সামান্য বদল",
+        "title": "গ্রেডিয়েন্ট ডিসেন্ট ওয়েট বদলায়",
+        "body": [
+          "গ্রেডিয়েন্ট ডিসেন্ট মডেলের ওয়েট ছোট ছোট ধাপে সামান্য বদলায়, যাতে লস কমে। ওয়েট হলো মডেলের ভেতরের সংখ্যা, যা সে শেখার সময় বদলায়।",
+          "এটা চোখ বাঁধা অবস্থায় উপত্যকার তলা খোঁজার মতো: মাটি কোন দিকে ঢালু হয়ে নেমেছে তা অনুভব করে সেদিকে একটা ছোট পা ফেলা।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "লস ছোট হয়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "weights change",
+            "bn": "ওয়েট বদলায়"
+          }
+        },
+        {
+          "id": "loss",
+          "state": "dim"
+        },
+        {
+          "id": "gd",
+          "state": "hot",
+          "sub": {
+            "en": "small steps",
+            "bn": "ছোট ছোট ধাপ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "loss",
+          "to": "gd",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gd",
+          "to": "model",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "small step",
+            "bn": "ছোট ধাপ"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "smaller",
+          "bn": "ছোট হয়"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Repeat",
+        "title": "The loop repeats, again and again",
+        "body": [
+          "The loop repeats over and over, thousands of times. An epoch is one pass over the training data. A batch is a small group of examples.",
+          "The learning rate is the step size."
+        ]
+      },
+      "bn": {
+        "short": "বারবার",
+        "title": "চক্রটা বারবার চলে",
+        "body": [
+          "চক্রটা বারবার চলে, হাজার হাজার বার। এপক মানে ট্রেইনিং ডেটার ওপর একবার পুরো ঘোরা। ব্যাচ হলো উদাহরণের ছোট দল।",
+          "লার্নিং রেট হলো ধাপের মাপ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "epoch, batch",
+            "bn": "এপক, ব্যাচ"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "loss",
+          "state": "hot"
+        },
+        {
+          "id": "gd",
+          "state": "hot",
+          "sub": {
+            "en": "learning rate",
+            "bn": "লার্নিং রেট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "loss",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "loss",
+          "to": "gd",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gd",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "smaller",
+          "bn": "ছোট হয়"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Overfit",
+        "title": "Overfitting: memorizing instead of learning",
+        "body": [
+          "Overfitting is when a model memorizes its training examples instead of learning the subject.",
+          "It looks perfect on practice and fails on new cases, like memorizing the answers to practice questions."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Overfitting means memorizing training examples instead of generalizing."
+        }
+      },
+      "bn": {
+        "short": "ওভারফিট",
+        "title": "ওভারফিটিং: শেখার বদলে মুখস্থ করা",
+        "body": [
+          "ওভারফিটিং হলো মডেল বিষয়টা না শিখে ট্রেইনিং উদাহরণ মুখস্থ করে ফেলা।",
+          "প্র্যাকটিসে সেটা নিখুঁত দেখায়, কিন্তু নতুন ক্ষেত্রে আটকে যায়, যেমন প্র্যাকটিস প্রশ্নের উত্তর মুখস্থ করা।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "ওভারফিটিং মানে সাধারণভাবে শেখার বদলে ট্রেইনিং উদাহরণ মুখস্থ করা।"
+        }
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "practice",
+            "bn": "প্র্যাকটিস"
+          }
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "memorizes",
+            "bn": "মুখস্থ করে"
+          }
+        },
+        {
+          "id": "new",
+          "state": "warn",
+          "sub": {
+            "en": "fails",
+            "bn": "আটকে যায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "model",
+          "to": "new",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "new cases",
+            "bn": "নতুন ক্ষেত্র"
+          }
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "perfect",
+          "bn": "নিখুঁত"
+        },
+        {
+          "en": "fails",
+          "bn": "আটকে যায়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Validate",
+        "title": "Validation curves warn you early",
+        "body": [
+          "A validation curve charts the model's score on held-back validation data as training goes on.",
+          "It gives an early warning that overfitting has started."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "An early warning that overfitting has started"
+          }
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "ভ্যালিডেশন কার্ভ আগেভাগে সতর্ক করে",
+        "body": [
+          "ভ্যালিডেশন কার্ভ হলো ট্রেইনিং চলার সময় আলাদা করে রাখা ভ্যালিডেশন ডেটায় মডেলের স্কোরের চার্ট।",
+          "ওভারফিটিং শুরু হলে এটা আগেভাগে সতর্ক করে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ওভারফিটিং শুরু হলে আগেভাগে সতর্কতা"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "valid",
+          "state": "hot",
+          "sub": {
+            "en": "held back",
+            "bn": "আলাদা করে রাখা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        },
+        {
+          "id": "curve",
+          "state": "hot",
+          "sub": {
+            "en": "early warning",
+            "bn": "আগাম সতর্কতা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "valid",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "model",
+          "to": "curve",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "score",
+            "bn": "স্কোর"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Training is a loop of a guess, a score, and small steps. Watch for overfitting."
+        ],
+        "points": [
+          "Loss is one number for how wrong a guess was. Gradient descent nudges weights to shrink it.",
+          "Overfitting means memorizing training examples instead of generalizing.",
+          "Validation curves warn you early that overfitting has started.",
+          "Do small PyTorch exercises: train a tiny model on a toy dataset end to end."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ট্রেইনিং হলো অনুমান, নম্বর আর ছোট ছোট ধাপের চক্র। ওভারফিটিং নিয়ে সাবধান থাকুন।"
+        ],
+        "points": [
+          "লস হলো অনুমান কতটা ভুল তার একটা সংখ্যা। গ্রেডিয়েন্ট ডিসেন্ট ওয়েট বদলে সেটা কমায়।",
+          "ওভারফিটিং মানে সাধারণভাবে শেখার বদলে ট্রেইনিং উদাহরণ মুখস্থ করা।",
+          "ভ্যালিডেশন কার্ভ আগেভাগে জানায় যে ওভারফিটিং শুরু হয়েছে।",
+          "ছোট PyTorch অনুশীলন করুন: খেলনা ডেটাসেটে একটা ছোট মডেল শুরু থেকে শেষ পর্যন্ত ট্রেইন করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "loss"
+        },
+        {
+          "id": "gd"
+        },
+        {
+          "id": "curve"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "loss",
+          "flow": "to"
+        },
+        {
+          "from": "loss",
+          "to": "gd",
+          "flow": "to"
+        },
+        {
+          "from": "gd",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "curve",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
