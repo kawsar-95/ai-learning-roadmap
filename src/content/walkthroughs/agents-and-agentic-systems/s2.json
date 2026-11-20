@@ -1,0 +1,605 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool",
+        "bn": "টুল"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "obs",
+      "kind": "file",
+      "label": {
+        "en": "Observation",
+        "bn": "পর্যবেক্ষণ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "planner",
+      "kind": "model",
+      "label": {
+        "en": "Planner",
+        "bn": "প্ল্যানার"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "steps",
+      "kind": "file",
+      "label": {
+        "en": "Steps",
+        "bn": "ধাপ"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "worker",
+      "kind": "service",
+      "label": {
+        "en": "Worker",
+        "bn": "ওয়ার্কার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "reflect",
+      "kind": "note",
+      "label": {
+        "en": "Reflection",
+        "bn": "রিফ্লেকশন"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "memory",
+      "kind": "storage",
+      "label": {
+        "en": "Memory",
+        "bn": "মেমরি"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "w1",
+      "kind": "service",
+      "label": {
+        "en": "Worker",
+        "bn": "ওয়ার্কার"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "w2",
+      "kind": "service",
+      "label": {
+        "en": "Worker",
+        "bn": "ওয়ার্কার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "w3",
+      "kind": "service",
+      "label": {
+        "en": "Worker",
+        "bn": "ওয়ার্কার"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "solver",
+      "kind": "model",
+      "label": {
+        "en": "Solver",
+        "bn": "সলভার"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Quality",
+      "bn": "মান"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Tokens",
+      "bn": "টোকেন"
+    }
+  ],
+  "caption": {
+    "en": "The four canonical agent loops, one at a time. Production systems usually compose them.",
+    "bn": "চারটি প্রচলিত এজেন্ট লুপ, একটি করে। প্রোডাকশন সিস্টেম সাধারণত এগুলো মিশিয়ে ব্যবহার করে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "ReAct",
+        "title": "ReAct: think, act, observe",
+        "body": [
+          "Every agent loop in production is a version of four patterns. Pick the loop that fits the shape of your task, not the one that is popular.",
+          "ReAct is the simplest loop. The model writes a thought, picks an action, sees the result, and repeats."
+        ]
+      },
+      "bn": {
+        "short": "ReAct",
+        "title": "ReAct: ভাবা, করা, দেখা",
+        "body": [
+          "প্রোডাকশনের প্রতিটি এজেন্ট লুপ চারটি প্যাটার্নের একটির রূপ। যে লুপ আপনার কাজের ধরনের সাথে মেলে তাকে বাছুন, যেটা জনপ্রিয় সেটাকে নয়।",
+          "ReAct সবচেয়ে সহজ লুপ। মডেল চিন্তা লেখে, অ্যাকশন বাছে, ফল দেখে, আর আবার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "Thought",
+            "bn": "চিন্তা"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "Action",
+            "bn": "অ্যাকশন"
+          }
+        },
+        {
+          "id": "obs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "obs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "obs",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Trace",
+        "title": "Read the scratchpad",
+        "body": [
+          "The thought stays in the model's private scratchpad. The user sees only the final answer.",
+          "In the section's example, the model thinks it needs the population of Tokyo in 2024, calls <code>search</code>, sees the result, thinks “Now I can answer”, and calls <code>Finish</code>."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Because the reasoning is interleaved, a trace is readable. When something goes wrong, you can see why the model picked the action it did."
+        }
+      },
+      "bn": {
+        "short": "ট্রেস",
+        "title": "স্ক্র্যাচপ্যাড পড়ুন",
+        "body": [
+          "চিন্তা থাকে মডেলের নিজস্ব স্ক্র্যাচপ্যাডে। ব্যবহারকারী শুধু শেষ উত্তর দেখে।",
+          "সেকশনের উদাহরণে মডেল ভাবে ২০২৪ সালে টোকিওর জনসংখ্যা দরকার, <code>search</code> ডাকে, ফল দেখে, ভাবে “এবার উত্তর দিতে পারি”, আর <code>Finish</code> ডাকে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "চিন্তা আর কাজ পালা করে চলে বলে ট্রেস পড়া যায়। কিছু ভুল হলে দেখা যায়, মডেল কেন সেই অ্যাকশন বাছল।"
+        }
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "private scratchpad",
+            "bn": "গোপন স্ক্র্যাচপ্যাড"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "search, Finish",
+            "bn": "search, Finish"
+          }
+        },
+        {
+          "id": "obs",
+          "state": "hot",
+          "sub": {
+            "en": "the result",
+            "bn": "ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "obs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "obs",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Plan",
+        "title": "Plan-and-Execute: plan, then do",
+        "body": [
+          "Plan-and-Execute separates planning from execution. A planner, usually a strong LLM, makes a list of steps. A worker, often a smaller model or a deterministic tool, then carries out each step.",
+          "If a step fails, the planner re-runs only that step, which is cheap, not the whole loop."
+        ]
+      },
+      "bn": {
+        "short": "প্ল্যান",
+        "title": "Plan-and-Execute: আগে প্ল্যান, তারপর কাজ",
+        "body": [
+          "Plan-and-Execute পরিকল্পনা আর কাজ আলাদা করে। একজন প্ল্যানার, সাধারণত শক্তিশালী LLM, ধাপের তালিকা বানায়। তারপর একজন ওয়ার্কার, প্রায়ই ছোট মডেল বা নির্ধারিত টুল, প্রতিটি ধাপ করে।",
+          "কোনো ধাপ ব্যর্থ হলে প্ল্যানার শুধু সেই ধাপটি আবার চালায়, যা সস্তা; পুরো লুপ নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "planner",
+          "state": "hot",
+          "sub": {
+            "en": "writes the steps",
+            "bn": "ধাপ লেখে"
+          }
+        },
+        {
+          "id": "steps",
+          "state": "hot"
+        },
+        {
+          "id": "worker",
+          "state": "hot",
+          "sub": {
+            "en": "does each step",
+            "bn": "প্রতিটি ধাপ করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "planner",
+          "to": "steps",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "steps",
+          "to": "worker",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "worker",
+          "to": "planner",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "failed step",
+            "bn": "ব্যর্থ ধাপ"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reflect",
+        "title": "Reflexion: learn from the miss",
+        "body": [
+          "Reflexion adds a second pass. After an attempt, the model reflects on what went wrong, and the reflection is added to its memory for the next try.",
+          "In benchmarks (HumanEval and AlfWorld) it beats plain ReAct by 10–20 percentage points, but it costs 2–3× ReAct."
+        ]
+      },
+      "bn": {
+        "short": "রিফ্লেক্ট",
+        "title": "Reflexion: ভুল থেকে শেখা",
+        "body": [
+          "Reflexion একটি দ্বিতীয় পাস যোগ করে। একবার চেষ্টার পর মডেল ভাবে কী ভুল হলো, আর সেই নোট পরের চেষ্টার জন্য তার মেমরিতে যোগ হয়।",
+          "বেঞ্চমার্কে (HumanEval আর AlfWorld) এটি সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "attempt",
+            "bn": "চেষ্টা"
+          }
+        },
+        {
+          "id": "reflect",
+          "state": "hot",
+          "sub": {
+            "en": "what went wrong",
+            "bn": "কী ভুল হলো"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "kept for next try",
+            "bn": "পরের চেষ্টার জন্য"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "reflect",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "reflect",
+          "to": "memory",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "memory",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "+10–20 points",
+          "bn": "+১০–২০ পয়েন্ট"
+        },
+        {
+          "en": "2–3× ReAct",
+          "bn": "ReAct-এর ২–৩ গুণ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "ReWOO",
+        "title": "ReWOO: plan every call first",
+        "body": [
+          "In many retrieval-heavy tasks, the model does not need to see the result of tool 1 to plan tool 2. So it plans the whole tool graph up front.",
+          "A worker runs everything in parallel, then a solver reads the evidence and answers. ReWOO uses 4–6× fewer tokens than ReAct on retrieval benchmarks, but it is hard to debug."
+        ]
+      },
+      "bn": {
+        "short": "ReWOO",
+        "title": "ReWOO: আগে সব কল প্ল্যান",
+        "body": [
+          "অনেক খোঁজাখুঁজি-ভারী কাজে টুল ২ প্ল্যান করতে মডেলের টুল ১-এর ফল দেখার দরকার হয় না। তাই সে পুরো টুল-গ্রাফ আগেই প্ল্যান করে।",
+          "একজন ওয়ার্কার সবগুলো প্যারালালে চালায়, তারপর সলভার প্রমাণ পড়ে উত্তর দেয়। খোঁজাখুঁজির বেঞ্চমার্কে ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "planner",
+          "state": "hot",
+          "sub": {
+            "en": "plans every call",
+            "bn": "সব কল প্ল্যান করে"
+          }
+        },
+        {
+          "id": "w1",
+          "state": "hot",
+          "sub": {
+            "en": "runs a call",
+            "bn": "একটি কল চালায়"
+          }
+        },
+        {
+          "id": "w2",
+          "state": "hot",
+          "sub": {
+            "en": "runs a call",
+            "bn": "একটি কল চালায়"
+          }
+        },
+        {
+          "id": "w3",
+          "state": "hot",
+          "sub": {
+            "en": "runs a call",
+            "bn": "একটি কল চালায়"
+          }
+        },
+        {
+          "id": "solver",
+          "state": "hot",
+          "sub": {
+            "en": "reads the evidence",
+            "bn": "প্রমাণ পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "planner",
+          "to": "w1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "planner",
+          "to": "w2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "planner",
+          "to": "w3",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "w1",
+          "to": "solver",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "w2",
+          "to": "solver",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "w3",
+          "to": "solver",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "4–6× fewer",
+          "bn": "৪–৬ গুণ কম"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Pick",
+        "title": "Pick by the shape of the task",
+        "body": [
+          "Default to ReAct. If the task is “go look up 5 things in parallel and write a summary”, switch to ReWOO. If it is “do these 6 steps in order, but be ready to replan if step 3 fails”, use Plan-and-Execute."
+        ],
+        "points": [
+          "ReAct is the default loop. Its readable scratchpad shows why the model chose each action.",
+          "Plan-and-Execute can redo only the failed step, which is cheap.",
+          "Reflexion beats plain ReAct by 10–20 percentage points in benchmarks, but costs 2–3× ReAct.",
+          "ReWOO uses 4–6× fewer tokens than ReAct, but is hard to debug.",
+          "Match the task: ReAct for short, tool-heavy tasks; ReWOO for look-up-heavy tasks with many parallel tool calls."
+        ]
+      },
+      "bn": {
+        "short": "বাছাই",
+        "title": "কাজের ধরন দেখে বাছুন",
+        "body": [
+          "ReAct দিয়ে শুরু করুন। কাজ যদি হয় “প্যারালালে ৫টি জিনিস খুঁজে সারসংক্ষেপ লিখুন”, তবে ReWOO। কাজ যদি হয় “এই ৬টি ধাপ পরপর করুন, তবে ৩ নম্বর ধাপ ব্যর্থ হলে রিপ্ল্যান করতে তৈরি থাকুন”, তবে Plan-and-Execute।"
+        ],
+        "points": [
+          "ReAct ডিফল্ট লুপ। এর পড়ার মতো স্ক্র্যাচপ্যাড দেখায় মডেল কেন প্রতিটি অ্যাকশন বাছল।",
+          "Plan-and-Execute শুধু ব্যর্থ ধাপটি আবার করতে পারে, যা সস্তা।",
+          "বেঞ্চমার্কে Reflexion সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।",
+          "ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।",
+          "কাজ দেখে বাছুন: ছোট, টুল-নির্ভর কাজে ReAct; অনেক প্যারালাল টুল কলসহ খোঁজাখুঁজি-ভারী কাজে ReWOO।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "sub": {
+            "en": "the default",
+            "bn": "ডিফল্ট"
+          }
+        },
+        {
+          "id": "tool"
+        },
+        {
+          "id": "obs"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to"
+        },
+        {
+          "from": "tool",
+          "to": "obs",
+          "flow": "to"
+        },
+        {
+          "from": "obs",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

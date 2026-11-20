@@ -1,0 +1,616 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "read",
+      "kind": "file",
+      "label": {
+        "en": "Read-only",
+        "bn": "শুধু পড়া"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "local",
+      "kind": "file",
+      "label": {
+        "en": "Local write",
+        "bn": "লোকাল রাইট"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "ext",
+      "kind": "service",
+      "label": {
+        "en": "External write",
+        "bn": "বাইরে লেখা"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "money",
+      "kind": "service",
+      "label": {
+        "en": "Money",
+        "bn": "টাকা"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "del",
+      "kind": "database",
+      "label": {
+        "en": "Destructive",
+        "bn": "ধ্বংসাত্মক"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Person",
+        "bn": "মানুষ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "human2",
+      "kind": "user",
+      "label": {
+        "en": "Second person",
+        "bn": "দ্বিতীয় মানুষ"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "gate",
+      "kind": "lock",
+      "label": {
+        "en": "Checkpoint",
+        "bn": "চেকপয়েন্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ui",
+      "kind": "browser",
+      "label": {
+        "en": "Approval UI",
+        "bn": "অনুমোদনের UI"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "backup",
+      "kind": "user",
+      "label": {
+        "en": "Backup approver",
+        "bn": "ব্যাকআপ অ্যাপ্রুভার"
+      },
+      "x": 650,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Approval",
+      "bn": "অনুমোদন"
+    },
+    {
+      "en": "UI budget",
+      "bn": "UI-এর বাজেট"
+    },
+    {
+      "en": "Timeout",
+      "bn": "টাইমআউট"
+    }
+  ],
+  "caption": {
+    "en": "The higher the step on the risk ladder, the stricter the approval.",
+    "bn": "ঝুঁকির সিঁড়িতে ধাপ যত ওপরে, অনুমোদনের নিয়ম তত কড়া।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Ladder",
+        "title": "A risk ladder",
+        "body": [
+          "Most production agents need at least one step where a person approves an action. The riskier the action, the more human approval it needs.",
+          "At the bottom of the ladder, read-only actions (search, fetch, query) are auto-approved. A local write, such as editing a file the agent owns, is auto-approved with a soft cap."
+        ]
+      },
+      "bn": {
+        "short": "সিঁড়ি",
+        "title": "ঝুঁকির সিঁড়ি",
+        "body": [
+          "বেশিরভাগ প্রোডাকশন এজেন্টের অন্তত একটি ধাপ লাগে, যেখানে একজন মানুষ কাজটি অনুমোদন করে। কাজ যত ঝুঁকিপূর্ণ, তত বেশি মানুষের অনুমোদন দরকার।",
+          "সিঁড়ির নিচে শুধু পড়ার কাজ (সার্চ, ফেচ, কুয়েরি) অটো-অ্যাপ্রুভ হয়। নিজের ফাইল এডিটের মতো লোকাল রাইট অটো-অ্যাপ্রুভ হয় নরম সীমা দিয়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "read",
+          "state": "hot",
+          "sub": {
+            "en": "auto-approve",
+            "bn": "অটো-অ্যাপ্রুভ"
+          }
+        },
+        {
+          "id": "local",
+          "state": "hot",
+          "sub": {
+            "en": "auto-approve, soft cap",
+            "bn": "অটো-অ্যাপ্রুভ, নরম সীমা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "read",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "local",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "none",
+          "bn": "লাগে না"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Per call",
+        "title": "Approve each call",
+        "body": [
+          "An external write, such as sending an email or posting to Slack, needs approval for each call.",
+          "Money actions, such as a refund, a charge or a payout, need approval for each call, plus a daily cap."
+        ]
+      },
+      "bn": {
+        "short": "প্রতি কল",
+        "title": "প্রতিটি কলে অনুমোদন",
+        "body": [
+          "বাইরের কিছুতে লেখা, যেমন ইমেইল পাঠানো বা Slack-এ পোস্ট করা, প্রতিটি কলে অনুমোদন লাগে।",
+          "টাকার কাজ, যেমন রিফান্ড, চার্জ বা পেআউট, প্রতিটি কলে অনুমোদন লাগে, সঙ্গে একটি দৈনিক সীমা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "ext",
+          "state": "hot",
+          "sub": {
+            "en": "approve per call",
+            "bn": "প্রতি কলে অনুমোদন"
+          }
+        },
+        {
+          "id": "money",
+          "state": "hot",
+          "sub": {
+            "en": "per call, daily cap",
+            "bn": "প্রতি কলে, দৈনিক সীমা"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "approves",
+            "bn": "অনুমোদন দেয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "ext",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "money",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ext",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "money",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "each call",
+          "bn": "প্রতি কলে"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Two people",
+        "title": "Destructive: two people",
+        "body": [
+          "Deleting a record is destructive. It needs the two-person rule: two people must agree before it can happen."
+        ]
+      },
+      "bn": {
+        "short": "দুজন",
+        "title": "ধ্বংসাত্মক: দুজন মানুষ",
+        "body": [
+          "রেকর্ড মুছে ফেলা ধ্বংসাত্মক কাজ। এতে টু-পারসন রুল লাগে: কাজটি হওয়ার আগে দুজন মানুষকে রাজি হতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "del",
+          "state": "warn",
+          "sub": {
+            "en": "two-person rule",
+            "bn": "টু-পারসন রুল"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "agrees",
+            "bn": "রাজি হয়"
+          }
+        },
+        {
+          "id": "human2",
+          "state": "hot",
+          "sub": {
+            "en": "must agree too",
+            "bn": "তাকেও রাজি হতে হয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "del",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "del",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "del",
+          "to": "human2",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "two people",
+          "bn": "দুজন মানুষ"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Checkpoint",
+        "title": "The checkpoint primitive",
+        "body": [
+          "Every durable framework has a “wait for human” primitive. In LangGraph it is <code>interrupt</code>, in Temporal <code>wait_for_signal</code>, and in Restate <code>await call().ack()</code>.",
+          "In the section's example, the email step calls <code>interrupt</code> with the recipient, subject and body. If the answer is not approved, it returns “User rejected email send.” Otherwise it sends the email."
+        ]
+      },
+      "bn": {
+        "short": "চেকপয়েন্ট",
+        "title": "চেকপয়েন্ট প্রিমিটিভ",
+        "body": [
+          "প্রতিটি ডিউরেবল ফ্রেমওয়ার্কে “মানুষের জন্য অপেক্ষা” করার একটি প্রিমিটিভ থাকে। LangGraph-এ এটি <code>interrupt</code>, Temporal-এ <code>wait_for_signal</code>, আর Restate-এ <code>await call().ack()</code>।",
+          "সেকশনের উদাহরণে ইমেইল ধাপ প্রাপক, বিষয় আর বডিসহ <code>interrupt</code> ডাকে। অনুমোদন না এলে সে “User rejected email send.” ফেরত দেয়। অনুমোদন এলে ইমেইল পাঠায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "gate",
+          "state": "hot",
+          "sub": {
+            "en": "waits for a human",
+            "bn": "মানুষের জন্য অপেক্ষা"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "approves or rejects",
+            "bn": "অনুমোদন বা বাতিল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "gate",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gate",
+          "to": "human",
+          "flow": "both",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "UI",
+        "title": "The hard part is the UI",
+        "body": [
+          "The framework gives you a clean interrupt, but you still have to build the inbox, the diff view, the approve and reject buttons, the audit log, the SLA and the mobile notifications."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Most teams underestimate the approval surface. Budget at least 30% of agent project time for the human-facing surface."
+        }
+      },
+      "bn": {
+        "short": "UI",
+        "title": "কঠিন অংশ UI",
+        "body": [
+          "ফ্রেমওয়ার্ক একটি পরিষ্কার interrupt দেয়, কিন্তু ইনবক্স, ডিফ ভিউ, অ্যাপ্রুভ আর রিজেক্ট বোতাম, অডিট লগ, SLA আর মোবাইল নোটিফিকেশন আপনাকেই বানাতে হবে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "বেশিরভাগ টিম অনুমোদনের এই অংশের কাজ কম ধরে। মানুষের সামনের অংশের জন্য এজেন্ট প্রজেক্টের অন্তত ৩০% সময় রাখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "gate",
+          "state": "hot"
+        },
+        {
+          "id": "ui",
+          "state": "warn",
+          "sub": {
+            "en": "inbox, diff, buttons",
+            "bn": "ইনবক্স, ডিফ, বোতাম"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "gate",
+          "to": "ui",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ui",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "30%+",
+          "bn": "৩০%+"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "No answer",
+        "title": "If no one answers",
+        "body": [
+          "When the human cannot respond right away, the workflow needs a timeout. With a soft timeout and default reject, the workflow ends if there is no answer in 24 hours.",
+          "A soft timeout with default approve lets the action go ahead, logged and reversible. A hard timeout escalates: at 24 hours the request goes to a backup approver."
+        ]
+      },
+      "bn": {
+        "short": "সাড়া নেই",
+        "title": "কেউ সাড়া না দিলে",
+        "body": [
+          "মানুষ সঙ্গে সঙ্গে সাড়া দিতে না পারলে ওয়ার্কফ্লোর টাইমআউট লাগে। নরম টাইমআউট আর ডিফল্ট রিজেক্টে ২৪ ঘণ্টায় সাড়া না এলে ওয়ার্কফ্লো শেষ হয়ে যায়।",
+          "নরম টাইমআউট আর ডিফল্ট অ্যাপ্রুভে কাজটি এগিয়ে যায়, লগ হয় আর ফেরানো যায়। কড়া টাইমআউটে এসকেলেট হয়: ২৪ ঘণ্টায় অনুরোধ যায় ব্যাকআপ অ্যাপ্রুভারের কাছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gate",
+          "state": "hot"
+        },
+        {
+          "id": "human",
+          "state": "warn",
+          "sub": {
+            "en": "no answer",
+            "bn": "সাড়া নেই"
+          }
+        },
+        {
+          "id": "backup",
+          "state": "hot",
+          "sub": {
+            "en": "after 24 hours",
+            "bn": "২৪ ঘণ্টা পর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "gate",
+          "to": "human",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "gate",
+          "to": "backup",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "24 hours",
+          "bn": "২৪ ঘণ্টা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "The higher the step on the risk ladder, the stricter the approval."
+        ],
+        "points": [
+          "Read-only actions are auto-approved. Money actions need approval per call plus a daily cap.",
+          "Deleting a record needs the two-person rule.",
+          "The hard part is the UI, not the protocol. Budget at least 30% of project time for it.",
+          "If no human answers, you can reject, approve with rollback, or escalate to a backup approver."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ঝুঁকির সিঁড়িতে ধাপ যত ওপরে, অনুমোদনের নিয়ম তত কড়া।"
+        ],
+        "points": [
+          "শুধু পড়ার কাজ অটো-অ্যাপ্রুভ হয়। টাকার কাজে প্রতি কলে অনুমোদন আর দৈনিক সীমা লাগে।",
+          "রেকর্ড মুছতে টু-পারসন রুল লাগে।",
+          "কঠিন অংশ UI, প্রটোকল নয়। এর জন্য প্রজেক্ট সময়ের অন্তত ৩০% রাখুন।",
+          "কোনো মানুষ সাড়া না দিলে বাতিল করা, রোলব্যাকসহ অনুমোদন করা, বা ব্যাকআপ অ্যাপ্রুভারের কাছে পাঠানো যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent"
+        },
+        {
+          "id": "read"
+        },
+        {
+          "id": "del"
+        },
+        {
+          "id": "money"
+        },
+        {
+          "id": "human"
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "read",
+          "flow": "to"
+        },
+        {
+          "from": "agent",
+          "to": "del",
+          "flow": "to"
+        },
+        {
+          "from": "agent",
+          "to": "money",
+          "flow": "to"
+        },
+        {
+          "from": "del",
+          "to": "human",
+          "flow": "to"
+        },
+        {
+          "from": "money",
+          "to": "human",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

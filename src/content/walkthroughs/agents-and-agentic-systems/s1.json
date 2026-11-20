@@ -1,0 +1,714 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "cap",
+      "kind": "clock",
+      "label": {
+        "en": "Step cap",
+        "bn": "ধাপ-সীমা"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "answer",
+      "kind": "note",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "guard",
+      "kind": "shield",
+      "label": {
+        "en": "Guardrail",
+        "bn": "গার্ডরেইল"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "state",
+      "kind": "file",
+      "label": {
+        "en": "State",
+        "bn": "স্টেট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tools",
+        "bn": "টুল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "goal",
+      "kind": "user",
+      "label": {
+        "en": "Goal",
+        "bn": "লক্ষ্য"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "flow",
+      "kind": "service",
+      "label": {
+        "en": "Workflow",
+        "bn": "ওয়ার্কফ্লো"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "scratch",
+      "kind": "storage",
+      "label": {
+        "en": "Scratchpad",
+        "bn": "স্ক্র্যাচপ্যাড"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "trace",
+      "kind": "chart",
+      "label": {
+        "en": "Trace",
+        "bn": "ট্রেস"
+      },
+      "x": 380,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Step cap",
+      "bn": "ধাপ-সীমা"
+    },
+    {
+      "en": "Unbounded",
+      "bn": "সীমাহীন লুপ"
+    },
+    {
+      "en": "Exit rule",
+      "bn": "থামার নিয়ম"
+    }
+  ],
+  "caption": {
+    "en": "Example: the loop of a minimal agent, and the parts a production agent adds around it.",
+    "bn": "উদাহরণ: ন্যূনতম এজেন্টের লুপ, আর প্রোডাকশন এজেন্ট তার চারপাশে যে অংশগুলো যোগ করে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Loop",
+        "title": "An agent is a loop",
+        "body": [
+          "An agent is a loop: the AI looks at the state, decides what to do, acts, and repeats until the job is done.",
+          "The loop takes the current state, asks an LLM what to do next, executes the answer, and feeds the result back in. The answer can be a tool call, a structured response, or a final answer."
+        ]
+      },
+      "bn": {
+        "short": "লুপ",
+        "title": "এজেন্ট একটি লুপ",
+        "body": [
+          "এজেন্ট হলো একটি লুপ: AI স্টেট দেখে, কী করবে ঠিক করে, কাজ করে, আর কাজ শেষ না হওয়া পর্যন্ত আবার করে।",
+          "লুপটি বর্তমান স্টেট নেয়, LLM-কে জিজ্ঞেস করে পরে কী করবে, উত্তর চালায়, আর ফল আবার ভেতরে ফিরিয়ে দেয়। উত্তর হতে পারে একটি টুল কল, একটি কাঠামোবদ্ধ উত্তর, বা চূড়ান্ত উত্তর।"
+        ]
+      },
+      "show": [
+        {
+          "id": "goal",
+          "state": "hot"
+        },
+        {
+          "id": "state",
+          "state": "hot",
+          "sub": {
+            "en": "looks at it",
+            "bn": "দেখে"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "decides",
+            "bn": "সিদ্ধান্ত নেয়"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "acts",
+            "bn": "কাজ করে"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "goal",
+          "to": "state",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Workflow",
+        "title": "Workflow or agent?",
+        "body": [
+          "A workflow is a fixed map of LLM calls and tool calls: every step and branch is written by a person in advance. In an agent, the LLM picks at least one step while it runs.",
+          "Rule of thumb: if a human could write a flowchart of the system's behavior from the prompt alone, it is a workflow. If the LLM picks the next node at runtime, it is an agent."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Most shipped systems are a mix: deterministic scaffolding around a few agentic decisions."
+        }
+      },
+      "bn": {
+        "short": "ওয়ার্কফ্লো",
+        "title": "ওয়ার্কফ্লো, না এজেন্ট?",
+        "body": [
+          "ওয়ার্কফ্লো হলো LLM কল আর টুল কলের একটি নির্দিষ্ট মানচিত্র: প্রতিটি ধাপ ও শাখা আগে থেকে মানুষ লিখে রাখে। এজেন্টে অন্তত একটি ধাপ LLM চলার সময় নিজেই বাছে।",
+          "সহজ নিয়ম: প্রম্পট দেখেই কোনো মানুষ যদি সিস্টেমের আচরণের ফ্লোচার্ট লিখে ফেলতে পারে, তবে সেটা ওয়ার্কফ্লো। LLM যদি রানটাইমে পরের নোড বাছে, তবে সেটা এজেন্ট।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "বেশিরভাগ চালু সিস্টেমই মিশ্র: কয়েকটি এজেন্টিক সিদ্ধান্তকে ঘিরে নির্ধারিত কাঠামো।"
+        }
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "picks a step at runtime",
+            "bn": "রানটাইমে ধাপ বাছে"
+          }
+        },
+        {
+          "id": "flow",
+          "state": "hot",
+          "sub": {
+            "en": "people write every step",
+            "bn": "প্রতিটি ধাপ মানুষ লেখে"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bounds",
+        "title": "Bound the loop",
+        "body": [
+          "Give the loop a hard step cap and a wall-clock timeout. Unbounded loops are how agents burn $10k overnight.",
+          "In the section's code, <code>max_steps</code> is 20, and the loop raises an error if it has not stopped by then."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "লুপে সীমা দিন",
+        "body": [
+          "লুপে কড়া ধাপ-সীমা আর ঘড়ির টাইমআউট দিন। সীমাহীন লুপ এক রাতে ১০ হাজার ডলার পুড়িয়ে দিতে পারে।",
+          "সেকশনের কোডে <code>max_steps</code> হলো ২০, আর তার মধ্যে না থামলে লুপ ত্রুটি তোলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "cap",
+          "state": "hot",
+          "sub": {
+            "en": "stops the loop",
+            "bn": "লুপ থামায়"
+          }
+        },
+        {
+          "id": "state",
+          "state": "dim"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "cap",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        "20",
+        {
+          "en": "$10k",
+          "bn": "১০ হাজার ডলার"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tools",
+        "title": "A narrow tool surface",
+        "body": [
+          "The tool surface is the set of tools an agent can call. Keep it narrow, well-typed and namespaced.",
+          "Then the model cannot accidentally call a destructive tool without going through a guardrail."
+        ]
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "সংকীর্ণ টুল সারফেস",
+        "body": [
+          "টুল সারফেস হলো এজেন্ট যে টুলগুলো কল করতে পারে তার সেট। এটি সংকীর্ণ, টাইপ করা আর নেমস্পেস দেওয়া রাখুন।",
+          "তাহলে মডেল গার্ডরেইল পার না হয়ে হঠাৎ কোনো ধ্বংসাত্মক টুল কল করতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "state",
+          "state": "dim"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "guard",
+          "state": "hot",
+          "sub": {
+            "en": "checks the call",
+            "bn": "কল যাচাই করে"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "narrow and typed",
+            "bn": "সংকীর্ণ ও টাইপ করা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "guard",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "guard",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Notes",
+        "title": "A scratchpad that survives",
+        "body": [
+          "A scratchpad keeps notes across turns, so they survive even when the model's context window runs out.",
+          "The model writes to a file, the framework keeps it, or you stuff it into the next prompt."
+        ]
+      },
+      "bn": {
+        "short": "নোট",
+        "title": "যে স্ক্র্যাচপ্যাড টিকে থাকে",
+        "body": [
+          "স্ক্র্যাচপ্যাড টার্নের পর টার্ন নোট রাখে, যাতে মডেলের কনটেক্সট উইন্ডো ফুরিয়ে গেলেও নোট থাকে।",
+          "মডেল ফাইলে লেখে, ফ্রেমওয়ার্ক রাখে, অথবা আপনি পরের প্রম্পটে ঢুকিয়ে দেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "scratch",
+          "state": "hot",
+          "sub": {
+            "en": "survives the window",
+            "bn": "উইন্ডো ফুরোলেও থাকে"
+          }
+        },
+        {
+          "id": "state",
+          "state": "dim"
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "scratch",
+          "flow": "both",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Exit",
+        "title": "Say when it is done",
+        "body": [
+          "An exit predicate is the rule that tells the agent it is done: at minimum, “I think I have enough; here is the answer.”",
+          "Without one, the agent will keep acting forever."
+        ]
+      },
+      "bn": {
+        "short": "থামা",
+        "title": "কখন শেষ, সেটা বলুন",
+        "body": [
+          "এগজিট প্রেডিকেট হলো সেই নিয়ম, যা এজেন্টকে বলে কাজ শেষ: অন্তত “আমার যথেষ্ট তথ্য আছে; এই নিন উত্তর”।",
+          "এমন নিয়ম না থাকলে এজেন্ট চলতেই থাকবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "state",
+          "state": "dim"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "I have enough",
+            "bn": "যথেষ্ট তথ্য আছে"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "dim"
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "final answer",
+            "bn": "চূড়ান্ত উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "“I have enough”",
+          "bn": "“যথেষ্ট তথ্য আছে”"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Trace",
+        "title": "Record every step",
+        "body": [
+          "Observability means every step is recorded with its prompt, tool call, result, cost and latency.",
+          "Without it, you cannot debug the agent."
+        ]
+      },
+      "bn": {
+        "short": "ট্রেস",
+        "title": "প্রতিটি ধাপ রেকর্ড করুন",
+        "body": [
+          "অবজারভেবিলিটি মানে প্রতিটি ধাপ প্রম্পট, টুল কল, ফল, খরচ আর লেটেন্সিসহ রেকর্ড করা।",
+          "এটি না থাকলে এজেন্ট ডিবাগ করা যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "trace",
+          "state": "hot",
+          "sub": {
+            "en": "every step",
+            "bn": "প্রতিটি ধাপ"
+          }
+        },
+        {
+          "id": "state",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "trace",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "trace",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Skip any one of the five parts and you have a hobby project, not a product."
+        ],
+        "points": [
+          "Every agent is a loop: take the state, ask the LLM, run the answer, feed the result back.",
+          "In a workflow, people write every step. In an agent, the LLM picks at least one step while it runs.",
+          "Give every loop a hard step cap and a wall-clock timeout. Unbounded loops can burn $10k overnight.",
+          "No exit rule: the agent runs forever. No recorded steps: you cannot debug it."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "পাঁচটি অংশের যেকোনো একটি বাদ দিলে সেটা প্রোডাক্ট নয়, শখের প্রজেক্ট।"
+        ],
+        "points": [
+          "প্রতিটি এজেন্ট একটি লুপ: স্টেট নিন, LLM-কে জিজ্ঞেস করুন, উত্তর চালান, ফল ফিরিয়ে দিন।",
+          "ওয়ার্কফ্লোতে মানুষ প্রতিটি ধাপ লেখে। এজেন্টে অন্তত একটি ধাপ LLM চলার সময় নিজেই বাছে।",
+          "প্রতিটি লুপে কড়া ধাপ-সীমা আর ঘড়ির টাইমআউট দিন। সীমাহীন লুপ এক রাতে ১০ হাজার ডলার পুড়িয়ে দিতে পারে।",
+          "থামার নিয়ম না থাকলে এজেন্ট চলতেই থাকে। ধাপের রেকর্ড না থাকলে ডিবাগ করা যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "cap"
+        },
+        {
+          "id": "llm"
+        },
+        {
+          "id": "answer"
+        },
+        {
+          "id": "state"
+        },
+        {
+          "id": "tool"
+        },
+        {
+          "id": "scratch"
+        }
+      ],
+      "links": [
+        {
+          "from": "cap",
+          "to": "llm",
+          "flow": "to"
+        },
+        {
+          "from": "llm",
+          "to": "answer",
+          "flow": "to"
+        },
+        {
+          "from": "state",
+          "to": "llm",
+          "flow": "to"
+        },
+        {
+          "from": "llm",
+          "to": "tool",
+          "flow": "to"
+        },
+        {
+          "from": "tool",
+          "to": "state",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
