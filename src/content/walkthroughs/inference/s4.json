@@ -1,0 +1,741 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "w16",
+      "kind": "model",
+      "label": {
+        "en": "Weights, 16-bit",
+        "bn": "ওয়েট, ১৬-বিট"
+      },
+      "x": 200,
+      "y": 162
+    },
+    {
+      "id": "w4",
+      "kind": "model",
+      "label": {
+        "en": "Weights, 4-bit",
+        "bn": "ওয়েট, ৪-বিট"
+      },
+      "x": 560,
+      "y": 162
+    },
+    {
+      "id": "old",
+      "kind": "note",
+      "label": {
+        "en": "Earlier tokens",
+        "bn": "আগের টোকেন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "kv",
+      "kind": "cache",
+      "label": {
+        "en": "KV cache",
+        "bn": "KV ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "next",
+      "kind": "note",
+      "label": {
+        "en": "Next tokens",
+        "bn": "পরের টোকেন"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "r1",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "r2",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "r3",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "draft",
+      "kind": "model",
+      "label": {
+        "en": "Draft model",
+        "bn": "ড্রাফট মডেল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "big",
+      "kind": "model",
+      "label": {
+        "en": "Big model",
+        "bn": "বড় মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "batch",
+      "kind": "queue",
+      "label": {
+        "en": "Mixed batch",
+        "bn": "মেশানো ব্যাচ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "GPU",
+        "bn": "GPU"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Memory",
+      "bn": "মেমরি"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Throughput",
+      "bn": "থ্রুপুট"
+    },
+    {
+      "en": "Quality",
+      "bn": "মান"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the sizes and speedups are the section's own figures.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: আকার আর গতির হিসাব সেকশনের নিজস্ব।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Quantize",
+        "title": "Quantization: fewer bits per weight",
+        "body": [
+          "Quantization stores model weights with fewer bits: it reduces precision from 16-bit to 8- or 4-bit.",
+          "It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference."
+        ]
+      },
+      "bn": {
+        "short": "কোয়ান্টাইজ",
+        "title": "কোয়ান্টাইজেশন: ওয়েটে কম বিট",
+        "body": [
+          "কোয়ান্টাইজেশন মডেলের ওয়েট কম বিটে রাখে: প্রিসিশন ১৬-বিট থেকে ৮ বা ৪ বিটে নামায়।",
+          "সামান্য মানের বিনিময়ে GPU মেমরি ২–৪× কমে আর ইনফারেন্স আনুপাতিকভাবে দ্রুত হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "w16",
+          "state": "hot"
+        },
+        {
+          "id": "w4",
+          "state": "hot",
+          "sub": {
+            "en": "fewer bits",
+            "bn": "কম বিট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "w16",
+          "to": "w4",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "2–4× less",
+          "bn": "২–৪× কম"
+        },
+        null,
+        null,
+        {
+          "en": "small loss",
+          "bn": "সামান্য কমে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Formats",
+        "title": "The common formats",
+        "body": [
+          "The common formats are:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "GGUF: llama.cpp's format, one file that runs on CPU, GPU or both"
+          },
+          {
+            "sign": "+",
+            "html": "AWQ: 4-bit with near-FP16 quality, popular for vLLM and SGLang"
+          },
+          {
+            "sign": "+",
+            "html": "GPTQ: a post-training method, older and still common for GPU serving"
+          },
+          {
+            "sign": "+",
+            "html": "INT8 / FP8: minimal quality loss on H100s, with native hardware support"
+          },
+          {
+            "sign": "+",
+            "html": "INT4 / NF4: four-bit formats, with bitsandbytes (QLoRA) for training, also used at inference"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ফরম্যাট",
+        "title": "প্রচলিত ফরম্যাট",
+        "body": [
+          "প্রচলিত ফরম্যাটগুলো হলো:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "GGUF: llama.cpp-এর ফরম্যাট, একটি ফাইল, যা CPU, GPU বা দুটোতেই চলে"
+          },
+          {
+            "sign": "+",
+            "html": "AWQ: ৪-বিটে FP16-এর কাছাকাছি মান, vLLM আর SGLang-এ জনপ্রিয়"
+          },
+          {
+            "sign": "+",
+            "html": "GPTQ: পোস্ট-ট্রেনিং পদ্ধতি, পুরোনো, GPU সার্ভিংয়ে এখনও প্রচলিত"
+          },
+          {
+            "sign": "+",
+            "html": "INT8 / FP8: H100-এ নেটিভ হার্ডওয়্যার সাপোর্টসহ সর্বনিম্ন মান-ক্ষতি"
+          },
+          {
+            "sign": "+",
+            "html": "INT4 / NF4: ৪-বিট ফরম্যাট, bitsandbytes (QLoRA) ট্রেনিংয়ে, ইনফারেন্সেও ব্যবহৃত"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "w16",
+          "state": "dim"
+        },
+        {
+          "id": "w4",
+          "state": "hot",
+          "sub": {
+            "en": "AWQ, GGUF, GPTQ",
+            "bn": "AWQ, GGUF, GPTQ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "w16",
+          "to": "w4",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "KV cache",
+        "title": "The KV cache",
+        "body": [
+          "The KV cache holds the attention keys and values already computed for earlier tokens, so the model does not recompute them for each new token.",
+          "A paged KV cache allocates its memory in pages, like OS virtual memory, instead of one contiguous buffer per request. vLLM's PagedAttention removes the wasted memory of naive serving."
+        ]
+      },
+      "bn": {
+        "short": "KV ক্যাশ",
+        "title": "KV ক্যাশ",
+        "body": [
+          "KV ক্যাশ আগের টোকেনের জন্য আগেই হিসাব করা অ্যাটেনশন কী আর ভ্যালু ধরে রাখে, যাতে প্রতিটি নতুন টোকেনে মডেলকে আবার হিসাব করতে না হয়।",
+          "পেজড KV ক্যাশ প্রতিটি রিকোয়েস্টের জন্য একটি কন্টিগুয়াস বাফারের বদলে মেমরি পেজে (OS ভার্চুয়াল মেমরির মতো) বরাদ্দ করে। vLLM-এর PagedAttention নেইভ সার্ভিংয়ের নষ্ট মেমরির সমস্যা দূর করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "old",
+          "state": "hot",
+          "sub": {
+            "en": "already computed",
+            "bn": "আগেই হিসাব করা"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "keys and values",
+            "bn": "কী আর ভ্যালু"
+          }
+        },
+        {
+          "id": "next",
+          "state": "hot",
+          "sub": {
+            "en": "no recompute",
+            "bn": "আবার হিসাব নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "old",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "kv",
+          "to": "next",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Prefix",
+        "title": "Prefix caching",
+        "body": [
+          "If many requests share a long system prompt, the server hashes the prefix and reuses the cached KV.",
+          "Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part."
+        ]
+      },
+      "bn": {
+        "short": "প্রিফিক্স",
+        "title": "প্রিফিক্স ক্যাশিং",
+        "body": [
+          "অনেক রিকোয়েস্ট একই দীর্ঘ সিস্টেম প্রম্পট শেয়ার করলে সার্ভার প্রিফিক্স হ্যাশ করে আর ক্যাশ করা KV আবার ব্যবহার করে।",
+          "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "r1",
+          "state": "hot",
+          "sub": {
+            "en": "same system prompt",
+            "bn": "একই সিস্টেম প্রম্পট"
+          }
+        },
+        {
+          "id": "r2",
+          "state": "hot",
+          "sub": {
+            "en": "same system prompt",
+            "bn": "একই সিস্টেম প্রম্পট"
+          }
+        },
+        {
+          "id": "r3",
+          "state": "hot",
+          "sub": {
+            "en": "same system prompt",
+            "bn": "একই সিস্টেম প্রম্পট"
+          }
+        },
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "shared prefix",
+            "bn": "শেয়ার করা প্রিফিক্স"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "r1",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "r2",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "r3",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "80–90% less",
+          "bn": "৮০–৯০% কম"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Speculate",
+        "title": "Speculative decoding",
+        "body": [
+          "A tiny draft model proposes the next 5–10 tokens, and the big model verifies them in parallel.",
+          "Net throughput is 2–3× higher for free, with no quality loss."
+        ]
+      },
+      "bn": {
+        "short": "অনুমান",
+        "title": "স্পেকুলেটিভ ডিকোডিং",
+        "body": [
+          "একটি ছোট ড্রাফট মডেল পরবর্তী ৫–১০ টোকেন প্রস্তাব করে; বড় মডেল সেগুলো সমান্তরালে যাচাই করে।",
+          "নিট থ্রুপুট বিনা খরচে ২–৩× বেশি হয়, মান একটুও কমে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "draft",
+          "state": "hot",
+          "sub": {
+            "en": "guesses ahead",
+            "bn": "আগে আন্দাজ করে"
+          }
+        },
+        {
+          "id": "big",
+          "state": "hot",
+          "sub": {
+            "en": "checks them all",
+            "bn": "সব একসাথে যাচাই করে"
+          }
+        },
+        {
+          "id": "next",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "draft",
+          "to": "big",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "big",
+          "to": "next",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "+2–3×",
+          "bn": "+২–৩×"
+        },
+        {
+          "en": "no loss",
+          "bn": "কমে না"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Batching",
+        "title": "Continuous batching",
+        "body": [
+          "Naive serving processes one request at a time per GPU. Continuous batching, in vLLM, TGI and SGLang, interleaves tokens from many requests so the GPU is never idle waiting for one slow request.",
+          "This alone typically gives 5–20× higher throughput. Adding <code>max_num_seqs</code>, <code>max_model_len</code> and CUDA-graph capture gives the next 2×."
+        ]
+      },
+      "bn": {
+        "short": "ব্যাচিং",
+        "title": "কন্টিনিউয়াস ব্যাচিং",
+        "body": [
+          "নেইভ সার্ভিং GPU-তে একবারে একটি রিকোয়েস্ট প্রক্রিয়া করে। কন্টিনিউয়াস ব্যাচিং (vLLM, TGI, SGLang) অনেক রিকোয়েস্টের টোকেন মিলিয়ে চালায়, যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো বসে না থাকে।",
+          "এটাই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়। <code>max_num_seqs</code>, <code>max_model_len</code> আর CUDA-graph ক্যাপচার যোগ করলে আরও ২× পাওয়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "r1",
+          "state": "hot"
+        },
+        {
+          "id": "r2",
+          "state": "hot"
+        },
+        {
+          "id": "r3",
+          "state": "hot"
+        },
+        {
+          "id": "batch",
+          "state": "hot",
+          "sub": {
+            "en": "mixed tokens",
+            "bn": "মেশানো টোকেন"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "never idle",
+            "bn": "কখনো বসে থাকে না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "r1",
+          "to": "batch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "r2",
+          "to": "batch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "r3",
+          "to": "batch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "batch",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "5–20×",
+          "bn": "৫–২০×"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Metrics",
+        "title": "Latency versus throughput",
+        "body": [
+          "TTFT, the time to first token, is how long until the user sees the first word. TPS, tokens per second per request, is the generation speed the user sees. Throughput is the total tokens the server emits. p99 latency is the tail latency for the worst 1% of requests."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "TTFT moves with prompt length, prefill compute and the network"
+          },
+          {
+            "sign": "+",
+            "html": "TPS moves with model size, batch size and KV-cache hits"
+          },
+          {
+            "sign": "+",
+            "html": "Throughput moves with continuous batching and GPU occupancy"
+          },
+          {
+            "sign": "+",
+            "html": "p99 latency moves with queue depth and KV-cache pressure"
+          }
+        ]
+      },
+      "bn": {
+        "short": "মেট্রিক",
+        "title": "ল্যাটেন্সি বনাম থ্রুপুট",
+        "body": [
+          "TTFT (টাইম টু ফার্স্ট টোকেন) হলো ইউজার কত তাড়াতাড়ি প্রথম শব্দ দেখে। TPS (টোকেন পার সেকেন্ড, প্রতি রিকোয়েস্টে) হলো জেনারেশনের গতি, যা ইউজার দেখে। থ্রুপুট হলো সার্ভার মোট কত টোকেন তৈরি করে। p99 ল্যাটেন্সি হলো সবচেয়ে খারাপ ১% রিকোয়েস্টের টেইল ল্যাটেন্সি।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "TTFT বদলায় প্রম্পটের দৈর্ঘ্য, প্রিফিল কম্পিউট আর নেটওয়ার্কে"
+          },
+          {
+            "sign": "+",
+            "html": "TPS বদলায় মডেলের আকার, ব্যাচ সাইজ আর KV-ক্যাশ হিটে"
+          },
+          {
+            "sign": "+",
+            "html": "থ্রুপুট বদলায় কন্টিনিউয়াস ব্যাচিং আর GPU ব্যবহারে"
+          },
+          {
+            "sign": "+",
+            "html": "p99 ল্যাটেন্সি বদলায় কিউয়ের গভীরতা আর KV-ক্যাশের চাপে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "r2",
+          "state": "hot",
+          "sub": {
+            "en": "waits for a word",
+            "bn": "প্রথম শব্দের অপেক্ষা"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "prefill, then tokens",
+            "bn": "প্রিফিল, তারপর টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "r2",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Quantization shrinks the model, caching skips repeated work, and batching keeps the GPU busy."
+        ],
+        "points": [
+          "Quantization cuts GPU memory by 2–4× for a small loss in quality.",
+          "Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part.",
+          "Speculative decoding makes throughput 2–3× higher with no quality loss.",
+          "Continuous batching alone typically gives 5–20× higher throughput."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কোয়ান্টাইজেশন মডেল ছোট করে, ক্যাশিং একই কাজ আবার করা এড়ায়, আর ব্যাচিং GPU-কে ব্যস্ত রাখে।"
+        ],
+        "points": [
+          "কোয়ান্টাইজেশন সামান্য মান কমিয়ে GPU মেমরি ২–৪× কমায়।",
+          "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।",
+          "স্পেকুলেটিভ ডিকোডিং মান না কমিয়ে থ্রুপুট ২–৩× বেশি করে।",
+          "শুধু কন্টিনিউয়াস ব্যাচিংই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "r1"
+        },
+        {
+          "id": "r2"
+        },
+        {
+          "id": "r3"
+        },
+        {
+          "id": "batch"
+        },
+        {
+          "id": "gpu"
+        }
+      ],
+      "links": [
+        {
+          "from": "r1",
+          "to": "batch",
+          "flow": "to"
+        },
+        {
+          "from": "r2",
+          "to": "batch",
+          "flow": "to"
+        },
+        {
+          "from": "r3",
+          "to": "batch",
+          "flow": "to"
+        },
+        {
+          "from": "batch",
+          "to": "gpu",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -36,7 +36,7 @@ Layman's, and বাংলা. Every page exists in English and in Bangla.
 | Parts | 18 |
 | Sections | 153 |
 | Start here boxes | 153, one per section: the big idea, the words to know, and what to remember |
-| Walk-throughs | 58, with 587 steps: one for each section of Part 18, and 18 in Parts 1 to 17 |
+| Walk-throughs | 59, with 595 steps: one for each section of Part 18, and 19 in Parts 1 to 17 |
 | Cited sources | 666, from 162 sites (218 of them arXiv papers) |
 | Voices in each section | 3: Technical, Layman's, বাংলা |
 | Languages | English and Bangla, page for page |
