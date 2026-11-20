@@ -1,0 +1,689 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "loop",
+      "kind": "model",
+      "label": {
+        "en": "Agent loop",
+        "bn": "এজেন্ট লুপ"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "crash",
+      "kind": "note",
+      "label": {
+        "en": "Crash",
+        "bn": "ক্র্যাশ"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "limit",
+      "kind": "clock",
+      "label": {
+        "en": "Rate limit",
+        "bn": "রেট লিমিট"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Human approval",
+        "bn": "মানুষের অনুমোদন"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "store",
+      "kind": "database",
+      "label": {
+        "en": "Durable store",
+        "bn": "ডিউরেবল স্টোর"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "st1",
+      "kind": "service",
+      "label": {
+        "en": "Step 1",
+        "bn": "ধাপ ১"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "st2",
+      "kind": "service",
+      "label": {
+        "en": "Step 2",
+        "bn": "ধাপ ২"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "st3",
+      "kind": "service",
+      "label": {
+        "en": "Step 3",
+        "bn": "ধাপ ৩"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "temporal",
+      "kind": "service",
+      "label": {
+        "en": "Temporal",
+        "bn": "Temporal"
+      },
+      "x": 200,
+      "y": 75
+    },
+    {
+      "id": "restate",
+      "kind": "service",
+      "label": {
+        "en": "Restate",
+        "bn": "Restate"
+      },
+      "x": 560,
+      "y": 75
+    },
+    {
+      "id": "inngest",
+      "kind": "service",
+      "label": {
+        "en": "Inngest",
+        "bn": "Inngest"
+      },
+      "x": 200,
+      "y": 250
+    },
+    {
+      "id": "aws",
+      "kind": "service",
+      "label": {
+        "en": "Step Functions / DBOS",
+        "bn": "Step Functions / DBOS"
+      },
+      "x": 560,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Run time",
+      "bn": "চলার সময়"
+    },
+    {
+      "en": "Saved",
+      "bn": "সেভ করা"
+    },
+    {
+      "en": "Engines",
+      "bn": "ইঞ্জিন"
+    }
+  ],
+  "caption": {
+    "en": "A durable workflow: each step's intent and result is journaled. A crash mid-flight resumes from the next un-run step, not from the beginning.",
+    "bn": "একটি ডিউরেবল ওয়ার্কফ্লো: প্রতিটি ধাপের উদ্দেশ্য আর ফলাফল জার্নালে লেখা হয়। মাঝপথে ক্র্যাশ হলে শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Problems",
+        "title": "Three problems for long runs",
+        "body": [
+          "Agents that run for minutes or hours face three problems a normal loop cannot solve: crashes lose state, rate limits force waits, and human approvals force pauses.",
+          "Durable execution engines solve all three."
+        ]
+      },
+      "bn": {
+        "short": "সমস্যা",
+        "title": "লম্বা চলায় তিনটি সমস্যা",
+        "body": [
+          "যে এজেন্ট কয়েক মিনিট বা ঘণ্টা চলে, তার তিনটি সমস্যা সাধারণ লুপ সামলাতে পারে না: ক্র্যাশ হলে স্টেট হারিয়ে যায়, রেট লিমিটের জন্য অপেক্ষা করতে হয়, আর মানুষের অনুমোদনের জন্য থামতে হয়।",
+          "ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটারই সমাধান দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "loop",
+          "state": "hot"
+        },
+        {
+          "id": "crash",
+          "state": "warn",
+          "sub": {
+            "en": "loses state",
+            "bn": "স্টেট হারায়"
+          }
+        },
+        {
+          "id": "limit",
+          "state": "warn",
+          "sub": {
+            "en": "forces waits",
+            "bn": "অপেক্ষা করায়"
+          }
+        },
+        {
+          "id": "human",
+          "state": "warn",
+          "sub": {
+            "en": "forces pauses",
+            "bn": "থামতে হয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "loop",
+          "to": "crash",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "loop",
+          "to": "limit",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "loop",
+          "to": "human",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "State",
+        "title": "Saving messages is not enough",
+        "body": [
+          "The naive fix is to save the agent's state to disk at every step. But the state is more than the message log.",
+          "Saving the messages and losing the rest gives you a corrupt resume."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "In-flight tool calls"
+          },
+          {
+            "sign": "-",
+            "html": "Partial writes to external services"
+          },
+          {
+            "sign": "-",
+            "html": "The human approval state"
+          },
+          {
+            "sign": "-",
+            "html": "The retry counters"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্টেট",
+        "title": "শুধু মেসেজ সেভ যথেষ্ট নয়",
+        "body": [
+          "সহজ সমাধান হলো প্রতিটি ধাপে এজেন্টের স্টেট ডিস্কে সেভ করা। কিন্তু স্টেট মানে শুধু মেসেজ লগ নয়।",
+          "মেসেজ সেভ করে বাকিটা হারালে রিজিউম হয় নষ্ট।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "চলমান টুল কল"
+          },
+          {
+            "sign": "-",
+            "html": "বাইরের সার্ভিসে আংশিক লেখা"
+          },
+          {
+            "sign": "-",
+            "html": "মানুষের অনুমোদনের অবস্থা"
+          },
+          {
+            "sign": "-",
+            "html": "রিট্রাই কাউন্টার"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "loop",
+          "state": "hot"
+        },
+        {
+          "id": "store",
+          "state": "warn",
+          "sub": {
+            "en": "only the messages",
+            "bn": "শুধু মেসেজ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "loop",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "messages only",
+          "bn": "শুধু মেসেজ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Durable",
+        "title": "Durable execution",
+        "body": [
+          "A durable execution engine records every step's intent and result to a durable store: a database, a journal or a queue.",
+          "Your code is a series of workflow steps. The engine is the runtime that survives crashes, and it handles retries, rate limits and human-in-the-loop pauses natively."
+        ]
+      },
+      "bn": {
+        "short": "ডিউরেবল",
+        "title": "ডিউরেবল এক্সিকিউশন",
+        "body": [
+          "ডিউরেবল এক্সিকিউশন ইঞ্জিন প্রতিটি ধাপের উদ্দেশ্য আর ফলাফল একটি ডিউরেবল স্টোরে লেখে: ডেটাবেস, জার্নাল বা কিউ।",
+          "আপনার কোড একটি সিরিজ ওয়ার্কফ্লো ধাপ। ইঞ্জিন হলো সেই রানটাইম, যা ক্র্যাশ সামলে টিকে থাকে, আর রিট্রাই, রেট লিমিট ও হিউম্যান-ইন-দ্য-লুপ বিরতি নিজেই সামলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "st1",
+          "state": "hot"
+        },
+        {
+          "id": "st2",
+          "state": "hot"
+        },
+        {
+          "id": "st3",
+          "state": "hot"
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "intent and result",
+            "bn": "উদ্দেশ্য আর ফলাফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "st1",
+          "to": "st2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "st2",
+          "to": "st3",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "st1",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "st2",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "st3",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "every step",
+          "bn": "প্রতিটি ধাপ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Resume",
+        "title": "Resume after a crash",
+        "body": [
+          "After a crash, the next process loads the snapshot and resumes from the next step that has not run, not from the beginning."
+        ]
+      },
+      "bn": {
+        "short": "রিজিউম",
+        "title": "ক্র্যাশের পর রিজিউম",
+        "body": [
+          "ক্র্যাশের পর পরের প্রসেস স্ন্যাপশট লোড করে, শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "st1",
+          "state": "hot",
+          "sub": {
+            "en": "done",
+            "bn": "শেষ"
+          }
+        },
+        {
+          "id": "st2",
+          "state": "hot",
+          "sub": {
+            "en": "done",
+            "bn": "শেষ"
+          }
+        },
+        {
+          "id": "st3",
+          "state": "warn",
+          "sub": {
+            "en": "crashed here",
+            "bn": "এখানে ক্র্যাশ"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "the journal",
+            "bn": "জার্নাল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "st1",
+          "to": "st2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "st2",
+          "to": "st3",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "store",
+          "to": "st3",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "resumes here",
+            "bn": "এখান থেকে চলে"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "When",
+        "title": "When you need it",
+        "body": [
+          "Use durable execution when any one of these is true."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The agent runs for more than about 30 seconds"
+          },
+          {
+            "sign": "+",
+            "html": "Humans are in the loop and might take hours or days to respond"
+          },
+          {
+            "sign": "+",
+            "html": "It makes irreversible side effects, such as sending money or deleting records, that you want to retry without duplicating"
+          },
+          {
+            "sign": "+",
+            "html": "Its work spans several services, and you want to resume from the failed one"
+          }
+        ]
+      },
+      "bn": {
+        "short": "কখন",
+        "title": "কখন দরকার",
+        "body": [
+          "এর যেকোনো একটি সত্য হলে ডিউরেবল এক্সিকিউশন ব্যবহার করুন।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "এজেন্ট প্রায় ৩০ সেকেন্ডের বেশি চলে"
+          },
+          {
+            "sign": "+",
+            "html": "মানুষ লুপে আছে, আর উত্তর দিতে কয়েক ঘণ্টা বা দিন লাগতে পারে"
+          },
+          {
+            "sign": "+",
+            "html": "ফেরানো যায় না এমন সাইড ইফেক্ট আছে, যেমন টাকা পাঠানো বা রেকর্ড মোছা, যা দুবার না করে আবার চালাতে চান"
+          },
+          {
+            "sign": "+",
+            "html": "কাজ কয়েকটি সার্ভিসে ছড়ানো, আর যে সার্ভিস ব্যর্থ হয়েছে সেখান থেকে আবার শুরু করতে চান"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "loop",
+          "state": "hot"
+        },
+        {
+          "id": "store",
+          "state": "hot"
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "hours or days",
+            "bn": "কয়েক ঘণ্টা বা দিন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "loop",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "human",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "over ~30 s",
+          "bn": "প্রায় ৩০ সে-র বেশি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Engines",
+        "title": "Four durable engines",
+        "body": [
+          "Temporal runs event-sourced workflows for long, multi-day work with strong consistency. Restate is journaled workflows, the same idea with a smaller surface area.",
+          "Inngest is event-driven serverless: it wakes on a webhook, and you pay per step. AWS Step Functions and DBOS are managed or SQL-based, for AWS-native shops and the simplest operations."
+        ]
+      },
+      "bn": {
+        "short": "ইঞ্জিন",
+        "title": "চারটি ডিউরেবল ইঞ্জিন",
+        "body": [
+          "Temporal ইভেন্ট-সোর্সড ওয়ার্কফ্লো চালায়, লম্বা, বহু-দিনের কাজে, শক্ত কনসিস্টেন্সিসহ। Restate জার্নাল-ভিত্তিক ওয়ার্কফ্লো, একই ধারণা, কিন্তু ছোট সারফেসে।",
+          "Inngest ইভেন্ট-চালিত সার্ভারলেস: ওয়েবহুকে জেগে ওঠে, আর ধাপ ধরে দাম দিতে হয়। AWS Step Functions আর DBOS ম্যানেজড বা SQL-ভিত্তিক, AWS-নির্ভর দলগুলোর জন্য, অপারেশন সবচেয়ে সহজ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "temporal",
+          "state": "hot",
+          "sub": {
+            "en": "event-sourced, multi-day",
+            "bn": "ইভেন্ট-সোর্সড, বহু-দিন"
+          }
+        },
+        {
+          "id": "restate",
+          "state": "hot",
+          "sub": {
+            "en": "journaled, smaller surface",
+            "bn": "জার্নাল-ভিত্তিক, ছোট সারফেস"
+          }
+        },
+        {
+          "id": "inngest",
+          "state": "hot",
+          "sub": {
+            "en": "event-driven, per step",
+            "bn": "ইভেন্ট-চালিত, ধাপ প্রতি দাম"
+          }
+        },
+        {
+          "id": "aws",
+          "state": "hot",
+          "sub": {
+            "en": "managed or SQL-based",
+            "bn": "ম্যানেজড বা SQL-ভিত্তিক"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        {
+          "en": "four",
+          "bn": "চারটি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Durable execution saves each step, so the agent can pick up where it stopped."
+        ],
+        "points": [
+          "Messages alone are not enough; also save in-flight tool calls, partial writes to external services, approvals, and retry counters.",
+          "After a crash, a durable engine resumes from the next un-run step, not from the beginning.",
+          "Use it if the agent runs over about 30 seconds, waits for humans, or has irreversible side effects.",
+          "Four engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ডিউরেবল এক্সিকিউশন প্রতিটি ধাপ সেভ করে রাখে, তাই এজেন্ট যেখানে থেমেছিল সেখান থেকে আবার শুরু করতে পারে।"
+        ],
+        "points": [
+          "শুধু মেসেজ সেভ করলে যথেষ্ট নয়; চলমান টুল কল, বাইরের সার্ভিসে আংশিক লেখা, অনুমোদন আর রিট্রাই কাউন্টারও সেভ করুন।",
+          "ক্র্যাশের পর ডিউরেবল ইঞ্জিন শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।",
+          "এজেন্ট প্রায় ৩০ সেকেন্ডের বেশি চললে, মানুষের জন্য অপেক্ষা করলে, বা ফেরানো যায় না এমন সাইড ইফেক্ট থাকলে এটি ব্যবহার করুন।",
+          "সেকশনে যে চারটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।"
+        ]
+      },
+      "show": [
+        {
+          "id": "st1"
+        },
+        {
+          "id": "st2"
+        },
+        {
+          "id": "st3"
+        },
+        {
+          "id": "store"
+        }
+      ],
+      "links": [
+        {
+          "from": "st1",
+          "to": "st2",
+          "flow": "to"
+        },
+        {
+          "from": "st2",
+          "to": "st3",
+          "flow": "to"
+        },
+        {
+          "from": "st1",
+          "to": "store",
+          "flow": "to"
+        },
+        {
+          "from": "st2",
+          "to": "store",
+          "flow": "to"
+        },
+        {
+          "from": "st3",
+          "to": "store",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

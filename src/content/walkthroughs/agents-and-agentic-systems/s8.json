@@ -1,0 +1,623 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "svc",
+      "kind": "server",
+      "label": {
+        "en": "Service",
+        "bn": "সার্ভিস"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "retry",
+      "kind": "clock",
+      "label": {
+        "en": "Retry",
+        "bn": "রিট্রাই"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "fallback",
+      "kind": "tool",
+      "label": {
+        "en": "Fallback",
+        "bn": "ফলব্যাক"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "reflect",
+      "kind": "note",
+      "label": {
+        "en": "Reflect",
+        "bn": "রিফ্লেক্ট"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "breaker",
+      "kind": "shield",
+      "label": {
+        "en": "Circuit breaker",
+        "bn": "সার্কিট ব্রেকার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "budget",
+      "kind": "chart",
+      "label": {
+        "en": "Budget",
+        "bn": "বাজেট"
+      },
+      "x": 650,
+      "y": 75
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Backoff",
+      "bn": "ব্যাকঅফ"
+    },
+    {
+      "en": "Attempts",
+      "bn": "চেষ্টা"
+    },
+    {
+      "en": "Opens after",
+      "bn": "খোলে"
+    },
+    {
+      "en": "Open for",
+      "bn": "খোলা থাকে"
+    }
+  ],
+  "caption": {
+    "en": "When an agent's call to a service fails, there are three layers of response, and every one of them is bounded.",
+    "bn": "এজেন্টের কল ব্যর্থ হলে সাড়া দেওয়ার তিনটি স্তর আছে, আর প্রতিটিরই একটি সীমা থাকে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Layers",
+        "title": "Three layers of response",
+        "body": [
+          "When an agent's call fails, there are three layers of response: retry the same call, fall back to a different one, or reflect on the failure and revise.",
+          "The key rule is to always bound retries, so a bad input cannot burn your budget."
+        ]
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "সাড়া দেওয়ার তিনটি স্তর",
+        "body": [
+          "এজেন্টের কল ব্যর্থ হলে সাড়া দেওয়ার তিনটি স্তর: একই কল আবার করা, অন্য একটা উপায়ে যাওয়া, অথবা ব্যর্থতাটা নিয়ে ভেবে ঠিক করে নেওয়া।",
+          "মূল নিয়ম হলো সবসময় রিট্রাইয়ের সীমা বেঁধে দেওয়া, যাতে একটি খারাপ ইনপুট আপনার বাজেট শেষ করতে না পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "svc",
+          "state": "warn",
+          "sub": {
+            "en": "call fails",
+            "bn": "কল ব্যর্থ"
+          }
+        },
+        {
+          "id": "retry",
+          "state": "hot",
+          "sub": {
+            "en": "same call again",
+            "bn": "একই কল আবার"
+          }
+        },
+        {
+          "id": "fallback",
+          "state": "hot",
+          "sub": {
+            "en": "a different one",
+            "bn": "অন্য একটি"
+          }
+        },
+        {
+          "id": "reflect",
+          "state": "hot",
+          "sub": {
+            "en": "revise",
+            "bn": "শুধরে নেওয়া"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "svc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "retry",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "fallback",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "reflect",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Retry",
+        "title": "Layer 1: retry transient failures",
+        "body": [
+          "Transient failures, such as a rate limit, a network blip or an overloaded server, are best handled with a short retry. Exponential backoff is the default: wait 1s, 2s, 4s, 8s, with a little random jitter so many callers do not retry at the same moment.",
+          "Cap it at 3–5 attempts. Beyond that, the failure is not transient."
+        ]
+      },
+      "bn": {
+        "short": "রিট্রাই",
+        "title": "স্তর ১: ক্ষণস্থায়ী ব্যর্থতায় রিট্রাই",
+        "body": [
+          "ট্রানজিয়েন্ট ব্যর্থতা, যেমন রেট লিমিট, নেটওয়ার্কের ক্ষণিক সমস্যা বা ওভারলোডেড সার্ভার, ছোট রিট্রাইয়ে সবচেয়ে ভালো সামলানো যায়। ডিফল্ট হলো এক্সপোনেনশিয়াল ব্যাকঅফ: ১ সেকেন্ড, ২, ৪, ৮ অপেক্ষা, সঙ্গে সামান্য এলোমেলো জিটার, যাতে অনেক কলার একই মুহূর্তে আবার চেষ্টা না করে।",
+          "চেষ্টা ৩–৫ বারে সীমিত রাখুন। এর পরও ব্যর্থ হলে সেটা ক্ষণস্থায়ী নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "retry",
+          "state": "hot",
+          "sub": {
+            "en": "backoff and jitter",
+            "bn": "ব্যাকঅফ আর জিটার"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "warn",
+          "sub": {
+            "en": "transient failure",
+            "bn": "ক্ষণস্থায়ী ব্যর্থতা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "retry",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "retry",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "1s, 2s, 4s, 8s",
+          "bn": "১ সে, ২ সে, ৪ সে, ৮ সে"
+        },
+        {
+          "en": "3–5",
+          "bn": "৩–৫"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Fallback",
+        "title": "Layer 2: fall back",
+        "body": [
+          "When the failure is not transient, retrying the same call is pointless. That is the case when the API is permanently down, the JSON schema is rejected because the model cannot follow it, or the function raised a domain-specific error.",
+          "Fall back to a different tool or model: a smaller model with a simpler schema, a different vendor, or no tool at all, letting the model answer from its own knowledge."
+        ]
+      },
+      "bn": {
+        "short": "ফলব্যাক",
+        "title": "স্তর ২: ফলব্যাক",
+        "body": [
+          "ব্যর্থতা ক্ষণস্থায়ী না হলে একই কল আবার করা অর্থহীন। যেমন, API স্থায়ীভাবে বন্ধ, JSON স্কিমা মডেল মানতে পারছে না বলে বাতিল, অথবা ফাংশন কোনো ডোমেইন-নির্দিষ্ট ত্রুটি তুলেছে।",
+          "অন্য টুল বা মডেলে সরে যান: সহজ স্কিমাসহ ছোট মডেল, অন্য ভেন্ডর, অথবা টুল ছেড়ে দিয়ে মডেলকে নিজের জ্ঞান থেকে উত্তর দিতে দেওয়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "svc",
+          "state": "warn",
+          "sub": {
+            "en": "not transient",
+            "bn": "ক্ষণস্থায়ী নয়"
+          }
+        },
+        {
+          "id": "fallback",
+          "state": "hot",
+          "sub": {
+            "en": "a different tool or model",
+            "bn": "অন্য টুল বা মডেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "svc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "fallback",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reflect",
+        "title": "Layer 3: reflect",
+        "body": [
+          "When the failure came from a reasoning error, such as the right tool called with the wrong arguments, or a logical mistake, neither retry nor fallback fixes the root cause.",
+          "Feed the failure back into the model and ask it to revise. Reflexion is the formal version of this."
+        ]
+      },
+      "bn": {
+        "short": "রিফ্লেক্ট",
+        "title": "স্তর ৩: রিফ্লেক্ট",
+        "body": [
+          "ব্যর্থতা যুক্তির ভুল থেকে এলে, যেমন সঠিক টুলে ভুল আর্গুমেন্ট দেওয়া বা যুক্তিগত ভুল, রিট্রাই বা ফলব্যাক কোনোটিই মূল কারণ ঠিক করে না।",
+          "ব্যর্থতাটা মডেলকে ফেরত দিন আর শুধরে নিতে বলুন। Reflexion এর আনুষ্ঠানিক রূপ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot",
+          "sub": {
+            "en": "revises",
+            "bn": "শুধরে নেয়"
+          }
+        },
+        {
+          "id": "reflect",
+          "state": "hot",
+          "sub": {
+            "en": "failure fed back",
+            "bn": "ব্যর্থতা ফেরত যায়"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "warn",
+          "sub": {
+            "en": "wrong arguments",
+            "bn": "ভুল আর্গুমেন্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "svc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "svc",
+          "to": "reflect",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "reflect",
+          "to": "agent",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bound",
+        "title": "Always bound retries",
+        "body": [
+          "Unbounded retry is a footgun. A poisoned input that always returns the same transient-looking error will burn your entire budget in a tight retry loop."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "A hard cap on retries"
+          },
+          {
+            "sign": "+",
+            "html": "A wall-clock timeout"
+          },
+          {
+            "sign": "+",
+            "html": "A circuit breaker that opens after N consecutive failures of the same type"
+          }
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "রিট্রাইয়ের সীমা বাঁধুন",
+        "body": [
+          "সীমাহীন রিট্রাই একটি ফুটগান। যে খারাপ ইনপুট সবসময় একই ক্ষণস্থায়ী-দেখতে ত্রুটি ফেরত দেয়, সে একটি টাইট রিট্রাই লুপে আপনার পুরো বাজেট পুড়িয়ে ফেলবে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "রিট্রাইয়ের কড়া সীমা"
+          },
+          {
+            "sign": "+",
+            "html": "ওয়াল-ক্লক টাইমআউট"
+          },
+          {
+            "sign": "+",
+            "html": "একই ধরনের পরপর N বার ব্যর্থতার পর খুলে যায়, এমন সার্কিট ব্রেকার"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "retry",
+          "state": "warn",
+          "sub": {
+            "en": "tight loop",
+            "bn": "টাইট লুপ"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "warn",
+          "sub": {
+            "en": "same error",
+            "bn": "একই ত্রুটি"
+          }
+        },
+        {
+          "id": "budget",
+          "state": "warn",
+          "sub": {
+            "en": "burned",
+            "bn": "পুড়ে যায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "retry",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "retry",
+          "to": "svc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "retry",
+          "to": "budget",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Breaker",
+        "title": "The circuit breaker",
+        "body": [
+          "A circuit breaker protects against a service that is failing in a way that looks transient but is not. After 5 consecutive failures of the same kind, it opens: for the next 60 seconds every call fails fast with “service unavailable”, with no retries.",
+          "After 60 seconds it half-opens and lets one test call through. If that call succeeds, the breaker closes. If it fails, the timer resets."
+        ]
+      },
+      "bn": {
+        "short": "ব্রেকার",
+        "title": "সার্কিট ব্রেকার",
+        "body": [
+          "সার্কিট ব্রেকার এমন সার্ভিস থেকে বাঁচায়, যে ক্ষণস্থায়ী দেখালেও আসলে তা নয়। একই ধরনের পরপর ৫ বার ব্যর্থ হলে সেটি খুলে যায়: পরের ৬০ সেকেন্ড প্রতিটি কল “service unavailable” ত্রুটিতে সঙ্গে সঙ্গে ব্যর্থ হয়, কোনো রিট্রাই ছাড়াই।",
+          "৬০ সেকেন্ড পর এটি অর্ধেক খোলে আর একটি পরীক্ষামূলক কল যেতে দেয়। কলটি সফল হলে ব্রেকার বন্ধ হয়। ব্যর্থ হলে টাইমার আবার শুরু হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "breaker",
+          "state": "warn",
+          "sub": {
+            "en": "open: fails fast",
+            "bn": "খোলা: সঙ্গে সঙ্গে ব্যর্থ"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "dim",
+          "sub": {
+            "en": "not called",
+            "bn": "ডাকা হয় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "breaker",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "breaker",
+          "to": "svc",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "5 failures",
+          "bn": "৫ বার ব্যর্থ"
+        },
+        {
+          "en": "60 s",
+          "bn": "৬০ সে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Match the response to the failure: retry what is transient, fall back when it is not, and reflect when the model reasoned badly."
+        ],
+        "points": [
+          "Retry only transient failures, and cap attempts at 3–5.",
+          "Use a fallback when the failure is not transient.",
+          "Use reflection when the model made a reasoning error, like wrong arguments.",
+          "Always set a retry cap, a wall-clock timeout, and a circuit breaker."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ব্যর্থতার ধরন দেখে সাড়া দিন: ক্ষণস্থায়ী হলে রিট্রাই, না হলে ফলব্যাক, আর মডেল ভুল যুক্তি করলে রিফ্লেক্ট।"
+        ],
+        "points": [
+          "শুধু ট্রানজিয়েন্ট ব্যর্থতায় রিট্রাই করুন, আর চেষ্টা ৩–৫ বারে সীমিত রাখুন।",
+          "ব্যর্থতা ট্রানজিয়েন্ট না হলে ফলব্যাক ব্যবহার করুন।",
+          "মডেল যুক্তিতে ভুল করলে, যেমন ভুল আর্গুমেন্ট দিলে, রিফ্লেক্ট ব্যবহার করুন।",
+          "সবসময় রিট্রাইয়ের সীমা, ওয়াল-ক্লক টাইমআউট আর সার্কিট ব্রেকার রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent"
+        },
+        {
+          "id": "svc"
+        },
+        {
+          "id": "retry"
+        },
+        {
+          "id": "fallback"
+        },
+        {
+          "id": "reflect"
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "svc",
+          "flow": "to"
+        },
+        {
+          "from": "agent",
+          "to": "retry",
+          "flow": "to"
+        },
+        {
+          "from": "agent",
+          "to": "fallback",
+          "flow": "to"
+        },
+        {
+          "from": "agent",
+          "to": "reflect",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

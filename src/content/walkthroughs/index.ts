@@ -12,6 +12,11 @@ import contextEngineeringS3 from "./context-engineering/s3.json";
 import contextEngineeringS7 from "./context-engineering/s7.json";
 import ragKnowledgeSystemsS3 from "./rag-knowledge-systems/s3.json";
 import ragKnowledgeSystemsS7 from "./rag-knowledge-systems/s7.json";
+import agentsAndAgenticSystemsS1 from "./agents-and-agentic-systems/s1.json";
+import agentsAndAgenticSystemsS2 from "./agents-and-agentic-systems/s2.json";
+import agentsAndAgenticSystemsS6 from "./agents-and-agentic-systems/s6.json";
+import agentsAndAgenticSystemsS8 from "./agents-and-agentic-systems/s8.json";
+import agentsAndAgenticSystemsS9 from "./agents-and-agentic-systems/s9.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -35,5 +40,12 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "rag-knowledge-systems": {
     s3: ragKnowledgeSystemsS3,
     s7: ragKnowledgeSystemsS7,
+  },
+  "agents-and-agentic-systems": {
+    s1: agentsAndAgenticSystemsS1,
+    s2: agentsAndAgenticSystemsS2,
+    s6: agentsAndAgenticSystemsS6,
+    s8: agentsAndAgenticSystemsS8,
+    s9: agentsAndAgenticSystemsS9,
   },
 };
