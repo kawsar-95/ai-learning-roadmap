@@ -20,6 +20,7 @@ import agentsAndAgenticSystemsS9 from "./agents-and-agentic-systems/s9.json";
 import toolUseAndIntegrationsS3 from "./tool-use-and-integrations/s3.json";
 import inferenceS4 from "./inference/s4.json";
 import llmopsAndObservabilityS4 from "./llmops-and-observability/s4.json";
+import evaluationEngineeringS5 from "./evaluation-engineering/s5.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -59,5 +60,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "llmops-and-observability": {
     s4: llmopsAndObservabilityS4,
+  },
+  "evaluation-engineering": {
+    s5: evaluationEngineeringS5,
   },
 };

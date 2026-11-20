@@ -1,0 +1,823 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "golden",
+      "kind": "database",
+      "label": {
+        "en": "Golden set",
+        "bn": "গোল্ডেন সেট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "attacks",
+      "kind": "note",
+      "label": {
+        "en": "Attack set",
+        "bn": "আক্রমণের সেট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "second",
+      "kind": "note",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "judge",
+      "kind": "model",
+      "label": {
+        "en": "Judge",
+        "bn": "জাজ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "chunks",
+      "kind": "database",
+      "label": {
+        "en": "Chunks",
+        "bn": "লেখার অংশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool call",
+        "bn": "টুল কল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ci",
+      "kind": "shield",
+      "label": {
+        "en": "CI gate",
+        "bn": "CI গেট"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "answer",
+      "kind": "note",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "result",
+      "kind": "chart",
+      "label": {
+        "en": "Result",
+        "bn": "ফলাফল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "trace",
+      "kind": "file",
+      "label": {
+        "en": "Trace",
+        "bn": "ট্রেস"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Criteria",
+      "bn": "মানদণ্ড"
+    },
+    {
+      "en": "Score each",
+      "bn": "প্রতিটির স্কোর"
+    },
+    {
+      "en": "Live sample",
+      "bn": "লাইভ নমুনা"
+    },
+    {
+      "en": "Red team",
+      "bn": "রেড টিম"
+    }
+  ],
+  "caption": {
+    "en": "If you can't measure it, you can't improve it: evaluation turns “the model feels worse today” into numbers.",
+    "bn": "মাপতে না পারলে উন্নতি করা যায় না: ইভ্যালুয়েশন “মডেল আজ খারাপ লাগছে” কথাটাকে সংখ্যায় বদলে দেয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Golden set",
+        "title": "From a feeling to numbers",
+        "body": [
+          "Evaluation engineering turns the feeling that a model got worse into numbers. Those numbers then act as a signal in CI that checks every prompt or model change before it ships.",
+          "Run the golden dataset in CI, and block the release if accuracy drops below the threshold."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "A golden dataset is a fixed set of <code>(input, expected_output)</code> pairs. Build it once, grow it from real failures, and never let it decay."
+        }
+      },
+      "bn": {
+        "short": "গোল্ডেন সেট",
+        "title": "অনুভূতি থেকে সংখ্যা",
+        "body": [
+          "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং মডেল খারাপ হয়েছে এমন অনুভূতিকে সংখ্যায় বদলে দেয়। সেই সংখ্যা CI-তে সংকেতের কাজ করে, আর প্রতিটি প্রম্পট বা মডেল পরিবর্তন শিপ হওয়ার আগে যাচাই করে।",
+          "গোল্ডেন ডেটাসেট CI-তে চালান, আর অ্যাকুরেসি সীমার নিচে নামলে রিলিজ আটকে দিন।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "গোল্ডেন ডেটাসেট হলো <code>(input, expected_output)</code> জোড়ার একটি নির্দিষ্ট সেট। একবার বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর কখনো ক্ষয় হতে দেবেন না।"
+        }
+      },
+      "show": [
+        {
+          "id": "golden",
+          "state": "hot",
+          "sub": {
+            "en": "fixed pairs",
+            "bn": "নির্দিষ্ট জোড়া"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "after every change",
+            "bn": "প্রতি পরিবর্তনের পর"
+          }
+        },
+        {
+          "id": "ci",
+          "state": "hot",
+          "sub": {
+            "en": "blocks the release",
+            "bn": "রিলিজ আটকায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "golden",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "ci",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pairwise",
+        "title": "A judge picks the better answer",
+        "body": [
+          "Many qualities, such as “does this answer sound helpful?”, can't be checked with regex. The trick is to use a strong LLM as a judge.",
+          "Pairwise comparison shows the judge A and B and asks which is better. It beats absolute scoring, because relative judgements are easier than absolute ones."
+        ]
+      },
+      "bn": {
+        "short": "পেয়ারওয়াইজ",
+        "title": "জাজ ভালো উত্তরটি বেছে নেয়",
+        "body": [
+          "“এই উত্তর কি সহায়ক শোনায়?” এমন অনেক গুণ regex দিয়ে যাচাই করা যায় না। কৌশল হলো একটি শক্তিশালী LLM-কে জাজ বানানো।",
+          "পেয়ারওয়াইজ তুলনায় জাজকে A ও B দেখিয়ে জিজ্ঞেস করা হয় কোনটি ভালো। এটি পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "A",
+            "bn": "A"
+          },
+          "x": 110,
+          "y": 75
+        },
+        {
+          "id": "second",
+          "state": "hot",
+          "sub": {
+            "en": "B",
+            "bn": "B"
+          }
+        },
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "a strong LLM",
+            "bn": "শক্তিশালী LLM"
+          }
+        },
+        {
+          "id": "result",
+          "state": "hot",
+          "sub": {
+            "en": "the better one",
+            "bn": "যেটি ভালো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "answer",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "second",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "result",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rubric",
+        "title": "A judge scores against a rubric",
+        "body": [
+          "Rubric-based scoring defines 4–6 criteria and asks the judge to rate each 0–5 with reasoning. The scores aggregate into a weighted score."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Use a different, often stronger, model as the judge than the one being evaluated, rotate judge prompts, and periodically sanity-check the judge against human labels."
+        }
+      },
+      "bn": {
+        "short": "রুব্রিক",
+        "title": "জাজ রুব্রিক ধরে স্কোর দেয়",
+        "body": [
+          "রুব্রিক-ভিত্তিক স্কোরিংয়ে ৪–৬টি মানদণ্ড ঠিক করা হয়, আর জাজকে যুক্তিসহ প্রতিটিতে ০–৫ দিতে বলা হয়। স্কোরগুলো মিলিয়ে একটি ওজনযুক্ত স্কোর হয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "যে মডেল মূল্যায়ন হচ্ছে তার চেয়ে ভিন্ন (প্রায়ই আরও শক্তিশালী) মডেলকে জাজ বানান, জাজ প্রম্পট ঘোরান, আর মাঝে মাঝে মানুষের লেবেলের সঙ্গে জাজকে মিলিয়ে দেখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "answer",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "reasons, then rates",
+            "bn": "যুক্তি দিয়ে স্কোর"
+          }
+        },
+        {
+          "id": "result",
+          "state": "hot",
+          "sub": {
+            "en": "weighted score",
+            "bn": "ওজনযুক্ত স্কোর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "answer",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "result",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "4–6",
+          "bn": "৪–৬"
+        },
+        {
+          "en": "0–5",
+          "bn": "০–৫"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "RAG",
+        "title": "Four numbers for a RAG system",
+        "body": [
+          "The Ragas framework standardized four metrics that every RAG system should track:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Faithfulness: does the answer stick to the retrieved chunks, or does it hallucinate?"
+          },
+          {
+            "sign": "+",
+            "html": "Answer relevance: does the answer address the user's question?"
+          },
+          {
+            "sign": "+",
+            "html": "Context precision: are the retrieved chunks mostly relevant (not noise)?"
+          },
+          {
+            "sign": "+",
+            "html": "Context recall: were all the chunks needed to answer actually retrieved?"
+          }
+        ]
+      },
+      "bn": {
+        "short": "RAG",
+        "title": "RAG সিস্টেমের চারটি সংখ্যা",
+        "body": [
+          "Ragas ফ্রেমওয়ার্ক চারটি মেট্রিক প্রমিত করেছে, যা প্রতিটি RAG সিস্টেমের ট্র্যাক করা উচিত:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ফেইথফুলনেস: উত্তর কি খুঁজে আনা অংশের সঙ্গে মেলে, নাকি বানিয়ে বলছে?"
+          },
+          {
+            "sign": "+",
+            "html": "আনসার রিলেভেন্স: উত্তর কি ইউজারের প্রশ্নের সঙ্গে সম্পর্কিত?"
+          },
+          {
+            "sign": "+",
+            "html": "কনটেক্সট প্রিসিশন: খুঁজে আনা অংশগুলো কি বেশিরভাগই প্রাসঙ্গিক (অবান্তর নয়)?"
+          },
+          {
+            "sign": "+",
+            "html": "কনটেক্সট রিকল: উত্তর দিতে দরকারি সব অংশ কি সত্যিই খুঁজে আনা হয়েছে?"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "question",
+            "bn": "প্রশ্ন"
+          }
+        },
+        {
+          "id": "chunks",
+          "state": "hot",
+          "sub": {
+            "en": "retrieved",
+            "bn": "খুঁজে আনা"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "chunks",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "chunks",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Agents",
+        "title": "Check the path, not only the answer",
+        "body": [
+          "For agents, “the right answer” is necessary but not sufficient: you also need to check how it got there. Track:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Task success rate: is the final outcome correct?"
+          },
+          {
+            "sign": "+",
+            "html": "Trajectory match: did the agent take a reasonable path, with the same tools and a similar number of steps?"
+          },
+          {
+            "sign": "+",
+            "html": "Tool-call accuracy: did each individual tool call have the right arguments?"
+          },
+          {
+            "sign": "+",
+            "html": "Step efficiency: how many steps compared with the minimum needed?"
+          }
+        ]
+      },
+      "bn": {
+        "short": "এজেন্ট",
+        "title": "শুধু উত্তর নয়, পথটাও দেখুন",
+        "body": [
+          "এজেন্টের জন্য “সঠিক উত্তর” দরকার, কিন্তু যথেষ্ট নয়: উত্তরে কীভাবে পৌঁছেছে সেটাও যাচাই করতে হয়। ট্র্যাক করুন:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "টাস্ক সাফল্যের হার: চূড়ান্ত ফলাফল কি ঠিক?"
+          },
+          {
+            "sign": "+",
+            "html": "ট্রাজেক্টরি ম্যাচ: এজেন্ট কি যুক্তিসংগত পথে গেছে, একই টুল আর কাছাকাছি ধাপ সংখ্যা নিয়ে?"
+          },
+          {
+            "sign": "+",
+            "html": "টুল-কল অ্যাকুরেসি: প্রতিটি টুল কলে কি সঠিক আর্গুমেন্ট ছিল?"
+          },
+          {
+            "sign": "+",
+            "html": "স্টেপ এফিশিয়েন্সি: দরকারি সর্বনিম্ন ধাপের তুলনায় কয় ধাপ লেগেছে?"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "the agent",
+            "bn": "এজেন্ট"
+          },
+          "x": 110
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "right arguments?",
+            "bn": "সঠিক আর্গুমেন্ট?"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "right answer?",
+            "bn": "সঠিক উত্তর?"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Synthetic",
+        "title": "Grow the set with synthetic data",
+        "body": [
+          "When your golden set is too small, use an LLM to synthesize plausible <code>(input, expected_output)</code> pairs from your docs and seed examples."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Always include a contamination check: make sure synthetic questions aren't paraphrases of training data, otherwise you're testing memorization, not capability."
+        }
+      },
+      "bn": {
+        "short": "সিনথেটিক",
+        "title": "সিনথেটিক ডেটায় সেট বাড়ান",
+        "body": [
+          "গোল্ডেন সেট খুব ছোট হলে LLM দিয়ে আপনার ডক আর শুরুর উদাহরণ থেকে সম্ভাব্য <code>(input, expected_output)</code> জোড়া বানান।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সবসময় কন্টামিনেশন যাচাই রাখুন: সিনথেটিক প্রশ্ন যেন ট্রেনিং ডেটার নকল না হয়, নইলে আপনি সক্ষমতার বদলে মুখস্থ বিদ্যা পরীক্ষা করছেন।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "writes pairs",
+            "bn": "জোড়া লেখে"
+          }
+        },
+        {
+          "id": "golden",
+          "state": "hot",
+          "sub": {
+            "en": "grows",
+            "bn": "বাড়ে"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "golden",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Online",
+        "title": "Online evals on live traffic",
+        "body": [
+          "Sample 1–5% of live requests, run cheap judges (heuristics, regex, a small LLM), and record the eval score alongside the trace.",
+          "This catches real failures your offline set misses: distribution shifts, prompt-template copy-paste errors, and fresh prompt injections."
+        ]
+      },
+      "bn": {
+        "short": "অনলাইন",
+        "title": "লাইভ ট্র্যাফিকে অনলাইন ইভ্যাল",
+        "body": [
+          "লাইভ রিকোয়েস্টের ১–৫% স্যাম্পল করুন, সস্তা জাজ (হিউরিস্টিক, regex, ছোট LLM) চালান, আর ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন।",
+          "এটি আপনার অফলাইন সেট মিস করা বাস্তব ব্যর্থতা ধরে: ডিস্ট্রিবিউশন শিফট, প্রম্পট-টেমপ্লেট কপি-পেস্ট এরর, নতুন প্রম্পট ইনজেকশন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "live requests",
+            "bn": "লাইভ রিকোয়েস্ট"
+          }
+        },
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "cheap judge",
+            "bn": "সস্তা জাজ"
+          }
+        },
+        {
+          "id": "trace",
+          "state": "hot",
+          "sub": {
+            "en": "with its score",
+            "bn": "স্কোরসহ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "trace",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "1–5%",
+          "bn": "১–৫%"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Red team",
+        "title": "Red teaming",
+        "body": [
+          "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them monthly, and track the failure rate."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Treat any new failure as a bug to fix in the system prompt or guardrail."
+        }
+      },
+      "bn": {
+        "short": "রেড টিম",
+        "title": "রেড টিমিং",
+        "body": [
+          "আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। মাসে একবার চালান, আর ব্যর্থতার হার ট্র্যাক করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "যেকোনো নতুন ব্যর্থতা সিস্টেম প্রম্পট বা গার্ডরেইলে ঠিক করার বাগ হিসেবে দেখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "attacks",
+          "state": "hot",
+          "sub": {
+            "en": "run monthly",
+            "bn": "মাসে একবার"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "under attack",
+            "bn": "আক্রমণের মুখে"
+          }
+        },
+        {
+          "id": "result",
+          "state": "hot",
+          "sub": {
+            "en": "failure rate",
+            "bn": "ব্যর্থতার হার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "attacks",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "result",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "monthly",
+          "bn": "মাসিক"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Evaluation engineering turns “the model feels worse today” into numbers, then turns the numbers into a CI signal that gates every prompt or model change."
+        ],
+        "points": [
+          "Build a golden dataset, grow it from real failures, and block the release if accuracy drops below the threshold.",
+          "Pairwise judging beats absolute scoring, because relative judgements are easier than absolute ones.",
+          "For agents, check how the answer was reached, not only whether the final answer is right.",
+          "Always check synthetic questions for contamination (questions that copy the training data), or you test memorization instead of capability."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং “মডেল আজ খারাপ লাগছে” কথাটাকে সংখ্যায় বদলায়। তারপর সেই সংখ্যাকে CI-র সিগন্যাল বানায়, যা প্রতিটা প্রম্পট বা মডেল বদলানোর আগে পরীক্ষা করে।"
+        ],
+        "points": [
+          "গোল্ডেন ডেটাসেট বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর অ্যাকুরেসি (accuracy) সীমার নিচে নামলে রিলিজ আটকে দিন।",
+          "পেয়ারওয়াইজ বিচার পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।",
+          "এজেন্টের ক্ষেত্রে শুধু চূড়ান্ত উত্তর নয়, উত্তরে কীভাবে পৌঁছেছে সেটাও দেখুন।",
+          "সিনথেটিক প্রশ্নে কন্টামিনেশন (contamination) (ট্রেনিং ডেটার নকল প্রশ্ন) সবসময় যাচাই করুন, নইলে সক্ষমতার বদলে মুখস্থ বিদ্যার পরীক্ষা হয়ে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "golden"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "ci"
+        }
+      ],
+      "links": [
+        {
+          "from": "golden",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "ci",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
