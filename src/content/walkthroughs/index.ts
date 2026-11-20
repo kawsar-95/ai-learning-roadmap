@@ -26,6 +26,7 @@ import safetySecurityAndGuardrailsS7 from "./safety-security-and-guardrails/s7.j
 import multimodalEngineeringS8 from "./multimodal-engineering/s8.json";
 import aiApplicationArchitectureS9 from "./ai-application-architecture/s9.json";
 import visualLearningResourcesS11 from "./visual-learning-resources/s11.json";
+import aiEngineeringBookCh6 from "./ai-engineering-book/ch6.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -83,5 +84,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "visual-learning-resources": {
     s11: visualLearningResourcesS11,
+  },
+  "ai-engineering-book": {
+    ch6: aiEngineeringBookCh6,
   },
 };
