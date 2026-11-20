@@ -1,0 +1,814 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "doc",
+      "kind": "file",
+      "label": {
+        "en": "Document",
+        "bn": "ডকুমেন্ট"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "schema",
+      "kind": "lock",
+      "label": {
+        "en": "Strict schema",
+        "bn": "কড়া স্কিমা"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "limit",
+      "kind": "clock",
+      "label": {
+        "en": "Rate limit",
+        "bn": "রেট লিমিট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool calls",
+        "bn": "টুল কল"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "out",
+      "kind": "browser",
+      "label": {
+        "en": "Output",
+        "bn": "আউটপুট"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "guard",
+      "kind": "shield",
+      "label": {
+        "en": "Guard",
+        "bn": "গার্ড"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "evil",
+      "kind": "server",
+      "label": {
+        "en": "Attacker",
+        "bn": "আক্রমণকারী"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "log",
+      "kind": "storage",
+      "label": {
+        "en": "Audit log",
+        "bn": "অডিট লগ"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "OWASP 2025",
+      "bn": "OWASP ২০২৫"
+    },
+    {
+      "en": "100% safety",
+      "bn": "১০০% সেফটি"
+    },
+    {
+      "en": "Retries",
+      "bn": "রিট্রাই"
+    }
+  ],
+  "caption": {
+    "en": "An AI app can be attacked through the prompt, the tool calls, and the output. Safety is the work of limiting those risks.",
+    "bn": "AI অ্যাপকে প্রম্পট, টুল কল আর আউটপুটের মধ্য দিয়ে আক্রমণ করা যায়। সেফটি হলো সেই ঝুঁকিগুলো সীমার মধ্যে রাখার কাজ।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Surface",
+        "title": "A new attack surface",
+        "body": [
+          "An AI app can be attacked in new ways: through the prompt, the tool calls, and the output. Safety is the work of limiting those risks.",
+          "The prompt is now user-influenced input, the tool calls are now an exfiltration channel, and the rendered output is now a script-execution context."
+        ]
+      },
+      "bn": {
+        "short": "ঝুঁকির জায়গা",
+        "title": "আক্রমণের নতুন জায়গা",
+        "body": [
+          "AI অ্যাপকে নতুন উপায়ে আক্রমণ করা যায়: প্রম্পট, টুল কল আর আউটপুটের মধ্য দিয়ে। সেফটি হলো সেই ঝুঁকিগুলো সীমার মধ্যে রাখার কাজ।",
+          "প্রম্পট এখন ইউজারের প্রভাবে বদলায়, টুল কল এখন ডেটা বের করে নেওয়ার পথ, আর রেন্ডার করা আউটপুট এখন স্ক্রিপ্ট চলার জায়গা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "the prompt",
+            "bn": "প্রম্পট"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "warn",
+          "sub": {
+            "en": "data can leave",
+            "bn": "ডেটা বেরোয়"
+          }
+        },
+        {
+          "id": "out",
+          "state": "warn",
+          "sub": {
+            "en": "runs scripts",
+            "bn": "স্ক্রিপ্ট চলে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "out",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Injection",
+        "title": "Prompt injection",
+        "body": [
+          "Prompt injection is when user-controlled text hijacks the model's behavior. Direct: the user types the attack. Indirect: the user plants malicious text in a document the model will read."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Indirect injection is the harder one because the user doesn't even need to interact with your system."
+        }
+      },
+      "bn": {
+        "short": "ইনজেকশন",
+        "title": "প্রম্পট ইনজেকশন",
+        "body": [
+          "প্রম্পট ইনজেকশন হলো ইউজারের নিয়ন্ত্রণে থাকা টেক্সট মডেলের আচরণ দখল করে নেওয়া। প্রত্যক্ষ: ইউজার নিজেই আক্রমণ টাইপ করে। পরোক্ষ: ইউজার মডেলের পড়া ডকুমেন্টে ক্ষতিকর টেক্সট রোপণ করে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "পরোক্ষ ইনজেকশন বেশি কঠিন, কারণ আক্রমণকারীকে আপনার সিস্টেম ব্যবহারই করতে হয় না।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "attacker",
+            "bn": "আক্রমণকারী"
+          }
+        },
+        {
+          "id": "doc",
+          "state": "warn",
+          "sub": {
+            "en": "planted text",
+            "bn": "রোপণ করা টেক্সট"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "user",
+          "to": "doc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "doc",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Jailbreak",
+        "title": "Jailbreaks",
+        "body": [
+          "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training. They're a moving target: red teams find new ones monthly.",
+          "Defenses: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable."
+        ]
+      },
+      "bn": {
+        "short": "জেইলব্রেক",
+        "title": "জেইলব্রেক",
+        "body": [
+          "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়। এগুলো একটি চলমান লক্ষ্য: রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়।",
+          "প্রতিরক্ষা: Constitutional AI ফাইন-টিউনিং, আউটপুট ক্লাসিফায়ার, মজবুত সিস্টেম প্রম্পট। ১০০% সেফটি অর্জনযোগ্য নয়, এটি মেনে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "creative rewrite",
+            "bn": "সৃজনশীল পুনর্লিখন"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "safety training",
+            "bn": "সেফটি ট্রেনিং"
+          }
+        },
+        {
+          "id": "guard",
+          "state": "hot",
+          "sub": {
+            "en": "output classifier",
+            "bn": "আউটপুট ক্লাসিফায়ার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "model",
+          "to": "guard",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "unachievable",
+          "bn": "অর্জনযোগ্য নয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Exfiltrate",
+        "title": "Data leaves through tools and links",
+        "body": [
+          "Once the model can call tools or render Markdown, a prompt-injected output can call a tool with attacker-chosen arguments, or render a Markdown image whose src URL encodes the user's session.",
+          "The OWASP LLM Top 10 ranks prompt injection, the cause of this attack, #1 in 2025."
+        ]
+      },
+      "bn": {
+        "short": "ডেটা বেরোনো",
+        "title": "টুল আর লিংক দিয়ে ডেটা বেরোয়",
+        "body": [
+          "মডেল একবার টুল কল করতে বা Markdown রেন্ডার করতে পারলে প্রম্পট-ইনজেক্টেড আউটপুট আক্রমণকারীর বেছে দেওয়া আর্গুমেন্ট সহ টুল কল করতে পারে, অথবা এমন Markdown ছবি রেন্ডার করতে পারে, যার src URL ইউজারের সেশন এনকোড করে।",
+          "এই আক্রমণের মূলে আছে প্রম্পট ইনজেকশন, আর OWASP LLM Top ১০ সেটিকে ২০২৫-এ #১ হিসেবে তালিকাভুক্ত করেছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "tool",
+          "state": "warn",
+          "sub": {
+            "en": "attacker's choice",
+            "bn": "আক্রমণকারীর পছন্দ"
+          },
+          "x": 380,
+          "y": 75
+        },
+        {
+          "id": "out",
+          "state": "warn",
+          "sub": {
+            "en": "session in URL",
+            "bn": "URL-এ সেশন"
+          },
+          "x": 380,
+          "y": 250
+        },
+        {
+          "id": "evil",
+          "state": "warn",
+          "sub": {
+            "en": "gets the data",
+            "bn": "ডেটা পায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "tool",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "model",
+          "to": "out",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "tool",
+          "to": "evil",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "out",
+          "to": "evil",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "#1",
+          "bn": "#১"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Screens",
+        "title": "Screen the text in and out",
+        "body": [
+          "Content moderation checks text for harmful content, such as hate, sexual content, violence, and self-harm. Run it on both the input and the output.",
+          "PII redaction removes personal details from the text before the model sees it, and again before the reply is shown."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "OpenAI moderation endpoint: a free, fast, multi-category classifier"
+          },
+          {
+            "sign": "+",
+            "html": "Llama Guard: an open-weight guard model, a drop-in classifier for input and output"
+          },
+          {
+            "sign": "+",
+            "html": "Microsoft Presidio and spaCy: PII detectors"
+          }
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "ঢোকা আর বেরোনো লেখা যাচাই",
+        "body": [
+          "কনটেন্ট মডারেশন টেক্সটে ক্ষতিকর বিষয় আছে কি না যাচাই করে, যেমন ঘৃণা, যৌনতা, সহিংসতা, আত্মক্ষতি। ইনপুট আর আউটপুট দুটোতেই চালান।",
+          "PII রিড্যাকশন মডেল দেখার আগে, আর উত্তর দেখানোর আগেও, লেখা থেকে ব্যক্তিগত তথ্য সরিয়ে ফেলে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "OpenAI মডারেশন এন্ডপয়েন্ট: ফ্রি, দ্রুত, বহু-বিভাগীয় ক্লাসিফায়ার"
+          },
+          {
+            "sign": "+",
+            "html": "Llama Guard: ওপেন-ওয়েট গার্ড মডেল, ইনপুট আর আউটপুটের জন্য সরাসরি বসানো ক্লাসিফায়ার"
+          },
+          {
+            "sign": "+",
+            "html": "Microsoft Presidio আর spaCy: PII ডিটেক্টর"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "guard",
+          "state": "hot",
+          "sub": {
+            "en": "moderation, PII",
+            "bn": "মডারেশন, PII"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "guard",
+          "flow": "both",
+          "state": "hot"
+        },
+        {
+          "from": "guard",
+          "to": "model",
+          "flow": "both",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rails",
+        "title": "Rails and strict schemas",
+        "body": [
+          "Never trust an LLM to emit valid JSON. Parse with a strict schema (Pydantic, Zod); on failure, retry once, then refuse.",
+          "Treat malformed output as a security event, not just a bug."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "NeMo Guardrails (NVIDIA): programmable rails for topics, actions, and structured output"
+          },
+          {
+            "sign": "+",
+            "html": "Guardrails AI: validators (PII regex, profanity, factuality, JSON schema) you compose around any LLM call"
+          }
+        ]
+      },
+      "bn": {
+        "short": "রেইল",
+        "title": "রেইল আর কড়া স্কিমা",
+        "body": [
+          "ভ্যালিড JSON দেওয়ার জন্য LLM-কে কখনো বিশ্বাস করবেন না। একটি কড়া স্কিমা (Pydantic, Zod) দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই, তারপর রিফিউজ।",
+          "ম্যালফর্মড আউটপুটকে শুধু বাগ নয়, সিকিউরিটি ইভেন্ট হিসেবে দেখুন।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "NeMo Guardrails (NVIDIA): বিষয়, অ্যাকশন আর কাঠামোবদ্ধ আউটপুটের জন্য প্রোগ্রামযোগ্য রেইল"
+          },
+          {
+            "sign": "+",
+            "html": "Guardrails AI: যেকোনো LLM কলের চারপাশে বসানোর ভ্যালিডেটর (PII রেজেক্স, প্রোফেনিটি, ফ্যাক্চুয়ালিটি, JSON স্কিমা)"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "schema",
+          "state": "hot",
+          "sub": {
+            "en": "parse strictly",
+            "bn": "কড়া পার্স"
+          }
+        },
+        {
+          "id": "out",
+          "state": "hot",
+          "sub": {
+            "en": "valid output",
+            "bn": "বৈধ আউটপুট"
+          },
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "schema",
+          "flow": "both",
+          "state": "hot",
+          "label": {
+            "en": "retry once",
+            "bn": "আরেকবার"
+          }
+        },
+        {
+          "from": "schema",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "once",
+          "bn": "একবার"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Rate limits against abuse",
+        "body": [
+          "Set per-user token budgets per day, per-IP request limits, jailbreak-attempt counters, and cost-based alarms.",
+          "Without these, a single user (or a single prompt-injection botnet) can burn budget or trigger a bill spike."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "অপব্যবহার ঠেকাতে রেট লিমিট",
+        "body": [
+          "প্রতি-ইউজার দৈনিক টোকেন বাজেট, প্রতি-IP রিকোয়েস্ট সীমা, জেইলব্রেক-চেষ্টার কাউন্টার আর খরচ-ভিত্তিক অ্যালার্ম রাখুন।",
+          "এগুলো না থাকলে একজন ইউজার (বা একটি প্রম্পট-ইনজেকশন বটনেট) বাজেট পুড়িয়ে ফেলতে বা বিল হঠাৎ বাড়িয়ে দিতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "one bot",
+            "bn": "একটি বট"
+          }
+        },
+        {
+          "id": "limit",
+          "state": "hot",
+          "sub": {
+            "en": "token budgets",
+            "bn": "টোকেন বাজেট"
+          }
+        },
+        {
+          "id": "model",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "limit",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "limit",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Audit log",
+        "title": "Audit logging",
+        "body": [
+          "Log every prompt, every model output, every tool call, every approval decision, and every redacted PII."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "SOC 2, HIPAA, and EU AI Act conformance all require this. Treat your LLM as a regulated component."
+        }
+      },
+      "bn": {
+        "short": "অডিট লগ",
+        "title": "অডিট লগিং",
+        "body": [
+          "প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত আর প্রতিটি রিড্যাক্ট করা PII লগ করুন।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "SOC ২, HIPAA, EU AI Act-এর সম্মতি সবকিছুর জন্য এটি দরকার। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "every prompt",
+            "bn": "প্রতিটি প্রম্পট"
+          },
+          "x": 110,
+          "y": 75
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "every output",
+            "bn": "প্রতিটি আউটপুট"
+          },
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "every call",
+            "bn": "প্রতিটি কল"
+          },
+          "x": 110,
+          "y": 250
+        },
+        {
+          "id": "log",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "An AI app can be attacked in new ways, through the prompt, the tool calls, and the output. Safety is the work of limiting those risks."
+        ],
+        "points": [
+          "Indirect injection is the harder kind, because the attacker never needs to use your system.",
+          "Prompt injection, ranked #1 in the OWASP LLM Top 10 for 2025, can make tools or Markdown leak user data.",
+          "Accept that 100% safety is unachievable. Jailbreaks are a moving target.",
+          "Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
+          "Log every prompt, output, and tool call. SOC 2, HIPAA, and the EU AI Act require it."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "AI অ্যাপকে নতুন উপায়ে আক্রমণ করা যায়: প্রম্পট, টুল কল আর আউটপুটের মধ্য দিয়ে। সেফটি হলো সেই ঝুঁকিগুলো সীমার মধ্যে রাখার কাজ।"
+        ],
+        "points": [
+          "পরোক্ষ ইনজেকশন বেশি কঠিন, কারণ আক্রমণকারীকে আপনার সিস্টেম ব্যবহারই করতে হয় না।",
+          "২০২৫-এর OWASP LLM Top 10-এ #১ স্থানে থাকা প্রম্পট ইনজেকশন টুল বা Markdown দিয়ে ইউজারের ডেটা বাইরে পাঠাতে পারে।",
+          "১০০% সেফটি অর্জনযোগ্য নয়, এটা মেনে নিন। জেইলব্রেক একটি চলমান লক্ষ্য।",
+          "LLM-এর ভ্যালিড JSON দেওয়ার ওপর কখনো ভরসা করবেন না। কড়া স্কিমা দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই করুন, তারপর রিফিউজ করুন।",
+          "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC ২, HIPAA আর EU AI Act-এ এটা দরকার।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "guard",
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "model",
+          "x": 650,
+          "y": 162
+        },
+        {
+          "id": "log",
+          "x": 380,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "guard",
+          "flow": "both"
+        },
+        {
+          "from": "guard",
+          "to": "model",
+          "flow": "both"
+        },
+        {
+          "from": "model",
+          "to": "log",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
