@@ -23,6 +23,7 @@ import llmopsAndObservabilityS4 from "./llmops-and-observability/s4.json";
 import evaluationEngineeringS5 from "./evaluation-engineering/s5.json";
 import costAndPerformanceOptimizationS6 from "./cost-and-performance-optimization/s6.json";
 import safetySecurityAndGuardrailsS7 from "./safety-security-and-guardrails/s7.json";
+import multimodalEngineeringS8 from "./multimodal-engineering/s8.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -71,5 +72,8 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "safety-security-and-guardrails": {
     s7: safetySecurityAndGuardrailsS7,
+  },
+  "multimodal-engineering": {
+    s8: multimodalEngineeringS8,
   },
 };
