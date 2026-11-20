@@ -1,0 +1,635 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "client",
+      "kind": "user",
+      "label": {
+        "en": "Client",
+        "bn": "ক্লায়েন্ট"
+      },
+      "x": 76,
+      "y": 162
+    },
+    {
+      "id": "dns",
+      "kind": "dns",
+      "label": {
+        "en": "DNS",
+        "bn": "DNS"
+      },
+      "x": 228,
+      "y": 162
+    },
+    {
+      "id": "tcp",
+      "kind": "server",
+      "label": {
+        "en": "TCP",
+        "bn": "TCP"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tls",
+      "kind": "lock",
+      "label": {
+        "en": "TLS",
+        "bn": "TLS"
+      },
+      "x": 532,
+      "y": 162
+    },
+    {
+      "id": "http",
+      "kind": "service",
+      "label": {
+        "en": "HTTP",
+        "bn": "HTTP"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "proxy",
+      "kind": "balancer",
+      "label": {
+        "en": "Proxy",
+        "bn": "প্রক্সি"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "model",
+      "label": {
+        "en": "Model API",
+        "bn": "মডেল API"
+      },
+      "x": 682,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Layer",
+      "bn": "স্তর"
+    },
+    {
+      "en": "What you see",
+      "bn": "যা দেখা যায়"
+    },
+    {
+      "en": "Retry on",
+      "bn": "রিট্রাই করুন"
+    }
+  ],
+  "caption": {
+    "en": "One call to a model API passes through several steps in a fixed order. Knowing that request path tells you where to look when a call fails.",
+    "bn": "একটি মডেল API কল নির্দিষ্ট ক্রমে কয়েকটা ধাপ পেরিয়ে যায়। এই রিকোয়েস্ট পাথ জানলে কল ব্যর্থ হলে কোথায় দেখতে হবে বোঝা যায়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Path",
+        "title": "The path of one request",
+        "body": [
+          "One call to a model API passes through several steps in a fixed order. Knowing that request path tells you where to look when a call fails.",
+          "The order is DNS, TCP, TLS, then HTTP."
+        ]
+      },
+      "bn": {
+        "short": "পথ",
+        "title": "একটি রিকোয়েস্টের পথ",
+        "body": [
+          "একটি মডেল API কল নির্দিষ্ট ক্রমে কয়েকটা ধাপ পেরিয়ে যায়। এই রিকোয়েস্ট পাথ জানলে কল ব্যর্থ হলে কোথায় দেখতে হবে বোঝা যায়।",
+          "ক্রমটা হলো DNS, TCP, TLS, তারপর HTTP।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot"
+        },
+        {
+          "id": "dns",
+          "state": "hot"
+        },
+        {
+          "id": "tcp",
+          "state": "hot"
+        },
+        {
+          "id": "tls",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "then HTTP",
+            "bn": "তারপর HTTP"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "dns",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dns",
+          "to": "tcp",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tcp",
+          "to": "tls",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tls",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "DNS",
+        "title": "Look up the name",
+        "body": [
+          "DNS turns the name (api.example.com) into an IP address."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A typical failure: the name does not resolve or points to the wrong place."
+        }
+      },
+      "bn": {
+        "short": "DNS",
+        "title": "নামটা খুঁজে নিন",
+        "body": [
+          "DNS api.example.com-এর মতো নামকে IP ঠিকানায় বদলে দেয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সাধারণ ব্যর্থতা: নামটা রিজলভ হয় না, বা ভুল জায়গায় নির্দেশ করে।"
+        }
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "dns",
+          "state": "warn",
+          "x": 380
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "dns",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "dns",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "DNS",
+          "bn": "DNS"
+        },
+        {
+          "en": "could not resolve host",
+          "bn": "could not resolve host"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "TCP",
+        "title": "Open a connection",
+        "body": [
+          "TCP opens a connection to that address and port."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A typical failure: the port is closed or a firewall drops packets. You see “connection refused” or a timeout."
+        }
+      },
+      "bn": {
+        "short": "TCP",
+        "title": "সংযোগ খুলুন",
+        "body": [
+          "TCP সেই ঠিকানা আর পোর্টে একটি সংযোগ খোলে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সাধারণ ব্যর্থতা: পোর্ট বন্ধ, বা ফায়ারওয়াল প্যাকেট ফেলে দেয়। আপনি দেখেন “connection refused” বা একটি টাইমআউট।"
+        }
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "tcp",
+          "state": "warn"
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "tcp",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "tcp",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "TCP",
+          "bn": "TCP"
+        },
+        {
+          "en": "connection refused",
+          "bn": "connection refused"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "TLS",
+        "title": "Encrypt the connection",
+        "body": [
+          "TLS encrypts the connection and checks the server's certificate."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A typical failure: an expired or untrusted certificate, or a wrong clock."
+        }
+      },
+      "bn": {
+        "short": "TLS",
+        "title": "সংযোগ এনক্রিপ্ট করুন",
+        "body": [
+          "TLS সংযোগ এনক্রিপ্ট করে আর সার্ভারের সার্টিফিকেট যাচাই করে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সাধারণ ব্যর্থতা: মেয়াদ-উত্তীর্ণ বা অবিশ্বস্ত সার্টিফিকেট, বা ভুল ঘড়ি।"
+        }
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "tls",
+          "state": "warn",
+          "x": 380
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "tls",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "tls",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "TLS",
+          "bn": "TLS"
+        },
+        {
+          "en": "Certificate errors",
+          "bn": "সার্টিফিকেট এরর"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "HTTP",
+        "title": "Send the request",
+        "body": [
+          "HTTP sends the request and returns a status code."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A typical failure: a bad request, missing credentials, or a rate limit."
+        }
+      },
+      "bn": {
+        "short": "HTTP",
+        "title": "রিকোয়েস্ট পাঠান",
+        "body": [
+          "HTTP রিকোয়েস্ট পাঠায় আর একটি স্ট্যাটাস কোড ফেরত দেয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সাধারণ ব্যর্থতা: ভুল রিকোয়েস্ট, ক্রেডেনশিয়াল না থাকা, বা রেট লিমিট।"
+        }
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "http",
+          "state": "warn"
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "http",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "http",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "HTTP",
+          "bn": "HTTP"
+        },
+        {
+          "en": "Status 400, 401, 429",
+          "bn": "স্ট্যাটাস ৪০০, ৪০১, ৪২৯"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Proxy",
+        "title": "A machine in the middle",
+        "body": [
+          "A proxy or load balancer in between forwards the request to a healthy server."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A typical failure: buffering, a short idle timeout, or no healthy server. You see cut-off streams."
+        }
+      },
+      "bn": {
+        "short": "প্রক্সি",
+        "title": "মাঝখানের মেশিন",
+        "body": [
+          "মাঝখানের প্রক্সি বা লোড ব্যালান্সার অনুরোধটা একটি সুস্থ সার্ভারে পাঠায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সাধারণ ব্যর্থতা: বাফারিং, ছোট idle timeout, বা কোনো সুস্থ সার্ভার না থাকা। আপনি দেখেন কেটে যাওয়া স্ট্রিম।"
+        }
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "proxy",
+          "state": "warn",
+          "sub": {
+            "en": "or load balancer",
+            "bn": "বা লোড ব্যালান্সার"
+          }
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "proxy",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "proxy",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "Proxy",
+          "bn": "প্রক্সি"
+        },
+        {
+          "en": "502 or 504",
+          "bn": "৫০২ বা ৫০৪"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Streaming",
+        "title": "Streaming answers",
+        "body": [
+          "A streamed answer arrives as server-sent events, a long-lived HTTP response. A reverse proxy that buffers the response holds the tokens back until the end, and a load balancer with a short idle timeout cuts a long generation in the middle.",
+          "Turn buffering off for the streaming route (in nginx, <code>proxy_buffering off;</code>) and set timeouts longer than your slowest answer."
+        ]
+      },
+      "bn": {
+        "short": "স্ট্রিমিং",
+        "title": "স্ট্রিমিং উত্তর",
+        "body": [
+          "স্ট্রিমিং উত্তর আসে server-sent events হয়ে, মানে একটা দীর্ঘ HTTP রেসপন্স। প্রক্সি রেসপন্স বাফার করলে টোকেন শেষে একসাথে আসে, আর লোড ব্যালান্সারের idle timeout ছোট হলে লম্বা উত্তর মাঝপথে কেটে যায়।",
+          "স্ট্রিমিং রুটে বাফারিং বন্ধ করুন (nginx-এ <code>proxy_buffering off;</code>) আর timeout সবচেয়ে ধীর উত্তরের চেয়ে বড় রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "proxy",
+          "state": "warn",
+          "sub": {
+            "en": "holds tokens back",
+            "bn": "টোকেন আটকে রাখে"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "api",
+          "to": "proxy",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "proxy",
+          "to": "client",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Retries",
+        "title": "Retry with backoff",
+        "body": [
+          "Retry with backoff on 429 and 5xx. Wait, then try again with a growing delay and a little randomness.",
+          "Do not retry in a tight loop, and retry only requests that are safe to repeat."
+        ]
+      },
+      "bn": {
+        "short": "রিট্রাই",
+        "title": "ব্যাকঅফ দিয়ে রিট্রাই",
+        "body": [
+          "৪২৯ বা ৫xx পেলে একটু অপেক্ষা করে আবার চেষ্টা করুন, প্রতিবার অপেক্ষা বাড়িয়ে আর একটু এলোমেলো করে।",
+          "ঘন ঘন লুপে চেষ্টা করবেন না, আর শুধু সেই অনুরোধই আবার পাঠান যা দুবার চালালে ক্ষতি নেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "both",
+          "state": "warn",
+          "label": {
+            "en": "backoff",
+            "bn": "ব্যাকঅফ"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "429 and 5xx",
+          "bn": "৪২৯ ও ৫xx"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "One call to a model API passes through several steps in a fixed order. Knowing that request path tells you where to look when a call fails."
+        ],
+        "points": [
+          "The order is DNS, TCP, TLS, then HTTP; a proxy or load balancer sits in between and forwards the request.",
+          "A proxy that buffers (saves up the answer) holds tokens back, and a short idle timeout cuts long answers.",
+          "For streaming, turn buffering off and set timeouts longer than your slowest answer.",
+          "Retry with backoff on 429 (rate limit) and 5xx (server errors), and only for requests that are safe to repeat."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একটি মডেল API কল নির্দিষ্ট ক্রমে কয়েকটা ধাপ পেরিয়ে যায়। এই রিকোয়েস্ট পাথ জানলে কল ব্যর্থ হলে কোথায় দেখতে হবে বোঝা যায়।"
+        ],
+        "points": [
+          "ক্রমটা হলো DNS, TCP, TLS, তারপর HTTP; মাঝখানে বসা প্রক্সি বা লোড ব্যালান্সার অনুরোধটা এগিয়ে দেয়।",
+          "যে প্রক্সি বাফার করে (মানে উত্তর জমিয়ে রাখে), সে টোকেন আটকে রাখে, আর ছোট idle timeout লম্বা উত্তর কেটে দেয়।",
+          "স্ট্রিমিংয়ে বাফারিং বন্ধ করুন আর timeout সবচেয়ে ধীর উত্তরের চেয়ে বড় রাখুন।",
+          "৪২৯ (রেট লিমিট) আর ৫xx (সার্ভার এরর) পেলে ব্যাকঅফ দিয়ে আবার চেষ্টা করুন, শুধু যে অনুরোধ দুবার চালালে ক্ষতি নেই তার জন্য।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "proxy"
+        },
+        {
+          "id": "api"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "proxy",
+          "flow": "to"
+        },
+        {
+          "from": "proxy",
+          "to": "api",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

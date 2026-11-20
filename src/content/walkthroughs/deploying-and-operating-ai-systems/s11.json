@@ -1,0 +1,688 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "you",
+      "kind": "user",
+      "label": {
+        "en": "You",
+        "bn": "আপনি"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "app",
+      "kind": "service",
+      "label": {
+        "en": "AI service",
+        "bn": "AI সার্ভিস"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "GPU",
+        "bn": "GPU"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "metrics",
+      "kind": "chart",
+      "label": {
+        "en": "Metrics",
+        "bn": "মেট্রিক"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "logs",
+      "kind": "file",
+      "label": {
+        "en": "Logs",
+        "bn": "লগ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "traces",
+      "kind": "clock",
+      "label": {
+        "en": "Traces",
+        "bn": "ট্রেস"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "prom",
+      "kind": "database",
+      "label": {
+        "en": "Prometheus",
+        "bn": "Prometheus"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "grafana",
+      "kind": "chart",
+      "label": {
+        "en": "Grafana",
+        "bn": "Grafana"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "otel",
+      "kind": "tool",
+      "label": {
+        "en": "OpenTelemetry",
+        "bn": "OpenTelemetry"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "dcgm",
+      "kind": "tool",
+      "label": {
+        "en": "DCGM exporter",
+        "bn": "DCGM exporter"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "alert",
+      "kind": "shield",
+      "label": {
+        "en": "Alert",
+        "bn": "অ্যালার্ট"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Signals",
+      "bn": "সংকেত"
+    },
+    {
+      "en": "Golden signals",
+      "bn": "golden signal"
+    },
+    {
+      "en": "Alert on",
+      "bn": "অ্যালার্ট দিন"
+    }
+  ],
+  "caption": {
+    "en": "Observability means you can ask a running system why it behaves as it does, using the data it sends out.",
+    "bn": "অবজার্ভেবিলিটি মানে চলমান সিস্টেম নিজে যে ডেটা পাঠায় তা দিয়ে জিজ্ঞেস করতে পারা যে সে কেন এমন আচরণ করছে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Observe",
+        "title": "Ask the system why",
+        "body": [
+          "Observability means you can ask a running system why it behaves as it does, using the data it sends out.",
+          "An AI service uses the ordinary tools, plus a few numbers for models and GPUs."
+        ]
+      },
+      "bn": {
+        "short": "পর্যবেক্ষণ",
+        "title": "সিস্টেমকে জিজ্ঞেস করুন কেন",
+        "body": [
+          "অবজার্ভেবিলিটি মানে চলমান সিস্টেম নিজে যে ডেটা পাঠায় তা দিয়ে জিজ্ঞেস করতে পারা যে সে কেন এমন আচরণ করছে।",
+          "AI সার্ভিসে সাধারণ টুলই লাগে, সঙ্গে মডেল আর GPU-র কিছু বিশেষ সংখ্যা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot",
+          "sub": {
+            "en": "asks why",
+            "bn": "কেন জিজ্ঞেস করে"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "sends out data",
+            "bn": "ডেটা পাঠায়"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "you",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "data it sends out",
+            "bn": "পাঠানো ডেটা"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Signals",
+        "title": "Three signals",
+        "body": [
+          "The three signals are metrics (numbers over time), logs (events) and traces (the path of one request through the system)."
+        ]
+      },
+      "bn": {
+        "short": "সংকেত",
+        "title": "তিনটি সংকেত",
+        "body": [
+          "তিনটে সংকেত: মেট্রিক (সময়ের সাথে সংখ্যা), লগ (ঘটনা) আর ট্রেস (একটা অনুরোধ সিস্টেমের ভেতর দিয়ে যে পথে যায়)।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "metrics",
+          "state": "hot",
+          "sub": {
+            "en": "numbers over time",
+            "bn": "সময়ের সাথে সংখ্যা"
+          }
+        },
+        {
+          "id": "logs",
+          "state": "hot",
+          "sub": {
+            "en": "events",
+            "bn": "ঘটনা"
+          }
+        },
+        {
+          "id": "traces",
+          "state": "hot",
+          "sub": {
+            "en": "path of one request",
+            "bn": "একটা অনুরোধের পথ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "metrics",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "traces",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "three",
+          "bn": "তিনটি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Metrics",
+        "title": "Numbers over time",
+        "body": [
+          "Metrics are numbers measured over time. They show that something changed, and they are good for trends, alerts and capacity.",
+          "Prometheus scrapes numbers from your services and stores them; Grafana draws dashboards."
+        ]
+      },
+      "bn": {
+        "short": "মেট্রিক",
+        "title": "সময়ের সাথে সংখ্যা",
+        "body": [
+          "মেট্রিক হলো সময়ের সাথে মাপা সংখ্যা। এগুলো দেখায় কিছু বদলেছে, আর ট্রেন্ড, অ্যালার্ট ও ক্যাপাসিটির জন্য ভালো।",
+          "Prometheus সার্ভিস থেকে সংখ্যা তুলে জমা রাখে, Grafana ড্যাশবোর্ড আঁকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "prom",
+          "state": "hot",
+          "sub": {
+            "en": "scrapes and stores",
+            "bn": "তুলে জমা রাখে"
+          }
+        },
+        {
+          "id": "grafana",
+          "state": "hot",
+          "sub": {
+            "en": "draws dashboards",
+            "bn": "ড্যাশবোর্ড আঁকে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "prom",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "prom",
+          "to": "grafana",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Logs, traces",
+        "title": "Detail and path",
+        "body": [
+          "Logs are records of events, good for the detail of one failure. Loki and Elasticsearch are tools you will meet.",
+          "Traces follow one request through the system, good for seeing where one slow request spent its time. OpenTelemetry produces them; Jaeger and Tempo show them."
+        ]
+      },
+      "bn": {
+        "short": "লগ, ট্রেস",
+        "title": "খুঁটিনাটি আর পথ",
+        "body": [
+          "লগ ঘটনার রেকর্ড, একটা ব্যর্থতার খুঁটিনাটির জন্য ভালো। Loki আর Elasticsearch এমন টুল, যা আপনি দেখবেন।",
+          "ট্রেস একটা অনুরোধকে সিস্টেমের ভেতর দিয়ে অনুসরণ করে, ধীর অনুরোধ কোথায় সময় কাটিয়েছে তা দেখতে ভালো। OpenTelemetry ট্রেস তৈরি করে; Jaeger আর Tempo সেগুলো দেখায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "logs",
+          "state": "hot",
+          "sub": {
+            "en": "Loki, Elasticsearch",
+            "bn": "Loki, Elasticsearch"
+          },
+          "y": 75
+        },
+        {
+          "id": "otel",
+          "state": "hot",
+          "sub": {
+            "en": "produces traces",
+            "bn": "ট্রেস তৈরি করে"
+          }
+        },
+        {
+          "id": "traces",
+          "state": "hot",
+          "sub": {
+            "en": "Jaeger, Tempo",
+            "bn": "Jaeger, Tempo"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "otel",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "otel",
+          "to": "traces",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Golden",
+        "title": "The four golden signals",
+        "body": [
+          "Measure the four golden signals: latency, traffic, errors and saturation.",
+          "Saturation is how close a part of the system is to its limit, like a road so full that no more cars fit."
+        ]
+      },
+      "bn": {
+        "short": "গোল্ডেন",
+        "title": "চারটি golden signal",
+        "body": [
+          "চারটে golden signal মাপুন: latency, traffic, errors আর saturation।",
+          "স্যাচুরেশন হলো সিস্টেমের কোনো অংশ তার সীমার কত কাছে আছে, যেমন রাস্তা এত ভরা যে আর গাড়ি ঢোকার জায়গা নেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "metrics",
+          "state": "hot",
+          "sub": {
+            "en": "four golden signals",
+            "bn": "চারটি golden signal"
+          },
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "metrics",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "four",
+          "bn": "চারটি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "LLM numbers",
+        "title": "Numbers for an LLM service",
+        "body": [
+          "For an LLM service, also track:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Time to first token: how long a user waits before the first piece of the answer appears."
+          },
+          {
+            "sign": "+",
+            "html": "Tokens per second."
+          },
+          {
+            "sign": "+",
+            "html": "Queue length."
+          },
+          {
+            "sign": "+",
+            "html": "Cost per request."
+          }
+        ]
+      },
+      "bn": {
+        "short": "LLM সংখ্যা",
+        "title": "LLM সার্ভিসের সংখ্যা",
+        "body": [
+          "LLM সার্ভিসে এগুলোও দেখুন:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "প্রথম টোকেন আসতে সময়: উত্তরের প্রথম অংশ আসার আগে ব্যবহারকারীকে কতক্ষণ অপেক্ষা করতে হয়।"
+          },
+          {
+            "sign": "+",
+            "html": "প্রতি সেকেন্ডে টোকেন।"
+          },
+          {
+            "sign": "+",
+            "html": "কিউ কত লম্বা।"
+          },
+          {
+            "sign": "+",
+            "html": "প্রতি রিকোয়েস্টে খরচ।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "metrics",
+          "state": "hot",
+          "sub": {
+            "en": "plus LLM numbers",
+            "bn": "সাথে LLM সংখ্যা"
+          },
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "metrics",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GPUs",
+        "title": "GPU numbers",
+        "body": [
+          "For GPUs, NVIDIA's DCGM exporter publishes utilization, memory and temperature as Prometheus metrics."
+        ]
+      },
+      "bn": {
+        "short": "GPU",
+        "title": "GPU-র সংখ্যা",
+        "body": [
+          "GPU-র ব্যবহার, মেমরি আর তাপমাত্রা NVIDIA-র DCGM exporter Prometheus মেট্রিক হিসেবে প্রকাশ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gpu",
+          "state": "hot"
+        },
+        {
+          "id": "dcgm",
+          "state": "hot",
+          "sub": {
+            "en": "use, memory, temperature",
+            "bn": "ব্যবহার, মেমরি, তাপমাত্রা"
+          }
+        },
+        {
+          "id": "prom",
+          "state": "hot",
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "gpu",
+          "to": "dcgm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dcgm",
+          "to": "prom",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Alerts",
+        "title": "Alert on what users feel",
+        "body": [
+          "Alert on what users feel (error rate, slow answers), not on every internal cause."
+        ]
+      },
+      "bn": {
+        "short": "অ্যালার্ট",
+        "title": "ব্যবহারকারী যা টের পায় তাতে অ্যালার্ট",
+        "body": [
+          "ব্যবহারকারী যা টের পায় (এরর রেট, ধীর উত্তর) তার ওপর অ্যালার্ট দিন, প্রতিটি ভেতরের কারণে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "metrics",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "alert",
+          "state": "hot",
+          "sub": {
+            "en": "error rate, slow answers",
+            "bn": "এরর রেট, ধীর উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "metrics",
+          "to": "alert",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "What users feel",
+          "bn": "যা ব্যবহারকারী টের পায়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Observability means you can ask a running system why it behaves as it does, using the data it sends out. An AI service uses the ordinary tools, plus a few numbers for models and GPUs."
+        ],
+        "points": [
+          "The three signals are metrics, logs and traces.",
+          "Measure the four golden signals: latency, traffic, errors and saturation.",
+          "For an LLM service, also track time to first token, tokens per second, queue length and cost per request.",
+          "Alert on what users feel, such as error rate and slow answers, not on every internal cause."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "অবজার্ভেবিলিটি মানে চলমান সিস্টেম নিজে যে ডেটা পাঠায় তা দিয়ে জিজ্ঞেস করতে পারা যে সে কেন এমন আচরণ করছে। AI সার্ভিসে সাধারণ টুলই লাগে, সঙ্গে মডেল আর GPU-র কিছু বিশেষ সংখ্যা।"
+        ],
+        "points": [
+          "তিনটে সংকেত হলো মেট্রিক, লগ আর ট্রেস।",
+          "চারটে golden signal মাপুন: latency, traffic, errors আর saturation।",
+          "LLM সার্ভিসে প্রথম টোকেন আসতে সময়, প্রতি সেকেন্ডে টোকেন, কিউ কত লম্বা আর প্রতি রিকোয়েস্টে খরচও দেখুন।",
+          "ব্যবহারকারী যা টের পায় তার ওপর অ্যালার্ট দিন, যেমন এরর রেট আর ধীর উত্তর; প্রতিটি ভেতরের কারণে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "x": 90
+        },
+        {
+          "id": "metrics",
+          "x": 345,
+          "y": 162
+        },
+        {
+          "id": "alert",
+          "x": 635
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "metrics",
+          "flow": "to"
+        },
+        {
+          "from": "metrics",
+          "to": "alert",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

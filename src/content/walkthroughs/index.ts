@@ -27,6 +27,11 @@ import multimodalEngineeringS8 from "./multimodal-engineering/s8.json";
 import aiApplicationArchitectureS9 from "./ai-application-architecture/s9.json";
 import visualLearningResourcesS11 from "./visual-learning-resources/s11.json";
 import aiEngineeringBookCh6 from "./ai-engineering-book/ch6.json";
+import deployingAndOperatingAiSystemsS3 from "./deploying-and-operating-ai-systems/s3.json";
+import deployingAndOperatingAiSystemsS5 from "./deploying-and-operating-ai-systems/s5.json";
+import deployingAndOperatingAiSystemsS6 from "./deploying-and-operating-ai-systems/s6.json";
+import deployingAndOperatingAiSystemsS7 from "./deploying-and-operating-ai-systems/s7.json";
+import deployingAndOperatingAiSystemsS11 from "./deploying-and-operating-ai-systems/s11.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "llm-fundamentals": {
@@ -87,5 +92,12 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "ai-engineering-book": {
     ch6: aiEngineeringBookCh6,
+  },
+  "deploying-and-operating-ai-systems": {
+    s3: deployingAndOperatingAiSystemsS3,
+    s5: deployingAndOperatingAiSystemsS5,
+    s6: deployingAndOperatingAiSystemsS6,
+    s7: deployingAndOperatingAiSystemsS7,
+    s11: deployingAndOperatingAiSystemsS11,
   },
 };

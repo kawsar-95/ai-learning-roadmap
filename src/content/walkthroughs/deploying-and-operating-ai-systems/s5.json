@@ -1,0 +1,689 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "code",
+      "kind": "file",
+      "label": {
+        "en": "Your code",
+        "bn": "আপনার কোড"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "deps",
+      "kind": "cache",
+      "label": {
+        "en": "Dependencies",
+        "bn": "ডিপেন্ডেন্সি"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "dockerfile",
+      "kind": "note",
+      "label": {
+        "en": "Dockerfile",
+        "bn": "Dockerfile"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "secret",
+      "kind": "key",
+      "label": {
+        "en": "Secrets",
+        "bn": "সিক্রেট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "weights",
+      "kind": "model",
+      "label": {
+        "en": "Weights",
+        "bn": "ওয়েট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "image",
+      "kind": "storage",
+      "label": {
+        "en": "Image",
+        "bn": "ইমেজ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "volume",
+      "kind": "database",
+      "label": {
+        "en": "Volume",
+        "bn": "ভলিউম"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "toolkit",
+      "kind": "tool",
+      "label": {
+        "en": "NVIDIA toolkit",
+        "bn": "NVIDIA টুলকিট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "container",
+      "kind": "service",
+      "label": {
+        "en": "Container",
+        "bn": "কনটেইনার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "reader",
+      "kind": "user",
+      "label": {
+        "en": "Anyone",
+        "bn": "যে কেউ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "GPU",
+        "bn": "GPU"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "host",
+      "kind": "server",
+      "label": {
+        "en": "Host kernel",
+        "bn": "হোস্ট কার্নেল"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Rebuild",
+      "bn": "রিবিল্ড"
+    },
+    {
+      "en": "Image pull",
+      "bn": "ইমেজ পুল"
+    },
+    {
+      "en": "Start",
+      "bn": "চালু হওয়া"
+    },
+    {
+      "en": "Isolation",
+      "bn": "আইসোলেশন"
+    }
+  ],
+  "caption": {
+    "en": "A container packs your code with everything it needs, so it runs the same on a laptop, in CI and in production.",
+    "bn": "কনটেইনার আপনার কোড আর তার দরকারি সবকিছু একসাথে প্যাক করে, তাই ল্যাপটপ, CI আর প্রোডাকশনে একই ভাবে চলে।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Pack",
+        "title": "Pack the code with what it needs",
+        "body": [
+          "A container packs your code with everything it needs, so it runs the same on a laptop, in CI (automatic build and test) and in production.",
+          "For AI, also plan for model weights, GPUs and other services."
+        ]
+      },
+      "bn": {
+        "short": "প্যাক",
+        "title": "কোড আর তার দরকারি সবকিছু প্যাক করুন",
+        "body": [
+          "কনটেইনার আপনার কোড আর তার দরকারি সবকিছু একসাথে প্যাক করে, তাই ল্যাপটপ, CI (স্বয়ংক্রিয় বিল্ড ও টেস্ট) আর প্রোডাকশনে একই ভাবে চলে।",
+          "AI-র কাজে মডেল ওয়েট, GPU আর অন্য সার্ভিসের কথাও ভাবতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "code",
+          "state": "hot",
+          "y": 75
+        },
+        {
+          "id": "deps",
+          "state": "hot",
+          "sub": {
+            "en": "everything it needs",
+            "bn": "দরকারি সবকিছু"
+          },
+          "y": 250
+        },
+        {
+          "id": "container",
+          "state": "hot",
+          "sub": {
+            "en": "runs the same",
+            "bn": "একই ভাবে চলে"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "code",
+          "to": "container",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "deps",
+          "to": "container",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Image",
+        "title": "A recipe and a running copy",
+        "body": [
+          "An image is the packed recipe, built in read-only layers. A container is a running copy of an image. A Dockerfile lists the steps that build the image."
+        ]
+      },
+      "bn": {
+        "short": "ইমেজ",
+        "title": "রেসিপি আর চলমান কপি",
+        "body": [
+          "ইমেজ হলো প্যাক করা রেসিপি, যা শুধু-পড়া লেয়ার দিয়ে তৈরি। কনটেইনার হলো সেই ইমেজের চলমান কপি। Dockerfile-এ ইমেজ বানানোর ধাপগুলো লেখা থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "dockerfile",
+          "state": "hot",
+          "sub": {
+            "en": "lists the steps",
+            "bn": "ধাপগুলো লেখা"
+          }
+        },
+        {
+          "id": "image",
+          "state": "hot",
+          "sub": {
+            "en": "read-only layers",
+            "bn": "শুধু-পড়া লেয়ার"
+          }
+        },
+        {
+          "id": "container",
+          "state": "hot",
+          "sub": {
+            "en": "a running copy",
+            "bn": "চলমান কপি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "dockerfile",
+          "to": "image",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "builds",
+            "bn": "বানায়"
+          }
+        },
+        {
+          "from": "image",
+          "to": "container",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Layers",
+        "title": "Order the lines",
+        "body": [
+          "Put the lines that change least first (dependencies) and the ones that change most last (your code), so a rebuild reuses the cached layers."
+        ]
+      },
+      "bn": {
+        "short": "লেয়ার",
+        "title": "লাইনের ক্রম ঠিক রাখুন",
+        "body": [
+          "যে লাইন কম বদলায় (ডিপেন্ডেন্সি) আগে রাখুন, আর যেটা বেশি বদলায় (আপনার কোড) পরে, যাতে রিবিল্ডে ক্যাশ করা লেয়ার কাজে লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "deps",
+          "state": "hot",
+          "sub": {
+            "en": "first, changes least",
+            "bn": "আগে, কম বদলায়"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot",
+          "sub": {
+            "en": "last, changes most",
+            "bn": "পরে, বেশি বদলায়"
+          },
+          "x": 380
+        },
+        {
+          "id": "image",
+          "state": "hot",
+          "sub": {
+            "en": "cached layers reused",
+            "bn": "ক্যাশ লেয়ার ব্যবহার"
+          },
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "deps",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "code",
+          "to": "image",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Reuses layers",
+          "bn": "লেয়ার কাজে লাগে"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Secrets",
+        "title": "Keep secrets out of the image",
+        "body": [
+          "Add a <code>.dockerignore</code>, so <code>.git</code>, <code>.env</code> and local data are not copied into the image.",
+          "Do not bake secrets into an image. Anyone who can pull the image can read its layers."
+        ]
+      },
+      "bn": {
+        "short": "সিক্রেট",
+        "title": "সিক্রেট ইমেজের বাইরে রাখুন",
+        "body": [
+          "একটি <code>.dockerignore</code> যোগ করুন, যাতে <code>.git</code>, <code>.env</code> আর লোকাল ডেটা ইমেজে কপি না হয়।",
+          "ইমেজে কখনও সিক্রেট ঢোকাবেন না। ইমেজ পুল করতে পারলেই তার লেয়ার পড়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "secret",
+          "state": "warn",
+          "sub": {
+            "en": "baked in",
+            "bn": "ঢুকিয়ে দেওয়া"
+          }
+        },
+        {
+          "id": "image",
+          "state": "warn",
+          "sub": {
+            "en": "layers can be read",
+            "bn": "লেয়ার পড়া যায়"
+          }
+        },
+        {
+          "id": "reader",
+          "state": "hot",
+          "sub": {
+            "en": "who can pull it",
+            "bn": "যে পুল করতে পারে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "secret",
+          "to": "image",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "image",
+          "to": "reader",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "pull",
+            "bn": "পুল"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Weights",
+        "title": "Weights: baked in or mounted",
+        "body": [
+          "A model of many gigabytes baked into the image makes every pull slow. Mount the weights as a volume or download them at start.",
+          "Baking them in gives reproducible, offline starts. Choose on purpose."
+        ]
+      },
+      "bn": {
+        "short": "ওয়েট",
+        "title": "ওয়েট: ভেতরে, না মাউন্ট করে",
+        "body": [
+          "অনেক গিগাবাইটের মডেল ওয়েট ইমেজে ঢোকালে প্রতিবার পুল ধীর হয়। ভলিউম মাউন্ট করুন বা চালুর সময় নামান।",
+          "ইমেজে ঢোকালে প্রতিবার একই ভাবে আর অফলাইনে চালু হয়। ইচ্ছা করে বেছে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "weights",
+          "state": "hot",
+          "sub": {
+            "en": "many gigabytes",
+            "bn": "অনেক গিগাবাইট"
+          }
+        },
+        {
+          "id": "image",
+          "state": "warn",
+          "sub": {
+            "en": "slow pulls",
+            "bn": "পুল ধীর"
+          },
+          "y": 75
+        },
+        {
+          "id": "volume",
+          "state": "hot",
+          "sub": {
+            "en": "mount or download",
+            "bn": "মাউন্ট বা ডাউনলোড"
+          }
+        },
+        {
+          "id": "container",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "weights",
+          "to": "image",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "baked in",
+            "bn": "ঢোকানো"
+          }
+        },
+        {
+          "from": "weights",
+          "to": "volume",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "image",
+          "to": "container",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "volume",
+          "to": "container",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Slow",
+          "bn": "ধীর"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GPUs",
+        "title": "Hand the GPUs to the container",
+        "body": [
+          "A container sees a GPU only when the host has the NVIDIA driver and the NVIDIA Container Toolkit. Then <code>docker run --gpus all ...</code> hands it the GPUs."
+        ]
+      },
+      "bn": {
+        "short": "GPU",
+        "title": "কনটেইনারকে GPU দিন",
+        "body": [
+          "কনটেইনার GPU দেখে তখনই, যখন হোস্টে NVIDIA ড্রাইভার আর NVIDIA Container Toolkit আছে। তারপর <code>docker run --gpus all ...</code> তাকে GPU দিয়ে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "container",
+          "state": "hot",
+          "x": 110
+        },
+        {
+          "id": "toolkit",
+          "state": "hot",
+          "sub": {
+            "en": "with the driver",
+            "bn": "ড্রাইভারের সাথে"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "on the host",
+            "bn": "হোস্টে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "container",
+          "to": "toolkit",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "toolkit",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Not a VM",
+        "title": "A container is not a VM",
+        "body": [
+          "A container is not a virtual machine. It shares the host's kernel, so it starts in seconds but isolates less."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Do not run untrusted agent code in a plain container without further limits."
+        }
+      },
+      "bn": {
+        "short": "VM নয়",
+        "title": "কনটেইনার VM নয়",
+        "body": [
+          "কনটেইনার ভার্চুয়াল মেশিন নয়। এটা হোস্টের কার্নেল ভাগ করে, তাই কয়েক সেকেন্ডে চালু হয় কিন্তু আইসোলেশন কম।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "অবিশ্বস্ত এজেন্ট কোড সাধারণ কনটেইনারে বাড়তি সীমা ছাড়া চালাবেন না।"
+        }
+      },
+      "show": [
+        {
+          "id": "container",
+          "state": "warn",
+          "sub": {
+            "en": "starts in seconds",
+            "bn": "সেকেন্ডে চালু"
+          },
+          "x": 110
+        },
+        {
+          "id": "host",
+          "state": "hot",
+          "sub": {
+            "en": "shared",
+            "bn": "ভাগ করা"
+          },
+          "x": 380
+        }
+      ],
+      "links": [
+        {
+          "from": "container",
+          "to": "host",
+          "flow": "both",
+          "state": "warn",
+          "label": {
+            "en": "shares",
+            "bn": "ভাগ করে"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "In seconds",
+          "bn": "কয়েক সেকেন্ডে"
+        },
+        {
+          "en": "Less",
+          "bn": "কম"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A container packs your code with everything it needs, so it runs the same on a laptop, in CI (automatic build and test) and in production. For AI, also plan for model weights, GPUs and other services."
+        ],
+        "points": [
+          "Put the lines that change least first, so a rebuild reuses the cached layers.",
+          "Never bake secrets into an image. Anyone who can pull the image can read its layers.",
+          "Baked-in weights give reproducible, offline starts but slow pulls; mounting or downloading avoids that, so choose on purpose.",
+          "A container is not a virtual machine. It shares the host's kernel, so it isolates less."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কনটেইনার আপনার কোড আর তার দরকারি সবকিছু একসাথে প্যাক করে, তাই ল্যাপটপ, CI (স্বয়ংক্রিয় বিল্ড ও টেস্ট) আর প্রোডাকশনে একই ভাবে চলে। AI-র কাজে মডেল ওয়েট, GPU আর অন্য সার্ভিসের কথাও ভাবতে হয়।"
+        ],
+        "points": [
+          "যে লাইন কম বদলায় আগে রাখুন, যাতে রিবিল্ডে ক্যাশ করা লেয়ার কাজে লাগে।",
+          "ইমেজে কখনও সিক্রেট ঢোকাবেন না। ইমেজ পুল করতে পারলেই তার লেয়ার পড়া যায়।",
+          "ওয়েট ইমেজে ঢোকালে প্রতিবার একই ভাবে আর অফলাইনে চালু হয়, কিন্তু পুল ধীর হয়; মাউন্ট করা বা চালুর সময় নামানো এটা এড়ায়, তাই ইচ্ছা করে বেছে নিন।",
+          "কনটেইনার ভার্চুয়াল মেশিন নয়। এটা হোস্টের কার্নেল ভাগ করে, তাই আইসোলেশন কম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "image",
+          "x": 110
+        },
+        {
+          "id": "container",
+          "x": 380
+        },
+        {
+          "id": "host",
+          "x": 650
+        }
+      ],
+      "links": [
+        {
+          "from": "image",
+          "to": "container",
+          "flow": "to"
+        },
+        {
+          "from": "container",
+          "to": "host",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

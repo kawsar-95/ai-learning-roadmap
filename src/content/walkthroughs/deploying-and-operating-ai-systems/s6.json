@@ -1,0 +1,723 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "you",
+      "kind": "user",
+      "label": {
+        "en": "You",
+        "bn": "আপনি"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "metric",
+      "kind": "chart",
+      "label": {
+        "en": "Request rate",
+        "bn": "রিকোয়েস্ট রেট"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "cpu",
+      "kind": "server",
+      "label": {
+        "en": "CPU",
+        "bn": "CPU"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "ingress",
+      "kind": "balancer",
+      "label": {
+        "en": "Ingress",
+        "bn": "Ingress"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "service",
+      "kind": "dns",
+      "label": {
+        "en": "Service",
+        "bn": "Service"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "kube",
+      "kind": "tool",
+      "label": {
+        "en": "Kubernetes",
+        "bn": "Kubernetes"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "hpa",
+      "kind": "tool",
+      "label": {
+        "en": "Autoscaler",
+        "bn": "অটোস্কেলার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "probe",
+      "kind": "clock",
+      "label": {
+        "en": "startupProbe",
+        "bn": "startupProbe"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "node",
+      "kind": "server",
+      "label": {
+        "en": "Node",
+        "bn": "Node"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "pod",
+      "kind": "server",
+      "label": {
+        "en": "Pod",
+        "bn": "Pod"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "deploy",
+      "kind": "service",
+      "label": {
+        "en": "Deployment",
+        "bn": "Deployment"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "GPU",
+        "bn": "GPU"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Copies",
+      "bn": "কপি"
+    },
+    {
+      "en": "GPUs",
+      "bn": "GPU"
+    },
+    {
+      "en": "Load time",
+      "bn": "লোড হতে সময়"
+    },
+    {
+      "en": "Scale on",
+      "bn": "স্কেল করুন"
+    }
+  ],
+  "caption": {
+    "en": "Kubernetes runs containers across many machines and keeps them in the shape you describe. For AI, it must also place GPU work and wait while a large model loads.",
+    "bn": "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে। AI-র জন্য তাকে GPU-র কাজও ঠিক জায়গায় বসাতে হয়, আর বড় মডেল লোড হওয়া পর্যন্ত অপেক্ষা করতে হয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "State",
+        "title": "Describe the state you want",
+        "body": [
+          "Kubernetes runs containers across many machines and keeps them in the shape you describe.",
+          "You describe the state you want, and Kubernetes keeps the cluster in that state: if a container dies it starts another, and if you ask for three copies it keeps three."
+        ]
+      },
+      "bn": {
+        "short": "অবস্থা",
+        "title": "চাওয়া অবস্থাটা বলে দিন",
+        "body": [
+          "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে।",
+          "আপনি চাওয়া অবস্থাটা বলে দেন, আর Kubernetes ক্লাস্টারকে সেই অবস্থায় রাখে: কনটেইনার মরে গেলে নতুন একটা চালু করে, তিনটে কপি চাইলে তিনটেই রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot",
+          "sub": {
+            "en": "the state you want",
+            "bn": "চাওয়া অবস্থা"
+          }
+        },
+        {
+          "id": "kube",
+          "state": "hot",
+          "sub": {
+            "en": "keeps that state",
+            "bn": "সেই অবস্থা ধরে রাখে"
+          }
+        },
+        {
+          "id": "pod",
+          "state": "hot",
+          "sub": {
+            "en": "three copies",
+            "bn": "তিনটে কপি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "kube",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "kube",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "three",
+          "bn": "তিনটি"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Objects",
+        "title": "The objects you meet first",
+        "body": [
+          "The objects you meet first, each with an example for an LLM service:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Pod: one or more containers that run together, such as a model server container."
+          },
+          {
+            "sign": "+",
+            "html": "Deployment: keeps N copies of a Pod and rolls out new versions, such as three replicas of the API."
+          },
+          {
+            "sign": "+",
+            "html": "Service: a stable name and address in front of changing Pods, such as llm-api, reached by other services."
+          },
+          {
+            "sign": "+",
+            "html": "Ingress: routes HTTP traffic from outside to Services, such as api.example.com to llm-api."
+          },
+          {
+            "sign": "+",
+            "html": "ConfigMap and Secret: settings and sensitive values, kept apart from the image, such as the model name and the API key."
+          }
+        ]
+      },
+      "bn": {
+        "short": "অবজেক্ট",
+        "title": "প্রথমে যে অবজেক্ট দেখবেন",
+        "body": [
+          "প্রথমে যে অবজেক্টগুলো দেখবেন, প্রতিটির সাথে একটি LLM সার্ভিসের উদাহরণ:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Pod: একসাথে চলা এক বা একাধিক কনটেইনার, যেমন একটি মডেল সার্ভার কনটেইনার।"
+          },
+          {
+            "sign": "+",
+            "html": "Deployment: একটি Pod-এর N কপি চালু রাখে আর নতুন ভার্সন ছাড়ে, যেমন API-এর তিনটি রেপ্লিকা।"
+          },
+          {
+            "sign": "+",
+            "html": "Service: বদলাতে থাকা Pod-গুলোর সামনে একটি স্থির নাম আর ঠিকানা, যেমন llm-api, যাকে অন্য সার্ভিস ডাকে।"
+          },
+          {
+            "sign": "+",
+            "html": "Ingress: বাইরের HTTP ট্রাফিককে সঠিক Service-এ পাঠায়, যেমন api.example.com থেকে llm-api।"
+          },
+          {
+            "sign": "+",
+            "html": "ConfigMap ও Secret: সেটিংস আর সংবেদনশীল মান, ইমেজ থেকে আলাদা রাখা, যেমন মডেলের নাম আর API কী।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "ingress",
+          "state": "hot",
+          "sub": {
+            "en": "HTTP from outside",
+            "bn": "বাইরের HTTP"
+          }
+        },
+        {
+          "id": "service",
+          "state": "hot",
+          "sub": {
+            "en": "a stable name",
+            "bn": "স্থির নাম"
+          }
+        },
+        {
+          "id": "pod",
+          "state": "hot",
+          "y": 75
+        },
+        {
+          "id": "deploy",
+          "state": "hot",
+          "sub": {
+            "en": "keeps N copies",
+            "bn": "N কপি ধরে রাখে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ingress",
+          "to": "service",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "service",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "deploy",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "three",
+          "bn": "তিনটি"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GPU",
+        "title": "Ask for a GPU",
+        "body": [
+          "A Pod asks for a GPU as a resource limit (<code>nvidia.com/gpu: 1</code>). The cluster needs the GPU vendor's device plugin installed."
+        ]
+      },
+      "bn": {
+        "short": "GPU",
+        "title": "GPU চেয়ে নিন",
+        "body": [
+          "Pod-এ GPU চাইতে হয় resource limit হিসেবে (<code>nvidia.com/gpu: 1</code>), আর ক্লাস্টারে GPU ভেন্ডরের device plugin থাকতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pod",
+          "state": "hot",
+          "sub": {
+            "en": "asks for a GPU",
+            "bn": "GPU চায়"
+          },
+          "x": 110
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "device plugin needed",
+            "bn": "ডিভাইস প্লাগইন লাগে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pod",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "limit",
+            "bn": "limit"
+          }
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "1",
+          "bn": "১"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Set requests and limits",
+        "body": [
+          "Set requests and limits for CPU and memory. Without them, one Pod can starve the others on the same node."
+        ]
+      },
+      "bn": {
+        "short": "লিমিট",
+        "title": "requests আর limits দিন",
+        "body": [
+          "CPU আর মেমরির requests ও limits দিন, নইলে একটা Pod পাশের Pod-গুলোকে না খাইয়ে রাখতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pod",
+          "state": "warn",
+          "sub": {
+            "en": "no limits set",
+            "bn": "limit দেওয়া নেই"
+          },
+          "x": 110
+        },
+        {
+          "id": "node",
+          "state": "warn",
+          "sub": {
+            "en": "others can starve",
+            "bn": "অন্যরা না খেয়ে থাকে"
+          },
+          "x": 380
+        }
+      ],
+      "links": [
+        {
+          "from": "pod",
+          "to": "node",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Probe",
+        "title": "Give a slow model time",
+        "body": [
+          "A model can take minutes to load. A <code>startupProbe</code> gives it that time.",
+          "Until it passes, the other probes wait and the Pod gets no traffic."
+        ]
+      },
+      "bn": {
+        "short": "প্রোব",
+        "title": "ধীর মডেলকে সময় দিন",
+        "body": [
+          "মডেল লোড হতে কয়েক মিনিট লাগতে পারে, তাই <code>startupProbe</code> দিন, সেটা ওই সময় দেয়।",
+          "সেটা পাশ না করা পর্যন্ত অন্য probe অপেক্ষা করে আর Pod ট্রাফিক পায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "service",
+          "state": "hot",
+          "x": 100,
+          "y": 162
+        },
+        {
+          "id": "pod",
+          "state": "warn",
+          "sub": {
+            "en": "loading a model",
+            "bn": "মডেল লোড হচ্ছে"
+          },
+          "x": 400
+        },
+        {
+          "id": "probe",
+          "state": "hot",
+          "sub": {
+            "en": "gives it time",
+            "bn": "সময় দেয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "service",
+          "to": "pod",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "no traffic",
+            "bn": "ট্রাফিক নেই"
+          }
+        },
+        {
+          "from": "probe",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "minutes",
+          "bn": "কয়েক মিনিট"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Scale",
+        "title": "Scale on the right signal",
+        "body": [
+          "A HorizontalPodAutoscaler changes the number of replicas from a metric.",
+          "CPU is a poor signal for a GPU service, so scale on request rate or queue length, which you export yourself."
+        ]
+      },
+      "bn": {
+        "short": "স্কেল",
+        "title": "সঠিক সংকেতে স্কেল করুন",
+        "body": [
+          "HorizontalPodAutoscaler একটি মেট্রিক দেখে রেপ্লিকার সংখ্যা বদলায়।",
+          "GPU সার্ভিসে CPU ঠিক সংকেত নয়, তাই রিকোয়েস্ট রেট বা কিউ দৈর্ঘ্য দেখে স্কেল করুন, যা আপনাকে নিজেই এক্সপোর্ট করতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "metric",
+          "state": "hot",
+          "sub": {
+            "en": "or queue length",
+            "bn": "বা কিউ দৈর্ঘ্য"
+          }
+        },
+        {
+          "id": "cpu",
+          "state": "warn",
+          "sub": {
+            "en": "a poor signal",
+            "bn": "ঠিক সংকেত নয়"
+          }
+        },
+        {
+          "id": "hpa",
+          "state": "hot"
+        },
+        {
+          "id": "pod",
+          "state": "hot",
+          "sub": {
+            "en": "more or fewer copies",
+            "bn": "কপি বাড়ায় বা কমায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "metric",
+          "to": "hpa",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cpu",
+          "to": "hpa",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "hpa",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "Request rate",
+          "bn": "রিকোয়েস্ট রেট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Need it?",
+        "title": "Do you need it?",
+        "body": [
+          "One service on one machine rarely does. Kubernetes pays off when you run many services, need rolling updates, or share a costly GPU pool between teams."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Projects such as KServe package model serving for it."
+        }
+      },
+      "bn": {
+        "short": "লাগবে?",
+        "title": "আপনার কি লাগবে?",
+        "body": [
+          "একটা মেশিনে একটা সার্ভিস চালালে সাধারণত Kubernetes লাগে না। অনেক সার্ভিস, রোলিং আপডেট, বা টিমগুলোর মধ্যে দামি GPU ভাগ করে নেওয়ার দরকার হলে এটা কাজে আসে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "KServe-এর মতো প্রকল্প এর জন্য মডেল সার্ভিং প্যাকেজ করে।"
+        }
+      },
+      "show": [
+        {
+          "id": "kube",
+          "state": "hot",
+          "x": 110
+        },
+        {
+          "id": "pod",
+          "state": "hot",
+          "sub": {
+            "en": "many services",
+            "bn": "অনেক সার্ভিস"
+          },
+          "y": 75
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "shared by teams",
+            "bn": "টিমগুলো ভাগ করে"
+          },
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "kube",
+          "to": "pod",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "rolling updates",
+            "bn": "রোলিং আপডেট"
+          }
+        },
+        {
+          "from": "kube",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Kubernetes runs containers across many machines and keeps them in the shape you describe. For AI, it must also place GPU work and wait while a large model loads."
+        ],
+        "points": [
+          "You describe the state you want. If a container dies, Kubernetes starts another.",
+          "Ask for a GPU as a resource limit, and set requests and limits for CPU and memory.",
+          "A model can take minutes to load, so add a <code>startupProbe</code>.",
+          "CPU is a poor signal for a GPU service. Scale on request rate or queue length.",
+          "One service on one machine rarely needs Kubernetes; it pays off with many services, rolling updates, or teams sharing GPUs."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "Kubernetes অনেক মেশিনে কনটেইনার চালায় আর আপনার বলে দেওয়া অবস্থাটা ধরে রাখে। AI-র জন্য তাকে GPU-র কাজও ঠিক জায়গায় বসাতে হয়, আর বড় মডেল লোড হওয়া পর্যন্ত অপেক্ষা করতে হয়।"
+        ],
+        "points": [
+          "আপনি চাওয়া অবস্থাটা বলে দেন। কনটেইনার মরে গেলে Kubernetes নতুন একটা চালু করে।",
+          "GPU চাইতে হয় resource limit হিসেবে, আর CPU ও মেমরির জন্য requests ও limits দিতে হয়।",
+          "মডেল লোড হতে কয়েক মিনিট লাগতে পারে, তাই <code>startupProbe</code> দিন।",
+          "GPU সার্ভিসে CPU ঠিক সংকেত নয়। রিকোয়েস্ট রেট বা কিউ দৈর্ঘ্য দেখে স্কেল করুন।",
+          "একটা মেশিনে একটা সার্ভিসে সাধারণত Kubernetes লাগে না; অনেক সার্ভিস, রোলিং আপডেট বা টিমগুলোর মধ্যে GPU ভাগ করতে এটা কাজে আসে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "x": 110
+        },
+        {
+          "id": "kube"
+        },
+        {
+          "id": "pod"
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "kube",
+          "flow": "to"
+        },
+        {
+          "from": "kube",
+          "to": "pod",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
