@@ -1,0 +1,817 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "client",
+      "kind": "user",
+      "label": {
+        "en": "Client",
+        "bn": "ক্লায়েন্ট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "server",
+      "label": {
+        "en": "API",
+        "bn": "API"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "gateway",
+      "kind": "balancer",
+      "label": {
+        "en": "Gateway",
+        "bn": "গেটওয়ে"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "flag",
+      "kind": "lock",
+      "label": {
+        "en": "Feature flag",
+        "bn": "ফিচার ফ্ল্যাগ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "queue",
+      "kind": "queue",
+      "label": {
+        "en": "Queue",
+        "bn": "কিউ"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "p1",
+      "kind": "service",
+      "label": {
+        "en": "OpenAI",
+        "bn": "OpenAI"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "p2",
+      "kind": "service",
+      "label": {
+        "en": "Anthropic",
+        "bn": "Anthropic"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "store",
+      "kind": "database",
+      "label": {
+        "en": "Database",
+        "bn": "ডেটাবেস"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "p3",
+      "kind": "service",
+      "label": {
+        "en": "Together",
+        "bn": "Together"
+      },
+      "x": 650,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Block limit",
+      "bn": "ব্লক সীমা"
+    },
+    {
+      "en": "Rollout",
+      "bn": "রোলআউট"
+    },
+    {
+      "en": "Budget",
+      "bn": "বাজেট"
+    }
+  ],
+  "caption": {
+    "en": "An LLM call is just one HTTP request. A product around it needs the same plumbing any modern app needs, plus a few new building blocks.",
+    "bn": "একটি LLM কল আসলে শুধু একটি HTTP রিকোয়েস্ট। এর চারপাশে একটি প্রোডাক্টে আধুনিক যেকোনো অ্যাপের মতো একই কাঠামো লাগে, সঙ্গে কয়েকটি নতুন অংশ।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Plumbing",
+        "title": "More than one model call",
+        "body": [
+          "An AI product is more than one model call. It needs extra building blocks, like streaming, safe retries, and fallbacks, so users get fast and reliable answers.",
+          "An LLM call is just one HTTP request."
+        ]
+      },
+      "bn": {
+        "short": "কাঠামো",
+        "title": "শুধু একটি মডেল কল নয়",
+        "body": [
+          "একটি AI প্রোডাক্ট মানে শুধু একটি মডেল কল নয়। এতে স্ট্রিমিং, নিরাপদ রিট্রাই আর ফলব্যাকের মতো বাড়তি অংশ লাগে, যাতে ইউজার দ্রুত আর নির্ভরযোগ্য উত্তর পায়।",
+          "একটি LLM কল হলো একটি HTTP রিকোয়েস্ট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "the LLM call",
+            "bn": "LLM কল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "to"
+        },
+        {
+          "from": "api",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Streaming",
+        "title": "Stream the words",
+        "body": [
+          "Users expect words to appear as the model writes them, not after a 3-second pause. Three transports:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "SSE (Server-Sent Events): the simplest; works through any HTTP proxy; one-way (server to client)"
+          },
+          {
+            "sign": "+",
+            "html": "WebSockets: bidirectional; needed for voice and collaborative UIs; heavier handshake"
+          },
+          {
+            "sign": "+",
+            "html": "HTTP chunked transfer: a fallback for proxies that strip SSE headers"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্ট্রিমিং",
+        "title": "শব্দ স্ট্রিম করুন",
+        "body": [
+          "ইউজাররা ৩ সেকেন্ডের বিরতির পরে নয়, মডেল যেভাবে লেখে সেভাবে শব্দ দেখতে চায়। তিনটি ট্রান্সপোর্ট:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "SSE (Server-Sent Events): সবচেয়ে সহজ; যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে; একমুখী (সার্ভার থেকে ক্লায়েন্ট)"
+          },
+          {
+            "sign": "+",
+            "html": "ওয়েবসকেট: দ্বিমুখী; ভয়েস ও সহযোগী UI-এর জন্য দরকার; ভারী হ্যান্ডশেক"
+          },
+          {
+            "sign": "+",
+            "html": "HTTP চাঙ্কড ট্রান্সফার: SSE হেডার স্ট্রিপ করে দেয় এমন প্রক্সির জন্য ফলব্যাক"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot",
+          "sub": {
+            "en": "sees words now",
+            "bn": "শব্দ সাথে সাথে"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "writes words",
+            "bn": "শব্দ লেখে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "client",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Queue",
+        "title": "Long jobs go to a queue",
+        "body": [
+          "Anything over ~10 seconds should not block an HTTP request. Push it to a queue (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) and return a <code>job_id</code>.",
+          "The client polls or subscribes via SSE or WebSocket for updates."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "This is the single biggest UX win for “the agent took 4 minutes” tasks."
+        }
+      },
+      "bn": {
+        "short": "কিউ",
+        "title": "লম্বা কাজ যায় কিউতে",
+        "body": [
+          "~১০ সেকেন্ডের বেশি যেকোনো কিছুতে HTTP রিকোয়েস্ট ব্লক করা উচিত নয়। একটি কিউতে (BullMQ, Celery, Inngest, Cloud Tasks, Temporal) পুশ করুন এবং একটি <code>job_id</code> ফেরত দিন।",
+          "ক্লায়েন্ট পোল করে বা SSE/ওয়েবসকেট দিয়ে আপডেট সাবস্ক্রাইব করে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "“এজেন্ট ৪ মিনিট নিয়েছে” ধরনের কাজের জন্য এটাই একমাত্র সবচেয়ে বড় UX জয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "queue",
+          "state": "hot",
+          "sub": {
+            "en": "long jobs wait here",
+            "bn": "লম্বা কাজ এখানে"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "runs the agent",
+            "bn": "এজেন্ট চালায়"
+          },
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "both",
+          "state": "hot",
+          "label": {
+            "en": "job_id",
+            "bn": "job_id"
+          }
+        },
+        {
+          "from": "api",
+          "to": "queue",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "queue",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "over ~10 s",
+          "bn": "~১০ সেকেন্ডের বেশি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Retries",
+        "title": "Retry safely, resume cheaply",
+        "body": [
+          "LLM calls fail. Networks drop. Users refresh. Always generate an idempotency key per request, and reject duplicates.",
+          "Store checkpoints of agent state so a resume replays only the failed steps. Use durable execution (Temporal or Restate) for anything longer than a minute."
+        ]
+      },
+      "bn": {
+        "short": "রিট্রাই",
+        "title": "নিরাপদে রিট্রাই, সস্তায় রিজিউম",
+        "body": [
+          "LLM কল ব্যর্থ হয়। নেটওয়ার্ক ড্রপ হয়। ইউজার রিফ্রেশ করে। সবসময়: প্রতিটি রিকোয়েস্টের জন্য একটি আইডেমপোটেন্সি কী তৈরি করুন; ডুপ্লিকেট প্রত্যাখ্যান করুন।",
+          "এজেন্ট স্টেটের চেকপয়েন্ট সংরক্ষণ করুন, যাতে রিজিউম করলে শুধু ব্যর্থ ধাপগুলো রিপ্লে হয়। এক মিনিটের বেশি যেকোনো কিছুর জন্য ডিউরেবল এক্সিকিউশন (Temporal/Restate) ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot",
+          "sub": {
+            "en": "idempotency key",
+            "bn": "আইডেমপোটেন্সি কী"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "rejects duplicates",
+            "bn": "ডুপ্লিকেট ফেরায়"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "the agent",
+            "bn": "এজেন্ট"
+          },
+          "y": 75
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "checkpoints",
+            "bn": "চেকপয়েন্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tenants",
+        "title": "One config row per tenant",
+        "body": [
+          "Per-tenant prompt overrides, per-tenant API keys, per-tenant rate limits, per-tenant tracing. Store all of these in a <code>tenant_config</code> row, fetch it at the edge of every request, and attach it to the trace.",
+          "Never hard-code a tenant's prompt in their codebase."
+        ]
+      },
+      "bn": {
+        "short": "টেন্যান্ট",
+        "title": "প্রতি টেন্যান্টের একটি কনফিগ রো",
+        "body": [
+          "প্রতি-টেন্যান্ট প্রম্পট ওভাররাইড, প্রতি-টেন্যান্ট API কী, প্রতি-টেন্যান্ট রেট লিমিট, প্রতি-টেন্যান্ট ট্রেসিং। এগুলো সব একটি <code>tenant_config</code> রো-তে রাখুন, প্রতিটি রিকোয়েস্টের এজে ফেচ করুন, ট্রেসে যুক্ত করুন।",
+          "কখনোই একটি টেন্যান্টের প্রম্পট তাদের কোডবেসে হার্ড-কোড করবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot",
+          "sub": {
+            "en": "a tenant",
+            "bn": "একজন টেন্যান্ট"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "fetches its config",
+            "bn": "কনফিগ ফেচ করে"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "tenant_config",
+            "bn": "tenant_config"
+          },
+          "y": 162
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "its own prompt",
+            "bn": "নিজের প্রম্পট"
+          },
+          "y": 75
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Fallbacks",
+        "title": "Fallback chains across providers",
+        "body": [
+          "OpenAI 503s? Route to Anthropic. Anthropic 429s? Route to Together. Use a degraded prompt per provider, such as “you have no tool use; just answer”.",
+          "LiteLLM and Portkey do this out of the box; a model gateway is essentially a fallback router plus cost tracking."
+        ]
+      },
+      "bn": {
+        "short": "ফলব্যাক",
+        "title": "প্রোভাইডার জুড়ে ফলব্যাক চেইন",
+        "body": [
+          "OpenAI ৫০৩ দিলে? Anthropic-এ রাউট করুন। Anthropic ৪২৯ দিলে? Together-এ রাউট করুন। প্রতি প্রোভাইডারের জন্য ডিগ্রেডেড প্রম্পট সহ (“আপনার tool use নেই; শুধু উত্তর দিন”)।",
+          "LiteLLM ও Portkey এটি বাক্সের বাইরে করে; একটি মডেল গেটওয়ে মূলত একটি ফলব্যাক রাউটার ও খরচ ট্র্যাকিং।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "gateway",
+          "state": "hot",
+          "sub": {
+            "en": "tries in order",
+            "bn": "পর পর চেষ্টা করে"
+          }
+        },
+        {
+          "id": "p1",
+          "state": "warn",
+          "sub": {
+            "en": "503",
+            "bn": "৫০৩"
+          }
+        },
+        {
+          "id": "p2",
+          "state": "warn",
+          "sub": {
+            "en": "429",
+            "bn": "৪২৯"
+          }
+        },
+        {
+          "id": "p3",
+          "state": "hot",
+          "sub": {
+            "en": "answers",
+            "bn": "উত্তর দেয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "gateway",
+          "flow": "to"
+        },
+        {
+          "from": "gateway",
+          "to": "p1",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "gateway",
+          "to": "p2",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "gateway",
+          "to": "p3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Flags",
+        "title": "Feature flags for prompts and models",
+        "body": [
+          "Treat every prompt and every model as a flag. Roll out “use GPT-5 for premium users only” to 1%, then 10%, then 100%.",
+          "Roll back instantly when evals regress. LaunchDarkly, Statsig, PostHog, or a simple DB column will do."
+        ]
+      },
+      "bn": {
+        "short": "ফ্ল্যাগ",
+        "title": "প্রম্পট আর মডেলের ফিচার ফ্ল্যাগ",
+        "body": [
+          "প্রতিটি প্রম্পট ও প্রতিটি মডেলকে ফ্ল্যাগ হিসেবে দেখুন। “শুধু প্রিমিয়াম ইউজারদের জন্য GPT-5 ব্যবহার করুন” ১%, তারপর ১০%, তারপর ১০০%-এ রোল আউট করুন।",
+          "ইভ্যাল রিগ্রেস করলে তাৎক্ষণিকভাবে রোল ব্যাক করুন। LaunchDarkly, Statsig, PostHog বা একটি সাধারণ DB কলামই চলবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot",
+          "sub": {
+            "en": "some users",
+            "bn": "কিছু ইউজার"
+          }
+        },
+        {
+          "id": "flag",
+          "state": "hot",
+          "sub": {
+            "en": "a switch per user",
+            "bn": "ইউজারভেদে সুইচ"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "the new prompt",
+            "bn": "নতুন প্রম্পট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "flag",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "flag",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "1% → 10% → 100%",
+          "bn": "১% → ১০% → ১০০%"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "API rules",
+        "title": "Rules for an AI API",
+        "body": [
+          "Five rules distinguish an AI API from a normal REST API:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Cancel mid-flight: the client should be able to abort the request and stop the bill"
+          },
+          {
+            "sign": "+",
+            "html": "Retry idempotently: same request plus idempotency key gives the same response, with no double billing"
+          },
+          {
+            "sign": "+",
+            "html": "Return partial results: stream tokens, return intermediate tool states, never make the client wait until completion"
+          },
+          {
+            "sign": "+",
+            "html": "Structured confidence: include a self-reported confidence, logprobs, or a “would I retry this?” field"
+          },
+          {
+            "sign": "+",
+            "html": "Cost and latency budget in the request: let the client say “spend up to $0.05 and 8s”; the server respects it"
+          }
+        ]
+      },
+      "bn": {
+        "short": "API নিয়ম",
+        "title": "AI API-এর নিয়ম",
+        "body": [
+          "পাঁচটি নিয়ম একটি AI API-কে সাধারণ REST API থেকে আলাদা করে:"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মাঝপথে ক্যানসেল: ক্লায়েন্ট রিকোয়েস্ট অ্যাবর্ট করতে এবং বিল বন্ধ করতে পারবে"
+          },
+          {
+            "sign": "+",
+            "html": "আইডেমপোটেন্টলি রিট্রাই: একই রিকোয়েস্ট আর আইডেমপোটেন্সি কী মানে একই রেসপন্স, দ্বিগুণ বিলিং নয়"
+          },
+          {
+            "sign": "+",
+            "html": "পার্শিয়াল রেজাল্ট ফেরত দিন: টোকেন স্ট্রিম করুন, মধ্যবর্তী টুল স্টেট ফেরত দিন, ক্লায়েন্টকে কখনো সম্পূর্ণ হওয়া পর্যন্ত অপেক্ষা করাবেন না"
+          },
+          {
+            "sign": "+",
+            "html": "স্ট্রাকচার্ড কনফিডেন্স: সেলফ-রিপোর্টেড কনফিডেন্স, লগপ্রব বা “আমি কি এটি রিট্রাই করব?” ফিল্ড রাখুন"
+          },
+          {
+            "sign": "+",
+            "html": "রিকোয়েস্টে খরচ/ল্যাটেন্সি বাজেট: ক্লায়েন্টকে বলতে দিন “সর্বোচ্চ $০.০৫ ও ৮s খরচ করুন”; সার্ভার সেটি মানে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "client",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "both",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "$0.05 and 8s",
+          "bn": "$০.০৫ ও ৮s"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "An LLM call is just one HTTP request. A product around it needs the same plumbing any modern app needs, plus a few new building blocks."
+        ],
+        "points": [
+          "Stream the answer so users see words as the model writes them, not after a pause.",
+          "Push any task over ~10 seconds to a queue and return a <code>job_id</code>.",
+          "Use an idempotency key and checkpoints so retries do not double the work or the bill.",
+          "Never hard-code a tenant's prompt in their codebase; store it in a <code>tenant_config</code> row.",
+          "Route to a backup provider when one fails; roll out new prompts to 1% first, and roll back instantly."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একটি LLM কল আসলে শুধু একটি HTTP রিকোয়েস্ট। এর চারপাশে একটি প্রোডাক্টে আধুনিক যেকোনো অ্যাপের মতো একই কাঠামো লাগে, সঙ্গে কয়েকটি নতুন অংশ।"
+        ],
+        "points": [
+          "উত্তর স্ট্রিম করুন, যাতে ইউজার বিরতির পরে নয়, মডেল লেখার সাথে সাথে শব্দ দেখে।",
+          "~১০ সেকেন্ডের বেশি লাগে এমন কাজ কিউতে পাঠান আর একটি <code>job_id</code> ফেরত দিন।",
+          "আইডেমপোটেন্সি কী আর চেকপয়েন্ট ব্যবহার করুন, যাতে রিট্রাইয়ে কাজ বা বিল দ্বিগুণ না হয়।",
+          "টেন্যান্টের প্রম্পট কখনো তাদের কোডবেসে হার্ড-কোড করবেন না; <code>tenant_config</code> রো-তে রাখুন।",
+          "একটি প্রোভাইডার ব্যর্থ হলে ব্যাকআপ প্রোভাইডারে রাউট করুন; নতুন প্রম্পট আগে ১%-এ রোল আউট করুন, আর দরকারে সাথে সাথে রোল ব্যাক করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "client"
+        },
+        {
+          "id": "api"
+        },
+        {
+          "id": "llm"
+        },
+        {
+          "id": "store"
+        }
+      ],
+      "links": [
+        {
+          "from": "client",
+          "to": "api",
+          "flow": "to"
+        },
+        {
+          "from": "api",
+          "to": "llm",
+          "flow": "to"
+        },
+        {
+          "from": "api",
+          "to": "store",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
