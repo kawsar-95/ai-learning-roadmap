@@ -135,7 +135,11 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                 <h3 className="m-0 mt-1 font-display text-[20px] font-bold leading-snug text-text">{text.title}</h3>
                 <p className="mt-2 mb-0 flex-1 text-[15px] text-text-dim">{text.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-medium">
-                  <Link href={`${roadmapHref(lang)}${path.lesson}/`} className="inline-flex min-h-6 items-center text-accent">
+                  <Link
+                    href={`${roadmapHref(lang)}${path.lesson}/`}
+                    prefetch={false}
+                    className="inline-flex min-h-6 items-center text-accent"
+                  >
                     {ui.pathsStart}
                   </Link>
                   <a
@@ -215,7 +219,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                           {topics.map((topic, i) => (
                             <span key={topic.slug}>
                               {i > 0 && ", "}
-                              <Link href={topicHref(topic.slug, lang)} className="text-accent">
+                              <Link href={topicHref(topic.slug, lang)} prefetch={false} className="text-accent">
                                 {topic.title}
                               </Link>
                             </span>
@@ -245,6 +249,10 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                               </span>
                               <Link
                                 href={lessonHref(phase, lesson, lang)}
+                                // A lesson page holds the whole lesson, so
+                                // its payload is large. This page lists
+                                // every lesson in the roadmap.
+                                prefetch={false}
                                 className="min-w-0 flex-1 text-[15px] leading-snug text-text no-underline hover:text-accent"
                               >
                                 {lesson.title}

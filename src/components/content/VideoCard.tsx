@@ -55,6 +55,12 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
                 alt=""
                 loading="lazy"
                 decoding="async"
+                // YouTube's hqdefault thumbnail is 480 by 360. The width and
+                // height tell the browser the shape before the file arrives,
+                // so the card does not jump. The CSS keeps the fill and the
+                // crop; these two only set the ratio the browser reserves.
+                width={480}
+                height={360}
                 className="h-full w-full object-cover opacity-85 transition-opacity group-hover:opacity-100"
               />
             )}

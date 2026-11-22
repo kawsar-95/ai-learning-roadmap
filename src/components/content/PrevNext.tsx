@@ -23,13 +23,17 @@ export function PrevNextLinks({ prev, next, label }: { prev?: NeighborLink; next
   return (
     <nav aria-label={label} className="grid gap-3 sm:grid-cols-2">
       {prev && (
-        <Link href={prev.href} rel="prev" className={CARD}>
+        // A Part or a lesson holds all of its content in one page, so its
+        // payload is large. The reader is at the end of a page and about to
+        // click one of these two, so there is nothing to gain by fetching it
+        // before they do.
+        <Link href={prev.href} rel="prev" prefetch={false} className={CARD}>
           <span className={LABEL}>← {prev.label}</span>
           <span className={TITLE}>{prev.title}</span>
         </Link>
       )}
       {next && (
-        <Link href={next.href} rel="next" className={CARD + " sm:col-start-2 sm:text-right"}>
+        <Link href={next.href} rel="next" prefetch={false} className={CARD + " sm:col-start-2 sm:text-right"}>
           <span className={LABEL}>{next.label} →</span>
           <span className={TITLE}>{next.title}</span>
         </Link>

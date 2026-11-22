@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Crimson_Pro, Inter, JetBrains_Mono, Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
-import { PANEL_INIT_SCRIPT } from "@/lib/panels";
-import { langInitScript } from "@/lib/i18n";
+import { initScript } from "@/lib/init-script";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
@@ -69,9 +67,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${crimson.variable} ${inter.variable} ${jetbrainsMono.variable} ${notoBengali.variable} h-full antialiased`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-        <script dangerouslySetInnerHTML={{ __html: PANEL_INIT_SCRIPT }} />
-        <script dangerouslySetInnerHTML={{ __html: langInitScript(BASE_PATH) }} />
+        {/* One script for the theme, the side columns, and the language, so
+            the browser has one render-blocking tag to read instead of three.
+            See src/lib/init-script.ts. */}
+        <script dangerouslySetInnerHTML={{ __html: initScript(BASE_PATH) }} />
       </head>
       <body className="min-h-full bg-bg text-text">
         {children}

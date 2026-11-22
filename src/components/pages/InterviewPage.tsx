@@ -34,7 +34,14 @@ export function InterviewPage({ lang }: { lang: Lang }) {
                   {fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0))}
                 </span>
                 <h2 className="m-0 min-w-0 flex-1 font-display text-[22px] font-bold leading-snug">
-                  <Link href={topicHref(topic.slug, lang)} className="text-text no-underline hover:text-accent">
+                  <Link
+                    href={topicHref(topic.slug, lang)}
+                    // A Part's payload is over a hundred kilobytes, and this
+                    // page has a link to every Part. See
+                    // src/components/layout/SidebarList.tsx.
+                    prefetch={false}
+                    className="text-text no-underline hover:text-accent"
+                  >
                     {topicText(topic, lang).title}
                   </Link>
                 </h2>
@@ -49,6 +56,7 @@ export function InterviewPage({ lang }: { lang: Lang }) {
                       <p className="m-0 text-[15px] leading-[1.75] text-text-dim">{item[lang].a}</p>
                       <Link
                         href={`${topicHref(topic.slug, lang)}/#${item.section}`}
+                        prefetch={false}
                         className="mt-3 inline-block text-[14px] font-medium text-accent no-underline hover:underline"
                       >
                         {ui.readSection}

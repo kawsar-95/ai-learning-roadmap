@@ -233,7 +233,11 @@ export function ResourcesPage({ lang }: { lang: Lang }) {
                   <p className="mt-2 mb-0 flex-1 text-[15px] text-text-dim">{item.about[lang]}</p>
                   <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-medium">
                     {phase && (
-                      <Link href={`${roadmapHref(lang)}#phase-${phase.phase}`} className="inline-flex min-h-6 items-center text-accent">
+                      <Link
+                        href={`${roadmapHref(lang)}#phase-${phase.phase}`}
+                        prefetch={false}
+                        className="inline-flex min-h-6 items-center text-accent"
+                      >
                         {ui.roadmapPhase(fmt(phase.phase))} · {phase.title}
                       </Link>
                     )}

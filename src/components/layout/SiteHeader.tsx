@@ -67,16 +67,19 @@ export function SiteHeader({
           <Link href={`${homeHref(lang)}#parts`} className={NAV_LINK}>
             {UI[lang].partsNav}
           </Link>
-          <Link href={roadmapHref(lang)} className={NAV_LINK}>
+          {/* The roadmap page and the pages below it hold a lot of content in
+              one page, so the browser fetches them when the reader clicks.
+              See src/components/content/PrevNext.tsx. */}
+          <Link href={roadmapHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].roadmap}
           </Link>
-          <Link href={contentsHref(lang)} className={NAV_LINK}>
+          <Link href={contentsHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].contents}
           </Link>
-          <Link href={dashboardHref(lang)} className={NAV_LINK}>
+          <Link href={dashboardHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].dashboard}
           </Link>
-          <Link href={interviewHref(lang)} className={NAV_LINK}>
+          <Link href={interviewHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].interview}
           </Link>
         </nav>

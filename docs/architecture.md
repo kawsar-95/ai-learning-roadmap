@@ -346,7 +346,9 @@ of the file. The build prints `sw.js: N files saved for offline use`.
 
 `<html data-theme>` is the source of truth. The server writes `dark`.
 `THEME_INIT_SCRIPT` in `src/lib/theme.ts` runs in `<head>` before the first
-paint. It uses the saved `theme`, or the device setting when nothing is
+paint. (The page sends it with the panel and language scripts as one inline
+script, `initScript` in `src/lib/init-script.ts`, with a `try/catch` for each
+part. A test checks that it does what the three scripts do together.) It uses the saved `theme`, or the device setting when nothing is
 saved, so the page does not flash. If storage is blocked, the page stays
 dark. A test checks that the script and `resolveTheme` agree in every case.
 

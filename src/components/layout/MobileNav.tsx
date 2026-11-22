@@ -141,6 +141,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             <Link
               href={roadmapHref(lang)}
               onClick={() => setOpen(false)}
+              prefetch={false}
               className="mx-2 mt-4 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.roadmap}
@@ -157,6 +158,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             <Link
               href={contentsHref(lang)}
               onClick={() => setOpen(false)}
+              prefetch={false}
               className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.contentsTitle}
@@ -173,6 +175,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             <Link
               href={interviewHref(lang)}
               onClick={() => setOpen(false)}
+              prefetch={false}
               className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.interview}

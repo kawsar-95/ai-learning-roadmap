@@ -45,7 +45,11 @@ export function ContentsPage({ lang }: { lang: Lang }) {
                   {fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0))}
                 </span>
                 <h2 className="m-0 min-w-0 flex-1 font-display text-[22px] font-bold leading-snug">
-                  <Link href={topicHref(topic.slug, lang)} className="text-text no-underline hover:text-accent">
+                  <Link
+                    href={topicHref(topic.slug, lang)}
+                    prefetch={false}
+                    className="text-text no-underline hover:text-accent"
+                  >
                     {text.title}
                   </Link>
                 </h2>
@@ -57,6 +61,7 @@ export function ContentsPage({ lang }: { lang: Lang }) {
                   <li key={key}>
                     <Link
                       href={href}
+                      prefetch={false}
                       className="group flex items-start gap-3 py-1.5 text-text-dim no-underline transition-colors hover:text-text"
                     >
                       <SectionCheck sectionKey={key} lang={lang} />
