@@ -14,10 +14,19 @@ export function nextTheme(theme: Theme): Theme {
 }
 
 /**
+ * The code that sets data-theme on <html>, without a wrapper. The site runs
+ * it in <head> before the first paint, together with the other two init
+ * scripts (see src/lib/init-script.ts).
+ * It must give the same result as resolveTheme (tests/theme.test.ts checks
+ * this). If storage is blocked, the server default (dark) stays.
+ */
+export const THEME_INIT_BODY = `var s=localStorage.getItem(${JSON.stringify(
+  THEME_STORAGE_KEY,
+)});var t=s==="light"||s==="dark"?s:window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)`;
+
+/**
  * Runs in <head> before the first paint and sets data-theme on <html>.
  * It must give the same result as resolveTheme (tests/theme.test.ts checks
  * this). If storage is blocked, the server default (dark) stays.
  */
-export const THEME_INIT_SCRIPT = `(function(){try{var s=localStorage.getItem(${JSON.stringify(
-  THEME_STORAGE_KEY,
-)});var t=s==="light"||s==="dark"?s:window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`;
+export const THEME_INIT_SCRIPT = `(function(){try{${THEME_INIT_BODY}}catch(e){}})()`;

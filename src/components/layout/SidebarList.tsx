@@ -43,6 +43,13 @@ export function SidebarList({
                 href={topicHref(item.slug, lang)}
                 aria-current={active ? "page" : undefined}
                 onClick={onNavigate}
+                // A Part's page holds every one of its sections, so its
+                // payload is over a megabyte. Next.js prefetches a link when
+                // it comes into view, and the Parts list is on screen on
+                // every page: without this, opening a page would download
+                // megabytes for the seventeen Parts the reader is not going
+                // to open. The link is prefetched on hover instead.
+                prefetch={false}
                 className={
                   "group flex items-baseline gap-2.5 rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
                   (active

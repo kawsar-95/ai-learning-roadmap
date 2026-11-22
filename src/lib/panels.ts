@@ -30,8 +30,19 @@ const CHECKS = PANELS.map(
 ).join("");
 
 /**
+ * The code that sets data-parts and data-toc on <html> for each folded
+ * column, without a wrapper. The site runs it in <head> before the first
+ * paint, together with the other two init scripts (see
+ * src/lib/init-script.ts).
+ * It must give the same result as isCollapsed (tests/panels.test.ts checks
+ * this). If storage is blocked, the columns stay open, as the server renders
+ * them.
+ */
+export const PANEL_INIT_BODY = `var d=document.documentElement;${CHECKS}`;
+
+/**
  * Runs in <head> before the first paint and sets data-parts and data-toc on <html> for each folded column.
  * It must give the same result as isCollapsed (tests/panels.test.ts checks this). If storage is blocked, the
  * columns stay open, as the server renders them.
  */
-export const PANEL_INIT_SCRIPT = `(function(){try{var d=document.documentElement;${CHECKS}}catch(e){}})()`;
+export const PANEL_INIT_SCRIPT = `(function(){try{${PANEL_INIT_BODY}}catch(e){}})()`;

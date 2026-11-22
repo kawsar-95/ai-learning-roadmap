@@ -109,6 +109,7 @@ function Hero({ lang }: { lang: Lang }) {
           <div className="flex flex-wrap gap-3.5 sm:mb-12">
             <Link
               href={topicHref(TOPICS[0].slug, lang)}
+              prefetch={false}
               className={`${BUTTON} bg-accent text-on-accent hover:opacity-90`}
             >
               {ui.startReading}
@@ -161,6 +162,10 @@ function Parts({ lang }: { lang: Lang }) {
                   <h3 className="m-0 font-display text-[20px] font-bold leading-snug text-balance">
                     <Link
                       href={topicHref(topic.slug, lang)}
+                      // A Part's payload is over a hundred kilobytes, and
+                      // this page has all eighteen Parts in view. See
+                      // src/components/layout/SidebarList.tsx.
+                      prefetch={false}
                       className="text-text no-underline after:absolute after:inset-0 after:content-[''] group-hover:text-accent"
                     >
                       {text.title}

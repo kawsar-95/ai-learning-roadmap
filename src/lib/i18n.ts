@@ -58,15 +58,27 @@ export function fmtNum(lang: Lang, n: number): string {
 }
 
 /**
+ * The code that sets <html lang> from the path and opens the other language
+ * when the reader chose it before, without a wrapper. The site runs it in
+ * <head> before the first paint, together with the other two init scripts
+ * (see src/lib/init-script.ts).
+ * It must agree with langFromPath and localizedPath (tests/i18n.test.ts
+ * checks this).
+ */
+export function langInitBody(basePath: string): string {
+  return `var b=${JSON.stringify(basePath)},l=location,p=l.pathname;if(b&&p.indexOf(b)===0)p=p.slice(b.length)||"/";var bn=p==="/bn"||p.indexOf("/bn/")===0;document.documentElement.setAttribute("lang",bn?"bn":"en");var s=localStorage.getItem(${JSON.stringify(
+    LANG_STORAGE_KEY,
+  )});if((s==="bn"&&!bn)||(s==="en"&&bn)){var e=bn?p.slice(3)||"/":p,t=s==="en"?e:e==="/"?"/bn/":"/bn"+e;l.replace(b+t+l.search+l.hash)}`;
+}
+
+/**
  * Runs in <head> before the first paint. It sets <html lang> from the path.
  * If the reader chose the other language before, it opens the same page in
  * that language. It must agree with langFromPath and localizedPath
  * (tests/i18n.test.ts checks this).
  */
 export function langInitScript(basePath: string): string {
-  return `(function(){try{var b=${JSON.stringify(basePath)},l=location,p=l.pathname;if(b&&p.indexOf(b)===0)p=p.slice(b.length)||"/";var bn=p==="/bn"||p.indexOf("/bn/")===0;document.documentElement.setAttribute("lang",bn?"bn":"en");var s=localStorage.getItem(${JSON.stringify(
-    LANG_STORAGE_KEY,
-  )});if((s==="bn"&&!bn)||(s==="en"&&bn)){var e=bn?p.slice(3)||"/":p,t=s==="en"?e:e==="/"?"/bn/":"/bn"+e;l.replace(b+t+l.search+l.hash)}}catch(x){}})()`;
+  return `(function(){try{${langInitBody(basePath)}}catch(x){}})()`;
 }
 
 const en = {
