@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { TOPICS, topicText } from "@/lib/topics";
 import { progressKey } from "@/lib/progress";
-import { AUTHOR_GITHUB_URL, AUTHOR_LINKS, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
+import { AUTHOR_GITHUB_URL, AUTHOR_GUIDE_URL, AUTHOR_LINKS, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { Inline } from "@/components/content/Inline";
 import { PartCount } from "@/components/progress/ProgressWidgets";
@@ -186,6 +186,7 @@ function Author({ lang }: { lang: Lang }) {
     [AUTHOR_LINKS.portfolio, ui.authorPortfolio],
     [AUTHOR_LINKS.linkedin, ui.authorLinkedin],
     [AUTHOR_GITHUB_URL, "GitHub"],
+    [AUTHOR_GUIDE_URL, ui.authorGuide],
     [AUTHOR_LINKS.x, ui.authorX],
     [AUTHOR_LINKS.resume, ui.authorResume],
   ];
