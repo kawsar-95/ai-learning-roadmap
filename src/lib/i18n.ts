@@ -96,6 +96,9 @@ const en = {
   themeToDark: "Switch to dark theme",
   themeGeneric: "Switch color theme",
   installApp: "Install this site as an app",
+  offlineNotice:
+    "You are offline. The Parts, the contents page and the interview questions are saved on this device. A roadmap lesson opens only if you read it before.",
+  offlineLessonTitle: "Not saved on this device: needs a connection",
 
   // Navigation.
   partsNav: "Parts",
@@ -116,7 +119,7 @@ const en = {
   searchUnavailable: "Search is unavailable.",
   searchType: "Type to search 18 parts.",
   searchLoading: "Loading…",
-  searchNone: "No results.",
+  searchNone: "No results. Check the spelling, or try a Part name such as “RAG” or “agents”.",
   searchClose: "Close search",
   searchResults: "Search results",
 
@@ -137,8 +140,6 @@ const en = {
   coverTag: "AI ENGINEERING · REFERENCE",
   coverTitle: ["Applied", "AI", "Engineering"] as [string, string, string],
   coverSub: "From tokens to agents · English + বাংলা",
-  coverLabel: "INSIDE",
-  coverValue: (parts: string, sections: string) => `${parts} parts · ${sections} sections`,
   whyEyebrow: "Features",
   whyTitle: "Why this reference?",
   features: [
@@ -212,6 +213,8 @@ const en = {
   resourcesBangla: "Bangla translation ↗",
   resourcesNote: "Star counts change, so they are not shown. Check each repo's license before you reuse its code or text.",
   lessonCode: "Code and tests on GitHub ↗",
+  lessonEnglishNote: "This lesson is written in English.",
+  lessonEnglishParts: "Parts in বাংলা",
   lessonCredit: "Lesson text from AI Engineering from Scratch by Rohit Ghumare and contributors, under the",
 
   // Contents page.
@@ -351,6 +354,9 @@ const bn: Dict = {
   themeToDark: "ডার্ক থিমে যান",
   themeGeneric: "থিম বদলান",
   installApp: "এই সাইটটা অ্যাপ হিসেবে ইনস্টল করুন",
+  offlineNotice:
+    "আপনি অফলাইনে আছেন। পার্টগুলো, সূচিপত্র আর ইন্টারভিউ প্রশ্ন এই ডিভাইসে সেভ করা আছে। রোডম্যাপের লেসন আগে পড়া থাকলেই খুলবে।",
+  offlineLessonTitle: "এই ডিভাইসে সেভ করা নেই: ইন্টারনেট লাগবে",
 
   partsNav: "পার্টগুলো",
   part: (n: string) => `পার্ট ${n}`,
@@ -368,7 +374,7 @@ const bn: Dict = {
   searchUnavailable: "এখন সার্চ কাজ করছে না।",
   searchType: "১৮টি পার্টে খুঁজতে লিখুন।",
   searchLoading: "লোড হচ্ছে…",
-  searchNone: "কিছু পাওয়া যায়নি।",
+  searchNone: "কিছু পাওয়া যায়নি। বানান দেখুন, অথবা কোনো পার্টের নাম লিখে দেখুন, যেমন “RAG”।",
   searchClose: "সার্চ বন্ধ করুন",
   searchResults: "সার্চের ফলাফল",
 
@@ -388,8 +394,6 @@ const bn: Dict = {
   coverTag: "AI ENGINEERING · REFERENCE",
   coverTitle: ["Applied", "AI", "Engineering"],
   coverSub: "টোকেন থেকে এজেন্ট পর্যন্ত · বাংলা + English",
-  coverLabel: "ভেতরে আছে",
-  coverValue: (parts: string, sections: string) => `${parts}টি পার্ট · ${sections}টি সেকশন`,
   whyEyebrow: "বৈশিষ্ট্য",
   whyTitle: "কেন এই রেফারেন্স?",
   features: [
@@ -462,6 +466,8 @@ const bn: Dict = {
   resourcesBangla: "বাংলা অনুবাদ ↗",
   resourcesNote: "স্টারের সংখ্যা বদলায়, তাই দেখানো হয়নি। কোনো রিপোর কোড বা লেখা আবার ব্যবহার করার আগে তার লাইসেন্স দেখে নিন।",
   lessonCode: "GitHub-এ কোড আর টেস্ট ↗",
+  lessonEnglishNote: "এই লেসনটা English-এ লেখা। বাংলা ব্যাখ্যা চাইলে পার্টগুলো দেখুন: সেখানে প্রতিটি বিষয়ের সহজ বাংলা আছে।",
+  lessonEnglishParts: "পার্টগুলো",
   lessonCredit: "লেসনের লেখা English-এ, AI Engineering from Scratch থেকে নেওয়া। লেখক Rohit Ghumare ও সহযোগীরা। লাইসেন্স:",
 
   contentsTitle: "সম্পূর্ণ সূচিপত্র",

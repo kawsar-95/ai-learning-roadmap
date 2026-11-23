@@ -42,13 +42,31 @@ export function LessonCheck({ lessonKey, title, lang }: { lessonKey: string; tit
       aria-label={done ? ui.roadmapUnmarkLesson(title) : ui.roadmapMarkLesson(title)}
       onClick={() => toggleLesson(lessonKey)}
       className={
-        "grid size-6 shrink-0 place-items-center rounded-full border text-[12px] transition-colors " +
+        // On touch screens the 24 px circle keeps its look and gets a 44 px hit area.
+        "relative grid size-6 shrink-0 place-items-center rounded-full border text-[12px] transition-colors pointer-coarse:after:absolute pointer-coarse:after:-inset-2.5 pointer-coarse:after:content-[''] " +
         (done
           ? "border-accent bg-accent text-on-accent"
           : "border-border-strong text-transparent hover:border-accent hover:text-accent")
       }
     >
       <span aria-hidden="true">✓</span>
+    </button>
+  );
+}
+
+/** The lesson page's own toggle: the same check, with a visible label (the round check alone says nothing). */
+export function LessonDoneButton({ lessonKey, lang }: { lessonKey: string; lang: Lang }) {
+  const ui = UI[lang];
+  const done = useRoadmapProgress().has(lessonKey);
+  return (
+    <button
+      type="button"
+      aria-pressed={done}
+      onClick={() => toggleLesson(lessonKey)}
+      className={`${FLAT_BUTTON} pointer-coarse:min-h-11 ${done ? "border-accent text-accent hover:opacity-90" : FLAT_BUTTON_IDLE}`}
+    >
+      <span aria-hidden="true">✓</span>
+      {done ? ui.markedRead : ui.markRead}
     </button>
   );
 }

@@ -206,7 +206,7 @@ export function SectionView({
       <header>
         <h2
           id={`${section.id}-title`}
-          className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.015em] text-balance text-text"
+          className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.02em] text-balance text-text"
         >
           {text.title}
         </h2>
@@ -217,6 +217,14 @@ export function SectionView({
         />
       </header>
 
+      {/* The voice choice comes right under the title: it decides which text the
+          reader gets, so it sits before the walk-through and the videos. */}
+      {available.length > 1 && (
+        <div className="mt-5">
+          <VoiceSwitcher value={voice} onChange={pick} available={available} lang={lang} />
+        </div>
+      )}
+
       {walkthroughPath && (
         <div className="mt-5">
           <LazyStepPlayer path={walkthroughPath} sectionId={section.id} lang={extrasLang} />
@@ -226,12 +234,6 @@ export function SectionView({
       {section.embeds && section.embeds.length > 0 && (
         <div className="mt-5">
           <EmbedList sectionId={section.id} embeds={section.embeds} lang={lang} />
-        </div>
-      )}
-
-      {available.length > 1 && (
-        <div className="mt-5">
-          <VoiceSwitcher value={voice} onChange={pick} available={available} lang={lang} />
         </div>
       )}
 

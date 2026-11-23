@@ -552,7 +552,7 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
   }
 
   const navButton = "wk-btn inline-flex min-w-0 items-center gap-1.5 px-3 py-1.5 text-[13px]";
-  const toolButton = "wk-btn inline-flex items-center gap-1.5 px-2.5 py-1 text-[12.5px]";
+  const toolButton = "wk-btn inline-flex items-center gap-1.5 px-2.5 py-1 text-[13px]";
 
   return (
     <div
@@ -603,7 +603,7 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
       )}
       {walkthrough.caption && <p className="mt-1.5 text-[12px] text-text-faint">{walkthrough.caption[lang]}</p>}
 
-      <div ref={frameRef} className="wk-frame mt-3 overflow-x-auto rounded-xl">
+      <div ref={frameRef} className="wk-frame mt-3 overflow-x-auto rounded-lg">
         <Scene walk={walkthrough} step={step} lang={lang} svgRef={svgRef} idBase={headingId} label={ui.walkDiagram(text.title)} />
       </div>
       <p className="wk-key mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-text-dim">
@@ -639,12 +639,12 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
         {ui.walkStepOf(index + 1, steps.length)}: {text.title}
       </p>
       <div key={index} className="voice-fade mt-4">
-        <h4 className="font-display text-[1.3rem] font-semibold leading-snug text-text">{text.title}</h4>
+        <h4 className="font-display text-[20px] font-semibold leading-snug text-text">{text.title}</h4>
         {text.body.map((html, i) => (
           <Inline key={i} as="p" html={html} className="mt-2 text-[16px] leading-[1.75] text-pretty text-text-dim" />
         ))}
         {text.points && (
-          <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[15.5px] leading-relaxed text-text marker:text-accent">
+          <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[16px] leading-relaxed text-text marker:text-accent">
             {text.points.map((html, i) => (
               <Inline key={i} as="li" html={html} />
             ))}

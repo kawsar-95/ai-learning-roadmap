@@ -12,58 +12,31 @@ const TOTAL_SOURCES = TOPICS.reduce((sum, t) => sum + t.sources.length, 0);
 const SECTION_TITLE =
   "font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text";
 const BUTTON =
-  "inline-flex items-center gap-2 rounded-[10px] px-6 py-3 text-[16px] font-semibold no-underline transition";
+  "inline-flex items-center gap-2 rounded-lg px-6 py-3 text-[16px] font-semibold no-underline transition";
 
 function partNum(lang: Lang, n: number): string {
   return fmtNum(lang, n).padStart(2, fmtNum(lang, 0));
 }
 
-/** The dark "book cover" card beside the hero text. */
+/**
+ * The dark "book cover" card beside the hero text. It is the one card with a
+ * shadow (docs/architecture.md, Design rules). It is flat otherwise: no tilt,
+ * no gradient, no glows, no network drawing. Its counts are not repeated here,
+ * because the stats row beside it already shows them.
+ */
 function CoverCard({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   const [first, accent, last] = ui.coverTitle;
   return (
-    <div className="relative mx-auto flex h-[380px] w-[280px] rotate-2 flex-col justify-between overflow-hidden rounded-[20px] bg-linear-135 from-[#1a1d1f] to-[#2d3540] p-6 text-white shadow-cover transition-transform duration-400 hover:scale-[1.02] hover:rotate-0 motion-reduce:transition-none sm:h-[460px] sm:w-[350px] sm:p-7 [[data-theme=dark]_&]:border [[data-theme=dark]_&]:border-border [[data-theme=dark]_&]:from-[#1a2025] [[data-theme=dark]_&]:to-[#0d1117]">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,color-mix(in_srgb,var(--accent)_35%,transparent)_0,transparent_50%),radial-gradient(circle_at_0%_100%,color-mix(in_srgb,var(--accent-2)_25%,transparent)_0,transparent_50%)]"
-      />
-      {/* A small network: the shape of an agent loop. */}
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 200 200"
-        className="absolute top-5 right-5 w-24 opacity-30"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.2"
-      >
-        <path d="M40 60 100 30 160 60 160 140 100 170 40 140Z M40 60 160 140 M160 60 40 140 M100 30 100 170" />
-        {[
-          [40, 60],
-          [100, 30],
-          [160, 60],
-          [160, 140],
-          [100, 170],
-          [40, 140],
-          [100, 100],
-        ].map(([cx, cy]) => (
-          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="5" fill="currentColor" />
-        ))}
-      </svg>
-      <p className="relative m-0 font-mono text-[10px] tracking-[0.2em] text-white/60">{ui.coverTag}</p>
-      <div className="relative">
+    <div className="mx-auto flex h-[380px] w-[280px] flex-col justify-between rounded-2xl bg-[#1a1d1f] p-6 text-white shadow-cover sm:h-[460px] sm:w-[350px] sm:p-7 [[data-theme=dark]_&]:border [[data-theme=dark]_&]:border-border [[data-theme=dark]_&]:bg-[#0d1117]">
+      <p className="m-0 font-mono text-[12px] tracking-[0.16em] text-white/60">{ui.coverTag}</p>
+      <div>
         <p lang="en" className="m-0 font-display text-[48px] font-bold leading-none tracking-[-0.03em] sm:text-[60px]">
           <span className="block">{first}</span>
           <span className="block text-[#5eead4] italic">{accent}</span>
           <span className="block">{last}</span>
         </p>
         <p className="mt-4 mb-0 text-[14px] text-white/75">{ui.coverSub}</p>
-      </div>
-      <div className="relative border-t border-white/15 pt-3.5">
-        <p className="m-0 font-mono text-[10px] tracking-[0.2em] text-white/50">{ui.coverLabel}</p>
-        <p className="m-0 mt-1 font-display text-[22px] font-semibold">
-          {ui.coverValue(fmtNum(lang, TOPICS.length), fmtNum(lang, TOTAL_SECTIONS))}
-        </p>
       </div>
     </div>
   );
@@ -79,16 +52,9 @@ function Hero({ lang }: { lang: Lang }) {
   ];
   return (
     <section className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-20">
-      {/* Two soft glows and a 64px grid behind the hero. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,color-mix(in_srgb,var(--accent)_12%,transparent)_0,transparent_40%),radial-gradient(circle_at_80%_60%,color-mix(in_srgb,var(--accent-2)_10%,transparent)_0,transparent_40%)]"
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(var(--border)_1px,transparent_1px),linear-gradient(90deg,var(--border)_1px,transparent_1px)] bg-size-[64px_64px] opacity-60 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
-      </div>
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <div>
-          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.025em] text-text">
+          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-text">
             <span className="block">{ui.heroLine1}</span>
             <span className="block text-text-dim">
               {ui.heroLine2}{" "}
@@ -119,7 +85,7 @@ function Hero({ lang }: { lang: Lang }) {
             {stats.map(([value, label]) => (
               <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3.5">
                 <dt className="mt-1 text-[13px] leading-snug text-text-faint">{label}</dt>
-                <dd className="m-0 font-display text-[28px] font-bold leading-none text-text">{value}</dd>
+                <dd className="m-0 font-display text-[26px] font-bold leading-none text-text">{value}</dd>
               </div>
             ))}
           </dl>

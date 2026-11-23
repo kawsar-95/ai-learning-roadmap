@@ -8,9 +8,9 @@ import source from "@/content/lessons/source.json";
 import { PHASES } from "@/lib/roadmap";
 import { CURRICULUM_URL, formatDuration, lessonHref, lessonKey } from "@/lib/roadmap-schema";
 import { renderLessonWithOutline } from "@/lib/lesson-markdown";
-import { UI, fmtNum, roadmapHref } from "@/lib/i18n";
+import { UI, fmtNum, homeHref, roadmapHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
-import { LessonCheck } from "@/components/progress/RoadmapWidgets";
+import { LessonDoneButton } from "@/components/progress/RoadmapWidgets";
 import { PrevNextLinks } from "@/components/content/PrevNext";
 import { PAGE_TITLE } from "@/components/layout/PageHeader";
 import { OutlineDetails } from "@/components/navigation/OutlineDetails";
@@ -76,7 +76,7 @@ export async function LessonPage({ params, lang }: { params: Promise<LessonParam
               {formatDuration(lesson.minutes, lang, fmt)}
             </p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <LessonCheck lessonKey={lessonKey(phase.phase, lesson.n)} title={lesson.title} lang={lang} />
+              <LessonDoneButton lessonKey={lessonKey(phase.phase, lesson.n)} lang={lang} />
               <a
                 href={`${CURRICULUM_URL}/tree/${source.commit}/phases/${phase.folder}/${lesson.dir}`}
                 target="_blank"
@@ -90,9 +90,21 @@ export async function LessonPage({ params, lang }: { params: Promise<LessonParam
           <h1 className={`mt-4 ${PAGE_TITLE}`}>{lesson.title}</h1>
         </header>
 
+        {/* The curriculum has no Bangla text, so a Bangla lesson page has an English body. Say so
+            at the top, with the way to the Bangla Parts, and mark the body as English for readers
+            of screen readers and translation tools. */}
+        {lang === "bn" && (
+          <p role="note" className="mt-6 mb-0 rounded-lg border border-border bg-bg-raised-2 px-4 py-3 text-[14px] leading-relaxed text-text-dim">
+            {ui.lessonEnglishNote}{" "}
+            <Link href={`${homeHref(lang)}#parts`} className="text-accent">
+              {ui.lessonEnglishParts} →
+            </Link>
+          </p>
+        )}
+
         {showOutline && <OutlineDetails items={outline} lang={lang} className="mt-8" />}
 
-        <div className="lesson-prose mt-8" dangerouslySetInnerHTML={{ __html: html }} />
+        <div lang="en" className="lesson-prose mt-8" dangerouslySetInnerHTML={{ __html: html }} />
 
         <div className="mt-14">
           <PrevNextLinks

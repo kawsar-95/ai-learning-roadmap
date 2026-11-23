@@ -10,7 +10,7 @@ export type Step = { id: string; title: string; label: string; node: ReactNode }
 
 const TOP = "top";
 const BUTTON =
-  "group flex-1 rounded-xl border border-border bg-bg-raised px-4 py-3 text-left no-underline transition-colors hover:border-accent motion-reduce:transition-none";
+  "group flex-1 rounded-lg border border-border bg-bg-raised px-4 py-3 text-left no-underline transition-colors hover:border-accent motion-reduce:transition-none";
 
 /** The element id that a hash points to, or null. */
 function idFromHash(hash: string): string | null {

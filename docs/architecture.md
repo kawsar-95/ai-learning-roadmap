@@ -76,10 +76,14 @@ demand.
 
 ## The build
 
-`npm run build` runs two steps:
+`npm run build` runs three steps:
 
 1. `next build` writes the site into `out/`.
-2. `node scripts/precache.mjs` writes the offline file list into `out/sw.js`
+2. `node scripts/set-html-lang.mjs` sets `<html lang="bn">` in every page under
+   `out/bn/`. One root layout serves both languages, so Next exports them all
+   with `lang="en"`; the head script fixes it after load, but a crawler or a
+   reader without JavaScript reads the static file.
+3. `node scripts/precache.mjs` writes the offline file list into `out/sw.js`
    (see [Offline use](#offline-use)).
 
 `next.config.ts` sets:
@@ -426,6 +430,34 @@ from the declutter pass
 4. A reading page puts the text first: one meta line, then the title.
 5. One accent color. Progress bars are flat teal.
 6. Nothing is listed twice. The footer does not repeat the Parts.
+
+**Scale.** `tests/design-tokens.test.ts` fails the build when a component or
+the site CSS steps outside these values. Use the nearest one; change the scale
+here and in the test together.
+
+| Role | Values |
+| --- | --- |
+| Radius | 4 px (chips, code), 6 px (`rounded-md`, small controls), 10 px (`rounded-lg`, cards and buttons), 16 px (`rounded-2xl`, panels), full (pills, dots). Tailwind's `lg` is set to 10 px in `globals.css`; `xl` is not used. |
+| Text size | 12, 13, 14, 15, 16, 17, 18, 20, 22, 26 px, and the hero's 48 and 60 px |
+| Letter-spacing | `0.06em` for small caps labels and badges, `0.16em` for eyebrow labels, `-0.02em` for headings, `-0.03em` for the hero title |
+
+**The walk-through is a sketch, on purpose.** The step-by-step player
+(`StepPlayer.tsx`, the `.wk-*` rules) is drawn as a hand-made diagram: 2 px
+ink outlines, hard offset shadows, and its own `--wk-*` colors, which encode
+the kind of each box (people, compute, memory, data, queue, guard, model).
+Rule 1 (flat cards) covers the page's cards, not this drawing. The exception
+is kept narrow by tests: offset shadows may appear only in `.wk-` rules, and
+every `--wk-*` color must exist in both themes. The scale above does not apply
+inside `.wk-*` rules.
+
+**The home page cover.** The cover card is flat and still: a solid dark
+card, the tag, the title, one line. No tilt, no gradient, no glows, no
+drawing, and no counts (the stats row beside it has them). The hero behind
+it has no glow or grid.
+
+**Bangla lessons.** The 542 curriculum lessons are English only. A Bangla
+lesson page says so in a note under its title, with a link to the Bangla
+Parts, and marks its body `lang="en"`.
 
 **Type.** Crimson Pro for headings, Inter for text, JetBrains Mono for code
 and labels, and Noto Sans Bengali for Bangla. `next/font/google` downloads

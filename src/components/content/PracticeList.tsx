@@ -79,7 +79,7 @@ function bnNum(n: number): string {
 
 const LABEL =
   "practice-label font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint";
-const BODY = "text-[14.5px] leading-relaxed";
+const BODY = "text-[15px] leading-relaxed";
 
 function PromptBox({ text, label, lang }: { text: string; label: string; lang: Lang }) {
   const textRef = useRef<HTMLPreElement>(null);
@@ -119,7 +119,7 @@ function StepItem({ step, n, lang }: { step: PracticeStep; n: number; lang: Lang
         <h6 className="m-0 text-[13px] font-semibold text-text">{ui.step(n)}</h6>
         <span
           className={
-            "rounded border px-1.5 py-px font-mono text-xs uppercase tracking-[0.1em] " +
+            "rounded border px-1.5 py-px font-mono text-xs uppercase tracking-[0.06em] " +
             (isNew ? "border-accent/50 text-accent" : "border-border-strong text-text-faint")
           }
         >

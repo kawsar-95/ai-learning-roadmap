@@ -20,7 +20,7 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
   return (
     <figure
       className={
-        "m-0 h-full overflow-hidden rounded-xl border border-border bg-bg-raised " +
+        "m-0 h-full overflow-hidden rounded-lg border border-border bg-bg-raised " +
         (short ? "mx-auto w-full max-w-[15rem]" : "")
       }
     >
@@ -44,7 +44,7 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
             {short ? (
               <span
                 aria-hidden
-                className="absolute left-3 top-3 rounded border border-border-strong px-1.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-text-faint"
+                className="absolute left-3 top-3 rounded border border-border-strong px-1.5 py-0.5 font-mono text-[12px] uppercase tracking-[0.06em] text-text-faint"
               >
                 {UI[lang].shorts}
               </span>
@@ -88,15 +88,15 @@ export function VideoCard({ video, lang }: { video: Video; lang: Lang }) {
         >
           {video.title}
         </a>
-        <p className="mt-1 flex items-center gap-2 text-[12.5px] text-text-faint">
+        <p className="mt-1 flex items-center gap-2 text-[13px] text-text-faint">
           <span className="truncate">{video.channel}</span>
           {video.seconds !== undefined && (
-            <time dateTime={isoDuration(video.seconds)} className="shrink-0 font-mono text-[11.5px]">
+            <time dateTime={isoDuration(video.seconds)} className="shrink-0 font-mono text-[12px]">
               {formatClock(video.seconds, lang)}
             </time>
           )}
           {video.lang === "bn" && (
-            <span className="shrink-0 rounded border border-voice-bangla/40 px-1.5 font-bengali text-[11px] text-voice-bangla">
+            <span className="shrink-0 rounded border border-voice-bangla/40 px-1.5 font-bengali text-[12px] text-voice-bangla">
               বাংলা
             </span>
           )}

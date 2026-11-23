@@ -84,7 +84,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen(true)}
-        className="-ml-1.5 grid size-8 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
+        className="-ml-1.5 grid size-8 pointer-coarse:size-11 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
       >
         <span className="sr-only">{ui.openParts}</span>
         <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5" fill="none">
@@ -129,7 +129,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
               ref={closeRef}
               type="button"
               onClick={() => setOpen(false)}
-              className="-mr-1.5 grid size-8 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
+              className="-mr-1.5 grid size-8 pointer-coarse:size-11 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised hover:text-text"
             >
               <span className="sr-only">{ui.closeParts}</span>
               <svg aria-hidden="true" viewBox="0 0 20 20" className="size-5" fill="none">
@@ -142,7 +142,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
               href={roadmapHref(lang)}
               onClick={() => setOpen(false)}
               prefetch={false}
-              className="mx-2 mt-4 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+              className="mx-2 mt-4 flex items-center justify-between rounded-lg border border-border bg-bg-raised min-h-11 px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.roadmap}
               <span aria-hidden="true" className="text-accent">→</span>
@@ -150,7 +150,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
             <Link
               href={resourcesHref(lang)}
               onClick={() => setOpen(false)}
-              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised min-h-11 px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.resources}
               <span aria-hidden="true" className="text-accent">→</span>
@@ -159,15 +159,15 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
               href={contentsHref(lang)}
               onClick={() => setOpen(false)}
               prefetch={false}
-              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised min-h-11 px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
-              {ui.contentsTitle}
+              {ui.contents}
               <span aria-hidden="true" className="text-accent">→</span>
             </Link>
             <Link
               href={dashboardHref(lang)}
               onClick={() => setOpen(false)}
-              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised min-h-11 px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.dashboard}
               <span aria-hidden="true" className="text-accent">→</span>
@@ -176,7 +176,7 @@ export function MobileNav({ items, lang }: { items: NavItem[]; lang: Lang }) {
               href={interviewHref(lang)}
               onClick={() => setOpen(false)}
               prefetch={false}
-              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
+              className="mx-2 mt-2 flex items-center justify-between rounded-lg border border-border bg-bg-raised min-h-11 px-3 py-2 text-sm font-medium text-text no-underline shadow-card transition-colors hover:border-accent"
             >
               {ui.interview}
               <span aria-hidden="true" className="text-accent">→</span>

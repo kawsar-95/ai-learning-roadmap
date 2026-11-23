@@ -42,7 +42,7 @@ export function SectionCheck({ sectionKey, lang }: { sectionKey: string; lang: L
   return (
     <span
       className={
-        "grid size-5 shrink-0 place-items-center rounded-full border text-[11px] transition-colors " +
+        "grid size-5 shrink-0 place-items-center rounded-full border text-[12px] transition-colors " +
         (done ? "border-accent bg-accent text-on-accent" : "border-border-strong text-transparent")
       }
     >

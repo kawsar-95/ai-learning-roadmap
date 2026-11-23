@@ -13,7 +13,7 @@ export function Callout(block: Extract<Block, { type: "callout" }>) {
   const color = VARIANT_COLOR[block.variant];
   return (
     <div
-      className="my-[18px] rounded-[10px] border-l-[3px] px-[18px] py-3.5 text-sm [&>:last-child]:mb-0"
+      className="my-[18px] rounded-lg border-l-[3px] px-[18px] py-3.5 text-sm [&>:last-child]:mb-0"
       style={{
         borderLeftColor: color,
         backgroundColor: `color-mix(in srgb, ${color} 8%, transparent)`,

@@ -5,6 +5,7 @@ import { REPO_URL, UI, contentsHref, dashboardHref, homeHref, interviewHref, res
 import type { Lang } from "@/lib/i18n";
 import { SiteHeader } from "./SiteHeader";
 import { SearchPalette } from "@/components/navigation/SearchPalette";
+import { OfflineNotice } from "./OfflineNotice";
 
 const FOOTER_LINK = "text-[14px] leading-snug text-text-dim no-underline transition-colors hover:text-accent";
 
@@ -18,7 +19,7 @@ function SiteFooter({ lang }: { lang: Lang }) {
   const links: [string, string][] = [
     [roadmapHref(lang), ui.roadmap],
     [resourcesHref(lang), ui.resources],
-    [contentsHref(lang), ui.contentsTitle],
+    [contentsHref(lang), ui.contents],
     [dashboardHref(lang), ui.dashboard],
     [interviewHref(lang), ui.interview],
   ];
@@ -29,7 +30,7 @@ function SiteFooter({ lang }: { lang: Lang }) {
           <Link href={homeHref(lang)} className="inline-flex items-center gap-2.5 text-text no-underline">
             <span
               aria-hidden="true"
-              className="grid size-8 place-items-center rounded-[9px] bg-accent font-display text-[15px] font-bold italic text-on-accent"
+              className="grid size-8 place-items-center rounded-lg bg-accent font-display text-[15px] font-bold italic text-on-accent"
             >
               Ai
             </span>
@@ -95,6 +96,7 @@ export function SiteShell({
         searchSlot={<SearchPalette lang={lang} />}
         languageSwitchToHome={languageSwitchToHome}
       />
+      <OfflineNotice lang={lang} />
       {/* The inline style beats the global :focus-visible rule for the skip-link target. */}
       <main id="content" tabIndex={-1} style={{ outline: "none" }} className="min-w-0 flex-1">
         {children}

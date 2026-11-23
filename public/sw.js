@@ -20,12 +20,36 @@ const DOWNLOADS = 6;
 // Site URL -> cache key. The key holds the revision, so a changed file gets a new key.
 const KEYS = new Map(PRECACHE_MANIFEST.map((e) => [SCOPE + e.url, `${SCOPE}${e.url}?__rev=${e.rev}`]));
 
-const OFFLINE_HTML = `<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Offline — AI Engineering</title>
+// The page for a URL that is not saved. It uses the site's colors, speaks the
+// language of the URL, and links to what is saved: the home page, the Parts
+// list on it, and the contents page.
+const OFFLINE_TEXT = {
+  en: {
+    lang: "en",
+    title: "Offline — AI Engineering",
+    h1: "You are offline",
+    body: "This page is not saved on this device. The Parts, the contents page, and the interview questions are; the roadmap lessons need a connection.",
+    links: [["", "Home"], ["#parts", "Parts"], ["contents/", "Contents"]],
+  },
+  bn: {
+    lang: "bn",
+    title: "অফলাইন — AI Engineering",
+    h1: "আপনি অফলাইনে আছেন",
+    body: "এই পাতাটা এই ডিভাইসে সেভ করা নেই। পার্টগুলো, সূচিপত্র আর ইন্টারভিউ প্রশ্ন সেভ করা আছে; রোডম্যাপের লেসনের জন্য ইন্টারনেট লাগবে।",
+    links: [["bn/", "হোম"], ["bn/#parts", "পার্টগুলো"], ["bn/contents/", "সূচিপত্র"]],
+  },
+};
+
+function offlineHtml(url) {
+  const bangla = new URL(url).pathname.startsWith(SCOPE + "bn/");
+  const t = bangla ? OFFLINE_TEXT.bn : OFFLINE_TEXT.en;
+  const links = t.links.map(([href, label]) => `<a href="${SCOPE}${href}">${label}</a>`).join(" · ");
+  return `<!doctype html><html lang="${t.lang}"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>${t.title}</title>
 <style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0e1115;color:#e6e6e6;font:16px/1.6 system-ui,sans-serif;padding:24px;text-align:center}
-a{color:#2dd4bf}@media (prefers-color-scheme:light){body{background:#faf7f2;color:#1a1d1f}a{color:#0f766e}}</style></head>
-<body><main><h1>You are offline</h1><p>This page is not saved on this device.</p>
-<p><a href="${SCOPE}">Go to the home page</a></p></main></body></html>`;
+main{max-width:30rem}p{color:#b8bfc7}a{color:#2dd4bf;display:inline-block;padding:10px 6px}@media (prefers-color-scheme:light){body{background:#faf7f2;color:#1a1d1f}p{color:#4a5158}a{color:#0f766e}}</style></head>
+<body><main><h1>${t.h1}</h1><p>${t.body}</p><p>${links}</p></main></body></html>`;
+}
 
 self.addEventListener("install", (event) => {
   event.waitUntil(precache().then(() => self.skipWaiting()));
@@ -103,7 +127,7 @@ async function networkFirst(request) {
     const cached = await caches.match(request, { ignoreSearch: true });
     if (cached) return cached;
     if (request.mode === "navigate") {
-      return new Response(OFFLINE_HTML, { headers: { "Content-Type": "text/html; charset=utf-8" } });
+      return new Response(offlineHtml(request.url), { headers: { "Content-Type": "text/html; charset=utf-8" } });
     }
     // The router then loads the full page, which the cache has.
     throw error;
