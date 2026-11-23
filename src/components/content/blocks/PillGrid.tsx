@@ -12,7 +12,7 @@ export function PillGrid(block: Extract<Block, { type: "pillGrid" }>) {
           <Inline
             as="div"
             html={item.label}
-            className="mb-0.5 font-mono text-[11px] uppercase tracking-[0.06em] text-[var(--text-faint)]"
+            className="mb-0.5 font-mono text-[12px] uppercase tracking-[0.06em] text-[var(--text-faint)]"
           />
           <Inline as="div" html={item.value} className="text-base font-semibold text-[var(--text)]" />
         </div>

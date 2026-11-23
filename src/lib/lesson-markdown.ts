@@ -85,6 +85,36 @@ function plainText(tokens: Token[]): string {
 }
 
 /**
+ * The lines under a lesson's title (`**Type:** Build`, `**Time:** ~90 minutes`,
+ * ...) are one paragraph in Markdown, so they run together on the page. When
+ * every line of a paragraph starts with a bold label, return them as a
+ * definition list; otherwise return null and the paragraph renders as usual.
+ */
+function metaList(tokens: Token[], raw: string, inline: (tokens: Token[]) => string): string | null {
+  const lines = raw.trim().split("\n");
+  if (lines.length < 2 || !lines.every((line) => /^\*\*[^*]+:\*\*/.test(line))) return null;
+  const items: string[] = [];
+  let label: Token | null = null;
+  let value: Token[] = [];
+  const flush = () => {
+    if (!label) return;
+    const name = plainText([label]).replace(/:\s*$/, "").trim();
+    items.push(`<div><dt>${escape(name)}</dt><dd>${inline(value).trim()}</dd></div>`);
+  };
+  for (const token of tokens) {
+    if (token.type === "strong") {
+      flush();
+      label = token;
+      value = [];
+    } else {
+      value.push(token);
+    }
+  }
+  flush();
+  return items.length === lines.length ? `<dl class="lesson-meta">${items.join("")}</dl>\n` : null;
+}
+
+/**
  * The lesson body as HTML, without its first "# Title" line (the page shows the title),
  * and the list of its h2 headings. Every heading gets an id.
  * Raw HTML in the source is escaped: the text comes from another repository.
@@ -103,6 +133,10 @@ export function renderLessonWithOutline(markdown: string, source: LessonSource):
     },
     renderer: {
       html: ({ text }) => escape(text),
+      paragraph({ tokens, raw }) {
+        const meta = metaList(tokens, raw, (list) => this.parser.parseInline(list));
+        return meta ?? `<p>${this.parser.parseInline(tokens)}</p>\n`;
+      },
       heading({ tokens, depth }) {
         const title = plainText(tokens).trim();
         const id = slug(title);

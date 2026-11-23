@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { headingSlugger, renderLesson, renderLessonWithOutline, resolveLessonHref } from "../src/lib/lesson-markdown.ts";
 import type { LessonSource } from "../src/lib/lesson-markdown.ts";
 
@@ -91,6 +91,40 @@ test("every roadmap lesson has its copied text, renders, and links only to lesso
       assert.equal(new Set(ids).size, ids.length, `${p.folder}/${l.dir} repeats a heading id`);
       assert.ok(outline.length >= 3, `${p.folder}/${l.dir} has ${outline.length} h2 parts`);
       for (const item of outline) assert.ok(ids.includes(item.id), `${p.folder}/${l.dir} outline id ${item.id}`);
+      count++;
+    }
+  }
+  assert.equal(count, 542);
+});
+
+test("renderLesson turns the Type / Language / Time lines into a definition list", () => {
+  const md = "# T\n\n> Hook.\n\n**Type:** Build\n**Languages:** Python, `Rust`\n**Time:** ~90 minutes\n\n## A\n";
+  const html = renderLesson(md, src);
+  assert.match(html, /<dl class="lesson-meta">/);
+  assert.match(html, /<div><dt>Type<\/dt><dd>Build<\/dd><\/div>/);
+  assert.match(html, /<dt>Languages<\/dt><dd>Python, <code>Rust<\/code><\/dd>/);
+  assert.match(html, /<dt>Time<\/dt><dd>~90 minutes<\/dd>/);
+  assert.doesNotMatch(html, /<strong>Type/);
+});
+
+test("renderLesson leaves an ordinary bold-led paragraph alone", () => {
+  const html = renderLesson("# T\n\n**Note:** one line only.\n\nText **bold:** inside.\n", src);
+  assert.doesNotMatch(html, /lesson-meta/);
+  assert.match(html, /<p><strong>Note:<\/strong> one line only\.<\/p>/);
+});
+
+test("every lesson's metadata block renders as a definition list with Type and Time", () => {
+  const root = content("");
+  let count = 0;
+  for (const folder of readdirSync(root)) {
+    if (!statSync(new URL(folder, root)).isDirectory()) continue;
+    const dir = new URL(`${folder}/`, root);
+    for (const file of readdirSync(dir)) {
+      if (!file.endsWith(".md")) continue;
+      const html = renderLesson(readFileSync(new URL(file, dir), "utf8"), { folder, dir: file.replace(/\.md$/, ""), commit: "abc", lang: "en" });
+      const meta = html.match(/<dl class="lesson-meta">[\s\S]*?<\/dl>/)?.[0] ?? "";
+      assert.match(meta, /<dt>Type<\/dt>/, `${folder}/${file} has no Type`);
+      assert.match(meta, /<dt>Time<\/dt>/, `${folder}/${file} has no Time`);
       count++;
     }
   }

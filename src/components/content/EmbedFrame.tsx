@@ -57,7 +57,7 @@ export function EmbedFrame({ embed, lang }: { embed: Embed; lang: Lang }) {
   }, [embed.autoload, frameable, loaded]);
 
   return (
-    <figure className="m-0 overflow-hidden rounded-xl border border-border bg-bg-raised">
+    <figure className="m-0 overflow-hidden rounded-lg border border-border bg-bg-raised">
       <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b border-border px-4 py-3">
         <span className="min-w-0">
           <span className="block text-[15px] font-medium leading-snug text-text">{embed.title}</span>
@@ -111,7 +111,7 @@ export function EmbedFrame({ embed, lang }: { embed: Embed; lang: Lang }) {
                   </svg>
                   {ui.liveLoad}
                 </button>
-                <p className="m-0 text-[12.5px] text-text-faint">
+                <p className="m-0 text-[13px] text-text-faint">
                   {ui.liveLoadHint} {ui.liveWide}
                 </p>
               </>

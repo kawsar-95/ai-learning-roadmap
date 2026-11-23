@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import type { NavItem } from "@/lib/topics";
-import { UI, contentsHref, dashboardHref, homeHref, interviewHref, roadmapHref } from "@/lib/i18n";
+import { UI, contentsHref, dashboardHref, homeHref, interviewHref, resourcesHref, roadmapHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { LanguageSwitch, LanguageSwitchFallback } from "./LanguageSwitch";
 import { MobileNav } from "./MobileNav";
@@ -13,7 +13,7 @@ import { ThemeToggle } from "./ThemeToggle";
 function MenuButtonPlaceholder() {
   return (
     <div className="lg:hidden">
-      <span aria-hidden="true" className="-ml-1.5 grid size-8 place-items-center text-text-faint">
+      <span aria-hidden="true" className="-ml-1.5 grid size-8 pointer-coarse:size-11 place-items-center text-text-faint">
         <svg viewBox="0 0 20 20" className="size-5" fill="none">
           <path d="M3 5.5h14M3 10h14M3 14.5h9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
@@ -52,14 +52,14 @@ export function SiteHeader({
         <Suspense fallback={<MenuButtonPlaceholder />}>
           <MobileNav items={items} lang={lang} />
         </Suspense>
-        <Link href={homeHref(lang)} className="flex min-w-0 items-center gap-2.5 text-text no-underline">
+        <Link href={homeHref(lang)} className="flex min-w-0 items-center gap-2.5 text-text no-underline pointer-coarse:min-h-11">
           <span
             aria-hidden="true"
-            className="grid size-9 shrink-0 place-items-center rounded-[10px] bg-accent font-display text-[17px] font-bold italic leading-none text-on-accent shadow-card"
+            className="grid size-9 shrink-0 place-items-center rounded-lg bg-accent font-display text-[17px] font-bold italic leading-none text-on-accent shadow-card"
           >
             Ai
           </span>
-          <span className="truncate font-display text-[19px] font-bold leading-none tracking-tight">
+          <span className="truncate font-display text-[20px] font-bold leading-none tracking-tight">
             {UI[lang].siteName}
           </span>
         </Link>
@@ -72,6 +72,9 @@ export function SiteHeader({
               See src/components/content/PrevNext.tsx. */}
           <Link href={roadmapHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].roadmap}
+          </Link>
+          <Link href={resourcesHref(lang)} className={NAV_LINK}>
+            {UI[lang].resources}
           </Link>
           <Link href={contentsHref(lang)} prefetch={false} className={NAV_LINK}>
             {UI[lang].contents}

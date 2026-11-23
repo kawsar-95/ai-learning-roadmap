@@ -181,3 +181,23 @@ test("sw: a new build downloads only changed files and deletes old ones", async 
   const keys = [...sw.stores.get("precache-v1")!.keys()].sort();
   assert.deepEqual(keys, ["https://x.test/repo/?__rev=a", "https://x.test/repo/topics/inference/?__rev=c"]);
 });
+
+test("sw: the offline page for a Bangla URL is in Bangla and links to what is saved", async () => {
+  const sw = loadWorker(MANIFEST);
+  await sw.run("install");
+  await sw.run("activate");
+  sw.state.online = false;
+  const html = await (await sw.get("/repo/bn/roadmap/00-setup/01-env/")).text();
+  assert.match(html, /<html lang="bn">/);
+  assert.match(html, /আপনি অফলাইনে আছেন/);
+  assert.match(html, /href="\/repo\/bn\/contents\/"/);
+  const en = await (await sw.get("/repo/roadmap/00-setup/01-env/")).text();
+  assert.match(en, /<html lang="en">/);
+  assert.match(en, /href="\/repo\/contents\/"/);
+});
+
+test("manifest: has a stable id and a language", () => {
+  const m = manifest();
+  assert.equal(m.id, "./");
+  assert.equal(m.lang, "en");
+});

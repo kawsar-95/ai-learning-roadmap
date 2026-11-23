@@ -9,7 +9,7 @@ export type Neighbor = { slug: string; part: number; title: string };
 export type NeighborLink = { href: string; label: string; title: string };
 
 const CARD =
-  "group block rounded-xl border border-border bg-bg-raised px-4 py-3 no-underline transition-colors hover:border-accent motion-reduce:transition-none";
+  "group block rounded-lg border border-border bg-bg-raised px-4 py-3 no-underline transition-colors hover:border-accent motion-reduce:transition-none";
 const LABEL = "block text-[13px] text-text-faint";
 const TITLE = "mt-0.5 block font-display text-[17px] leading-snug text-text transition-colors group-hover:text-accent";
 

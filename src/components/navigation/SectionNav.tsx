@@ -92,7 +92,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
                   aria-current={isActive ? "location" : undefined}
                   className={
                     "-ml-px block border-l-2 py-1 pr-2 leading-snug no-underline transition-colors " +
-                    (item.level === 3 ? "pl-7 text-[12.5px] " : "pl-4 text-[13.5px] ") +
+                    (item.level === 3 ? "pl-7 text-[13px] " : "pl-4 text-[14px] ") +
                     (isActive
                       ? "border-accent text-text"
                       : "border-transparent text-text-dim hover:border-border-strong hover:text-text")

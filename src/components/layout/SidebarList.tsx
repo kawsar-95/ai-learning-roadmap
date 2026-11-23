@@ -51,7 +51,7 @@ export function SidebarList({
                 // to open. The link is prefetched on hover instead.
                 prefetch={false}
                 className={
-                  "group flex items-baseline gap-2.5 rounded-r-md border-l-2 px-3 py-1.5 no-underline transition-colors " +
+                  "group flex items-baseline gap-2.5 rounded-r-md border-l-2 px-3 py-1.5 pointer-coarse:min-h-11 pointer-coarse:items-center no-underline transition-colors " +
                   (active
                     ? "border-accent bg-bg-raised-2"
                     : "border-transparent hover:border-border-strong hover:bg-bg-raised-2/60")
@@ -60,7 +60,7 @@ export function SidebarList({
                 <span
                   aria-hidden="true"
                   className={
-                    "w-5 shrink-0 font-mono text-[11px] tabular-nums " +
+                    "w-5 shrink-0 font-mono text-[12px] tabular-nums " +
                     (active ? "text-accent" : "text-text-faint")
                   }
                 >

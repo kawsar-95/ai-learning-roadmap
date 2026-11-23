@@ -168,7 +168,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
         aria-expanded={open}
         aria-keyshortcuts="Control+K Meta+K"
         onClick={openPalette}
-        className="grid size-8 shrink-0 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised-2 hover:text-text"
+        className="grid size-8 shrink-0 pointer-coarse:size-11 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised-2 hover:text-text"
         title={`${ui.search} · Ctrl/⌘ K`}
       >
         <svg aria-hidden="true" viewBox="0 0 20 20" className="size-[18px]" fill="none">
@@ -190,7 +190,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
             aria-modal="true"
             aria-labelledby={titleId}
             onKeyDown={onDialogKeyDown}
-            className="relative flex max-h-[min(34rem,80vh)] w-full max-w-xl flex-col overflow-hidden rounded-xl border border-border-strong bg-bg-raised shadow-2xl shadow-black/60"
+            className="relative flex max-h-[min(34rem,80vh)] w-full max-w-xl flex-col overflow-hidden rounded-lg border border-border-strong bg-bg-raised shadow-2xl shadow-black/60"
           >
             <h2 id={titleId} className="sr-only">
               {ui.searchAll}
@@ -227,7 +227,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded border border-border-strong px-1.5 py-1 font-mono text-[11px] leading-none text-text-faint transition-colors hover:text-text"
+                className="rounded border border-border-strong px-1.5 py-1 font-mono text-[12px] leading-none text-text-faint transition-colors hover:text-text"
               >
                 <span aria-hidden="true">Esc</span>
                 <span className="sr-only">{ui.searchClose}</span>
@@ -257,7 +257,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
                       : "")
                   }
                 >
-                  <div className="font-mono text-[11px] uppercase tracking-wide text-text-faint">
+                  <div className="font-mono text-[12px] uppercase tracking-wide text-text-faint">
                     {ui.part(fmtNum(lang, hit.part))} · {hit.topic}
                   </div>
                   <div className={"mt-0.5 text-[15px] " + (i === active ? "text-text" : "text-text-dim")}>

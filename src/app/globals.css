@@ -146,6 +146,11 @@
   --shadow-card-hover: 0 0 #0000;
   --shadow-cover: var(--shadow-lg);
 
+  /* The radius scale: 4 (chips, code), 6 (small controls), 10 (cards and
+     buttons), 16 (panels), full (pills). Tailwind's `lg` is 10 here, not 8;
+     `xl` is not used. See Design rules in docs/architecture.md. */
+  --radius-lg: 10px;
+
   --font-display: var(--font-crimson), var(--font-noto-bengali), ui-serif, Georgia, serif;
   --font-sans: var(--font-inter), var(--font-noto-bengali), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-jb), var(--font-noto-bengali), ui-monospace, SFMono-Regular, monospace;
@@ -302,6 +307,15 @@ html {
 .lesson-prose th, .lesson-prose td { border: 1px solid var(--border); padding: 6px 10px; text-align: left; vertical-align: top; }
 .lesson-prose th { color: var(--text); background: var(--bg-raised-2); font-weight: 600; }
 .lesson-prose .lesson-math { overflow-x: auto; overflow-y: hidden; color: var(--text); }
+/* A wide inline formula (a fraction under a root, a long sum) cannot wrap.
+   Let it scroll inside its own box instead of widening the page.
+   Display formulas already scroll inside .lesson-math. */
+.lesson-prose :not(.katex-display) > .katex { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: bottom; }
+/* The "Type / Language / Prerequisites / Time" lines at the top of a lesson. */
+.lesson-prose .lesson-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; font-size: 14px; line-height: 1.5; }
+.lesson-prose .lesson-meta > div { display: flex; gap: 6px; min-width: 0; }
+.lesson-prose .lesson-meta dt { flex: none; color: var(--text-faint); font-weight: 500; }
+.lesson-prose .lesson-meta dd { margin: 0; min-width: 0; color: var(--text); }
 .lesson-prose .lesson-figure { border: 1px dashed var(--border-strong); border-radius: 10px; padding: 10px 14px; font-size: 15px; }
 
 /* Code blocks: Shiki emits <pre class="shiki ..."> with its own background
@@ -338,12 +352,16 @@ html {
   right: 10px;
   z-index: 1;
   font-family: var(--font-mono-jb), var(--font-noto-bengali), ui-monospace, monospace;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #8a867f;
+  color: #9a9d9f;
   pointer-events: none;
 }
+/* Shiki's github-dark-dimmed comment color (#768390) is 3.9:1 on the code
+   background. The token colors are inline in the Part JSON, so a rule that
+   wins over inline styles is the only way to lift it. 5.1:1 on #22272e. */
+.code-block .shiki span[style*="color:#768390"] { color: #8b98a5 !important; }
 
 /* ─────────────────────────────────────────────────────────────────────────
    Diagrams in the light theme (src/components/content/blocks/Diagram.tsx).
@@ -803,7 +821,7 @@ html {
 .wk-tkl {
   max-width: 84px;
   color: var(--text-faint);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.25;
 }
 .wk-tk[data-state="done"] .wk-tkl {
@@ -824,3 +842,6 @@ html {
     transition: none;
   }
 }
+
+/* A roadmap lesson link that cannot open offline (OfflineNotice.tsx). */
+a[data-online-only] { opacity: 0.55; }

@@ -61,7 +61,7 @@ Run all three before you push. All three must pass.
 
 | Command | What it checks |
 | --- | --- |
-| `npm test` | 216 tests in `tests/`: the libraries, and rules for the real content (quizzes, videos, interview questions, lessons), and that `src/content/system-design.json` is what `scripts/system-design` builds, and that the walk-through files of Parts 1 to 17 are what `scripts/walkthroughs` builds |
+| `npm test` | 232 tests in `tests/`: the libraries, and rules for the real content (quizzes, videos, interview questions, lessons), and that `src/content/system-design.json` is what `scripts/system-design` builds, and that the walk-through files of Parts 1 to 17 are what `scripts/walkthroughs` builds |
 | `npm run lint` | ESLint with the Next.js core web vitals and TypeScript rules |
 | `npm run build` | The type check, every content file against its schema, and every page in both languages |
 

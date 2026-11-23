@@ -131,7 +131,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                   (path.kind === "start" ? "border-accent sm:col-span-2" : "border-border")
                 }
               >
-                <span className="font-mono text-[12px] tracking-[0.12em] text-accent uppercase">{label}</span>
+                <span className="font-mono text-[12px] tracking-[0.16em] text-accent uppercase">{label}</span>
                 <h3 className="m-0 mt-1 font-display text-[20px] font-bold leading-snug text-text">{text.title}</h3>
                 <p className="mt-2 mb-0 flex-1 text-[15px] text-text-dim">{text.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-medium">
@@ -192,12 +192,12 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                       className="rounded-2xl border border-border bg-bg-raised p-6 shadow-card group-data-[core-only=true]/filter:data-[core=false]:hidden sm:p-7"
                     >
                       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <span className="font-mono text-[12px] tracking-[0.12em] text-accent uppercase">
+                        <span className="font-mono text-[12px] tracking-[0.16em] text-accent uppercase">
                           {ui.roadmapPhase(fmt(phase.phase))}
                         </span>
                         <span
                           className={
-                            "rounded-full border px-2 py-0.5 text-[11px] font-medium " +
+                            "rounded-full border px-2 py-0.5 text-[12px] font-medium " +
                             (phase.core ? "border-accent text-accent" : "border-border-strong text-text-faint")
                           }
                         >

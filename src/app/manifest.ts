@@ -13,6 +13,10 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Learn AI",
     description:
       "Eighteen reference parts for applied AI engineers. Each topic in three voices: technical, layman, and বাংলা.",
+    // A stable identity: the install stays the same app if start_url changes later.
+    id: "./",
+    lang: "en",
+    categories: ["education"],
     start_url: "./",
     scope: "./",
     display: "standalone",
