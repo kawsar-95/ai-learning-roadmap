@@ -7,7 +7,7 @@ import { SiteHeader } from "./SiteHeader";
 import { SearchPalette } from "@/components/navigation/SearchPalette";
 import { OfflineNotice } from "./OfflineNotice";
 
-const FOOTER_LINK = "text-[14px] leading-snug text-text-dim no-underline transition-colors hover:text-accent";
+const FOOTER_LINK = "inline-block py-1 text-[14px] leading-snug text-text-dim no-underline transition-colors hover:text-accent";
 
 /**
  * The footer: the brand with one line about the site, the site links in one

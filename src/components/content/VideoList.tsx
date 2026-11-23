@@ -14,7 +14,7 @@ export function VideoList({ videos, sectionId, lang }: { videos: Video[]; sectio
       <summary className="cursor-pointer py-2 marker:text-accent">
         <h3
           id={headingId}
-          className="inline font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint"
+          className="inline font-mono text-xs font-medium text-text-faint"
         >
           {UI[lang].watch(videos.length)}
         </h3>
@@ -31,7 +31,7 @@ export function VideoList({ videos, sectionId, lang }: { videos: Video[]; sectio
       {shorts.length > 0 && (
         <>
           {full.length > 0 && (
-            <h4 className="mt-5 font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint">
+            <h4 className="mt-5 font-mono text-xs font-medium text-text-faint">
               {UI[lang].shorts}
             </h4>
           )}

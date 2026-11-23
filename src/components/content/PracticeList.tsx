@@ -78,7 +78,7 @@ function bnNum(n: number): string {
 }
 
 const LABEL =
-  "practice-label font-mono text-xs font-medium uppercase tracking-[0.16em] text-text-faint";
+  "practice-label font-mono text-xs font-medium text-text-faint";
 const BODY = "text-[15px] leading-relaxed";
 
 function PromptBox({ text, label, lang }: { text: string; label: string; lang: Lang }) {
@@ -180,7 +180,7 @@ function PracticeCard({ text, index, lang }: { text: PracticeText; index: number
       </div>
 
       <p className={`mt-4 text-text ${BODY}`}>
-        <span aria-hidden="true" className="mr-1.5 text-good">✔</span>
+        <span aria-hidden="true" className="mr-1.5 text-good">✓</span>
         <span className="font-medium">{ui.done}</span>{" "}
         <Inline html={text.done} className="text-text-dim" />
       </p>
