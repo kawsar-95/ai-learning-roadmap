@@ -49,6 +49,9 @@ export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
 /** The GitHub profile of the author. */
 export const AUTHOR_GITHUB_URL = "https://github.com/kawsar-95";
 
+/** The author's Agentic QA tutorial. */
+export const AUTHOR_GUIDE_URL = "https://kawsar-95.github.io/ai-testing-guide/";
+
 /**
  * The author's other profiles. An empty URL hides its button, so fill these
  * in rather than linking to a placeholder.
@@ -259,6 +262,7 @@ const en = {
   readSection: "Read the section →",
   authorBy: "Built and maintained by",
   authorGithub: "GitHub ↗",
+  authorGuide: "Agentic QA guide",
   authorHeading: "About the author",
   authorRole: "QA Automation Engineer at Shomvob Technologies Ltd.",
   authorBio:
@@ -518,6 +522,7 @@ const bn: Dict = {
   readSection: "সেকশন পড়ুন →",
   authorBy: "যিনি বানিয়েছেন ও দেখভাল করেন",
   authorGithub: "GitHub ↗",
+  authorGuide: "Agentic QA গাইড",
   authorHeading: "লেখক পরিচিতি",
   authorRole: "QA Automation Engineer, Shomvob Technologies Ltd.",
   authorBio:
