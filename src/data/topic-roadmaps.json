@@ -1,0 +1,1430 @@
+{
+  "path": [
+    {
+      "en": "Understand models",
+      "bn": "মডেল বোঝা",
+      "parts": [
+        "llm-fundamentals",
+        "visual-learning-resources"
+      ]
+    },
+    {
+      "en": "Talk to models well",
+      "bn": "মডেলের সঙ্গে ভালো করে কথা বলা",
+      "parts": [
+        "prompt-engineering",
+        "context-engineering"
+      ]
+    },
+    {
+      "en": "Give models knowledge and tools",
+      "bn": "মডেলকে জ্ঞান আর টুল দেওয়া",
+      "parts": [
+        "rag-knowledge-systems",
+        "tool-use-and-integrations",
+        "multimodal-engineering"
+      ]
+    },
+    {
+      "en": "Build agents",
+      "bn": "এজেন্ট বানানো",
+      "parts": [
+        "agents-and-agentic-systems"
+      ]
+    },
+    {
+      "en": "Make it trustworthy",
+      "bn": "ভরসাযোগ্য করা",
+      "parts": [
+        "evaluation-engineering",
+        "safety-security-and-guardrails"
+      ]
+    },
+    {
+      "en": "Ship and run it",
+      "bn": "চালু করা আর চালিয়ে যাওয়া",
+      "parts": [
+        "system-design",
+        "ai-application-architecture",
+        "deploying-and-operating-ai-systems",
+        "inference",
+        "llmops-and-observability",
+        "cost-and-performance-optimization"
+      ]
+    },
+    {
+      "en": "Go deeper",
+      "bn": "আরও গভীরে যাওয়া",
+      "parts": [
+        "fine-tuning-roadmap",
+        "ai-engineering-book"
+      ]
+    }
+  ],
+  "roadmaps": {
+    "llm-fundamentals": {
+      "before": [],
+      "after": [
+        "prompt-engineering",
+        "context-engineering"
+      ],
+      "en": {
+        "goal": "Understand what a model actually receives and returns, so you can pick one and call it with confidence."
+      },
+      "bn": {
+        "goal": "মডেল আসলে কী পায় আর কী ফেরত দেয় তা বোঝা, যাতে ভরসার সঙ্গে একটি মডেল বেছে নিয়ে কল করতে পারেন।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "How a model reads and answers",
+            "goal": "Explain tokens, context cost, and the sampling settings that change an answer.",
+            "build": "Send one prompt at three temperatures, count its tokens, and note how the answers and the cost change."
+          },
+          "bn": {
+            "title": "মডেল কীভাবে পড়ে আর উত্তর দেয়",
+            "goal": "টোকেন, কনটেক্সটের খরচ, আর উত্তর বদলে দেওয়া স্যাম্পলিং সেটিং ব্যাখ্যা করা।",
+            "build": "একই প্রম্পট তিনটি temperature-এ পাঠান, তার টোকেন গুনুন, আর দেখুন উত্তর ও খরচ কীভাবে বদলায়।"
+          },
+          "targets": [
+            "s1",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Choose a model",
+            "goal": "Compare model families and decide between closed and open-weight models.",
+            "build": "Write a one-page comparison of two models for a task you care about, with price and context size."
+          },
+          "bn": {
+            "title": "মডেল বেছে নেওয়া",
+            "goal": "মডেল ফ্যামিলি তুলনা করা আর closed ও open-weight মডেলের মধ্যে সিদ্ধান্ত নেওয়া।",
+            "build": "আপনার পছন্দের একটি কাজের জন্য দুটি মডেলের এক পাতার তুলনা লিখুন, দাম আর কনটেক্সট সাইজসহ।"
+          },
+          "targets": [
+            "s2",
+            "s3"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Get structured, usable output",
+            "goal": "Make a model return JSON you can parse and call your own functions.",
+            "build": "Extract fields from a messy paragraph into a JSON schema, then let the model call one function you wrote."
+          },
+          "bn": {
+            "title": "গুছিয়ে ব্যবহারযোগ্য আউটপুট পাওয়া",
+            "goal": "মডেলকে দিয়ে পার্স করার মতো JSON ফেরত আনানো আর নিজের ফাংশন কল করানো।",
+            "build": "একটি অগোছালো অনুচ্ছেদ থেকে JSON স্কিমায় ফিল্ড বের করুন, তারপর মডেলকে দিয়ে আপনার লেখা একটি ফাংশন কল করান।"
+          },
+          "targets": [
+            "s6",
+            "s7"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Beyond plain text",
+            "goal": "Use embeddings, rerankers, reasoning models, and image, audio or PDF input.",
+            "build": "Embed ten sentences, rank them against a query, then ask a reasoning model one hard question and compare."
+          },
+          "bn": {
+            "title": "সাধারণ টেক্সটের বাইরে",
+            "goal": "এমবেডিং, রিরেঙ্কার, রিজনিং মডেল, আর ছবি, অডিও বা PDF ইনপুট ব্যবহার করা।",
+            "build": "দশটি বাক্য এমবেড করে একটি কোয়েরির সঙ্গে সাজান, তারপর একটি রিজনিং মডেলকে একটি কঠিন প্রশ্ন করে ফল মিলিয়ে দেখুন।"
+          },
+          "targets": [
+            "s8",
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    },
+    "prompt-engineering": {
+      "before": [
+        "llm-fundamentals"
+      ],
+      "after": [
+        "context-engineering",
+        "tool-use-and-integrations"
+      ],
+      "en": {
+        "goal": "Write prompts that behave the same way every time, treat them like code, and keep them safe."
+      },
+      "bn": {
+        "goal": "এমন প্রম্পট লেখা, যা প্রতিবার একইভাবে কাজ করে, কোডের মতো যত্নে রাখা যায়, আর নিরাপদ থাকে।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Write a clear prompt",
+            "goal": "Split instructions across system, user and assistant messages, and show the model examples.",
+            "build": "Rewrite a vague prompt with a system message and three examples, and compare the two answers."
+          },
+          "bn": {
+            "title": "পরিষ্কার প্রম্পট লেখা",
+            "goal": "system, user আর assistant মেসেজে নির্দেশ ভাগ করা এবং মডেলকে উদাহরণ দেখানো।",
+            "build": "একটি অস্পষ্ট প্রম্পট নতুন করে system মেসেজ ও তিনটি উদাহরণসহ লিখুন, তারপর দুই উত্তর মিলিয়ে দেখুন।"
+          },
+          "targets": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Make it reliable",
+            "goal": "Use reasoning patterns and clear structure so output is easy to parse.",
+            "build": "Ask for step-by-step reasoning and an XML-tagged answer, then parse the tags with a small script."
+          },
+          "bn": {
+            "title": "নির্ভরযোগ্য করা",
+            "goal": "রিজনিং প্যাটার্ন আর পরিষ্কার কাঠামো ব্যবহার করা, যাতে আউটপুট সহজে পার্স হয়।",
+            "build": "ধাপে ধাপে যুক্তি আর XML ট্যাগ করা উত্তর চান, তারপর ছোট একটি স্ক্রিপ্টে ট্যাগ পার্স করুন।"
+          },
+          "targets": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Run prompts like software",
+            "goal": "Template, version and parse prompts, and defend them against injection.",
+            "build": "Move one prompt into a versioned file with variables, add a parser that retries on bad output, and try one injection attack."
+          },
+          "bn": {
+            "title": "প্রম্পটকে সফটওয়্যারের মতো চালানো",
+            "goal": "প্রম্পট টেমপ্লেট, ভার্সন আর পার্স করা, এবং ইনজেকশন থেকে রক্ষা করা।",
+            "build": "একটি প্রম্পট ভেরিয়েবলসহ ভার্সন করা ফাইলে নিন, খারাপ আউটপুটে আবার চেষ্টা করে এমন একটি পার্সার যোগ করুন, আর একটি ইনজেকশন আক্রমণ চালিয়ে দেখুন।"
+          },
+          "targets": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        }
+      ]
+    },
+    "fine-tuning-roadmap": {
+      "before": [
+        "llm-fundamentals",
+        "evaluation-engineering"
+      ],
+      "after": [
+        "inference"
+      ],
+      "en": {
+        "goal": "Follow the five phases from Python basics to a small fine-tuned model that runs on your own machine."
+      },
+      "bn": {
+        "goal": "Python-এর মৌলিক বিষয় থেকে নিজের মেশিনে চলা একটি ছোট ফাইন-টিউন করা মডেল পর্যন্ত পাঁচটি ফেজ অনুসরণ করা।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Foundations",
+            "goal": "Handle data in Python and understand how a neural network learns.",
+            "build": "Load a small text dataset, clean it, and train a tiny network on it."
+          },
+          "bn": {
+            "title": "ভিত্তি",
+            "goal": "Python-এ ডেটা সামলানো আর নিউরাল নেটওয়ার্ক কীভাবে শেখে তা বোঝা।",
+            "build": "একটি ছোট টেক্সট ডেটাসেট লোড ও পরিষ্কার করুন, তারপর তার ওপর একটি ছোট নেটওয়ার্ক ট্রেন করুন।"
+          },
+          "targets": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Fine-tune and measure",
+            "goal": "Fine-tune an open model and judge whether it really got better.",
+            "build": "Fine-tune a small open model on your dataset, then score it against the base model on a held-out set."
+          },
+          "bn": {
+            "title": "ফাইন-টিউন করা আর মাপা",
+            "goal": "একটি open মডেল ফাইন-টিউন করা এবং সত্যিই ভালো হয়েছে কি না তা যাচাই করা।",
+            "build": "আপনার ডেটাসেটে একটি ছোট open মডেল ফাইন-টিউন করুন, তারপর আলাদা রাখা ডেটায় বেস মডেলের সঙ্গে স্কোর মেলান।"
+          },
+          "targets": [
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Ship it",
+            "goal": "Run the model locally and finish the capstone on the full timeline.",
+            "build": "Serve your tuned model on your own machine and complete the capstone project."
+          },
+          "bn": {
+            "title": "চালু করা",
+            "goal": "মডেলটি লোকাল মেশিনে চালানো আর পুরো সময়রেখা ধরে ক্যাপস্টোন শেষ করা।",
+            "build": "ফাইন-টিউন করা মডেলটি নিজের মেশিনে চালু করুন এবং ক্যাপস্টোন প্রজেক্ট শেষ করুন।"
+          },
+          "targets": [
+            "s5",
+            "s6"
+          ]
+        }
+      ]
+    },
+    "context-engineering": {
+      "before": [
+        "llm-fundamentals",
+        "prompt-engineering"
+      ],
+      "after": [
+        "rag-knowledge-systems",
+        "agents-and-agentic-systems"
+      ],
+      "en": {
+        "goal": "Decide what goes into the context window, in what order, and what to drop as it fills up."
+      },
+      "bn": {
+        "goal": "কনটেক্সট উইন্ডোতে কী যাবে, কোন ক্রমে যাবে, আর ভরে গেলে কী বাদ পড়বে তা ঠিক করা।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Budget the window",
+            "goal": "Count what each part of a prompt costs, and cache the parts that repeat.",
+            "build": "Measure the tokens in one real prompt by part, then turn on prompt caching for the fixed part."
+          },
+          "bn": {
+            "title": "উইন্ডোর বাজেট করা",
+            "goal": "প্রম্পটের প্রতিটি অংশের খরচ গোনা আর যে অংশ বারবার আসে তা ক্যাশ করা।",
+            "build": "একটি আসল প্রম্পটের টোকেন অংশ ধরে মাপুন, তারপর স্থির অংশে প্রম্পট ক্যাশিং চালু করুন।"
+          },
+          "targets": [
+            "s1",
+            "s3"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Keep long conversations alive",
+            "goal": "Summarize old turns, keep memory in layers, and trim what you no longer need.",
+            "build": "Add a rolling summary to a chat loop that triggers when the history passes a token limit."
+          },
+          "bn": {
+            "title": "লম্বা কথোপকথন টিকিয়ে রাখা",
+            "goal": "পুরোনো পালা সারাংশ করা, মেমরি স্তরে স্তরে রাখা, আর অপ্রয়োজনীয় অংশ ছেঁটে ফেলা।",
+            "build": "একটি চ্যাট লুপে rolling সারাংশ যোগ করুন, যা ইতিহাস টোকেন সীমা পেরোলে চালু হয়।"
+          },
+          "targets": [
+            "s2",
+            "s4",
+            "s5"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Handle tools and long inputs",
+            "goal": "Truncate big tool results and avoid the Lost in the Middle problem.",
+            "build": "Truncate one large tool result safely, then test whether the model finds a fact placed in the middle of a long prompt."
+          },
+          "bn": {
+            "title": "টুলের ফল ও লম্বা ইনপুট সামলানো",
+            "goal": "বড় টুল ফল ছেঁটে ফেলা এবং Lost in the Middle সমস্যা এড়ানো।",
+            "build": "একটি বড় টুল ফল নিরাপদে ছাঁটুন, তারপর দেখুন লম্বা প্রম্পটের মাঝখানে রাখা একটি তথ্য মডেল খুঁজে পায় কি না।"
+          },
+          "targets": [
+            "s6",
+            "s7"
+          ]
+        }
+      ]
+    },
+    "rag-knowledge-systems": {
+      "before": [
+        "llm-fundamentals",
+        "context-engineering"
+      ],
+      "after": [
+        "agents-and-agentic-systems",
+        "evaluation-engineering"
+      ],
+      "en": {
+        "goal": "Go from a folder of documents to a retrieval pipeline you can tune, and then to retrieval that reasons over several steps."
+      },
+      "bn": {
+        "goal": "একগাদা ডকুমেন্ট থেকে শুরু করে এমন একটি রিট্রিভাল পাইপলাইন বানানো, যা আপনি টিউন করতে পারেন, তারপর একাধিক ধাপে ভেবে খুঁজতে পারে এমন রিট্রিভালে পৌঁছানো।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Parse and chunk documents",
+            "goal": "Turn PDFs and web pages into clean text, then cut it into chunks a retriever can return.",
+            "build": "Parse five of your own documents, chunk them two ways, and compare the chunks by eye."
+          },
+          "bn": {
+            "title": "ডকুমেন্ট পার্স ও চাঙ্ক করা",
+            "goal": "PDF আর ওয়েব পেজকে পরিষ্কার লেখায় বদলে সেটাকে রিট্রিভারের ফেরত দেওয়ার মতো চাঙ্কে কাটা।",
+            "build": "নিজের পাঁচটি ডকুমেন্ট পার্স করুন, দুইভাবে চাঙ্ক করুন, তারপর চোখে দেখে চাঙ্কগুলো মিলিয়ে নিন।"
+          },
+          "targets": [
+            "s9",
+            "s15",
+            "s1"
+          ]
+        },
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Index and search",
+            "goal": "Store chunks in a vector database, filter and search them, and add keyword search next to vector search.",
+            "build": "Load your chunks into one vector database and answer ten questions with plain vector search, then with hybrid search."
+          },
+          "bn": {
+            "title": "ইনডেক্স করা ও সার্চ করা",
+            "goal": "চাঙ্কগুলো একটি ভেক্টর ডেটাবেসে রাখা, ফিল্টার করে খোঁজা, আর ভেক্টর সার্চের পাশে কিওয়ার্ড সার্চ যোগ করা।",
+            "build": "চাঙ্কগুলো একটি ভেক্টর ডেটাবেসে লোড করুন, দশটি প্রশ্নের উত্তর আগে সাধারণ ভেক্টর সার্চে, পরে হাইব্রিড সার্চে খুঁজুন।"
+          },
+          "targets": [
+            "s2",
+            "s11",
+            "s16",
+            "s8",
+            "s3"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Retrieve more accurately",
+            "goal": "Fix weak retrieval with better chunk context, better queries, and a reranker on top.",
+            "build": "Add query rewriting and a reranker to your pipeline and measure which of the ten questions now find the right chunk."
+          },
+          "bn": {
+            "title": "আরও নির্ভুলভাবে খুঁজে আনা",
+            "goal": "দুর্বল রিট্রিভাল ঠিক করা: চাঙ্কে আরও কনটেক্সট, ভালো কোয়েরি, আর ওপরে একটি রিরেঙ্কার দিয়ে।",
+            "build": "পাইপলাইনে কোয়েরি রিরাইটিং আর একটি রিরেঙ্কার যোগ করুন, তারপর দেখুন দশটির মধ্যে কোনগুলো এখন সঠিক চাঙ্ক পাচ্ছে।"
+          },
+          "targets": [
+            "s18",
+            "s4",
+            "s17",
+            "s7",
+            "s13"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Retrieval that reasons and sees",
+            "goal": "Let the model write filters, retrieve in several hops, use a graph, and retrieve from images and tables.",
+            "build": "Pick the one question your pipeline still fails, and try one advanced pattern on it. Keep it only if the answer improves."
+          },
+          "bn": {
+            "title": "ভেবে খোঁজে আর দেখতে পায় এমন রিট্রিভাল",
+            "goal": "মডেলকে দিয়ে ফিল্টার লেখানো, কয়েক ধাপে খোঁজা, গ্রাফ ব্যবহার করা, আর ছবি ও টেবিল থেকে তথ্য আনা।",
+            "build": "যে প্রশ্নটিতে আপনার পাইপলাইন এখনও ব্যর্থ, তার ওপর একটি উন্নত প্যাটার্ন চালান। উত্তর ভালো হলেই সেটা রাখুন।"
+          },
+          "targets": [
+            "s14",
+            "s5",
+            "s12",
+            "s6",
+            "s10"
+          ]
+        }
+      ]
+    },
+    "agents-and-agentic-systems": {
+      "before": [
+        "tool-use-and-integrations",
+        "context-engineering"
+      ],
+      "after": [
+        "evaluation-engineering",
+        "safety-security-and-guardrails"
+      ],
+      "en": {
+        "goal": "Go from a single tool-calling loop to agents that run for a long time, recover from errors, and work in teams."
+      },
+      "bn": {
+        "goal": "একটি টুল-কলিং লুপ থেকে শুরু করে এমন এজেন্ট বানানো, যা অনেকক্ষণ চলে, ভুল থেকে সামলে ওঠে, আর দলে কাজ করে।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "The agent loop",
+            "goal": "Say what makes something an agent and write the basic loops.",
+            "build": "Write a loop where a model picks a tool, sees the result, and stops when it decides it is done."
+          },
+          "bn": {
+            "title": "এজেন্টের লুপ",
+            "goal": "কোনো কিছু কেন এজেন্ট তা বলা এবং মৌলিক লুপগুলো লেখা।",
+            "build": "এমন একটি লুপ লিখুন, যেখানে মডেল টুল বেছে নেয়, ফল দেখে, আর শেষ ভাবলে থামে।"
+          },
+          "targets": [
+            "s1",
+            "s2"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Structure and memory",
+            "goal": "Control the flow with a state machine and give the agent memory.",
+            "build": "Turn your loop into a small state graph and add a scratchpad that survives between steps."
+          },
+          "bn": {
+            "title": "কাঠামো আর মেমরি",
+            "goal": "state machine দিয়ে প্রবাহ নিয়ন্ত্রণ করা আর এজেন্টকে মেমরি দেওয়া।",
+            "build": "লুপটিকে ছোট একটি state graph বানান আর ধাপগুলোর মধ্যে টিকে থাকে এমন একটি scratchpad যোগ করুন।"
+          },
+          "targets": [
+            "s4",
+            "s5",
+            "s6"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Make it robust",
+            "goal": "Retry, self-correct, and keep a person in the loop for risky steps.",
+            "build": "Make one tool fail on purpose and let the agent recover, with an approval step before a risky action."
+          },
+          "bn": {
+            "title": "মজবুত করা",
+            "goal": "আবার চেষ্টা, নিজে শুধরে নেওয়া, আর ঝুঁকির ধাপে মানুষকে রাখা।",
+            "build": "একটি টুল ইচ্ছা করে ব্যর্থ করান এবং এজেন্টকে সামলাতে দিন, ঝুঁকিপূর্ণ কাজের আগে একটি অনুমোদনের ধাপসহ।"
+          },
+          "targets": [
+            "s8"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Scale to teams and long runs",
+            "goal": "Pick single or multi-agent, delegate to subagents, run for hours, and control a browser.",
+            "build": "Split one task between a planner and a worker agent, then make the run resumable after a crash."
+          },
+          "bn": {
+            "title": "দল ও দীর্ঘ চলা পর্যন্ত বাড়ানো",
+            "goal": "একক না বহু-এজেন্ট বেছে নেওয়া, subagent-এ কাজ দেওয়া, ঘণ্টার পর ঘণ্টা চালানো, আর ব্রাউজার চালানো।",
+            "build": "একটি কাজ পরিকল্পনাকারী ও কর্মী এজেন্টের মধ্যে ভাগ করুন, তারপর ক্র্যাশের পরও চালানো যায় এমন করুন।"
+          },
+          "targets": [
+            "s3",
+            "s7",
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    },
+    "tool-use-and-integrations": {
+      "before": [
+        "llm-fundamentals",
+        "prompt-engineering"
+      ],
+      "after": [
+        "agents-and-agentic-systems"
+      ],
+      "en": {
+        "goal": "Give a model tools it can call correctly, then connect them through MCP and run code safely."
+      },
+      "bn": {
+        "goal": "মডেলকে সঠিকভাবে কল করার মতো টুল দেওয়া, তারপর MCP দিয়ে যুক্ত করা আর কোড নিরাপদে চালানো।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Design and call tools",
+            "goal": "Write clear tool schemas, allow parallel calls, wrap an API, and format results for the model.",
+            "build": "Wrap one public API as a tool with a strict schema and return trimmed, readable results."
+          },
+          "bn": {
+            "title": "টুল ডিজাইন আর কল করা",
+            "goal": "পরিষ্কার টুল স্কিমা লেখা, সমান্তরাল কল করতে দেওয়া, API মুড়ে নেওয়া, আর মডেলের জন্য ফল সাজানো।",
+            "build": "একটি পাবলিক API কঠোর স্কিমাসহ টুল হিসেবে মুড়ুন এবং ছাঁটা, পড়ার উপযোগী ফল ফেরত দিন।"
+          },
+          "targets": [
+            "s2"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Connect and sandbox",
+            "goal": "Expose tools through MCP and run model-written code in a sandbox.",
+            "build": "Serve your tool from a small MCP server and run one model-written snippet in a sandbox."
+          },
+          "bn": {
+            "title": "যুক্ত করা আর স্যান্ডবক্সে চালানো",
+            "goal": "MCP দিয়ে টুল দেখানো এবং মডেলের লেখা কোড স্যান্ডবক্সে চালানো।",
+            "build": "আপনার টুলটি একটি ছোট MCP সার্ভার থেকে চালান এবং মডেলের লেখা একটি স্নিপেট স্যান্ডবক্সে চালান।"
+          },
+          "targets": [
+            "s3"
+          ]
+        }
+      ]
+    },
+    "inference": {
+      "before": [
+        "llm-fundamentals"
+      ],
+      "after": [
+        "cost-and-performance-optimization",
+        "deploying-and-operating-ai-systems"
+      ],
+      "en": {
+        "goal": "Decide where to run a model, what it will cost, and how to make it faster and cheaper."
+      },
+      "bn": {
+        "goal": "মডেল কোথায় চালাবেন, খরচ কত হবে, আর কীভাবে দ্রুততর ও সস্তা করবেন তা ঠিক করা।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Hosted or self-hosted",
+            "goal": "Weigh hosted APIs against running your own inference server.",
+            "build": "List the traffic, privacy and latency needs of one project and choose hosted or self-hosted."
+          },
+          "bn": {
+            "title": "হোস্টেড না নিজের সার্ভারে",
+            "goal": "হোস্টেড API আর নিজের ইনফারেন্স সার্ভার চালানোর মধ্যে তুলনা করা।",
+            "build": "একটি প্রজেক্টের ট্রাফিক, গোপনীয়তা আর লেটেন্সির চাহিদা লিখে হোস্টেড না নিজের সার্ভার তা বেছে নিন।"
+          },
+          "targets": [
+            "s3"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Know the cost",
+            "goal": "Work out GPU economics, edge devices and provider prices.",
+            "build": "Estimate the monthly cost of one workload on a hosted provider and on a rented GPU."
+          },
+          "bn": {
+            "title": "খরচ জানা",
+            "goal": "GPU-র অর্থনীতি, edge ডিভাইস আর প্রোভাইডারের দাম হিসাব করা।",
+            "build": "একটি কাজের মাসিক খরচ হোস্টেড প্রোভাইডারে আর ভাড়া করা GPU-তে আন্দাজ করুন।"
+          },
+          "targets": [
+            "s5"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Make it faster and cheaper",
+            "goal": "Apply quantization, caching and batching, and read the metrics.",
+            "build": "Quantize one model and compare its speed and answer quality with the original."
+          },
+          "bn": {
+            "title": "দ্রুত আর সস্তা করা",
+            "goal": "কোয়ান্টাইজেশন, ক্যাশিং ও ব্যাচিং প্রয়োগ করা এবং মেট্রিক পড়া।",
+            "build": "একটি মডেল কোয়ান্টাইজ করুন এবং গতি ও উত্তরের মান মূলটির সঙ্গে মেলান।"
+          },
+          "targets": [
+            "s4"
+          ]
+        }
+      ]
+    },
+    "llmops-and-observability": {
+      "before": [
+        "evaluation-engineering",
+        "ai-application-architecture"
+      ],
+      "after": [
+        "deploying-and-operating-ai-systems"
+      ],
+      "en": {
+        "goal": "See what your AI app does in production, version what changes, and learn from real use."
+      },
+      "bn": {
+        "goal": "প্রোডাকশনে আপনার AI অ্যাপ কী করছে তা দেখা, যা বদলায় তার ভার্সন রাখা, আর আসল ব্যবহার থেকে শেখা।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "See what happens",
+            "goal": "Trace requests and track tokens, cost and latency.",
+            "build": "Add tracing to one LLM call and read its cost and latency from the trace."
+          },
+          "bn": {
+            "title": "কী ঘটছে তা দেখা",
+            "goal": "রিকোয়েস্ট ট্রেস করা এবং টোকেন, খরচ ও লেটেন্সি ট্র্যাক করা।",
+            "build": "একটি LLM কলে ট্রেসিং যোগ করুন এবং ট্রেস থেকে তার খরচ ও লেটেন্সি পড়ুন।"
+          },
+          "targets": [
+            "s4-tracing",
+            "s4-token-cost-and-latency-tracking"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Change safely",
+            "goal": "Version prompts and agents, run A/B tests, and replay a bad run.",
+            "build": "Run an A/B test between two prompt versions and replay one failed trace to find the cause."
+          },
+          "bn": {
+            "title": "নিরাপদে বদলানো",
+            "goal": "প্রম্পট ও এজেন্টের ভার্সন রাখা, A/B পরীক্ষা চালানো, আর খারাপ রান আবার চালানো।",
+            "build": "দুটি প্রম্পট ভার্সনের মধ্যে A/B পরীক্ষা চালান এবং কারণ খুঁজতে একটি ব্যর্থ ট্রেস আবার চালান।"
+          },
+          "targets": [
+            "s4-prompt-and-agent-versioning",
+            "s4-a-b-testing-prompts-and-models-in-production",
+            "s4-replay-and-debugging"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Catch drift and learn",
+            "goal": "Detect silent behaviour changes and turn user feedback into improvements.",
+            "build": "Log user feedback on answers and set an alert for a drop in the good-answer rate."
+          },
+          "bn": {
+            "title": "ড্রিফট ধরা আর শেখা",
+            "goal": "নীরবে আচরণ বদলে যাওয়া ধরা এবং ব্যবহারকারীর মতামতকে উন্নতিতে বদলানো।",
+            "build": "উত্তরের ওপর ব্যবহারকারীর মতামত সংরক্ষণ করুন এবং ভালো উত্তরের হার কমলে সতর্কবার্তার ব্যবস্থা করুন।"
+          },
+          "targets": [
+            "s4-drift-detection-silent-behaviour-changes",
+            "s4-feedback-loops"
+          ]
+        }
+      ]
+    },
+    "evaluation-engineering": {
+      "before": [
+        "prompt-engineering",
+        "rag-knowledge-systems"
+      ],
+      "after": [
+        "llmops-and-observability",
+        "safety-security-and-guardrails"
+      ],
+      "en": {
+        "goal": "Build tests that tell you whether your AI app is good, before and after launch."
+      },
+      "bn": {
+        "goal": "এমন টেস্ট বানানো, যা লঞ্চের আগে ও পরে আপনার AI অ্যাপ ভালো কি না তা জানায়।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Start with a golden set",
+            "goal": "Write a fixed set of examples and run it every time you change something.",
+            "build": "Write twenty question and answer pairs and a script that scores your app on them."
+          },
+          "bn": {
+            "title": "গোল্ডেন সেট দিয়ে শুরু",
+            "goal": "নির্দিষ্ট একটি উদাহরণের সেট লেখা এবং কিছু বদলালেই সেটি চালানো।",
+            "build": "বিশটি প্রশ্ন-উত্তরের জোড়া লিখুন এবং সেগুলোতে আপনার অ্যাপের স্কোর দেয় এমন একটি স্ক্রিপ্ট বানান।"
+          },
+          "targets": [
+            "s5-offline-evals-golden-datasets-regression-tests",
+            "s5-synthetic-data-generation-for-evals"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Score what code cannot",
+            "goal": "Use an LLM as a judge and measure RAG and agent quality.",
+            "build": "Add an LLM judge to your script and check its scores against ten answers you graded by hand."
+          },
+          "bn": {
+            "title": "যা কোড দিয়ে মাপা যায় না তা মাপা",
+            "goal": "LLM-কে বিচারক বানানো এবং RAG ও এজেন্টের মান মাপা।",
+            "build": "স্ক্রিপ্টে একটি LLM বিচারক যোগ করুন এবং তার স্কোর নিজে নম্বর দেওয়া দশটি উত্তরের সঙ্গে মেলান।"
+          },
+          "targets": [
+            "s5-llm-as-judge",
+            "s5-rag-metrics-faithfulness-answer-relevance-context-precision",
+            "s5-agent-evals-task-success-trajectory-tool-call-accuracy",
+            "s5-frameworks"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Test in the real world",
+            "goal": "Evaluate on live traffic and attack your own app.",
+            "build": "Sample live answers for scoring each day and write five adversarial prompts that try to break the app."
+          },
+          "bn": {
+            "title": "আসল জগতে পরীক্ষা",
+            "goal": "লাইভ ট্রাফিকে মূল্যায়ন করা এবং নিজের অ্যাপে আক্রমণ চালানো।",
+            "build": "প্রতিদিন স্কোর করার জন্য লাইভ উত্তরের নমুনা নিন এবং অ্যাপ ভাঙার চেষ্টা করে এমন পাঁচটি প্রম্পট লিখুন।"
+          },
+          "targets": [
+            "s5-online-evals-on-production-traffic",
+            "s5-red-teaming-and-adversarial-testing"
+          ]
+        }
+      ]
+    },
+    "cost-and-performance-optimization": {
+      "before": [
+        "llm-fundamentals",
+        "inference"
+      ],
+      "after": [
+        "llmops-and-observability"
+      ],
+      "en": {
+        "goal": "Cut what an AI feature costs without hurting its answers."
+      },
+      "bn": {
+        "goal": "উত্তরের মান না কমিয়ে একটি AI ফিচারের খরচ কমানো।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Spend less per call",
+            "goal": "Cache repeated work, batch what is not urgent, and set a token budget per feature.",
+            "build": "Give one feature a token budget and move its non-urgent work to a batch API."
+          },
+          "bn": {
+            "title": "প্রতি কলে কম খরচ",
+            "goal": "যে কাজ বারবার হয় তা ক্যাশ করা, জরুরি নয় এমন কাজ ব্যাচ করা, আর প্রতি ফিচারে টোকেন বাজেট ঠিক করা।",
+            "build": "একটি ফিচারকে টোকেন বাজেট দিন এবং তার জরুরি নয় এমন কাজ একটি ব্যাচ API-তে সরান।"
+          },
+          "targets": [
+            "s6-token-budgeting-per-feature",
+            "s6-caching-semantic-output-prompt",
+            "s6-batch-apis-for-non-real-time-workloads"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Use a cheaper model smartly",
+            "goal": "Route easy requests to small models, compress prompts, distil a small model, and put a gateway in front.",
+            "build": "Route half your test requests to a cheaper model and check the score does not drop."
+          },
+          "bn": {
+            "title": "সস্তা মডেল বুদ্ধি করে ব্যবহার",
+            "goal": "সহজ অনুরোধ ছোট মডেলে পাঠানো, প্রম্পট ছোট করা, ছোট মডেলে জ্ঞান নামিয়ে আনা, আর সামনে একটি গেটওয়ে বসানো।",
+            "build": "পরীক্ষার অর্ধেক অনুরোধ সস্তা মডেলে পাঠান এবং দেখুন স্কোর কমে না।"
+          },
+          "targets": [
+            "s6-model-cascading-cheap-expensive-routing",
+            "s6-prompt-compression-llmlingua-style",
+            "s6-distillation-small-model-from-big",
+            "s6-model-gateways-litellm-portkey-openrouter"
+          ]
+        }
+      ]
+    },
+    "safety-security-and-guardrails": {
+      "before": [
+        "prompt-engineering",
+        "tool-use-and-integrations"
+      ],
+      "after": [
+        "llmops-and-observability"
+      ],
+      "en": {
+        "goal": "Find the ways an AI app can be attacked or can leak data, and put guards in place."
+      },
+      "bn": {
+        "goal": "AI অ্যাপ কীভাবে আক্রান্ত হতে বা তথ্য ফাঁস করতে পারে তা খুঁজে বের করা এবং সুরক্ষা বসানো।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Know the attacks",
+            "goal": "Recognise prompt injection, jailbreaks and data leaks through tools and links.",
+            "build": "Try one injection and one jailbreak on your own app and write down what got through."
+          },
+          "bn": {
+            "title": "আক্রমণ চেনা",
+            "goal": "প্রম্পট ইনজেকশন, জেইলব্রেক, আর টুল ও লিঙ্ক দিয়ে তথ্য ফাঁস চেনা।",
+            "build": "নিজের অ্যাপে একটি ইনজেকশন আর একটি জেইলব্রেক চালিয়ে দেখুন এবং কী ঢুকল তা লিখে রাখুন।"
+          },
+          "targets": [
+            "s7-prompt-injection-direct-and-indirect",
+            "s7-jailbreak-resistance",
+            "s7-data-exfiltration-via-tool-calls-and-rendered-links"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Filter inputs and outputs",
+            "goal": "Moderate content, remove personal data, and check outputs against a schema.",
+            "build": "Add a step that redacts emails and phone numbers before text reaches the model, and validate every reply against a schema."
+          },
+          "bn": {
+            "title": "ইনপুট ও আউটপুট ছাঁকা",
+            "goal": "কনটেন্ট মডারেট করা, ব্যক্তিগত তথ্য সরানো, আর আউটপুট স্কিমার সঙ্গে মেলানো।",
+            "build": "মডেলের কাছে লেখা যাওয়ার আগে ইমেইল ও ফোন নম্বর মুছে দেয় এমন একটি ধাপ যোগ করুন, আর প্রতিটি উত্তর স্কিমার সঙ্গে যাচাই করুন।"
+          },
+          "targets": [
+            "s7-content-moderation",
+            "s7-pii-redaction-in-inputs-and-outputs",
+            "s7-output-validation-against-schemas"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Operate with guardrails",
+            "goal": "Use a guardrail framework, limit abuse, and keep audit logs.",
+            "build": "Put one guardrail framework in front of your app and log each blocked request for audit."
+          },
+          "bn": {
+            "title": "গার্ডরেইল নিয়ে চালানো",
+            "goal": "গার্ডরেইল ফ্রেমওয়ার্ক ব্যবহার করা, অপব্যবহার সীমিত করা, আর অডিট লগ রাখা।",
+            "build": "আপনার অ্যাপের সামনে একটি গার্ডরেইল ফ্রেমওয়ার্ক বসান এবং আটকে দেওয়া প্রতিটি অনুরোধ অডিটের জন্য লগ করুন।"
+          },
+          "targets": [
+            "s7-guardrail-frameworks-nemo-guardrails-guardrails-ai",
+            "s7-rate-limiting-and-abuse-prevention",
+            "s7-audit-logging-for-compliance"
+          ]
+        }
+      ]
+    },
+    "multimodal-engineering": {
+      "before": [
+        "llm-fundamentals"
+      ],
+      "after": [
+        "ai-application-architecture"
+      ],
+      "en": {
+        "goal": "Work with images, voice and video, from understanding them to generating them."
+      },
+      "bn": {
+        "goal": "ছবি, কণ্ঠ আর ভিডিও নিয়ে কাজ করা, বোঝা থেকে তৈরি করা পর্যন্ত।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Understand images",
+            "goal": "Have a model read images, screenshots and documents.",
+            "build": "Send a scanned receipt to a vision model and get the total as JSON."
+          },
+          "bn": {
+            "title": "ছবি বোঝা",
+            "goal": "মডেলকে দিয়ে ছবি, স্ক্রিনশট আর ডকুমেন্ট পড়ানো।",
+            "build": "একটি স্ক্যান করা রসিদ ভিশন মডেলে পাঠান এবং মোট অঙ্ক JSON-এ নিন।"
+          },
+          "targets": [
+            "s8-vision-image-understanding-ocr-via-llm-document-ai"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Talk and listen",
+            "goal": "Build a voice agent with speech to text, text to speech and realtime APIs.",
+            "build": "Build a voice loop that listens, answers and speaks back in under a few seconds."
+          },
+          "bn": {
+            "title": "কথা বলা আর শোনা",
+            "goal": "speech to text, text to speech আর realtime API দিয়ে ভয়েস এজেন্ট বানানো।",
+            "build": "এমন একটি ভয়েস লুপ বানান, যা শোনে, উত্তর দেয়, আর কয়েক সেকেন্ডের মধ্যে কথা বলে ফেরত দেয়।"
+          },
+          "targets": [
+            "s8-voice-agents-stt-tts-realtime-apis"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Generate media",
+            "goal": "Generate images and video and wire them into a pipeline.",
+            "build": "Chain an image generator and a video generator into one pipeline that makes a short clip from a prompt."
+          },
+          "bn": {
+            "title": "মিডিয়া তৈরি করা",
+            "goal": "ছবি ও ভিডিও তৈরি করা এবং সেগুলো একটি পাইপলাইনে জোড়া।",
+            "build": "একটি ইমেজ জেনারেটর আর একটি ভিডিও জেনারেটর জুড়ে এমন একটি পাইপলাইন বানান, যা প্রম্পট থেকে ছোট ক্লিপ বানায়।"
+          },
+          "targets": [
+            "s8-image-generation",
+            "s8-video-generation",
+            "s8-comfyui-replicate-fal-for-media-pipelines"
+          ]
+        }
+      ]
+    },
+    "ai-application-architecture": {
+      "before": [
+        "llm-fundamentals",
+        "system-design"
+      ],
+      "after": [
+        "llmops-and-observability",
+        "deploying-and-operating-ai-systems"
+      ],
+      "en": {
+        "goal": "Design the app around the model so it streams, survives failures, and serves many customers."
+      },
+      "bn": {
+        "goal": "মডেলকে ঘিরে অ্যাপ এমনভাবে ডিজাইন করা, যাতে সে স্ট্রিম করে, ব্যর্থতায় টিকে থাকে, আর অনেক গ্রাহককে সেবা দেয়।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Stream and queue",
+            "goal": "Stream answers to the user and move long runs into background jobs.",
+            "build": "Stream a model answer to a web page over SSE and run one slow task in a background queue."
+          },
+          "bn": {
+            "title": "স্ট্রিম ও কিউ",
+            "goal": "ব্যবহারকারীকে উত্তর স্ট্রিম করা এবং লম্বা কাজ ব্যাকগ্রাউন্ড জবে সরানো।",
+            "build": "একটি মডেলের উত্তর SSE দিয়ে ওয়েব পেজে স্ট্রিম করুন এবং একটি ধীর কাজ ব্যাকগ্রাউন্ড কিউতে চালান।"
+          },
+          "targets": [
+            "s9-streaming-over-sse-websockets-http-chunked",
+            "s9-background-jobs-and-queues-for-long-agent-runs"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Survive failure",
+            "goal": "Make requests safe to retry, resume, and fall back to another provider.",
+            "build": "Make one endpoint idempotent and add a fallback to a second provider when the first one fails."
+          },
+          "bn": {
+            "title": "ব্যর্থতায় টিকে থাকা",
+            "goal": "অনুরোধ নিরাপদে আবার চেষ্টা, পুনরায় শুরু, আর অন্য প্রোভাইডারে সরে যাওয়ার উপযোগী করা।",
+            "build": "একটি এন্ডপয়েন্টকে idempotent করুন এবং প্রথমটি ব্যর্থ হলে দ্বিতীয় প্রোভাইডারে সরে যাওয়ার ব্যবস্থা যোগ করুন।"
+          },
+          "targets": [
+            "s9-idempotency-and-resumability",
+            "s9-fallback-chains-across-providers"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Serve many customers",
+            "goal": "Isolate prompts and keys per tenant, ship changes behind flags, and design the API.",
+            "build": "Give each tenant its own prompt and key, and put a model change behind a feature flag."
+          },
+          "bn": {
+            "title": "অনেক গ্রাহককে সেবা দেওয়া",
+            "goal": "প্রতি গ্রাহকের প্রম্পট ও কী আলাদা রাখা, ফ্ল্যাগের পেছনে পরিবর্তন ছাড়া, আর API ডিজাইন করা।",
+            "build": "প্রতি গ্রাহককে নিজস্ব প্রম্পট ও কী দিন এবং একটি মডেল পরিবর্তন ফিচার ফ্ল্যাগের পেছনে রাখুন।"
+          },
+          "targets": [
+            "s9-multi-tenant-prompt-and-key-management",
+            "s9-feature-flags-for-prompts-and-models",
+            "s9-api-design-patterns-for-ai-features"
+          ]
+        }
+      ]
+    },
+    "visual-learning-resources": {
+      "before": [],
+      "after": [
+        "llm-fundamentals",
+        "inference"
+      ],
+      "en": {
+        "goal": "Watch how transformers work, then look inside the parts that are hard to picture."
+      },
+      "bn": {
+        "goal": "ট্রান্সফরমার কীভাবে কাজ করে তা দেখা, তারপর যে অংশগুলো কল্পনা করা কঠিন সেগুলোর ভেতরে তাকানো।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "See a model work",
+            "goal": "Watch a model predict the next token and see a network train.",
+            "build": "Play with a tiny network until you can explain what one layer does."
+          },
+          "bn": {
+            "title": "একটি মডেলকে কাজ করতে দেখা",
+            "goal": "মডেলকে পরবর্তী টোকেন অনুমান করতে দেখা এবং একটি নেটওয়ার্ককে ট্রেন হতে দেখা।",
+            "build": "একটি ছোট নেটওয়ার্ক নিয়ে খেলুন, যতক্ষণ না একটি লেয়ার কী করে তা বলতে পারেন।"
+          },
+          "targets": [
+            "s1",
+            "s5",
+            "s3"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Open up the transformer",
+            "goal": "Follow Q, K and V and tour a GPT in 3D.",
+            "build": "Explain attention to a friend using only the Q, K, V picture."
+          },
+          "bn": {
+            "title": "ট্রান্সফরমার খুলে দেখা",
+            "goal": "Q, K ও V অনুসরণ করা এবং একটি GPT-র ভেতরটা ৩D-তে ঘুরে দেখা।",
+            "build": "শুধু Q, K, V-এর ছবি দেখিয়ে এক বন্ধুকে attention বুঝিয়ে বলুন।"
+          },
+          "targets": [
+            "s4",
+            "s2"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Variants and internals",
+            "goal": "Compare attention variants, mixture of experts, serving, features and embeddings.",
+            "build": "Work out the KV cache size of one model for a long prompt, then find one feature in Neuronpedia."
+          },
+          "bn": {
+            "title": "ভ্যারিয়েন্ট আর ভেতরের গঠন",
+            "goal": "attention ভ্যারিয়েন্ট, mixture of experts, সার্ভিং, ফিচার আর এমবেডিং তুলনা করা।",
+            "build": "একটি মডেলের লম্বা প্রম্পটের জন্য KV ক্যাশের আকার হিসাব করুন, তারপর Neuronpedia-তে একটি ফিচার খুঁজে বের করুন।"
+          },
+          "targets": [
+            "s6",
+            "s11",
+            "s7",
+            "s8",
+            "s9",
+            "s10"
+          ]
+        }
+      ]
+    },
+    "ai-engineering-book": {
+      "before": [
+        "llm-fundamentals"
+      ],
+      "after": [
+        "rag-knowledge-systems",
+        "evaluation-engineering"
+      ],
+      "en": {
+        "goal": "Read the book chapter by chapter, from how foundation models work to building the whole platform."
+      },
+      "bn": {
+        "goal": "বইটি অধ্যায়ের পর অধ্যায় পড়া, ফাউন্ডেশন মডেল কীভাবে কাজ করে তা থেকে পুরো প্ল্যাটফর্ম বানানো পর্যন্ত।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "The foundations",
+            "goal": "Understand what you are building on: how foundation models are trained, sampled and why they hallucinate.",
+            "build": "Summarise in your own words why a model can sound sure and still be wrong."
+          },
+          "bn": {
+            "title": "ভিত্তি",
+            "goal": "আপনি কিসের ওপর বানাচ্ছেন তা বোঝা: ফাউন্ডেশন মডেল কীভাবে ট্রেন ও স্যাম্পল হয়, আর কেন ভুল তথ্য বানায়।",
+            "build": "মডেল কেন আত্মবিশ্বাসী শোনালেও ভুল হতে পারে তা নিজের ভাষায় সংক্ষেপে লিখুন।"
+          },
+          "targets": [
+            "ch1",
+            "ch2",
+            "ch2b"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Evaluate and prompt",
+            "goal": "Learn evaluation methods, then use prompts and context well.",
+            "build": "Pick one metric and one judge from these chapters and apply them to a prompt of your own."
+          },
+          "bn": {
+            "title": "মূল্যায়ন আর প্রম্পট",
+            "goal": "মূল্যায়নের পদ্ধতি শেখা, তারপর প্রম্পট ও কনটেক্সট ভালোভাবে ব্যবহার করা।",
+            "build": "এই অধ্যায়গুলো থেকে একটি মেট্রিক ও একটি বিচারক বেছে নিজের একটি প্রম্পটে প্রয়োগ করুন।"
+          },
+          "targets": [
+            "ch3",
+            "ch3b",
+            "ch4",
+            "ch5",
+            "ch5b"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Retrieval, agents and finetuning",
+            "goal": "Add your own data and tools to a model, and know when finetuning is worth it.",
+            "build": "Decide for one use case whether it needs RAG, an agent, finetuning, or none of them, and say why."
+          },
+          "bn": {
+            "title": "রিট্রিভাল, এজেন্ট ও ফাইনটিউনিং",
+            "goal": "মডেলে নিজের ডেটা ও টুল যোগ করা এবং ফাইনটিউনিং কখন ঠিক তা জানা।",
+            "build": "একটি ব্যবহারের ক্ষেত্রে ঠিক করুন RAG, এজেন্ট, ফাইনটিউনিং, নাকি কোনোটিই লাগবে না, আর কারণ লিখুন।"
+          },
+          "targets": [
+            "ch6",
+            "ch6b",
+            "ch7",
+            "ch7b",
+            "ch8"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Optimise and build the platform",
+            "goal": "Speed up inference, then design the architecture and the feedback loop.",
+            "build": "Sketch the architecture of one AI product with its feedback loop, and mark where it will be slow."
+          },
+          "bn": {
+            "title": "দ্রুত করা আর প্ল্যাটফর্ম বানানো",
+            "goal": "ইনফারেন্স দ্রুত করা, তারপর আর্কিটেকচার আর ফিডব্যাক লুপ ডিজাইন করা।",
+            "build": "একটি AI পণ্যের আর্কিটেকচার ফিডব্যাক লুপসহ এঁকে ফেলুন এবং কোথায় ধীর হবে তা চিহ্নিত করুন।"
+          },
+          "targets": [
+            "ch9",
+            "ch9b",
+            "ch10",
+            "ch10b"
+          ]
+        }
+      ]
+    },
+    "deploying-and-operating-ai-systems": {
+      "before": [
+        "llm-fundamentals"
+      ],
+      "after": [
+        "system-design"
+      ],
+      "en": {
+        "goal": "Learn the operations skills behind an AI system, from the shell to Kubernetes, pipelines, and monitoring."
+      },
+      "bn": {
+        "goal": "একটি AI সিস্টেমের পেছনের অপারেশনের দক্ষতা শেখা, শেল থেকে শুরু করে Kubernetes, পাইপলাইন আর মনিটরিং পর্যন্ত।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "Everyday tools",
+            "goal": "Work comfortably in Linux, Git, networking, and the Python and YAML used in pipelines.",
+            "build": "Clone a repo, run its tests from the shell, and edit one YAML pipeline file."
+          },
+          "bn": {
+            "title": "প্রতিদিনের টুল",
+            "goal": "Linux, Git, নেটওয়ার্কিং, আর পাইপলাইনে ব্যবহৃত Python ও YAML-এ স্বচ্ছন্দ হওয়া।",
+            "build": "একটি রিপো ক্লোন করুন, শেল থেকে তার টেস্ট চালান, আর একটি YAML পাইপলাইন ফাইল সম্পাদনা করুন।"
+          },
+          "targets": [
+            "s1",
+            "s2",
+            "s3",
+            "s4"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Package and ship",
+            "goal": "Containerise an app, run it on Kubernetes, and deliver it with CI/CD and infrastructure as code.",
+            "build": "Put a small app in a Docker image and add a CI job that builds it on every push."
+          },
+          "bn": {
+            "title": "প্যাকেজ করা আর পাঠানো",
+            "goal": "অ্যাপ কনটেইনারে ভরা, Kubernetes-এ চালানো, আর CI/CD ও infrastructure as code দিয়ে পৌঁছে দেওয়া।",
+            "build": "একটি ছোট অ্যাপ Docker ইমেজে ভরুন এবং প্রতিটি push-এ তা বানায় এমন একটি CI জব যোগ করুন।"
+          },
+          "targets": [
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Run it in production",
+            "goal": "Use cloud AI services, MLOps, monitoring and security, then data infrastructure, AIOps and coding assistants.",
+            "build": "Add metrics and an alert to your deployed app and write down how you would roll back a bad release."
+          },
+          "bn": {
+            "title": "প্রোডাকশনে চালানো",
+            "goal": "ক্লাউডের AI সেবা, MLOps, মনিটরিং ও নিরাপত্তা, তারপর ডেটা অবকাঠামো, AIOps ও কোডিং সহকারী ব্যবহার করা।",
+            "build": "ডিপ্লয় করা অ্যাপে মেট্রিক ও একটি অ্যালার্ট যোগ করুন এবং খারাপ রিলিজ কীভাবে ফেরত নেবেন তা লিখে রাখুন।"
+          },
+          "targets": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15"
+          ]
+        }
+      ]
+    },
+    "system-design": {
+      "before": [
+        "deploying-and-operating-ai-systems"
+      ],
+      "after": [
+        "ai-application-architecture"
+      ],
+      "en": {
+        "goal": "Go from how one request travels to designing a whole system such as a chat app."
+      },
+      "bn": {
+        "goal": "একটি রিকোয়েস্ট কীভাবে ভ্রমণ করে তা থেকে শুরু করে চ্যাট অ্যাপের মতো পুরো সিস্টেম ডিজাইন করা।"
+      },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": {
+            "title": "How requests and scale work",
+            "goal": "Trace a request, measure latency, do napkin math, and scale with balancers, stateless services and caches.",
+            "build": "Estimate the traffic of an app you know and draw how its requests are spread across servers."
+          },
+          "bn": {
+            "title": "রিকোয়েস্ট আর স্কেল কীভাবে কাজ করে",
+            "goal": "রিকোয়েস্ট অনুসরণ করা, লেটেন্সি মাপা, মোটামুটি হিসাব করা, আর ব্যালান্সার, stateless সার্ভিস ও ক্যাশ দিয়ে স্কেল করা।",
+            "build": "আপনার চেনা একটি অ্যাপের ট্রাফিক আন্দাজ করুন এবং তার রিকোয়েস্ট সার্ভারে কীভাবে ভাগ হয় তা এঁকে ফেলুন।"
+          },
+          "targets": [
+            "s1",
+            "s2",
+            "s3",
+            "s4",
+            "s5",
+            "s6",
+            "s7",
+            "s8"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Store data",
+            "goal": "Choose a database, index it, replicate and shard it, and handle files.",
+            "build": "Pick a database for a notes app and explain how you would add a replica and an index."
+          },
+          "bn": {
+            "title": "ডেটা সংরক্ষণ",
+            "goal": "ডেটাবেস বাছা, ইনডেক্স করা, রেপ্লিকেট ও শার্ড করা, আর ফাইল সামলানো।",
+            "build": "একটি নোট অ্যাপের জন্য ডেটাবেস বেছে নিন এবং কীভাবে রেপ্লিকা ও ইনডেক্স যোগ করবেন তা ব্যাখ্যা করুন।"
+          },
+          "targets": [
+            "s9",
+            "s10",
+            "s11",
+            "s12",
+            "s13",
+            "s14",
+            "s15",
+            "s19"
+          ]
+        },
+        {
+          "level": "intermediate",
+          "en": {
+            "title": "Keep data correct",
+            "goal": "Reason about consistency, consensus and transactions.",
+            "build": "Explain with an example what goes wrong when two users book the last seat at the same time."
+          },
+          "bn": {
+            "title": "ডেটা সঠিক রাখা",
+            "goal": "consistency, consensus আর transaction নিয়ে যুক্তি করা।",
+            "build": "দুজন ব্যবহারকারী একই সময়ে শেষ আসনটি বুক করলে কী ভুল হয় তা একটি উদাহরণসহ ব্যাখ্যা করুন।"
+          },
+          "targets": [
+            "s16",
+            "s17",
+            "s18"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Connect and run services",
+            "goal": "Design APIs and queues, split services, survive failures, and watch the system.",
+            "build": "Put a queue between two services of your design and decide the timeout and retry rules."
+          },
+          "bn": {
+            "title": "সার্ভিস জোড়া আর চালানো",
+            "goal": "API ও কিউ ডিজাইন করা, সার্ভিস ভাগ করা, ব্যর্থতা সামলানো, আর সিস্টেমের ওপর নজর রাখা।",
+            "build": "আপনার ডিজাইনের দুটি সার্ভিসের মাঝে একটি কিউ বসান এবং টাইমআউট ও আবার চেষ্টার নিয়ম ঠিক করুন।"
+          },
+          "targets": [
+            "s20",
+            "s21",
+            "s22",
+            "s23",
+            "s24",
+            "s25",
+            "s26",
+            "s27",
+            "s28",
+            "s29",
+            "s30",
+            "s31"
+          ]
+        },
+        {
+          "level": "advanced",
+          "en": {
+            "title": "Secure, ship and design whole systems",
+            "goal": "Secure the system, test and deploy it, then design full systems from a blank page.",
+            "build": "Design a URL shortener end to end, then a chat system, and write down the trade-offs you chose."
+          },
+          "bn": {
+            "title": "নিরাপদ করা, পাঠানো আর পুরো সিস্টেম ডিজাইন",
+            "goal": "সিস্টেম নিরাপদ করা, টেস্ট ও ডিপ্লয় করা, তারপর ফাঁকা পাতা থেকে পুরো সিস্টেম ডিজাইন করা।",
+            "build": "একটি URL শর্টনার শুরু থেকে শেষ ডিজাইন করুন, তারপর একটি চ্যাট সিস্টেম, আর যে ট্রেড-অফ বেছেছেন তা লিখে রাখুন।"
+          },
+          "targets": [
+            "s32",
+            "s33",
+            "s34",
+            "s35",
+            "s36",
+            "s37",
+            "s38",
+            "s39",
+            "s40"
+          ]
+        }
+      ]
+    }
+  }
+}

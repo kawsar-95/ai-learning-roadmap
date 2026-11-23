@@ -22,6 +22,7 @@ change a Part without breaking a reader's saved progress.
 - [Practice tasks](#practice-tasks)
 - [Quizzes](#quizzes)
 - [Interview questions](#interview-questions)
+- [Learning roadmaps](#learning-roadmaps)
 - [Adding a Part](#adding-a-part)
 
 ## Where content lives
@@ -33,6 +34,7 @@ change a Part without breaking a reader's saved progress.
 | `scripts/walkthroughs/` | The Python files that build the walk-throughs of Parts 1 to 17, into `src/content/walkthroughs/` | Yes. Edit these, then run the build ([Walk-throughs](#walk-throughs)) |
 | `src/content/interview.json` | Three interview questions for each Part | Yes |
 | `src/data/roadmap-phases.json` | Roadmap stages and phase summaries | Yes ([roadmap.md](roadmap.md)) |
+| `src/data/topic-roadmaps.json` | The roadmap of each Part, and the path across the Parts | Yes ([Learning roadmaps](#learning-roadmaps)) |
 | `src/data/roadmap-lessons.json` | Every roadmap phase and lesson | No, generated |
 | `src/content/lessons/` | The copied curriculum lessons | No, copied |
 
@@ -579,6 +581,49 @@ The quiz format is in [quizzes.md](quizzes.md). The tests add these rules:
 - The text is plain text. Each answer is 2 to 4 sentences and uses only
   facts the linked section states.
 
+## Learning roadmaps
+
+Each Part has a roadmap: its sections in stages, from the first step to the
+last. It shows under the Part header, closed, and the home page shows one
+path across all the Parts. They are in `src/data/topic-roadmaps.json`, apart
+from the Part files, so a roadmap never changes a section id or a reader's
+progress.
+
+```json
+{
+  "path": [{ "en": "Understand models", "bn": "মডেল বোঝা", "parts": ["llm-fundamentals"] }],
+  "roadmaps": {
+    "llm-fundamentals": {
+      "before": [],
+      "after": ["prompt-engineering"],
+      "en": { "goal": "What the reader can do after the whole Part." },
+      "bn": { "goal": "বাংলায় একই কথা।" },
+      "stages": [
+        {
+          "level": "beginner",
+          "en": { "title": "…", "goal": "…", "build": "One small thing to build." },
+          "bn": { "title": "…", "goal": "…", "build": "…" },
+          "targets": ["s1", "s4"]
+        }
+      ]
+    }
+  }
+}
+```
+
+| Field | Rule |
+| --- | --- |
+| `path` | At least 2 tracks. Each Part is in exactly one track. `parts` are slugs, in reading order. |
+| `before`, `after` | Slugs of Parts to read first and next. |
+| `stages` | At least 2. `level` is `beginner`, `intermediate`, or `advanced`. |
+| `targets` | Section ids in reading order, which need not be the order in the file. A one-section Part has no sections to split, so its targets are the ids of its level 3 headings. |
+| text | Plain text, no tags. Bangla text has Bangla letters and Bangla digits (a name such as `BM25` stays Latin). |
+
+The build checks the file with `TopicRoadmapsSchema` and `roadmapProblems`
+(`src/lib/topic-roadmap.ts`). `tests/topic-roadmap.test.ts` also checks
+the real file: every Part has a roadmap, every section (or heading) is in
+exactly one stage, and every Part is on the path.
+
 ## Adding a Part
 
 1. Write `src/content/<slug>.json`, with sections in all three voices, a
@@ -588,7 +633,8 @@ The quiz format is in [quizzes.md](quizzes.md). The tests add these rules:
    slug in `TOPIC_ORDER` where it belongs. The position sets the Part
    number.
 3. Add its 3 questions to `src/content/interview.json`, at the same
-   position.
+   position, and its roadmap and place on the path to
+   `src/data/topic-roadmaps.json` (the build fails without them).
 4. Link it from the roadmap phases that cover the same ground: the `topics`
    list of each phase in `src/data/roadmap-phases.json`.
 5. Update the places that state the Part count or list the Parts:
