@@ -5,6 +5,7 @@ import { AUTHOR_GITHUB_URL, AUTHOR_GUIDE_URL, AUTHOR_LINKS, UI, contentsHref, fm
 import type { Lang } from "@/lib/i18n";
 import { Inline } from "@/components/content/Inline";
 import { PartCount } from "@/components/progress/ProgressWidgets";
+import { LEARNING_PATH } from "@/lib/topic-roadmap-data";
 
 const TOTAL_SECTIONS = TOPICS.reduce((sum, t) => sum + t.sections.length, 0);
 const TOTAL_SOURCES = TOPICS.reduce((sum, t) => sum + t.sources.length, 0);
@@ -180,6 +181,47 @@ function Parts({ lang }: { lang: Lang }) {
   );
 }
 
+/**
+ * The Parts in the order to read them, in tracks. It answers "where do I
+ * start?" before the long index below it. Each Part also has its own
+ * roadmap on its page.
+ */
+function LearningPath({ lang }: { lang: Lang }) {
+  const ui = UI[lang];
+  return (
+    <section aria-labelledby="path-heading" className="border-t border-border py-14 sm:py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <p className="m-0 mb-3 font-mono text-[12px] text-accent">{ui.learningPathEyebrow}</p>
+        <h2 id="path-heading" className={SECTION_TITLE}>
+          {ui.learningPathTitle}
+        </h2>
+        <p className="mt-3 max-w-2xl text-[17px] text-text-dim">{ui.learningPathIntro}</p>
+        <ol className="m-0 mt-8 grid list-none gap-x-12 gap-y-6 p-0 md:grid-cols-2">
+          {LEARNING_PATH.map((track, i) => (
+            <li key={track.en} className="border-l-2 border-border pl-4">
+              <p className="m-0 font-mono text-[12px] text-text-faint">{fmtNum(lang, i + 1)}</p>
+              <h3 className="m-0 mt-0.5 mb-2 font-display text-[20px] font-medium leading-snug text-text">{track[lang]}</h3>
+              <ul className="m-0 list-none space-y-1 p-0 text-[15px]">
+                {track.parts.map((slug) => {
+                  const topic = TOPICS.find((t) => t.slug === slug);
+                  if (!topic) return null;
+                  return (
+                    <li key={slug}>
+                      <Link href={topicHref(slug, lang)} prefetch={false} className="text-text-dim no-underline hover:text-accent hover:underline">
+                        <span className="text-accent-2">{partNum(lang, topic.part)}</span> {topicText(topic, lang).title}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 function Author({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   const links: [string, string][] = [
@@ -239,6 +281,7 @@ export function HomePage({ lang }: { lang: Lang }) {
   return (
     <>
       <Hero lang={lang} />
+      <LearningPath lang={lang} />
       <Parts lang={lang} />
       <Author lang={lang} />
     </>

@@ -318,6 +318,21 @@ const en = {
   basicsWords: "Words to know",
   basicsRemember: "Remember",
 
+  // The learning roadmap of a Part.
+  topicRoadmapTitle: "Learning roadmap",
+  topicRoadmapSummary: (stages: string, minutes: string) => `${stages} stages · about ${minutes} min`,
+  topicRoadmapBefore: "Read first",
+  topicRoadmapAfter: "Read next",
+  topicRoadmapGoal: "You can",
+  topicRoadmapBuild: "Build",
+  topicRoadmapQuiz: "Finish with the quiz",
+  topicRoadmapLevel: { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" },
+  topicRoadmapStage: (n: string) => `Stage ${n}`,
+  topicRoadmapStages: (n: string) => `${n} stages`,
+  learningPathEyebrow: "Start to end",
+  learningPathTitle: "One path through all the Parts",
+  learningPathIntro: "Not sure where to begin? Read the tracks in order. Every Part also has its own roadmap, at the top of its page.",
+
   // The step-by-step walk-through of a section.
   walkTitle: "Walk-through",
   walkStepOf: (i: number, n: number) => `Step ${i} of ${n}`,
@@ -573,6 +588,21 @@ const bn: Dict = {
   basicsTitle: "এখান থেকে শুরু করুন",
   basicsWords: "শব্দগুলো চিনে নিন",
   basicsRemember: "মনে রাখুন",
+
+  // The learning roadmap of a Part.
+  topicRoadmapTitle: "শেখার রোডম্যাপ",
+  topicRoadmapSummary: (stages: string, minutes: string) => `${stages}টি ধাপ · প্রায় ${minutes} মিনিট`,
+  topicRoadmapBefore: "আগে পড়ুন",
+  topicRoadmapAfter: "এরপর পড়ুন",
+  topicRoadmapGoal: "আপনি পারবেন",
+  topicRoadmapBuild: "বানান",
+  topicRoadmapQuiz: "কুইজ দিয়ে শেষ করুন",
+  topicRoadmapLevel: { beginner: "শুরুর স্তর", intermediate: "মাঝারি স্তর", advanced: "উন্নত স্তর" },
+  topicRoadmapStage: (n: string) => `ধাপ ${n}`,
+  topicRoadmapStages: (n: string) => `${n}টি ধাপ`,
+  learningPathEyebrow: "শুরু থেকে শেষ",
+  learningPathTitle: "সব পার্টের ভেতর দিয়ে একটি পথ",
+  learningPathIntro: "কোথা থেকে শুরু করবেন বুঝতে পারছেন না? ট্র্যাকগুলো ক্রম ধরে পড়ুন। প্রতিটি পার্টের পাতার ওপরেও তার নিজের রোডম্যাপ আছে।",
 
   walkTitle: "ধাপে ধাপে",
   walkStepOf: (i: number, n: number) => `ধাপ ${fmtNum("bn", i)}/${fmtNum("bn", n)}`,

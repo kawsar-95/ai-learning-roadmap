@@ -300,7 +300,7 @@ npm run dev        # http://localhost:3000
 | `npm run dev` | Starts the dev server at <http://localhost:3000>. The service worker is off in development. |
 | `npm run build` | Validates all content, writes the static site to `out/`, then writes the offline file list into `out/sw.js`. |
 | `npx serve@latest out` | Serves the static build at <http://localhost:3000>. |
-| `npm test` | Runs the 232 tests in `tests/` with Node's built-in test runner. |
+| `npm test` | Runs the 240 tests in `tests/` with Node's built-in test runner. |
 | `npm run lint` | Runs ESLint. |
 | `npm run check:videos` | Asks YouTube whether every listed video still exists and can be embedded. It needs the network, so `npm test` and the deploy do not run it. |
 

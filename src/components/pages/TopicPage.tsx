@@ -13,6 +13,8 @@ import { SectionView } from "@/components/content/SectionView";
 import { QuizSection } from "@/components/content/QuizSection";
 import { Sources } from "@/components/content/Sources";
 import { TopicHeader } from "@/components/content/TopicHeader";
+import { TopicRoadmapView } from "@/components/content/TopicRoadmap";
+import { getTopicRoadmap } from "@/lib/topic-roadmap-data";
 import { OutlineDetails } from "@/components/navigation/OutlineDetails";
 import { SectionNav } from "@/components/navigation/SectionNav";
 import { Sidebar } from "@/components/layout/Sidebar";
@@ -48,6 +50,8 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
   const neighbor = (t?: typeof topic) => t && { slug: t.slug, part: t.part, title: topicText(t, lang).title };
 
   const items = getNavItems(lang);
+  const roadmap = getTopicRoadmap(slug);
+  const titleOf = (s: string) => items.find((i) => i.slug === s)?.title ?? s;
   const outline = getOutline(topic, lang);
 
   // A walk-through is not sent with its section: the section gets the path of
@@ -113,6 +117,7 @@ export async function TopicPage({ params, lang }: { params: Promise<TopicParams>
         </aside>
         <article className="mx-auto w-full max-w-[var(--text-w)] min-w-0 px-4 pt-6 pb-20 sm:px-6 sm:pt-10 lg:px-0">
           <TopicHeader topic={topic} lang={lang} />
+          {roadmap && <TopicRoadmapView topic={topic} roadmap={roadmap} titleOf={titleOf} lang={lang} />}
           {/* The "On this page" column shows from `xl`. Below it, this closed list does the same job. */}
           {outline.length > 1 && <OutlineDetails items={outline} lang={lang} className="mb-6" />}
           {steps.length > 0 ? <SectionPager steps={steps} lang={lang} /> : (

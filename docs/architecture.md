@@ -116,6 +116,7 @@ Two modules load the data, and only server code may import them:
 | --- | --- | --- |
 | `src/lib/topics.ts` | the 18 Part files, and the walk-through files in `src/content/walkthroughs` | `TopicFileSchema.parse` on each Part file. The `slug` in the file must match its place in `TOPIC_ORDER`. `attachWalkthroughs` checks each walk-through file against `WalkthroughSchema`, and that it belongs to a section of its Part. |
 | `src/lib/roadmap.ts` | `roadmap-lessons.json`, `roadmap-phases.json` | `buildRoadmap`: both schemas, no gaps, no repeats, every phase in exactly one stage |
+| `src/lib/topic-roadmap-data.ts` | `topic-roadmaps.json` | `TopicRoadmapsSchema.parse`, then `roadmapProblems` against the real Parts: every section in one stage, every Part on the path |
 
 `InterviewPage.tsx` parses `src/content/interview.json` the same way. It
 throws if a Part is missing, is out of order, does not have exactly 3
@@ -197,6 +198,11 @@ and `bangla` (বাংলা). `SectionView.tsx` shows one at a time.
 
 The text column is at most 720 px wide.
 
+- `TopicRoadmap.tsx` shows under the header, closed: the stages of the Part's
+  roadmap, with links to their sections and a reading time for each stage of
+  sections. The links are plain `#id` links, which the section pager opens.
+  The home page shows the path across the Parts (`LearningPath` in
+  `HomePage.tsx`).
 - `TopicHeader.tsx` opens the page: the Part number, the reading time,
   **Mark as read**, **Go to quiz**, then the title, tagline, and intro.
   The reading time counts 200 words a minute over the voice each site shows
@@ -491,6 +497,7 @@ modules in `src/lib/` directly, and some read the real content files.
 | `i18n.test.ts` | Paths in both languages, the language script, the dictionaries, Bangla digits, Bangla titles in the content |
 | `icons.test.ts` | `icon.svg` colors and validity, `favicon.ico` sizes, icons in the offline list |
 | `interview.test.ts` | The interview checker and the real `interview.json` |
+| `topic-roadmap.test.ts` | The roadmap checker and the real `topic-roadmaps.json` |
 | `lesson-markdown.test.ts` | Lesson rendering, escaping, math, links, and every real lesson |
 | `panels.test.ts` | The saved keys of the two side columns, the head script that folds them, and the selectors in `globals.css` that it feeds |
 | `practice.test.ts` | The practice task schema and `practiceLang` |
@@ -570,6 +577,7 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │   │   ├── PracticeList.tsx         practice tasks, with CopyButton.tsx
 │   │   │   ├── VideoList.tsx            the Watch list: videos, then Shorts, with VideoCard.tsx
 │   │   │   ├── EmbedList.tsx            the Live view list, with EmbedFrame.tsx
+│   │   │   ├── TopicRoadmap.tsx         the learning roadmap of a Part
 │   │   │   ├── QuizSection.tsx          the quiz
 │   │   │   ├── Sources.tsx              the numbered sources
 │   │   │   └── PrevNext.tsx             previous and next Part or lesson
@@ -603,11 +611,14 @@ modules in `src/lib/` directly, and some read the real content files.
 │   │   └── lessons/                     the copied curriculum lessons, LICENSE, source.json
 │   ├── data/
 │   │   ├── roadmap-lessons.json         every phase and lesson (generated)
-│   │   └── roadmap-phases.json          stages, summaries, links to the Parts (by hand)
+│   │   ├── roadmap-phases.json          stages, summaries, links to the Parts (by hand)
+│   │   └── topic-roadmaps.json          the roadmap of each Part, and the path across the Parts (by hand)
 │   └── lib/
 │       ├── content-schema.ts            block, section, Start here box, Part, video, embed, practice, and quiz schemas
 │       ├── topics.ts                    loads the Parts; TOPIC_ORDER (server only)
 │       ├── roadmap.ts                   loads the roadmap (server only)
+│       ├── topic-roadmap.ts             Part roadmap schema and roadmapProblems
+│       ├── topic-roadmap-data.ts        loads the Part roadmaps (server only)
 │       ├── roadmap-schema.ts            roadmap schemas, buildRoadmap, lesson URLs, durations
 │       ├── lesson-markdown.ts           renders a lesson: marked, KaTeX, links, outline
 │       ├── interview.ts                 the interview schema and checker
