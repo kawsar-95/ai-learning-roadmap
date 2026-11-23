@@ -168,7 +168,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
         aria-expanded={open}
         aria-keyshortcuts="Control+K Meta+K"
         onClick={openPalette}
-        className="grid size-8 shrink-0 pointer-coarse:size-11 place-items-center rounded-md text-text-dim transition-colors hover:bg-bg-raised-2 hover:text-text"
+        className="grid size-9 shrink-0 pointer-coarse:size-11 place-items-center rounded-lg border border-border bg-bg-raised text-text-dim transition-colors hover:border-border-strong hover:text-text"
         title={`${ui.search} · Ctrl/⌘ K`}
       >
         <svg aria-hidden="true" viewBox="0 0 20 20" className="size-[18px]" fill="none">

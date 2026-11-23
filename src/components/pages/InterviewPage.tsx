@@ -30,10 +30,10 @@ export function InterviewPage({ lang }: { lang: Lang }) {
           return (
             <li key={part.topic} className="border-t border-border-strong pt-5">
               <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                <span aria-hidden="true" className="font-display text-[26px] font-bold leading-none text-accent">
+                <span aria-hidden="true" className="font-display text-[26px] font-medium leading-none text-accent">
                   {fmtNum(lang, topic.part).padStart(2, fmtNum(lang, 0))}
                 </span>
-                <h2 className="m-0 min-w-0 flex-1 font-display text-[22px] font-bold leading-snug">
+                <h2 className="m-0 min-w-0 flex-1 font-display text-[22px] font-medium leading-snug">
                   <Link
                     href={topicHref(topic.slug, lang)}
                     // A Part's payload is over a hundred kilobytes, and this

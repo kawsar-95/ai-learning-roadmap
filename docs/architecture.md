@@ -417,13 +417,14 @@ frame, under the section intro. Only hosts in `FRAMEABLE_HOSTS` or
 
 ## Design rules
 
-The look follows the calm editorial style of
-[systemdesignbangla.com](https://www.systemdesignbangla.com/). The rules come
-from the declutter pass
+The look follows the Agentic QA guide
+([kawsar-95.github.io/ai-testing-guide](https://kawsar-95.github.io/ai-testing-guide/),
+its `DESIGN.md`): warm paper by day, blue-black by night, one teal accent for
+anything interactive, and amber for a number that carries weight. The rules
+come from the declutter pass
 ([spec](superpowers/specs/2026-11-07-declutter-design.md)):
 
-1. Cards are flat: a border, no resting shadow, no lift on hover. Only the
-   home page's cover card has a shadow.
+1. Cards are flat: a border, no resting shadow, no lift on hover.
 2. Chrome has no emoji. A page header is a title and one line, with no label
    that repeats the navigation.
 3. A list of many things is a ruled index, not a grid of boxes.
@@ -439,7 +440,9 @@ here and in the test together.
 | --- | --- |
 | Radius | 4 px (chips, code), 6 px (`rounded-md`, small controls), 10 px (`rounded-lg`, cards and buttons), 16 px (`rounded-2xl`, panels), full (pills, dots). Tailwind's `lg` is set to 10 px in `globals.css`; `xl` is not used. |
 | Text size | 12, 13, 14, 15, 16, 17, 18, 20, 22, 26 px, and the hero's 48 and 60 px |
-| Letter-spacing | `0.06em` for small caps labels and badges, `0.16em` for eyebrow labels, `-0.02em` for headings, `-0.03em` for the hero title |
+| Letter-spacing | `0.06em` for small caps labels and badges, `-0.015em` for section headings, `-0.025em` for page titles and the hero title. Eyebrow labels are sentence case with normal tracking. |
+| Weight | Display type (Crimson Pro) is 500. Wordmarks are 600. There is no 700 or 800 in headings. |
+| Borders | `--border` is the hairline, `--border-strong` is for controls and emphasis. Header controls are 36 px squares with a `--border` edge and a 10 px radius. |
 
 **The walk-through is a sketch, on purpose.** The step-by-step player
 (`StepPlayer.tsx`, the `.wk-*` rules) is drawn as a hand-made diagram: 2 px
@@ -450,10 +453,12 @@ is kept narrow by tests: offset shadows may appear only in `.wk-` rules, and
 every `--wk-*` color must exist in both themes. The scale above does not apply
 inside `.wk-*` rules.
 
-**The home page cover.** The cover card is flat and still: a solid dark
-card, the tag, the title, one line. No tilt, no gradient, no glows, no
-drawing, and no counts (the stats row beside it has them). The hero behind
-it has no glow or grid.
+**The home page cover.** The card beside the hero is a flat terminal window:
+three dots, the Part it comes from, and a short command with its output. It has
+a border and no shadow, is fixed to the code-block ground (`#22272e`, not a theme token) in both
+themes, and is hidden from assistive tech because it only illustrates. The
+hero has a mono teal eyebrow, one primary and one outline button, and no glow
+or grid behind it. Part numbers in the index are amber.
 
 **Bangla lessons.** The 542 curriculum lessons are English only. A Bangla
 lesson page says so in a note under its title, with a link to the Bangla

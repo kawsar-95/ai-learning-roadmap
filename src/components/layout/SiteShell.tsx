@@ -30,11 +30,11 @@ function SiteFooter({ lang }: { lang: Lang }) {
           <Link href={homeHref(lang)} className="inline-flex items-center gap-2.5 text-text no-underline">
             <span
               aria-hidden="true"
-              className="grid size-8 place-items-center rounded-lg bg-accent font-display text-[15px] font-bold italic text-on-accent"
+              className="grid size-8 place-items-center rounded-lg bg-accent font-display text-[15px] font-semibold text-on-accent"
             >
               Ai
             </span>
-            <span className="font-display text-lg font-bold">{ui.siteName}</span>
+            <span className="font-display text-lg font-semibold">{ui.siteName}</span>
           </Link>
           <p className="mt-3 max-w-xs text-[14px] leading-relaxed text-text-dim">{ui.footer}</p>
         </div>

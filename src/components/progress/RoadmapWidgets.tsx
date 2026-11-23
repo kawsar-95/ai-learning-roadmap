@@ -113,7 +113,7 @@ export function RoadmapSummary({ lessons, lang }: { lessons: LessonLink[]; lang:
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3 sm:pl-4">
             <dt className="mt-1.5 text-[13px] leading-snug text-text-faint">{label}</dt>
-            <dd className="m-0 font-display text-[clamp(1.5rem,4.5vw,2.25rem)] font-bold leading-none text-text">
+            <dd className="m-0 font-display text-[clamp(1.5rem,4.5vw,2.25rem)] font-medium leading-none text-text">
               {value}
             </dd>
           </div>

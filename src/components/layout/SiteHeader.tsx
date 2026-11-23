@@ -55,11 +55,11 @@ export function SiteHeader({
         <Link href={homeHref(lang)} className="flex min-w-0 items-center gap-2.5 text-text no-underline pointer-coarse:min-h-11">
           <span
             aria-hidden="true"
-            className="grid size-9 shrink-0 place-items-center rounded-lg bg-accent font-display text-[17px] font-bold italic leading-none text-on-accent shadow-card"
+            className="grid size-9 shrink-0 place-items-center rounded-lg bg-accent font-display text-[17px] font-semibold leading-none text-on-accent shadow-card"
           >
             Ai
           </span>
-          <span className="truncate font-display text-[20px] font-bold leading-none tracking-tight">
+          <span className="truncate font-display text-[20px] font-semibold leading-none tracking-tight">
             {UI[lang].siteName}
           </span>
         </Link>

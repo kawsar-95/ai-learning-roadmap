@@ -13,8 +13,8 @@ export type SectionLink = { key: string; href: string };
  * The small flat buttons of the reading pages: a border, no shadow, a fill only when on.
  * The roadmap's "Mark as read" uses them too (RoadmapWidgets), so both pages keep one look.
  */
-export const BUTTON = "inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-[13px] font-medium transition-colors";
-export const BUTTON_IDLE = "border-border-strong text-text-dim hover:border-accent hover:text-text";
+export const BUTTON = "inline-flex items-center gap-1.5 rounded-lg border px-3.5 py-1.5 text-[13px] font-semibold transition-colors";
+export const BUTTON_IDLE = "border-border-strong bg-bg-raised text-text hover:border-accent hover:text-accent";
 
 /**
  * The reading progress of one Part, for the Part lists. With a `label` (for
@@ -134,7 +134,7 @@ export function ProgressSummary({ sections, lang }: { sections: SectionLink[]; l
         {stats.map(([value, label]) => (
           <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3 sm:pl-4">
             <dt className="mt-1.5 text-[13px] leading-snug text-text-faint">{label}</dt>
-            <dd className="m-0 font-display text-[clamp(1.75rem,5vw,2.25rem)] font-bold leading-none text-text">
+            <dd className="m-0 font-display text-[clamp(1.75rem,5vw,2.25rem)] font-medium leading-none text-text">
               {value}
             </dd>
           </div>

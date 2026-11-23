@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { TOPICS, topicText } from "@/lib/topics";
 import { progressKey } from "@/lib/progress";
-import { AUTHOR_GITHUB_URL, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
+import { AUTHOR_GITHUB_URL, AUTHOR_LINKS, UI, contentsHref, fmtNum, topicHref } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { Inline } from "@/components/content/Inline";
 import { PartCount } from "@/components/progress/ProgressWidgets";
@@ -10,7 +10,7 @@ const TOTAL_SECTIONS = TOPICS.reduce((sum, t) => sum + t.sections.length, 0);
 const TOTAL_SOURCES = TOPICS.reduce((sum, t) => sum + t.sources.length, 0);
 
 const SECTION_TITLE =
-  "font-display text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text";
+  "font-display text-[clamp(1.75rem,4vw,2.5rem)] font-medium leading-[1.1] tracking-[-0.015em] text-balance text-text";
 const BUTTON =
   "inline-flex items-center gap-2 rounded-lg px-6 py-3 text-[16px] font-semibold no-underline transition";
 
@@ -19,25 +19,36 @@ function partNum(lang: Lang, n: number): string {
 }
 
 /**
- * The dark "book cover" card beside the hero text. It is the one card with a
- * shadow (docs/architecture.md, Design rules). It is flat otherwise: no tilt,
- * no gradient, no glows, no network drawing. Its counts are not repeated here,
- * because the stats row beside it already shows them.
+ * The terminal card beside the hero text: a small window showing what a Part
+ * teaches, the way the Agentic QA guide shows a command. It is flat (a border
+ * and no shadow) and still, and it is decoration, so it is hidden from
+ * assistive tech. The dark ground is the code-block color in both themes.
  */
 function CoverCard({ lang }: { lang: Lang }) {
   const ui = UI[lang];
-  const [first, accent, last] = ui.coverTitle;
+  const part = TOPICS.find((t) => t.slug === "rag-knowledge-systems");
   return (
-    <div className="mx-auto flex h-[380px] w-[280px] flex-col justify-between rounded-2xl bg-[#1a1d1f] p-6 text-white shadow-cover sm:h-[460px] sm:w-[350px] sm:p-7 [[data-theme=dark]_&]:border [[data-theme=dark]_&]:border-border [[data-theme=dark]_&]:bg-[#0d1117]">
-      <p className="m-0 font-mono text-[12px] text-white/60">{ui.coverTag}</p>
-      <div>
-        <p lang="en" className="m-0 font-display text-[48px] font-bold leading-none tracking-[-0.03em] sm:text-[60px]">
-          <span className="block">{first}</span>
-          <span className="block text-[#5eead4] italic">{accent}</span>
-          <span className="block">{last}</span>
-        </p>
-        <p className="mt-4 mb-0 text-[14px] text-white/75">{ui.coverSub}</p>
+    <div
+      aria-hidden="true"
+      lang="en"
+      className="mx-auto w-full max-w-[440px] overflow-hidden rounded-lg border border-[#3a424d] bg-[#22272e] font-mono text-[13px] leading-[1.65] text-[#adbac7]"
+    >
+      <div className="flex items-center gap-2 border-b border-[#3a424d] px-4 py-3 text-[12px] text-[#8b939e]">
+        <span className="size-2.5 rounded-full bg-[#4a525d]" />
+        <span className="size-2.5 rounded-full bg-[#4a525d]" />
+        <span className="size-2.5 rounded-full bg-[#4a525d]" />
+        {part && (
+          <span className="ms-2">
+            {ui.part(partNum(lang, part.part))} · {topicText(part, "en").title}
+          </span>
+        )}
       </div>
+      <pre className="m-0 overflow-x-auto px-6 py-5 font-[inherit] text-[inherit]">
+        <span className="text-[#2dd4bf]">&gt;</span> <span className="text-[#e6e6e6]">python ask.py &quot;why did my bill double?&quot;</span>
+        {"\n"}retrieve  hybrid search, top 20 chunks
+        {"\n"}rerank    cross-encoder, keep 3
+        {"\n"}answer    cited [1] [2] [3], or &quot;not found&quot;
+      </pre>
     </div>
   );
 }
@@ -54,7 +65,8 @@ function Hero({ lang }: { lang: Lang }) {
     <section className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-20">
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <div>
-          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.02em] text-text">
+          <p className="m-0 mb-5 font-mono text-[12px] text-accent">{ui.coverTag}</p>
+          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.025em] text-text">
             <span className="block">{ui.heroLine1}</span>
             <span className="block text-text-dim">
               {ui.heroLine2}{" "}
@@ -80,12 +92,19 @@ function Hero({ lang }: { lang: Lang }) {
             >
               {ui.startReading}
             </Link>
+            <a
+              href="#parts"
+              className={`${BUTTON} border border-border-strong bg-bg-raised text-text hover:border-accent hover:text-accent`}
+            >
+              {ui.seeAllParts}
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
           <dl className="m-0 hidden max-w-lg grid-cols-4 gap-6 sm:grid">
             {stats.map(([value, label]) => (
               <div key={label} className="flex flex-col-reverse border-l-2 border-accent pl-3.5">
                 <dt className="mt-1 text-[13px] leading-snug text-text-faint">{label}</dt>
-                <dd className="m-0 font-display text-[26px] font-bold leading-none text-text">{value}</dd>
+                <dd className="m-0 font-display text-[26px] font-medium leading-none text-text">{value}</dd>
               </div>
             ))}
           </dl>
@@ -107,25 +126,26 @@ function Hero({ lang }: { lang: Lang }) {
 function Parts({ lang }: { lang: Lang }) {
   const ui = UI[lang];
   return (
-    <section id="parts" aria-labelledby="parts-heading" className="bg-bg-raised-2 py-14 sm:py-16">
+    <section id="parts" aria-labelledby="parts-heading" className="border-t border-border py-14 sm:py-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <p className="m-0 mb-3 font-mono text-[12px] text-accent">{ui.partsEyebrow}</p>
         <h2 id="parts-heading" className={SECTION_TITLE}>
           {ui.partsTitle}
         </h2>
         <p className="mt-3 max-w-2xl text-[17px] text-text-dim">{ui.partsIntro}</p>
-        <ol className="m-0 mt-8 grid list-none gap-x-12 border-b border-border-strong p-0 md:grid-cols-2">
+        <ol className="m-0 mt-8 grid list-none gap-x-12 border-b border-border p-0 md:grid-cols-2">
           {TOPICS.map((topic) => {
             const text = topicText(topic, lang);
             return (
               <li
                 key={topic.slug}
-                className="group relative flex items-baseline gap-4 border-t border-border-strong py-4"
+                className="group relative flex items-baseline gap-4 border-t border-border py-4"
               >
-                <span aria-hidden="true" className="w-9 shrink-0 font-display text-[26px] font-bold leading-none text-accent">
+                <span aria-hidden="true" className="w-9 shrink-0 font-display text-[26px] font-medium leading-none text-accent-2">
                   {partNum(lang, topic.part)}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <h3 className="m-0 font-display text-[20px] font-bold leading-snug text-balance">
+                  <h3 className="m-0 font-display text-[20px] font-medium leading-snug text-balance">
                     <Link
                       href={topicHref(topic.slug, lang)}
                       // A Part's payload is over a hundred kilobytes, and
@@ -162,21 +182,52 @@ function Parts({ lang }: { lang: Lang }) {
 
 function Author({ lang }: { lang: Lang }) {
   const ui = UI[lang];
+  const links: [string, string][] = [
+    [AUTHOR_LINKS.portfolio, ui.authorPortfolio],
+    [AUTHOR_LINKS.linkedin, ui.authorLinkedin],
+    [AUTHOR_GITHUB_URL, "GitHub"],
+    [AUTHOR_LINKS.x, ui.authorX],
+    [AUTHOR_LINKS.resume, ui.authorResume],
+  ];
   return (
     <section aria-labelledby="author-heading" className="py-12 sm:py-14">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 id="author-heading" className="m-0 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
-          Nuruddin Kawsar
+        <h2 id="author-heading" className="m-0 border-b border-border pb-3 font-mono text-[14px] font-normal text-text-dim">
+          {ui.authorHeading}
         </h2>
-        <p className="mt-1 mb-0 text-[16px] text-text-dim">{ui.authorBy}</p>
-        <a
-          href={AUTHOR_GITHUB_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-2 inline-block text-[16px] font-medium text-accent no-underline hover:underline"
-        >
-          {ui.authorGithub}
-        </a>
+        <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimizer */}
+          <img
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/author.jpg`}
+            alt="Nuruddin Kawsar"
+            width={140}
+            height={140}
+            className="size-[140px] shrink-0 rounded-full border border-border object-cover"
+          />
+          <div className="min-w-0 max-w-3xl">
+            <h3 className="m-0 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-semibold leading-tight text-text">
+              Nuruddin Kawsar
+            </h3>
+            <p className="mt-2 mb-0 text-[16px] text-text-dim">{ui.authorRole}</p>
+            <p className="mt-4 mb-0 text-[16px] leading-relaxed text-text-dim">{ui.authorBio}</p>
+            <ul className="m-0 mt-5 flex list-none flex-wrap gap-3 p-0">
+              {links
+                .filter(([href]) => href)
+                .map(([href, label]) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center rounded-lg border border-border bg-bg-raised-2 px-4 text-[15px] font-semibold text-text no-underline hover:border-accent"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );

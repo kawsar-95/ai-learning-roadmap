@@ -102,11 +102,10 @@ export function SectionPager({ steps, lang }: { steps: Step[]; lang: Lang }) {
       <div ref={top} />
       <div className="mb-5">
         <p className="m-0 text-[13px] text-text-faint">{steps[index].label}</p>
-        <div aria-hidden="true" className="mt-2 h-0.5 overflow-hidden rounded-full bg-bg-raised-2">
-          <div
-            className="h-full rounded-full bg-accent transition-[width] duration-300"
-            style={{ width: `${((index + 1) / steps.length) * 100}%` }}
-          />
+        <div aria-hidden="true" className="mt-2.5 flex gap-1">
+          {steps.map((step, i) => (
+            <span key={step.id} className={`h-1.5 max-w-9 flex-1 rounded-full ${i <= index ? "bg-accent" : "bg-border-strong"}`} />
+          ))}
         </div>
       </div>
 

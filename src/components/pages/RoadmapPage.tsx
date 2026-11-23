@@ -115,7 +115,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
       <PageHeader title={ui.roadmapTitle} intro={ui.roadmapIntro} />
 
       <section aria-labelledby="learning-paths" className="mb-12">
-        <h2 id="learning-paths" className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
+        <h2 id="learning-paths" className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-medium leading-tight text-text">
           {ui.pathsTitle}
         </h2>
         <p className="mt-1 max-w-2xl text-[15px] text-text-dim">{ui.pathsIntro}</p>
@@ -132,7 +132,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                 }
               >
                 <span className="font-mono text-[12px] text-accent">{label}</span>
-                <h3 className="m-0 mt-1 font-display text-[20px] font-bold leading-snug text-text">{text.title}</h3>
+                <h3 className="m-0 mt-1 font-display text-[20px] font-medium leading-snug text-text">{text.title}</h3>
                 <p className="mt-2 mb-0 flex-1 text-[15px] text-text-dim">{text.summary}</p>
                 <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[14px] font-medium">
                   <Link
@@ -172,7 +172,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
               <p className="font-mono text-[12px] text-text-faint">
                 {fmt(stageIndex + 1).padStart(2, fmt(0))}
               </p>
-              <h2 id={`stage-${stage.id}`} className="mt-1 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text">
+              <h2 id={`stage-${stage.id}`} className="mt-1 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-medium leading-tight text-text">
                 {text.title}
               </h2>
               <p className="mt-1 max-w-2xl text-[15px] text-text-dim">{text.summary}</p>
@@ -204,7 +204,7 @@ export function RoadmapPage({ lang }: { lang: Lang }) {
                           {phase.core ? ui.roadmapCore : ui.roadmapOptional}
                         </span>
                       </div>
-                      <h3 className="m-0 mt-1 font-display text-[22px] font-bold leading-snug text-text">
+                      <h3 className="m-0 mt-1 font-display text-[22px] font-medium leading-snug text-text">
                         {phase.title}
                       </h3>
                       <p className="mt-2 mb-0 max-w-2xl text-[15px] text-text-dim">
