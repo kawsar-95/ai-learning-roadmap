@@ -198,11 +198,11 @@ function Author({ lang }: { lang: Lang }) {
         <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
           {/* eslint-disable-next-line @next/next/no-img-element -- static export, no image optimizer */}
           <img
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/author.png`}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/author.jpg`}
             alt="Nuruddin Kawsar"
-            width={139}
-            height={139}
-            className="size-[139px] shrink-0 rounded-full border border-border object-cover"
+            width={140}
+            height={140}
+            className="size-[140px] shrink-0 rounded-full border border-border object-cover"
           />
           <div className="min-w-0 max-w-3xl">
             <h3 className="m-0 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-semibold leading-tight text-text">
