@@ -257,7 +257,7 @@ export function SearchPalette({ lang }: { lang: Lang }) {
                       : "")
                   }
                 >
-                  <div className="font-mono text-[12px] uppercase tracking-wide text-text-faint">
+                  <div className="font-mono text-[12px] text-text-faint">
                     {ui.part(fmtNum(lang, hit.part))} · {hit.topic}
                   </div>
                   <div className={"mt-0.5 text-[15px] " + (i === active ? "text-text" : "text-text-dim")}>

@@ -38,7 +38,7 @@ export function ContinueCard({ sections, lang }: { sections: DashboardSection[];
   const started = sections.some((s) => done.has(s.key));
   return (
     <div className={CARD}>
-      <p className="m-0 font-mono text-[12px] tracking-[0.16em] text-text-faint uppercase">{next.partTitle}</p>
+      <p className="m-0 font-mono text-[12px] text-text-faint">{next.partTitle}</p>
       <p className="mt-2 mb-5 font-display text-[clamp(1.375rem,3vw,1.75rem)] font-bold leading-snug text-text">
         {next.title}
       </p>

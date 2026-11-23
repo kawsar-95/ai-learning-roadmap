@@ -265,7 +265,7 @@ html {
   border-bottom-color: currentColor;
 }
 .prose-inline a.cite {
-  font-size: 0.72em;
+  font-size: max(12px, 0.72em);
   vertical-align: super;
   line-height: 0;
   border: none;
@@ -312,7 +312,7 @@ html {
    Display formulas already scroll inside .lesson-math. */
 .lesson-prose :not(.katex-display) > .katex { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: bottom; }
 /* The "Type / Language / Prerequisites / Time" lines at the top of a lesson. */
-.lesson-prose .lesson-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; font-size: 14px; line-height: 1.5; }
+.lesson-prose .lesson-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 16px 0 0; font-size: 14px; line-height: 1.5; }
 .lesson-prose .lesson-meta > div { display: flex; gap: 6px; min-width: 0; }
 .lesson-prose .lesson-meta dt { flex: none; color: var(--text-faint); font-weight: 500; }
 .lesson-prose .lesson-meta dd { margin: 0; min-width: 0; color: var(--text); }
@@ -715,7 +715,7 @@ html {
 .wk-note-tag {
   display: block;
   margin: 0 0 2px;
-  font: 700 10.5px var(--wk-mono);
+  font: 700 12px var(--wk-mono);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -845,3 +845,8 @@ html {
 
 /* A roadmap lesson link that cannot open offline (OfflineNotice.tsx). */
 a[data-online-only] { opacity: 0.55; }
+
+/* Noto Sans Bengali has no italic. Without this the browser slants the glyphs. */
+:lang(bn) {
+  font-synthesis-style: none;
+}

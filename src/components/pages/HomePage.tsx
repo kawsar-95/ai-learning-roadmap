@@ -29,7 +29,7 @@ function CoverCard({ lang }: { lang: Lang }) {
   const [first, accent, last] = ui.coverTitle;
   return (
     <div className="mx-auto flex h-[380px] w-[280px] flex-col justify-between rounded-2xl bg-[#1a1d1f] p-6 text-white shadow-cover sm:h-[460px] sm:w-[350px] sm:p-7 [[data-theme=dark]_&]:border [[data-theme=dark]_&]:border-border [[data-theme=dark]_&]:bg-[#0d1117]">
-      <p className="m-0 font-mono text-[12px] tracking-[0.16em] text-white/60">{ui.coverTag}</p>
+      <p className="m-0 font-mono text-[12px] text-white/60">{ui.coverTag}</p>
       <div>
         <p lang="en" className="m-0 font-display text-[48px] font-bold leading-none tracking-[-0.03em] sm:text-[60px]">
           <span className="block">{first}</span>

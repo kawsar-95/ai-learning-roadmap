@@ -479,7 +479,7 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
   const uses = useMemo(() => walkUses(walkthrough), [walkthrough]);
   const headingId = `${sectionId}-walk`;
   const bangla = lang === "bn";
-  const label = bangla ? "text-[14px] font-semibold" : "font-mono text-xs font-medium uppercase tracking-[0.16em]";
+  const label = bangla ? "text-[14px] font-semibold" : "font-mono text-xs font-medium";
   const first = index === 0;
   const last = index === steps.length - 1;
   const nextShort = last ? null : steps[index + 1][lang].short;

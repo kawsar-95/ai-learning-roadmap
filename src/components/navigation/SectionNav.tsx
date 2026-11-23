@@ -76,7 +76,7 @@ export function SectionNav({ items, lang }: { items: TocItem[]; lang: Lang }) {
           -mt-2 and mb-2 keep the label and the list where they were: the button is taller than the label. When
           folded, pl-2 centres the button in the 3rem rail. */}
       <div className="-mt-2 mb-2 flex items-center justify-between gap-2 toc-collapsed:pl-2">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-text-faint toc-collapsed:hidden">
+        <p className="font-mono text-xs text-text-faint toc-collapsed:hidden">
           {UI[lang].onThisPage}
         </p>
         <PanelToggle panel="toc" lang={lang} controls="toc-panel" />

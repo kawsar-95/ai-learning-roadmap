@@ -23,7 +23,7 @@ export function SectionBasics({
   // Letter spacing and capitals suit Latin labels only; spaced Bangla breaks the headstroke.
   const label = bangla
     ? "text-[14px] font-semibold"
-    : "font-mono text-xs font-medium uppercase tracking-[0.16em]";
+    : "font-mono text-xs font-medium";
   const headingId = `${sectionId}-basics`;
   return (
     <div

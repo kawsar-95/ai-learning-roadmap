@@ -63,7 +63,7 @@ export async function LessonPage({ params, lang }: { params: Promise<LessonParam
         <header>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
             <p className="m-0 text-[14px] text-text-faint">
-              <Link href={`${roadmapHref(lang)}#phase-${phase.phase}`} className="text-accent no-underline hover:underline">
+              <Link href={`${roadmapHref(lang)}#phase-${phase.phase}`} className="-my-1 inline-block py-1 text-accent no-underline hover:underline">
                 {ui.roadmap}
               </Link>
               <span aria-hidden="true" className="mx-2">
