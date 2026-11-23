@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const RADIUS = new Set(["", "md", "lg", "2xl", "full"]); // rounded, -md (6), -lg (10), -2xl (16), -full
 const RADIUS_PX = new Set(["4px", "6px", "10px", "16px", "50%", "999px", "0"]);
 const TEXT_PX = new Set([12, 13, 14, 15, 16, 17, 18, 20, 22, 26, 48, 60]);
-const TRACKING = new Set(["-0.03em", "-0.02em", "0.06em", "0.16em"]);
+const TRACKING = new Set(["-0.025em", "-0.015em", "0.06em"]);
 
 const SRC = fileURLToPath(new URL("../src/", import.meta.url));
 function walk(dir: string): string[] {

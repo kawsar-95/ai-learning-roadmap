@@ -25,7 +25,7 @@ export function TopicHeader({ topic, lang }: { topic: Topic; lang: Lang }) {
   return (
     <header className="mb-6 sm:mb-8">
       <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-        <p className="m-0 text-[14px] text-text-faint">
+        <p className="m-0 font-mono text-[12px] text-accent">
           {ui.part(fmtNum(lang, topic.part))}
           <span aria-hidden="true" className="mx-2">
             ·

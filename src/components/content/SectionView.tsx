@@ -206,7 +206,7 @@ export function SectionView({
       <header>
         <h2
           id={`${section.id}-title`}
-          className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.02em] text-balance text-text"
+          className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-medium leading-[1.15] tracking-[-0.015em] text-balance text-text"
         >
           {text.title}
         </h2>

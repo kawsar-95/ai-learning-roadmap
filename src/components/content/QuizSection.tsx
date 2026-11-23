@@ -54,7 +54,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
         id="quiz-title"
         ref={titleRef}
         tabIndex={-1}
-        className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-[1.15] tracking-[-0.02em] text-balance text-text"
+        className="font-display text-[clamp(1.5rem,3vw,1.875rem)] font-medium leading-[1.15] tracking-[-0.015em] text-balance text-text"
       >
         {ui.quizTitle}
       </h2>
@@ -124,7 +124,7 @@ export function QuizSection({ slug, questions, lang }: { slug: string; questions
       <div className="mt-6 flex flex-wrap items-center gap-4">
         {/* Always in the page and never display:none, so screen readers announce the score when it
             appears. While empty it is absolute, so it takes no space in the row. */}
-        <p role="status" className="m-0 font-display text-[22px] font-bold text-text empty:absolute">
+        <p role="status" className="m-0 font-display text-[22px] font-medium text-text empty:absolute">
           {checked ? ui.quizScore(fmtNum(lang, correct), fmtNum(lang, total)) : null}
         </p>
         {checked ? (

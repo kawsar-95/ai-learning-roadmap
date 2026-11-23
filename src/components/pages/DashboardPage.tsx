@@ -6,7 +6,7 @@ import { BookmarkList, ContinueCard } from "@/components/progress/DashboardWidge
 import type { DashboardSection } from "@/components/progress/DashboardWidgets";
 import { PageHeader } from "@/components/layout/PageHeader";
 
-const H2 = "mb-5 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-text";
+const H2 = "mb-5 font-display text-[clamp(1.5rem,3vw,1.875rem)] font-medium leading-tight text-text";
 
 /** The dashboard: where to continue, and the bookmarks. */
 export function DashboardPage({ lang }: { lang: Lang }) {

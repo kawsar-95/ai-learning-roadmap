@@ -49,6 +49,17 @@ export const REPO_URL = "https://github.com/kawsar-95/ai-learning-roadmap";
 /** The GitHub profile of the author. */
 export const AUTHOR_GITHUB_URL = "https://github.com/kawsar-95";
 
+/**
+ * The author's other profiles. An empty URL hides its button, so fill these
+ * in rather than linking to a placeholder.
+ */
+export const AUTHOR_LINKS = {
+  portfolio: "",
+  linkedin: "",
+  x: "",
+  resume: "",
+} as const;
+
 /** A feature card on the home page. */
 type Feature = { icon: string; title: string; text: string };
 
@@ -133,13 +144,13 @@ const en = {
   heroAccent: "in three voices",
   startReading: "Start reading",
   seeContents: "See all contents →",
+  seeAllParts: "See all parts",
+  partsEyebrow: "Course structure",
   statParts: "Parts",
   statSections: "Sections",
   statSources: "Sources",
   statVoices: "Voices",
   coverTag: "AI Engineering · Reference",
-  coverTitle: ["Applied", "AI", "Engineering"] as [string, string, string],
-  coverSub: "From tokens to agents · English + বাংলা",
   whyEyebrow: "Features",
   whyTitle: "Why this reference?",
   features: [
@@ -248,6 +259,14 @@ const en = {
   readSection: "Read the section →",
   authorBy: "Built and maintained by",
   authorGithub: "GitHub ↗",
+  authorHeading: "About the author",
+  authorRole: "QA Automation Engineer at Shomvob Technologies Ltd.",
+  authorBio:
+    "Software QA Engineer with 5+ years of experience in manual and automated testing across web, mobile, API, and SaaS platforms. I build automation with Playwright, Cypress, and Selenium, and I care about QA processes as much as test code. Currently exploring AI-assisted testing and growing toward QA leadership.",
+  authorPortfolio: "Portfolio",
+  authorLinkedin: "LinkedIn",
+  authorX: "X",
+  authorResume: "Resume (PDF)",
   quizTitle: "Quiz",
   quizIntro: (n: number) => `Check what you learned. ${n} ${n === 1 ? "question" : "questions"}.`,
   quizCheck: "Check answers",
@@ -387,13 +406,13 @@ const bn: Dict = {
   heroAccent: "সহজ বাংলায়",
   startReading: "পড়া শুরু করুন",
   seeContents: "পুরো সূচিপত্র দেখুন →",
+  seeAllParts: "সব পার্ট দেখুন",
+  partsEyebrow: "কোর্সের কাঠামো",
   statParts: "পার্ট",
   statSections: "সেকশন",
   statSources: "সোর্স",
   statVoices: "ব্যাখ্যার ধরন",
   coverTag: "এআই ইঞ্জিনিয়ারিং · রেফারেন্স",
-  coverTitle: ["Applied", "AI", "Engineering"],
-  coverSub: "টোকেন থেকে এজেন্ট পর্যন্ত · বাংলা + English",
   whyEyebrow: "বৈশিষ্ট্য",
   whyTitle: "কেন এই রেফারেন্স?",
   features: [
@@ -499,6 +518,14 @@ const bn: Dict = {
   readSection: "সেকশন পড়ুন →",
   authorBy: "যিনি বানিয়েছেন ও দেখভাল করেন",
   authorGithub: "GitHub ↗",
+  authorHeading: "লেখক পরিচিতি",
+  authorRole: "QA Automation Engineer, Shomvob Technologies Ltd.",
+  authorBio:
+    "ওয়েব, মোবাইল, API ও SaaS প্ল্যাটফর্মে ম্যানুয়াল ও অটোমেটেড টেস্টিংয়ে ৫ বছরের বেশি অভিজ্ঞতাসম্পন্ন Software QA Engineer। আমি Playwright, Cypress ও Selenium দিয়ে অটোমেশন বানাই, এবং টেস্ট কোডের মতোই QA প্রসেসকে গুরুত্ব দিই। এখন AI-সহায়ক টেস্টিং নিয়ে কাজ করছি এবং QA লিডারশিপের দিকে এগোচ্ছি।",
+  authorPortfolio: "Portfolio",
+  authorLinkedin: "LinkedIn",
+  authorX: "X",
+  authorResume: "Resume (PDF)",
   quizTitle: "কুইজ",
   quizIntro: (n: number) => `কী শিখলেন যাচাই করুন। ${fmtNum("bn", n)}টি প্রশ্ন।`,
   quizCheck: "উত্তর মেলান",

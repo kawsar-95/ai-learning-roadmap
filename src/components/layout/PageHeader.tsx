@@ -3,7 +3,7 @@
  * header, the lesson pages, and the 404 page all use it, so they keep one look.
  */
 export const PAGE_TITLE =
-  "font-display text-[clamp(2rem,4.5vw,2.75rem)] font-bold leading-[1.1] tracking-[-0.02em] text-balance text-text";
+  "font-display text-[clamp(2rem,4.5vw,2.75rem)] font-medium leading-[1.1] tracking-[-0.025em] text-balance text-text";
 
 /**
  * The top of a secondary page (contents, dashboard, interview, roadmap,
