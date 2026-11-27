@@ -30,7 +30,7 @@
             },
             {
               "term": "Prompt cache",
-              "meaning": "The provider reuses its work on the start of your prompt, like the system prompt, across calls. That part gets an 80–90% discount."
+              "meaning": "The provider reuses its work on the start of your prompt, like the system prompt, across calls. That part gets a big discount: cached reads cost about 10% of the base input price on most models."
             },
             {
               "term": "Batch API",
@@ -42,7 +42,7 @@
             },
             {
               "term": "Prompt compression",
-              "meaning": "Removing filler and low-value words from a prompt. Tools like LLMLingua often shrink it 5–20× with under 3% quality loss."
+              "meaning": "Removing filler and low-value words from a prompt. Tools like LLMLingua can shrink it by up to 20× with little performance loss."
             },
             {
               "term": "Model gateway",
@@ -69,7 +69,7 @@
             },
             {
               "term": "প্রম্পট ক্যাশ (prompt cache)",
-              "meaning": "প্রম্পটের শুরুর অংশ (যেমন সিস্টেম প্রম্পট) নিয়ে করা কাজ প্রোভাইডার কলের পর কলে আবার ব্যবহার করে। সেই অংশে ৮০–৯০% ছাড় মেলে।"
+              "meaning": "প্রম্পটের শুরুর অংশ (যেমন সিস্টেম প্রম্পট) নিয়ে করা কাজ প্রোভাইডার কলের পর কলে আবার ব্যবহার করে। সেই অংশে বড় ছাড় মেলে: বেশিরভাগ মডেলে ক্যাশ রিডের দাম বেস ইনপুট দামের প্রায় ১০%।"
             },
             {
               "term": "ব্যাচ API (Batch API)",
@@ -81,7 +81,7 @@
             },
             {
               "term": "প্রম্পট কম্প্রেশন (prompt compression)",
-              "meaning": "প্রম্পট থেকে ফিলার আর কম দরকারি শব্দ বাদ দেওয়া। LLMLingua-র মতো টুলে প্রায়ই ৫–২০× ছোট হয়, মান কমে ৩%-এরও কম।"
+              "meaning": "প্রম্পট থেকে ফিলার আর কম দরকারি শব্দ বাদ দেওয়া। LLMLingua-র মতো টুলে ২০× পর্যন্ত ছোট হতে পারে, মানের ক্ষতি সামান্য।"
             },
             {
               "term": "মডেল গেটওয়ে (model gateway)",
@@ -127,9 +127,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Semantic cache:</strong> hash embeddings of the prompt; if a near-identical prompt was answered recently (cosine &gt; 0.95), return the cached answer. Built into GPTCache, Redis with vector search, and Helicone.<a class=\"cite\" href=\"#src21\">[21]</a>",
+            "<strong>Semantic cache:</strong> hash embeddings of the prompt; if a near-identical prompt was answered recently (for example cosine &gt; 0.95; the threshold is your choice), return the cached answer. Libraries such as GPTCache provide this.<a class=\"cite\" href=\"#src21\">[21]</a>",
             "<strong>Output cache:</strong> for deterministic tasks (extraction, classification with temperature=0), a key-value cache keyed on the input.",
-            "<strong>Prompt cache:</strong> provider-level (Anthropic <code>prompt_caching</code>, OpenAI <code>cached_prompt</code>) reuses the KV of the system prompt across calls. 80–90% discount on cached prefix."
+            "<strong>Prompt cache:</strong> provider-level (Anthropic <code>cache_control</code>, OpenAI automatic prompt caching, reported as <code>cached_tokens</code>) reuses the KV of the system prompt across calls. Cached reads cost about 10% of the base input price on most models (90% off); newer Claude models are cheaper still (0.05×). Writes to the cache cost more (1.25× on Anthropic's 5-minute cache)."
           ]
         },
         {
@@ -150,7 +150,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Take 50,000 (prompt, big_model_answer) pairs from production (with consent), fine-tune a small open model on them. DeepSeek-R1's \"distilled Qwen\" line showed that a well-distilled 7B beats an un-distilled 12B on reasoning benchmarks.<a class=\"cite\" href=\"#src22\">[22]</a> Distillation is the only technique that simultaneously cuts cost <em>and</em> latency <em>and</em> unlocks self-hosting."
+          "html": "Take 50,000 (prompt, big_model_answer) pairs from production (with consent), fine-tune a small open model on them. DeepSeek-R1's \"distilled Qwen\" line showed that reasoning patterns from a large model can be used to improve the reasoning of much smaller models.<a class=\"cite\" href=\"#src22\">[22]</a> Distillation is the only technique that simultaneously cuts cost <em>and</em> latency <em>and</em> unlocks self-hosting."
         },
         {
           "type": "heading",
@@ -160,7 +160,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Tools like <strong>LLMLingua</strong> remove stopwords, paraphrase verbose passages, and drop low-information tokens — often 5–20× compression with &lt;3% quality hit.<a class=\"cite\" href=\"#src23\">[23]</a> Particularly powerful for long RAG contexts where most chunks are filler."
+          "html": "Tools like <strong>LLMLingua</strong> remove stopwords, paraphrase verbose passages, and drop low-information tokens — up to 20× compression with little performance loss.<a class=\"cite\" href=\"#src23\">[23]</a> Particularly powerful for long RAG contexts where most chunks are filler."
         },
         {
           "type": "heading",
@@ -180,7 +180,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>model gateway</strong> sits between your app and every LLM provider. It gives you: one API for OpenAI + Anthropic + Together + your own vLLM; per-key rate limits; cost tracking; retries; fallbacks; semantic caching out of the box. The three major options are <strong>LiteLLM</strong> (Python proxy), <strong>Portkey</strong> (production-grade SaaS), and <strong>OpenRouter</strong> (consumer-grade aggregator).<a class=\"cite\" href=\"#src24\">[24]</a>"
+          "html": "A <strong>model gateway</strong> sits between your app and every LLM provider. It gives you: one API for OpenAI + Anthropic + Together + your own vLLM; per-key rate limits; cost tracking; retries; fallbacks. Examples are <strong>LiteLLM</strong>, <strong>Portkey</strong>, and <strong>OpenRouter</strong>. LiteLLM, for one, gives one API for 100+ providers, per-key budgets and rate limits, cost tracking, retries, and fallbacks.<a class=\"cite\" href=\"#src24\">[24]</a>"
         },
         {
           "type": "diagram",
@@ -750,8 +750,8 @@
     },
     {
       "n": 20,
-      "url": "https://arxiv.org/abs/2405.00072",
-      "text": "Yue et al., \"Large Language Model Cascades with Mixture of Thought Representations\" — 2024"
+      "url": "https://arxiv.org/abs/2310.03094",
+      "text": "Yue et al., \"Large Language Model Cascades with Mixture of Thoughts Representations for Cost-efficient Reasoning\" — ICLR 2024"
     },
     {
       "n": 21,
@@ -765,7 +765,7 @@
     },
     {
       "n": 23,
-      "url": "https://arxiv.org/abs/2310.06839",
+      "url": "https://arxiv.org/abs/2310.05736",
       "text": "Jiang et al., \"LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models\" — EMNLP 2023"
     },
     {
@@ -905,7 +905,7 @@
           "It removes stopwords from long prompts",
           "It fine-tunes a small model on big-model answers"
         ],
-        "why": "A model gateway sits between the app and all providers. It gives one API plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching."
+        "why": "A model gateway sits between the app and all providers. It gives one API plus per-key rate limits, cost tracking, retries, and fallbacks."
       },
       "bn": {
         "q": "LiteLLM, Portkey বা OpenRouter-এর মতো মডেল গেটওয়ে কী কাজ করে?",
@@ -915,7 +915,7 @@
           "লম্বা প্রম্পট থেকে স্টপওয়ার্ড সরিয়ে দেয়",
           "বড় মডেলের উত্তর দিয়ে একটা ছোট মডেল ফাইন-টিউন করে"
         ],
-        "why": "মডেল গেটওয়ে অ্যাপ আর সব প্রোভাইডারের মাঝখানে বসে। এটা একটা API দেয়, সাথে প্রতি-কী রেট লিমিট, খরচ ট্র্যাকিং, রিট্রাই, ফলব্যাক আর সেম্যান্টিক ক্যাশিং।"
+        "why": "মডেল গেটওয়ে অ্যাপ আর সব প্রোভাইডারের মাঝখানে বসে। এটা একটা API দেয়, সাথে প্রতি-কী রেট লিমিট, খরচ ট্র্যাকিং, রিট্রাই আর ফলব্যাক।"
       }
     }
   ]
