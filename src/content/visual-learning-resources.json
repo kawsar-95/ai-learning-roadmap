@@ -109,7 +109,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Open it:</strong> <a href=\"https://poloclub.github.io/transformer-explainer/\">poloclub.github.io/transformer-explainer</a>. No install and no account. The model runs on your own machine, so your text does not leave the browser.<a class=\"cite\" href=\"#src1\">[1]</a>"
+              "html": "<strong>Open it:</strong> <a href=\"https://poloclub.github.io/transformer-explainer/\">poloclub.github.io/transformer-explainer</a>. No install and no account. The model runs in your browser, so there is no install and no setup.<a class=\"cite\" href=\"#src2\">[2]</a>"
             }
           ]
         },
@@ -216,7 +216,7 @@
             "Pick an example prompt, or type <em>The cat sat on the</em>. Press <strong>Generate</strong>.",
             "Click a token. Watch the page zoom from the embedding to the attention stage.",
             "Open the attention view. Hover over a token and see which earlier tokens it reads.",
-            "Set temperature to <code>0.2</code>, generate three times, then set it to <code>1.5</code> and generate three times. Compare the answers.",
+            "Set temperature to <code>0.2</code>, generate three times, then set it to <code>2</code> and generate three times. Compare the answers.",
             "Set top-k to <code>1</code>. The output is now the same every time. This is greedy decoding."
           ]
         },
@@ -517,7 +517,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The page includes these four models: <strong>nano-GPT</strong>, <strong>GPT-2 (small)</strong>, and <strong>GPT-2 (XL)</strong>, and <strong>GPT-3</strong>. They share one design, so the shapes below are the same kind of object at four sizes. The GPT-3 row uses the sizes from its paper.<a class=\"cite\" href=\"#src5\">[5]</a><a class=\"cite\" href=\"#src32\">[32]</a>"
+          "html": "The page includes these four models: <strong>nano-GPT</strong>, <strong>GPT-2 (small)</strong>, and <strong>GPT-2 (XL)</strong>, and <strong>GPT-3</strong>. They share one design, so the shapes below are the same kind of object at four sizes. The GPT-3 row uses the sizes in the page's source code. The paper's context length is 2,048.<a class=\"cite\" href=\"#src5\">[5]</a><a class=\"cite\" href=\"#src32\">[32]</a>"
         },
         {
           "type": "table",
@@ -560,7 +560,7 @@
             ],
             [
               "GPT-3",
-              "2,048",
+              "1,024",
               "12,288",
               "96",
               "96",
@@ -1902,7 +1902,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An LLM does the same on text. It has billions of weights instead of about 25, and its output is a probability for each token instead of one class."
+          "html": "An LLM does the same on text. It has billions of parameters instead of about 25, and its output is a probability for each token instead of one class."
         },
         {
           "type": "callout",
@@ -1980,7 +1980,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>LLM-এর সাথে সম্পর্ক:</strong> Playground-এ চারটি ধাপ চলে: ফরওয়ার্ড পাস, লস মাপা, ব্যাকওয়ার্ড পাস এবং ওয়েট আপডেট। LLM-ও এই চারটি ধাপেই ট্রেন হয়। শুধু তার ওয়েট প্রায় ২৫টির জায়গায় কয়েক বিলিয়ন।"
+          "html": "<strong>LLM-এর সাথে সম্পর্ক:</strong> Playground-এ চারটি ধাপ চলে: ফরওয়ার্ড পাস, লস মাপা, ব্যাকওয়ার্ড পাস এবং ওয়েট আপডেট। LLM-ও এই চারটি ধাপেই ট্রেন হয়। শুধু তার প্যারামিটার প্রায় ২৫টির জায়গায় কয়েক বিলিয়ন।"
         },
         {
           "type": "analogy",
@@ -2553,7 +2553,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>How big do the notes get?</strong> The AI keeps notes on every earlier word so it does not have to work them out again. For a mid-sized model and a very long chat, those notes can fill many gigabytes of memory. In the article's example, letting every four readers share one set of notes cuts that to a quarter."
+          "html": "<strong>How big do the notes get?</strong> The AI keeps notes on every earlier word so it does not have to work them out again. For a mid-sized model and a very long chat, those notes can fill many gigabytes of memory. If every four readers share one set of notes, the notes shrink to a quarter."
         },
         {
           "type": "paragraph",
@@ -2674,7 +2674,7 @@
             },
             {
               "term": "Top-k",
-              "meaning": "Keeping only the k largest router values, for example 2, and setting the others to zero."
+              "meaning": "Keeping only the k largest router scores, for example 2, and masking the others out so they get zero probability."
             },
             {
               "term": "Load balancing",
@@ -2713,7 +2713,7 @@
             },
             {
               "term": "Top-k",
-              "meaning": "রাউটারের সবচেয়ে বড় k-টি মান রাখা, যেমন ২টি, আর বাকিগুলো শূন্য করে দেওয়া।"
+              "meaning": "রাউটারের সবচেয়ে বড় k-টি স্কোর রাখা, যেমন ২টি, আর বাকিগুলো বাদ দিয়ে শূন্য সম্ভাবনা দেওয়া।"
             },
             {
               "term": "লোড ব্যালেন্সিং (load balancing)",
@@ -2763,7 +2763,7 @@
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 900 352\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A mixture-of-experts layer: a router scores 8 experts, the top 2 process the token, and their outputs are added with the router weights\"><defs><marker id=\"t13-ah0\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#94a3b8\"></path></marker><marker id=\"t13-ah1\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#34d399\"></path></marker></defs><text x=\"450.0\" y=\"20.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">One token through one MoE layer (top-2 of 8 experts)</text><rect x=\"8.0\" y=\"140.0\" width=\"96.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.5\"></rect><text x=\"56.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Token</text><text x=\"56.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">vector x</text><rect x=\"150.0\" y=\"140.0\" width=\"120.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(251,191,36,0.13)\" stroke=\"#fbbf24\" stroke-width=\"1.5\"></rect><text x=\"210.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Router</text><text x=\"210.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">softmax(x·W)</text><line x1=\"106.0\" y1=\"170.0\" x2=\"148.0\" y2=\"170.0\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#t13-ah0)\"></line><rect x=\"360.0\" y=\"40.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"59.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E1  FFN</text><text x=\"500.0\" y=\"59.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"54.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"74.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"93.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E2  FFN</text><text x=\"500.0\" y=\"93.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"88.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"108.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.8\"></rect><text x=\"372.0\" y=\"127.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#e2e8f0\" font-weight=\"600\">E3  FFN</text><text x=\"500.0\" y=\"127.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#34d399\" font-weight=\"600\">g=0.62</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"122.0\" stroke=\"#34d399\" stroke-width=\"1.8\" marker-end=\"url(#t13-ah1)\"></line><rect x=\"360.0\" y=\"142.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"161.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E4  FFN</text><text x=\"500.0\" y=\"161.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"156.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"176.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"195.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E5  FFN</text><text x=\"500.0\" y=\"195.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"190.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"210.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.8\"></rect><text x=\"372.0\" y=\"229.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#e2e8f0\" font-weight=\"600\">E6  FFN</text><text x=\"500.0\" y=\"229.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#34d399\" font-weight=\"600\">g=0.38</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"224.0\" stroke=\"#34d399\" stroke-width=\"1.8\" marker-end=\"url(#t13-ah1)\"></line><rect x=\"360.0\" y=\"244.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"263.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E7  FFN</text><text x=\"500.0\" y=\"263.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"258.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"278.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"297.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E8  FFN</text><text x=\"500.0\" y=\"297.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"292.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"600.0\" y=\"140.0\" width=\"160.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"></rect><text x=\"680.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">g1·E3 + g2·E6</text><text x=\"680.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">weighted sum</text><line x1=\"512.0\" y1=\"122.0\" x2=\"598.0\" y2=\"170.0\" stroke=\"#34d399\" stroke-width=\"1.6\" marker-end=\"url(#t13-ah1)\"></line><line x1=\"512.0\" y1=\"224.0\" x2=\"598.0\" y2=\"170.0\" stroke=\"#34d399\" stroke-width=\"1.6\" marker-end=\"url(#t13-ah1)\"></line><line x1=\"762.0\" y1=\"170.0\" x2=\"800.0\" y2=\"170.0\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#t13-ah0)\"></line><rect x=\"802.0\" y=\"140.0\" width=\"90.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.5\"></rect><text x=\"847.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Output</text><text x=\"847.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">same size</text><text x=\"450.0\" y=\"340.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">6 of the 8 experts do no work for this token. The router chooses again for the next token.</text></svg>",
+          "svg": "<svg viewBox=\"0 0 900 352\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A mixture-of-experts layer: a router scores 8 experts, the top 2 process the token, and their outputs are added with the router weights\"><defs><marker id=\"t13-ah0\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#94a3b8\"></path></marker><marker id=\"t13-ah1\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0 0L10 5L0 10z\" fill=\"#34d399\"></path></marker></defs><text x=\"450.0\" y=\"20.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">One token through one MoE layer (top-2 of 8 experts)</text><rect x=\"8.0\" y=\"140.0\" width=\"96.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.5\"></rect><text x=\"56.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Token</text><text x=\"56.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">vector x</text><rect x=\"150.0\" y=\"140.0\" width=\"120.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(251,191,36,0.13)\" stroke=\"#fbbf24\" stroke-width=\"1.5\"></rect><text x=\"210.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Router</text><text x=\"210.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">top-k, softmax</text><line x1=\"106.0\" y1=\"170.0\" x2=\"148.0\" y2=\"170.0\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#t13-ah0)\"></line><rect x=\"360.0\" y=\"40.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"59.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E1  FFN</text><text x=\"500.0\" y=\"59.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"54.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"74.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"93.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E2  FFN</text><text x=\"500.0\" y=\"93.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"88.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"108.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.8\"></rect><text x=\"372.0\" y=\"127.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#e2e8f0\" font-weight=\"600\">E3  FFN</text><text x=\"500.0\" y=\"127.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#34d399\" font-weight=\"600\">g=0.62</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"122.0\" stroke=\"#34d399\" stroke-width=\"1.8\" marker-end=\"url(#t13-ah1)\"></line><rect x=\"360.0\" y=\"142.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"161.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E4  FFN</text><text x=\"500.0\" y=\"161.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"156.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"176.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"195.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E5  FFN</text><text x=\"500.0\" y=\"195.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"190.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"210.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"rgba(52,211,153,0.13)\" stroke=\"#34d399\" stroke-width=\"1.8\"></rect><text x=\"372.0\" y=\"229.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#e2e8f0\" font-weight=\"600\">E6  FFN</text><text x=\"500.0\" y=\"229.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#34d399\" font-weight=\"600\">g=0.38</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"224.0\" stroke=\"#34d399\" stroke-width=\"1.8\" marker-end=\"url(#t13-ah1)\"></line><rect x=\"360.0\" y=\"244.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"263.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E7  FFN</text><text x=\"500.0\" y=\"263.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"258.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"360.0\" y=\"278.0\" width=\"150.0\" height=\"28.0\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.2\" stroke-dasharray=\"4 3\"></rect><text x=\"372.0\" y=\"297.0\" text-anchor=\"start\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#94a3b8\">E8  FFN</text><text x=\"500.0\" y=\"297.0\" text-anchor=\"end\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">idle</text><line x1=\"272.0\" y1=\"170.0\" x2=\"358.0\" y2=\"292.0\" stroke=\"#334155\" stroke-width=\"1\"></line><rect x=\"600.0\" y=\"140.0\" width=\"160.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(167,139,250,0.14)\" stroke=\"#a78bfa\" stroke-width=\"1.5\"></rect><text x=\"680.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">g1·E3 + g2·E6</text><text x=\"680.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">weighted sum</text><line x1=\"512.0\" y1=\"122.0\" x2=\"598.0\" y2=\"170.0\" stroke=\"#34d399\" stroke-width=\"1.6\" marker-end=\"url(#t13-ah1)\"></line><line x1=\"512.0\" y1=\"224.0\" x2=\"598.0\" y2=\"170.0\" stroke=\"#34d399\" stroke-width=\"1.6\" marker-end=\"url(#t13-ah1)\"></line><line x1=\"762.0\" y1=\"170.0\" x2=\"800.0\" y2=\"170.0\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#t13-ah0)\"></line><rect x=\"802.0\" y=\"140.0\" width=\"90.0\" height=\"60.0\" rx=\"8\" fill=\"rgba(34,211,238,0.13)\" stroke=\"#22d3ee\" stroke-width=\"1.5\"></rect><text x=\"847.0\" y=\"167.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"14\" fill=\"#e2e8f0\" font-weight=\"600\">Output</text><text x=\"847.0\" y=\"184.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#94a3b8\">same size</text><text x=\"450.0\" y=\"340.0\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#94a3b8\">6 of the 8 experts do no work for this token. The router chooses again for the next token.</text></svg>",
           "caption": "One MoE layer. The router gives each expert a score. The top 2 experts (E3 and E6, in this example) run, and the layer adds their outputs, scaled by the router weights g. The numbers are illustrative.",
           "captionBn": "একটি MoE লেয়ার। রাউটার প্রতিটি এক্সপার্টকে স্কোর দেয়। সেরা ২টি এক্সপার্ট (এই উদাহরণে E3 ও E6) চলে এবং লেয়ার তাদের আউটপুট রাউটারের ওজন g দিয়ে গুণ করে যোগ করে। সংখ্যাগুলো উদাহরণমূলক।"
         },
@@ -2778,8 +2778,8 @@
           "ordered": true,
           "items": [
             "<strong>Score:</strong> multiply the token vector by the router weights <code>W</code>. This gives one score for each expert.",
-            "<strong>Softmax:</strong> turn the scores into probabilities <code>G(x)</code>.",
-            "<strong>Keep top-k:</strong> keep the <code>k</code> largest values (for example 2). Set the others to zero.",
+            "<strong>Keep top-k:</strong> keep the <code>k</code> largest scores (for example 2). Set the others to −∞.",
+            "<strong>Softmax:</strong> turn the kept scores into probabilities <code>G(x)</code>. The others get 0.",
             "<strong>Combine:</strong> run the chosen experts and add their outputs, each multiplied by its router probability."
           ]
         },
@@ -2953,8 +2953,8 @@
           "ordered": false,
           "items": [
             "<strong>স্কোর:</strong> টোকেন ভেক্টরকে রাউটারের ওয়েট <code>W</code> দিয়ে গুণ করলে প্রতিটি এক্সপার্টের একটি স্কোর হয়।",
-            "<strong>সফটম্যাক্স:</strong> স্কোরকে সম্ভাবনা <code>G(x)</code>-এ বদলানো হয়।",
-            "<strong>Top-k রাখা:</strong> সবচেয়ে বড় <code>k</code>টি রাখা হয় (যেমন ২টি)। বাকিগুলো শূন্য।",
+            "<strong>Top-k রাখা:</strong> সবচেয়ে বড় <code>k</code>টি স্কোর রাখা হয় (যেমন ২টি)। বাকিগুলো −∞ করা হয়।",
+            "<strong>সফটম্যাক্স:</strong> রাখা স্কোরগুলোকে সম্ভাবনা <code>G(x)</code>-এ বদলানো হয়। বাকিগুলো ০ পায়।",
             "<strong>মেলানো:</strong> বাছা এক্সপার্টরা চলে এবং তাদের আউটপুট রাউটারের সম্ভাবনা দিয়ে গুণ করে যোগ করা হয়।"
           ]
         },
@@ -3316,7 +3316,7 @@
           "ordered": true,
           "items": [
             "Press play on the visualizer. Name each of the four steps to yourself.",
-            "Read <em>What is an inference server?</em> and the page on serving versus inference. Write one line for each term in your own words.",
+            "Read the sections <em>What is an inference server?</em> and <em>What's the difference between serving and inference?</em> on the first page. Write one line for each term in your own words.",
             "Choose one optimization from the table. Read its chapter. Find the metric it improves: TTFT, TPOT, or throughput.",
             "Return to Part 7 of this site and read the section on servers and quantization with the same vocabulary."
           ]
@@ -3600,7 +3600,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Open it:</strong> <a href=\"https://www.neuronpedia.org/\">neuronpedia.org</a>. The menu has Search, Steer, SAE Evals, Exports, Guides, and API. The site also hosts a Circuit Tracer, which traces the internal steps of a model's reasoning.<a class=\"cite\" href=\"#src23\">[23]</a>"
+              "html": "<strong>Open it:</strong> <a href=\"https://www.neuronpedia.org/\">neuronpedia.org</a>. The menu has Search, Steer, SAE Evals, Exports, interp-engine, Guides, and Docs. The site also hosts a Circuit Tracer, which traces the internal steps of a model's reasoning.<a class=\"cite\" href=\"#src23\">[23]</a>"
             }
           ]
         },
@@ -4008,7 +4008,7 @@
         },
         {
           "type": "paragraph",
-          "html": "UMAP is a method that keeps nearby points near each other when it moves from many dimensions to two.<a class=\"cite\" href=\"#src30\">[30]</a> Embedding Atlas ships a WebAssembly version of UMAP, plus nearest-neighbour search and a density-based clustering step.<a class=\"cite\" href=\"#src28\">[28]</a>"
+          "html": "UMAP is a method that keeps nearby points near each other when it moves from many dimensions to two.<a class=\"cite\" href=\"#src30\">[30]</a> Embedding Atlas ships a WebAssembly version of UMAP, plus nearest-neighbour search and a density-based clustering step.<a class=\"cite\" href=\"#src28\">[28]</a><a class=\"cite\" href=\"#src29\">[29]</a>"
         },
         {
           "type": "heading",
