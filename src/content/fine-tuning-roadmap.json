@@ -49,7 +49,7 @@
           ],
           "remember": [
             "A fine-tuned model cannot be better than the data it is shown.",
-            "500 clean, correctly labeled examples usually beat 5,000 noisy ones.",
+            "a small set of clean, correctly labeled examples often beats a much larger noisy one.",
             "Auditing your data pays off more than tuning hyperparameters.",
             "Split data so similar examples do not leak across splits."
           ]
@@ -84,7 +84,7 @@
           ],
           "remember": [
             "ফাইন-টিউন করা মডেল তাকে দেখানো ডেটার চেয়ে ভালো হতে পারে না।",
-            "৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো।",
+            "অল্প কিছু পরিষ্কার, সঠিক লেবেলের উদাহরণ প্রায়ই অনেক বড় এলোমেলো ডেটাসেটের চেয়ে ভালো।",
             "হাইপারপ্যারামিটার ঠিক করার চেয়ে ডেটা যাচাই করায় বেশি লাভ হয়।",
             "ডেটা এমনভাবে ভাগ করুন, যাতে একই ধরনের উদাহরণ দুই ভাগে ফাঁস না হয়।"
           ]
@@ -113,7 +113,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "Rule of thumb: 500 clean, correctly labeled examples usually beat 5,000 noisy ones. Time spent auditing data pays off more than time spent tuning hyperparameters."
+              "html": "Rule of thumb: a small set of clean, correctly labeled examples often beats a much larger noisy one. Time spent auditing data pays off more than time spent tuning hyperparameters."
             }
           ]
         },
@@ -137,7 +137,7 @@
             "<a href=\"https://pandas.pydata.org/docs/user_guide/index.html\">pandas User Guide</a> — official documentation, the canonical reference",
             "<a href=\"https://www.kaggle.com/learn/pandas\">Kaggle Learn: Pandas</a> — free, hands-on micro-course with exercises",
             "<a href=\"https://www.kaggle.com/learn/data-cleaning\">Kaggle Learn: Data Cleaning</a> — free micro-course on missing values and inconsistent data",
-            "<a href=\"https://www.dataquest.io/blog/data-cleaning-in-python/\">Dataquest: Complete Guide to Data Cleaning in Python</a> — free tutorial with a cheat sheet"
+            "<a href=\"https://www.dataquest.io/guide/data-cleaning-in-python-tutorial/\">Dataquest: Complete Guide to Data Cleaning in Python</a> — free tutorial with a cheat sheet"
           ]
         }
       ],
@@ -185,7 +185,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "মনে রাখার নিয়ম: ৫০০টা পরিষ্কার, সঠিক লেবেলের উদাহরণ সাধারণত ৫,০০০টা এলোমেলো উদাহরণের চেয়ে ভালো ফল দেয়।"
+              "html": "মনে রাখার নিয়ম: অল্প কিছু পরিষ্কার, সঠিক লেবেলের উদাহরণ প্রায়ই অনেক বড় এলোমেলো ডেটাসেটের চেয়ে ভালো ফল দেয়।"
             }
           ]
         },
@@ -200,7 +200,7 @@
             "<a href=\"https://pandas.pydata.org/docs/user_guide/index.html\">pandas User Guide</a> — অফিসিয়াল ডকুমেন্টেশন",
             "<a href=\"https://www.kaggle.com/learn/pandas\">Kaggle Learn: Pandas</a> — ফ্রি, হাতে-কলমে মাইক্রো-কোর্স",
             "<a href=\"https://www.kaggle.com/learn/data-cleaning\">Kaggle Learn: Data Cleaning</a> — মিসিং ভ্যালু ও এলোমেলো ডেটা নিয়ে ফ্রি মাইক্রো-কোর্স",
-            "<a href=\"https://www.dataquest.io/blog/data-cleaning-in-python/\">Dataquest: Data Cleaning in Python</a> — চিট শিট সহ ফ্রি টিউটোরিয়াল"
+            "<a href=\"https://www.dataquest.io/guide/data-cleaning-in-python-tutorial/\">Dataquest: Data Cleaning in Python</a> — চিট শিট সহ ফ্রি টিউটোরিয়াল"
           ]
         }
       ]
@@ -445,7 +445,7 @@
           "remember": [
             "LoRA freezes the base model and trains a small add-on. QLoRA does this on a 4-bit model.",
             "A full fine-tune trains every weight, which is out of reach on a free GPU for most models.",
-            "A free Colab GPU is generally enough for small models, roughly 1–3B parameters.",
+            "A free Colab GPU is generally enough for small models: 1–3B parameters is comfortable, and QLoRA can stretch to about 7B.",
             "These libraries change fast. Follow current official docs, not an old tutorial."
           ]
         },
@@ -484,7 +484,7 @@
           "remember": [
             "LoRA বেস মডেল ফ্রিজ করে ছোট অংশ ট্রেইন করে। QLoRA একই কাজ ৪-বিট মডেলে করে।",
             "ফুল ফাইন-টিউনে প্রতিটা ওয়েট ট্রেইন হয়, যা বেশির ভাগ মডেলের জন্য ফ্রি GPU-তে সম্ভব নয়।",
-            "ছোট মডেলের জন্য একটা ফ্রি Colab GPU সাধারণত যথেষ্ট, মোটামুটি ১–৩ বিলিয়ন প্যারামিটার পর্যন্ত।",
+            "ছোট মডেলের জন্য একটা ফ্রি Colab GPU সাধারণত যথেষ্ট: ১–৩ বিলিয়ন প্যারামিটার স্বাচ্ছন্দ্যের, আর QLoRA দিয়ে প্রায় ৭ বিলিয়ন পর্যন্ত টানা যায়।",
             "এই লাইব্রেরিগুলো দ্রুত বদলায়। পুরনো টিউটোরিয়ালের বদলে বর্তমান অফিসিয়াল ডকুমেন্টেশন অনুসরণ করুন।"
           ]
         }
@@ -506,7 +506,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A free Colab GPU is generally enough for small models, roughly in the 1–3B parameter range."
+          "html": "A free Colab GPU is generally enough for small models: 1–3B parameters is comfortable, and QLoRA can stretch to about 7B."
         },
         {
           "type": "callout",
@@ -557,7 +557,7 @@
         },
         {
           "type": "paragraph",
-          "html": "একটা ফ্রি Colab GPU সাধারণত ছোট মডেলের জন্য যথেষ্ট, মোটামুটি ১–৩ বিলিয়ন প্যারামিটার পর্যন্ত।"
+          "html": "একটা ফ্রি Colab GPU সাধারণত ছোট মডেলের জন্য যথেষ্ট: ১–৩ বিলিয়ন প্যারামিটার স্বাচ্ছন্দ্যের, আর QLoRA দিয়ে প্রায় ৭ বিলিয়ন পর্যন্ত টানা যায়।"
         },
         {
           "type": "callout",
@@ -742,8 +742,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<a href=\"https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — widely cited practical guide to building an eval workflow",
-            "<a href=\"https://huggingface.co/docs/evaluate/index\">Hugging Face Evaluate</a> — official docs for standard evaluation metrics",
+            "<a href=\"https://hamel.dev/blog/posts/evals/\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — practical guide to building an eval workflow",
+            "<a href=\"https://huggingface.co/docs/evaluate/index\">Hugging Face Evaluate</a> — official docs for a library of evaluation metrics (Hugging Face now points to LightEval for newer LLM evals)",
             "<a href=\"https://github.com/EleutherAI/lm-evaluation-harness\">lm-evaluation-harness</a> — open-source standard benchmark harness",
             "<a href=\"https://github.com/confident-ai/deepeval\">DeepEval</a> — open-source, pytest-style LLM testing framework"
           ]
@@ -792,7 +792,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<a href=\"https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — ইভ্যালুয়েশন ওয়ার্কফ্লো বানানোর ব্যবহারিক গাইড",
+            "<a href=\"https://hamel.dev/blog/posts/evals/\">\"Your AI Product Needs Evals\"</a> (Hamel Husain) — ইভ্যালুয়েশন ওয়ার্কফ্লো বানানোর ব্যবহারিক গাইড",
             "<a href=\"https://huggingface.co/docs/evaluate/index\">Hugging Face Evaluate</a> — স্ট্যান্ডার্ড ইভ্যালুয়েশন মেট্রিকের অফিসিয়াল ডকুমেন্টেশন",
             "<a href=\"https://github.com/EleutherAI/lm-evaluation-harness\">lm-evaluation-harness</a> — ওপেন-সোর্স স্ট্যান্ডার্ড বেঞ্চমার্ক হারনেস",
             "<a href=\"https://github.com/confident-ai/deepeval\">DeepEval</a> — ওপেন-সোর্স, pytest-স্টাইল LLM টেস্টিং ফ্রেমওয়ার্ক"
@@ -900,7 +900,7 @@
           "headers": ["Quantization level", "Relative size", "Trade-off"],
           "rows": [
             ["Q8", "Largest of the common levels", "Closest to the original model's quality"],
-            ["Q5", "Mid-size", "A reasonable balance for most small models"],
+            ["Q5", "Mid-size", "A common balance of size and quality (Q4_K_M is also a popular default)"],
             ["Q4", "Smallest of the common levels", "Fastest and lightest, with a bit more quality loss"]
           ]
         },
@@ -926,7 +926,7 @@
             "<a href=\"https://github.com/ggml-org/llama.cpp\">llama.cpp</a> — official repo: conversion scripts, quantization tool, and server",
             "<a href=\"https://ollama.com\">Ollama</a> — run quantized local models behind a simple API",
             "<a href=\"https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/\">Collabnix: Complete Ollama Guide</a> — free walkthrough covering Docker Compose and a FastAPI integration",
-            "<a href=\"https://www.byteplus.com/en/topic/556170\">BytePlus: Deploying Ollama with Docker and FastAPI</a> — free end-to-end guide: Modelfile → Docker → FastAPI"
+            "<a href=\"https://docs.ollama.com/docker\">Ollama docs: Docker</a> — official guide to running Ollama in a container"
           ]
         }
       ],
@@ -976,7 +976,7 @@
             "<a href=\"https://github.com/ggml-org/llama.cpp\">llama.cpp</a> — অফিসিয়াল রিপো: কনভার্সন স্ক্রিপ্ট, কোয়ান্টাইজেশন টুল, আর সার্ভার",
             "<a href=\"https://ollama.com\">Ollama</a> — একটা সহজ API-র পেছনে কোয়ান্টাইজড লোকাল মডেল চালান",
             "<a href=\"https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/\">Collabnix: Complete Ollama Guide</a> — Docker Compose আর FastAPI ইন্টিগ্রেশনসহ ফ্রি ওয়াকথ্রু",
-            "<a href=\"https://www.byteplus.com/en/topic/556170\">BytePlus: Ollama, Docker আর FastAPI দিয়ে ডিপ্লয়</a> — Modelfile → Docker → FastAPI, এন্ড-টু-এন্ড ফ্রি গাইড"
+            "<a href=\"https://docs.ollama.com/docker\">Ollama ডকস: Docker</a> — কনটেইনারে Ollama চালানোর অফিশিয়াল গাইড"
           ]
         }
       ],
@@ -1031,14 +1031,14 @@
       "id": "s6",
       "num": "06",
       "title": "Capstone & the full timeline",
-      "sub": "a realistic project idea, with synthetic data only, and roughly 5–7 months total",
+      "sub": "a realistic project idea, with synthetic data only, and roughly 4–6 months total",
       "bn": {
         "title": "ক্যাপস্টোন আর পুরো টাইমলাইন",
-        "sub": "একটা বাস্তবসম্মত প্রজেক্ট আইডিয়া, শুধু সিন্থেটিক ডেটা দিয়ে, মোট আনুমানিক ৫–৭ মাস"
+        "sub": "একটা বাস্তবসম্মত প্রজেক্ট আইডিয়া, শুধু সিন্থেটিক ডেটা দিয়ে, মোট আনুমানিক ৪–৬ মাস"
       },
       "basics": {
         "en": {
-          "idea": "A good <strong>capstone</strong> is a realistic project built only on anonymized or synthetic data. The full roadmap takes roughly 5–7 months part-time, but that is an estimate, not a deadline.",
+          "idea": "A good <strong>capstone</strong> is a realistic project built only on anonymized or synthetic data. The full roadmap takes roughly 4–6 months part-time, but that is an estimate, not a deadline.",
           "words": [
             {
               "term": "Capstone",
@@ -1068,12 +1068,12 @@
           "remember": [
             "For the capstone, fine-tune a small model to turn requirements into test cases or to classify bug reports.",
             "Never fine-tune on real company or employee data. Use anonymized or synthetic examples.",
-            "The full timeline takes roughly 5–7 months, part-time.",
+            "The full timeline takes roughly 4–6 months, part-time.",
             "The total is an estimate. Good Phase 1 data hygiene shortens every later phase."
           ]
         },
         "bn": {
-          "idea": "ভালো <strong>ক্যাপস্টোন</strong> হলো একটা বাস্তবসম্মত প্রজেক্ট, যা শুধু অ্যানোনিমাইজড বা সিন্থেটিক ডেটার উপর দাঁড়িয়ে। পুরো রোডম্যাপে পার্ট-টাইমে আনুমানিক ৫–৭ মাস লাগে, তবে সেটা হিসাব, ডেডলাইন নয়।",
+          "idea": "ভালো <strong>ক্যাপস্টোন</strong> হলো একটা বাস্তবসম্মত প্রজেক্ট, যা শুধু অ্যানোনিমাইজড বা সিন্থেটিক ডেটার উপর দাঁড়িয়ে। পুরো রোডম্যাপে পার্ট-টাইমে আনুমানিক ৪–৬ মাস লাগে, তবে সেটা হিসাব, ডেডলাইন নয়।",
           "words": [
             {
               "term": "ক্যাপস্টোন (capstone)",
@@ -1103,7 +1103,7 @@
           "remember": [
             "ক্যাপস্টোনের জন্য, ছোট একটা মডেল ফাইন-টিউন করুন, যা রিকোয়ারমেন্ট থেকে টেস্ট কেস বানায় বা বাগ রিপোর্ট ক্লাসিফাই করে।",
             "আসল কোম্পানি বা কর্মীর ডেটা দিয়ে কখনো ফাইন-টিউন করবেন না। অ্যানোনিমাইজড বা সিন্থেটিক উদাহরণ ব্যবহার করুন।",
-            "পুরো টাইমলাইনে পার্ট-টাইমে আনুমানিক ৫–৭ মাস লাগে।",
+            "পুরো টাইমলাইনে পার্ট-টাইমে আনুমানিক ৪–৬ মাস লাগে।",
             "মোট সময় একটা হিসাব। Phase ১-এ ভালো ডেটা হাইজিন পরের প্রতিটা ফেজের সময় কমায়।"
           ]
         }
@@ -1134,7 +1134,7 @@
             ["3", "Fine-tuning open models", "6–8 weeks"],
             ["4", "Evaluation", "2–3 weeks"],
             ["5", "Run it locally and ship it", "3–4 weeks"],
-            ["Total", "—", "Roughly 5–7 months"]
+            ["Total", "—", "Roughly 4–6 months"]
           ]
         },
         {
@@ -1149,7 +1149,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The 5–7 month estimate is a rough part-time pace, not a contract. Some phases will go faster, some slower — what matters is finishing each phase before starting the next."
+          "html": "The 4–6 month estimate is a rough part-time pace, not a contract. Some phases will go faster, some slower — what matters is finishing each phase before starting the next."
         }
       ],
       "bangla": [
@@ -1176,7 +1176,7 @@
             ["৩", "ওপেন মডেল ফাইন-টিউনিং", "৬–৮ সপ্তাহ"],
             ["৪", "ইভ্যালুয়েশন", "২–৩ সপ্তাহ"],
             ["৫", "লোকালি চালানো আর শিপ করা", "৩–৪ সপ্তাহ"],
-            ["মোট", "—", "আনুমানিক ৫–৭ মাস"]
+            ["মোট", "—", "আনুমানিক ৪–৬ মাস"]
           ]
         },
         {
@@ -1199,16 +1199,16 @@
     { "n": 10, "url": "https://pandas.pydata.org/docs/user_guide/index.html", "text": "pandas User Guide (official documentation)" },
     { "n": 11, "url": "https://www.kaggle.com/learn/pandas", "text": "Kaggle Learn, Pandas (free micro-course)" },
     { "n": 12, "url": "https://www.kaggle.com/learn/data-cleaning", "text": "Kaggle Learn, Data Cleaning (free micro-course)" },
-    { "n": 13, "url": "https://www.dataquest.io/blog/data-cleaning-in-python/", "text": "Dataquest, Complete Guide to Data Cleaning in Python (free tutorial)" },
+    { "n": 13, "url": "https://www.dataquest.io/guide/data-cleaning-in-python-tutorial/", "text": "Dataquest, Complete Guide to Data Cleaning in Python (free tutorial)" },
     { "n": 14, "url": "https://docs.pytorch.org/tutorials/beginner/basics/index.html", "text": "PyTorch, Learn the Basics (official beginner tutorials)" },
     { "n": 15, "url": "https://huggingface.co/learn/llm-course/en/chapter11/4", "text": "Hugging Face LLM Course, Chapter 11.4: LoRA (free, official)" },
     { "n": 16, "url": "https://www.datacamp.com/tutorial/fine-tuning-llama-2", "text": "DataCamp, Fine-Tuning Llama 2 with QLoRA (free Colab tutorial)" },
-    { "n": 17, "url": "https://simonwillison.net/2024/Mar/31/your-ai-product-needs-evals", "text": "Hamel Husain, \"Your AI Product Needs Evals\" (practical eval-workflow guide)" },
+    { "n": 17, "url": "https://hamel.dev/blog/posts/evals/", "text": "Hamel Husain, \"Your AI Product Needs Evals\" (practical eval-workflow guide)" },
     { "n": 18, "url": "https://huggingface.co/docs/evaluate/index", "text": "Hugging Face Evaluate (official metrics library documentation)" },
     { "n": 19, "url": "https://github.com/EleutherAI/lm-evaluation-harness", "text": "EleutherAI, lm-evaluation-harness (open-source benchmark harness)" },
     { "n": 20, "url": "https://github.com/confident-ai/deepeval", "text": "DeepEval (open-source, pytest-style LLM testing framework)" },
     { "n": 21, "url": "https://collabnix.com/complete-ollama-guide-installation-usage-code-examples/", "text": "Collabnix, Complete Ollama Guide (Docker + FastAPI walkthrough)" },
-    { "n": 22, "url": "https://www.byteplus.com/en/topic/556170", "text": "BytePlus, Deploying Ollama with Docker and FastAPI (end-to-end guide)" }
+    { "n": 22, "url": "https://docs.ollama.com/docker", "text": "Ollama, Docker (official documentation)" }
   ],
   "quiz": [
     {

@@ -3303,8 +3303,8 @@
     },
     {
       "n": 7,
-      "url": "https://temporal.io/blog/temporal-for-llm-agents",
-      "text": "Temporal — \"Durable Execution for LLM Agents\""
+      "url": "https://temporal.io/blog/building-an-agentic-system-thats-actually-production-ready",
+      "text": "Temporal — \"Building an agentic system that's actually production-ready\""
     },
     {
       "n": 8,
@@ -3368,7 +3368,7 @@
     },
     {
       "n": 20,
-      "url": "https://platform.openai.com/docs/guides/computer-use",
+      "url": "https://developers.openai.com/api/docs/guides/tools-computer-use",
       "text": "OpenAI — Computer use / Operator documentation"
     },
     {
@@ -3388,7 +3388,7 @@
     },
     {
       "n": 24,
-      "url": "https://docs.llamaindex.ai/en/stable/module_guides/agents/",
+      "url": "https://developers.llamaindex.ai/python/framework/use_cases/agents/",
       "text": "LlamaIndex — Agents module documentation"
     },
     {
@@ -3413,7 +3413,7 @@
     },
     {
       "n": 29,
-      "url": "https://docs.mastra.ai/",
+      "url": "https://mastra.ai/docs",
       "text": "Mastra — TypeScript agent framework documentation"
     },
     {
