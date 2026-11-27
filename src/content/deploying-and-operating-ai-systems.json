@@ -1482,8 +1482,8 @@
         {
           "type": "code",
           "lang": "yaml",
-          "code": "# .github/workflows/ci.yml\nname: ci\non: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: pip install -r requirements.txt\n      - run: pytest\n      # your own script: exits with an error when the score is below the baseline\n      - run: python evals/run.py --baseline evals/baseline.json",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># .github/workflows/ci.yml</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">name</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ci</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">on</span><span style=\"color:#ADBAC7\">: [</span><span style=\"color:#96D0FF\">pull_request</span><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">jobs</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  test</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    runs-on</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ubuntu-latest</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    steps</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/checkout@v4</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/setup-python@v5</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">        with</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          python-version</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"3.12\"</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pip install -r requirements.txt</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pytest</span></span>\n<span class=\"line\"><span style=\"color:#768390\">      # your own script: exits with an error when the score is below the baseline</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">python evals/run.py --baseline evals/baseline.json</span></span></code></pre>"
+          "code": "# .github/workflows/ci.yml\nname: ci\non: [pull_request]\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v7\n      - uses: actions/setup-python@v7\n        with:\n          python-version: \"3.12\"\n      - run: pip install -r requirements.txt\n      - run: pytest\n      # your own script: exits with an error when the score is below the baseline\n      - run: python evals/run.py --baseline evals/baseline.json",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># .github/workflows/ci.yml</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">name</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ci</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">on</span><span style=\"color:#ADBAC7\">: [</span><span style=\"color:#96D0FF\">pull_request</span><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">jobs</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">  test</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    runs-on</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">ubuntu-latest</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">    steps</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/checkout@v7</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">uses</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">actions/setup-python@v7</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">        with</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#8DDB8C\">          python-version</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"3.12\"</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pip install -r requirements.txt</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">pytest</span></span>\n<span class=\"line\"><span style=\"color:#768390\">      # your own script: exits with an error when the score is below the baseline</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">      - </span><span style=\"color:#8DDB8C\">run</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">python evals/run.py --baseline evals/baseline.json</span></span></code></pre>"
         },
         {
           "type": "heading",
@@ -1638,7 +1638,7 @@
             },
             {
               "term": "Ansible",
-              "meaning": "A tool that sets up drivers, packages and services on machines that already exist, by running ordered steps with no agent on the machine."
+              "meaning": "A tool that sets up drivers, packages and services on machines that already exist, by running playbook tasks over SSH, with no agent on the machine."
             },
             {
               "term": "Plan and apply",
@@ -1677,7 +1677,7 @@
             },
             {
               "term": "Ansible",
-              "meaning": "যে টুল আগে থেকে থাকা মেশিনে ড্রাইভার, প্যাকেজ আর সার্ভিস সেট আপ করে, ক্রমানুসারে ধাপ চালিয়ে। মেশিনে কোনো এজেন্ট লাগে না।"
+              "meaning": "যে টুল আগে থেকে থাকা মেশিনে ড্রাইভার, প্যাকেজ আর সার্ভিস সেট আপ করে, প্লেবুকের টাস্ক SSH দিয়ে চালিয়ে। মেশিনে কোনো এজেন্ট লাগে না।"
             },
             {
               "term": "প্ল্যান আর অ্যাপ্লাই (plan, apply)",
@@ -1726,7 +1726,7 @@
             ],
             [
               "Ansible",
-              "Ordered steps run over SSH, with no agent on the machine <a class=\"cite\" href=\"#src16\">[16]</a>",
+              "Playbooks of tasks, run over SSH with no agent on the machine; safe to rerun (idempotent) <a class=\"cite\" href=\"#src16\">[16]</a>",
               "Configuring machines that already exist: drivers, packages, services"
             ],
             [
@@ -2316,7 +2316,7 @@
             },
             {
               "term": "OpenTelemetry",
-              "meaning": "A tool that produces traces."
+              "meaning": "A framework and toolkit that generates and exports telemetry: traces, metrics and logs."
             },
             {
               "term": "Saturation",
@@ -2359,7 +2359,7 @@
             },
             {
               "term": "OpenTelemetry",
-              "meaning": "যে টুল ট্রেস তৈরি করে।"
+              "meaning": "যে ফ্রেমওয়ার্ক ও টুলকিট টেলিমেট্রি তৈরি আর এক্সপোর্ট করে: ট্রেস, মেট্রিক আর লগ।"
             },
             {
               "term": "স্যাচুরেশন (saturation)",
@@ -3118,7 +3118,7 @@
           "items": [
             "Start read-only: let the assistant look and explain, not change anything.",
             "Keep a human approval step for every change, such as a restart, a scale-up or a rollback.",
-            "Log every action and the evidence behind it, and review the log after each incident <a class=\"cite\" href=\"#src33\">[33]</a>.",
+            "Keep a record of what happens during an incident, and review it afterwards <a class=\"cite\" href=\"#src33\">[33]</a>.",
             "Measure it: time to detect, time to resolve, and how often its suggestion was right."
           ]
         },
@@ -3233,7 +3233,7 @@
             },
             {
               "term": "MCP server",
-              "meaning": "A program that lets a tool call outside systems, such as issue trackers, databases and browsers, through one protocol."
+              "meaning": "A program that lets a tool call outside systems, such as files, databases and other tools, through one protocol."
             },
             {
               "term": "Attack surface",
@@ -3272,7 +3272,7 @@
             },
             {
               "term": "MCP সার্ভার (MCP server)",
-              "meaning": "যে প্রোগ্রাম টুলকে একটা প্রটোকলে বাইরের সিস্টেম কল করতে দেয়, যেমন ইস্যু ট্র্যাকার, ডেটাবেস আর ব্রাউজার।"
+              "meaning": "যে প্রোগ্রাম টুলকে একটা প্রটোকলে বাইরের সিস্টেম কল করতে দেয়, যেমন ফাইল, ডেটাবেস আর অন্য টুল।"
             },
             {
               "term": "অ্যাটাক সারফেস (attack surface)",
@@ -3312,7 +3312,7 @@
           "items": [
             "A <strong>context file</strong> in the repository tells the tool how the project works: the build and test commands, the conventions, and what not to touch. Claude Code reads <code>CLAUDE.md</code> <a class=\"cite\" href=\"#src34\">[34]</a>, and <code>AGENTS.md</code> is an open convention that several tools read <a class=\"cite\" href=\"#src35\">[35]</a>. Keep it short and true.",
             "<strong>Permissions.</strong> Let the tool run read-only commands freely, and ask before it writes outside the project, installs packages or uses the network.",
-            "<strong>MCP servers</strong> let a tool call outside systems, such as issue trackers, databases and browsers, through one protocol <a class=\"cite\" href=\"#src36\">[36]</a>. Each one is also an attack surface, so install only servers you trust (Part 7).",
+            "<strong>MCP servers</strong> let a tool call outside systems, such as files, databases and other tools, through one protocol <a class=\"cite\" href=\"#src36\">[36]</a>. Each one is also an attack surface, so install only servers you trust (Part 7).",
             "<strong>One task, one branch.</strong> Give each agent its own branch, and its own worktree when several run at once (section 2 of this Part)."
           ]
         },
@@ -3454,8 +3454,8 @@
     },
     {
       "n": 9,
-      "url": "https://docs.docker.com/get-started/docker-overview",
-      "text": "Docker Docs, \"What is Docker?\""
+      "url": "https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/",
+      "text": "Docker Docs, \"What is a container?\""
     },
     {
       "n": 10,
