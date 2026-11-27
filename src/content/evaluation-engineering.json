@@ -51,7 +51,7 @@
           ],
           "remember": [
             "Build a golden dataset, grow it from real failures, and block the release if accuracy drops below the threshold.",
-            "Pairwise judging beats absolute scoring, because relative judgements are easier than absolute ones.",
+            "Pairwise judging can pick up subtle differences between two answers, but watch for position bias: swap the order to check.",
             "For agents, check how the answer was reached, not only whether the final answer is right.",
             "Always check synthetic questions for contamination (questions that copy the training data), or you test memorisation instead of capability."
           ]
@@ -90,7 +90,7 @@
           ],
           "remember": [
             "গোল্ডেন ডেটাসেট বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর অ্যাকুরেসি (accuracy) সীমার নিচে নামলে রিলিজ আটকে দিন।",
-            "পেয়ারওয়াইজ বিচার পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।",
+            "পেয়ারওয়াইজ বিচার দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে, তবে পজিশন বায়াস থেকে সাবধান: ক্রম অদলবদল করে যাচাই করুন।",
             "এজেন্টের ক্ষেত্রে শুধু চূড়ান্ত উত্তর নয়, উত্তরে কীভাবে পৌঁছেছে সেটাও দেখুন।",
             "সিনথেটিক প্রশ্নে কন্টামিনেশন (contamination) (ট্রেনিং ডেটার নকল প্রশ্ন) সবসময় যাচাই করুন, নইলে সক্ষমতার বদলে মুখস্থ বিদ্যার পরীক্ষা হয়ে যায়।"
           ]
@@ -121,13 +121,13 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Pairwise comparison:</strong> show the judge A and B, ask which is better. Beats absolute scoring, because relative judgements are easier than absolute ones.",
+            "<strong>Pairwise comparison:</strong> show the judge A and B, ask which is better. It can pick up subtle differences, but cost grows with the number of pairs and the judge can show position bias; swap the order to check.<a class=\"cite\" href=\"#src18\">[18]</a>",
             "<strong>Rubric-based scoring:</strong> define 4–6 criteria, ask the judge to rate each 0–5 with reasoning. Aggregate weighted score."
           ]
         },
         {
           "type": "paragraph",
-          "html": "Best practice: use a different (often stronger) model as the judge than the one being evaluated; rotate judge prompts; periodically sanity-check the judge against human labels.<a class=\"cite\" href=\"#src18\">[18]</a>"
+          "html": "Best practice: avoid judging a model with itself (judges can favour their own answers); swap answer positions; periodically check the judge against human labels.<a class=\"cite\" href=\"#src18\">[18]</a>"
         },
         {
           "type": "heading",
@@ -137,7 +137,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The <strong>Ragas</strong> framework standardised four metrics that every RAG system should track:<a class=\"cite\" href=\"#src19\">[19]</a>"
+          "html": "The <strong>Ragas</strong> paper defines three reference-free metrics (faithfulness, answer relevance, context relevance).<a class=\"cite\" href=\"#src19\">[19]</a> The Ragas library also offers context precision and context recall. These four metrics are worth tracking in every RAG system:"
         },
         {
           "type": "table",
@@ -237,7 +237,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Sample 1–5% of live requests, run cheap judges (heuristics, regex, small LLM), record the eval score alongside the trace. This catches <em>real</em> failures your offline set misses — distribution shifts, prompt-template copy-paste errors, fresh prompt injections."
+          "html": "Sample a small share of live requests (for example 1–5%), run cheap judges (heuristics, regex, small LLM), record the eval score alongside the trace. This catches <em>real</em> failures your offline set misses — distribution shifts, prompt-template copy-paste errors, fresh prompt injections."
         },
         {
           "type": "heading",
@@ -247,7 +247,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them monthly. Track the failure rate; treat any new failure as a bug to fix in the system prompt or guardrail."
+          "html": "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them on a regular schedule, for example monthly. Track the failure rate; treat any new failure as a bug to fix in the system prompt or guardrail."
         }
       ],
       "layman": [
@@ -261,7 +261,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>LLM-as-judge = \"let an AI grade another AI's homework.\"</strong> For things like \"does this answer sound helpful?\" you can't write a regex. So you have a second, usually stronger, AI score the first AI's answers. Two styles: (1) <em>pairwise</em> — show A and B side by side, ask which is better, (2) <em>rubric</em> — define 5 criteria, ask for 0–5 on each with reasoning. The pairwise style works better because relative judgements are easier than absolute ones."
+          "html": "<strong>LLM-as-judge = \"let an AI grade another AI's homework.\"</strong> For things like \"does this answer sound helpful?\" you can't write a regex. So you have a second, usually stronger, AI score the first AI's answers. Two styles: (1) <em>pairwise</em> — show A and B side by side, ask which is better, (2) <em>rubric</em> — define 5 criteria, ask for 0–5 on each with reasoning. The pairwise style can pick up subtle differences, but the judge can favour whichever answer comes first, so swap the order to check."
         },
         {
           "type": "paragraph",
@@ -322,7 +322,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>LLM-as-judge = \"এক AI অন্য AI-এর হোমওয়ার্ক গ্রেড করে।\"</strong> \"এই উত্তর কি সহায়ক শোনায়?\" এমন কিছুর জন্য regex লেখা যায় না। তাই দ্বিতীয়, সাধারণত শক্তিশালী, AI প্রথম AI-এর উত্তর স্কোর করে। দুটি ধরন: (১) <em>পেয়ারওয়াইজ</em> — A ও B পাশাপাশি দেখিয়ে জিজ্ঞেস করুন কোনটি ভালো, (২) <em>রুব্রিক</em> — ৫টি মানদণ্ড সংজ্ঞায়িত করুন, প্রতিটিতে যুক্তিসহ ০–৫ চান। পেয়ারওয়াইজ ভালো কাজ করে কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।"
+          "html": "<strong>LLM-as-judge = \"এক AI অন্য AI-এর হোমওয়ার্ক গ্রেড করে।\"</strong> \"এই উত্তর কি সহায়ক শোনায়?\" এমন কিছুর জন্য regex লেখা যায় না। তাই দ্বিতীয়, সাধারণত শক্তিশালী, AI প্রথম AI-এর উত্তর স্কোর করে। দুটি ধরন: (১) <em>পেয়ারওয়াইজ</em> — A ও B পাশাপাশি দেখিয়ে জিজ্ঞেস করুন কোনটি ভালো, (২) <em>রুব্রিক</em> — ৫টি মানদণ্ড সংজ্ঞায়িত করুন, প্রতিটিতে যুক্তিসহ ০–৫ চান। পেয়ারওয়াইজ সূক্ষ্ম পার্থক্য ধরতে পারে, তবে জাজ প্রথম উত্তরের দিকে ঝুঁকতে পারে, তাই ক্রম অদলবদল করে যাচাই করুন।"
         },
         {
           "type": "paragraph",
@@ -363,11 +363,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রোডাকশন ট্রাফিকে অনলাইন ইভ্যাল:</strong> লাইভ রিকোয়েস্টের ১–৫% স্যাম্পল করুন, সস্তা জাজ (regex, ছোট LLM) চালান, ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন। এটি আপনার অফলাইন সেট মিস করা <em>বাস্তব</em> ব্যর্থতা ধরে — ডিস্ট্রিবিউশন শিফট, প্রম্পট-টেমপ্লেট কপি-পেস্ট এরর, নতুন প্রম্পট ইনজেকশন।"
+          "html": "<strong>প্রোডাকশন ট্রাফিকে অনলাইন ইভ্যাল:</strong> লাইভ রিকোয়েস্টের একটি ছোট অংশ (যেমন ১–৫%) স্যাম্পল করুন, সস্তা জাজ (regex, ছোট LLM) চালান, ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন। এটি আপনার অফলাইন সেট মিস করা <em>বাস্তব</em> ব্যর্থতা ধরে — ডিস্ট্রিবিউশন শিফট, প্রম্পট-টেমপ্লেট কপি-পেস্ট এরর, নতুন প্রম্পট ইনজেকশন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>রেড টিমিং ও অ্যাডভার্সারিয়াল টেস্টিং:</strong> আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। মাসে একবার চালান। ব্যর্থতার হার ট্র্যাক করুন; যেকোনো নতুন ব্যর্থতা সিস্টেম প্রম্পট বা গার্ডরেইলে ঠিক করার বাগ।"
+          "html": "<strong>রেড টিমিং ও অ্যাডভার্সারিয়াল টেস্টিং:</strong> আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। নিয়মিত চালান, যেমন মাসে একবার। ব্যর্থতার হার ট্র্যাক করুন; যেকোনো নতুন ব্যর্থতা সিস্টেম প্রম্পট বা গার্ডরেইলে ঠিক করার বাগ।"
         },
         {
           "type": "analogy",
@@ -944,24 +944,24 @@
       "kind": "mcq",
       "answer": 0,
       "en": {
-        "q": "Why does pairwise comparison beat absolute scoring in LLM-as-judge?",
+        "q": "What is one advantage of pairwise comparison in LLM-as-judge?",
         "options": [
-          "Relative judgements are easier than absolute ones",
+          "It can pick up subtle differences between two answers",
           "It does not need a judge model at all",
           "It checks the answers with regex",
           "It always uses a weaker judge than the model under test"
         ],
-        "why": "In pairwise mode the judge sees A and B and picks the better one. This Part says this beats absolute scoring because relative judgements are easier."
+        "why": "In pairwise mode the judge sees A and B and picks the better one. This Part says it can pick up subtle differences, though the judge can show position bias."
       },
       "bn": {
-        "q": "LLM-as-judge-এ পেয়ারওয়াইজ কমপেয়ারিজন কেন অ্যাবসোলিউট স্কোরিংয়ের চেয়ে ভালো?",
+        "q": "LLM-as-judge-এ পেয়ারওয়াইজ কমপেয়ারিজনের একটি সুবিধা কী?",
         "options": [
-          "আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ",
+          "এটা দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে",
           "এতে কোনো জাজ মডেলই লাগে না",
           "এটা regex দিয়ে উত্তর যাচাই করে",
           "এটা সবসময় পরীক্ষা করা মডেলের চেয়ে দুর্বল জাজ ব্যবহার করে"
         ],
-        "why": "পেয়ারওয়াইজ মোডে জাজ A আর B দেখে কোনটা ভালো বেছে নেয়। এই পার্ট বলছে এটা অ্যাবসোলিউট স্কোরিংয়ের চেয়ে ভালো, কারণ আপেক্ষিক বিচার সহজ।"
+        "why": "পেয়ারওয়াইজ মোডে জাজ A আর B দেখে কোনটা ভালো বেছে নেয়। এই পার্ট বলছে এটা সূক্ষ্ম পার্থক্য ধরতে পারে, তবে জাজে পজিশন বায়াস থাকতে পারে।"
       }
     },
     {
