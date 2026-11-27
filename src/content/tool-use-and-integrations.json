@@ -48,7 +48,7 @@
           "remember": [
             "Write each tool description to say what it does, when to use it, and what it returns.",
             "Use a tight schema with clear types and enums. Avoid <code>any</code>.",
-            "More than about 20 tools in one prompt hurts how well the model picks the right one.",
+            "OpenAI suggests keeping fewer than about 20 tools available at once; many tools can make it harder for the model to pick the right one.",
             "Make independent tool calls in one turn so they run at the same time.",
             "Tool output is prompt content: trim it, format it for reading, add a summary when the result is not obvious."
           ]
@@ -84,7 +84,7 @@
           "remember": [
             "প্রতিটি টুলের ডেসক্রিপশনে লিখুন সে কী করে, কখন ব্যবহার করবেন আর কী ফেরত দেয়।",
             "স্পষ্ট টাইপ আর এনাম দিয়ে স্কিমা আঁটসাঁট রাখুন। <code>any</code> এড়িয়ে চলুন।",
-            "একটি প্রম্পটে প্রায় ২০-এর বেশি টুল দিলে মডেল ঠিক টুল বাছতে কম পারে।",
+            "OpenAI পরামর্শ দেয় একসাথে প্রায় ২০-এর কম টুল রাখতে; অনেক টুল থাকলে মডেলের ঠিক টুল বাছা কঠিন হতে পারে।",
             "একে অপরের ওপর নির্ভর করে না এমন টুল কল এক টার্নে দিন, যাতে সেগুলো একসাথে চলে।",
             "টুলের আউটপুট প্রম্পটেরই অংশ: ছাঁটুন, পড়ার মতো ফরম্যাট করুন, আর ফলাফল অস্পষ্ট হলে সারমর্ম যোগ করুন।"
           ]
@@ -105,7 +105,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Name:</strong> verb_noun. <code>search_documents</code>, not <code>docs</code>. Names appear in the model's context window — they're a contract.",
+            "<strong>Name:</strong> verb_noun is a common convention (not a documented rule): <code>search_documents</code>, not <code>docs</code>. Names appear in the model's context window — they're a contract.",
             "<strong>Description:</strong> one sentence on what it does, one on when to use it, and one on what it returns. Treat it like a function docstring the model <em>must</em> read.",
             "<strong>Parameters:</strong> explicit types, enums for closed sets, descriptions for every non-obvious field. Avoid <code>any</code>; the model hallucinates less when the schema is tight.",
             "<strong>Returns:</strong> document the shape. If the tool can fail, return an <code>error</code> field, not a 500."
@@ -123,7 +123,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Number of tools:</strong> more than ~20 tools in a single prompt measurably degrades selection accuracy (the <em>many-tools</em> problem). Split into sub-agents by domain, or use a router."
+              "html": "<strong>Number of tools:</strong> OpenAI's function-calling guide suggests keeping fewer than 20 functions available at the start of a turn (a soft suggestion). Many tools can make selection harder (the <em>many-tools</em> problem): split into sub-agents by domain, use a router, or defer tools with tool search."
             }
           ]
         },
@@ -135,7 +135,7 @@
         },
         {
           "type": "paragraph",
-          "html": "When the model needs to gather information that doesn't depend on itself (e.g. \"look up weather in Tokyo <em>and</em> the exchange rate\"), it should issue those calls <strong>in one turn</strong>, not three. Modern APIs return all parallel results at once; the orchestrator runs them concurrently. This is the single biggest latency win in tool-heavy agents."
+          "html": "When the model needs to gather information that doesn't depend on itself (e.g. \"look up weather in Tokyo <em>and</em> the exchange rate\"), it should issue those calls <strong>in one turn</strong>, not three. Modern APIs return all parallel results at once; the orchestrator runs them concurrently. This can cut latency a lot in tool-heavy agents, because total wait is the slowest call, not the sum."
         },
         {
           "type": "heading",
@@ -178,7 +178,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Do things in parallel when you can.</strong> If the AI needs both \"weather in Tokyo\" and \"USD to JPY rate,\" it should press both buttons at the same time, not one after the other. Modern AI does this automatically — and it's the single biggest speed win for tool-heavy assistants."
+          "html": "<strong>Do things in parallel when you can.</strong> If the AI needs both \"weather in Tokyo\" and \"USD to JPY rate,\" it should press both buttons at the same time, not one after the other. Modern models often do this by default — and it can speed up tool-heavy assistants a lot."
         },
         {
           "type": "paragraph",
@@ -201,11 +201,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>স্কিমার নকশা:</strong> নাম ভার্ব_নাউন ফরম্যাটে হওয়া উচিত (<code>search_documents</code>, <code>docs</code> নয়); ডেসক্রিপশনে এক লাইনে কী করে, কখন ব্যবহার করবেন ও কী ফেরত দেয় — তিনটিই থাকা উচিত।<a class=\"cite\" href=\"#src10\">[১০]</a> প্যারামিটারে স্পষ্ট টাইপ, enum ও ডেসক্রিপশন দিন; <code>any</code> এড়িয়ে চলুন। একটি প্রম্পটে ২০-এর বেশি টুল দিলে সিলেকশনের মান ক্ষতিগ্রস্ত হয় — ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করুন।"
+          "html": "<strong>স্কিমার নকশা:</strong> নাম ভার্ব_নাউন ফরম্যাটে রাখা একটি প্রচলিত রীতি, নথিভুক্ত নিয়ম নয় (<code>search_documents</code>, <code>docs</code> নয়); ডেসক্রিপশনে এক লাইনে কী করে, কখন ব্যবহার করবেন ও কী ফেরত দেয় — তিনটিই থাকা উচিত।<a class=\"cite\" href=\"#src10\">[১০]</a> প্যারামিটারে স্পষ্ট টাইপ, enum ও ডেসক্রিপশন দিন; <code>any</code> এড়িয়ে চলুন। OpenAI-এর পরামর্শ একসাথে ২০-এর কম ফাংশন রাখা; অনেক টুল থাকলে সিলেকশন কঠিন হতে পারে — ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করুন।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্যারালাল টুল কলিং:</strong> একে অপরের ওপর নির্ভরশীল নয় এমন তথ্য (যেমন টোকিওর আবহাওয়া <em>এবং</em> USD→JPY রেট) একই টার্নে একসাথে কল করুন। এটাই টুল-নির্ভর এজেন্টের সবচেয়ে বড় ল্যাটেন্সি জয়।"
+          "html": "<strong>প্যারালাল টুল কলিং:</strong> একে অপরের ওপর নির্ভরশীল নয় এমন তথ্য (যেমন টোকিওর আবহাওয়া <em>এবং</em> USD→JPY রেট) একই টার্নে একসাথে কল করুন। এতে টুল-নির্ভর এজেন্টের ল্যাটেন্সি অনেক কমতে পারে, কারণ মোট অপেক্ষা হলো সবচেয়ে ধীর কলের সময়, সবগুলোর যোগফল নয়।"
         },
         {
           "type": "paragraph",
@@ -564,15 +564,15 @@
           "ordered": false,
           "items": [
             "<strong>Tools</strong> — functions the model can call (the action surface).",
-            "<strong>Resources</strong> — read-only data the client can fetch on demand (files, DB rows, web pages). Model decides to <code>read</code> based on its goal.",
+            "<strong>Resources</strong> — read-only data the client can fetch on demand (files, DB rows, web pages). The host application decides how to surface and include them.",
             "<strong>Prompts</strong> — named prompt templates the server offers; the host can list them and let the user invoke by name."
           ]
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"MCP architecture\">\n      <defs>\n        <marker id=\"arr-mcp\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <rect x=\"40\" y=\"100\" width=\"180\" height=\"120\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"130\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">MCP Host</text>\n      <text x=\"130\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">(Claude Code, Cursor,</text>\n      <text x=\"130\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">VS Code, your app)</text>\n      <text x=\"130\" y=\"190\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">connects to many servers</text>\n      \n      <rect x=\"270\" y=\"120\" width=\"120\" height=\"80\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"330\" y=\"150\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">MCP Client</text>\n      <text x=\"330\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">JSON-RPC</text>\n      \n      <rect x=\"450\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"560\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\" dy=\"20\">Filesystem server</text>\n      <text x=\"560\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: read_file, write_file</text>\n      <text x=\"560\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: file://...</text>\n      <text x=\"560\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">stdio / sse / http</text>\n\n      <rect x=\"700\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"810\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\" dy=\"20\">GitHub server</text>\n      <text x=\"810\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: create_issue, list_prs</text>\n      <text x=\"810\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: repo://...</text>\n      <text x=\"810\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">oauth / token</text>\n\n      <rect x=\"450\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"560\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\" dy=\"20\">Postgres server</text>\n      <text x=\"560\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: run_query (read-only)</text>\n      <text x=\"560\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: table://...</text>\n      <text x=\"560\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">read replica</text>\n\n      <rect x=\"700\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n      <text x=\"810\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\" dy=\"20\">Browser server</text>\n      <text x=\"810\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: navigate, click, type</text>\n      <text x=\"810\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: screenshot://</text>\n      <text x=\"810\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">isolated profile</text>\n\n      <line x1=\"220\" y1=\"160\" x2=\"270\" y2=\"160\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"140\" x2=\"450\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"150\" x2=\"700\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"180\" x2=\"450\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"190\" x2=\"700\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n    </svg>",
-          "caption": "MCP architecture: one host can speak to many servers in parallel, each over stdio, SSE, or streamable HTTP. Servers expose tools (actions), resources (data), and prompts (templates).",
-          "captionBn": "MCP আর্কিটেকচার: একটি হোস্ট একাধিক সার্ভারের সাথে কথা বলে (stdio / SSE / HTTP); প্রতিটি সার্ভার টুলস (কর্ম), রিসোর্সেস (তথ্য) ও প্রম্পটস (টেমপ্লেট) প্রকাশ করে।"
+          "svg": "<svg viewBox=\"0 0 1100 320\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"MCP architecture\">\n      <defs>\n        <marker id=\"arr-mcp\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <rect x=\"40\" y=\"100\" width=\"180\" height=\"120\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"130\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">MCP Host</text>\n      <text x=\"130\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">(Claude Code, Cursor,</text>\n      <text x=\"130\" y=\"164\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#a8b5c8\">VS Code, your app)</text>\n      <text x=\"130\" y=\"190\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">connects to many servers</text>\n      \n      <rect x=\"270\" y=\"120\" width=\"120\" height=\"80\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"330\" y=\"150\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#a78bfa\">MCP Client</text>\n      <text x=\"330\" y=\"170\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">JSON-RPC</text>\n      \n      <rect x=\"450\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"560\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#34d399\" dy=\"20\">Filesystem server</text>\n      <text x=\"560\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: read_file, write_file</text>\n      <text x=\"560\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: file://...</text>\n      <text x=\"560\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">stdio / streamable HTTP</text>\n\n      <rect x=\"700\" y=\"40\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n      <text x=\"810\" y=\"40\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fbbf24\" dy=\"20\">GitHub server</text>\n      <text x=\"810\" y=\"70\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: create_issue, list_prs</text>\n      <text x=\"810\" y=\"84\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: repo://...</text>\n      <text x=\"810\" y=\"98\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">oauth / token</text>\n\n      <rect x=\"450\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"560\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#22d3ee\" dy=\"20\">Postgres server</text>\n      <text x=\"560\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: run_query (read-only)</text>\n      <text x=\"560\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: table://...</text>\n      <text x=\"560\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">read replica</text>\n\n      <rect x=\"700\" y=\"210\" width=\"220\" height=\"70\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fb7185\"></rect>\n      <text x=\"810\" y=\"210\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"12\" font-weight=\"700\" fill=\"#fb7185\" dy=\"20\">Browser server</text>\n      <text x=\"810\" y=\"240\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">tools: navigate, click, type</text>\n      <text x=\"810\" y=\"254\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#cfd8e6\">resources: screenshot://</text>\n      <text x=\"810\" y=\"268\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">isolated profile</text>\n\n      <line x1=\"220\" y1=\"160\" x2=\"270\" y2=\"160\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"140\" x2=\"450\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"150\" x2=\"700\" y2=\"80\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"180\" x2=\"450\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n      <line x1=\"390\" y1=\"190\" x2=\"700\" y2=\"240\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr-mcp)\"></line>\n    </svg>",
+          "caption": "MCP architecture: one host can speak to many servers in parallel, each over stdio or Streamable HTTP (the older HTTP+SSE transport is deprecated). Servers expose tools (actions), resources (data), and prompts (templates).",
+          "captionBn": "MCP আর্কিটেকচার: একটি হোস্ট একাধিক সার্ভারের সাথে কথা বলে (stdio / Streamable HTTP; পুরোনো HTTP+SSE ট্রান্সপোর্ট বাতিল); প্রতিটি সার্ভার টুলস (কর্ম), রিসোর্সেস (তথ্য) ও প্রম্পটস (টেমপ্লেট) প্রকাশ করে।"
         },
         {
           "type": "callout",
@@ -614,8 +614,8 @@
             ],
             [
               "<strong>Daytona</strong>",
-              "Hosted dev environments",
-              "Full git/REPL (interactive shell) workflows, AI agents"
+              "Hosted isolated sandboxes (dedicated kernel, filesystem, network) for AI-generated code",
+              "AI agent code execution, full-computer workflows"
             ],
             [
               "<strong>Cloudflare Workers / Sandbox</strong>",
@@ -654,7 +654,7 @@
           "ordered": false,
           "items": [
             "<strong>টুলস</strong> — মডেল যে ফাংশন কল করতে পারে।",
-            "<strong>রিসোর্সেস</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB রো, ওয়েবপেজ)। মডেল লক্ষ্য অনুযায়ী <code>read</code> করার সিদ্ধান্ত নেয়।",
+            "<strong>রিসোর্সেস</strong> — শুধু-পড়ার যোগ্য তথ্য (ফাইল, DB রো, ওয়েবপেজ)। হোস্ট অ্যাপ্লিকেশন ঠিক করে সেগুলো কীভাবে সামনে আনবে ও যুক্ত করবে।",
             "<strong>প্রম্পটস</strong> — নামকরা প্রম্পট টেমপ্লেট যা হোস্ট তালিকা করে ব্যবহারকারীকে নাম ধরে ব্যবহার করতে দেয়।"
           ]
         },
@@ -664,7 +664,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>স্যান্ডবক্সড কোড এক্সিকিউশন:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, সাব-সেকেন্ড Python), Modal (হোস্টেড কনটেইনার + GPU), Daytona (ফুল ডেভেলপমেন্ট এনভায়রনমেন্ট), Cloudflare Workers/Sandbox (এজ আইসোলেট)।"
+          "html": "<strong>স্যান্ডবক্সড কোড এক্সিকিউশন:</strong> অনেক এজেন্ট কাজ সবচেয়ে সহজে কোড দিয়ে প্রকাশ করা যায় (\"কলাম X-এর গড় বের কর\")। মডেলকে স্যান্ডবক্সে কোড লিখে রান করার অনুমতি দিলে টুলের বিস্ফোরণ এড়ানো যায় এবং গাণিতিক নির্ভুলতা পাওয়া যায়। ২০২৫-এর প্রধান বিকল্প: E2B (Firecracker microVM, সাব-সেকেন্ড Python), Modal (হোস্টেড কনটেইনার + GPU), Daytona (AI-র লেখা কোডের জন্য হোস্টেড আইসোলেটেড স্যান্ডবক্স), Cloudflare Workers/Sandbox (এজ আইসোলেট)।"
         },
         {
           "type": "analogy",
@@ -1020,11 +1020,11 @@
       "answer": false,
       "en": {
         "q": "Putting more than about 20 tools in one prompt improves the model's accuracy at choosing the right tool.",
-        "why": "This Part says more than about 20 tools in one prompt degrades selection accuracy. It suggests splitting into sub-agents by domain, or using a router."
+        "why": "This Part says many tools (OpenAI suggests fewer than about 20) can make selection harder. It suggests splitting into sub-agents by domain, or using a router."
       },
       "bn": {
         "q": "একটি প্রম্পটে প্রায় 20-এর বেশি টুল দিলে সঠিক টুল বেছে নেওয়ার ক্ষেত্রে মডেলের অ্যাকুরেসি বাড়ে।",
-        "why": "এই পার্ট বলছে, একটি প্রম্পটে প্রায় 20-এর বেশি টুল দিলে সিলেকশন অ্যাকুরেসি কমে যায়। সমাধান হলো ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করা, অথবা রাউটার ব্যবহার করা।"
+        "why": "এই পার্ট বলছে, অনেক টুল থাকলে (OpenAI প্রায় ২০-এর কম রাখার পরামর্শ দেয়) সিলেকশন কঠিন হতে পারে। সমাধান হলো ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করা, অথবা রাউটার ব্যবহার করা।"
       }
     },
     {
@@ -1039,7 +1039,7 @@
           "Skip the tools and answer from memory",
           "Call the weather tool first and the rate tool in the next turn"
         ],
-        "why": "Independent calls should go out in one turn, and the orchestrator runs them concurrently. This Part calls this the single biggest latency win in tool-heavy agents."
+        "why": "Independent calls should go out in one turn, and the orchestrator runs them concurrently. This Part says this can cut latency a lot in tool-heavy agents."
       },
       "bn": {
         "q": "মডেলের টোকিওর আবহাওয়া আর USD থেকে JPY রেট দুটোই দরকার, আর একটি অন্যটির উপর নির্ভর করে না। তার কী করা উচিত?",
@@ -1049,7 +1049,7 @@
           "টুল বাদ দিয়ে নিজের মেমরি থেকে উত্তর দেওয়া",
           "আগে ওয়েদার টুল কল করা, আর রেট টুল পরের টার্নে কল করা"
         ],
-        "why": "যে কলগুলো একে অপরের উপর নির্ভর করে না, সেগুলো এক টার্নে পাঠানো উচিত, আর অর্কেস্ট্রেটর সেগুলো একসাথে চালায়। এই পার্ট একে টুল-নির্ভর এজেন্টের সবচেয়ে বড় ল্যাটেন্সি জয় বলেছে।"
+        "why": "যে কলগুলো একে অপরের উপর নির্ভর করে না, সেগুলো এক টার্নে পাঠানো উচিত, আর অর্কেস্ট্রেটর সেগুলো একসাথে চালায়। এই পার্ট বলছে এতে টুল-নির্ভর এজেন্টের ল্যাটেন্সি অনেক কমতে পারে।"
       }
     },
     {
