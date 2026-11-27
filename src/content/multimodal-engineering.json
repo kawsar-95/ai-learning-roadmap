@@ -22,7 +22,7 @@
           "words": [
             {
               "term": "OCR-via-LLM",
-              "meaning": "Reading the text in an image by asking an LLM. It beats a classic OCR tool like Tesseract on messy photos, handwritten notes, and forms."
+              "meaning": "Reading the text in an image by asking an LLM. It often reads messy photos, handwritten notes, and forms better than a classic OCR tool like Tesseract."
             },
             {
               "term": "STT and TTS",
@@ -30,7 +30,7 @@
             },
             {
               "term": "Realtime APIs",
-              "meaning": "Services that stream audio in both directions, skipping the step-by-step STT→LLM→TTS loop. Sub-500 ms turn-taking (the gap before the AI replies) is now possible."
+              "meaning": "Services that stream audio in both directions, skipping the step-by-step STT→LLM→TTS loop. They aim for low first-audio latency and natural turn-taking (the gap before the AI replies)."
             },
             {
               "term": "LoRA",
@@ -51,7 +51,7 @@
           ],
           "remember": [
             "In 2025, every production AI app combines at least two of vision, voice, image generation, and video generation.",
-            "Models that take images directly often need no separate OCR step, and they beat Tesseract on messy photos.",
+            "Models that take images directly often need no separate OCR step, and they often read messy photos better than Tesseract.",
             "A voice pipeline is STT → LLM → TTS. Realtime APIs stream audio both ways instead.",
             "Pick image and video models by what you need: licence, photorealism, clip length, character consistency, price, and speed."
           ]
@@ -61,7 +61,7 @@
           "words": [
             {
               "term": "OCR-via-LLM",
-              "meaning": "LLM-কে দিয়ে ছবির লেখা পড়ানো। অগোছালো ছবি, হাতের লেখা নোট আর ফর্মে এটা Tesseract-এর মতো প্রচলিত OCR টুলকে ছাড়িয়ে যায়।"
+              "meaning": "LLM-কে দিয়ে ছবির লেখা পড়ানো। অগোছালো ছবি, হাতের লেখা নোট আর ফর্মে এটা অনেক সময় Tesseract-এর মতো প্রচলিত OCR টুলের চেয়ে ভালো পড়ে।"
             },
             {
               "term": "STT আর TTS (speech-to-text, text-to-speech)",
@@ -69,7 +69,7 @@
             },
             {
               "term": "রিয়েলটাইম API (Realtime APIs)",
-              "meaning": "যে সার্ভিস দুই দিকেই অডিও স্ট্রিম করে, ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে। এখন ৫০০ ms-এর কমে পালা বদল (AI উত্তর দেওয়ার আগের বিরতি) সম্ভব।"
+              "meaning": "যে সার্ভিস দুই দিকেই অডিও স্ট্রিম করে, ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে। এগুলো কম first-audio latency আর স্বাভাবিক পালা বদলের (AI উত্তর দেওয়ার আগের বিরতি) লক্ষ্য রাখে।"
             },
             {
               "term": "LoRA",
@@ -90,7 +90,7 @@
           ],
           "remember": [
             "২০২৫-এ প্রতিটি প্রোডাকশন AI অ্যাপ ভিশন, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশনের অন্তত দুটি মেলায়।",
-            "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে Tesseract-কে হারায়।",
+            "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে।",
             "ভয়েস পাইপলাইন হলো STT → LLM → TTS। রিয়েলটাইম API তার বদলে দুই দিকে অডিও স্ট্রিম করে।",
             "প্রয়োজন দেখে ইমেজ ও ভিডিও মডেল বাছুন: লাইসেন্স, ফটোরিয়ালিজম, ক্লিপের দৈর্ঘ্য, চরিত্রের ধারাবাহিকতা, দাম আর গতি।"
           ]
@@ -111,7 +111,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>OCR-via-LLM</strong> (reading the text in an image with an LLM): it beats Tesseract on messy photos, handwritten notes, and structured forms. Often no separate OCR step is needed.<a class=\"cite\" href=\"#src28\">[28]</a>",
+            "<strong>OCR-via-LLM</strong> (reading the text in an image with an LLM): it often reads messy photos, handwritten notes, and structured forms better than Tesseract. Often no separate OCR step is needed.<a class=\"cite\" href=\"#src28\">[28]</a>",
             "<strong>Document AI</strong>: PDF understanding with layout awareness (Claude, Mistral OCR, Qwen2-VL).",
             "<strong>Chart/diagram extraction</strong>: ask the model to read a chart and emit JSON.",
             "<strong>Visual Q&amp;A</strong>: \"what's wrong with this screenshot?\""
@@ -140,7 +140,7 @@
             ],
             [
               "<strong>TTS</strong>",
-              "ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
+              "ElevenLabs, Cartesia, OpenAI TTS"
             ],
             [
               "<strong>Realtime</strong>",
@@ -150,7 +150,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Realtime APIs</strong> skip the chunky STT→LLM→TTS loop by streaming audio bidirectionally. Sub-500 ms turn-taking is now achievable. LiveKit and Vapi ship full agent frameworks on top of these.<a class=\"cite\" href=\"#src29\">[29]</a>"
+          "html": "<strong>Realtime APIs</strong> skip the chunky STT→LLM→TTS loop by streaming audio bidirectionally. They target low first-audio latency and natural turn-taking. LiveKit and Vapi ship full agent frameworks on top of these.<a class=\"cite\" href=\"#src29\">[29]</a>"
         },
         {
           "type": "heading",
@@ -178,11 +178,11 @@
               "Open, fine-tuneable with LoRA"
             ],
             [
-              "<strong>Imagen 3 (Google)</strong>",
-              "Photorealism, available via Vertex"
+              "<strong>Imagen 4 (Google)</strong>",
+              "Photorealism, generally available on Vertex since Aug 14 2025"
             ],
             [
-              "<strong>DALL-E 3 / GPT-Image-1 (OpenAI)</strong>",
+              "<strong>DALL-E 3 / GPT-Image-2.5 (OpenAI)</strong>",
               "Polished, instruction-following"
             ],
             [
@@ -228,11 +228,11 @@
           "rows": [
             [
               "<strong>Sora (OpenAI)</strong>",
-              "Up to 20 s, strong physics"
+              "Discontinued (app Apr 2026, API Sep 24 2026)"
             ],
             [
-              "<strong>Veo 3 (Google)</strong>",
-              "Native audio + 4K, prompt-adherent"
+              "<strong>Veo 3.1 (Google)</strong>",
+              "Native audio, up to 4K; the Veo 3.1 Preview ID was shut down Oct 22 2026"
             ],
             [
               "<strong>Runway Gen-4</strong>",
@@ -271,7 +271,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Vision (\"AI that sees\"):</strong> Native multimodal models like GPT-4o, Claude 4, Gemini 2.5 take images directly — no separate OCR step needed. They can read a photo of a receipt, look at a screenshot and tell you what's wrong, extract the data from a chart, or understand a PDF's layout. They beat traditional OCR tools on messy real-world images."
+          "html": "<strong>Vision (\"AI that sees\"):</strong> Native multimodal models like GPT-4o, Claude 4, Gemini 2.5 take images directly — no separate OCR step needed. They can read a photo of a receipt, look at a screenshot and tell you what's wrong, extract the data from a chart, or understand a PDF's layout. They often read messy real-world images better than traditional OCR tools."
         },
         {
           "type": "paragraph",
@@ -296,7 +296,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Video generation (\"AI that films\"):</strong> Sora (OpenAI), Veo 3 (Google, with native audio), Kling (Kuaishou, longer), Runway (character continuity), Pika/Luma/Hailuo (cheaper, faster). Most produce 5–20 second clips. Quality is now broadcast-grade for short social-media content."
+          "html": "<strong>Video generation (\"AI that films\"):</strong> Veo 3.1 (Google, with native audio), Kling (Kuaishou, longer), Runway (character continuity), Pika/Luma/Hailuo (cheaper, faster). Most produce 5–20 second clips. Quality is now broadcast-grade for short social-media content."
         },
         {
           "type": "paragraph",
@@ -319,7 +319,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ভিশন (\"যে AI দেখে\"):</strong> GPT-4o, Claude 4, Gemini 2.5-এর মতো নেটিভ মাল্টিমোডাল মডেলগুলো সরাসরি ছবি নেয় — কোনো আলাদা OCR ধাপের দরকার নেই। তারা রসিদের ছবি পড়তে, স্ক্রিনশট দেখে বলতে এটি কী ভুল, চার্ট থেকে ডেটা বের করতে, বা PDF-এর লেআউট বুঝতে পারে। তারা বাস্তব-বিশ্বের অগোছালো ছবিতে ঐতিহ্যবাহী OCR টুলকে ছাড়িয়ে যায়।<a class=\"cite\" href=\"#src28\">[২৮]</a>"
+          "html": "<strong>ভিশন (\"যে AI দেখে\"):</strong> GPT-4o, Claude 4, Gemini 2.5-এর মতো নেটিভ মাল্টিমোডাল মডেলগুলো সরাসরি ছবি নেয় — কোনো আলাদা OCR ধাপের দরকার নেই। তারা রসিদের ছবি পড়তে, স্ক্রিনশট দেখে বলতে এটি কী ভুল, চার্ট থেকে ডেটা বের করতে, বা PDF-এর লেআউট বুঝতে পারে। তারা বাস্তব-বিশ্বের অগোছালো ছবিতে অনেক সময় ঐতিহ্যবাহী OCR টুলের চেয়ে ভালো পড়ে।<a class=\"cite\" href=\"#src28\">[২৮]</a>"
         },
         {
           "type": "paragraph",
@@ -331,7 +331,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ভিডিও জেনারেশন (\"যে AI চিত্রগ্রহণ করে\"):</strong> Sora (OpenAI), Veo 3 (Google, নেটিভ অডিও সহ), Kling (Kuaishou, দীর্ঘ), Runway (চরিত্রের ধারাবাহিকতা), Pika/Luma/Hailuo (সস্তা, দ্রুত)। বেশিরভাগ ৫–২০ সেকেন্ডের ক্লিপ তৈরি করে। স্বল্প সোশ্যাল মিডিয়া কনটেন্টের জন্য মান এখন ব্রডকাস্ট-গ্রেড।"
+          "html": "<strong>ভিডিও জেনারেশন (\"যে AI চিত্রগ্রহণ করে\"):</strong> Veo 3.1 (Google, নেটিভ অডিও সহ), Kling (Kuaishou, দীর্ঘ), Runway (চরিত্রের ধারাবাহিকতা), Pika/Luma/Hailuo (সস্তা, দ্রুত)। বেশিরভাগ ৫–২০ সেকেন্ডের ক্লিপ তৈরি করে। স্বল্প সোশ্যাল মিডিয়া কনটেন্টের জন্য মান এখন ব্রডকাস্ট-গ্রেড।"
         },
         {
           "type": "paragraph",
@@ -868,20 +868,20 @@
       "en": {
         "q": "What does this Part say about an LLM and Tesseract for reading text in images?",
         "options": [
-          "Tesseract beats an LLM on messy photos and handwritten notes.",
-          "An LLM beats Tesseract on messy photos, handwritten notes, and structured forms.",
+          "Tesseract always beats an LLM on messy photos and handwritten notes.",
+          "An LLM often reads messy photos, handwritten notes, and structured forms better than Tesseract.",
           "An LLM can read only clean printed text."
         ],
-        "why": "This Part says an LLM beats Tesseract on messy photos, handwritten notes, and structured forms. Often you need no separate OCR step."
+        "why": "This Part says an LLM often reads messy photos, handwritten notes, and structured forms better than Tesseract. Often you need no separate OCR step."
       },
       "bn": {
         "q": "ছবির লেখা পড়ার ক্ষেত্রে LLM আর Tesseract নিয়ে টপিকটা কী বলে?",
         "options": [
-          "অগোছালো ছবি আর হাতের লেখার নোটে Tesseract, LLM-কে ছাড়িয়ে যায়।",
-          "অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM, Tesseract-কে ছাড়িয়ে যায়।",
+          "অগোছালো ছবি আর হাতের লেখার নোটে Tesseract সবসময় LLM-কে ছাড়িয়ে যায়।",
+          "অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে।",
           "LLM শুধু পরিষ্কার ছাপা লেখা পড়তে পারে।"
         ],
-        "why": "এই পার্ট বলে, অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM, Tesseract-কে ছাড়িয়ে যায়। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
+        "why": "এই পার্ট বলে, অগোছালো ছবি, হাতের লেখার নোট আর স্ট্রাকচার্ড ফর্মে LLM অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে। অনেক সময় আলাদা OCR ধাপের দরকারই হয় না।"
       }
     },
     {
@@ -913,11 +913,11 @@
       "answer": true,
       "en": {
         "q": "Realtime APIs skip the STT → LLM → TTS loop by streaming audio in both directions.",
-        "why": "This Part says realtime APIs stream audio bidirectionally, so they skip the chunky STT → LLM → TTS loop. Sub-500 ms turn-taking is now achievable."
+        "why": "This Part says realtime APIs stream audio bidirectionally, so they skip the chunky STT → LLM → TTS loop. They target low first-audio latency and natural turn-taking."
       },
       "bn": {
         "q": "রিয়েলটাইম API দুই দিকে অডিও স্ট্রিম করে বলে STT → LLM → TTS লুপ এড়িয়ে যায়।",
-        "why": "এই পার্ট বলে, রিয়েলটাইম API দুই দিকে অডিও স্ট্রিম করে, তাই চাঙ্কি STT → LLM → TTS লুপ লাগে না। এখন ৫০০ ms-এর কম সময়ে টার্ন-টেকিং সম্ভব।"
+        "why": "এই পার্ট বলে, রিয়েলটাইম API দুই দিকে অডিও স্ট্রিম করে, তাই চাঙ্কি STT → LLM → TTS লুপ লাগে না। এগুলো কম first-audio latency আর স্বাভাবিক টার্ন-টেকিংয়ের লক্ষ্য রাখে।"
       }
     },
     {
