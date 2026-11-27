@@ -397,8 +397,8 @@
           "remember": [
             "ReAct is the default loop. Its readable scratchpad shows why the model chose each action.",
             "Plan-and-Execute can redo only the failed step, which is cheap.",
-            "Reflexion beats plain ReAct by 10–20 percentage points in benchmarks, but costs 2–3× ReAct.",
-            "ReWOO uses 4–6× fewer tokens than ReAct, but is hard to debug.",
+            "In the paper, Reflexion beats baseline agents by up to 22 points (AlfWorld), but costs extra attempts and reflection calls.",
+            "In the paper, ReWOO used about 5× fewer tokens on HotpotQA (64% fewer on average over six benchmarks), but is hard to debug.",
             "Match the task: ReAct for short, tool-heavy tasks; ReWOO for look-up-heavy tasks with many parallel tool calls."
           ]
         },
@@ -429,8 +429,8 @@
           "remember": [
             "ReAct ডিফল্ট লুপ। এর পড়ার মতো স্ক্র্যাচপ্যাড দেখায় মডেল কেন প্রতিটি অ্যাকশন বাছল।",
             "Plan-and-Execute শুধু ব্যর্থ ধাপটি আবার করতে পারে, যা সস্তা।",
-            "বেঞ্চমার্কে Reflexion সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।",
-            "ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।",
+            "পেপারে Reflexion বেসলাইন এজেন্টের চেয়ে সর্বোচ্চ ২২ পার্সেন্টেজ পয়েন্ট (AlfWorld) ভালো করে, কিন্তু বাড়তি চেষ্টা আর রিফ্লেকশন কলের খরচ লাগে।",
+            "পেপারে ReWOO HotpotQA-তে প্রায় ৫ গুণ কম টোকেন নিয়েছে (ছয়টি বেঞ্চমার্কে গড়ে ৬৪% কম), কিন্তু ডিবাগ করা কঠিন।",
             "কাজ দেখে বাছুন: ছোট, টুল-নির্ভর কাজে ReAct; অনেক প্যারালাল টুল কলসহ খোঁজাখুঁজি-ভারী কাজে ReWOO।"
           ]
         }
@@ -438,7 +438,7 @@
       "body": [
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Four agent loop patterns\">\n      <g>\n        <rect x=\"40\" y=\"40\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"60\" y=\"68\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#22d3ee\">ReAct — Reason + Act (interleaved)</text>\n        <text x=\"60\" y=\"92\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">loop until \"Finish\":</text>\n        <text x=\"60\" y=\"114\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Thought: ...   (private scratchpad)</text>\n        <text x=\"60\" y=\"134\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Action:   tool_call(...) (N used)</text>\n        <text x=\"60\" y=\"154\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Observation: &lt;tool result&gt;</text>\n        <text x=\"60\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: short, reactive tasks; debugging-friendly traces. Yao et al., 2022.[1]</text>\n      </g>\n      <g>\n        <rect x=\"560\" y=\"40\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"580\" y=\"68\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#a78bfa\">Plan-and-Execute — plan once, then act step-by-step</text>\n        <text x=\"580\" y=\"92\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Plan: [\"search X\", \"fetch Y\", \"draft email\"]</text>\n        <text x=\"580\" y=\"114\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">for each step:</text>\n        <text x=\"580\" y=\"134\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  agent_or_tool.run(step)</text>\n        <text x=\"580\" y=\"154\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  replan if step failed</text>\n        <text x=\"580\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: known-shape workflows; cheap replanning. Wang et al., 2023.[2]</text>\n      </g>\n      <g>\n        <rect x=\"40\" y=\"220\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n        <text x=\"60\" y=\"248\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#34d399\">Reflexion — act, then verbally self-criticise</text>\n        <text x=\"60\" y=\"272\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">loop until success or N attempts:</text>\n        <text x=\"60\" y=\"294\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  attempt = ReAct(task, memory)</text>\n        <text x=\"60\" y=\"314\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  reflect(attempt, env_feedback)</text>\n        <text x=\"60\" y=\"334\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  memory.append(reflection)</text>\n        <text x=\"60\" y=\"360\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: tasks with clear success signal. Shinn et al., 2023.[3]</text>\n      </g>\n      <g>\n        <rect x=\"560\" y=\"220\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n        <text x=\"580\" y=\"248\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fbbf24\">ReWOO — plan all tool calls upfront, no per-step LLM</text>\n        <text x=\"580\" y=\"272\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Planner: produce (Plan, #E1, #E2, ...)</text>\n        <text x=\"580\" y=\"294\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Worker:  exec all #Ei (no LLM between)</text>\n        <text x=\"580\" y=\"314\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Solver:  read evidence, answer</text>\n        <text x=\"580\" y=\"340\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: retrieval-heavy tasks; 4–6× fewer tokens. Xu et al., 2023.[4]</text>\n      </g>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Four agent loop patterns\">\n      <g>\n        <rect x=\"40\" y=\"40\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"60\" y=\"68\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#22d3ee\">ReAct — Reason + Act (interleaved)</text>\n        <text x=\"60\" y=\"92\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">loop until \"Finish\":</text>\n        <text x=\"60\" y=\"114\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Thought: ...   (private scratchpad)</text>\n        <text x=\"60\" y=\"134\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Action:   tool_call(...) (N used)</text>\n        <text x=\"60\" y=\"154\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  Observation: &lt;tool result&gt;</text>\n        <text x=\"60\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: short, reactive tasks; debugging-friendly traces. Yao et al., 2022.[1]</text>\n      </g>\n      <g>\n        <rect x=\"560\" y=\"40\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"580\" y=\"68\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#a78bfa\">Plan-and-Execute — plan once, then act step-by-step</text>\n        <text x=\"580\" y=\"92\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Plan: [\"search X\", \"fetch Y\", \"draft email\"]</text>\n        <text x=\"580\" y=\"114\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">for each step:</text>\n        <text x=\"580\" y=\"134\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  agent_or_tool.run(step)</text>\n        <text x=\"580\" y=\"154\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  replan if step failed</text>\n        <text x=\"580\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: known-shape workflows; cheap replanning. Related: Wang et al., 2023.[2]</text>\n      </g>\n      <g>\n        <rect x=\"40\" y=\"220\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n        <text x=\"60\" y=\"248\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#34d399\">Reflexion — act, then verbally self-criticise</text>\n        <text x=\"60\" y=\"272\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">loop until success or N attempts:</text>\n        <text x=\"60\" y=\"294\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  attempt = ReAct(task, memory)</text>\n        <text x=\"60\" y=\"314\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  reflect(attempt, env_feedback)</text>\n        <text x=\"60\" y=\"334\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">  memory.append(reflection)</text>\n        <text x=\"60\" y=\"360\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: tasks with clear success signal. Shinn et al., 2023.[3]</text>\n      </g>\n      <g>\n        <rect x=\"560\" y=\"220\" width=\"500\" height=\"160\" rx=\"10\" fill=\"#0f172a\" stroke=\"#fbbf24\"></rect>\n        <text x=\"580\" y=\"248\" font-family=\"Inter, sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#fbbf24\">ReWOO — plan all tool calls upfront, no per-step LLM</text>\n        <text x=\"580\" y=\"272\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">Planner: produce (Plan, #E1, #E2, ...)</text>\n        <text x=\"580\" y=\"294\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Worker:  exec all #Ei (no LLM between)</text>\n        <text x=\"580\" y=\"314\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">Solver:  read evidence, answer</text>\n        <text x=\"580\" y=\"340\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">Best for: retrieval-heavy tasks; ~5× fewer tokens (HotpotQA). Xu et al., 2023.[4]</text>\n      </g>\n    </svg>",
           "caption": "The four canonical agent loops. Each trades off reasoning depth, token cost, latency, and recovery behaviour. Production systems usually compose them.",
           "captionBn": "চারটি ক্যানোনিক্যাল এজেন্ট লুপ: ReAct, Plan-and-Execute, Reflexion, এবং ReWOO।"
         },
@@ -450,7 +450,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Introduced by Yao et al. in 2022,<a class=\"cite\" href=\"#src1\">[1]</a> ReAct is the simplest agent loop: the model writes a <em>Thought</em>, picks an <em>Action</em>, observes the result, repeats. The thought is in the model's private scratchpad and never shown to the user; only the final answer is. ReAct is the default loop in LangChain's <code>AgentExecutor</code> and most early agent frameworks."
+          "html": "Introduced by Yao et al. in 2022,<a class=\"cite\" href=\"#src1\">[1]</a> ReAct is the simplest agent loop: the model writes a <em>Thought</em>, picks an <em>Action</em>, observes the result, repeats. The thought is in the model's private scratchpad and never shown to the user; only the final answer is. ReAct was the default loop in LangChain's legacy <code>AgentExecutor</code> and most early agent frameworks; current LangChain recommends <code>create_agent</code>."
         },
         {
           "type": "code",
@@ -476,7 +476,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Plan-and-Execute separates planning from execution: a planner (usually a strong LLM) produces a sequence of steps, then a worker (often a smaller model or a deterministic tool) carries out each step. The worker can be ReAct itself, a single-shot LLM call, or a pure function. If a step fails, the planner re-runs only that step (cheap) rather than the whole loop.<a class=\"cite\" href=\"#src2\">[2]</a>"
+          "html": "Plan-and-Execute separates planning from execution: a planner (usually a strong LLM) produces a sequence of steps, then a worker (often a smaller model or a deterministic tool) carries out each step. The worker can be ReAct itself, a single-shot LLM call, or a pure function. If a step fails, the planner can re-run only that step (cheap) rather than the whole loop."
         },
         {
           "type": "heading",
@@ -486,7 +486,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Reflexion adds a second pass: after a ReAct attempt, the model is asked to <em>reflect</em> on what went wrong, and that reflection is appended to the memory for the next attempt.<a class=\"cite\" href=\"#src3\">[3]</a> In benchmarks (HumanEval, AlfWorld) Reflexion beats vanilla ReAct by 10–20% absolute."
+          "html": "Reflexion adds a second pass: after a ReAct attempt, the model is asked to <em>reflect</em> on what went wrong, and that reflection is appended to the memory for the next attempt.<a class=\"cite\" href=\"#src3\">[3]</a> In the paper, Reflexion improves on baseline agents by up to 22 points on AlfWorld, 20 on HotPotQA and 11 on HumanEval."
         },
         {
           "type": "heading",
@@ -496,7 +496,7 @@
         },
         {
           "type": "paragraph",
-          "html": "ReWOO's insight: in many retrieval-heavy tasks, the model doesn't need to see the result of tool #1 to plan tool #2. It plans the entire tool graph upfront, the worker executes everything in parallel, then the solver reads the evidence and answers.<a class=\"cite\" href=\"#src4\">[4]</a> ReWOO uses 4–6× fewer tokens than ReAct on retrieval benchmarks."
+          "html": "ReWOO's insight: in many retrieval-heavy tasks, the model doesn't need to see the result of tool #1 to plan tool #2. It plans the entire tool graph upfront, the worker executes everything in parallel, then the solver reads the evidence and answers.<a class=\"cite\" href=\"#src4\">[4]</a> In the paper, ReWOO used about 5× fewer tokens on HotpotQA and 64% fewer on average across six benchmarks."
         },
         {
           "type": "heading",
@@ -530,14 +530,14 @@
             ],
             [
               "<strong>Reflexion</strong>",
-              "2–3× ReAct",
+              "Extra attempts + reflection calls",
               "Slow",
               "Good",
               "Tasks with clear success signal"
             ],
             [
               "<strong>ReWOO</strong>",
-              "Low (4–6× fewer tokens)",
+              "Low (about 5× fewer on HotpotQA)",
               "Fast",
               "Weak",
               "Retrieval-heavy, fan-out tool graphs"
@@ -773,9 +773,9 @@
             }
           ],
           "remember": [
-            "Multi-agent costs 2–5× more tokens than single-agent.",
+            "Multi-agent systems use far more tokens: Anthropic measured about 15× a chat, against about 4× for a single agent.",
             "Debugging a single agent means reading one trace. Multi-agent means matching N traces.",
-            "Use a single agent for 5 tools or fewer in one domain. Use multi-agent for distinct roles and high stakes.",
+            "As a rule of thumb, use a single agent for 5 tools or fewer in one domain. Use multi-agent for distinct roles and high stakes.",
             "Do not build a multi-agent system just because it sounds advanced."
           ]
         },
@@ -808,9 +808,9 @@
             }
           ],
           "remember": [
-            "মাল্টি-এজেন্টে সিঙ্গেল-এজেন্টের চেয়ে ২–৫ গুণ বেশি টোকেন লাগে।",
+            "মাল্টি-এজেন্টে অনেক বেশি টোকেন লাগে: Anthropic-এর হিসাবে চ্যাটের প্রায় ১৫ গুণ, আর সিঙ্গেল এজেন্টের প্রায় ৪ গুণ।",
             "সিঙ্গেল এজেন্ট ডিবাগে একটি ট্রেস পড়তে হয়। মাল্টি-এজেন্টে N-টি ট্রেস মেলাতে হয়।",
-            "একটি ডোমেইনে ৫টি বা কম টুলে সিঙ্গেল এজেন্ট নিন। আলাদা ভূমিকা আর বড় ঝুঁকিতে মাল্টি-এজেন্ট নিন।",
+            "সাধারণ নিয়ম: একটি ডোমেইনে ৫টি বা কম টুলে সিঙ্গেল এজেন্ট নিন। আলাদা ভূমিকা আর বড় ঝুঁকিতে মাল্টি-এজেন্ট নিন।",
             "শুধু উন্নত শোনায় বলে মাল্টি-এজেন্ট সিস্টেম বানাবেন না।"
           ]
         }
@@ -852,7 +852,7 @@
             [
               "Token cost",
               "Lower",
-              "2–5× higher"
+              "About 15× a chat (single agent: about 4×)"
             ],
             [
               "Capability ceiling",
@@ -866,7 +866,7 @@
             ],
             [
               "When to use",
-              "≤5 tools, one domain",
+              "Rule of thumb: ≤5 tools, one domain",
               "Distinct roles, high stakes"
             ]
           ]
@@ -877,7 +877,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Anti-pattern:</strong> spinning up a multi-agent system because it sounds advanced. Anthropic's own engineering blog reports that well-tuned single-agent prompts often match multi-agent quality at a fraction of the cost.<a class=\"cite\" href=\"#src5\">[5]</a>"
+              "html": "<strong>Anti-pattern:</strong> spinning up a multi-agent system because it sounds advanced. Anthropic's engineering blog notes that multi-agent systems use about 15× more tokens than chat, so they only pay off for high-value, heavily parallel tasks; most coding tasks are a poorer fit.<a class=\"cite\" href=\"#src5\">[5]</a>"
             }
           ]
         },
@@ -910,7 +910,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Why teams cost more:</strong> every time the manager hands work to a specialist, you have to send them the full context. The specialist has to re-read it. That's the 2–5× cost."
+          "html": "<strong>Why teams cost more:</strong> every time the manager hands work to a specialist, you have to send them the full context. The specialist has to re-read it. That's why it costs so much: Anthropic measured about 15× the tokens of a chat."
         },
         {
           "type": "paragraph",
@@ -1039,7 +1039,7 @@
                 "expect": "The team reply is usually several times longer. Often both replies find the conflict between 12 March and 15 March."
               }
             ],
-            "learned": "The team reply used many more words for the same job. More words mean more <strong>tokens</strong> (the pieces of text you pay for), so a team often costs 2 to 5 times more. The single prompt found the same date problem. A team is worth it only when the roles are really different or a mistake is costly.",
+            "learned": "The team reply used many more words for the same job. More words mean more <strong>tokens</strong> (the pieces of text you pay for), so a team costs more. Anthropic measured about 15 times the tokens of a chat for multi-agent systems, and about 4 times for a single agent. The single prompt found the same date problem. A team is worth it only when the roles are really different or a mistake is costly.",
             "done": "You have two replies, and you know which one is longer and whether each one found the date conflict.",
             "check": {
               "question": "When is a team of agents worth the extra cost?",
@@ -1071,7 +1071,7 @@
                 "expect": "টিমের উত্তর সাধারণত কয়েক গুণ লম্বা হয়। প্রায়ই দুটোই ১২ March আর ১৫ March-এর গরমিল ধরে।"
               }
             ],
-            "learned": "একই কাজের জন্য টিমের উত্তরে অনেক বেশি শব্দ লেগেছে। বেশি শব্দ মানে বেশি <strong>টোকেন</strong> (লেখার যেসব অংশের জন্য আপনি টাকা দেন), তাই টিমের খরচ প্রায়ই ২ থেকে ৫ গুণ বেশি হয়। একটাই প্রম্পট দিয়েও ডেটের একই সমস্যা ধরা পড়েছে। টিম তখনই কাজে লাগে, যখন ভূমিকাগুলো সত্যিই আলাদা, অথবা ভুলের দাম অনেক বেশি।",
+            "learned": "একই কাজের জন্য টিমের উত্তরে অনেক বেশি শব্দ লেগেছে। বেশি শব্দ মানে বেশি <strong>টোকেন</strong> (লেখার যেসব অংশের জন্য আপনি টাকা দেন), তাই টিমের খরচ বেশি হয়। Anthropic মেপেছে: মাল্টি-এজেন্টে চ্যাটের প্রায় ১৫ গুণ টোকেন, আর একটা এজেন্টে প্রায় ৪ গুণ। একটাই প্রম্পট দিয়েও ডেটের একই সমস্যা ধরা পড়েছে। টিম তখনই কাজে লাগে, যখন ভূমিকাগুলো সত্যিই আলাদা, অথবা ভুলের দাম অনেক বেশি।",
             "done": "আপনার কাছে দুটো উত্তর আছে, আর আপনি জানেন কোনটা লম্বা এবং দুটোই ডেটের গরমিল ধরেছে কি না।",
             "check": {
               "question": "কখন এজেন্টের টিমের বাড়তি খরচ সার্থক হয়?",
@@ -1184,13 +1184,13 @@
         },
         {
           "type": "paragraph",
-          "html": "LangGraph (LangChain's graph framework) is the most popular Python/TypeScript option.<a class=\"cite\" href=\"#src6\">[6]</a> It models the agent as a state graph: nodes are functions, edges are conditional, the state is a TypedDict that flows through. Cycles are first-class (an agent <em>can</em> loop back to an earlier node), and <code>checkpointer</code> lets you resume from any past state."
+          "html": "LangGraph (LangChain's graph framework) is a widely used Python/TypeScript option.<a class=\"cite\" href=\"#src6\">[6]</a> It models the agent as a state graph: nodes are functions, edges are conditional, the state is a TypedDict that flows through. Cycles are first-class (an agent <em>can</em> loop back to an earlier node), and <code>checkpointer</code> lets you resume from any past state."
         },
         {
           "type": "code",
           "lang": "python",
-          "code": "# LangGraph minimal agent\nfrom langgraph.graph import StateGraph, END\nfrom typing import TypedDict\n\nclass State(TypedDict):\n    messages: list\n    step: int\n\ndef call_llm(state: State) -> State:\n    response = llm.invoke(state[\"messages\"])\n    return {\"messages\": state[\"messages\"] + [response], \"step\": state[\"step\"] + 1}\n\ndef should_continue(state: State) -> str:\n    last = state[\"messages\"][-1]\n    if hasattr(last, \"tool_calls\") and last.tool_calls:\n        return \"tool\"\n    return END\n\ngraph = StateGraph(State)\ngraph.add_node(\"llm\", call_llm)\ngraph.add_conditional_edges(\"llm\", should_continue, {\"tool\": \"llm\", END: END})\ngraph.set_entry_point(\"llm\")\napp = graph.compile()",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># LangGraph minimal agent</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> langgraph.graph </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> StateGraph, </span><span style=\"color:#6CB6FF\">END</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> typing </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> TypedDict</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">class</span><span style=\"color:#F69D50\"> State</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">TypedDict</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    messages: </span><span style=\"color:#6CB6FF\">list</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    step: </span><span style=\"color:#6CB6FF\">int</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> call_llm</span><span style=\"color:#ADBAC7\">(state: State) -> State:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm.invoke(state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">])</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> {</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">: state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">] </span><span style=\"color:#F47067\">+</span><span style=\"color:#ADBAC7\"> [response], </span><span style=\"color:#96D0FF\">\"step\"</span><span style=\"color:#ADBAC7\">: state[</span><span style=\"color:#96D0FF\">\"step\"</span><span style=\"color:#ADBAC7\">] </span><span style=\"color:#F47067\">+</span><span style=\"color:#6CB6FF\"> 1</span><span style=\"color:#ADBAC7\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> should_continue</span><span style=\"color:#ADBAC7\">(state: State) -> </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    last </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">][</span><span style=\"color:#F47067\">-</span><span style=\"color:#6CB6FF\">1</span><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#6CB6FF\"> hasattr</span><span style=\"color:#ADBAC7\">(last, </span><span style=\"color:#96D0FF\">\"tool_calls\"</span><span style=\"color:#ADBAC7\">) </span><span style=\"color:#F47067\">and</span><span style=\"color:#ADBAC7\"> last.tool_calls:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        return</span><span style=\"color:#96D0FF\"> \"tool\"</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#6CB6FF\"> END</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> StateGraph(State)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_node(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">, call_llm)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_conditional_edges(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">, should_continue, {</span><span style=\"color:#96D0FF\">\"tool\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#6CB6FF\">END</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">END</span><span style=\"color:#ADBAC7\">})</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.set_entry_point(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">app </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> graph.compile()</span></span></code></pre>"
+          "code": "# LangGraph minimal agent (llm and run_tools are assumed defined)\nfrom langgraph.graph import StateGraph, END\nfrom typing import TypedDict\n\nclass State(TypedDict):\n    messages: list\n    step: int\n\ndef call_llm(state: State) -> State:\n    response = llm.invoke(state[\"messages\"])\n    return {\"messages\": state[\"messages\"] + [response], \"step\": state[\"step\"] + 1}\n\ndef should_continue(state: State) -> str:\n    last = state[\"messages\"][-1]\n    if hasattr(last, \"tool_calls\") and last.tool_calls:\n        return \"tool\"\n    return END\n\ngraph = StateGraph(State)\ngraph.add_node(\"llm\", call_llm)\ngraph.add_node(\"tools\", run_tools)\ngraph.add_conditional_edges(\"llm\", should_continue, {\"tool\": \"tools\", END: END})\ngraph.add_edge(\"tools\", \"llm\")\ngraph.set_entry_point(\"llm\")\napp = graph.compile()",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># LangGraph minimal agent (llm and run_tools are assumed defined)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> langgraph.graph </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> StateGraph, </span><span style=\"color:#6CB6FF\">END</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> typing </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> TypedDict</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">class</span><span style=\"color:#F69D50\"> State</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">TypedDict</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    messages: </span><span style=\"color:#6CB6FF\">list</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    step: </span><span style=\"color:#6CB6FF\">int</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> call_llm</span><span style=\"color:#ADBAC7\">(state: State) -> State:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> llm.invoke(state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">])</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> {</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">: state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">] </span><span style=\"color:#F47067\">+</span><span style=\"color:#ADBAC7\"> [response], </span><span style=\"color:#96D0FF\">\"step\"</span><span style=\"color:#ADBAC7\">: state[</span><span style=\"color:#96D0FF\">\"step\"</span><span style=\"color:#ADBAC7\">] </span><span style=\"color:#F47067\">+</span><span style=\"color:#6CB6FF\"> 1</span><span style=\"color:#ADBAC7\">}</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> should_continue</span><span style=\"color:#ADBAC7\">(state: State) -> </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    last </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> state[</span><span style=\"color:#96D0FF\">\"messages\"</span><span style=\"color:#ADBAC7\">][</span><span style=\"color:#F47067\">-</span><span style=\"color:#6CB6FF\">1</span><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#6CB6FF\"> hasattr</span><span style=\"color:#ADBAC7\">(last, </span><span style=\"color:#96D0FF\">\"tool_calls\"</span><span style=\"color:#ADBAC7\">) </span><span style=\"color:#F47067\">and</span><span style=\"color:#ADBAC7\"> last.tool_calls:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        return</span><span style=\"color:#96D0FF\"> \"tool\"</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#6CB6FF\"> END</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> StateGraph(State)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_node(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">, call_llm)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_node(</span><span style=\"color:#96D0FF\">\"tools\"</span><span style=\"color:#ADBAC7\">, run_tools)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_conditional_edges(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">, should_continue, {</span><span style=\"color:#96D0FF\">\"tool\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"tools\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#6CB6FF\">END</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">END</span><span style=\"color:#ADBAC7\">})</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.add_edge(</span><span style=\"color:#96D0FF\">\"tools\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">graph.set_entry_point(</span><span style=\"color:#96D0FF\">\"llm\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">app </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> graph.compile()</span></span></code></pre>"
         },
         {
           "type": "heading",
@@ -1200,7 +1200,7 @@
         },
         {
           "type": "paragraph",
-          "html": "For long-running agents (minutes to hours), the graph needs to be <strong>durable</strong> — survive crashes, retries, and human-in-the-loop pauses. Temporal and Restate are workflow engines from the microservices world adapted to agents.<a class=\"cite\" href=\"#src7\">[7]</a> <strong>Mastra</strong> is TypeScript-first with built-in workflow engine, memory, and tool definitions. <strong>Inngest</strong> is event-driven serverless workflows with pay-per-step pricing."
+          "html": "For long-running agents (minutes to hours), the graph needs to be <strong>durable</strong> — survive crashes, retries, and human-in-the-loop pauses. Temporal and Restate are durable-execution engines that can also run AI agents.<a class=\"cite\" href=\"#src7\">[7]</a> <strong>Mastra</strong> is TypeScript-first with built-in workflow engine, memory, and tool definitions. <strong>Inngest</strong> is event-driven serverless workflows with pay-per-step pricing."
         },
         {
           "type": "heading",
@@ -1272,7 +1272,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>LangGraph</strong> (LangChain-এর গ্রাফ ফ্রেমওয়ার্ক) সবচেয়ে জনপ্রিয়।<a class=\"cite\" href=\"#src6\">[৬]</a>"
+          "html": "<strong>LangGraph</strong> (LangChain-এর গ্রাফ ফ্রেমওয়ার্ক) বহুল ব্যবহৃত।<a class=\"cite\" href=\"#src6\">[৬]</a>"
         },
         {
           "type": "paragraph",
@@ -1432,10 +1432,10 @@
       "id": "s5",
       "num": "05",
       "title": "Agent memory: scratchpad, semantic, procedural",
-      "sub": "Three memory types show up again and again in the agent literature.<a class=\"cite\" href=\"#src8\">[8]</a>",
+      "sub": "Three memory types are a common way to organise agent memory. Generative Agents store a record of experiences in natural language and reflect on them.<a class=\"cite\" href=\"#src8\">[8]</a>",
       "bn": {
         "title": "এজেন্টের মেমরি: স্ক্র্যাচপ্যাড, সেম্যান্টিক, প্রসিডিউরাল",
-        "sub": "এজেন্ট নিয়ে লেখা গবেষণায় বারবার তিন ধরনের মেমরি আসে।<a class=\"cite\" href=\"#src8\">[৮]</a>"
+        "sub": "এজেন্ট নিয়ে লেখা গবেষণায় বারবার তিন ধরনের মেমরি আসে। Generative Agents নিজেদের অভিজ্ঞতার রেকর্ড প্রাকৃতিক ভাষায় রাখে আর তা নিয়ে রিফ্লেক্ট করে।<a class=\"cite\" href=\"#src8\">[৮]</a>"
       },
       "basics": {
         "en": {
@@ -1577,7 +1577,7 @@
             [
               "<strong>Identity</strong>",
               "Who the agent is",
-              "System prompt (immutable)"
+              "System prompt (usually fixed)"
             ]
           ]
         },
@@ -1852,7 +1852,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every durable framework exposes a \"wait for human\" primitive. In LangGraph it's <code>interrupt</code>; in Temporal it's <code>wait_for_signal</code>; in Restate it's <code>await call().ack()</code>."
+          "html": "Every durable framework exposes a \"wait for human\" primitive. In LangGraph it's <code>interrupt</code>; in Temporal you send a Signal and block with <code>workflow.wait_condition()</code> (Python); in Restate it's an awakeable (a durable promise the approver resolves)."
         },
         {
           "type": "code",
@@ -2067,7 +2067,7 @@
               "meaning": "The most text a model can handle in one call. Subagents keep the parent's window clean."
             },
             {
-              "term": "<code>Task</code> tool",
+              "term": "<code>Agent</code> tool",
               "meaning": "The tool in Claude Code that the model calls to start a subagent. The subagent returns a summary."
             },
             {
@@ -2102,7 +2102,7 @@
               "meaning": "এক কলে মডেল সর্বোচ্চ যত লেখা সামলাতে পারে। সাবএজেন্ট প্যারেন্টের উইন্ডো পরিষ্কার রাখে।"
             },
             {
-              "term": "<code>Task</code> টুল (<code>Task</code> tool)",
+              "term": "<code>Agent</code> টুল (<code>Agent</code> tool)",
               "meaning": "Claude Code-এর যে টুল মডেল ডেকে সাবএজেন্ট চালু করে। সাবএজেন্ট একটি সারাংশ ফেরত দেয়।"
             },
             {
@@ -2143,11 +2143,11 @@
           "type": "heading",
           "level": 3,
           "id": "s7-claude-code-s-task-tool",
-          "html": "Claude Code's Task tool"
+          "html": "Claude Code's Agent tool"
         },
         {
           "type": "paragraph",
-          "html": "Anthropic's Claude Code ships a <code>Task</code> tool that the model can invoke to spawn a subagent. The subagent runs in its own loop, with its own tools, and returns a summary. The parent never sees the intermediate steps — only the summary. This is the cleanest implementation of the pattern in 2025."
+          "html": "Anthropic's Claude Code ships an <code>Agent</code> tool that the model can invoke to spawn a subagent. The subagent runs in its own loop, with its own tools, and returns a summary. The parent never sees the intermediate steps — only the summary."
         },
         {
           "type": "heading",
@@ -2157,7 +2157,7 @@
         },
         {
           "type": "paragraph",
-          "html": "OpenAI's <code>openai-agents-sdk</code> exposes <code>Runner.run(agent, input)</code> returning a final <code>RunResult</code>. CrewAI models multi-agent systems as crews (the team), agents (the roles), tasks (the work), and a process (sequential, hierarchical, or consensual)."
+          "html": "OpenAI's <code>openai-agents-sdk</code> exposes <code>Runner.run(agent, input)</code> returning a final <code>RunResult</code>. CrewAI models multi-agent systems as crews (the team), agents (the roles), tasks (the work), and a process (sequential or hierarchical)."
         },
         {
           "type": "heading",
@@ -2368,7 +2368,7 @@
             },
             {
               "term": "Circuit breaker",
-              "meaning": "A guard that stops calls to a failing service. After 5 failures of the same kind in a row, it fails calls fast for 60 seconds."
+              "meaning": "A guard that stops calls to a failing service. After N failures of the same kind in a row (say 5), it fails calls fast for a timeout (say 60 seconds)."
             }
           ],
           "remember": [
@@ -2407,7 +2407,7 @@
             },
             {
               "term": "সার্কিট ব্রেকার (circuit breaker)",
-              "meaning": "ব্যর্থ হতে থাকা সার্ভিসে কল থামানোর পাহারা। একই ধরনের ব্যর্থতা পরপর ৫ বার হলে ৬০ সেকেন্ড কলগুলো সঙ্গে সঙ্গে ব্যর্থ হয়।"
+              "meaning": "ব্যর্থ হতে থাকা সার্ভিসে কল থামানোর পাহারা। একই ধরনের ব্যর্থতা পরপর N বার (যেমন ৫) হলে একটা নির্দিষ্ট সময় (যেমন ৬০ সেকেন্ড) কলগুলো সঙ্গে সঙ্গে ব্যর্থ হয়।"
             }
           ],
           "remember": [
@@ -2479,7 +2479,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A circuit breaker protects against a downstream service that's failing in a way that looks transient but isn't. After 5 consecutive failures of the same kind, the breaker opens: all calls for the next 60 seconds fail fast with a \"service unavailable\" error, no retries. After 60 seconds, the breaker half-opens: one test call. If it succeeds, the breaker closes. If it fails, the timer resets."
+          "html": "A circuit breaker protects against a downstream service that's failing in a way that looks transient but isn't. After N consecutive failures of the same kind (say 5), the breaker opens: all calls for a timeout (say 60 seconds) fail fast with a \"service unavailable\" error, no retries. After the timeout, the breaker half-opens: one test call. If it succeeds, the breaker closes. If it fails, it opens again."
         }
       ],
       "layman": [
@@ -2497,7 +2497,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The circuit breaker pattern:</strong> after 5 consecutive failures, all calls for the next 60 seconds fail instantly."
+          "html": "<strong>The circuit breaker pattern:</strong> after N consecutive failures (say 5), all calls for a timeout (say 60 seconds) fail instantly."
         },
         {
           "type": "analogy",
@@ -2520,7 +2520,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>সার্কিট ব্রেকার প্যাটার্ন:</strong> ৫ টি ধারাবাহিক ব্যর্থতার পর, পরবর্তী ৬০ সেকেন্ডের জন্য সমস্ত কল তাৎক্ষণিকভাবে ব্যর্থ হয়।"
+          "html": "<strong>সার্কিট ব্রেকার প্যাটার্ন:</strong> N টি ধারাবাহিক ব্যর্থতার (যেমন ৫) পর, একটা নির্দিষ্ট সময়ের (যেমন ৬০ সেকেন্ড) জন্য সমস্ত কল তাৎক্ষণিকভাবে ব্যর্থ হয়।"
         },
         {
           "type": "analogy",
@@ -2637,10 +2637,10 @@
       "id": "s9",
       "num": "09",
       "title": "Long-running agents and durable execution",
-      "sub": "Agents that take minutes or hours face three problems a normal Python loop can't solve: crashes lose state, rate limits force waits, and human approvals force pauses. Durable execution engines solve all three.",
+      "sub": "Agents that take minutes or hours face three problems a normal Python loop can't solve: crashes lose state, rate limits force waits, and human approvals force pauses. Durable execution engines help with all three.",
       "bn": {
         "title": "দীর্ঘক্ষণ চলা এজেন্ট আর ডিউরেবল এক্সিকিউশন",
-        "sub": "যে এজেন্ট কয়েক মিনিট বা কয়েক ঘণ্টা চলে, তার তিনটা সমস্যা সাধারণ Python লুপ সামলাতে পারে না: ক্র্যাশ হলে স্টেট হারিয়ে যায়, রেট লিমিটের জন্য অপেক্ষা করতে হয়, আর মানুষের অনুমোদনের জন্য থামতে হয়। ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটারই সমাধান দেয়।"
+        "sub": "যে এজেন্ট কয়েক মিনিট বা কয়েক ঘণ্টা চলে, তার তিনটা সমস্যা সাধারণ Python লুপ সামলাতে পারে না: ক্র্যাশ হলে স্টেট হারিয়ে যায়, রেট লিমিটের জন্য অপেক্ষা করতে হয়, আর মানুষের অনুমোদনের জন্য থামতে হয়। ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটাতেই সাহায্য করে।"
       },
       "basics": {
         "en": {
@@ -2675,7 +2675,7 @@
             "Messages alone are not enough; also save in-flight tool calls, partial writes to external services, approvals, and retry counters.",
             "After a crash, a durable engine resumes from the next un-run step, not from the beginning.",
             "Use it if the agent runs over about 30 seconds, waits for humans, or has irreversible side effects.",
-            "Four engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS."
+            "Five engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS."
           ]
         },
         "bn": {
@@ -2710,7 +2710,7 @@
             "শুধু মেসেজ সেভ করলে যথেষ্ট নয়; চলমান টুল কল, বাইরের সার্ভিসে আংশিক লেখা, অনুমোদন আর রিট্রাই কাউন্টারও সেভ করুন।",
             "ক্র্যাশের পর ডিউরেবল ইঞ্জিন শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।",
             "এজেন্ট প্রায় ৩০ সেকেন্ডের বেশি চললে, মানুষের জন্য অপেক্ষা করলে, বা ফেরানো যায় না এমন সাইড ইফেক্ট থাকলে এটি ব্যবহার করুন।",
-            "সেকশনে যে চারটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।"
+            "সেকশনে যে পাঁচটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।"
           ]
         }
       },
@@ -2733,11 +2733,11 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>durable execution engine</strong> records every step's intent and result to a durable store (a database, a journal, a queue). On crash, the next process loads the snapshot and resumes from the next un-run step. The engine handles retries, rate limits, and human-in-the-loop pauses natively. The application code is a series of workflow steps; the engine is the runtime that survives crashes.<a class=\"cite\" href=\"#src7\">[7]</a>"
+          "html": "A <strong>durable execution engine</strong> records every step's intent and result to a durable store (a database, a journal, a queue). On crash, the next process replays the recorded history to rebuild state and resumes from the next un-run step. The engine handles retries and human-in-the-loop pauses natively. The application code is a series of workflow steps; the engine is the runtime that survives crashes.<a class=\"cite\" href=\"#src7\">[7]</a>"
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Durable execution: workflow as a series of recorded steps\">\n      <defs>\n        <marker id=\"arr-de\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      <g>\n        <rect x=\"40\"  y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"110\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 1</text>\n        <text x=\"110\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">search</text>\n\n        <rect x=\"220\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"290\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 2</text>\n        <text x=\"290\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">fetch</text>\n\n        <rect x=\"400\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"470\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a78bfa\">Step 3</text>\n        <text x=\"470\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">await human</text>\n\n        <rect x=\"580\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"650\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 4</text>\n        <text x=\"650\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">execute</text>\n\n        <rect x=\"760\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"820\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 5</text>\n        <text x=\"820\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">notify</text>\n      </g>\n      <line x1=\"180\" y1=\"110\" x2=\"220\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"360\" y1=\"110\" x2=\"400\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"540\" y1=\"110\" x2=\"580\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"720\" y1=\"110\" x2=\"760\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <g>\n        <rect x=\"940\" y=\"60\" width=\"140\" height=\"100\" rx=\"8\" fill=\"#111827\" stroke=\"#fb7185\" stroke-dasharray=\"4 4\"></rect>\n        <text x=\"1010\" y=\"86\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">journal</text>\n        <text x=\"1010\" y=\"105\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S1 ✓</text>\n        <text x=\"1010\" y=\"120\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S2 ✓</text>\n        <text x=\"1010\" y=\"135\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S3 …</text>\n        <text x=\"1010\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S4 —</text>\n      </g>\n      <line x1=\"900\" y1=\"110\" x2=\"940\" y2=\"110\" stroke=\"#fb7185\" stroke-dasharray=\"3 3\"></line>\n      <text x=\"40\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">If the worker crashes after step 3, the next process loads the journal and resumes at step 4. No work is replayed; no work is lost.</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Durable execution: workflow as a series of recorded steps\">\n      <defs>\n        <marker id=\"arr-de\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      <g>\n        <rect x=\"40\"  y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"110\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 1</text>\n        <text x=\"110\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">search</text>\n\n        <rect x=\"220\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"290\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 2</text>\n        <text x=\"290\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">fetch</text>\n\n        <rect x=\"400\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n        <text x=\"470\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a78bfa\">Step 3</text>\n        <text x=\"470\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">await human</text>\n\n        <rect x=\"580\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"650\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 4</text>\n        <text x=\"650\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">execute</text>\n\n        <rect x=\"760\" y=\"80\" width=\"140\" height=\"60\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n        <text x=\"820\" y=\"108\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">Step 5</text>\n        <text x=\"820\" y=\"125\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">notify</text>\n      </g>\n      <line x1=\"180\" y1=\"110\" x2=\"220\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"360\" y1=\"110\" x2=\"400\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"540\" y1=\"110\" x2=\"580\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <line x1=\"720\" y1=\"110\" x2=\"760\" y2=\"110\" stroke=\"#94a3b8\" marker-end=\"url(#arr-de)\"></line>\n      <g>\n        <rect x=\"940\" y=\"60\" width=\"140\" height=\"100\" rx=\"8\" fill=\"#111827\" stroke=\"#fb7185\" stroke-dasharray=\"4 4\"></rect>\n        <text x=\"1010\" y=\"86\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#fb7185\">journal</text>\n        <text x=\"1010\" y=\"105\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S1 ✓</text>\n        <text x=\"1010\" y=\"120\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S2 ✓</text>\n        <text x=\"1010\" y=\"135\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S3 …</text>\n        <text x=\"1010\" y=\"150\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"9\" fill=\"#94a3b8\">S4 —</text>\n      </g>\n      <line x1=\"900\" y1=\"110\" x2=\"940\" y2=\"110\" stroke=\"#fb7185\" stroke-dasharray=\"3 3\"></line>\n      <text x=\"40\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#94a3b8\">If the worker crashes after step 3, the next process loads the journal and resumes at step 4. Finished steps do not run again; no work is lost.</text>\n    </svg>",
           "caption": "A durable workflow: each step's intent and result is journaled. A crash mid-flight resumes from the next un-run step, not from the beginning.",
           "captionBn": "একটি টেকসই ওয়ার্কফ্লো: প্রতিটি ধাপের ইনটেন্ট ও ফলাফল জার্নাল করা হয়। মাঝ-উড়ানে ক্র্যাশ হলে, পরবর্তী আন-রান ধাপ থেকে রিজিউম হয়।"
         },
@@ -2832,7 +2832,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>চারটি ডিউরেবল ইঞ্জিন:</strong> Temporal, Restate, Inngest, AWS Step Functions / DBOS।"
+          "html": "<strong>পাঁচটি ডিউরেবল ইঞ্জিন:</strong> Temporal, Restate, Inngest, AWS Step Functions / DBOS।"
         },
         {
           "type": "analogy",
@@ -2941,10 +2941,10 @@
       "id": "s10",
       "num": "10",
       "title": "Browser and computer-use agents",
-      "sub": "The newest agent category uses a model that can see a screenshot and act with mouse/keyboard primitives. OpenAI's Operator and Anthropic's \"computer use\" are the marquee examples. They trade precision for generality.",
+      "sub": "The newest agent category uses a model that can see a screenshot and act with mouse/keyboard primitives. OpenAI's Operator (since folded into ChatGPT agent) and Anthropic's \"computer use\" are the marquee examples. They trade precision for generality.",
       "bn": {
         "title": "ব্রাউজার আর কম্পিউটার-ইউজ এজেন্ট",
-        "sub": "এটা এজেন্টের সবচেয়ে নতুন ধরন। এখানে মডেল স্ক্রিনশট দেখতে পারে, আর মাউস/কীবোর্ডের মতো মৌলিক কাজ দিয়ে কাজ করে। উদাহরণ হিসেবে সবচেয়ে পরিচিত OpenAI-র Operator আর Anthropic-এর \"computer use\"। এরা নিখুঁত হওয়ার বদলে সবকিছুতে কাজ করতে পারাকে বেছে নেয়।"
+        "sub": "এটা এজেন্টের সবচেয়ে নতুন ধরন। এখানে মডেল স্ক্রিনশট দেখতে পারে, আর মাউস/কীবোর্ডের মতো মৌলিক কাজ দিয়ে কাজ করে। উদাহরণ হিসেবে সবচেয়ে পরিচিত OpenAI-র Operator (পরে ChatGPT agent-এ মিশে গেছে) আর Anthropic-এর \"computer use\"। এরা নিখুঁত হওয়ার বদলে সবকিছুতে কাজ করতে পারাকে বেছে নেয়।"
       },
       "basics": {
         "en": {
@@ -2981,7 +2981,7 @@
           ],
           "remember": [
             "Computer use wins with no API, a hostile (costly or badly documented) API, one-off tasks, or cross-app work.",
-            "It loses on cost (5–30× an API call), latency (1–5 seconds per cycle), reliability, and security.",
+            "It loses on cost (every screenshot costs vision tokens), latency (each screenshot → model → action cycle takes seconds), reliability, and security.",
             "If you can frame the task in a browser, prefer a browser agent. Its smaller surface makes it more reliable.",
             "Have the model write a plan up front, checkpoint each step, and run in a VM or separate browser profile."
           ]
@@ -3020,7 +3020,7 @@
           ],
           "remember": [
             "API না থাকলে, API প্রতিকূল (দামি বা বাজে ডকুমেন্টেশনসহ) হলে, কাজ একবারের হলে, বা একাধিক অ্যাপে ছড়ালে কম্পিউটার ইউজ জেতে।",
-            "খরচ (API কলের ৫–৩০ গুণ), ল্যাটেন্সি (প্রতি চক্রে ১–৫ সেকেন্ড), নির্ভরযোগ্যতা আর নিরাপত্তায় এটি হারে।",
+            "খরচ (প্রতিটি স্ক্রিনশটে ভিশন টোকেন লাগে), ল্যাটেন্সি (প্রতি চক্রে কয়েক সেকেন্ড), নির্ভরযোগ্যতা আর নিরাপত্তায় এটি হারে।",
             "কাজটা ব্রাউজারে করা গেলে ব্রাউজার এজেন্ট বেছে নিন। এর পরিসর ছোট, তাই এটি বেশি নির্ভরযোগ্য।",
             "মডেলকে দিয়ে আগে প্ল্যান লেখান, প্রতিটি ধাপ চেকপয়েন্ট করুন, আর VM বা আলাদা ব্রাউজার প্রোফাইলে চালান।"
           ]
@@ -3035,13 +3035,13 @@
         },
         {
           "type": "paragraph",
-          "html": "The model receives a screenshot of the desktop (or a specific window) and a list of available actions: <code>mouse_move</code>, <code>left_click</code>, <code>right_click</code>, <code>type</code>, <code>key</code>, <code>screenshot</code>. It picks an action, the runtime executes it, captures a new screenshot, and feeds both back. The loop continues until the model emits a <code>done</code> action.<a class=\"cite\" href=\"#src9\">[9]</a>"
+          "html": "The model receives a screenshot of the desktop (or a specific window) and a list of available actions, such as <code>mouse_move</code>, <code>left_click</code>, <code>right_click</code>, <code>type</code>, <code>key</code>, <code>screenshot</code>. It picks an action, the runtime executes it, captures a new screenshot, and feeds both back. The loop continues until the model replies without a tool call (stop reason <code>end_turn</code>).<a class=\"cite\" href=\"#src9\">[9]</a>"
         },
         {
           "type": "code",
           "lang": "python",
-          "code": "# Anthropic computer-use minimal loop (pseudocode)\nwhile not done:\n    screenshot = capture()\n    response = client.messages.create(\n        model=\"claude-sonnet-4-5\",\n        tools=[\"computer\"],\n        messages=[{\"role\": \"user\",\n                   \"content\": [screenshot, goal]}],\n    )\n    for block in response.content:\n        if block.type == \"tool_use\":\n            execute(block.input)\n    if response.stop_reason in (\"end_turn\", \"max_tokens\"):\n        break",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic computer-use minimal loop (pseudocode)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">while</span><span style=\"color:#F47067\"> not</span><span style=\"color:#ADBAC7\"> done:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    screenshot </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> capture()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.messages.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"claude-sonnet-4-5\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        tools</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[</span><span style=\"color:#96D0FF\">\"computer\"</span><span style=\"color:#ADBAC7\">],</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">                   \"content\"</span><span style=\"color:#ADBAC7\">: [screenshot, goal]}],</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    )</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    for</span><span style=\"color:#ADBAC7\"> block </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> response.content:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"tool_use\"</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            execute(block.input)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> response.stop_reason </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> (</span><span style=\"color:#96D0FF\">\"end_turn\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"max_tokens\"</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        break</span></span></code></pre>"
+          "code": "# Anthropic computer-use minimal loop (pseudocode)\nwhile not done:\n    screenshot = capture()\n    response = client.messages.create(\n        model=\"claude-sonnet-5-5\",\n        tools=[{\"type\": \"computer_toolset_20260801\"}],\n        max_tokens=1024,\n        messages=[{\"role\": \"user\",\n                   \"content\": [screenshot, goal]}],\n    )\n    for block in response.content:\n        if block.type == \"tool_use\":\n            execute(block.input)\n    if response.stop_reason in (\"end_turn\", \"max_tokens\"):\n        break",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic computer-use minimal loop (pseudocode)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">while</span><span style=\"color:#F47067\"> not</span><span style=\"color:#ADBAC7\"> done:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    screenshot </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> capture()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.messages.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"claude-sonnet-5-5\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        tools</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"computer_toolset_20260801\"</span><span style=\"color:#ADBAC7\">}],</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        max_tokens</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1024</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">        messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">                   \"content\"</span><span style=\"color:#ADBAC7\">: [screenshot, goal]}],</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    )</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    for</span><span style=\"color:#ADBAC7\"> block </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> response.content:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"tool_use\"</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            execute(block.input)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> response.stop_reason </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> (</span><span style=\"color:#96D0FF\">\"end_turn\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"max_tokens\"</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">        break</span></span></code></pre>"
         },
         {
           "type": "heading",
@@ -3069,8 +3069,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Cost.</strong> Computer-use calls are 5–30× the cost of an API call (vision tokens for every screenshot).",
-            "<strong>Latency.</strong> A click is instant; a screenshot → LLM → action cycle is 1–5 seconds. A 20-step task takes a minute.",
+            "<strong>Cost.</strong> Computer-use calls cost more than a plain API call (vision tokens for every screenshot).",
+            "<strong>Latency.</strong> A click is instant; a screenshot → LLM → action cycle takes seconds, so a long task takes minutes.",
             "<strong>Reliability.</strong> A shifted button, a popup, a captcha — any of these kills the run.",
             "<strong>Security.</strong> The agent has unrestricted mouse/keyboard. Pair with a sandboxed VM, a per-task browser profile, and a tight human-in-the-loop on destructive actions."
           ]
@@ -3107,7 +3107,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Where they lose:</strong> cost (5–30× more than an API call), latency (1–5 seconds per click vs instant), reliability (a shifted button kills the run), security."
+          "html": "<strong>Where they lose:</strong> cost (more than an API call, since every screenshot costs vision tokens), latency (seconds per click vs instant), reliability (a shifted button kills the run), security."
         },
         {
           "type": "paragraph",
@@ -3278,12 +3278,12 @@
     },
     {
       "n": 2,
-      "url": "https://arxiv.org/abs/2201.11903",
-      "text": "Wei et al., \"Chain-of-Thought Prompting Elicits Reasoning in Large Language Models\" — NeurIPS 2022 (foundational for Plan-and-Execute)"
+      "url": "https://arxiv.org/abs/2305.04091",
+      "text": "Wang et al., \"Plan-and-Solve Prompting: Improving Zero-Shot Chain-of-Thought Reasoning\" — ACL 2023 (a related plan-first method)"
     },
     {
       "n": 3,
-      "url": "https://arxiv.org/abs/2303.11381",
+      "url": "https://arxiv.org/abs/2303.11366",
       "text": "Shinn et al., \"Reflexion: Language Agents with Verbal Reinforcement Learning\" — NeurIPS 2023"
     },
     {
@@ -3313,8 +3313,8 @@
     },
     {
       "n": 9,
-      "url": "https://www.anthropic.com/news/3-5-models-and-computer-use",
-      "text": "Anthropic — \"Introducing computer use, a new Claude 3.5 Sonnet capability\" (Oct 2024)"
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+      "text": "Anthropic — Computer use tool documentation"
     },
     {
       "n": 10,
