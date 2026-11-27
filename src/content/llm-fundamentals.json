@@ -48,7 +48,7 @@
             },
             {
               "term": "Prompt caching",
-              "meaning": "Reusing the work done on the start of a prompt that repeats. It cuts the cost of that part by about 80–90%."
+              "meaning": "Reusing the work done on the start of a prompt that repeats. It can cut the cost of that part by up to about 90%, depending on the provider."
             }
           ],
           "remember": [
@@ -87,7 +87,7 @@
             },
             {
               "term": "প্রম্পট ক্যাশিং (prompt caching)",
-              "meaning": "প্রম্পটের যে শুরুর অংশ বারবার আসে, তার জন্য করা কাজ আবার ব্যবহার করা। এতে সেই অংশের খরচ প্রায় ৮০–৯০% কমে।"
+              "meaning": "প্রম্পটের যে শুরুর অংশ বারবার আসে, তার জন্য করা কাজ আবার ব্যবহার করা। এতে প্রোভাইডারভেদে সেই অংশের খরচ সর্বোচ্চ প্রায় ৯০% পর্যন্ত কমে।"
             }
           ],
           "remember": [
@@ -107,11 +107,11 @@
         },
         {
           "type": "paragraph",
-          "html": "A <strong>token</strong> is one element in the model's vocabulary. Modern LLMs don't read characters; they read the output of a <strong>subword tokenizer</strong> — most commonly <strong>Byte-Pair Encoding (BPE)</strong>, which iteratively merges the most frequent adjacent pairs in a corpus until a target vocabulary size (often 32k–200k) is reached.<a class=\"cite\" href=\"#src15\">[15]</a> For multilingual and code workloads, <strong>SentencePiece</strong> is the dominant alternative — it operates directly on raw Unicode bytes or whitespace, treating language as a configuration parameter.<a class=\"cite\" href=\"#src16\">[16]</a>"
+          "html": "A <strong>token</strong> is one element in the model's vocabulary. Modern LLMs don't read characters; they read the output of a <strong>subword tokenizer</strong> — most commonly <strong>Byte-Pair Encoding (BPE)</strong>, which iteratively merges the most frequent adjacent pairs in a corpus until a target vocabulary size (often 32k–200k) is reached.<a class=\"cite\" href=\"#src15\">[15]</a> For multilingual and code workloads, <strong>SentencePiece</strong> is a language-independent alternative — it trains subword models directly from raw sentences, without a pre-tokenization step.<a class=\"cite\" href=\"#src16\">[16]</a>"
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tokenization of a sample sentence\">\n      <defs>\n        <marker id=\"arr1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <text x=\"40\" y=\"36\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">raw input</text>\n      <rect x=\"40\" y=\"50\" width=\"1020\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">unbelievable</text>\n      <text x=\"232\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n      <text x=\"252\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_tokenization</text>\n      <text x=\"430\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_</text>\n      <text x=\"446\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">helps</text>\n      <text x=\"540\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_compression</text>\n      <text x=\"712\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n\n      \n      <line x1=\"550\" y1=\"110\" x2=\"550\" y2=\"135\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr1)\"></line>\n      <text x=\"568\" y=\"125\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">BPE merges (low→high freq)</text>\n\n      \n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">token IDs (vocab index)</text>\n      <g font-family=\"JetBrains Mono, monospace\" font-size=\"14\" font-weight=\"600\" text-anchor=\"middle\">\n        <rect x=\"40\"   y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"99\"  y=\"200\" fill=\"#22d3ee\">un</text>\n        <rect x=\"166\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"225\" y=\"200\" fill=\"#22d3ee\">believ</text>\n        <rect x=\"292\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"351\" y=\"200\" fill=\"#22d3ee\">able</text>\n        <rect x=\"418\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"441\" y=\"200\" fill=\"#a78bfa\">.</text>\n        <rect x=\"472\"  y=\"172\" width=\"148\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"546\" y=\"200\" fill=\"#22d3ee\">_token</text>\n        <rect x=\"628\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"687\" y=\"200\" fill=\"#22d3ee\">ization</text>\n        <rect x=\"754\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"777\" y=\"200\" fill=\"#a78bfa\">_</text>\n        <rect x=\"808\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"867\" y=\"200\" fill=\"#22d3ee\">helps</text>\n        <rect x=\"934\"  y=\"172\" width=\"124\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"996\" y=\"200\" fill=\"#22d3ee\">_comp</text>\n      </g>\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ 11 subword pieces (vs 33 raw chars). Frequent runs = single tokens; rare substrings split into 2–3.</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ The model never sees characters — only these integer IDs feed the embedding table.</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Tokenization of a sample sentence\">\n      <defs>\n        <marker id=\"arr1\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\">\n          <path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path>\n        </marker>\n      </defs>\n      \n      <text x=\"40\" y=\"36\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">raw input</text>\n      <rect x=\"40\" y=\"50\" width=\"1020\" height=\"50\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">unbelievable</text>\n      <text x=\"232\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n      <text x=\"252\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_tokenization</text>\n      <text x=\"430\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_</text>\n      <text x=\"446\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">helps</text>\n      <text x=\"540\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">_compression</text>\n      <text x=\"712\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"20\" fill=\"#e2e8f0\">.</text>\n\n      \n      <line x1=\"550\" y1=\"110\" x2=\"550\" y2=\"135\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arr1)\"></line>\n      <text x=\"568\" y=\"125\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">BPE merges (low→high freq)</text>\n\n      \n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">token IDs (vocab index)</text>\n      <g font-family=\"JetBrains Mono, monospace\" font-size=\"14\" font-weight=\"600\" text-anchor=\"middle\">\n        <rect x=\"40\"   y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"99\"  y=\"200\" fill=\"#22d3ee\">un</text>\n        <rect x=\"166\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"225\" y=\"200\" fill=\"#22d3ee\">believ</text>\n        <rect x=\"292\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"351\" y=\"200\" fill=\"#22d3ee\">able</text>\n        <rect x=\"418\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"441\" y=\"200\" fill=\"#a78bfa\">.</text>\n        <rect x=\"472\"  y=\"172\" width=\"148\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"546\" y=\"200\" fill=\"#22d3ee\">_token</text>\n        <rect x=\"628\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"687\" y=\"200\" fill=\"#22d3ee\">ization</text>\n        <rect x=\"754\"  y=\"172\" width=\"46\"  height=\"44\" rx=\"6\" fill=\"#a78bfa\" fill-opacity=\"0.10\" stroke=\"#a78bfa\"></rect>\n        <text x=\"777\" y=\"200\" fill=\"#a78bfa\">_</text>\n        <rect x=\"808\"  y=\"172\" width=\"118\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"867\" y=\"200\" fill=\"#22d3ee\">helps</text>\n        <rect x=\"934\"  y=\"172\" width=\"124\" height=\"44\" rx=\"6\" fill=\"#22d3ee\" fill-opacity=\"0.10\" stroke=\"#22d3ee\"></rect>\n        <text x=\"996\" y=\"200\" fill=\"#22d3ee\">_comp</text>\n      </g>\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ 11 subword pieces (vs 45 raw chars). Frequent runs = single tokens; rare substrings split into 2–3.</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">→ The model never sees characters — only these integer IDs feed the embedding table.</text>\n    </svg>",
           "caption": "BPE tokenization in practice: English byte-runs merge into common pieces; punctuation and whitespace often become standalone tokens.",
           "captionBn": "এই ডায়াগ্রামে দেখানো হয়েছে র ইনপুট টেক্সট কীভাবে BPE মার্জের মাধ্যমে সাবওয়ার্ড পিসে ভাগ হয় এবং প্রতিটি পিস একটি টোকেন ID পায়। উপর থেকে নিচে পড়ুন: মডেল কখনো ক্যারেক্টার দেখে না, শুধু এই ইন্টিজার ID-ই এমবেডিং টেবিলে যায়।"
         },
@@ -128,8 +128,8 @@
         {
           "type": "code",
           "lang": "python",
-          "code": "# Counting tokens with tiktoken (OpenAI) or transformers\nimport tiktoken\nenc = tiktoken.encoding_for_model(\"gpt-4o\")\ntext = \"Tokenization is the silent tax on every LLM call.\"\nprint(len(enc.encode(text)))   # → 11 tokens, not 8 words\n\n# Concrete cost (input, gpt-4o-mini, Jul 2025 pricing)\ntokens        = 11\nprice_per_m   = 0.15      # USD per 1M input tokens\ncost_per_call = tokens / 1_000_000 * price_per_m   # → $0.00000165",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Counting tokens with tiktoken (OpenAI) or transformers</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> tiktoken</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">enc </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> tiktoken.encoding_for_model(</span><span style=\"color:#96D0FF\">\"gpt-4o\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">text </span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\"> \"Tokenization is the silent tax on every LLM call.\"</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(text)))   </span><span style=\"color:#768390\"># → 11 tokens, not 8 words</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># Concrete cost (input, gpt-4o-mini, Jul 2025 pricing)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">tokens        </span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\"> 11</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">price_per_m   </span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\"> 0.15</span><span style=\"color:#768390\">      # USD per 1M input tokens</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">cost_per_call </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> tokens </span><span style=\"color:#F47067\">/</span><span style=\"color:#6CB6FF\"> 1_000_000</span><span style=\"color:#F47067\"> *</span><span style=\"color:#ADBAC7\"> price_per_m   </span><span style=\"color:#768390\"># → $0.00000165</span></span></code></pre>"
+          "code": "# Counting tokens with tiktoken (OpenAI) or transformers\nimport tiktoken\nenc = tiktoken.encoding_for_model(\"gpt-4o\")\ntext = \"Tokenization is the silent tax on every LLM call.\"\nprint(len(enc.encode(text)))   # → 12 tokens, not 9 words\n\n# Concrete cost (input, gpt-4o-mini, Jul 2025 pricing)\ntokens        = 12\nprice_per_m   = 0.15      # USD per 1M input tokens\ncost_per_call = tokens / 1_000_000 * price_per_m   # → $0.0000018",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Counting tokens with tiktoken (OpenAI) or transformers</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> tiktoken</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">enc </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> tiktoken.encoding_for_model(</span><span style=\"color:#96D0FF\">\"gpt-4o\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">text </span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\"> \"Tokenization is the silent tax on every LLM call.\"</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(text)))   </span><span style=\"color:#768390\"># → 12 tokens, not 9 words</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#768390\"># Concrete cost (input, gpt-4o-mini, Jul 2025 pricing)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">tokens        </span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\"> 11</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">price_per_m   </span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\"> 0.15</span><span style=\"color:#768390\">      # USD per 1M input tokens</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">cost_per_call </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> tokens </span><span style=\"color:#F47067\">/</span><span style=\"color:#6CB6FF\"> 1_000_000</span><span style=\"color:#F47067\"> *</span><span style=\"color:#ADBAC7\"> price_per_m   </span><span style=\"color:#768390\"># → $0.0000018</span></span></code></pre>"
         },
         {
           "type": "heading",
@@ -153,8 +153,8 @@
               "value": "128K tokens"
             },
             {
-              "label": "Claude 4 Sonnet",
-              "value": "200K (1M β)"
+              "label": "Claude Sonnet 4",
+              "value": "200K"
             },
             {
               "label": "Gemini 1.5 Pro",
@@ -166,7 +166,7 @@
             },
             {
               "label": "Qwen3",
-              "value": "32K native, 1M w/ YaRN"
+              "value": "32K native, 131K (128K) with YaRN"
             }
           ]
         },
@@ -176,7 +176,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Long context ≠ free performance.</strong> Even with 1M-token windows, retrieval-augmented generation, summarisation, or hierarchical attention beats dumping 800K tokens in. Needle-in-a-haystack benchmarks improve, but multi-hop reasoning across long contexts degrades sharply. Measure on your own workloads."
+              "html": "<strong>Long context ≠ free performance.</strong> Even with 1M-token windows, retrieval-augmented generation, summarisation, or hierarchical attention beats dumping 800K tokens in. Needle-in-a-haystack benchmarks improve, but multi-hop reasoning across long contexts may degrade. Measure on your own workloads."
             }
           ]
         },
@@ -197,7 +197,7 @@
             [
               "Prefill (prompt processing)",
               "Tokens in × input $/M",
-              "Quadratic attention compute; ~100 ms–2 s on modern APIs for 10K tokens"
+              "Quadratic attention compute; time grows with prompt length"
             ],
             [
               "Decode (generation)",
@@ -207,12 +207,12 @@
             [
               "Caching",
               "Cache hits vs misses",
-              "Prompt caching (Anthropic, OpenAI, Gemini) cuts repeated-prefix cost by ~80–90%"
+              "Prompt caching cuts repeated-prefix input cost (Anthropic bills cache reads at 0.1× the base input price; OpenAI's discount depends on the model, e.g. 50% on GPT-4o)"
             ],
             [
               "Long context",
               "Quadratic attention",
-              "A 1M-token call isn't 125× a 8K call — closer to 5–8× due to attention scaling and chunked prefill"
+              "A 1M-token call has 125× the input tokens of an 8K call, and attention compute grows faster than linearly with length"
             ]
           ]
         }
@@ -251,7 +251,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>কনটেক্সট উইন্ডো</strong> হলো এক কলে মডেল সর্বোচ্চ কত টোকেন (ইনপুট + আউটপুট মিলিয়ে) দেখতে পারে। এটি GPT-3-এর ২K থেকে বেড়ে এখন ১M+ পর্যন্ত গেছে। খরচ ও গতির দিক থেকে: প্রিফিল (প্রম্পট প্রসেসিং) এর খরচ ইনপুট টোকেন অনুযায়ী, আর ডিকোড (লেখা তৈরি) ধাপে ধাপে হয় এবং আউটপুট টোকেন সাধারণত ইনপুটের চেয়ে ৩–৫ গুণ দামি। <code>Prompt caching</code> বারবার আসা প্রিফিক্সের খরচ প্রায় ৮০–৯০% কমায়।"
+          "html": "<strong>কনটেক্সট উইন্ডো</strong> হলো এক কলে মডেল সর্বোচ্চ কত টোকেন (ইনপুট + আউটপুট মিলিয়ে) দেখতে পারে। এটি GPT-3-এর ২K থেকে বেড়ে এখন ১M+ পর্যন্ত গেছে। খরচ ও গতির দিক থেকে: প্রিফিল (প্রম্পট প্রসেসিং) এর খরচ ইনপুট টোকেন অনুযায়ী, আর ডিকোড (লেখা তৈরি) ধাপে ধাপে হয় এবং আউটপুট টোকেন সাধারণত ইনপুটের চেয়ে ৩–৫ গুণ দামি। <code>Prompt caching</code> বারবার আসা প্রিফিক্সের খরচ প্রোভাইডারভেদে সর্বোচ্চ প্রায় ৯০% পর্যন্ত কমায়।"
         },
         {
           "type": "paragraph",
@@ -394,10 +394,10 @@
       "id": "s2",
       "num": "02",
       "title": "Model families & trade-offs",
-      "sub": "The frontier in 2025 is dominated by five families, each with a distinct architectural and commercial philosophy. Picking \"the best model\" is a misframe — the right question is <em>which trade-off matches your workload's centre of gravity</em>.",
+      "sub": "The frontier in 2025 is dominated by seven families, each with a distinct architectural and commercial philosophy. Picking \"the best model\" is a misframe — the right question is <em>which trade-off matches your workload's centre of gravity</em>.",
       "bn": {
         "title": "মডেল ফ্যামিলি আর ট্রেড-অফ",
-        "sub": "২০২৫ সালে ফ্রন্টিয়ারে পাঁচটি ফ্যামিলির দাপট। প্রতিটির আর্কিটেকচার আর ব্যবসার দর্শন আলাদা। “সেরা মডেল কোনটা” — এই প্রশ্নটাই ভুল। সঠিক প্রশ্ন হলো: <em>কোন ট্রেড-অফ আপনার ওয়ার্কলোডের মূল চাহিদার সাথে মেলে</em>।"
+        "sub": "২০২৫ সালে ফ্রন্টিয়ারে সাতটি ফ্যামিলির দাপট। প্রতিটির আর্কিটেকচার আর ব্যবসার দর্শন আলাদা। “সেরা মডেল কোনটা” — এই প্রশ্নটাই ভুল। সঠিক প্রশ্ন হলো: <em>কোন ট্রেড-অফ আপনার ওয়ার্কলোডের মূল চাহিদার সাথে মেলে</em>।"
       },
       "basics": {
         "en": {
@@ -510,19 +510,19 @@
             [
               "<strong>Anthropic</strong>",
               "Claude 4 Opus/Sonnet",
-              "Long context (200K), code agentic tasks, Constitutional AI safety<a class=\"cite\" href=\"#src25\">[25]</a>",
+              "Long context (200K on Claude 4-era models; 1M on current Opus/Sonnet), code agentic tasks, Constitutional AI safety<a class=\"cite\" href=\"#src25\">[25]</a>",
               "Rare-coding agents, legal/long-doc analysis"
             ],
             [
               "<strong>Google</strong>",
               "Gemini 2.5 Pro/Flash",
-              "Multimodal (native audio/video), 1–2M context<a class=\"cite\" href=\"#src10\">[10]</a><a class=\"cite\" href=\"#src11\">[11]</a><a class=\"cite\" href=\"#src12\">[12]</a>",
+              "Multimodal (native audio/video), 1M+ context<a class=\"cite\" href=\"#src11\">[11]</a><a class=\"cite\" href=\"#src12\">[12]</a>",
               "Long-context RAG, multimodal pipelines"
             ],
             [
               "<strong>Meta</strong>",
               "Llama 3.1 8B–405B",
-              "Open weights, permissive license, strong small models<a class=\"cite\" href=\"#src2\">[2]</a><a class=\"cite\" href=\"#src3\">[3]</a>",
+              "Open weights (Llama Community License), strong small models<a class=\"cite\" href=\"#src3\">[3]</a>",
               "Self-hosted infra, on-prem, fine-tuning"
             ],
             [
@@ -534,7 +534,7 @@
             [
               "<strong>Alibaba</strong>",
               "Qwen3 (dense + MoE)",
-              "Best-in-class small models, multilingual, Apache 2.0<a class=\"cite\" href=\"#src8\">[8]</a><a class=\"cite\" href=\"#src9\">[9]</a><a class=\"cite\" href=\"#src28\">[28]</a>",
+              "Strong small models, multilingual (119 languages), Apache 2.0<a class=\"cite\" href=\"#src9\">[9]</a>",
               "Cheap self-host, Chinese/multilingual, agentic coding"
             ],
             [
@@ -586,7 +586,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Mistral 7B pioneered sliding-window attention for cheap inference. Gemini 1.5 mixes local + global attention for million-token contexts.<a class=\"cite\" href=\"#src4\">[4]</a><a class=\"cite\" href=\"#src11\">[11]</a>"
+                  "html": "Mistral 7B used sliding-window attention (introduced earlier, e.g. in Longformer) for cheap inference.<a class=\"cite\" href=\"#src4\">[4]</a>"
                 }
               ]
             }
@@ -630,8 +630,8 @@
           "ordered": false,
           "items": [
             "OpenAI (GPT-4o, o3, GPT-5) রিজনিং ও পরিণত ইকোসিস্টেমে ভালো;",
-            "Anthropic (Claude 4) লম্বা কনটেক্সট (২০০K), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো;",
-            "Google (Gemini 2.5) নেটিভ মাল্টিমোডাল ও ১–২M কনটেক্সটে এগিয়ে;",
+            "Anthropic (Claude 4) লম্বা কনটেক্সট (Claude 4-এ ২০০K, বর্তমান Opus/Sonnet-এ ১M), কোড-এজেন্ট ও দীর্ঘ ডকুমেন্ট বিশ্লেষণে ভালো;",
+            "Google (Gemini 2.5) নেটিভ মাল্টিমোডাল ও ১M+ কনটেক্সটে এগিয়ে;",
             "Meta (Llama 3.1) ওপেন ওয়েটস ও শক্তিশালী ছোট মডেল;",
             "Mistral ইউরোপীয় ডেটা রেসিডেন্সি ও এজ ডিপ্লয়মেন্টের জন্য;",
             "Alibaba Qwen3 সস্তা সেলফ-হোস্ট ও বহুভাষিক কাজে;",
@@ -640,7 +640,7 @@
         },
         {
           "type": "paragraph",
-          "html": "স্থাপত্যগত পার্থক্যও গুরুত্বপূর্ণ। <strong>ডেন্স ট্রান্সফর্মারে</strong> প্রতিটি টোকেনের জন্য সব প্যারামিটার ব্যবহার হয়, তাই কম্পিউট অনুমানযোগ্য ও সার্ভিং সহজ। <strong>Mixture-of-Experts (MoE)</strong>-এ প্রতিটি টোকেন শুধু কিছু \"এক্সপার্ট\" FFN-এ যায়: মোট প্যারামিটার বিশাল কিন্তু অ্যাকটিভ প্যারামিটার কম, ফলে ইনফারেন্স সস্তা হলেও মেমরি বেশি লাগে (যেমন DeepSeek-V3: ৬৭১B মোট, ৩৭B অ্যাকটিভ)। <code>MLA</code> (Multi-Head Latent Attention) KV ক্যাশকে ছোট করে লম্বা কনটেক্সটের মেমরি বাঁচায়। স্লাইডিং-উইন্ডো বা হাইব্রিড অ্যাটেনশন সস্তা ইনফারেন্স ও বিশাল কনটেক্সটে সাহায্য করে।"
+          "html": "স্থাপত্যগত পার্থক্যও গুরুত্বপূর্ণ। <strong>ডেন্স ট্রান্সফর্মারে</strong> প্রতিটি টোকেনের জন্য সব প্যারামিটার ব্যবহার হয়, তাই কম্পিউট অনুমানযোগ্য ও সার্ভিং সহজ। <strong>Mixture-of-Experts (MoE)</strong>-এ প্রতিটি টোকেন শুধু কিছু \"এক্সপার্ট\" FFN-এ যায়: মোট প্যারামিটার বিশাল কিন্তু অ্যাকটিভ প্যারামিটার কম, ফলে ইনফারেন্স সস্তা হলেও মেমরি বেশি লাগে (যেমন DeepSeek-V3: ৬৭১B মোট, ৩৭B অ্যাকটিভ)। <code>MLA</code> (Multi-Head Latent Attention) KV ক্যাশকে ছোট করে লম্বা কনটেক্সটের মেমরি বাঁচায়। স্লাইডিং-উইন্ডো অ্যাটেনশন সস্তা ইনফারেন্সে সাহায্য করে।"
         },
         {
           "type": "paragraph",
@@ -882,7 +882,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Hosted behind APIs. Examples: GPT-4o/o3/GPT-5, Claude 4, Gemini 2.5. <strong>Advantages:</strong> highest capability ceiling, fastest hardware optimisation, integrated safety stack, no infra to run. <strong>Costs:</strong> vendor lock-in, no auditability of weights, data leaves your perimeter, price changes are unilateral.<a class=\"cite\" href=\"#src14\">[14]</a><a class=\"cite\" href=\"#src13\">[13]</a>"
+          "html": "Hosted behind APIs. Examples: GPT-4o/o3/GPT-5, Claude 4, Gemini 2.5. <strong>Advantages:</strong> highest capability ceiling, fastest hardware optimisation, integrated safety stack, no infra to run. <strong>Costs:</strong> vendor lock-in, no auditability of weights, data leaves your perimeter, price changes are unilateral."
         },
         {
           "type": "heading",
@@ -892,7 +892,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Weights released under a licence (often Apache 2.0, Llama Community License, or MIT). Examples: Llama 3.1 (8B–405B),<a class=\"cite\" href=\"#src3\">[3]</a> Mistral 7B &amp; Mixtral 8×7B,<a class=\"cite\" href=\"#src4\">[4]</a><a class=\"cite\" href=\"#src5\">[5]</a> Qwen2.5/Qwen3,<a class=\"cite\" href=\"#src8\">[8]</a><a class=\"cite\" href=\"#src9\">[9]</a> DeepSeek-V3 / R1.<a class=\"cite\" href=\"#src6\">[6]</a><a class=\"cite\" href=\"#src7\">[7]</a> <strong>Advantages:</strong> self-host on your hardware, fine-tune on private data, audit weights, no per-token fees, no data egress. <strong>Costs:</strong> you operate the infra (GPUs, networking, monitoring), capability ceiling ~3–9 months behind the frontier, safety is your problem."
+          "html": "Weights released under a licence (often Apache 2.0, Llama Community License, or MIT). Examples: Llama 3.1 (8B–405B),<a class=\"cite\" href=\"#src3\">[3]</a> Mistral 7B &amp; Mixtral 8×7B,<a class=\"cite\" href=\"#src4\">[4]</a><a class=\"cite\" href=\"#src5\">[5]</a> Qwen2.5/Qwen3,<a class=\"cite\" href=\"#src8\">[8]</a><a class=\"cite\" href=\"#src9\">[9]</a> DeepSeek-V3 / R1.<a class=\"cite\" href=\"#src6\">[6]</a><a class=\"cite\" href=\"#src7\">[7]</a> <strong>Advantages:</strong> self-host on your hardware, fine-tune on private data, audit weights, no per-token fees, no data egress. <strong>Costs:</strong> you operate the infra (GPUs, networking, monitoring), capability ceiling usually trails the best closed models (the gap varies by task), safety is your problem."
         },
         {
           "type": "callout",
@@ -910,7 +910,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>When closed wins:</strong> tasks where you're <em>3–9 months behind the SOTA</em> matters (frontier coding agents, reasoning), small query volume makes self-hosting uneconomical, you need multimodal audio/video (Gemini)."
+              "html": "<strong>When closed wins:</strong> tasks where <em>being at the very frontier</em> matters (frontier coding agents, reasoning), small query volume makes self-hosting uneconomical, you need multimodal audio/video (Gemini)."
             }
           ]
         },
@@ -924,7 +924,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Distillation:</strong> DeepSeek-R1's distilled Qwen/Llama variants prove you can train strong small open models from a closed teacher's outputs.<a class=\"cite\" href=\"#src7\">[7]</a>",
+            "<strong>Distillation:</strong> DeepSeek-R1's distilled Qwen/Llama variants show that the reasoning patterns of a large open model can be used to improve smaller models.<a class=\"cite\" href=\"#src7\">[7]</a>",
             "<strong>Routing:</strong> route easy queries to a local 8B, hard ones to a frontier API. Saves cost without measurable quality loss on common tasks.",
             "<strong>Open-weights with closed APIs:</strong> Llama 3.1 405B is open, and you can also call it via Together, Groq, Fireworks for managed serving — keeping the option to migrate."
           ]
@@ -941,7 +941,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Open-weight (Llama, Qwen, DeepSeek, Mistral):</strong> the company released the file containing all the model's \"knowledge\" — billions of numbers that together form a brain. Anyone can download this file (it's huge — 8 to 700 gigabytes) and run it on their own computers. The recipe is public, even if the cookbook is not."
+          "html": "<strong>Open-weight (Llama, Qwen, DeepSeek, Mistral):</strong> the company released the file containing all the model's \"knowledge\" — billions of numbers that together form a brain. Anyone can download this file (it's huge — from a few gigabytes to several hundred) and run it on their own computers. The recipe is public, even if the cookbook is not."
         },
         {
           "type": "paragraph",
@@ -949,7 +949,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The 2025 reality:</strong> open-weight models got <em>so good</em>. For most business tasks, a free open-weight model running on rented GPUs is 80% as good as GPT-4 at 10% of the cost. Companies are quietly switching. The frontier closed models (Claude 4, GPT-5) still lead on hard reasoning, but the gap is small."
+          "html": "<strong>The 2025 reality:</strong> open-weight models got <em>so good</em>. For most business tasks, an open-weight model running on rented GPUs can handle many business tasks at lower cost than a frontier API, depending on volume. Companies are quietly switching. The frontier closed models (Claude 4, GPT-5) still lead on hard reasoning, but the gap varies by task."
         },
         {
           "type": "analogy",
@@ -972,7 +972,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ওপেন-ওয়েট</strong> (Llama, Mistral, Qwen, DeepSeek) মডেলে আপনি নিজের হার্ডওয়্যারে চালাতে পারেন, প্রাইভেট ডেটায় ফাইন-টিউন করতে পারেন, ওয়েটস অডিট করতে পারেন, পার-টোকেন ফি লাগে না এবং ডেটা বাইরে যায় না। বিনিময়ে GPU, নেটওয়ার্কিং ও মনিটরিং আপনাকেই চালাতে হবে, ক্ষমতা ফ্রন্টিয়ার থেকে প্রায় ৩–৯ মাস পিছিয়ে, আর সেফটির দায়ও আপনার।"
+          "html": "<strong>ওপেন-ওয়েট</strong> (Llama, Mistral, Qwen, DeepSeek) মডেলে আপনি নিজের হার্ডওয়্যারে চালাতে পারেন, প্রাইভেট ডেটায় ফাইন-টিউন করতে পারেন, ওয়েটস অডিট করতে পারেন, পার-টোকেন ফি লাগে না এবং ডেটা বাইরে যায় না। বিনিময়ে GPU, নেটওয়ার্কিং ও মনিটরিং আপনাকেই চালাতে হবে, ক্ষমতা সাধারণত সেরা ক্লোজড মডেলের চেয়ে কিছুটা পিছনে থাকে (ফারাক কাজভেদে আলাদা), আর সেফটির দায়ও আপনার।"
         },
         {
           "type": "list",
@@ -1141,7 +1141,7 @@
           "remember": [
             "Use <code>temperature</code> 0 for code, JSON, classification, and math, and about 0.7–1.0 for chat.",
             "Raise <code>temperature</code> to 1.0–2.0 for creative writing and brainstorming.",
-            "Pair <code>temperature</code> with <code>top_p</code> or <code>min_p</code>. Do not stack tight <code>top_k</code> and <code>top_p</code> values."
+            "Change <code>temperature</code> or <code>top_p</code>, usually not both (<code>min_p</code> is mainly found in open-source stacks). Do not stack tight <code>top_k</code> and <code>top_p</code> values."
           ]
         },
         "bn": {
@@ -1183,7 +1183,7 @@
           "remember": [
             "কোড, JSON, ক্লাসিফিকেশন আর গণিতে <code>temperature</code> ০ দিন; চ্যাটে মোটামুটি ০.৭–১.০।",
             "সৃজনশীল লেখা আর ব্রেইনস্টর্মিংয়ে <code>temperature</code> বাড়িয়ে ১.০–২.০ করুন।",
-            "<code>temperature</code>-এর সাথে <code>top_p</code> বা <code>min_p</code> জুড়ুন। কড়া <code>top_k</code> আর <code>top_p</code> একসাথে চাপাবেন না।"
+            "<code>temperature</code> অথবা <code>top_p</code>-এর যেকোনো একটি বদলান, সাধারণত দুটো একসাথে নয় (<code>min_p</code> মূলত ওপেন-সোর্স স্ট্যাকে মেলে)। কড়া <code>top_k</code> আর <code>top_p</code> একসাথে চাপাবেন না।"
           ]
         }
       },
@@ -1196,7 +1196,7 @@
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sampling knobs comparison\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">logits → softmax → temperature → top-k → top-p → penalties → sample</text>\n\n      \n      <g transform=\"translate(40,60)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">raw logits z</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"120\" fill=\"#22d3ee\" opacity=\"0.85\"></rect>\n        <rect x=\"48\"  y=\"40\" width=\"40\" height=\"100\" fill=\"#22d3ee\" opacity=\"0.7\"></rect>\n        <rect x=\"96\"  y=\"60\" width=\"40\" height=\"80\"  fill=\"#22d3ee\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"70\" width=\"40\" height=\"70\"  fill=\"#22d3ee\" opacity=\"0.55\"></rect>\n        <rect x=\"192\" y=\"85\" width=\"40\" height=\"55\"  fill=\"#22d3ee\" opacity=\"0.5\"></rect>\n        <rect x=\"240\" y=\"100\" width=\"40\" height=\"40\" fill=\"#22d3ee\" opacity=\"0.45\"></rect>\n        <rect x=\"288\" y=\"105\" width=\"40\" height=\"35\" fill=\"#22d3ee\" opacity=\"0.4\"></rect>\n        <rect x=\"336\" y=\"110\" width=\"40\" height=\"30\" fill=\"#22d3ee\" opacity=\"0.35\"></rect>\n        <rect x=\"384\" y=\"115\" width=\"40\" height=\"25\" fill=\"#22d3ee\" opacity=\"0.3\"></rect>\n        <rect x=\"432\" y=\"120\" width=\"40\" height=\"20\" fill=\"#22d3ee\" opacity=\"0.25\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(40,222)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">softmax → probs</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"80\"  fill=\"#a78bfa\" opacity=\"0.95\"></rect>\n        <rect x=\"48\"  y=\"60\" width=\"40\" height=\"40\"  fill=\"#a78bfa\" opacity=\"0.75\"></rect>\n        <rect x=\"96\"  y=\"78\" width=\"40\" height=\"22\"  fill=\"#a78bfa\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"86\" width=\"40\" height=\"14\"  fill=\"#a78bfa\" opacity=\"0.5\"></rect>\n        <rect x=\"192\" y=\"91\" width=\"40\" height=\"9\"   fill=\"#a78bfa\" opacity=\"0.4\"></rect>\n        <rect x=\"240\" y=\"95\" width=\"40\" height=\"5\"   fill=\"#a78bfa\" opacity=\"0.3\"></rect>\n        <rect x=\"288\" y=\"97\" width=\"40\" height=\"3\"   fill=\"#a78bfa\" opacity=\"0.2\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,40)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">temperature</text>\n        <text x=\"0\" y=\"20\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→0: greedy / deterministic</text>\n        <rect x=\"0\"   y=\"32\" width=\"280\" height=\"10\" fill=\"#fb7185\" opacity=\"0.85\"></rect>\n        <text x=\"0\" y=\"58\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T=1.0: native distribution</text>\n        <rect x=\"0\"   y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\"></rect>\n        <rect x=\"80\"  y=\"70\" width=\"50\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.75\"></rect>\n        <rect x=\"130\" y=\"70\" width=\"40\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.55\"></rect>\n        <rect x=\"170\" y=\"70\" width=\"30\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.4\"></rect>\n        <rect x=\"200\" y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.25\"></rect>\n        <text x=\"0\" y=\"96\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→∞: uniform / noise</text>\n        <rect x=\"0\"   y=\"108\" width=\"280\" height=\"10\" fill=\"#34d399\" opacity=\"0.5\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,170)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">truncation</text>\n        <text x=\"0\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_k</text>\n        <text x=\"60\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep only the k highest-prob tokens</text>\n        <text x=\"0\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_p</text>\n        <text x=\"60\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep smallest set whose sum ≥ k</text>\n        <text x=\"0\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">min_p</text>\n        <text x=\"60\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">drop tokens below p_min × top prob</text>\n\n        <text x=\"0\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">penalties</text>\n        <text x=\"0\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">freq</text>\n        <text x=\"60\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α · count(token)</text>\n        <text x=\"0\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">pres</text>\n        <text x=\"60\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α if token seen (any count)</text>\n      </g>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Sampling knobs comparison\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">logits → softmax → temperature → top-k → top-p → penalties → sample</text>\n\n      \n      <g transform=\"translate(40,60)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">raw logits z</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"120\" fill=\"#22d3ee\" opacity=\"0.85\"></rect>\n        <rect x=\"48\"  y=\"40\" width=\"40\" height=\"100\" fill=\"#22d3ee\" opacity=\"0.7\"></rect>\n        <rect x=\"96\"  y=\"60\" width=\"40\" height=\"80\"  fill=\"#22d3ee\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"70\" width=\"40\" height=\"70\"  fill=\"#22d3ee\" opacity=\"0.55\"></rect>\n        <rect x=\"192\" y=\"85\" width=\"40\" height=\"55\"  fill=\"#22d3ee\" opacity=\"0.5\"></rect>\n        <rect x=\"240\" y=\"100\" width=\"40\" height=\"40\" fill=\"#22d3ee\" opacity=\"0.45\"></rect>\n        <rect x=\"288\" y=\"105\" width=\"40\" height=\"35\" fill=\"#22d3ee\" opacity=\"0.4\"></rect>\n        <rect x=\"336\" y=\"110\" width=\"40\" height=\"30\" fill=\"#22d3ee\" opacity=\"0.35\"></rect>\n        <rect x=\"384\" y=\"115\" width=\"40\" height=\"25\" fill=\"#22d3ee\" opacity=\"0.3\"></rect>\n        <rect x=\"432\" y=\"120\" width=\"40\" height=\"20\" fill=\"#22d3ee\" opacity=\"0.25\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(40,222)\">\n        <text x=\"0\" y=\"-4\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">softmax → probs</text>\n        <rect x=\"0\"   y=\"20\" width=\"40\" height=\"80\"  fill=\"#a78bfa\" opacity=\"0.95\"></rect>\n        <rect x=\"48\"  y=\"60\" width=\"40\" height=\"40\"  fill=\"#a78bfa\" opacity=\"0.75\"></rect>\n        <rect x=\"96\"  y=\"78\" width=\"40\" height=\"22\"  fill=\"#a78bfa\" opacity=\"0.6\"></rect>\n        <rect x=\"144\" y=\"86\" width=\"40\" height=\"14\"  fill=\"#a78bfa\" opacity=\"0.5\"></rect>\n        <rect x=\"192\" y=\"91\" width=\"40\" height=\"9\"   fill=\"#a78bfa\" opacity=\"0.4\"></rect>\n        <rect x=\"240\" y=\"95\" width=\"40\" height=\"5\"   fill=\"#a78bfa\" opacity=\"0.3\"></rect>\n        <rect x=\"288\" y=\"97\" width=\"40\" height=\"3\"   fill=\"#a78bfa\" opacity=\"0.2\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,40)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">temperature</text>\n        <text x=\"0\" y=\"20\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→0: greedy / deterministic</text>\n        <rect x=\"0\"   y=\"32\" width=\"280\" height=\"10\" fill=\"#fb7185\" opacity=\"0.85\"></rect>\n        <text x=\"0\" y=\"58\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T=1.0: native distribution</text>\n        <rect x=\"0\"   y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\"></rect>\n        <rect x=\"80\"  y=\"70\" width=\"50\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.75\"></rect>\n        <rect x=\"130\" y=\"70\" width=\"40\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.55\"></rect>\n        <rect x=\"170\" y=\"70\" width=\"30\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.4\"></rect>\n        <rect x=\"200\" y=\"70\" width=\"80\"  height=\"10\" fill=\"#fbbf24\" opacity=\"0.25\"></rect>\n        <text x=\"0\" y=\"96\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">T→∞: uniform / noise</text>\n        <rect x=\"0\"   y=\"108\" width=\"280\" height=\"10\" fill=\"#34d399\" opacity=\"0.5\"></rect>\n      </g>\n\n      \n      <g transform=\"translate(540,170)\">\n        <text x=\"0\" y=\"0\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">truncation</text>\n        <text x=\"0\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_k</text>\n        <text x=\"60\" y=\"22\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep only the k highest-prob tokens</text>\n        <text x=\"0\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">top_p</text>\n        <text x=\"60\" y=\"44\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">keep smallest set whose sum ≥ p</text>\n        <text x=\"0\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">min_p</text>\n        <text x=\"60\" y=\"66\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">drop tokens below p_min × top prob</text>\n\n        <text x=\"0\" y=\"98\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\" font-weight=\"600\">penalties</text>\n        <text x=\"0\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">freq</text>\n        <text x=\"60\" y=\"118\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α · count(token)</text>\n        <text x=\"0\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#22d3ee\">pres</text>\n        <text x=\"60\" y=\"138\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">−α if token seen (any count)</text>\n      </g>\n    </svg>",
           "caption": "Visualising how temperature flattens or sharpens the distribution, and where truncation steps (top_k, top_p, min_p) cut the tail.",
           "captionBn": "এখানে দেখা যায় র লজিটস কীভাবে সফটম্যাক্স, টেম্পারেচার, top_k, top_p, min_p ও রিপিটিশন পেনাল্টি পেরিয়ে শেষে স্যাম্পল হয়। বাঁ থেকে ডানে পড়ুন: T কম হলে বণ্টন শার্প (গ্রিডি), T বেশি হলে ফ্ল্যাট (নয়েজ), আর ট্রানকেশন ধাপগুলো কম-সম্ভাবনার টেইল কেটে দেয়।"
         },
@@ -1226,7 +1226,7 @@
             [
               "<code>min_p</code>",
               "Drop tokens with prob &lt; min_p × top_prob. Recent alternative to top_p.",
-              "Scales better across model sizes than fixed top_p."
+              "Reported to improve quality and diversity across model sizes, especially at high temperature (Nguyen et al., arXiv:2407.01082)."
             ],
             [
               "<code>frequency_penalty</code>",
@@ -1243,8 +1243,8 @@
         {
           "type": "code",
           "lang": "python",
-          "code": "# OpenAI-compatible sampling params (works across providers)\nresponse = client.chat.completions.create(\n    model=\"gpt-4o\",\n    messages=messages,\n    temperature=0.2,        # low for JSON extraction\n    top_p=1.0,              # off when temperature low\n    frequency_penalty=0.3,\n    presence_penalty=0.0,\n    max_tokens=512,\n)",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># OpenAI-compatible sampling params (works across providers)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.chat.completions.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"gpt-4o\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">messages,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    temperature</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.2</span><span style=\"color:#ADBAC7\">,        </span><span style=\"color:#768390\"># low for JSON extraction</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    top_p</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1.0</span><span style=\"color:#ADBAC7\">,              </span><span style=\"color:#768390\"># off when temperature low</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    frequency_penalty</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.3</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    presence_penalty</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.0</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    max_tokens</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">512</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span></code></pre>"
+          "code": "# OpenAI Chat Completions sampling params (other compatible servers may ignore some)\nresponse = client.chat.completions.create(\n    model=\"gpt-4o\",\n    messages=messages,\n    temperature=0.2,        # low for JSON extraction\n    top_p=1.0,              # off when temperature low\n    frequency_penalty=0.3,\n    presence_penalty=0.0,\n    max_tokens=512,\n)",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># OpenAI Chat Completions sampling params (other compatible servers may ignore some)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.chat.completions.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"gpt-4o\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">messages,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    temperature</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.2</span><span style=\"color:#ADBAC7\">,        </span><span style=\"color:#768390\"># low for JSON extraction</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    top_p</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1.0</span><span style=\"color:#ADBAC7\">,              </span><span style=\"color:#768390\"># off when temperature low</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    frequency_penalty</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.3</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    presence_penalty</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">0.0</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    max_tokens</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">512</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span></code></pre>"
         },
         {
           "type": "callout",
@@ -1252,7 +1252,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Don't combine top_k and top_p aggressively.</strong> Either pick top_k (fixed vocabulary cut) or top_p (probability mass cut). Using both with tight values double-strips the tail and can cause degeneration. Modern providers recommend temperature + top_p (or temperature + min_p), full stop."
+              "html": "<strong>Don't combine top_k and top_p aggressively.</strong> Either pick top_k (fixed vocabulary cut) or top_p (probability mass cut). Using both with tight values double-strips the tail and can cause degeneration. OpenAI's API reference recommends changing either temperature or top_p, not both. min_p is mainly available in open-source inference stacks (e.g. Hugging Face Transformers, vLLM)."
             }
           ]
         }
@@ -1300,14 +1300,14 @@
             "<code>temperature</code>: সফটম্যাক্সের আগে লজিটসকে T দিয়ে ভাগ করে। T&lt;১ হলে বণ্টন ধারালো (বেশি ডিটারমিনিস্টিক), T&gt;১ হলে সমতল (বেশি র‍্যান্ডম)। কোড, JSON, ক্লাসিফিকেশন, ম্যাথের জন্য ০; চ্যাটের জন্য ০.৭–১.০; সৃজনশীল লেখা ও ব্রেইনস্টর্মিংয়ের জন্য ১.০–২.০।",
             "<code>top_k</code>: শুধু সবচেয়ে সম্ভাব্য k-টি টোকেন থেকে বাছে। k=১ মানে গ্রিডি; সাধারণত k≈৪০–১০০। বেশি টেম্পারেচারের সাথে k&lt;১০ এড়ানো ভালো।",
             "<code>top_p</code> (নিউক্লিয়াস): যে ক্ষুদ্রতম টোকেন-সেটের সম্মিলিত সম্ভাবনা ≥ p, শুধু সেটি রাখে। সাধারণত ০.৯–০.৯৫।",
-            "<code>min_p</code>: শীর্ষ টোকেনের সম্ভাবনার min_p গুণের চেয়ে কম সম্ভাবনার টোকেন বাদ দেয়; মডেলের আকার বদলালেও এটি ভালো কাজ করে।",
+            "<code>min_p</code>: শীর্ষ টোকেনের সম্ভাবনার min_p গুণের চেয়ে কম সম্ভাবনার টোকেন বাদ দেয়; বিভিন্ন মডেলের আকারে, বিশেষ করে উঁচু temperature-এ, মান ও বৈচিত্র্য বাড়ায় বলে রিপোর্ট করা হয়েছে।",
             "<code>frequency_penalty</code>: টোকেন যতবার এসেছে তার সংখ্যা অনুযায়ী লজিট কমায়, ফলে পুনরাবৃত্তি কমে (সাধারণত ০.১–১.০)।",
             "<code>presence_penalty</code>: টোকেন একবার এসে থাকলেই কমায়, ফলে বিষয়ের বৈচিত্র্য বাড়ে (সাধারণত ০–০.৬)।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>সাধারণ ভুল:</strong> <code>top_k</code> ও <code>top_p</code> একসাথে কড়াভাবে দিলে টেইল দুইবার ছাঁটা হয়ে লেখা অসংলগ্ন (ডিজেনারেশন) হতে পারে। আধুনিক প্রোভাইডাররা <code>temperature</code> + <code>top_p</code> (অথবা <code>temperature</code> + <code>min_p</code>) ব্যবহারের পরামর্শ দেন।"
+          "html": "<strong>সাধারণ ভুল:</strong> <code>top_k</code> ও <code>top_p</code> একসাথে কড়াভাবে দিলে টেইল দুইবার ছাঁটা হয়ে লেখা অসংলগ্ন (ডিজেনারেশন) হতে পারে। OpenAI-এর API রেফারেন্স <code>temperature</code> অথবা <code>top_p</code>-এর যেকোনো একটি বদলানোর পরামর্শ দেয়, দুটো একসাথে নয়; <code>min_p</code> মূলত ওপেন-সোর্স ইনফারেন্স স্ট্যাকে (যেমন Hugging Face Transformers, vLLM) পাওয়া যায়।"
         },
         {
           "type": "analogy",
@@ -1532,9 +1532,9 @@
       "body": [
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Streaming vs non-streaming timeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">time →</text>\n\n      <text x=\"40\" y=\"76\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#fb7185\">non-streaming</text>\n      <rect x=\"40\" y=\"86\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill (compute)</text>\n      <rect x=\"200\" y=\"86\" width=\"800\" height=\"40\" fill=\"rgba(251,113,133,0.18)\" stroke=\"#fb7185\"></rect>\n      <text x=\"600\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\">waiting... TTFT = total time</text>\n      <rect x=\"1000\" y=\"86\" width=\"60\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"1030\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#0b0f17\" font-weight=\"700\">full text</text>\n\n      <text x=\"40\" y=\"166\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#22d3ee\">streaming</text>\n      <rect x=\"40\" y=\"176\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill</text>\n      <rect x=\"200\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"220\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t1</text>\n      <rect x=\"240\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.85\"></rect>\n      <text x=\"260\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t2</text>\n      <rect x=\"280\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.7\"></rect>\n      <text x=\"300\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t3</text>\n      <rect x=\"320\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.55\"></rect>\n      <text x=\"340\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t4</text>\n      <text x=\"420\" y=\"201\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">tokens stream back as decoded</text>\n\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">TTFT (time to first token) ≈ 100–500 ms · TPOT (time per output token) ≈ 30–80 ms</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">Total wall time is identical; only the perceived latency differs.</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Streaming vs non-streaming timeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">time →</text>\n\n      <text x=\"40\" y=\"76\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#fb7185\">non-streaming</text>\n      <rect x=\"40\" y=\"86\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill (compute)</text>\n      <rect x=\"200\" y=\"86\" width=\"800\" height=\"40\" fill=\"rgba(251,113,133,0.18)\" stroke=\"#fb7185\"></rect>\n      <text x=\"600\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fb7185\">waiting... TTFT = total time</text>\n      <rect x=\"1000\" y=\"86\" width=\"60\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"1030\" y=\"111\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#0b0f17\" font-weight=\"700\">full text</text>\n\n      <text x=\"40\" y=\"166\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"600\" fill=\"#22d3ee\">streaming</text>\n      <rect x=\"40\" y=\"176\" width=\"160\" height=\"40\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"120\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">prefill</text>\n      <rect x=\"200\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\"></rect>\n      <text x=\"220\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t1</text>\n      <rect x=\"240\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.85\"></rect>\n      <text x=\"260\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t2</text>\n      <rect x=\"280\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.7\"></rect>\n      <text x=\"300\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t3</text>\n      <rect x=\"320\" y=\"176\" width=\"40\" height=\"40\" fill=\"#34d399\" opacity=\"0.55\"></rect>\n      <text x=\"340\" y=\"201\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"10\" fill=\"#0b0f17\" font-weight=\"700\">t4</text>\n      <text x=\"420\" y=\"201\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">tokens stream back as decoded</text>\n\n      <text x=\"40\" y=\"248\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">TTFT (time to first token) and TPOT (time per output token) vary by model, prompt length and load</text>\n      <text x=\"40\" y=\"266\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">Total generation time is essentially the same; only the perceived latency differs.</text>\n    </svg>",
           "caption": "Streaming shifts perceived latency from \"all-or-nothing\" to \"incremental\". Same compute, much better UX.",
-          "captionBn": "এই ডায়াগ্রামে নন-স্ট্রিমিং ও স্ট্রিমিং রেসপন্সের সময়রেখা তুলনা করা হয়েছে। নন-স্ট্রিমিংয়ে পুরো টেক্সট একসাথে আসে, আর স্ট্রিমিংয়ে প্রিফিলের পর t1, t2, t3, t4 করে টোকেন ক্রমে আসে; মোট সময় একই, শুধু TTFT কমে বলে অনুভূত ল্যাটেন্সি কম লাগে।"
+          "captionBn": "এই ডায়াগ্রামে নন-স্ট্রিমিং ও স্ট্রিমিং রেসপন্সের সময়রেখা তুলনা করা হয়েছে। নন-স্ট্রিমিংয়ে পুরো টেক্সট একসাথে আসে, আর স্ট্রিমিংয়ে প্রিফিলের পর t1, t2, t3, t4 করে টোকেন ক্রমে আসে; মোট সময় প্রায় একই, শুধু TTFT কমে বলে অনুভূত ল্যাটেন্সি কম লাগে।"
         },
         {
           "type": "heading",
@@ -1728,7 +1728,7 @@
                 "example": "{\n  \"id\": 1042,\n  \"name\": \"Amina Rahman\",\n  \"email\": \"amina.rahman@example.com\",\n  \"city\": \"Chattogram\",\n  \"plan\": \"pro\",\n  \"signup_date\": \"2024-0"
               }
             ],
-            "learned": "<strong>স্ট্রিমিং</strong> মানে AI উত্তরটা কয়েকটা কয়েকটা শব্দ করে পাঠায়, তাই আপনি প্রথম শব্দ আগেই দেখতে পান। এতে পুরো উত্তর দ্রুত হয় না: মোট সময় একই থাকে। চ্যাট উইন্ডোর জন্য এটা দারুণ, কারণ ইউজার সাথে সাথে অগ্রগতি দেখে। কিন্তু যে প্রোগ্রামের পুরো JSON লাগে, তার জন্য অর্ধেক উত্তর কোনো কাজের না, তাই সেই ধাপে সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।",
+            "learned": "<strong>স্ট্রিমিং</strong> মানে AI উত্তরটা কয়েকটা কয়েকটা শব্দ করে পাঠায়, তাই আপনি প্রথম শব্দ আগেই দেখতে পান। এতে পুরো উত্তর দ্রুত হয় না: মোট সময় প্রায় একই থাকে। চ্যাট উইন্ডোর জন্য এটা দারুণ, কারণ ইউজার সাথে সাথে অগ্রগতি দেখে। কিন্তু যে প্রোগ্রামের পুরো JSON লাগে, তার জন্য অর্ধেক উত্তর কোনো কাজের না, তাই সেই ধাপে সম্পূর্ণ উত্তরের জন্য অপেক্ষা করতে হয়।",
             "done": "গল্পের জন্য আপনার কাছে প্রথম শব্দের আর শেষ শব্দের সময় আছে, আর আপনি এমন একটা অর্ধেক JSON দেখেছেন যেটা কোনো প্রোগ্রাম ব্যবহার করতে পারে না।",
             "check": {
               "question": "চ্যাট উইন্ডোর জন্য স্ট্রিমিং ভালো, কিন্তু ডেটা পাইপলাইনের একটা ধাপের জন্য প্রায়ই খারাপ। কেন?",
@@ -1770,7 +1770,7 @@
             },
             {
               "term": "Schema-constrained decoding",
-              "meaning": "At each step, the model is blocked from any token that would break the schema, so the output always fits."
+              "meaning": "At each step, the model is blocked from any token that would break the schema, so a normally finished output fits."
             },
             {
               "term": "Typed parsing",
@@ -1779,8 +1779,8 @@
           ],
           "remember": [
             "Use structured outputs whenever you can.",
-            "Schema-constrained output always parses, so you need no regex, no retry loops, and no extra checks on the shape.",
-            "It adds a little time, but far less than the checking it saves."
+            "Schema-constrained output that finishes normally follows the schema, but you still handle refusals and incomplete answers.",
+            "The first request with a new schema is slower, but that costs far less than the checking it saves."
           ]
         },
         "bn": {
@@ -1804,7 +1804,7 @@
             },
             {
               "term": "স্কিমা-কনস্ট্রেইনড ডিকোডিং (schema-constrained decoding)",
-              "meaning": "প্রতিটি ধাপে মডেলকে এমন কোনো টোকেন বাছতে দেওয়া হয় না যা স্কিমা ভাঙবে, তাই আউটপুট সবসময় খাপ খায়।"
+              "meaning": "প্রতিটি ধাপে মডেলকে এমন কোনো টোকেন বাছতে দেওয়া হয় না যা স্কিমা ভাঙবে, তাই স্বাভাবিকভাবে শেষ হওয়া আউটপুট স্কিমায় খাপ খায়।"
             },
             {
               "term": "টাইপড পার্সিং (typed parsing)",
@@ -1813,8 +1813,8 @@
           ],
           "remember": [
             "যখনই পারেন, স্ট্রাকচার্ড আউটপুট ব্যবহার করুন।",
-            "স্কিমা-কনস্ট্রেইনড আউটপুট সবসময় পার্স হয়, তাই regex, রিট্রাই লুপ বা আকার যাচাই লাগে না।",
-            "এতে সামান্য বাড়তি সময় লাগে, কিন্তু যত যাচাই বাঁচে তার তুলনায় তা অনেক কম।"
+            "স্কিমা-কনস্ট্রেইনড আউটপুট স্বাভাবিকভাবে শেষ হলে স্কিমা মেনে চলে, তবে প্রত্যাখ্যান (refusal) ও অসম্পূর্ণ উত্তর আপনাকেই সামলাতে হবে।",
+            "নতুন স্কিমায় প্রথম রিকোয়েস্টে সামান্য বাড়তি সময় লাগে, কিন্তু যত যাচাই বাঁচে তার তুলনায় তা অনেক কম।"
           ]
         }
       },
@@ -1827,9 +1827,9 @@
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Structured outputs levels\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">strictness ↗</text>\n\n      <rect x=\"40\"   y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"60\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">1. JSON mode</text>\n      <text x=\"60\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">\"respond with valid JSON\"</text>\n      <text x=\"60\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">+ simple regex / json.loads</text>\n      <text x=\"60\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">↳ shape can drift; needs</text>\n      <text x=\"60\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">   defensive parsing</text>\n      <text x=\"60\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">~90% reliable</text>\n\n      <rect x=\"385\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"405\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">2. Schema-constrained decoding</text>\n      <text x=\"405\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pass JSON Schema; tokenizer</text>\n      <text x=\"405\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">masks invalid tokens at each</text>\n      <text x=\"405\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">step → guaranteed valid output</text>\n      <text x=\"405\" y=\"174\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">OpenAI Structured Outputs,</text>\n      <text x=\"405\" y=\"190\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Anthropic tool-use schemas</text>\n      <text x=\"405\" y=\"208\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">~99% reliable</text>\n\n      <rect x=\"730\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"750\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">3. Typed parsing</text>\n      <text x=\"750\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Parse the constrained output</text>\n      <text x=\"750\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">into typed objects in your code;</text>\n      <text x=\"750\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pydantic / Zod / Instructor /</text>\n      <text x=\"750\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Outlines / Guidance libraries</text>\n      <text x=\"750\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">100% by construction</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 280\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Structured outputs levels\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">strictness ↗</text>\n\n      <rect x=\"40\"   y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#22d3ee\"></rect>\n      <text x=\"60\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">1. JSON mode</text>\n      <text x=\"60\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">\"respond with valid JSON\"</text>\n      <text x=\"60\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">+ simple regex / json.loads</text>\n      <text x=\"60\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">↳ shape can drift; needs</text>\n      <text x=\"60\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">   defensive parsing</text>\n      <text x=\"60\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">valid JSON, shape not enforced</text>\n\n      <rect x=\"385\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#a78bfa\"></rect>\n      <text x=\"405\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">2. Schema-constrained decoding</text>\n      <text x=\"405\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pass JSON Schema; engine</text>\n      <text x=\"405\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">allows only valid tokens at each</text>\n      <text x=\"405\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">step → output follows the schema</text>\n      <text x=\"405\" y=\"174\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">OpenAI Structured Outputs,</text>\n      <text x=\"405\" y=\"190\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Anthropic strict tool use</text>\n      <text x=\"405\" y=\"208\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">output follows the schema</text>\n\n      <rect x=\"730\"  y=\"60\" width=\"330\" height=\"160\" rx=\"8\" fill=\"#0f172a\" stroke=\"#34d399\"></rect>\n      <text x=\"750\" y=\"86\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">3. Typed parsing</text>\n      <text x=\"750\" y=\"108\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Parse the constrained output</text>\n      <text x=\"750\" y=\"128\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">into typed objects in your code;</text>\n      <text x=\"750\" y=\"148\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Pydantic / Zod / Instructor /</text>\n      <text x=\"750\" y=\"164\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#cfd8e6\">Outlines / Guidance libraries</text>\n      <text x=\"750\" y=\"200\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#fbbf24\">typed object in your code</text>\n    </svg>",
           "caption": "JSON mode, schema-constrained decoding, and typed parsing — three guarantees, three reliability tiers.",
-          "captionBn": "এখানে স্ট্রাকচার্ড আউটপুট পাওয়ার তিনটি স্তর স্ট্রিক্টনেস বাড়ার ক্রমে দেখানো হয়েছে: JSON mode (~৯০% রিলায়েবল), স্কিমা-কনস্ট্রেইন্ড ডিকোডিং (~৯৯%, ইনভ্যালিড টোকেন মাস্ক হয়) এবং টাইপড পার্সিং (Pydantic, Zod ইত্যাদি দিয়ে ১০০% বাই কনস্ট্রাকশন)। বাঁ থেকে ডানে গেলে নিশ্চয়তা বাড়ে।"
+          "captionBn": "এখানে স্ট্রাকচার্ড আউটপুট পাওয়ার তিনটি স্তর স্ট্রিক্টনেস বাড়ার ক্রমে দেখানো হয়েছে: JSON mode (বৈধ JSON, কিন্তু আকার বাধ্যতামূলক নয়), স্কিমা-কনস্ট্রেইন্ড ডিকোডিং (স্কিমা মেনে চলে, ইনভ্যালিড টোকেন মাস্ক হয়) এবং টাইপড পার্সিং (Pydantic, Zod ইত্যাদি দিয়ে টাইপড অবজেক্টে বদলানো)। বাঁ থেকে ডানে গেলে নিশ্চয়তা বাড়ে।"
         },
         {
           "type": "heading",
@@ -1839,13 +1839,13 @@
         },
         {
           "type": "paragraph",
-          "html": "The provider compiles the schema into a finite-state machine (or grammar) and, at each generation step, <strong>masks the logits of any token that would violate the schema</strong>. Output is guaranteed to be parseable by construction — no defensive try/except needed.<a class=\"cite\" href=\"#src26\">[26]</a>"
+          "html": "The provider turns the schema into a grammar and, at each generation step, its inference engine <strong>only allows tokens that keep the output valid</strong>. Output that completes normally (no refusal, not cut off) follows the schema. You still need to handle refusals, incomplete responses and API errors. The first request with a new schema is slower because the grammar is built.<a class=\"cite\" href=\"#src26\">[26]</a>"
         },
         {
           "type": "code",
           "lang": "python",
-          "code": "# OpenAI Structured Outputs (Python)\nfrom pydantic import BaseModel\nfrom openai import OpenAI\n\nclass Person(BaseModel):\n    name: str\n    age: int\n    role: str\n\nclient = OpenAI()\nresp = client.beta.chat.completions.parse(\n    model=\"gpt-4o-2024-08-09\",\n    messages=[{\"role\": \"user\", \"content\": \"Extract: Ada Lovelace, 36, mathematician\"}],\n    response_format=Person,\n)\nperson: Person = resp.choices[0].message.parsed\nprint(person.name, person.age)    # typed, valid by construction",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># OpenAI Structured Outputs (Python)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> pydantic </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> BaseModel</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> openai </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> OpenAI</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">class</span><span style=\"color:#F69D50\"> Person</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">BaseModel</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    name: </span><span style=\"color:#6CB6FF\">str</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    age: </span><span style=\"color:#6CB6FF\">int</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    role: </span><span style=\"color:#6CB6FF\">str</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">client </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> OpenAI()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">resp </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.beta.chat.completions.parse(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"gpt-4o-2024-08-09\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"Extract: Ada Lovelace, 36, mathematician\"</span><span style=\"color:#ADBAC7\">}],</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    response_format</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">Person,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">person: Person </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> resp.choices[</span><span style=\"color:#6CB6FF\">0</span><span style=\"color:#ADBAC7\">].message.parsed</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(person.name, person.age)    </span><span style=\"color:#768390\"># typed, valid by construction</span></span></code></pre>"
+          "code": "# OpenAI Structured Outputs (Python)\nfrom pydantic import BaseModel\nfrom openai import OpenAI\n\nclass Person(BaseModel):\n    name: str\n    age: int\n    role: str\n\nclient = OpenAI()\nresp = client.beta.chat.completions.parse(\n    model=\"gpt-4o-2024-08-06\",\n    messages=[{\"role\": \"user\", \"content\": \"Extract: Ada Lovelace, 36, mathematician\"}],\n    response_format=Person,\n)\nperson: Person = resp.choices[0].message.parsed\nprint(person.name, person.age)    # typed object",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># OpenAI Structured Outputs (Python)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> pydantic </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> BaseModel</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">from</span><span style=\"color:#ADBAC7\"> openai </span><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> OpenAI</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">class</span><span style=\"color:#F69D50\"> Person</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">BaseModel</span><span style=\"color:#ADBAC7\">):</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    name: </span><span style=\"color:#6CB6FF\">str</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    age: </span><span style=\"color:#6CB6FF\">int</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    role: </span><span style=\"color:#6CB6FF\">str</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">client </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> OpenAI()</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">resp </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.beta.chat.completions.parse(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"gpt-4o-2024-08-06\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"Extract: Ada Lovelace, 36, mathematician\"</span><span style=\"color:#ADBAC7\">}],</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    response_format</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">Person,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">person: Person </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> resp.choices[</span><span style=\"color:#6CB6FF\">0</span><span style=\"color:#ADBAC7\">].message.parsed</span></span>\n<span class=\"line\"><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(person.name, person.age)    </span><span style=\"color:#768390\"># typed object</span></span></code></pre>"
         },
         {
           "type": "callout",
@@ -1853,7 +1853,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Use structured outputs whenever you can.</strong> They turn LLM calls into well-typed function calls — no regex, no eval, no retry loops. The slight latency bump from FSM lookup is dwarfed by the saved post-validation."
+              "html": "<strong>Use structured outputs whenever you can.</strong> They turn LLM calls into well-typed function calls — far less regex and eval-style cleanup. The first request with a new schema is a little slower while the grammar is built, which is dwarfed by the saved post-validation. You still handle refusals and incomplete responses."
             }
           ]
         }
@@ -1873,7 +1873,7 @@
         },
         {
           "type": "paragraph",
-          "html": "• <strong>JSON mode</strong> — \"respond with JSON\" in the prompt. ~90% reliable, sometimes the shape drifts.<br>\n       • <strong>Schema-constrained</strong> — you pass a strict shape; the AI physically <em>cannot</em> output anything that doesn't fit. ~99.9% reliable.<br>\n       • <strong>Typed parsing</strong> — the schema-constrained output goes directly into a typed object in your code (Pydantic, Zod). 100% guaranteed."
+          "html": "• <strong>JSON mode</strong> — \"respond with JSON\" in the prompt. valid JSON, but sometimes the shape drifts.<br>\n       • <strong>Schema-constrained</strong> — you pass a strict shape; the AI physically <em>cannot</em> output anything that doesn't fit.<br>\n       • <strong>Typed parsing</strong> — the schema-constrained output goes directly into a typed object in your code (Pydantic, Zod)."
         },
         {
           "type": "paragraph",
@@ -1896,15 +1896,15 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>স্কিমা-কনস্ট্রেইন্ড জেনারেশন</strong> কীভাবে কাজ করে: প্রোভাইডার <code>JSON schema</code>-কে একটি ফাইনাইট-স্টেট মেশিন (বা গ্রামার)-এ রূপ দেয়, এবং প্রতিটি ধাপে যে টোকেন স্কিমা ভাঙবে তার লজিট মাস্ক করে দেয়। ফলে আউটপুট নির্মাণগতভাবেই পার্স-যোগ্য, আলাদা <code>try/except</code> দরকার হয় না।"
+          "html": "<strong>স্কিমা-কনস্ট্রেইন্ড জেনারেশন</strong> কীভাবে কাজ করে: প্রোভাইডার <code>JSON schema</code>-কে একটি গ্রামারে রূপ দেয়, এবং প্রতিটি ধাপে তাদের ইনফারেন্স ইঞ্জিন শুধু সেই টোকেনই বাছতে দেয় যা আউটপুট বৈধ রাখে। স্বাভাবিকভাবে শেষ হওয়া আউটপুট স্কিমা মেনে চলে, তবে প্রত্যাখ্যান, অসম্পূর্ণ উত্তর ও API ত্রুটি আপনাকেই সামলাতে হবে। নতুন স্কিমায় প্রথম রিকোয়েস্ট ধীর হয়, কারণ তখন গ্রামার বানানো হয়।"
         },
         {
           "type": "paragraph",
-          "html": "Python-এ সাধারণত <code>Pydantic</code> মডেল (যেমন <code>Person</code> ক্লাসে name, age, role) বানিয়ে <code>response_format=Person</code> দিলে ফলাফল টাইপসহ <code>parsed</code> অবজেক্ট হিসেবে পাওয়া যায়। এতে রেজেক্স, <code>eval</code> বা রিট্রাই লুপ লাগে না।"
+          "html": "Python-এ সাধারণত <code>Pydantic</code> মডেল (যেমন <code>Person</code> ক্লাসে name, age, role) বানিয়ে <code>response_format=Person</code> দিলে ফলাফল টাইপসহ <code>parsed</code> অবজেক্ট হিসেবে পাওয়া যায়। এতে হাতে রেজেক্স বা <code>eval</code> দিয়ে পার্স করার ঝামেলা অনেক কমে।"
         },
         {
           "type": "paragraph",
-          "html": "সুতরাং সম্ভব হলেই স্ট্রাকচার্ড আউটপুট ব্যবহার করুন। FSM লুকআপের জন্য সামান্য ল্যাটেন্সি বাড়ে, কিন্তু পরে ভ্যালিডেশনের ঝামেলা বাঁচায় বলে সেটা সহজেই পুষিয়ে যায়।"
+          "html": "সুতরাং সম্ভব হলেই স্ট্রাকচার্ড আউটপুট ব্যবহার করুন। নতুন স্কিমায় প্রথম রিকোয়েস্টে গ্রামার বানাতে সামান্য ল্যাটেন্সি বাড়ে, কিন্তু পরে ভ্যালিডেশনের ঝামেলা বাঁচায় বলে সেটা সহজেই পুষিয়ে যায়।"
         },
         {
           "type": "analogy",
@@ -1968,11 +1968,11 @@
                 "expect": "The strict answer passes most checks. The loose answer often fails one or more."
               }
             ],
-            "learned": "A program needs an exact format. When you only say \"JSON\", the AI chooses the field names, the types, and the extra text. A <strong>schema</strong> (a description of the exact fields and their types) tells the AI what to return, and the answer becomes much cleaner. But asking does not guarantee it. Some AI providers can force the format, so a wrong answer is not even possible. This is called structured outputs.",
+            "learned": "A program needs an exact format. When you only say \"JSON\", the AI chooses the field names, the types, and the extra text. A <strong>schema</strong> (a description of the exact fields and their types) tells the AI what to return, and the answer becomes much cleaner. But asking does not guarantee it. Some AI providers can force the format, so the answer follows your format. This is called structured outputs.",
             "done": "You have two answers, and you checked that the strict one has age 34 as a number and age null for Sadia.",
             "check": {
               "question": "How is forcing the format different from asking for JSON in a prompt?",
-              "answer": "A prompt only asks the AI to follow the format, so it can still fail. When the provider forces the format, it blocks every word that would break the schema, so the output always has the right shape."
+              "answer": "A prompt only asks the AI to follow the format, so it can still fail. When the provider forces the format, it blocks every word that would break the schema, so a normally finished output has the right shape."
             },
             "challenge": "Add a third person to the note, and give them two roles, for example <em>designer and team lead</em>. The schema allows one role. Ask the AI to follow the schema, and see how it handles this."
           },
@@ -2000,11 +2000,11 @@
                 "expect": "কড়া উত্তরটা বেশিরভাগ চেক পাস করে। ঢিলেঢালা উত্তরটা প্রায়ই এক বা একাধিক চেকে ফেল করে।"
               }
             ],
-            "learned": "প্রোগ্রামের একটা নির্দিষ্ট ফরম্যাট লাগে। আপনি শুধু \"JSON\" বললে ফিল্ডের নাম, টাইপ আর বাড়তি টেক্সট AI নিজে ঠিক করে। <strong>স্কিমা</strong> (কোন ফিল্ড থাকবে আর তার টাইপ কী, তার বিবরণ) AI-কে বলে দেয় কী ফেরত দিতে হবে, আর উত্তর অনেক পরিষ্কার হয়। কিন্তু চাইলেই গ্যারান্টি পাওয়া যায় না। কিছু AI প্রোভাইডার ফরম্যাট জোর করে বসিয়ে দিতে পারে, তখন ভুল উত্তর আসাই সম্ভব না। একে বলে স্ট্রাকচার্ড আউটপুট।",
+            "learned": "প্রোগ্রামের একটা নির্দিষ্ট ফরম্যাট লাগে। আপনি শুধু \"JSON\" বললে ফিল্ডের নাম, টাইপ আর বাড়তি টেক্সট AI নিজে ঠিক করে। <strong>স্কিমা</strong> (কোন ফিল্ড থাকবে আর তার টাইপ কী, তার বিবরণ) AI-কে বলে দেয় কী ফেরত দিতে হবে, আর উত্তর অনেক পরিষ্কার হয়। কিন্তু চাইলেই গ্যারান্টি পাওয়া যায় না। কিছু AI প্রোভাইডার ফরম্যাট জোর করে বসিয়ে দিতে পারে, তখন উত্তর আপনার ফরম্যাট মেনে চলে। একে বলে স্ট্রাকচার্ড আউটপুট।",
             "done": "আপনার কাছে দুটো উত্তর আছে, আর আপনি দেখেছেন কড়া উত্তরে age ৩৪ সংখ্যা হিসেবে আছে এবং সাদিয়ার age null।",
             "check": {
               "question": "ফরম্যাট জোর করে বসানো আর প্রম্পটে JSON চাওয়ার মধ্যে পার্থক্য কী?",
-              "answer": "প্রম্পট শুধু AI-কে ফরম্যাট মানতে বলে, তাই ভুল হতে পারে। প্রোভাইডার যখন ফরম্যাট জোর করে, তখন স্কিমা ভাঙবে এমন প্রতিটা শব্দ আটকে দেয়, তাই আউটপুটের আকার সবসময় ঠিক থাকে।"
+              "answer": "প্রম্পট শুধু AI-কে ফরম্যাট মানতে বলে, তাই ভুল হতে পারে। প্রোভাইডার যখন ফরম্যাট জোর করে, তখন স্কিমা ভাঙবে এমন প্রতিটা শব্দ আটকে দেয়, তাই স্বাভাবিকভাবে শেষ হওয়া আউটপুটের আকার ঠিক থাকে।"
             },
             "challenge": "নোটে তৃতীয় একজন মানুষ যোগ করুন, যার দুটো রোল, যেমন <em>designer আর team lead</em>। স্কিমায় একটাই রোলের জায়গা। AI-কে স্কিমা মানতে বলুন, আর দেখুন সে এটা কীভাবে সামলায়।"
           }
@@ -2107,7 +2107,7 @@
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Function calling loop\">\n      <defs>\n        <marker id=\"arr7\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n\n      <rect x=\"40\"  y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(34,211,238,0.08)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">User prompt</text>\n      <text x=\"130\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">+ tools schema</text>\n\n      <rect x=\"260\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"350\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">LLM</text>\n      <text x=\"350\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">decides → emits JSON</text>\n\n      <rect x=\"480\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"570\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">Your code</text>\n      <text x=\"570\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">parses, runs tool</text>\n\n      <rect x=\"700\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.08)\" stroke=\"#34d399\"></rect>\n      <text x=\"790\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">Tool result</text>\n      <text x=\"790\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">appended to context</text>\n\n      <rect x=\"920\" y=\"60\" width=\"140\" height=\"80\" rx=\"10\" fill=\"rgba(251,113,133,0.08)\" stroke=\"#fb7185\"></rect>\n      <text x=\"990\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fb7185\">LLM</text>\n      <text x=\"990\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">final answer</text>\n\n      <line x1=\"220\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"440\" y1=\"100\" x2=\"480\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"660\" y1=\"100\" x2=\"700\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"880\" y1=\"100\" x2=\"920\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <text x=\"40\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">↑ loop repeats if LLM calls another tool (Anthropic: max_iterations; OpenAI: 'auto' parallel)</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Function calling loop\">\n      <defs>\n        <marker id=\"arr7\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L6,4 L0,8 Z\" fill=\"#94a3b8\"></path></marker>\n      </defs>\n\n      <rect x=\"40\"  y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(34,211,238,0.08)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"130\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#22d3ee\">User prompt</text>\n      <text x=\"130\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">+ tools schema</text>\n\n      <rect x=\"260\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(167,139,250,0.08)\" stroke=\"#a78bfa\"></rect>\n      <text x=\"350\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#a78bfa\">LLM</text>\n      <text x=\"350\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">decides → emits JSON</text>\n\n      <rect x=\"480\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(251,191,36,0.08)\" stroke=\"#fbbf24\"></rect>\n      <text x=\"570\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fbbf24\">Your code</text>\n      <text x=\"570\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">parses, runs tool</text>\n\n      <rect x=\"700\" y=\"60\" width=\"180\" height=\"80\" rx=\"10\" fill=\"rgba(52,211,153,0.08)\" stroke=\"#34d399\"></rect>\n      <text x=\"790\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#34d399\">Tool result</text>\n      <text x=\"790\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">appended to context</text>\n\n      <rect x=\"920\" y=\"60\" width=\"140\" height=\"80\" rx=\"10\" fill=\"rgba(251,113,133,0.08)\" stroke=\"#fb7185\"></rect>\n      <text x=\"990\" y=\"92\" text-anchor=\"middle\" font-family=\"Inter, sans-serif\" font-size=\"13\" font-weight=\"700\" fill=\"#fb7185\">LLM</text>\n      <text x=\"990\" y=\"114\" text-anchor=\"middle\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#cfd8e6\">final answer</text>\n\n      <line x1=\"220\" y1=\"100\" x2=\"260\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"440\" y1=\"100\" x2=\"480\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"660\" y1=\"100\" x2=\"700\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <line x1=\"880\" y1=\"100\" x2=\"920\" y2=\"100\" stroke=\"#94a3b8\" marker-end=\"url(#arr7)\"></line>\n      <text x=\"40\" y=\"180\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">↑ loop repeats if LLM calls another tool (you decide when to stop, e.g. a max-iterations limit)</text>\n    </svg>",
           "caption": "Classic ReAct-style tool loop: model emits a tool-call JSON, your code runs it, the result is appended, repeat.",
           "captionBn": "এই ডায়াগ্রামে টুল-কলিং লুপ দেখানো হয়েছে: ইউজার প্রম্পট ও টুলস স্কিমা থেকে LLM সিদ্ধান্ত নিয়ে JSON এমিট করে, আপনার কোড তা পার্স করে টুল চালায়, আর টুল রেজাল্ট কনটেক্সটে যুক্ত হয়ে আবার LLM-এ যায়। LLM আরেকটি টুল কল করলে লুপ পুনরাবৃত্ত হয়, নইলে চূড়ান্ত উত্তর আসে।"
         },
@@ -2119,7 +2119,7 @@
         },
         {
           "type": "paragraph",
-          "html": "You supply a list of tools as JSON Schema (function name, parameters, description). The model is fine-tuned to emit a special <code>tool_calls</code> field instead of (or alongside) prose. Because the schema is constrained, the arguments are valid by construction. The leading paper is <strong>Toolformer</strong> (Meta, 2023),<a class=\"cite\" href=\"#src18\">[18]</a> with concurrent industry work on <strong>Gorilla</strong> (Berkeley, 2023) for massive API use,<a class=\"cite\" href=\"#src17\">[17]</a> and Anthropic's <strong>tool use</strong> docs.<a class=\"cite\" href=\"#src27\">[27]</a>"
+          "html": "You supply a list of tools as JSON Schema (function name, parameters, description). The API returns a structured tool-call item instead of (or alongside) prose: for Anthropic, a <code>tool_use</code> content block with <code>stop_reason: \"tool_use\"</code>; for OpenAI, a function-call item. Tool arguments follow your JSON Schema only if you turn on strict tool use (<code>strict: true</code>); otherwise validate them in your code. The leading paper is <strong>Toolformer</strong> (Meta, 2023),<a class=\"cite\" href=\"#src18\">[18]</a> with concurrent work on <strong>Gorilla</strong> (Berkeley, 2023) for massive API use,<a class=\"cite\" href=\"#src17\">[17]</a> and Anthropic's <strong>tool use</strong> docs.<a class=\"cite\" href=\"#src27\">[27]</a>"
         },
         {
           "type": "code",
@@ -2133,7 +2133,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Tool design matters as much as model choice.</strong> Tool names and descriptions are inserted verbatim into the prompt. \"Retrieve flights\" is ambiguous; <code>search_flights(origin, destination, depart_date, cabin_class)</code> with documented parameters in the description yields dramatically higher correct-call rates. Iterate on tool descriptions the same way you iterate on prompts."
+              "html": "<strong>Tool design matters as much as model choice.</strong> Tool names and descriptions are turned into part of the prompt by the API. \"Retrieve flights\" is ambiguous; <code>search_flights(origin, destination, depart_date, cabin_class)</code> with documented parameters in the description yields dramatically higher correct-call rates. Iterate on tool descriptions the same way you iterate on prompts."
             }
           ]
         },
@@ -2147,9 +2147,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Parallel tool calls:</strong> OpenAI's <code>tool_choice: \"auto\"</code> can emit multiple independent calls per turn — the model decides what can run concurrently.",
+            "<strong>Parallel tool calls:</strong> models can return several independent tool calls in one turn — the model decides what can run concurrently. Anthropic has this on by default; turn it off with <code>disable_parallel_tool_use</code> inside <code>tool_choice</code>.",
             "<strong>Chain-of-Abstraction:</strong> the model writes <em>placeholders</em> for tool results, then fills them in after parallel execution — saves wall time on multi-step agents.<a class=\"cite\" href=\"#src19\">[19]</a>",
-            "<strong>Computer use:</strong> Sonnet 4.5 and similar can drive a desktop via screenshot + mouse/keyboard primitives — the \"ultimate tool\" with the agent acting as the API."
+            "<strong>Computer use:</strong> Current Claude models (see the computer-use docs for the list) can drive a desktop via screenshot + mouse/keyboard primitives — the \"ultimate tool\" with the agent acting as the API."
           ]
         }
       ],
@@ -2191,11 +2191,11 @@
         },
         {
           "type": "paragraph",
-          "html": "লুপটি ReAct-ধাঁচের: মডেল টুল-কল JSON দেয়, কোড সেটি চালায়, ফলাফল কনভারসেশনে যোগ হয়, আর এভাবে চলতে থাকে। আপনি টুলের তালিকা <code>JSON Schema</code> আকারে দেন (নাম, প্যারামিটার, ডেসক্রিপশন), এবং মডেল প্রোজের বদলে (বা সাথে) <code>tool_calls</code> ফিল্ড বের করতে ফাইন-টিউন করা। স্কিমা কনস্ট্রেইন্ড বলে আর্গুমেন্ট বৈধ হয়। Anthropic-এ <code>stop_reason == \"tool_use\"</code> হলে টুল-ইউজ ব্লক থেকে <code>input</code> নিয়ে নিজের ফাংশন চালাতে হয়।"
+          "html": "লুপটি ReAct-ধাঁচের: মডেল টুল-কল JSON দেয়, কোড সেটি চালায়, ফলাফল কনভারসেশনে যোগ হয়, আর এভাবে চলতে থাকে। আপনি টুলের তালিকা <code>JSON Schema</code> আকারে দেন (নাম, প্যারামিটার, ডেসক্রিপশন), এবং API প্রোজের বদলে (বা সাথে) একটি স্ট্রাকচার্ড টুল-কল আইটেম ফেরত দেয় (Anthropic-এ <code>tool_use</code> ব্লক)। <code>strict: true</code> দিয়ে স্ট্রিক্ট টুল ইউজ চালু করলেই আর্গুমেন্ট স্কিমা মেনে চলে; নইলে নিজের কোডে যাচাই করুন। Anthropic-এ <code>stop_reason == \"tool_use\"</code> হলে টুল-ইউজ ব্লক থেকে <code>input</code> নিয়ে নিজের ফাংশন চালাতে হয়।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>টুল ডিজাইন মডেল বাছাইয়ের মতোই গুরুত্বপূর্ণ।</strong> টুলের নাম ও ডেসক্রিপশন হুবহু প্রম্পটে ঢোকে। \"Retrieve flights\" অস্পষ্ট; কিন্তু <code>search_flights(origin, destination, depart_date, cabin_class)</code> এবং ডেসক্রিপশনে প্রতিটি প্যারামিটারের ব্যাখ্যা থাকলে সঠিক কলের হার অনেক বাড়ে। প্রম্পটের মতোই টুল ডেসক্রিপশন বারবার উন্নত করুন।"
+          "html": "<strong>টুল ডিজাইন মডেল বাছাইয়ের মতোই গুরুত্বপূর্ণ।</strong> টুলের নাম ও ডেসক্রিপশন API-র মাধ্যমে প্রম্পটের অংশ হয়ে যায়। \"Retrieve flights\" অস্পষ্ট; কিন্তু <code>search_flights(origin, destination, depart_date, cabin_class)</code> এবং ডেসক্রিপশনে প্রতিটি প্যারামিটারের ব্যাখ্যা থাকলে সঠিক কলের হার অনেক বাড়ে। প্রম্পটের মতোই টুল ডেসক্রিপশন বারবার উন্নত করুন।"
         },
         {
           "type": "list",
@@ -2441,7 +2441,7 @@
           "type": "heading",
           "level": 3,
           "id": "s8-capability-comparison-2025",
-          "html": "Capability comparison (2025)"
+          "html": "Capability comparison (as of 2025)"
         },
         {
           "type": "table",
@@ -2457,23 +2457,23 @@
             [
               "<strong>GPT-4o / GPT-5</strong>",
               "✓ native",
-              "✓ (input via Whisper; output via TTS, text-to-speech)",
+              "✓ native in+out (audio in and out in one model)",
               "frames",
               "via vision",
-              "High-quality image reasoning<a class=\"cite\" href=\"#src14\">[14]</a>"
+              "High-quality image reasoning"
             ],
             [
               "<strong>Claude 4</strong>",
               "✓ native",
-              "input only (transcribe)",
+              "no audio input (text + image in, text out)",
               "frames",
               "via vision",
-              "Best on chart/diagram reading"
+              "Reads charts and diagrams"
             ],
             [
               "<strong>Gemini 1.5 / 2.5</strong>",
               "✓ native",
-              "✓ native in+out",
+              "✓ native audio input (text responses)",
               "✓ native frames",
               "✓ native",
               "Most natively multimodal<a class=\"cite\" href=\"#src10\">[10]</a><a class=\"cite\" href=\"#src11\">[11]</a><a class=\"cite\" href=\"#src12\">[12]</a>"
@@ -2492,7 +2492,7 @@
               "via external",
               "frames",
               "via vision",
-              "Open-weight, smaller"
+              "Open-weight, 11B and 90B"
             ]
           ]
         },
@@ -2514,7 +2514,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Frontier APIs accept PDFs directly (Claude, Gemini) and render each page as an image. The alternatives:<br>\n  • <strong>Text-extract first:</strong> pymupdf, pdfplumber, unstructured.io — fast, cheap, but loses layout &amp; visuals.<br>\n  • <strong>Vision path:</strong> render pages → multimodal LLM — slower, expensive, but handles scanned docs, tables, charts.<br>\n  • <strong>Hybrid:</strong> text-extract + page-image for tables/figures. This is what production systems ship."
+          "html": "Frontier APIs accept PDFs directly (Claude, Gemini, OpenAI). Claude and OpenAI send the model both the extracted text and an image of each page. The alternatives:<br>\n  • <strong>Text-extract first:</strong> pymupdf, pdfplumber, unstructured.io — fast, cheap, but loses layout &amp; visuals.<br>\n  • <strong>Vision path:</strong> render pages → multimodal LLM — slower, expensive, but handles scanned docs, tables, charts.<br>\n  • <strong>Hybrid:</strong> text-extract + page-image for tables/figures. This is what production systems ship."
         }
       ],
       "layman": [
@@ -2528,7 +2528,7 @@
         },
         {
           "type": "paragraph",
-          "html": "• <strong>Images</strong> get chopped into patches; a vision model (like CLIP) describes each patch as numbers.<br>\n       • <strong>Audio</strong> gets converted into a spectrogram; a speech model transcribes it.<br>\n       • <strong>PDFs</strong> get split into pages; some pages become text (extractable), others become images (scanned)."
+          "html": "• <strong>Images</strong> get chopped into patches; a vision model (like CLIP) describes each patch as numbers.<br>\n       • <strong>Audio</strong> gets turned into numbers (some models first transcribe it with a speech model).<br>\n       • <strong>PDFs</strong> get split into pages; some pages become text (extractable), others become images (scanned)."
         },
         {
           "type": "paragraph",
@@ -2565,9 +2565,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "Gemini 1.5/2.5 সবচেয়ে নেটিভ মাল্টিমোডাল (ছবি, অডিও ইন/আউট, ভিডিও, PDF);",
+            "Gemini 1.5/2.5 সবচেয়ে নেটিভ মাল্টিমোডাল (ছবি, অডিও ইন, ভিডিও, PDF);",
             "GPT-4o ছবিতে ভালো;",
-            "Claude 4 চার্ট ও ডায়াগ্রাম পড়ায় ভালো;",
+            "Claude 4 চার্ট ও ডায়াগ্রাম পড়তে পারে;",
             "Qwen-VL ও Llama 3.2 Vision হলো ওপেন-ওয়েট ভিশন মডেল।"
           ]
         },
@@ -2634,14 +2634,14 @@
                 "do": "Attach the screenshot to the chat. Then copy this prompt, paste it, and press Enter.",
                 "prompt": "Look at the attached image. Copy the table into text, one row per line, with the exact words and symbols. After the copy, list every cell where you are not sure of the text.",
                 "expect": "A text copy of the table: a header and 5 rows. Usually few or no mistakes, and a short list of unsure cells.",
-                "example": "Model | Image | Audio in/out | Video | PDF | Notes\nGPT-4o / GPT-5 | native | input via Whisper, output TTS | frames | via vision | High-quality image reasoning\nClaude 4 | native | input only (transcribe) | frames | via vision | Best on chart/diagram reading\nGemini 1.5 / 2.5 | native | native in+out | native frames | native | Most natively multimodal\n...\nUnsure cells: none."
+                "example": "Model | Image | Audio in/out | Video | PDF | Notes\nGPT-4o / GPT-5 | native | native in+out | frames | via vision | High-quality image reasoning\nClaude 4 | native | no audio input | frames | via vision | Reads charts and diagrams\nGemini 1.5 / 2.5 | native | native audio input | native frames | native | Most natively multimodal\n...\nUnsure cells: none."
               },
               {
                 "chat": "new",
                 "do": "Zoom your browser out to about 30%. Take a new screenshot of the same table. Attach it, then paste the same prompt below and press Enter.",
                 "prompt": "Look at the attached image. Copy the table into text, one row per line, with the exact words and symbols. After the copy, list every cell where you are not sure of the text.",
                 "expect": "More mistakes: missing rows, wrong words, or guessed cells. Many chats also list more unsure cells.",
-                "example": "Model | Image | Audio | Video | PDF | Notes\nGPT-4o | native | Whisper | frames | vision | image reasoning\nClaude 4 | native | input only | ? | via vision | chart reading\nGemini 2.5 | native | native | native | native | multimodal\n...\nUnsure cells: Claude 4 video, most of the Notes column, the last two rows."
+                "example": "Model | Image | Audio | Video | PDF | Notes\nGPT-4o | native | native | frames | vision | image reasoning\nClaude 4 | native | no audio input | ? | via vision | chart reading\nGemini 2.5 | native | native | native | native | multimodal\n...\nUnsure cells: Claude 4 video, most of the Notes column, the last two rows."
               },
               {
                 "chat": "same",
@@ -2671,14 +2671,14 @@
                 "do": "স্ক্রিনশটটা চ্যাটে অ্যাটাচ করুন। তারপর এই প্রম্পটটা কপি করে পেস্ট করুন, Enter চাপুন।",
                 "prompt": "সংযুক্ত image-টা দেখো। table-টা text-এ copy করো, প্রতি লাইনে একটা row, শব্দ আর চিহ্ন ঠিক যেমন আছে তেমন। copy করার পর যে cell-গুলোর text নিয়ে তুমি নিশ্চিত না, সেগুলোর তালিকা দাও।",
                 "expect": "টেবিলের টেক্সট কপি: একটা হেডার আর ৫টা রো। সাধারণত ভুল কম বা নেই, আর অনিশ্চিত সেলের ছোট একটা তালিকা।",
-                "example": "Model | Image | Audio in/out | Video | PDF | Notes\nGPT-4o / GPT-5 | native | input via Whisper, output TTS | frames | via vision | High-quality image reasoning\nClaude 4 | native | input only (transcribe) | frames | via vision | Best on chart/diagram reading\nGemini 1.5 / 2.5 | native | native in+out | native frames | native | Most natively multimodal\n...\nযে cell নিয়ে নিশ্চিত না: নেই।"
+                "example": "Model | Image | Audio in/out | Video | PDF | Notes\nGPT-4o / GPT-5 | native | native in+out | frames | via vision | High-quality image reasoning\nClaude 4 | native | no audio input | frames | via vision | Reads charts and diagrams\nGemini 1.5 / 2.5 | native | native audio input | native frames | native | Most natively multimodal\n...\nযে cell নিয়ে নিশ্চিত না: নেই।"
               },
               {
                 "chat": "new",
                 "do": "ব্রাউজার জুম কমিয়ে প্রায় ৩০% করুন। একই টেবিলের নতুন স্ক্রিনশট নিন। সেটা অ্যাটাচ করুন, তারপর নিচের একই প্রম্পট পেস্ট করে Enter চাপুন।",
                 "prompt": "সংযুক্ত image-টা দেখো। table-টা text-এ copy করো, প্রতি লাইনে একটা row, শব্দ আর চিহ্ন ঠিক যেমন আছে তেমন। copy করার পর যে cell-গুলোর text নিয়ে তুমি নিশ্চিত না, সেগুলোর তালিকা দাও।",
                 "expect": "ভুল বেশি: রো বাদ পড়া, ভুল শব্দ, বা আন্দাজ করা সেল। অনেক চ্যাট অনিশ্চিত সেলও বেশি দেখায়।",
-                "example": "Model | Image | Audio | Video | PDF | Notes\nGPT-4o | native | Whisper | frames | vision | image reasoning\nClaude 4 | native | input only | ? | via vision | chart reading\nGemini 2.5 | native | native | native | native | multimodal\n...\nযে cell নিয়ে নিশ্চিত না: Claude 4-এর video, Notes column-এর বেশিরভাগ, শেষ দুটো row।"
+                "example": "Model | Image | Audio | Video | PDF | Notes\nGPT-4o | native | native | frames | vision | image reasoning\nClaude 4 | native | no audio input | ? | via vision | chart reading\nGemini 2.5 | native | native | native | native | multimodal\n...\nযে cell নিয়ে নিশ্চিত না: Claude 4-এর video, Notes column-এর বেশিরভাগ, শেষ দুটো row।"
               },
               {
                 "chat": "same",
@@ -2736,13 +2736,13 @@
             },
             {
               "term": "Hybrid retrieval",
-              "meaning": "Using keyword search and embedding search together. On standard retrieval tests, it usually beats either one alone."
+              "meaning": "Using keyword search and embedding search together. On standard retrieval tests, it often beats either one alone."
             }
           ],
           "remember": [
             "Stage 1: embeddings narrow millions of documents down to a few hundred, fast.",
             "Stage 2: a reranker picks the best few. It is more accurate, but slower.",
-            "On standard tests, keyword search (BM25) plus embeddings usually beats either alone."
+            "On standard tests, keyword search (BM25) plus embeddings often beats either alone."
           ]
         },
         "bn": {
@@ -2774,13 +2774,13 @@
             },
             {
               "term": "হাইব্রিড রিট্রিভাল (hybrid retrieval)",
-              "meaning": "কিওয়ার্ড সার্চ আর এমবেডিং সার্চ একসাথে ব্যবহার করা। প্রচলিত রিট্রিভাল পরীক্ষায় এটা সাধারণত যেকোনো একটার চেয়ে ভালো করে।"
+              "meaning": "কিওয়ার্ড সার্চ আর এমবেডিং সার্চ একসাথে ব্যবহার করা। প্রচলিত রিট্রিভাল পরীক্ষায় এটা প্রায়ই যেকোনো একটার চেয়ে ভালো করে।"
             }
           ],
           "remember": [
             "ধাপ ১: এমবেডিং লাখ লাখ ডকুমেন্ট থেকে দ্রুত কয়েকশোতে নামিয়ে আনে।",
             "ধাপ ২: রিরেংকার সেরা কয়েকটি বাছে। এটা বেশি নির্ভুল, কিন্তু ধীর।",
-            "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে সাধারণত যেকোনো একটার চেয়ে ভালো ফল আসে।"
+            "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে প্রায়ই যেকোনো একটার চেয়ে ভালো ফল আসে।"
           ]
         }
       },
@@ -2805,7 +2805,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Encode each side (query and document) <em>independently</em> into a fixed-size vector. Similarity is a dot product or cosine — O(1) per pair, allowing billion-scale approximate nearest-neighbour (ANN) search with libraries such as FAISS and ScaNN, or an HNSW graph index. Modern examples: <strong>OpenAI text-embedding-3-large</strong>, <strong>Cohere embed-v3</strong>, <strong>BGE-M3</strong>, <strong>E5-Mistral-7B</strong>.<a class=\"cite\" href=\"#src21\">[21]</a>"
+          "html": "Encode each side (query and document) <em>independently</em> into a fixed-size vector. Similarity is a dot product or cosine — O(1) per pair, allowing billion-scale approximate nearest-neighbour (ANN) search with libraries such as FAISS and ScaNN, or an HNSW graph index. Modern examples: <strong>OpenAI text-embedding-3-large</strong>, <strong>Cohere embed-v4</strong>, <strong>BGE-M3</strong>, <strong>E5-Mistral-7B</strong>.<a class=\"cite\" href=\"#src21\">[21]</a>"
         },
         {
           "type": "code",
@@ -2821,7 +2821,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Rerankers concatenate query + document and run full transformer attention across them — much more accurate but O(n) per pair. Best used as the second stage on top-K=100 candidates.<a class=\"cite\" href=\"#src22\">[22]</a> Recent papers show LLM-based rerankers (even small open ones like Qwen2.5-7B) can match proprietary rerankers with listwise ranking prompts."
+          "html": "Rerankers concatenate query + document and run full transformer attention across them — much more accurate but O(n) per pair. Best used as the second stage on top-K=100 candidates.<a class=\"cite\" href=\"#src22\">[22]</a> Recent papers show fine-tuned open 7B listwise rerankers (e.g. RankZephyr, REARANK-7B on Qwen2.5-7B) can come close to GPT-4-based rerankers."
         },
         {
           "type": "table",
@@ -2834,7 +2834,7 @@
             [
               "Speed",
               "Encode once, search billions in ms",
-              "~50–200 ms per (q, d) pair"
+              "Slower: a full model runs for each (q, d) pair; time depends on model size and hardware"
             ],
             [
               "Accuracy",
@@ -2859,7 +2859,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The state-of-the-art 2025 stack:</strong> embed with <code>E5-Mistral-7B-instruct</code> or <code>BGE-M3</code> for open weights, rerank with <code>Qwen3-Reranker</code> or <code>Cohere Rerank v3</code>, generate with your favourite LLM. Hybrid retrieval (sparse BM25 keyword scoring + dense embeddings) consistently beats either alone on BEIR, a standard retrieval benchmark."
+              "html": "<strong>A current stack:</strong> embed with <code>E5-Mistral-7B-instruct</code> or <code>BGE-M3</code> for open weights, rerank with <code>Qwen3-Reranker</code> or <code>Cohere Rerank</code> (v3.5 / v4 / v5), generate with your favourite LLM. Hybrid retrieval (sparse BM25 keyword scoring + dense embeddings) is a commonly recommended first stage and often improves on either alone; BEIR, a standard retrieval benchmark, shows BM25 is a strong zero-shot baseline."
             }
           ]
         }
@@ -2871,7 +2871,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Embeddings: a fancy index.</strong> Imagine every document in your library gets summarised into a list of numbers — say 1,000 numbers — that captures its <em>meaning</em>. Similar documents get similar numbers. Now you can search by meaning: \"find me stuff related to climate insurance\" finds documents that <em>mean</em> similar things, even if they don't share any words. The trick is: you can compare 1,000 numbers against a million other documents in milliseconds. That's how ChatGPT's \"Search\" can scan your entire Drive in seconds."
+          "html": "<strong>Embeddings: a fancy index.</strong> Imagine every document in your library gets summarised into a list of numbers — say 1,000 numbers — that captures its <em>meaning</em>. Similar documents get similar numbers. Now you can search by meaning: \"find me stuff related to climate insurance\" finds documents that <em>mean</em> similar things, even if they don't share any words. The trick is: you can compare 1,000 numbers against a million other documents in milliseconds. That's the kind of technique behind many \"search my documents\" features."
         },
         {
           "type": "paragraph",
@@ -2887,7 +2887,7 @@
         },
         {
           "type": "paragraph",
-          "html": "This is what powers every \"ChatGPT, search my docs\" feature, every customer-support bot that knows your product manual, every legal-AI tool that scans case law."
+          "html": "This is the kind of setup behind many \"search my docs\" features, customer-support bots that know your product manual, and legal-AI tools that scan case law."
         },
         {
           "type": "analogy",
@@ -2906,11 +2906,11 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>এমবেডিং (বাই-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট আলাদা আলাদা করে নির্দিষ্ট আকারের ভেক্টর বানানো হয়। সাদৃশ্য মাপা হয় ডট প্রোডাক্ট বা কোসাইন দিয়ে, প্রতি জোড়ায় O(১), তাই <code>FAISS</code>, <code>ScaNN</code> বা <code>HNSW</code> দিয়ে বিলিয়ন-স্কেল ANN সার্চ সম্ভব। উদাহরণ: <code>text-embedding-3-large</code>, <code>embed-v3</code>, <code>BGE-M3</code>, <code>E5-Mistral-7B</code>।"
+          "html": "<strong>এমবেডিং (বাই-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট আলাদা আলাদা করে নির্দিষ্ট আকারের ভেক্টর বানানো হয়। সাদৃশ্য মাপা হয় ডট প্রোডাক্ট বা কোসাইন দিয়ে, প্রতি জোড়ায় O(১), তাই <code>FAISS</code>, <code>ScaNN</code> বা <code>HNSW</code> দিয়ে বিলিয়ন-স্কেল ANN সার্চ সম্ভব। উদাহরণ: <code>text-embedding-3-large</code>, <code>embed-v4</code>, <code>BGE-M3</code>, <code>E5-Mistral-7B</code>।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>রিরেংকার (ক্রস-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট জুড়ে পুরো ট্রান্সফর্মার অ্যাটেনশন চালায়। অনেক নিখুঁত, কিন্তু প্রতি জোড়ায় O(n) এবং প্রায় ৫০–২০০ ms, তাই এটি দ্বিতীয় ধাপে, শীর্ষ প্রায় ১০০ ক্যান্ডিডেটের ওপর ব্যবহার করা উচিত।"
+          "html": "<strong>রিরেংকার (ক্রস-এনকোডার):</strong> কুয়েরি ও ডকুমেন্ট জুড়ে পুরো ট্রান্সফর্মার অ্যাটেনশন চালায়। অনেক নিখুঁত, কিন্তু প্রতি জোড়ায় O(n) এবং সময় মডেলের আকার ও হার্ডওয়্যারের ওপর নির্ভর করে, তাই এটি দ্বিতীয় ধাপে, শীর্ষ প্রায় ১০০ ক্যান্ডিডেটের ওপর ব্যবহার করা উচিত।"
         },
         {
           "type": "list",
@@ -2922,7 +2922,7 @@
         },
         {
           "type": "paragraph",
-          "html": "2025-এর আধুনিক স্ট্যাক: ওপেন-ওয়েটে <code>E5-Mistral-7B-instruct</code> বা <code>BGE-M3</code> দিয়ে এমবেড, <code>Qwen3-Reranker</code> বা <code>Cohere Rerank v3</code> দিয়ে রিরেংক, তারপর পছন্দের LLM দিয়ে উত্তর তৈরি। হাইব্রিড রিট্রিভাল (স্পার্স BM25 + ডেন্স) BEIR-এ প্রায় সবসময় একা কোনোটির চেয়ে ভালো ফল দেয়।"
+          "html": "বর্তমান একটি আধুনিক স্ট্যাক: ওপেন-ওয়েটে <code>E5-Mistral-7B-instruct</code> বা <code>BGE-M3</code> দিয়ে এমবেড, <code>Qwen3-Reranker</code> বা <code>Cohere Rerank</code> (v3.5 / v4 / v5) দিয়ে রিরেংক, তারপর পছন্দের LLM দিয়ে উত্তর তৈরি। হাইব্রিড রিট্রিভাল (স্পার্স BM25 + ডেন্স) প্রায়ই একা কোনোটির চেয়ে ভালো ফল দেয়; BEIR বেঞ্চমার্ক দেখায় BM25 নিজেই একটি শক্ত বেসলাইন।"
         },
         {
           "type": "analogy",
@@ -3097,7 +3097,7 @@
           ],
           "remember": [
             "Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions.",
-            "They can use 5–50 times more tokens, so set a thinking budget.",
+            "They can use many times more tokens, so set a thinking budget.",
             "For most chat, extraction, and RAG, a standard model with careful prompting wins."
           ]
         },
@@ -3135,7 +3135,7 @@
           ],
           "remember": [
             "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন; চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়।",
-            "এরা ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
+            "এরা অনেক গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
             "বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এ ভালো প্রম্পটিংসহ সাধারণ মডেলই সবচেয়ে ভালো কাজ করে।"
           ]
         }
@@ -3161,7 +3161,7 @@
         },
         {
           "type": "paragraph",
-          "html": "OpenAI's o1 paper showed that <strong>reinforcement learning on chain-of-thought traces</strong> dramatically improves math/physics/code reasoning — the model learns to think longer on hard problems.<a class=\"cite\" href=\"#src13\">[13]</a> DeepSeek-R1 replicated this with pure RL (no SFT), open-weights.<a class=\"cite\" href=\"#src7\">[7]</a> Anthropic's \"extended thinking\" exposes this as a togglable parameter.<a class=\"cite\" href=\"#src28\">[28]</a>"
+          "html": "OpenAI's o1 system card says o1 is trained with <strong>large-scale reinforcement learning</strong> to reason using chain of thought.<a class=\"cite\" href=\"#src13\">[13]</a> DeepSeek-R1-Zero showed reasoning can emerge from pure RL (no SFT); DeepSeek-R1 adds cold-start data before RL. Both are open-weight.<a class=\"cite\" href=\"#src7\">[7]</a> Anthropic's \"extended thinking\" exposes this as a parameter on models that support it."
         },
         {
           "type": "heading",
@@ -3224,7 +3224,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Reasoning models can use 5–50× more tokens per query. A \"thinking budget\" cap is essential — set it to your latency/cost ceiling."
+                  "html": "Reasoning models can use many times more tokens per query, depending on the task and thinking budget. A \"thinking budget\" cap is essential — set it to your latency/cost ceiling."
                 }
               ]
             },
@@ -3233,7 +3233,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "TTFT is often slower (longer prefill). Streaming the thinking tokens can help UX."
+                  "html": "TTFT is often slower because the model writes thinking tokens before the answer. Streaming the thinking tokens can help UX."
                 }
               ]
             },
@@ -3260,8 +3260,8 @@
         {
           "type": "code",
           "lang": "python",
-          "code": "# Anthropic extended thinking\nresp = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    thinking={\"type\": \"enabled\", \"budget_tokens\": 10000},\n    messages=[{\"role\": \"user\", \"content\": \"Prove sqrt(2) is irrational\"}],\n)\nfor block in resp.content:\n    if block.type == \"thinking\":  print(\"…\", block.thinking)\n    if block.type == \"text\":      print(block.text)",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic extended thinking</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">resp </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.messages.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"claude-sonnet-4-5\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    thinking</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">{</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"enabled\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"budget_tokens\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">10000</span><span style=\"color:#ADBAC7\">},</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"Prove sqrt(2) is irrational\"</span><span style=\"color:#ADBAC7\">}],</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> block </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> resp.content:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"thinking\"</span><span style=\"color:#ADBAC7\">:  </span><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#96D0FF\">\"…\"</span><span style=\"color:#ADBAC7\">, block.thinking)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"text\"</span><span style=\"color:#ADBAC7\">:      </span><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(block.text)</span></span></code></pre>"
+          "code": "# Anthropic extended thinking (manual budget; older models)\nresp = client.messages.create(\n    model=\"claude-sonnet-4-5\",\n    max_tokens=16000,        # must be larger than budget_tokens\n    thinking={\"type\": \"enabled\", \"budget_tokens\": 10000},\n    messages=[{\"role\": \"user\", \"content\": \"Prove sqrt(2) is irrational\"}],\n)\nfor block in resp.content:\n    if block.type == \"thinking\":  print(\"…\", block.thinking)\n    if block.type == \"text\":      print(block.text)",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic extended thinking (manual budget; older models)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">resp </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.messages.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#96D0FF\">\"claude-sonnet-4-5\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    max_tokens</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">16000</span><span style=\"color:#ADBAC7\">,        </span><span style=\"color:#768390\"># must be larger than budget_tokens</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    thinking</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">{</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"enabled\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"budget_tokens\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">10000</span><span style=\"color:#ADBAC7\">},</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[{</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"Prove sqrt(2) is irrational\"</span><span style=\"color:#ADBAC7\">}],</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> block </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> resp.content:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"thinking\"</span><span style=\"color:#ADBAC7\">:  </span><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#96D0FF\">\"…\"</span><span style=\"color:#ADBAC7\">, block.thinking)</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    if</span><span style=\"color:#ADBAC7\"> block.type </span><span style=\"color:#F47067\">==</span><span style=\"color:#96D0FF\"> \"text\"</span><span style=\"color:#ADBAC7\">:      </span><span style=\"color:#6CB6FF\">print</span><span style=\"color:#ADBAC7\">(block.text)</span></span></code></pre>"
         },
         {
           "type": "callout",
@@ -3269,7 +3269,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Don't reach for reasoning models by reflex.</strong> They're 5–50× more expensive and slower. Use them when (1) the task is math/code/agentic, (2) standard models have plateaued on your benchmark, and (3) you can afford the latency. For most chat / extraction / RAG, a standard model + careful prompting wins."
+              "html": "<strong>Don't reach for reasoning models by reflex.</strong> They can cost many times more and are slower. Use them when (1) the task is math/code/agentic, (2) standard models have plateaued on your benchmark, and (3) you can afford the latency. For most chat / extraction / RAG, a standard model + careful prompting wins."
             }
           ]
         },
@@ -3280,15 +3280,15 @@
           "type": "heading",
           "level": 3,
           "id": "s10-the-frontier-as-of-q3-2025",
-          "html": "The frontier as of Q3 2025"
+          "html": "The frontier (as of 2025)"
         },
         {
           "type": "list",
           "ordered": false,
           "items": [
-            "Reasoning models are the default for hard tasks: GPT-5, o3, DeepSeek-R1, Claude 4 with extended thinking.<a class=\"cite\" href=\"#src13\">[13]</a><a class=\"cite\" href=\"#src7\">[7]</a>",
+            "Reasoning models are the default for hard tasks: GPT-5, o3, DeepSeek-R1, Claude models with extended thinking.",
             "Open-weight models match closed on many benchmarks (Qwen3, Llama 3.1 405B, DeepSeek-V3).<a class=\"cite\" href=\"#src9\">[9]</a><a class=\"cite\" href=\"#src3\">[3]</a><a class=\"cite\" href=\"#src6\">[6]</a>",
-            "Multimodal is now table stakes: Gemini 2.5, GPT-4o, Claude 4, Qwen3-VL all native.<a class=\"cite\" href=\"#src12\">[12]</a>",
+            "Image input is now table stakes: Gemini, GPT-4o, Claude and Qwen3-VL all accept images natively.",
             "Long context (1M+) is real but doesn't replace good retrieval.",
             "Tool-use agents are the dominant deployment pattern."
           ]
@@ -3309,7 +3309,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Where reasoning models win dramatically:</strong> math, logic, multi-step coding, planning complex tasks, scientific questions. OpenAI's o1/o3, Claude with \"extended thinking,\" DeepSeek-R1 — these all spend 5–50× more \"thinking time\" than regular models, and the quality jump is real."
+          "html": "<strong>Where reasoning models win dramatically:</strong> math, logic, multi-step coding, planning complex tasks, scientific questions. OpenAI's o1/o3, Claude with \"extended thinking,\" DeepSeek-R1 — these all spend far more \"thinking time\" than regular models, and the quality jump is real."
         },
         {
           "type": "paragraph",
@@ -3317,7 +3317,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The catch:</strong> reasoning models cost a lot. They're 5–50× more expensive per query, and they take longer. So pick them deliberately, like calling a math tutor for the hard homework but doing the easy drills yourself."
+          "html": "<strong>The catch:</strong> reasoning models cost a lot. They can be many times more expensive per query, and they take longer. So pick them deliberately, like calling a math tutor for the hard homework but doing the easy drills yourself."
         },
         {
           "type": "paragraph",
@@ -3340,7 +3340,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>প্রশিক্ষণের কৌশল:</strong> চেইন-অফ-থটের ওপর রিইনফোর্সমেন্ট লার্নিং (RL) প্রয়োগ করলে ম্যাথ, ফিজিক্স ও কোড রিজনিং অনেক ভালো হয়, কারণ মডেল কঠিন সমস্যায় বেশি ভাবতে শেখে। OpenAI-এর o1 এটি দেখিয়েছে; DeepSeek-R1 শুধু RL দিয়ে (SFT ছাড়া) ওপেন-ওয়েট আকারে তা পুনরায় করেছে; আর Anthropic-এ <code>extended thinking</code> একটি চালু/বন্ধ করার প্যারামিটার। প্রসেস রিওয়ার্ড মডেলও ধাপ-স্তরের পুরস্কার দিয়ে ম্যাথে আউটকাম-অনলি সুপারভিশনকে ছাড়িয়ে গেছে।"
+          "html": "<strong>প্রশিক্ষণের কৌশল:</strong> চেইন-অফ-থটের ওপর রিইনফোর্সমেন্ট লার্নিং (RL) প্রয়োগ করে মডেলকে যুক্তি দিয়ে ভাবতে শেখানো হয়। OpenAI-এর o1 সিস্টেম কার্ড বলছে o1 বড় আকারের RL দিয়ে প্রশিক্ষিত; DeepSeek-R1-Zero দেখিয়েছে শুধু RL দিয়ে (SFT ছাড়া) রিজনিং তৈরি হতে পারে, আর DeepSeek-R1 RL-এর আগে কোল্ড-স্টার্ট ডেটা যোগ করে (দুটোই ওপেন-ওয়েট); আর Anthropic-এ যেসব মডেল সমর্থন করে সেখানে <code>extended thinking</code> একটি প্যারামিটার। প্রসেস রিওয়ার্ড মডেলও ধাপ-স্তরের পুরস্কার দিয়ে ম্যাথে আউটকাম-অনলি সুপারভিশনকে ছাড়িয়ে গেছে।"
         },
         {
           "type": "list",
@@ -3352,7 +3352,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ইঞ্জিনিয়ারিং ট্রেড-অফ:</strong> প্রতি কুয়েরিতে ৫–৫০ গুণ বেশি টোকেন লাগতে পারে, তাই ল্যাটেন্সি/খরচের সীমা অনুযায়ী <code>budget_tokens</code> (থিংকিং বাজেট) সীমা দেওয়া জরুরি। প্রিফিল লম্বা হওয়ায় TTFT প্রায়ই ধীর হয়; থিংকিং টোকেন স্ট্রিম করলে UX ভালো হয়। ডিস্টিলেশনের মাধ্যমে R1-এর ক্ষমতা Qwen 1.5B–32B-এর মতো ছোট ওপেন মডেলে আনা গেছে।"
+          "html": "<strong>ইঞ্জিনিয়ারিং ট্রেড-অফ:</strong> কাজ আর থিংকিং বাজেট অনুযায়ী প্রতি কুয়েরিতে অনেক গুণ বেশি টোকেন লাগতে পারে, তাই ল্যাটেন্সি/খরচের সীমা অনুযায়ী <code>budget_tokens</code> (থিংকিং বাজেট) সীমা দেওয়া জরুরি। উত্তরের আগে থিংকিং টোকেন লেখায় TTFT প্রায়ই ধীর হয়; থিংকিং টোকেন স্ট্রিম করলে UX ভালো হয়। ডিস্টিলেশনের মাধ্যমে R1-এর ক্ষমতা Qwen 1.5B–32B-এর মতো ছোট ওপেন মডেলে আনা গেছে।"
         },
         {
           "type": "paragraph",
@@ -3432,7 +3432,7 @@
             "learned": "In step 2 the AI wrote its thinking first, so each small step was easy and you could check it. This is the idea behind <strong>reasoning models</strong> (models that write many thinking words before the final answer). The thinking costs more words, so it costs more money and time. It helps on multi-step problems, but on \"capital of Japan\" it only wasted words.",
             "done": "You have two bakery answers and the correct amount, $130.50, from your calculator.",
             "check": {
-              "question": "Why do reasoning models use 5 to 50 times more tokens, and when is it worth it?",
+              "question": "Why do reasoning models use many more tokens, and when is it worth it?",
               "answer": "They write thinking tokens before the final answer, so they spend more compute on each question. This helps on hard maths, code, and planning. It adds cost and waiting time, so for simple chat or extraction a standard model is better."
             },
             "challenge": "If your chat has a Think or Reasoning mode, turn it on and send the step 1 prompt again in a new chat. Does the answer change? Does it take longer?"
@@ -3471,7 +3471,7 @@
             "learned": "ধাপ 2-এ AI আগে তার ভাবনা লিখেছে, তাই প্রতিটা ছোট ধাপ সহজ ছিল আর আপনি সেগুলো মিলিয়ে দেখতে পেরেছেন। এটাই <strong>রিজনিং মডেলের</strong> ধারণা (যে মডেল শেষ উত্তরের আগে অনেক ভাবনার শব্দ লেখে)। ভাবনা লিখতে বেশি শব্দ লাগে, তাই খরচ আর সময়ও বেশি লাগে। বহু ধাপের সমস্যায় এটা কাজে লাগে, কিন্তু \"জাপানের রাজধানী\"-তে শুধু শব্দ নষ্ট হলো।",
             "done": "আপনার কাছে বেকারির দুটো উত্তর আছে, আর ক্যালকুলেটর থেকে পাওয়া সঠিক অঙ্ক $১৩০.৫০।",
             "check": {
-              "question": "রিজনিং মডেল কেন ৫ থেকে ৫০ গুণ বেশি টোকেন ব্যবহার করে, আর কখন সেটা সার্থক?",
+              "question": "রিজনিং মডেল কেন অনেক বেশি টোকেন ব্যবহার করে, আর কখন সেটা সার্থক?",
               "answer": "শেষ উত্তরের আগে তারা থিংকিং টোকেন লেখে, তাই প্রতিটা প্রশ্নে বেশি কম্পিউট খরচ হয়। কঠিন অঙ্ক, কোড আর প্ল্যানিংয়ে এটা কাজে লাগে। এতে খরচ আর অপেক্ষা বাড়ে, তাই সহজ চ্যাট বা তথ্য বের করার কাজে সাধারণ মডেল ভালো।"
             },
             "challenge": "আপনার চ্যাটে Think বা Reasoning মোড থাকলে সেটা চালু করুন, আর নতুন চ্যাটে ধাপ 1-এর প্রম্পট আবার পাঠান। উত্তর কি বদলায়? সময় কি বেশি লাগে?"
