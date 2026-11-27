@@ -121,7 +121,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>SSE (Server-Sent Events):</strong> the simplest; works through any HTTP proxy; one-way (server→client).",
+            "<strong>SSE (Server-Sent Events):</strong> the simplest; it is plain HTTP, so it usually passes through proxies (some legacy proxies drop long-lived connections); one-way (server→client).",
             "<strong>WebSockets:</strong> bidirectional; needed for voice and collaborative UIs; heavier handshake.",
             "<strong>HTTP chunked transfer:</strong> a fallback for proxies that strip SSE headers."
           ]
@@ -273,7 +273,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<em>SSE</em> (সবচেয়ে সহজ, যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে, একমুখী);",
+            "<em>SSE</em> (সবচেয়ে সহজ, সাধারণ HTTP প্রক্সির মধ্য দিয়ে সাধারণত কাজ করে (কিছু পুরনো প্রক্সি দীর্ঘ কানেকশন কেটে দেয়), একমুখী);",
             "<em>ওয়েবসকেট</em> (দ্বিমুখী; ভয়েস ও সহযোগী UI-এর জন্য দরকার);",
             "<em>HTTP চাঙ্কড ট্রান্সফার</em> (SSE হেডার স্ট্রিপ করে দেয় এমন প্রক্সির জন্য ফলব্যাক)।"
           ]
@@ -869,22 +869,22 @@
       "kind": "mcq",
       "answer": 0,
       "en": {
-        "q": "Which streaming transport is the simplest, one-way (server to client), and works through any HTTP proxy?",
+        "q": "Which streaming transport is the simplest, one-way (server to client), and works through ordinary HTTP proxies?",
         "options": [
           "SSE (Server-Sent Events)",
           "HTTP chunked transfer",
           "WebSockets"
         ],
-        "why": "SSE is the simplest transport, it is one-way, and it works through any HTTP proxy. WebSockets are bidirectional, and HTTP chunked transfer is a fallback."
+        "why": "SSE is the simplest transport, it is one-way, and it works through ordinary HTTP proxies. WebSockets are bidirectional, and HTTP chunked transfer is a fallback."
       },
       "bn": {
-        "q": "কোন স্ট্রিমিং ট্রান্সপোর্ট সবচেয়ে সহজ, একমুখী (সার্ভার থেকে ক্লায়েন্ট) আর যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে?",
+        "q": "কোন স্ট্রিমিং ট্রান্সপোর্ট সবচেয়ে সহজ, একমুখী (সার্ভার থেকে ক্লায়েন্ট) আর সাধারণ HTTP প্রক্সির মধ্য দিয়ে কাজ করে?",
         "options": [
           "SSE (Server-Sent Events)",
           "HTTP চাঙ্কড ট্রান্সফার",
           "ওয়েবসকেট"
         ],
-        "why": "SSE সবচেয়ে সহজ ট্রান্সপোর্ট, একমুখী, আর যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে। ওয়েবসকেট দ্বিমুখী, আর HTTP চাঙ্কড ট্রান্সফার হলো ফলব্যাক।"
+        "why": "SSE সবচেয়ে সহজ ট্রান্সপোর্ট, একমুখী, আর সাধারণ HTTP প্রক্সির মধ্য দিয়ে কাজ করে। ওয়েবসকেট দ্বিমুখী, আর HTTP চাঙ্কড ট্রান্সফার হলো ফলব্যাক।"
       }
     },
     {
