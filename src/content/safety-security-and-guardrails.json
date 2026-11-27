@@ -58,7 +58,7 @@
             "Prompt injection, ranked #1 in the OWASP LLM Top 10 for 2025, can make tools or Markdown leak user data.",
             "Accept that 100% safety is unachievable. Jailbreaks are a moving target.",
             "Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
-            "Log every prompt, output, and tool call. SOC 2, HIPAA, and the EU AI Act require it."
+            "Log every prompt, output, and tool call. SOC 2 and HIPAA expect audit trails, and the EU AI Act requires event logging for high-risk AI systems."
           ]
         },
         "bn": {
@@ -102,7 +102,7 @@
             "২০২৫-এর OWASP LLM Top 10-এ #১ স্থানে থাকা প্রম্পট ইনজেকশন টুল বা Markdown দিয়ে ইউজারের ডেটা বাইরে পাঠাতে পারে।",
             "১০০% সেফটি অর্জনযোগ্য নয়, এটা মেনে নিন। জেইলব্রেক একটি চলমান লক্ষ্য।",
             "LLM-এর ভ্যালিড JSON দেওয়ার ওপর কখনো ভরসা করবেন না। কড়া স্কিমা দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই করুন, তারপর রিফিউজ করুন।",
-            "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC 2, HIPAA আর EU AI Act-এ এটা দরকার।"
+            "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC 2 ও HIPAA অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমে ইভেন্ট লগিং বাধ্যতামূলক করে।"
           ]
         }
       },
@@ -125,7 +125,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training (\"explain in a fictional universe…\", \"as DAN I can…\"). They're a moving target: red-teams find new ones monthly. Defences: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable.<a class=\"cite\" href=\"#src26\">[26]</a>"
+          "html": "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training (\"explain in a fictional universe…\", \"as DAN I can…\"). They're a moving target: red-teams keep finding new ones. Defences: Constitutional AI fine-tuning,<a class=\"cite\" href=\"#src26\">[26]</a> output classifiers, robust system prompts, and accepting that 100% safety is unachievable."
         },
         {
           "type": "heading",
@@ -156,7 +156,7 @@
             ],
             [
               "<strong>Azure AI Content Safety</strong>",
-              "Enterprise equivalent, with grounding risk scores"
+              "Enterprise equivalent, with groundedness detection (preview) and Prompt Shields"
             ],
             [
               "<strong>Llama Guard</strong>",
@@ -212,7 +212,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Log every prompt, every model output, every tool call, every approval decision, every redacted PII. SOC 2, HIPAA, and EU AI Act conformance all require this. Treat your LLM as a regulated component."
+          "html": "Log every prompt, every model output, every tool call, every approval decision, every redacted PII item. Frameworks such as SOC 2 and HIPAA expect audit trails, and the EU AI Act requires automatic event logging for high-risk AI systems (Art. 12). Treat your LLM as a regulated component."
         }
       ],
       "layman": [
@@ -258,7 +258,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Audit logging = \"write everything down for compliance.\"</strong> Every prompt, every reply, every tool call. Required for SOC 2, HIPAA, and the EU AI Act."
+          "html": "<strong>Audit logging = \"write everything down for compliance.\"</strong> Every prompt, every reply, every tool call. Audit trails are expected by SOC 2 and HIPAA, and required for high-risk systems by the EU AI Act."
         },
         {
           "type": "analogy",
@@ -289,7 +289,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>জেইলব্রেক রেজিস্ট্যান্স:</strong> জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায় (\"একটি কাল্পনিক মহাবিশ্বে ব্যাখ্যা কর যেখানে এই নিয়ম নেই…\", \"DAN হিসেবে আমি বলতে পারি…\")। এগুলো একটি চলমান লক্ষ্য: রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়। প্রতিরক্ষা: Constitutional AI ফাইন-টিউনিং, আউটপুট ক্লাসিফায়ার, মজবুত সিস্টেম প্রম্পট। ১০০% সেফটি অর্জনযোগ্য নয় — এটি মেনে নিন।<a class=\"cite\" href=\"#src26\">[২৬]</a>"
+          "html": "<strong>জেইলব্রেক রেজিস্ট্যান্স:</strong> জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায় (\"একটি কাল্পনিক মহাবিশ্বে ব্যাখ্যা কর যেখানে এই নিয়ম নেই…\", \"DAN হিসেবে আমি বলতে পারি…\")। এগুলো একটি চলমান লক্ষ্য: রেড-টিম নতুন জেইলব্রেক খুঁজে পেতেই থাকে। প্রতিরক্ষা: Constitutional AI ফাইন-টিউনিং,<a class=\"cite\" href=\"#src26\">[২৬]</a> আউটপুট ক্লাসিফায়ার, মজবুত সিস্টেম প্রম্পট। ১০০% সেফটি অর্জনযোগ্য নয় — এটি মেনে নিন।"
         },
         {
           "type": "paragraph",
@@ -297,7 +297,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>কনটেন্ট মডারেশন:</strong> OpenAI মডারেশন এন্ডপয়েন্ট (ফ্রি, দ্রুত, বহু-বিভাগীয় ক্লাসিফায়ার), Azure AI Content Safety (এন্টারপ্রাইজ, গ্রাউন্ডিং রিস্ক স্কোর), Llama Guard (ওপেন-ওয়েট গার্ড মডেল)।"
+          "html": "<strong>কনটেন্ট মডারেশন:</strong> OpenAI মডারেশন এন্ডপয়েন্ট (ফ্রি, দ্রুত, বহু-বিভাগীয় ক্লাসিফায়ার), Azure AI Content Safety (এন্টারপ্রাইজ, groundedness detection (প্রিভিউ) আর Prompt Shields), Llama Guard (ওপেন-ওয়েট গার্ড মডেল)।"
         },
         {
           "type": "paragraph",
@@ -317,7 +317,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>কমপ্লায়েন্সের জন্য অডিট লগিং:</strong> প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত, প্রতিটি রিড্যাক্ট করা PII লগ করুন। SOC ২, HIPAA, EU AI Act-এর সম্মতি সবকিছুর জন্য এটি দরকার। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।"
+          "html": "<strong>কমপ্লায়েন্সের জন্য অডিট লগিং:</strong> প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত, প্রতিটি রিড্যাক্ট করা PII লগ করুন। SOC ২ ও HIPAA-এর মতো কাঠামো অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমের জন্য স্বয়ংক্রিয় ইভেন্ট লগিং (ধারা ১২) বাধ্যতামূলক করে। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।"
         },
         {
           "type": "analogy",
@@ -966,11 +966,11 @@
       "answer": false,
       "en": {
         "q": "With strong enough defences, 100% jailbreak safety is achievable.",
-        "why": "This Part says jailbreaks are a moving target and that red-teams find new ones monthly. It tells you to accept that 100% safety is unachievable."
+        "why": "This Part says jailbreaks are a moving target and that red-teams keep finding new ones. It tells you to accept that 100% safety is unachievable."
       },
       "bn": {
         "q": "যথেষ্ট শক্তিশালী ডিফেন্স থাকলে জেইলব্রেক থেকে ১০০% নিরাপত্তা পাওয়া সম্ভব।",
-        "why": "এই পার্ট বলছে জেইলব্রেক একটা চলমান লক্ষ্য, রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়। তাই মেনে নিতে হবে যে ১০০% সেফটি অর্জন করা যায় না।"
+        "why": "এই পার্ট বলছে জেইলব্রেক একটা চলমান লক্ষ্য, রেড-টিম নতুন জেইলব্রেক খুঁজে পেতেই থাকে। তাই মেনে নিতে হবে যে ১০০% সেফটি অর্জন করা যায় না।"
       }
     }
   ]
