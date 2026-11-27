@@ -44,7 +44,7 @@
             },
             {
               "term": "Last mile problem",
-              "meaning": "Going from a demo that is 60% working to a product that is 95%+ reliable takes far longer than the demo."
+              "meaning": "Going from a demo that is about 80% working to a product that is 95%+ reliable takes far longer than the demo."
             }
           ],
           "remember": [
@@ -79,7 +79,7 @@
             },
             {
               "term": "লাস্ট মাইল প্রবলেম (last mile problem)",
-              "meaning": "৬০% কাজ করা ডেমো থেকে ৯৫%+ নির্ভরযোগ্য প্রোডাক্টে যেতে ডেমোর চেয়ে অনেক বেশি সময় লাগে।"
+              "meaning": "প্রায় ৮০% কাজ করা ডেমো থেকে ৯৫%+ নির্ভরযোগ্য প্রোডাক্টে যেতে ডেমোর চেয়ে অনেক বেশি সময় লাগে।"
             }
           ],
           "remember": [
@@ -200,7 +200,7 @@
           "ordered": false,
           "items": [
             "<strong>Setting expectations:</strong> define success with concrete business metrics (percentage of tickets automated, response time saved). Set a usefulness threshold the product must clear before going live.",
-            "<strong>Milestone planning:</strong> evaluate existing off-the-shelf models first; the stronger they already are at your task, the less work remains. Expect the <strong>last mile problem</strong> — going from a 60% working demo to a 95%+ reliable product takes far longer than the initial demo.",
+            "<strong>Milestone planning:</strong> evaluate existing off-the-shelf models first; the stronger they already are at your task, the less work remains. Expect the <strong>last mile problem</strong> — going from an 80% working demo to a 95%+ reliable product takes far longer than the initial demo.",
             "<strong>Maintenance:</strong> foundation models and their pricing change quickly. Plan for context lengths, costs, and capabilities to keep shifting, and build so that you can swap models or providers."
           ]
         },
@@ -312,7 +312,7 @@
         },
         {
           "type": "paragraph",
-          "html": "একটা AI প্রোডাক্ট বানানোর আগে ভাবা দরকার: এটা না বানালে কি আপনি পিছিয়ে পড়বেন, নাকি এটা বানালে লাভ-productivity বাড়বে? প্রথম ৬০% কাজ করানো সহজ, কিন্তু সেটাকে ৯৫%+ নির্ভরযোগ্য বানানো — যাকে বইটা <strong>last mile problem</strong> বলছে — অনেক বেশি সময় লাগে।"
+          "html": "একটা AI প্রোডাক্ট বানানোর আগে ভাবা দরকার: এটা না বানালে কি আপনি পিছিয়ে পড়বেন, নাকি এটা বানালে লাভ-productivity বাড়বে? প্রথম প্রায় ৮০% কাজ করানো সহজ, কিন্তু সেটাকে ৯৫%+ নির্ভরযোগ্য বানানো — যাকে বইটা <strong>last mile problem</strong> বলছে — অনেক বেশি সময় লাগে।"
         },
         {
           "type": "analogy",
@@ -474,7 +474,7 @@
         },
         {
           "type": "paragraph",
-          "html": "English dominates internet text, accounting for nearly half of Common Crawl, roughly eight times more than the next most common language, Russian. Languages with little representation in training data are called <strong>low-resource languages</strong>. This imbalance shows up directly in benchmark results. GPT-4 scores much higher on English MMLU questions (a multiple-choice knowledge benchmark) than on the same questions in Telugu. It also performs far better at math problems posed in English than in Burmese or Amharic."
+          "html": "English dominates internet text, accounting for roughly 40–45% of Common Crawl pages in recent crawls (about 42.6% in CC-MAIN-2026-43), several times more than the next most common language, Russian (about 6.3%). Languages with little representation in training data are called <strong>low-resource languages</strong>. This imbalance shows up directly in benchmark results. GPT-4 scores much higher on English MMLU questions (a multiple-choice knowledge benchmark) than on the same questions in Telugu. It also performs far better at math problems posed in English than in Burmese or Amharic."
         },
         {
           "type": "list",
@@ -724,7 +724,7 @@
             "Post-training has two stages: supervised finetuning first, then preference finetuning.",
             "The same prompt can give different answers. Fixing temperature, top-p, top-k, and a seed helps but never removes this.",
             "For a required output format, finetuning is the most reliable fix and the most expensive. Prompting is the least reliable.",
-            "RLHF does not reliably fix hallucination. On some benchmarks it made InstructGPT's hallucination rate worse."
+            "RLHF does not reliably fix hallucination. Compared with SFT alone, it raised InstructGPT's hallucination rate on some benchmarks (per Huyen), though InstructGPT hallucinated less than GPT-3 overall."
           ]
         },
         "bn": {
@@ -767,7 +767,7 @@
             "পোস্ট-ট্রেনিংয়ে দুই ধাপ: আগে সুপারভাইজড ফাইনটিউনিং, তারপর প্রেফারেন্স ফাইনটিউনিং।",
             "একই প্রম্পটে আলাদা উত্তর আসতে পারে। temperature, top-p, top-k আর সিড ঠিক করলে কমে, কিন্তু পুরো যায় না।",
             "নির্দিষ্ট ফরম্যাটের আউটপুটের জন্য ফাইনটিউনিং সবচেয়ে নির্ভরযোগ্য ও সবচেয়ে দামি। প্রম্পটিং সবচেয়ে কম নির্ভরযোগ্য।",
-            "RLHF হ্যালুসিনেশন নির্ভরযোগ্যভাবে ঠিক করে না। কিছু বেঞ্চমার্কে InstructGPT-এর হ্যালুসিনেশন বরং বেড়েছিল।"
+            "RLHF হ্যালুসিনেশন নির্ভরযোগ্যভাবে ঠিক করে না। শুধু SFT-এর তুলনায় কিছু বেঞ্চমার্কে InstructGPT-এর হ্যালুসিনেশন বরং বেড়েছিল (Huyen-এর মতে), যদিও GPT-3-এর চেয়ে সামগ্রিকভাবে কমই ছিল।"
           ]
         }
       },
@@ -850,7 +850,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Hallucination</strong>, where a model confidently states something false or unverifiable, has two competing explanations. One view says the model cannot tell its own earlier generated text apart from the original prompt. An early guess is then accepted as fact and built upon (self-delusion), which can snowball into increasingly confident errors. The other view says hallucination comes from training the model to mimic labeler answers that draw on knowledge the model never had. That effectively teaches it to make things up. Neither hypothesis fully explains the phenomenon, and techniques like RLHF do not reliably fix it. RLHF improved InstructGPT's helpfulness overall, but it made its hallucination rate on some benchmarks worse."
+          "html": "<strong>Hallucination</strong>, where a model confidently states something false or unverifiable, has two competing explanations. One view says the model cannot tell its own earlier generated text apart from the original prompt. An early guess is then accepted as fact and built upon (self-delusion), which can snowball into increasingly confident errors. The other view says hallucination comes from training the model to mimic labeler answers that draw on knowledge the model never had. That effectively teaches it to make things up. Neither hypothesis fully explains the phenomenon, and techniques like RLHF do not reliably fix it. RLHF improved InstructGPT's helpfulness overall. Compared with SFT alone, it raised the hallucination rate on some benchmarks (per Huyen), although InstructGPT hallucinated less than GPT-3 overall."
         }
       ],
       "layman": [
@@ -890,7 +890,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "এই probabilistic প্রকৃতির কারণেই দুইটা সমস্যা হয়: <strong>inconsistency</strong> (একই প্রশ্নে বারবার ভিন্ন উত্তর) আর <strong>hallucination</strong> (আত্মবিশ্বাসের সাথে ভুল তথ্য দেওয়া)। RLHF-এর মতো কৌশলও hallucination পুরোপুরি ঠিক করে না — কিছু ক্ষেত্রে বরং বাড়িয়ে দিতে পারে।"
+              "html": "এই probabilistic প্রকৃতির কারণেই দুইটা সমস্যা হয়: <strong>inconsistency</strong> (একই প্রশ্নে বারবার ভিন্ন উত্তর) আর <strong>hallucination</strong> (আত্মবিশ্বাসের সাথে ভুল তথ্য দেওয়া)। RLHF-এর মতো কৌশলও hallucination পুরোপুরি ঠিক করে না — শুধু SFT-এর তুলনায় কিছু ক্ষেত্রে বরং বাড়িয়ে দিতে পারে।"
             }
           ]
         }
@@ -1317,7 +1317,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Pointwise evaluation scores each model independently and ranks by score. <strong>Comparative evaluation</strong> instead has evaluators compare two models' outputs for the same prompt side by side and pick a winner, the way LMSYS's Chatbot Arena does. This is often easier for subjective quality judgments. It's simpler to say which of two songs is better than to give each song a precise score. From a history of pairwise \"matches,\" a rating algorithm (such as Elo or Bradley–Terry) converts win rates into an overall ranking."
+          "html": "Pointwise evaluation scores each model independently and ranks by score. <strong>Comparative evaluation</strong> instead has evaluators compare two models' outputs for the same prompt side by side and pick a winner, the way Chatbot Arena (now run as Arena, originally from LMSYS) does. This is often easier for subjective quality judgments. It's simpler to say which of two songs is better than to give each song a precise score. From a history of pairwise \"matches,\" a rating algorithm (such as Elo or Bradley–Terry) converts win rates into an overall ranking."
         },
         {
           "type": "list",
@@ -1632,7 +1632,7 @@
         },
         {
           "type": "paragraph",
-          "html": "There are thousands of benchmarks, and new ones appear as old ones saturate. Public leaderboards (Hugging Face's Open LLM Leaderboard, Stanford's HELM) try to summarize model quality by averaging scores across a small, curated set of benchmarks. This is useful for filtering out clearly weak models, but it has three weaknesses. Leaderboards rarely explain their selection process. Strongly correlated benchmarks can double-count the same capability. And averaging treats every benchmark as equally important, even though it may not be for your application."
+          "html": "There are thousands of benchmarks, and new ones appear as old ones saturate. Public leaderboards (Stanford's HELM, and Hugging Face's Open LLM Leaderboard, which was retired in March 2025) try to summarize model quality by averaging scores across a small, curated set of benchmarks. This is useful for filtering out clearly weak models, but it has three weaknesses. Leaderboards rarely explain their selection process. Strongly correlated benchmarks can double-count the same capability. And averaging treats every benchmark as equally important, even though it may not be for your application."
         },
         {
           "type": "callout",
@@ -1948,7 +1948,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones. But a longer context window does not mean every position in it is used equally well. Research with <strong>needle-in-a-haystack (NIAH)</strong> tests shows that models recall information near the <strong>beginning or end</strong> of a prompt far more reliably than information buried in the middle. If a model's accuracy drops as prompts get longer, shortening or re-ordering the prompt &mdash; putting critical instructions first or last &mdash; can help."
+          "html": "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones. But a longer context window does not mean every position in it is used equally well. Research on long-context use (for example the &ldquo;Lost in the Middle&rdquo; paper) and <strong>needle-in-a-haystack (NIAH)</strong> tests show that models recall information near the <strong>beginning or end</strong> of a prompt far more reliably than information buried in the middle. If a model's accuracy drops as prompts get longer, shortening or re-ordering the prompt &mdash; putting critical instructions first or last &mdash; can help."
         }
       ],
       "layman": [
@@ -2327,7 +2327,7 @@
             },
             {
               "term": "Hybrid search",
-              "meaning": "Running a cheap retriever first, then reranking with a more precise one."
+              "meaning": "Running keyword search and embedding search together and merging their results."
             },
             {
               "term": "Text-to-SQL",
@@ -2366,7 +2366,7 @@
             },
             {
               "term": "হাইব্রিড সার্চ (hybrid search)",
-              "meaning": "আগে সস্তা রিট্রিভার চালানো, তারপর আরও নির্ভুল একটি দিয়ে আবার সাজানো।"
+              "meaning": "কিওয়ার্ড সার্চ আর এমবেডিং সার্চ একসাথে চালিয়ে ফলাফল মিলিয়ে নেওয়া।"
             },
             {
               "term": "টেক্সট-টু-SQL (text-to-SQL)",
@@ -2444,7 +2444,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Because each approach has blind spots, production systems often combine them. Running a cheap retriever first and reranking with a more precise one is called <strong>hybrid search</strong>. <strong>Reciprocal rank fusion</strong> can merge rankings from multiple retrievers into one list."
+          "html": "Because each approach has blind spots, production systems often combine them. Combining term-based and embedding-based retrieval, then merging their ranked lists, is called <strong>hybrid search</strong>. A cheap first-pass retriever followed by a more precise reranker is a separate pattern, <strong>reranking</strong>. <strong>Reciprocal rank fusion</strong> can merge rankings from multiple retrievers into one list."
         },
         {
           "type": "heading",
@@ -3557,7 +3557,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Model distillation trains a smaller <em>student</em> model to imitate a larger <em>teacher</em> model, usually by training the student on data the teacher generated. The classic motivation is deployment cost: DistilBERT keeps 97% of BERT's language understanding at 40% of the size and 60% of the latency. Alpaca is a well-known instruction-tuning example — a 7-billion-parameter Llama finetuned on outputs from a 175-billion-parameter model. Not every model can be legally distilled: many providers' terms of service forbid using their outputs to train a competing model."
+          "html": "Model distillation trains a smaller <em>student</em> model to imitate a larger <em>teacher</em> model, usually by training the student on data the teacher generated. The classic motivation is deployment cost: DistilBERT is 40% smaller and 60% faster than BERT while keeping 97% of its language understanding. Alpaca is a well-known instruction-tuning example — a 7-billion-parameter Llama finetuned on outputs from a 175-billion-parameter model. Not every model can be legally distilled: many providers' terms of service forbid using their outputs to train a competing model."
         },
         {
           "type": "heading",
@@ -4852,7 +4852,7 @@
     {
       "n": 1,
       "url": "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
-      "text": "Chip Huyen, \"AI Engineering: Building Applications with Foundation Models\", O'Reilly Media, 2024"
+      "text": "Chip Huyen, \"AI Engineering: Building Applications with Foundation Models\", O'Reilly Media, 2025"
     },
     {
       "n": 2,
