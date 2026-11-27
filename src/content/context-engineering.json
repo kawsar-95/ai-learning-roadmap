@@ -48,11 +48,11 @@
             },
             {
               "term": "Lost in the Middle",
-              "meaning": "A research finding: models recall the start and end of a long prompt well, but do close to random in the middle."
+              "meaning": "A research finding: models often do best on the start and end of a long prompt, and much worse in the middle."
             }
           ],
           "remember": [
-            "A system prompt needs a floor of ~1–2K tokens. Tool definitions need ~1–3K.",
+            "Rule of thumb (no source): a system prompt needs about 1–2K tokens, and tool definitions about 1–3K.",
             "Put the most important information at the start or the end of the prompt, not the middle.",
             "Keep history small and cap retrieval chunks. Quality beats quantity.",
             "Always reserve tokens for the answer, or it is cut off and fails silently."
@@ -87,11 +87,11 @@
             },
             {
               "term": "Lost in the Middle",
-              "meaning": "একটি গবেষণার ফল: লম্বা প্রম্পটের শুরু আর শেষের তথ্য মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে ফল প্রায় র‍্যান্ডমের কাছাকাছি।"
+              "meaning": "একটি গবেষণার ফল: লম্বা প্রম্পটের শুরু আর শেষের তথ্য মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে ফল উল্লেখযোগ্যভাবে খারাপ হয়।"
             }
           ],
           "remember": [
-            "সিস্টেম প্রম্পটে কমপক্ষে ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।",
+            "অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): সিস্টেম প্রম্পটে প্রায় ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।",
             "যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।",
             "হিস্ট্রি ছোট রাখুন আর রিট্রিভালের অংশ সীমিত করুন। পরিমাণের চেয়ে মান ভালো।",
             "উত্তরের জন্য টোকেন আগেই রাখুন, নইলে উত্তর কেটে গিয়ে নীরবে ব্যর্থ হয়।"
@@ -125,8 +125,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "→ <strong>System prompt: floor of ~1–2K tokens.</strong> Persona + schema + hard constraints. Larger prompts cost more per call AND dilute attention.<a class=\"cite\" href=\"#src14\">[14]</a>",
-            "→ <strong>Tool definitions: floor of ~1–3K tokens.</strong> Only include tools the current step might call; load specialised tools lazily.",
+            "→ <strong>System prompt: about 1–2K tokens (rule of thumb).</strong> Persona + schema + hard constraints. Larger prompts cost more per call AND dilute attention.<a class=\"cite\" href=\"#src14\">[14]</a>",
+            "→ <strong>Tool definitions: about 1–3K tokens (rule of thumb).</strong> Only include tools the current step might call; load specialised tools lazily.",
             "→ <strong>Retrieval: budget = window − system − tools − current turn − reserved output.</strong> Cap retrieval chunks; prefer quality over quantity.",
             "→ <strong>History: shrink aggressively.</strong> Use summarization (§2) or selective replay to keep it bounded.",
             "→ <strong>Output reservation: </strong> always reserve enough tokens for the response. Forcing truncation produces silent failures."
@@ -135,8 +135,8 @@
         {
           "type": "code",
           "lang": "python",
-          "code": "# A budget calculator\ndef budget(window: int, tools: list[dict], retrieved: str,\n          system: str, history: str, max_out: int) -> dict:\n    return {\n        \"system\":      len(enc.encode(system)),\n        \"tools\":       sum(len(enc.encode(json.dumps(t))) for t in tools),\n        \"retrieval\":   len(enc.encode(retrieved)),\n        \"history\":     len(enc.encode(history)),\n        \"max_output\":  max_out,\n        \"total\":       sum((len(enc.encode(x)) for x in [system, history, retrieved])) + max_out,\n        \"headroom\":    window - \"total\",\n    }",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># A budget calculator</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> budget</span><span style=\"color:#ADBAC7\">(window: </span><span style=\"color:#6CB6FF\">int</span><span style=\"color:#ADBAC7\">, tools: list[</span><span style=\"color:#6CB6FF\">dict</span><span style=\"color:#ADBAC7\">], retrieved: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">          system: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">, history: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">, max_out: </span><span style=\"color:#6CB6FF\">int</span><span style=\"color:#ADBAC7\">) -> </span><span style=\"color:#6CB6FF\">dict</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> {</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"system\"</span><span style=\"color:#ADBAC7\">:      </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(system)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"tools\"</span><span style=\"color:#ADBAC7\">:       </span><span style=\"color:#6CB6FF\">sum</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(json.dumps(t))) </span><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> t </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> tools),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"retrieval\"</span><span style=\"color:#ADBAC7\">:   </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(retrieved)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"history\"</span><span style=\"color:#ADBAC7\">:     </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(history)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"max_output\"</span><span style=\"color:#ADBAC7\">:  max_out,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"total\"</span><span style=\"color:#ADBAC7\">:       </span><span style=\"color:#6CB6FF\">sum</span><span style=\"color:#ADBAC7\">((</span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(x)) </span><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> x </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> [system, history, retrieved])) </span><span style=\"color:#F47067\">+</span><span style=\"color:#ADBAC7\"> max_out,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"headroom\"</span><span style=\"color:#ADBAC7\">:    window </span><span style=\"color:#F47067\">-</span><span style=\"color:#96D0FF\"> \"total\"</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    }</span></span></code></pre>"
+          "code": "# A budget calculator\nimport json\nimport tiktoken\n\nenc = tiktoken.get_encoding(\"cl100k_base\")\n\ndef budget(window: int, tools: list[dict], retrieved: str,\n          system: str, history: str, max_out: int) -> dict:\n    parts = {\n        \"system\":      len(enc.encode(system)),\n        \"tools\":       sum(len(enc.encode(json.dumps(t))) for t in tools),\n        \"retrieval\":   len(enc.encode(retrieved)),\n        \"history\":     len(enc.encode(history)),\n        \"max_output\":  max_out,\n    }\n    total = sum(parts.values())\n    return {**parts, \"total\": total, \"headroom\": window - total}",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># A budget calculator</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> json</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">import</span><span style=\"color:#ADBAC7\"> tiktoken</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">enc </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> tiktoken.get_encoding(</span><span style=\"color:#96D0FF\">\"cl100k_base\"</span><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"></span>\n<span class=\"line\"><span style=\"color:#F47067\">def</span><span style=\"color:#DCBDFB\"> budget</span><span style=\"color:#ADBAC7\">(window: </span><span style=\"color:#6CB6FF\">int</span><span style=\"color:#ADBAC7\">, tools: list[</span><span style=\"color:#6CB6FF\">dict</span><span style=\"color:#ADBAC7\">], retrieved: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">          system: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">, history: </span><span style=\"color:#6CB6FF\">str</span><span style=\"color:#ADBAC7\">, max_out: </span><span style=\"color:#6CB6FF\">int</span><span style=\"color:#ADBAC7\">) -> </span><span style=\"color:#6CB6FF\">dict</span><span style=\"color:#ADBAC7\">:</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    parts </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> {</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"system\"</span><span style=\"color:#ADBAC7\">:      </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(system)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"tools\"</span><span style=\"color:#ADBAC7\">:       </span><span style=\"color:#6CB6FF\">sum</span><span style=\"color:#ADBAC7\">(</span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(json.dumps(t))) </span><span style=\"color:#F47067\">for</span><span style=\"color:#ADBAC7\"> t </span><span style=\"color:#F47067\">in</span><span style=\"color:#ADBAC7\"> tools),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"retrieval\"</span><span style=\"color:#ADBAC7\">:   </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(retrieved)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"history\"</span><span style=\"color:#ADBAC7\">:     </span><span style=\"color:#6CB6FF\">len</span><span style=\"color:#ADBAC7\">(enc.encode(history)),</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">        \"max_output\"</span><span style=\"color:#ADBAC7\">:  max_out,</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    }</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    total </span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\"> sum</span><span style=\"color:#ADBAC7\">(parts.values())</span></span>\n<span class=\"line\"><span style=\"color:#F47067\">    return</span><span style=\"color:#ADBAC7\"> {</span><span style=\"color:#F47067\">*</span><span style=\"color:#F47067\">*</span><span style=\"color:#ADBAC7\">parts, </span><span style=\"color:#96D0FF\">\"total\"</span><span style=\"color:#ADBAC7\">: total, </span><span style=\"color:#96D0FF\">\"headroom\"</span><span style=\"color:#ADBAC7\">: window </span><span style=\"color:#F47067\">-</span><span style=\"color:#ADBAC7\"> total}</span></span></code></pre>"
         },
         {
           "type": "callout",
@@ -144,7 +144,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The \"Lost in the Middle\" effect.</strong> Liu et al. (2023) showed that models reliably recall information at the <em>beginning</em> and <em>end</em> of long contexts but perform close to random in the middle.<a class=\"cite\" href=\"#src1\">[1]</a> This is the single most important budget heuristic: <strong>put the things you most need retrieved in the start or the end</strong> of your prompt, not buried in the middle. (§7 expands this.)"
+              "html": "<strong>The \"Lost in the Middle\" effect.</strong> Liu et al. (2023) showed that performance is often highest when the information is at the <em>beginning</em> or <em>end</em> of a long context, and degrades significantly in the middle.<a class=\"cite\" href=\"#src1\">[1]</a> This is the single most important budget heuristic: <strong>put the things you most need retrieved in the start or the end</strong> of your prompt, not buried in the middle. (§7 expands this.)"
             }
           ]
         }
@@ -197,8 +197,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>সিস্টেম প্রম্পট:</strong> কমপক্ষে ~১–২K টোকেন লাগে (পারসোনা, নিয়ম, স্কিমা)। বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়।",
-            "<strong>টুল ডেফিনিশন:</strong> ~১–৩K টোকেন। শুধু সেই টুলই রাখুন যা এই ধাপে লাগতে পারে; বিশেষ টুল দরকারের সময় লোড করুন।",
+            "<strong>সিস্টেম প্রম্পট:</strong> প্রায় ~১–২K টোকেন লাগে (অভিজ্ঞতালব্ধ নিয়ম; পারসোনা, নিয়ম, স্কিমা)। বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়।",
+            "<strong>টুল ডেফিনিশন:</strong> ~১–৩K টোকেন (অভিজ্ঞতালব্ধ নিয়ম)। শুধু সেই টুলই রাখুন যা এই ধাপে লাগতে পারে; বিশেষ টুল দরকারের সময় লোড করুন।",
             "<strong>রিট্রিভাল:</strong> বাজেট = উইন্ডো − সিস্টেম − টুল − বর্তমান টার্ন − রিজার্ভ করা আউটপুট। পরিমাণের চেয়ে মান বেশি গুরুত্বপূর্ণ।",
             "<strong>হিস্ট্রি:</strong> কঠোরভাবে ছোট রাখুন — সামারাইজেশন (§২) ব্যবহার করুন।",
             "<strong>আউটপুট রিজার্ভেশন:</strong> উত্তরের জন্য টোকেন আগেই আলাদা করে রাখুন, নইলে উত্তর মাঝপথে কেটে গিয়ে নীরবে ব্যর্থ হয়।"
@@ -206,7 +206,7 @@
         },
         {
           "type": "paragraph",
-          "html": "সবচেয়ে গুরুত্বপূর্ণ সতর্কতা হলো <strong>\"Lost in the Middle\"</strong> (Liu et al., ২০২৩): মডেল লম্বা কনটেক্সটের শুরু ও শেষের তথ্য ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে প্রায় র‍্যান্ডমের কাছাকাছি ফল দেয়। তাই যা সবচেয়ে জরুরি, তা শুরুতে বা শেষে রাখুন। আর বাজেট ছাড়িয়ে গেলে আগে রিট্রিভাল কমান — সিস্টেম প্রম্পট নয়, কারণ রিট্রিভালই সাধারণত সবচেয়ে বড় অংশ। (বিস্তারিত §7-এ।)"
+          "html": "সবচেয়ে গুরুত্বপূর্ণ সতর্কতা হলো <strong>\"Lost in the Middle\"</strong> (Liu et al., ২০২৩): লম্বা কনটেক্সটের শুরু বা শেষে তথ্য থাকলে মডেলের ফল প্রায়ই সবচেয়ে ভালো হয়, আর মাঝখানে তা উল্লেখযোগ্যভাবে কমে যায়। তাই যা সবচেয়ে জরুরি, তা শুরুতে বা শেষে রাখুন। আর বাজেট ছাড়িয়ে গেলে আগে রিট্রিভাল কমান — সিস্টেম প্রম্পট নয়, কারণ রিট্রিভালই সাধারণত সবচেয়ে বড় অংশ। (বিস্তারিত §7-এ।)"
         },
         {
           "type": "analogy",
@@ -484,7 +484,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Hierarchical summarisation</strong> — the technique Anthropic's prompt-engineering docs recommend: keep a <em>rolling</em> summary of the very oldest turns, a <em>mid-resolution</em> summary of the middle turns, and the <em>recent</em> turns verbatim. This preserves both long-arc continuity and recent detail.<a class=\"cite\" href=\"#src14\">[14]</a>"
+              "html": "<strong>Hierarchical summarisation</strong> — a common extension of compaction (Anthropic describes compaction: summarise the history and restart with the summary): keep a <em>rolling</em> summary of the very oldest turns, a <em>mid-resolution</em> summary of the middle turns, and the <em>recent</em> turns verbatim. This preserves both long-arc continuity and recent detail.<a class=\"cite\" href=\"#src14\">[14]</a>"
             }
           ]
         },
@@ -547,7 +547,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>The best production trick:</strong> hierarchical summarization. Keep a tight summary of the very oldest stuff, a mid-resolution summary of the middle, and the recent turns verbatim. Like an executive briefing: one page, then three pages, then the full transcript. The AI can ask for the right level of detail as needed."
+          "html": "<strong>A common production trick:</strong> hierarchical summarization. Keep a tight summary of the very oldest stuff, a mid-resolution summary of the middle, and the recent turns verbatim. Like an executive briefing: one page, then three pages, then the full transcript. The AI can ask for the right level of detail as needed."
         },
         {
           "type": "analogy",
@@ -579,11 +579,11 @@
         },
         {
           "type": "paragraph",
-          "html": "শুধু \"চ্যাটটা সারসংক্ষেপ করুন\" বললে ঝাপসা ফল আসে। তাই একটি <strong>স্ট্রাকচার্ড স্কিমা</strong> ব্যবহার করুন — যেমন <code>user_goal</code>, <code>decisions_made</code>, <code>open_questions</code>, <code>key_facts_learned</code>, <code>entities</code>, <code>user_preferences</code>, <code>tool_results_to_remember</code>। সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
+          "html": "শুধু \"চ্যাটটা সারসংক্ষেপ করুন\" বললে ঝাপসা ফল আসে। তাই একটি <strong>স্ট্রাকচার্ড স্কিমা</strong> ব্যবহার করুন — যেমন <code>user_goal</code>, <code>decisions_made</code>, <code>open_questions</code>, <code>key_facts_learned</code>, <code>entities</code>, <code>user_preferences</code>, <code>tool_results_to_remember</code>। কমপ্রেশন রেশিও কাজভেদে আলাদা, তবে এর মূল্য হলো তথ্য হারানো।"
         },
         {
           "type": "paragraph",
-          "html": "<strong>হায়ারার্কিক্যাল সামারাইজেশন</strong> হলো সবচেয়ে ভালো কৌশল: একদম পুরোনো টার্নের রোলিং সারসংক্ষেপ, মাঝের টার্নের মিড-রেজোলিউশন সারসংক্ষেপ, আর সাম্প্রতিক টার্ন হুবহু। আর সতর্ক থাকুন — সামারাইজেশন লসি; সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়। তাই গুরুত্বপূর্ণ তথ্য আলাদা স্ট্রাকচার্ড স্লটে রাখুন, সারসংক্ষেপকে \"সূচি\" ভাবুন (সোর্স অব ট্রুথ নয়), আর হাই-স্টেকসের কথোপকথনের পুরো ট্রান্সক্রিপ্ট DB-তে সংরক্ষণ করুন।"
+          "html": "<strong>হায়ারার্কিক্যাল সামারাইজেশন</strong> হলো একটি প্রচলিত কৌশল: একদম পুরোনো টার্নের রোলিং সারসংক্ষেপ, মাঝের টার্নের মিড-রেজোলিউশন সারসংক্ষেপ, আর সাম্প্রতিক টার্ন হুবহু। আর সতর্ক থাকুন — সামারাইজেশন লসি; সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়। তাই গুরুত্বপূর্ণ তথ্য আলাদা স্ট্রাকচার্ড স্লটে রাখুন, সারসংক্ষেপকে \"সূচি\" ভাবুন (সোর্স অব ট্রুথ নয়), আর হাই-স্টেকসের কথোপকথনের পুরো ট্রান্সক্রিপ্ট DB-তে সংরক্ষণ করুন।"
         },
         {
           "type": "analogy",
@@ -698,14 +698,14 @@
       "id": "s3",
       "num": "03",
       "title": "Prompt caching strategies",
-      "sub": "Frontier providers let you <strong>cache a prefix of your prompt</strong>: identical tokens at the start of a request cost dramatically less and run faster. Used well, caching drops 80–90% of the input bill for apps with stable system prompts and long retrieval sections.",
+      "sub": "Frontier providers let you <strong>cache a prefix of your prompt</strong>: identical tokens at the start of a request cost dramatically less and run faster. Used well, caching can cut most of the input cost (on Anthropic, cached reads cost 0.1× the base input price) for apps with stable system prompts and long retrieval sections.",
       "bn": {
         "title": "প্রম্পট ক্যাশিংয়ের কৌশল",
-        "sub": "ফ্রন্টিয়ার প্রোভাইডাররা আপনার <strong>প্রম্পটের শুরুর অংশ ক্যাশ করতে</strong> দেয়: রিকোয়েস্টের শুরুতে একই টোকেন থাকলে খরচ অনেক কম আর গতি বেশি। যে অ্যাপের সিস্টেম প্রম্পট স্থির আর রিট্রিভাল অংশ লম্বা, সেখানে ভালোভাবে করলে ইনপুটের বিলের ৮০–৯০% কমে যায়।"
+        "sub": "ফ্রন্টিয়ার প্রোভাইডাররা আপনার <strong>প্রম্পটের শুরুর অংশ ক্যাশ করতে</strong> দেয়: রিকোয়েস্টের শুরুতে একই টোকেন থাকলে খরচ অনেক কম আর গতি বেশি। যে অ্যাপের সিস্টেম প্রম্পট স্থির আর রিট্রিভাল অংশ লম্বা, সেখানে ভালোভাবে করলে ইনপুটের খরচের বেশিরভাগই কমে যায় (Anthropic-এ ক্যাশ রিড বেস ইনপুট দামের ০.১×)।"
       },
       "basics": {
         "en": {
-          "idea": "Providers let you save the unchanged start of a prompt. <strong>Prompt caching</strong> can cut 80–90% of the input bill for apps with stable instructions and long fetched documents, but only if that start stays exactly the same.",
+          "idea": "Providers let you save the unchanged start of a prompt. <strong>Prompt caching</strong> can cut most of the input cost (cached reads are 0.1× on Anthropic) for apps with stable instructions and long fetched documents, but only if that start stays exactly the same.",
           "words": [
             {
               "term": "Prefix",
@@ -721,7 +721,7 @@
             },
             {
               "term": "TTL (time to live)",
-              "meaning": "How long a cache entry is kept. For Anthropic it is 5 minutes, and it refreshes on a hit."
+              "meaning": "How long a cache entry is kept. For Anthropic it is 5 minutes by default (1 hour is optional at a higher write price), and it refreshes on a hit."
             },
             {
               "term": "Cache invalidation",
@@ -736,7 +736,7 @@
           ]
         },
         "bn": {
-          "idea": "প্রোভাইডাররা প্রম্পটের না-বদলানো শুরুর অংশ ক্যাশ করতে দেয়। স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে <strong>প্রম্পট ক্যাশিং</strong> ইনপুট বিলের ৮০–৯০% কমাতে পারে, তবে শুরুর অংশ হুবহু একই থাকতে হবে।",
+          "idea": "প্রোভাইডাররা প্রম্পটের না-বদলানো শুরুর অংশ ক্যাশ করতে দেয়। স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে <strong>প্রম্পট ক্যাশিং</strong> ইনপুট খরচের বেশিরভাগ কমাতে পারে (Anthropic-এ ক্যাশ রিড ০.১×), তবে শুরুর অংশ হুবহু একই থাকতে হবে।",
           "words": [
             {
               "term": "প্রিফিক্স (prefix)",
@@ -752,7 +752,7 @@
             },
             {
               "term": "TTL (time to live)",
-              "meaning": "ক্যাশ কতক্ষণ থাকে। Anthropic-এ ৫ মিনিট, আর হিট হলে সময় নতুন করে শুরু হয়।"
+              "meaning": "ক্যাশ কতক্ষণ থাকে। Anthropic-এ ডিফল্ট ৫ মিনিট (বেশি লেখার দামে ঐচ্ছিকভাবে ১ ঘণ্টা), আর হিট হলে সময় নতুন করে শুরু হয়।"
             },
             {
               "term": "ক্যাশ ইনভ্যালিডেশন (cache invalidation)",
@@ -786,24 +786,24 @@
           "rows": [
             [
               "<strong>Anthropic</strong>",
-              "Auto-cache of system + tools + first user message; explicit <code>cache_control</code> breakpoints for custom control",
-              "5–10× cheaper on cache hit (write pricing per tonne)",
-              "5 min (refreshes on hit)",
-              "1024 tokens (Claude 4 Sonnet), 4096 (Haiku)"
+              "Opt-in: one top-level <code>cache_control</code> (automatic breakpoint) or explicit <code>cache_control</code> on blocks",
+              "Cache reads 0.1× base input price (0.05× on some newer models); writes cost more than base (e.g. 2× for 1-hour TTL)",
+              "5 min default (refreshes on hit); optional 1 hour at higher write price",
+              "Varies by model: 512 – 4,096 tokens (e.g. 512 for Sonnet 5.5/Haiku 5.5, 4,096 for Haiku 4.5)"
             ],
             [
               "<strong>OpenAI</strong>",
-              "Auto-cache on prompts &gt;1024 tokens matching a recent prefix",
-              "50% off cached tokens",
-              "5–10 min (sliding window)",
-              "1024 tokens"
+              "Auto-cache on prompts that match a recent prefix (min 1,024 tokens on GPT-5.6+)",
+              "Discount varies by model (reads 0.1× or 0.05× of input price on GPT-5.6+)",
+              "5–10 min of inactivity on earlier models; 30 min default on GPT-5.6+",
+              "1,024 tokens (GPT-5.6+)"
             ],
             [
               "<strong>Gemini</strong>",
-              "Explicit <code>cachedContent</code> resource",
-              "~75% off (free for system+prompt, regular per-token for output)",
-              "Configurable, default ~60 min",
-              "2048 tokens (Flash), 4096 (Pro)"
+              "Implicit caching on by default (Gemini 2.5 and newer); explicit <code>cachedContent</code> on Gemini 3 / 2.5 only, not Gemini 4",
+              "Implicit caching passes savings on automatically; see Gemini pricing page for rates",
+              "See Gemini docs",
+              "2,048 tokens (2.5 Flash / 2.5 Pro); 4,096 (Gemini 3.x / 4)"
             ]
           ]
         },
@@ -897,8 +897,8 @@
         {
           "type": "code",
           "lang": "python",
-          "code": "# Anthropic prompt caching with explicit breakpoints\nmessages = [\n    {\"role\": \"system\", \"content\": [\n        {\"type\": \"text\", \"text\": SYSTEM_PROMPT,\n         \"cache_control\": {\"type\": \"ephemeral\"}},\n    ]},\n    {\"role\": \"user\", \"content\": [\n        {\"type\": \"text\", \"text\": tool_docs_str,\n         \"cache_control\": {\"type\": \"ephemeral\"}},\n        {\"type\": \"text\", \"text\": f\"<retrieved>{retrieved}</retrieved>\"},\n        {\"type\": \"text\", \"text\": f\"Question: {user_q}\"},  # not cached\n    ]},\n]\n# Inspect the response.usage to verify cache hit:\n# response.usage.cache_read_input_tokens > 0  → cache hit",
-          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic prompt caching with explicit breakpoints</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">messages </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> [</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    {</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"system\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: [</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">SYSTEM_PROMPT</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">         \"cache_control\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"ephemeral\"</span><span style=\"color:#ADBAC7\">}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    ]},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    {</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: [</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: tool_docs_str,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">         \"cache_control\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"ephemeral\"</span><span style=\"color:#ADBAC7\">}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"&#x3C;retrieved></span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">retrieved</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">&#x3C;/retrieved>\"</span><span style=\"color:#ADBAC7\">},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Question: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">user_q</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">},  </span><span style=\"color:#768390\"># not cached</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    ]},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">]</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># Inspect the response.usage to verify cache hit:</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># response.usage.cache_read_input_tokens > 0  → cache hit</span></span></code></pre>"
+          "code": "# Anthropic prompt caching with explicit breakpoints\nresponse = client.messages.create(\n    model=MODEL,\n    max_tokens=1024,\n    system=[\n        {\"type\": \"text\", \"text\": SYSTEM_PROMPT,\n         \"cache_control\": {\"type\": \"ephemeral\"}},\n    ],\n    messages=[\n        {\"role\": \"user\", \"content\": [\n            # tool docs as plain text here (not the API tools parameter)\n            {\"type\": \"text\", \"text\": tool_docs_str,\n             \"cache_control\": {\"type\": \"ephemeral\"}},\n            {\"type\": \"text\", \"text\": f\"<retrieved>{retrieved}</retrieved>\"},\n            {\"type\": \"text\", \"text\": f\"Question: {user_q}\"},  # not cached\n        ]},\n    ],\n)\n# Inspect response.usage to verify a cache hit:\n# response.usage.cache_read_input_tokens > 0  → cache hit",
+          "html": "<pre class=\"shiki github-dark-dimmed\" style=\"background-color:#22272e;color:#adbac7\" tabindex=\"0\"><code><span class=\"line\"><span style=\"color:#768390\"># Anthropic prompt caching with explicit breakpoints</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">response </span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\"> client.messages.create(</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    model</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">MODEL</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    max_tokens</span><span style=\"color:#F47067\">=</span><span style=\"color:#6CB6FF\">1024</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    system</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#6CB6FF\">SYSTEM_PROMPT</span><span style=\"color:#ADBAC7\">,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">         \"cache_control\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"ephemeral\"</span><span style=\"color:#ADBAC7\">}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    ],</span></span>\n<span class=\"line\"><span style=\"color:#F69D50\">    messages</span><span style=\"color:#F47067\">=</span><span style=\"color:#ADBAC7\">[</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        {</span><span style=\"color:#96D0FF\">\"role\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"user\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"content\"</span><span style=\"color:#ADBAC7\">: [</span></span>\n<span class=\"line\"><span style=\"color:#768390\">            # tool docs as plain text here (not the API tools parameter)</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: tool_docs_str,</span></span>\n<span class=\"line\"><span style=\"color:#96D0FF\">             \"cache_control\"</span><span style=\"color:#ADBAC7\">: {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"ephemeral\"</span><span style=\"color:#ADBAC7\">}},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"&#x3C;retrieved></span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">retrieved</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">&#x3C;/retrieved>\"</span><span style=\"color:#ADBAC7\">},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">            {</span><span style=\"color:#96D0FF\">\"type\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">, </span><span style=\"color:#96D0FF\">\"text\"</span><span style=\"color:#ADBAC7\">: </span><span style=\"color:#F47067\">f</span><span style=\"color:#96D0FF\">\"Question: </span><span style=\"color:#F47067\">{</span><span style=\"color:#ADBAC7\">user_q</span><span style=\"color:#F47067\">}</span><span style=\"color:#96D0FF\">\"</span><span style=\"color:#ADBAC7\">},  </span><span style=\"color:#768390\"># not cached</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">        ]},</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">    ],</span></span>\n<span class=\"line\"><span style=\"color:#ADBAC7\">)</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># Inspect response.usage to verify a cache hit:</span></span>\n<span class=\"line\"><span style=\"color:#768390\"># response.usage.cache_read_input_tokens > 0  → cache hit</span></span></code></pre>"
         }
       ],
       "layman": [
@@ -912,7 +912,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>Prompt caching is the fix.</strong> All the major AI providers (Anthropic, OpenAI, Gemini) now let you mark a portion of your prompt as \"cached.\" If the next call has the same prefix, they reuse the work instead of re-reading it. Cost drops 80–90%. Latency drops too."
+          "html": "<strong>Prompt caching is the fix.</strong> All the major AI providers (Anthropic, OpenAI, Gemini) now let you mark a portion of your prompt as \"cached.\" If the next call has the same prefix, they reuse the work instead of re-reading it. Cost drops a lot (on Anthropic, cached reads cost 0.1× the base price). Latency drops too."
         },
         {
           "type": "paragraph",
@@ -943,7 +943,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "প্রতিবার API কলে একই সিস্টেম প্রম্পট, টুল স্কিমা আর রিট্রিভ করা ডকুমেন্ট বারবার পাঠালে একই লেখা বারবার পড়ার জন্য টাকা দিতে হয়। <strong>প্রম্পট ক্যাশিংয়ে</strong> আপনি প্রম্পটের একটি <strong>প্রিফিক্স</strong> (শুরুর অংশ) ক্যাশ করতে পারেন; পরের কলে প্রিফিক্স হুবহু মিললে প্রোভাইডার আগের কাজ পুনরায় ব্যবহার করে — খরচ কমে এবং গতি বাড়ে। স্থির সিস্টেম প্রম্পট ও দীর্ঘ রিট্রিভাল আছে এমন অ্যাপে ইনপুট বিলের ৮০–৯০% পর্যন্ত কমতে পারে।"
+          "html": "প্রতিবার API কলে একই সিস্টেম প্রম্পট, টুল স্কিমা আর রিট্রিভ করা ডকুমেন্ট বারবার পাঠালে একই লেখা বারবার পড়ার জন্য টাকা দিতে হয়। <strong>প্রম্পট ক্যাশিংয়ে</strong> আপনি প্রম্পটের একটি <strong>প্রিফিক্স</strong> (শুরুর অংশ) ক্যাশ করতে পারেন; পরের কলে প্রিফিক্স হুবহু মিললে প্রোভাইডার আগের কাজ পুনরায় ব্যবহার করে — খরচ কমে এবং গতি বাড়ে। স্থির সিস্টেম প্রম্পট ও দীর্ঘ রিট্রিভাল আছে এমন অ্যাপে ইনপুট খরচের বেশিরভাগ কমতে পারে (Anthropic-এ ক্যাশ রিড বেস দামের ০.১×)।"
         },
         {
           "type": "paragraph",
@@ -953,9 +953,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Anthropic:</strong> স্বয়ংক্রিয় ক্যাশ এবং নিজের নিয়ন্ত্রণের জন্য <code>cache_control</code> ব্রেকপয়েন্ট; একটি প্রম্পটে সর্বোচ্চ ৪টি <em>এফেমেরাল</em> ব্রেকপয়েন্ট। TTL ৫ মিনিট (হিট হলে নতুন করে শুরু হয়)।",
-            "<strong>OpenAI:</strong> ১০২৪ টোকেনের বেশি প্রম্পটে রিসেন্ট প্রিফিক্স মিললে স্বয়ংক্রিয় ক্যাশ; ক্যাশ করা টোকেনে ৫০% ছাড়।",
-            "<strong>Gemini:</strong> স্পষ্টভাবে <code>cachedContent</code> রিসোর্স তৈরি করতে হয়; TTL কনফিগারেবল (ডিফল্ট ~৬০ মিনিট)।"
+            "<strong>Anthropic:</strong> ক্যাশিং অপ্ট-ইন: <code>cache_control</code> (টপ-লেভেলে একটি, অথবা ব্লকে ব্লকে ব্রেকপয়েন্ট); একটি প্রম্পটে সর্বোচ্চ ৪টি <em>এফেমেরাল</em> ব্রেকপয়েন্ট। ডিফল্ট TTL ৫ মিনিট (হিট হলে নতুন করে শুরু হয়), ঐচ্ছিক ১ ঘণ্টা।",
+            "<strong>OpenAI:</strong> রিসেন্ট প্রিফিক্স মিললে স্বয়ংক্রিয় ক্যাশ (GPT-5.6+-এ ন্যূনতম ১,০২৪ টোকেন); ছাড় মডেলভেদে আলাদা।",
+            "<strong>Gemini:</strong> Gemini 2.5 ও নতুন মডেলে ইমপ্লিসিট ক্যাশিং ডিফল্টে চালু; স্পষ্ট <code>cachedContent</code> শুধু Gemini 3 / 2.5-এ চলে, Gemini 4-এ নয়।"
           ]
         },
         {
@@ -1108,7 +1108,7 @@
             },
             {
               "term": "MemGPT",
-              "meaning": "A 2023 idea (Packer et al.): the model itself decides what to move out of its prompt and what to bring back, using tool calls like <code>recall</code>."
+              "meaning": "A 2023 idea (Packer et al.): the model itself decides what to move out of its prompt and what to bring back, using tool calls like <code>recall_storage.search</code>."
             },
             {
               "term": "Evict and page in",
@@ -1147,7 +1147,7 @@
             },
             {
               "term": "MemGPT",
-              "meaning": "২০২৩ সালের একটি ধারণা (Packer et al.): মডেল নিজেই ঠিক করে প্রম্পট থেকে কী সরাবে আর কী ফিরিয়ে আনবে, <code>recall</code>-এর মতো টুল কল দিয়ে।"
+              "meaning": "২০২৩ সালের একটি ধারণা (Packer et al.): মডেল নিজেই ঠিক করে প্রম্পট থেকে কী সরাবে আর কী ফিরিয়ে আনবে, <code>recall_storage.search</code>-এর মতো টুল কল দিয়ে।"
             },
             {
               "term": "ইভিক্ট ও পেজ ইন (evict, page in)",
@@ -1224,7 +1224,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Packer et al. (2023) proposed treating the LLM's context like virtual memory: the model itself decides when to <em>evict</em> information from working memory to external storage, and when to <em>page it back in</em>. The model uses tool calls (<code>recall</code>, <code>archival_search</code>) to manipulate its own memory.<a class=\"cite\" href=\"#src2\">[2]</a> This is the architectural blueprint for every serious long-running AI agent in 2024–2025.<a class=\"cite\" href=\"#src14\">[14]</a>"
+          "html": "Packer et al. (2023) proposed treating the LLM's context like virtual memory: the model itself decides when to <em>evict</em> information from working memory to external storage, and when to <em>page it back in</em>. The model uses tool calls (for example <code>recall_storage.search</code> and <code>archival_storage.search</code>) to manipulate its own memory.<a class=\"cite\" href=\"#src2\">[2]</a> MemGPT was an influential early design for long-running agents; later agent frameworks use similar ideas such as note-taking memory outside the context window.<a class=\"cite\" href=\"#src14\">[14]</a>"
         },
         {
           "type": "heading",
@@ -1316,7 +1316,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>MemGPT</strong> (Packer et al., ২০২৩)-এর মূল ধারণা: LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখা। মডেল নিজেই ঠিক করে কখন তথ্য ওয়ার্কিং মেমরি থেকে এক্সটার্নাল স্টোরেজে <em>ইভিক্ট</em> করবে এবং কখন আবার <em>পেজ ইন</em> করবে — এর জন্য সে <code>recall</code>, <code>archival_search</code>-এর মতো টুল কল ব্যবহার করে। দীর্ঘস্থায়ী এজেন্টের এটিই স্থাপত্য-নকশা। সাধারণ প্যাটার্ন হলো সেশন শেষে একটি কনসোলিডেশন ধাপ: ট্রান্সক্রিপ্ট থেকে <code>user_preferences</code>, <code>project_facts</code>, <code>episodic_lessons</code> বের করে ভেক্টর স্টোর বা স্ট্রাকচার্ড DB-তে লেখা।"
+          "html": "<strong>MemGPT</strong> (Packer et al., ২০২৩)-এর মূল ধারণা: LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখা। মডেল নিজেই ঠিক করে কখন তথ্য ওয়ার্কিং মেমরি থেকে এক্সটার্নাল স্টোরেজে <em>ইভিক্ট</em> করবে এবং কখন আবার <em>পেজ ইন</em> করবে — এর জন্য সে <code>recall_storage.search</code>, <code>archival_storage.search</code>-এর মতো টুল কল ব্যবহার করে। MemGPT দীর্ঘস্থায়ী এজেন্টের একটি প্রভাবশালী প্রাথমিক নকশা; পরের এজেন্ট ফ্রেমওয়ার্কে কনটেক্সটের বাইরে নোট রাখার মতো একই ধরনের ধারণা দেখা যায়। সাধারণ প্যাটার্ন হলো সেশন শেষে একটি কনসোলিডেশন ধাপ: ট্রান্সক্রিপ্ট থেকে <code>user_preferences</code>, <code>project_facts</code>, <code>episodic_lessons</code> বের করে ভেক্টর স্টোর বা স্ট্রাকচার্ড DB-তে লেখা।"
         },
         {
           "type": "paragraph",
@@ -1438,7 +1438,7 @@
             },
             {
               "term": "LLMLingua",
-              "meaning": "A method where a small classifier cuts low-information words from a prompt. It can shrink prompts 5–20×."
+              "meaning": "A method that cuts low-information tokens from a prompt. It can shrink prompts by up to 20×."
             },
             {
               "term": "Self-information (perplexity)",
@@ -1481,7 +1481,7 @@
             },
             {
               "term": "LLMLingua",
-              "meaning": "একটি পদ্ধতি, যেখানে ছোট ক্লাসিফায়ার প্রম্পট থেকে কম-তথ্যের শব্দ কেটে দেয়। এতে প্রম্পট ৫–২০× পর্যন্ত ছোট হতে পারে।"
+              "meaning": "একটি পদ্ধতি, যা প্রম্পট থেকে কম-তথ্যের টোকেন কেটে দেয়। এতে প্রম্পট ২০× পর্যন্ত ছোট হতে পারে।"
             },
             {
               "term": "সেলফ-ইনফরমেশন (self-information, perplexity)",
@@ -1531,19 +1531,19 @@
             [
               "<strong>LLM summarisation</strong>",
               "Ask the model to summarise; structured schema for fact preservation",
-              "5–20×",
+              "Varies",
               "Conversation history, long documents"
             ],
             [
               "<strong>LLMLingua</strong>",
-              "Small classifier prunes low-information words from prompts",
-              "5–20×",
+              "Budget controller plus token-level iterative compression drops low-information tokens",
+              "Up to 20×",
               "Latency-sensitive inference, prompt compression for cost"
             ],
             [
               "<strong>Selective context</strong>",
               "Use self-information (perplexity) to drop uninformative phrases",
-              "5×",
+              "About 2× (50% context reduction)",
               "RAG context pruning"
             ],
             [
@@ -1561,7 +1561,7 @@
             [
               "<strong>Deduplication</strong>",
               "Near-duplicate detection (cosine &gt; 0.95), keep one copy",
-              "1.5–3×",
+              "Varies",
               "RAG over a corpus with overlapping content"
             ]
           ]
@@ -1574,13 +1574,13 @@
         },
         {
           "type": "paragraph",
-          "html": "LLMLingua (Microsoft, 2023) trains a small classifier to predict which tokens are <em>informative</em> given the prompt; non-informative tokens are dropped. It can compress prompts 5–20× while preserving the LLM's ability to answer accurately.<a class=\"cite\" href=\"#src3\">[3]</a>"
+          "html": "LLMLingua (Microsoft, 2023) uses a budget controller and token-level iterative compression to drop low-information tokens from the prompt. It allows up to 20× compression with little performance loss.<a class=\"cite\" href=\"#src3\">[3]</a>"
         },
         {
           "type": "diagram",
-          "svg": "<svg viewBox=\"0 0 1100 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"LLMLingua compression pipeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">LLMLingua pipeline: classifier marks low-info tokens for removal</text>\n\n      <rect x=\"40\" y=\"60\" width=\"600\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#e2e8f0\">\"The user is asking about the weather in Dhaka which is the capital of Bangladesh...\"</text>\n\n      <line x1=\"660\" y1=\"80\" x2=\"730\" y2=\"80\" stroke=\"#94a3b8\" marker-end=\"url(#arr2)\"></line>\n      <text x=\"670\" y=\"68\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">classify</text>\n\n      <rect x=\"750\" y=\"60\" width=\"300\" height=\"40\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"766\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">\"user asks Dhaka weather...\" (40% tokens)</text>\n\n      <text x=\"40\" y=\"140\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">compression done BEFORE the LLM call — saves input tokens &amp; latency</text>\n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">some lossiness is acceptable for simple Q&amp;A; not for factual lookups</text>\n    </svg>",
+          "svg": "<svg viewBox=\"0 0 1100 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"LLMLingua compression pipeline\">\n      <text x=\"40\" y=\"32\" font-family=\"JetBrains Mono, monospace\" font-size=\"13\" fill=\"#a8b5c8\">LLMLingua pipeline: low-info tokens are marked for removal</text>\n\n      <rect x=\"40\" y=\"60\" width=\"600\" height=\"40\" rx=\"6\" fill=\"#0f172a\" stroke=\"#334155\"></rect>\n      <text x=\"56\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#e2e8f0\">\"The user is asking about the weather in Dhaka which is the capital of Bangladesh...\"</text>\n\n      <line x1=\"660\" y1=\"80\" x2=\"730\" y2=\"80\" stroke=\"#94a3b8\" marker-end=\"url(#arr2)\"></line>\n      <text x=\"670\" y=\"68\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#a8b5c8\">score</text>\n\n      <rect x=\"750\" y=\"60\" width=\"300\" height=\"40\" rx=\"6\" fill=\"rgba(34,211,238,0.10)\" stroke=\"#22d3ee\"></rect>\n      <text x=\"766\" y=\"82\" font-family=\"JetBrains Mono, monospace\" font-size=\"11\" fill=\"#22d3ee\">\"user asks Dhaka weather...\" (40% tokens)</text>\n\n      <text x=\"40\" y=\"140\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">compression done BEFORE the LLM call — saves input tokens &amp; latency</text>\n      <text x=\"40\" y=\"160\" font-family=\"JetBrains Mono, monospace\" font-size=\"12\" fill=\"#a8b5c8\">some lossiness is acceptable for simple Q&amp;A; not for factual lookups</text>\n    </svg>",
           "caption": "LLMLingua and similar tools identify low-information phrases (\"the capital of Bangladesh\") and drop them while preserving the meaning.",
-          "captionBn": "এখানে LLMLingua পাইপলাইন দেখানো হয়েছে: একটি ক্লাসিফায়ার মূল প্রম্পটের কম-তথ্যপূর্ণ টোকেন চিহ্নিত করে, তারপর সংক্ষিপ্ত রূপ (প্রায় ৪০% টোকেন) তৈরি হয়। এই কমপ্রেশন LLM কলের আগেই হয়, ফলে ইনপুট টোকেন ও ল্যাটেন্সি কমে; তবে কিছু তথ্য হারাতে পারে।"
+          "captionBn": "এখানে LLMLingua পাইপলাইন দেখানো হয়েছে: মূল প্রম্পটের কম-তথ্যপূর্ণ টোকেন চিহ্নিত হয়, তারপর সংক্ষিপ্ত রূপ (প্রায় ৪০% টোকেন) তৈরি হয়। এই কমপ্রেশন LLM কলের আগেই হয়, ফলে ইনপুট টোকেন ও ল্যাটেন্সি কমে; তবে কিছু তথ্য হারাতে পারে।"
         },
         {
           "type": "heading",
@@ -1625,7 +1625,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>The \"compression + pruning\" combo.</strong> Compress <em>everywhere</em>, prune <em>where it hurts least</em>. Pruning preserves information density; compression reduces absolute size. They're complementary. The Anthropic context-engineering playbook recommends both, in that order, before any prompt goes to the model.<a class=\"cite\" href=\"#src14\">[14]</a>"
+              "html": "<strong>The \"compression + pruning\" combo.</strong> Compress <em>everywhere</em>, prune <em>where it hurts least</em>. Pruning preserves information density; compression reduces absolute size. They're complementary. Anthropic's playbook describes related techniques: compaction (summarising history) and clearing old tool results.<a class=\"cite\" href=\"#src14\">[14]</a>"
             }
           ]
         }
@@ -1689,12 +1689,12 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>LLM সামারাইজেশন:</strong> স্ট্রাকচার্ড স্কিমা দিয়ে সারসংক্ষেপ; ৫–২০×; চ্যাট হিস্ট্রি ও লম্বা ডকুমেন্টের জন্য।",
-            "<strong>LLMLingua:</strong> ছোট ক্লাসিফায়ার কম-তথ্যবহ শব্দ/টোকেন ছেঁটে দেয়; ৫–২০×; ল্যাটেন্সি ও খরচ কমাতে। এটি LLM কলের <em>আগেই</em> চলে।",
-            "<strong>সিলেক্টিভ কনটেক্সট:</strong> সেলফ-ইনফরমেশন (পারপ্লেক্সিটি) দিয়ে অপ্রয়োজনীয় বাক্যাংশ বাদ; প্রায় ৫×; RAG-এর জন্য।",
+            "<strong>LLM সামারাইজেশন:</strong> স্ট্রাকচার্ড স্কিমা দিয়ে সারসংক্ষেপ; কাজভেদে আলাদা; চ্যাট হিস্ট্রি ও লম্বা ডকুমেন্টের জন্য।",
+            "<strong>LLMLingua:</strong> বাজেট কন্ট্রোলার ও টোকেন-স্তরের ইটারেটিভ কমপ্রেশন দিয়ে কম-তথ্যবহ টোকেন ছেঁটে দেয়; ২০× পর্যন্ত; ল্যাটেন্সি ও খরচ কমাতে। এটি LLM কলের <em>আগেই</em> চলে।",
+            "<strong>সিলেক্টিভ কনটেক্সট:</strong> সেলফ-ইনফরমেশন (পারপ্লেক্সিটি) দিয়ে অপ্রয়োজনীয় বাক্যাংশ বাদ; প্রায় ২× (৫০% কনটেক্সট কমে); RAG-এর জন্য।",
             "<strong>এমবেডিং-বেসড ফিল্টারিং:</strong> কুয়েরির সাথে প্রাসঙ্গিকতার স্কোর দিয়ে কম-স্কোর চাঙ্ক বাদ।",
             "<strong>টোকেন-বাজেট ন্যাপস্যাক:</strong> প্রাসঙ্গিকতার ক্রমে চাঙ্ক নিতে থাকা, বাজেট ভরলে থামা।",
-            "<strong>ডিডুপ্লিকেশন:</strong> প্রায় একই চাঙ্ক (কসাইন &gt; ০.৯৫) থাকলে একটি রাখা; ১.৫–৩×।"
+            "<strong>ডিডুপ্লিকেশন:</strong> প্রায় একই চাঙ্ক (কসাইন &gt; ০.৯৫) থাকলে একটি রাখা; অনুপাত কাজভেদে আলাদা।"
           ]
         },
         {
@@ -2199,10 +2199,10 @@
       "id": "s7",
       "num": "07",
       "title": "Lost in the Middle & mitigation",
-      "sub": "Liu et al. (2023) showed a robust phenomenon: language models attend strongly to information at the <em>beginning</em> and <em>end</em> of their input, and perform close to random for information buried in the <em>middle</em>. The longer the context, the worse the middle. This single finding reframes how you should structure prompts.",
+      "sub": "Liu et al. (2023) showed a robust phenomenon: language models attend strongly to information at the <em>beginning</em> and <em>end</em> of their input, and perform significantly worse for information buried in the <em>middle</em> (for GPT-3.5-Turbo, worst-case multi-document QA fell below its no-documents accuracy of 56.1%). The longer the context, the worse the middle. This single finding reframes how you should structure prompts.",
       "bn": {
         "title": "Lost in the Middle আর তার সমাধান",
-        "sub": "Liu et al. (২০২৩) একটি পাকা ঘটনা দেখিয়েছেন: ল্যাঙ্গুয়েজ মডেল ইনপুটের <em>শুরু</em> আর <em>শেষ</em> অংশের তথ্যে জোরালো অ্যাটেনশন দেয়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় এলোমেলো উত্তর দেয়। কনটেক্সট যত লম্বা, মাঝখানের অবস্থা তত খারাপ। এই একটি আবিষ্কার প্রম্পট সাজানোর ধরনটাই বদলে দেয়।"
+        "sub": "Liu et al. (২০২৩) একটি পাকা ঘটনা দেখিয়েছেন: ল্যাঙ্গুয়েজ মডেল ইনপুটের <em>শুরু</em> আর <em>শেষ</em> অংশের তথ্যে জোরালো অ্যাটেনশন দেয়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে উল্লেখযোগ্যভাবে খারাপ ফল দেয় (GPT-3.5-Turbo-র সবচেয়ে খারাপ ক্ষেত্রে ফল নথি ছাড়া উত্তরের ৫৬.১% অ্যাকুরেসিরও নিচে নেমেছিল)। কনটেক্সট যত লম্বা, মাঝখানের অবস্থা তত খারাপ। এই একটি আবিষ্কার প্রম্পট সাজানোর ধরনটাই বদলে দেয়।"
       },
       "basics": {
         "en": {
@@ -2238,10 +2238,10 @@
             }
           ],
           "remember": [
-            "Put facts that must be recalled in the first 10% or the last 10% of the context.",
+            "Rule of thumb: put facts that must be recalled in the first 10% or the last 10% of the context.",
             "If you cannot, repeat them at both ends. Sandwich the key content.",
-            "Shorter context gives better recall. If it fits in 8K, do not use 50K.",
-            "Better models flatten the U-shape, but it never fully goes away."
+            "Shorter context usually helps recall. Rule of thumb: if it fits in 8K, do not use 50K.",
+            "Do not assume a bigger model removes the U-shape. Test your own prompts."
           ]
         },
         "bn": {
@@ -2277,10 +2277,10 @@
             }
           ],
           "remember": [
-            "যে তথ্য মনে রাখাতে চান, তা কনটেক্সটের প্রথম ১০% বা শেষ ১০%-এ রাখুন।",
+            "অভিজ্ঞতালব্ধ নিয়ম: যে তথ্য মনে রাখাতে চান, তা কনটেক্সটের প্রথম ১০% বা শেষ ১০%-এ রাখুন।",
             "না পারলে দুই প্রান্তেই পুনরাবৃত্তি করুন। জরুরি অংশ স্যান্ডউইচ করুন।",
-            "ছোট কনটেক্সটে রিকল ভালো। ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
-            "ভালো মডেলে ইউ-আকৃতি চ্যাপ্টা হয়, কিন্তু পুরোপুরি যায় না।"
+            "ছোট কনটেক্সটে সাধারণত রিকল ভালো। অভিজ্ঞতালব্ধ নিয়ম: ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
+            "বড় মডেল হলেই ইউ-আকৃতি চলে যাবে, ধরে নেবেন না। নিজের প্রম্পটে পরীক্ষা করুন।"
           ]
         }
       },
@@ -2293,7 +2293,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Liu et al. inserted random \"needle\" facts at varying positions in a long context and measured retrieval accuracy. Result: <strong>U-shaped performance curve</strong> — recall is high at the start, collapses in the middle, recovers at the end. The effect is worse for longer contexts and weaker models, but persists even in frontier models with 100K+ context windows.<a class=\"cite\" href=\"#src1\">[1]</a>"
+          "html": "Liu et al. varied the position of the relevant information in multi-document question answering and key-value retrieval tasks, and measured accuracy. Result: <strong>U-shaped performance curve</strong> — accuracy is high at the start, drops in the middle, recovers at the end. The effect appeared in both standard and extended-context models (e.g. Claude-1.3 100K), and extended-context models were not necessarily better at using their input.<a class=\"cite\" href=\"#src1\">[1]</a>"
         },
         {
           "type": "diagram",
@@ -2339,7 +2339,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "For multi-document RAG, place the most relevant doc at the start AND the end. Put mid-relevance docs in the middle (where they won't be relied on as heavily)."
+                  "html": "For multi-document RAG, place the most relevant docs at the start or the end. Information in the middle is used less reliably."
                 }
               ]
             },
@@ -2348,7 +2348,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Shorter context &gt; longer context for recall. The middle problem is exacerbated at 50K+ tokens. If you can fit in 8K, do."
+                  "html": "Shorter context usually helps recall. Rule of thumb (the author's heuristic): if you can fit in 8K, do."
                 }
               ]
             },
@@ -2357,7 +2357,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Wrap critical content in <code>&lt;important&gt;…&lt;/important&gt;</code> tags. Strong models pay special attention to marked regions."
+                  "html": "Use XML tags or headers to delineate sections, for example <code>&lt;important&gt;…&lt;/important&gt;</code>. This helps organise the prompt, but no source here shows it fixes middle-position loss."
                 }
               ]
             },
@@ -2366,16 +2366,16 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "For RAG, design the system to: (1) read docs, (2) if answer not found, re-query with the partial answer as context. Two shorter queries beat one long one."
+                  "html": "For RAG, design the system to: (1) read docs, (2) if answer not found, re-query with the partial answer as context."
                 }
               ]
             },
             {
-              "heading": "6. Explicit \"answer here\" markers",
+              "heading": "6. Put the question at both ends",
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "End the prompt with: <code>\"Based on the above, your answer:\"</code> — recent papers show that forcing the model to \"look back\" before answering helps retrieval from the middle."
+                  "html": "Put the question both before and after the documents. Liu et al. found this query-aware contextualization greatly improved key-value retrieval, but had minimal effect on multi-document QA."
                 }
               ]
             }
@@ -2395,10 +2395,10 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "The U-curve flattens with better models and longer-context training, but never fully goes away.",
-            "<strong>Variable-length tasks</strong> (retrieval over changing input sizes) are harder than fixed-length.",
+            "Almost all models show large performance drops as context length grows (RULER).",
+            "Summary of a Haystack can also be used to study position bias in long-context models.",
             "Multi-hop reasoning across long contexts remains an open problem.",
-            "RAG + long-context is complementary, not redundant."
+            "BABILong reports that popular LLMs effectively use only 10–20% of their context."
           ]
         },
         {
@@ -2407,7 +2407,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Practical rule:</strong> if a fact needs to be reliably recalled, put it in the <strong>first 10%</strong> or the <strong>last 10%</strong> of the context. If you can't, repeat it at both ends. If neither works, the model genuinely can't handle that fact — use a smaller context, or external retrieval, or a different architecture.<a class=\"cite\" href=\"#src14\">[14]</a>"
+              "html": "<strong>Rule of thumb (the author's heuristic, not from a paper):</strong> if a fact needs to be reliably recalled, put it in the <strong>first 10%</strong> or the <strong>last 10%</strong> of the context. If you can't, repeat it at both ends. If neither works, the model may not handle that fact — use a smaller context, or external retrieval, or a different architecture."
             }
           ]
         }
@@ -2431,11 +2431,11 @@
         },
         {
           "type": "paragraph",
-          "html": "1. <strong>Sandwich it:</strong> put the most important stuff at the very top of your prompt AND repeat it at the very bottom. Hit both attention peaks.<br>\n       2. <strong>Re-order documents:</strong> if you retrieved 10 documents, put the most relevant at the start and the end, the least relevant in the middle.<br>\n       3. <strong>Cut shorter:</strong> shorter prompts = better recall. If you can fit it in 8K tokens, don't use 50K.<br>\n       4. <strong>Mark the important:</strong> wrap critical info in <code>&lt;important&gt;…&lt;/important&gt;</code> tags. Strong models pay attention to marked regions.<br>\n       5. <strong>Re-query when unsure:</strong> if the AI doesn't find the answer in one pass, ask it to look again with what it learned. Two short passes beat one long one.<br>\n       6. <strong>Add an \"answer here\" prompt:</strong> end the prompt with \"based on the above, your answer:\". This nudges the AI to look back over the whole context one more time before responding."
+          "html": "1. <strong>Sandwich it:</strong> put the most important stuff at the very top of your prompt AND repeat it at the very bottom. Hit both attention peaks.<br>\n       2. <strong>Re-order documents:</strong> if you retrieved 10 documents, put the most relevant at the start or the end, the least relevant in the middle.<br>\n       3. <strong>Cut shorter:</strong> shorter prompts = better recall. If you can fit it in 8K tokens, don't use 50K (a rule of thumb).<br>\n       4. <strong>Mark the important:</strong> wrap critical info in <code>&lt;important&gt;…&lt;/important&gt;</code> tags. This keeps the prompt organised, but it is not proven to fix the middle problem.<br>\n       5. <strong>Re-query when unsure:</strong> if the AI doesn't find the answer in one pass, ask it to look again with what it learned.<br>\n       6. <strong>Ask the question twice:</strong> put your question before the documents and again after them. In the paper this helped a lot on key-value lookups, and little on multi-document Q&amp;A."
         },
         {
           "type": "paragraph",
-          "html": "<strong>The brutal truth:</strong> newer models handle long context better than 2023's, but the U-shape never fully disappears. For really important facts, don't bury them in the middle. Put them at the top, at the bottom, or both."
+          "html": "<strong>The brutal truth:</strong> newer models may handle long context better than 2023's, but do not assume the U-shape is gone. For really important facts, don't bury them in the middle. Put them at the top, at the bottom, or both."
         },
         {
           "type": "analogy",
@@ -2450,7 +2450,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "Liu et al. (২০২৩) দেখিয়েছেন, ভাষা মডেল তার ইনপুটের <em>শুরু</em> ও <em>শেষের</em> তথ্য খুব ভালো কাজে লাগায়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে প্রায় র‍্যান্ডমের কাছাকাছি ফল দেয়। এটিই <strong>\"Lost in the Middle\"</strong>। তাঁরা লম্বা কনটেক্সটের বিভিন্ন অবস্থানে \"নিডল\" তথ্য বসিয়ে রিট্রিভাল অ্যাকুরেসি মেপেছিলেন — ফলে <strong>ইউ-আকৃতির কার্ভ</strong>: শুরুতে উঁচু, মাঝখানে ধস, শেষে আবার উঠে আসে। কনটেক্সট যত লম্বা বা মডেল যত দুর্বল, মাঝের সমস্যা তত বেশি; তবে ১০০K+ কনটেক্সটের ফ্রন্টিয়ার মডেলেও এটি থেকে যায়।"
+          "html": "Liu et al. (২০২৩) দেখিয়েছেন, ভাষা মডেল তার ইনপুটের <em>শুরু</em> ও <em>শেষের</em> তথ্য খুব ভালো কাজে লাগায়, কিন্তু <em>মাঝখানে</em> চাপা পড়া তথ্যে উল্লেখযোগ্যভাবে খারাপ ফল দেয়। এটিই <strong>\"Lost in the Middle\"</strong>। তাঁরা মাল্টি-ডকুমেন্ট প্রশ্নোত্তর ও কি-ভ্যালু রিট্রিভাল কাজে প্রাসঙ্গিক তথ্যের অবস্থান বদলে অ্যাকুরেসি মেপেছিলেন — ফলে <strong>ইউ-আকৃতির কার্ভ</strong>: শুরুতে উঁচু, মাঝখানে নিচু, শেষে আবার উঠে আসে। এই প্রভাব সাধারণ ও এক্সটেন্ডেড-কনটেক্সট (যেমন Claude-1.3 100K) দুই ধরনের মডেলেই দেখা গেছে; এক্সটেন্ডেড-কনটেক্সট মডেল ইনপুট কাজে লাগাতে সবসময় ভালো নয়।"
         },
         {
           "type": "paragraph",
@@ -2465,11 +2465,11 @@
           "ordered": false,
           "items": [
             "<strong>স্যান্ডউইচ:</strong> জরুরি নির্দেশ সিস্টেম মেসেজের শুরুতে দিন এবং ইউজার মেসেজের শেষে আবার বলুন।",
-            "<strong>ডকুমেন্ট নতুন করে সাজানো:</strong> সবচেয়ে প্রাসঙ্গিক ডকুমেন্ট শুরুতে ও শেষে, মাঝারিগুলো মাঝখানে।",
+            "<strong>ডকুমেন্ট নতুন করে সাজানো:</strong> সবচেয়ে প্রাসঙ্গিক ডকুমেন্ট শুরুতে বা শেষে, কম প্রাসঙ্গিকগুলো মাঝখানে।",
             "<strong>কঠোরভাবে ছাঁটা:</strong> ছোট কনটেক্সটে রিকল ভালো; ৮K-তে আঁটলে ৫০K ব্যবহার করবেন না।",
-            "<strong>স্ট্রাকচার্ড ডিলিমিটার:</strong> জরুরি অংশ <code>&lt;important&gt;…&lt;/important&gt;</code> ট্যাগে মুড়ুন।",
-            "<strong>রি-কুয়েরি:</strong> উত্তর না পেলে আংশিক উত্তর নিয়ে আবার কুয়েরি করুন — দুটো ছোট কুয়েরি একটি লম্বা কুয়েরির চেয়ে ভালো।",
-            "<strong>\"Answer here\" মার্কার:</strong> প্রম্পট শেষ করুন <code>\"Based on the above, your answer:\"</code> দিয়ে, যাতে মডেল উত্তরের আগে আবার পেছনে তাকায়।"
+            "<strong>স্ট্রাকচার্ড ডিলিমিটার:</strong> জরুরি অংশ <code>&lt;important&gt;…&lt;/important&gt;</code> ট্যাগে মুড়ুন। এতে প্রম্পট গোছানো থাকে, তবে এটি মাঝের সমস্যা মেটায় — এমন প্রমাণ এখানে নেই।",
+            "<strong>রি-কুয়েরি:</strong> উত্তর না পেলে আংশিক উত্তর নিয়ে আবার কুয়েরি করুন।",
+            "<strong>প্রশ্ন দুই প্রান্তে:</strong> ডকুমেন্টের আগে ও পরে — দুই জায়গাতেই প্রশ্ন রাখুন। Liu et al. দেখেছেন, এতে কি-ভ্যালু রিট্রিভালে বড় উন্নতি হয়, কিন্তু মাল্টি-ডকুমেন্ট QA-তে প্রভাব সামান্য।"
           ]
         },
         {
@@ -2480,15 +2480,15 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "ভালো মডেলে ইউ-কার্ভ চ্যাপ্টা হয় কিন্তু পুরোপুরি যায় না;",
-            "পরিবর্তনশীল দৈর্ঘ্যের কাজ কঠিনতর;",
+            "প্রায় সব মডেলেই কনটেক্সট লম্বা হলে পারফরম্যান্স বড়ভাবে কমে (RULER);",
+            "Summary of a Haystack দিয়ে লং-কনটেক্সট মডেলের পজিশন বায়াসও পরীক্ষা করা যায়;",
             "দীর্ঘ কনটেক্সট জুড়ে মাল্টি-হপ রিজনিং এখনও খোলা সমস্যা;",
-            "RAG ও লং-কনটেক্সট একে অপরের পরিপূরক।"
+            "BABILong বলছে, জনপ্রিয় LLM-গুলো তাদের কনটেক্সটের মাত্র ১০–২০% কার্যকরভাবে কাজে লাগায়।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>ব্যবহারিক নিয়ম:</strong>"
+          "html": "<strong>অভিজ্ঞতালব্ধ নিয়ম (লেখকের নিজস্ব হিউরিস্টিক, গবেষণাপত্রের নয়):</strong>"
         },
         {
           "type": "list",
@@ -2638,7 +2638,7 @@
     {
       "n": 1,
       "url": "https://arxiv.org/abs/2307.03172",
-      "text": "Liu et al., \"Lost in the Middle: How Language Models Use Long Contexts\" — Princeton, 2023 (the foundational paper)"
+      "text": "Liu et al., \"Lost in the Middle: How Language Models Use Long Contexts\" — Stanford / UC Berkeley / Samaya AI, 2023 (the foundational paper)"
     },
     {
       "n": 2,
@@ -2648,7 +2648,7 @@
     {
       "n": 3,
       "url": "https://arxiv.org/abs/2310.05736",
-      "text": "Jiang et al., \"ActiveLLMLingua: Active Learning for LLMLingua\" — Microsoft prompt compression"
+      "text": "Jiang et al., \"LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models\" — Microsoft prompt compression, 2023"
     },
     {
       "n": 5,
@@ -2703,7 +2703,7 @@
           "In the middle of the context, where attention is strongest",
           "At the start or the end of the context"
         ],
-        "why": "Liu et al. (2023) found that models recall the start and end well but perform close to random in the middle. So put critical facts at the start or the end, or repeat them at both."
+        "why": "Liu et al. (2023) found that performance is often highest at the start or end and degrades significantly in the middle. So put critical facts at the start or the end, or repeat them at both."
       },
       "bn": {
         "q": "যে তথ্য মডেলের সবচেয়ে বেশি মনে রাখা দরকার, এই পার্ট অনুযায়ী তা কোথায় রাখবেন?",
@@ -2712,7 +2712,7 @@
           "কনটেক্সটের মাঝখানে, যেখানে অ্যাটেনশন সবচেয়ে বেশি",
           "কনটেক্সটের শুরুতে বা শেষে"
         ],
-        "why": "Liu et al. (২০২৩) দেখিয়েছেন, মডেল শুরু ও শেষের তথ্য ভালো মনে রাখে কিন্তু মাঝখানের তথ্যে প্রায় র‍্যান্ডম ফল দেয়। তাই জরুরি তথ্য শুরুতে বা শেষে রাখুন, অথবা দুই প্রান্তেই বসান।"
+        "why": "Liu et al. (২০২৩) দেখিয়েছেন, মডেলের ফল প্রায়ই শুরু বা শেষে সবচেয়ে ভালো হয়, আর মাঝখানে উল্লেখযোগ্যভাবে কমে যায়। তাই জরুরি তথ্য শুরুতে বা শেষে রাখুন, অথবা দুই প্রান্তেই বসান।"
       }
     },
     {
@@ -2764,7 +2764,7 @@
           "A cache with a 5-minute TTL",
           "The developer, by hand on every turn"
         ],
-        "why": "MemGPT treats the LLM's context like virtual memory. The model itself evicts information to external storage and pages it back in, using tool calls such as recall and archival_search."
+        "why": "MemGPT treats the LLM's context like virtual memory. The model itself evicts information to external storage and pages it back in, using tool calls such as recall_storage.search and archival_storage.search."
       },
       "bn": {
         "q": "MemGPT ধারণায় (Packer et al., ২০২৩) ওয়ার্কিং মেমরি আর এক্সটার্নাল স্টোরেজের মধ্যে তথ্য সরানোর সিদ্ধান্ত কে নেয়?",
@@ -2773,7 +2773,7 @@
           "৫ মিনিটের TTL-এর একটি ক্যাশ",
           "ডেভেলপার, প্রতি টার্নে হাতে"
         ],
-        "why": "MemGPT LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখে। মডেল নিজেই recall ও archival_search-এর মতো টুল কল দিয়ে তথ্য এক্সটার্নাল স্টোরেজে সরায় এবং দরকারে আবার ফিরিয়ে আনে।"
+        "why": "MemGPT LLM-এর কনটেক্সটকে ভার্চুয়াল মেমরির মতো দেখে। মডেল নিজেই recall_storage.search ও archival_storage.search-এর মতো টুল কল দিয়ে তথ্য এক্সটার্নাল স্টোরেজে সরায় এবং দরকারে আবার ফিরিয়ে আনে।"
       }
     },
     {
