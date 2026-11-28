@@ -191,7 +191,7 @@ export function findWalkthrough(topics: readonly WithWalkthroughs[], slug: strin
 }
 
 /** The Parts that draw their walk-throughs in the isometric look (where a walk-through fits it). Parts are added one at a time. */
-export const ISO_PARTS: ReadonlySet<string> = new Set(["system-design", "llm-fundamentals", "prompt-engineering", "context-engineering", "fine-tuning-roadmap", "rag-knowledge-systems", "agents-and-agentic-systems", "tool-use-and-integrations", "inference", "multimodal-engineering", "evaluation-engineering", "deploying-and-operating-ai-systems", "ai-engineering-book"]);
+export const ISO_PARTS: ReadonlySet<string> = new Set(["system-design", "llm-fundamentals", "prompt-engineering", "context-engineering", "fine-tuning-roadmap", "rag-knowledge-systems", "agents-and-agentic-systems", "tool-use-and-integrations", "inference", "multimodal-engineering", "evaluation-engineering", "deploying-and-operating-ai-systems", "ai-engineering-book", "visual-learning-resources"]);
 
 /** The scales an isometric object may be drawn at, from the biggest down. */
 export const ISO_SCALES = [1, 0.8, 0.65] as const;
