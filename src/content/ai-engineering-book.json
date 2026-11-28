@@ -724,7 +724,7 @@
             "Post-training has two stages: supervised finetuning first, then preference finetuning.",
             "The same prompt can give different answers. Fixing temperature, top-p, top-k, and a seed helps but never removes this.",
             "For a required output format, finetuning is the most reliable fix and the most expensive. Prompting is the least reliable.",
-            "RLHF does not reliably fix hallucination. Compared with SFT alone, it raised InstructGPT's hallucination rate on some benchmarks (per Huyen), though InstructGPT hallucinated less than GPT-3 overall."
+            "RLHF does not reliably fix hallucination: on some benchmarks it raised InstructGPT's rate versus SFT alone (per Huyen), though InstructGPT beat GPT-3 overall."
           ]
         },
         "bn": {

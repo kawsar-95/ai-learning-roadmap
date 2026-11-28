@@ -2368,7 +2368,7 @@
             },
             {
               "term": "Circuit breaker",
-              "meaning": "A guard that stops calls to a failing service. After N failures of the same kind in a row (say 5), it fails calls fast for a timeout (say 60 seconds)."
+              "meaning": "A guard that stops calls to a failing service. After N failures in a row (say 5), it fails calls fast for a set time (say 60 seconds)."
             }
           ],
           "remember": [
