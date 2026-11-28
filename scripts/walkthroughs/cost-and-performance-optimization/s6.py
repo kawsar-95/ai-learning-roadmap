@@ -4,12 +4,12 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
 
   1 Knobs     Start here: "LLM bills grow with usage. Three ideas cut the cost by 5–50× without losing quality: send easy work to cheap models, reuse past work, and shrink what you send or use a smaller model."
   2 Cascade   Body, "Model cascading": "Route easy requests to a small, cheap model; only escalate to a large, expensive one when the small model's confidence is low (use logprobs, self-critique, or a separate classifier). A well-tuned cascade often reaches frontier quality at 30–70% of the cost."
-  3 Cache     Body, "Caching": "Caching is the single most powerful cost lever. Three kinds:" semantic cache (cosine > 0.95), output cache, prompt cache ("80–90% discount on cached prefix").
+  3 Cache     Body, "Caching": "Caching is the single most powerful cost lever. Three kinds:" semantic cache (for example cosine > 0.95; the threshold is your choice; "Libraries such as GPTCache provide this."), output cache, prompt cache ("Anthropic cache_control, OpenAI automatic prompt caching, reported as cached_tokens ... Cached reads cost about 10% of the base input price on most models (90% off); newer Claude models are cheaper still (0.05×). Writes to the cache cost more (1.25× on Anthropic's 5-minute cache).").
   4 Batch     Body, "Batch APIs": "OpenAI's /v1/batches, Google Batch, Together batch — submit a JSONL file, get results within 24h, at half the cost. Use for: nightly evals, bulk labelling, backfills, anything that doesn't need an answer in the next 5 seconds."
-  5 Distill   Body, "Distillation": "Take 50,000 (prompt, big_model_answer) pairs from production (with consent), fine-tune a small open model on them. ... a well-distilled 7B beats an un-distilled 12B on reasoning benchmarks. Distillation is the only technique that simultaneously cuts cost and latency and unlocks self-hosting."
-  6 Compress  Body, "Prompt compression": "Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens — often 5–20× compression with <3% quality hit. Particularly powerful for long RAG contexts where most chunks are filler."
+  5 Distill   Body, "Distillation": "Take 50,000 (prompt, big_model_answer) pairs from production (with consent), fine-tune a small open model on them. ... DeepSeek-R1's "distilled Qwen" line showed that reasoning patterns from a large model can be used to improve the reasoning of much smaller models. Distillation is the only technique that simultaneously cuts cost and latency and unlocks self-hosting."
+  6 Compress  Body, "Prompt compression": "Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens — up to 20× compression with little performance loss. Particularly powerful for long RAG contexts where most chunks are filler."
   7 Budget    Body, "Token budgeting per feature": "Allocate a monthly token budget per feature, alert at 80%, throttle at 100%. This is the operational layer that prevents one runaway feature from blowing the company's bill."
-  8 Gateway   Body, "Model gateways": "A model gateway sits between your app and every LLM provider. It gives you: one API for OpenAI + Anthropic + Together + your own vLLM; per-key rate limits; cost tracking; retries; fallbacks; semantic caching out of the box. The three major options are LiteLLM (Python proxy), Portkey (production-grade SaaS), and OpenRouter (consumer-grade aggregator)."
+  8 Gateway   Body, "Model gateways": "A model gateway sits between your app and every LLM provider. It gives you: one API for OpenAI + Anthropic + Together + your own vLLM; per-key rate limits; cost tracking; retries; fallbacks. Examples are LiteLLM, Portkey, and OpenRouter. LiteLLM, for one, gives one API for 100+ providers, per-key budgets and rate limits, cost tracking, retries, and fallbacks."
   9 Remember  The sub-title ("Three knobs ... cascade, cache, and compress"), and the four "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -67,12 +67,12 @@ STEPS = [
        [sh("app"), sh("cache", "hot", ("saved answers", "জমানো উত্তর")), sh("big", None, ("only on a miss", "না মিললে তবেই"))],
        [ln("app", "cache", "to", state="hot"), ln("cache", "big", "to")],
        [None, None, None],
-       changes=[("+", "Semantic cache: if a near-identical prompt was answered recently (cosine above 0.95), return the cached answer.",
-                 "সেম্যান্টিক ক্যাশ: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হলে (কোসাইন ০.৯৫-এর বেশি) জমানো উত্তর ফেরত দিন।"),
+       changes=[("+", "Semantic cache: if a near-identical prompt was answered recently (for example cosine above 0.95; the threshold is your choice), return the cached answer. Libraries such as GPTCache provide this.",
+                 "সেম্যান্টিক ক্যাশ: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হলে (যেমন কোসাইন ০.৯৫-এর বেশি; সীমাটা আপনার ঠিক করা) জমানো উত্তর ফেরত দিন। GPTCache-এর মতো লাইব্রেরি এটি দেয়।"),
                 ("+", "Output cache: for deterministic tasks (extraction, classification with <code>temperature=0</code>), a key-value cache keyed on the input.",
                  "আউটপুট ক্যাশ: নির্ধারিত কাজে (এক্সট্র্যাকশন, <code>temperature=0</code> দিয়ে ক্লাসিফিকেশন) ইনপুট ধরে কী-ভ্যালু ক্যাশ।"),
-                ("+", "Prompt cache: provider-level, it reuses the KV of the system prompt across calls, with an 80–90% discount on the cached prefix.",
-                 "প্রম্পট ক্যাশ: প্রোভাইডার-স্তরের; কলের পর কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে, ক্যাশ করা প্রিফিক্সে ৮০–৯০% ছাড়।")]),
+                ("+", "Prompt cache: provider-level (Anthropic cache_control, OpenAI automatic prompt caching, reported as cached_tokens), it reuses the KV of the system prompt across calls. Cached reads cost about 10% of the base input price on most models (90% off); newer Claude models are cheaper still (0.05×). Writes to the cache cost more (1.25× on Anthropic's 5-minute cache).",
+                 "প্রম্পট ক্যাশ: প্রোভাইডার-স্তরের (Anthropic <code>cache_control</code>, OpenAI-র স্বয়ংক্রিয় প্রম্পট ক্যাশিং, যা <code>cached_tokens</code> নামে দেখায়); কলের পর কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে। বেশিরভাগ মডেলে ক্যাশ রিডের দাম বেস ইনপুট দামের প্রায় ১০% (৯০% ছাড়); নতুন Claude মডেলে আরও কম (০.০৫×)। ক্যাশে লেখার খরচ বেশি (Anthropic-এর ৫ মিনিটের ক্যাশে ১.২৫×)।")]),
 
     st(("Batch", "ব্যাচ"),
        ("Batch APIs for work that can wait", "যে কাজ অপেক্ষা করতে পারে তার ব্যাচ API"),
@@ -94,19 +94,19 @@ STEPS = [
        [ln("big", "small", "to", state="hot")],
        [None, None, None],
        note=("insight",
-             "DeepSeek-R1's “distilled Qwen” line showed that a well-distilled 7B beats an un-distilled 12B on reasoning benchmarks.",
-             "DeepSeek-R1-এর “distilled Qwen” লাইন দেখিয়েছে, ভালোভাবে ডিস্টিল করা একটি 7B রিজনিং বেঞ্চমার্কে ডিস্টিল না করা 12B-কে ছাড়িয়ে যায়।")),
+             "DeepSeek-R1's “distilled Qwen” line showed that reasoning patterns from a large model can be used to improve the reasoning of much smaller models.",
+             "DeepSeek-R1-এর “distilled Qwen” লাইন দেখিয়েছে, বড় মডেলের রিজনিং-ধাঁচ দিয়ে অনেক ছোট মডেলের রিজনিং উন্নত করা যায়।")),
 
     st(("Compress", "কম্প্রেস"),
        ("Prompt compression", "প্রম্পট কম্প্রেশন"),
-       [("Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens: often 5–20× compression with under 3% quality loss.",
-         "LLMLingua-র মতো টুল স্টপওয়ার্ড বাদ দেয়, বিস্তারিত অংশ সংক্ষেপে বলে, আর কম তথ্যের টোকেন ফেলে দেয়: প্রায়ই ৫–২০× কম্প্রেশন, মান কমে ৩%-এরও কম।"),
+       [("Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens: up to 20× compression with little performance loss.",
+         "LLMLingua-র মতো টুল স্টপওয়ার্ড বাদ দেয়, বিস্তারিত অংশ সংক্ষেপে বলে, আর কম তথ্যের টোকেন ফেলে দেয়: ২০× পর্যন্ত কম্প্রেশন, কার্যক্ষমতার ক্ষতি সামান্য।"),
         ("This is particularly powerful for long RAG contexts, where most chunks are filler.",
          "লম্বা RAG কনটেক্সটে এটি বিশেষভাবে কাজের, যেখানে বেশিরভাগ অংশই ফিলার।")],
        [sh("prompt", "hot", ("full of filler", "ফিলারে ভরা")), sh("squeeze", "hot", ("LLMLingua-style", "LLMLingua-ধাঁচের"), y=162),
         sh("big", "hot", ("gets the short one", "ছোটটি পায়"))],
        [ln("prompt", "squeeze", "to", state="hot"), ln("squeeze", "big", "to", state="hot")],
-       [None, ("under 3% loss", "৩%-এরও কম ক্ষতি"), ("5–20× smaller", "৫–২০× ছোট")]),
+       [None, ("little loss", "সামান্য ক্ষতি"), ("up to 20× smaller", "২০× পর্যন্ত ছোট")]),
 
     st(("Budget", "বাজেট"),
        ("A token budget per feature", "প্রতিটি ফিচারের টোকেন বাজেট"),
@@ -120,15 +120,15 @@ STEPS = [
 
     st(("Gateway", "গেটওয়ে"),
        ("A model gateway", "মডেল গেটওয়ে"),
-       [("A model gateway sits between your app and every LLM provider. It gives you one API for OpenAI, Anthropic, Together, and your own vLLM, plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching out of the box.",
-         "মডেল গেটওয়ে আপনার অ্যাপ আর প্রতিটি LLM প্রোভাইডারের মাঝে বসে। এটি দেয় OpenAI, Anthropic, Together আর আপনার নিজের vLLM-এর জন্য একটি API, সঙ্গে প্রতি-কী রেট লিমিট, খরচের হিসাব, রিট্রাই, ফলব্যাক আর রেডিমেড সেম্যান্টিক ক্যাশিং।")],
+       [("A model gateway sits between your app and every LLM provider. It gives you one API for OpenAI, Anthropic, Together, and your own vLLM, plus per-key rate limits, cost tracking, retries, and fallbacks.",
+         "মডেল গেটওয়ে আপনার অ্যাপ আর প্রতিটি LLM প্রোভাইডারের মাঝে বসে। এটি দেয় OpenAI, Anthropic, Together আর আপনার নিজের vLLM-এর জন্য একটি API, সঙ্গে প্রতি-কী রেট লিমিট, খরচের হিসাব, রিট্রাই আর ফলব্যাক।")],
        [sh("app"), sh("gateway", "hot", ("one API", "একটি API")), sh("big", "hot", ("OpenAI, Anthropic", "OpenAI, Anthropic"), y=75),
         sh("small", "hot", ("your own vLLM", "আপনার নিজের vLLM"), x=650, y=250)],
        [ln("app", "gateway", "to", state="hot"), ln("gateway", "big", "to", state="hot"), ln("gateway", "small", "to", state="hot")],
        [None, None, None],
        note=("tip",
-             "The three major options are LiteLLM (a Python proxy), Portkey (a production-grade SaaS), and OpenRouter (a consumer-grade aggregator).",
-             "তিনটি প্রধান বিকল্প হলো LiteLLM (Python প্রক্সি), Portkey (প্রোডাকশন-মানের SaaS) আর OpenRouter (কনজিউমার-মানের অ্যাগ্রিগেটর)।")),
+             "Examples are LiteLLM, Portkey, and OpenRouter. LiteLLM, for one, gives one API for 100+ providers, per-key budgets and rate limits, cost tracking, retries, and fallbacks.",
+             "উদাহরণ: LiteLLM, Portkey আর OpenRouter। LiteLLM একটি API-তে ১০০+ প্রোভাইডার, প্রতি-কী বাজেট ও রেট লিমিট, খরচের হিসাব, রিট্রাই আর ফলব্যাক দেয়।")),
 
     st(("Remember", "মনে রাখুন"),
        ("What to remember", "যা মনে রাখবেন"),

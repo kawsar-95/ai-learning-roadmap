@@ -3,13 +3,13 @@
 Every English text sits next to its Bangla text. Every claim restates the section's own text (the section carries the citations):
 
   1 Golden set  Start here: "Evaluation engineering turns the feeling that a model got worse into numbers. Those numbers then act as a signal in CI that checks every prompt or model change before it ships."; body, "Offline evals": "A golden dataset is a fixed set of (input, expected_output) pairs the model is run against on every change. Build it once, grow it from real failures, never let it decay. Run it in CI; block the release if accuracy drops below threshold."
-  2 Pairwise    Body, "LLM-as-judge": "Many qualities ... can't be checked with regex. The trick is to use a strong LLM as a judge ... Pairwise comparison: show the judge A and B, ask which is better. Beats absolute scoring, because relative judgements are easier than absolute ones."
-  3 Rubric      Same part: "Rubric-based scoring: define 4–6 criteria, ask the judge to rate each 0–5 with reasoning. Aggregate weighted score." and "Best practice: use a different (often stronger) model as the judge than the one being evaluated; rotate judge prompts; periodically sanity-check the judge against human labels."
-  4 RAG         Body, "RAG metrics": "The Ragas framework standardised four metrics that every RAG system should track", and its table: Faithfulness, Answer relevance, Context precision, Context recall.
+  2 Pairwise    Body, "LLM-as-judge": "Many qualities ... can't be checked with regex. The trick is to use a strong LLM as a judge ... Pairwise comparison: show the judge A and B, ask which is better. It can pick up subtle differences, but cost grows with the number of pairs and the judge can show position bias; swap the order to check."
+  3 Rubric      Same part: "Rubric-based scoring: define 4–6 criteria, ask the judge to rate each 0–5 with reasoning. Aggregate weighted score." and "Best practice: avoid judging a model with itself (judges can favour their own answers); swap answer positions; periodically check the judge against human labels."
+  4 RAG         Body, "RAG metrics": "The Ragas paper defines three reference-free metrics (faithfulness, answer relevance, context relevance). The Ragas library also offers context precision and context recall. These four metrics are worth tracking in every RAG system:", and its table: Faithfulness, Answer relevance, Context precision, Context recall.
   5 Agents      Body, "Agent evals": "For agents, "the right answer" is necessary but not sufficient — you also need to check how it got there. Track:" task success rate, trajectory match, tool-call accuracy, step efficiency.
   6 Synthetic   Body, "Synthetic data generation for evals": "When your golden set is too small, use an LLM to synthesise plausible (input, expected_output) pairs from your docs and seed examples. Always include a contamination check".
-  7 Online      Body, "Online evals on production traffic": "Sample 1–5% of live requests, run cheap judges (heuristics, regex, small LLM), record the eval score alongside the trace. This catches real failures your offline set misses".
-  8 Red team    Body, "Red teaming and adversarial testing": "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them monthly. Track the failure rate; treat any new failure as a bug to fix in the system prompt or guardrail."
+  7 Online      Body, "Online evals on production traffic": "Sample a small share of live requests (for example 1–5%), run cheap judges (heuristics, regex, small LLM), record the eval score alongside the trace. This catches real failures your offline set misses".
+  8 Red team    Body, "Red teaming and adversarial testing": "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them on a regular schedule, for example monthly. Track the failure rate; treat any new failure as a bug to fix in the system prompt or guardrail."
   9 Remember    The sub-title, and the four "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -60,8 +60,8 @@ STEPS = [
        ("A judge picks the better answer", "জাজ ভালো উত্তরটি বেছে নেয়"),
        [("Many qualities, such as “does this answer sound helpful?”, can't be checked with regex. The trick is to use a strong LLM as a judge.",
          "“এই উত্তর কি সহায়ক শোনায়?” এমন অনেক গুণ regex দিয়ে যাচাই করা যায় না। কৌশল হলো একটি শক্তিশালী LLM-কে জাজ বানানো।"),
-        ("Pairwise comparison shows the judge A and B and asks which is better. It beats absolute scoring, because relative judgements are easier than absolute ones.",
-         "পেয়ারওয়াইজ তুলনায় জাজকে A ও B দেখিয়ে জিজ্ঞেস করা হয় কোনটি ভালো। এটি পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।")],
+        ("Pairwise comparison shows the judge A and B and asks which is better. It can pick up subtle differences, but cost grows with the number of pairs and the judge can show position bias; swap the order to check.",
+         "পেয়ারওয়াইজ তুলনায় জাজকে A ও B দেখিয়ে জিজ্ঞেস করা হয় কোনটি ভালো। এটি দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে, তবে জোড়ার সংখ্যা বাড়লে খরচ বাড়ে, আর জাজের পজিশন বায়াস দেখা দিতে পারে; ক্রম অদলবদল করে যাচাই করুন।")],
        [sh("answer", "hot", ("A", "A"), x=110, y=75), sh("second", "hot", ("B", "B")), sh("judge", "hot", ("a strong LLM", "শক্তিশালী LLM")),
         sh("result", "hot", ("the better one", "যেটি ভালো"))],
        [ln("answer", "judge", "to", state="hot"), ln("second", "judge", "to", state="hot"), ln("judge", "result", "to", state="hot")],
@@ -75,13 +75,13 @@ STEPS = [
        [ln("answer", "judge", "to", state="hot"), ln("judge", "result", "to", state="hot")],
        [("4–6", "৪–৬"), ("0–5", "০–৫"), None, None],
        note=("tip",
-             "Use a different, often stronger, model as the judge than the one being evaluated, rotate judge prompts, and periodically sanity-check the judge against human labels.",
-             "যে মডেল মূল্যায়ন হচ্ছে তার চেয়ে ভিন্ন (প্রায়ই আরও শক্তিশালী) মডেলকে জাজ বানান, জাজ প্রম্পট ঘোরান, আর মাঝে মাঝে মানুষের লেবেলের সঙ্গে জাজকে মিলিয়ে দেখুন।")),
+             "Avoid judging a model with itself (judges can favour their own answers), swap answer positions, and periodically check the judge against human labels.",
+             "একটি মডেলকে তার নিজের দিয়ে জাজ করাবেন না (জাজ নিজের উত্তরকে বেশি পছন্দ করতে পারে), উত্তরের অবস্থান অদলবদল করুন, আর মাঝে মাঝে মানুষের লেবেলের সঙ্গে জাজকে মিলিয়ে দেখুন।")),
 
     st(("RAG", "RAG"),
        ("Four numbers for a RAG system", "RAG সিস্টেমের চারটি সংখ্যা"),
-       [("The Ragas framework standardized four metrics that every RAG system should track:",
-         "Ragas ফ্রেমওয়ার্ক চারটি মেট্রিক প্রমিত করেছে, যা প্রতিটি RAG সিস্টেমের ট্র্যাক করা উচিত:")],
+       [("The Ragas paper defines three reference-free metrics (faithfulness, answer relevance, context relevance). The Ragas library also offers context precision and context recall. These four metrics are worth tracking in every RAG system:",
+         "Ragas পেপার তিনটি রেফারেন্স-ছাড়া মেট্রিক সংজ্ঞায়িত করেছে (ফেইথফুলনেস, আনসার রিলেভেন্স, কনটেক্সট রিলেভেন্স)। Ragas লাইব্রেরি কনটেক্সট প্রিসিশন আর কনটেক্সট রিকলও দেয়। প্রতিটি RAG সিস্টেমে এই চারটি মেট্রিক ট্র্যাক করা উচিত:")],
        [sh("user", "hot", ("question", "প্রশ্ন")), sh("chunks", "hot", ("retrieved", "খুঁজে আনা")), sh("answer", "hot")],
        [ln("user", "chunks", "to", state="hot"), ln("chunks", "answer", "to", state="hot")],
        [None, None, None, None],
@@ -123,8 +123,8 @@ STEPS = [
 
     st(("Online", "অনলাইন"),
        ("Online evals on live traffic", "লাইভ ট্র্যাফিকে অনলাইন ইভ্যাল"),
-       [("Sample 1–5% of live requests, run cheap judges (heuristics, regex, a small LLM), and record the eval score alongside the trace.",
-         "লাইভ রিকোয়েস্টের ১–৫% স্যাম্পল করুন, সস্তা জাজ (হিউরিস্টিক, regex, ছোট LLM) চালান, আর ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন।"),
+       [("Sample a small share of live requests (for example 1–5%), run cheap judges (heuristics, regex, a small LLM), and record the eval score alongside the trace.",
+         "লাইভ রিকোয়েস্টের একটি ছোট অংশ (যেমন ১–৫%) স্যাম্পল করুন, সস্তা জাজ (হিউরিস্টিক, regex, ছোট LLM) চালান, আর ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন।"),
         ("This catches real failures your offline set misses: distribution shifts, prompt-template copy-paste errors, and fresh prompt injections.",
          "এটি আপনার অফলাইন সেট মিস করা বাস্তব ব্যর্থতা ধরে: ডিস্ট্রিবিউশন শিফট, প্রম্পট-টেমপ্লেট কপি-পেস্ট এরর, নতুন প্রম্পট ইনজেকশন।")],
        [sh("user", "hot", ("live requests", "লাইভ রিকোয়েস্ট")), sh("judge", "hot", ("cheap judge", "সস্তা জাজ")), sh("trace", "hot", ("with its score", "স্কোরসহ"))],
@@ -133,8 +133,8 @@ STEPS = [
 
     st(("Red team", "রেড টিম"),
        ("Red teaming", "রেড টিমিং"),
-       [("Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them monthly, and track the failure rate.",
-         "আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। মাসে একবার চালান, আর ব্যর্থতার হার ট্র্যাক করুন।")],
+       [("Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them on a regular schedule, for example monthly. Track the failure rate.",
+         "আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। নিয়মিত চালান, যেমন মাসে একবার।  ব্যর্থতার হার ট্র্যাক করুন।")],
        [sh("attacks", "hot", ("run monthly", "মাসে একবার")), sh("model", "hot", ("under attack", "আক্রমণের মুখে")), sh("result", "hot", ("failure rate", "ব্যর্থতার হার"))],
        [ln("attacks", "model", "to", state="hot"), ln("model", "result", "to", state="hot")],
        [None, None, None, ("monthly", "মাসিক")],
@@ -144,15 +144,15 @@ STEPS = [
 
     st(("Remember", "মনে রাখুন"),
        ("What to remember", "যা মনে রাখবেন"),
-       [("Evaluation engineering turns “the model feels worse today” into numbers, then turns the numbers into a CI signal that gates every prompt or model change.",
-         "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং “মডেল আজ খারাপ লাগছে” কথাটাকে সংখ্যায় বদলায়। তারপর সেই সংখ্যাকে CI-র সিগন্যাল বানায়, যা প্রতিটা প্রম্পট বা মডেল বদলানোর আগে পরীক্ষা করে।")],
+       [("Evaluation engineering turns the feeling that a model got worse into numbers. Those numbers then act as a signal in CI that checks every prompt or model change before it ships.",
+         "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং মডেল খারাপ হয়েছে এমন অনুভূতিকে সংখ্যায় বদলে দেয়। সেই সংখ্যা CI-তে সংকেতের কাজ করে, আর প্রতিটি প্রম্পট বা মডেল পরিবর্তন শিপ হওয়ার আগে যাচাই করে।")],
        [sh("golden"), sh("model"), sh("ci")],
        [ln("golden", "model", "to"), ln("model", "ci", "to")],
        [None, None, None, None],
        points=[("Build a golden dataset, grow it from real failures, and block the release if accuracy drops below the threshold.",
                 "গোল্ডেন ডেটাসেট বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর অ্যাকুরেসি (accuracy) সীমার নিচে নামলে রিলিজ আটকে দিন।"),
-               ("Pairwise judging beats absolute scoring, because relative judgements are easier than absolute ones.",
-                "পেয়ারওয়াইজ বিচার পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।"),
+               ("Pairwise judging can pick up subtle differences between two answers, but watch for position bias: swap the order to check.",
+                "পেয়ারওয়াইজ বিচার দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে, তবে পজিশন বায়াস থেকে সাবধান: ক্রম অদলবদল করে যাচাই করুন।"),
                ("For agents, check how the answer was reached, not only whether the final answer is right.",
                 "এজেন্টের ক্ষেত্রে শুধু চূড়ান্ত উত্তর নয়, উত্তরে কীভাবে পৌঁছেছে সেটাও দেখুন।"),
                ("Always check synthetic questions for contamination (questions that copy the training data), or you test memorization instead of capability.",

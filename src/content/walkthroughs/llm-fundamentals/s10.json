@@ -108,8 +108,8 @@
     }
   ],
   "caption": {
-    "en": "Typical ranges from this section. They depend on the task.",
-    "bn": "এই সেকশনের সাধারণ সীমা। কাজ অনুযায়ী বদলায়।"
+    "en": "Rough comparisons from this section. They depend on the task.",
+    "bn": "এই সেকশন থেকে মোটামুটি তুলনা। কাজ অনুযায়ী বদলায়।"
   },
   "steps": [
     {
@@ -171,7 +171,10 @@
         }
       ],
       "values": [
-        "1×",
+        {
+          "en": "fewer",
+          "bn": "কম"
+        },
         {
           "en": "short",
           "bn": "কম"
@@ -278,7 +281,10 @@
         }
       ],
       "values": [
-        "5–50×",
+        {
+          "en": "many times more",
+          "bn": "অনেক গুণ বেশি"
+        },
         {
           "en": "longer",
           "bn": "বেশি"
@@ -295,7 +301,7 @@
         "title": "Thinking costs tokens",
         "body": [
           "Thinking tokens count as tokens too, so you pay for them and wait for them.",
-          "A reasoning model can use 5–50 times more tokens for one query. That is why it costs more."
+          "A reasoning model can use many times more tokens for one query, depending on the task and the thinking budget. That is why it costs more."
         ],
         "changes": [
           {
@@ -309,7 +315,7 @@
         "title": "ভাবতেও টোকেন লাগে",
         "body": [
           "থিংকিং টোকেনও টোকেন হিসেবে গোনা হয়, তাই এগুলোর জন্যও টাকা দিতে হয়, সময়ও লাগে।",
-          "একটি প্রশ্নে রিজনিং মডেল ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে। তাই খরচও বেশি।"
+          "একটি প্রশ্নে রিজনিং মডেল অনেক গুণ বেশি টোকেন খরচ করতে পারে, কাজ আর থিংকিং বাজেটের ওপর নির্ভর করে। তাই খরচও বেশি।"
         ],
         "changes": [
           {
@@ -335,8 +341,8 @@
           "id": "bill",
           "state": "warn",
           "sub": {
-            "en": "5–50× more",
-            "bn": "৫–৫০ গুণ বেশি"
+            "en": "many times more",
+            "bn": "অনেক গুণ বেশি"
           }
         }
       ],
@@ -355,7 +361,10 @@
         }
       ],
       "values": [
-        "5–50×",
+        {
+          "en": "many times more",
+          "bn": "অনেক গুণ বেশি"
+        },
         {
           "en": "longer",
           "bn": "বেশি"
@@ -371,7 +380,7 @@
         "short": "Wait",
         "title": "The first output comes later",
         "body": [
-          "Thinking also changes the wait. TTFT, the time until the first output appears, is often slower, because the prefill is longer.",
+          "Thinking also changes the wait. TTFT, the time until the first output appears, is often slower, because the model writes thinking tokens before the answer.",
           "Streaming the thinking tokens as they are written can help the user experience."
         ],
         "changes": [
@@ -385,7 +394,7 @@
         "short": "অপেক্ষা",
         "title": "প্রথম আউটপুট আসে দেরিতে",
         "body": [
-          "ভাবার ফলে অপেক্ষার সময়ও বদলায়। TTFT, মানে প্রথম আউটপুট দেখা দিতে যে সময় লাগে, তা প্রায়ই বেশি হয়, কারণ প্রিফিল লম্বা হয়।",
+          "ভাবার ফলে অপেক্ষার সময়ও বদলায়। TTFT, মানে প্রথম আউটপুট দেখা দিতে যে সময় লাগে, তা প্রায়ই বেশি হয়, কারণ মডেল উত্তরের আগে থিংকিং টোকেন লেখে।",
           "থিংকিং টোকেন লেখা হওয়ার সঙ্গে সঙ্গে স্ট্রিম করলে ব্যবহারকারীর অভিজ্ঞতা ভালো হয়।"
         ],
         "changes": [
@@ -440,7 +449,10 @@
         }
       ],
       "values": [
-        "5–50×",
+        {
+          "en": "many times more",
+          "bn": "অনেক গুণ বেশি"
+        },
         {
           "en": "longer",
           "bn": "বেশি"
@@ -634,7 +646,7 @@
         "title": "How a model learns to think",
         "body": [
           "A reasoning model is trained by reward, called reinforcement learning: it tries, gets a score, and learns to do more of what scored well.",
-          "Trained this way on chains of thought, step-by-step lines of reasoning, a model learns to think longer on hard problems."
+          "Reasoning models are trained with large-scale reinforcement learning to reason using chain of thought, a step-by-step line of reasoning."
         ],
         "note": {
           "kind": "insight",
@@ -646,7 +658,7 @@
         "title": "মডেল কীভাবে ভাবতে শেখে",
         "body": [
           "রিজনিং মডেলকে ট্রেন করা হয় পুরস্কার দিয়ে, যাকে রিইনফোর্সমেন্ট লার্নিং বলে: মডেল চেষ্টা করে, স্কোর পায়, আর যেটায় ভালো স্কোর আসে সেটা বেশি করতে শেখে।",
-          "চেইন অফ থটের ওপর, মানে ধাপে ধাপে যুক্তির ওপর, এভাবে ট্রেন করলে মডেল কঠিন সমস্যায় বেশি সময় ধরে ভাবতে শেখে।"
+          "রিজনিং মডেলকে বড় মাপের রিইনফোর্সমেন্ট লার্নিং দিয়ে ট্রেন করা হয়, যাতে সে চেইন অফ থট, মানে ধাপে ধাপে যুক্তি, ব্যবহার করে ভাবতে শেখে।"
         ],
         "note": {
           "kind": "insight",
@@ -700,7 +712,7 @@
         ],
         "points": [
           "Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions.",
-          "They can use 5–50 times more tokens, so set a thinking budget.",
+          "They can use many times more tokens, so set a thinking budget.",
           "For most chat, extraction, and RAG, a standard model with careful prompting wins."
         ]
       },
@@ -712,7 +724,7 @@
         ],
         "points": [
           "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন; চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়।",
-          "এরা ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
+          "এরা অনেক গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।",
           "বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এ ভালো প্রম্পটিংসহ সাধারণ মডেলই সবচেয়ে ভালো কাজ করে।"
         ]
       },

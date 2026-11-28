@@ -527,7 +527,7 @@
         "short": "GPUs",
         "title": "GPU numbers",
         "body": [
-          "For GPUs, NVIDIA's DCGM exporter publishes utilization, memory and temperature as Prometheus metrics."
+          "For GPUs, NVIDIA's DCGM exporter publishes utilisation, memory and temperature as Prometheus metrics."
         ]
       },
       "bn": {

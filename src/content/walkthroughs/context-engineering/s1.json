@@ -83,8 +83,8 @@
       "bn": "ভাগ"
     },
     {
-      "en": "Floor",
-      "bn": "সর্বনিম্ন"
+      "en": "Rule of thumb",
+      "bn": "অভিজ্ঞতালব্ধ নিয়ম"
     },
     {
       "en": "Answer",
@@ -190,7 +190,7 @@
         "short": "System",
         "title": "The system prompt: standing instructions",
         "body": [
-          "The system prompt holds the standing instructions: the persona, the output format, and the hard rules. It needs a floor of about 1–2K tokens.",
+          "The system prompt holds the standing instructions: the persona, the output format, and the hard rules. By a rule of thumb (no source), it needs about 1–2K tokens.",
           "Larger prompts cost more per call and dilute attention. In the example it takes about 8% of the window."
         ],
         "changes": [
@@ -204,7 +204,7 @@
         "short": "সিস্টেম",
         "title": "সিস্টেম প্রম্পট: স্থায়ী নির্দেশ",
         "body": [
-          "সিস্টেম প্রম্পটে থাকে স্থায়ী নির্দেশ: পারসোনা, আউটপুটের কাঠামো আর কড়া নিয়ম। এতে কমপক্ষে ~১–২K টোকেন লাগে।",
+          "সিস্টেম প্রম্পটে থাকে স্থায়ী নির্দেশ: পারসোনা, আউটপুটের কাঠামো আর কড়া নিয়ম। অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): এতে প্রায় ~১–২K টোকেন লাগে।",
           "বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়। উদাহরণে এটা উইন্ডোর প্রায় ৮%।"
         ],
         "changes": [
@@ -258,7 +258,7 @@
         "short": "Tools",
         "title": "Tool definitions: only what this step needs",
         "body": [
-          "Tool definitions describe the tools the model may call. They need a floor of about 1–3K tokens.",
+          "Tool definitions describe the tools the model may call. By a rule of thumb (no source), they need about 1–3K tokens.",
           "Include only the tools the current step might need, and load specialised tools lazily. In the example it is about 7%."
         ],
         "changes": [
@@ -272,7 +272,7 @@
         "short": "টুল",
         "title": "টুল ডেফিনিশন: শুধু যা এই ধাপে লাগে",
         "body": [
-          "টুল ডেফিনিশনে থাকে মডেল কোন টুল ডাকতে পারে তার বর্ণনা। এতে ~১–৩K টোকেন লাগে।",
+          "টুল ডেফিনিশনে থাকে মডেল কোন টুল ডাকতে পারে তার বর্ণনা। অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): এতে প্রায় ~১–৩K টোকেন লাগে।",
           "শুধু সেই টুলই রাখুন, যা এই ধাপে লাগতে পারে; বিশেষ টুল দরকারের সময় লোড করুন। উদাহরণে প্রায় ৭%।"
         ],
         "changes": [
@@ -665,7 +665,7 @@
         "short": "Middle",
         "title": "Lost in the Middle: where you put it matters",
         "body": [
-          "Models recall the start and end of a long prompt well, but do close to random in the middle.",
+          "Models often do best on the start and end of a long prompt, and much worse in the middle.",
           "So put the most important information at the start or the end of the prompt, not in the middle."
         ]
       },
@@ -673,7 +673,7 @@
         "short": "মাঝখান",
         "title": "Lost in the Middle: কোথায় রাখছেন, সেটাও জরুরি",
         "body": [
-          "লম্বা প্রম্পটের শুরু আর শেষের তথ্য মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে ফল প্রায় র‍্যান্ডমের কাছাকাছি।",
+          "লম্বা প্রম্পটের শুরু আর শেষের তথ্যে মডেল প্রায়ই সবচেয়ে ভালো করে, আর মাঝখানের তথ্যে ফল উল্লেখযোগ্যভাবে খারাপ হয়।",
           "তাই যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।"
         ]
       },
@@ -757,7 +757,7 @@
           "One window, five parts and a reserved answer: decide the budget before you fill it."
         ],
         "points": [
-          "A system prompt needs a floor of ~1–2K tokens. Tool definitions need ~1–3K.",
+          "Rule of thumb (no source): a system prompt needs about 1–2K tokens, and tool definitions about 1–3K.",
           "Put the most important information at the start or the end of the prompt, not the middle.",
           "Keep history small and cap retrieval chunks. Quality beats quantity.",
           "Always reserve tokens for the answer, or it is cut off and fails silently."
@@ -770,7 +770,7 @@
           "একটি উইন্ডো, পাঁচটি অংশ আর রিজার্ভ করা উত্তর: ভরার আগেই বাজেট ঠিক করুন।"
         ],
         "points": [
-          "সিস্টেম প্রম্পটে কমপক্ষে ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।",
+          "অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): সিস্টেম প্রম্পটে প্রায় ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।",
           "যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।",
           "হিস্ট্রি ছোট রাখুন আর রিট্রিভালের অংশ সীমিত করুন। পরিমাণের চেয়ে মান ভালো।",
           "উত্তরের জন্য টোকেন আগেই রাখুন, নইলে উত্তর কেটে গিয়ে নীরবে ব্যর্থ হয়।"

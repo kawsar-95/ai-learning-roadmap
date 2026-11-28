@@ -265,7 +265,7 @@
         "title": "Stage 2: a reranker reads each pair together",
         "body": [
           "A reranker, also called a cross-encoder, reads the question and one document together and scores how well they match.",
-          "This is more accurate but slower: about 50–200 ms for each pair. So it only sees the 100 candidates, not the 10 million documents."
+          "This is more accurate but slower: a full model runs for each pair, and the time depends on model size and hardware. So it only sees the 100 candidates, not the 10 million documents."
         ],
         "changes": [
           {
@@ -279,7 +279,7 @@
         "title": "স্টেজ ২: রিরেংকার প্রতিটি জোড়া একসাথে পড়ে",
         "body": [
           "রিরেংকার, যাকে ক্রস-এনকোডারও বলে, প্রশ্ন আর একটি ডকুমেন্ট একসাথে পড়ে এবং দুটো কতটা মেলে তার স্কোর দেয়।",
-          "এটা বেশি নির্ভুল, কিন্তু ধীর: প্রতি জোড়ায় প্রায় ৫০–২০০ ms। তাই রিরেংকার শুধু ১০০টি ক্যান্ডিডেট দেখে, ১ কোটি ডকুমেন্ট নয়।"
+          "এটা বেশি নির্ভুল, কিন্তু ধীর: প্রতি জোড়ায় একটি পুরো মডেল চলে, আর সময় নির্ভর করে মডেলের আকার ও হার্ডওয়্যারের ওপর। তাই রিরেংকার শুধু ১০০টি ক্যান্ডিডেট দেখে, ১ কোটি ডকুমেন্ট নয়।"
         ],
         "changes": [
           {
@@ -316,7 +316,10 @@
       ],
       "values": [
         "100",
-        "50–200 ms"
+        {
+          "en": "slower",
+          "bn": "ধীর"
+        }
       ]
     },
     {
@@ -380,7 +383,10 @@
       ],
       "values": [
         "5",
-        "50–200 ms"
+        {
+          "en": "slower",
+          "bn": "ধীর"
+        }
       ]
     },
     {
@@ -389,7 +395,7 @@
         "title": "Keywords and meaning work better together",
         "body": [
           "BM25 is a classic keyword score: documents that share the question's words score higher. Hybrid retrieval uses it together with embedding search.",
-          "On standard retrieval tests, this usually beats either one alone."
+          "On standard retrieval tests, this often beats either one alone."
         ]
       },
       "bn": {
@@ -397,7 +403,7 @@
         "title": "কিওয়ার্ড আর অর্থ একসাথে ভালো কাজ করে",
         "body": [
           "BM25 কিওয়ার্ড দিয়ে খোঁজার পুরনো স্কোর: প্রশ্নের শব্দ যে ডকুমেন্টে আছে, সেটা বেশি স্কোর পায়। হাইব্রিড রিট্রিভাল এটাকে এমবেডিং সার্চের সঙ্গে একসাথে ব্যবহার করে।",
-          "প্রচলিত রিট্রিভাল পরীক্ষায় এটা সাধারণত যেকোনো একটার চেয়ে ভালো করে।"
+          "প্রচলিত রিট্রিভাল পরীক্ষায় এটা প্রায়ই যেকোনো একটার চেয়ে ভালো করে।"
         ]
       },
       "show": [
@@ -471,7 +477,7 @@
         "points": [
           "Stage 1: embeddings narrow millions of documents down to a few hundred, fast.",
           "Stage 2: a reranker picks the best few. It is more accurate, but slower.",
-          "On standard tests, keyword search (BM25) plus embeddings usually beats either alone."
+          "On standard tests, keyword search (BM25) plus embeddings often beats either alone."
         ]
       },
       "bn": {
@@ -483,7 +489,7 @@
         "points": [
           "স্টেজ ১: এমবেডিং লাখ লাখ ডকুমেন্ট থেকে দ্রুত কয়েকশোতে নামিয়ে আনে।",
           "স্টেজ ২: রিরেংকার সেরা কয়েকটি বাছে। এটা বেশি নির্ভুল, কিন্তু ধীর।",
-          "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে সাধারণত যেকোনো একটার চেয়ে ভালো ফল আসে।"
+          "প্রচলিত পরীক্ষায় কিওয়ার্ড সার্চ (BM25) আর এমবেডিং মেলালে প্রায়ই যেকোনো একটার চেয়ে ভালো ফল আসে।"
         ]
       },
       "show": [

@@ -3,10 +3,10 @@
 Every English text sits next to its Bangla text. Every claim restates the section's own text (the section carries the citations):
 
   1 Modalities  Start here: "Modern AI apps combine at least two of: seeing images, voice, making images, and making video. Multimodal engineering is choosing the right models, time limits, and steps for each one."
-  2 Vision      Body, "Vision": "Native multimodal models (GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL) take images directly. ... OCR-via-LLM ...: it beats Tesseract on messy photos, handwritten notes, and structured forms. Often no separate OCR step is needed." Document AI, chart extraction, visual Q&A.
+  2 Vision      Body, "Vision": "Native multimodal models (GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL) take images directly. ... OCR-via-LLM ...: it often reads messy photos, handwritten notes, and structured forms better than Tesseract. Often no separate OCR step is needed." Document AI, chart extraction, visual Q&A.
   3 Voice       Body, "Voice agents": "A voice pipeline is STT (speech-to-text) → LLM → TTS (text-to-speech). Each stage has its own leading options:" and its table.
-  4 Realtime    Same part: "Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio bidirectionally. Sub-500 ms turn-taking is now achievable. LiveKit and Vapi ship full agent frameworks on top of these."
-  5 Images      Body, "Image generation": "The models differ in licence and in what they do best." and its table (Flux, SDXL / SD3, Imagen 3, DALL-E 3 / GPT-Image-1, Ideogram, Recraft, Reve).
+  4 Realtime    Same part: "Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio bidirectionally. They target low first-audio latency and natural turn-taking. LiveKit and Vapi ship full agent frameworks on top of these."
+  5 Images      Body, "Image generation": "The models differ in licence and in what they do best." and its table (Flux, SDXL / SD3, Imagen 4, DALL-E 3 / GPT-Image-2.5, Ideogram, Recraft, Reve).
   6 Add-ons     Same part: "Common workflow add-ons: ControlNet ...; LoRA ...; inpainting ...; IP-Adapter ... ComfyUI lets you wire these into reproducible pipelines."
   7 Video       Body, "Video generation": "They differ in clip length, built-in audio and resolution, in how well a character stays the same from shot to shot, and in price and speed." and its table.
   8 Pipelines   Body, "ComfyUI, Replicate, Fal for media pipelines": the three bullets.
@@ -32,7 +32,7 @@ NODES = [
 METRICS = [
     ("Modalities", "মোডালিটি"),
     ("Turn-taking", "পালা বদল"),
-    ("Sora clip", "Sora ক্লিপ"),
+    ("Veo 3.1", "Veo 3.1"),
 ]
 
 CAPTION = (
@@ -54,8 +54,8 @@ STEPS = [
        ("Models that see", "যে মডেল দেখে"),
        [("Native multimodal models (GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL) take images directly.",
          "GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL-এর মতো নেটিভ মাল্টিমোডাল মডেল সরাসরি ছবি নেয়।"),
-        ("OCR-via-LLM beats Tesseract on messy photos, handwritten notes, and structured forms, and often needs no separate OCR step.",
-         "OCR-via-LLM অগোছালো ছবি, হাতের লেখা নোট আর কাঠামোবদ্ধ ফর্মে Tesseract-কে ছাড়িয়ে যায়, আর প্রায়ই আলাদা OCR ধাপের দরকার হয় না।")],
+        ("OCR-via-LLM often reads messy photos, handwritten notes, and structured forms better than Tesseract, and often needs no separate OCR step.",
+         "OCR-via-LLM অগোছালো ছবি, হাতের লেখা নোট আর কাঠামোবদ্ধ ফর্মে অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে, আর প্রায়ই আলাদা OCR ধাপের দরকার হয় না।")],
        [sh("input", "hot", ("an image", "একটি ছবি")), sh("vision", "hot", ("takes images", "ছবি নেয়"), None, 380, 162), sh("output", "hot", ("text or JSON", "টেক্সট বা JSON"))],
        [ln("input", "vision", "to", state="hot"), ln("vision", "output", "to", state="hot")],
        [None, None, None],
@@ -75,16 +75,16 @@ STEPS = [
        [None, None, None],
        changes=[("+", "STT: Whisper, Deepgram, AssemblyAI, ElevenLabs Scribe",
                  "STT: Whisper, Deepgram, AssemblyAI, ElevenLabs Scribe"),
-                ("+", "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT",
-                 "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT")]),
+                ("+", "TTS: ElevenLabs, Cartesia, OpenAI TTS",
+                 "TTS: ElevenLabs, Cartesia, OpenAI TTS")]),
 
     st(("Realtime", "রিয়েলটাইম"),
        ("Realtime APIs", "রিয়েলটাইম API"),
-       [("Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio in both directions. Sub-500 ms turn-taking is now achievable.",
-         "রিয়েলটাইম API ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে দুই দিকেই অডিও স্ট্রিম করে। এখন ৫০০ ms-এর কমে পালা বদল সম্ভব।")],
+       [("Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio in both directions. They target low first-audio latency and natural turn-taking.",
+         "রিয়েলটাইম API ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে দুই দিকেই অডিও স্ট্রিম করে। এগুলো কম first-audio latency আর স্বাভাবিক পালা বদলের লক্ষ্য রাখে।")],
        [sh("input", "hot", ("the caller", "কলকারী")), sh("voice", "hot", ("streams both ways", "দুই দিকে স্ট্রিম"), None, 380, 162)],
        [ln("input", "voice", "both", state="hot")],
-       [None, ("sub-500 ms", "৫০০ ms-এর কমে"), None],
+       [None, ("low latency", "কম ল্যাটেন্সি"), None],
        note=("tip",
              "Options include the OpenAI Realtime API, LiveKit Agents, Vapi, Retell, and Daily. LiveKit and Vapi ship full agent frameworks on top of these.",
              "বিকল্পের মধ্যে আছে OpenAI Realtime API, LiveKit Agents, Vapi, Retell আর Daily। LiveKit আর Vapi এগুলোর ওপর পূর্ণ এজেন্ট ফ্রেমওয়ার্ক দেয়।")),
@@ -100,10 +100,10 @@ STEPS = [
                  "Flux (Black Forest Labs): ওপেন-ওয়েটস, প্রম্পটের প্রতি দৃঢ় বিশ্বস্ততা"),
                 ("+", "SDXL / SD3 (Stability): open, fine-tuneable with LoRA",
                  "SDXL / SD3 (Stability): ওপেন, LoRA দিয়ে ফাইন-টিউন করা যায়"),
-                ("+", "Imagen 3 (Google): photorealism, available via Vertex",
-                 "Imagen 3 (Google): ফটোরিয়ালিজম, Vertex-এ পাওয়া যায়"),
-                ("+", "DALL-E 3 / GPT-Image-1 (OpenAI): polished, instruction-following",
-                 "DALL-E 3 / GPT-Image-1 (OpenAI): পরিপাটি, নির্দেশ-অনুসারী"),
+                ("+", "Imagen 4 (Google): photorealism, generally available on Vertex since Aug 14 2025",
+                 "Imagen 4 (Google): ফটোরিয়ালিজম, ১৪ আগস্ট ২০২৫ থেকে Vertex-এ সাধারণভাবে পাওয়া যায়"),
+                ("+", "DALL-E 3 / GPT-Image-2.5 (OpenAI): polished, instruction-following",
+                 "DALL-E 3 / GPT-Image-2.5 (OpenAI): পরিপাটি, নির্দেশ-অনুসারী"),
                 ("+", "Ideogram, Recraft, Reve: typography and design-oriented",
                  "Ideogram, Recraft, Reve: টাইপোগ্রাফি আর ডিজাইনমুখী")]),
 
@@ -129,11 +129,11 @@ STEPS = [
          "ভিডিও মডেলগুলো ক্লিপের দৈর্ঘ্য, বিল্ট-ইন অডিও আর রেজোলিউশনে, এক শট থেকে আরেক শটে চরিত্র কতটা একই থাকে তাতে, আর দাম ও গতিতে আলাদা।")],
        [sh("input", "hot", ("a prompt", "একটি প্রম্পট")), sh("videogen", "hot", ("length, audio", "দৈর্ঘ্য, অডিও"), None, 380, 162), sh("output", "hot", ("a clip", "একটি ক্লিপ"))],
        [ln("input", "videogen", "to", state="hot"), ln("videogen", "output", "to", state="hot")],
-       [None, None, ("up to 20 s", "২০ সেকেন্ড পর্যন্ত")],
-       changes=[("+", "Sora (OpenAI): up to 20 s, strong physics",
-                 "Sora (OpenAI): ২০ সেকেন্ড পর্যন্ত, শক্তিশালী ফিজিক্স"),
-                ("+", "Veo 3 (Google): native audio + 4K, prompt-adherent",
-                 "Veo 3 (Google): নেটিভ অডিও + 4K, প্রম্পট-অনুসারী"),
+       [None, None, ("up to 4K", "৪K পর্যন্ত")],
+       changes=[("+", "Sora (OpenAI): discontinued (app Apr 2026, API Sep 24 2026)",
+                 "Sora (OpenAI): বন্ধ (অ্যাপ এপ্রিল ২০২৬, API ২৪ সেপ্টেম্বর ২০২৬)"),
+                ("+", "Veo 3.1 (Google): native audio, up to 4K; the Veo 3.1 Preview ID was shut down Oct 22 2026",
+                 "Veo 3.1 (Google): নেটিভ অডিও, ৪K পর্যন্ত; Veo 3.1 Preview ID ২২ অক্টোবর ২০২৬-এ বন্ধ হয়েছে"),
                 ("+", "Runway Gen-4: reference-image continuity for character",
                  "Runway Gen-4: চরিত্রের জন্য রেফারেন্স-ছবির ধারাবাহিকতা"),
                 ("+", "Kling 2.0 (Kuaishou): long-form, motion quality",
@@ -164,8 +164,8 @@ STEPS = [
        [None, None, None],
        points=[("In 2025, every production AI app combines at least two of vision, voice, image generation, and video generation.",
                 "২০২৫-এ প্রতিটি প্রোডাকশন AI অ্যাপ ভিশন, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশনের অন্তত দুটি মেলায়।"),
-               ("Models that take images directly often need no separate OCR step, and they beat Tesseract on messy photos.",
-                "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে Tesseract-কে হারায়।"),
+               ("Models that take images directly often need no separate OCR step, and they often read messy photos better than Tesseract.",
+                "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে।"),
                ("A voice pipeline is STT → LLM → TTS. Realtime APIs stream audio both ways instead.",
                 "ভয়েস পাইপলাইন হলো STT → LLM → TTS। রিয়েলটাইম API তার বদলে দুই দিকে অডিও স্ট্রিম করে।"),
                ("Pick image and video models by what you need: license, photorealism, clip length, character consistency, price, and speed.",

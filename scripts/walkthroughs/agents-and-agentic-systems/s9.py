@@ -2,12 +2,12 @@
 
 Every English text sits next to its Bangla text. Every claim restates the section's own text (the section carries the citations):
 
-  1 Problems  Sub-title: "Agents that take minutes or hours face three problems a normal Python loop can't solve: crashes lose state, rate limits force waits, and human approvals force pauses. Durable execution engines solve all three."
+  1 Problems  Sub-title: "Agents that take minutes or hours face three problems a normal Python loop can't solve: crashes lose state, rate limits force waits, and human approvals force pauses. Durable execution engines help with all three."
   2 State     Body, "Why "just save state" isn't enough": "The naive solution is to checkpoint the agent's state to disk every step. But "the agent's state" is more than the message log: it's the in-flight tool calls, the partial writes to external services, the human approval state, the retry counters. Saving the messages and losing the rest gives you a corrupt resume."
-  3 Durable   Body, "Durable execution, defined": "A durable execution engine records every step's intent and result to a durable store (a database, a journal, a queue)... The engine handles retries, rate limits, and human-in-the-loop pauses natively. The application code is a series of workflow steps; the engine is the runtime that survives crashes."
-  4 Resume    Same body: "On crash, the next process loads the snapshot and resumes from the next un-run step."; the diagram: "A crash mid-flight resumes from the next un-run step, not from the beginning."
+  3 Durable   Body, "Durable execution, defined": "A durable execution engine records every step's intent and result to a durable store (a database, a journal, a queue). On crash, the next process replays the recorded history to rebuild state and resumes from the next un-run step. The engine handles retries and human-in-the-loop pauses natively. The application code is a series of workflow steps; the engine is the runtime that survives crashes."
+  4 Resume    Same body: "On crash, the next process replays the recorded history to rebuild state and resumes from the next un-run step."; the diagram: "Finished steps do not run again; no work is lost." and "A crash mid-flight resumes from the next un-run step, not from the beginning."
   5 When      Body, "When you need it": "The agent runs for more than ~30 seconds (anything that might survive a deploy)." "Humans are in the loop and might take hours or days to respond." "The agent makes irreversible side effects (sending money, deleting records) that you want to be able to retry without duplicating." "The agent's work spans multiple services and you want to resume from the failed service."
-  6 Engines   Body, "The four durable engines": Temporal ("Event-sourced workflows", "Long-running, multi-day, with strong consistency"), Restate ("Journaled workflows", "Same as Temporal, smaller surface area"), Inngest ("Event-driven serverless", "Wake-on-webhook, pay-per-step"), AWS Step Functions / DBOS ("Managed / SQL-based", "AWS-native shops, simplest ops").
+  6 Engines   Body, "The four durable engines" (takeaway: "Five engines the section lists"): Temporal ("Event-sourced workflows", "Long-running, multi-day, with strong consistency"), Restate ("Journaled workflows", "Same as Temporal, smaller surface area"), Inngest ("Event-driven serverless", "Wake-on-webhook, pay-per-step"), AWS Step Functions / DBOS ("Managed / SQL-based", "AWS-native shops, simplest ops").
   7 Remember  Start here: "Durable execution saves each step, so the agent can pick up where it stopped."; and the four "remember" points.
 """
 from kit import walk, node, sh, ln, st
@@ -50,8 +50,8 @@ STEPS = [
        ("Three problems for long runs", "লম্বা চলায় তিনটি সমস্যা"),
        [("Agents that run for minutes or hours face three problems a normal loop cannot solve: crashes lose state, rate limits force waits, and human approvals force pauses.",
          "যে এজেন্ট কয়েক মিনিট বা ঘণ্টা চলে, তার তিনটি সমস্যা সাধারণ লুপ সামলাতে পারে না: ক্র্যাশ হলে স্টেট হারিয়ে যায়, রেট লিমিটের জন্য অপেক্ষা করতে হয়, আর মানুষের অনুমোদনের জন্য থামতে হয়।"),
-        ("Durable execution engines solve all three.",
-         "ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটারই সমাধান দেয়।")],
+        ("Durable execution engines help with all three.",
+         "ডিউরেবল এক্সিকিউশন ইঞ্জিন এই তিনটাতেই সাহায্য করে।")],
        [sh("loop", "hot"), sh("crash", "warn", ("loses state", "স্টেট হারায়")), sh("limit", "warn", ("forces waits", "অপেক্ষা করায়")), sh("human", "warn", ("forces pauses", "থামতে হয়"))],
        [ln("loop", "crash", "to", state="warn"), ln("loop", "limit", "to", state="warn"), ln("loop", "human", "to", state="warn")],
        [None, None, None]),
@@ -74,16 +74,16 @@ STEPS = [
        ("Durable execution", "ডিউরেবল এক্সিকিউশন"),
        [("A durable execution engine records every step's intent and result to a durable store: a database, a journal or a queue.",
          "ডিউরেবল এক্সিকিউশন ইঞ্জিন প্রতিটি ধাপের উদ্দেশ্য আর ফলাফল একটি ডিউরেবল স্টোরে লেখে: ডেটাবেস, জার্নাল বা কিউ।"),
-        ("Your code is a series of workflow steps. The engine is the runtime that survives crashes, and it handles retries, rate limits and human-in-the-loop pauses natively.",
-         "আপনার কোড একটি সিরিজ ওয়ার্কফ্লো ধাপ। ইঞ্জিন হলো সেই রানটাইম, যা ক্র্যাশ সামলে টিকে থাকে, আর রিট্রাই, রেট লিমিট ও হিউম্যান-ইন-দ্য-লুপ বিরতি নিজেই সামলায়।")],
+        ("Your code is a series of workflow steps. The engine is the runtime that survives crashes, and it handles retries and human-in-the-loop pauses natively.",
+         "আপনার কোড একটি সিরিজ ওয়ার্কফ্লো ধাপ। ইঞ্জিন হলো সেই রানটাইম, যা ক্র্যাশ সামলে টিকে থাকে, আর রিট্রাই ও হিউম্যান-ইন-দ্য-লুপ বিরতি নিজেই সামলায়।")],
        [sh("st1", "hot"), sh("st2", "hot"), sh("st3", "hot"), sh("store", "hot", ("intent and result", "উদ্দেশ্য আর ফলাফল"))],
        chain("hot"),
        [None, ("every step", "প্রতিটি ধাপ"), None]),
 
     st(("Resume", "রিজিউম"),
        ("Resume after a crash", "ক্র্যাশের পর রিজিউম"),
-       [("After a crash, the next process loads the snapshot and resumes from the next step that has not run, not from the beginning.",
-         "ক্র্যাশের পর পরের প্রসেস স্ন্যাপশট লোড করে, শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।")],
+       [("After a crash, the next process replays the recorded history to rebuild state and resumes from the next step that has not run. Finished steps do not run again.",
+         "ক্র্যাশের পর পরের প্রসেস রেকর্ড করা ইতিহাস রিপ্লে করে স্টেট আবার গড়ে, আর যে ধাপ চলেনি সেখান থেকে আবার চলে। শেষ হওয়া ধাপ আর চলে না।")],
        [sh("st1", "hot", ("done", "শেষ")), sh("st2", "hot", ("done", "শেষ")), sh("st3", "warn", ("crashed here", "এখানে ক্র্যাশ")), sh("store", "hot", ("the journal", "জার্নাল"))],
        [ln("st1", "st2", "to", state="hot"), ln("st2", "st3", "to", state="dim"),
         ln("store", "st3", "to", state="hot", label=("resumes here", "এখান থেকে চলে"))],
@@ -102,7 +102,7 @@ STEPS = [
                 ("+", "Its work spans several services, and you want to resume from the failed one", "কাজ কয়েকটি সার্ভিসে ছড়ানো, আর যে সার্ভিস ব্যর্থ হয়েছে সেখান থেকে আবার শুরু করতে চান")]),
 
     st(("Engines", "ইঞ্জিন"),
-       ("Four durable engines", "চারটি ডিউরেবল ইঞ্জিন"),
+       ("Durable engines", "ডিউরেবল ইঞ্জিন"),
        [("Temporal runs event-sourced workflows for long, multi-day work with strong consistency. Restate is journaled workflows, the same idea with a smaller surface area.",
          "Temporal ইভেন্ট-সোর্সড ওয়ার্কফ্লো চালায়, লম্বা, বহু-দিনের কাজে, শক্ত কনসিস্টেন্সিসহ। Restate জার্নাল-ভিত্তিক ওয়ার্কফ্লো, একই ধারণা, কিন্তু ছোট সারফেসে।"),
         ("Inngest is event-driven serverless: it wakes on a webhook, and you pay per step. AWS Step Functions and DBOS are managed or SQL-based, for AWS-native shops and the simplest operations.",
@@ -110,7 +110,7 @@ STEPS = [
        [sh("temporal", "hot", ("event-sourced, multi-day", "ইভেন্ট-সোর্সড, বহু-দিন")), sh("restate", "hot", ("journaled, smaller surface", "জার্নাল-ভিত্তিক, ছোট সারফেস")),
         sh("inngest", "hot", ("event-driven, per step", "ইভেন্ট-চালিত, ধাপ প্রতি দাম")), sh("aws", "hot", ("managed or SQL-based", "ম্যানেজড বা SQL-ভিত্তিক"))],
        [],
-       [None, None, ("four", "চারটি")]),
+       [None, None, ("five", "পাঁচটি")]),
 
     st(("Remember", "মনে রাখুন"),
        ("What to remember", "যা মনে রাখবেন"),
@@ -125,8 +125,8 @@ STEPS = [
                 "ক্র্যাশের পর ডিউরেবল ইঞ্জিন শুরু থেকে নয়, যে ধাপ চলেনি সেখান থেকে আবার চলে।"),
                ("Use it if the agent runs over about 30 seconds, waits for humans, or has irreversible side effects.",
                 "এজেন্ট প্রায় ৩০ সেকেন্ডের বেশি চললে, মানুষের জন্য অপেক্ষা করলে, বা ফেরানো যায় না এমন সাইড ইফেক্ট থাকলে এটি ব্যবহার করুন।"),
-               ("Four engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS.",
-                "সেকশনে যে চারটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।")]),
+               ("Five engines the section lists: Temporal, Restate, Inngest, and AWS Step Functions / DBOS.",
+                "সেকশনে যে পাঁচটি ইঞ্জিনের কথা আছে: Temporal, Restate, Inngest আর AWS Step Functions / DBOS।")]),
 ]
 
 WALK = walk(760, 320, NODES, METRICS, CAPTION, STEPS)

@@ -4,10 +4,10 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
 
   1 Resend    Layman's voice: "they send the full system prompt + tool descriptions + retrieved context + the user's question every single call. Even if nothing changed from the last call." and "You're paying the AI company to re-read the same ... words over and over."
               Bangla voice: "ক্যাশ ছাড়া ৬৪K টোকেনের পুরো দাম লাগে".
-  2 Prefix    Start here: Prefix ("The first part of a prompt. If it is identical across calls, the provider can reuse its earlier work."); "Prompt caching can cut 80–90% of the input bill for apps with stable instructions and long fetched documents, but only if that start stays exactly the same."
+  2 Prefix    Start here: Prefix ("The first part of a prompt. If it is identical across calls, the provider can reuse its earlier work."); "Prompt caching can cut most of the input cost (cached reads are 0.1× on Anthropic) for apps with stable instructions and long fetched documents, but only if that start stays exactly the same."
   3 Layout    Remember: "Put stable parts first (system prompt, tools, reused documents) and changing parts, like the user message, last."; layman's voice: "Cache the start, send the end fresh each time."
   4 Breakpoint Start here: Cache breakpoint ("A marker in the prompt. Everything before it is cached; everything after is rebuilt each call. Anthropic allows up to 4.").
-  5 Hit       Start here: Cache hit ("A call whose start matches the cache, so the saved work is reused. In Anthropic's API, response.usage.cache_read_input_tokens above 0 means a hit."); TTL ("For Anthropic it is 5 minutes, and it refreshes on a hit.").
+  5 Hit       Start here: Cache hit ("A call whose start matches the cache, so the saved work is reused. In Anthropic's API, response.usage.cache_read_input_tokens above 0 means a hit."); TTL ("For Anthropic it is 5 minutes by default (1 hour is optional at a higher write price), and it refreshes on a hit.").
   6 Math      Body, the cost math: "a 60K-token system + tools prefix and a 4K-token user message ... No cache: 64K input tokens ... With cache: 60K cached (≈10× cheaper) + 4K uncached ... ~85% on input costs for the steady state".
   7 Break     Start here: Cache invalidation ("The cache breaking because of a change. One new character in the cached part breaks the cache for everything after it.");
               callout: "Change a version number, fix a typo, even add a dynamic timestamp — cache miss."
@@ -65,8 +65,8 @@ STEPS = [
        ("The unchanged start is the prefix", "না-বদলানো শুরুর অংশই প্রিফিক্স"),
        [("The prefix is the first part of a prompt. If it is identical across calls, the provider can reuse its earlier work.",
          "প্রিফিক্স হলো প্রম্পটের শুরুর অংশ। কলের পর কলে হুবহু এক থাকলে প্রোভাইডার আগের কাজ আবার ব্যবহার করতে পারে।"),
-        ("Prompt caching can cut 80–90% of the input bill for apps with stable instructions and long fetched documents, but only if that start stays exactly the same.",
-         "স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে প্রম্পট ক্যাশিং ইনপুট বিলের ৮০–৯০% কমাতে পারে, তবে শুরুর অংশ হুবহু একই থাকতে হবে।")],
+        ("Prompt caching can cut most of the input cost (cached reads are 0.1× on Anthropic) for apps with stable instructions and long fetched documents, but only if that start stays exactly the same.",
+         "স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে প্রম্পট ক্যাশিং ইনপুট খরচের বেশিরভাগ কমাতে পারে (Anthropic-এ ক্যাশ রিড ০.১×), তবে শুরুর অংশ হুবহু একই থাকতে হবে।")],
        [sh("system", "hot", ("prefix", "প্রিফিক্স")), sh("tools", "hot", ("prefix", "প্রিফিক্স")), sh("docs", "hot", ("prefix", "প্রিফিক্স")), sh("msg", "dim"), sh("model", "hot")],
        to_model("hot", ["system", "tools", "docs"]) + to_model("dim", ["msg"]),
        [None, None, None, None],
@@ -98,8 +98,8 @@ STEPS = [
        ("The next call hits the cache", "পরের কল ক্যাশ ধরে ফেলে"),
        [("A cache hit is a call whose start matches the cache, so the saved work is reused. In Anthropic's API, <code>response.usage.cache_read_input_tokens</code> above 0 means a hit.",
          "ক্যাশ হিট হলো যে কলে প্রম্পটের শুরু ক্যাশের সাথে মেলে, তাই আগের কাজ আবার ব্যবহার হয়। Anthropic-এর API-তে <code>response.usage.cache_read_input_tokens</code> ০-এর বেশি হলে হিট।"),
-        ("The cache entry lives for a TTL, a time to live. For Anthropic it is 5 minutes, and a hit starts the time again.",
-         "ক্যাশ কতক্ষণ থাকে তা TTL, মানে time to live। Anthropic-এ ৫ মিনিট, আর হিট হলে সময় নতুন করে শুরু হয়।")],
+        ("The cache entry lives for a TTL, a time to live. For Anthropic it is 5 minutes by default (1 hour is optional at a higher write price), and a hit starts the time again.",
+         "ক্যাশ কতক্ষণ থাকে তা TTL, মানে time to live। Anthropic-এ ডিফল্ট ৫ মিনিট (বেশি লেখার দামে ঐচ্ছিকভাবে ১ ঘণ্টা), আর হিট হলে সময় নতুন করে শুরু হয়।")],
        [sh("cache", "hot", HIT), sh("msg", "hot"), sh("model", "hot", ("reads the cache", "ক্যাশ থেকে পড়ে"))],
        [ln("cache", "model", "to", state="hot"), ln("msg", "model", "to", state="hot")],
        [None, None, None, HIT],

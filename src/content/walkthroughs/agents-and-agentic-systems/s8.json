@@ -485,16 +485,16 @@
         "short": "Breaker",
         "title": "The circuit breaker",
         "body": [
-          "A circuit breaker protects against a service that is failing in a way that looks transient but is not. After 5 consecutive failures of the same kind, it opens: for the next 60 seconds every call fails fast with “service unavailable”, with no retries.",
-          "After 60 seconds it half-opens and lets one test call through. If that call succeeds, the breaker closes. If it fails, the timer resets."
+          "A circuit breaker protects against a service that is failing in a way that looks transient but is not. After N consecutive failures of the same kind (say 5), it opens: for a timeout (say 60 seconds) every call fails fast with “service unavailable”, with no retries.",
+          "After the timeout it half-opens and lets one test call through. If that call succeeds, the breaker closes. If it fails, it opens again."
         ]
       },
       "bn": {
         "short": "ব্রেকার",
         "title": "সার্কিট ব্রেকার",
         "body": [
-          "সার্কিট ব্রেকার এমন সার্ভিস থেকে বাঁচায়, যে ক্ষণস্থায়ী দেখালেও আসলে তা নয়। একই ধরনের পরপর ৫ বার ব্যর্থ হলে সেটি খুলে যায়: পরের ৬০ সেকেন্ড প্রতিটি কল “service unavailable” ত্রুটিতে সঙ্গে সঙ্গে ব্যর্থ হয়, কোনো রিট্রাই ছাড়াই।",
-          "৬০ সেকেন্ড পর এটি অর্ধেক খোলে আর একটি পরীক্ষামূলক কল যেতে দেয়। কলটি সফল হলে ব্রেকার বন্ধ হয়। ব্যর্থ হলে টাইমার আবার শুরু হয়।"
+          "সার্কিট ব্রেকার এমন সার্ভিস থেকে বাঁচায়, যে ক্ষণস্থায়ী দেখালেও আসলে তা নয়। একই ধরনের পরপর N বার (যেমন ৫) ব্যর্থ হলে সেটি খুলে যায়: একটি নির্দিষ্ট সময় (যেমন ৬০ সেকেন্ড) প্রতিটি কল “service unavailable” ত্রুটিতে সঙ্গে সঙ্গে ব্যর্থ হয়, কোনো রিট্রাই ছাড়াই।",
+          "সময় পেরোলে এটি অর্ধেক খোলে আর একটি পরীক্ষামূলক কল যেতে দেয়। কলটি সফল হলে ব্রেকার বন্ধ হয়। ব্যর্থ হলে এটি আবার খুলে যায়।"
         ]
       },
       "show": [
@@ -537,12 +537,12 @@
         null,
         null,
         {
-          "en": "5 failures",
-          "bn": "৫ বার ব্যর্থ"
+          "en": "N failures (say 5)",
+          "bn": "N বার (যেমন ৫)"
         },
         {
-          "en": "60 s",
-          "bn": "৬০ সে"
+          "en": "say 60 s",
+          "bn": "যেমন ৬০ সে"
         }
       ]
     },

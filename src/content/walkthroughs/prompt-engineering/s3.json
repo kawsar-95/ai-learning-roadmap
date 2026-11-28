@@ -79,12 +79,12 @@
       "bn": "১৭ × ২৪"
     },
     {
-      "en": "ReAct score",
-      "bn": "ReAct স্কোর"
+      "en": "Reflexion HumanEval",
+      "bn": "Reflexion HumanEval"
     },
     {
-      "en": "Reflexion score",
-      "bn": "Reflexion স্কোর"
+      "en": "GPT-4 baseline",
+      "bn": "GPT-4 বেসলাইন"
     },
     {
       "en": "Trace vs direct answer",
@@ -323,12 +323,12 @@
         "title": "Self-consistency: take the majority answer",
         "body": [
           "Self-consistency asks for N separate reasoning chains and takes the answer that most of them give.",
-          "On GSM8K this gives about +10%."
+          "On GSM8K this gives about +18 points (+17.9%)."
         ],
         "changes": [
           {
             "sign": "+",
-            "html": "About +10% on GSM8K"
+            "html": "About +18 points on GSM8K (+17.9%)"
           }
         ]
       },
@@ -337,12 +337,12 @@
         "title": "সেলফ-কনসিস্টেন্সি: বেশিরভাগের উত্তর নেওয়া",
         "body": [
           "সেলফ-কনসিস্টেন্সি N-টা আলাদা যুক্তির চেইন চায় আর যে উত্তরটা বেশিরভাগ চেইনে আসে সেটা নেয়।",
-          "GSM8K-তে এতে প্রায় +১০% পাওয়া যায়।"
+          "GSM8K-তে এতে প্রায় +১৮ পয়েন্ট (+১৭.৯%) পাওয়া যায়।"
         ],
         "changes": [
           {
             "sign": "+",
-            "html": "GSM8K-তে প্রায় +১০%"
+            "html": "GSM8K-তে প্রায় +১৮ পয়েন্ট (+১৭.৯%)"
           }
         ]
       },
@@ -456,7 +456,7 @@
       ],
       "values": [
         null,
-        "~40%",
+        null,
         null,
         null
       ]
@@ -471,7 +471,7 @@
         ],
         "note": {
           "kind": "insight",
-          "html": "ReAct loops think, act, observe. It is the pattern behind every modern AI agent."
+          "html": "ReAct loops think, act, observe. It is the basis of many AI agent designs."
         }
       },
       "bn": {
@@ -483,7 +483,7 @@
         ],
         "note": {
           "kind": "insight",
-          "html": "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।"
+          "html": "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের অনেক AI এজেন্টের পেছনে এই প্যাটার্ন।"
         }
       },
       "show": [
@@ -536,7 +536,7 @@
       ],
       "values": [
         null,
-        "~40%",
+        null,
         null,
         null
       ]
@@ -547,7 +547,7 @@
         "title": "Reflexion: write down what went wrong",
         "body": [
           "After each try, the model writes down what went wrong in memory. The next try learns from it.",
-          "On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%."
+          "On the HumanEval coding benchmark, Reflexion reached 91% pass@1, against 80% for GPT-4."
         ],
         "changes": [
           {
@@ -561,7 +561,7 @@
         "title": "রিফ্লেকশন: কোথায় ভুল হলো তা লিখে রাখা",
         "body": [
           "প্রতিটি চেষ্টার পর মডেল কোথায় ভুল হলো তা মেমরিতে লিখে রাখে, যাতে পরের চেষ্টা সেখান থেকে শেখে।",
-          "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।"
+          "HumanEval কোডিং বেঞ্চমার্কে Reflexion ৯১% pass@1 পেয়েছে, আর GPT-4 পেয়েছে ৮০%।"
         ],
         "changes": [
           {
@@ -612,8 +612,14 @@
       ],
       "values": [
         null,
-        "~40%",
-        "~91%",
+        {
+          "en": "91%",
+          "bn": "৯১%"
+        },
+        {
+          "en": "80%",
+          "bn": "৮০%"
+        },
         null
       ]
     },
@@ -622,7 +628,7 @@
         "short": "Cost",
         "title": "Thinking costs tokens",
         "body": [
-          "A reasoning trace can be 10–50× longer than a direct answer. All three patterns cost more tokens, and so more money and time.",
+          "A reasoning trace can be many times longer than a direct answer. All three patterns cost more tokens, and so more money and time.",
           "Use them for hard tasks: math, planning, debugging, multi-hop reasoning. For extraction or simple Q&amp;A, a direct answer is faster and cheaper."
         ],
         "note": {
@@ -634,7 +640,7 @@
         "short": "খরচ",
         "title": "ভাবনার খরচ আছে",
         "body": [
-          "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। তিনটি প্যাটার্নেই টোকেন বেশি লাগে, তাই খরচ আর সময়ও বেশি।",
+          "রিজনিং ট্রেস সরাসরি উত্তরের অনেক গুণ লম্বা হতে পারে। তিনটি প্যাটার্নেই টোকেন বেশি লাগে, তাই খরচ আর সময়ও বেশি।",
           "কঠিন কাজেই এগুলো ব্যবহার করুন: অঙ্ক, প্ল্যানিং, ডিবাগিং, মাল্টি-হপ রিজনিং। এক্সট্রাকশন বা সহজ Q&amp;A-তে সরাসরি উত্তরই দ্রুত ও সস্তা।"
         ],
         "note": {
@@ -653,8 +659,8 @@
           "id": "steps",
           "state": "warn",
           "sub": {
-            "en": "10–50× longer",
-            "bn": "১০–৫০ গুণ লম্বা"
+            "en": "many times longer",
+            "bn": "অনেক গুণ লম্বা"
           }
         },
         {
@@ -684,7 +690,10 @@
         null,
         null,
         null,
-        "10–50×"
+        {
+          "en": "many times",
+          "bn": "অনেক গুণ"
+        }
       ]
     },
     {
@@ -696,9 +705,9 @@
         ],
         "points": [
           "Showing worked steps, or adding Let's think step by step, improves math, logic, and multi-step answers.",
-          "ReAct loops think, act, observe. It is the pattern behind every modern AI agent.",
-          "On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%.",
-          "A reasoning trace can be 10–50× longer than a direct answer. Use it only for hard tasks."
+          "ReAct loops think, act, observe. It is the basis of many AI agent designs.",
+          "On the HumanEval coding benchmark, Reflexion reached 91% pass@1, against 80% for GPT-4.",
+          "A reasoning trace can be many times longer than a direct answer. Use it only for hard tasks."
         ]
       },
       "bn": {
@@ -709,9 +718,9 @@
         ],
         "points": [
           "কাজের ধাপ দেখালে বা Let's think step by step যোগ করলে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ উত্তর ভালো হয়।",
-          "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।",
-          "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।",
-          "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।"
+          "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের অনেক AI এজেন্টের পেছনে এই প্যাটার্ন।",
+          "HumanEval কোডিং বেঞ্চমার্কে Reflexion ৯১% pass@1 পেয়েছে, আর GPT-4 পেয়েছে ৮০%।",
+          "রিজনিং ট্রেস সরাসরি উত্তরের অনেক গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।"
         ]
       },
       "show": [

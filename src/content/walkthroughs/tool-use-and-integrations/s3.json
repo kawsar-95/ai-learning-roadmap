@@ -464,7 +464,7 @@
           },
           {
             "sign": "+",
-            "html": "Daytona: hosted dev environments, for full git and REPL workflows and AI agents"
+            "html": "Daytona: hosted isolated sandboxes (dedicated kernel, filesystem, network) for AI-generated code, for AI agent code execution and full-computer workflows"
           },
           {
             "sign": "+",
@@ -489,7 +489,7 @@
           },
           {
             "sign": "+",
-            "html": "Daytona: হোস্টেড ডেভ এনভায়রনমেন্ট, পুরো git ও REPL ওয়ার্কফ্লো আর AI এজেন্টের জন্য"
+            "html": "Daytona: AI-জেনারেটেড কোডের জন্য হোস্টেড আইসোলেটেড স্যান্ডবক্স (আলাদা কার্নেল, ফাইলসিস্টেম, নেটওয়ার্ক), AI এজেন্টের কোড চালানো আর পুরো-কম্পিউটার ওয়ার্কফ্লোর জন্য"
           },
           {
             "sign": "+",

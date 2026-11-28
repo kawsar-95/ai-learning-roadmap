@@ -8,7 +8,7 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   3 RRF       Start here: Reciprocal rank fusion ("A merge method that ignores raw scores. Each list gives a document points based on its rank, and the points add up."); body: "Cormack, Clarke and Buettcher define a document's score as a sum over every ranking that contains it. Each ranking adds 1 / (k + r(d)), where r(d) is the document's rank in that list."
   4 Doc B     Body: "The ranks in the diagram are invented for the arithmetic."; Bangla voice, the worked example (k = 60): "document B has rank 2 in both lists, so 1/62 + 1/62 = 0.032258".
   5 Doc A     Bangla voice: "document A is first in BM25 (1/61) but fifth in the dense list (1/65), 0.031778 in all, so A comes third"; the diagram: "documents ranked well by both retrievers (B, C) overtake it"; the code's result: ['B', 'C', 'A', 'E', 'D', 'F', 'G'] (D and E tie).
-  6 k         Constant k ("A small k gives top ranks much more weight."); the diagram: "a rank-10 hit keeps 87% of a rank-1 hit's weight at k = 60 but only 25% at k = 2".
+  6 k         Constant k ("A small k gives top ranks much more weight."); the diagram: "a rank-10 hit keeps 87% of a rank-1 hit's weight at k = 60 but only 25% at k = 2 (illustrative, ranks counted from 1)".
   7 Engines   Warning callout: "the paper fixed k = 60, and Elasticsearch and OpenSearch default to 60. Qdrant's docs, however, state that RRF's k is "set to 2 by default". Weaviate's rankedFusion uses 1/(RANK+60). The same two lists can therefore fuse differently across engines. Check the default before comparing results, and set k explicitly where the API allows it."
   8 Scores    Body, "Rank-based versus score-based fusion": relativeScoreFusion "normalises each search's scores to 0-1 ..., then weights them with alpha. An alpha of 0 is keyword only, 1 is vector only, and the server default is 0.75."; rankedFusion "is the rank-based alternative"; Qdrant "advise RRF as the default when you have no evaluation set".
   9 Remember  The four "remember" points of the Start here box.
@@ -110,13 +110,13 @@ STEPS = [
        ("A small k favors the top", "ছোট k ওপরের র‍্যাংককে বেশি গুরুত্ব দেয়"),
        [("In the formula, k is a constant. A small k gives the top ranks much more weight.",
          "সূত্রে k একটি ধ্রুবক। k ছোট হলে উপরের র‍্যাংক অনেক বেশি গুরুত্ব পায়।"),
-        ("At k = 60, a rank-10 hit keeps 87% of a rank-1 hit's weight. At k = 2, it keeps only 25%.",
-         "k = ৬০-এ র‍্যাংক ১০ পায় র‍্যাংক ১-এর প্রায় ৮৭%; k = ২-এ মাত্র ২৫%।")],
+        ("At k = 60, a rank-10 hit keeps 87% of a rank-1 hit's weight. At an illustrative k = 2 (ranks counted from 1), it keeps only 25%.",
+         "k = ৬০-এ র‍্যাংক ১০ পায় র‍্যাংক ১-এর প্রায় ৮৭%; উদাহরণ হিসেবে k = ২ (র‍্যাংক ১ থেকে গুনলে) হলে মাত্র ২৫%।")],
        [sh("bm25", "dim"), sh("dense", "dim"), sh("fusion", "hot", ("k sets the weight", "k ঠিক করে ওজন"))],
        merge("dim"),
        [KS, None, None, None],
        changes=[("+", "k = 60: rank 10 keeps 87% of rank 1", "k = ৬০: র‍্যাংক ১০ পায় র‍্যাংক ১-এর ৮৭%"),
-                ("-", "k = 2: rank 10 keeps only 25%", "k = ২: র‍্যাংক ১০ পায় মাত্র ২৫%")]),
+                ("-", "Illustrative k = 2: rank 10 keeps only 25%", "উদাহরণ k = ২: র‍্যাংক ১০ পায় মাত্র ২৫%")]),
 
     st(("Engines", "ইঞ্জিন"),
        ("Engines disagree on k", "ইঞ্জিনভেদে k আলাদা"),

@@ -355,7 +355,7 @@
         "short": "Checkpoint",
         "title": "The checkpoint primitive",
         "body": [
-          "Every durable framework has a “wait for human” primitive. In LangGraph it is <code>interrupt</code>, in Temporal <code>wait_for_signal</code>, and in Restate <code>await call().ack()</code>.",
+          "Every durable framework has a “wait for human” primitive. In LangGraph it is <code>interrupt</code>. In Temporal you send a Signal and block with <code>workflow.wait_condition()</code> (Python). In Restate it is an awakeable, a durable promise the approver resolves.",
           "In the section's example, the email step calls <code>interrupt</code> with the recipient, subject and body. If the answer is not approved, it returns “User rejected email send.” Otherwise it sends the email."
         ]
       },
@@ -363,7 +363,7 @@
         "short": "চেকপয়েন্ট",
         "title": "চেকপয়েন্ট প্রিমিটিভ",
         "body": [
-          "প্রতিটি ডিউরেবল ফ্রেমওয়ার্কে “মানুষের জন্য অপেক্ষা” করার একটি প্রিমিটিভ থাকে। LangGraph-এ এটি <code>interrupt</code>, Temporal-এ <code>wait_for_signal</code>, আর Restate-এ <code>await call().ack()</code>।",
+          "প্রতিটি ডিউরেবল ফ্রেমওয়ার্কে “মানুষের জন্য অপেক্ষা” করার একটি প্রিমিটিভ থাকে। LangGraph-এ এটি <code>interrupt</code>। Temporal-এ আপনি একটি Signal পাঠান আর <code>workflow.wait_condition()</code> (Python) দিয়ে অপেক্ষা করেন। Restate-এ এটি একটি awakeable, অর্থাৎ একটি ডিউরেবল প্রমিস, যা অনুমোদনকারী পূরণ করে।",
           "সেকশনের উদাহরণে ইমেইল ধাপ প্রাপক, বিষয় আর বডিসহ <code>interrupt</code> ডাকে। অনুমোদন না এলে সে “User rejected email send.” ফেরত দেয়। অনুমোদন এলে ইমেইল পাঠায়।"
         ]
       },

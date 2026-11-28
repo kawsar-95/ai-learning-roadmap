@@ -133,8 +133,8 @@
       "bn": "পালা বদল"
     },
     {
-      "en": "Sora clip",
-      "bn": "Sora ক্লিপ"
+      "en": "Veo 3.1",
+      "bn": "Veo 3.1"
     }
   ],
   "caption": {
@@ -236,7 +236,7 @@
         "title": "Models that see",
         "body": [
           "Native multimodal models (GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL) take images directly.",
-          "OCR-via-LLM beats Tesseract on messy photos, handwritten notes, and structured forms, and often needs no separate OCR step."
+          "OCR-via-LLM often reads messy photos, handwritten notes, and structured forms better than Tesseract, and often needs no separate OCR step."
         ],
         "changes": [
           {
@@ -258,7 +258,7 @@
         "title": "যে মডেল দেখে",
         "body": [
           "GPT-4o, Claude 4, Gemini 2.5, Qwen3-VL-এর মতো নেটিভ মাল্টিমোডাল মডেল সরাসরি ছবি নেয়।",
-          "OCR-via-LLM অগোছালো ছবি, হাতের লেখা নোট আর কাঠামোবদ্ধ ফর্মে Tesseract-কে ছাড়িয়ে যায়, আর প্রায়ই আলাদা OCR ধাপের দরকার হয় না।"
+          "OCR-via-LLM অগোছালো ছবি, হাতের লেখা নোট আর কাঠামোবদ্ধ ফর্মে অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে, আর প্রায়ই আলাদা OCR ধাপের দরকার হয় না।"
         ],
         "changes": [
           {
@@ -337,7 +337,7 @@
           },
           {
             "sign": "+",
-            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
+            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS"
           }
         ]
       },
@@ -354,7 +354,7 @@
           },
           {
             "sign": "+",
-            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS, PlayHT"
+            "html": "TTS: ElevenLabs, Cartesia, OpenAI TTS"
           }
         ]
       },
@@ -409,7 +409,7 @@
         "short": "Realtime",
         "title": "Realtime APIs",
         "body": [
-          "Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio in both directions. Sub-500 ms turn-taking is now achievable."
+          "Realtime APIs skip the chunky STT→LLM→TTS loop by streaming audio in both directions. They target low first-audio latency and natural turn-taking."
         ],
         "note": {
           "kind": "tip",
@@ -420,7 +420,7 @@
         "short": "রিয়েলটাইম",
         "title": "রিয়েলটাইম API",
         "body": [
-          "রিয়েলটাইম API ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে দুই দিকেই অডিও স্ট্রিম করে। এখন ৫০০ ms-এর কমে পালা বদল সম্ভব।"
+          "রিয়েলটাইম API ধাপে ধাপে STT→LLM→TTS লুপ বাদ দিয়ে দুই দিকেই অডিও স্ট্রিম করে। এগুলো কম first-audio latency আর স্বাভাবিক পালা বদলের লক্ষ্য রাখে।"
         ],
         "note": {
           "kind": "tip",
@@ -458,8 +458,8 @@
       "values": [
         null,
         {
-          "en": "sub-500 ms",
-          "bn": "৫০০ ms-এর কমে"
+          "en": "low latency",
+          "bn": "কম ল্যাটেন্সি"
         },
         null
       ]
@@ -482,11 +482,11 @@
           },
           {
             "sign": "+",
-            "html": "Imagen 3 (Google): photorealism, available via Vertex"
+            "html": "Imagen 4 (Google): photorealism, generally available on Vertex since Aug 14 2025"
           },
           {
             "sign": "+",
-            "html": "DALL-E 3 / GPT-Image-1 (OpenAI): polished, instruction-following"
+            "html": "DALL-E 3 / GPT-Image-2.5 (OpenAI): polished, instruction-following"
           },
           {
             "sign": "+",
@@ -511,11 +511,11 @@
           },
           {
             "sign": "+",
-            "html": "Imagen 3 (Google): ফটোরিয়ালিজম, Vertex-এ পাওয়া যায়"
+            "html": "Imagen 4 (Google): ফটোরিয়ালিজম, ১৪ আগস্ট ২০২৫ থেকে Vertex-এ সাধারণভাবে পাওয়া যায়"
           },
           {
             "sign": "+",
-            "html": "DALL-E 3 / GPT-Image-1 (OpenAI): পরিপাটি, নির্দেশ-অনুসারী"
+            "html": "DALL-E 3 / GPT-Image-2.5 (OpenAI): পরিপাটি, নির্দেশ-অনুসারী"
           },
           {
             "sign": "+",
@@ -680,11 +680,11 @@
         "changes": [
           {
             "sign": "+",
-            "html": "Sora (OpenAI): up to 20 s, strong physics"
+            "html": "Sora (OpenAI): discontinued (app Apr 2026, API Sep 24 2026)"
           },
           {
             "sign": "+",
-            "html": "Veo 3 (Google): native audio + 4K, prompt-adherent"
+            "html": "Veo 3.1 (Google): native audio, up to 4K; the Veo 3.1 Preview ID was shut down Oct 22 2026"
           },
           {
             "sign": "+",
@@ -709,11 +709,11 @@
         "changes": [
           {
             "sign": "+",
-            "html": "Sora (OpenAI): ২০ সেকেন্ড পর্যন্ত, শক্তিশালী ফিজিক্স"
+            "html": "Sora (OpenAI): বন্ধ (অ্যাপ এপ্রিল ২০২৬, API ২৪ সেপ্টেম্বর ২০২৬)"
           },
           {
             "sign": "+",
-            "html": "Veo 3 (Google): নেটিভ অডিও + 4K, প্রম্পট-অনুসারী"
+            "html": "Veo 3.1 (Google): নেটিভ অডিও, ৪K পর্যন্ত; Veo 3.1 Preview ID ২২ অক্টোবর ২০২৬-এ বন্ধ হয়েছে"
           },
           {
             "sign": "+",
@@ -775,8 +775,8 @@
         null,
         null,
         {
-          "en": "up to 20 s",
-          "bn": "২০ সেকেন্ড পর্যন্ত"
+          "en": "up to 4K",
+          "bn": "৪K পর্যন্ত"
         }
       ]
     },
@@ -876,7 +876,7 @@
         ],
         "points": [
           "In 2025, every production AI app combines at least two of vision, voice, image generation, and video generation.",
-          "Models that take images directly often need no separate OCR step, and they beat Tesseract on messy photos.",
+          "Models that take images directly often need no separate OCR step, and they often read messy photos better than Tesseract.",
           "A voice pipeline is STT → LLM → TTS. Realtime APIs stream audio both ways instead.",
           "Pick image and video models by what you need: license, photorealism, clip length, character consistency, price, and speed."
         ]
@@ -889,7 +889,7 @@
         ],
         "points": [
           "২০২৫-এ প্রতিটি প্রোডাকশন AI অ্যাপ ভিশন, ভয়েস, ইমেজ জেনারেশন আর ভিডিও জেনারেশনের অন্তত দুটি মেলায়।",
-          "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে Tesseract-কে হারায়।",
+          "যে মডেল সরাসরি ছবি নেয়, তার প্রায়ই আলাদা OCR ধাপ লাগে না। অগোছালো ছবিতে সে অনেক সময় Tesseract-এর চেয়ে ভালো পড়ে।",
           "ভয়েস পাইপলাইন হলো STT → LLM → TTS। রিয়েলটাইম API তার বদলে দুই দিকে অডিও স্ট্রিম করে।",
           "প্রয়োজন দেখে ইমেজ ও ভিডিও মডেল বাছুন: লাইসেন্স, ফটোরিয়ালিজম, ক্লিপের দৈর্ঘ্য, চরিত্রের ধারাবাহিকতা, দাম আর গতি।"
         ]

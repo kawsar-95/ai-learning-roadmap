@@ -5,8 +5,8 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   1 ReAct     Sub-title: "Every agent loop you'll meet in production is a variation of one of these four patterns. Pick by the shape of your task, not by hype."; ReAct ("The simplest loop. The model writes a thought, picks an action, sees the result, and repeats.").
   2 Trace     Body: "The thought is in the model's private scratchpad and never shown to the user; only the final answer is."; the code: a thought about the population of Tokyo in 2024, search(...), an observation, "Now I can answer.", Finish(...); the callout: "the interleaved reasoning makes traces human-readable. When something goes wrong, you can read the scratchpad and see why the model picked the action it did."
   3 Plan      Body: "a planner (usually a strong LLM) produces a sequence of steps, then a worker (often a smaller model or a deterministic tool) carries out each step ... If a step fails, the planner re-runs only that step (cheap) rather than the whole loop."
-  4 Reflect   Body: "after a ReAct attempt, the model is asked to reflect on what went wrong, and that reflection is appended to the memory for the next attempt. In benchmarks (HumanEval, AlfWorld) Reflexion beats vanilla ReAct by 10–20% absolute."; Start here: "Reflexion beats plain ReAct by 10–20 percentage points in benchmarks, but costs 2–3× ReAct."
-  5 ReWOO     Body: "in many retrieval-heavy tasks, the model doesn't need to see the result of tool #1 to plan tool #2. It plans the entire tool graph upfront, the worker executes everything in parallel, then the solver reads the evidence and answers. ReWOO uses 4–6× fewer tokens than ReAct on retrieval benchmarks."; "ReWOO ... is hard to debug."
+  4 Reflect   Body: "after a ReAct attempt, the model is asked to reflect on what went wrong, and that reflection is appended to the memory for the next attempt. In the paper, Reflexion improves on baseline agents by up to 22 points on AlfWorld, 20 on HotPotQA and 11 on HumanEval."; Start here: "In the paper, Reflexion beats baseline agents by up to 22 points (AlfWorld), but costs extra attempts and reflection calls."
+  5 ReWOO     Body: "in many retrieval-heavy tasks, the model doesn't need to see the result of tool #1 to plan tool #2. It plans the entire tool graph upfront, the worker executes everything in parallel, then the solver reads the evidence and answers. In the paper, ReWOO used about 5× fewer tokens on HotpotQA and 64% fewer on average across six benchmarks."; Start here: "In the paper, ReWOO used about 5× fewer tokens on HotpotQA (64% fewer on average over six benchmarks), but is hard to debug."
   6 Pick      Layman's voice: "default to ReAct. If your task is "go look up 5 things in parallel and write a summary," switch to ReWOO. If your task is "do these 6 steps in order, but be ready to replan if step 3 fails," use Plan-and-Execute."; and the five "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -82,23 +82,23 @@ STEPS = [
        ("Reflexion: learn from the miss", "Reflexion: ভুল থেকে শেখা"),
        [("Reflexion adds a second pass. After an attempt, the model reflects on what went wrong, and the reflection is added to its memory for the next try.",
          "Reflexion একটি দ্বিতীয় পাস যোগ করে। একবার চেষ্টার পর মডেল ভাবে কী ভুল হলো, আর সেই নোট পরের চেষ্টার জন্য তার মেমরিতে যোগ হয়।"),
-        ("In benchmarks (HumanEval and AlfWorld) it beats plain ReAct by 10–20 percentage points, but it costs 2–3× ReAct.",
-         "বেঞ্চমার্কে (HumanEval আর AlfWorld) এটি সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।")],
+        ("In the paper, Reflexion improves on baseline agents by up to 22 points on AlfWorld, 20 on HotPotQA and 11 on HumanEval. It costs extra attempts and reflection calls.",
+         "পেপারে Reflexion বেসলাইন এজেন্টের চেয়ে AlfWorld-এ সর্বোচ্চ ২২ পয়েন্ট, HotPotQA-তে ২০ আর HumanEval-এ ১১ পয়েন্ট ভালো করেছে। এতে বাড়তি চেষ্টা আর রিফ্লেকশন কলের খরচ লাগে।")],
        [sh("llm", "hot", ("attempt", "চেষ্টা")), sh("reflect", "hot", ("what went wrong", "কী ভুল হলো")), sh("memory", "hot", ("kept for next try", "পরের চেষ্টার জন্য"))],
        cycle("llm", "reflect", "memory", "hot"),
-       [("+10–20 points", "+১০–২০ পয়েন্ট"), ("2–3× ReAct", "ReAct-এর ২–৩ গুণ"), None]),
+       [("up to +22 points", "সর্বোচ্চ +২২ পয়েন্ট"), ("extra calls", "বাড়তি কল"), None]),
 
     st(("ReWOO", "ReWOO"),
        ("ReWOO: plan every call first", "ReWOO: আগে সব কল প্ল্যান"),
        [("In many retrieval-heavy tasks, the model does not need to see the result of tool 1 to plan tool 2. So it plans the whole tool graph up front.",
          "অনেক খোঁজাখুঁজি-ভারী কাজে টুল ২ প্ল্যান করতে মডেলের টুল ১-এর ফল দেখার দরকার হয় না। তাই সে পুরো টুল-গ্রাফ আগেই প্ল্যান করে।"),
-        ("A worker runs everything in parallel, then a solver reads the evidence and answers. ReWOO uses 4–6× fewer tokens than ReAct on retrieval benchmarks, but it is hard to debug.",
-         "একজন ওয়ার্কার সবগুলো প্যারালালে চালায়, তারপর সলভার প্রমাণ পড়ে উত্তর দেয়। খোঁজাখুঁজির বেঞ্চমার্কে ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।")],
+        ("A worker runs everything in parallel, then a solver reads the evidence and answers. In the paper, ReWOO used about 5× fewer tokens on HotpotQA (64% fewer on average over six benchmarks), but it is hard to debug.",
+         "একজন ওয়ার্কার সবগুলো প্যারালালে চালায়, তারপর সলভার প্রমাণ পড়ে উত্তর দেয়। পেপারে ReWOO HotpotQA-তে প্রায় ৫ গুণ কম টোকেন নিয়েছে (ছয়টি বেঞ্চমার্কে গড়ে ৬৪% কম), কিন্তু ডিবাগ করা কঠিন।")],
        [sh("planner", "hot", ("plans every call", "সব কল প্ল্যান করে")), sh("w1", "hot", ("runs a call", "একটি কল চালায়")), sh("w2", "hot", ("runs a call", "একটি কল চালায়")),
         sh("w3", "hot", ("runs a call", "একটি কল চালায়")), sh("solver", "hot", ("reads the evidence", "প্রমাণ পড়ে"))],
        [ln("planner", "w1", "to", state="hot"), ln("planner", "w2", "to", state="hot"), ln("planner", "w3", "to", state="hot"),
         ln("w1", "solver", "to", state="hot"), ln("w2", "solver", "to", state="hot"), ln("w3", "solver", "to", state="hot")],
-       [None, None, ("4–6× fewer", "৪–৬ গুণ কম")]),
+       [None, None, ("about 5× fewer", "প্রায় ৫ গুণ কম")]),
 
     st(("Pick", "বাছাই"),
        ("Pick by the shape of the task", "কাজের ধরন দেখে বাছুন"),
@@ -111,10 +111,10 @@ STEPS = [
                 "ReAct ডিফল্ট লুপ। এর পড়ার মতো স্ক্র্যাচপ্যাড দেখায় মডেল কেন প্রতিটি অ্যাকশন বাছল।"),
                ("Plan-and-Execute can redo only the failed step, which is cheap.",
                 "Plan-and-Execute শুধু ব্যর্থ ধাপটি আবার করতে পারে, যা সস্তা।"),
-               ("Reflexion beats plain ReAct by 10–20 percentage points in benchmarks, but costs 2–3× ReAct.",
-                "বেঞ্চমার্কে Reflexion সাধারণ ReAct-এর চেয়ে ১০–২০ পার্সেন্টেজ পয়েন্ট ভালো করে, কিন্তু খরচ ReAct-এর ২–৩ গুণ।"),
-               ("ReWOO uses 4–6× fewer tokens than ReAct, but is hard to debug.",
-                "ReWOO ReAct-এর চেয়ে ৪–৬ গুণ কম টোকেন নেয়, কিন্তু ডিবাগ করা কঠিন।"),
+               ("In the paper, Reflexion beats baseline agents by up to 22 points (AlfWorld), but costs extra attempts and reflection calls.",
+                "পেপারে Reflexion বেসলাইন এজেন্টের চেয়ে সর্বোচ্চ ২২ পার্সেন্টেজ পয়েন্ট (AlfWorld) ভালো করে, কিন্তু বাড়তি চেষ্টা আর রিফ্লেকশন কলের খরচ লাগে।"),
+               ("In the paper, ReWOO used about 5× fewer tokens on HotpotQA (64% fewer on average over six benchmarks), but is hard to debug.",
+                "পেপারে ReWOO HotpotQA-তে প্রায় ৫ গুণ কম টোকেন নিয়েছে (ছয়টি বেঞ্চমার্কে গড়ে ৬৪% কম), কিন্তু ডিবাগ করা কঠিন।"),
                ("Match the task: ReAct for short, tool-heavy tasks; ReWOO for look-up-heavy tasks with many parallel tool calls.",
                 "কাজ দেখে বাছুন: ছোট, টুল-নির্ভর কাজে ReAct; অনেক প্যারালাল টুল কলসহ খোঁজাখুঁজি-ভারী কাজে ReWOO।")]),
 ]

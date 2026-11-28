@@ -197,7 +197,7 @@
         "short": "Injection",
         "title": "Prompt injection",
         "body": [
-          "Prompt injection is when user-controlled text hijacks the model's behavior. Direct: the user types the attack. Indirect: the user plants malicious text in a document the model will read."
+          "Prompt injection is when user-controlled text hijacks the model's behaviour. Direct: the user types the attack. Indirect: the user plants malicious text in a document the model will read."
         ],
         "note": {
           "kind": "insight",
@@ -268,7 +268,7 @@
         "short": "Jailbreak",
         "title": "Jailbreaks",
         "body": [
-          "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training. They're a moving target: red teams find new ones monthly.",
+          "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training. They're a moving target: red-teams keep finding new ones.",
           "Defenses: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable."
         ]
       },
@@ -276,7 +276,7 @@
         "short": "জেইলব্রেক",
         "title": "জেইলব্রেক",
         "body": [
-          "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়। এগুলো একটি চলমান লক্ষ্য: রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়।",
+          "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়। এগুলো একটি চলমান লক্ষ্য: রেড-টিম নতুন জেইলব্রেক খুঁজে পেতেই থাকে।",
           "প্রতিরক্ষা: Constitutional AI ফাইন-টিউনিং, আউটপুট ক্লাসিফায়ার, মজবুত সিস্টেম প্রম্পট। ১০০% সেফটি অর্জনযোগ্য নয়, এটি মেনে নিন।"
         ]
       },
@@ -658,22 +658,22 @@
         "short": "Audit log",
         "title": "Audit logging",
         "body": [
-          "Log every prompt, every model output, every tool call, every approval decision, and every redacted PII."
+          "Log every prompt, every model output, every tool call, every approval decision, and every redacted PII item."
         ],
         "note": {
           "kind": "insight",
-          "html": "SOC 2, HIPAA, and EU AI Act conformance all require this. Treat your LLM as a regulated component."
+          "html": "Frameworks such as SOC 2 and HIPAA expect audit trails, and the EU AI Act requires automatic event logging for high-risk AI systems (Art. 12). Treat your LLM as a regulated component."
         }
       },
       "bn": {
         "short": "অডিট লগ",
         "title": "অডিট লগিং",
         "body": [
-          "প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত আর প্রতিটি রিড্যাক্ট করা PII লগ করুন।"
+          "প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত আর প্রতিটি রিড্যাক্ট করা PII আইটেম লগ করুন।"
         ],
         "note": {
           "kind": "insight",
-          "html": "SOC ২, HIPAA, EU AI Act-এর সম্মতি সবকিছুর জন্য এটি দরকার। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।"
+          "html": "SOC 2 ও HIPAA-এর মতো ফ্রেমওয়ার্ক অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমে স্বয়ংক্রিয় ইভেন্ট লগিং বাধ্যতামূলক করে (Art. 12)। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।"
         }
       },
       "show": [
@@ -750,7 +750,7 @@
           "Prompt injection, ranked #1 in the OWASP LLM Top 10 for 2025, can make tools or Markdown leak user data.",
           "Accept that 100% safety is unachievable. Jailbreaks are a moving target.",
           "Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
-          "Log every prompt, output, and tool call. SOC 2, HIPAA, and the EU AI Act require it."
+          "Log every prompt, output, and tool call. SOC 2 and HIPAA expect audit trails; the EU AI Act requires logging for high-risk AI."
         ]
       },
       "bn": {
@@ -764,7 +764,7 @@
           "২০২৫-এর OWASP LLM Top 10-এ #১ স্থানে থাকা প্রম্পট ইনজেকশন টুল বা Markdown দিয়ে ইউজারের ডেটা বাইরে পাঠাতে পারে।",
           "১০০% সেফটি অর্জনযোগ্য নয়, এটা মেনে নিন। জেইলব্রেক একটি চলমান লক্ষ্য।",
           "LLM-এর ভ্যালিড JSON দেওয়ার ওপর কখনো ভরসা করবেন না। কড়া স্কিমা দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই করুন, তারপর রিফিউজ করুন।",
-          "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC ২, HIPAA আর EU AI Act-এ এটা দরকার।"
+          "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC 2 ও HIPAA অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমে ইভেন্ট লগিং বাধ্যতামূলক করে।"
         ]
       },
       "show": [

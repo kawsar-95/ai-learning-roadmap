@@ -4,10 +4,10 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
 
   1 Before    Callout: "before MCP, every IDE / agent app wrote custom integrations for every data source."; layman's voice: "no glue code".
   2 MCP       Body: "MCP is an open standard (introduced by Anthropic in late 2024, now adopted by OpenAI, Google, and the major IDE vendors) for connecting models to data and tools."; callout: "Now you write one MCP server (e.g. for Postgres) and every MCP-compatible client — Claude Code, Cursor, VS Code, custom agents — can use it."
-  3 Primitives Body: "The model is the client; the data/tool provider runs an MCP server. The server exposes three primitives: Tools — functions the model can call (the action surface). Resources — read-only data the client can fetch on demand ... Prompts — named prompt templates the server offers; the host can list them and let the user invoke by name."
+  3 Primitives Body: "The model is the client; the data/tool provider runs an MCP server. The server exposes three primitives: Tools — functions the model can call (the action surface). Resources — read-only data the client can fetch on demand (files, DB rows, web pages). The host application decides how to surface and include them. Prompts — named prompt templates the server offers; the host can list them and let the user invoke by name."
   4 Code      Body: "Many agent tasks are easiest to express as code ("compute the average of column X"). Letting the model generate and execute code in a sandbox avoids tool explosion and gives you correctness on arithmetic."; remember: "(a separate tool per small task)".
   5 Sandbox   Start here: Sandbox ("A locked space where code can run without touching your real files or network."); "Run model-written code in a sandbox".
-  6 Options   Table, "The four production options in 2025": E2B (hosted Firecracker microVMs; sub-second Python, easy REST API), Modal (hosted containers + GPU; long-running compute, ML inference), Daytona (hosted dev environments; full git/REPL workflows, AI agents), Cloudflare Workers / Sandbox (edge isolates; low-latency, cold-start-fast JS/Wasm).
+  6 Options   Table, "The four production options in 2025": E2B (hosted Firecracker microVMs; sub-second Python, easy REST API), Modal (hosted containers + GPU; long-running compute, ML inference), Daytona (hosted isolated sandboxes (dedicated kernel, filesystem, network) for AI-generated code; AI agent code execution, full-computer workflows), Cloudflare Workers / Sandbox (edge isolates; low-latency, cold-start-fast JS/Wasm).
   7 Remember  The four "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -98,8 +98,8 @@ STEPS = [
                  "E2B: হোস্টেড Firecracker microVM, সাব-সেকেন্ড Python আর সহজ REST API-র জন্য"),
                 ("+", "Modal: hosted containers and GPUs, for long-running compute and ML inference",
                  "Modal: হোস্টেড কনটেইনার আর GPU, দীর্ঘ কম্পিউট আর ML ইনফারেন্সের জন্য"),
-                ("+", "Daytona: hosted dev environments, for full git and REPL workflows and AI agents",
-                 "Daytona: হোস্টেড ডেভ এনভায়রনমেন্ট, পুরো git ও REPL ওয়ার্কফ্লো আর AI এজেন্টের জন্য"),
+                ("+", "Daytona: hosted isolated sandboxes (dedicated kernel, filesystem, network) for AI-generated code, for AI agent code execution and full-computer workflows",
+                 "Daytona: AI-জেনারেটেড কোডের জন্য হোস্টেড আইসোলেটেড স্যান্ডবক্স (আলাদা কার্নেল, ফাইলসিস্টেম, নেটওয়ার্ক), AI এজেন্টের কোড চালানো আর পুরো-কম্পিউটার ওয়ার্কফ্লোর জন্য"),
                 ("+", "Cloudflare Workers / Sandbox: edge isolates, for low-latency JS and Wasm with fast cold starts",
                  "Cloudflare Workers / Sandbox: এজ আইসোলেট, কম দেরির JS ও Wasm আর দ্রুত কোল্ড-স্টার্টের জন্য")]),
 

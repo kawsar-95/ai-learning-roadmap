@@ -107,7 +107,7 @@ STEPS = [
 
     st(("GPUs", "GPU"),
        ("GPU numbers", "GPU-র সংখ্যা"),
-       [("For GPUs, NVIDIA's DCGM exporter publishes utilization, memory and temperature as Prometheus metrics.",
+       [("For GPUs, NVIDIA's DCGM exporter publishes utilisation, memory and temperature as Prometheus metrics.",
          "GPU-র ব্যবহার, মেমরি আর তাপমাত্রা NVIDIA-র DCGM exporter Prometheus মেট্রিক হিসেবে প্রকাশ করে।")],
        [sh("gpu", "hot"), sh("dcgm", "hot", ("use, memory, temperature", "ব্যবহার, মেমরি, তাপমাত্রা")), sh("prom", "hot", x=650)],
        [ln("gpu", "dcgm", "to", state="hot"), ln("dcgm", "prom", "to", state="hot")],

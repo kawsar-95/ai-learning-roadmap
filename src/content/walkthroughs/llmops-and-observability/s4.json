@@ -460,7 +460,7 @@
         "title": "Replay and debugging",
         "body": [
           "When a user complains, pull the trace, see every prompt and every model reply, and identify the failure.",
-          "Then replay the exact request against a different model or prompt to verify the fix. Langfuse, Helicone, and LangSmith all give you a replay button."
+          "Then replay the exact request against a different model or prompt to verify the fix. Langfuse and LangSmith let you open a logged call in a playground and re-run it with another model or prompt."
         ]
       },
       "bn": {
@@ -468,7 +468,7 @@
         "title": "রিপ্লে আর ডিবাগিং",
         "body": [
           "ইউজার অভিযোগ করলে ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন, আর ব্যর্থতা চিহ্নিত করুন।",
-          "তারপর সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে রিপ্লে করে ফিক্স যাচাই করুন। Langfuse, Helicone আর LangSmith সবই রিপ্লে বোতাম দেয়।"
+          "তারপর সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে রিপ্লে করে ফিক্স যাচাই করুন। Langfuse আর LangSmith-এ লগ করা কল প্লেগ্রাউন্ডে খুলে অন্য মডেল বা প্রম্পট দিয়ে আবার চালানো যায়।"
         ]
       },
       "show": [
@@ -525,16 +525,16 @@
         "short": "Drift",
         "title": "Drift detection",
         "body": [
-          "When OpenAI swaps GPT-4 for GPT-4-0613, or Anthropic bumps the weights of a “same-named” model, your outputs drift in ways your offline evals won't catch.",
-          "The fix: run a small fraction of production traffic (1–5%) through both the old and the new model, compare evals, and alert on delta. Arize Phoenix and Braintrust automate this."
+          "When a vendor's model alias starts pointing to a newer snapshot (for example an unpinned alias that moves to a new dated version), your outputs can drift in ways your offline evals won't catch. Pin dated model IDs.",
+          "The fix: run a small fraction of production traffic (1–5%) through both the old and the new model, compare evals, and alert on delta. Tools such as Braintrust (online scoring with alerts) and Arize Phoenix (embedding drift) cover parts of this."
         ]
       },
       "bn": {
         "short": "ড্রিফট",
         "title": "ড্রিফট ডিটেকশন",
         "body": [
-          "OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic “একই নামের” মডেলের ওয়েটস আপডেট করলে আপনার আউটপুট এমনভাবে ড্রিফট করে, যা আপনার অফলাইন ইভ্যাল ধরতে পারে না।",
-          "সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়েই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন। Arize Phoenix আর Braintrust এটি স্বয়ংক্রিয় করে।"
+          "ভেন্ডরের কোনো মডেল অ্যালিয়াস নতুন স্ন্যাপশটের দিকে ঘুরে গেলে (যেমন পিন না করা অ্যালিয়াস নতুন ডেটেড ভার্সনে চলে যায়), আপনার আউটপুট এমনভাবে ড্রিফট করতে পারে যা অফলাইন ইভ্যাল ধরতে পারে না। ডেটেড মডেল ID পিন করুন।",
+          "সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়েই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন। Braintrust (সতর্কতাসহ অনলাইন স্কোরিং) আর Arize Phoenix (এমবেডিং ড্রিফট) এর কিছু অংশ কভার করে।"
         ]
       },
       "show": [

@@ -2,7 +2,7 @@
 
 Every English text sits next to its Bangla text. Every claim restates the section's own text (the section carries the citations):
 
-  1 Tools      "You supply a list of tools as JSON Schema (function name, parameters, description)." "Tool names and descriptions are inserted verbatim into the prompt."
+  1 Tools      "You supply a list of tools as JSON Schema (function name, parameters, description)." "Tool names and descriptions are turned into part of the prompt by the API."
   2 Ask        The code: messages=[{"role": "user", "content": "Weather in Dhaka?"}], tools=tools.
   3 Decide     Sub-title: "emit a structured request to invoke a tool ... instead of free-form prose. The model doesn't execute: it decides what to call and with what arguments".
   4 Run        The code: result = get_weather(**tool.input)  # your code. Start here: "your code runs the tool".
@@ -51,8 +51,8 @@ STEPS = [
        [ln("tools", "app", "to", 1200, "hot")],
        ["0", "0", None],
        note=("tip",
-             "Tool names and descriptions go into the prompt as you write them. Give them the care you give a prompt.",
-             "টুলের নাম আর বর্ণনা যেমন লিখবেন, প্রম্পটে হুবহু তেমনই বসে যায়। প্রম্পটের মতো যত্ন নিয়ে সেগুলো লিখুন।"),
+             "Tool names and descriptions are turned into part of the prompt by the API. Give them the care you give a prompt.",
+             "API টুলের নাম আর বর্ণনাকে প্রম্পটের অংশ বানিয়ে নেয়। প্রম্পটের মতো যত্ন নিয়ে সেগুলো লিখুন।"),
        changes=[("+", "A tool list with one tool: <code>get_weather</code>",
                  "একটা টুলসহ টুলের তালিকা: <code>get_weather</code>")]),
 
