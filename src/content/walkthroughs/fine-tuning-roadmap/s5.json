@@ -1,0 +1,593 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "ft",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "gguf",
+      "kind": "file",
+      "label": {
+        "en": "GGUF file",
+        "bn": "GGUF ফাইল"
+      },
+      "x": 260,
+      "y": 162
+    },
+    {
+      "id": "llama",
+      "kind": "tool",
+      "label": {
+        "en": "llama.cpp",
+        "bn": "llama.cpp"
+      },
+      "x": 470,
+      "y": 90
+    },
+    {
+      "id": "ollama",
+      "kind": "tool",
+      "label": {
+        "en": "Ollama",
+        "bn": "Ollama"
+      },
+      "x": 470,
+      "y": 234
+    },
+    {
+      "id": "hw",
+      "kind": "server",
+      "label": {
+        "en": "Ordinary hardware",
+        "bn": "সাধারণ হার্ডওয়্যার"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "q8",
+      "kind": "file",
+      "label": {
+        "en": "Q8",
+        "bn": "Q8"
+      },
+      "x": 470,
+      "y": 70
+    },
+    {
+      "id": "q5",
+      "kind": "file",
+      "label": {
+        "en": "Q5",
+        "bn": "Q5"
+      },
+      "x": 470,
+      "y": 162
+    },
+    {
+      "id": "q4",
+      "kind": "file",
+      "label": {
+        "en": "Q4",
+        "bn": "Q4"
+      },
+      "x": 470,
+      "y": 254
+    },
+    {
+      "id": "test",
+      "kind": "note",
+      "label": {
+        "en": "Phase 4 test set",
+        "bn": "Phase ৪-এর টেস্ট সেট"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "service",
+      "label": {
+        "en": "API",
+        "bn": "API"
+      },
+      "x": 310,
+      "y": 162
+    },
+    {
+      "id": "docker",
+      "kind": "storage",
+      "label": {
+        "en": "Docker container",
+        "bn": "ডকার কন্টেইনার"
+      },
+      "x": 510,
+      "y": 162
+    },
+    {
+      "id": "dep",
+      "kind": "server",
+      "label": {
+        "en": "Deploy",
+        "bn": "ডিপ্লয়"
+      },
+      "x": 690,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "File size",
+      "bn": "ফাইলের আকার"
+    },
+    {
+      "en": "Quality",
+      "bn": "মান"
+    },
+    {
+      "en": "Runs on",
+      "bn": "যেখানে চলে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Quantize",
+        "title": "Shrink the model with quantization",
+        "body": [
+          "After fine-tuning, you shrink the model with quantization so it runs on ordinary hardware.",
+          "Quantization stores the model's numbers with fewer bits so the file gets smaller, like compressing a video file."
+        ]
+      },
+      "bn": {
+        "short": "কোয়ান্টাইজ",
+        "title": "কোয়ান্টাইজেশনে মডেল ছোট করুন",
+        "body": [
+          "ফাইন-টিউনিংয়ের পর কোয়ান্টাইজেশন দিয়ে মডেলকে ছোট করা হয়, যাতে সাধারণ হার্ডওয়্যারে চলে।",
+          "কোয়ান্টাইজেশন মডেলের সংখ্যাগুলো কম বিটে রাখে, যাতে ফাইল ছোট হয়। ভিডিও ফাইল কমপ্রেস করার মতো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ft",
+          "state": "hot"
+        },
+        {
+          "id": "gguf",
+          "state": "hot",
+          "sub": {
+            "en": "fewer bits",
+            "bn": "কম বিট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ft",
+          "to": "gguf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Smaller",
+          "bn": "ছোট"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GGUF",
+        "title": "GGUF, llama.cpp and Ollama",
+        "body": [
+          "GGUF is a file format for quantized models that tools like llama.cpp and Ollama can run.",
+          "llama.cpp runs quantized models on ordinary hardware. Ollama runs them behind a simple API."
+        ]
+      },
+      "bn": {
+        "short": "GGUF",
+        "title": "GGUF, llama.cpp আর Ollama",
+        "body": [
+          "GGUF কোয়ান্টাইজড মডেলের একটি ফাইল ফরম্যাট, যেটা llama.cpp আর Ollama-র মতো টুল দিয়ে চালানো যায়।",
+          "llama.cpp কোয়ান্টাইজড মডেলকে সাধারণ হার্ডওয়্যারে চালায়। Ollama একটি সহজ API-র পেছনে চালায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gguf",
+          "state": "hot"
+        },
+        {
+          "id": "llama",
+          "state": "hot"
+        },
+        {
+          "id": "ollama",
+          "state": "hot"
+        },
+        {
+          "id": "hw",
+          "state": "hot",
+          "sub": {
+            "en": "no dedicated GPU server",
+            "bn": "আলাদা GPU সার্ভার ছাড়া"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "gguf",
+          "to": "llama",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gguf",
+          "to": "ollama",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llama",
+          "to": "hw",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ollama",
+          "to": "hw",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "Ordinary hardware",
+          "bn": "সাধারণ হার্ডওয়্যার"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Levels",
+        "title": "Q8, Q5, Q4: the quantization levels",
+        "body": [
+          "The number in a level's name is roughly the bits stored per weight, so a smaller number means a smaller model.",
+          "Q8 is closest to the original quality. Q4, the smallest and fastest of the common levels, loses a bit more."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Q5 is a common balance of size and quality."
+        }
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "Q8, Q5, Q4: কোয়ান্টাইজেশনের স্তর",
+        "body": [
+          "স্তরের নামের সংখ্যাটা মোটামুটি প্রতিটি ওয়েটের জন্য রাখা বিট, তাই সংখ্যা ছোট মানে মডেল ছোট।",
+          "Q8 আসল মানের সবচেয়ে কাছে। প্রচলিত স্তরগুলোর মধ্যে Q4 সবচেয়ে ছোট আর দ্রুত, কিন্তু মান একটু বেশি কমে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Q5 হলো আকার আর মানের একটা সাধারণ ভারসাম্য।"
+        }
+      },
+      "show": [
+        {
+          "id": "gguf",
+          "state": "hot"
+        },
+        {
+          "id": "q8",
+          "state": "hot",
+          "sub": {
+            "en": "Largest",
+            "bn": "সবচেয়ে বড়"
+          }
+        },
+        {
+          "id": "q5",
+          "state": "hot",
+          "sub": {
+            "en": "Mid-size",
+            "bn": "মাঝারি"
+          }
+        },
+        {
+          "id": "q4",
+          "state": "hot",
+          "sub": {
+            "en": "Smallest",
+            "bn": "সবচেয়ে ছোট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "gguf",
+          "to": "q8",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gguf",
+          "to": "q5",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gguf",
+          "to": "q4",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Q8 largest, Q4 smallest",
+          "bn": "Q8 সবচেয়ে বড়, Q4 সবচেয়ে ছোট"
+        },
+        {
+          "en": "Q8 closest to original",
+          "bn": "Q8 আসলের সবচেয়ে কাছে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Test",
+        "title": "Test the quantized model",
+        "body": [
+          "After you quantize it, test the quality against your Phase 4 test set."
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "কোয়ান্টাইজড মডেল যাচাই করুন",
+        "body": [
+          "কোয়ান্টাইজ করার পর Phase ৪-এর টেস্ট সেটে মান যাচাই করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gguf",
+          "state": "hot",
+          "x": 100
+        },
+        {
+          "id": "test",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "gguf",
+          "to": "test",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Test it",
+          "bn": "যাচাই করুন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Wrap",
+        "title": "Wrap it behind an API",
+        "body": [
+          "An API is a doorway that lets other programs send the model a request and get its answer."
+        ]
+      },
+      "bn": {
+        "short": "র‍্যাপ",
+        "title": "API-র পেছনে র‍্যাপ করুন",
+        "body": [
+          "API একটি দরজার মতো, যা দিয়ে অন্য প্রোগ্রাম মডেলকে অনুরোধ পাঠাতে আর তার উত্তর পেতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gguf",
+          "state": "dim",
+          "x": 100
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "api",
+          "to": "gguf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Docker",
+        "title": "Put it in a Docker container",
+        "body": [
+          "A Docker container is a package that holds your app and everything it needs.",
+          "So it runs the same way on any machine."
+        ]
+      },
+      "bn": {
+        "short": "Docker",
+        "title": "Docker কন্টেইনারে রাখুন",
+        "body": [
+          "ডকার কন্টেইনার একটি প্যাকেজ, যাতে আপনার অ্যাপ আর তার দরকারি সবকিছু থাকে।",
+          "ফলে যেকোনো মেশিনে একইভাবে চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "docker",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "api",
+          "to": "docker",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Deploy",
+        "title": "Deploy it",
+        "body": [
+          "The last step is to deploy the container.",
+          "The steps are: convert, quantize, wrap behind an API, put in Docker, deploy."
+        ]
+      },
+      "bn": {
+        "short": "ডিপ্লয়",
+        "title": "ডিপ্লয় করুন",
+        "body": [
+          "শেষ ধাপ হলো কন্টেইনারটা ডিপ্লয় করা।",
+          "ধাপগুলো: কনভার্ট, কোয়ান্টাইজ, API-র পেছনে র‍্যাপ, Docker-এ রাখা, ডিপ্লয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "api",
+          "state": "dim"
+        },
+        {
+          "id": "docker",
+          "state": "hot"
+        },
+        {
+          "id": "dep",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "api",
+          "to": "docker",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "docker",
+          "to": "dep",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Quantize, serve, wrap, deploy."
+        ],
+        "points": [
+          "A quantized GGUF model, run with llama.cpp or Ollama, can run on ordinary hardware without a dedicated GPU server.",
+          "Q8 is closest to the original quality; Q4, the smallest and fastest of the common levels, loses a bit more.",
+          "Test the quantized model against your Phase 4 test set."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কোয়ান্টাইজ, সার্ভ, র‍্যাপ, ডিপ্লয়।"
+        ],
+        "points": [
+          "কোয়ান্টাইজ করা GGUF মডেল llama.cpp বা Ollama দিয়ে চালালে আলাদা GPU সার্ভার ছাড়াই সাধারণ হার্ডওয়্যারে চলতে পারে।",
+          "Q8 আসল মানের সবচেয়ে কাছে; প্রচলিত স্তরগুলোর মধ্যে Q4 সবচেয়ে ছোট আর দ্রুত, কিন্তু মান একটু বেশি কমে।",
+          "কোয়ান্টাইজড মডেলকে Phase ৪-এর টেস্ট সেটে যাচাই করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gguf",
+          "x": 100
+        },
+        {
+          "id": "api"
+        },
+        {
+          "id": "docker"
+        },
+        {
+          "id": "dep"
+        }
+      ],
+      "links": [
+        {
+          "from": "gguf",
+          "to": "api",
+          "flow": "to"
+        },
+        {
+          "from": "api",
+          "to": "docker",
+          "flow": "to"
+        },
+        {
+          "from": "docker",
+          "to": "dep",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,509 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "file",
+      "kind": "file",
+      "label": {
+        "en": "Prompt file",
+        "bn": "প্রম্পট ফাইল"
+      },
+      "x": 110,
+      "y": 80
+    },
+    {
+      "id": "pr",
+      "kind": "service",
+      "label": {
+        "en": "Pull request",
+        "bn": "পুল রিকোয়েস্ট"
+      },
+      "x": 330,
+      "y": 80
+    },
+    {
+      "id": "tests",
+      "kind": "chart",
+      "label": {
+        "en": "Golden tests",
+        "bn": "গোল্ডেন টেস্ট"
+      },
+      "x": 560,
+      "y": 80
+    },
+    {
+      "id": "canary",
+      "kind": "balancer",
+      "label": {
+        "en": "Canary rollout",
+        "bn": "ক্যানারি রোলআউট"
+      },
+      "x": 560,
+      "y": 250
+    },
+    {
+      "id": "promo",
+      "kind": "user",
+      "label": {
+        "en": "Promote",
+        "bn": "চালু করা"
+      },
+      "x": 330,
+      "y": 250
+    },
+    {
+      "id": "logs",
+      "kind": "database",
+      "label": {
+        "en": "Logs",
+        "bn": "লগ"
+      },
+      "x": 110,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Pinned",
+      "bn": "পিন করা"
+    },
+    {
+      "en": "Tests",
+      "bn": "টেস্ট"
+    },
+    {
+      "en": "Traffic",
+      "bn": "ট্রাফিক"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Source",
+        "title": "Prompts live in source control",
+        "body": [
+          "Keep prompts as files in source control.",
+          "Every change is a pull request you can review."
+        ]
+      },
+      "bn": {
+        "short": "সোর্স",
+        "title": "প্রম্পট থাকে সোর্স কন্ট্রোলে",
+        "body": [
+          "প্রম্পট সোর্স কন্ট্রোলে ফাইল হিসেবে রাখুন।",
+          "প্রতিটি পরিবর্তন হবে পর্যালোচনাযোগ্য পুল রিকোয়েস্ট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "pr",
+          "state": "hot",
+          "sub": {
+            "en": "review",
+            "bn": "রিভিউ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "pr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pin",
+        "title": "Pin the model, temperature, prompt",
+        "body": [
+          "Pin the model, the temperature, and the prompt. Without all three, you cannot reproduce a good output.",
+          "Pinning the model version means fixing an exact version instead of a moving label like latest."
+        ]
+      },
+      "bn": {
+        "short": "পিন",
+        "title": "মডেল, টেম্পারেচার, প্রম্পট পিন করুন",
+        "body": [
+          "মডেল, টেম্পারেচার আর প্রম্পট, তিনটাই পিন করুন। নইলে ভালো আউটপুট আবার বানানো যায় না।",
+          "মডেল ভার্সন পিন মানে latest-এর মতো বদলে যাওয়া নামের বদলে নির্দিষ্ট মডেল ভার্সন বেঁধে রাখা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot",
+          "sub": {
+            "en": "all three",
+            "bn": "তিনটাই"
+          }
+        },
+        {
+          "id": "pr",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "pr",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "model, temperature, prompt",
+          "bn": "মডেল, টেম্পারেচার, প্রম্পট"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Golden",
+        "title": "Run golden test cases",
+        "body": [
+          "Golden test cases are pairs of an input and the output you expect.",
+          "You run them on every prompt change."
+        ]
+      },
+      "bn": {
+        "short": "গোল্ডেন",
+        "title": "গোল্ডেন টেস্ট কেস চালান",
+        "body": [
+          "গোল্ডেন টেস্ট কেস হলো ইনপুট আর প্রত্যাশিত আউটপুটের জোড়া।",
+          "প্রতিটি প্রম্পট পরিবর্তনে এগুলো চালানো হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "pr",
+          "state": "hot"
+        },
+        {
+          "id": "tests",
+          "state": "hot",
+          "sub": {
+            "en": "input, output",
+            "bn": "ইনপুট, আউটপুট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "pr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pr",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "every prompt change",
+          "bn": "প্রতিটি প্রম্পট পরিবর্তন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Regression",
+        "title": "A regression is caught early",
+        "body": [
+          "A regression is when a change breaks something that used to work. A rule that fixes one ticket can break another one.",
+          "Golden tests catch it before users do."
+        ]
+      },
+      "bn": {
+        "short": "রিগ্রেশন",
+        "title": "রিগ্রেশন আগেই ধরা পড়ে",
+        "body": [
+          "রিগ্রেশন হলো কোনো পরিবর্তনের ফলে আগে ঠিকঠাক চলা জিনিস ভেঙে যাওয়া। একটা নিয়ম এক টিকেট ঠিক করে আরেকটা ভেঙে দিতে পারে।",
+          "গোল্ডেন টেস্ট ইউজারের আগেই সেটা ধরে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pr",
+          "state": "warn",
+          "sub": {
+            "en": "change",
+            "bn": "পরিবর্তন"
+          }
+        },
+        {
+          "id": "tests",
+          "state": "warn",
+          "sub": {
+            "en": "regression",
+            "bn": "রিগ্রেশন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pr",
+          "to": "tests",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "tests",
+          "to": "pr",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "regression caught",
+          "bn": "রিগ্রেশন ধরা পড়েছে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rollout",
+        "title": "Canary, A/B, then promote",
+        "body": [
+          "A canary rollout sends a new version to a small group of users first, to catch problems before everyone gets it.",
+          "With A/B in production, you send a small part of traffic to the new prompt, measure business metrics, then promote it."
+        ]
+      },
+      "bn": {
+        "short": "রোলআউট",
+        "title": "ক্যানারি, A/B, তারপর চালু",
+        "body": [
+          "ক্যানারি রোলআউটে নতুন ভার্সন আগে অল্প কিছু ইউজারকে দেওয়া হয়, যাতে সবার কাছে যাওয়ার আগেই সমস্যা ধরা পড়ে।",
+          "প্রোডাকশনে A/B-তে ট্রাফিকের ছোট অংশ নতুন প্রম্পটে পাঠানো হয়, বিজনেস মেট্রিক মাপা হয়, তারপর সেটা চালু করা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tests",
+          "state": "hot"
+        },
+        {
+          "id": "canary",
+          "state": "hot",
+          "sub": {
+            "en": "small group",
+            "bn": "অল্প কিছু ইউজার"
+          }
+        },
+        {
+          "id": "promo",
+          "state": "hot",
+          "sub": {
+            "en": "then promote",
+            "bn": "তারপর চালু"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tests",
+          "to": "canary",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "canary",
+          "to": "promo",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "a small part",
+          "bn": "ছোট অংশ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Log",
+        "title": "Log every call, mine the failures",
+        "body": [
+          "Log (prompt, output, user_feedback) for every call.",
+          "Then mine the failures."
+        ]
+      },
+      "bn": {
+        "short": "লগ",
+        "title": "প্রতিটি কল লগ করুন, ব্যর্থতা খুঁড়ুন",
+        "body": [
+          "প্রতিটি কলের (prompt, output, user_feedback) লগ করুন।",
+          "তারপর ব্যর্থতাগুলো খুঁড়ে দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "promo",
+          "state": "hot"
+        },
+        {
+          "id": "logs",
+          "state": "hot",
+          "sub": {
+            "en": "mine failures",
+            "bn": "ব্যর্থতা খোঁড়া"
+          }
+        },
+        {
+          "id": "file",
+          "state": "hot",
+          "sub": {
+            "en": "next edit",
+            "bn": "পরের পরিবর্তন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "promo",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "logs",
+          "to": "file",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember: a prompt is deployed code",
+        "body": [
+          "A prompt that ships is like deployed code.",
+          "Every change is reviewed, tested, and rolled out with care, not edited live in production."
+        ],
+        "points": [
+          "Run golden test cases on every prompt change to catch regressions before users do."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন: প্রম্পট ডিপ্লয় করা কোড",
+        "body": [
+          "যে প্রম্পট ইউজারের কাছে পৌঁছে গেছে, সেটা ডিপ্লয় করা কোডের মতো।",
+          "প্রতিটি পরিবর্তন যত্ন করে রিভিউ, টেস্ট আর রোলআউট করা হয়, সরাসরি প্রোডাকশনে বদলানো হয় না।"
+        ],
+        "points": [
+          "প্রতিটি প্রম্পট পরিবর্তনে গোল্ডেন টেস্ট কেস চালান, যাতে রিগ্রেশন ইউজারের আগে ধরা পড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "pr",
+          "state": "hot"
+        },
+        {
+          "id": "tests",
+          "state": "hot"
+        },
+        {
+          "id": "canary",
+          "state": "hot"
+        },
+        {
+          "id": "promo",
+          "state": "hot"
+        },
+        {
+          "id": "logs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "pr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pr",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tests",
+          "to": "canary",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "canary",
+          "to": "promo",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "promo",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "logs",
+          "to": "file",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

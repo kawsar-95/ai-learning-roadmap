@@ -1,0 +1,521 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "prose",
+      "kind": "note",
+      "label": {
+        "en": "Free prose",
+        "bn": "সাধারণ লেখা"
+      },
+      "x": 300,
+      "y": 60
+    },
+    {
+      "id": "lab",
+      "kind": "file",
+      "label": {
+        "en": "Labeled sections",
+        "bn": "লেবেল দেওয়া সেকশন"
+      },
+      "x": 300,
+      "y": 162
+    },
+    {
+      "id": "fail",
+      "kind": "note",
+      "label": {
+        "en": "Failed section",
+        "bn": "ব্যর্থ সেকশন"
+      },
+      "x": 300,
+      "y": 268
+    },
+    {
+      "id": "rx",
+      "kind": "tool",
+      "label": {
+        "en": "One regex",
+        "bn": "একটা রেজেক্স"
+      },
+      "x": 520,
+      "y": 162
+    },
+    {
+      "id": "code",
+      "kind": "service",
+      "label": {
+        "en": "Your code",
+        "bn": "আপনার কোড"
+      },
+      "x": 680,
+      "y": 162
+    },
+    {
+      "id": "md",
+      "kind": "file",
+      "label": {
+        "en": "Markdown",
+        "bn": "Markdown"
+      },
+      "x": 520,
+      "y": 60
+    },
+    {
+      "id": "xml",
+      "kind": "file",
+      "label": {
+        "en": "XML tags",
+        "bn": "XML ট্যাগ"
+      },
+      "x": 520,
+      "y": 268
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Parsing",
+      "bn": "পার্সিং"
+    },
+    {
+      "en": "Output",
+      "bn": "আউটপুট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Prose",
+        "title": "Free prose is hard to read by code",
+        "body": [
+          "Free-form prose is fine for humans, but software needs structured output.",
+          "If the AI writes a wall of text, your code has to parse English to pull out the answer."
+        ]
+      },
+      "bn": {
+        "short": "লেখা",
+        "title": "সাধারণ লেখা কোডের জন্য কঠিন",
+        "body": [
+          "সাধারণ লেখা মানুষের জন্য ঠিক আছে, কিন্তু সফটওয়্যারের দরকার স্ট্রাকচার্ড আউটপুট।",
+          "AI লেখার দেয়াল লিখলে আপনার কোডকে ইংরেজি পার্স করে উত্তর তুলতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "prose",
+          "state": "warn",
+          "sub": {
+            "en": "wall of text",
+            "bn": "লেখার দেয়াল"
+          }
+        },
+        {
+          "id": "code",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "prose",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "prose",
+          "to": "code",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "parse English",
+          "bn": "ইংরেজি পার্স"
+        },
+        {
+          "en": "free prose",
+          "bn": "সাধারণ লেখা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Labels",
+        "title": "Labeled sections give a shape",
+        "body": [
+          "Labeled sections in Markdown or XML give the model a clear shape to follow.",
+          "They also give your code clear parts to pull out. This is structured output."
+        ]
+      },
+      "bn": {
+        "short": "লেবেল",
+        "title": "লেবেল দেওয়া সেকশন কাঠামো দেয়",
+        "body": [
+          "Markdown বা XML-এর লেবেল দেওয়া সেকশন মডেলকে অনুসরণ করার মতো স্পষ্ট কাঠামো দেয়।",
+          "আপনার কোডকেও তুলে আনার মতো স্পষ্ট অংশ দেয়। একেই বলে স্ট্রাকচার্ড আউটপুট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "lab",
+          "state": "hot",
+          "sub": {
+            "en": "clear parts",
+            "bn": "স্পষ্ট অংশ"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "lab",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lab",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "clear parts",
+          "bn": "স্পষ্ট অংশ"
+        },
+        {
+          "en": "structured output",
+          "bn": "স্ট্রাকচার্ড আউটপুট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Anchoring",
+        "title": "Labels anchor the model",
+        "body": [
+          "The model pays more attention to content that has a label, such as a heading ## Summary."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাংকরিং",
+        "title": "লেবেল মডেলকে অ্যাংকর করে",
+        "body": [
+          "লেবেল দেওয়া অংশে মডেল বেশি মনোযোগ দেয়, যেমন ## Summary হেডিং।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "more attention",
+            "bn": "বেশি মনোযোগ"
+          }
+        },
+        {
+          "id": "lab",
+          "state": "hot",
+          "sub": {
+            "en": "## Summary",
+            "bn": "## Summary"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "lab",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "labeled",
+          "bn": "লেবেল দেওয়া"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Regex",
+        "title": "One regex pulls out a section",
+        "body": [
+          "A regex is a short pattern that finds matching text. One regex can pull out a whole labeled section.",
+          "Your code does not need to parse English."
+        ]
+      },
+      "bn": {
+        "short": "রেজেক্স",
+        "title": "একটা রেজেক্সেই সেকশন তোলা যায়",
+        "body": [
+          "রেজেক্স মিলে যাওয়া লেখা খুঁজে বের করার একটা ছোট প্যাটার্ন। একটা রেজেক্সেই পুরো লেবেল দেওয়া সেকশন তোলা যায়।",
+          "আপনার কোডকে ইংরেজি বাক্য বিশ্লেষণ করতে হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lab",
+          "state": "hot"
+        },
+        {
+          "id": "rx",
+          "state": "hot",
+          "sub": {
+            "en": "whole section",
+            "bn": "পুরো সেকশন"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "lab",
+          "to": "rx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rx",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one regex",
+          "bn": "একটা রেজেক্স"
+        },
+        {
+          "en": "labeled",
+          "bn": "লেবেল দেওয়া"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Audit",
+        "title": "Labels show which section failed",
+        "body": [
+          "Labels also show which section failed when an output is wrong."
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "লেবেল দেখায় কোন সেকশন ব্যর্থ",
+        "body": [
+          "আউটপুট ভুল হলে লেবেল দেখে বোঝা যায় ঠিক কোন সেকশন ব্যর্থ হয়েছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lab",
+          "state": "hot"
+        },
+        {
+          "id": "fail",
+          "state": "warn",
+          "sub": {
+            "en": "which one",
+            "bn": "কোনটা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lab",
+          "to": "fail",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "labeled",
+          "bn": "লেবেল দেওয়া"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Formats",
+        "title": "Two ways to label",
+        "body": [
+          "Markdown sections are headings like ## Answer. They work for any model and are easy to read.",
+          "XML tags open and close a block. The boundaries are stricter, and blocks can sit inside blocks."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Use Markdown for chat-facing output. Use XML tags for agents and tool pipelines."
+        }
+      },
+      "bn": {
+        "short": "ফরম্যাট",
+        "title": "লেবেল দেওয়ার দুই উপায়",
+        "body": [
+          "Markdown সেকশন হলো ## Answer-এর মতো হেডিং। সব মডেলে কাজ করে আর পড়তে সহজ।",
+          "XML ট্যাগ একটা ব্লক খোলে ও বন্ধ করে। সীমানা বেশি কঠোর, আর ব্লকের ভেতরে ব্লক রাখা যায়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "ব্যবহারকারীর দিকের আউটপুটে Markdown, আর এজেন্ট ও টুল পাইপলাইনে XML ট্যাগ ব্যবহার করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "lab",
+          "state": "hot"
+        },
+        {
+          "id": "md",
+          "state": "hot",
+          "sub": {
+            "en": "chat-facing",
+            "bn": "ব্যবহারকারীর দিকে"
+          }
+        },
+        {
+          "id": "xml",
+          "state": "hot",
+          "sub": {
+            "en": "agents, tool pipelines",
+            "bn": "এজেন্ট, টুল পাইপলাইন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lab",
+          "to": "md",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lab",
+          "to": "xml",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Markdown or XML",
+          "bn": "Markdown বা XML"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember: reuse the skeleton",
+        "body": [
+          "Labeled sections help the model and let your code pull out parts with one regex instead of parsing English.",
+          "Reuse the skeleton: role → context → task → output format → rules."
+        ],
+        "points": [
+          "role → context → task → output format → rules"
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন: কাঠামোটা বারবার ব্যবহার করুন",
+        "body": [
+          "লেবেল দেওয়া সেকশন মডেলকে সাহায্য করে, আর একটা রেজেক্সেই অংশ তোলা যায়, ইংরেজি বাক্য বিশ্লেষণ করতে হয় না।",
+          "এই কাঠামো বারবার ব্যবহার করুন: রোল → কনটেক্সট → টাস্ক → আউটপুট ফরম্যাট → নিয়ম।"
+        ],
+        "points": [
+          "রোল → কনটেক্সট → টাস্ক → আউটপুট ফরম্যাট → নিয়ম"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "lab",
+          "state": "hot",
+          "sub": {
+            "en": "role → context → task",
+            "bn": "রোল → কনটেক্সট → টাস্ক"
+          }
+        },
+        {
+          "id": "rx",
+          "state": "hot"
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "lab",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lab",
+          "to": "rx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rx",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one regex",
+          "bn": "একটা রেজেক্স"
+        },
+        {
+          "en": "labeled",
+          "bn": "লেবেল দেওয়া"
+        }
+      ]
+    }
+  ]
+}

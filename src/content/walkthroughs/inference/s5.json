@@ -1,0 +1,601 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "rent",
+      "kind": "clock",
+      "label": {
+        "en": "Rent",
+        "bn": "ভাড়া"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "h100",
+      "kind": "server",
+      "label": {
+        "en": "H100",
+        "bn": "H100"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "buy",
+      "kind": "key",
+      "label": {
+        "en": "Buy",
+        "bn": "কেনা"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "reqs",
+      "kind": "user",
+      "label": {
+        "en": "Concurrent requests",
+        "bn": "একসাথে চলা রিকোয়েস্ট"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "m70",
+      "kind": "model",
+      "label": {
+        "en": "70B model",
+        "bn": "৭০B মডেল"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "small",
+      "kind": "model",
+      "label": {
+        "en": "Smaller model",
+        "bn": "ছোট মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "dev",
+      "kind": "browser",
+      "label": {
+        "en": "User's device",
+        "bn": "ইউজারের ডিভাইস"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "you",
+      "kind": "user",
+      "label": {
+        "en": "Your app",
+        "bn": "আপনার অ্যাপ"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tog",
+      "kind": "service",
+      "label": {
+        "en": "Together",
+        "bn": "Together"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "groq",
+      "kind": "service",
+      "label": {
+        "en": "Groq",
+        "bn": "Groq"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "or",
+      "kind": "service",
+      "label": {
+        "en": "OpenRouter",
+        "bn": "OpenRouter"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "pick",
+      "kind": "note",
+      "label": {
+        "en": "Model, price, SLA",
+        "bn": "মডেল, দাম, SLA"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Rent",
+      "bn": "ভাড়া"
+    },
+    {
+      "en": "Buy",
+      "bn": "কেনা"
+    },
+    {
+      "en": "At once",
+      "bn": "একসাথে"
+    },
+    {
+      "en": "Per 1k tokens",
+      "bn": "প্রতি ১k টোকেনে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the figures and labels are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: সংখ্যা আর লেবেলগুলো সেকশনের নিজের।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Rent or buy",
+        "title": "What an H100 costs",
+        "body": [
+          "An H100, a top-end Nvidia GPU, rents for $2–$4/hr on the major clouds and costs about $30k to buy.",
+          "If you run millions of conversations, owning is cheaper. If you run thousands, renting is cheaper."
+        ]
+      },
+      "bn": {
+        "short": "ভাড়া বা কেনা",
+        "title": "একটা H100-এর খরচ",
+        "body": [
+          "H100, মানে Nvidia-র একটি সেরা মানের GPU, প্রধান ক্লাউডে ঘণ্টায় $২–$৪-এ ভাড়া পাওয়া যায়, আর কিনতে প্রায় $৩০k লাগে।",
+          "লাখ লাখ কথোপকথন চালালে নিজে কেনা সস্তা। হাজার কয়েক চালালে ভাড়া নেওয়া সস্তা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rent",
+          "state": "hot",
+          "sub": {
+            "en": "on the major clouds",
+            "bn": "প্রধান ক্লাউডে"
+          }
+        },
+        {
+          "id": "h100",
+          "state": "hot"
+        },
+        {
+          "id": "buy",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "rent",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "buy",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "$2–$4/hr",
+          "bn": "ঘণ্টায় $২–$৪"
+        },
+        {
+          "en": "about $30k",
+          "bn": "প্রায় $৩০k"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Requests",
+        "title": "How many requests at once",
+        "body": [
+          "Concurrent requests are the requests the server handles at the same moment.",
+          "With a 70B model, you can serve about 30 of them before latency collapses."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Latency is how long a user waits for an answer."
+        }
+      },
+      "bn": {
+        "short": "রিকোয়েস্ট",
+        "title": "একসাথে কত রিকোয়েস্ট",
+        "body": [
+          "একসাথে চলা রিকোয়েস্ট হলো সার্ভার একই মুহূর্তে যত রিকোয়েস্ট সামলায়।",
+          "৭০B মডেলে ল্যাটেন্সি ভেঙে পড়ার আগে এর প্রায় ৩০টি সামলানো যায়।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "ল্যাটেন্সি হলো উত্তরের জন্য ইউজারকে কতক্ষণ অপেক্ষা করতে হয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "reqs",
+          "state": "hot"
+        },
+        {
+          "id": "h100",
+          "state": "hot",
+          "sub": {
+            "en": "before latency collapses",
+            "bn": "ল্যাটেন্সি ভেঙে পড়ার আগে"
+          }
+        },
+        {
+          "id": "m70",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "reqs",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "m70",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "about 30",
+          "bn": "প্রায় ৩০টি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "What a token costs",
+        "body": [
+          "Fully loaded, this costs about $0.10 per 1k generated tokens."
+        ]
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "একটা টোকেনের খরচ",
+        "body": [
+          "পুরো লোডে এর খরচ প্রতি ১k জেনারেটেড টোকেনে প্রায় $০.১০।"
+        ]
+      },
+      "show": [
+        {
+          "id": "reqs",
+          "state": "hot"
+        },
+        {
+          "id": "h100",
+          "state": "hot",
+          "sub": {
+            "en": "fully loaded",
+            "bn": "পুরো লোডে"
+          }
+        },
+        {
+          "id": "m70",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "reqs",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "m70",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "about 30",
+          "bn": "প্রায় ৩০টি"
+        },
+        {
+          "en": "about $0.10",
+          "bn": "প্রায় $০.১০"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Edge",
+        "title": "Edge inference: no server bill",
+        "body": [
+          "Edge inference runs smaller models on the user's own device, like a phone, instead of on a server.",
+          "The trade-off: zero server cost, but quality and capability are limited."
+        ]
+      },
+      "bn": {
+        "short": "এজ",
+        "title": "এজ ইনফারেন্স: সার্ভার খরচ নেই",
+        "body": [
+          "এজ ইনফারেন্স সার্ভারের বদলে ইউজারের নিজের ডিভাইসে, যেমন ফোনে, ছোট মডেল চালায়।",
+          "বিনিময়ে: সার্ভার খরচ শূন্য, কিন্তু মান আর সামর্থ্য সীমিত।"
+        ]
+      },
+      "show": [
+        {
+          "id": "dev",
+          "state": "hot"
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "limited",
+            "bn": "সীমিত"
+          }
+        },
+        {
+          "id": "h100",
+          "state": "dim",
+          "sub": {
+            "en": "zero server cost",
+            "bn": "সার্ভার খরচ শূন্য"
+          },
+          "x": 630,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "small",
+          "to": "dev",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Providers",
+        "title": "Hosted providers",
+        "body": [
+          "Hosted inference in 2025 is a commodity market, and many providers offer the same models.",
+          "Together is a good default, Groq runs on its own LPU chip, and OpenRouter is an aggregator: one API, many providers."
+        ]
+      },
+      "bn": {
+        "short": "প্রোভাইডার",
+        "title": "হোস্টেড প্রোভাইডার",
+        "body": [
+          "২০২৫ সালে হোস্টেড ইনফারেন্স একটি কমোডিটি বাজার, আর অনেক প্রোভাইডার একই মডেল দেয়।",
+          "Together ভালো ডিফল্ট, Groq চলে নিজের LPU চিপে, আর OpenRouter অ্যাগ্রিগেটর: একটা API, অনেক প্রোভাইডার।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot"
+        },
+        {
+          "id": "tog",
+          "state": "hot",
+          "sub": {
+            "en": "good default",
+            "bn": "ভালো ডিফল্ট"
+          }
+        },
+        {
+          "id": "groq",
+          "state": "hot",
+          "sub": {
+            "en": "LPU hardware",
+            "bn": "LPU হার্ডওয়্যার"
+          }
+        },
+        {
+          "id": "or",
+          "state": "hot",
+          "sub": {
+            "en": "one API, many providers",
+            "bn": "একটা API, অনেক প্রোভাইডার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "tog",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "you",
+          "to": "groq",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "you",
+          "to": "or",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pick",
+        "title": "Pick by model, price and SLA",
+        "body": [
+          "Pick by which model you want, at what price, with what SLA.",
+          "An SLA, a service-level agreement, is a written promise about how reliable and fast the service will be."
+        ]
+      },
+      "bn": {
+        "short": "বাছাই",
+        "title": "মডেল, দাম আর SLA দেখে বাছুন",
+        "body": [
+          "কোন মডেল চান, কী দামে, আর কোন SLA-তে, তা দেখে বাছুন।",
+          "SLA, মানে service-level agreement, হলো সেবা কতটা নির্ভরযোগ্য আর দ্রুত হবে তার লিখিত প্রতিশ্রুতি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tog",
+          "state": "dim"
+        },
+        {
+          "id": "groq",
+          "state": "dim"
+        },
+        {
+          "id": "or",
+          "state": "dim"
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tog",
+          "to": "pick",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "groq",
+          "to": "pick",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "or",
+          "to": "pick",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Running your own model costs real money for GPUs, so it helps to know the numbers."
+        ],
+        "points": [
+          "An H100 rents for $2–$4/hr on the major clouds and costs about $30k to buy.",
+          "With a 70B model, you can serve about 30 concurrent requests before latency collapses.",
+          "Fully loaded, this costs about $0.10 per 1k generated tokens.",
+          "Edge inference has zero server cost, but quality and capability are limited.",
+          "Many hosted providers offer the same models, so pick by model, price and SLA."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "নিজের মডেল চালাতে GPU-র পেছনে সত্যিকারের টাকা লাগে, তাই সংখ্যাগুলো জানা কাজে দেয়।"
+        ],
+        "points": [
+          "H100 প্রধান ক্লাউডে ঘণ্টায় $২–$৪-এ ভাড়া পাওয়া যায়, আর কিনতে প্রায় $৩০k লাগে।",
+          "৭০B মডেলে ল্যাটেন্সি ভেঙে পড়ার আগে প্রায় ৩০টি একসাথে চলা রিকোয়েস্ট সামলানো যায়।",
+          "পুরো লোডে এর খরচ প্রতি ১k জেনারেটেড টোকেনে প্রায় $০.১০।",
+          "এজ ইনফারেন্সে সার্ভার খরচ শূন্য, কিন্তু মান আর সামর্থ্য সীমিত।",
+          "অনেক হোস্টেড প্রোভাইডার একই মডেল দেয়, তাই মডেল, দাম আর SLA দেখে বাছুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rent",
+          "state": "hot"
+        },
+        {
+          "id": "h100",
+          "state": "hot"
+        },
+        {
+          "id": "buy",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "rent",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "buy",
+          "to": "h100",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "$2–$4/hr",
+          "bn": "ঘণ্টায় $২–$৪"
+        },
+        {
+          "en": "about $30k",
+          "bn": "প্রায় $৩০k"
+        },
+        null,
+        null
+      ]
+    }
+  ]
+}

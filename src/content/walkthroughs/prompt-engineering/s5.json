@@ -1,0 +1,530 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "vars",
+      "kind": "note",
+      "label": {
+        "en": "Variables",
+        "bn": "ভেরিয়েবল"
+      },
+      "x": 120,
+      "y": 60
+    },
+    {
+      "id": "tpl",
+      "kind": "file",
+      "label": {
+        "en": "Template",
+        "bn": "টেমপ্লেট"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "evil",
+      "kind": "user",
+      "label": {
+        "en": "Fake instructions",
+        "bn": "নকল নির্দেশ"
+      },
+      "x": 285,
+      "y": 60
+    },
+    {
+      "id": "msgs",
+      "kind": "tool",
+      "label": {
+        "en": "List of messages",
+        "bn": "মেসেজ তালিকা"
+      },
+      "x": 285,
+      "y": 162
+    },
+    {
+      "id": "sys",
+      "kind": "note",
+      "label": {
+        "en": "System message",
+        "bn": "সিস্টেম মেসেজ"
+      },
+      "x": 285,
+      "y": 268
+    },
+    {
+      "id": "tags",
+      "kind": "shield",
+      "label": {
+        "en": "XML tags",
+        "bn": "XML ট্যাগ"
+      },
+      "x": 490,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 665,
+      "y": 162
+    },
+    {
+      "id": "gold",
+      "kind": "file",
+      "label": {
+        "en": "Golden outputs",
+        "bn": "গোল্ডেন আউটপুট"
+      },
+      "x": 500,
+      "y": 268
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Input",
+      "bn": "ইনপুট"
+    },
+    {
+      "en": "Risk",
+      "bn": "ঝুঁকি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Template",
+        "title": "A prompt is a template",
+        "body": [
+          "Real prompts are templates: text with blanks that get filled in when you call the model.",
+          "Treat them like code: well structured, checked, and tested."
+        ]
+      },
+      "bn": {
+        "short": "টেমপ্লেট",
+        "title": "প্রম্পট মানে টেমপ্লেট",
+        "body": [
+          "বাস্তব প্রম্পট হলো টেমপ্লেট: ফাঁকা ঘরওয়ালা লেখা, যা মডেলকে কল করার সময় ভরা হয়।",
+          "একে কোডের মতো দেখুন: গোছানো, যাচাই করা আর পরীক্ষা করা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tpl",
+          "state": "hot",
+          "sub": {
+            "en": "blanks",
+            "bn": "ফাঁকা ঘর"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "tpl",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Variables",
+        "title": "Variables fill the blanks",
+        "body": [
+          "The blanks are called variables, such as user input, retrieved context, today's date, or the model's prior reply.",
+          "You fill them in at call time."
+        ]
+      },
+      "bn": {
+        "short": "ভেরিয়েবল",
+        "title": "ভেরিয়েবল ফাঁকা ঘর ভরে",
+        "body": [
+          "ফাঁকা ঘরগুলোর নাম ভেরিয়েবল, যেমন ইউজারের ইনপুট, আনা কনটেক্সট, আজকের তারিখ বা মডেলের আগের উত্তর।",
+          "কল করার সময় আপনি সেগুলো ভরেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "vars",
+          "state": "hot",
+          "sub": {
+            "en": "user input, date",
+            "bn": "ইউজারের ইনপুট, তারিখ"
+          }
+        },
+        {
+          "id": "tpl",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "vars",
+          "to": "tpl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tpl",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "filled at call time",
+          "bn": "কল করার সময় ভরা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Messages",
+        "title": "A function returns the messages",
+        "body": [
+          "The production pattern is a function that returns the whole list of messages.",
+          "It is the most flexible: it handles tool definitions, history, retrieval, and dynamic few-shot."
+        ]
+      },
+      "bn": {
+        "short": "মেসেজ",
+        "title": "একটা ফাংশন মেসেজ ফেরত দেয়",
+        "body": [
+          "প্রোডাকশনের প্যাটার্ন হলো এমন ফাংশন, যা পুরো মেসেজ তালিকা ফেরত দেয়।",
+          "এটা সবচেয়ে নমনীয়: টুল ডেফিনিশন, হিস্ট্রি, রিট্রিভাল আর ডাইনামিক ফিউ-শট সামলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tpl",
+          "state": "hot"
+        },
+        {
+          "id": "msgs",
+          "state": "hot"
+        },
+        {
+          "id": "sys",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tpl",
+          "to": "msgs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sys",
+          "to": "msgs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "msgs",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "f-string",
+        "title": "An f-string with user input is a risk",
+        "body": [
+          "Never trust f-strings with user input. It is a real prompt injection path.",
+          "Prompt injection means sneaking fake instructions into a variable so the model follows them instead of your rules."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Wrap untrusted data in tags. Do not rely on a plain f-string."
+        }
+      },
+      "bn": {
+        "short": "f-string",
+        "title": "ইউজারের ইনপুটসহ f-string ঝুঁকির",
+        "body": [
+          "ইউজারের ইনপুটে f-string-কে বিশ্বাস করবেন না। এটা প্রম্পট ইনজেকশনের বাস্তব পথ।",
+          "প্রম্পট ইনজেকশন মানে ভেরিয়েবলের ভেতরে নকল নির্দেশ ঢুকিয়ে দেওয়া, যাতে মডেল আপনার নিয়মের বদলে সেটা মানে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "আনট্রাস্টেড ডেটা ট্যাগে মুড়ুন। সাধারণ f-string-এর ওপর ভরসা করবেন না।"
+        }
+      },
+      "show": [
+        {
+          "id": "evil",
+          "state": "warn"
+        },
+        {
+          "id": "msgs",
+          "state": "warn"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "follows them",
+            "bn": "সেটা মানে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "evil",
+          "to": "msgs",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "msgs",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "untrusted",
+          "bn": "আনট্রাস্টেড"
+        },
+        {
+          "en": "injection path",
+          "bn": "ইনজেকশনের পথ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Tags",
+        "title": "Wrap untrusted input in tags",
+        "body": [
+          "Wrap untrusted input in XML tags, and let the system message tell the model it is data, not instructions.",
+          "Tags reduce injection risk but do not prevent it."
+        ]
+      },
+      "bn": {
+        "short": "ট্যাগ",
+        "title": "আনট্রাস্টেড ইনপুট ট্যাগে মুড়ুন",
+        "body": [
+          "আনট্রাস্টেড ইনপুট XML ট্যাগে মুড়ুন, আর সিস্টেম মেসেজে মডেলকে বলে দিন যে এটা ডেটা, নির্দেশ নয়।",
+          "ট্যাগ ইনজেকশনের ঝুঁকি কমায়, কিন্তু আটকায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "evil",
+          "state": "dim"
+        },
+        {
+          "id": "msgs",
+          "state": "hot"
+        },
+        {
+          "id": "tags",
+          "state": "hot",
+          "sub": {
+            "en": "data only",
+            "bn": "শুধু ডেটা"
+          }
+        },
+        {
+          "id": "sys",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "evil",
+          "to": "msgs",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "msgs",
+          "to": "tags",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tags",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sys",
+          "to": "msgs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "wrapped in tags",
+          "bn": "ট্যাগে মোড়া"
+        },
+        {
+          "en": "reduced, not prevented",
+          "bn": "কমে, আটকায় না"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Sentinel",
+        "title": "Sentinels and smaller input",
+        "body": [
+          "A sentinel is a marker that will not collide with your data, such as triple quotes, a custom token, or a random ID.",
+          "Summarise or truncate big input first."
+        ]
+      },
+      "bn": {
+        "short": "সেন্টিনেল",
+        "title": "সেন্টিনেল আর ছোট ইনপুট",
+        "body": [
+          "সেন্টিনেল এমন চিহ্ন যা ডেটার সাথে মিলে যাবে না, যেমন ট্রিপল কোট, কাস্টম টোকেন বা র‍্যান্ডম ID।",
+          "বড় ইনপুট আগে সামারাইজ বা ট্রাঙ্কেট করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "vars",
+          "state": "hot",
+          "sub": {
+            "en": "summarise first",
+            "bn": "আগে সামারাইজ"
+          }
+        },
+        {
+          "id": "tpl",
+          "state": "hot"
+        },
+        {
+          "id": "tags",
+          "state": "hot",
+          "sub": {
+            "en": "unique sentinel",
+            "bn": "ইউনিক সেন্টিনেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "vars",
+          "to": "tpl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "summarised or truncated",
+          "bn": "সামারাইজ বা ট্রাঙ্কেট করা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember: store, version, test",
+        "body": [
+          "Store templates as files, then version, lint, and test them.",
+          "Golden outputs are saved correct answers. A unit test compares the prompt's new output against them."
+        ],
+        "points": [
+          "Never trust f-strings with user input."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন: ফাইলে রাখুন, ভার্সন করুন, টেস্ট করুন",
+        "body": [
+          "টেমপ্লেট ফাইলে রেখে ভার্সন, লিন্ট ও টেস্ট করুন।",
+          "গোল্ডেন আউটপুট আগে থেকে রাখা সঠিক উত্তর। ইউনিট টেস্ট প্রম্পটের নতুন আউটপুট এর সাথে মিলিয়ে দেখে।"
+        ],
+        "points": [
+          "ইউজারের ইনপুটে f-string-কে বিশ্বাস করবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tpl",
+          "state": "hot",
+          "sub": {
+            "en": "a file",
+            "bn": "একটা ফাইল"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "gold",
+          "state": "hot",
+          "sub": {
+            "en": "saved correct answers",
+            "bn": "রাখা সঠিক উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tpl",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "gold",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

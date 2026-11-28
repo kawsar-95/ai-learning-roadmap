@@ -1,0 +1,635 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "img",
+      "kind": "file",
+      "label": {
+        "en": "Image",
+        "bn": "ছবি"
+      },
+      "x": 110,
+      "y": 62
+    },
+    {
+      "id": "aud",
+      "kind": "file",
+      "label": {
+        "en": "Audio",
+        "bn": "অডিও"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "pdf",
+      "kind": "file",
+      "label": {
+        "en": "PDF page",
+        "bn": "PDF-এর পাতা"
+      },
+      "x": 110,
+      "y": 262
+    },
+    {
+      "id": "enc",
+      "kind": "tool",
+      "label": {
+        "en": "Encoder",
+        "bn": "এনকোডার"
+      },
+      "x": 260,
+      "y": 162
+    },
+    {
+      "id": "vec",
+      "kind": "chart",
+      "label": {
+        "en": "Numbers",
+        "bn": "সংখ্যা"
+      },
+      "x": 440,
+      "y": 162
+    },
+    {
+      "id": "txt",
+      "kind": "note",
+      "label": {
+        "en": "Text tokens",
+        "bn": "টেক্সট টোকেন"
+      },
+      "x": 440,
+      "y": 262
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM core",
+        "bn": "LLM কোর"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "ocr",
+      "kind": "tool",
+      "label": {
+        "en": "OCR engine",
+        "bn": "OCR ইঞ্জিন"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ext",
+      "kind": "tool",
+      "label": {
+        "en": "Text extraction",
+        "bn": "টেক্সট এক্সট্র্যাকশন"
+      },
+      "x": 380,
+      "y": 62
+    },
+    {
+      "id": "pgs",
+      "kind": "file",
+      "label": {
+        "en": "Page images",
+        "bn": "পাতার ইমেজ"
+      },
+      "x": 380,
+      "y": 262
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Kinds of input",
+      "bn": "ইনপুটের ধরন"
+    },
+    {
+      "en": "Model reads",
+      "bn": "মডেল পড়ে"
+    },
+    {
+      "en": "Exact reading",
+      "bn": "নিখুঁত পড়া"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Inputs",
+        "title": "More than text",
+        "body": [
+          "Many models now take images, audio, video frames, and PDF pages, not just text."
+        ]
+      },
+      "bn": {
+        "short": "ইনপুট",
+        "title": "শুধু লেখা নয়",
+        "body": [
+          "এখন অনেক মডেল শুধু লেখা নয়, ছবি, অডিও, ভিডিওর ফ্রেম আর PDF-এর পাতাও নেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "img",
+          "state": "hot"
+        },
+        {
+          "id": "aud",
+          "state": "hot"
+        },
+        {
+          "id": "pdf",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "aud",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pdf",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "images, audio, PDFs",
+          "bn": "ছবি, অডিও, PDF"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Encoders",
+        "title": "An encoder for each kind",
+        "body": [
+          "An encoder is a model that turns one kind of input, such as an image, into numbers.",
+          "Each modality has a specialised encoder."
+        ]
+      },
+      "bn": {
+        "short": "এনকোডার",
+        "title": "প্রতিটি ধরনের জন্য একটি এনকোডার",
+        "body": [
+          "এনকোডার এমন একটি মডেল, যে এক ধরনের ইনপুটকে, যেমন ছবি, সংখ্যায় বদলায়।",
+          "প্রতিটি মোডালিটির জন্য আলাদা বিশেষায়িত এনকোডার আছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "img",
+          "state": "hot"
+        },
+        {
+          "id": "aud",
+          "state": "hot"
+        },
+        {
+          "id": "pdf",
+          "state": "hot"
+        },
+        {
+          "id": "enc",
+          "state": "hot",
+          "sub": {
+            "en": "into numbers",
+            "bn": "সংখ্যায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "enc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "aud",
+          "to": "enc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pdf",
+          "to": "enc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "numbers",
+          "bn": "সংখ্যা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Join",
+        "title": "The numbers join the text",
+        "body": [
+          "A projection maps the numbers into the LLM's token space, next to the text tokens.",
+          "A single transformer then attends over all of them. It reads numbers, not pixels or sound."
+        ]
+      },
+      "bn": {
+        "short": "জোড়া",
+        "title": "সংখ্যাগুলো লেখার সঙ্গে জোড়া লাগে",
+        "body": [
+          "প্রজেকশন সংখ্যাগুলোকে LLM-এর টোকেন স্পেসে টেক্সট টোকেনের পাশে বসায়।",
+          "তারপর একটি ট্রান্সফর্মার সবগুলোর ওপর অ্যাটেনশন দেয়। সে সংখ্যা পড়ে, পিক্সেল বা শব্দ নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "enc",
+          "state": "dim"
+        },
+        {
+          "id": "vec",
+          "state": "hot"
+        },
+        {
+          "id": "txt",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "joint attention",
+            "bn": "জয়েন্ট অ্যাটেনশন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "enc",
+          "to": "vec",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "vec",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "txt",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "numbers, next to the text",
+          "bn": "সংখ্যা, লেখার পাশে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tiny text",
+        "title": "Tiny text is misread",
+        "body": [
+          "Vision models still misread tiny text, exact numbers, and rotated pages.",
+          "To hallucinate is to state something wrong as if it were true."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A guess often looks as sure as a correct reading."
+        }
+      },
+      "bn": {
+        "short": "ছোট লেখা",
+        "title": "ছোট লেখা ভুল পড়া হয়",
+        "body": [
+          "ভিশন মডেল এখনো ছোট লেখা, নিখুঁত সংখ্যা আর ঘোরানো পাতা ভুল পড়ে।",
+          "হ্যালুসিনেট করা মানে ভুল কিছুকে সত্যের মতো করে বলা।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "আন্দাজও প্রায়ই সঠিক পড়ার মতোই নিশ্চিত শোনায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "img",
+          "state": "warn",
+          "sub": {
+            "en": "tiny text",
+            "bn": "ছোট লেখা"
+          }
+        },
+        {
+          "id": "enc",
+          "state": "dim"
+        },
+        {
+          "id": "vec",
+          "state": "dim"
+        },
+        {
+          "id": "llm",
+          "state": "warn",
+          "sub": {
+            "en": "guesses",
+            "bn": "আন্দাজ করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "enc",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "enc",
+          "to": "vec",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "vec",
+          "to": "llm",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "can be wrong",
+          "bn": "ভুল হতে পারে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "OCR",
+        "title": "OCR first, then the LLM",
+        "body": [
+          "To read invoices or IDs exactly, use a dedicated OCR engine.",
+          "OCR is software that reads the letters in a picture of text. Then give the text to the LLM."
+        ]
+      },
+      "bn": {
+        "short": "OCR",
+        "title": "আগে OCR, তারপর LLM",
+        "body": [
+          "ইনভয়েস বা আইডি নিখুঁতভাবে পড়তে আলাদা OCR ইঞ্জিন ব্যবহার করুন।",
+          "OCR এমন সফটওয়্যার, যা লেখার ছবি থেকে অক্ষর পড়ে। তারপর লেখাটা LLM-কে দিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "img",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "ocr",
+          "state": "hot",
+          "sub": {
+            "en": "reads the letters",
+            "bn": "অক্ষর পড়ে"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "gets the text",
+            "bn": "লেখা পায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "ocr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ocr",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "text",
+            "bn": "লেখা"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "OCR, then the LLM",
+          "bn": "আগে OCR, পরে LLM"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "PDFs",
+        "title": "PDFs: text and page images",
+        "body": [
+          "Text extraction pulls the plain text out of a PDF. It is fast and cheap, but it loses the layout and the pictures.",
+          "Production systems mix text extraction with page images for tables and figures."
+        ]
+      },
+      "bn": {
+        "short": "PDF",
+        "title": "PDF: লেখা আর পাতার ছবি",
+        "body": [
+          "টেক্সট এক্সট্র্যাকশন PDF থেকে শুধু লেখাটা বের করে। এটা দ্রুত আর সস্তা, কিন্তু লেআউট আর ছবি হারিয়ে যায়।",
+          "প্রোডাকশন সিস্টেম টেক্সট এক্সট্র্যাকশনের সাথে টেবিল আর ছবির জন্য পাতার ইমেজ মেলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "ext",
+          "state": "hot",
+          "sub": {
+            "en": "fast and cheap",
+            "bn": "দ্রুত আর সস্তা"
+          }
+        },
+        {
+          "id": "pgs",
+          "state": "hot",
+          "sub": {
+            "en": "tables and figures",
+            "bn": "টেবিল আর ছবি"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "ext",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pdf",
+          "to": "pgs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ext",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pgs",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Every kind of input ends up as numbers that the same model reads next to the text."
+        ],
+        "points": [
+          "Vision models still misread tiny text, exact numbers, and rotated pages.",
+          "To read invoices or IDs exactly, use a dedicated OCR engine, then give the text to the LLM.",
+          "For PDFs, production systems mix text extraction with page images for tables and figures."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "প্রতিটি ইনপুট শেষে সংখ্যা হয়ে যায়, যা একই মডেল লেখার পাশাপাশি পড়ে।"
+        ],
+        "points": [
+          "ভিশন মডেল এখনো ছোট লেখা, নিখুঁত সংখ্যা আর ঘোরানো পাতা ভুল পড়ে।",
+          "ইনভয়েস বা আইডি নিখুঁতভাবে পড়তে আলাদা OCR ইঞ্জিন ব্যবহার করুন, তারপর লেখাটা LLM-কে দিন।",
+          "PDF-এর জন্য প্রোডাকশন সিস্টেম টেক্সট এক্সট্র্যাকশনের সাথে টেবিল আর ছবির জন্য পাতার ইমেজ মেলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "img"
+        },
+        {
+          "id": "aud"
+        },
+        {
+          "id": "pdf"
+        },
+        {
+          "id": "enc"
+        },
+        {
+          "id": "vec"
+        },
+        {
+          "id": "txt"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "enc",
+          "flow": "to"
+        },
+        {
+          "from": "aud",
+          "to": "enc",
+          "flow": "to"
+        },
+        {
+          "from": "pdf",
+          "to": "enc",
+          "flow": "to"
+        },
+        {
+          "from": "enc",
+          "to": "vec",
+          "flow": "to"
+        },
+        {
+          "from": "vec",
+          "to": "llm",
+          "flow": "to"
+        },
+        {
+          "from": "txt",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

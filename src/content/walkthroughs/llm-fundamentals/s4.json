@@ -1,0 +1,507 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "logits",
+      "kind": "model",
+      "label": {
+        "en": "Logits",
+        "bn": "লজিট"
+      },
+      "x": 120,
+      "y": 90
+    },
+    {
+      "id": "probs",
+      "kind": "chart",
+      "label": {
+        "en": "Chances",
+        "bn": "সম্ভাবনা"
+      },
+      "x": 380,
+      "y": 90
+    },
+    {
+      "id": "temp",
+      "kind": "tool",
+      "label": {
+        "en": "temperature",
+        "bn": "temperature"
+      },
+      "x": 640,
+      "y": 90
+    },
+    {
+      "id": "topk",
+      "kind": "tool",
+      "label": {
+        "en": "top_k",
+        "bn": "top_k"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "topp",
+      "kind": "tool",
+      "label": {
+        "en": "top_p / min_p",
+        "bn": "top_p / min_p"
+      },
+      "x": 300,
+      "y": 250
+    },
+    {
+      "id": "pen",
+      "kind": "tool",
+      "label": {
+        "en": "Penalties",
+        "bn": "পেনাল্টি"
+      },
+      "x": 500,
+      "y": 250
+    },
+    {
+      "id": "pick",
+      "kind": "note",
+      "label": {
+        "en": "Picked token",
+        "bn": "বাছা টোকেন"
+      },
+      "x": 650,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Temperature",
+      "bn": "temperature"
+    },
+    {
+      "en": "Tokens kept",
+      "bn": "রাখা টোকেন"
+    },
+    {
+      "en": "Pick",
+      "bn": "বাছাই"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Logits",
+        "title": "The model gives raw scores",
+        "body": [
+          "A model outputs a probability distribution over every token in its vocabulary.",
+          "Logits are the raw scores the model gives each token before they are turned into chances."
+        ]
+      },
+      "bn": {
+        "short": "লজিট",
+        "title": "মডেল কাঁচা স্কোর দেয়",
+        "body": [
+          "মডেল তার ভোকাবুলারির প্রতিটি টোকেনের ওপর একটা প্রোবাবিলিটি ডিস্ট্রিবিউশন দেয়।",
+          "লজিট হলো সম্ভাবনায় বদলানোর আগে মডেল প্রতিটি টোকেনকে যে কাঁচা স্কোর দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "logits",
+          "state": "hot",
+          "sub": {
+            "en": "raw scores",
+            "bn": "কাঁচা স্কোর"
+          }
+        },
+        {
+          "id": "probs",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "logits",
+          "to": "probs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Chances",
+        "title": "Chances, then a pick",
+        "body": [
+          "At each step, the model gives every possible next token a chance of being picked. All the chances add up to 100%.",
+          "Sampling is picking the next token from that list of chances."
+        ]
+      },
+      "bn": {
+        "short": "সম্ভাবনা",
+        "title": "সম্ভাবনা, তারপর বাছাই",
+        "body": [
+          "প্রতিটি ধাপে মডেল সম্ভাব্য প্রতিটি পরের টোকেনকে বাছাই হওয়ার একটা সম্ভাবনা দেয়। সব সম্ভাবনা যোগ করলে ১০০% হয়।",
+          "স্যাম্পলিং মানে সম্ভাবনার সেই তালিকা থেকে পরের টোকেন বেছে নেওয়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "logits",
+          "state": "dim"
+        },
+        {
+          "id": "probs",
+          "state": "hot",
+          "sub": {
+            "en": "adds up to 100%",
+            "bn": "যোগফল ১০০%"
+          }
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "logits",
+          "to": "probs",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "probs",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Temperature",
+        "title": "temperature is the randomness dial",
+        "body": [
+          "Low (0) makes answers predictable. Above 1 makes them more varied."
+        ]
+      },
+      "bn": {
+        "short": "temperature",
+        "title": "temperature হলো র‍্যান্ডমনেসের নব",
+        "body": [
+          "কম (০) দিলে উত্তর আগে থেকে আন্দাজ করা যায়। ১-এর বেশি দিলে উত্তরে বৈচিত্র্য বাড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "probs",
+          "state": "dim"
+        },
+        {
+          "id": "temp",
+          "state": "hot",
+          "sub": {
+            "en": "0 = predictable",
+            "bn": "০ = আন্দাজ করা যায়"
+          }
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "probs",
+          "to": "temp",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "temp",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "0",
+          "bn": "০"
+        },
+        null,
+        {
+          "en": "predictable at 0",
+          "bn": "০ হলে আন্দাজ করা যায়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Keep",
+        "title": "top_k, top_p and min_p keep some tokens",
+        "body": [
+          "top_k keeps only the k most likely tokens. k=1 always takes the top one.",
+          "top_p keeps the fewest top tokens whose chances add up to at least p, such as 0.9. min_p drops tokens whose chance is below min_p times the top token's chance."
+        ]
+      },
+      "bn": {
+        "short": "রাখা",
+        "title": "top_k, top_p, min_p কিছু টোকেন রাখে",
+        "body": [
+          "top_k শুধু সবচেয়ে সম্ভাব্য k-টি টোকেন রাখে। k=১ মানে সবসময় সবার উপরেরটা।",
+          "top_p উপরের দিকের সবচেয়ে কম সংখ্যক টোকেন রাখে, যাদের সম্ভাবনা যোগ করলে অন্তত p হয়, যেমন ০.৯। min_p সেই টোকেনগুলো বাদ দেয়, যাদের সম্ভাবনা শীর্ষ টোকেনের সম্ভাবনার min_p গুণের চেয়ে কম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "probs",
+          "state": "dim"
+        },
+        {
+          "id": "topk",
+          "state": "hot",
+          "sub": {
+            "en": "k=1: the top one",
+            "bn": "k=১: সবার উপরেরটা"
+          }
+        },
+        {
+          "id": "topp",
+          "state": "hot",
+          "sub": {
+            "en": "p such as 0.9",
+            "bn": "p যেমন ০.৯"
+          }
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "topk",
+          "to": "topp",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "topp",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "fewest top tokens",
+          "bn": "সবচেয়ে কম সংখ্যক টোকেন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Penalties",
+        "title": "Penalties push away from repeats",
+        "body": [
+          "frequency_penalty discourages repeating the same tokens.",
+          "presence_penalty pushes toward new topics."
+        ]
+      },
+      "bn": {
+        "short": "পেনাল্টি",
+        "title": "পেনাল্টি পুনরাবৃত্তি থেকে সরায়",
+        "body": [
+          "frequency_penalty একই টোকেন বারবার বলা কমায়।",
+          "presence_penalty নতুন বিষয়ের দিকে ঠেলে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "topp",
+          "state": "dim"
+        },
+        {
+          "id": "pen",
+          "state": "hot"
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "topp",
+          "to": "pen",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "pen",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Settings",
+        "title": "Which temperature for which job",
+        "body": [
+          "Use temperature 0 for code, JSON, classification, and math, and about 0.7–1.0 for chat.",
+          "Raise temperature to 1.0–2.0 for creative writing and brainstorming."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "0: code, JSON, classification, math"
+          },
+          {
+            "sign": "+",
+            "html": "About 0.7–1.0: chat"
+          },
+          {
+            "sign": "+",
+            "html": "1.0–2.0: creative writing, brainstorming"
+          }
+        ]
+      },
+      "bn": {
+        "short": "সেটিংস",
+        "title": "কোন কাজে কোন temperature",
+        "body": [
+          "কোড, JSON, ক্লাসিফিকেশন আর গণিতে temperature ০ দিন; চ্যাটে মোটামুটি ০.৭–১.০।",
+          "সৃজনশীল লেখা আর ব্রেইনস্টর্মিংয়ে temperature বাড়িয়ে ১.০–২.০ করুন।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "০: কোড, JSON, ক্লাসিফিকেশন, গণিত"
+          },
+          {
+            "sign": "+",
+            "html": "মোটামুটি ০.৭–১.০: চ্যাট"
+          },
+          {
+            "sign": "+",
+            "html": "১.০–২.০: সৃজনশীল লেখা, ব্রেইনস্টর্মিং"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "temp",
+          "state": "hot"
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "temp",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "0 · about 0.7–1.0 · 1.0–2.0",
+          "bn": "০ · মোটামুটি ০.৭–১.০ · ১.০–২.০"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Change temperature or top_p, usually not both. Do not stack tight top_k and top_p values."
+        ],
+        "points": [
+          "Change temperature or top_p, usually not both.",
+          "min_p is mainly found in open-source stacks.",
+          "Do not stack tight top_k and top_p values."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "temperature অথবা top_p-এর যেকোনো একটি বদলান, সাধারণত দুটো একসাথে নয়। কড়া top_k আর top_p একসাথে চাপাবেন না।"
+        ],
+        "points": [
+          "temperature অথবা top_p-এর যেকোনো একটি বদলান, সাধারণত দুটো একসাথে নয়।",
+          "min_p মূলত ওপেন-সোর্স স্ট্যাকে মেলে।",
+          "কড়া top_k আর top_p একসাথে চাপাবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "temp",
+          "state": "hot"
+        },
+        {
+          "id": "topk",
+          "state": "warn"
+        },
+        {
+          "id": "topp",
+          "state": "warn"
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "temp",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "topk",
+          "to": "topp",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,670 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "doc",
+      "kind": "file",
+      "label": {
+        "en": "Document",
+        "bn": "ডকুমেন্ট"
+      },
+      "x": 70,
+      "y": 162
+    },
+    {
+      "id": "chunk",
+      "kind": "file",
+      "label": {
+        "en": "Chunk",
+        "bn": "চাঙ্ক"
+      },
+      "x": 235,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Embedding model",
+        "bn": "এমবেডিং মডেল"
+      },
+      "x": 440,
+      "y": 162
+    },
+    {
+      "id": "pool",
+      "kind": "tool",
+      "label": {
+        "en": "Mean pooling",
+        "bn": "মিন পুলিং"
+      },
+      "x": 440,
+      "y": 162
+    },
+    {
+      "id": "vec",
+      "kind": "storage",
+      "label": {
+        "en": "Chunk vectors",
+        "bn": "চাঙ্ক ভেক্টর"
+      },
+      "x": 655,
+      "y": 162
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 110,
+      "y": 75
+    },
+    {
+      "id": "ctx",
+      "kind": "file",
+      "label": {
+        "en": "Chunk with note",
+        "bn": "নোট-সহ চাঙ্ক"
+      },
+      "x": 300,
+      "y": 162
+    },
+    {
+      "id": "emb",
+      "kind": "storage",
+      "label": {
+        "en": "Embeddings",
+        "bn": "এমবেডিং"
+      },
+      "x": 500,
+      "y": 75
+    },
+    {
+      "id": "bm25",
+      "kind": "storage",
+      "label": {
+        "en": "BM25",
+        "bn": "BM25"
+      },
+      "x": 500,
+      "y": 250
+    },
+    {
+      "id": "rerank",
+      "kind": "tool",
+      "label": {
+        "en": "Reranking",
+        "bn": "রিরেংকিং"
+      },
+      "x": 660,
+      "y": 162
+    },
+    {
+      "id": "own",
+      "kind": "note",
+      "label": {
+        "en": "Your own test",
+        "bn": "আপনার নিজের পরীক্ষা"
+      },
+      "x": 450,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Extra training",
+      "bn": "আলাদা ট্রেনিং"
+    },
+    {
+      "en": "Context added",
+      "bn": "যোগ হয়"
+    },
+    {
+      "en": "Failed retrievals",
+      "bn": "ব্যর্থ রিট্রিভাল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own words, and the figures are the vendor's own test.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর সংখ্যা সেকশনের নিজের কথা, আর সংখ্যাগুলো বিক্রেতার নিজের পরীক্ষার।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Lost",
+        "title": "A chunk can lose its meaning",
+        "body": [
+          "A chunk cut from a document can lose its meaning, like a chunk that says only the company.",
+          "Late chunking and contextual retrieval fix this by keeping each chunk tied to its document."
+        ]
+      },
+      "bn": {
+        "short": "হারানো",
+        "title": "চাঙ্ক অর্থ হারাতে পারে",
+        "body": [
+          "কোনো ডকুমেন্ট থেকে কেটে নেওয়া চাঙ্ক অর্থ হারাতে পারে, যেমন যে চাঙ্কে শুধু কোম্পানিটি লেখা।",
+          "লেট চাঙ্কিং আর কনটেক্সচুয়াল রিট্রিভাল প্রতিটি চাঙ্ককে তার ডকুমেন্টের সাথে জুড়ে রেখে এটা ঠিক করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "chunk",
+          "state": "warn",
+          "sub": {
+            "en": "only the company",
+            "bn": "শুধু কোম্পানিটি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "chunk",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Naive",
+        "title": "Naive: chunk, then embed",
+        "body": [
+          "Conventional pipelines chunk first and embed each chunk alone.",
+          "So a chunk saying \"the company\" cannot know which company."
+        ]
+      },
+      "bn": {
+        "short": "নেইভ",
+        "title": "নেইভ: আগে কাটা, তারপর এমবেড",
+        "body": [
+          "নেইভ পদ্ধতিতে আগে কাটা হয়, তারপর প্রতিটি চাঙ্ক আলাদাভাবে এনকোড হয়।",
+          "তাই যে চাঙ্কে শুধু \"কোম্পানি\" লেখা, সে জানে না কোন কোম্পানি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "chunk",
+          "state": "hot",
+          "sub": {
+            "en": "alone",
+            "bn": "আলাদাভাবে"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "vec",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "chunk",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "chunk",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "vec",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Late",
+        "title": "Late chunking: embed, then split",
+        "body": [
+          "Late chunking embeds the whole document first, then splits just before mean pooling.",
+          "Mean pooling averages the number lists of many tokens into one list for a chunk. Late chunking needs no extra training."
+        ]
+      },
+      "bn": {
+        "short": "লেট",
+        "title": "লেট চাঙ্কিং: আগে এমবেড, তারপর কাটা",
+        "body": [
+          "লেট চাঙ্কিং আগে পুরো ডকুমেন্ট এমবেড করে, তারপর মিন পুলিংয়ের ঠিক আগে কাটে।",
+          "মিন পুলিং অনেক টোকেনের সংখ্যার তালিকার গড় নিয়ে একটি চাঙ্কের জন্য একটি তালিকা বানায়। আলাদা ট্রেনিং লাগে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "whole document",
+            "bn": "পুরো ডকুমেন্ট"
+          },
+          "x": 250
+        },
+        {
+          "id": "pool",
+          "state": "hot",
+          "sub": {
+            "en": "split just before",
+            "bn": "ঠিক আগে কাটা"
+          }
+        },
+        {
+          "id": "vec",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "pool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pool",
+          "to": "vec",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Not needed",
+          "bn": "লাগে না"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Limit",
+        "title": "It needs a long-context model",
+        "body": [
+          "Late chunking requires an embedding model whose context window can hold the document.",
+          "The context window is how much text the model can read at once."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "লং-কনটেক্সট মডেল লাগে",
+        "body": [
+          "লেট চাঙ্কিংয়ের জন্য এমন এমবেডিং মডেল লাগে, যার কনটেক্সট উইন্ডো ডকুমেন্ট ধরে রাখতে পারে।",
+          "কনটেক্সট উইন্ডো মানে একবারে কতটা লেখা পড়তে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "long-context",
+            "bn": "লং-কনটেক্সট"
+          },
+          "x": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Context",
+        "title": "Contextual retrieval: add a note",
+        "body": [
+          "Contextual retrieval is Anthropic's method: an LLM writes a short note on where a chunk sits in its document.",
+          "The note goes in front of the chunk, and the result is used for both embedding and BM25."
+        ]
+      },
+      "bn": {
+        "short": "কনটেক্সট",
+        "title": "কনটেক্সচুয়াল রিট্রিভাল: নোট জোড়া",
+        "body": [
+          "কনটেক্সচুয়াল রিট্রিভাল Anthropic-এর পদ্ধতি: LLM চাঙ্কটি ডকুমেন্টের কোথায় আছে তার একটি ছোট নোট লেখে।",
+          "নোটটি চাঙ্কের সামনে বসে, আর ফলটি এমবেডিং আর BM25 দুটোর জন্যই ব্যবহার হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "writes the note",
+            "bn": "নোট লেখে"
+          }
+        },
+        {
+          "id": "chunk",
+          "state": "hot",
+          "x": 110,
+          "y": 250
+        },
+        {
+          "id": "ctx",
+          "state": "hot"
+        },
+        {
+          "id": "emb",
+          "state": "hot"
+        },
+        {
+          "id": "bm25",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "ctx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "chunk",
+          "to": "ctx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ctx",
+          "to": "emb",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ctx",
+          "to": "bm25",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "about 50 to 100 tokens",
+          "bn": "প্রায় ৫০ থেকে ১০০ টোকেন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reported",
+        "title": "What Anthropic reports",
+        "body": [
+          "Reranking re-scores the top results with a more careful model, so the best ones come first.",
+          "Anthropic reports failed retrievals falling from 5.7% to 1.9% with reranking. This is the vendor's own test."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The figures are the vendor's own test, not a benchmark."
+        }
+      },
+      "bn": {
+        "short": "রিপোর্ট",
+        "title": "Anthropic যা জানিয়েছে",
+        "body": [
+          "রিরেংকিং সেরা ফলগুলোকে আরও যত্নশীল মডেল দিয়ে আবার স্কোর করে, যাতে সেরাগুলো আগে আসে।",
+          "Anthropic জানিয়েছে রিরেংকিং-সহ ব্যর্থ রিট্রিভাল ৫.৭% থেকে ১.৯%-এ নেমেছে। এটা বিক্রেতার নিজের পরীক্ষা।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "এই সংখ্যাগুলো বিক্রেতার নিজের পরীক্ষার, বেঞ্চমার্ক নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "emb",
+          "state": "hot"
+        },
+        {
+          "id": "bm25",
+          "state": "hot"
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "5.7% to 1.9%",
+            "bn": "৫.৭% থেকে ১.৯%"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "emb",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bm25",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "5.7% to 1.9%",
+          "bn": "৫.৭% থেকে ১.৯%"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Choose",
+        "title": "Choosing a strategy",
+        "body": [
+          "The strategy table is editorial, not a benchmark: each method trades a strength for a cost.",
+          "No single cutting rule is best for every kind of document, so you have to test on your own."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Fixed + overlap: trivial, predictable, cheap. Watch out: can slice through sentences and facts"
+          },
+          {
+            "sign": "+",
+            "html": "Recursive: keeps coherent units whenever they fit. Watch out: size is in characters by default"
+          },
+          {
+            "sign": "+",
+            "html": "Structural: header metadata for filtering and citations. Watch out: needs clean, consistent markup"
+          },
+          {
+            "sign": "+",
+            "html": "Semantic: topic-coherent chunks. Watch out: extra embedding pass, and a threshold to tune"
+          },
+          {
+            "sign": "+",
+            "html": "Late chunking: chunk vectors carry document context. Watch out: needs a long-context embedding model"
+          },
+          {
+            "sign": "+",
+            "html": "Contextual retrieval: repairs lost context for dense and BM25. Watch out: one-time LLM cost per chunk"
+          }
+        ]
+      },
+      "bn": {
+        "short": "বাছাই",
+        "title": "কৌশল বাছাই",
+        "body": [
+          "কৌশলের তুলনার টেবিলটি লেখকের নিজের মত, বেঞ্চমার্ক নয়: প্রতিটি পদ্ধতিতে একটা সুবিধার বদলে একটা খরচ আছে।",
+          "সব ধরনের ডকুমেন্টের জন্য একটাই কাটার নিয়ম সেরা নয়, তাই নিজে পরীক্ষা করে দেখতে হবে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ফিক্সড + ওভারল্যাপ: সহজ, অনুমানযোগ্য, সস্তা। সতর্কতা: বাক্য আর তথ্যের মাঝখানে কেটে ফেলতে পারে"
+          },
+          {
+            "sign": "+",
+            "html": "রিকার্সিভ: যেখানে সম্ভব সংগত অংশ একসাথে রাখে। সতর্কতা: আকার ডিফল্টভাবে অক্ষরে মাপা হয়"
+          },
+          {
+            "sign": "+",
+            "html": "স্ট্রাকচারাল: ফিল্টার আর সাইটেশনের জন্য হেডার মেটাডেটা। সতর্কতা: পরিষ্কার, সামঞ্জস্যপূর্ণ মার্কআপ লাগে"
+          },
+          {
+            "sign": "+",
+            "html": "সিমান্টিক: বিষয়ে সংগত চাঙ্ক। সতর্কতা: বাড়তি এমবেডিং পাস, আর ঠিক করার মতো থ্রেশহোল্ড"
+          },
+          {
+            "sign": "+",
+            "html": "লেট চাঙ্কিং: চাঙ্ক ভেক্টর ডকুমেন্টের কনটেক্সট বহন করে। সতর্কতা: লং-কনটেক্সট এমবেডিং মডেল লাগে"
+          },
+          {
+            "sign": "+",
+            "html": "কনটেক্সচুয়াল রিট্রিভাল: ডেন্স আর BM25 দুটোর হারানো কনটেক্সট ঠিক করে। সতর্কতা: প্রতি চাঙ্কে একবারের LLM খরচ"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "own",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "own",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Two newer fixes keep a chunk tied to its document: late chunking, which splits after the transformer, and contextual retrieval, which prepends an explanation to every chunk."
+        ],
+        "points": [
+          "Late chunking embeds the whole document first, then splits just before mean pooling. It needs no extra training.",
+          "Contextual retrieval adds about 50 to 100 tokens of context to each chunk, for both embedding and BM25.",
+          "Anthropic's figures are the vendor's own test, and the strategy table is editorial, not a benchmark."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "দুটি নতুন সমাধান চাঙ্ককে তার ডকুমেন্টের সাথে জুড়ে রাখে: লেট চাঙ্কিং, যা ট্রান্সফর্মারের পরে কাটে, আর কনটেক্সচুয়াল রিট্রিভাল, যা প্রতিটি চাঙ্কের সামনে একটি ব্যাখ্যা জোড়ে।"
+        ],
+        "points": [
+          "লেট চাঙ্কিং আগে পুরো ডকুমেন্ট এমবেড করে, তারপর মিন পুলিংয়ের ঠিক আগে কাটে। আলাদা ট্রেনিং লাগে না।",
+          "কনটেক্সচুয়াল রিট্রিভাল প্রতিটি চাঙ্কে প্রায় ৫০ থেকে ১০০ টোকেনের কনটেক্সট জোড়ে, এমবেডিং আর BM25 দুটোর জন্যই।",
+          "Anthropic-এর সংখ্যা বিক্রেতার নিজের পরীক্ষার, আর কৌশলের টেবিল লেখকের নিজের মত, বেঞ্চমার্ক নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "chunk",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "vec",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "chunk",
+          "flow": "to"
+        },
+        {
+          "from": "chunk",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "vec",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "sys",
+      "kind": "server",
+      "label": {
+        "en": "System",
+        "bn": "সিস্টেম"
+      },
+      "x": 90,
+      "y": 160
+    },
+    {
+      "id": "sig",
+      "kind": "chart",
+      "label": {
+        "en": "Alerts and logs",
+        "bn": "অ্যালার্ট আর লগ"
+      },
+      "x": 280,
+      "y": 160
+    },
+    {
+      "id": "ai",
+      "kind": "model",
+      "label": {
+        "en": "Assistant",
+        "bn": "অ্যাসিস্ট্যান্ট"
+      },
+      "x": 480,
+      "y": 160
+    },
+    {
+      "id": "rb",
+      "kind": "file",
+      "label": {
+        "en": "Runbook",
+        "bn": "রানবুক"
+      },
+      "x": 480,
+      "y": 50
+    },
+    {
+      "id": "check",
+      "kind": "chart",
+      "label": {
+        "en": "Metric, log line",
+        "bn": "মেট্রিক, লগ লাইন"
+      },
+      "x": 650,
+      "y": 60
+    },
+    {
+      "id": "eng",
+      "kind": "user",
+      "label": {
+        "en": "Engineer",
+        "bn": "ইঞ্জিনিয়ার"
+      },
+      "x": 670,
+      "y": 160
+    },
+    {
+      "id": "wrong",
+      "kind": "note",
+      "label": {
+        "en": "Wrong fix",
+        "bn": "ভুল সমাধান"
+      },
+      "x": 660,
+      "y": 270
+    },
+    {
+      "id": "log",
+      "kind": "file",
+      "label": {
+        "en": "Log of actions",
+        "bn": "কাজের লগ"
+      },
+      "x": 480,
+      "y": 270
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Time to detect",
+      "bn": "ধরতে সময়"
+    },
+    {
+      "en": "Time to resolve",
+      "bn": "সারাতে সময়"
+    },
+    {
+      "en": "Changes made",
+      "bn": "পরিবর্তন"
+    },
+    {
+      "en": "Approval",
+      "bn": "অনুমোদন"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Alerts",
+        "title": "Too many alerts and logs",
+        "body": [
+          "AIOps uses AI to help run IT systems. It is AI used to operate software.",
+          "It sorts alerts and logs so engineers can find and fix problems faster."
+        ]
+      },
+      "bn": {
+        "short": "অ্যালার্ট",
+        "title": "অনেক অ্যালার্ট আর লগ",
+        "body": [
+          "AIOps IT সিস্টেম চালাতে AI-এর সাহায্য নেয়। এটা সফটওয়্যার চালাতে AI ব্যবহার।",
+          "এটা অ্যালার্ট আর লগ বাছাই করে, যাতে ইঞ্জিনিয়ার দ্রুত সমস্যা ধরতে আর সারাতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "warn",
+          "sub": {
+            "en": "a problem",
+            "bn": "একটা সমস্যা"
+          }
+        },
+        {
+          "id": "sig",
+          "state": "hot",
+          "sub": {
+            "en": "too many alerts",
+            "bn": "অনেক অ্যালার্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "sig",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Sort",
+        "title": "The assistant sorts them",
+        "body": [
+          "It learns which alerts usually fire together and shows one incident. It uses a model of what is normal for this hour and this weekday.",
+          "For a huge log it gives a summary of what changed around the first error."
+        ]
+      },
+      "bn": {
+        "short": "বাছাই",
+        "title": "অ্যাসিস্ট্যান্ট বাছাই করে",
+        "body": [
+          "কোন অ্যালার্ট সাধারণত একসাথে বাজে তা শেখে আর একটা ঘটনা দেখায়। এই ঘণ্টা আর এই বারে কী স্বাভাবিক, তার একটা মডেল ব্যবহার করে।",
+          "বিশাল লগে প্রথম এররের আশপাশে কী বদলেছে তার সারাংশ দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sig",
+          "state": "hot"
+        },
+        {
+          "id": "ai",
+          "state": "hot",
+          "sub": {
+            "en": "one",
+            "bn": "একটা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sig",
+          "to": "ai",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Runbook",
+        "title": "Read-only: look and explain",
+        "body": [
+          "At 3 a.m. the assistant reads the runbook, runs read-only checks and drafts the update.",
+          "Start read-only: let it look and explain, not change anything."
+        ]
+      },
+      "bn": {
+        "short": "রানবুক",
+        "title": "রিড-অনলি: দেখা আর ব্যাখ্যা",
+        "body": [
+          "রাত তিনটায় অ্যাসিস্ট্যান্ট রানবুক পড়ে, রিড-অনলি চেক চালায় আর আপডেটের খসড়া লেখে।",
+          "রিড-অনলি দিয়ে শুরু করুন: সে দেখবে আর ব্যাখ্যা করবে, কিছু বদলাবে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rb",
+          "state": "hot"
+        },
+        {
+          "id": "ai",
+          "state": "hot",
+          "sub": {
+            "en": "looks and explains",
+            "bn": "দেখে আর ব্যাখ্যা করে"
+          }
+        },
+        {
+          "id": "sys",
+          "state": "dim",
+          "sub": {
+            "en": "read-only",
+            "bn": "রিড-অনলি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rb",
+          "to": "ai",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ai",
+          "to": "sys",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "read-only",
+          "bn": "রিড-অনলি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Evidence",
+        "title": "Check the claim against evidence",
+        "body": [
+          "Give the assistant the same evidence an engineer would use.",
+          "Check its claim against a metric or a log line before anything is changed."
+        ]
+      },
+      "bn": {
+        "short": "প্রমাণ",
+        "title": "দাবি প্রমাণের সাথে মেলান",
+        "body": [
+          "অ্যাসিস্ট্যান্টকে সেই প্রমাণই দিন যা একজন ইঞ্জিনিয়ার ব্যবহার করত।",
+          "কিছু বদলানোর আগে তার দাবি মেট্রিক বা লগ লাইনের সাথে মিলিয়ে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ai",
+          "state": "hot",
+          "sub": {
+            "en": "a claim",
+            "bn": "একটা দাবি"
+          }
+        },
+        {
+          "id": "check",
+          "state": "hot",
+          "sub": {
+            "en": "compare first",
+            "bn": "আগে মেলান"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ai",
+          "to": "check",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Wrong fix",
+        "title": "A confident wrong fix",
+        "body": [
+          "A confident wrong fix is worse than none.",
+          "A language model can invent a command or a cause."
+        ]
+      },
+      "bn": {
+        "short": "ভুল সমাধান",
+        "title": "আত্মবিশ্বাসী ভুল সমাধান",
+        "body": [
+          "আত্মবিশ্বাসী ভুল সমাধান কোনো সমাধান না থাকার চেয়ে খারাপ।",
+          "একটা ভাষা মডেল কমান্ড বা কারণ বানিয়ে ফেলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ai",
+          "state": "warn",
+          "sub": {
+            "en": "invented cause",
+            "bn": "বানানো কারণ"
+          }
+        },
+        {
+          "id": "check",
+          "state": "warn",
+          "sub": {
+            "en": "does not match",
+            "bn": "মেলে না"
+          }
+        },
+        {
+          "id": "wrong",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "ai",
+          "to": "wrong",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "check",
+          "to": "wrong",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Approval",
+        "title": "A human approves every change",
+        "body": [
+          "Keep a human approval step for every change, such as a restart, a scale-up or a rollback.",
+          "The engineer still decides what to do."
+        ]
+      },
+      "bn": {
+        "short": "অনুমোদন",
+        "title": "প্রতিটি পরিবর্তনে মানুষের অনুমোদন",
+        "body": [
+          "প্রতিটি পরিবর্তনে মানুষের অনুমোদন রাখুন, যেমন রিস্টার্ট, স্কেল-আপ বা রোলব্যাক।",
+          "কী করতে হবে, তা ইঞ্জিনিয়ারই ঠিক করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ai",
+          "state": "hot",
+          "sub": {
+            "en": "suggests",
+            "bn": "পরামর্শ"
+          }
+        },
+        {
+          "id": "eng",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ai",
+          "to": "eng",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "human approval",
+          "bn": "মানুষের অনুমোদন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Keep a record of what happens during an incident, and review it afterwards. Measure time to detect, time to resolve, and how often its suggestion was right."
+        ],
+        "points": [
+          "Start read-only: let the assistant look and explain, not change anything.",
+          "Keep a human approval step for every change, such as a restart, a scale-up or a rollback.",
+          "Log every action and its evidence, and review the log after each incident.",
+          "A confident wrong fix is worse than none. Check its claim against a metric or a log line."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "ঘটনার সময় কী হয় তার রেকর্ড রাখুন, আর পরে রিভিউ করুন। ধরতে সময়, সারাতে সময়, আর তার পরামর্শ কতবার ঠিক ছিল তা মাপুন।"
+        ],
+        "points": [
+          "রিড-অনলি দিয়ে শুরু করুন: অ্যাসিস্ট্যান্ট দেখবে আর ব্যাখ্যা করবে, কিছু বদলাবে না।",
+          "প্রতিটি পরিবর্তনে মানুষের অনুমোদন রাখুন, যেমন রিস্টার্ট, স্কেল-আপ বা রোলব্যাক।",
+          "প্রতিটি কাজ আর তার প্রমাণ লগ করুন, আর প্রতিটি ঘটনার পরে লগ রিভিউ করুন।",
+          "আত্মবিশ্বাসী ভুল সমাধান কোনো সমাধান না থাকার চেয়ে খারাপ। দাবি মেট্রিক বা লগ লাইনের সাথে মিলিয়ে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ai",
+          "state": "hot"
+        },
+        {
+          "id": "eng",
+          "state": "hot"
+        },
+        {
+          "id": "log",
+          "state": "hot",
+          "sub": {
+            "en": "every action and evidence",
+            "bn": "প্রতিটি কাজ আর প্রমাণ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ai",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eng",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "time to detect",
+          "bn": "ধরতে সময়"
+        },
+        {
+          "en": "time to resolve",
+          "bn": "সারাতে সময়"
+        },
+        null,
+        {
+          "en": "every change",
+          "bn": "প্রতিটি পরিবর্তনে"
+        }
+      ]
+    }
+  ]
+}

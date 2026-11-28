@@ -1,0 +1,475 @@
+{
+  "width": 760,
+  "height": 400,
+  "nodes": [
+    {
+      "id": "free",
+      "kind": "note",
+      "label": {
+        "en": "Free text",
+        "bn": "খোলামেলা লেখা"
+      },
+      "x": 200,
+      "y": 50
+    },
+    {
+      "id": "json",
+      "kind": "file",
+      "label": {
+        "en": "1. JSON mode",
+        "bn": "১. JSON মোড"
+      },
+      "x": 200,
+      "y": 150
+    },
+    {
+      "id": "sc",
+      "kind": "shield",
+      "label": {
+        "en": "2. Schema-constrained decoding",
+        "bn": "২. স্কিমা-কনস্ট্রেইনড ডিকোডিং"
+      },
+      "x": 200,
+      "y": 250
+    },
+    {
+      "id": "typed",
+      "kind": "tool",
+      "label": {
+        "en": "3. Typed parsing",
+        "bn": "৩. টাইপড পার্সিং"
+      },
+      "x": 200,
+      "y": 350
+    },
+    {
+      "id": "code",
+      "kind": "service",
+      "label": {
+        "en": "Your code",
+        "bn": "আপনার কোড"
+      },
+      "x": 620,
+      "y": 200
+    },
+    {
+      "id": "handle",
+      "kind": "lock",
+      "label": {
+        "en": "Refusals, incomplete answers",
+        "bn": "প্রত্যাখ্যান, অসম্পূর্ণ উত্তর"
+      },
+      "x": 600,
+      "y": 330
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Level",
+      "bn": "স্তর"
+    },
+    {
+      "en": "Shape",
+      "bn": "আকার"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Free text",
+        "title": "A fixed shape, not free text",
+        "body": [
+          "Instead of free text, you can make a model answer in a fixed shape, such as JSON with the fields you named.",
+          "Then your code can use the answer directly, with no guessing."
+        ]
+      },
+      "bn": {
+        "short": "খোলামেলা লেখা",
+        "title": "খোলামেলা লেখা নয়, নির্দিষ্ট আকার",
+        "body": [
+          "খোলামেলা লেখার বদলে মডেলকে একটা নির্দিষ্ট আকারে উত্তর দিতে বলা যায়, যেমন আপনার বলে দেওয়া ফিল্ডসহ JSON।",
+          "তখন আপনার কোড কোনো আন্দাজ ছাড়াই সরাসরি উত্তরটা ব্যবহার করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "free",
+          "state": "dim"
+        },
+        {
+          "id": "json",
+          "state": "hot",
+          "sub": {
+            "en": "fields you named",
+            "bn": "আপনার বলে দেওয়া ফিল্ড"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot",
+          "sub": {
+            "en": "no guessing",
+            "bn": "আন্দাজ নেই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "json",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "JSON mode",
+        "title": "Level 1: JSON mode",
+        "body": [
+          "In JSON mode the model is told to reply in JSON.",
+          "It is the loosest of the three levels."
+        ]
+      },
+      "bn": {
+        "short": "JSON মোড",
+        "title": "স্তর ১: JSON মোড",
+        "body": [
+          "JSON মোডে মডেলকে JSON-এ উত্তর দিতে বলা হয়।",
+          "তিনটি স্তরের মধ্যে এটাই সবচেয়ে ঢিলেঢালা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "free",
+          "state": "dim"
+        },
+        {
+          "id": "json",
+          "state": "hot",
+          "sub": {
+            "en": "loosest",
+            "bn": "সবচেয়ে ঢিলেঢালা"
+          }
+        },
+        {
+          "id": "sc",
+          "state": "dim"
+        },
+        {
+          "id": "typed",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "free",
+          "to": "json",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "JSON mode",
+          "bn": "JSON মোড"
+        },
+        {
+          "en": "valid JSON, shape not enforced",
+          "bn": "বৈধ JSON, আকার বাধ্যতামূলক নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Schema",
+        "title": "A schema names the shape",
+        "body": [
+          "A schema describes the exact shape you want: which fields, and what type each one is, such as text or a number."
+        ]
+      },
+      "bn": {
+        "short": "স্কিমা",
+        "title": "স্কিমা আকারের নাম দেয়",
+        "body": [
+          "স্কিমা আপনি ঠিক কোন আকার চান তার বর্ণনা: কোন কোন ফিল্ড, আর প্রতিটি কোন টাইপের, যেমন লেখা বা সংখ্যা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "json",
+          "state": "dim"
+        },
+        {
+          "id": "sc",
+          "state": "hot",
+          "sub": {
+            "en": "which fields, which types",
+            "bn": "কোন ফিল্ড, কোন টাইপ"
+          }
+        },
+        {
+          "id": "typed",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "json",
+          "to": "sc",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Blocked",
+        "title": "Level 2: tokens that break the schema are blocked",
+        "body": [
+          "In schema-constrained decoding, the model is blocked at each step from any token that would break the schema.",
+          "So a normally finished output fits the schema."
+        ]
+      },
+      "bn": {
+        "short": "ব্লক",
+        "title": "স্তর ২: স্কিমা ভাঙা টোকেন ব্লক",
+        "body": [
+          "স্কিমা-কনস্ট্রেইনড ডিকোডিংয়ে প্রতিটি ধাপে মডেলকে এমন কোনো টোকেন বাছতে দেওয়া হয় না যা স্কিমা ভাঙবে।",
+          "তাই স্বাভাবিকভাবে শেষ হওয়া আউটপুট স্কিমায় খাপ খায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "json",
+          "state": "dim"
+        },
+        {
+          "id": "sc",
+          "state": "hot",
+          "sub": {
+            "en": "blocks tokens that break it",
+            "bn": "ভাঙা টোকেন ব্লক করে"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sc",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "schema-constrained decoding",
+          "bn": "স্কিমা-কনস্ট্রেইনড ডিকোডিং"
+        },
+        {
+          "en": "output follows the schema",
+          "bn": "আউটপুট স্কিমা মেনে চলে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Typed",
+        "title": "Level 3: typed parsing",
+        "body": [
+          "Your code turns the answer into a typed object, such as an object of a Pydantic class in Python.",
+          "Then it reads the fields directly."
+        ]
+      },
+      "bn": {
+        "short": "টাইপড",
+        "title": "স্তর ৩: টাইপড পার্সিং",
+        "body": [
+          "আপনার কোড উত্তরটাকে একটি টাইপড অবজেক্টে বদলায়, যেমন Python-এ একটি Pydantic ক্লাসের অবজেক্ট।",
+          "তারপর ফিল্ডগুলো সরাসরি পড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sc",
+          "state": "dim"
+        },
+        {
+          "id": "typed",
+          "state": "hot",
+          "sub": {
+            "en": "typed object",
+            "bn": "টাইপড অবজেক্ট"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot",
+          "sub": {
+            "en": "reads fields directly",
+            "bn": "ফিল্ড সরাসরি পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sc",
+          "to": "typed",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "typed",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "typed parsing",
+          "bn": "টাইপড পার্সিং"
+        },
+        {
+          "en": "typed object in your code",
+          "bn": "কোডে টাইপড অবজেক্ট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Still",
+        "title": "You still handle some cases",
+        "body": [
+          "Schema-constrained output that finishes normally follows the schema, but you still handle refusals and incomplete answers.",
+          "The first request with a new schema is slower, but that costs far less than the checking it saves."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Handle refusals and incomplete answers in your code."
+        }
+      },
+      "bn": {
+        "short": "তবুও",
+        "title": "কিছু ক্ষেত্র তবুও আপনাকে সামলাতে হয়",
+        "body": [
+          "স্কিমা-কনস্ট্রেইনড আউটপুট স্বাভাবিকভাবে শেষ হলে স্কিমা মেনে চলে, তবে প্রত্যাখ্যান (refusal) ও অসম্পূর্ণ উত্তর আপনাকেই সামলাতে হবে।",
+          "নতুন স্কিমায় প্রথম রিকোয়েস্টে সামান্য বাড়তি সময় লাগে, কিন্তু যত যাচাই বাঁচে তার তুলনায় তা অনেক কম।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "প্রত্যাখ্যান ও অসম্পূর্ণ উত্তর আপনার কোডে সামলান।"
+        }
+      },
+      "show": [
+        {
+          "id": "sc",
+          "state": "hot"
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        },
+        {
+          "id": "handle",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "sc",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "code",
+          "to": "handle",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Use structured outputs whenever you can."
+        ],
+        "points": [
+          "Use structured outputs whenever you can.",
+          "You still handle refusals and incomplete answers.",
+          "The first request with a new schema is slower, but that costs far less than the checking it saves."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "যখনই পারেন, স্ট্রাকচার্ড আউটপুট ব্যবহার করুন।"
+        ],
+        "points": [
+          "যখনই পারেন, স্ট্রাকচার্ড আউটপুট ব্যবহার করুন।",
+          "প্রত্যাখ্যান ও অসম্পূর্ণ উত্তর আপনাকেই সামলাতে হবে।",
+          "নতুন স্কিমায় প্রথম রিকোয়েস্টে সামান্য বাড়তি সময় লাগে, কিন্তু যত যাচাই বাঁচে তার তুলনায় তা অনেক কম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "json"
+        },
+        {
+          "id": "sc"
+        },
+        {
+          "id": "typed"
+        },
+        {
+          "id": "code"
+        }
+      ],
+      "links": [
+        {
+          "from": "json",
+          "to": "sc",
+          "flow": "to"
+        },
+        {
+          "from": "sc",
+          "to": "typed",
+          "flow": "to"
+        },
+        {
+          "from": "typed",
+          "to": "code",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}
