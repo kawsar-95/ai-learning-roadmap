@@ -1,0 +1,600 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "role",
+      "kind": "note",
+      "label": {
+        "en": "Role",
+        "bn": "রোল"
+      },
+      "x": 130,
+      "y": 70
+    },
+    {
+      "id": "prose",
+      "kind": "note",
+      "label": {
+        "en": "Long description",
+        "bn": "লম্বা বর্ণনা"
+      },
+      "x": 130,
+      "y": 70
+    },
+    {
+      "id": "common",
+      "kind": "file",
+      "label": {
+        "en": "Common case",
+        "bn": "সাধারণ কেস"
+      },
+      "x": 130,
+      "y": 70
+    },
+    {
+      "id": "ex",
+      "kind": "file",
+      "label": {
+        "en": "Examples",
+        "bn": "উদাহরণ"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "edge",
+      "kind": "file",
+      "label": {
+        "en": "Edge cases",
+        "bn": "এজ কেস"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "persona",
+      "kind": "note",
+      "label": {
+        "en": "Detailed persona",
+        "bn": "বিস্তারিত পারসোনা"
+      },
+      "x": 130,
+      "y": 254
+    },
+    {
+      "id": "trap",
+      "kind": "file",
+      "label": {
+        "en": "Format traps",
+        "bn": "ফরম্যাট ট্র্যাপ"
+      },
+      "x": 130,
+      "y": 254
+    },
+    {
+      "id": "know",
+      "kind": "database",
+      "label": {
+        "en": "Retrieved knowledge (RAG)",
+        "bn": "রিট্রিভ করা জ্ঞান (RAG)"
+      },
+      "x": 410,
+      "y": 70
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 610,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Examples",
+      "bn": "উদাহরণ"
+    },
+    {
+      "en": "Gives",
+      "bn": "দেয়"
+    },
+    {
+      "en": "Lives in",
+      "bn": "থাকে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Shape",
+        "title": "Show it, or give it a role",
+        "body": [
+          "You can shape a model by showing it examples, giving it a role, or both."
+        ]
+      },
+      "bn": {
+        "short": "গড়া",
+        "title": "দেখান, বা রোল দিন",
+        "body": [
+          "উদাহরণ দেখিয়ে, রোল দিয়ে বা দুটোই করে মডেলের আচরণ গড়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ex",
+          "state": "hot",
+          "y": 254
+        },
+        {
+          "id": "role",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "role",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Few-shot",
+        "title": "Few-shot: the examples are the spec",
+        "body": [
+          "Few-shot examples are a few sample input and output pairs, 2–8, placed in the prompt.",
+          "The model finds the pattern and follows it."
+        ]
+      },
+      "bn": {
+        "short": "ফিউ-শট",
+        "title": "ফিউ-শট: উদাহরণই স্পেক",
+        "body": [
+          "ফিউ-শট উদাহরণ হলো প্রম্পটে দেওয়া কয়েকটি নমুনা ইনপুট ও আউটপুটের জোড়া, ২–৮টি।",
+          "মডেল প্যাটার্ন ধরে নিয়ে সেটা মেনে চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ex",
+          "state": "hot",
+          "sub": {
+            "en": "input and output pairs",
+            "bn": "ইনপুট ও আউটপুটের জোড়া"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "follows the pattern",
+            "bn": "প্যাটার্ন মানে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "2–8 pairs",
+          "bn": "২–৮টি জোড়া"
+        },
+        {
+          "en": "a pattern to follow",
+          "bn": "মানার প্যাটার্ন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Not prose",
+        "title": "Examples beat a description",
+        "body": [
+          "Examples are often more reliable than a long description.",
+          "2–8 pairs work better than describing the task in prose."
+        ]
+      },
+      "bn": {
+        "short": "বর্ণনা নয়",
+        "title": "বর্ণনার চেয়ে উদাহরণ ভালো",
+        "body": [
+          "লম্বা বর্ণনার চেয়ে উদাহরণ প্রায়ই বেশি নির্ভরযোগ্য।",
+          "কথায় বর্ণনার চেয়ে ২–৮টি জোড়া বেশি ভালো কাজ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "prose",
+          "state": "dim",
+          "sub": {
+            "en": "describes in prose",
+            "bn": "কথায় বর্ণনা"
+          }
+        },
+        {
+          "id": "ex",
+          "state": "hot",
+          "sub": {
+            "en": "2–8 pairs",
+            "bn": "২–৮টি জোড়া"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "prose",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "2–8 pairs",
+          "bn": "২–৮টি জোড়া"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cover",
+        "title": "Cover the tricky cases",
+        "body": [
+          "Cover the common case, tricky edge cases, and format traps like multi-line input in your examples.",
+          "An edge case is a tricky input, like sarcasm or mixed feelings, that the easy pattern does not cover."
+        ]
+      },
+      "bn": {
+        "short": "কভার",
+        "title": "কঠিন কেস কভার করুন",
+        "body": [
+          "উদাহরণে সাধারণ কেস, কঠিন এজ কেস আর মাল্টি-লাইন ইনপুটের মতো ফরম্যাট ট্র্যাপ রাখুন।",
+          "এজ কেস হলো কঠিন ইনপুট, যেমন স্যারকাজম বা মিশ্র অনুভূতি, যা সহজ প্যাটার্নে ধরা পড়ে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "common",
+          "state": "hot"
+        },
+        {
+          "id": "edge",
+          "state": "hot",
+          "sub": {
+            "en": "sarcasm, mixed feelings",
+            "bn": "স্যারকাজম, মিশ্র অনুভূতি"
+          }
+        },
+        {
+          "id": "trap",
+          "state": "hot",
+          "sub": {
+            "en": "multi-line input",
+            "bn": "মাল্টি-লাইন ইনপুট"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "common",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "edge",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "trap",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Role",
+        "title": "Role prompting: who to be",
+        "body": [
+          "Role prompting tells the model who to be, for example a senior copyeditor.",
+          "It changes style, how much it hedges, and depth."
+        ]
+      },
+      "bn": {
+        "short": "রোল",
+        "title": "রোল প্রম্পটিং: কী সাজবে",
+        "body": [
+          "রোল প্রম্পটিং মডেলকে বলে দেয় সে কী সাজবে, যেমন সিনিয়র কপিএডিটর।",
+          "এতে স্টাইল, সে কতটা দাবি নরম করে, আর গভীরতা বদলে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "role",
+          "state": "hot",
+          "sub": {
+            "en": "a senior copyeditor",
+            "bn": "সিনিয়র কপিএডিটর"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "style, hedging, depth",
+            "bn": "স্টাইল, দাবি নরম করা, গভীরতা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "role",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "style, hedging, depth",
+          "bn": "স্টাইল, দাবি নরম করা, গভীরতা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Persona",
+        "title": "A detailed persona beats a vague one",
+        "body": [
+          "A persona is a detailed role with level, vocabulary, and tone.",
+          "A detailed persona tends to beat a vague one, and it works best in the system message."
+        ]
+      },
+      "bn": {
+        "short": "পারসোনা",
+        "title": "বিস্তারিত পারসোনা ঝাপসার চেয়ে ভালো",
+        "body": [
+          "পারসোনা হলো স্তর, শব্দভান্ডার আর সুরসহ বিস্তারিত রোল।",
+          "বিস্তারিত পারসোনা ঝাপসা পারসোনার চেয়ে ভালো, আর সিস্টেম মেসেজে এটা সবচেয়ে ভালো কাজ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "role",
+          "state": "dim",
+          "sub": {
+            "en": "vague",
+            "bn": "ঝাপসা"
+          }
+        },
+        {
+          "id": "persona",
+          "state": "hot",
+          "sub": {
+            "en": "level, vocabulary, tone",
+            "bn": "স্তর, শব্দভান্ডার, সুর"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "role",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "persona",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "system message",
+          "bn": "সিস্টেম মেসেজ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Not brain",
+        "title": "A persona is style, not knowledge",
+        "body": [
+          "A persona gives style, not knowledge.",
+          "When expertise matters, add retrieved knowledge (RAG): find the relevant text first and give it to the model."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Personas alone risk confident hallucination."
+        }
+      },
+      "bn": {
+        "short": "জ্ঞান নয়",
+        "title": "পারসোনা স্টাইল, জ্ঞান নয়",
+        "body": [
+          "পারসোনা স্টাইল দেয়, জ্ঞান দেয় না।",
+          "বিশেষজ্ঞতা দরকার হলে রিট্রিভ করা জ্ঞান (RAG) যোগ করুন: আগে দরকারি লেখা খুঁজে মডেলকে দিন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "শুধু পারসোনা থাকলে আত্মবিশ্বাসী হ্যালুসিনেশনের ঝুঁকি থাকে।"
+        }
+      },
+      "show": [
+        {
+          "id": "persona",
+          "state": "warn",
+          "sub": {
+            "en": "style only",
+            "bn": "শুধু স্টাইল"
+          }
+        },
+        {
+          "id": "know",
+          "state": "hot",
+          "sub": {
+            "en": "answers from that text",
+            "bn": "সেই লেখা থেকে উত্তর"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "persona",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "know",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "style, not knowledge",
+          "bn": "স্টাইল, জ্ঞান নয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Show examples, give a role, and add retrieved knowledge when expertise matters."
+        ],
+        "points": [
+          "Examples are the spec: 2–8 pairs work better than describing the task in prose.",
+          "Cover the common case, tricky edge cases, and format traps like multi-line input in your examples.",
+          "A detailed persona tends to beat a vague one, and it belongs in the system message.",
+          "A persona gives style, not knowledge. When expertise matters, add retrieved knowledge (RAG)."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "উদাহরণ দেখান, রোল দিন, আর বিশেষজ্ঞতা দরকার হলে রিট্রিভ করা জ্ঞান যোগ করুন।"
+        ],
+        "points": [
+          "উদাহরণই স্পেক: কথায় বর্ণনার চেয়ে ২–৮টি জোড়া বেশি ভালো কাজ করে।",
+          "উদাহরণে সাধারণ কেস, কঠিন এজ কেস আর মাল্টি-লাইন ইনপুটের মতো ফরম্যাট ট্র্যাপ রাখুন।",
+          "বিস্তারিত পারসোনা ঝাপসা পারসোনার চেয়ে ভালো, আর তা থাকবে সিস্টেম মেসেজে।",
+          "পারসোনা স্টাইল দেয়, জ্ঞান দেয় না। বিশেষজ্ঞতা দরকার হলে রিট্রিভ করা জ্ঞান (RAG) যোগ করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ex"
+        },
+        {
+          "id": "persona"
+        },
+        {
+          "id": "know"
+        },
+        {
+          "id": "model"
+        }
+      ],
+      "links": [
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "persona",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "know",
+          "to": "model",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

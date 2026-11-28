@@ -1,0 +1,662 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "doc",
+      "kind": "file",
+      "label": {
+        "en": "Document",
+        "bn": "ডকুমেন্ট"
+      },
+      "x": 90,
+      "y": 162
+    },
+    {
+      "id": "c1",
+      "kind": "note",
+      "label": {
+        "en": "Chunk 1",
+        "bn": "চাঙ্ক ১"
+      },
+      "x": 330,
+      "y": 70
+    },
+    {
+      "id": "c2",
+      "kind": "note",
+      "label": {
+        "en": "Chunk 2",
+        "bn": "চাঙ্ক ২"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "c3",
+      "kind": "note",
+      "label": {
+        "en": "Chunk 3",
+        "bn": "চাঙ্ক ৩"
+      },
+      "x": 330,
+      "y": 254
+    },
+    {
+      "id": "par",
+      "kind": "tool",
+      "label": {
+        "en": "Paragraph",
+        "bn": "প্যারাগ্রাফ"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "line",
+      "kind": "tool",
+      "label": {
+        "en": "Line",
+        "bn": "লাইন"
+      },
+      "x": 280,
+      "y": 162
+    },
+    {
+      "id": "word",
+      "kind": "tool",
+      "label": {
+        "en": "Word",
+        "bn": "শব্দ"
+      },
+      "x": 460,
+      "y": 162
+    },
+    {
+      "id": "chr",
+      "kind": "tool",
+      "label": {
+        "en": "Character",
+        "bn": "ক্যারেক্টার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "hdr",
+      "kind": "tool",
+      "label": {
+        "en": "Header splitter",
+        "bn": "হেডার স্প্লিটার"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "rec",
+      "kind": "tool",
+      "label": {
+        "en": "Recursive splitter",
+        "bn": "রিকার্সিভ স্প্লিটার"
+      },
+      "x": 390,
+      "y": 162
+    },
+    {
+      "id": "sem",
+      "kind": "chart",
+      "label": {
+        "en": "Sentence similarity",
+        "bn": "বাক্যের সিমিলারিটি"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "bot",
+      "kind": "service",
+      "label": {
+        "en": "Support bot",
+        "bn": "সাপোর্ট বট"
+      },
+      "x": 640,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Cut",
+      "bn": "কাটা"
+    },
+    {
+      "en": "Fact",
+      "bn": "তথ্য"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Chunks",
+        "title": "Search works on chunks",
+        "body": [
+          "Search works on small pieces of documents called chunks, not on whole documents.",
+          "How you cut the text decides what the search can find, so cutting well matters."
+        ]
+      },
+      "bn": {
+        "short": "চাঙ্ক",
+        "title": "সার্চ চাঙ্কে কাজ করে",
+        "body": [
+          "সার্চ পুরো ডকুমেন্টে নয়, ডকুমেন্টের ছোট টুকরায় কাজ করে, যাকে বলে চাঙ্ক।",
+          "লেখা কীভাবে কাটছেন, তার ওপরই ঠিক হয় সার্চ কী খুঁজে পাবে। তাই ভালোভাবে কাটা জরুরি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "c1",
+          "state": "hot"
+        },
+        {
+          "id": "c2",
+          "state": "hot"
+        },
+        {
+          "id": "c3",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "c1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "c2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "doc",
+          "to": "c3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Overlap",
+        "title": "Fixed-size windows with overlap",
+        "body": [
+          "Fixed-size splitting cuts a window of chunk_size units. Neighbouring windows share chunk_overlap units.",
+          "So a fact on the cut line stays whole in at least one chunk."
+        ]
+      },
+      "bn": {
+        "short": "ওভারল্যাপ",
+        "title": "ওভারল্যাপসহ ফিক্সড-সাইজ উইন্ডো",
+        "body": [
+          "ফিক্সড-সাইজ স্প্লিটিং chunk_size মাপের উইন্ডোতে কাটে। পাশাপাশি উইন্ডো chunk_overlap মাপের অংশ শেয়ার করে।",
+          "তাই কাটার রেখায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "c1",
+          "state": "hot",
+          "sub": {
+            "en": "chunk_size",
+            "bn": "chunk_size"
+          }
+        },
+        {
+          "id": "c2",
+          "state": "hot",
+          "sub": {
+            "en": "shared text",
+            "bn": "শেয়ার করা লেখা"
+          }
+        },
+        {
+          "id": "c3",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "c1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "c1",
+          "to": "c2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "c2",
+          "to": "c3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Recursive",
+        "title": "Recursive splitting: biggest break first",
+        "body": [
+          "Recursive splitting cuts at the biggest natural break first: paragraph, then line, then word, then character.",
+          "It goes to a finer separator only when needed, so coherent units stay together for as long as possible."
+        ]
+      },
+      "bn": {
+        "short": "রিকার্সিভ",
+        "title": "রিকার্সিভ স্প্লিটিং: আগে বড় বিরতি",
+        "body": [
+          "রিকার্সিভ স্প্লিটিং আগে সবচেয়ে বড় স্বাভাবিক বিরতিতে কাটে: প্যারাগ্রাফ, তারপর লাইন, তারপর শব্দ, তারপর ক্যারেক্টার।",
+          "দরকার হলে তবেই সে সূক্ষ্ম বিভাজকে যায়, তাই অর্থপূর্ণ অংশ যতক্ষণ সম্ভব একসাথে থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "par",
+          "state": "hot",
+          "sub": {
+            "en": "first",
+            "bn": "আগে"
+          }
+        },
+        {
+          "id": "line",
+          "state": "hot"
+        },
+        {
+          "id": "word",
+          "state": "hot"
+        },
+        {
+          "id": "chr",
+          "state": "hot",
+          "sub": {
+            "en": "last",
+            "bn": "শেষে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "par",
+          "to": "line",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "line",
+          "to": "word",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "word",
+          "to": "chr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Structure",
+        "title": "Cut along headers and sentences",
+        "body": [
+          "A header splitter groups text by header level and attaches the headers as metadata, extra labels on each chunk. A sentence splitter breaks at sentence boundaries.",
+          "Chain the header splitter with a recursive one, so overlap never crosses a header boundary."
+        ]
+      },
+      "bn": {
+        "short": "স্ট্রাকচার",
+        "title": "হেডার আর বাক্য ধরে কাটুন",
+        "body": [
+          "হেডার স্প্লিটার হেডারের স্তর ধরে লেখা সাজায় আর হেডারগুলো মেটাডেটা হিসেবে জুড়ে দেয়, মানে চাঙ্কের বাড়তি লেবেল। সেন্টেন্স স্প্লিটার বাক্যের সীমানায় কাটে।",
+          "হেডার স্প্লিটারের সাথে রিকার্সিভ স্প্লিটার জুড়ুন, যাতে ওভারল্যাপ হেডারের সীমানা না পেরোয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "hdr",
+          "state": "hot",
+          "sub": {
+            "en": "headers as metadata",
+            "bn": "হেডার মেটাডেটা হিসেবে"
+          },
+          "x": 270,
+          "y": 162
+        },
+        {
+          "id": "rec",
+          "state": "hot",
+          "sub": {
+            "en": "overlap inside a section",
+            "bn": "ওভারল্যাপ সেকশনের ভেতরে"
+          },
+          "x": 520,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "hdr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "hdr",
+          "to": "rec",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Semantic",
+        "title": "Semantic chunking: cut where meaning shifts",
+        "body": [
+          "Semantic chunking embeds sentences, and cuts where adjacent-sentence similarity drops.",
+          "An embedding is a list of numbers that stands for the meaning of a text."
+        ]
+      },
+      "bn": {
+        "short": "সেম্যান্টিক",
+        "title": "সেম্যান্টিক চাঙ্কিং: অর্থ যেখানে বদলায়",
+        "body": [
+          "সেম্যান্টিক চাঙ্কিং বাক্যগুলো এমবেড করে, আর পাশাপাশি বাক্যের সিমিলারিটি যেখানে কমে সেখানে কাটে।",
+          "এমবেডিং হলো একটি লেখার অর্থ বোঝানো সংখ্যার তালিকা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot",
+          "x": 90,
+          "y": 162
+        },
+        {
+          "id": "sem",
+          "state": "hot",
+          "sub": {
+            "en": "breakpoint where it drops",
+            "bn": "যেখানে কমে সেখানে ব্রেকপয়েন্ট"
+          },
+          "x": 330,
+          "y": 162
+        },
+        {
+          "id": "c1",
+          "state": "hot",
+          "x": 580,
+          "y": 70
+        },
+        {
+          "id": "c2",
+          "state": "hot",
+          "x": 580,
+          "y": 254
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "sem",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sem",
+          "to": "c1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sem",
+          "to": "c2",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Units",
+        "title": "Units, and no best size",
+        "body": [
+          "LangChain measures size in characters, not tokens, so a chunk of 1000 is not 1000 tokens.",
+          "None of the sources checked gives a best chunk size, so tune it on your own retrieval tests."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The values in the section's code are illustrative. Tune the size and overlap against your own retrieval evals."
+        }
+      },
+      "bn": {
+        "short": "মাপ",
+        "title": "মাপ, আর সেরা সাইজ নেই",
+        "body": [
+          "LangChain-এর মাপ ক্যারেক্টারে, টোকেনে নয়; তাই ১০০০ মাপের চাঙ্ক মানে ১০০০ টোকেন নয়।",
+          "যাচাই করা কোনো সূত্রে সেরা চাঙ্ক সাইজ বলা নেই, তাই নিজের রিট্রিভাল টেস্টে ঠিক করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সেকশনের কোডের মানগুলো উদাহরণমাত্র। চাঙ্কের সাইজ আর ওভারল্যাপ নিজের রিট্রিভাল টেস্টে ঠিক করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "c1",
+          "state": "warn",
+          "sub": {
+            "en": "characters, not tokens",
+            "bn": "ক্যারেক্টার, টোকেন নয়"
+          }
+        },
+        {
+          "id": "c2",
+          "state": "hot",
+          "sub": {
+            "en": "tune on your tests",
+            "bn": "নিজের টেস্টে ঠিক করুন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "c1",
+          "to": "c2",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bad cut",
+        "title": "A bad cut breaks an answer",
+        "body": [
+          "A fixed-size cutter cuts after a set number of characters, even in the middle of a fact. Here the cut removed 14, so the AI could not answer.",
+          "A cutter that stops at sentence ends keeps the fact whole."
+        ]
+      },
+      "bn": {
+        "short": "ভুল কাটা",
+        "title": "ভুল জায়গায় কাটলে উত্তর নষ্ট হয়",
+        "body": [
+          "ফিক্সড-সাইজ কাটার নির্দিষ্ট সংখ্যক অক্ষর পরপর কাটে, তথ্যের মাঝখানে হলেও। এখানে কাটায় ১৪ হারিয়ে গেছে, তাই AI উত্তর দিতে পারেনি।",
+          "যে কাটার বাক্যের শেষে থামে, সে তথ্যটা পুরো রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "c1",
+          "state": "warn",
+          "sub": {
+            "en": "cut mid-sentence",
+            "bn": "বাক্যের মাঝখানে কাটা"
+          }
+        },
+        {
+          "id": "c2",
+          "state": "hot",
+          "sub": {
+            "en": "cut at sentence end",
+            "bn": "বাক্যের শেষে কাটা"
+          }
+        },
+        {
+          "id": "bot",
+          "state": "hot",
+          "sub": {
+            "en": "14 days",
+            "bn": "১৪ দিন"
+          },
+          "x": 640,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "c1",
+          "to": "bot",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "c2",
+          "to": "bot",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "mid-sentence",
+          "bn": "বাক্যের মাঝখানে"
+        },
+        {
+          "en": "14 days",
+          "bn": "১৪ দিন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A chunk that is too coarse buries the answer in noise; one that is too fine strips away the context that made the sentence meaningful."
+        ],
+        "points": [
+          "Overlap keeps a fact that sits on a cut line whole in at least one chunk.",
+          "Chain a header splitter with a recursive one, so overlap never crosses a header boundary.",
+          "None of the sources checked gives a best chunk size, so tune it on your own retrieval tests."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "চাঙ্ক বেশি বড় হলে উত্তর বাড়তি লেখার ভিড়ে হারিয়ে যায়। বেশি ছোট হলে বাক্যটির অর্থ যে কনটেক্সট দিয়েছিল, তা চলে যায়।"
+        ],
+        "points": [
+          "ওভারল্যাপ থাকলে কাটার রেখায় পড়া তথ্য অন্তত একটি চাঙ্কে পুরো থাকে।",
+          "হেডার স্প্লিটারের সাথে রিকার্সিভ স্প্লিটার জুড়ুন, যাতে ওভারল্যাপ হেডারের সীমানা না পেরোয়।",
+          "যাচাই করা কোনো সূত্রে সেরা চাঙ্ক সাইজ বলা নেই, তাই নিজের রিট্রিভাল টেস্টে ঠিক করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc"
+        },
+        {
+          "id": "c1",
+          "state": "hot"
+        },
+        {
+          "id": "c2",
+          "state": "hot"
+        },
+        {
+          "id": "c3",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "c1",
+          "flow": "to"
+        },
+        {
+          "from": "doc",
+          "to": "c2",
+          "flow": "to"
+        },
+        {
+          "from": "doc",
+          "to": "c3",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

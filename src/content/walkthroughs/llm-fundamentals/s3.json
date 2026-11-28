@@ -1,0 +1,622 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "you",
+      "kind": "user",
+      "label": {
+        "en": "Your program",
+        "bn": "আপনার প্রোগ্রাম"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "service",
+      "label": {
+        "en": "API",
+        "bn": "API"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "closed",
+      "kind": "model",
+      "label": {
+        "en": "Closed model",
+        "bn": "ক্লোজড মডেল"
+      },
+      "x": 625,
+      "y": 162
+    },
+    {
+      "id": "open",
+      "kind": "model",
+      "label": {
+        "en": "Open weights",
+        "bn": "ওপেন ওয়েট"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "mach",
+      "kind": "server",
+      "label": {
+        "en": "Your machines",
+        "bn": "আপনার মেশিন"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "code",
+      "kind": "file",
+      "label": {
+        "en": "Training code",
+        "bn": "ট্রেনিং কোড"
+      },
+      "x": 130,
+      "y": 60
+    },
+    {
+      "id": "data",
+      "kind": "database",
+      "label": {
+        "en": "Data",
+        "bn": "ডেটা"
+      },
+      "x": 130,
+      "y": 265
+    },
+    {
+      "id": "lic",
+      "kind": "key",
+      "label": {
+        "en": "Right to change and share",
+        "bn": "বদলে বিলি করার অনুমতি"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "osrc",
+      "kind": "note",
+      "label": {
+        "en": "Open-source",
+        "bn": "ওপেন-সোর্স"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "router",
+      "kind": "balancer",
+      "label": {
+        "en": "Routing",
+        "bn": "রাউটিং"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "small",
+      "kind": "model",
+      "label": {
+        "en": "Small local model",
+        "bn": "ছোট লোকাল মডেল"
+      },
+      "x": 650,
+      "y": 75
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Your data",
+      "bn": "আপনার ডেটা"
+    },
+    {
+      "en": "Servers",
+      "bn": "সার্ভার"
+    },
+    {
+      "en": "Per-token fee",
+      "bn": "টোকেন-প্রতি ফি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Closed",
+        "title": "Closed: behind an API",
+        "body": [
+          "A closed model is hosted behind an API, and you cannot download it.",
+          "It has the highest capability ceiling and no infra to run, but your data leaves your network and you live with vendor lock-in."
+        ]
+      },
+      "bn": {
+        "short": "ক্লোজড",
+        "title": "ক্লোজড: API-র পেছনে",
+        "body": [
+          "ক্লোজড মডেল থাকে API-র পেছনে, আর সেটা ডাউনলোড করা যায় না।",
+          "এর সক্ষমতার সীমা সবচেয়ে উঁচু আর নিজের ইনফ্রা চালাতে হয় না, কিন্তু আপনার ডেটা নেটওয়ার্কের বাইরে যায় আর ভেন্ডর লক-ইন মেনে নিতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "closed",
+          "state": "hot",
+          "sub": {
+            "en": "you cannot download it",
+            "bn": "ডাউনলোড করা যায় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "closed",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "leaves your network",
+          "bn": "নেটওয়ার্কের বাইরে যায়"
+        },
+        {
+          "en": "none of your own",
+          "bn": "নিজের লাগে না"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Open-weight",
+        "title": "Open-weight: you run it",
+        "body": [
+          "An open-weight model can be downloaded and run on your own machines, but then running it is your job.",
+          "Your data stays in-house and there are no per-token fees, but you run the GPUs."
+        ]
+      },
+      "bn": {
+        "short": "ওপেন-ওয়েট",
+        "title": "ওপেন-ওয়েট: আপনি চালান",
+        "body": [
+          "ওপেন-ওয়েট মডেল ডাউনলোড করে নিজের মেশিনে চালানো যায়, তবে তখন চালানোর দায়িত্বও আপনার।",
+          "ডেটা নিজের কাছে থাকে আর টোকেন-প্রতি ফি নেই, কিন্তু GPU চালাতে হয় আপনাকেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "open",
+          "state": "hot",
+          "sub": {
+            "en": "download it",
+            "bn": "ডাউনলোড করুন"
+          }
+        },
+        {
+          "id": "mach",
+          "state": "hot",
+          "sub": {
+            "en": "you run the GPUs",
+            "bn": "GPU চালান আপনি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "open",
+          "to": "mach",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "stays in-house",
+          "bn": "নিজের কাছে থাকে"
+        },
+        {
+          "en": "you run the GPUs",
+          "bn": "GPU চালান আপনি"
+        },
+        {
+          "en": "none",
+          "bn": "নেই"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Open-source",
+        "title": "Open-source is more than open weights",
+        "body": [
+          "Open-source is open weights plus the training code, the data, and the right to change and share them.",
+          "Most open LLMs are open-weight, not open-source."
+        ]
+      },
+      "bn": {
+        "short": "ওপেন-সোর্স",
+        "title": "ওপেন-সোর্স মানে ওপেন ওয়েটের চেয়ে বেশি",
+        "body": [
+          "ওপেন-সোর্স মানে ওপেন ওয়েটের সাথে ট্রেনিং কোড, ডেটা আর সেগুলো বদলে আবার বিলি করার অনুমতিও।",
+          "বেশিরভাগ ওপেন LLM আসলে ওপেন-ওয়েট, ওপেন-সোর্স নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "open",
+          "state": "hot"
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        },
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "lic",
+          "state": "hot"
+        },
+        {
+          "id": "osrc",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "open",
+          "to": "osrc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "code",
+          "to": "osrc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "data",
+          "to": "osrc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lic",
+          "to": "osrc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Open wins",
+        "title": "When open-weight wins",
+        "body": [
+          "These are the cases where open-weight wins."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Predictable cost at scale"
+          },
+          {
+            "sign": "+",
+            "html": "Data residency and compliance requirements"
+          },
+          {
+            "sign": "+",
+            "html": "You need to fine-tune on proprietary data"
+          },
+          {
+            "sign": "+",
+            "html": "Latency-sensitive serving, where inference sits next to the state"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ওপেন জেতে",
+        "title": "যখন ওপেন-ওয়েট জেতে",
+        "body": [
+          "এই ক্ষেত্রগুলোতে ওপেন-ওয়েট জেতে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "স্কেলে খরচ আগে থেকে বোঝা যায়"
+          },
+          {
+            "sign": "+",
+            "html": "ডেটা কোথায় থাকবে আর কমপ্লায়েন্সের শর্ত"
+          },
+          {
+            "sign": "+",
+            "html": "নিজস্ব ডেটায় ফাইন-টিউন করা দরকার"
+          },
+          {
+            "sign": "+",
+            "html": "ল্যাটেন্সি-সংবেদনশীল সার্ভিং, যেখানে ইনফারেন্স স্টেটের পাশেই চলে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "open",
+          "state": "hot"
+        },
+        {
+          "id": "mach",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "open",
+          "to": "mach",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Closed wins",
+        "title": "When closed wins",
+        "body": [
+          "These are the cases where closed wins."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Tasks where being at the very frontier matters, like frontier coding agents and reasoning"
+          },
+          {
+            "sign": "+",
+            "html": "A small query volume makes self-hosting uneconomical"
+          },
+          {
+            "sign": "+",
+            "html": "You need multimodal audio or video, as in Gemini"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ক্লোজড জেতে",
+        "title": "যখন ক্লোজড জেতে",
+        "body": [
+          "এই ক্ষেত্রগুলোতে ক্লোজড জেতে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "যেসব কাজে একদম ফ্রন্টিয়ারে থাকা জরুরি, যেমন ফ্রন্টিয়ার কোডিং এজেন্ট আর রিজনিং"
+          },
+          {
+            "sign": "+",
+            "html": "কোয়েরির পরিমাণ কম হলে নিজে হোস্ট করা পোষায় না"
+          },
+          {
+            "sign": "+",
+            "html": "মাল্টিমোডাল অডিও বা ভিডিও দরকার, যেমন Gemini-তে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "closed",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "closed",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hybrid",
+        "title": "Mix both with routing",
+        "body": [
+          "Routing sends easy questions to a small, cheap model and hard ones to a big one.",
+          "Many teams do this: easy questions go to a small local model, hard ones to a frontier API."
+        ]
+      },
+      "bn": {
+        "short": "হাইব্রিড",
+        "title": "রাউটিং দিয়ে দুটোই মেলান",
+        "body": [
+          "রাউটিং সহজ প্রশ্ন ছোট, সস্তা মডেলে আর কঠিন প্রশ্ন বড় মডেলে পাঠায়।",
+          "অনেক টিম এটাই করে: সহজ প্রশ্ন যায় লোকাল ছোট মডেলে, কঠিন প্রশ্ন ফ্রন্টিয়ার API-তে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot"
+        },
+        {
+          "id": "router",
+          "state": "hot"
+        },
+        {
+          "id": "small",
+          "state": "hot",
+          "sub": {
+            "en": "easy questions",
+            "bn": "সহজ প্রশ্ন"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "hard questions",
+            "bn": "কঠিন প্রশ্ন"
+          },
+          "x": 650,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "router",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Most open LLMs are open-weight, not open-source."
+        ],
+        "points": [
+          "Most open LLMs are open-weight, not open-source.",
+          "Closed models are the most capable and need no servers of your own, but your data leaves your network.",
+          "Open-weight models keep your data in-house and have no per-token fees, but you run the GPUs.",
+          "Many teams mix both: easy questions go to a small local model, hard ones to a frontier API."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "বেশিরভাগ ওপেন LLM আসলে ওপেন-ওয়েট, ওপেন-সোর্স নয়।"
+        ],
+        "points": [
+          "বেশিরভাগ ওপেন LLM আসলে ওপেন-ওয়েট, ওপেন-সোর্স নয়।",
+          "ক্লোজড মডেল সবচেয়ে সক্ষম আর নিজের সার্ভার লাগে না, কিন্তু আপনার ডেটা আপনার নেটওয়ার্কের বাইরে যায়।",
+          "ওপেন-ওয়েট মডেলে ডেটা নিজের কাছে থাকে আর টোকেন-প্রতি ফি নেই, কিন্তু GPU চালাতে হয় আপনাকেই।",
+          "অনেক টিম দুটোই মেলায়: সহজ প্রশ্ন যায় লোকাল ছোট মডেলে, কঠিন প্রশ্ন ফ্রন্টিয়ার API-তে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "you",
+          "state": "hot"
+        },
+        {
+          "id": "router",
+          "state": "hot"
+        },
+        {
+          "id": "small",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "x": 650,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "you",
+          "to": "router",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "small",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

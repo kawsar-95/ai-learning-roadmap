@@ -1,0 +1,562 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 100,
+      "y": 160
+    },
+    {
+      "id": "bal",
+      "kind": "balancer",
+      "label": {
+        "en": "Rate limit",
+        "bn": "রেট লিমিট"
+      },
+      "x": 295,
+      "y": 160
+    },
+    {
+      "id": "cache",
+      "kind": "cache",
+      "label": {
+        "en": "Cache",
+        "bn": "ক্যাশ"
+      },
+      "x": 495,
+      "y": 60
+    },
+    {
+      "id": "queue",
+      "kind": "queue",
+      "label": {
+        "en": "Queue",
+        "bn": "কিউ"
+      },
+      "x": 495,
+      "y": 160
+    },
+    {
+      "id": "workers",
+      "kind": "service",
+      "label": {
+        "en": "Workers",
+        "bn": "ওয়ার্কার"
+      },
+      "x": 665,
+      "y": 160
+    },
+    {
+      "id": "db",
+      "kind": "database",
+      "label": {
+        "en": "Database",
+        "bn": "ডেটাবেস"
+      },
+      "x": 665,
+      "y": 270
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Request",
+      "bn": "রিকোয়েস্ট"
+    },
+    {
+      "en": "Same question",
+      "bn": "একই প্রশ্ন"
+    },
+    {
+      "en": "Too many",
+      "bn": "অনেক বেশি"
+    },
+    {
+      "en": "Retry",
+      "bn": "রিট্রাই"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Slow call",
+        "title": "A slow, costly call",
+        "body": [
+          "An AI feature is a slow, costly call inside an ordinary system.",
+          "So ordinary tools help: queues, caches, limits and safe retries."
+        ]
+      },
+      "bn": {
+        "short": "ধীর কল",
+        "title": "ধীর আর দামি কল",
+        "body": [
+          "AI ফিচার একটা সাধারণ সিস্টেমের ভেতরে ধীর আর দামি কল।",
+          "তাই সাধারণ টুলই কাজে লাগে: কিউ, ক্যাশ, সীমা আর নিরাপদ রিট্রাই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "workers",
+          "state": "warn",
+          "sub": {
+            "en": "slow, costly",
+            "bn": "ধীর, দামি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "workers",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Queue",
+        "title": "Send slow calls to a queue",
+        "body": [
+          "When a model call takes ten seconds and the web request cannot wait, use a queue and workers. The request returns a job id.",
+          "Workers call the model and store the result."
+        ]
+      },
+      "bn": {
+        "short": "কিউ",
+        "title": "ধীর কল কিউতে পাঠান",
+        "body": [
+          "মডেল কল দশ সেকেন্ড নিলে আর ওয়েব রিকোয়েস্ট অপেক্ষা করতে না পারলে কিউ আর ওয়ার্কার ব্যবহার করুন। রিকোয়েস্ট একটা job id ফেরত দেয়।",
+          "ওয়ার্কার মডেল কল করে ফল জমা রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "gets a job id",
+            "bn": "job id পায়"
+          }
+        },
+        {
+          "id": "queue",
+          "state": "hot"
+        },
+        {
+          "id": "workers",
+          "state": "hot",
+          "sub": {
+            "en": "call the model",
+            "bn": "মডেল কল করে"
+          }
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "result stored",
+            "bn": "ফল জমা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "queue",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "queue",
+          "to": "workers",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "workers",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "a job id",
+          "bn": "একটা job id"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cache",
+        "title": "A cache returns a stored answer",
+        "body": [
+          "When the same question arrives again and again, a cache such as Redis returns a stored answer.",
+          "A semantic cache also matches similar questions."
+        ]
+      },
+      "bn": {
+        "short": "ক্যাশ",
+        "title": "ক্যাশ জমানো উত্তর ফেরত দেয়",
+        "body": [
+          "একই প্রশ্ন বারবার এলে Redis-এর মতো ক্যাশ জমানো উত্তর ফেরত দেয়।",
+          "সেমান্টিক ক্যাশ মিল থাকা প্রশ্নও মেলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "same question",
+            "bn": "একই প্রশ্ন"
+          }
+        },
+        {
+          "id": "cache",
+          "state": "hot",
+          "sub": {
+            "en": "stored answer",
+            "bn": "জমানো উত্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "cache",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "stored answer",
+          "bn": "জমানো উত্তর"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Rate limiting and backpressure",
+        "body": [
+          "Rate limiting caps how many requests are allowed. Backpressure slows or refuses new work when the system is full.",
+          "This protects the model's quota and keeps the service up."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "রেট লিমিটিং আর ব্যাকপ্রেশার",
+        "body": [
+          "রেট লিমিটিং কত রিকোয়েস্ট চলবে তার সীমা বাঁধে। সিস্টেম ভরে গেলে ব্যাকপ্রেশার নতুন কাজ ধীর করে বা ফিরিয়ে দেয়।",
+          "এতে মডেলের কোটা সুরক্ষিত থাকে আর সার্ভিস চালু থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "bal",
+          "state": "warn",
+          "sub": {
+            "en": "caps, slows, refuses",
+            "bn": "সীমা, ধীর, ফিরিয়ে দেয়"
+          }
+        },
+        {
+          "id": "queue",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "bal",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "bal",
+          "to": "queue",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "slow or refuse",
+          "bn": "ধীর বা ফিরিয়ে দেয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Retries",
+        "title": "Timeouts, retries and idempotency",
+        "body": [
+          "Set a timeout on every call. A call without one can hold a worker forever.",
+          "Retry with backoff: wait a little longer before each retry. Make the operation idempotent, so running it twice has the same effect as running it once."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "A common way is to send an idempotency key with the request."
+        }
+      },
+      "bn": {
+        "short": "রিট্রাই",
+        "title": "টাইমআউট, রিট্রাই আর আইডেমপোটেন্সি",
+        "body": [
+          "প্রতিটি কলে timeout দিন। timeout ছাড়া একটা কল ওয়ার্কারকে চিরকাল আটকে রাখতে পারে।",
+          "backoff দিয়ে রিট্রাই করুন: প্রতিবার রিট্রাইয়ের আগে একটু বেশি অপেক্ষা করুন। কাজ আইডেমপোটেন্ট বানান, যাতে দুবার চললেও একবার চলার মতোই ফল হয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "একটা প্রচলিত উপায় হলো রিকোয়েস্টের সাথে idempotency key পাঠানো।"
+        }
+      },
+      "show": [
+        {
+          "id": "queue",
+          "state": "hot"
+        },
+        {
+          "id": "workers",
+          "state": "hot",
+          "sub": {
+            "en": "timeout",
+            "bn": "timeout"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "workers",
+          "to": "queue",
+          "flow": "back",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "wait a little longer",
+          "bn": "একটু বেশি অপেক্ষা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "State",
+        "title": "Scale out, and keep state outside",
+        "body": [
+          "Prefer scaling out, which means more copies behind a load balancer, to one bigger machine.",
+          "Keep state in a database or a cache, not inside the process."
+        ]
+      },
+      "bn": {
+        "short": "স্টেট",
+        "title": "স্কেল আউট করুন, state বাইরে রাখুন",
+        "body": [
+          "একটা বড় মেশিনের বদলে স্কেল আউট বেছে নিন, মানে লোড ব্যালান্সারের পেছনে আরও কপি।",
+          "state রাখুন ডেটাবেস বা ক্যাশে, প্রসেসের ভেতরে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "bal",
+          "state": "hot",
+          "sub": {
+            "en": "load balancer",
+            "bn": "লোড ব্যালান্সার"
+          }
+        },
+        {
+          "id": "workers",
+          "state": "hot",
+          "sub": {
+            "en": "more copies",
+            "bn": "আরও কপি"
+          }
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "state here",
+            "bn": "state এখানে"
+          }
+        },
+        {
+          "id": "cache",
+          "state": "hot",
+          "sub": {
+            "en": "or here",
+            "bn": "বা এখানে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "bal",
+          "to": "workers",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "workers",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hashing",
+        "title": "Consistent hashing",
+        "body": [
+          "Consistent hashing spreads cache keys over many nodes, so that adding a node moves only a small share of the keys.",
+          "It is why a cache cluster can grow without emptying itself."
+        ]
+      },
+      "bn": {
+        "short": "হ্যাশিং",
+        "title": "কনসিস্টেন্ট হ্যাশিং",
+        "body": [
+          "কনসিস্টেন্ট হ্যাশিং ক্যাশ কী অনেক নোডে ছড়িয়ে দেয়, যাতে নতুন নোড যোগ করলে অল্প কী-ই সরে।",
+          "এ কারণেই ক্যাশ ক্লাস্টার নিজেকে খালি না করেই বড় হতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "cache",
+          "state": "hot",
+          "sub": {
+            "en": "keys over many nodes",
+            "bn": "অনেক নোডে কী"
+          }
+        },
+        {
+          "id": "workers",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "workers",
+          "to": "cache",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Four rules cover the section."
+        ],
+        "points": [
+          "Send slow model calls to a queue. Workers call the model and store the result.",
+          "A cache returns a stored answer when the same question arrives again.",
+          "Set a timeout on every call, and retry with backoff: wait a little longer before each retry.",
+          "Make operations idempotent, and keep state in a database or cache, not inside the process."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "চারটা নিয়মে পুরো সেকশন।"
+        ],
+        "points": [
+          "ধীর মডেল কল কিউতে পাঠান। ওয়ার্কার মডেল কল করে ফল জমা রাখে।",
+          "একই প্রশ্ন আবার এলে ক্যাশ জমানো উত্তর ফেরত দেয়।",
+          "প্রতিটি কলে timeout দিন, আর backoff দিয়ে রিট্রাই করুন: প্রতিবার রিট্রাইয়ের আগে একটু বেশি অপেক্ষা করুন।",
+          "কাজ আইডেমপোটেন্ট বানান, আর state রাখুন ডেটাবেস বা ক্যাশে, প্রসেসের ভেতরে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "queue",
+          "state": "hot"
+        },
+        {
+          "id": "cache",
+          "state": "hot"
+        },
+        {
+          "id": "workers",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot"
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "a job id",
+          "bn": "একটা job id"
+        },
+        {
+          "en": "stored answer",
+          "bn": "জমানো উত্তর"
+        },
+        null,
+        {
+          "en": "wait a little longer",
+          "bn": "একটু বেশি অপেক্ষা"
+        }
+      ]
+    }
+  ]
+}

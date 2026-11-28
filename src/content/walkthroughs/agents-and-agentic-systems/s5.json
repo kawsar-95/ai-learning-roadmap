@@ -1,0 +1,578 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "pad",
+      "kind": "file",
+      "label": {
+        "en": "Scratchpad",
+        "bn": "স্ক্র্যাচপ্যাড"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "ctx",
+      "kind": "cache",
+      "label": {
+        "en": "Context window",
+        "bn": "কনটেক্সট উইন্ডো"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "sem",
+      "kind": "database",
+      "label": {
+        "en": "Semantic memory",
+        "bn": "সেম্যান্টিক মেমরি"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "vec",
+      "kind": "database",
+      "label": {
+        "en": "Vector store",
+        "bn": "ভেক্টর স্টোর"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "proc",
+      "kind": "file",
+      "label": {
+        "en": "Procedural memory",
+        "bn": "প্রসিডিউরাল মেমরি"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "epi",
+      "kind": "storage",
+      "label": {
+        "en": "Episodic memory",
+        "bn": "এপিসোডিক মেমরি"
+      },
+      "x": 400,
+      "y": 100
+    },
+    {
+      "id": "ident",
+      "kind": "note",
+      "label": {
+        "en": "Identity",
+        "bn": "আইডেন্টিটি"
+      },
+      "x": 400,
+      "y": 230
+    },
+    {
+      "id": "much",
+      "kind": "note",
+      "label": {
+        "en": "Too much",
+        "bn": "খুব বেশি"
+      },
+      "x": 450,
+      "y": 75
+    },
+    {
+      "id": "little",
+      "kind": "note",
+      "label": {
+        "en": "Too little",
+        "bn": "খুব কম"
+      },
+      "x": 450,
+      "y": 162
+    },
+    {
+      "id": "conf",
+      "kind": "note",
+      "label": {
+        "en": "Conflicting",
+        "bn": "পরস্পরবিরোধী"
+      },
+      "x": 450,
+      "y": 250
+    },
+    {
+      "id": "old",
+      "kind": "note",
+      "label": {
+        "en": "User lives in Dhaka",
+        "bn": "User Dhaka-য় থাকে"
+      },
+      "x": 560,
+      "y": 75
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Lasts",
+      "bn": "টেকে"
+    },
+    {
+      "en": "Found by",
+      "bn": "খোঁজা হয়"
+    },
+    {
+      "en": "Kept as",
+      "bn": "রাখা হয়"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Scratchpad",
+        "title": "The scratchpad: notes for one run",
+        "body": [
+          "The scratchpad, or working memory, is the model's private notes for the current run.",
+          "When the run ends, the notes are thrown away. A scratchpad can live in the context window."
+        ]
+      },
+      "bn": {
+        "short": "স্ক্র্যাচপ্যাড",
+        "title": "স্ক্র্যাচপ্যাড: একটি রানের নোট",
+        "body": [
+          "স্ক্র্যাচপ্যাড (working memory) বর্তমান রানের জন্য মডেলের নিজস্ব নোট।",
+          "রান শেষ হলে এগুলো ফেলে দেওয়া হয়। স্ক্র্যাচপ্যাড কনটেক্সট উইন্ডোতে থাকতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "pad",
+          "state": "hot",
+          "sub": {
+            "en": "thrown away",
+            "bn": "ফেলে দেওয়া হয়"
+          }
+        },
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "can live there",
+            "bn": "সেখানে থাকতে পারে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "pad",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pad",
+          "to": "ctx",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "until the run ends",
+          "bn": "রান শেষ হওয়া পর্যন্ত"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Semantic",
+        "title": "Semantic memory: long-term facts",
+        "body": [
+          "Semantic memory holds long-term facts the agent has learned about the user, the project, or the world.",
+          "A vector store is a database that finds items by meaning, not by exact words."
+        ]
+      },
+      "bn": {
+        "short": "সেম্যান্টিক",
+        "title": "সেম্যান্টিক মেমরি: দীর্ঘমেয়াদি তথ্য",
+        "body": [
+          "সেম্যান্টিক মেমরি হলো ব্যবহারকারী, প্রজেক্ট বা দুনিয়া সম্পর্কে এজেন্ট যে দীর্ঘমেয়াদি তথ্য শিখেছে।",
+          "ভেক্টর স্টোর এমন ডেটাবেস, যা হুবহু শব্দ দিয়ে নয়, অর্থ দিয়ে জিনিস খুঁজে বের করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "sem",
+          "state": "hot",
+          "sub": {
+            "en": "long-term facts",
+            "bn": "দীর্ঘমেয়াদি তথ্য"
+          }
+        },
+        {
+          "id": "vec",
+          "state": "hot",
+          "sub": {
+            "en": "by meaning",
+            "bn": "অর্থ দিয়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "sem",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sem",
+          "to": "vec",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "long-term",
+          "bn": "দীর্ঘমেয়াদি"
+        },
+        {
+          "en": "meaning",
+          "bn": "অর্থ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Procedural",
+        "title": "Procedural memory: the playbook",
+        "body": [
+          "Procedural memory is the agent's playbook of how to do a task.",
+          "It is kept as versioned prompt templates or Markdown checklists."
+        ]
+      },
+      "bn": {
+        "short": "প্রসিডিউরাল",
+        "title": "প্রসিডিউরাল মেমরি: প্লেবুক",
+        "body": [
+          "প্রসিডিউরাল মেমরি হলো কোনো কাজ কীভাবে করতে হয়, তার প্লেবুক।",
+          "ভার্সন করা প্রম্পট টেমপ্লেট বা Markdown চেকলিস্ট হিসেবে রাখা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "proc",
+          "state": "hot",
+          "sub": {
+            "en": "how to do a task",
+            "bn": "কাজ কীভাবে করতে হয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "proc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "versioned prompt templates",
+          "bn": "ভার্সন করা প্রম্পট টেমপ্লেট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "More",
+        "title": "Two more memory types",
+        "body": [
+          "Episodic memory is a record of past runs and what happened in them.",
+          "Identity is who the agent is."
+        ]
+      },
+      "bn": {
+        "short": "আরও",
+        "title": "আরও দুই ধরনের মেমরি",
+        "body": [
+          "এপিসোডিক মেমরি হলো আগের রানগুলো আর সেগুলোতে কী ঘটেছিল, তার রেকর্ড।",
+          "আইডেন্টিটি হলো এজেন্ট কে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "epi",
+          "state": "hot",
+          "sub": {
+            "en": "past runs",
+            "bn": "আগের রান"
+          }
+        },
+        {
+          "id": "ident",
+          "state": "hot",
+          "sub": {
+            "en": "who the agent is",
+            "bn": "এজেন্ট কে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "epi",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "ident",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Breaks",
+        "title": "Where memory breaks",
+        "body": [
+          "Too much memory makes the agent trust stale facts. Too little makes it re-derive the same conclusion every turn.",
+          "Conflicting memory means two facts disagree."
+        ]
+      },
+      "bn": {
+        "short": "ভাঙে",
+        "title": "মেমরি কোথায় ভেঙে পড়ে",
+        "body": [
+          "খুব বেশি মেমরি থাকলে এজেন্ট পুরোনো তথ্যের ওপর ভরসা করে। খুব কম থাকলে প্রতিবার একই সিদ্ধান্ত নতুন করে বের করে।",
+          "মেমরি পরস্পরবিরোধী হলে দুটি তথ্য একে অপরের সাথে মেলে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "much",
+          "state": "warn",
+          "sub": {
+            "en": "trusts stale facts",
+            "bn": "পুরোনো তথ্যে ভরসা"
+          }
+        },
+        {
+          "id": "little",
+          "state": "warn",
+          "sub": {
+            "en": "re-derives every turn",
+            "bn": "প্রতিবার নতুন করে বের করে"
+          }
+        },
+        {
+          "id": "conf",
+          "state": "warn",
+          "sub": {
+            "en": "two facts disagree",
+            "bn": "দুটি তথ্য মেলে না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "much",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "little",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "conf",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Conflict",
+        "title": "Two facts disagree",
+        "body": [
+          "Say the memory holds two facts: the user lives in Dhaka, and the user lives in Chattogram.",
+          "The agent needs a rule for this, for example the newer date wins."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "An old saved fact is a risk: stale facts cause confidently wrong answers."
+        }
+      },
+      "bn": {
+        "short": "গরমিল",
+        "title": "দুটি তথ্য মেলে না",
+        "body": [
+          "ধরুন মেমরিতে দুটি তথ্য: User Dhaka-য় থাকে, আর User Chattogram-এ থাকে।",
+          "এজেন্টের এর জন্য একটা নিয়ম লাগে, যেমন নতুন তারিখেরটাই জেতে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "পুরোনো সংরক্ষিত তথ্য ঝুঁকির: পুরোনো তথ্য আত্মবিশ্বাসী ভুল উত্তর দেয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "sem",
+          "state": "hot",
+          "x": 120,
+          "y": 162
+        },
+        {
+          "id": "old",
+          "state": "dim",
+          "sub": {
+            "en": "older",
+            "bn": "পুরোনো"
+          },
+          "x": 450,
+          "y": 75
+        },
+        {
+          "id": "conf",
+          "state": "hot",
+          "sub": {
+            "en": "newer date wins",
+            "bn": "নতুন তারিখেরটাই জেতে"
+          },
+          "x": 450,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "sem",
+          "to": "old",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "sem",
+          "to": "conf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "The scratchpad is thrown away when the run ends."
+        ],
+        "points": [
+          "Too much memory makes the agent trust stale facts.",
+          "Too little memory makes the agent re-derive the same conclusion every turn.",
+          "Conflicting memory means two facts disagree."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "রান শেষ হলে স্ক্র্যাচপ্যাড ফেলে দেওয়া হয়।"
+        ],
+        "points": [
+          "খুব বেশি মেমরি থাকলে এজেন্ট পুরোনো তথ্যের ওপর ভরসা করে।",
+          "খুব কম মেমরি থাকলে এজেন্ট প্রতিবার একই সিদ্ধান্ত নতুন করে বের করে।",
+          "মেমরি পরস্পরবিরোধী হলে দুটি তথ্য একে অপরের সাথে মেলে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pad",
+          "state": "hot",
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "sem",
+          "state": "hot",
+          "x": 400,
+          "y": 162
+        },
+        {
+          "id": "proc",
+          "state": "hot",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

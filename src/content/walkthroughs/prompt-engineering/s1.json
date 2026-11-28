@@ -1,0 +1,593 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "sys",
+      "kind": "file",
+      "label": {
+        "en": "System message",
+        "bn": "সিস্টেম মেসেজ"
+      },
+      "x": 190,
+      "y": 60
+    },
+    {
+      "id": "usr",
+      "kind": "user",
+      "label": {
+        "en": "User message",
+        "bn": "ইউজার মেসেজ"
+      },
+      "x": 190,
+      "y": 160
+    },
+    {
+      "id": "asst",
+      "kind": "model",
+      "label": {
+        "en": "Assistant message",
+        "bn": "অ্যাসিস্ট্যান্ট মেসেজ"
+      },
+      "x": 190,
+      "y": 260
+    },
+    {
+      "id": "hard",
+      "kind": "shield",
+      "label": {
+        "en": "Hard rules",
+        "bn": "কঠিন নিয়ম"
+      },
+      "x": 570,
+      "y": 60
+    },
+    {
+      "id": "soft",
+      "kind": "note",
+      "label": {
+        "en": "Soft style wishes",
+        "bn": "নরম স্টাইলের পছন্দ"
+      },
+      "x": 570,
+      "y": 160
+    },
+    {
+      "id": "start",
+      "kind": "note",
+      "label": {
+        "en": "Start",
+        "bn": "শুরু"
+      },
+      "x": 130,
+      "y": 160
+    },
+    {
+      "id": "mid",
+      "kind": "note",
+      "label": {
+        "en": "Middle",
+        "bn": "মাঝখান"
+      },
+      "x": 380,
+      "y": 160
+    },
+    {
+      "id": "end",
+      "kind": "note",
+      "label": {
+        "en": "End",
+        "bn": "শেষ"
+      },
+      "x": 630,
+      "y": 160
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Role",
+      "bn": "রোল"
+    },
+    {
+      "en": "Holds",
+      "bn": "যা থাকে"
+    },
+    {
+      "en": "Placement",
+      "bn": "বসানো"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Roles",
+        "title": "Every message has a role",
+        "body": [
+          "Every message you send to a chat model has a role: system, user, or assistant.",
+          "A role is a tag that says who is speaking."
+        ]
+      },
+      "bn": {
+        "short": "রোল",
+        "title": "প্রতিটি মেসেজের একটা রোল আছে",
+        "body": [
+          "চ্যাট মডেলে পাঠানো প্রতিটি মেসেজের একটা রোল থাকে: system, user বা assistant।",
+          "রোল হলো মেসেজে লাগানো ট্যাগ, যা বলে কে কথা বলছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "hot"
+        },
+        {
+          "id": "usr",
+          "state": "hot"
+        },
+        {
+          "id": "asst",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "usr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "usr",
+          "to": "asst",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "system, user, assistant",
+          "bn": "system, user, assistant"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "System",
+        "title": "System: the fixed rules",
+        "body": [
+          "The system message holds the app's fixed rules for every call: how the model should act, the output format, and safety limits.",
+          "Think of it as the app's instruction sheet."
+        ]
+      },
+      "bn": {
+        "short": "সিস্টেম",
+        "title": "সিস্টেম: স্থির নিয়ম",
+        "body": [
+          "সিস্টেম মেসেজে থাকে প্রতিটি কলের জন্য অ্যাপের স্থির নিয়ম: মডেল কীভাবে আচরণ করবে, আউটপুট ফরম্যাট, সেফটি সীমা।",
+          "এটা অ্যাপের নির্দেশিকার মতো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "hot",
+          "sub": {
+            "en": "true for every call",
+            "bn": "প্রতিটি কলে যা সত্যি"
+          }
+        },
+        {
+          "id": "usr",
+          "state": "dim"
+        },
+        {
+          "id": "asst",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "usr",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "usr",
+          "to": "asst",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "system",
+          "bn": "system"
+        },
+        {
+          "en": "rules for every call",
+          "bn": "প্রতিটি কলের নিয়ম"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "User",
+        "title": "User: the task for this turn",
+        "body": [
+          "The user message is the real task for this turn: the request, the data to work on, and any retrieved text.",
+          "Be specific and give all inputs."
+        ]
+      },
+      "bn": {
+        "short": "ইউজার",
+        "title": "ইউজার: এই টার্নের কাজ",
+        "body": [
+          "ইউজার মেসেজ হলো এই টার্নের আসল কাজ: অনুরোধ, কাজ করার ডেটা আর খুঁজে আনা লেখা।",
+          "স্পষ্ট হতে হবে, দরকারি সব ইনপুট দিতে হবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "dim"
+        },
+        {
+          "id": "usr",
+          "state": "hot",
+          "sub": {
+            "en": "request and data",
+            "bn": "অনুরোধ আর ডেটা"
+          }
+        },
+        {
+          "id": "asst",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "usr",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "usr",
+          "to": "asst",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "user",
+          "bn": "user"
+        },
+        {
+          "en": "request, data, retrieved text",
+          "bn": "অনুরোধ, ডেটা, খুঁজে আনা লেখা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Assistant",
+        "title": "Assistant: the earlier replies",
+        "body": [
+          "The assistant message is the model's own earlier reply.",
+          "In a multi-turn chat, you send this history again each turn."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাসিস্ট্যান্ট",
+        "title": "অ্যাসিস্ট্যান্ট: আগের উত্তর",
+        "body": [
+          "অ্যাসিস্ট্যান্ট মেসেজ হলো মডেলের নিজের আগের উত্তর।",
+          "মাল্টি-টার্ন চ্যাটে এই ইতিহাস প্রতি টার্নে আবার পাঠাতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "dim"
+        },
+        {
+          "id": "usr",
+          "state": "dim"
+        },
+        {
+          "id": "asst",
+          "state": "hot",
+          "sub": {
+            "en": "history, sent again",
+            "bn": "ইতিহাস, আবার পাঠানো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "usr",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "usr",
+          "to": "asst",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "assistant",
+          "bn": "assistant"
+        },
+        {
+          "en": "the model's earlier replies",
+          "bn": "মডেলের আগের উত্তর"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Placement",
+        "title": "Hard rules in system, style in user",
+        "body": [
+          "Hard rules, like the output format and what the model must refuse, go in system.",
+          "Soft style wishes go in user, next to the request."
+        ]
+      },
+      "bn": {
+        "short": "বসানো",
+        "title": "কঠিন নিয়ম সিস্টেমে, স্টাইল ইউজারে",
+        "body": [
+          "কঠিন নিয়ম, যেমন আউটপুট ফরম্যাট আর মডেল কী প্রত্যাখ্যান করবে, থাকবে সিস্টেমে।",
+          "নরম স্টাইলের পছন্দ থাকবে ইউজার মেসেজে, অনুরোধের পাশেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "hard",
+          "state": "hot"
+        },
+        {
+          "id": "sys",
+          "state": "hot"
+        },
+        {
+          "id": "soft",
+          "state": "hot"
+        },
+        {
+          "id": "usr",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "hard",
+          "to": "sys",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "soft",
+          "to": "usr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "hard in system, soft in user",
+          "bn": "কঠিন সিস্টেমে, নরম ইউজারে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Crowded",
+        "title": "A crowded system message",
+        "body": [
+          "A very long, crowded system message can give worse results than a short, focused one."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Dumping every wish into the system message leaves the model unable to prioritise."
+        }
+      },
+      "bn": {
+        "short": "ঠাসা",
+        "title": "ঠাসা সিস্টেম মেসেজ",
+        "body": [
+          "খুব লম্বা, ঠাসা সিস্টেম মেসেজ ছোট ও ফোকাসড মেসেজের চেয়ে খারাপ ফল দিতে পারে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সব ইচ্ছা সিস্টেম মেসেজে ঢোকালে মডেল অগ্রাধিকার ঠিক করতে পারে না।"
+        }
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "warn",
+          "sub": {
+            "en": "crowded",
+            "bn": "ঠাসা"
+          }
+        },
+        {
+          "id": "usr",
+          "state": "dim"
+        },
+        {
+          "id": "asst",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "usr",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "usr",
+          "to": "asst",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "short and focused",
+          "bn": "ছোট ও ফোকাসড"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Middle",
+        "title": "Lost in the middle",
+        "body": [
+          "Models notice information in the middle of a long text less reliably than information at the start or end."
+        ]
+      },
+      "bn": {
+        "short": "মাঝখান",
+        "title": "লস্ট ইন দ্য মিডল",
+        "body": [
+          "লম্বা লেখার মাঝখানের তথ্য মডেল শুরু বা শেষের তথ্যের চেয়ে কম নির্ভরযোগ্যভাবে খেয়াল করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot",
+          "sub": {
+            "en": "noticed",
+            "bn": "খেয়াল করে"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "less reliably",
+            "bn": "কম নির্ভরযোগ্যভাবে"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot",
+          "sub": {
+            "en": "noticed",
+            "bn": "খেয়াল করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "mid",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "mid",
+          "to": "end",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "not in the middle",
+          "bn": "মাঝখানে নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Put your most important instructions at the beginning or end, not in the middle."
+        ],
+        "points": [
+          "Put what is true for every call in the system message. Put the specific request and its data in the user message.",
+          "Hard rules, like the output format and what the model must refuse, go in system. Soft style wishes go in user, next to the request.",
+          "A very long, crowded system message can give worse results than a short, focused one.",
+          "Put your most important instructions at the beginning or end, not in the middle."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "সবচেয়ে জরুরি নির্দেশ শুরুতে বা শেষে রাখুন, মাঝখানে নয়।"
+        ],
+        "points": [
+          "প্রতিটি কলে যা সত্যি, তা সিস্টেম মেসেজে রাখুন। নির্দিষ্ট অনুরোধ আর তার ডেটা রাখুন ইউজার মেসেজে।",
+          "কঠিন নিয়ম, যেমন আউটপুট ফরম্যাট আর মডেল কী প্রত্যাখ্যান করবে, থাকবে সিস্টেমে। নরম স্টাইলের পছন্দ থাকবে ইউজার মেসেজে, অনুরোধের পাশেই।",
+          "খুব লম্বা, ঠাসা সিস্টেম মেসেজ ছোট ও ফোকাসড মেসেজের চেয়ে খারাপ ফল দিতে পারে।",
+          "সবচেয়ে জরুরি নির্দেশ শুরুতে বা শেষে রাখুন, মাঝখানে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "start",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "dim"
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "start",
+          "to": "mid",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "mid",
+          "to": "end",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "beginning or end",
+          "bn": "শুরুতে বা শেষে"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,687 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "app",
+      "kind": "user",
+      "label": {
+        "en": "Your app",
+        "bn": "আপনার অ্যাপ"
+      },
+      "x": 90,
+      "y": 162
+    },
+    {
+      "id": "hosted",
+      "kind": "cdn",
+      "label": {
+        "en": "Hosted API",
+        "bn": "হোস্টেড API"
+      },
+      "x": 360,
+      "y": 70
+    },
+    {
+      "id": "srv",
+      "kind": "service",
+      "label": {
+        "en": "Inference server",
+        "bn": "ইনফারেন্স সার্ভার"
+      },
+      "x": 360,
+      "y": 254
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "Your own GPU",
+        "bn": "আপনার নিজের GPU"
+      },
+      "x": 640,
+      "y": 254
+    },
+    {
+      "id": "bill",
+      "kind": "chart",
+      "label": {
+        "en": "Your bill",
+        "bn": "আপনার বিল"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "cost",
+      "kind": "note",
+      "label": {
+        "en": "Engineer plus two H100s",
+        "bn": "ইঞ্জিনিয়ার আর দুটি H100"
+      },
+      "x": 390,
+      "y": 162
+    },
+    {
+      "id": "vllm",
+      "kind": "service",
+      "label": {
+        "en": "vLLM",
+        "bn": "vLLM"
+      },
+      "x": 330,
+      "y": 70
+    },
+    {
+      "id": "tgi",
+      "kind": "service",
+      "label": {
+        "en": "TGI",
+        "bn": "TGI"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "sglang",
+      "kind": "service",
+      "label": {
+        "en": "SGLang",
+        "bn": "SGLang"
+      },
+      "x": 330,
+      "y": 254
+    },
+    {
+      "id": "ollama",
+      "kind": "service",
+      "label": {
+        "en": "Ollama",
+        "bn": "Ollama"
+      },
+      "x": 600,
+      "y": 70
+    },
+    {
+      "id": "llama",
+      "kind": "service",
+      "label": {
+        "en": "llama.cpp",
+        "bn": "llama.cpp"
+      },
+      "x": 600,
+      "y": 162
+    },
+    {
+      "id": "trt",
+      "kind": "service",
+      "label": {
+        "en": "TensorRT-LLM / Triton",
+        "bn": "TensorRT-LLM / Triton"
+      },
+      "x": 600,
+      "y": 254
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Time to first token",
+      "bn": "টাইম টু ফার্স্ট টোকেন"
+    },
+    {
+      "en": "Cost per 1M tokens",
+      "bn": "১M টোকেনে খরচ"
+    },
+    {
+      "en": "Data",
+      "bn": "ডেটা"
+    },
+    {
+      "en": "Ops effort",
+      "bn": "অপস প্রচেষ্টা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর অঙ্ক সেকশনের নিজস্ব।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Hosted",
+        "title": "Start with a hosted API",
+        "body": [
+          "A hosted API is a model that a vendor runs for you. You send requests and pay for what you use.",
+          "Start here. It takes minutes, while self-hosting takes weeks."
+        ]
+      },
+      "bn": {
+        "short": "হোস্টেড",
+        "title": "হোস্টেড API দিয়ে শুরু করুন",
+        "body": [
+          "হোস্টেড API হলো যে মডেল কোনো ভেন্ডর আপনার হয়ে চালায়। আপনি রিকোয়েস্ট পাঠান, আর যত ব্যবহার করেন তত টাকা দেন।",
+          "আগে এটা দিয়ে শুরু করুন। এতে মিনিট লাগে, আর সেলফ-হোস্টে লাগে কয়েক সপ্তাহ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "hosted",
+          "state": "hot",
+          "sub": {
+            "en": "vendor runs it",
+            "bn": "ভেন্ডর চালায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "hosted",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "request",
+            "bn": "রিকোয়েস্ট"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "Minutes",
+          "bn": "মিনিট"
+        },
+        null,
+        {
+          "en": "Vendor's terms",
+          "bn": "ভেন্ডরের শর্ত"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Self-host",
+        "title": "Self-hosting: your own GPU",
+        "body": [
+          "Self-hosted means running the model yourself on your own GPU, so you control the setup and the data.",
+          "An inference server is the program that loads model weights into GPU memory and answers requests."
+        ]
+      },
+      "bn": {
+        "short": "সেলফ-হোস্ট",
+        "title": "সেলফ-হোস্ট: নিজের GPU",
+        "body": [
+          "সেলফ-হোস্টেড মানে নিজের GPU-তে নিজেই মডেল চালানো, ফলে সেটআপ আর ডেটা আপনার হাতে থাকে।",
+          "ইনফারেন্স সার্ভার হলো যে প্রোগ্রাম মডেলের ওয়েট GPU মেমরিতে তোলে আর রিকোয়েস্টের উত্তর দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "srv",
+          "state": "hot",
+          "sub": {
+            "en": "loads the weights",
+            "bn": "ওয়েট তোলে"
+          },
+          "x": 360,
+          "y": 162
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "you control it",
+            "bn": "আপনার নিয়ন্ত্রণে"
+          },
+          "x": 640,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "srv",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Weeks",
+          "bn": "সপ্তাহ"
+        },
+        null,
+        {
+          "en": "You control everything",
+          "bn": "সবকিছু আপনার নিয়ন্ত্রণে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Trade-off",
+        "title": "The trade-off",
+        "body": [
+          "Hosted starts in minutes; self-hosting takes weeks. Per 1M tokens, hosted is $0.10 – $15 and self-hosted is $0.04 – $2 at scale."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Model selection: the vendor's catalogue, or anything you can fit on your GPU"
+          },
+          {
+            "sign": "+",
+            "html": "Peak traffic: the vendor scales, or you scale"
+          },
+          {
+            "sign": "+",
+            "html": "Customisation: none or a fine-tune API, or full"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ট্রেড-অফ",
+        "title": "ট্রেড-অফ",
+        "body": [
+          "হোস্টেড মিনিটে শুরু হয়; সেলফ-হোস্টে লাগে কয়েক সপ্তাহ। ১M টোকেনে হোস্টেড $০.১০ – $১৫, আর স্কেলে সেলফ-হোস্টেড $০.০৪ – $২।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "মডেল বাছাই: ভেন্ডরের ক্যাটালগ, বা আপনার GPU-তে যা ধরে"
+          },
+          {
+            "sign": "+",
+            "html": "পিক ট্রাফিক: ভেন্ডর স্কেল করে, বা আপনি স্কেল করেন"
+          },
+          {
+            "sign": "+",
+            "html": "কাস্টমাইজেশন: নেই বা ফাইন-টিউন API, বা পুরোপুরি"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "hosted",
+          "state": "hot",
+          "sub": {
+            "en": "Minutes",
+            "bn": "মিনিট"
+          }
+        },
+        {
+          "id": "srv",
+          "state": "hot",
+          "sub": {
+            "en": "Weeks",
+            "bn": "সপ্তাহ"
+          }
+        },
+        {
+          "id": "app",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "hosted",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Minutes vs weeks",
+          "bn": "মিনিট বনাম সপ্তাহ"
+        },
+        {
+          "en": "$0.10 – $15 vs $0.04 – $2",
+          "bn": "$০.১০ – $১৫ বনাম $০.০৪ – $২"
+        },
+        {
+          "en": "Vendor's terms vs you",
+          "bn": "ভেন্ডরের শর্ত বনাম আপনি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rule",
+        "title": "When to move",
+        "body": [
+          "Rule of thumb: start hosted.",
+          "Move to self-hosting once your bill exceeds the cost of a half-time ML engineer plus two H100s."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Self-hosting costs less per token at scale and gives you full control of your data."
+        }
+      },
+      "bn": {
+        "short": "নিয়ম",
+        "title": "কখন সরবেন",
+        "body": [
+          "মোটামুটি নিয়ম: আগে হোস্টেড দিয়ে শুরু করুন।",
+          "বিল আধা-সময়ের ML ইঞ্জিনিয়ার আর দুটি H100-এর খরচ ছাড়ালে সেলফ-হোস্টে যান।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "স্কেলে সেলফ-হোস্টে প্রতি টোকেনের খরচ কম, আর ডেটার পুরো নিয়ন্ত্রণ আপনার হাতে থাকে।"
+        }
+      },
+      "show": [
+        {
+          "id": "bill",
+          "state": "warn",
+          "sub": {
+            "en": "exceeds",
+            "bn": "ছাড়ালে"
+          }
+        },
+        {
+          "id": "cost",
+          "state": "hot",
+          "sub": {
+            "en": "half-time ML engineer",
+            "bn": "আধা-সময়ের ML ইঞ্জিনিয়ার"
+          }
+        },
+        {
+          "id": "srv",
+          "state": "hot",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "bill",
+          "to": "cost",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "cost",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Servers",
+        "title": "The five servers, plus one",
+        "body": [
+          "Five main servers in 2025 are vLLM, TGI, SGLang, Ollama and llama.cpp.",
+          "TensorRT-LLM / Triton is the fastest, but takes the most ops work."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "SGLang: structured-output and multi-call programs"
+          },
+          {
+            "sign": "+",
+            "html": "TGI: Hugging Face's server, now in maintenance mode; Hugging Face recommends vLLM or SGLang for new deployments"
+          }
+        ]
+      },
+      "bn": {
+        "short": "সার্ভার",
+        "title": "পাঁচটি সার্ভার, সাথে আরও একটা",
+        "body": [
+          "২০২৫-এ পাঁচটি প্রধান সার্ভার হলো vLLM, TGI, SGLang, Ollama আর llama.cpp।",
+          "TensorRT-LLM / Triton সবচেয়ে দ্রুত, কিন্তু সবচেয়ে বেশি অপস কাজ লাগে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "SGLang: স্ট্রাকচার্ড আউটপুট ও মাল্টি-কল প্রোগ্রামের জন্য"
+          },
+          {
+            "sign": "+",
+            "html": "TGI: Hugging Face-এর সার্ভার, এখন maintenance mode-এ; নতুন ডিপ্লয়মেন্টের জন্য Hugging Face vLLM বা SGLang সুপারিশ করে"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "vllm",
+          "state": "hot"
+        },
+        {
+          "id": "tgi",
+          "state": "hot"
+        },
+        {
+          "id": "sglang",
+          "state": "hot"
+        },
+        {
+          "id": "ollama",
+          "state": "hot"
+        },
+        {
+          "id": "llama",
+          "state": "hot"
+        },
+        {
+          "id": "trt",
+          "state": "hot"
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "TensorRT-LLM / Triton: most",
+          "bn": "TensorRT-LLM / Triton: সবচেয়ে বেশি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "vLLM",
+        "title": "vLLM: the throughput champion",
+        "body": [
+          "PagedAttention and continuous batching improved throughput 2–4× over FasterTransformer and Orca at the same latency in the vLLM paper.",
+          "PagedAttention stores the model's working memory in small pages, so little memory is wasted."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "vLLM has a Python API and an OpenAI-compatible HTTP server."
+        }
+      },
+      "bn": {
+        "short": "vLLM",
+        "title": "vLLM: থ্রুপুট চ্যাম্পিয়ন",
+        "body": [
+          "vLLM paper-এ PagedAttention আর কন্টিনিউয়াস ব্যাচিং একই ল্যাটেন্সিতে FasterTransformer ও Orca-র চেয়ে ২–৪× থ্রুপুট বাড়িয়েছে।",
+          "PagedAttention মডেলের কাজের মেমরি ছোট ছোট পেজে রাখে, ফলে মেমরি কম নষ্ট হয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "vLLM-এ আছে Python API আর OpenAI-compatible HTTP সার্ভার।"
+        }
+      },
+      "show": [
+        {
+          "id": "srv",
+          "state": "hot",
+          "x": 120,
+          "y": 162
+        },
+        {
+          "id": "vllm",
+          "state": "hot",
+          "sub": {
+            "en": "PagedAttention",
+            "bn": "PagedAttention"
+          },
+          "x": 420,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "srv",
+          "to": "vllm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Small",
+        "title": "Ollama and llama.cpp",
+        "body": [
+          "Ollama is a one-line CLI for local laptops and small servers, best for dev and small-scale prod.",
+          "llama.cpp is CPU-first and GGUF-native, and runs on phones and Raspberry Pis."
+        ]
+      },
+      "bn": {
+        "short": "ছোট",
+        "title": "Ollama আর llama.cpp",
+        "body": [
+          "Ollama লোকাল ল্যাপটপ ও ছোট সার্ভারের জন্য এক-লাইনের CLI, ডেভ আর ছোট প্রোডের জন্য সেরা।",
+          "llama.cpp হলো CPU-first, GGUF-native, ফোন ও Raspberry Pi-তেও চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ollama",
+          "state": "hot",
+          "sub": {
+            "en": "laptops, small servers",
+            "bn": "ল্যাপটপ, ছোট সার্ভার"
+          },
+          "x": 240,
+          "y": 100
+        },
+        {
+          "id": "llama",
+          "state": "hot",
+          "sub": {
+            "en": "phones, Raspberry Pis",
+            "bn": "ফোন, Raspberry Pi"
+          },
+          "x": 240,
+          "y": 224
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Start hosted, and self-host once the numbers justify it."
+        ],
+        "points": [
+          "Start with a hosted API. It takes minutes, while self-hosting takes weeks.",
+          "Self-hosting costs less per token at scale and gives you full control of your data.",
+          "Move to self-hosting when your bill exceeds the cost of a half-time ML engineer plus two H100s.",
+          "Five main servers in 2025 are vLLM, TGI, SGLang, Ollama and llama.cpp, plus TensorRT-LLM / Triton."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "আগে হোস্টেড দিয়ে শুরু করুন, আর হিসাবে পোষালে সেলফ-হোস্ট করুন।"
+        ],
+        "points": [
+          "আগে হোস্টেড API দিয়ে শুরু করুন। এতে মিনিট লাগে, আর সেলফ-হোস্টে লাগে কয়েক সপ্তাহ।",
+          "স্কেলে সেলফ-হোস্টে প্রতি টোকেনের খরচ কম, আর ডেটার পুরো নিয়ন্ত্রণ আপনার হাতে থাকে।",
+          "বিল আধা-সময়ের ML ইঞ্জিনিয়ার আর দুটি H100-এর খরচ ছাড়ালে সেলফ-হোস্টে যান।",
+          "২০২৫-এ পাঁচটি প্রধান সার্ভার হলো vLLM, TGI, SGLang, Ollama আর llama.cpp, সাথে TensorRT-LLM / Triton।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app"
+        },
+        {
+          "id": "hosted"
+        },
+        {
+          "id": "srv",
+          "x": 360,
+          "y": 254
+        },
+        {
+          "id": "gpu"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "hosted",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "srv",
+          "flow": "to"
+        },
+        {
+          "from": "srv",
+          "to": "gpu",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

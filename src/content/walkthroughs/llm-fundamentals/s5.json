@@ -1,0 +1,476 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "full",
+      "kind": "file",
+      "label": {
+        "en": "Whole answer",
+        "bn": "পুরো উত্তর"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "ua",
+      "kind": "user",
+      "label": {
+        "en": "Reader",
+        "bn": "পাঠক"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "pieces",
+      "kind": "queue",
+      "label": {
+        "en": "Small pieces",
+        "bn": "ছোট টুকরো"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "ub",
+      "kind": "user",
+      "label": {
+        "en": "Reader",
+        "bn": "পাঠক"
+      },
+      "x": 650,
+      "y": 250
+    },
+    {
+      "id": "parser",
+      "kind": "tool",
+      "label": {
+        "en": "JSON parser",
+        "bn": "JSON পার্সার"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Wait before first word",
+      "bn": "প্রথম শব্দের আগের অপেক্ষা"
+    },
+    {
+      "en": "Total time",
+      "bn": "মোট সময়"
+    },
+    {
+      "en": "Model work",
+      "bn": "মডেলের কাজ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Tokens",
+        "title": "One token at a time",
+        "body": [
+          "A model writes its answer one token at a time."
+        ]
+      },
+      "bn": {
+        "short": "টোকেন",
+        "title": "একবারে একটি টোকেন",
+        "body": [
+          "মডেল উত্তর লেখে একবারে একটি টোকেন করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "one token at a time",
+            "bn": "একবারে একটি টোকেন"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Waiting",
+        "title": "Non-streaming waits",
+        "body": [
+          "Non-streaming waits, and sends the whole answer at the end."
+        ]
+      },
+      "bn": {
+        "short": "অপেক্ষা",
+        "title": "নন-স্ট্রিমিং অপেক্ষা করে",
+        "body": [
+          "নন-স্ট্রিমিং অপেক্ষা করে, আর শেষে পুরো উত্তর একসাথে পাঠায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "full",
+          "state": "warn",
+          "sub": {
+            "en": "at the end",
+            "bn": "শেষে"
+          }
+        },
+        {
+          "id": "ua",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "full",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "full",
+          "to": "ua",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "waits",
+          "bn": "অপেক্ষা"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Streaming",
+        "title": "Streaming sends small pieces",
+        "body": [
+          "Streaming sends the answer in small pieces while the model is still writing it.",
+          "Server-Sent Events (SSE) is a simple way for a server to keep pushing new pieces of text to a page over one connection."
+        ]
+      },
+      "bn": {
+        "short": "স্ট্রিমিং",
+        "title": "স্ট্রিমিং ছোট টুকরো পাঠায়",
+        "body": [
+          "স্ট্রিমিং মডেল লিখতে থাকার সময়েই উত্তরটা ছোট ছোট টুকরোয় পাঠায়।",
+          "Server-Sent Events (SSE) একটি সহজ উপায়, যাতে সার্ভার একটি কানেকশন দিয়েই পাতায় একের পর এক নতুন টুকরো পাঠাতে থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "pieces",
+          "state": "hot",
+          "sub": {
+            "en": "while still writing",
+            "bn": "লিখতে থাকার সময়েই"
+          }
+        },
+        {
+          "id": "ub",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "pieces",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pieces",
+          "to": "ub",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "earlier",
+          "bn": "আগে"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Latency",
+        "title": "Same work, earlier first word",
+        "body": [
+          "Streaming does not cut the total time. It cuts the wait before the first word.",
+          "It makes an answer feel faster, but the model does the same work."
+        ]
+      },
+      "bn": {
+        "short": "ল্যাটেন্সি",
+        "title": "একই কাজ, আগে প্রথম শব্দ",
+        "body": [
+          "স্ট্রিমিং মোট সময় কমায় না; প্রথম শব্দের আগের অপেক্ষাটা কমায়।",
+          "এতে উত্তর দ্রুত মনে হয়, কিন্তু মডেলের কাজ একই থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "full",
+          "state": "dim"
+        },
+        {
+          "id": "ua",
+          "state": "dim"
+        },
+        {
+          "id": "pieces",
+          "state": "hot",
+          "sub": {
+            "en": "first word sooner",
+            "bn": "প্রথম শব্দ আগে"
+          }
+        },
+        {
+          "id": "ub",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "full",
+          "to": "ua",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "pieces",
+          "to": "ub",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "shorter",
+          "bn": "কম"
+        },
+        {
+          "en": "not cut",
+          "bn": "কমে না"
+        },
+        {
+          "en": "the same",
+          "bn": "একই"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Stream",
+        "title": "Stream what a person reads",
+        "body": [
+          "Stream any chat or text that a person reads as it arrives."
+        ]
+      },
+      "bn": {
+        "short": "স্ট্রিম",
+        "title": "মানুষ যা পড়ে, তা স্ট্রিম করুন",
+        "body": [
+          "মানুষ আসতে আসতেই পড়বে এমন যেকোনো চ্যাট বা লেখা স্ট্রিম করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "pieces",
+          "state": "hot"
+        },
+        {
+          "id": "ub",
+          "state": "hot",
+          "sub": {
+            "en": "reads as it arrives",
+            "bn": "আসতে আসতেই পড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "pieces",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pieces",
+          "to": "ub",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Skip",
+        "title": "Skip it when code needs it all",
+        "body": [
+          "Skip streaming when code needs the full answer first, such as to parse or check JSON, and in batch jobs.",
+          "A pipeline is a chain of programs where one step's output is the next step's input, with no person reading in between."
+        ]
+      },
+      "bn": {
+        "short": "বাদ",
+        "title": "কোডের সবটা লাগলে বন্ধ রাখুন",
+        "body": [
+          "কোডের যখন আগে পুরো উত্তর দরকার, যেমন JSON পার্স বা যাচাই করতে, আর ব্যাচ জবে, স্ট্রিমিং বন্ধ রাখুন।",
+          "পাইপলাইন হলো প্রোগ্রামের একটা শিকল, যেখানে এক ধাপের আউটপুট পরের ধাপের ইনপুট; মাঝে কোনো মানুষ পড়ে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "full",
+          "state": "hot",
+          "sub": {
+            "en": "full answer first",
+            "bn": "আগে পুরো উত্তর"
+          }
+        },
+        {
+          "id": "parser",
+          "state": "hot",
+          "sub": {
+            "en": "parse or check",
+            "bn": "পার্স বা যাচাই"
+          }
+        },
+        {
+          "id": "pieces",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "full",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "full",
+          "to": "parser",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "pieces",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Streaming makes an answer feel faster, but the model does the same work."
+        ],
+        "points": [
+          "Stream any chat or text that a person reads as it arrives.",
+          "Skip streaming when code needs the full answer first, such as to parse or check JSON.",
+          "Skip streaming in batch jobs."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "স্ট্রিমিংয়ে উত্তর দ্রুত মনে হয়, কিন্তু মডেলের কাজ একই থাকে।"
+        ],
+        "points": [
+          "মানুষ আসতে আসতেই পড়বে এমন যেকোনো চ্যাট বা লেখা স্ট্রিম করুন।",
+          "কোডের যখন আগে পুরো উত্তর দরকার, যেমন JSON পার্স বা যাচাই করতে, স্ট্রিমিং বন্ধ রাখুন।",
+          "ব্যাচ জবে স্ট্রিমিং বন্ধ রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model"
+        },
+        {
+          "id": "pieces"
+        },
+        {
+          "id": "ub"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "pieces",
+          "flow": "to"
+        },
+        {
+          "from": "pieces",
+          "to": "ub",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

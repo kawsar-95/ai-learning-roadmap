@@ -1,0 +1,564 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "web",
+      "kind": "file",
+      "label": {
+        "en": "Internet-like text",
+        "bn": "ইন্টারনেটের মতো লেখা"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "pre",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "sft",
+      "kind": "file",
+      "label": {
+        "en": "SFT pairs",
+        "bn": "SFT জোড়া"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "pref",
+      "kind": "key",
+      "label": {
+        "en": "Preference tuning",
+        "bn": "প্রেফারেন্স টিউনিং"
+      },
+      "x": 625,
+      "y": 162
+    },
+    {
+      "id": "prompt",
+      "kind": "user",
+      "label": {
+        "en": "Prompt",
+        "bn": "প্রম্পট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "temp",
+      "kind": "tool",
+      "label": {
+        "en": "Temperature",
+        "bn": "টেম্পারেচার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "topp",
+      "kind": "tool",
+      "label": {
+        "en": "Top-k, top-p",
+        "bn": "top-k, top-p"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "odds",
+      "kind": "chart",
+      "label": {
+        "en": "Next-token odds",
+        "bn": "পরের টোকেনের সম্ভাবনা"
+      },
+      "x": 625,
+      "y": 162
+    },
+    {
+      "id": "ans1",
+      "kind": "note",
+      "label": {
+        "en": "Answer 1",
+        "bn": "উত্তর ১"
+      },
+      "x": 650,
+      "y": 80
+    },
+    {
+      "id": "ans2",
+      "kind": "note",
+      "label": {
+        "en": "Answer 2",
+        "bn": "উত্তর ২"
+      },
+      "x": 650,
+      "y": 244
+    },
+    {
+      "id": "hall",
+      "kind": "note",
+      "label": {
+        "en": "Confidently false",
+        "bn": "আত্মবিশ্বাসে ভুল"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Temperature",
+      "bn": "টেম্পারেচার"
+    },
+    {
+      "en": "Top-k keeps",
+      "bn": "top-k রাখে"
+    },
+    {
+      "en": "Top-p keeps",
+      "bn": "top-p রাখে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Pre-trained",
+        "title": "Pre-training is not enough",
+        "body": [
+          "A model that only went through pre-training is optimized to predict the next token of internet-like text, not to hold a conversation.",
+          "It can also reproduce the racism, misinformation, and rudeness present in its training data."
+        ]
+      },
+      "bn": {
+        "short": "প্রি-ট্রেনিং",
+        "title": "শুধু প্রি-ট্রেনিং যথেষ্ট নয়",
+        "body": [
+          "যে মডেল শুধু প্রি-ট্রেনিং পেয়েছে, সে ইন্টারনেটের মতো লেখার পরের টোকেন অনুমান করতে ওপটিমাইজ করা, কথোপকথন চালাতে নয়।",
+          "সে ট্রেনিং ডেটার বর্ণবাদ, ভুল তথ্য আর রূঢ়তাও নকল করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "web",
+          "state": "hot"
+        },
+        {
+          "id": "pre",
+          "state": "warn",
+          "sub": {
+            "en": "pre-training only",
+            "bn": "শুধু প্রি-ট্রেনিং"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "web",
+          "to": "pre",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "SFT",
+        "title": "Stage one: supervised finetuning",
+        "body": [
+          "In supervised finetuning (SFT), the model is finetuned on curated (prompt, response) pairs written by trained labelers.",
+          "It learns to behave like an assistant rather than a text-completion engine."
+        ]
+      },
+      "bn": {
+        "short": "SFT",
+        "title": "প্রথম ধাপ: সুপারভাইজড ফাইনটিউনিং",
+        "body": [
+          "সুপারভাইজড ফাইনটিউনিংয়ে (SFT) প্রশিক্ষিত লেবেলারদের লেখা বাছাই করা (prompt, response) জোড়া দিয়ে মডেলকে ফাইনটিউন করা হয়।",
+          "সে টেক্সট-কমপ্লিশন ইঞ্জিনের বদলে অ্যাসিস্ট্যান্টের মতো আচরণ শেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pre",
+          "state": "dim",
+          "x": 110
+        },
+        {
+          "id": "sft",
+          "state": "hot",
+          "sub": {
+            "en": "(prompt, response) pairs",
+            "bn": "(prompt, response) জোড়া"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pre",
+          "to": "sft",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Preference",
+        "title": "Stage two: preference finetuning",
+        "body": [
+          "In preference finetuning, the model is further tuned to produce responses humans actually prefer.",
+          "The classic approach, RLHF, trains a reward model on human comparisons of response pairs."
+        ]
+      },
+      "bn": {
+        "short": "প্রেফারেন্স",
+        "title": "দ্বিতীয় ধাপ: প্রেফারেন্স ফাইনটিউনিং",
+        "body": [
+          "প্রেফারেন্স ফাইনটিউনিংয়ে মডেলকে আরও টিউন করা হয়, যাতে মানুষ আসলে যে উত্তর পছন্দ করে সে তা দেয়।",
+          "প্রচলিত উপায় RLHF উত্তরের জোড়ার ওপর মানুষের তুলনা দিয়ে একটা রিওয়ার্ড মডেল ট্রেইন করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pre",
+          "state": "dim",
+          "x": 100
+        },
+        {
+          "id": "sft",
+          "state": "dim",
+          "x": 340
+        },
+        {
+          "id": "pref",
+          "state": "hot",
+          "sub": {
+            "en": "RLHF",
+            "bn": "RLHF"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pre",
+          "to": "sft",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "sft",
+          "to": "pref",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Token odds",
+        "title": "A probability for every token",
+        "body": [
+          "At each step the model computes a probability distribution over every token in its vocabulary, then samples one.",
+          "Most systems sample proportionally to probability."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Always picking the single most likely token is called greedy sampling. It is safe but tends to produce dull, repetitive text."
+        }
+      },
+      "bn": {
+        "short": "টোকেনের সম্ভাবনা",
+        "title": "প্রতিটি টোকেনের সম্ভাবনা",
+        "body": [
+          "প্রতিটি ধাপে মডেল তার ভোকাবুলারির প্রতিটি টোকেনের ওপর একটা সম্ভাব্যতার বণ্টন হিসাব করে, তারপর একটা বাছে।",
+          "বেশিরভাগ সিস্টেম সম্ভাব্যতা অনুযায়ী বাছে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "সবসময় একটাই সবচেয়ে সম্ভাব্য টোকেন বাছাকে বলে গ্রিডি স্যাম্পলিং। এটা নিরাপদ, কিন্তু একঘেয়ে আর পুনরাবৃত্তিমূলক লেখা বানায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "prompt",
+          "state": "hot"
+        },
+        {
+          "id": "pre",
+          "state": "hot"
+        },
+        {
+          "id": "odds",
+          "state": "hot",
+          "sub": {
+            "en": "sampled by probability",
+            "bn": "সম্ভাব্যতা অনুযায়ী বাছা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "prompt",
+          "to": "pre",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pre",
+          "to": "odds",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Temperature",
+        "title": "Temperature flattens or sharpens",
+        "body": [
+          "Temperature rescales the raw scores (logits) before converting them to probabilities. Higher temperature flattens the distribution.",
+          "Rare tokens get more of a chance, so output is more creative but less predictable. Lower temperature sharpens it toward the most likely token."
+        ]
+      },
+      "bn": {
+        "short": "টেম্পারেচার",
+        "title": "টেম্পারেচার সমান বা তীক্ষ্ণ করে",
+        "body": [
+          "টেম্পারেচার সম্ভাব্যতায় বদলানোর আগে র স্কোর (logits) নতুন করে মাপে। বেশি টেম্পারেচার বণ্টনকে সমান করে দেয়।",
+          "বিরল টোকেন বেশি সুযোগ পায়, তাই আউটপুট বেশি সৃজনশীল কিন্তু কম অনুমানযোগ্য হয়। কম টেম্পারেচার সবচেয়ে সম্ভাব্য টোকেনের দিকে তীক্ষ্ণ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "temp",
+          "state": "hot"
+        },
+        {
+          "id": "odds",
+          "state": "hot",
+          "sub": {
+            "en": "flatter or sharper",
+            "bn": "সমান বা তীক্ষ্ণ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "temp",
+          "to": "odds",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Higher: flatter",
+          "bn": "বেশি: সমান"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Top-k, top-p",
+        "title": "Top-k and top-p cut the list",
+        "body": [
+          "Top-k restricts sampling to only the k most likely tokens, cutting compute and keeping output more focused.",
+          "Top-p (nucleus sampling) keeps the smallest set of tokens whose cumulative probability passes a threshold p. The number of candidates then adapts to how confident the model is at each step."
+        ]
+      },
+      "bn": {
+        "short": "top-k, top-p",
+        "title": "top-k আর top-p তালিকা ছাঁটে",
+        "body": [
+          "top-k শুধু সবচেয়ে সম্ভাব্য k-টা টোকেন থেকে বাছে, তাই কম্পিউট কমে আর আউটপুট বেশি কেন্দ্রীভূত থাকে।",
+          "top-p (নিউক্লিয়াস স্যাম্পলিং) সবচেয়ে ছোট টোকেনের সেট রাখে, যার মোট সম্ভাব্যতা একটা সীমা p পার হয়। তাই প্রতি ধাপে মডেল কতটা নিশ্চিত, তার ওপর প্রার্থীর সংখ্যা বদলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "topp",
+          "state": "hot"
+        },
+        {
+          "id": "odds",
+          "state": "hot",
+          "sub": {
+            "en": "fewer tokens left",
+            "bn": "কম টোকেন বাকি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "topp",
+          "to": "odds",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "the most likely",
+          "bn": "সবচেয়ে সম্ভাব্য"
+        },
+        {
+          "en": "smallest set past p",
+          "bn": "সবচেয়ে ছোট সেট, p পার"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Same prompt",
+        "title": "The same prompt, different answers",
+        "body": [
+          "Because sampling is probabilistic, the same prompt can get different answers on different runs.",
+          "Fixing temperature, top-p, top-k, and a random seed helps. It can never be fully eliminated."
+        ]
+      },
+      "bn": {
+        "short": "একই প্রম্পট",
+        "title": "একই প্রম্পট, আলাদা উত্তর",
+        "body": [
+          "স্যাম্পলিং সম্ভাব্যতা-নির্ভর, তাই একই প্রম্পটে প্রতিবার আলাদা উত্তর আসতে পারে।",
+          "temperature, top-p, top-k আর একটা র‍্যান্ডম সিড ঠিক করলে কমে। কিন্তু পুরোপুরি যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "prompt",
+          "state": "hot"
+        },
+        {
+          "id": "pre",
+          "state": "hot"
+        },
+        {
+          "id": "ans1",
+          "state": "hot"
+        },
+        {
+          "id": "ans2",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "prompt",
+          "to": "pre",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pre",
+          "to": "ans1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pre",
+          "to": "ans2",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hallucinate",
+        "title": "Hallucination is not reliably fixed",
+        "body": [
+          "Hallucination is when a model confidently states something false or unverifiable.",
+          "Techniques like RLHF do not reliably fix it."
+        ]
+      },
+      "bn": {
+        "short": "হ্যালুসিনেশন",
+        "title": "হ্যালুসিনেশন নির্ভরযোগ্যভাবে ঠিক হয় না",
+        "body": [
+          "হ্যালুসিনেশন হলো মডেল আত্মবিশ্বাসের সাথে এমন কিছু বলে, যা ভুল বা যাচাই করা যায় না।",
+          "RLHF-এর মতো কৌশল এটা নির্ভরযোগ্যভাবে ঠিক করে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pre",
+          "state": "hot",
+          "x": 110
+        },
+        {
+          "id": "pref",
+          "state": "dim",
+          "sub": {
+            "en": "does not reliably fix it",
+            "bn": "নির্ভরযোগ্যভাবে ঠিক করে না"
+          },
+          "x": 380
+        },
+        {
+          "id": "hall",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "pre",
+          "to": "pref",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "pref",
+          "to": "hall",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

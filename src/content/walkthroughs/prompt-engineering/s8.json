@@ -1,0 +1,597 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 130,
+      "y": 80
+    },
+    {
+      "id": "doc",
+      "kind": "file",
+      "label": {
+        "en": "Retrieved document",
+        "bn": "খুঁজে আনা ডকুমেন্ট"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 630,
+      "y": 100
+    },
+    {
+      "id": "rules",
+      "kind": "note",
+      "label": {
+        "en": "System rules",
+        "bn": "সিস্টেম নিয়ম"
+      },
+      "x": 130,
+      "y": 100
+    },
+    {
+      "id": "tags",
+      "kind": "shield",
+      "label": {
+        "en": "Tagged data",
+        "bn": "ট্যাগে মোড়া ডেটা"
+      },
+      "x": 380,
+      "y": 100
+    },
+    {
+      "id": "remind",
+      "kind": "note",
+      "label": {
+        "en": "Rules again",
+        "bn": "নিয়ম আবার"
+      },
+      "x": 630,
+      "y": 250
+    },
+    {
+      "id": "cap",
+      "kind": "shield",
+      "label": {
+        "en": "Capped input",
+        "bn": "সীমা দেওয়া ইনপুট"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "out",
+      "kind": "note",
+      "label": {
+        "en": "Output check",
+        "bn": "আউটপুট পরীক্ষা"
+      },
+      "x": 630,
+      "y": 250
+    },
+    {
+      "id": "allow",
+      "kind": "lock",
+      "label": {
+        "en": "Tool allowlist",
+        "bn": "টুল অ্যালাউলিস্ট"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "sys",
+      "kind": "service",
+      "label": {
+        "en": "System-layer defenses",
+        "bn": "সিস্টেম-স্তরের প্রতিরক্ষা"
+      },
+      "x": 630,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Risk",
+      "bn": "ঝুঁকি"
+    },
+    {
+      "en": "Layers",
+      "bn": "স্তর"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Injection",
+        "title": "Instructions hidden in data",
+        "body": [
+          "Prompt injection is when instructions hidden inside data try to hijack the model.",
+          "Prompt-layer defenses lower the risk but never remove it, so use several together."
+        ]
+      },
+      "bn": {
+        "short": "ইনজেকশন",
+        "title": "ডেটার ভেতরে লুকানো নির্দেশ",
+        "body": [
+          "প্রম্পট ইনজেকশন হলো ডেটার ভেতরে লুকানো নির্দেশ দিয়ে মডেলকে হাইজ্যাক করার চেষ্টা।",
+          "প্রম্পট-স্তরের প্রতিরক্ষা ঝুঁকি কমায়, শেষ করে না, তাই একসাথে কয়েকটা ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rules",
+          "state": "dim",
+          "x": 130,
+          "y": 250
+        },
+        {
+          "id": "user",
+          "state": "warn",
+          "x": 130,
+          "y": 100
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "hijack",
+            "bn": "হাইজ্যাক"
+          },
+          "x": 630,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "lowered, not removed",
+          "bn": "কমে, শেষ হয় না"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Two ways",
+        "title": "Direct and indirect injection",
+        "body": [
+          "Direct: the attacker types the prompt.",
+          "Indirect: the attacker poisons the data the model reads, such as a retrieved document. Both bypass naive system prompts."
+        ]
+      },
+      "bn": {
+        "short": "দুই পথ",
+        "title": "ডাইরেক্ট আর ইনডাইরেক্ট ইনজেকশন",
+        "body": [
+          "ডাইরেক্ট: আক্রমণকারী নিজেই প্রম্পট টাইপ করে।",
+          "ইনডাইরেক্ট: আক্রমণকারী মডেলের পড়া ডেটা, যেমন খুঁজে আনা কোনো ডকুমেন্ট, বিষিয়ে রাখে। উভয়ই সাধারণ সিস্টেম প্রম্পট এড়িয়ে যেতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "warn",
+          "sub": {
+            "en": "types it",
+            "bn": "টাইপ করে"
+          }
+        },
+        {
+          "id": "doc",
+          "state": "warn",
+          "sub": {
+            "en": "poisoned",
+            "bn": "বিষানো"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 630,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "doc",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Wrap",
+        "title": "Wrap untrusted input in tags",
+        "body": [
+          "Wrap every piece of untrusted input in clearly labeled tags.",
+          "Tell the model in the system prompt that the content inside the tags is data, not instructions."
+        ]
+      },
+      "bn": {
+        "short": "র‍্যাপ",
+        "title": "আনট্রাস্টেড ইনপুট ট্যাগে মুড়ুন",
+        "body": [
+          "প্রতিটি আনট্রাস্টেড ইনপুট স্পষ্ট নামের ট্যাগে মুড়ে দিন।",
+          "সিস্টেম প্রম্পটে মডেলকে বলে দিন যে ট্যাগের ভেতরটা ডেটা, নির্দেশ নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rules",
+          "state": "hot"
+        },
+        {
+          "id": "tags",
+          "state": "hot",
+          "sub": {
+            "en": "data",
+            "bn": "ডেটা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "rules",
+          "to": "tags",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tags",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "lowered",
+          "bn": "কমে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Sandwich",
+        "title": "Sandwich: repeat the rules",
+        "body": [
+          "A sandwich is instructions, then data, then the instructions again.",
+          "Repeating the rules at the end may help the model follow them."
+        ]
+      },
+      "bn": {
+        "short": "স্যান্ডউইচ",
+        "title": "স্যান্ডউইচ: নিয়ম আবার বলুন",
+        "body": [
+          "স্যান্ডউইচ মানে নির্দেশ, তারপর ডেটা, তারপর আবার নির্দেশ।",
+          "শেষে আবার বলা নিয়ম মডেলকে সেগুলো মানতে সাহায্য করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rules",
+          "state": "hot"
+        },
+        {
+          "id": "tags",
+          "state": "hot",
+          "sub": {
+            "en": "data",
+            "bn": "ডেটা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "remind",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "rules",
+          "to": "tags",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tags",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "remind",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Cap the input, check the output",
+        "body": [
+          "Cap the injected content, for example 4K tokens of retrieved text.",
+          "After the call, check the output for signs of a hijack."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "ইনপুটের সীমা দিন, আউটপুট দেখুন",
+        "body": [
+          "ইনজেক্ট করা কনটেন্টের সীমা দিন, যেমন ৪K টোকেন।",
+          "কলের পরে হাইজ্যাকের লক্ষণ আছে কি না আউটপুটে দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "doc",
+          "state": "hot"
+        },
+        {
+          "id": "cap",
+          "state": "hot",
+          "sub": {
+            "en": "4K tokens",
+            "bn": "৪K টোকেন"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "doc",
+          "to": "cap",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cap",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Allowlist",
+        "title": "Enforce the tool allowlist in your code",
+        "body": [
+          "An allowlist is a list of the only tools allowed to run. Anything not on the list is refused.",
+          "Enforce it in your own code, not by trusting the model."
+        ]
+      },
+      "bn": {
+        "short": "অ্যালাউলিস্ট",
+        "title": "টুল অ্যালাউলিস্ট নিজের কোডে প্রয়োগ করুন",
+        "body": [
+          "অ্যালাউলিস্ট হলো শুধু যেসব টুল চালানোর অনুমতি আছে তার তালিকা। তালিকায় না থাকলে প্রত্যাখ্যান করা হয়।",
+          "এটা নিজের কোডে প্রয়োগ করুন, মডেলের ওপর ভরসা করে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "allow",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "allow",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Not a lock",
+        "title": "No prompt-layer defense is bulletproof",
+        "body": [
+          "Use the prompt-layer defenses together, and add system-layer defenses too.",
+          "Defence in depth means many layers, so that one broken layer does not break everything."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A prompt rule is a speed bump, not a lock."
+        }
+      },
+      "bn": {
+        "short": "তালা নয়",
+        "title": "কোনো প্রম্পট-স্তরের প্রতিরক্ষাই অভেদ্য নয়",
+        "body": [
+          "প্রম্পট-স্তরের প্রতিরক্ষাগুলো একসাথে ব্যবহার করুন, সাথে সিস্টেম-স্তরের প্রতিরক্ষাও যোগ করুন।",
+          "ডিফেন্স ইন ডেপথ মানে অনেক স্তর, যাতে এক স্তর ভাঙলেও সব না ভাঙে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "প্রম্পটের নিয়ম স্পিড ব্রেকার, তালা নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "tags",
+          "state": "hot",
+          "x": 130,
+          "y": 100
+        },
+        {
+          "id": "remind",
+          "state": "hot",
+          "x": 380,
+          "y": 100
+        },
+        {
+          "id": "allow",
+          "state": "hot",
+          "x": 630,
+          "y": 100
+        },
+        {
+          "id": "sys",
+          "state": "hot",
+          "sub": {
+            "en": "add these too",
+            "bn": "এগুলোও যোগ করুন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "allow",
+          "to": "sys",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "lowered, not removed",
+          "bn": "কমে, শেষ হয় না"
+        },
+        {
+          "en": "use several together",
+          "bn": "একসাথে কয়েকটা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "No prompt-layer defense is bulletproof. Use them together, and add system-layer defenses too."
+        ],
+        "points": [
+          "Wrap untrusted input in tags, and tell the model in the system prompt that it is data.",
+          "Enforce the tool allowlist in your own code, not by trusting the model.",
+          "Cap injected content, for example 4K tokens, and check the output for signs of a hijack."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কোনো প্রম্পট-স্তরের প্রতিরক্ষাই অভেদ্য নয়। এগুলো একসাথে ব্যবহার করুন, সাথে সিস্টেম-স্তরের প্রতিরক্ষাও যোগ করুন।"
+        ],
+        "points": [
+          "আনট্রাস্টেড ইনপুট ট্যাগে মুড়ুন, আর সিস্টেম প্রম্পটে মডেলকে বলে দিন যে এটা ডেটা।",
+          "টুল অ্যালাউলিস্ট নিজের কোডে প্রয়োগ করুন, মডেলের ওপর ভরসা করে নয়।",
+          "ইনজেক্ট করা কনটেন্টের সীমা দিন, যেমন ৪K টোকেন, আর হাইজ্যাকের লক্ষণ আছে কি না আউটপুটে দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tags",
+          "state": "hot",
+          "x": 130,
+          "y": 100
+        },
+        {
+          "id": "remind",
+          "state": "hot",
+          "x": 380,
+          "y": 100
+        },
+        {
+          "id": "allow",
+          "state": "hot",
+          "x": 630,
+          "y": 100
+        },
+        {
+          "id": "sys",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "allow",
+          "to": "sys",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

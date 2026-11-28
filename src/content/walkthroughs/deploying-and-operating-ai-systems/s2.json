@@ -1,0 +1,636 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "git",
+      "kind": "database",
+      "label": {
+        "en": "Git",
+        "bn": "Git"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "gh",
+      "kind": "server",
+      "label": {
+        "en": "GitHub",
+        "bn": "GitHub"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "commit",
+      "kind": "file",
+      "label": {
+        "en": "Commit",
+        "bn": "কমিট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "branch",
+      "kind": "note",
+      "label": {
+        "en": "Branch",
+        "bn": "ব্রাঞ্চ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "main",
+      "kind": "storage",
+      "label": {
+        "en": "main",
+        "bn": "main"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "pr",
+      "kind": "note",
+      "label": {
+        "en": "Pull request",
+        "bn": "পুল রিকোয়েস্ট"
+      },
+      "x": 280,
+      "y": 162
+    },
+    {
+      "id": "rc",
+      "kind": "shield",
+      "label": {
+        "en": "Review and checks",
+        "bn": "রিভিউ আর চেক"
+      },
+      "x": 480,
+      "y": 162
+    },
+    {
+      "id": "code",
+      "kind": "file",
+      "label": {
+        "en": "Code, prompts, eval cases",
+        "bn": "কোড, প্রম্পট, ইভ্যাল কেস"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "secrets",
+      "kind": "key",
+      "label": {
+        "en": "API keys, .env files",
+        "bn": "API key, .env ফাইল"
+      },
+      "x": 600,
+      "y": 70
+    },
+    {
+      "id": "weights",
+      "kind": "storage",
+      "label": {
+        "en": "Model weights",
+        "bn": "মডেল ওয়েট"
+      },
+      "x": 600,
+      "y": 262
+    },
+    {
+      "id": "wta",
+      "kind": "file",
+      "label": {
+        "en": "Own folder and branch",
+        "bn": "নিজের ফোল্ডার আর ব্রাঞ্চ"
+      },
+      "x": 600,
+      "y": 70
+    },
+    {
+      "id": "wtb",
+      "kind": "file",
+      "label": {
+        "en": "Own folder and branch",
+        "bn": "নিজের ফোল্ডার আর ব্রাঞ্চ"
+      },
+      "x": 600,
+      "y": 262
+    }
+  ],
+  "metrics": [
+    {
+      "en": "In Git",
+      "bn": "Git-এ"
+    },
+    {
+      "en": "Out of Git",
+      "bn": "Git-এর বাইরে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Git",
+        "title": "Git records, GitHub reviews",
+        "body": [
+          "Git records every change to your code, prompts and settings. GitHub adds review and automatic checks.",
+          "AI work also needs care with secrets and large files."
+        ]
+      },
+      "bn": {
+        "short": "Git",
+        "title": "Git লিখে রাখে, GitHub রিভিউ করে",
+        "body": [
+          "Git আপনার কোড, প্রম্পট আর সেটিংসের প্রতিটি পরিবর্তন লিখে রাখে। GitHub যোগ করে রিভিউ আর অটোমেটিক চেক।",
+          "AI কাজে সিক্রেট আর বড় ফাইল নিয়েও সতর্ক থাকতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git",
+          "state": "hot",
+          "sub": {
+            "en": "every change",
+            "bn": "প্রতিটি পরিবর্তন"
+          },
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "gh",
+          "state": "hot",
+          "sub": {
+            "en": "automatic checks",
+            "bn": "অটোমেটিক চেক"
+          },
+          "x": 610,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "gh",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Commit",
+        "title": "A commit and a branch",
+        "body": [
+          "A commit is a snapshot of the project with a message, like a save point in a game.",
+          "A branch is a movable name for a commit. Making one is cheap, so you can try changes safely."
+        ]
+      },
+      "bn": {
+        "short": "কমিট",
+        "title": "কমিট আর ব্রাঞ্চ",
+        "body": [
+          "কমিট একটি বার্তাসহ প্রজেক্টের সংরক্ষিত স্ন্যাপশট, খেলার সেভ পয়েন্টের মতো।",
+          "ব্রাঞ্চ একটি কমিটের সরানো যায় এমন নাম। বানানো সস্তা, তাই নিরাপদে পরিবর্তন চেষ্টা করা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "commit",
+          "state": "hot",
+          "sub": {
+            "en": "snapshot with a message",
+            "bn": "বার্তাসহ স্ন্যাপশট"
+          },
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "branch",
+          "state": "hot",
+          "sub": {
+            "en": "movable name",
+            "bn": "সরানো যায় এমন নাম"
+          },
+          "x": 400,
+          "y": 162
+        },
+        {
+          "id": "main",
+          "state": "dim",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "commit",
+          "to": "branch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "branch",
+          "to": "main",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pull request",
+        "title": "A pull request asks to merge",
+        "body": [
+          "Work happens on a branch.",
+          "A pull request asks for that branch to be merged into main after review and automatic checks."
+        ]
+      },
+      "bn": {
+        "short": "পুল রিকোয়েস্ট",
+        "title": "পুল রিকোয়েস্ট মার্জ চায়",
+        "body": [
+          "কাজ হয় একটি ব্রাঞ্চে।",
+          "পুল রিকোয়েস্ট রিভিউ আর অটোমেটিক চেকের পর সেই ব্রাঞ্চ main-এ মার্জ করার অনুরোধ জানায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "branch",
+          "state": "hot",
+          "x": 150,
+          "y": 70
+        },
+        {
+          "id": "pr",
+          "state": "hot",
+          "x": 400,
+          "y": 70
+        },
+        {
+          "id": "rc",
+          "state": "hot",
+          "x": 640,
+          "y": 70
+        },
+        {
+          "id": "main",
+          "state": "hot",
+          "x": 640,
+          "y": 254
+        }
+      ],
+      "links": [
+        {
+          "from": "branch",
+          "to": "pr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pr",
+          "to": "rc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rc",
+          "to": "main",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Keep",
+        "title": "What goes in Git, what stays out",
+        "body": [
+          "Keep code, prompts, eval cases and config in Git.",
+          "Keep API keys, .env files and model weights out. For large files use Git LFS, an object store or a model hub."
+        ]
+      },
+      "bn": {
+        "short": "রাখুন",
+        "title": "Git-এ কী, বাইরে কী",
+        "body": [
+          "কোড, প্রম্পট, ইভ্যাল কেস আর কনফিগ Git-এ রাখুন।",
+          "API key, .env ফাইল আর মডেল ওয়েট রাখবেন না। বড় ফাইলের জন্য Git LFS, অবজেক্ট স্টোর বা মডেল হাব ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "code",
+          "state": "hot"
+        },
+        {
+          "id": "git",
+          "state": "hot",
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "secrets",
+          "state": "warn",
+          "sub": {
+            "en": "keep out",
+            "bn": "বাইরে রাখুন"
+          }
+        },
+        {
+          "id": "weights",
+          "state": "warn",
+          "sub": {
+            "en": "LFS, object store or hub",
+            "bn": "LFS, অবজেক্ট স্টোর বা হাব"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "code",
+          "to": "git",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "git",
+          "to": "secrets",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "git",
+          "to": "weights",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "code, prompts, eval cases, config",
+          "bn": "কোড, প্রম্পট, ইভ্যাল কেস, কনফিগ"
+        },
+        {
+          "en": "API keys, .env, weights",
+          "bn": "API key, .env, ওয়েট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Worktree",
+        "title": "Several agents, one repository",
+        "body": [
+          "<code>git worktree</code> checks out more than one branch of the same repository into separate folders.",
+          "Coding agents that work in parallel each get their own folder and branch, so they cannot overwrite one another's files."
+        ]
+      },
+      "bn": {
+        "short": "worktree",
+        "title": "অনেক এজেন্ট, একটি রিপোজিটরি",
+        "body": [
+          "<code>git worktree</code> একই রিপোজিটরির একাধিক ব্রাঞ্চ আলাদা আলাদা ফোল্ডারে চেক আউট করে।",
+          "সমান্তরালে চলা প্রতিটি কোডিং এজেন্ট নিজের ফোল্ডার আর ব্রাঞ্চ পায়, তাই একে অপরের ফাইল বদলে ফেলতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "git",
+          "state": "hot",
+          "sub": {
+            "en": "one repository",
+            "bn": "একটি রিপোজিটরি"
+          },
+          "x": 150,
+          "y": 162
+        },
+        {
+          "id": "wta",
+          "state": "hot"
+        },
+        {
+          "id": "wtb",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "git",
+          "to": "wta",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "git",
+          "to": "wtb",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rebase",
+        "title": "Rebase only your own branch",
+        "body": [
+          "Rebase tidies your own unpublished branch by rewriting its commits. Merge keeps shared history as it was.",
+          "Never rebase a branch that other people have pulled."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Write commit messages that say why, and keep each commit to one change."
+        }
+      },
+      "bn": {
+        "short": "রিবেস",
+        "title": "রিবেস শুধু নিজের ব্রাঞ্চে",
+        "body": [
+          "রিবেস নিজের অপ্রকাশিত ব্রাঞ্চের কমিট নতুন করে লিখে গুছিয়ে নেয়। মার্জ শেয়ার করা ইতিহাস যেমন ছিল তেমন রাখে।",
+          "অন্যরা যে ব্রাঞ্চ নামিয়ে নিয়েছে, তা কখনো রিবেস করবেন না।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "কমিট বার্তায় কেন তা লিখুন, আর প্রতিটি কমিটে একটি পরিবর্তন রাখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "branch",
+          "state": "hot",
+          "sub": {
+            "en": "your own, unpublished",
+            "bn": "আপনার নিজের, অপ্রকাশিত"
+          },
+          "x": 150,
+          "y": 162
+        },
+        {
+          "id": "main",
+          "state": "dim",
+          "sub": {
+            "en": "shared history",
+            "bn": "শেয়ার করা ইতিহাস"
+          },
+          "x": 610,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "branch",
+          "to": "main",
+          "flow": "to",
+          "state": "dim",
+          "label": {
+            "en": "merge",
+            "bn": "মার্জ"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Secret",
+        "title": "A committed secret is leaked",
+        "body": [
+          "A secret you commit is a secret you leaked. Deleting the file in a later commit does not remove it from history.",
+          "Revoke the key at the provider first, then clean up."
+        ]
+      },
+      "bn": {
+        "short": "সিক্রেট",
+        "title": "কমিট করা সিক্রেট ফাঁস",
+        "body": [
+          "কমিট করা সিক্রেট মানে ফাঁস হয়ে যাওয়া সিক্রেট। পরের কমিটে ফাইল মুছলে ইতিহাস থেকে তা যায় না।",
+          "আগে provider-এ key বাতিল করুন, তারপর পরিষ্কার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "secrets",
+          "state": "warn",
+          "sub": {
+            "en": "committed",
+            "bn": "কমিট করা"
+          },
+          "x": 150,
+          "y": 162
+        },
+        {
+          "id": "git",
+          "state": "warn",
+          "sub": {
+            "en": "stays in history",
+            "bn": "ইতিহাসে থেকে যায়"
+          },
+          "x": 610,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "secrets",
+          "to": "git",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Keep code in Git and secrets out."
+        ],
+        "points": [
+          "Keep code, prompts, eval cases and config in Git. Keep API keys, .env files and model weights out.",
+          "Give each parallel coding agent its own worktree and branch, so they cannot overwrite each other's files.",
+          "Never rebase a branch that other people have pulled.",
+          "A secret you commit is a secret you leaked. Revoke the key at the provider first."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কোড Git-এ রাখুন, সিক্রেট বাইরে।"
+        ],
+        "points": [
+          "কোড, প্রম্পট, ইভ্যাল কেস আর কনফিগ Git-এ রাখুন। API key, .env ফাইল আর মডেল ওয়েট রাখবেন না।",
+          "সমান্তরাল প্রতিটি কোডিং এজেন্টকে আলাদা worktree আর ব্রাঞ্চ দিন, যাতে একে অপরের ফাইল বদলে না ফেলে।",
+          "অন্যরা যে ব্রাঞ্চ নামিয়ে নিয়েছে, তা কখনো রিবেস করবেন না।",
+          "কমিট করা সিক্রেট মানে ফাঁস হয়ে যাওয়া সিক্রেট। আগে provider-এ key বাতিল করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "code",
+          "state": "hot"
+        },
+        {
+          "id": "git",
+          "state": "hot",
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "secrets",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "code",
+          "to": "git",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "git",
+          "to": "secrets",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

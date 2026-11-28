@@ -1,0 +1,763 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "shot",
+      "kind": "file",
+      "label": {
+        "en": "Screenshot",
+        "bn": "স্ক্রিনশট"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "act",
+      "kind": "tool",
+      "label": {
+        "en": "Mouse, keyboard",
+        "bn": "মাউস, কিবোর্ড"
+      },
+      "x": 620,
+      "y": 250
+    },
+    {
+      "id": "api",
+      "kind": "server",
+      "label": {
+        "en": "API",
+        "bn": "API"
+      },
+      "x": 400,
+      "y": 60
+    },
+    {
+      "id": "app",
+      "kind": "browser",
+      "label": {
+        "en": "App or site",
+        "bn": "অ্যাপ বা সাইট"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "bagent",
+      "kind": "model",
+      "label": {
+        "en": "Browser agent",
+        "bn": "ব্রাউজার এজেন্ট"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "tab",
+      "kind": "browser",
+      "label": {
+        "en": "One browser tab",
+        "bn": "একটি ব্রাউজার ট্যাব"
+      },
+      "x": 400,
+      "y": 250
+    },
+    {
+      "id": "desk",
+      "kind": "server",
+      "label": {
+        "en": "Whole desktop",
+        "bn": "পুরো ডেস্কটপ"
+      },
+      "x": 400,
+      "y": 75
+    },
+    {
+      "id": "plan",
+      "kind": "note",
+      "label": {
+        "en": "Plan up front",
+        "bn": "আগে প্ল্যান"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "ckpt",
+      "kind": "storage",
+      "label": {
+        "en": "Checkpoint",
+        "bn": "চেকপয়েন্ট"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "vm",
+      "kind": "shield",
+      "label": {
+        "en": "Sandboxed VM",
+        "bn": "স্যান্ডবক্সড VM"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "host",
+      "kind": "server",
+      "label": {
+        "en": "Host system",
+        "bn": "হোস্ট সিস্টেম"
+      },
+      "x": 640,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Speed",
+      "bn": "গতি"
+    },
+    {
+      "en": "Reliability",
+      "bn": "নির্ভরযোগ্যতা"
+    },
+    {
+      "en": "Security",
+      "bn": "নিরাপত্তা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Loop",
+        "title": "Screenshot, action, repeat",
+        "body": [
+          "A computer-use agent looks at a screenshot and acts with the mouse and keyboard.",
+          "The runtime runs the action, takes a new screenshot, and the loop continues until the model replies without a tool call."
+        ]
+      },
+      "bn": {
+        "short": "লুপ",
+        "title": "স্ক্রিনশট, অ্যাকশন, আবার",
+        "body": [
+          "কম্পিউটার-ইউজ এজেন্ট স্ক্রিনশট দেখে মাউস আর কিবোর্ড দিয়ে কাজ করে।",
+          "রানটাইম অ্যাকশন চালায়, নতুন স্ক্রিনশট নেয়, আর মডেল টুল কল ছাড়া উত্তর না দেওয়া পর্যন্ত লুপ চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "shot",
+          "state": "hot"
+        },
+        {
+          "id": "agent",
+          "state": "hot",
+          "sub": {
+            "en": "picks an action",
+            "bn": "অ্যাকশন বাছে"
+          },
+          "x": 380,
+          "y": 60
+        },
+        {
+          "id": "act",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "shot",
+          "to": "agent",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "act",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "act",
+          "to": "shot",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Wins",
+        "title": "Where computer use wins",
+        "body": [
+          "It wins when no API exists, or the API is hostile (costly or badly documented).",
+          "It also wins for one-off tasks and cross-app work."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "No API exists: the only way in is the GUI"
+          },
+          {
+            "sign": "+",
+            "html": "The API is hostile: costly or badly documented"
+          },
+          {
+            "sign": "+",
+            "html": "One-off tasks, so the cost per task is acceptable"
+          },
+          {
+            "sign": "+",
+            "html": "Cross-app workflows with no integration"
+          }
+        ]
+      },
+      "bn": {
+        "short": "জেতে",
+        "title": "কোথায় কম্পিউটার ইউজ জেতে",
+        "body": [
+          "API না থাকলে, বা API প্রতিকূল (দামি বা বাজে ডকুমেন্টেশনসহ) হলে এটি জেতে।",
+          "কাজ একবারের হলে, বা একাধিক অ্যাপে ছড়ালেও এটি জেতে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "API নেই: ঢোকার একমাত্র পথ GUI"
+          },
+          {
+            "sign": "+",
+            "html": "API প্রতিকূল: দামি বা বাজে ডকুমেন্টেশনসহ"
+          },
+          {
+            "sign": "+",
+            "html": "একবারের কাজ, তাই প্রতি কাজের খরচ মেনে নেওয়া যায়"
+          },
+          {
+            "sign": "+",
+            "html": "একাধিক অ্যাপের কাজ, যেখানে কোনো ইন্টিগ্রেশন নেই"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot",
+          "x": 130
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "the GUI is the way in",
+            "bn": "GUI-ই ঢোকার পথ"
+          }
+        },
+        {
+          "id": "api",
+          "state": "dim",
+          "sub": {
+            "en": "none, or hostile",
+            "bn": "নেই, বা প্রতিকূল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "api",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Loses",
+        "title": "Where computer use loses",
+        "body": [
+          "It loses on cost, latency, reliability, and security.",
+          "Every screenshot costs vision tokens, and each screenshot → model → action cycle takes seconds."
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "Cost: more than a plain API call, with vision tokens for every screenshot"
+          },
+          {
+            "sign": "-",
+            "html": "Latency: a click is instant, but the cycle takes seconds"
+          },
+          {
+            "sign": "-",
+            "html": "Reliability: a shifted button, a popup, a captcha can kill the run"
+          },
+          {
+            "sign": "-",
+            "html": "Security: the agent has unrestricted mouse and keyboard"
+          }
+        ]
+      },
+      "bn": {
+        "short": "হারে",
+        "title": "কোথায় কম্পিউটার ইউজ হারে",
+        "body": [
+          "খরচ, ল্যাটেন্সি, নির্ভরযোগ্যতা আর নিরাপত্তায় এটি হারে।",
+          "প্রতিটি স্ক্রিনশটে ভিশন টোকেন লাগে, আর প্রতিটি স্ক্রিনশট → মডেল → অ্যাকশন চক্রে কয়েক সেকেন্ড লাগে।"
+        ],
+        "changes": [
+          {
+            "sign": "-",
+            "html": "খরচ: সাধারণ API কলের চেয়ে বেশি, প্রতিটি স্ক্রিনশটে ভিশন টোকেন"
+          },
+          {
+            "sign": "-",
+            "html": "ল্যাটেন্সি: ক্লিক তাৎক্ষণিক, কিন্তু চক্রে কয়েক সেকেন্ড লাগে"
+          },
+          {
+            "sign": "-",
+            "html": "নির্ভরযোগ্যতা: সরে যাওয়া বাটন, পপআপ বা ক্যাপচা রান নষ্ট করতে পারে"
+          },
+          {
+            "sign": "-",
+            "html": "নিরাপত্তা: এজেন্টের মাউস আর কিবোর্ডে কোনো বাধা নেই"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "shot",
+          "state": "warn",
+          "sub": {
+            "en": "vision tokens",
+            "bn": "ভিশন টোকেন"
+          }
+        },
+        {
+          "id": "agent",
+          "state": "warn",
+          "sub": {
+            "en": "seconds per cycle",
+            "bn": "প্রতি চক্রে কয়েক সেকেন্ড"
+          },
+          "x": 380,
+          "y": 60
+        },
+        {
+          "id": "act",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "shot",
+          "to": "agent",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "act",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "act",
+          "to": "shot",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "more",
+          "bn": "বেশি"
+        },
+        {
+          "en": "slower",
+          "bn": "ধীর"
+        },
+        {
+          "en": "breaks easily",
+          "bn": "সহজে ভাঙে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Browser",
+        "title": "Browser agents are a smaller surface",
+        "body": [
+          "A browser agent can only see and act inside a single browser tab, not the whole desktop.",
+          "It uses the same screenshot → action loop with a smaller surface, which is why it is more reliable."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "If you can frame the task in a browser, prefer a browser agent."
+        }
+      },
+      "bn": {
+        "short": "ব্রাউজার",
+        "title": "ব্রাউজার এজেন্টের পরিসর ছোট",
+        "body": [
+          "ব্রাউজার এজেন্ট শুধু একটি ব্রাউজার ট্যাবের ভেতরে দেখতে ও কাজ করতে পারে, পুরো ডেস্কটপে নয়।",
+          "সে একই স্ক্রিনশট → অ্যাকশন লুপ ব্যবহার করে, কিন্তু পরিসর ছোট, তাই এটি বেশি নির্ভরযোগ্য।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "কাজটা ব্রাউজারে করা গেলে ব্রাউজার এজেন্ট বেছে নিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "dim",
+          "x": 130,
+          "y": 75
+        },
+        {
+          "id": "desk",
+          "state": "dim"
+        },
+        {
+          "id": "bagent",
+          "state": "hot",
+          "sub": {
+            "en": "smaller surface",
+            "bn": "ছোট পরিসর"
+          }
+        },
+        {
+          "id": "tab",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "desk",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "bagent",
+          "to": "tab",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "more reliable",
+          "bn": "বেশি নির্ভরযোগ্য"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Plan",
+        "title": "Write a plan up front",
+        "body": [
+          "In the first reliability pattern, the model emits a structured plan up front.",
+          "This makes mid-run debugging easier."
+        ]
+      },
+      "bn": {
+        "short": "প্ল্যান",
+        "title": "আগে প্ল্যান লেখান",
+        "body": [
+          "প্রথম নির্ভরযোগ্যতার প্যাটার্নে মডেল শুরুতেই একটি কাঠামোবদ্ধ প্ল্যান লেখে।",
+          "এতে চলার মাঝখানে ডিবাগ করা সহজ হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot",
+          "x": 130
+        },
+        {
+          "id": "plan",
+          "state": "hot",
+          "sub": {
+            "en": "makes debugging easier",
+            "bn": "ডিবাগ সহজ হয়"
+          }
+        },
+        {
+          "id": "act",
+          "state": "hot",
+          "x": 630,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "plan",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "plan",
+          "to": "act",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Checkpoint",
+        "title": "Checkpoint each step",
+        "body": [
+          "In the second pattern, each step is checkpointed.",
+          "So a crash resumes from the last successful step."
+        ]
+      },
+      "bn": {
+        "short": "চেকপয়েন্ট",
+        "title": "প্রতিটি ধাপ চেকপয়েন্ট করুন",
+        "body": [
+          "দ্বিতীয় প্যাটার্নে প্রতিটি ধাপ চেকপয়েন্ট করা হয়।",
+          "তাই ক্র্যাশ হলে শেষ সফল ধাপ থেকে আবার চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "act",
+          "state": "hot",
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "ckpt",
+          "state": "hot",
+          "sub": {
+            "en": "last successful step",
+            "bn": "শেষ সফল ধাপ"
+          }
+        },
+        {
+          "id": "agent",
+          "state": "hot",
+          "sub": {
+            "en": "resumes",
+            "bn": "আবার চলে"
+          },
+          "x": 620,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "act",
+          "to": "ckpt",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ckpt",
+          "to": "agent",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "resumes",
+          "bn": "আবার চলে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "VM",
+        "title": "Run in an isolated VM",
+        "body": [
+          "In the third pattern, the agent runs in an isolated VM or browser profile.",
+          "So a misclick can't reach the host system."
+        ]
+      },
+      "bn": {
+        "short": "VM",
+        "title": "আলাদা VM-এ চালান",
+        "body": [
+          "তৃতীয় প্যাটার্নে এজেন্ট চলে একটি আলাদা VM বা ব্রাউজার প্রোফাইলে।",
+          "তাই ভুল ক্লিক হোস্ট সিস্টেমে পৌঁছাতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot",
+          "x": 130
+        },
+        {
+          "id": "vm",
+          "state": "hot",
+          "sub": {
+            "en": "isolated",
+            "bn": "আলাদা করা"
+          }
+        },
+        {
+          "id": "host",
+          "state": "dim",
+          "sub": {
+            "en": "not reached",
+            "bn": "পৌঁছায় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "vm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vm",
+          "to": "host",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "isolated",
+          "bn": "আলাদা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Have the model write a plan up front, checkpoint each step, and run in a VM or separate browser profile."
+        ],
+        "points": [
+          "It can work where no API exists, but it costs more, is slower, and breaks more easily.",
+          "If you can frame the task in a browser, prefer a browser agent."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "মডেলকে দিয়ে আগে প্ল্যান লেখান, প্রতিটি ধাপ চেকপয়েন্ট করুন, আর VM বা আলাদা ব্রাউজার প্রোফাইলে চালান।"
+        ],
+        "points": [
+          "যেখানে API নেই সেখানে সে কাজ করতে পারে, কিন্তু খরচ বেশি, গতি ধীর, আর সহজে ভেঙে যায়।",
+          "কাজটা ব্রাউজারে করা গেলে ব্রাউজার এজেন্ট বেছে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "hot",
+          "x": 135,
+          "y": 70
+        },
+        {
+          "id": "plan",
+          "state": "hot",
+          "x": 380,
+          "y": 70
+        },
+        {
+          "id": "ckpt",
+          "state": "hot",
+          "x": 640,
+          "y": 70
+        },
+        {
+          "id": "vm",
+          "state": "hot",
+          "x": 640,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "plan",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "plan",
+          "to": "ckpt",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ckpt",
+          "to": "vm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

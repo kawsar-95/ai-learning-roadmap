@@ -1,0 +1,651 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "task",
+      "kind": "file",
+      "label": {
+        "en": "Task description",
+        "bn": "কাজের বর্ণনা"
+      },
+      "x": 140,
+      "y": 70
+    },
+    {
+      "id": "ex",
+      "kind": "file",
+      "label": {
+        "en": "Examples",
+        "bn": "উদাহরণ"
+      },
+      "x": 140,
+      "y": 162
+    },
+    {
+      "id": "real",
+      "kind": "file",
+      "label": {
+        "en": "Actual task",
+        "bn": "আসল কাজ"
+      },
+      "x": 140,
+      "y": 254
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 600,
+      "y": 162
+    },
+    {
+      "id": "ft",
+      "kind": "tool",
+      "label": {
+        "en": "Fine-tuning",
+        "bn": "ফাইন-টিউনিং"
+      },
+      "x": 600,
+      "y": 262
+    },
+    {
+      "id": "sys",
+      "kind": "note",
+      "label": {
+        "en": "System prompt",
+        "bn": "সিস্টেম প্রম্পট"
+      },
+      "x": 140,
+      "y": 90
+    },
+    {
+      "id": "usr",
+      "kind": "user",
+      "label": {
+        "en": "User prompt",
+        "bn": "ইউজার প্রম্পট"
+      },
+      "x": 140,
+      "y": 234
+    },
+    {
+      "id": "tmpl",
+      "kind": "tool",
+      "label": {
+        "en": "Chat template",
+        "bn": "চ্যাট টেমপ্লেট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "begin",
+      "kind": "file",
+      "label": {
+        "en": "Beginning",
+        "bn": "শুরু"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "mid",
+      "kind": "file",
+      "label": {
+        "en": "Middle",
+        "bn": "মাঝখান"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "end",
+      "kind": "file",
+      "label": {
+        "en": "End",
+        "bn": "শেষ"
+      },
+      "x": 640,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Changes",
+      "bn": "বদলায়"
+    },
+    {
+      "en": "Examples",
+      "bn": "উদাহরণ"
+    },
+    {
+      "en": "Recall",
+      "bn": "মনে থাকে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Prompt",
+        "title": "What a prompt holds",
+        "body": [
+          "A prompt is the instruction you give a model to perform a task. It usually combines a task description, optional examples, and the actual task itself.",
+          "The task description says what to do, what role to play, and what format to answer in."
+        ]
+      },
+      "bn": {
+        "short": "প্রম্পট",
+        "title": "প্রম্পটে কী থাকে",
+        "body": [
+          "প্রম্পট হলো আপনি মডেলকে কাজ করার জন্য যে নির্দেশ দেন। এতে সাধারণত থাকে কাজের বর্ণনা, চাইলে কিছু উদাহরণ (ঐচ্ছিক), আর আসল কাজ।",
+          "কাজের বর্ণনা বলে কী করতে হবে, কী ভূমিকা নিতে হবে, আর কোন ফরম্যাটে উত্তর দিতে হবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "task",
+          "state": "hot",
+          "sub": {
+            "en": "what to do, role, format",
+            "bn": "কী করতে হবে, ভূমিকা, ফরম্যাট"
+          }
+        },
+        {
+          "id": "ex",
+          "state": "dim",
+          "sub": {
+            "en": "optional",
+            "bn": "ঐচ্ছিক"
+          }
+        },
+        {
+          "id": "real",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "task",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "real",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Weights",
+        "title": "Only the prompt changes",
+        "body": [
+          "Prompt engineering is the cheapest, fastest way to adapt a foundation model to your use case.",
+          "It changes nothing about the model's weights, it only changes what you feed into it. Try good prompting before fine-tuning."
+        ]
+      },
+      "bn": {
+        "short": "ওয়েট",
+        "title": "শুধু প্রম্পট বদলায়",
+        "body": [
+          "প্রম্পট ইঞ্জিনিয়ারিং ফাউন্ডেশন মডেলকে আপনার কাজের উপযোগী করার সবচেয়ে সস্তা আর দ্রুত উপায়।",
+          "এতে মডেলের ওয়েটে কিছুই বদলায় না, শুধু মডেলকে যা দেওয়া হয় তা বদলায়। ফাইন-টিউনিংয়ের আগে ভালো প্রম্পটিং করে দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "real",
+          "state": "hot",
+          "sub": {
+            "en": "what you feed in",
+            "bn": "যা দেওয়া হয়"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim",
+          "sub": {
+            "en": "weights unchanged",
+            "bn": "ওয়েট বদলায় না"
+          }
+        },
+        {
+          "id": "ft",
+          "state": "dim",
+          "sub": {
+            "en": "after good prompting",
+            "bn": "ভালো প্রম্পটিংয়ের পরে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "real",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Only the prompt",
+          "bn": "শুধু প্রম্পট"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Shots",
+        "title": "Learn from examples in the prompt",
+        "body": [
+          "Models can learn a new behavior just from examples placed inside the prompt, without any weight update. This is called in-context learning.",
+          "Each example is a shot: zero examples is zero-shot, five examples is 5-shot. More shots generally help, but they cost more tokens and are capped by the model's context length."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Few-shot examples still help a lot for niche or domain-specific tasks the model has rarely seen."
+        }
+      },
+      "bn": {
+        "short": "শট",
+        "title": "প্রম্পটের উদাহরণ থেকে শেখা",
+        "body": [
+          "প্রম্পটের ভেতরে রাখা উদাহরণ থেকেই মডেল নতুন আচরণ শিখতে পারে, কোনো ওয়েট আপডেট ছাড়াই। একে বলে ইন-কনটেক্সট লার্নিং।",
+          "প্রতিটি উদাহরণ একটি শট: কোনো উদাহরণ না থাকলে zero-shot, ৫টি উদাহরণ হলে ৫-shot। বেশি শট সাধারণত কাজে লাগে, কিন্তু বেশি টোকেন লাগে আর মডেলের context length-এ সীমা আছে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "যে নিশ বা ডোমেইন-নির্দিষ্ট কাজ মডেল কমই দেখেছে, সেখানে few-shot উদাহরণ এখনও অনেক কাজে লাগে।"
+        }
+      },
+      "show": [
+        {
+          "id": "task",
+          "state": "hot"
+        },
+        {
+          "id": "ex",
+          "state": "hot",
+          "sub": {
+            "en": "zero-shot or 5-shot",
+            "bn": "zero-shot বা ৫-shot"
+          }
+        },
+        {
+          "id": "real",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "task",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "real",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "zero-shot, 5-shot",
+          "bn": "zero-shot, ৫-shot"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Two parts",
+        "title": "System prompt and user prompt",
+        "body": [
+          "Most model APIs let you split a prompt into two parts. The system prompt holds the task description and persona, usually set by the application developer.",
+          "The user prompt holds the actual question or request, usually from the end user. A model-specific chat template joins the two into one text."
+        ]
+      },
+      "bn": {
+        "short": "দুই অংশ",
+        "title": "সিস্টেম প্রম্পট আর ইউজার প্রম্পট",
+        "body": [
+          "অনেক মডেল API প্রম্পটকে দুই ভাগে ভাগ করতে দেয়। সিস্টেম প্রম্পটে থাকে কাজের বর্ণনা আর persona, সাধারণত অ্যাপ্লিকেশন ডেভেলপার ঠিক করে দেন।",
+          "ইউজার প্রম্পটে থাকে আসল প্রশ্ন বা অনুরোধ, সাধারণত শেষ ব্যবহারকারীর। মডেলের নিজস্ব চ্যাট টেমপ্লেট দুটোকে জুড়ে একটি লেখা বানায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "hot",
+          "sub": {
+            "en": "developer",
+            "bn": "ডেভেলপার"
+          }
+        },
+        {
+          "id": "usr",
+          "state": "hot",
+          "sub": {
+            "en": "end user",
+            "bn": "শেষ ব্যবহারকারী"
+          }
+        },
+        {
+          "id": "tmpl",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "tmpl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "usr",
+          "to": "tmpl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tmpl",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Template",
+        "title": "A wrong template fails silently",
+        "body": [
+          "Getting the chat template wrong causes silent, hard-to-debug performance drops.",
+          "System prompts often perform better, but not because the model treats them as special by nature. They come first in the final text, and many models are explicitly post-trained to weigh them more heavily."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A wrong chat template causes silent performance drops that are hard to debug."
+        }
+      },
+      "bn": {
+        "short": "টেমপ্লেট",
+        "title": "ভুল টেমপ্লেট চুপচাপ ব্যর্থ হয়",
+        "body": [
+          "চ্যাট টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়, আর ধরা কঠিন।",
+          "সিস্টেম প্রম্পট প্রায়ই ভালো কাজ করে, কিন্তু মডেল সেটাকে স্বভাবগতভাবে বিশেষ ভাবে বলে নয়। চূড়ান্ত লেখায় সেটা আগে আসে, আর অনেক মডেলকে স্পষ্টভাবে পোস্ট-ট্রেইন করা হয় যাতে সেটাকে বেশি গুরুত্ব দেয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "চ্যাট টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়, আর ধরা কঠিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "dim"
+        },
+        {
+          "id": "usr",
+          "state": "dim"
+        },
+        {
+          "id": "tmpl",
+          "state": "warn",
+          "sub": {
+            "en": "wrong template",
+            "bn": "ভুল টেমপ্লেট"
+          }
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "silent drop",
+            "bn": "চুপচাপ পতন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "tmpl",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "usr",
+          "to": "tmpl",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "tmpl",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Long",
+        "title": "A long context is not used equally",
+        "body": [
+          "Context length limits have exploded, from about 1K tokens in early GPT models to millions of tokens in newer ones.",
+          "But a longer context window does not mean every position in it is used equally well."
+        ]
+      },
+      "bn": {
+        "short": "লম্বা",
+        "title": "লম্বা কনটেক্সট সমানভাবে কাজে লাগে না",
+        "body": [
+          "কনটেক্সট লেংথের সীমা বিস্ফোরকভাবে বেড়েছে, আগের GPT মডেলে প্রায় ১K টোকেন থেকে নতুন মডেলে লক্ষ লক্ষ টোকেন।",
+          "কিন্তু লম্বা কনটেক্সট উইন্ডো মানে এই নয় যে তার প্রতিটি জায়গা সমান ভালোভাবে কাজে লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "begin",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "hot"
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Ends",
+        "title": "Start and end are recalled best",
+        "body": [
+          "Needle-in-a-haystack tests hide one fact in a long prompt and check whether the model can find it. They show that models recall information near the beginning or end of a prompt far more reliably than information buried in the middle.",
+          "If accuracy drops as prompts get longer, shortening or re-ordering the prompt can help."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Put critical instructions first or last."
+        }
+      },
+      "bn": {
+        "short": "শুরু-শেষ",
+        "title": "শুরু আর শেষ সবচেয়ে ভালো মনে থাকে",
+        "body": [
+          "নিডল-ইন-আ-হেস্ট্যাক টেস্টে লম্বা প্রম্পটে একটি তথ্য লুকিয়ে দেখা হয় মডেল সেটা খুঁজে পায় কিনা। এতে দেখা যায়, প্রম্পটের শুরু বা শেষের তথ্য মডেল মাঝখানে চাপা পড়া তথ্যের চেয়ে অনেক বেশি নির্ভরযোগ্যভাবে মনে রাখে।",
+          "প্রম্পট লম্বা হলে নির্ভুলতা কমলে প্রম্পট ছোট করা বা ক্রম বদলানো কাজে লাগতে পারে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "জরুরি নির্দেশ প্রথমে বা শেষে রাখুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "begin",
+          "state": "hot",
+          "sub": {
+            "en": "recalled well",
+            "bn": "ভালো মনে থাকে"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "warn",
+          "sub": {
+            "en": "easily missed",
+            "bn": "সহজে বাদ পড়ে"
+          }
+        },
+        {
+          "id": "end",
+          "state": "hot",
+          "sub": {
+            "en": "recalled well",
+            "bn": "ভালো মনে থাকে"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        {
+          "en": "start and end, not middle",
+          "bn": "শুরু আর শেষ, মাঝখান নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "A prompt usually has a task description, optional examples, and the actual task. Try good prompting before fine-tuning, because it changes nothing inside the model itself.",
+          "A wrong chat template causes silent performance drops that are hard to debug. Models recall the start and end of a prompt better than the middle."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "প্রম্পটে সাধারণত থাকে কাজের বর্ণনা, চাইলে কিছু উদাহরণ (ঐচ্ছিক), আর আসল কাজ। ফাইন-টিউনিংয়ের আগে ভালো প্রম্পটিং করে দেখুন, কারণ এতে মডেলের ভেতরে কিছুই বদলায় না।",
+          "চ্যাট টেমপ্লেট ভুল হলে পারফরম্যান্স চুপচাপ খারাপ হয়, আর ধরা কঠিন। মডেল প্রম্পটের শুরু আর শেষের তথ্য মাঝের চেয়ে ভালো মনে রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "task",
+          "state": "hot"
+        },
+        {
+          "id": "ex",
+          "state": "dim",
+          "sub": {
+            "en": "optional",
+            "bn": "ঐচ্ছিক"
+          }
+        },
+        {
+          "id": "real",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "task",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ex",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "real",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

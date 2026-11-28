@@ -1,0 +1,631 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "ci",
+      "kind": "tool",
+      "label": {
+        "en": "Checks in CI",
+        "bn": "CI-তে চেক"
+      },
+      "x": 150,
+      "y": 160
+    },
+    {
+      "id": "svc",
+      "kind": "service",
+      "label": {
+        "en": "Service",
+        "bn": "সার্ভিস"
+      },
+      "x": 620,
+      "y": 160
+    },
+    {
+      "id": "vault",
+      "kind": "key",
+      "label": {
+        "en": "Secrets manager",
+        "bn": "সিক্রেট ম্যানেজার"
+      },
+      "x": 330,
+      "y": 160
+    },
+    {
+      "id": "git",
+      "kind": "file",
+      "label": {
+        "en": "Git or image",
+        "bn": "Git বা ইমেজ"
+      },
+      "x": 330,
+      "y": 60
+    },
+    {
+      "id": "lp",
+      "kind": "shield",
+      "label": {
+        "en": "Least privilege",
+        "bn": "লিস্ট প্রিভিলেজ"
+      },
+      "x": 330,
+      "y": 160
+    },
+    {
+      "id": "img",
+      "kind": "file",
+      "label": {
+        "en": "Images and dependencies",
+        "bn": "ইমেজ আর ডিপেন্ডেন্সি"
+      },
+      "x": 330,
+      "y": 160
+    },
+    {
+      "id": "np",
+      "kind": "shield",
+      "label": {
+        "en": "NetworkPolicy",
+        "bn": "NetworkPolicy"
+      },
+      "x": 330,
+      "y": 160
+    },
+    {
+      "id": "pk",
+      "kind": "file",
+      "label": {
+        "en": "pickle",
+        "bn": "pickle"
+      },
+      "x": 200,
+      "y": 70
+    },
+    {
+      "id": "stz",
+      "kind": "file",
+      "label": {
+        "en": "safetensors",
+        "bn": "safetensors"
+      },
+      "x": 200,
+      "y": 250
+    },
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 150,
+      "y": 160
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool",
+        "bn": "টুল"
+      },
+      "x": 620,
+      "y": 160
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Human",
+        "bn": "মানুষ"
+      },
+      "x": 380,
+      "y": 260
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Checks",
+      "bn": "চেক"
+    },
+    {
+      "en": "Keys",
+      "bn": "কী"
+    },
+    {
+      "en": "Model file",
+      "bn": "মডেল ফাইল"
+    },
+    {
+      "en": "Undoable action",
+      "bn": "যা ফেরানো যায় না"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Shift left",
+        "title": "Find problems when a change is made",
+        "body": [
+          "DevSecOps puts security checks into the same pipeline as the tests.",
+          "The idea is to find a security problem when a change is made, not after it ships."
+        ]
+      },
+      "bn": {
+        "short": "আগেই চেক",
+        "title": "পরিবর্তনের সময়ই সমস্যা ধরুন",
+        "body": [
+          "DevSecOps নিরাপত্তার চেক টেস্টের একই পাইপলাইনে রাখে।",
+          "ধারণাটা হলো নিরাপত্তার সমস্যা পরিবর্তনের সময়ই ধরা, ডিপ্লয়ের পরে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ci",
+          "state": "hot",
+          "sub": {
+            "en": "next to the tests",
+            "bn": "টেস্টের পাশেই"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "dim",
+          "sub": {
+            "en": "after it ships",
+            "bn": "ডিপ্লয়ের পরে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ci",
+          "to": "svc",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "in CI",
+          "bn": "CI-তে"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Secrets",
+        "title": "Keys stay out of Git and images",
+        "body": [
+          "Keep API keys and passwords in a secrets manager, and inject them when the service starts.",
+          "Never in Git, never in an image."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A Kubernetes Secret is only base64-encoded unless you turn on encryption at rest, so limit who can read it."
+        }
+      },
+      "bn": {
+        "short": "সিক্রেট",
+        "title": "key থাকে Git আর ইমেজের বাইরে",
+        "body": [
+          "API key আর পাসওয়ার্ড রাখুন সিক্রেট ম্যানেজারে, আর সার্ভিস চালুর সময় সেগুলো দিন।",
+          "কখনো Git-এ নয়, কখনো ইমেজে নয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "এনক্রিপশন অ্যাট রেস্ট চালু না করলে Kubernetes Secret শুধু base64-এনকোড করা থাকে, তাই কে পড়তে পারে তা সীমিত করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "vault",
+          "state": "hot"
+        },
+        {
+          "id": "svc",
+          "state": "hot",
+          "sub": {
+            "en": "gets them at start",
+            "bn": "চালুর সময় পায়"
+          }
+        },
+        {
+          "id": "git",
+          "state": "warn",
+          "sub": {
+            "en": "never",
+            "bn": "কখনো নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "vault",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "secrets manager",
+          "bn": "সিক্রেট ম্যানেজার"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Privilege",
+        "title": "Each service gets only the access it needs",
+        "body": [
+          "Each service gets its own identity with only the access it needs.",
+          "That means IAM roles in the cloud and RBAC in Kubernetes."
+        ]
+      },
+      "bn": {
+        "short": "প্রিভিলেজ",
+        "title": "প্রতিটি সার্ভিস শুধু দরকারি অ্যাক্সেস পায়",
+        "body": [
+          "প্রতিটি সার্ভিস নিজের আলাদা পরিচয় পায়, শুধু ততটুকু অ্যাক্সেসসহ যতটুকু লাগে।",
+          "ক্লাউডে এর মানে IAM role, আর Kubernetes-এ RBAC।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lp",
+          "state": "hot",
+          "sub": {
+            "en": "nothing more",
+            "bn": "তার বেশি নয়"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "hot",
+          "sub": {
+            "en": "its own identity",
+            "bn": "নিজের পরিচয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lp",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Images",
+        "title": "Scan images and dependencies",
+        "body": [
+          "Scan images and dependencies for known vulnerabilities, and keep a software bill of materials (SBOM).",
+          "Pin versions, and pull only from registries you trust."
+        ]
+      },
+      "bn": {
+        "short": "ইমেজ",
+        "title": "ইমেজ আর ডিপেন্ডেন্সি স্ক্যান করুন",
+        "body": [
+          "ইমেজ আর ডিপেন্ডেন্সি স্ক্যান করুন জানা দুর্বলতার জন্য, আর একটা SBOM (software bill of materials) রাখুন।",
+          "ভার্সন পিন করুন, আর শুধু বিশ্বস্ত রেজিস্ট্রি থেকে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "img",
+          "state": "hot",
+          "sub": {
+            "en": "scan, SBOM, pin",
+            "bn": "স্ক্যান, SBOM, পিন"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "img",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Network",
+        "title": "Deny traffic by default",
+        "body": [
+          "Deny traffic by default and open only what a service needs. A Kubernetes NetworkPolicy can do this, with a network plugin that enforces it.",
+          "An agent that can reach the whole internet or your internal network can leak data."
+        ]
+      },
+      "bn": {
+        "short": "নেটওয়ার্ক",
+        "title": "ডিফল্টে ট্রাফিক বন্ধ",
+        "body": [
+          "ডিফল্টে ট্রাফিক বন্ধ রাখুন আর সার্ভিসের দরকারটুকুই খুলুন। Kubernetes NetworkPolicy এটা পারে, তবে এমন নেটওয়ার্ক প্লাগইন লাগে যা এটা প্রয়োগ করে।",
+          "যে এজেন্ট পুরো ইন্টারনেটে বা আপনার অভ্যন্তরীণ নেটওয়ার্কে পৌঁছাতে পারে, সে ডেটা ফাঁস করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "np",
+          "state": "hot",
+          "sub": {
+            "en": "deny by default",
+            "bn": "ডিফল্টে বন্ধ"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "hot",
+          "sub": {
+            "en": "only what it needs",
+            "bn": "শুধু দরকারটুকু"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "np",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Model file",
+        "title": "The model file is code too",
+        "body": [
+          "Some model file formats, such as Python's pickle, can run code when you load them.",
+          "Load weights only from sources you trust, and prefer safetensors, which holds only tensors."
+        ]
+      },
+      "bn": {
+        "short": "মডেল ফাইল",
+        "title": "মডেল ফাইলও কোড",
+        "body": [
+          "কিছু মডেল ফাইল ফরম্যাট, যেমন Python-এর pickle, লোড করার সময় কোড চালাতে পারে।",
+          "ওয়েট শুধু বিশ্বস্ত উৎস থেকে নিন, আর safetensors বেছে নিন, যা শুধু টেন্সর রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pk",
+          "state": "warn",
+          "sub": {
+            "en": "can run code",
+            "bn": "কোড চালাতে পারে"
+          }
+        },
+        {
+          "id": "stz",
+          "state": "hot",
+          "sub": {
+            "en": "only tensors",
+            "bn": "শুধু টেন্সর"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "hot",
+          "sub": {
+            "en": "loads weights",
+            "bn": "ওয়েট লোড করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pk",
+          "to": "svc",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "stz",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "safetensors",
+          "bn": "safetensors"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tools",
+        "title": "An agent's tools are an attack surface",
+        "body": [
+          "Prompt injection can make a model call a tool you gave it. Limit what each tool can do, and log every call.",
+          "Ask a human before any action that cannot be undone."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Part 12 covers this in depth."
+        }
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "এজেন্টের টুল আক্রমণের জায়গা",
+        "body": [
+          "প্রম্পট ইনজেকশন মডেলকে আপনার দেওয়া টুল কল করাতে পারে। প্রতিটি টুল কী করতে পারবে তা সীমিত করুন, আর প্রতিটি কল লগ করুন।",
+          "যে কাজ ফেরানো যায় না, তার আগে মানুষের অনুমতি নিন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Part ১২-তে এটা বিস্তারিত আছে।"
+        }
+      },
+      "show": [
+        {
+          "id": "agent",
+          "state": "warn",
+          "sub": {
+            "en": "prompt injection",
+            "bn": "প্রম্পট ইনজেকশন"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "limited, logged",
+            "bn": "সীমিত, লগ করা"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "asked first",
+            "bn": "আগে জিজ্ঞাসা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "tool",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "human",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "ask a human",
+          "bn": "মানুষকে জিজ্ঞাসা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Four rules cover the section."
+        ],
+        "points": [
+          "Find security problems when a change is made, not after it ships.",
+          "Never put API keys in Git or in an image.",
+          "Load model weights only from sources you trust, and prefer safetensors.",
+          "Limit each tool, log every call, and ask a human before any action that cannot be undone."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "চারটা নিয়মে পুরো সেকশন।"
+        ],
+        "points": [
+          "নিরাপত্তার সমস্যা পরিবর্তনের সময়ই ধরুন, ডিপ্লয়ের পরে নয়।",
+          "API key কখনো Git-এ বা ইমেজে রাখবেন না।",
+          "মডেলের ওয়েট শুধু বিশ্বস্ত উৎস থেকে নিন, আর safetensors বেছে নিন।",
+          "প্রতিটি টুল সীমিত করুন, প্রতিটি কল লগ করুন, আর যা ফেরানো যায় না তার আগে মানুষের অনুমতি নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ci",
+          "state": "hot"
+        },
+        {
+          "id": "vault",
+          "state": "hot"
+        },
+        {
+          "id": "stz",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "human",
+          "state": "hot"
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "in CI",
+          "bn": "CI-তে"
+        },
+        {
+          "en": "not in Git",
+          "bn": "Git-এ নয়"
+        },
+        {
+          "en": "safetensors",
+          "bn": "safetensors"
+        },
+        {
+          "en": "ask a human",
+          "bn": "মানুষকে জিজ্ঞাসা"
+        }
+      ]
+    }
+  ]
+}
