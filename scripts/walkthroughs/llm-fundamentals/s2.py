@@ -63,7 +63,7 @@ STEPS = [
         sh("qwen", "hot", ("open-weight", "ওপেন-ওয়েট")), sh("deep", "hot", ("open-weight", "ওপেন-ওয়েট"))],
        [],
        [None, None, None],
-       note=("info", "The position is qualitative, not benchmark-exact.",
+       note=("insight", "The position is qualitative, not benchmark-exact.",
              "অবস্থান গুণগত, বেঞ্চমার্কের হুবহু মান নয়।")),
 
     st(("Open", "ওপেন"),

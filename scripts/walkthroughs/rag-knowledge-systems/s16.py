@@ -77,7 +77,7 @@ STEPS = [
        [sh("idx", "hot"), sh("quant", "hot", ("smaller form", "ছোট আকার")), sh("store", "hot")],
        [ln("quant", "idx", "to", state="hot"), ln("idx", "store", "to", state="hot")],
        [None, None, None, ("up to 97% less", "৯৭% পর্যন্ত কম")],
-       note=("info", "This is Qdrant's claim, not a number measured here.",
+       note=("insight", "This is Qdrant's claim, not a number measured here.",
              "এটা Qdrant-এর দাবি, এখানে মাপা সংখ্যা নয়।")),
 
     st(("Filtered", "ফিল্টার"),

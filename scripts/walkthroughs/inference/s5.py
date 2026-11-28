@@ -64,7 +64,7 @@ STEPS = [
        [sh("reqs", "hot"), sh("h100", "hot", ("before latency collapses", "ল্যাটেন্সি ভেঙে পড়ার আগে")), sh("m70", "hot")],
        [ln("reqs", "h100", "to", state="hot"), ln("m70", "h100", "to", state="hot")],
        [None, None, ONCE, None],
-       note=("info", "Latency is how long a user waits for an answer.",
+       note=("insight", "Latency is how long a user waits for an answer.",
              "ল্যাটেন্সি হলো উত্তরের জন্য ইউজারকে কতক্ষণ অপেক্ষা করতে হয়।")),
 
     st(("Cost", "খরচ"),
