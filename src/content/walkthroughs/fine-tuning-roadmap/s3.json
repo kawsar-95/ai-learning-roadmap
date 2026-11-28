@@ -1,0 +1,565 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "file",
+      "label": {
+        "en": "Your cleaned data",
+        "bn": "আপনার পরিষ্কার ডেটা"
+      },
+      "x": 135,
+      "y": 162
+    },
+    {
+      "id": "ds",
+      "kind": "tool",
+      "label": {
+        "en": "datasets",
+        "bn": "datasets"
+      },
+      "x": 260,
+      "y": 70
+    },
+    {
+      "id": "tf",
+      "kind": "tool",
+      "label": {
+        "en": "transformers",
+        "bn": "transformers"
+      },
+      "x": 260,
+      "y": 254
+    },
+    {
+      "id": "base",
+      "kind": "model",
+      "label": {
+        "en": "Base model",
+        "bn": "বেস মডেল"
+      },
+      "x": 430,
+      "y": 162
+    },
+    {
+      "id": "peft",
+      "kind": "tool",
+      "label": {
+        "en": "PEFT",
+        "bn": "PEFT"
+      },
+      "x": 260,
+      "y": 162
+    },
+    {
+      "id": "lora",
+      "kind": "model",
+      "label": {
+        "en": "LoRA add-on",
+        "bn": "LoRA অতিরিক্ত অংশ"
+      },
+      "x": 430,
+      "y": 260
+    },
+    {
+      "id": "q4",
+      "kind": "model",
+      "label": {
+        "en": "4-bit base model",
+        "bn": "৪-বিট বেস মডেল"
+      },
+      "x": 430,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "Free Colab GPU",
+        "bn": "ফ্রি Colab GPU"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "docs",
+      "kind": "note",
+      "label": {
+        "en": "Current official docs",
+        "bn": "বর্তমান অফিসিয়াল ডক"
+      },
+      "x": 560,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Trains",
+      "bn": "ট্রেইন হয়"
+    },
+    {
+      "en": "GPU need",
+      "bn": "GPU লাগে"
+    },
+    {
+      "en": "Free GPU",
+      "bn": "ফ্রি GPU"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Load",
+        "title": "Load the model and your data",
+        "body": [
+          "transformers loads the base model, the original model you start from, and its tokenizer.",
+          "datasets loads and prepares your cleaned data from Phase 1."
+        ]
+      },
+      "bn": {
+        "short": "লোড",
+        "title": "মডেল আর ডেটা লোড",
+        "body": [
+          "transformers বেস মডেল, মানে যে মূল মডেল থেকে শুরু করছেন, আর তার টোকেনাইজার লোড করে।",
+          "datasets আপনার পরিষ্কার করা ডেটা লোড করে আর তৈরি করে, যা আপনি ফেজ ১-এ করেছেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "ds",
+          "state": "hot"
+        },
+        {
+          "id": "tf",
+          "state": "hot"
+        },
+        {
+          "id": "base",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "ds",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tf",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Full",
+        "title": "A full fine-tune trains every weight",
+        "body": [
+          "A full fine-tune updates every weight in the model.",
+          "That needs a large GPU, which is out of reach on a free GPU for most models."
+        ]
+      },
+      "bn": {
+        "short": "ফুল",
+        "title": "ফুল ফাইন-টিউনে প্রতিটা ওয়েট ট্রেইন হয়",
+        "body": [
+          "ফুল ফাইন-টিউনে মডেলের প্রতিটা ওয়েট আপডেট হয়।",
+          "এতে বড় GPU লাগে, যা বেশির ভাগ মডেলের জন্য ফ্রি GPU-তে সম্ভব নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "warn",
+          "sub": {
+            "en": "every weight",
+            "bn": "প্রতিটা ওয়েট"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "warn",
+          "sub": {
+            "en": "Large",
+            "bn": "বড়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "gpu",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "every weight",
+          "bn": "প্রতিটা ওয়েট"
+        },
+        {
+          "en": "Large",
+          "bn": "বড়"
+        },
+        {
+          "en": "out of reach",
+          "bn": "নাগালের বাইরে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Freeze",
+        "title": "Freeze the base, train a small add-on",
+        "body": [
+          "Instead of updating every weight, the PEFT library's LoRA freezes the base model.",
+          "It trains a small add-on of extra weights alongside it."
+        ]
+      },
+      "bn": {
+        "short": "ফ্রিজ",
+        "title": "বেস ফ্রিজ করুন, ছোট অংশ ট্রেইন করুন",
+        "body": [
+          "প্রতিটা ওয়েট বদলানোর বদলে PEFT লাইব্রেরির LoRA বেস মডেলটা ফ্রিজ করে।",
+          "পাশে অতিরিক্ত ওয়েটের একটা ছোট অংশ ট্রেইন করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "peft",
+          "state": "hot"
+        },
+        {
+          "id": "base",
+          "state": "dim",
+          "sub": {
+            "en": "frozen",
+            "bn": "ফ্রিজ করা"
+          }
+        },
+        {
+          "id": "lora",
+          "state": "hot",
+          "sub": {
+            "en": "small add-on",
+            "bn": "ছোট অংশ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "peft",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "peft",
+          "to": "lora",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "LoRA",
+        "title": "LoRA: a moderate GPU is enough",
+        "body": [
+          "LoRA trains a small set of added low-rank weights.",
+          "It needs a moderate GPU: it fits a single consumer or free-tier GPU for small models."
+        ]
+      },
+      "bn": {
+        "short": "LoRA",
+        "title": "LoRA: মাঝারি GPU-ই যথেষ্ট",
+        "body": [
+          "LoRA যোগ করা কম-র‍্যাঙ্কের অল্প কিছু ওয়েট ট্রেইন করে।",
+          "এতে মাঝারি GPU লাগে: ছোট মডেলের জন্য একটা কনজিউমার বা ফ্রি-টিয়ার GPU-তে এটা ধরে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "dim",
+          "sub": {
+            "en": "frozen",
+            "bn": "ফ্রিজ করা"
+          }
+        },
+        {
+          "id": "lora",
+          "state": "hot",
+          "sub": {
+            "en": "small add-on",
+            "bn": "ছোট অংশ"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "Moderate",
+            "bn": "মাঝারি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lora",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "small add-on",
+          "bn": "ছোট অংশ"
+        },
+        {
+          "en": "Moderate",
+          "bn": "মাঝারি"
+        },
+        {
+          "en": "small models",
+          "bn": "ছোট মডেল"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "QLoRA",
+        "title": "QLoRA: LoRA on a 4-bit base",
+        "body": [
+          "QLoRA is the same as LoRA, on a 4-bit quantized base model.",
+          "Quantized means stored with fewer bits per number, so the model takes less memory."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "QLoRA needs the least GPU memory. It is the usual choice on a free Colab GPU."
+        }
+      },
+      "bn": {
+        "short": "QLoRA",
+        "title": "QLoRA: ৪-বিট বেসের ওপর LoRA",
+        "body": [
+          "QLoRA মানে LoRA-ই, কিন্তু ৪-বিট কোয়ান্টাইজড বেস মডেলের ওপর।",
+          "কোয়ান্টাইজড মানে প্রতিটি সংখ্যা কম বিটে রাখা, ফলে মডেল কম মেমরি নেয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "QLoRA-তে GPU মেমরি সবচেয়ে কম লাগে। ফ্রি Colab GPU-তে এটাই সচরাচর পছন্দ।"
+        }
+      },
+      "show": [
+        {
+          "id": "q4",
+          "state": "hot",
+          "sub": {
+            "en": "fewer bits",
+            "bn": "কম বিট"
+          }
+        },
+        {
+          "id": "lora",
+          "state": "hot",
+          "sub": {
+            "en": "small add-on",
+            "bn": "ছোট অংশ"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "Lowest",
+            "bn": "সর্বনিম্ন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q4",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lora",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "small add-on",
+          "bn": "ছোট অংশ"
+        },
+        {
+          "en": "Lowest",
+          "bn": "সর্বনিম্ন"
+        },
+        {
+          "en": "usual choice",
+          "bn": "সচরাচর পছন্দ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Free GPU",
+        "title": "What fits a free GPU",
+        "body": [
+          "A free Colab GPU is generally enough for small models.",
+          "1–3B parameters is comfortable, and QLoRA can stretch to about 7B."
+        ]
+      },
+      "bn": {
+        "short": "ফ্রি GPU",
+        "title": "ফ্রি GPU-তে কী ধরে",
+        "body": [
+          "ছোট মডেলের জন্য একটা ফ্রি Colab GPU সাধারণত যথেষ্ট।",
+          "১–৩ বিলিয়ন প্যারামিটার স্বাচ্ছন্দ্যের, আর QLoRA দিয়ে প্রায় ৭ বিলিয়ন পর্যন্ত টানা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "1–3B comfortable",
+            "bn": "১–৩B স্বাচ্ছন্দ্যের"
+          }
+        },
+        {
+          "id": "q4",
+          "state": "hot",
+          "sub": {
+            "en": "QLoRA: about 7B",
+            "bn": "QLoRA: প্রায় ৭B"
+          }
+        },
+        {
+          "id": "lora",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "q4",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lora",
+          "to": "gpu",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "1–3B, QLoRA to about 7B",
+          "bn": "১–৩B, QLoRA-তে প্রায় ৭B"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Changes",
+        "title": "These libraries change fast",
+        "body": [
+          "transformers, datasets, and PEFT change fast.",
+          "Follow the current official docs, not an old tutorial."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "An old tutorial may use a removed argument or a renamed function."
+        }
+      },
+      "bn": {
+        "short": "বদল",
+        "title": "এই লাইব্রেরিগুলো দ্রুত বদলায়",
+        "body": [
+          "transformers, datasets আর PEFT দ্রুত বদলায়।",
+          "পুরনো টিউটোরিয়ালের বদলে বর্তমান অফিসিয়াল ডকুমেন্টেশন অনুসরণ করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "পুরনো টিউটোরিয়ালে এমন আর্গুমেন্ট থাকতে পারে যা সরানো হয়েছে, বা এমন ফাংশন যার নাম বদলেছে।"
+        }
+      },
+      "show": [
+        {
+          "id": "docs",
+          "state": "hot"
+        },
+        {
+          "id": "tf",
+          "state": "dim"
+        },
+        {
+          "id": "ds",
+          "state": "dim"
+        },
+        {
+          "id": "peft",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "docs",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "docs",
+          "to": "ds",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "docs",
+          "to": "peft",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
