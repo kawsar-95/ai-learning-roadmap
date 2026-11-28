@@ -5,6 +5,14 @@ import type { Walkthrough } from "@/lib/content-schema";
 import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import { StepPlayer } from "./StepPlayer";
+import { ISO_PARTS, isoScale } from "@/lib/walkthrough";
+
+/** The scale of the isometric look for a walk-through, or undefined for the flat boxes. */
+function isoLook(path: string, walk: Walkthrough): number | undefined {
+  const slug = path.split("/")[2];
+  if (!ISO_PARTS.has(slug)) return undefined;
+  return isoScale(walk) ?? undefined;
+}
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -72,7 +80,7 @@ export function LazyStepPlayer({ path, sectionId, lang }: { path: string; sectio
     };
   }, [seen, path, attempt]);
 
-  if (walkthrough) return <StepPlayer walkthrough={walkthrough} sectionId={sectionId} lang={lang} />;
+  if (walkthrough) return <StepPlayer walkthrough={walkthrough} sectionId={sectionId} lang={lang} look={isoLook(path, walkthrough)} />;
 
   return (
     <div

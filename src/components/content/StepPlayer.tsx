@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent, RefObject } from "react";
-import type { WalkLink, WalkNode, WalkNodeKind, WalkShow, WalkStep, Walkthrough } from "@/lib/content-schema";
+import type { WalkLink, WalkNode, WalkShow, WalkStep, Walkthrough } from "@/lib/content-schema";
 import { UI } from "@/lib/i18n";
 import type { Lang } from "@/lib/i18n";
 import {
@@ -21,164 +21,16 @@ import {
 } from "@/lib/walkthrough";
 import type { Box } from "@/lib/walkthrough";
 import { Inline } from "./Inline";
+import { IsoNode } from "./IsoNode";
+import { Icon } from "./WalkIcon";
 
 // The look of the diagram and of the card around it is in globals.css (`.wk-*` and the `--wk-*` colors).
 const BOX_R = 14;
 const NOTE_R = 10;
 const DOT_R = 5.5;
+/** How much slower a dot travels than its walk-through asks: the dots read better at an easy pace. */
+const DOT_PACE = 1.6;
 const SIGN = { "+": "+", "-": "−", "~": "~" } as const;
-
-/** A 20 × 20 line icon for each kind of box. */
-function Icon({ kind }: { kind: WalkNodeKind }) {
-  const line = {
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.7,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-  };
-  switch (kind) {
-    case "user":
-      return (
-        <g {...line}>
-          <circle cx="10" cy="6.5" r="3.5" />
-          <path d="M3.5 18c0-3.9 2.9-6.2 6.5-6.2s6.5 2.3 6.5 6.2" />
-        </g>
-      );
-    case "browser":
-      return (
-        <g {...line}>
-          <rect x="2" y="3.5" width="16" height="13" rx="2" />
-          <path d="M2 7.5h16M4.8 5.5h.01M7 5.5h.01" />
-        </g>
-      );
-    case "dns":
-      return (
-        <g {...line}>
-          <circle cx="10" cy="10" r="7.5" />
-          <path d="M2.5 10h15M10 2.5c2.2 2.1 3.2 4.6 3.2 7.5s-1 5.4-3.2 7.5c-2.2-2.1-3.2-4.6-3.2-7.5s1-5.4 3.2-7.5z" />
-        </g>
-      );
-    case "server":
-      return (
-        <g {...line}>
-          <rect x="3" y="3" width="14" height="6" rx="1.5" />
-          <rect x="3" y="11" width="14" height="6" rx="1.5" />
-          <path d="M6 6h.01M6 14h.01" />
-        </g>
-      );
-    case "database":
-      return (
-        <g {...line}>
-          <ellipse cx="10" cy="4.8" rx="6.5" ry="2.3" />
-          <path d="M3.5 4.8v10.4c0 1.3 2.9 2.3 6.5 2.3s6.5-1 6.5-2.3V4.8M3.5 10c0 1.3 2.9 2.3 6.5 2.3s6.5-1 6.5-2.3" />
-        </g>
-      );
-    case "cache":
-      return (
-        <g {...line}>
-          <path d="M11 2.5 4.5 11h5l-1 6.5L15.5 9h-5z" />
-        </g>
-      );
-    case "cdn":
-      return (
-        <g {...line}>
-          <circle cx="10" cy="10" r="7.5" />
-          <path d="M2.5 10h15M10 2.5v15" />
-          <circle cx="10" cy="10" r="2.2" />
-        </g>
-      );
-    case "balancer":
-      return (
-        <g {...line}>
-          <path d="M2.5 10h5l4-5h5M7.5 10l4 5h5M14.5 3l2.5 2-2.5 2M14.5 13l2.5 2-2.5 2" />
-        </g>
-      );
-    case "queue":
-      return (
-        <g {...line}>
-          <rect x="2.5" y="6" width="4" height="8" rx="1" />
-          <rect x="8" y="6" width="4" height="8" rx="1" />
-          <rect x="13.5" y="6" width="4" height="8" rx="1" />
-        </g>
-      );
-    case "storage":
-      return (
-        <g {...line}>
-          <rect x="2.5" y="4" width="15" height="4" rx="1" />
-          <path d="M3.5 8v7.5h13V8M8 11h4" />
-        </g>
-      );
-    case "service":
-      return (
-        <g {...line}>
-          <rect x="3" y="3" width="14" height="14" rx="3.5" />
-          <circle cx="10" cy="10" r="3" />
-        </g>
-      );
-    case "lock":
-      return (
-        <g {...line}>
-          <rect x="4.5" y="9" width="11" height="8" rx="2" />
-          <path d="M6.8 9V6.6a3.2 3.2 0 0 1 6.4 0V9M10 12.2v2" />
-        </g>
-      );
-    case "key":
-      return (
-        <g {...line}>
-          <circle cx="6.5" cy="13.5" r="3.5" />
-          <path d="M9 11 17 3M14 6l2.5 2.5M11.8 8.2l2 2" />
-        </g>
-      );
-    case "shield":
-      return (
-        <g {...line}>
-          <path d="M10 2.5 4 5v4.6c0 4 2.6 6.8 6 7.9 3.4-1.1 6-3.9 6-7.9V5z" />
-          <path d="m7.3 10 2.1 2.1 3.5-3.9" />
-        </g>
-      );
-    case "clock":
-      return (
-        <g {...line}>
-          <circle cx="10" cy="10" r="7.5" />
-          <path d="M10 5.5V10l3 2" />
-        </g>
-      );
-    case "chart":
-      return (
-        <g {...line}>
-          <path d="M3 3v14h14" />
-          <path d="m6 13 3-4 3 2 4-6" />
-        </g>
-      );
-    case "file":
-      return (
-        <g {...line}>
-          <path d="M5 2.5h6.5L15 6v11.5H5z" />
-          <path d="M11.5 2.5V6H15M7.5 10h5M7.5 13h5" />
-        </g>
-      );
-    case "model":
-      return (
-        <g {...line}>
-          <circle cx="10" cy="10" r="2.4" />
-          <circle cx="3.8" cy="4.5" r="1.8" />
-          <circle cx="16.2" cy="4.5" r="1.8" />
-          <circle cx="3.8" cy="15.5" r="1.8" />
-          <circle cx="16.2" cy="15.5" r="1.8" />
-          <path d="M5.3 5.6l3 2.7M14.7 5.6l-3 2.7M5.3 14.4l3-2.7M14.7 14.4l-3-2.7" />
-        </g>
-      );
-    case "tool":
-      return (
-        <g {...line}>
-          <path d="M7.6 3.2c-1.8 0-2.6.9-2.6 2.6v1.7c0 1.1-.7 2-1.9 2.5 1.2.5 1.9 1.4 1.9 2.5v1.7c0 1.7.8 2.6 2.6 2.6M12.4 3.2c1.8 0 2.6.9 2.6 2.6v1.7c0 1.1.7 2 1.9 2.5-1.2.5-1.9 1.4-1.9 2.5v1.7c0 1.7-.8 2.6-2.6 2.6" />
-        </g>
-      );
-    case "note":
-      return null;
-  }
-}
 
 /** A 20 × 20 line icon for each kind of callout. */
 function NoteIcon({ kind }: { kind: "insight" | "tip" | "warn" }) {
@@ -359,7 +211,7 @@ function SceneLink({
   const forward = `M${x1} ${y1} L${x2} ${y2}`;
   const backward = `M${x2} ${y2} L${x1} ${y1}`;
   const state = link.state ?? "plain";
-  const ms = link.ms ?? 1400;
+  const ms = (link.ms ?? 1400) * DOT_PACE;
   const flow = link.flow;
   const label = link.label?.[lang];
   return (
@@ -386,7 +238,9 @@ function Scene({
   svgRef,
   idBase,
   label,
+  look,
 }: {
+  look?: number;
   walk: Walkthrough;
   step: WalkStep;
   lang: Lang;
@@ -394,6 +248,7 @@ function Scene({
   idBase: string;
   label: string;
 }) {
+  const scale = look ?? 1;
   const widths = useMemo(() => nodeWidths(walk, lang), [walk, lang]);
   const shown = useMemo(() => new Map(step.show.map((s) => [s.id, s])), [step]);
   const boxes = useMemo(
@@ -415,7 +270,15 @@ function Scene({
       }),
     [walk, boxes, shown],
   );
+  const byIdEarly = new Map(walk.nodes.map((n) => [n.id, n]));
   const at = (id: string): Box => boxes.get(id) ?? { x: 0, y: 0, w: 112, h: NODE_H };
+  // Where a line meets a box: an isometric object is smaller than its box, so the line runs up to the object.
+  const meet = (id: string): Box => {
+    const b = at(id);
+    const kind = byIdEarly.get(id)?.kind;
+    if (look === undefined || kind === undefined || kind === "note") return b;
+    return { x: b.x, y: b.y - 4 * scale, w: 84 * scale + 8, h: 64 * scale };
+  };
   const byId = new Map(walk.nodes.map((n) => [n.id, n]));
   const markerId = (state: string) => `${idBase}-arrow-${state}`;
   return (
@@ -428,7 +291,7 @@ function Scene({
     >
       <defs>
         <pattern id={`${idBase}-lattice`} width="48" height="24" patternUnits="userSpaceOnUse">
-          <path className="wk-lattice" d="M0 0L48 24M0 24L48 0" />
+          <path className="wk-lattice" d={look !== undefined ? "M0 12 48 0M0 12 48 24M0 0V24" : "M0 0L48 24M0 24L48 0"} />
         </pattern>
         {(["plain", "dim", "hot", "warn"] as const).map((state) => (
           <marker
@@ -449,10 +312,14 @@ function Scene({
       <rect x={-DIAGRAM_PAD} width={walk.width + 2 * DIAGRAM_PAD} height={walk.height} fill={`url(#${idBase}-lattice)`} />
       {step.links.map((link, i) => {
         if (!byId.has(link.from) || !byId.has(link.to)) return null;
-        return <SceneLink key={`${link.from}-${link.to}-${i}`} link={link} from={at(link.from)} to={at(link.to)} lang={lang} markerId={markerId} obstacles={obstacles} />;
+        return <SceneLink key={`${link.from}-${link.to}-${i}`} link={link} from={meet(link.from)} to={meet(link.to)} lang={lang} markerId={markerId} obstacles={obstacles} />;
       })}
       {walk.nodes.map((node) => (
-        <SceneNode key={node.id} node={node} show={shown.get(node.id)} box={at(node.id)} lang={lang} />
+        look !== undefined && node.kind !== "note" ? (
+          <IsoNode key={node.id} node={node} show={shown.get(node.id)} box={at(node.id)} lang={lang} scale={scale} />
+        ) : (
+          <SceneNode key={node.id} node={node} show={shown.get(node.id)} box={at(node.id)} lang={lang} />
+        )
       ))}
     </svg>
   );
@@ -465,7 +332,7 @@ function Scene({
  * steps. Pause stops the dots. Readers who ask for reduced motion get the
  * same steps without dots or sliding boxes.
  */
-export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walkthrough; sectionId: string; lang: Lang }) {
+export function StepPlayer({ walkthrough, sectionId, lang, look }: { walkthrough: Walkthrough; sectionId: string; lang: Lang; look?: number }) {
   const ui = UI[lang];
   const steps = walkthrough.steps;
   const [index, setIndex] = useState(0);
@@ -604,7 +471,7 @@ export function StepPlayer({ walkthrough, sectionId, lang }: { walkthrough: Walk
       {walkthrough.caption && <p className="mt-1.5 text-[12px] text-text-faint">{walkthrough.caption[lang]}</p>}
 
       <div ref={frameRef} className="wk-frame mt-3 overflow-x-auto rounded-lg">
-        <Scene walk={walkthrough} step={step} lang={lang} svgRef={svgRef} idBase={headingId} label={ui.walkDiagram(text.title)} />
+        <Scene look={look} walk={walkthrough} step={step} lang={lang} svgRef={svgRef} idBase={headingId} label={ui.walkDiagram(text.title)} />
       </div>
       <p className="wk-key mt-2.5 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-text-dim">
         <span>
