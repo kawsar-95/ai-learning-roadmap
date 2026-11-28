@@ -490,10 +490,20 @@ html {
   stroke: var(--wk-ink);
   stroke-width: 2px;
 }
-.wk-disc {
-  fill: var(--role);
+/* The isometric tile under each icon: a top face and two shaded sides, all from the role color. */
+.wk-tile > path {
   stroke: var(--wk-ink);
-  stroke-width: 1.75px;
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+}
+.wk-tile-top {
+  fill: var(--role);
+}
+.wk-tile-left {
+  fill: color-mix(in srgb, var(--role) 62%, var(--wk-ink));
+}
+.wk-tile-right {
+  fill: color-mix(in srgb, var(--role) 80%, var(--wk-ink));
 }
 .wk-icon {
   color: var(--wk-ink);
@@ -506,8 +516,8 @@ html {
   fill: var(--wk-red);
   stroke-width: 2.5px;
 }
-.wk-node[data-state="hot"] .wk-disc,
-.wk-node[data-state="warn"] .wk-disc {
+.wk-node[data-state="hot"] .wk-tile-top,
+.wk-node[data-state="warn"] .wk-tile-top {
   fill: var(--wk-paper);
 }
 .wk-node[data-role="note"] .wk-box {

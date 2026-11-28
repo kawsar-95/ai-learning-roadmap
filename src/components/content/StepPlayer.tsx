@@ -233,9 +233,14 @@ function SceneNode({ node, show, box, lang }: { node: WalkNode; show: WalkShow |
       <rect className="wk-box" width={box.w} height={box.h} rx={note ? NOTE_R : BOX_R} />
       {!note && (
         <>
-          <circle className="wk-disc" cx={22} cy={box.h / 2} r={14} />
-          <g className="wk-icon" transform={`translate(12 ${box.h / 2 - 10})`}>
-            <Icon kind={node.kind} />
+          <g className="wk-tile" transform={`translate(22 ${box.h / 2 - 4})`} aria-hidden>
+            <path className="wk-tile-left" d="M-15 0 0 9.5V15.5L-15 6z" />
+            <path className="wk-tile-right" d="M15 0 0 9.5V15.5L15 6z" />
+            <path className="wk-tile-top" d="M0-9.5 15 0 0 9.5-15 0z" />
+            {/* The 20 × 20 icon is laid flat on the top face: scaled and sheared into the isometric plane. */}
+            <g className="wk-icon" transform="matrix(0.69 0.4 -0.69 0.4 0 0) translate(-10 -10)">
+              <Icon kind={node.kind} />
+            </g>
           </g>
         </>
       )}
