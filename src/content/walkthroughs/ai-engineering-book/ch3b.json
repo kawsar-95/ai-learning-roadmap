@@ -1,0 +1,690 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "ans-a",
+      "kind": "file",
+      "label": {
+        "en": "Answer A",
+        "bn": "উত্তর A"
+      },
+      "x": 110,
+      "y": 90
+    },
+    {
+      "id": "ans-b",
+      "kind": "file",
+      "label": {
+        "en": "Answer B",
+        "bn": "উত্তর B"
+      },
+      "x": 110,
+      "y": 234
+    },
+    {
+      "id": "ref",
+      "kind": "file",
+      "label": {
+        "en": "Reference answer",
+        "bn": "রেফারেন্স উত্তর"
+      },
+      "x": 335,
+      "y": 50
+    },
+    {
+      "id": "judge",
+      "kind": "model",
+      "label": {
+        "en": "AI judge",
+        "bn": "এআই জাজ"
+      },
+      "x": 335,
+      "y": 162
+    },
+    {
+      "id": "score",
+      "kind": "chart",
+      "label": {
+        "en": "Score",
+        "bn": "স্কোর"
+      },
+      "x": 615,
+      "y": 162
+    },
+    {
+      "id": "t1",
+      "kind": "model",
+      "label": {
+        "en": "Reward model",
+        "bn": "রিওয়ার্ড মডেল"
+      },
+      "x": 615,
+      "y": 60
+    },
+    {
+      "id": "t2",
+      "kind": "model",
+      "label": {
+        "en": "Reference judge",
+        "bn": "রেফারেন্স জাজ"
+      },
+      "x": 615,
+      "y": 162
+    },
+    {
+      "id": "t3",
+      "kind": "model",
+      "label": {
+        "en": "Preference model",
+        "bn": "প্রেফারেন্স মডেল"
+      },
+      "x": 615,
+      "y": 264
+    },
+    {
+      "id": "eval",
+      "kind": "user",
+      "label": {
+        "en": "Evaluator",
+        "bn": "মূল্যায়নকারী"
+      },
+      "x": 335,
+      "y": 162
+    },
+    {
+      "id": "rank",
+      "kind": "chart",
+      "label": {
+        "en": "One overall ranking",
+        "bn": "একটি সামগ্রিক র‍্যাংক"
+      },
+      "x": 615,
+      "y": 162
+    },
+    {
+      "id": "m-a",
+      "kind": "model",
+      "label": {
+        "en": "Model A",
+        "bn": "মডেল A"
+      },
+      "x": 110,
+      "y": 90
+    },
+    {
+      "id": "m-b",
+      "kind": "model",
+      "label": {
+        "en": "Model B",
+        "bn": "মডেল B"
+      },
+      "x": 110,
+      "y": 234
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Judge",
+      "bn": "জাজ"
+    },
+    {
+      "en": "Compares",
+      "bn": "তুলনা"
+    },
+    {
+      "en": "Tells you",
+      "bn": "জানায়"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Judge",
+        "title": "One model judges another",
+        "body": [
+          "AI as a judge means using one AI model to score or compare the outputs of another AI model, or of itself.",
+          "It is fast and cheap relative to human annotation, and it can judge on any criteria you describe."
+        ]
+      },
+      "bn": {
+        "short": "জাজ",
+        "title": "এক মডেল আরেক মডেলকে বিচার করে",
+        "body": [
+          "এআই জাজ মানে একটি AI মডেল দিয়ে অন্য AI মডেলের, বা নিজের, আউটপুট স্কোর করানো বা তুলনা করানো।",
+          "মানুষের অ্যানোটেশনের তুলনায় এটা দ্রুত আর সস্তা, আর আপনার বলে দেওয়া যেকোনো মানদণ্ডে বিচার করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ans-a",
+          "state": "hot"
+        },
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "fast and cheap",
+            "bn": "দ্রুত আর সস্তা"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ans-a",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "AI model",
+          "bn": "AI মডেল"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Three ways",
+        "title": "Three ways to use a judge",
+        "body": [
+          "A judge can score a response on its own, or compare it to a reference answer.",
+          "It can also compare two responses against each other to pick a winner."
+        ]
+      },
+      "bn": {
+        "short": "তিন উপায়",
+        "title": "জাজ ব্যবহারের তিন উপায়",
+        "body": [
+          "জাজ একটি উত্তরকে একা স্কোর করতে পারে, বা রেফারেন্স উত্তরের সাথে তুলনা করতে পারে।",
+          "অথবা দুটি উত্তরকে একে অপরের সাথে তুলনা করে বিজয়ী বাছতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ans-a",
+          "state": "hot",
+          "sub": {
+            "en": "on its own",
+            "bn": "একা"
+          }
+        },
+        {
+          "id": "ref",
+          "state": "hot"
+        },
+        {
+          "id": "ans-b",
+          "state": "hot",
+          "sub": {
+            "en": "pick a winner",
+            "bn": "বিজয়ী বাছা"
+          }
+        },
+        {
+          "id": "judge",
+          "state": "hot"
+        },
+        {
+          "id": "score",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ans-a",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ref",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ans-b",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Prompt",
+        "title": "Spell out the judge's prompt",
+        "body": [
+          "A judge's prompt should spell out the task, the scoring criteria in detail, and the scoring system.",
+          "The system can be classification labels, discrete numbers such as 1–5, or a continuous scale."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Discrete, classification-style scoring tends to work more reliably than open-ended numeric scoring."
+        }
+      },
+      "bn": {
+        "short": "প্রম্পট",
+        "title": "জাজের প্রম্পট স্পষ্ট করুন",
+        "body": [
+          "জাজের প্রম্পটে কাজ, বিস্তারিত স্কোরিং মানদণ্ড আর স্কোরিং সিস্টেম স্পষ্ট করে লেখা উচিত।",
+          "সিস্টেম হতে পারে ক্লাসিফিকেশন লেবেল, ১–৫-এর মতো আলাদা সংখ্যা, বা একটানা স্কেল।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "আলাদা, ক্লাসিফিকেশন-ধরনের স্কোরিং সাধারণত খোলা সংখ্যাভিত্তিক স্কোরিংয়ের চেয়ে বেশি নির্ভরযোগ্য।"
+        }
+      },
+      "show": [
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "task, criteria, scoring system",
+            "bn": "কাজ, মানদণ্ড, স্কোরিং সিস্টেম"
+          }
+        },
+        {
+          "id": "score",
+          "state": "hot",
+          "sub": {
+            "en": "labels, 1–5, or scale",
+            "bn": "লেবেল, ১–৫, বা স্কেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "judge",
+          "to": "score",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "Discrete, classification-style",
+          "bn": "আলাদা, ক্লাসিফিকেশন-ধরনের"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Judges have flaws",
+        "body": [
+          "The same judge can give different scores for the same input, and different tools define one criterion differently.",
+          "Judges can favor their own outputs, the first option shown, or longer answers, regardless of actual quality."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "AI judges work best alongside other checks, not alone."
+        },
+        "points": [
+          "Inconsistency",
+          "Criteria ambiguity",
+          "Bias: self-bias, position bias, verbosity bias",
+          "Cost and latency"
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "জাজের দুর্বলতা আছে",
+        "body": [
+          "একই জাজ একই ইনপুটে আলাদা স্কোর দিতে পারে, আর বিভিন্ন টুল একই মানদণ্ডকে আলাদাভাবে সংজ্ঞায়িত করে।",
+          "জাজ নিজের উত্তর, প্রথম দেখানো অপশন বা লম্বা উত্তরের দিকে ঝুঁকতে পারে, আসল মান যা-ই হোক।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "এআই জাজ অন্য যাচাইয়ের পাশে সবচেয়ে ভালো কাজ করে, একা নয়।"
+        },
+        "points": [
+          "অসঙ্গতি",
+          "মানদণ্ডে অস্পষ্টতা",
+          "বায়াস: সেলফ-বায়াস, পজিশন বায়াস, ভার্বোসিটি বায়াস",
+          "খরচ ও লেটেন্সি"
+        ]
+      },
+      "show": [
+        {
+          "id": "ans-a",
+          "state": "dim"
+        },
+        {
+          "id": "judge",
+          "state": "warn",
+          "sub": {
+            "en": "inconsistent",
+            "bn": "অসঙ্গত"
+          }
+        },
+        {
+          "id": "score",
+          "state": "warn",
+          "sub": {
+            "en": "biased",
+            "bn": "পক্ষপাতদুষ্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ans-a",
+          "to": "judge",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "judge",
+          "to": "score",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Types",
+        "title": "Specialized judges",
+        "body": [
+          "Weaker or specialized judges are cheaper and still useful.",
+          "A reward model scores a prompt-response pair. Reference-based judges score a response against reference answers. Preference models pick which of two responses is better."
+        ]
+      },
+      "bn": {
+        "short": "ধরন",
+        "title": "বিশেষ ধরনের জাজ",
+        "body": [
+          "দুর্বল বা বিশেষ ধরনের জাজ সস্তা এবং তবুও কাজের।",
+          "রিওয়ার্ড মডেল একটি প্রম্পট-উত্তরের জোড়াকে স্কোর দেয়। রেফারেন্স-ভিত্তিক জাজ রেফারেন্স উত্তরের সাথে মিলিয়ে স্কোর দেয়। প্রেফারেন্স মডেল দুটি উত্তরের কোনটি ভালো তা বাছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "t1",
+          "state": "hot",
+          "sub": {
+            "en": "scores a pair",
+            "bn": "জোড়াকে স্কোর দেয়"
+          }
+        },
+        {
+          "id": "t2",
+          "state": "hot",
+          "sub": {
+            "en": "vs references",
+            "bn": "রেফারেন্সের সাথে"
+          }
+        },
+        {
+          "id": "t3",
+          "state": "hot",
+          "sub": {
+            "en": "picks the better",
+            "bn": "ভালোটা বাছে"
+          }
+        },
+        {
+          "id": "judge",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "judge",
+          "to": "t1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "t2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "t3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Head to head",
+        "title": "Compare answers side by side",
+        "body": [
+          "Comparative evaluation shows two models' answers to the same prompt side by side and picks a winner, instead of scoring each alone.",
+          "From many head-to-head matches, a rating method such as Elo turns the results into one overall ranking."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "It does not saturate like fixed benchmarks."
+        }
+      },
+      "bn": {
+        "short": "মুখোমুখি",
+        "title": "উত্তর পাশাপাশি তুলনা",
+        "body": [
+          "কমপ্যারেটিভ ইভ্যালুয়েশনে একই প্রম্পটের জন্য দুই মডেলের উত্তর পাশাপাশি দেখিয়ে বিজয়ী বাছা হয়, প্রতিটিকে আলাদা স্কোর না দিয়ে।",
+          "অনেক মুখোমুখি ম্যাচ থেকে Elo-র মতো রেটিং পদ্ধতি ফলগুলোকে একটি সামগ্রিক র‍্যাংকে বদলে দেয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "এটা নির্দিষ্ট বেঞ্চমার্কের মতো স্যাচুরেট হয়ে পড়ে না।"
+        }
+      },
+      "show": [
+        {
+          "id": "ans-a",
+          "state": "hot"
+        },
+        {
+          "id": "ans-b",
+          "state": "hot"
+        },
+        {
+          "id": "eval",
+          "state": "hot",
+          "sub": {
+            "en": "pick a winner",
+            "bn": "বিজয়ী বাছা"
+          }
+        },
+        {
+          "id": "rank",
+          "state": "hot",
+          "sub": {
+            "en": "Elo",
+            "bn": "Elo"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ans-a",
+          "to": "eval",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ans-b",
+          "to": "eval",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eval",
+          "to": "rank",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "head-to-head wins",
+          "bn": "মুখোমুখি জয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Gap",
+        "title": "Winning is not the same as good",
+        "body": [
+          "Knowing that model B beats model A does not tell you if either one is good enough.",
+          "Nor does it tell you whether the win is worth B's extra cost."
+        ]
+      },
+      "bn": {
+        "short": "ফাঁক",
+        "title": "জেতা মানেই ভালো নয়",
+        "body": [
+          "মডেল B মডেল A-কে হারিয়েছে জানলেও বোঝা যায় না, দুটোর কোনোটা যথেষ্ট ভালো কিনা।",
+          "এটাও বোঝা যায় না, জয়টা B-এর বাড়তি খরচের যোগ্য কিনা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "m-a",
+          "state": "dim"
+        },
+        {
+          "id": "m-b",
+          "state": "hot",
+          "sub": {
+            "en": "beats A",
+            "bn": "A-কে হারায়"
+          }
+        },
+        {
+          "id": "rank",
+          "state": "warn",
+          "sub": {
+            "en": "good enough?",
+            "bn": "যথেষ্ট ভালো?"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "m-a",
+          "to": "rank",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "m-b",
+          "to": "rank",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "Not good enough?",
+          "bn": "যথেষ্ট ভালো কিনা নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "AI judges are fast and cheap, and can judge on any criteria you describe. Judges can be inconsistent and biased toward their own answers, the first option, or longer answers.",
+          "Comparative evaluation ranks models from many head-to-head wins. Knowing model B beats model A does not tell you if either one is good enough."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "এআই জাজ দ্রুত আর সস্তা, আর আপনার বলে দেওয়া যেকোনো মানদণ্ডে বিচার করতে পারে। জাজ অসঙ্গত হতে পারে, আর নিজের উত্তর, প্রথম অপশন বা লম্বা উত্তরের দিকে ঝুঁকতে পারে।",
+          "কমপ্যারেটিভ ইভ্যালুয়েশন অনেক মুখোমুখি জয় থেকে মডেলদের র‍্যাংক করে। মডেল B মডেল A-কে হারিয়েছে জানলেও বোঝা যায় না, দুটোর কোনোটা যথেষ্ট ভালো কিনা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "judge",
+          "state": "hot"
+        },
+        {
+          "id": "eval",
+          "state": "hot",
+          "x": 335,
+          "y": 60
+        },
+        {
+          "id": "rank",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "judge",
+          "to": "rank",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eval",
+          "to": "rank",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

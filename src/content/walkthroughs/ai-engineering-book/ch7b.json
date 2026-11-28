@@ -1,0 +1,555 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "full",
+      "kind": "model",
+      "label": {
+        "en": "Whole model",
+        "bn": "পুরো মডেল"
+      },
+      "x": 140,
+      "y": 162
+    },
+    {
+      "id": "base",
+      "kind": "model",
+      "label": {
+        "en": "Base model",
+        "bn": "বেস মডেল"
+      },
+      "x": 140,
+      "y": 162
+    },
+    {
+      "id": "adapter",
+      "kind": "model",
+      "label": {
+        "en": "Small add-on",
+        "bn": "ছোট অ্যাড-অন"
+      },
+      "x": 420,
+      "y": 162
+    },
+    {
+      "id": "q4",
+      "kind": "model",
+      "label": {
+        "en": "4-bit base model",
+        "bn": "৪-বিট বেস মডেল"
+      },
+      "x": 170,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "One consumer-grade GPU",
+        "bn": "একটি সাধারণ GPU"
+      },
+      "x": 570,
+      "y": 162
+    },
+    {
+      "id": "a1",
+      "kind": "service",
+      "label": {
+        "en": "Customer adapter",
+        "bn": "কাস্টমার অ্যাডাপ্টার"
+      },
+      "x": 450,
+      "y": 70
+    },
+    {
+      "id": "a2",
+      "kind": "service",
+      "label": {
+        "en": "Task adapter",
+        "bn": "কাজের অ্যাডাপ্টার"
+      },
+      "x": 450,
+      "y": 254
+    },
+    {
+      "id": "ma",
+      "kind": "model",
+      "label": {
+        "en": "Task model",
+        "bn": "কাজের মডেল"
+      },
+      "x": 130,
+      "y": 70
+    },
+    {
+      "id": "mb",
+      "kind": "model",
+      "label": {
+        "en": "Task model",
+        "bn": "কাজের মডেল"
+      },
+      "x": 130,
+      "y": 254
+    },
+    {
+      "id": "merge",
+      "kind": "tool",
+      "label": {
+        "en": "Model merging",
+        "bn": "মডেল মার্জিং"
+      },
+      "x": 390,
+      "y": 162
+    },
+    {
+      "id": "multi",
+      "kind": "model",
+      "label": {
+        "en": "One multi-skilled model",
+        "bn": "এক বহুমুখী মডেল"
+      },
+      "x": 630,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Memory",
+      "bn": "মেমরি"
+    },
+    {
+      "en": "Trained",
+      "bn": "ট্রেইন হয়"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Memory",
+        "title": "A whole model takes a lot of memory",
+        "body": [
+          "Updating a whole model takes a lot of memory.",
+          "Full finetuning updates every parameter."
+        ]
+      },
+      "bn": {
+        "short": "মেমরি",
+        "title": "পুরো মডেলে অনেক মেমরি লাগে",
+        "body": [
+          "পুরো মডেল আপডেট করতে অনেক মেমরি লাগে।",
+          "পুরো ফাইন-টিউনিংয়ে সব প্যারামিটার আপডেট হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "full",
+          "state": "warn",
+          "sub": {
+            "en": "every parameter",
+            "bn": "সব প্যারামিটার"
+          },
+          "x": 380
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "a lot",
+          "bn": "অনেক"
+        },
+        {
+          "en": "every parameter",
+          "bn": "সব প্যারামিটার"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "PEFT",
+        "title": "Train only a tiny add-on",
+        "body": [
+          "PEFT methods like LoRA train only a tiny add-on.",
+          "They add small trainable modules (adapters) rather than touching the base weights."
+        ]
+      },
+      "bn": {
+        "short": "PEFT",
+        "title": "শুধু ছোট একটা অ্যাড-অন ট্রেইন করুন",
+        "body": [
+          "LoRA-র মতো PEFT পদ্ধতি শুধু একটি ছোট অ্যাড-অন ট্রেইন করে।",
+          "মূল ওয়েট না ছুঁয়ে তারা ছোট ট্রেইনেবল মডিউল (অ্যাডাপ্টার) যোগ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "dim",
+          "sub": {
+            "en": "base weights untouched",
+            "bn": "মূল ওয়েট ছোঁয়া হয় না"
+          }
+        },
+        {
+          "id": "adapter",
+          "state": "hot",
+          "sub": {
+            "en": "adapter",
+            "bn": "অ্যাডাপ্টার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "adapter",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "tiny add-on",
+          "bn": "ছোট অ্যাড-অন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "LoRA",
+        "title": "LoRA: two small matrices",
+        "body": [
+          "For a weight matrix, LoRA trains only two small matrices whose product approximates the update.",
+          "The base weights are left alone, so far fewer values are trained and memory drops."
+        ]
+      },
+      "bn": {
+        "short": "LoRA",
+        "title": "LoRA: দুটি ছোট ম্যাট্রিক্স",
+        "body": [
+          "একটি ওয়েট ম্যাট্রিক্সের জন্য LoRA শুধু দুটি ছোট ম্যাট্রিক্স ট্রেইন করে, যাদের গুণফল বদলের মোটামুটি রূপ দেয়।",
+          "মূল ওয়েট ছোঁয়া হয় না, তাই অনেক কম মান ট্রেইন হয় আর মেমরি কমে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "dim",
+          "sub": {
+            "en": "left alone",
+            "bn": "ছোঁয়া হয় না"
+          }
+        },
+        {
+          "id": "adapter",
+          "state": "hot",
+          "sub": {
+            "en": "two small matrices",
+            "bn": "দুটি ছোট ম্যাট্রিক্স"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "adapter",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "drops",
+          "bn": "কমে"
+        },
+        {
+          "en": "far fewer values",
+          "bn": "অনেক কম মান"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "QLoRA",
+        "title": "QLoRA: a 4-bit base",
+        "body": [
+          "QLoRA is LoRA with the base model stored in 4-bit precision.",
+          "It lets one consumer-grade GPU finetune very large models."
+        ]
+      },
+      "bn": {
+        "short": "QLoRA",
+        "title": "QLoRA: ৪-বিট বেস",
+        "body": [
+          "QLoRA হলো এমন LoRA, যেখানে বেস মডেল ৪-বিট প্রিসিশনে রাখা হয়।",
+          "এতে একটি সাধারণ GPU-তে খুব বড় মডেল ফাইন-টিউন করা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q4",
+          "state": "hot",
+          "sub": {
+            "en": "4-bit precision",
+            "bn": "৪-বিট প্রিসিশন"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "very large models",
+            "bn": "খুব বড় মডেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q4",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Share",
+        "title": "Many adapters share one base",
+        "body": [
+          "Many LoRA adapters can share one base model.",
+          "Each one can be a model for a customer or for a task."
+        ]
+      },
+      "bn": {
+        "short": "শেয়ার",
+        "title": "এক বেসে অনেক অ্যাডাপ্টার",
+        "body": [
+          "একটি বেস মডেলে অনেক LoRA অ্যাডাপ্টার চলতে পারে।",
+          "প্রতিটি হতে পারে একেকটি কাস্টমার বা কাজের জন্য আলাদা মডেল।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "hot",
+          "sub": {
+            "en": "one base model",
+            "bn": "একটি বেস মডেল"
+          }
+        },
+        {
+          "id": "a1",
+          "state": "hot",
+          "sub": {
+            "en": "per-customer",
+            "bn": "প্রতি কাস্টমার"
+          }
+        },
+        {
+          "id": "a2",
+          "state": "hot",
+          "sub": {
+            "en": "per-task",
+            "bn": "প্রতি কাজ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "a1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "base",
+          "to": "a2",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Merge",
+        "title": "Merge models, one skill each",
+        "body": [
+          "Training on tasks one after another risks catastrophic forgetting, where the model forgets earlier tasks.",
+          "Merging lets you finetune each task separately, then combine the results into one multi-skilled model, without necessarily needing a GPU."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Training tasks one after another can make the model forget the earlier tasks."
+        }
+      },
+      "bn": {
+        "short": "মার্জ",
+        "title": "মডেল মার্জ করুন, প্রতিটিতে একটি কাজ",
+        "body": [
+          "একের পর এক কাজে ট্রেনিং করলে ক্যাটাস্ট্রফিক ফরগেটিংয়ের ঝুঁকি থাকে, যেখানে মডেল আগের কাজগুলো ভুলে যায়।",
+          "মার্জিংয়ে প্রতিটি কাজ আলাদা ফাইন-টিউন করে পরে এক বহুমুখী মডেলে মেলানো যায়, GPU ছাড়াও সম্ভব।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "একের পর এক কাজে ট্রেনিং করলে মডেল আগের কাজগুলো ভুলে যেতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "ma",
+          "state": "hot",
+          "sub": {
+            "en": "finetuned separately",
+            "bn": "আলাদা ফাইন-টিউন"
+          }
+        },
+        {
+          "id": "mb",
+          "state": "hot",
+          "sub": {
+            "en": "finetuned separately",
+            "bn": "আলাদা ফাইন-টিউন"
+          }
+        },
+        {
+          "id": "merge",
+          "state": "hot"
+        },
+        {
+          "id": "multi",
+          "state": "hot",
+          "sub": {
+            "en": "multi-skilled",
+            "bn": "বহুমুখী"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ma",
+          "to": "merge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mb",
+          "to": "merge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "merge",
+          "to": "multi",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tactics",
+        "title": "Watch the learning rate and the loss",
+        "body": [
+          "Learning rate is the step size. Too high and training turns unstable; too low and it crawls.",
+          "Watch training and validation loss to catch overfitting."
+        ],
+        "points": [
+          "Overfitting shows when held-out (validation) error rises while training error falls."
+        ]
+      },
+      "bn": {
+        "short": "কৌশল",
+        "title": "লার্নিং রেট আর লস দেখুন",
+        "body": [
+          "লার্নিং রেট হলো ধাপের মাপ। বেশি হলে ট্রেনিং অস্থির হয়; কম হলে খুব ধীরে এগোয়।",
+          "ওভারফিটিং ধরতে ট্রেনিং আর ভ্যালিডেশন লস দেখুন।"
+        ],
+        "points": [
+          "আলাদা রাখা (ভ্যালিডেশন) ডেটায় ভুল বাড়ে অথচ ট্রেনিংয়ের ভুল কমে, তখন ওভারফিটিং ধরা পড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "adapter",
+          "state": "hot",
+          "sub": {
+            "en": "training",
+            "bn": "ট্রেনিং"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Start with an adapter",
+        "body": [
+          "Start with an adapter like LoRA.",
+          "Move to full finetuning only with enough data and a need for extra quality."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "অ্যাডাপ্টার দিয়ে শুরু করুন",
+        "body": [
+          "শুরুতে LoRA-র মতো অ্যাডাপ্টার ব্যবহার করুন।",
+          "যথেষ্ট ডেটা থাকলে আর বাড়তি মান লাগলে তবেই পুরো ফাইন-টিউনিং করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "adapter",
+          "state": "hot",
+          "sub": {
+            "en": "start here",
+            "bn": "এখানে শুরু"
+          }
+        },
+        {
+          "id": "full",
+          "state": "dim",
+          "sub": {
+            "en": "later",
+            "bn": "পরে"
+          },
+          "x": 140
+        }
+      ],
+      "links": [
+        {
+          "from": "adapter",
+          "to": "full",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

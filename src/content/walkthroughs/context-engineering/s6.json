@@ -1,0 +1,663 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Tool",
+        "bn": "টুল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "res",
+      "kind": "file",
+      "label": {
+        "en": "Tool result",
+        "bn": "টুল রেজাল্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "win",
+      "kind": "model",
+      "label": {
+        "en": "Context window",
+        "bn": "কনটেক্সট উইন্ডো"
+      },
+      "x": 640,
+      "y": 162
+    },
+    {
+      "id": "head",
+      "kind": "file",
+      "label": {
+        "en": "First K",
+        "bn": "প্রথম K"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "mid",
+      "kind": "file",
+      "label": {
+        "en": "Middle",
+        "bn": "মাঝখান"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tail",
+      "kind": "file",
+      "label": {
+        "en": "Last K",
+        "bn": "শেষ K"
+      },
+      "x": 380,
+      "y": 264
+    },
+    {
+      "id": "slice",
+      "kind": "file",
+      "label": {
+        "en": "Small slice",
+        "bn": "ছোট স্লাইস"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "cursor",
+      "kind": "key",
+      "label": {
+        "en": "Cursor",
+        "bn": "কার্সর"
+      },
+      "x": 380,
+      "y": 264
+    },
+    {
+      "id": "schema",
+      "kind": "file",
+      "label": {
+        "en": "Schema",
+        "bn": "স্কিমা"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "rows",
+      "kind": "database",
+      "label": {
+        "en": "First 10 rows",
+        "bn": "প্রথম ১০ সারি"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "count",
+      "kind": "chart",
+      "label": {
+        "en": "Count",
+        "bn": "মোট সংখ্যা"
+      },
+      "x": 380,
+      "y": 264
+    },
+    {
+      "id": "store",
+      "kind": "storage",
+      "label": {
+        "en": "Outside the prompt",
+        "bn": "প্রম্পটের বাইরে"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Result",
+      "bn": "ফলাফল"
+    },
+    {
+      "en": "Window",
+      "bn": "উইন্ডো"
+    },
+    {
+      "en": "Next",
+      "bn": "পরের অংশ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Problem",
+        "title": "One tool call can fill the window",
+        "body": [
+          "A tool result is the data a tool sends back to the model after a call, such as a file or database rows.",
+          "One tool call can return 100K tokens and fill your whole context window."
+        ]
+      },
+      "bn": {
+        "short": "সমস্যা",
+        "title": "একটি টুল কল পুরো উইন্ডো ভরতে পারে",
+        "body": [
+          "টুল রেজাল্ট হলো কল করার পর টুল মডেলকে যে ডেটা ফেরত পাঠায়, যেমন ফাইল বা ডেটাবেসের সারি।",
+          "একটি টুল কল ১০০K টোকেন ফেরত দিয়ে পুরো কনটেক্সট উইন্ডো ভরে ফেলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "warn",
+          "sub": {
+            "en": "100K tokens",
+            "bn": "১০০K টোকেন"
+          }
+        },
+        {
+          "id": "win",
+          "state": "warn",
+          "sub": {
+            "en": "whole window",
+            "bn": "পুরো উইন্ডো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "res",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "res",
+          "to": "win",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "100K tokens",
+          "bn": "১০০K টোকেন"
+        },
+        {
+          "en": "whole window",
+          "bn": "পুরো উইন্ডো"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Head/tail",
+        "title": "Truncation: keep the parts that matter",
+        "body": [
+          "Truncation cuts a long result down to a smaller size, and keeps the parts that matter.",
+          "Head/tail keeps the first K and last K tokens, and drops the middle."
+        ]
+      },
+      "bn": {
+        "short": "হেড/টেইল",
+        "title": "ট্রাঙ্কেশন: দরকারি অংশ রাখা",
+        "body": [
+          "ট্রাঙ্কেশন লম্বা ফলাফল ছোট করে কেটে নেয়, আর দরকারি অংশ রাখে।",
+          "হেড/টেইল শুরুর K আর শেষের K টোকেন রাখে, মাঝখান বাদ দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "res",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "head",
+          "state": "hot"
+        },
+        {
+          "id": "mid",
+          "state": "dim",
+          "sub": {
+            "en": "dropped",
+            "bn": "বাদ"
+          }
+        },
+        {
+          "id": "tail",
+          "state": "hot"
+        },
+        {
+          "id": "win",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "res",
+          "to": "head",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "res",
+          "to": "tail",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "head",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tail",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "first K, last K",
+          "bn": "প্রথম K, শেষ K"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pages",
+        "title": "Pagination: a small slice plus a cursor",
+        "body": [
+          "Pagination returns results in small slices, so the agent asks for the next slice only if needed.",
+          "A cursor is a marker the tool returns to show where the next slice starts."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Never return the whole result at once. Let the agent ask for more."
+        }
+      },
+      "bn": {
+        "short": "পেজ",
+        "title": "পেজিনেশন: ছোট স্লাইস আর কার্সর",
+        "body": [
+          "পেজিনেশন ফলাফল ছোট ছোট অংশে দেয়, যাতে এজেন্ট দরকার হলেই পরের অংশ চায়।",
+          "কার্সর হলো টুলের ফেরত দেওয়া চিহ্ন, যা দেখায় পরের অংশ কোথা থেকে শুরু।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "পুরো ফলাফল একসাথে দেবেন না। এজেন্ট দরকারে আরও চাইবে।"
+        }
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "slice",
+          "state": "hot"
+        },
+        {
+          "id": "cursor",
+          "state": "hot"
+        },
+        {
+          "id": "win",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "slice",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "cursor",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "slice",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "small slice",
+          "bn": "ছোট স্লাইস"
+        },
+        null,
+        {
+          "en": "cursor",
+          "bn": "কার্সর"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Structure",
+        "title": "Database results: schema, rows, count",
+        "body": [
+          "For database results, return the schema, the first 10 rows, and the count."
+        ]
+      },
+      "bn": {
+        "short": "কাঠামো",
+        "title": "ডেটাবেসের ফলাফল: স্কিমা, সারি, সংখ্যা",
+        "body": [
+          "ডেটাবেসের ফলাফলে স্কিমা, প্রথম ১০ সারি আর মোট সংখ্যা দিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "schema",
+          "state": "hot"
+        },
+        {
+          "id": "rows",
+          "state": "hot"
+        },
+        {
+          "id": "count",
+          "state": "hot"
+        },
+        {
+          "id": "win",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "schema",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "rows",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "count",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "schema",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rows",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "count",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Just in time",
+        "title": "Just-in-time: save it, give a reference",
+        "body": [
+          "Just-in-time means saving the data outside the prompt, giving a reference, and fetching it only when needed."
+        ]
+      },
+      "bn": {
+        "short": "জাস্ট-ইন-টাইম",
+        "title": "জাস্ট-ইন-টাইম: রেখে দিন, রেফারেন্স দিন",
+        "body": [
+          "জাস্ট-ইন-টাইম মানে ডেটা প্রম্পটের বাইরে রেখে একটি রেফারেন্স দেওয়া, আর দরকার হলেই আনা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "store",
+          "state": "hot",
+          "sub": {
+            "en": "fetch when needed",
+            "bn": "দরকারে আনা"
+          }
+        },
+        {
+          "id": "win",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "store",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reserve",
+        "title": "Reserve room for tool results",
+        "body": [
+          "Reserve room for tool results in your token budget."
+        ]
+      },
+      "bn": {
+        "short": "রিজার্ভ",
+        "title": "টুল রেজাল্টের জন্য জায়গা রাখুন",
+        "body": [
+          "টোকেন বাজেটে টুল রেজাল্টের জন্য জায়গা আগেই রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        },
+        {
+          "id": "win",
+          "state": "hot",
+          "sub": {
+            "en": "room reserved",
+            "bn": "জায়গা রাখা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "res",
+          "to": "win",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "room reserved",
+          "bn": "জায়গা রাখা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Boundaries",
+        "title": "Do not cut code or JSON in the middle",
+        "body": [
+          "Do not cut code or JSON in the middle.",
+          "Stop at function ends, closing braces, or line endings."
+        ]
+      },
+      "bn": {
+        "short": "সীমানা",
+        "title": "কোড বা JSON মাঝপথে কাটবেন না",
+        "body": [
+          "কোড বা JSON মাঝপথে কাটবেন না।",
+          "ফাংশনের শেষ, বন্ধনী বন্ধ হওয়া বা লাইনের শেষে থামুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "res",
+          "state": "warn",
+          "sub": {
+            "en": "not in the middle",
+            "bn": "মাঝপথে নয়"
+          }
+        },
+        {
+          "id": "win",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "res",
+          "to": "win",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Never return the whole result at once. Return a small slice plus a cursor, and let the agent ask for more."
+        ],
+        "points": [
+          "For database results, return the schema, the first 10 rows, and the count.",
+          "Reserve room for tool results in your token budget.",
+          "Do not cut code or JSON in the middle."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "পুরো ফলাফল একসাথে দেবেন না। ছোট একটি স্লাইস আর কার্সর দিন, এজেন্ট দরকারে আরও চাইবে।"
+        ],
+        "points": [
+          "ডেটাবেসের ফলাফলে স্কিমা, প্রথম ১০ সারি আর মোট সংখ্যা দিন।",
+          "টোকেন বাজেটে টুল রেজাল্টের জন্য জায়গা আগেই রাখুন।",
+          "কোড বা JSON মাঝপথে কাটবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool"
+        },
+        {
+          "id": "slice"
+        },
+        {
+          "id": "cursor"
+        },
+        {
+          "id": "win"
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "slice",
+          "flow": "to"
+        },
+        {
+          "from": "tool",
+          "to": "cursor",
+          "flow": "to"
+        },
+        {
+          "from": "slice",
+          "to": "win",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

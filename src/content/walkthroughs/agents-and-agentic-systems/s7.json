@@ -1,0 +1,650 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "ctx",
+      "kind": "file",
+      "label": {
+        "en": "Context window",
+        "bn": "কনটেক্সট উইন্ডো"
+      },
+      "x": 110,
+      "y": 50
+    },
+    {
+      "id": "parent",
+      "kind": "model",
+      "label": {
+        "en": "Parent agent",
+        "bn": "প্যারেন্ট এজেন্ট"
+      },
+      "x": 110,
+      "y": 200
+    },
+    {
+      "id": "sub",
+      "kind": "model",
+      "label": {
+        "en": "Subagent",
+        "bn": "সাবএজেন্ট"
+      },
+      "x": 390,
+      "y": 200
+    },
+    {
+      "id": "res",
+      "kind": "note",
+      "label": {
+        "en": "Final result",
+        "bn": "চূড়ান্ত ফলাফল"
+      },
+      "x": 650,
+      "y": 200
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "Agent tool",
+        "bn": "Agent টুল"
+      },
+      "x": 250,
+      "y": 60
+    },
+    {
+      "id": "sdk",
+      "kind": "tool",
+      "label": {
+        "en": "openai-agents-sdk",
+        "bn": "openai-agents-sdk"
+      },
+      "x": 110,
+      "y": 70
+    },
+    {
+      "id": "rr",
+      "kind": "note",
+      "label": {
+        "en": "RunResult",
+        "bn": "RunResult"
+      },
+      "x": 400,
+      "y": 70
+    },
+    {
+      "id": "crew",
+      "kind": "service",
+      "label": {
+        "en": "Crew",
+        "bn": "ক্রু"
+      },
+      "x": 70,
+      "y": 250
+    },
+    {
+      "id": "agents",
+      "kind": "model",
+      "label": {
+        "en": "Agents",
+        "bn": "এজেন্ট"
+      },
+      "x": 220,
+      "y": 250
+    },
+    {
+      "id": "tasks",
+      "kind": "file",
+      "label": {
+        "en": "Tasks",
+        "bn": "টাস্ক"
+      },
+      "x": 365,
+      "y": 250
+    },
+    {
+      "id": "proc",
+      "kind": "queue",
+      "label": {
+        "en": "Process",
+        "bn": "প্রসেস"
+      },
+      "x": 590,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Parent gets",
+      "bn": "প্যারেন্ট পায়"
+    },
+    {
+      "en": "Parent window",
+      "bn": "প্যারেন্টের উইন্ডো"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Too much",
+        "title": "Hand the work to a subagent",
+        "body": [
+          "When one agent has too much to do for one context window, it can hand work to a subagent.",
+          "The parent waits and gets back only a final result."
+        ]
+      },
+      "bn": {
+        "short": "বেশি কাজ",
+        "title": "কাজ দিন সাবএজেন্টকে",
+        "body": [
+          "একটি এজেন্টের কাজ এক কনটেক্সট উইন্ডোর জন্য বেশি হয়ে গেলে সে কাজ দিতে পারে একটি সাবএজেন্টকে।",
+          "প্যারেন্ট অপেক্ষা করে আর শুধু চূড়ান্ত ফলাফল ফেরত পায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ctx",
+          "state": "warn",
+          "sub": {
+            "en": "too much to do",
+            "bn": "কাজ বেশি"
+          }
+        },
+        {
+          "id": "parent",
+          "state": "hot"
+        },
+        {
+          "id": "sub",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "sub",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sub",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "final result only",
+          "bn": "শুধু চূড়ান্ত ফলাফল"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Subagent",
+        "title": "What a subagent is",
+        "body": [
+          "A subagent is an agent started by another agent.",
+          "It has its own prompt, its own tools, its own loop, and its own end point."
+        ]
+      },
+      "bn": {
+        "short": "সাবএজেন্ট",
+        "title": "সাবএজেন্ট কী",
+        "body": [
+          "সাবএজেন্ট হলো অন্য এজেন্টের চালু করা একটি এজেন্ট।",
+          "তার নিজের প্রম্পট, টুল, লুপ আর শেষ করার নিয়ম আছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "parent",
+          "state": "dim"
+        },
+        {
+          "id": "sub",
+          "state": "hot",
+          "sub": {
+            "en": "own prompt, tools, loop",
+            "bn": "নিজের প্রম্পট, টুল, লুপ"
+          }
+        },
+        {
+          "id": "res",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "sub",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Manager",
+        "title": "Manager–worker, not fork/join",
+        "body": [
+          "The parent gives a job and waits. It does not poll the subagent and does not watch its progress.",
+          "It gets a single result, so the parent's context window stays clean."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "The section says not to picture subagents as fork/join."
+        }
+      },
+      "bn": {
+        "short": "ম্যানেজার",
+        "title": "ম্যানেজার–ওয়ার্কার, ফর্ক/জয়েন নয়",
+        "body": [
+          "প্যারেন্ট কাজ দিয়ে অপেক্ষা করে। সে বারবার খোঁজ নেয় না, অগ্রগতিও দেখে না।",
+          "সে একটিমাত্র ফলাফল পায়, তাই প্যারেন্টের কনটেক্সট উইন্ডো পরিষ্কার থাকে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "এই সেকশন বলে, সাবএজেন্টকে ফর্ক/জয়েন-এর মতো করে ভাববেন না।"
+        }
+      },
+      "show": [
+        {
+          "id": "parent",
+          "state": "hot",
+          "sub": {
+            "en": "waits",
+            "bn": "অপেক্ষা করে"
+          }
+        },
+        {
+          "id": "sub",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot",
+          "sub": {
+            "en": "one result",
+            "bn": "একটিমাত্র ফলাফল"
+          }
+        },
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "stays clean",
+            "bn": "পরিষ্কার থাকে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "sub",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sub",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one result",
+          "bn": "একটিমাত্র ফলাফল"
+        },
+        {
+          "en": "clean",
+          "bn": "পরিষ্কার"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Agent tool",
+        "title": "Claude Code's Agent tool",
+        "body": [
+          "Claude Code has an Agent tool that the model calls to start a subagent.",
+          "The subagent runs in its own loop with its own tools. The parent never sees the intermediate steps, only the summary."
+        ]
+      },
+      "bn": {
+        "short": "Agent টুল",
+        "title": "Claude Code-এর Agent টুল",
+        "body": [
+          "Claude Code-এ একটি Agent টুল আছে, যা মডেল ডেকে সাবএজেন্ট চালু করে।",
+          "সাবএজেন্ট নিজের লুপে নিজের টুল নিয়ে চলে। প্যারেন্ট মাঝের ধাপ দেখে না, শুধু সারাংশ দেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "parent",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "sub",
+          "state": "hot",
+          "sub": {
+            "en": "own loop, own tools",
+            "bn": "নিজের লুপ, নিজের টুল"
+          }
+        },
+        {
+          "id": "res",
+          "state": "hot",
+          "sub": {
+            "en": "summary",
+            "bn": "সারাংশ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "sub",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sub",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "summary",
+          "bn": "সারাংশ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Frameworks",
+        "title": "OpenAI's agents-sdk and CrewAI",
+        "body": [
+          "OpenAI's openai-agents-sdk has Runner.run(agent, input), which returns a final RunResult.",
+          "CrewAI models a multi-agent system as a crew (the team), agents (the roles), tasks (the work), and a process (sequential or hierarchical)."
+        ]
+      },
+      "bn": {
+        "short": "ফ্রেমওয়ার্ক",
+        "title": "OpenAI-র agents-sdk আর CrewAI",
+        "body": [
+          "OpenAI-র openai-agents-sdk-তে আছে Runner.run(agent, input), যা একটি চূড়ান্ত RunResult ফেরত দেয়।",
+          "CrewAI মাল্টি-এজেন্ট সিস্টেমকে ভাগ করে ক্রু (দল), এজেন্ট (ভূমিকা), টাস্ক (কাজ) আর প্রসেসে (সিকোয়েন্সিয়াল বা হায়ারার্কিক্যাল)।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sdk",
+          "state": "hot"
+        },
+        {
+          "id": "rr",
+          "state": "hot",
+          "sub": {
+            "en": "final",
+            "bn": "চূড়ান্ত"
+          }
+        },
+        {
+          "id": "crew",
+          "state": "hot",
+          "sub": {
+            "en": "the team",
+            "bn": "দল"
+          }
+        },
+        {
+          "id": "agents",
+          "state": "hot",
+          "sub": {
+            "en": "the roles",
+            "bn": "ভূমিকা"
+          }
+        },
+        {
+          "id": "tasks",
+          "state": "hot",
+          "sub": {
+            "en": "the work",
+            "bn": "কাজ"
+          }
+        },
+        {
+          "id": "proc",
+          "state": "hot",
+          "sub": {
+            "en": "sequential or hierarchical",
+            "bn": "সিকোয়েন্সিয়াল/হায়ারার্কিক্যাল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sdk",
+          "to": "rr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "crew",
+          "to": "agents",
+          "state": "hot"
+        },
+        {
+          "from": "agents",
+          "to": "tasks",
+          "state": "hot"
+        },
+        {
+          "from": "tasks",
+          "to": "proc",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "final RunResult",
+          "bn": "চূড়ান্ত RunResult"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "When",
+        "title": "When to use a subagent",
+        "body": [
+          "Use a subagent when the task is well-defined and self-contained, needs different tools, or has steps that would pollute the parent's context.",
+          "Use one also when you want independent retries or a separate cost centre."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "The subtask is well-defined and self-contained"
+          },
+          {
+            "sign": "+",
+            "html": "The subtask needs different tools than the parent has"
+          },
+          {
+            "sign": "+",
+            "html": "The subtask's intermediate steps would pollute the parent's context"
+          },
+          {
+            "sign": "+",
+            "html": "You want the subtask retried independently of the parent"
+          },
+          {
+            "sign": "+",
+            "html": "You want to bill the subtask to a different cost centre"
+          }
+        ]
+      },
+      "bn": {
+        "short": "কখন",
+        "title": "কখন সাবএজেন্ট ব্যবহার করবেন",
+        "body": [
+          "কাজটি স্পষ্টভাবে সংজ্ঞায়িত হলে, ভিন্ন টুল লাগলে, বা তার মাঝের ধাপ প্যারেন্টের কনটেক্সট দূষিত করলে সাবএজেন্ট ব্যবহার করুন।",
+          "আলাদাভাবে রিট্রাই বা আলাদা খরচ-কেন্দ্র চাইলেও এটি ব্যবহার করুন।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "সাবটাস্ক স্পষ্টভাবে সংজ্ঞায়িত আর স্বয়ংসম্পূর্ণ"
+          },
+          {
+            "sign": "+",
+            "html": "সাবটাস্কের জন্য প্যারেন্টের চেয়ে ভিন্ন টুল লাগে"
+          },
+          {
+            "sign": "+",
+            "html": "সাবটাস্কের মাঝের ধাপ প্যারেন্টের কনটেক্সট দূষিত করবে"
+          },
+          {
+            "sign": "+",
+            "html": "প্যারেন্টের থেকে আলাদাভাবে সাবটাস্ক রিট্রাই করতে চান"
+          },
+          {
+            "sign": "+",
+            "html": "সাবটাস্কের খরচ আলাদা খরচ-কেন্দ্রে ধরতে চান"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "parent",
+          "state": "hot"
+        },
+        {
+          "id": "sub",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "sub",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sub",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A subagent returns a final result to the parent, not its intermediate steps."
+        ],
+        "points": [
+          "A subagent returns a final result to the parent, not its intermediate steps.",
+          "The parent does not poll or stream the subagent. Its context window stays clean."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "সাবএজেন্ট প্যারেন্টকে চূড়ান্ত ফলাফল ফেরত দেয়, মাঝের ধাপ নয়।"
+        ],
+        "points": [
+          "সাবএজেন্ট প্যারেন্টকে চূড়ান্ত ফলাফল ফেরত দেয়, মাঝের ধাপ নয়।",
+          "প্যারেন্ট সাবএজেন্টকে পোল বা স্ট্রিম করে না। তাই তার কনটেক্সট উইন্ডো পরিষ্কার থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "stays clean",
+            "bn": "পরিষ্কার থাকে"
+          }
+        },
+        {
+          "id": "parent",
+          "state": "hot"
+        },
+        {
+          "id": "sub",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "parent",
+          "to": "sub",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sub",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "final result",
+          "bn": "চূড়ান্ত ফলাফল"
+        },
+        {
+          "en": "clean",
+          "bn": "পরিষ্কার"
+        }
+      ]
+    }
+  ]
+}

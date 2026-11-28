@@ -1,0 +1,556 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "files",
+      "kind": "file",
+      "label": {
+        "en": "Files in Git",
+        "bn": "Git-এর ফাইল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tf",
+      "kind": "tool",
+      "label": {
+        "en": "Terraform",
+        "bn": "Terraform"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "state",
+      "kind": "storage",
+      "label": {
+        "en": "State",
+        "bn": "স্টেট"
+      },
+      "x": 330,
+      "y": 50
+    },
+    {
+      "id": "cloud",
+      "kind": "server",
+      "label": {
+        "en": "GPU nodes",
+        "bn": "GPU নোড"
+      },
+      "x": 580,
+      "y": 162
+    },
+    {
+      "id": "ans",
+      "kind": "tool",
+      "label": {
+        "en": "Ansible",
+        "bn": "Ansible"
+      },
+      "x": 330,
+      "y": 282
+    },
+    {
+      "id": "hand",
+      "kind": "user",
+      "label": {
+        "en": "Someone by hand",
+        "bn": "হাতে বদল"
+      },
+      "x": 580,
+      "y": 282
+    },
+    {
+      "id": "lock",
+      "kind": "lock",
+      "label": {
+        "en": "Remote backend",
+        "bn": "remote backend"
+      },
+      "x": 580,
+      "y": 50
+    },
+    {
+      "id": "tags",
+      "kind": "note",
+      "label": {
+        "en": "Owner and expiry tags",
+        "bn": "মালিক আর মেয়াদের ট্যাগ"
+      },
+      "x": 140,
+      "y": 282
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Result",
+      "bn": "ফল"
+    },
+    {
+      "en": "Change",
+      "bn": "বদল"
+    },
+    {
+      "en": "State",
+      "bn": "স্টেট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Files",
+        "title": "Files replace clicking",
+        "body": [
+          "IaC describes servers, networks and databases in files that you review and version like code.",
+          "The same files give the same result each time."
+        ]
+      },
+      "bn": {
+        "short": "ফাইল",
+        "title": "ফাইল, ক্লিকের বদলে",
+        "body": [
+          "IaC সার্ভার, নেটওয়ার্ক আর ডেটাবেসকে ফাইলে লিখে রাখে, যা কোডের মতো রিভিউ ও ভার্সন করা যায়।",
+          "একই ফাইল প্রতিবার একই ফল দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "files",
+          "state": "hot",
+          "sub": {
+            "en": "review and version",
+            "bn": "রিভিউ আর ভার্সন"
+          }
+        },
+        {
+          "id": "tf",
+          "state": "hot"
+        },
+        {
+          "id": "cloud",
+          "state": "hot",
+          "sub": {
+            "en": "same every time",
+            "bn": "প্রতিবার একই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "files",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tf",
+          "to": "cloud",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "same",
+          "bn": "একই"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Tools",
+        "title": "Terraform and Ansible",
+        "body": [
+          "Terraform is declarative: you describe the end state, and it creates cloud resources such as GPU nodes, networks, buckets and databases. OpenTofu is its open-source fork.",
+          "Ansible sets up drivers, packages and services on machines that already exist, over SSH, with no agent on the machine."
+        ]
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "Terraform আর Ansible",
+        "body": [
+          "Terraform ডিক্লারেটিভ: আপনি শেষ অবস্থাটা বর্ণনা করেন, আর সেটা GPU নোড, নেটওয়ার্ক, বাকেট, ডেটাবেসের মতো ক্লাউড রিসোর্স বানায়। OpenTofu তার ওপেন-সোর্স ফর্ক।",
+          "Ansible আগে থেকে থাকা মেশিনে ড্রাইভার, প্যাকেজ আর সার্ভিস সেট আপ করে, SSH দিয়ে, মেশিনে কোনো এজেন্ট ছাড়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tf",
+          "state": "hot",
+          "sub": {
+            "en": "end state",
+            "bn": "শেষ অবস্থা"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "hot",
+          "sub": {
+            "en": "no agent",
+            "bn": "এজেন্ট নেই"
+          }
+        },
+        {
+          "id": "cloud",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tf",
+          "to": "cloud",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ans",
+          "to": "cloud",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Plan",
+        "title": "Plan shows what would change",
+        "body": [
+          "Terraform compares your files with its recorded state and with the real resources, and shows a plan.",
+          "Run terraform plan to see the change."
+        ]
+      },
+      "bn": {
+        "short": "প্ল্যান",
+        "title": "প্ল্যান দেখায় কী বদলাবে",
+        "body": [
+          "Terraform আপনার ফাইলকে তার রেকর্ড করা স্টেট আর আসল রিসোর্সের সঙ্গে মেলায়, আর একটা প্ল্যান দেখায়।",
+          "বদল দেখতে terraform plan চালান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "files",
+          "state": "hot"
+        },
+        {
+          "id": "state",
+          "state": "hot",
+          "sub": {
+            "en": "recorded",
+            "bn": "রেকর্ড করা"
+          }
+        },
+        {
+          "id": "tf",
+          "state": "hot",
+          "sub": {
+            "en": "plan",
+            "bn": "প্ল্যান"
+          }
+        },
+        {
+          "id": "cloud",
+          "state": "hot",
+          "sub": {
+            "en": "real resources",
+            "bn": "আসল রিসোর্স"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "files",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "state",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cloud",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "plan",
+          "bn": "প্ল্যান"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Apply",
+        "title": "Apply makes the change",
+        "body": [
+          "When you apply, Terraform changes only the difference.",
+          "Run terraform apply to make the change, after you approve it."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাপ্লাই",
+        "title": "অ্যাপ্লাই বদলটা করে",
+        "body": [
+          "অ্যাপ্লাই করলে Terraform শুধু পার্থক্যটুকু বদলায়।",
+          "আপনি মেনে নিলে বদলটা করতে terraform apply চালান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tf",
+          "state": "hot",
+          "sub": {
+            "en": "after you approve",
+            "bn": "আপনি মেনে নিলে"
+          }
+        },
+        {
+          "id": "cloud",
+          "state": "hot",
+          "sub": {
+            "en": "only the difference",
+            "bn": "শুধু পার্থক্য"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tf",
+          "to": "cloud",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "only the difference",
+          "bn": "শুধু পার্থক্য"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "State",
+        "title": "Keep state in a remote backend",
+        "body": [
+          "The state can hold sensitive values, and the team shares it.",
+          "Keep it in a remote backend with locking, shared storage with one change at a time, never in Git."
+        ]
+      },
+      "bn": {
+        "short": "স্টেট",
+        "title": "স্টেট রাখুন remote backend-এ",
+        "body": [
+          "স্টেটে সংবেদনশীল মান থাকতে পারে, আর পুরো টিম এটা ভাগ করে।",
+          "স্টেট লকিংসহ remote backend-এ, মানে শেয়ার করা স্টোরেজে, যেখানে একবারে একটাই বদল, রাখুন; কখনও Git-এ নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "state",
+          "state": "hot",
+          "sub": {
+            "en": "sensitive values",
+            "bn": "সংবেদনশীল মান"
+          }
+        },
+        {
+          "id": "lock",
+          "state": "hot",
+          "sub": {
+            "en": "one change at a time",
+            "bn": "একবারে একটাই বদল"
+          }
+        },
+        {
+          "id": "files",
+          "state": "warn",
+          "sub": {
+            "en": "never state in Git",
+            "bn": "স্টেট কখনও Git-এ নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "state",
+          "to": "lock",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "remote, locked",
+          "bn": "remote, লকসহ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Drift",
+        "title": "Drift: files no longer match",
+        "body": [
+          "If someone changes a resource by hand, the files no longer match reality. This is drift.",
+          "terraform plan shows the difference."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Drift is when the files and reality differ."
+        }
+      },
+      "bn": {
+        "short": "ড্রিফট",
+        "title": "ড্রিফট: ফাইল আর মেলে না",
+        "body": [
+          "কেউ হাতে কোনো রিসোর্স বদলালে ফাইল আর বাস্তব অবস্থা মেলে না। একে বলে ড্রিফট।",
+          "terraform plan পার্থক্যটা দেখায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "ড্রিফট মানে ফাইল আর বাস্তব অবস্থা আলাদা।"
+        }
+      },
+      "show": [
+        {
+          "id": "hand",
+          "state": "warn",
+          "sub": {
+            "en": "by hand",
+            "bn": "হাতে"
+          }
+        },
+        {
+          "id": "cloud",
+          "state": "warn"
+        },
+        {
+          "id": "tf",
+          "state": "hot",
+          "sub": {
+            "en": "plan",
+            "bn": "প্ল্যান"
+          }
+        },
+        {
+          "id": "files",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "hand",
+          "to": "cloud",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "cloud",
+          "to": "tf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "no longer match",
+          "bn": "আর মেলে না"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "GPUs cost a lot, and terraform destroy is as easy as apply."
+        ],
+        "points": [
+          "Files replace clicking in a console, and they give the same result each time.",
+          "Run terraform plan to see the change, then terraform apply to make it.",
+          "Keep state in a remote backend with locking, never in Git.",
+          "Tag every resource with an owner and an expiry."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "GPU দামি, আর terraform destroy চালানো apply-এর মতোই সহজ।"
+        ],
+        "points": [
+          "কনসোলে ক্লিক করার বদলে ফাইল ব্যবহার হয়, আর প্রতিবার একই ফল দেয়।",
+          "বদল দেখতে terraform plan চালান, তারপর বদলটা করতে terraform apply চালান।",
+          "স্টেট লকিংসহ remote backend-এ রাখুন, কখনও Git-এ নয়।",
+          "প্রতিটি রিসোর্সে মালিক আর মেয়াদের ট্যাগ দিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "files",
+          "state": "hot"
+        },
+        {
+          "id": "tf",
+          "state": "hot"
+        },
+        {
+          "id": "cloud",
+          "state": "hot",
+          "sub": {
+            "en": "tagged",
+            "bn": "ট্যাগ দেওয়া"
+          }
+        },
+        {
+          "id": "tags",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "files",
+          "to": "tf",
+          "flow": "to"
+        },
+        {
+          "from": "tf",
+          "to": "cloud",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

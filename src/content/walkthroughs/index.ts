@@ -10,14 +10,22 @@ import fineTuningRoadmapS3 from "./fine-tuning-roadmap/s3.json";
 import contextEngineeringS1 from "./context-engineering/s1.json";
 import contextEngineeringS2 from "./context-engineering/s2.json";
 import contextEngineeringS3 from "./context-engineering/s3.json";
+import contextEngineeringS4 from "./context-engineering/s4.json";
+import contextEngineeringS5 from "./context-engineering/s5.json";
+import contextEngineeringS6 from "./context-engineering/s6.json";
 import contextEngineeringS7 from "./context-engineering/s7.json";
 import ragKnowledgeSystemsS3 from "./rag-knowledge-systems/s3.json";
 import ragKnowledgeSystemsS7 from "./rag-knowledge-systems/s7.json";
 import agentsAndAgenticSystemsS1 from "./agents-and-agentic-systems/s1.json";
 import agentsAndAgenticSystemsS2 from "./agents-and-agentic-systems/s2.json";
+import agentsAndAgenticSystemsS3 from "./agents-and-agentic-systems/s3.json";
+import agentsAndAgenticSystemsS4 from "./agents-and-agentic-systems/s4.json";
+import agentsAndAgenticSystemsS5 from "./agents-and-agentic-systems/s5.json";
 import agentsAndAgenticSystemsS6 from "./agents-and-agentic-systems/s6.json";
+import agentsAndAgenticSystemsS7 from "./agents-and-agentic-systems/s7.json";
 import agentsAndAgenticSystemsS8 from "./agents-and-agentic-systems/s8.json";
 import agentsAndAgenticSystemsS9 from "./agents-and-agentic-systems/s9.json";
+import agentsAndAgenticSystemsS10 from "./agents-and-agentic-systems/s10.json";
 import toolUseAndIntegrationsS3 from "./tool-use-and-integrations/s3.json";
 import inferenceS4 from "./inference/s4.json";
 import llmopsAndObservabilityS4 from "./llmops-and-observability/s4.json";
@@ -27,11 +35,33 @@ import safetySecurityAndGuardrailsS7 from "./safety-security-and-guardrails/s7.j
 import multimodalEngineeringS8 from "./multimodal-engineering/s8.json";
 import aiApplicationArchitectureS9 from "./ai-application-architecture/s9.json";
 import visualLearningResourcesS11 from "./visual-learning-resources/s11.json";
+import aiEngineeringBookCh1 from "./ai-engineering-book/ch1.json";
+import aiEngineeringBookCh2 from "./ai-engineering-book/ch2.json";
+import aiEngineeringBookCh2b from "./ai-engineering-book/ch2b.json";
+import aiEngineeringBookCh3 from "./ai-engineering-book/ch3.json";
+import aiEngineeringBookCh3b from "./ai-engineering-book/ch3b.json";
+import aiEngineeringBookCh4 from "./ai-engineering-book/ch4.json";
+import aiEngineeringBookCh5 from "./ai-engineering-book/ch5.json";
+import aiEngineeringBookCh5b from "./ai-engineering-book/ch5b.json";
 import aiEngineeringBookCh6 from "./ai-engineering-book/ch6.json";
+import aiEngineeringBookCh6b from "./ai-engineering-book/ch6b.json";
+import aiEngineeringBookCh7 from "./ai-engineering-book/ch7.json";
+import aiEngineeringBookCh7b from "./ai-engineering-book/ch7b.json";
+import aiEngineeringBookCh8 from "./ai-engineering-book/ch8.json";
+import aiEngineeringBookCh9 from "./ai-engineering-book/ch9.json";
+import aiEngineeringBookCh9b from "./ai-engineering-book/ch9b.json";
+import aiEngineeringBookCh10 from "./ai-engineering-book/ch10.json";
+import aiEngineeringBookCh10b from "./ai-engineering-book/ch10b.json";
+import deployingAndOperatingAiSystemsS1 from "./deploying-and-operating-ai-systems/s1.json";
+import deployingAndOperatingAiSystemsS2 from "./deploying-and-operating-ai-systems/s2.json";
 import deployingAndOperatingAiSystemsS3 from "./deploying-and-operating-ai-systems/s3.json";
+import deployingAndOperatingAiSystemsS4 from "./deploying-and-operating-ai-systems/s4.json";
 import deployingAndOperatingAiSystemsS5 from "./deploying-and-operating-ai-systems/s5.json";
 import deployingAndOperatingAiSystemsS6 from "./deploying-and-operating-ai-systems/s6.json";
 import deployingAndOperatingAiSystemsS7 from "./deploying-and-operating-ai-systems/s7.json";
+import deployingAndOperatingAiSystemsS8 from "./deploying-and-operating-ai-systems/s8.json";
+import deployingAndOperatingAiSystemsS9 from "./deploying-and-operating-ai-systems/s9.json";
+import deployingAndOperatingAiSystemsS10 from "./deploying-and-operating-ai-systems/s10.json";
 import deployingAndOperatingAiSystemsS11 from "./deploying-and-operating-ai-systems/s11.json";
 
 export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
@@ -52,6 +82,9 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s1: contextEngineeringS1,
     s2: contextEngineeringS2,
     s3: contextEngineeringS3,
+    s4: contextEngineeringS4,
+    s5: contextEngineeringS5,
+    s6: contextEngineeringS6,
     s7: contextEngineeringS7,
   },
   "rag-knowledge-systems": {
@@ -61,9 +94,14 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   "agents-and-agentic-systems": {
     s1: agentsAndAgenticSystemsS1,
     s2: agentsAndAgenticSystemsS2,
+    s3: agentsAndAgenticSystemsS3,
+    s4: agentsAndAgenticSystemsS4,
+    s5: agentsAndAgenticSystemsS5,
     s6: agentsAndAgenticSystemsS6,
+    s7: agentsAndAgenticSystemsS7,
     s8: agentsAndAgenticSystemsS8,
     s9: agentsAndAgenticSystemsS9,
+    s10: agentsAndAgenticSystemsS10,
   },
   "tool-use-and-integrations": {
     s3: toolUseAndIntegrationsS3,
@@ -93,13 +131,35 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s11: visualLearningResourcesS11,
   },
   "ai-engineering-book": {
+    ch1: aiEngineeringBookCh1,
+    ch2: aiEngineeringBookCh2,
+    ch2b: aiEngineeringBookCh2b,
+    ch3: aiEngineeringBookCh3,
+    ch3b: aiEngineeringBookCh3b,
+    ch4: aiEngineeringBookCh4,
+    ch5: aiEngineeringBookCh5,
+    ch5b: aiEngineeringBookCh5b,
     ch6: aiEngineeringBookCh6,
+    ch6b: aiEngineeringBookCh6b,
+    ch7: aiEngineeringBookCh7,
+    ch7b: aiEngineeringBookCh7b,
+    ch8: aiEngineeringBookCh8,
+    ch9: aiEngineeringBookCh9,
+    ch9b: aiEngineeringBookCh9b,
+    ch10: aiEngineeringBookCh10,
+    ch10b: aiEngineeringBookCh10b,
   },
   "deploying-and-operating-ai-systems": {
+    s1: deployingAndOperatingAiSystemsS1,
+    s2: deployingAndOperatingAiSystemsS2,
     s3: deployingAndOperatingAiSystemsS3,
+    s4: deployingAndOperatingAiSystemsS4,
     s5: deployingAndOperatingAiSystemsS5,
     s6: deployingAndOperatingAiSystemsS6,
     s7: deployingAndOperatingAiSystemsS7,
+    s8: deployingAndOperatingAiSystemsS8,
+    s9: deployingAndOperatingAiSystemsS9,
+    s10: deployingAndOperatingAiSystemsS10,
     s11: deployingAndOperatingAiSystemsS11,
   },
 };

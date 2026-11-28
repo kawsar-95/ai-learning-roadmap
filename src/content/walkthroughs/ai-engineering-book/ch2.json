@@ -1,0 +1,601 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "file",
+      "label": {
+        "en": "Training data",
+        "bn": "ট্রেনিং ডেটা"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "meaning",
+      "kind": "note",
+      "label": {
+        "en": "Same meaning",
+        "bn": "একই অর্থ"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "en",
+      "kind": "file",
+      "label": {
+        "en": "English",
+        "bn": "ইংরেজি"
+      },
+      "x": 380,
+      "y": 70
+    },
+    {
+      "id": "hi",
+      "kind": "file",
+      "label": {
+        "en": "Hindi",
+        "bn": "হিন্দি"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "my",
+      "kind": "file",
+      "label": {
+        "en": "Burmese",
+        "bn": "বর্মিজ"
+      },
+      "x": 380,
+      "y": 254
+    },
+    {
+      "id": "input",
+      "kind": "file",
+      "label": {
+        "en": "Whole input",
+        "bn": "পুরো ইনপুট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "summary",
+      "kind": "note",
+      "label": {
+        "en": "One summary",
+        "bn": "একটা সারাংশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "dec",
+      "kind": "model",
+      "label": {
+        "en": "Decoder",
+        "bn": "ডিকোডার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "prev",
+      "kind": "file",
+      "label": {
+        "en": "Earlier tokens",
+        "bn": "আগের টোকেন"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "params",
+      "kind": "chart",
+      "label": {
+        "en": "Parameters",
+        "bn": "প্যারামিটার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "experts",
+      "kind": "tool",
+      "label": {
+        "en": "Experts",
+        "bn": "এক্সপার্ট"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Tokens for same meaning",
+      "bn": "একই অর্থে টোকেন"
+    },
+    {
+      "en": "Tokens per parameter",
+      "bn": "প্রতি প্যারামিটারে টোকেন"
+    },
+    {
+      "en": "Active parameters",
+      "bn": "চালু প্যারামিটার"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Data",
+        "title": "A model is only as good as its data",
+        "body": [
+          "A model is only as good as its data.",
+          "No Vietnamese text in training means no Vietnamese translation."
+        ]
+      },
+      "bn": {
+        "short": "ডেটা",
+        "title": "মডেল তার ডেটার চেয়ে ভালো হয় না",
+        "body": [
+          "মডেল তার ডেটার চেয়ে ভালো হয় না।",
+          "ট্রেনিংয়ে ভিয়েতনামি লেখা না থাকলে ভিয়েতনামিতে অনুবাদ হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "no Vietnamese text",
+            "bn": "ভিয়েতনামি লেখা নেই"
+          }
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "no Vietnamese translation",
+            "bn": "ভিয়েতনামিতে অনুবাদ নেই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Languages",
+        "title": "Low-resource languages",
+        "body": [
+          "A low-resource language has little text in the training data.",
+          "Models usually do worse on it."
+        ]
+      },
+      "bn": {
+        "short": "ভাষা",
+        "title": "লো-রিসোর্স ল্যাঙ্গুয়েজ",
+        "body": [
+          "লো-রিসোর্স ল্যাঙ্গুয়েজ হলো যে ভাষার লেখা ট্রেনিং ডেটায় কম।",
+          "মডেল সাধারণত এতে দুর্বল পারফর্ম করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "little text",
+            "bn": "কম লেখা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "usually does worse",
+            "bn": "সাধারণত দুর্বল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Token cost",
+        "title": "The same meaning costs different tokens",
+        "body": [
+          "The same meaning needs about 7 tokens in English, 32 in Hindi, and 72 in Burmese, so costs differ.",
+          "Non-English users can therefore pay far more and wait far longer for the same request."
+        ]
+      },
+      "bn": {
+        "short": "টোকেন খরচ",
+        "title": "একই অর্থে টোকেন আলাদা",
+        "body": [
+          "একই অর্থে ইংরেজিতে প্রায় ৭, হিন্দিতে ৩২ আর বর্মিজে ৭২টি টোকেন লাগে, তাই খরচ আলাদা হয়।",
+          "তাই ইংরেজি ছাড়া অন্য ভাষার ব্যবহারকারী একই অনুরোধে অনেক বেশি খরচ করতে পারেন, আর অনেক বেশি অপেক্ষাও করতে পারেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "meaning",
+          "state": "hot"
+        },
+        {
+          "id": "en",
+          "state": "hot",
+          "sub": {
+            "en": "about 7 tokens",
+            "bn": "প্রায় ৭টি টোকেন"
+          }
+        },
+        {
+          "id": "hi",
+          "state": "warn",
+          "sub": {
+            "en": "32 tokens",
+            "bn": "৩২টি টোকেন"
+          }
+        },
+        {
+          "id": "my",
+          "state": "warn",
+          "sub": {
+            "en": "72 tokens",
+            "bn": "৭২টি টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "meaning",
+          "to": "en",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "meaning",
+          "to": "hi",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "meaning",
+          "to": "my",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "7, 32, 72",
+          "bn": "৭, ৩২, ৭২"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Seq2seq",
+        "title": "Seq2seq: one summary",
+        "body": [
+          "A seq2seq encoder reads the input one token at a time and compresses it into a single final hidden state. The decoder generates the output from that state.",
+          "The decoder only ever sees a compressed summary of the input, like answering questions about a book using only its summary."
+        ]
+      },
+      "bn": {
+        "short": "seq2seq",
+        "title": "seq2seq: একটাই সারাংশ",
+        "body": [
+          "seq2seq এনকোডার ইনপুট একটা একটা করে টোকেন পড়ে আর চেপে একটা শেষ হিডেন স্টেটে আনে। ডিকোডার সেই স্টেট থেকে আউটপুট লেখে।",
+          "ডিকোডার ইনপুটের শুধু চাপা সারাংশ দেখে, যেন বইয়ের সারাংশ দেখে বইয়ের প্রশ্নের উত্তর দেওয়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "input",
+          "state": "hot"
+        },
+        {
+          "id": "summary",
+          "state": "warn",
+          "sub": {
+            "en": "compressed",
+            "bn": "চাপা"
+          }
+        },
+        {
+          "id": "dec",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "input",
+          "to": "summary",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "summary",
+          "to": "dec",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Attention",
+        "title": "Attention looks at every earlier token",
+        "body": [
+          "The attention mechanism lets the model look directly at every earlier piece of text when writing the next. It is like flipping to any page of a book.",
+          "Transformers also process input tokens in parallel. Decoding, one output token at a time, is still sequential."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাটেনশন",
+        "title": "অ্যাটেনশন আগের প্রতিটি টোকেন দেখে",
+        "body": [
+          "অ্যাটেনশন মেকানিজমে পরের অংশ লেখার সময় মডেল আগের প্রতিটি টুকরোর দিকে সরাসরি তাকাতে পারে। যেন বইয়ের যেকোনো পাতা উল্টে দেখা।",
+          "ট্রান্সফরমার ইনপুট টোকেন একসাথে প্রসেস করে। তবে একটা একটা করে আউটপুট টোকেন বানানো (ডিকোডিং) এখনো ক্রমানুসারে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "prev",
+          "state": "hot",
+          "sub": {
+            "en": "every earlier token",
+            "bn": "আগের প্রতিটি টোকেন"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "attention",
+            "bn": "অ্যাটেনশন"
+          }
+        },
+        {
+          "id": "dec",
+          "state": "dim",
+          "sub": {
+            "en": "next token",
+            "bn": "পরের টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "prev",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "dec",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Chinchilla",
+        "title": "Size and data grow together",
+        "body": [
+          "The Chinchilla scaling law says compute-optimal training needs about 20 training tokens per parameter. Model size and data grow together.",
+          "Bigger is not always better: a large model on too little data can lose to a smaller, well-trained one."
+        ]
+      },
+      "bn": {
+        "short": "চিনচিলা",
+        "title": "মডেল আর ডেটা একসাথে বাড়ে",
+        "body": [
+          "চিনচিলা স্কেলিং ল বলে, কম্পিউট-অপটিমাল ট্রেনিংয়ে প্রতি প্যারামিটারে প্রায় ২০টি ট্রেনিং টোকেন লাগে। মডেল আর ডেটা একসাথে বাড়াতে হয়।",
+          "বড় মানেই ভালো নয়: কম ডেটায় ট্রেইন করা বড় মডেল, ভালোভাবে ট্রেইন করা ছোট মডেলের কাছে হারতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "training tokens",
+            "bn": "ট্রেনিং টোকেন"
+          }
+        },
+        {
+          "id": "params",
+          "state": "hot",
+          "sub": {
+            "en": "about 20 per parameter",
+            "bn": "প্রতি প্যারামিটারে প্রায় ২০"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "params",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        "about 20",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Experts",
+        "title": "Mixture-of-experts: few active parameters",
+        "body": [
+          "Mixture-of-experts (MoE) runs only a few parameter groups, called experts, per token.",
+          "A 46.7-billion-parameter model can run at roughly the cost and speed of a 12.9-billion one."
+        ]
+      },
+      "bn": {
+        "short": "এক্সপার্ট",
+        "title": "মিক্সচার-অব-এক্সপার্টস: অল্প চালু প্যারামিটার",
+        "body": [
+          "মিক্সচার-অব-এক্সপার্টস (MoE) প্রতি টোকেনে প্যারামিটারের মাত্র কয়েকটা গ্রুপ, মানে এক্সপার্ট, চালায়।",
+          "তাই ৪৬.৭ বিলিয়ন প্যারামিটারের মডেল মোটামুটি ১২.৯ বিলিয়নের মডেলের খরচ আর গতিতে চলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "46.7B parameters",
+            "bn": "৪৬.৭B প্যারামিটার"
+          }
+        },
+        {
+          "id": "experts",
+          "state": "hot",
+          "sub": {
+            "en": "a few per token",
+            "bn": "প্রতি টোকেনে কয়েকটা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "experts",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "roughly 12.9B",
+          "bn": "মোটামুটি ১২.৯B"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Data, architecture and size shape a model."
+        ],
+        "points": [
+          "A model is only as good as its data.",
+          "Attention lets the model look at every earlier token, not just a summary. Transformers still dominate.",
+          "Bigger is not always better."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "ডেটা, আর্কিটেকচার আর সাইজ মডেলকে গড়ে তোলে।"
+        ],
+        "points": [
+          "মডেল তার ডেটার চেয়ে ভালো হয় না।",
+          "অ্যাটেনশন শুধু সারাংশ নয়, আগের প্রতিটি টোকেন দেখতে দেয়। ট্রান্সফরমার এখনো এগিয়ে।",
+          "বড় মানেই ভালো নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "x": 112
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 365
+        },
+        {
+          "id": "params",
+          "state": "hot",
+          "x": 630
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "params",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
