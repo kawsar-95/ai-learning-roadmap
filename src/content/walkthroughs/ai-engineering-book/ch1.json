@@ -1,0 +1,635 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "text",
+      "kind": "file",
+      "label": {
+        "en": "Text",
+        "bn": "লেখা"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "lm",
+      "kind": "model",
+      "label": {
+        "en": "Language model",
+        "bn": "ল্যাঙ্গুয়েজ মডেল"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "fm",
+      "kind": "model",
+      "label": {
+        "en": "Foundation model",
+        "bn": "ফাউন্ডেশন মডেল"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "lab",
+      "kind": "server",
+      "label": {
+        "en": "A handful of large labs",
+        "bn": "কিছু বড় ল্যাব"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "service",
+      "label": {
+        "en": "API",
+        "bn": "API"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "app",
+      "kind": "browser",
+      "label": {
+        "en": "Your application",
+        "bn": "আপনার অ্যাপ্লিকেশন"
+      },
+      "x": 640,
+      "y": 162
+    },
+    {
+      "id": "l1",
+      "kind": "service",
+      "label": {
+        "en": "Application development",
+        "bn": "অ্যাপ্লিকেশন ডেভেলপমেন্ট"
+      },
+      "x": 260,
+      "y": 60
+    },
+    {
+      "id": "l2",
+      "kind": "model",
+      "label": {
+        "en": "Model development",
+        "bn": "মডেল ডেভেলপমেন্ট"
+      },
+      "x": 260,
+      "y": 162
+    },
+    {
+      "id": "l3",
+      "kind": "server",
+      "label": {
+        "en": "Infrastructure",
+        "bn": "ইনফ্রাস্ট্রাকচার"
+      },
+      "x": 260,
+      "y": 262
+    },
+    {
+      "id": "thresh",
+      "kind": "shield",
+      "label": {
+        "en": "Usefulness threshold",
+        "bn": "উপযোগিতার সীমা"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "alt",
+      "kind": "model",
+      "label": {
+        "en": "Another model or provider",
+        "bn": "অন্য মডেল বা প্রোভাইডার"
+      },
+      "x": 400,
+      "y": 262
+    },
+    {
+      "id": "prod",
+      "kind": "chart",
+      "label": {
+        "en": "Reliable product",
+        "bn": "নির্ভরযোগ্য প্রোডাক্ট"
+      },
+      "x": 640,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Model",
+      "bn": "মডেল"
+    },
+    {
+      "en": "Reliability",
+      "bn": "নির্ভরযোগ্যতা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Language",
+        "title": "From text to a language model",
+        "body": [
+          "A language model is a system that predicts which token is likely to come next in a piece of text.",
+          "Self-supervision was the breakthrough: the text itself supplies the labels, so every word is the answer predicted from the words before it."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "This removed the labeling bottleneck and let models scale up into large language models (LLMs)."
+        }
+      },
+      "bn": {
+        "short": "ল্যাঙ্গুয়েজ",
+        "title": "লেখা থেকে ল্যাঙ্গুয়েজ মডেল",
+        "body": [
+          "ল্যাঙ্গুয়েজ মডেল এমন একটি সিস্টেম, যে অনুমান করে লেখার পরের টোকেন কী হতে পারে।",
+          "সেলফ-সুপারভিশন ছিল সাফল্যের চাবি: লেখাটাই লেবেল জোগায়, তাই আগের শব্দগুলো দেখে প্রতিটি শব্দই অনুমান করার উত্তর।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "এতে লেবেল করার বাধা সরে যায়, আর মডেল বড় ল্যাঙ্গুয়েজ মডেলে (LLM) বড় হতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "text",
+          "state": "hot",
+          "sub": {
+            "en": "each word is the answer",
+            "bn": "প্রতিটি শব্দই উত্তর"
+          }
+        },
+        {
+          "id": "lm",
+          "state": "hot",
+          "sub": {
+            "en": "predicts the next token",
+            "bn": "পরের টোকেন অনুমান করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "text",
+          "to": "lm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Foundation",
+        "title": "Foundation models",
+        "body": [
+          "Models learned to handle images, audio, and video in addition to text, so they outgrew the name language model.",
+          "The field now calls them foundation models: large, general-purpose models that can be adapted to many different applications."
+        ]
+      },
+      "bn": {
+        "short": "ফাউন্ডেশন",
+        "title": "ফাউন্ডেশন মডেল",
+        "body": [
+          "মডেল লেখার পাশাপাশি ছবি, অডিও আর ভিডিও সামলাতে শিখল, তাই ল্যাঙ্গুয়েজ মডেল নামটা তাদের জন্য ছোট হয়ে গেল।",
+          "এখন তাদের বলা হয় ফাউন্ডেশন মডেল: বড় আর সাধারণ কাজের মডেল, যাকে অনেক ধরনের অ্যাপ্লিকেশনের জন্য মানিয়ে নেওয়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lm",
+          "state": "dim",
+          "x": 130
+        },
+        {
+          "id": "fm",
+          "state": "hot",
+          "sub": {
+            "en": "general-purpose",
+            "bn": "সাধারণ কাজের"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "many applications",
+            "bn": "অনেক অ্যাপ্লিকেশন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lm",
+          "to": "fm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "fm",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Service",
+        "title": "Model as a service",
+        "body": [
+          "Foundation models are expensive to train, so a handful of large labs train them and offer them through APIs.",
+          "Everyone else can build applications on top without training anything. This practice is AI engineering."
+        ]
+      },
+      "bn": {
+        "short": "সার্ভিস",
+        "title": "মডেল অ্যাজ আ সার্ভিস",
+        "body": [
+          "ফাউন্ডেশন মডেল ট্রেইন করা ব্যয়বহুল, তাই কিছু বড় ল্যাব ট্রেইন করে API দিয়ে দেয়।",
+          "বাকি সবাই কিছু ট্রেইন না করেই তার ওপর অ্যাপ্লিকেশন বানাতে পারে। এই কাজই AI ইঞ্জিনিয়ারিং।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lab",
+          "state": "hot",
+          "sub": {
+            "en": "train the models",
+            "bn": "মডেল ট্রেইন করে"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "model as a service",
+            "bn": "মডেল অ্যাজ আ সার্ভিস"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "no training needed",
+            "bn": "ট্রেইন করতে হয় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lab",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "through an API",
+          "bn": "API দিয়ে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Stack",
+        "title": "The three layers of the stack",
+        "body": [
+          "The stack has three layers: application development, model development, and infrastructure.",
+          "Most AI engineers spend most of their time in application development, because the model is already available as a service."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Application development: prompting, context construction, evaluation, and the user-facing interface"
+          },
+          {
+            "sign": "+",
+            "html": "Model development: training, finetuning, dataset engineering, and inference optimization"
+          },
+          {
+            "sign": "+",
+            "html": "Infrastructure: compute, data management, serving, and monitoring"
+          }
+        ]
+      },
+      "bn": {
+        "short": "স্ট্যাক",
+        "title": "স্ট্যাকের তিন লেয়ার",
+        "body": [
+          "স্ট্যাকে তিন লেয়ার: অ্যাপ্লিকেশন ডেভেলপমেন্ট, মডেল ডেভেলপমেন্ট আর ইনফ্রাস্ট্রাকচার।",
+          "বেশিরভাগ AI ইঞ্জিনিয়ার বেশিরভাগ সময় অ্যাপ্লিকেশন ডেভেলপমেন্টে কাজ করেন, কারণ মডেল আগে থেকেই সার্ভিস হিসেবে পাওয়া যায়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "অ্যাপ্লিকেশন ডেভেলপমেন্ট: প্রম্পট, কনটেক্সট, ইভ্যালুয়েশন আর ইন্টারফেস"
+          },
+          {
+            "sign": "+",
+            "html": "মডেল ডেভেলপমেন্ট: ট্রেইনিং, ফাইন-টিউনিং আর ডেটাসেট ইঞ্জিনিয়ারিং"
+          },
+          {
+            "sign": "+",
+            "html": "ইনফ্রাস্ট্রাকচার: কম্পিউট, ডেটা, সার্ভিং আর মনিটরিং"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "l1",
+          "state": "hot",
+          "sub": {
+            "en": "most engineers work here",
+            "bn": "বেশিরভাগ ইঞ্জিনিয়ার এখানে"
+          }
+        },
+        {
+          "id": "l2",
+          "state": "dim"
+        },
+        {
+          "id": "l3",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "l1",
+          "to": "l2",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "l2",
+          "to": "l3",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Success",
+        "title": "Define success first",
+        "body": [
+          "Before building, define success with concrete business metrics, such as the percentage of tickets automated or response time saved.",
+          "Set a usefulness threshold the product must clear before going live."
+        ]
+      },
+      "bn": {
+        "short": "সফলতা",
+        "title": "আগে সফলতা ঠিক করুন",
+        "body": [
+          "বানানোর আগে স্পষ্ট বিজনেস মেট্রিক দিয়ে সফলতা ঠিক করুন, যেমন কত শতাংশ টিকিট অটোমেট হলো বা কত সময় বাঁচল।",
+          "লাইভে যাওয়ার আগে একটা উপযোগিতার সীমা রাখুন, যা প্রোডাক্টকে পার হতে হবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "thresh",
+          "state": "hot",
+          "sub": {
+            "en": "concrete business metrics",
+            "bn": "স্পষ্ট বিজনেস মেট্রিক"
+          },
+          "x": 260
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "going live",
+            "bn": "লাইভে যাওয়া"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "thresh",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Last mile",
+        "title": "The last mile problem",
+        "body": [
+          "An 80% working demo is the easy part.",
+          "Going from that demo to a 95%+ reliable product takes far longer than the initial demo."
+        ]
+      },
+      "bn": {
+        "short": "লাস্ট মাইল",
+        "title": "লাস্ট মাইল প্রবলেম",
+        "body": [
+          "প্রায় ৮০% কাজ করা ডেমো বানানো সহজ অংশ।",
+          "সেই ডেমো থেকে ৯৫%+ নির্ভরযোগ্য প্রোডাক্টে যেতে ডেমোর চেয়ে অনেক বেশি সময় লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "about 80% working demo",
+            "bn": "প্রায় ৮০% কাজ করা ডেমো"
+          },
+          "x": 150
+        },
+        {
+          "id": "prod",
+          "state": "warn",
+          "sub": {
+            "en": "95%+ reliable",
+            "bn": "৯৫%+ নির্ভরযোগ্য"
+          },
+          "x": 600
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "prod",
+          "flow": "to",
+          "state": "warn",
+          "label": {
+            "en": "far longer",
+            "bn": "অনেক বেশি সময়"
+          }
+        }
+      ],
+      "values": [
+        null,
+        "80% → 95%+"
+      ]
+    },
+    {
+      "en": {
+        "short": "Change",
+        "title": "Plan for change",
+        "body": [
+          "Foundation models and their pricing change quickly. Plan for context lengths, costs, and capabilities to keep shifting.",
+          "Build so that you can swap models or providers."
+        ]
+      },
+      "bn": {
+        "short": "বদল",
+        "title": "বদলের জন্য তৈরি থাকুন",
+        "body": [
+          "ফাউন্ডেশন মডেল আর তার দাম দ্রুত বদলায়। কনটেক্সট দৈর্ঘ্য, খরচ আর সক্ষমতা বদলাতে থাকবে ধরে নিয়ে তৈরি থাকুন।",
+          "মডেল বা প্রোভাইডার বদলানোর সুযোগ রেখে বানান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "x": 130,
+          "y": 212
+        },
+        {
+          "id": "fm",
+          "state": "hot",
+          "sub": {
+            "en": "current model",
+            "bn": "বর্তমান মডেল"
+          },
+          "x": 420,
+          "y": 100
+        },
+        {
+          "id": "alt",
+          "state": "dim",
+          "sub": {
+            "en": "swap in",
+            "bn": "বদলে নেওয়া যায়"
+          },
+          "x": 420,
+          "y": 262
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "fm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "alt",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "swappable",
+          "bn": "বদলানো যায়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "You can build on an existing model through an API instead of training your own."
+        ],
+        "points": [
+          "Before building, define success with concrete business metrics and set a usefulness threshold to clear before going live.",
+          "The stack has three layers: application development, model development, and infrastructure. Most engineers work in application development.",
+          "Plan for change: build so you can swap models or providers."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "নিজের মডেল ট্রেইন না করে API দিয়ে আগে থেকে থাকা মডেলের ওপর বানানো যায়।"
+        ],
+        "points": [
+          "বানানোর আগে স্পষ্ট বিজনেস মেট্রিক দিয়ে সফলতা ঠিক করুন, আর লাইভে যাওয়ার আগে একটা উপযোগিতার সীমা রাখুন।",
+          "স্ট্যাকে তিন লেয়ার: অ্যাপ্লিকেশন ডেভেলপমেন্ট, মডেল ডেভেলপমেন্ট আর ইনফ্রাস্ট্রাকচার। বেশিরভাগ ইঞ্জিনিয়ার অ্যাপ্লিকেশন ডেভেলপমেন্টে কাজ করেন।",
+          "বদলের জন্য তৈরি থাকুন: মডেল বা প্রোভাইডার বদলানোর সুযোগ রেখে বানান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lab",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "lab",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "api",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "through an API",
+          "bn": "API দিয়ে"
+        },
+        null
+      ]
+    }
+  ]
+}

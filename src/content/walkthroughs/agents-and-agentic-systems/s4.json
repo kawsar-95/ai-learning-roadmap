@@ -1,0 +1,598 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "loop",
+      "kind": "model",
+      "label": {
+        "en": "One hidden loop",
+        "bn": "একটি লুকানো লুপ"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "llm",
+        "bn": "llm"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "tools",
+      "kind": "tool",
+      "label": {
+        "en": "tools",
+        "bn": "tools"
+      },
+      "x": 400,
+      "y": 75
+    },
+    {
+      "id": "end",
+      "kind": "note",
+      "label": {
+        "en": "END",
+        "bn": "END"
+      },
+      "x": 400,
+      "y": 250
+    },
+    {
+      "id": "ck",
+      "kind": "storage",
+      "label": {
+        "en": "Checkpointer",
+        "bn": "চেকপয়েন্টার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "dur",
+      "kind": "shield",
+      "label": {
+        "en": "Durable graph",
+        "bn": "ডিউরেবল গ্রাফ"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "tmp",
+      "kind": "service",
+      "label": {
+        "en": "Temporal",
+        "bn": "Temporal"
+      },
+      "x": 400,
+      "y": 100
+    },
+    {
+      "id": "rst",
+      "kind": "service",
+      "label": {
+        "en": "Restate",
+        "bn": "Restate"
+      },
+      "x": 400,
+      "y": 230
+    },
+    {
+      "id": "lg",
+      "kind": "service",
+      "label": {
+        "en": "LangGraph",
+        "bn": "LangGraph"
+      },
+      "x": 200,
+      "y": 100
+    },
+    {
+      "id": "mas",
+      "kind": "service",
+      "label": {
+        "en": "Mastra",
+        "bn": "Mastra"
+      },
+      "x": 200,
+      "y": 230
+    },
+    {
+      "id": "inn",
+      "kind": "service",
+      "label": {
+        "en": "Inngest",
+        "bn": "Inngest"
+      },
+      "x": 560,
+      "y": 230
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Writing",
+      "bn": "লেখা"
+    },
+    {
+      "en": "Debugging",
+      "bn": "ডিবাগ"
+    },
+    {
+      "en": "Runs for",
+      "bn": "চলে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Loop",
+        "title": "The implicit loop hides the path",
+        "body": [
+          "An implicit loop is a plain loop where the path is hidden.",
+          "After 30 tool calls, you cannot tell which path the model took."
+        ]
+      },
+      "bn": {
+        "short": "লুপ",
+        "title": "ইমপ্লিসিট লুপ পথ লুকায়",
+        "body": [
+          "ইমপ্লিসিট লুপ সাধারণ লুপ, যেখানে পথ লুকানো থাকে।",
+          "৩০টি টুল কলের পর বোঝা যায় না মডেল কোন পথে গেছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "loop",
+          "state": "warn",
+          "sub": {
+            "en": "path hidden",
+            "bn": "পথ লুকানো"
+          }
+        },
+        {
+          "id": "tools",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "loop",
+          "to": "tools",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "fast to write",
+          "bn": "লেখা দ্রুত"
+        },
+        {
+          "en": "impossible",
+          "bn": "অসম্ভব"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Graph",
+        "title": "A graph of nodes and edges",
+        "body": [
+          "A graph is a map of nodes (steps) joined by edges (moves). Each edge can have a condition.",
+          "Every node has a name, and every transition is recorded."
+        ]
+      },
+      "bn": {
+        "short": "গ্রাফ",
+        "title": "নোড আর এজের গ্রাফ",
+        "body": [
+          "গ্রাফ হলো নোড (ধাপ) আর এজ (চলন) দিয়ে জোড়া মানচিত্র। প্রতিটি এজে শর্ত থাকতে পারে।",
+          "প্রতিটি ধাপের নাম থাকে আর প্রতিটি চলন রেকর্ড হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "tool",
+            "bn": "tool"
+          }
+        },
+        {
+          "from": "llm",
+          "to": "end",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "END",
+            "bn": "END"
+          }
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "shows every path",
+          "bn": "প্রতিটি পথ দেখায়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "LangGraph",
+        "title": "LangGraph can go back",
+        "body": [
+          "LangGraph is LangChain's graph framework, a widely used Python or TypeScript option.",
+          "Cycles are first-class: the agent can go back to an earlier step."
+        ]
+      },
+      "bn": {
+        "short": "LangGraph",
+        "title": "LangGraph ফিরে যেতে পারে",
+        "body": [
+          "LangGraph হলো LangChain-এর গ্রাফ ফ্রেমওয়ার্ক।",
+          "এটি এজেন্টকে আগের ধাপে ফিরে যেতে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        },
+        {
+          "id": "end",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "tools",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "back",
+            "bn": "ফিরে"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Resume",
+        "title": "The checkpointer resumes",
+        "body": [
+          "The checkpointer is a LangGraph feature.",
+          "It lets you resume from any past state."
+        ]
+      },
+      "bn": {
+        "short": "রিজিউম",
+        "title": "চেকপয়েন্টার আবার শুরু করে",
+        "body": [
+          "চেকপয়েন্টার LangGraph-এর একটি ফিচার।",
+          "এটি দিয়ে যেকোনো আগের স্টেট থেকে আবার শুরু করা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "dim"
+        },
+        {
+          "id": "ck",
+          "state": "hot",
+          "sub": {
+            "en": "any past state",
+            "bn": "যেকোনো আগের স্টেট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ck",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "resume",
+            "bn": "রিজিউম"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Durable",
+        "title": "Long agents need a durable graph",
+        "body": [
+          "Agents that run for minutes to hours need a durable graph.",
+          "Durable means able to survive crashes, retries, and pauses for a human."
+        ]
+      },
+      "bn": {
+        "short": "ডিউরেবল",
+        "title": "দীর্ঘ এজেন্টের ডিউরেবল গ্রাফ লাগে",
+        "body": [
+          "কয়েক মিনিট থেকে কয়েক ঘণ্টা চলা এজেন্টের জন্য ডিউরেবল গ্রাফ দরকার।",
+          "ডিউরেবল মানে ক্র্যাশ, রিট্রাই আর মানুষের জন্য থামা সামলে টিকে থাকতে পারা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "dur",
+          "state": "hot",
+          "sub": {
+            "en": "survives crashes",
+            "bn": "ক্র্যাশ সামলায়"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "dim",
+          "x": 400,
+          "y": 75
+        },
+        {
+          "id": "tools",
+          "state": "dim",
+          "x": 400,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "dur",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dur",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "minutes to hours",
+          "bn": "কয়েক মিনিট থেকে কয়েক ঘণ্টা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Engines",
+        "title": "Temporal and Restate",
+        "body": [
+          "Temporal and Restate are workflow engines adapted to run long agents.",
+          "Restate is the same as Temporal, with a smaller surface."
+        ]
+      },
+      "bn": {
+        "short": "ইঞ্জিন",
+        "title": "Temporal আর Restate",
+        "body": [
+          "Temporal আর Restate ওয়ার্কফ্লো ইঞ্জিন, যা দীর্ঘ এজেন্ট চালাতে মানিয়ে নেওয়া হয়েছে।",
+          "Restate হলো Temporal-এর মতোই, ছোট পরিসরে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "dur",
+          "state": "hot"
+        },
+        {
+          "id": "tmp",
+          "state": "hot",
+          "sub": {
+            "en": "multi-day workflows",
+            "bn": "কয়েক দিনের ওয়ার্কফ্লো"
+          }
+        },
+        {
+          "id": "rst",
+          "state": "hot",
+          "sub": {
+            "en": "smaller surface",
+            "bn": "ছোট পরিসর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tmp",
+          "to": "dur",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rst",
+          "to": "dur",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "multi-day",
+          "bn": "কয়েক দিনের"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Pick",
+        "title": "Picking one",
+        "body": [
+          "LangGraph suits Python or TypeScript teams already using LangChain. Temporal fits multi-day workflows, and Mastra suits teams who write TypeScript.",
+          "Inngest starts work when an event happens, and you pay for each step."
+        ]
+      },
+      "bn": {
+        "short": "বাছাই",
+        "title": "একটা বেছে নেওয়া",
+        "body": [
+          "যে Python বা TypeScript টিম আগে থেকেই LangChain ব্যবহার করে, LangGraph তাদের জন্য ভালো। Temporal কয়েক দিনের ওয়ার্কফ্লোর জন্য, আর TypeScript-এ কাজ করা টিমের জন্য Mastra ভালো।",
+          "Inngest কোনো ইভেন্ট ঘটলে কাজ শুরু করে, আর প্রতি ধাপের জন্য দাম দিতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lg",
+          "state": "hot",
+          "sub": {
+            "en": "already using LangChain",
+            "bn": "আগে থেকে LangChain"
+          }
+        },
+        {
+          "id": "tmp",
+          "state": "hot",
+          "sub": {
+            "en": "multi-day",
+            "bn": "কয়েক দিনের"
+          },
+          "x": 560,
+          "y": 100
+        },
+        {
+          "id": "mas",
+          "state": "hot",
+          "sub": {
+            "en": "TypeScript",
+            "bn": "TypeScript"
+          }
+        },
+        {
+          "id": "inn",
+          "state": "hot",
+          "sub": {
+            "en": "event, pay per step",
+            "bn": "ইভেন্ট, প্রতি ধাপে দাম"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "An implicit loop is fast to write but impossible to debug. An explicit graph shows every path."
+        ],
+        "points": [
+          "Agents that run for minutes to hours need a durable graph.",
+          "Temporal fits multi-day workflows, and Mastra suits teams who write TypeScript."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ইমপ্লিসিট লুপ লেখা দ্রুত, কিন্তু ডিবাগ অসম্ভব। এক্সপ্লিসিট গ্রাফ প্রতিটি পথ দেখায়।"
+        ],
+        "points": [
+          "কয়েক মিনিট থেকে কয়েক ঘণ্টা চলা এজেন্টের জন্য ডিউরেবল গ্রাফ দরকার।",
+          "Temporal কয়েক দিনের ওয়ার্কফ্লোর জন্য, আর TypeScript-এ কাজ করা টিমের জন্য Mastra ভালো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        },
+        {
+          "id": "end",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "end",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "fast to write",
+          "bn": "লেখা দ্রুত"
+        },
+        {
+          "en": "shows every path",
+          "bn": "প্রতিটি পথ দেখায়"
+        },
+        null
+      ]
+    }
+  ]
+}

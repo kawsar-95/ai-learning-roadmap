@@ -1,0 +1,667 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "clear",
+      "kind": "note",
+      "label": {
+        "en": "Clear instructions",
+        "bn": "স্পষ্ট নির্দেশ"
+      },
+      "x": 120,
+      "y": 50
+    },
+    {
+      "id": "ctx",
+      "kind": "note",
+      "label": {
+        "en": "Enough context",
+        "bn": "যথেষ্ট কনটেক্সট"
+      },
+      "x": 120,
+      "y": 125
+    },
+    {
+      "id": "split",
+      "kind": "note",
+      "label": {
+        "en": "Subtasks",
+        "bn": "subtask"
+      },
+      "x": 120,
+      "y": 200
+    },
+    {
+      "id": "think",
+      "kind": "note",
+      "label": {
+        "en": "Time to think",
+        "bn": "ভাবার সুযোগ"
+      },
+      "x": 120,
+      "y": 275
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "catalog",
+      "kind": "storage",
+      "label": {
+        "en": "Prompt catalog",
+        "bn": "প্রম্পট ক্যাটালগ"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "app",
+      "kind": "service",
+      "label": {
+        "en": "Application",
+        "bn": "অ্যাপ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "attacker",
+      "kind": "user",
+      "label": {
+        "en": "Attacker",
+        "bn": "আক্রমণকারী"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "planted",
+      "kind": "file",
+      "label": {
+        "en": "Planted text",
+        "bn": "লুকানো লেখা"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "sys",
+      "kind": "note",
+      "label": {
+        "en": "System prompt",
+        "bn": "সিস্টেম প্রম্পট"
+      },
+      "x": 130,
+      "y": 75
+    },
+    {
+      "id": "usr",
+      "kind": "user",
+      "label": {
+        "en": "User prompt",
+        "bn": "ইউজার প্রম্পট"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "tout",
+      "kind": "tool",
+      "label": {
+        "en": "Tool output",
+        "bn": "টুল আউটপুট"
+      },
+      "x": 130,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Violation rate",
+      "bn": "ভায়োলেশন রেট"
+    },
+    {
+      "en": "False refusal rate",
+      "bn": "ফলস রিফিউজাল রেট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Habits",
+        "title": "Habits that make prompts reliable",
+        "body": [
+          "Write clear instructions, give enough context, split big tasks into subtasks, and let the model think.",
+          "Chain-of-thought (\"think step by step\") and self-critique nudge the model toward more systematic reasoning. Both can add latency."
+        ]
+      },
+      "bn": {
+        "short": "অভ্যাস",
+        "title": "যে অভ্যাসে প্রম্পট ভরসাযোগ্য হয়",
+        "body": [
+          "স্পষ্ট নির্দেশ লিখুন, যথেষ্ট কনটেক্সট দিন, বড় কাজ ছোট subtask-এ ভাঙুন, আর মডেলকে ভাবার সুযোগ দিন।",
+          "চেইন-অফ-থট (ধাপে ধাপে ভাবতে বলা) আর self-critique মডেলকে আরও গুছিয়ে যুক্তি করার দিকে ঠেলে। দুটোতেই latency বাড়তে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "clear",
+          "state": "hot"
+        },
+        {
+          "id": "ctx",
+          "state": "hot"
+        },
+        {
+          "id": "split",
+          "state": "hot"
+        },
+        {
+          "id": "think",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "clear",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ctx",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "split",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "think",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Over time",
+        "title": "Keep prompts out of the code",
+        "body": [
+          "Keep prompts out of application code, for example in a dedicated file or a prompt catalog, and version them.",
+          "That allows reuse, independent testing, and safer rollout across teams."
+        ]
+      },
+      "bn": {
+        "short": "সময়ের সাথে",
+        "title": "প্রম্পট কোড থেকে আলাদা রাখুন",
+        "body": [
+          "প্রম্পট অ্যাপের কোড থেকে আলাদা রাখুন, যেমন আলাদা ফাইলে বা প্রম্পট ক্যাটালগে, আর version করুন।",
+          "এতে আবার ব্যবহার, আলাদাভাবে পরীক্ষা, আর টিমগুলোর মধ্যে নিরাপদ রোলআউট সম্ভব হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "catalog",
+          "state": "hot",
+          "sub": {
+            "en": "versioned",
+            "bn": "version করা"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "code only",
+            "bn": "শুধু কোড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "catalog",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Attacks",
+        "title": "A deployed app faces bad users",
+        "body": [
+          "A deployed application faces users who are not always well-intentioned.",
+          "Attacks come in three groups, listed below."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Prompt extraction: recovers the hidden system prompt to copy or exploit an app"
+          },
+          {
+            "sign": "+",
+            "html": "Jailbreaking and prompt injection: bypasses the model's safety behavior, or smuggles malicious instructions inside data the model processes"
+          },
+          {
+            "sign": "+",
+            "html": "Information extraction: pulls training data, private context, or copyrighted material out of the model"
+          }
+        ]
+      },
+      "bn": {
+        "short": "আক্রমণ",
+        "title": "চালু অ্যাপে খারাপ ব্যবহারকারী আসে",
+        "body": [
+          "চালু অ্যাপের সামনে এমন ব্যবহারকারীও আসে যাদের উদ্দেশ্য সবসময় ভালো নয়।",
+          "আক্রমণ তিন ধরনের, নিচে দেওয়া আছে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "প্রম্পট এক্সট্রাকশন: লুকানো সিস্টেম প্রম্পট বের করে অ্যাপ কপি বা কাজে লাগানো"
+          },
+          {
+            "sign": "+",
+            "html": "জেইলব্রেকিং ও প্রম্পট ইনজেকশন: মডেলের নিরাপত্তা-আচরণ এড়ানো, বা মডেলের পড়া ডেটার ভেতরে ক্ষতিকর নির্দেশ ঢুকিয়ে দেওয়া"
+          },
+          {
+            "sign": "+",
+            "html": "ইনফরমেশন এক্সট্রাকশন: মডেল থেকে ট্রেনিং ডেটা, প্রাইভেট কনটেক্সট বা কপিরাইট করা উপাদান বের করা"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "attacker",
+          "state": "warn"
+        },
+        {
+          "id": "app",
+          "state": "warn"
+        },
+        {
+          "id": "model",
+          "state": "dim",
+          "x": 650,
+          "y": 270
+        }
+      ],
+      "links": [
+        {
+          "from": "attacker",
+          "to": "app",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Indirect",
+        "title": "Indirect prompt injection",
+        "body": [
+          "Attackers plant bad instructions in content the model will later retrieve: a web page, a GitHub repo, an email, even a database field like a username.",
+          "When an agent with tool access reads it, it can mistake the planted text for a legitimate instruction."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The model reads the planted text later and mistakes it for a real instruction."
+        }
+      },
+      "bn": {
+        "short": "পরোক্ষ",
+        "title": "ইনডাইরেক্ট প্রম্পট ইনজেকশন",
+        "body": [
+          "আক্রমণকারী এমন কনটেন্টে খারাপ নির্দেশ রেখে দেয় যা মডেল পরে আনে: ওয়েব পেজ, GitHub রিপো, ইমেইল, এমনকি ইউজারনেমের মতো ডেটাবেস ফিল্ড।",
+          "টুল-অ্যাক্সেসওয়ালা এজেন্ট সেটা পড়লে লুকানো লেখাকে আসল নির্দেশ ভেবে ভুল করতে পারে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "মডেল লুকানো লেখা পরে পড়ে আর সেটাকে আসল নির্দেশ ভেবে ভুল করে।"
+        }
+      },
+      "show": [
+        {
+          "id": "planted",
+          "state": "warn",
+          "sub": {
+            "en": "planted",
+            "bn": "রাখা আছে"
+          }
+        },
+        {
+          "id": "tout",
+          "state": "warn"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "mistakes it for real",
+            "bn": "আসল ভেবে ভুল করে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "planted",
+          "to": "tout",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "tout",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hierarchy",
+        "title": "Trust system over user over tool",
+        "body": [
+          "A model-level defense trains the model to prioritize system prompts over user prompts, and user prompts over tool outputs.",
+          "This is called an instruction hierarchy."
+        ]
+      },
+      "bn": {
+        "short": "হায়ারার্কি",
+        "title": "সিস্টেম, তারপর ইউজার, তারপর টুল",
+        "body": [
+          "মডেল-স্তরের সুরক্ষায় মডেলকে এমনভাবে ট্রেইন করা হয় যাতে সে ইউজার প্রম্পটের চেয়ে সিস্টেম প্রম্পটকে, আর টুল আউটপুটের চেয়ে ইউজার প্রম্পটকে বেশি গুরুত্ব দেয়।",
+          "একে বলে ইনস্ট্রাকশন হায়ারার্কি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sys",
+          "state": "hot",
+          "sub": {
+            "en": "most trusted",
+            "bn": "সবচেয়ে বেশি গুরুত্ব"
+          }
+        },
+        {
+          "id": "usr",
+          "state": "hot"
+        },
+        {
+          "id": "tout",
+          "state": "dim",
+          "sub": {
+            "en": "least trusted",
+            "bn": "সবচেয়ে কম গুরুত্ব"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "usr",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tout",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Levels",
+        "title": "Defenses at three levels",
+        "body": [
+          "Defenses operate at three levels: the model, the prompt and the system.",
+          "Prompt-level means stating what must never be revealed, repeating key instructions, or pre-warning the model about known attack patterns."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "System-level means input/output guardrails and anomaly detection on usage patterns."
+        }
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "তিন স্তরে সুরক্ষা",
+        "body": [
+          "সুরক্ষা তিন স্তরে কাজ করে: মডেল, প্রম্পট আর সিস্টেম।",
+          "প্রম্পট-স্তরে স্পষ্ট বলা হয় কী কখনো প্রকাশ করা যাবে না, মূল নির্দেশ বারবার লেখা হয়, বা পরিচিত আক্রমণের ধরন নিয়ে মডেলকে আগে থেকে সতর্ক করা হয়।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "সিস্টেম-স্তর মানে input/output guardrail আর ব্যবহারের ধরনে anomaly detection।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "model-level",
+            "bn": "মডেল-স্তর"
+          }
+        },
+        {
+          "id": "sys",
+          "state": "hot",
+          "sub": {
+            "en": "prompt-level",
+            "bn": "প্রম্পট-স্তর"
+          }
+        },
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "system-level",
+            "bn": "সিস্টেম-স্তর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "sys",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Metrics",
+        "title": "No layer is foolproof",
+        "body": [
+          "No single layer is foolproof.",
+          "Track two metrics together: the violation rate, which counts successful attacks, and the false refusal rate, which counts safe requests wrongly blocked."
+        ]
+      },
+      "bn": {
+        "short": "মেট্রিক",
+        "title": "কোনো স্তরই নিশ্চিত নয়",
+        "body": [
+          "কোনো একটি স্তরই নিশ্চিত নয়।",
+          "দুটো মেট্রিক একসাথে নজরে রাখুন: ভায়োলেশন রেট, মানে সফল আক্রমণ, আর ফলস রিফিউজাল রেট, মানে ভুলে আটকানো নিরাপদ অনুরোধ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "attacker",
+          "state": "warn",
+          "sub": {
+            "en": "successful attacks",
+            "bn": "সফল আক্রমণ"
+          },
+          "y": 75
+        },
+        {
+          "id": "usr",
+          "state": "hot",
+          "sub": {
+            "en": "safe requests",
+            "bn": "নিরাপদ অনুরোধ"
+          },
+          "y": 250
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "attacker",
+          "to": "app",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "usr",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "successful attacks",
+          "bn": "সফল আক্রমণ"
+        },
+        {
+          "en": "safe requests wrongly blocked",
+          "bn": "ভুলে আটকানো নিরাপদ অনুরোধ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Good habits make prompts reliable, and a deployed app must also defend against bad users."
+        ],
+        "points": [
+          "Write clear instructions, give enough context, split big tasks into subtasks, and let the model think.",
+          "Keep prompts out of application code, and version them so teams can reuse and test them.",
+          "Attacks come in three groups: prompt extraction, jailbreaking and prompt injection, and information extraction.",
+          "No single defense layer is foolproof. Track the violation rate and the false refusal rate together."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ভালো অভ্যাস প্রম্পটকে ভরসাযোগ্য করে, আর চালু অ্যাপকে খারাপ ব্যবহারকারীর হাত থেকেও বাঁচাতে হয়।"
+        ],
+        "points": [
+          "স্পষ্ট নির্দেশ লিখুন, যথেষ্ট কনটেক্সট দিন, বড় কাজ ছোট subtask-এ ভাঙুন, আর মডেলকে ভাবার সুযোগ দিন।",
+          "প্রম্পট অ্যাপের কোড থেকে আলাদা রাখুন আর version করুন, যাতে টিমগুলো আবার ব্যবহার ও পরীক্ষা করতে পারে।",
+          "আক্রমণ তিন ধরনের: প্রম্পট এক্সট্রাকশন, জেইলব্রেকিং ও প্রম্পট ইনজেকশন, আর ইনফরমেশন এক্সট্রাকশন।",
+          "কোনো একটি সুরক্ষা স্তরই নিশ্চিত নয়। violation rate আর false refusal rate একসাথে নজরে রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "catalog"
+        },
+        {
+          "id": "app"
+        },
+        {
+          "id": "model",
+          "x": 650,
+          "y": 270
+        }
+      ],
+      "links": [
+        {
+          "from": "catalog",
+          "to": "app",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "model",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

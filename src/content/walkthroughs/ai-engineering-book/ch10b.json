@@ -1,0 +1,572 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 95,
+      "y": 162
+    },
+    {
+      "id": "orch",
+      "kind": "service",
+      "label": {
+        "en": "Orchestrator",
+        "bn": "অর্কেস্ট্রেটর"
+      },
+      "x": 290,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 520,
+      "y": 162
+    },
+    {
+      "id": "logs",
+      "kind": "database",
+      "label": {
+        "en": "Logs and metrics",
+        "bn": "লগ আর মেট্রিক"
+      },
+      "x": 520,
+      "y": 262
+    },
+    {
+      "id": "trace",
+      "kind": "chart",
+      "label": {
+        "en": "Trace",
+        "bn": "ট্রেস"
+      },
+      "x": 290,
+      "y": 262
+    },
+    {
+      "id": "drift",
+      "kind": "note",
+      "label": {
+        "en": "Drift",
+        "bn": "ড্রিফট"
+      },
+      "x": 290,
+      "y": 70
+    },
+    {
+      "id": "bias",
+      "kind": "note",
+      "label": {
+        "en": "Biased feedback",
+        "bn": "পক্ষপাতী ফিডব্যাক"
+      },
+      "x": 520,
+      "y": 70
+    },
+    {
+      "id": "pop",
+      "kind": "service",
+      "label": {
+        "en": "Popular outputs",
+        "bn": "জনপ্রিয় আউটপুট"
+      },
+      "x": 200,
+      "y": 130
+    },
+    {
+      "id": "clicks",
+      "kind": "user",
+      "label": {
+        "en": "More clicks",
+        "bn": "বেশি ক্লিক"
+      },
+      "x": 560,
+      "y": 130
+    },
+    {
+      "id": "unseen",
+      "kind": "file",
+      "label": {
+        "en": "Outputs never shown",
+        "bn": "যা কখনো দেখানো হয় না"
+      },
+      "x": 380,
+      "y": 262
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Feedback",
+      "bn": "ফিডব্যাক"
+    },
+    {
+      "en": "Shown",
+      "bn": "দেখানো"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Request",
+        "title": "An orchestrator runs the steps",
+        "body": [
+          "The orchestrator connects all the components and sets the order of the steps.",
+          "Starting without a heavy orchestration framework is often the better default."
+        ]
+      },
+      "bn": {
+        "short": "রিকোয়েস্ট",
+        "title": "অর্কেস্ট্রেটর ধাপগুলো চালায়",
+        "body": [
+          "অর্কেস্ট্রেটর সব কম্পোনেন্ট জুড়ে দেয় আর ধাপগুলোর ক্রম ঠিক করে।",
+          "ভারী অর্কেস্ট্রেশন ফ্রেমওয়ার্ক ছাড়া শুরু করাই প্রায়ই ভালো ডিফল্ট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "orch",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "orch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Observe",
+        "title": "Observability reads logs and metrics",
+        "body": [
+          "Observability is being able to work out what is happening inside a system from its logs and metrics.",
+          "You do not write new code just to find a problem."
+        ]
+      },
+      "bn": {
+        "short": "অবজারভ",
+        "title": "অবজারভেবিলিটি লগ আর মেট্রিক পড়ে",
+        "body": [
+          "অবজারভেবিলিটি হলো লগ আর মেট্রিক থেকে সিস্টেমের ভেতরে কী হচ্ছে বুঝতে পারা।",
+          "শুধু সমস্যা খুঁজতে নতুন কোড লিখতে হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "orch",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "logs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Trace",
+        "title": "A trace shows the failing step",
+        "body": [
+          "A trace is the full path of one request, step by step, with timing and cost.",
+          "It shows which step went wrong."
+        ]
+      },
+      "bn": {
+        "short": "ট্রেস",
+        "title": "ট্রেস দেখায় কোন ধাপ ব্যর্থ",
+        "body": [
+          "ট্রেস হলো একটি রিকোয়েস্টের পুরো পথ, ধাপে ধাপে, সময় আর খরচসহ।",
+          "এতে বোঝা যায় কোন ধাপে সমস্যা হয়েছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "orch",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "this step went wrong",
+            "bn": "এই ধাপে সমস্যা"
+          }
+        },
+        {
+          "id": "trace",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "orch",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "orch",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "trace",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Drift",
+        "title": "Drift changes things unnoticed",
+        "body": [
+          "Drift is an unnoticed change in how the system behaves or is used, such as users slowly changing how they phrase requests.",
+          "The model can also change silently behind an unchanged API."
+        ]
+      },
+      "bn": {
+        "short": "ড্রিফট",
+        "title": "ড্রিফট চুপচাপ সব বদলায়",
+        "body": [
+          "ড্রিফট হলো সিস্টেমের আচরণ বা ব্যবহারে এমন পরিবর্তন যা কেউ খেয়াল করে না, যেমন ইউজাররা ধীরে ধীরে অনুরোধের ভাষা বদলে ফেলে।",
+          "API একই থাকলেও মডেল চুপচাপ বদলে যেতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "rephrases",
+            "bn": "ভাষা বদলায়"
+          }
+        },
+        {
+          "id": "orch",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "changes silently",
+            "bn": "চুপচাপ বদলায়"
+          }
+        },
+        {
+          "id": "drift",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "orch",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "orch",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "drift",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Feedback",
+        "title": "Users teach it through actions",
+        "body": [
+          "Implicit feedback is what you infer from what a user does, such as regenerating an answer, instead of asking directly.",
+          "Good feedback design makes giving feedback nearly free."
+        ]
+      },
+      "bn": {
+        "short": "ফিডব্যাক",
+        "title": "ইউজার কাজের মাধ্যমে শেখায়",
+        "body": [
+          "ইমপ্লিসিট ফিডব্যাক হলো সরাসরি জিজ্ঞেস না করে ইউজারের কাজ থেকে বোঝা ফিডব্যাক, যেমন উত্তর আবার জেনারেট করানো।",
+          "ভালো ফিডব্যাক ডিজাইন ফিডব্যাক দেওয়াটা প্রায় বিনা ঝামেলার করে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "regenerates",
+            "bn": "রিজেনারেট করে"
+          }
+        },
+        {
+          "id": "logs",
+          "state": "hot",
+          "sub": {
+            "en": "feedback signal",
+            "bn": "ফিডব্যাক সংকেত"
+          },
+          "x": 400
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "nearly free",
+          "bn": "প্রায় বিনামূল্যে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bias",
+        "title": "Feedback is biased",
+        "body": [
+          "Leniency bias, position bias, and preference bias all distort feedback.",
+          "So user feedback is valuable but biased and incomplete."
+        ]
+      },
+      "bn": {
+        "short": "বায়াস",
+        "title": "ফিডব্যাকে পক্ষপাত থাকে",
+        "body": [
+          "লেনিয়েন্সি বায়াস (leniency bias), পজিশন বায়াস (position bias) আর প্রেফারেন্স বায়াস (preference bias) সবই ফল বিকৃত করে।",
+          "তাই ইউজার ফিডব্যাক মূল্যবান, কিন্তু পক্ষপাতী আর অসম্পূর্ণ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "bias",
+          "state": "warn",
+          "sub": {
+            "en": "leniency, position, preference",
+            "bn": "লেনিয়েন্সি, পজিশন, প্রেফারেন্স"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "bias",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "bias",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "biased",
+          "bn": "পক্ষপাতী"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Loop",
+        "title": "Popular outputs get more popular",
+        "body": [
+          "Popular outputs get shown more, get more clicks, and grow more popular.",
+          "Outputs that are never shown get no chance. This is a degenerate feedback loop."
+        ]
+      },
+      "bn": {
+        "short": "লুপ",
+        "title": "জনপ্রিয় আউটপুট আরও জনপ্রিয় হয়",
+        "body": [
+          "জনপ্রিয় আউটপুট বেশি দেখানো হয়, বেশি ক্লিক পায়, আরও জনপ্রিয় হয়।",
+          "যা কখনো দেখানো হয় না, সে সুযোগই পায় না। একে বলে ডিজেনারেট ফিডব্যাক লুপ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pop",
+          "state": "hot"
+        },
+        {
+          "id": "clicks",
+          "state": "hot"
+        },
+        {
+          "id": "unseen",
+          "state": "dim",
+          "sub": {
+            "en": "get no chance",
+            "bn": "সুযোগ পায় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pop",
+          "to": "clicks",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "shown more",
+            "bn": "বেশি দেখানো"
+          }
+        },
+        {
+          "from": "clicks",
+          "to": "pop",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "shown more",
+          "bn": "বেশি দেখানো"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Trace it, watch it, and test the feedback",
+        "body": [
+          "Use traces to find exactly which step failed, with metrics and logs to spot and debug problems. Watch for drift.",
+          "Make giving feedback nearly free for users, and remember that feedback is biased."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "ট্রেস করুন, নজর রাখুন, ফিডব্যাক যাচাই করুন",
+        "body": [
+          "ঠিক কোন ধাপ ব্যর্থ হয়েছে তা খুঁজতে ট্রেস ব্যবহার করুন, আর সমস্যা ধরতে ও ডিবাগ করতে মেট্রিক ও লগ কাজে লাগান। ড্রিফটের দিকে নজর রাখুন।",
+          "ইউজারের জন্য ফিডব্যাক দেওয়া প্রায় বিনা ঝামেলার করুন, আর মনে রাখুন ফিডব্যাকে পক্ষপাত থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "trace",
+          "state": "hot"
+        },
+        {
+          "id": "logs",
+          "state": "hot"
+        },
+        {
+          "id": "drift",
+          "state": "warn"
+        },
+        {
+          "id": "bias",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "trace",
+          "to": "logs",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "drift",
+          "to": "bias",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,630 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "request",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "server",
+      "kind": "server",
+      "label": {
+        "en": "Inference server",
+        "bn": "ইনফারেন্স সার্ভার"
+      },
+      "x": 390,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "The model",
+        "bn": "মডেল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "hw",
+      "kind": "server",
+      "label": {
+        "en": "Hardware",
+        "bn": "হার্ডওয়্যার"
+      },
+      "x": 390,
+      "y": 162
+    },
+    {
+      "id": "svc",
+      "kind": "service",
+      "label": {
+        "en": "Service",
+        "bn": "সার্ভিস"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "compute",
+      "kind": "tool",
+      "label": {
+        "en": "Calculations",
+        "bn": "হিসাব"
+      },
+      "x": 190,
+      "y": 162
+    },
+    {
+      "id": "memory",
+      "kind": "storage",
+      "label": {
+        "en": "Memory",
+        "bn": "মেমোরি"
+      },
+      "x": 570,
+      "y": 162
+    },
+    {
+      "id": "prefill",
+      "kind": "service",
+      "label": {
+        "en": "Prefill",
+        "bn": "প্রিফিল"
+      },
+      "x": 330,
+      "y": 70
+    },
+    {
+      "id": "decode",
+      "kind": "service",
+      "label": {
+        "en": "Decode",
+        "bn": "ডিকোড"
+      },
+      "x": 330,
+      "y": 254
+    },
+    {
+      "id": "answer",
+      "kind": "file",
+      "label": {
+        "en": "Answer tokens",
+        "bn": "উত্তরের টোকেন"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "ttft",
+      "kind": "clock",
+      "label": {
+        "en": "TTFT",
+        "bn": "TTFT"
+      },
+      "x": 250,
+      "y": 162
+    },
+    {
+      "id": "tpot",
+      "kind": "clock",
+      "label": {
+        "en": "TPOT",
+        "bn": "TPOT"
+      },
+      "x": 510,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "TTFT",
+      "bn": "TTFT"
+    },
+    {
+      "en": "TPOT",
+      "bn": "TPOT"
+    },
+    {
+      "en": "Total latency",
+      "bn": "মোট latency"
+    },
+    {
+      "en": "Throughput",
+      "bn": "থ্রুপুট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Inference",
+        "title": "Running a trained model",
+        "body": [
+          "Inference means running a trained model to answer real requests.",
+          "If it is too slow or too costly, people cannot use it."
+        ]
+      },
+      "bn": {
+        "short": "ইনফারেন্স",
+        "title": "ট্রেইন করা মডেল চালানো",
+        "body": [
+          "ইনফারেন্স মানে ট্রেইন করা মডেল চালিয়ে আসল রিকোয়েস্টের উত্তর দেওয়া।",
+          "এটা খুব ধীর বা খুব খরচের হলে মানুষ ব্যবহার করতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "request",
+          "state": "hot"
+        },
+        {
+          "id": "server",
+          "state": "hot",
+          "sub": {
+            "en": "runs the model",
+            "bn": "মডেল চালায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "request",
+          "to": "server",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Levels",
+        "title": "Model, hardware or service",
+        "body": [
+          "Optimization can target the model, the hardware, or the service.",
+          "Most systems combine more than one."
+        ]
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "মডেল, হার্ডওয়্যার বা সার্ভিস",
+        "body": [
+          "অপ্টিমাইজেশন হতে পারে মডেল, হার্ডওয়্যার বা সার্ভিসে।",
+          "বেশিরভাগ সিস্টেম একাধিক স্তর মিলিয়ে ব্যবহার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "smaller",
+            "bn": "ছোট"
+          }
+        },
+        {
+          "id": "hw",
+          "state": "hot",
+          "sub": {
+            "en": "better chips",
+            "bn": "ভালো চিপ"
+          }
+        },
+        {
+          "id": "svc",
+          "state": "hot",
+          "sub": {
+            "en": "manage requests",
+            "bn": "রিকোয়েস্ট সামলানো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "hw",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "hw",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Bottleneck",
+        "title": "Two bottlenecks",
+        "body": [
+          "A compute-bound task is limited by how many calculations the hardware can do.",
+          "A memory bandwidth-bound task is limited by how fast data moves between memory and the processor."
+        ]
+      },
+      "bn": {
+        "short": "বটলনেক",
+        "title": "দুই ধরনের বটলনেক",
+        "body": [
+          "কম্পিউট-বাউন্ড কাজ আটকে থাকে হার্ডওয়্যার কতগুলো হিসাব করতে পারে তার ওপর।",
+          "মেমোরি ব্যান্ডউইথ-বাউন্ড কাজ আটকে থাকে মেমোরি আর প্রসেসরের মধ্যে ডেটা কত দ্রুত যায় তার ওপর।"
+        ]
+      },
+      "show": [
+        {
+          "id": "compute",
+          "state": "hot",
+          "sub": {
+            "en": "compute-bound",
+            "bn": "compute-bound"
+          }
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "memory bandwidth-bound",
+            "bn": "memory bandwidth-bound"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "memory",
+          "to": "compute",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "data moves",
+            "bn": "ডেটা যায়"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Prefill",
+        "title": "Prefill reads, decode writes",
+        "body": [
+          "Prefill reads the whole prompt at once. Decode then writes the answer one token at a time, reloading the model's weights each step.",
+          "Prefill is compute-bound. Decode is memory bandwidth-bound, and it dominates response time for long outputs."
+        ]
+      },
+      "bn": {
+        "short": "প্রিফিল",
+        "title": "প্রিফিল পড়ে, ডিকোড লেখে",
+        "body": [
+          "প্রিফিল পুরো প্রম্পট একবারে পড়ে। ডিকোড তারপর একবারে একটি টোকেন করে উত্তর লেখে, প্রতি ধাপে মডেলের ওয়েট আবার লোড করে।",
+          "প্রিফিল compute-bound। ডিকোড memory bandwidth-bound, আর লম্বা আউটপুটে ডিকোডই বেশি সময় নেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "request",
+          "state": "hot",
+          "sub": {
+            "en": "whole prompt",
+            "bn": "পুরো প্রম্পট"
+          },
+          "x": 90
+        },
+        {
+          "id": "prefill",
+          "state": "hot",
+          "sub": {
+            "en": "compute-bound",
+            "bn": "compute-bound"
+          }
+        },
+        {
+          "id": "decode",
+          "state": "warn",
+          "sub": {
+            "en": "memory bandwidth-bound",
+            "bn": "memory bandwidth-bound"
+          }
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "one token at a time",
+            "bn": "একবারে একটি টোকেন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "request",
+          "to": "prefill",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "prefill",
+          "to": "decode",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "decode",
+          "to": "answer",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Latency",
+        "title": "TTFT, TPOT and total latency",
+        "body": [
+          "TTFT is how long until the first token appears. It depends on prefill and input length.",
+          "TPOT is how quickly each later token arrives. It depends on decode."
+        ]
+      },
+      "bn": {
+        "short": "latency",
+        "title": "TTFT, TPOT আর মোট latency",
+        "body": [
+          "TTFT হলো প্রথম টোকেন আসতে কত সময় লাগে। এটা প্রিফিল আর ইনপুটের দৈর্ঘ্যের ওপর নির্ভর করে।",
+          "TPOT হলো পরের প্রতিটি টোকেন কত দ্রুত আসে। এটা ডিকোডের ওপর নির্ভর করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ttft",
+          "state": "hot",
+          "sub": {
+            "en": "prefill and input length",
+            "bn": "প্রিফিল আর ইনপুটের দৈর্ঘ্য"
+          }
+        },
+        {
+          "id": "tpot",
+          "state": "hot",
+          "sub": {
+            "en": "decode",
+            "bn": "ডিকোড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ttft",
+          "to": "tpot",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "prefill, input length",
+          "bn": "প্রিফিল, ইনপুটের দৈর্ঘ্য"
+        },
+        {
+          "en": "decode",
+          "bn": "ডিকোড"
+        },
+        {
+          "en": "TTFT + TPOT × output tokens",
+          "bn": "TTFT + TPOT × আউটপুট টোকেন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Throughput",
+        "title": "Throughput and goodput",
+        "body": [
+          "Throughput is how much the service produces: output tokens per second across all requests. It is directly tied to compute cost.",
+          "Goodput is requests per second that meet a latency target, not just requests finished."
+        ]
+      },
+      "bn": {
+        "short": "থ্রুপুট",
+        "title": "থ্রুপুট আর গুডপুট",
+        "body": [
+          "থ্রুপুট হলো সার্ভিস কতটা তৈরি করে: সব রিকোয়েস্ট মিলিয়ে প্রতি সেকেন্ডে কতগুলো আউটপুট টোকেন। এটা সরাসরি কম্পিউটের খরচের সাথে জড়িত।",
+          "গুডপুট হলো প্রতি সেকেন্ডে কতগুলো রিকোয়েস্ট latency লক্ষ্য পূরণ করে। শুধু শেষ হওয়া রিকোয়েস্ট গোনা হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "request",
+          "state": "hot",
+          "sub": {
+            "en": "all requests",
+            "bn": "সব রিকোয়েস্ট"
+          }
+        },
+        {
+          "id": "server",
+          "state": "hot",
+          "x": 330
+        },
+        {
+          "id": "answer",
+          "state": "hot",
+          "sub": {
+            "en": "output tokens per second",
+            "bn": "প্রতি সেকেন্ডে আউটপুট টোকেন"
+          },
+          "x": 620
+        }
+      ],
+      "links": [
+        {
+          "from": "request",
+          "to": "server",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "server",
+          "to": "answer",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "output tokens per second",
+          "bn": "প্রতি সেকেন্ডে আউটপুট টোকেন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Spread",
+        "title": "Latency is a spread",
+        "body": [
+          "Latency is a spread, not one number.",
+          "A few slow outlier requests can badly skew an average. Teams report percentiles such as p50, p90, p95, and p99."
+        ]
+      },
+      "bn": {
+        "short": "বিস্তার",
+        "title": "latency একটি বিস্তার",
+        "body": [
+          "latency একটি সংখ্যা নয়, একটি বিস্তার।",
+          "কয়েকটি ধীর আউটলায়ার রিকোয়েস্ট গড়কে অনেক বিগড়ে দিতে পারে। টিমগুলো p50, p90, p95, p99 এর মতো পারসেন্টাইল জানায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "server",
+          "state": "hot",
+          "sub": {
+            "en": "p50, p90, p95, p99",
+            "bn": "p50, p90, p95, p99"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        {
+          "en": "a spread",
+          "bn": "একটি বিস্তার"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Chips",
+        "title": "Compare chips on three specs",
+        "body": [
+          "An accelerator is a chip built for one kind of workload. GPUs lead in AI because they pack thousands of smaller cores.",
+          "Compare chips on computational capability, memory size and bandwidth, and power consumption."
+        ],
+        "points": [
+          "Also compare power consumption."
+        ]
+      },
+      "bn": {
+        "short": "চিপ",
+        "title": "তিন দিকে চিপ তুলনা করুন",
+        "body": [
+          "অ্যাক্সিলারেটর হলো একটি বিশেষ ধরনের কাজের জন্য বানানো চিপ। GPU-তে হাজার হাজার ছোট কোর থাকে, তাই AI-তে GPU এগিয়ে।",
+          "চিপ তুলনা করুন হিসাবের ক্ষমতা, মেমোরির আকার ও ব্যান্ডউইথ, আর বিদ্যুৎ খরচ দেখে।"
+        ],
+        "points": [
+          "আরও দেখুন বিদ্যুৎ খরচ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "hw",
+          "state": "hot",
+          "sub": {
+            "en": "thousands of smaller cores",
+            "bn": "হাজার হাজার ছোট কোর"
+          },
+          "x": 150
+        },
+        {
+          "id": "compute",
+          "state": "hot",
+          "sub": {
+            "en": "computational capability",
+            "bn": "হিসাবের ক্ষমতা"
+          },
+          "x": 470,
+          "y": 75
+        },
+        {
+          "id": "memory",
+          "state": "hot",
+          "sub": {
+            "en": "memory size and bandwidth",
+            "bn": "মেমোরির আকার ও ব্যান্ডউইথ"
+          },
+          "x": 470,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "hw",
+          "to": "compute",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "hw",
+          "to": "memory",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

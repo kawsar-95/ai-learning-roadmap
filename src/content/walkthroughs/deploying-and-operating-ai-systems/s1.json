@@ -1,0 +1,670 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "shell",
+      "kind": "tool",
+      "label": {
+        "en": "Shell",
+        "bn": "শেল"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "srv",
+      "kind": "server",
+      "label": {
+        "en": "Linux server",
+        "bn": "Linux সার্ভার"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "chart",
+      "label": {
+        "en": "nvidia-smi",
+        "bn": "nvidia-smi"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "disk",
+      "kind": "storage",
+      "label": {
+        "en": "df -h",
+        "bn": "df -h"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ram",
+      "kind": "chart",
+      "label": {
+        "en": "free -h",
+        "bn": "free -h"
+      },
+      "x": 380,
+      "y": 264
+    },
+    {
+      "id": "ps",
+      "kind": "service",
+      "label": {
+        "en": "ps aux, top",
+        "bn": "ps aux, top"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "port",
+      "kind": "service",
+      "label": {
+        "en": "ss -ltnp",
+        "bn": "ss -ltnp"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "log",
+      "kind": "file",
+      "label": {
+        "en": "journalctl",
+        "bn": "journalctl"
+      },
+      "x": 380,
+      "y": 264
+    },
+    {
+      "id": "grep",
+      "kind": "tool",
+      "label": {
+        "en": "grep ERROR",
+        "bn": "grep ERROR"
+      },
+      "x": 560,
+      "y": 162
+    },
+    {
+      "id": "proc",
+      "kind": "service",
+      "label": {
+        "en": "Process",
+        "bn": "প্রসেস"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "oom",
+      "kind": "shield",
+      "label": {
+        "en": "Out-of-memory killer",
+        "bn": "আউট-অব-মেমোরি কিলার"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "env",
+      "kind": "key",
+      "label": {
+        "en": "Environment variables",
+        "bn": "এনভায়রনমেন্ট ভেরিয়েবল"
+      },
+      "x": 130,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Command",
+      "bn": "কমান্ড"
+    },
+    {
+      "en": "Look at",
+      "bn": "দেখুন"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Shell",
+        "title": "The shell asks the server",
+        "body": [
+          "Most AI systems run on Linux servers. When one is slow, full or gone, you use a few shell commands to see what the machine is doing.",
+          "The shell is a text window where you type instructions instead of clicking."
+        ]
+      },
+      "bn": {
+        "short": "শেল",
+        "title": "শেল সার্ভারকে জিজ্ঞেস করে",
+        "body": [
+          "বেশিরভাগ AI সিস্টেম Linux সার্ভারে চলে। কিছু ধীর, ভরা বা বন্ধ হয়ে গেলে কয়েকটা শেল কমান্ড দিয়ে দেখুন মেশিন কী করছে।",
+          "শেল একটি টেক্সট উইন্ডো, যেখানে ক্লিক না করে লিখে নির্দেশ দেওয়া হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "shell",
+          "state": "hot",
+          "sub": {
+            "en": "type, not click",
+            "bn": "ক্লিক নয়, লেখা"
+          }
+        },
+        {
+          "id": "srv",
+          "state": "hot",
+          "sub": {
+            "en": "slow, full or gone",
+            "bn": "ধীর, ভরা বা বন্ধ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "shell",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Read first",
+        "title": "Read the machine first",
+        "body": [
+          "Read the machine first with commands like <code>nvidia-smi</code>, <code>df -h</code> and <code>free -h</code>, then fix it.",
+          "Each answers a question: is the GPU busy, is the disk full, is RAM used up."
+        ]
+      },
+      "bn": {
+        "short": "আগে দেখুন",
+        "title": "আগে মেশিন দেখুন",
+        "body": [
+          "আগে <code>nvidia-smi</code>, <code>df -h</code>, <code>free -h</code>-এর মতো কমান্ডে মেশিন দেখুন, তারপর ঠিক করুন।",
+          "প্রতিটি একটা প্রশ্নের উত্তর দেয়: GPU ব্যস্ত কি না, ডিস্ক ভরা কি না, RAM ফুরিয়েছে কি না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "shell",
+          "state": "hot"
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "GPU use and memory",
+            "bn": "GPU ব্যবহার আর মেমোরি"
+          }
+        },
+        {
+          "id": "disk",
+          "state": "hot",
+          "sub": {
+            "en": "free space",
+            "bn": "খালি জায়গা"
+          }
+        },
+        {
+          "id": "ram",
+          "state": "hot",
+          "sub": {
+            "en": "used and available",
+            "bn": "ব্যবহৃত আর বাকি"
+          }
+        },
+        {
+          "id": "srv",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "shell",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "shell",
+          "to": "disk",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "shell",
+          "to": "ram",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gpu",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ram",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "nvidia-smi, df -h, free -h",
+          "bn": "nvidia-smi, df -h, free -h"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "More",
+        "title": "What runs, what listens, what the log says",
+        "body": [
+          "<code>ps aux</code> and <code>top</code> show processes with their CPU and memory use. <code>ss -ltnp</code> shows listening TCP sockets and the process behind each.",
+          "<code>journalctl -u &lt;name&gt;</code> shows the service's log under systemd."
+        ]
+      },
+      "bn": {
+        "short": "আরও",
+        "title": "কী চলছে, কী শুনছে, লগে কী আছে",
+        "body": [
+          "<code>ps aux</code> আর <code>top</code> প্রসেস আর তাদের CPU ও মেমোরি ব্যবহার দেখায়। <code>ss -ltnp</code> লিসেনিং TCP সকেট আর প্রতিটির পেছনের প্রসেস দেখায়।",
+          "<code>journalctl -u &lt;name&gt;</code> systemd-এর অধীনে সার্ভিসের লগ দেখায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "shell",
+          "state": "hot"
+        },
+        {
+          "id": "ps",
+          "state": "hot",
+          "sub": {
+            "en": "CPU and memory use",
+            "bn": "CPU ও মেমোরি ব্যবহার"
+          }
+        },
+        {
+          "id": "port",
+          "state": "hot",
+          "sub": {
+            "en": "what listens",
+            "bn": "কী শুনছে"
+          }
+        },
+        {
+          "id": "log",
+          "state": "hot",
+          "sub": {
+            "en": "why a service stopped",
+            "bn": "সার্ভিস কেন থামল"
+          }
+        },
+        {
+          "id": "srv",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "shell",
+          "to": "ps",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "shell",
+          "to": "port",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "shell",
+          "to": "log",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ps",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "log",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "ps aux, top, ss -ltnp",
+          "bn": "ps aux, top, ss -ltnp"
+        },
+        {
+          "en": "journalctl -u",
+          "bn": "journalctl -u"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Pipe",
+        "title": "A pipe passes output along",
+        "body": [
+          "A pipe (<code>|</code>) feeds the output of one command into the next, like passing a note along a line.",
+          "For example: <code>journalctl -u api | grep ERROR | tail</code>."
+        ]
+      },
+      "bn": {
+        "short": "পাইপ",
+        "title": "পাইপ আউটপুট এগিয়ে দেয়",
+        "body": [
+          "পাইপ (<code>|</code>) এক কমান্ডের আউটপুট পরের কমান্ডে পাঠায়, লাইনে একটা চিরকুট হাতে হাতে পাঠানোর মতো।",
+          "যেমন: <code>journalctl -u api | grep ERROR | tail</code>।"
+        ]
+      },
+      "show": [
+        {
+          "id": "log",
+          "state": "hot",
+          "sub": {
+            "en": "journalctl -u api",
+            "bn": "journalctl -u api"
+          },
+          "x": 200,
+          "y": 162
+        },
+        {
+          "id": "grep",
+          "state": "hot",
+          "sub": {
+            "en": "then tail",
+            "bn": "তারপর tail"
+          },
+          "x": 560,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "log",
+          "to": "grep",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "|",
+            "bn": "|"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "journalctl -u api | grep ERROR | tail",
+          "bn": "journalctl -u api | grep ERROR | tail"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Signals",
+        "title": "Ask first, force last",
+        "body": [
+          "<code>kill &lt;pid&gt;</code> sends SIGTERM, which asks a process to exit and lets it clean up.",
+          "<code>kill -9</code> sends SIGKILL, which the process cannot catch, so use it last."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "SIGKILL cannot be caught, so use <code>kill -9</code> last."
+        }
+      },
+      "bn": {
+        "short": "সংকেত",
+        "title": "আগে অনুরোধ, জোর শেষে",
+        "body": [
+          "<code>kill &lt;pid&gt;</code> SIGTERM পাঠায়, যা প্রসেসকে গুছিয়ে বন্ধ হতে বলে।",
+          "<code>kill -9</code> SIGKILL পাঠায়, যা প্রসেস আটকাতে পারে না, তাই শেষে ব্যবহার করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "SIGKILL আটকানো যায় না, তাই <code>kill -9</code> শেষে ব্যবহার করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "shell",
+          "state": "hot"
+        },
+        {
+          "id": "proc",
+          "state": "hot",
+          "sub": {
+            "en": "exits and cleans up",
+            "bn": "গুছিয়ে বন্ধ হয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "shell",
+          "to": "proc",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "SIGTERM first",
+            "bn": "আগে SIGTERM"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "kill first, kill -9 last",
+          "bn": "আগে kill, kill -9 শেষে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Memory",
+        "title": "A process vanishes with no error",
+        "body": [
+          "When RAM runs out, the kernel may kill a process to free memory. The process can vanish without any error in its own log.",
+          "Look for an out-of-memory message with <code>dmesg</code>."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A model server that vanishes with no error is often such a case."
+        }
+      },
+      "bn": {
+        "short": "মেমোরি",
+        "title": "প্রসেস কোনো এরর ছাড়া উধাও",
+        "body": [
+          "RAM ফুরিয়ে গেলে কার্নেল জায়গা খালি করতে কোনো প্রসেস মেরে ফেলতে পারে। প্রসেসটি নিজের লগে কোনো এরর না রেখেই উধাও হতে পারে।",
+          "<code>dmesg</code> দিয়ে out-of-memory বার্তা খুঁজুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "মডেল সার্ভার কোনো এরর ছাড়া উধাও হলে প্রায়ই এটাই কারণ।"
+        }
+      },
+      "show": [
+        {
+          "id": "ram",
+          "state": "warn",
+          "sub": {
+            "en": "RAM runs out",
+            "bn": "RAM ফুরিয়ে যায়"
+          },
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "oom",
+          "state": "warn",
+          "sub": {
+            "en": "kills a process",
+            "bn": "প্রসেস মারে"
+          }
+        },
+        {
+          "id": "proc",
+          "state": "dim",
+          "sub": {
+            "en": "gone, no error",
+            "bn": "উধাও, এরর নেই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "ram",
+          "to": "oom",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "oom",
+          "to": "proc",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "dmesg",
+          "bn": "dmesg"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Secrets",
+        "title": "Keep secrets out of logs",
+        "body": [
+          "Environment variables pass settings, including secrets, to a process.",
+          "Never print them into logs."
+        ]
+      },
+      "bn": {
+        "short": "সিক্রেট",
+        "title": "লগে সিক্রেট নয়",
+        "body": [
+          "এনভায়রনমেন্ট ভেরিয়েবল প্রসেসে সেটিংস পাঠায়, সিক্রেটসহ।",
+          "এগুলো কখনো লগে প্রিন্ট করবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "env",
+          "state": "hot",
+          "sub": {
+            "en": "can hold secrets",
+            "bn": "সিক্রেট থাকতে পারে"
+          },
+          "x": 200,
+          "y": 162
+        },
+        {
+          "id": "log",
+          "state": "warn",
+          "sub": {
+            "en": "not here",
+            "bn": "এখানে নয়"
+          },
+          "x": 560,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "env",
+          "to": "log",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Read the machine first, then fix it."
+        ],
+        "points": [
+          "Read the machine first with commands like <code>nvidia-smi</code>, <code>df -h</code> and <code>free -h</code>, then fix it.",
+          "Use kill first, which sends SIGTERM. Use <code>kill -9</code> last.",
+          "Never print environment variables into logs, because they can hold secrets.",
+          "If a model server vanishes with no error, look for an out-of-memory message with <code>dmesg</code>."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "আগে মেশিন দেখুন, তারপর ঠিক করুন।"
+        ],
+        "points": [
+          "আগে <code>nvidia-smi</code>, <code>df -h</code>, <code>free -h</code>-এর মতো কমান্ডে মেশিন দেখুন, তারপর ঠিক করুন।",
+          "আগে kill দিন, যা SIGTERM পাঠায়। <code>kill -9</code> শেষ উপায়।",
+          "এনভায়রনমেন্ট ভেরিয়েবল কখনো লগে প্রিন্ট করবেন না, কারণ তাতে সিক্রেট থাকতে পারে।",
+          "মডেল সার্ভার কোনো এরর ছাড়া উধাও হলে <code>dmesg</code> দিয়ে out-of-memory বার্তা খুঁজুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "shell",
+          "state": "hot"
+        },
+        {
+          "id": "srv",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "shell",
+          "to": "srv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

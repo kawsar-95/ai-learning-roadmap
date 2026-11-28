@@ -1,0 +1,661 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "base",
+      "kind": "model",
+      "label": {
+        "en": "Pre-trained model",
+        "bn": "ট্রেইন করা মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "data",
+      "kind": "file",
+      "label": {
+        "en": "Your task data",
+        "bn": "আপনার কাজের ডেটা"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "pairs",
+      "kind": "file",
+      "label": {
+        "en": "Input and right output",
+        "bn": "ইনপুট আর সঠিক আউটপুট"
+      },
+      "x": 130,
+      "y": 75
+    },
+    {
+      "id": "pref",
+      "kind": "file",
+      "label": {
+        "en": "Better and worse response",
+        "bn": "ভালো আর খারাপ উত্তর"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "p1",
+      "kind": "note",
+      "label": {
+        "en": "Prompt engineering",
+        "bn": "প্রম্পট ইঞ্জিনিয়ারিং"
+      },
+      "x": 130,
+      "y": 75
+    },
+    {
+      "id": "p2",
+      "kind": "note",
+      "label": {
+        "en": "More examples",
+        "bn": "আরও উদাহরণ"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "p3",
+      "kind": "service",
+      "label": {
+        "en": "Retrieval (RAG)",
+        "bn": "রিট্রিভাল (RAG)"
+      },
+      "x": 650,
+      "y": 75
+    },
+    {
+      "id": "p4",
+      "kind": "tool",
+      "label": {
+        "en": "Finetuning",
+        "bn": "ফাইন-টিউনিং"
+      },
+      "x": 250,
+      "y": 250
+    },
+    {
+      "id": "p5",
+      "kind": "tool",
+      "label": {
+        "en": "RAG and finetuning",
+        "bn": "RAG আর ফাইন-টিউনিং"
+      },
+      "x": 520,
+      "y": 250
+    },
+    {
+      "id": "train",
+      "kind": "model",
+      "label": {
+        "en": "Trainable parameters",
+        "bn": "ট্রেইনেবল প্যারামিটার"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "GPU memory",
+        "bn": "GPU মেমরি"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "qmodel",
+      "kind": "model",
+      "label": {
+        "en": "Fewer bits per value",
+        "bn": "প্রতি মানে কম বিট"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Weights only (inference)",
+      "bn": "শুধু ওয়েট (ইনফারেন্স)"
+    },
+    {
+      "en": "Plus activations",
+      "bn": "সঙ্গে অ্যাক্টিভেশন"
+    },
+    {
+      "en": "Full finetuning, total",
+      "bn": "পুরো ফাইন-টিউনিং, মোট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর হিসাব সেকশনের নিজের।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Finetuning",
+        "title": "Extra training on your data",
+        "body": [
+          "Finetuning is extra training you run on top of a pre-trained foundation model, using your own task-specific data.",
+          "The model already knows a lot from pre-training, and finetuning nudges that knowledge toward your task. It usually needs far fewer examples than training from scratch."
+        ]
+      },
+      "bn": {
+        "short": "ফাইন-টিউনিং",
+        "title": "আপনার ডেটায় বাড়তি ট্রেনিং",
+        "body": [
+          "ফাইন-টিউনিং হলো আগে ট্রেইন করা ফাউন্ডেশন মডেলের ওপর আপনার নিজের কাজের ডেটায় বাড়তি ট্রেনিং।",
+          "প্রি-ট্রেনিং থেকে মডেল অনেক কিছু জানে, আর ফাইন-টিউনিং সেই জ্ঞানকে আপনার কাজের দিকে ঝোঁকায়। শুরু থেকে ট্রেনিংয়ের চেয়ে এতে সাধারণত অনেক কম উদাহরণ লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "hot",
+          "y": 75
+        },
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "p4",
+          "state": "hot",
+          "x": 380,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "data",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Two kinds",
+        "title": "Supervised and preference",
+        "body": [
+          "Supervised finetuning trains the model on (input, output) pairs, so it follows instructions and produces the right format.",
+          "Preference finetuning trains it on (instruction, better response, worse response) comparisons, so it generates answers people prefer."
+        ]
+      },
+      "bn": {
+        "short": "দুই ধরন",
+        "title": "সুপারভাইজড আর প্রেফারেন্স",
+        "body": [
+          "সুপারভাইজড ফাইন-টিউনিংয়ে (ইনপুট, আউটপুট) জোড়া দিয়ে মডেল ট্রেইন হয়, যাতে সে নির্দেশ মানে আর ঠিক ফরম্যাটে লেখে।",
+          "প্রেফারেন্স ফাইন-টিউনিংয়ে (নির্দেশ, ভালো উত্তর, খারাপ উত্তর) তুলনা দিয়ে ট্রেনিং হয়, যাতে মডেল মানুষের পছন্দের উত্তর লেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pairs",
+          "state": "hot",
+          "sub": {
+            "en": "supervised",
+            "bn": "সুপারভাইজড"
+          }
+        },
+        {
+          "id": "pref",
+          "state": "hot",
+          "sub": {
+            "en": "preference",
+            "bn": "প্রেফারেন্স"
+          }
+        },
+        {
+          "id": "base",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "pairs",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pref",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "When",
+        "title": "Think before you finetune",
+        "body": [
+          "Finetuning is expensive in data, compute and ML expertise, so it should usually come after you have pushed prompting as far as it goes.",
+          "It is not a replacement for prompting: the two are often combined."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Good reason: improving task-specific quality, such as following a strict output format"
+          },
+          {
+            "sign": "+",
+            "html": "Good reason: adapting to a rare dialect or domain language, or mitigating specific biases with curated data"
+          },
+          {
+            "sign": "-",
+            "html": "Think twice: finetuning for one task can quietly hurt performance on others"
+          },
+          {
+            "sign": "-",
+            "html": "Think twice: a new base model often improves faster than you can re-finetune your own"
+          }
+        ]
+      },
+      "bn": {
+        "short": "কখন",
+        "title": "ফাইন-টিউনের আগে ভাবুন",
+        "body": [
+          "ফাইন-টিউনিংয়ে ডেটা, কম্পিউট আর ML দক্ষতার খরচ বেশি, তাই সাধারণত প্রম্পটিং যতদূর যায় ততদূর ঠেলার পরেই এটা করা উচিত।",
+          "এটা প্রম্পটিংয়ের বিকল্প নয়: দুটো প্রায়ই একসাথে ব্যবহার হয়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ভালো কারণ: কাজ-নির্দিষ্ট মান বাড়ানো, যেমন কড়া আউটপুট ফরম্যাট মানা"
+          },
+          {
+            "sign": "+",
+            "html": "ভালো কারণ: বিরল উপভাষা বা ডোমেইনের ভাষায় মানানো, বা বাছাই করা ডেটা দিয়ে নির্দিষ্ট পক্ষপাত কমানো"
+          },
+          {
+            "sign": "-",
+            "html": "দুবার ভাবুন: এক কাজের জন্য ফাইন-টিউনিং চুপচাপ অন্য কাজের পারফরম্যান্স নষ্ট করতে পারে"
+          },
+          {
+            "sign": "-",
+            "html": "দুবার ভাবুন: নতুন বেস মডেল প্রায়ই আপনার আবার ফাইন-টিউন করার চেয়ে দ্রুত ভালো হয়"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "p1",
+          "state": "hot",
+          "sub": {
+            "en": "first",
+            "bn": "আগে"
+          }
+        },
+        {
+          "id": "p4",
+          "state": "hot",
+          "sub": {
+            "en": "after",
+            "bn": "পরে"
+          },
+          "x": 380,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "p1",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Form",
+        "title": "Finetuning is for form, RAG for facts",
+        "body": [
+          "If the model lacks or has outdated information, retrieval usually helps more than finetuning.",
+          "If the facts are fine but the tone, structure or syntax is wrong, finetuning is the better tool."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Finetuning is for form; RAG is for facts."
+        }
+      },
+      "bn": {
+        "short": "ফর্ম",
+        "title": "ফর্মের জন্য ফাইন-টিউনিং, তথ্যের জন্য RAG",
+        "body": [
+          "মডেলের তথ্য না থাকলে বা পুরনো হলে সাধারণত ফাইন-টিউনিংয়ের চেয়ে রিট্রিভালই বেশি কাজে লাগে।",
+          "তথ্য ঠিক কিন্তু টোন, গঠন বা সিনট্যাক্স ভুল হলে ফাইন-টিউনিংই ভালো টুল।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "ফাইন-টিউনিং ফর্মের জন্য; RAG তথ্যের জন্য।"
+        }
+      },
+      "show": [
+        {
+          "id": "p3",
+          "state": "hot",
+          "sub": {
+            "en": "facts",
+            "bn": "তথ্য"
+          },
+          "x": 130,
+          "y": 75
+        },
+        {
+          "id": "p4",
+          "state": "hot",
+          "sub": {
+            "en": "form",
+            "bn": "ফর্ম"
+          },
+          "x": 130,
+          "y": 250
+        },
+        {
+          "id": "base",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "p3",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p4",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Path",
+        "title": "A typical path",
+        "body": [
+          "A typical path is prompt engineering, then more examples in the prompt, then retrieval (RAG) for information gaps.",
+          "Next comes finetuning for the remaining behavioral or formatting problems, and RAG and finetuning combined if you need the last bit of performance."
+        ]
+      },
+      "bn": {
+        "short": "পথ",
+        "title": "সাধারণ পথ",
+        "body": [
+          "সাধারণ পথ: প্রম্পট ইঞ্জিনিয়ারিং, তারপর প্রম্পটে আরও উদাহরণ, তারপর তথ্যের ঘাটতিতে রিট্রিভাল (RAG)।",
+          "এরপর বাকি আচরণ বা ফরম্যাটের সমস্যায় ফাইন-টিউনিং, আর শেষ একটু পারফরম্যান্স লাগলে RAG আর ফাইন-টিউনিং একসাথে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "p1",
+          "state": "hot"
+        },
+        {
+          "id": "p2",
+          "state": "hot"
+        },
+        {
+          "id": "p3",
+          "state": "hot"
+        },
+        {
+          "id": "p4",
+          "state": "hot"
+        },
+        {
+          "id": "p5",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "p1",
+          "to": "p2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p2",
+          "to": "p3",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p3",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p4",
+          "to": "p5",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Memory",
+        "title": "Training needs far more memory",
+        "body": [
+          "Every trainable parameter needs memory for its weight, its gradient, and one or two optimizer values. A frozen parameter needs none of that extra memory.",
+          "For a 7B-parameter model at 16-bit, loading the weights takes 14 GB, and full finetuning takes 56 GB in total."
+        ]
+      },
+      "bn": {
+        "short": "মেমরি",
+        "title": "ট্রেনিংয়ে অনেক বেশি মেমরি লাগে",
+        "body": [
+          "প্রতিটি ট্রেইনেবল প্যারামিটারের ওয়েট, গ্রেডিয়েন্ট আর এক-দুটো অপটিমাইজার মানের জন্য মেমরি লাগে। ফ্রিজ করা প্যারামিটারের এই বাড়তি মেমরি লাগে না।",
+          "১৬-বিটের ৭B-প্যারামিটার মডেলে ওয়েট লোড করতে ১৪ GB লাগে, আর পুরো ফাইন-টিউনিংয়ে মোট ৫৬ GB লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "train",
+          "state": "warn",
+          "sub": {
+            "en": "weight, gradient, optimizer",
+            "bn": "ওয়েট, গ্রেডিয়েন্ট, অপটিমাইজার"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "train",
+          "to": "gpu",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        "14 GB",
+        "~17 GB",
+        "56 GB"
+      ]
+    },
+    {
+      "en": {
+        "short": "Quantize",
+        "title": "Fewer bits per value",
+        "body": [
+          "Quantization means converting a model to a format with fewer bits per value. It shrinks memory roughly in proportion to the bits saved, and it often speeds up computation too, at the cost of some precision.",
+          "It is usually done after training, since training itself is more sensitive to low precision."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "When training in low precision is needed, mixed precision keeps sensitive values like gradients in a higher-precision format."
+        }
+      },
+      "bn": {
+        "short": "কোয়ান্টাইজ",
+        "title": "প্রতি মানে কম বিট",
+        "body": [
+          "কোয়ান্টাইজেশন মানে মডেলকে এমন ফরম্যাটে আনা যেখানে প্রতি মানে বিট কম। বাঁচানো বিটের অনুপাতে মেমরি কমে, প্রায়ই গণনাও দ্রুত হয়, তবে কিছুটা প্রিসিশন যায়।",
+          "এটা সাধারণত ট্রেনিংয়ের পরে করা হয়, কারণ ট্রেনিং নিজে কম প্রিসিশনে বেশি সংবেদনশীল।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "কম প্রিসিশনে ট্রেনিং দরকার হলে মিক্সড প্রিসিশন গ্রেডিয়েন্টের মতো সংবেদনশীল মান বেশি প্রিসিশনে রাখে।"
+        }
+      },
+      "show": [
+        {
+          "id": "base",
+          "state": "hot",
+          "sub": {
+            "en": "FP16 or BF16",
+            "bn": "FP16 বা BF16"
+          },
+          "x": 130
+        },
+        {
+          "id": "qmodel",
+          "state": "hot",
+          "sub": {
+            "en": "INT8 or INT4",
+            "bn": "INT8 বা INT4"
+          }
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "less memory",
+            "bn": "কম মেমরি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "base",
+          "to": "qmodel",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "qmodel",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Finetuning is extra training on your own data, on top of a model that is already trained."
+        ],
+        "points": [
+          "Finetuning is for form; RAG is for facts.",
+          "Try prompting, more examples, and RAG before finetuning.",
+          "Full finetuning of a 16-bit 7B model needs about 56 GB, versus about 14 GB just to load the weights for inference.",
+          "Fewer trainable parameters or fewer bits per value both cut the memory bill."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ফাইন-টিউনিং মানে আগে থেকে ট্রেইন করা মডেলকে আপনার নিজের ডেটায় বাড়তি ট্রেনিং দেওয়া।"
+        ],
+        "points": [
+          "ফাইন-টিউনিং ফর্মের জন্য; RAG তথ্যের জন্য।",
+          "ফাইন-টিউনিংয়ের আগে প্রম্পটিং, বেশি উদাহরণ আর RAG চেষ্টা করুন।",
+          "১৬-বিটের ৭B মডেলের পুরো ফাইন-টিউনিংয়ে প্রায় ৫৬ GB লাগে, আর ইনফারেন্সের জন্য শুধু ওয়েট লোড করতে লাগে প্রায় ১৪ GB।",
+          "ট্রেইনেবল প্যারামিটার কমালে বা প্রতিটি মান কম বিটে রাখলে মেমরির খরচ কমে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "p3"
+        },
+        {
+          "id": "p4"
+        },
+        {
+          "id": "base"
+        }
+      ],
+      "links": [
+        {
+          "from": "p3",
+          "to": "base",
+          "flow": "to"
+        },
+        {
+          "from": "p4",
+          "to": "base",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,697 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "query"
+      },
+      "x": 80,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 640,
+      "y": 162
+    },
+    {
+      "id": "ctx",
+      "kind": "tool",
+      "label": {
+        "en": "Context",
+        "bn": "কনটেক্সট"
+      },
+      "x": 380,
+      "y": 70
+    },
+    {
+      "id": "guard",
+      "kind": "shield",
+      "label": {
+        "en": "Guardrails",
+        "bn": "গার্ডরেইল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "router",
+      "kind": "balancer",
+      "label": {
+        "en": "Router",
+        "bn": "রাউটার"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "spec",
+      "kind": "model",
+      "label": {
+        "en": "Specialized model",
+        "bn": "বিশেষায়িত মডেল"
+      },
+      "x": 600,
+      "y": 162
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Human",
+        "bn": "মানুষ"
+      },
+      "x": 600,
+      "y": 255
+    },
+    {
+      "id": "gateway",
+      "kind": "service",
+      "label": {
+        "en": "Gateway",
+        "bn": "গেটওয়ে"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ecache",
+      "kind": "cache",
+      "label": {
+        "en": "Exact cache",
+        "bn": "এক্স্যাক্ট ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "scache",
+      "kind": "cache",
+      "label": {
+        "en": "Semantic cache",
+        "bn": "সেমান্টিক ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "action",
+      "kind": "tool",
+      "label": {
+        "en": "Write action",
+        "bn": "রাইট অ্যাকশন"
+      },
+      "x": 620,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Layers",
+      "bn": "স্তর"
+    },
+    {
+      "en": "Latency",
+      "bn": "ল্যাটেন্সি"
+    },
+    {
+      "en": "Risk",
+      "bn": "ঝুঁকি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Start",
+        "title": "One model call",
+        "body": [
+          "The simplest AI application is just a query sent to a model API and a response returned to the user. It has no context, no safety checks, and no optimization.",
+          "A real AI platform grows from this, one layer at a time."
+        ]
+      },
+      "bn": {
+        "short": "শুরু",
+        "title": "একটিমাত্র মডেল কল",
+        "body": [
+          "সবচেয়ে সরল AI অ্যাপ্লিকেশন হলো মডেল API-তে একটি query পাঠানো আর ইউজারকে উত্তর ফেরত দেওয়া। এতে কনটেক্সট নেই, নিরাপত্তা চেক নেই, অপ্টিমাইজেশনও নেই।",
+          "একটি আসল AI প্ল্যাটফর্ম এখান থেকে একে একে স্তর যোগ করে বড় হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Context",
+        "title": "Give the model what it needs",
+        "body": [
+          "Context construction feeds the model the information it needs for a query.",
+          "It uses retrieval (finding relevant data) and tool use (web search, SQL, APIs)."
+        ]
+      },
+      "bn": {
+        "short": "কনটেক্সট",
+        "title": "মডেলকে দরকারি তথ্য দিন",
+        "body": [
+          "কনটেক্সট কনস্ট্রাকশন মডেলকে প্রশ্নের জন্য দরকারি তথ্য দেয়।",
+          "এটা retrieval (দরকারি ডেটা খোঁজা) আর tool use (web search, SQL, API) ব্যবহার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "retrieval and tool use",
+            "bn": "retrieval আর tool use"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "ctx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ctx",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Guardrails",
+        "title": "Guardrails protect the system and the user",
+        "body": [
+          "Input guardrails stop bad inputs. Output guardrails catch bad answers after generation.",
+          "Guardrails add latency, and a system can be too safe."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Track wrong refusals of safe requests, not only security failures."
+        }
+      },
+      "bn": {
+        "short": "গার্ডরেইল",
+        "title": "গার্ডরেইল সিস্টেম আর ইউজারকে বাঁচায়",
+        "body": [
+          "input guardrail খারাপ ইনপুট ঠেকায়। output guardrail তৈরি হওয়ার পর খারাপ উত্তর ধরে।",
+          "গার্ডরেইল ল্যাটেন্সি বাড়ায়, আর সিস্টেম অতিরিক্ত নিরাপদও হয়ে যেতে পারে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "শুধু সিকিউরিটি ব্যর্থতা নয়, নিরাপদ অনুরোধ ভুল করে ফিরিয়ে দেওয়াও মাপুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "guard",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "guard",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "guard",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "adds latency",
+          "bn": "ল্যাটেন্সি বাড়ায়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Router",
+        "title": "A router decides where a query goes",
+        "body": [
+          "A router is a small, fast part that decides where each query goes.",
+          "It can send a query to a cheap model, a specialized model, or a human."
+        ]
+      },
+      "bn": {
+        "short": "রাউটার",
+        "title": "রাউটার ঠিক করে query কোথায় যাবে",
+        "body": [
+          "রাউটার ছোট, দ্রুত একটি অংশ, যে ঠিক করে প্রতিটি query কোথায় যাবে।",
+          "সে query পাঠাতে পারে সস্তা মডেলে, বিশেষায়িত মডেলে, নয়তো মানুষের কাছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "router",
+          "state": "hot",
+          "sub": {
+            "en": "small and fast",
+            "bn": "ছোট আর দ্রুত"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "a cheap model",
+            "bn": "সস্তা মডেল"
+          },
+          "x": 600,
+          "y": 70
+        },
+        {
+          "id": "spec",
+          "state": "hot"
+        },
+        {
+          "id": "human",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "router",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "spec",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Gateway",
+        "title": "One gateway for all the models",
+        "body": [
+          "A gateway is one unified interface between an application and all the models it uses.",
+          "It centralizes access control, usage monitoring, cost limits, and fallback."
+        ]
+      },
+      "bn": {
+        "short": "গেটওয়ে",
+        "title": "সব মডেলের জন্য একটি গেটওয়ে",
+        "body": [
+          "গেটওয়ে হলো অ্যাপ্লিকেশন আর তার ব্যবহার করা সব মডেলের মাঝের একটিমাত্র ইন্টারফেস।",
+          "এটা access control, ব্যবহার মনিটরিং, খরচের সীমা আর fallback এক জায়গায় রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "gateway",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "all the models",
+            "bn": "সব মডেল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "gateway",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "gateway",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Exact cache",
+        "title": "Exact caching: only an identical query",
+        "body": [
+          "Exact caching reuses a stored result only when the query is identical.",
+          "Its risk: it can serve one user's personalized response to someone else."
+        ]
+      },
+      "bn": {
+        "short": "এক্স্যাক্ট ক্যাশ",
+        "title": "এক্স্যাক্ট ক্যাশিং: শুধু হুবহু এক query",
+        "body": [
+          "exact caching query হুবহু এক হলেই আগে জমানো ফল আবার ব্যবহার করে।",
+          "এর ঝুঁকি: একজনের জন্য বানানো উত্তর অন্যজনকে দিয়ে ফেলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "ecache",
+          "state": "warn",
+          "sub": {
+            "en": "identical query",
+            "bn": "হুবহু এক query"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "ecache",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ecache",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "personalized reply",
+          "bn": "ব্যক্তিগত উত্তর"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Semantic",
+        "title": "Semantic caching: a similar query",
+        "body": [
+          "Semantic caching reuses a stored answer when a query is only similar. It compares embeddings against a similarity threshold.",
+          "A bad semantic threshold returns a plausible wrong answer."
+        ]
+      },
+      "bn": {
+        "short": "সেমান্টিক",
+        "title": "সেমান্টিক ক্যাশিং: কাছাকাছি query",
+        "body": [
+          "semantic caching query শুধু কাছাকাছি হলেও জমানো উত্তর আবার ব্যবহার করে। এটা embedding সিমিলারিটি threshold-এর সাথে মিলিয়ে দেখে।",
+          "ভুল semantic threshold বিশ্বাসযোগ্য দেখতে ভুল উত্তর দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "scache",
+          "state": "warn",
+          "sub": {
+            "en": "similar query",
+            "bn": "কাছাকাছি query"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "scache",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "scache",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "wrong answer",
+          "bn": "ভুল উত্তর"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Write action",
+        "title": "Write actions change the real world",
+        "body": [
+          "A write action changes something in the real world, such as sending an email, placing an order, or updating a database.",
+          "It makes a system more capable but riskier: a mistake becomes a real-world side effect."
+        ]
+      },
+      "bn": {
+        "short": "রাইট অ্যাকশন",
+        "title": "রাইট অ্যাকশন বাস্তব জগৎ বদলায়",
+        "body": [
+          "রাইট অ্যাকশন বাস্তব জগতে কিছু বদলায়, যেমন ইমেইল পাঠানো, অর্ডার বসানো, বা ডেটাবেস আপডেট করা।",
+          "এটা সিস্টেমকে বেশি সক্ষম করে, কিন্তু ঝুঁকিও বাড়ায়, কারণ ভুল তখন বাস্তব জগতে প্রভাব ফেলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "x": 380
+        },
+        {
+          "id": "action",
+          "state": "warn",
+          "sub": {
+            "en": "real-world side effect",
+            "bn": "বাস্তব জগতে প্রভাব"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "action",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "riskier",
+          "bn": "বেশি ঝুঁকি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "One layer at a time",
+        "body": [
+          "Layers are added one at a time: context, guardrails, router and gateway, caches, then agent patterns.",
+          "Each solves a real problem, not a wish for complexity."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "একে একে স্তর",
+        "body": [
+          "স্তরগুলো একে একে যোগ হয়: context, guardrails, router আর gateway, cache, তারপর agent pattern।",
+          "প্রতিটি একটি আসল সমস্যা মেটায়, জটিলতার শখে যোগ হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ctx",
+          "state": "hot",
+          "x": 130,
+          "y": 90
+        },
+        {
+          "id": "guard",
+          "state": "hot",
+          "x": 320,
+          "y": 90
+        },
+        {
+          "id": "router",
+          "state": "hot",
+          "x": 490,
+          "y": 90
+        },
+        {
+          "id": "gateway",
+          "state": "hot",
+          "x": 650,
+          "y": 90
+        },
+        {
+          "id": "ecache",
+          "state": "hot",
+          "x": 190,
+          "y": 230
+        },
+        {
+          "id": "scache",
+          "state": "hot",
+          "x": 400,
+          "y": 230
+        },
+        {
+          "id": "action",
+          "state": "hot",
+          "x": 620,
+          "y": 230
+        }
+      ],
+      "links": [
+        {
+          "from": "ctx",
+          "to": "guard",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "guard",
+          "to": "router",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "router",
+          "to": "gateway",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ecache",
+          "to": "scache",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "scache",
+          "to": "action",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one at a time",
+          "bn": "একে একে"
+        },
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,562 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "Request",
+        "bn": "রিকোয়েস্ট"
+      },
+      "x": 80,
+      "y": 162
+    },
+    {
+      "id": "draft",
+      "kind": "model",
+      "label": {
+        "en": "Draft model",
+        "bn": "draft মডেল"
+      },
+      "x": 290,
+      "y": 70
+    },
+    {
+      "id": "large",
+      "kind": "model",
+      "label": {
+        "en": "Large model",
+        "bn": "বড় মডেল"
+      },
+      "x": 460,
+      "y": 162
+    },
+    {
+      "id": "out",
+      "kind": "file",
+      "label": {
+        "en": "Answer",
+        "bn": "উত্তর"
+      },
+      "x": 680,
+      "y": 162
+    },
+    {
+      "id": "kv",
+      "kind": "cache",
+      "label": {
+        "en": "KV cache",
+        "bn": "KV cache"
+      },
+      "x": 460,
+      "y": 262
+    },
+    {
+      "id": "queue",
+      "kind": "queue",
+      "label": {
+        "en": "Batch",
+        "bn": "ব্যাচ"
+      },
+      "x": 250,
+      "y": 162
+    },
+    {
+      "id": "pc",
+      "kind": "cache",
+      "label": {
+        "en": "Prompt cache",
+        "bn": "প্রম্পট ক্যাশ"
+      },
+      "x": 290,
+      "y": 262
+    },
+    {
+      "id": "da",
+      "kind": "server",
+      "label": {
+        "en": "Device",
+        "bn": "ডিভাইস"
+      },
+      "x": 670,
+      "y": 70
+    },
+    {
+      "id": "db",
+      "kind": "server",
+      "label": {
+        "en": "Device",
+        "bn": "ডিভাইস"
+      },
+      "x": 670,
+      "y": 262
+    },
+    {
+      "id": "qual",
+      "kind": "chart",
+      "label": {
+        "en": "Output quality",
+        "bn": "আউটপুট কোয়ালিটি"
+      },
+      "x": 650,
+      "y": 262
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Memory",
+      "bn": "মেমোরি"
+    },
+    {
+      "en": "Output quality",
+      "bn": "আউটপুট কোয়ালিটি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Slow",
+        "title": "Decode goes one token at a time",
+        "body": [
+          "Inference optimization makes a trained model faster and cheaper to run.",
+          "Decode is slow because it goes one token at a time."
+        ]
+      },
+      "bn": {
+        "short": "ধীর",
+        "title": "ডিকোড একবারে একটি টোকেন",
+        "body": [
+          "ইনফারেন্স অপ্টিমাইজেশন ট্রেইন করা মডেলকে দ্রুত আর সস্তা করে চালায়।",
+          "ডিকোড ধীর, কারণ এটা একবারে একটি টোকেন করে চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "large",
+          "state": "hot",
+          "sub": {
+            "en": "one token at a time",
+            "bn": "একবারে একটি টোকেন"
+          }
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "large",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "large",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Draft",
+        "title": "A small model drafts guesses",
+        "body": [
+          "In speculative decoding, a small, fast draft model proposes several tokens."
+        ]
+      },
+      "bn": {
+        "short": "ড্রাফট",
+        "title": "ছোট মডেল অনুমান লেখে",
+        "body": [
+          "স্পেকুলেটিভ ডিকোডিংয়ে একটি ছোট, দ্রুত draft মডেল কয়েকটি টোকেন প্রস্তাব করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "dim"
+        },
+        {
+          "id": "draft",
+          "state": "hot",
+          "sub": {
+            "en": "proposes several tokens",
+            "bn": "কয়েকটি টোকেন প্রস্তাব করে"
+          }
+        },
+        {
+          "id": "large",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "draft",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "draft",
+          "to": "large",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Verify",
+        "title": "The large model checks in one pass",
+        "body": [
+          "The large model checks them all in one pass and keeps the longest correct run.",
+          "Speculative decoding checks guesses in parallel; parallel decoding breaks that chain."
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "বড় মডেল এক পাসে যাচাই করে",
+        "body": [
+          "বড় মডেল এক পাসে সব যাচাই করে সবচেয়ে লম্বা সঠিক অংশ রাখে।",
+          "স্পেকুলেটিভ ডিকোডিং অনুমানগুলো একসাথে যাচাই করে; প্যারালাল ডিকোডিং সেই শিকলটাই ভাঙে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "draft",
+          "state": "dim"
+        },
+        {
+          "id": "large",
+          "state": "hot",
+          "sub": {
+            "en": "checks them all in one pass",
+            "bn": "এক পাসে সব যাচাই"
+          }
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "draft",
+          "to": "large",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "large",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "KV cache",
+        "title": "The KV cache can fill memory",
+        "body": [
+          "The KV cache is a store of numbers the model computed for earlier tokens, so they are not redone each step.",
+          "It can use a lot of memory, so attention redesigns and smarter cache management help."
+        ]
+      },
+      "bn": {
+        "short": "KV cache",
+        "title": "KV cache মেমোরি ভরে দিতে পারে",
+        "body": [
+          "KV cache হলো আগের টোকেনগুলোর জন্য মডেলের হিসাব করা সংখ্যার ভান্ডার, যাতে প্রতি ধাপে আবার হিসাব করতে না হয়।",
+          "এটা অনেক মেমোরি নিতে পারে, তাই attention-এর নতুন নকশা আর ভালো cache ম্যানেজমেন্ট কাজে আসে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "large",
+          "state": "hot"
+        },
+        {
+          "id": "kv",
+          "state": "warn",
+          "sub": {
+            "en": "a lot of memory",
+            "bn": "অনেক মেমোরি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "large",
+          "to": "kv",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "a lot",
+          "bn": "অনেক"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Batching",
+        "title": "Continuous batching wastes nothing",
+        "body": [
+          "Requests are grouped together. Each response returns the moment it finishes and a new request takes its place.",
+          "So no capacity is wasted."
+        ]
+      },
+      "bn": {
+        "short": "ব্যাচিং",
+        "title": "কন্টিনিউয়াস ব্যাচিংয়ে কিছু নষ্ট হয় না",
+        "body": [
+          "রিকোয়েস্টগুলো একসাথে করা হয়। একটির উত্তর শেষ হলেই সেটা ফেরত যায় আর নতুন রিকোয়েস্ট জায়গা নেয়।",
+          "তাই ক্ষমতা নষ্ট হয় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "queue",
+          "state": "hot"
+        },
+        {
+          "id": "large",
+          "state": "hot"
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "queue",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "queue",
+          "to": "large",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "large",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Prompt cache",
+        "title": "Shared text is processed once",
+        "body": [
+          "Text shared across requests, like a system prompt or a long document, is processed once and reused.",
+          "This cuts latency and cost."
+        ]
+      },
+      "bn": {
+        "short": "প্রম্পট ক্যাশ",
+        "title": "এক থাকা লেখা একবারই প্রসেস হয়",
+        "body": [
+          "একাধিক রিকোয়েস্টে এক থাকা লেখা, যেমন system prompt বা লম্বা ডকুমেন্ট, একবার প্রসেস করে আবার ব্যবহার করা হয়।",
+          "এতে latency আর খরচ কমে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "pc",
+          "state": "hot",
+          "sub": {
+            "en": "processed once, reused",
+            "bn": "একবার প্রসেস, আবার ব্যবহার"
+          }
+        },
+        {
+          "id": "large",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "pc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pc",
+          "to": "large",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Split",
+        "title": "Tensor parallelism splits operations",
+        "body": [
+          "Tensor parallelism splits single operations, such as a matrix multiply, across several devices.",
+          "So a large model fits and runs faster."
+        ]
+      },
+      "bn": {
+        "short": "ভাগ",
+        "title": "টেনসর প্যারালেলিজম অপারেশন ভাগ করে",
+        "body": [
+          "টেনসর প্যারালেলিজম ম্যাট্রিক্স গুণের মতো একেকটি অপারেশন কয়েকটি ডিভাইসে ভাগ করে।",
+          "যাতে বড় মডেল ধরে আর দ্রুত চলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "large",
+          "state": "hot",
+          "sub": {
+            "en": "one operation, split",
+            "bn": "একটি অপারেশন, ভাগ করা"
+          }
+        },
+        {
+          "id": "da",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "large",
+          "to": "da",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "large",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Judge cost and speed with quality",
+        "body": [
+          "Service-level techniques manage compute and memory across requests without touching output quality. Model-level changes can shift quality.",
+          "Judge an inference provider's cost and speed together with its output quality, not alone."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Comparing cost and speed without checking output quality can be misleading."
+        }
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "খরচ আর গতি কোয়ালিটির সাথে বিচার করুন",
+        "body": [
+          "সার্ভিস লেভেলের কৌশল আউটপুট কোয়ালিটি না ছুঁয়ে কম্পিউট আর মেমোরি সামলায়। মডেল লেভেলের পরিবর্তনে কোয়ালিটি বদলাতে পারে।",
+          "কোনো inference provider-এর খরচ আর গতি আউটপুট কোয়ালিটির সাথে মিলিয়ে বিচার করুন, আলাদাভাবে নয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "আউটপুট কোয়ালিটি না দেখে শুধু খরচ আর গতি তুলনা করলে বিভ্রান্তি হতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "queue",
+          "state": "hot"
+        },
+        {
+          "id": "large",
+          "state": "warn",
+          "sub": {
+            "en": "model level",
+            "bn": "মডেল লেভেল"
+          }
+        },
+        {
+          "id": "qual",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "queue",
+          "to": "large",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "large",
+          "to": "qual",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "can shift",
+          "bn": "বদলাতে পারে"
+        }
+      ]
+    }
+  ]
+}
