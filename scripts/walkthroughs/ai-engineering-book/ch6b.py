@@ -98,7 +98,7 @@ STEPS = [
        [sh("plan", "warn", ("wrong parameters", "ভুল প্যারামিটার")), sh("agent", "warn", ("too many steps", "অনেক ধাপ")), sh("tools", "warn", ("wrong result", "ভুল ফল"))],
        [ln("plan", "agent", "to", state="warn"), ln("agent", "tools", "to", state="warn")],
        [None, None],
-       note=("info", "Always log every tool call and its output. It is the single most useful habit for debugging an agent.",
+       note=("insight", "Always log every tool call and its output. It is the single most useful habit for debugging an agent.",
              "প্রতিটি টুল কল আর তার আউটপুট সবসময় লগ করুন। এজেন্ট কেন ভুল করল তা ডিবাগ করতে এটাই সবচেয়ে কাজের অভ্যাস।")),
 
     st(("Memory", "মেমরি"),

@@ -119,7 +119,7 @@ STEPS = [
        [sh("base", "hot", ("FP16 or BF16", "FP16 বা BF16"), x=130), sh("qmodel", "hot", ("INT8 or INT4", "INT8 বা INT4")), sh("gpu", "hot", ("less memory", "কম মেমরি"))],
        [ln("base", "qmodel", "to", state="hot"), ln("qmodel", "gpu", "to", state="hot")],
        [None, None, None],
-       note=("info", "When training in low precision is needed, mixed precision keeps sensitive values like gradients in a higher-precision format.",
+       note=("insight", "When training in low precision is needed, mixed precision keeps sensitive values like gradients in a higher-precision format.",
              "কম প্রিসিশনে ট্রেনিং দরকার হলে মিক্সড প্রিসিশন গ্রেডিয়েন্টের মতো সংবেদনশীল মান বেশি প্রিসিশনে রাখে।")),
 
     st(("Remember", "মনে রাখুন"),

@@ -107,7 +107,7 @@ STEPS = [
        [sh("model", "hot", ("model-level", "মডেল-স্তর")), sh("sys", "hot", ("prompt-level", "প্রম্পট-স্তর")), sh("app", "hot", ("system-level", "সিস্টেম-স্তর"))],
        [ln("sys", "model", "to", state="hot"), ln("model", "app", "to", state="hot")],
        [None, None],
-       note=("info", "System-level means input/output guardrails and anomaly detection on usage patterns.",
+       note=("insight", "System-level means input/output guardrails and anomaly detection on usage patterns.",
              "সিস্টেম-স্তর মানে input/output guardrail আর ব্যবহারের ধরনে anomaly detection।")),
 
     st(("Metrics", "মেট্রিক"),
