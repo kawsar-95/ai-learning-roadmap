@@ -1,0 +1,676 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "কুয়েরি"
+      },
+      "x": 90,
+      "y": 162
+    },
+    {
+      "id": "idx",
+      "kind": "service",
+      "label": {
+        "en": "HNSW index",
+        "bn": "HNSW ইনডেক্স"
+      },
+      "x": 340,
+      "y": 162
+    },
+    {
+      "id": "store",
+      "kind": "database",
+      "label": {
+        "en": "Vectors",
+        "bn": "ভেক্টর"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "quant",
+      "kind": "tool",
+      "label": {
+        "en": "Quantization",
+        "bn": "কোয়ান্টাইজেশন"
+      },
+      "x": 340,
+      "y": 270
+    },
+    {
+      "id": "filt",
+      "kind": "shield",
+      "label": {
+        "en": "Metadata filter",
+        "bn": "মেটাডেটা ফিল্টার"
+      },
+      "x": 200,
+      "y": 162
+    },
+    {
+      "id": "payload",
+      "kind": "key",
+      "label": {
+        "en": "Payload index",
+        "bn": "পেলোড ইনডেক্স"
+      },
+      "x": 470,
+      "y": 75
+    },
+    {
+      "id": "pg",
+      "kind": "database",
+      "label": {
+        "en": "pgvector",
+        "bn": "pgvector"
+      },
+      "x": 470,
+      "y": 250
+    },
+    {
+      "id": "test",
+      "kind": "chart",
+      "label": {
+        "en": "Your real filters",
+        "bn": "আপনার আসল ফিল্টার"
+      },
+      "x": 520,
+      "y": 162
+    },
+    {
+      "id": "sit",
+      "kind": "user",
+      "label": {
+        "en": "Your situation",
+        "bn": "আপনার পরিস্থিতি"
+      },
+      "x": 150,
+      "y": 162
+    },
+    {
+      "id": "pick",
+      "kind": "service",
+      "label": {
+        "en": "Lean toward",
+        "bn": "যেটার দিকে ঝুঁকবেন"
+      },
+      "x": 580,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "m",
+      "bn": "m"
+    },
+    {
+      "en": "ef_construction",
+      "bn": "ef_construction"
+    },
+    {
+      "en": "hnsw.ef_search",
+      "bn": "hnsw.ef_search"
+    },
+    {
+      "en": "RAM",
+      "bn": "RAM"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর সংখ্যা সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Index",
+        "title": "A few settings decide recall",
+        "body": [
+          "A few settings decide how well a vector database finds close matches.",
+          "The HNSW index is a map of vectors that lets a search find close ones fast, without checking every vector."
+        ]
+      },
+      "bn": {
+        "short": "ইনডেক্স",
+        "title": "কয়েকটি সেটিং ঠিক করে",
+        "body": [
+          "ভেক্টর ডেটাবেস কাছের জিনিস কতটা ভালো খোঁজে, তা ঠিক করে কয়েকটি সেটিং।",
+          "HNSW ইনডেক্স ভেক্টরের এমন একটি মানচিত্র, যা দিয়ে প্রতিটি ভেক্টর না দেখেই কাছের ভেক্টর দ্রুত খোঁজা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "idx",
+          "state": "hot",
+          "sub": {
+            "en": "a map of vectors",
+            "bn": "ভেক্টরের মানচিত্র"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Build",
+        "title": "pgvector's HNSW defaults",
+        "body": [
+          "pgvector HNSW defaults: m 16 and ef_construction 64."
+        ]
+      },
+      "bn": {
+        "short": "বিল্ড",
+        "title": "pgvector-এর HNSW ডিফল্ট",
+        "body": [
+          "pgvector HNSW-এর ডিফল্ট: m ১৬ আর ef_construction ৬৪।"
+        ]
+      },
+      "show": [
+        {
+          "id": "idx",
+          "state": "hot",
+          "sub": {
+            "en": "m, ef_construction",
+            "bn": "m, ef_construction"
+          }
+        },
+        {
+          "id": "store",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "idx",
+          "to": "store",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        "16",
+        "64",
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Query",
+        "title": "The query-time setting",
+        "body": [
+          "hnsw.ef_search is a query-time setting that trades speed against recall.",
+          "The pgvector default is 40."
+        ]
+      },
+      "bn": {
+        "short": "কুয়েরি",
+        "title": "কুয়েরির সময়ের সেটিং",
+        "body": [
+          "hnsw.ef_search কুয়েরির সময় বদলানো যায় এমন সেটিং, যা গতি আর রিকলের মধ্যে ভারসাম্য আনে।",
+          "pgvector-এ ডিফল্ট ৪০।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "hnsw.ef_search",
+            "bn": "hnsw.ef_search"
+          }
+        },
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "store",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        "40",
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Quantize",
+        "title": "Quantization saves memory",
+        "body": [
+          "Quantization stores vectors in a smaller form to save memory.",
+          "Qdrant claims up to 97% less RAM."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "This is Qdrant's claim, not a number measured here."
+        }
+      },
+      "bn": {
+        "short": "কোয়ান্টাইজ",
+        "title": "কোয়ান্টাইজেশন মেমরি বাঁচায়",
+        "body": [
+          "কোয়ান্টাইজেশন ভেক্টরকে ছোট আকারে রেখে মেমরি বাঁচায়।",
+          "Qdrant দাবি করে RAM ৯৭% পর্যন্ত কমে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "এটা Qdrant-এর দাবি, এখানে মাপা সংখ্যা নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "quant",
+          "state": "hot",
+          "sub": {
+            "en": "smaller form",
+            "bn": "ছোট আকার"
+          }
+        },
+        {
+          "id": "store",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "quant",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "store",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "up to 97% less",
+          "bn": "৯৭% পর্যন্ত কম"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Filtered",
+        "title": "Filtered search",
+        "body": [
+          "Filtered search looks only among items that match a condition on their metadata, such as one customer's files.",
+          "This is where engines differ."
+        ]
+      },
+      "bn": {
+        "short": "ফিল্টার",
+        "title": "ফিল্টার-সহ সার্চ",
+        "body": [
+          "ফিল্টার-সহ সার্চ মেটাডেটার কোনো শর্ত মেলে এমন আইটেমের মধ্যেই খোঁজে, যেমন শুধু একজন গ্রাহকের ফাইল।",
+          "এখানেই ইঞ্জিনগুলো আলাদা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "x": 90
+        },
+        {
+          "id": "filt",
+          "state": "hot",
+          "sub": {
+            "en": "one customer's files",
+            "bn": "একজন গ্রাহকের ফাইল"
+          },
+          "x": 330
+        },
+        {
+          "id": "idx",
+          "state": "hot",
+          "x": 570
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "filt",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "filt",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Engines",
+        "title": "How two engines filter",
+        "body": [
+          "Qdrant's payload index lets filtering happen during a single pass through the graph.",
+          "pgvector offers partial indexes, partitioning and iterative index scans for filtered queries."
+        ]
+      },
+      "bn": {
+        "short": "ইঞ্জিন",
+        "title": "দুই ইঞ্জিন কীভাবে ফিল্টার করে",
+        "body": [
+          "মেটাডেটার ফিল্ডের ওপর Qdrant-এর পেলোড ইনডেক্স গ্রাফে একবার খোঁজার সময়ই ফিল্টার করতে দেয়।",
+          "pgvector ফিল্টার-সহ কুয়েরির জন্য পার্শিয়াল ইনডেক্স, পার্টিশনিং আর ইটারেটিভ ইনডেক্স স্ক্যান দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "filt",
+          "state": "hot"
+        },
+        {
+          "id": "payload",
+          "state": "hot",
+          "sub": {
+            "en": "Qdrant: one pass",
+            "bn": "Qdrant: একবারে"
+          }
+        },
+        {
+          "id": "pg",
+          "state": "hot",
+          "sub": {
+            "en": "partial indexes",
+            "bn": "পার্শিয়াল ইনডেক্স"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "filt",
+          "to": "payload",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "filt",
+          "to": "pg",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Test",
+        "title": "Test your real filters",
+        "body": [
+          "Test real filters at your real selectivity, which is how much of the data the filter keeps.",
+          "A recall number measured without filters says little about filtered queries."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A shortcut map that ignores filters can return too few results."
+        }
+      },
+      "bn": {
+        "short": "পরীক্ষা",
+        "title": "আপনার আসল ফিল্টার পরীক্ষা করুন",
+        "body": [
+          "নিজের আসল ফিল্টার আর আসল সিলেকটিভিটিতে (ফিল্টার ডেটার কতটা অংশ রাখে) পরীক্ষা করুন।",
+          "ফিল্টার ছাড়া মাপা রিকল ফিল্টার-সহ কুয়েরি সম্পর্কে খুব কম বলে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "যে শর্টকাট মানচিত্র ফিল্টার উপেক্ষা করে, সে খুব কম ফল ফেরত দিতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "filt",
+          "state": "warn"
+        },
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "real selectivity",
+            "bn": "আসল সিলেকটিভিটি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "filt",
+          "to": "test",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Fit",
+        "title": "Which one to lean toward",
+        "body": [
+          "The best pick depends on your situation. The when-to-choose table is the author's own inference, not vendor advice."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Data already in Postgres; want transactions and joins: pgvector"
+          },
+          {
+            "sign": "+",
+            "html": "Prototype or laptop-scale experiment: Chroma (local mode)"
+          },
+          {
+            "sign": "+",
+            "html": "Minimal operations, managed service: Pinecone, or a managed tier of Qdrant, Chroma or Milvus"
+          },
+          {
+            "sign": "+",
+            "html": "Self-hosted, filter-heavy search: Qdrant"
+          },
+          {
+            "sign": "+",
+            "html": "Very large, distributed deployment on Kubernetes: Milvus"
+          },
+          {
+            "sign": "+",
+            "html": "Built-in hybrid fusion with tunable alpha, or many tenants: Weaviate"
+          }
+        ]
+      },
+      "bn": {
+        "short": "পছন্দ",
+        "title": "কোনটির দিকে ঝুঁকবেন",
+        "body": [
+          "সেরা বাছাই নির্ভর করে আপনার পরিস্থিতির ওপর। কোনটি কখন, এই তালিকা লেখকের নিজের অনুমান, বিক্রেতার পরামর্শ নয়।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ডেটা আগে থেকেই Postgres-এ; লেনদেন আর জয়েন চান: pgvector"
+          },
+          {
+            "sign": "+",
+            "html": "প্রোটোটাইপ বা ল্যাপটপ-মাপের পরীক্ষা: Chroma (লোকাল মোড)"
+          },
+          {
+            "sign": "+",
+            "html": "ন্যূনতম অপারেশন, ম্যানেজড সার্ভিস: Pinecone, বা Qdrant, Chroma অথবা Milvus-এর ম্যানেজড টিয়ার"
+          },
+          {
+            "sign": "+",
+            "html": "নিজে হোস্ট করা, ফিল্টার-নির্ভর সার্চ: Qdrant"
+          },
+          {
+            "sign": "+",
+            "html": "খুব বড়, Kubernetes-এ বিতরিত ডিপ্লয়মেন্ট: Milvus"
+          },
+          {
+            "sign": "+",
+            "html": "টিউন করা যায় এমন অ্যালফা-সহ বিল্ট-ইন হাইব্রিড ফিউশন, বা অনেক টেন্যান্ট: Weaviate"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "sit",
+          "state": "hot"
+        },
+        {
+          "id": "pick",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sit",
+          "to": "pick",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A few settings decide how well a vector database finds close matches. Filtered search is where engines differ."
+        ],
+        "points": [
+          "pgvector HNSW defaults: m 16 and ef_construction 64. The hnsw.ef_search default is 40.",
+          "Test real filters at your real selectivity.",
+          "The when-to-choose table is the author's own inference, not vendor advice."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কয়েকটি সেটিং ঠিক করে ভেক্টর ডেটাবেস কাছের জিনিস কতটা ভালো খোঁজে। ফিল্টার-সহ সার্চেই ইঞ্জিনগুলো আলাদা।"
+        ],
+        "points": [
+          "pgvector HNSW-এর ডিফল্ট: m ১৬ আর ef_construction ৬৪। hnsw.ef_search ডিফল্ট ৪০।",
+          "নিজের আসল ফিল্টার আর আসল সিলেকটিভিটিতে পরীক্ষা করুন।",
+          "কোনটি কখন, এই তালিকা লেখকের নিজের অনুমান, বিক্রেতার পরামর্শ নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "x": 90
+        },
+        {
+          "id": "filt",
+          "x": 330
+        },
+        {
+          "id": "idx",
+          "x": 570
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "filt",
+          "flow": "to"
+        },
+        {
+          "from": "filt",
+          "to": "idx",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

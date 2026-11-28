@@ -1,0 +1,596 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "repo",
+      "kind": "file",
+      "label": {
+        "en": "Repository",
+        "bn": "রিপোজিটরি"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "AI assistant",
+        "bn": "AI অ্যাসিস্ট্যান্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ctx",
+      "kind": "note",
+      "label": {
+        "en": "Context file",
+        "bn": "কনটেক্সট ফাইল"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "mcp",
+      "kind": "service",
+      "label": {
+        "en": "MCP server",
+        "bn": "MCP সার্ভার"
+      },
+      "x": 650,
+      "y": 60
+    },
+    {
+      "id": "branch",
+      "kind": "file",
+      "label": {
+        "en": "Branch",
+        "bn": "ব্রাঞ্চ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "tree",
+      "kind": "file",
+      "label": {
+        "en": "Worktree",
+        "bn": "ওয়ার্কট্রি"
+      },
+      "x": 650,
+      "y": 260
+    },
+    {
+      "id": "diff",
+      "kind": "file",
+      "label": {
+        "en": "Diff",
+        "bn": "ডিফ"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "tests",
+      "kind": "shield",
+      "label": {
+        "en": "Tests",
+        "bn": "টেস্ট"
+      },
+      "x": 380,
+      "y": 260
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Human reviewer",
+        "bn": "মানুষ রিভিউয়ার"
+      },
+      "x": 650,
+      "y": 260
+    },
+    {
+      "id": "secret",
+      "kind": "key",
+      "label": {
+        "en": "Secrets",
+        "bn": "সিক্রেট"
+      },
+      "x": 110,
+      "y": 260
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Context",
+      "bn": "কনটেক্সট"
+    },
+    {
+      "en": "Permissions",
+      "bn": "অনুমতি"
+    },
+    {
+      "en": "Review",
+      "bn": "রিভিউ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Assistant",
+        "title": "A fast junior engineer",
+        "body": [
+          "An AI coding assistant reads your repository, edits files and runs commands.",
+          "Treat it like a fast junior engineer: give it context and limits, and review its work."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাসিস্ট্যান্ট",
+        "title": "দ্রুত জুনিয়র ইঞ্জিনিয়ার",
+        "body": [
+          "AI কোডিং অ্যাসিস্ট্যান্ট আপনার রিপোজিটরি পড়ে, ফাইল বদলায় আর কমান্ড চালায়।",
+          "একে দ্রুত জুনিয়র ইঞ্জিনিয়ারের মতো ধরুন: কনটেক্সট আর সীমা দিন, আর তার কাজ রিভিউ করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "repo",
+          "state": "hot",
+          "sub": {
+            "en": "reads",
+            "bn": "পড়ে"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "edits, runs",
+            "bn": "বদলায়, চালায়"
+          }
+        },
+        {
+          "id": "diff",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "repo",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "diff",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Context",
+        "title": "Give it a context file",
+        "body": [
+          "A context file in the repository tells the tool how the project works: the build and test commands, the conventions, and what not to touch.",
+          "AGENTS.md is an open convention that several tools read. Keep it short and true."
+        ]
+      },
+      "bn": {
+        "short": "কনটেক্সট",
+        "title": "কনটেক্সট ফাইল দিন",
+        "body": [
+          "রিপোজিটরির একটা context ফাইল টুলকে জানায় প্রজেক্ট কীভাবে চলে: বিল্ড আর টেস্টের কমান্ড, নিয়মকানুন, আর কী ছোঁয়া যাবে না।",
+          "AGENTS.md একটা খোলা রীতি যা কয়েকটা টুল পড়ে। ফাইলটা ছোট আর সত্য রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "short and true",
+            "bn": "ছোট আর সত্য"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "repo",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "ctx",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "repo",
+          "to": "tool",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "short, true",
+          "bn": "ছোট, সত্য"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Limits",
+        "title": "Set the permissions",
+        "body": [
+          "Let the tool run read-only commands freely.",
+          "Ask before it writes outside the project, installs packages or uses the network."
+        ]
+      },
+      "bn": {
+        "short": "সীমা",
+        "title": "অনুমতি ঠিক করুন",
+        "body": [
+          "রিড-অনলি কমান্ড টুলকে স্বাধীনভাবে চালাতে দিন।",
+          "প্রজেক্টের বাইরে লেখা, প্যাকেজ ইনস্টল বা নেটওয়ার্ক ব্যবহারের আগে জিজ্ঞেস করতে বলুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "repo",
+          "state": "hot",
+          "sub": {
+            "en": "read-only: free",
+            "bn": "রিড-অনলি: স্বাধীন"
+          }
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "mcp",
+          "state": "warn",
+          "sub": {
+            "en": "ask first",
+            "bn": "আগে জিজ্ঞেস"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "repo",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "mcp",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "ask first",
+          "bn": "আগে জিজ্ঞেস"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "MCP",
+        "title": "MCP servers are an attack surface",
+        "body": [
+          "MCP servers let a tool call outside systems, such as files, databases and other tools, through one protocol.",
+          "Each one is also an attack surface, so install only servers you trust."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Install only servers you trust."
+        }
+      },
+      "bn": {
+        "short": "MCP",
+        "title": "MCP সার্ভার আক্রমণের জায়গা",
+        "body": [
+          "MCP সার্ভার টুলকে একটা প্রটোকলে বাইরের সিস্টেম কল করতে দেয়, যেমন ফাইল, ডেটাবেস আর অন্য টুল।",
+          "প্রতিটি সার্ভার আক্রমণেরও জায়গা, তাই শুধু বিশ্বস্ত সার্ভার ইনস্টল করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "শুধু বিশ্বস্ত সার্ভার ইনস্টল করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "mcp",
+          "state": "warn",
+          "sub": {
+            "en": "attack surface",
+            "bn": "অ্যাটাক সারফেস"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "mcp",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Branch",
+        "title": "One task, one branch",
+        "body": [
+          "Give each agent its own branch, and its own worktree when several run at once.",
+          "Small, checkable steps beat one huge request. When a step goes wrong, you throw away a small branch."
+        ]
+      },
+      "bn": {
+        "short": "ব্রাঞ্চ",
+        "title": "একটা কাজ, একটা ব্রাঞ্চ",
+        "body": [
+          "প্রতিটি এজেন্টকে আলাদা ব্রাঞ্চ দিন, আর একসাথে অনেকগুলো চালালে আলাদা worktree-ও দিন।",
+          "ছোট ছোট যাচাইযোগ্য ধাপ একটা বিশাল অনুরোধের চেয়ে ভালো। কিছু ভুল হলে ছোট ব্রাঞ্চটাই ফেলে দেবেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "branch",
+          "state": "hot",
+          "sub": {
+            "en": "its own",
+            "bn": "নিজস্ব"
+          }
+        },
+        {
+          "id": "tree",
+          "state": "hot",
+          "sub": {
+            "en": "several at once",
+            "bn": "একসাথে অনেক"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "branch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "branch",
+          "to": "tree",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Review",
+        "title": "Review it like any other change",
+        "body": [
+          "For a large change, ask for a plan first, and read the diff, not only the summary. Make the tool run the tests, and read what it ran.",
+          "Never paste secrets into a prompt, and keep real credentials out of the folder the tool can read."
+        ]
+      },
+      "bn": {
+        "short": "রিভিউ",
+        "title": "অন্য যেকোনো পরিবর্তনের মতো রিভিউ করুন",
+        "body": [
+          "বড় পরিবর্তনের আগে পরিকল্পনা চান, আর শুধু সারাংশ নয়, diff পড়ুন। টুলকে টেস্ট চালাতে বলুন আর কী চালিয়েছে তা পড়ুন।",
+          "প্রম্পটে কখনও সিক্রেট দেবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "diff",
+          "state": "hot",
+          "sub": {
+            "en": "read it",
+            "bn": "পড়ুন"
+          }
+        },
+        {
+          "id": "tests",
+          "state": "hot",
+          "sub": {
+            "en": "read what it ran",
+            "bn": "কী চালিয়েছে পড়ুন"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot"
+        },
+        {
+          "id": "secret",
+          "state": "warn",
+          "sub": {
+            "en": "never in a prompt",
+            "bn": "প্রম্পটে কখনও নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tool",
+          "to": "diff",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "diff",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tests",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "secret",
+          "to": "tool",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "diff and tests",
+          "bn": "diff আর টেস্ট"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Speed moves the bottleneck to review. Keep the tests, the types and a human reviewer in the loop."
+        ],
+        "points": [
+          "Give the tool a short, true context file and clear permissions.",
+          "Give each task its own branch, and work in small, checkable steps.",
+          "Read the diff and the tests it ran, not only the summary.",
+          "Never paste secrets into a prompt. Keep tests, types and a human reviewer in the loop."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "গতি বাধাটাকে রিভিউয়ে সরিয়ে দেয়। টেস্ট, টাইপ আর একজন মানুষ রিভিউয়ার রাখুন।"
+        ],
+        "points": [
+          "টুলকে ছোট ও সত্য কনটেক্সট ফাইল আর পরিষ্কার অনুমতির সীমা দিন।",
+          "প্রতিটি কাজ আলাদা ব্রাঞ্চে করান, আর ছোট ছোট যাচাইযোগ্য ধাপে এগোন।",
+          "শুধু সারাংশ নয়, ডিফ আর সে যে টেস্ট চালিয়েছে তা পড়ুন।",
+          "প্রম্পটে কখনও সিক্রেট দেবেন না। টেস্ট, টাইপ আর একজন মানুষ রিভিউয়ার রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ctx",
+          "state": "hot"
+        },
+        {
+          "id": "tool",
+          "state": "hot"
+        },
+        {
+          "id": "branch",
+          "state": "hot"
+        },
+        {
+          "id": "tests",
+          "state": "hot"
+        },
+        {
+          "id": "human",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ctx",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "branch",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tests",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "branch",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

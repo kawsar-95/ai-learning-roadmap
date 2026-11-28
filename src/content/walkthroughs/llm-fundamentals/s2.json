@@ -1,0 +1,624 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "anth",
+      "kind": "model",
+      "label": {
+        "en": "Anthropic",
+        "bn": "Anthropic"
+      },
+      "x": 120,
+      "y": 60
+    },
+    {
+      "id": "oai",
+      "kind": "model",
+      "label": {
+        "en": "OpenAI",
+        "bn": "OpenAI"
+      },
+      "x": 120,
+      "y": 162
+    },
+    {
+      "id": "goog",
+      "kind": "model",
+      "label": {
+        "en": "Google DeepMind",
+        "bn": "Google DeepMind"
+      },
+      "x": 120,
+      "y": 265
+    },
+    {
+      "id": "meta",
+      "kind": "model",
+      "label": {
+        "en": "Meta",
+        "bn": "Meta"
+      },
+      "x": 450,
+      "y": 60
+    },
+    {
+      "id": "mis",
+      "kind": "model",
+      "label": {
+        "en": "Mistral AI",
+        "bn": "Mistral AI"
+      },
+      "x": 650,
+      "y": 60
+    },
+    {
+      "id": "qwen",
+      "kind": "model",
+      "label": {
+        "en": "Alibaba",
+        "bn": "Alibaba"
+      },
+      "x": 450,
+      "y": 265
+    },
+    {
+      "id": "deep",
+      "kind": "model",
+      "label": {
+        "en": "DeepSeek",
+        "bn": "DeepSeek"
+      },
+      "x": 650,
+      "y": 265
+    },
+    {
+      "id": "work",
+      "kind": "user",
+      "label": {
+        "en": "Your workload",
+        "bn": "আপনার ওয়ার্কলোড"
+      },
+      "x": 550,
+      "y": 162
+    },
+    {
+      "id": "tok",
+      "kind": "note",
+      "label": {
+        "en": "A token",
+        "bn": "একটা টোকেন"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "dense",
+      "kind": "model",
+      "label": {
+        "en": "Dense model",
+        "bn": "ডেন্স মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "moe",
+      "kind": "model",
+      "label": {
+        "en": "MoE model",
+        "bn": "MoE মডেল"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "kv",
+      "kind": "cache",
+      "label": {
+        "en": "KV cache",
+        "bn": "KV ক্যাশ"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Compute per token",
+      "bn": "প্রতি টোকেনে কম্পিউট"
+    },
+    {
+      "en": "Memory",
+      "bn": "মেমরি"
+    },
+    {
+      "en": "Cost to run",
+      "bn": "চালানোর খরচ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: position is qualitative and the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: অবস্থান গুণগত আর লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Question",
+        "title": "Not which is best, but which trade-off",
+        "body": [
+          "Do not ask which model is best. Ask which trade-off fits your work.",
+          "A few big companies make most of the top models, and each family is good at different things."
+        ]
+      },
+      "bn": {
+        "short": "প্রশ্ন",
+        "title": "কোনটা সেরা নয়, কোন ট্রেড-অফ",
+        "body": [
+          "কোন মডেল সেরা, তা জিজ্ঞেস করবেন না। জিজ্ঞেস করুন, কোন ট্রেড-অফ আপনার কাজের সাথে মেলে।",
+          "সেরা মডেলগুলোর বেশিরভাগ বানায় অল্প কয়েকটি বড় কোম্পানি, আর প্রতিটি ফ্যামিলি আলাদা কাজে ভালো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "work",
+          "state": "hot",
+          "sub": {
+            "en": "which trade-off?",
+            "bn": "কোন ট্রেড-অফ?"
+          }
+        },
+        {
+          "id": "anth",
+          "state": "dim"
+        },
+        {
+          "id": "oai",
+          "state": "dim"
+        },
+        {
+          "id": "goog",
+          "state": "dim"
+        },
+        {
+          "id": "meta",
+          "state": "dim"
+        },
+        {
+          "id": "mis",
+          "state": "dim"
+        },
+        {
+          "id": "qwen",
+          "state": "dim"
+        },
+        {
+          "id": "deep",
+          "state": "dim"
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Families",
+        "title": "Seven families, two sides",
+        "body": [
+          "The frontier in 2025 is dominated by seven families, each with its own architectural and commercial philosophy.",
+          "The chart puts Anthropic, OpenAI and Google DeepMind on the private side, and Meta, Mistral AI, Alibaba and DeepSeek on the open-weight side."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "The position is qualitative, not benchmark-exact."
+        }
+      },
+      "bn": {
+        "short": "ফ্যামিলি",
+        "title": "সাতটি ফ্যামিলি, দুই দিক",
+        "body": [
+          "২০২৫ সালে ফ্রন্টিয়ারে সাতটি ফ্যামিলির দাপট। প্রতিটির আর্কিটেকচার আর ব্যবসার দর্শন আলাদা।",
+          "চার্টে Anthropic, OpenAI আর Google DeepMind প্রাইভেট দিকে, আর Meta, Mistral AI, Alibaba ও DeepSeek ওপেন-ওয়েট দিকে।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "অবস্থান গুণগত, বেঞ্চমার্কের হুবহু মান নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "anth",
+          "state": "hot",
+          "sub": {
+            "en": "private",
+            "bn": "প্রাইভেট"
+          }
+        },
+        {
+          "id": "oai",
+          "state": "hot",
+          "sub": {
+            "en": "private",
+            "bn": "প্রাইভেট"
+          }
+        },
+        {
+          "id": "goog",
+          "state": "hot",
+          "sub": {
+            "en": "private",
+            "bn": "প্রাইভেট"
+          }
+        },
+        {
+          "id": "meta",
+          "state": "hot",
+          "sub": {
+            "en": "open-weight",
+            "bn": "ওপেন-ওয়েট"
+          }
+        },
+        {
+          "id": "mis",
+          "state": "hot",
+          "sub": {
+            "en": "open-weight",
+            "bn": "ওপেন-ওয়েট"
+          }
+        },
+        {
+          "id": "qwen",
+          "state": "hot",
+          "sub": {
+            "en": "open-weight",
+            "bn": "ওপেন-ওয়েট"
+          }
+        },
+        {
+          "id": "deep",
+          "state": "hot",
+          "sub": {
+            "en": "open-weight",
+            "bn": "ওপেন-ওয়েট"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Open",
+        "title": "Open weights you can host",
+        "body": [
+          "Llama, Qwen, DeepSeek and Mistral's small models publish their weights, so you can host them yourself.",
+          "Open weights means the model file is published, so anyone can download it and run it on their own machines."
+        ]
+      },
+      "bn": {
+        "short": "ওপেন",
+        "title": "ওপেন ওয়েট, নিজে হোস্ট করা যায়",
+        "body": [
+          "Llama, Qwen, DeepSeek আর Mistral-এর ছোট মডেলগুলো তাদের ওয়েট প্রকাশ করে, তাই নিজে হোস্ট করা যায়।",
+          "ওপেন ওয়েট মানে মডেলের ফাইল প্রকাশ করা হয়, তাই যে কেউ ডাউনলোড করে নিজের মেশিনে চালাতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "anth",
+          "state": "dim"
+        },
+        {
+          "id": "oai",
+          "state": "dim"
+        },
+        {
+          "id": "goog",
+          "state": "dim"
+        },
+        {
+          "id": "meta",
+          "state": "hot",
+          "sub": {
+            "en": "weights published",
+            "bn": "ওয়েট প্রকাশিত"
+          }
+        },
+        {
+          "id": "mis",
+          "state": "hot",
+          "sub": {
+            "en": "weights published",
+            "bn": "ওয়েট প্রকাশিত"
+          }
+        },
+        {
+          "id": "qwen",
+          "state": "hot",
+          "sub": {
+            "en": "weights published",
+            "bn": "ওয়েট প্রকাশিত"
+          }
+        },
+        {
+          "id": "deep",
+          "state": "hot",
+          "sub": {
+            "en": "weights published",
+            "bn": "ওয়েট প্রকাশিত"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Dense",
+        "title": "A dense model uses everything",
+        "body": [
+          "A dense model uses all of its parameters for every token.",
+          "Its compute is predictable, and it is simple to serve."
+        ]
+      },
+      "bn": {
+        "short": "ডেন্স",
+        "title": "ডেন্স মডেল সবটাই ব্যবহার করে",
+        "body": [
+          "ডেন্স মডেল প্রতিটি টোকেনের জন্য তার সব প্যারামিটার ব্যবহার করে।",
+          "এর কম্পিউট আগে থেকে বোঝা যায়, চালানোও সহজ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tok",
+          "state": "hot"
+        },
+        {
+          "id": "dense",
+          "state": "hot",
+          "sub": {
+            "en": "every parameter",
+            "bn": "প্রতিটি প্যারামিটার"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "dense",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "predictable",
+          "bn": "আগে থেকে বোঝা যায়"
+        },
+        null,
+        {
+          "en": "simple to serve",
+          "bn": "চালানো সহজ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "MoE",
+        "title": "Mixture-of-Experts: a few experts per token",
+        "body": [
+          "A Mixture-of-Experts model sends each token to only a few of its expert parts.",
+          "Its total size is large but only a small part is active per token, so it is cheaper to run but needs more memory. DeepSeek-V3 is 671B/37B active."
+        ]
+      },
+      "bn": {
+        "short": "MoE",
+        "title": "মিক্সচার-অফ-এক্সপার্টস: টোকেনে কয়েকজন এক্সপার্ট",
+        "body": [
+          "মিক্সচার-অফ-এক্সপার্টস মডেল প্রতিটি টোকেনকে তার অল্প কয়েকটি এক্সপার্ট অংশে পাঠায়।",
+          "মোট আকার বড়, কিন্তু প্রতিটি টোকেনে অল্প একটা অংশ অ্যাক্টিভ থাকে, তাই চালাতে সস্তা, তবে মেমরি বেশি লাগে। DeepSeek-V3 হলো ৬৭১B/৩৭B অ্যাক্টিভ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tok",
+          "state": "hot"
+        },
+        {
+          "id": "moe",
+          "state": "hot",
+          "sub": {
+            "en": "a few experts",
+            "bn": "কয়েকজন এক্সপার্ট"
+          }
+        },
+        {
+          "id": "deep",
+          "state": "hot",
+          "sub": {
+            "en": "671B/37B active",
+            "bn": "৬৭১B/৩৭B অ্যাক্টিভ"
+          },
+          "x": 630,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "tok",
+          "to": "moe",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "cheaper per token",
+          "bn": "প্রতি টোকেনে সস্তা"
+        },
+        {
+          "en": "more memory",
+          "bn": "বেশি মেমরি"
+        },
+        {
+          "en": "cheaper to run",
+          "bn": "চালাতে সস্তা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Long input",
+        "title": "Cheaper long inputs",
+        "body": [
+          "The KV cache is the stored notes about earlier tokens. Long inputs make it big, and DeepSeek's MLA compresses it to save memory.",
+          "With sliding-window attention, each token looks only at a window of nearby tokens, which makes the model cheaper to run."
+        ]
+      },
+      "bn": {
+        "short": "লম্বা ইনপুট",
+        "title": "লম্বা ইনপুট সস্তা",
+        "body": [
+          "KV ক্যাশ আগের টোকেন নিয়ে জমিয়ে রাখা নোট। লম্বা ইনপুটে এটা বড় হয়, আর DeepSeek-এর MLA একে ছোট করে মেমরি বাঁচায়।",
+          "স্লাইডিং-উইন্ডো অ্যাটেনশনে প্রতিটি টোকেন শুধু কাছের কিছু টোকেনের একটা উইন্ডো দেখে, তাই মডেল চালানো সস্তা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "kv",
+          "state": "hot",
+          "sub": {
+            "en": "long inputs make it big",
+            "bn": "লম্বা ইনপুটে বড় হয়"
+          }
+        },
+        {
+          "id": "deep",
+          "state": "hot",
+          "sub": {
+            "en": "MLA compresses it",
+            "bn": "MLA একে ছোট করে"
+          },
+          "x": 650,
+          "y": 162
+        },
+        {
+          "id": "mis",
+          "state": "hot",
+          "sub": {
+            "en": "sliding-window",
+            "bn": "স্লাইডিং-উইন্ডো"
+          },
+          "x": 110,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "deep",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mis",
+          "to": "kv",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "saved by MLA",
+          "bn": "MLA-তে বাঁচে"
+        },
+        {
+          "en": "cheaper",
+          "bn": "সস্তা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "There is no single best model. Pick the trade-off that fits your work."
+        ],
+        "points": [
+          "There is no single best model. Pick the trade-off that fits your work.",
+          "Llama, Qwen, DeepSeek, and Mistral's small models publish their weights, so you can host them yourself.",
+          "MoE models are large in total but use only a small part for each token, so they are cheaper to run.",
+          "Tricks like MLA and sliding-window attention make long inputs cheaper to handle."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একক কোনো সেরা মডেল নেই। আপনার কাজের সাথে মেলে এমন ট্রেড-অফ বাছুন।"
+        ],
+        "points": [
+          "একক কোনো সেরা মডেল নেই। আপনার কাজের সাথে মেলে এমন ট্রেড-অফ বাছুন।",
+          "Llama, Qwen, DeepSeek আর Mistral-এর ছোট মডেলগুলো তাদের ওয়েট প্রকাশ করে, তাই নিজে হোস্ট করা যায়।",
+          "MoE মডেল মোট আকারে বড়, কিন্তু প্রতিটি টোকেনে অল্প একটা অংশ চলে, তাই চালাতে সস্তা।",
+          "MLA আর স্লাইডিং-উইন্ডো অ্যাটেনশনের মতো কৌশল লম্বা ইনপুট সামলানো সস্তা করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "work",
+          "state": "hot"
+        },
+        {
+          "id": "anth",
+          "state": "dim"
+        },
+        {
+          "id": "oai",
+          "state": "dim"
+        },
+        {
+          "id": "goog",
+          "state": "dim"
+        },
+        {
+          "id": "meta",
+          "state": "dim"
+        },
+        {
+          "id": "mis",
+          "state": "dim"
+        },
+        {
+          "id": "qwen",
+          "state": "dim"
+        },
+        {
+          "id": "deep",
+          "state": "dim"
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

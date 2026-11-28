@@ -1,0 +1,589 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "test",
+      "kind": "file",
+      "label": {
+        "en": "Held-out test set",
+        "bn": "হেল্ড-আউট টেস্ট সেট"
+      },
+      "x": 135,
+      "y": 162
+    },
+    {
+      "id": "base",
+      "kind": "model",
+      "label": {
+        "en": "Base model",
+        "bn": "বেস মডেল"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "tuned",
+      "kind": "model",
+      "label": {
+        "en": "Fine-tuned model",
+        "bn": "ফাইন-টিউন করা মডেল"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "verdict",
+      "kind": "note",
+      "label": {
+        "en": "Did it help?",
+        "bn": "কাজে লেগেছে কি?"
+      },
+      "x": 610,
+      "y": 162
+    },
+    {
+      "id": "exact",
+      "kind": "tool",
+      "label": {
+        "en": "Exact-match scoring",
+        "bn": "এক্সাক্ট-ম্যাচ স্কোরিং"
+      },
+      "x": 380,
+      "y": 75
+    },
+    {
+      "id": "rubric",
+      "kind": "tool",
+      "label": {
+        "en": "Rubric scoring",
+        "bn": "রুব্রিক স্কোরিং"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "judge",
+      "kind": "model",
+      "label": {
+        "en": "LLM-as-judge",
+        "bn": "LLM-as-judge"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "human",
+      "kind": "user",
+      "label": {
+        "en": "Human spot-check",
+        "bn": "মানুষের স্পট-চেক"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "fail",
+      "kind": "note",
+      "label": {
+        "en": "Every failure",
+        "bn": "প্রতিটা ব্যর্থতা"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "regress",
+      "kind": "chart",
+      "label": {
+        "en": "Regression suite",
+        "bn": "রিগ্রেশন স্যুট"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Test set",
+      "bn": "টেস্ট সেট"
+    },
+    {
+      "en": "Scoring",
+      "bn": "স্কোরিং"
+    },
+    {
+      "en": "Regression suite",
+      "bn": "রিগ্রেশন স্যুট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Test set",
+        "title": "A held-out test set",
+        "body": [
+          "Build a held-out test set the model never saw during training. It is kept apart from everything used in training.",
+          "Then run the base model and your fine-tuned one on the same inputs."
+        ]
+      },
+      "bn": {
+        "short": "টেস্ট সেট",
+        "title": "হেল্ড-আউট টেস্ট সেট",
+        "body": [
+          "ট্রেইনিংয়ে মডেল কখনো দেখেনি এমন একটা হেল্ড-আউট টেস্ট সেট বানান। ট্রেইনিংয়ে ব্যবহার হওয়া সবকিছু থেকে এটা আলাদা রাখা হয়।",
+          "তারপর একই ইনপুটে বেস মডেল আর আপনার ফাইন-টিউন করা মডেল চালান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "never seen",
+            "bn": "কখনো দেখেনি"
+          }
+        },
+        {
+          "id": "base",
+          "state": "hot",
+          "sub": {
+            "en": "same inputs",
+            "bn": "একই ইনপুট"
+          }
+        },
+        {
+          "id": "tuned",
+          "state": "hot",
+          "sub": {
+            "en": "same inputs",
+            "bn": "একই ইনপুট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "test",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "test",
+          "to": "tuned",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "never seen",
+          "bn": "কখনো দেখেনি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Compare",
+        "title": "Compare base and fine-tuned",
+        "body": [
+          "Compare the base model against the fine-tuned one on the same inputs.",
+          "Check which answers are actually better, not just different. Without this step, you cannot tell whether fine-tuning helped."
+        ]
+      },
+      "bn": {
+        "short": "তুলনা",
+        "title": "বেস আর ফাইন-টিউনের তুলনা",
+        "body": [
+          "একই ইনপুটে বেস মডেলের সাথে ফাইন-টিউন করা মডেলের তুলনা করুন।",
+          "কোন উত্তরগুলো সত্যিই ভালো তা দেখুন, শুধু আলাদা নয়। এই ধাপ ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং কাজে লেগেছে কিনা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "test",
+          "state": "hot"
+        },
+        {
+          "id": "base",
+          "state": "hot"
+        },
+        {
+          "id": "tuned",
+          "state": "hot"
+        },
+        {
+          "id": "verdict",
+          "state": "hot",
+          "sub": {
+            "en": "actually better",
+            "bn": "সত্যিই ভালো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "test",
+          "to": "base",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "test",
+          "to": "tuned",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "base",
+          "to": "verdict",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tuned",
+          "to": "verdict",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Clear",
+        "title": "Clear answers: exact-match or rubric",
+        "body": [
+          "Use exact-match or rubric scoring for tasks with a clear right answer.",
+          "Exact-match counts an answer as right only if it matches exactly. Rubric scoring checks it against a checklist of what a good answer must have."
+        ]
+      },
+      "bn": {
+        "short": "স্পষ্ট উত্তর",
+        "title": "স্পষ্ট উত্তর: exact-match বা রুব্রিক",
+        "body": [
+          "স্পষ্ট সঠিক উত্তর থাকা টাস্কের জন্য exact-match বা রুব্রিক স্কোরিং ব্যবহার করুন।",
+          "এক্সাক্ট-ম্যাচে উত্তর সঠিক ধরা হয় শুধু হুবহু মিললে। রুব্রিক স্কোরিংয়ে ভালো উত্তরে কী কী থাকতে হবে তার চেকলিস্টের সাথে মেলানো হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tuned",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "exact",
+          "state": "hot",
+          "sub": {
+            "en": "matches exactly",
+            "bn": "হুবহু মেলে"
+          }
+        },
+        {
+          "id": "rubric",
+          "state": "hot",
+          "sub": {
+            "en": "a checklist",
+            "bn": "একটা চেকলিস্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tuned",
+          "to": "exact",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tuned",
+          "to": "rubric",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "clear right answer",
+          "bn": "স্পষ্ট সঠিক উত্তর"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Open-ended",
+        "title": "Open-ended: LLM-as-judge",
+        "body": [
+          "Use LLM-as-judge scoring for open-ended outputs: a language model scores another model's answers when there is no single right answer.",
+          "A human spot-checks the judge."
+        ]
+      },
+      "bn": {
+        "short": "ওপেন-এন্ডেড",
+        "title": "ওপেন-এন্ডেড: LLM-as-judge",
+        "body": [
+          "ওপেন-এন্ডেড আউটপুটের জন্য LLM-as-judge স্কোরিং ব্যবহার করুন: যখন একটাই সঠিক উত্তর থাকে না, তখন একটি ল্যাঙ্গুয়েজ মডেল অন্য মডেলের উত্তরে নম্বর দেয়।",
+          "মানুষ জাজের কাজ স্পট-চেক করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "tuned",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "judge",
+          "state": "hot",
+          "sub": {
+            "en": "no single right answer",
+            "bn": "একটাই সঠিক উত্তর নেই"
+          }
+        },
+        {
+          "id": "human",
+          "state": "hot",
+          "sub": {
+            "en": "spot-checks",
+            "bn": "স্পট-চেক"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "tuned",
+          "to": "judge",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "judge",
+          "to": "human",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "LLM-as-judge",
+          "bn": "LLM-as-judge"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Regression",
+        "title": "A running regression suite",
+        "body": [
+          "Add every failure you find to a running regression suite.",
+          "It is rerun to check that old mistakes do not come back."
+        ]
+      },
+      "bn": {
+        "short": "রিগ্রেশন",
+        "title": "চলমান রিগ্রেশন স্যুট",
+        "body": [
+          "খুঁজে পাওয়া প্রতিটা ব্যর্থতা একটা চলমান রিগ্রেশন স্যুটে যোগ করুন।",
+          "পুরনো ভুল ফিরে আসছে কিনা দেখতে এটা বারবার চালানো হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "fail",
+          "state": "warn"
+        },
+        {
+          "id": "regress",
+          "state": "hot",
+          "sub": {
+            "en": "rerun",
+            "bn": "বারবার চালানো"
+          }
+        },
+        {
+          "id": "verdict",
+          "state": "hot",
+          "sub": {
+            "en": "no old mistakes",
+            "bn": "পুরনো ভুল নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "fail",
+          "to": "regress",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "regress",
+          "to": "verdict",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "growing",
+          "bn": "ক্রমে বাড়ছে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Fluent",
+        "title": "Fluent is not correct",
+        "body": [
+          "Do not trust an output just because it reads fluently.",
+          "A model can sound confident and still be wrong, so test it on cases it has not seen."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A model can sound confident and still be wrong."
+        }
+      },
+      "bn": {
+        "short": "ফ্লুয়েন্ট",
+        "title": "ফ্লুয়েন্ট মানে সঠিক নয়",
+        "body": [
+          "আউটপুট ফ্লুয়েন্ট শোনায় বলেই তাকে বিশ্বাস করবেন না।",
+          "মডেল আত্মবিশ্বাসী শোনালেও ভুল হতে পারে, তাই যে কেসগুলো সে দেখেনি সেগুলোতে টেস্ট করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "মডেল আত্মবিশ্বাসী শোনালেও ভুল হতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "tuned",
+          "state": "warn",
+          "sub": {
+            "en": "reads fluently",
+            "bn": "ফ্লুয়েন্ট শোনায়"
+          }
+        },
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "cases it has not seen",
+            "bn": "যে কেস দেখেনি"
+          }
+        },
+        {
+          "id": "verdict",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "tuned",
+          "to": "verdict",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "test",
+          "to": "verdict",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Without a held-out test set, you cannot tell whether fine-tuning helped."
+        ],
+        "points": [
+          "Without a held-out test set, you cannot tell whether fine-tuning helped.",
+          "Use exact-match or rubric scoring for clear answers, and LLM-as-judge with human spot-checks for open-ended ones.",
+          "Add every failure you find to a running regression suite.",
+          "Do not trust an output just because it reads fluently."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "হেল্ড-আউট টেস্ট সেট ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং কাজে লেগেছে কিনা।"
+        ],
+        "points": [
+          "হেল্ড-আউট টেস্ট সেট ছাড়া বোঝার উপায় নেই ফাইন-টিউনিং কাজে লেগেছে কিনা।",
+          "স্পষ্ট উত্তরের জন্য exact-match বা রুব্রিক স্কোরিং, আর ওপেন-এন্ডেড উত্তরের জন্য মানুষের স্পট-চেকসহ LLM-as-judge ব্যবহার করুন।",
+          "খুঁজে পাওয়া প্রতিটা ব্যর্থতা একটা চলমান রিগ্রেশন স্যুটে যোগ করুন।",
+          "আউটপুট ফ্লুয়েন্ট শোনায় বলেই তাকে বিশ্বাস করবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "test"
+        },
+        {
+          "id": "base"
+        },
+        {
+          "id": "tuned"
+        },
+        {
+          "id": "verdict"
+        }
+      ],
+      "links": [
+        {
+          "from": "test",
+          "to": "base",
+          "flow": "to"
+        },
+        {
+          "from": "test",
+          "to": "tuned",
+          "flow": "to"
+        },
+        {
+          "from": "base",
+          "to": "verdict",
+          "flow": "to"
+        },
+        {
+          "from": "tuned",
+          "to": "verdict",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

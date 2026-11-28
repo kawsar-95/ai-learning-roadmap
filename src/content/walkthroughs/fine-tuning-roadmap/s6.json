@@ -1,0 +1,640 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "req",
+      "kind": "file",
+      "label": {
+        "en": "Requirements",
+        "bn": "রিকোয়ারমেন্ট"
+      },
+      "x": 120,
+      "y": 90
+    },
+    {
+      "id": "bug",
+      "kind": "file",
+      "label": {
+        "en": "Bug reports",
+        "bn": "বাগ রিপোর্ট"
+      },
+      "x": 120,
+      "y": 234
+    },
+    {
+      "id": "mdl",
+      "kind": "model",
+      "label": {
+        "en": "Small model",
+        "bn": "ছোট মডেল"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "real",
+      "kind": "shield",
+      "label": {
+        "en": "Real company or employee data",
+        "bn": "আসল কোম্পানি বা কর্মীর ডেটা"
+      },
+      "x": 150,
+      "y": 162
+    },
+    {
+      "id": "anon",
+      "kind": "file",
+      "label": {
+        "en": "Anonymized data",
+        "bn": "অ্যানোনিমাইজড ডেটা"
+      },
+      "x": 530,
+      "y": 90
+    },
+    {
+      "id": "syn",
+      "kind": "file",
+      "label": {
+        "en": "Synthetic data",
+        "bn": "সিন্থেটিক ডেটা"
+      },
+      "x": 530,
+      "y": 234
+    },
+    {
+      "id": "p1",
+      "kind": "clock",
+      "label": {
+        "en": "Python for data",
+        "bn": "ডেটার জন্য Python"
+      },
+      "x": 130,
+      "y": 90
+    },
+    {
+      "id": "p2",
+      "kind": "clock",
+      "label": {
+        "en": "How neural nets train",
+        "bn": "নিউরাল নেট কীভাবে ট্রেইন হয়"
+      },
+      "x": 390,
+      "y": 90
+    },
+    {
+      "id": "p3",
+      "kind": "clock",
+      "label": {
+        "en": "Fine-tuning open models",
+        "bn": "ওপেন মডেল ফাইন-টিউনিং"
+      },
+      "x": 640,
+      "y": 90
+    },
+    {
+      "id": "p4",
+      "kind": "clock",
+      "label": {
+        "en": "Evaluation",
+        "bn": "ইভ্যালুয়েশন"
+      },
+      "x": 260,
+      "y": 250
+    },
+    {
+      "id": "p5",
+      "kind": "clock",
+      "label": {
+        "en": "Run it locally and ship it",
+        "bn": "লোকালি চালানো আর শিপ করা"
+      },
+      "x": 520,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Data",
+      "bn": "ডেটা"
+    },
+    {
+      "en": "Total",
+      "bn": "মোট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and durations are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর সময় সেকশনের নিজস্ব।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Capstone",
+        "title": "A good capstone",
+        "body": [
+          "A capstone is a final project that pulls together everything you learned and shows your skill.",
+          "A good one is a realistic project built only on anonymized or synthetic data."
+        ]
+      },
+      "bn": {
+        "short": "ক্যাপস্টোন",
+        "title": "ভালো ক্যাপস্টোন",
+        "body": [
+          "ক্যাপস্টোন শেষের প্রজেক্ট, যেখানে যা শিখেছেন সব একসাথে কাজে লাগে আর আপনার দক্ষতা দেখা যায়।",
+          "ভালো ক্যাপস্টোন হলো একটা বাস্তবসম্মত প্রজেক্ট, যা শুধু অ্যানোনিমাইজড বা সিন্থেটিক ডেটার উপর দাঁড়িয়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "anon",
+          "state": "hot"
+        },
+        {
+          "id": "syn",
+          "state": "hot"
+        },
+        {
+          "id": "mdl",
+          "state": "hot",
+          "sub": {
+            "en": "capstone",
+            "bn": "ক্যাপস্টোন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "anon",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "syn",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Anonymized or synthetic",
+          "bn": "অ্যানোনিমাইজড বা সিন্থেটিক"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Idea",
+        "title": "The capstone idea",
+        "body": [
+          "Fine-tune a small model to turn requirements into test cases, or to classify bug reports.",
+          "To classify is to give each item a label, such as putting a bug report into a group."
+        ]
+      },
+      "bn": {
+        "short": "আইডিয়া",
+        "title": "ক্যাপস্টোনের আইডিয়া",
+        "body": [
+          "ছোট একটা মডেল ফাইন-টিউন করুন, যা রিকোয়ারমেন্ট থেকে টেস্ট কেস বানায় বা বাগ রিপোর্ট ক্লাসিফাই করে।",
+          "ক্লাসিফাই মানে প্রতিটি জিনিসকে একটি লেবেল দেওয়া, যেমন বাগ রিপোর্টকে একটা দলে রাখা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "req",
+          "state": "hot",
+          "sub": {
+            "en": "into test cases",
+            "bn": "টেস্ট কেসে"
+          }
+        },
+        {
+          "id": "bug",
+          "state": "hot",
+          "sub": {
+            "en": "classify",
+            "bn": "ক্লাসিফাই"
+          }
+        },
+        {
+          "id": "mdl",
+          "state": "hot",
+          "sub": {
+            "en": "fine-tuned",
+            "bn": "ফাইন-টিউন করা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "req",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bug",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Data",
+        "title": "Never real company data",
+        "body": [
+          "Never fine-tune on real company or employee data, even for a personal project.",
+          "Use anonymized or synthetic examples instead."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The risk of leaking sensitive data through a model is not worth the convenience."
+        }
+      },
+      "bn": {
+        "short": "ডেটা",
+        "title": "আসল কোম্পানির ডেটা কখনো নয়",
+        "body": [
+          "ব্যক্তিগত প্রজেক্টেও আসল কোম্পানি বা কর্মীর ডেটা দিয়ে ফাইন-টিউন করবেন না।",
+          "অ্যানোনিমাইজড বা সিন্থেটিক উদাহরণ ব্যবহার করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সুবিধার জন্য মডেলের মাধ্যমে সংবেদনশীল ডেটা ফাঁস হওয়ার ঝুঁকি নেওয়ার মানে হয় না।"
+        }
+      },
+      "show": [
+        {
+          "id": "real",
+          "state": "warn",
+          "sub": {
+            "en": "never",
+            "bn": "কখনো নয়"
+          }
+        },
+        {
+          "id": "anon",
+          "state": "hot",
+          "sub": {
+            "en": "names removed",
+            "bn": "নাম সরানো"
+          }
+        },
+        {
+          "id": "syn",
+          "state": "hot",
+          "sub": {
+            "en": "made-up examples",
+            "bn": "কাল্পনিক উদাহরণ"
+          }
+        },
+        {
+          "id": "mdl",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "real",
+          "to": "mdl",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "anon",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "syn",
+          "to": "mdl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Anonymized or synthetic",
+          "bn": "অ্যানোনিমাইজড বা সিন্থেটিক"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Timeline",
+        "title": "The full timeline",
+        "body": [
+          "The roadmap has five phases, and each has its own part-time duration."
+        ]
+      },
+      "bn": {
+        "short": "টাইমলাইন",
+        "title": "পুরো টাইমলাইন",
+        "body": [
+          "রোডম্যাপে পাঁচটা ফেজ, আর প্রতিটার নিজের পার্ট-টাইম সময় আছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "p1",
+          "state": "hot",
+          "sub": {
+            "en": "3–4 weeks",
+            "bn": "৩–৪ সপ্তাহ"
+          }
+        },
+        {
+          "id": "p2",
+          "state": "hot",
+          "sub": {
+            "en": "4–6 weeks",
+            "bn": "৪–৬ সপ্তাহ"
+          }
+        },
+        {
+          "id": "p3",
+          "state": "hot",
+          "sub": {
+            "en": "6–8 weeks",
+            "bn": "৬–৮ সপ্তাহ"
+          }
+        },
+        {
+          "id": "p4",
+          "state": "hot",
+          "sub": {
+            "en": "2–3 weeks",
+            "bn": "২–৩ সপ্তাহ"
+          }
+        },
+        {
+          "id": "p5",
+          "state": "hot",
+          "sub": {
+            "en": "3–4 weeks",
+            "bn": "৩–৪ সপ্তাহ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "p1",
+          "to": "p2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p2",
+          "to": "p3",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p3",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p4",
+          "to": "p5",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Total",
+        "title": "Roughly 4–6 months",
+        "body": [
+          "The full timeline takes roughly 4–6 months, part-time.",
+          "Treat the total as an estimate, not a deadline."
+        ]
+      },
+      "bn": {
+        "short": "মোট",
+        "title": "আনুমানিক ৪–৬ মাস",
+        "body": [
+          "পুরো টাইমলাইনে পার্ট-টাইমে আনুমানিক ৪–৬ মাস লাগে।",
+          "মোট সময়টাকে একটা হিসাব হিসেবে দেখুন, ডেডলাইন হিসেবে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "p1",
+          "state": "hot"
+        },
+        {
+          "id": "p2",
+          "state": "hot"
+        },
+        {
+          "id": "p3",
+          "state": "hot"
+        },
+        {
+          "id": "p4",
+          "state": "hot"
+        },
+        {
+          "id": "p5",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "p1",
+          "to": "p2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p2",
+          "to": "p3",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p3",
+          "to": "p4",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p4",
+          "to": "p5",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Roughly 4–6 months",
+          "bn": "আনুমানিক ৪–৬ মাস"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Hygiene",
+        "title": "Phase 1 data hygiene pays off",
+        "body": [
+          "The phases build on each other. Time spent getting Phase 1's data hygiene right shortens every phase after it.",
+          "Data hygiene means keeping your data clean and correct before you use it."
+        ]
+      },
+      "bn": {
+        "short": "হাইজিন",
+        "title": "Phase ১-এর ডেটা হাইজিনের ফল",
+        "body": [
+          "ফেজগুলো একে অপরের উপর দাঁড়িয়ে আছে। Phase ১-এ ডেটা হাইজিন ঠিক করতে সময় দিলে পরের প্রতিটা ফেজের সময় কমে।",
+          "ডেটা হাইজিন মানে ডেটা ব্যবহারের আগে তা পরিষ্কার আর ঠিক রাখা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "p1",
+          "state": "hot",
+          "sub": {
+            "en": "data hygiene",
+            "bn": "ডেটা হাইজিন"
+          }
+        },
+        {
+          "id": "p2",
+          "state": "dim"
+        },
+        {
+          "id": "p3",
+          "state": "dim"
+        },
+        {
+          "id": "p4",
+          "state": "dim"
+        },
+        {
+          "id": "p5",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "p1",
+          "to": "p2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "p2",
+          "to": "p3",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "p3",
+          "to": "p4",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "p4",
+          "to": "p5",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "What matters is finishing each phase before starting the next."
+        ],
+        "points": [
+          "For the capstone, fine-tune a small model to turn requirements into test cases or to classify bug reports.",
+          "Never fine-tune on real company or employee data. Use anonymized or synthetic examples.",
+          "The full timeline takes roughly 4–6 months, part-time.",
+          "The total is an estimate."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "যেটা জরুরি তা হলো পরেরটা শুরুর আগে প্রতিটা ফেজ শেষ করা।"
+        ],
+        "points": [
+          "ক্যাপস্টোনের জন্য, ছোট একটা মডেল ফাইন-টিউন করুন, যা রিকোয়ারমেন্ট থেকে টেস্ট কেস বানায় বা বাগ রিপোর্ট ক্লাসিফাই করে।",
+          "আসল কোম্পানি বা কর্মীর ডেটা দিয়ে কখনো ফাইন-টিউন করবেন না। অ্যানোনিমাইজড বা সিন্থেটিক উদাহরণ ব্যবহার করুন।",
+          "পুরো টাইমলাইনে পার্ট-টাইমে আনুমানিক ৪–৬ মাস লাগে।",
+          "মোট সময় একটা হিসাব।"
+        ]
+      },
+      "show": [
+        {
+          "id": "req"
+        },
+        {
+          "id": "bug"
+        },
+        {
+          "id": "mdl"
+        },
+        {
+          "id": "anon"
+        },
+        {
+          "id": "syn"
+        }
+      ],
+      "links": [
+        {
+          "from": "req",
+          "to": "mdl",
+          "flow": "to"
+        },
+        {
+          "from": "bug",
+          "to": "mdl",
+          "flow": "to"
+        },
+        {
+          "from": "anon",
+          "to": "mdl",
+          "flow": "to"
+        },
+        {
+          "from": "syn",
+          "to": "mdl",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

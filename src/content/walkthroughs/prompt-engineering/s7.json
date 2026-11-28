@@ -1,0 +1,602 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 110,
+      "y": 100
+    },
+    {
+      "id": "cons",
+      "kind": "shield",
+      "label": {
+        "en": "Constrain the model",
+        "bn": "মডেলকে কনস্ট্রেইন"
+      },
+      "x": 380,
+      "y": 100
+    },
+    {
+      "id": "val",
+      "kind": "shield",
+      "label": {
+        "en": "Validate the output",
+        "bn": "আউটপুট ভ্যালিডেট"
+      },
+      "x": 640,
+      "y": 100
+    },
+    {
+      "id": "rec",
+      "kind": "service",
+      "label": {
+        "en": "Recover gracefully",
+        "bn": "গ্রেসফুলি রিকভার"
+      },
+      "x": 640,
+      "y": 250
+    },
+    {
+      "id": "bad",
+      "kind": "note",
+      "label": {
+        "en": "Unexpected output",
+        "bn": "অপ্রত্যাশিত আউটপুট"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "fail",
+      "kind": "note",
+      "label": {
+        "en": "Failure modes",
+        "bn": "ব্যর্থতার ধরন"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "inv",
+      "kind": "file",
+      "label": {
+        "en": "Smudged invoice",
+        "bn": "ঝাপসা ইনভয়েস"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "code",
+      "kind": "service",
+      "label": {
+        "en": "Your code",
+        "bn": "আপনার কোড"
+      },
+      "x": 380,
+      "y": 250
+    },
+    {
+      "id": "ev",
+      "kind": "tool",
+      "label": {
+        "en": "eval()",
+        "bn": "eval()"
+      },
+      "x": 380,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Constrain",
+      "bn": "কনস্ট্রেইন"
+    },
+    {
+      "en": "Validate",
+      "bn": "ভ্যালিডেট"
+    },
+    {
+      "en": "Recover",
+      "bn": "রিকভার"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Garbage",
+        "title": "The model will sometimes surprise your code",
+        "body": [
+          "A model will sometimes give output your code does not expect.",
+          "Good apps use graceful failure handling: they constrain the output, check it, and recover when it is wrong."
+        ]
+      },
+      "bn": {
+        "short": "ব্যর্থতা",
+        "title": "মডেল মাঝে মাঝে আপনার কোডকে অবাক করবে",
+        "body": [
+          "মডেল মাঝে মাঝে এমন আউটপুট দেবে, যা আপনার কোড আশা করেনি।",
+          "ভালো অ্যাপ সুন্দরভাবে ব্যর্থতা সামলায়: আউটপুট বেঁধে দেয়, যাচাই করে, আর ভুল হলে ঠিক করে নেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "bad",
+          "state": "warn"
+        },
+        {
+          "id": "rec",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "bad",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Constrain",
+        "title": "Layer one: constrain the model",
+        "body": [
+          "Structured outputs match your schema; plain JSON mode only gives valid JSON.",
+          "Both can still fail on refusal or truncation."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Always for production. It is the cheapest insurance."
+        }
+      },
+      "bn": {
+        "short": "কনস্ট্রেইন",
+        "title": "প্রথম স্তর: মডেলকে কনস্ট্রেইন করুন",
+        "body": [
+          "স্ট্রাকচার্ড আউটপুট স্কিমা মেনে চলে; সাধারণ JSON মোড শুধু বৈধ JSON দেয়।",
+          "রিফিউজাল বা কেটে যাওয়া উত্তরে দুটোই ব্যর্থ হতে পারে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "প্রোডাকশনে সবসময়। এটাই সবচেয়ে সস্তা বীমা।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "cons",
+          "state": "hot"
+        },
+        {
+          "id": "val",
+          "state": "dim"
+        },
+        {
+          "id": "rec",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "cons",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Always for production",
+          "bn": "প্রোডাকশনে সবসময়"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Validate",
+        "title": "Layer two: validate the output",
+        "body": [
+          "Even constrained output needs validation. It can still have a wrong field or an invented value.",
+          "Validation is a runtime check, with a tool like Pydantic, Zod, or JSON Schema."
+        ]
+      },
+      "bn": {
+        "short": "ভ্যালিডেট",
+        "title": "দ্বিতীয় স্তর: আউটপুট ভ্যালিডেট করুন",
+        "body": [
+          "কনস্ট্রেইন করা আউটপুটেও ভ্যালিডেশন লাগে। তাতে তবু ভুল ফিল্ড বা বানানো মান আসতে পারে।",
+          "ভ্যালিডেশন হলো রানটাইমের যাচাই, যেমন Pydantic, Zod বা JSON Schema দিয়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "cons",
+          "state": "dim"
+        },
+        {
+          "id": "val",
+          "state": "hot",
+          "sub": {
+            "en": "Pydantic, Zod",
+            "bn": "Pydantic, Zod"
+          }
+        },
+        {
+          "id": "rec",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "cons",
+          "to": "val",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Defence in depth",
+          "bn": "ডিফেন্স ইন ডেপথ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Recover",
+        "title": "Layer three: recover gracefully",
+        "body": [
+          "When validation fails, retry with a stricter prompt, fall back to defaults, or tell the user you do not know.",
+          "Retry with backoff means trying again, and waiting a little longer before each new try."
+        ]
+      },
+      "bn": {
+        "short": "রিকভার",
+        "title": "তৃতীয় স্তর: গ্রেসফুলি রিকভার",
+        "body": [
+          "ভ্যালিডেশন ব্যর্থ হলে কড়া প্রম্পটে রিট্রাই করুন, ডিফল্টে ফিরুন, বা ইউজারকে জানান যে আপনি জানেন না।",
+          "ব্যাকঅফ-সহ রিট্রাই মানে আবার চেষ্টা করা, আর প্রতিবার নতুন চেষ্টার আগে একটু বেশি অপেক্ষা করা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "val",
+          "state": "warn"
+        },
+        {
+          "id": "rec",
+          "state": "hot",
+          "sub": {
+            "en": "stricter retry",
+            "bn": "কড়া রিট্রাই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "val",
+          "to": "rec",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "When validation fails",
+          "bn": "ভ্যালিডেশন ব্যর্থ হলে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Failures",
+        "title": "Common failure modes",
+        "body": [
+          "Each way the model breaks has its own defence."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Malformed JSON: use structured outputs / JSON mode"
+          },
+          {
+            "sign": "+",
+            "html": "Hallucinated field: strict schema and business-rule validation"
+          },
+          {
+            "sign": "+",
+            "html": "Refusal: detect the refusal string, return null and tell the UI"
+          },
+          {
+            "sign": "+",
+            "html": "Truncation: detect the finish reason, increase max_tokens"
+          },
+          {
+            "sign": "+",
+            "html": "Empty output: retry with backoff, eventually return \"I couldn't answer\""
+          },
+          {
+            "sign": "+",
+            "html": "Inconsistent format: JSON Schema validation and retry with a stricter prompt"
+          }
+        ]
+      },
+      "bn": {
+        "short": "ব্যর্থতা",
+        "title": "সাধারণ ব্যর্থতার ধরন",
+        "body": [
+          "মডেল যেভাবে ভাঙে, প্রতিটার নিজস্ব প্রতিরক্ষা আছে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ভুল JSON: স্ট্রাকচার্ড আউটপুট / JSON মোড ব্যবহার করুন"
+          },
+          {
+            "sign": "+",
+            "html": "বানানো ফিল্ড: কড়া স্কিমা আর বিজনেস নিয়মের ভ্যালিডেশন"
+          },
+          {
+            "sign": "+",
+            "html": "রিফিউজাল: রিফিউজাল স্ট্রিং শনাক্ত করে null ফেরত দিন এবং UI-কে জানান"
+          },
+          {
+            "sign": "+",
+            "html": "ট্রাঙ্কেশন: ফিনিশ রিজন দেখুন, max_tokens বাড়ান"
+          },
+          {
+            "sign": "+",
+            "html": "খালি আউটপুট: ব্যাকঅফ-সহ রিট্রাই, শেষে \"I couldn't answer\""
+          },
+          {
+            "sign": "+",
+            "html": "অসঙ্গত ফরম্যাট: JSON Schema ভ্যালিডেশন আর কড়া প্রম্পটে রিট্রাই"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "fail",
+          "state": "warn"
+        },
+        {
+          "id": "cons",
+          "state": "hot"
+        },
+        {
+          "id": "val",
+          "state": "hot"
+        },
+        {
+          "id": "rec",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "fail",
+          "to": "cons",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Null",
+        "title": "A safe way out: null and problems",
+        "body": [
+          "Give the model a safe way out: use null, a value that means nothing here, and a problems list.",
+          "Then your code can see the gap and act. Rules in the prompt help, but your code must still validate the reply."
+        ]
+      },
+      "bn": {
+        "short": "null",
+        "title": "নিরাপদ বের হওয়ার পথ: null আর problems",
+        "body": [
+          "মডেলকে একটা নিরাপদ বের হওয়ার পথ দিন: null (যে ভ্যালুর মানে এখানে কিছু নেই) আর একটা problems তালিকা।",
+          "তখন আপনার কোড ফাঁকটা দেখে ঠিক কাজ করতে পারে। প্রম্পটের নিয়ম সাহায্য করে, কিন্তু আপনার কোডকে তবু উত্তর ভ্যালিডেট করতে হবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "inv",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "null",
+            "bn": "null"
+          }
+        },
+        {
+          "id": "code",
+          "state": "hot"
+        },
+        {
+          "id": "val",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "inv",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "val",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "val",
+          "to": "code",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "types and values",
+          "bn": "টাইপ আর ভ্যালু"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "eval",
+        "title": "Never eval() model output",
+        "body": [
+          "Never use eval() on model output.",
+          "The model can be tricked into writing harmful code."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Never use eval() on model output. Use a proper parser such as json.loads or Pydantic."
+        }
+      },
+      "bn": {
+        "short": "eval",
+        "title": "মডেলের আউটপুটে কখনো eval() নয়",
+        "body": [
+          "মডেলের আউটপুটে কখনো eval() চালাবেন না।",
+          "মডেলকে ফাঁকি দিয়ে ক্ষতিকর কোড লেখানো যায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "মডেলের আউটপুটে কখনো eval() নয়। json.loads বা Pydantic-এর মতো সঠিক পার্সার ব্যবহার করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "warn"
+        },
+        {
+          "id": "ev",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "ev",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Use three layers: constrain the model, validate the output, then recover gracefully."
+        ],
+        "points": [
+          "Even constrained output needs validation.",
+          "When validation fails, retry with a stricter prompt, fall back to defaults, or tell the user you do not know.",
+          "Never use eval() on model output."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "তিন স্তর ব্যবহার করুন: মডেলকে কনস্ট্রেইন করুন, আউটপুট ভ্যালিডেট করুন, তারপর সুন্দরভাবে রিকভার করুন।"
+        ],
+        "points": [
+          "কনস্ট্রেইন করা আউটপুটেও ভ্যালিডেশন লাগে।",
+          "ভ্যালিডেশন ব্যর্থ হলে কড়া প্রম্পটে রিট্রাই করুন, ডিফল্টে ফিরুন, বা ইউজারকে জানান যে আপনি জানেন না।",
+          "মডেলের আউটপুটে কখনো eval() চালাবেন না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model"
+        },
+        {
+          "id": "cons",
+          "state": "hot"
+        },
+        {
+          "id": "val",
+          "state": "hot"
+        },
+        {
+          "id": "rec",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "cons",
+          "flow": "to"
+        },
+        {
+          "from": "cons",
+          "to": "val",
+          "flow": "to"
+        },
+        {
+          "from": "val",
+          "to": "rec",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

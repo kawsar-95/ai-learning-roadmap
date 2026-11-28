@@ -1,0 +1,528 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "file",
+      "label": {
+        "en": "Your data",
+        "bn": "আপনার ডেটা"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "pandas",
+      "kind": "tool",
+      "label": {
+        "en": "pandas",
+        "bn": "pandas"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "clean",
+      "kind": "file",
+      "label": {
+        "en": "Clean data",
+        "bn": "পরিষ্কার ডেটা"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Fine-tuned model",
+        "bn": "ফাইন-টিউন করা মডেল"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "train",
+      "kind": "file",
+      "label": {
+        "en": "Train",
+        "bn": "ট্রেন"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "val",
+      "kind": "file",
+      "label": {
+        "en": "Validation",
+        "bn": "ভ্যালিডেশন"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "test",
+      "kind": "file",
+      "label": {
+        "en": "Test",
+        "bn": "টেস্ট"
+      },
+      "x": 380,
+      "y": 260
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Data",
+      "bn": "ডেটা"
+    },
+    {
+      "en": "Splits",
+      "bn": "স্প্লিট"
+    },
+    {
+      "en": "Test result",
+      "bn": "টেস্টের ফল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Data first",
+        "title": "Data comes first",
+        "body": [
+          "A fine-tuned model cannot be better than the data it is shown.",
+          "This phase teaches you to read and clean data with pandas before any AI work begins."
+        ]
+      },
+      "bn": {
+        "short": "আগে ডেটা",
+        "title": "আগে ডেটা",
+        "body": [
+          "ফাইন-টিউন করা মডেল তাকে দেখানো ডেটার চেয়ে ভালো হতে পারে না।",
+          "AI-এর কাজ শুরুর আগে এই ধাপে pandas দিয়ে ডেটা পড়া আর পরিষ্কার করা শেখা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "no better",
+            "bn": "ভালো নয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "pandas",
+        "title": "pandas reads and cleans",
+        "body": [
+          "pandas is a Python tool for reading, cleaning, and reshaping tables of data.",
+          "Think of a spreadsheet with superpowers."
+        ]
+      },
+      "bn": {
+        "short": "pandas",
+        "title": "pandas পড়ে আর পরিষ্কার করে",
+        "body": [
+          "pandas ডেটার টেবিল পড়া, পরিষ্কার করা আর নতুন করে সাজানোর একটি Python টুল।",
+          "ভাবুন সুপারপাওয়ারওয়ালা স্প্রেডশিট।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "pandas",
+          "state": "hot",
+          "sub": {
+            "en": "a spreadsheet with superpowers",
+            "bn": "সুপারপাওয়ারওয়ালা স্প্রেডশিট"
+          }
+        },
+        {
+          "id": "clean",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "pandas",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pandas",
+          "to": "clean",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hygiene",
+        "title": "Data hygiene",
+        "body": [
+          "Data hygiene is keeping data clean: removing duplicates, fixing bad labels, and handling missing values."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Duplicate rows: drop_duplicates(). Duplicates let the model memorize instead of generalize."
+          },
+          {
+            "sign": "+",
+            "html": "Mislabeled rows: value_counts() audits and manual spot-checks. A fine-tune learns your labels as ground truth, errors included."
+          }
+        ]
+      },
+      "bn": {
+        "short": "হাইজিন",
+        "title": "ডেটা হাইজিন",
+        "body": [
+          "ডেটা হাইজিন মানে ডেটা পরিষ্কার রাখা: ডুপ্লিকেট সরানো, ভুল লেবেল ঠিক করা আর মিসিং ভ্যালু সামলানো।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ডুপ্লিকেট সারি: drop_duplicates()। ডুপ্লিকেট থাকলে মডেল সাধারণীকরণের বদলে মুখস্থ করে।"
+          },
+          {
+            "sign": "+",
+            "html": "ভুল লেবেলের সারি: value_counts() দিয়ে যাচাই আর হাতে স্পট-চেক। ফাইন-টিউন আপনার লেবেলকে সঠিক ধরে শেখে, ভুলসহ।"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "warn",
+          "sub": {
+            "en": "duplicates, bad labels",
+            "bn": "ডুপ্লিকেট, ভুল লেবেল"
+          }
+        },
+        {
+          "id": "pandas",
+          "state": "hot"
+        },
+        {
+          "id": "clean",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "pandas",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "pandas",
+          "to": "clean",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "cleaned",
+          "bn": "পরিষ্কার"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Splits",
+        "title": "Train, validation, test",
+        "body": [
+          "Train, validation and test splits divide the data into three parts.",
+          "One part is to learn from, one to check progress, and one for the final test."
+        ]
+      },
+      "bn": {
+        "short": "স্প্লিট",
+        "title": "ট্রেন, ভ্যালিডেশন, টেস্ট",
+        "body": [
+          "ট্রেন, ভ্যালিডেশন আর টেস্ট স্প্লিটে ডেটা তিন ভাগ করা হয়।",
+          "একভাগ থেকে শেখা, একভাগে অগ্রগতি দেখা, আর একভাগ শেষ পরীক্ষার জন্য।"
+        ]
+      },
+      "show": [
+        {
+          "id": "clean",
+          "state": "hot",
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "train",
+          "state": "hot",
+          "sub": {
+            "en": "learn from",
+            "bn": "শেখা"
+          }
+        },
+        {
+          "id": "val",
+          "state": "hot",
+          "sub": {
+            "en": "check progress",
+            "bn": "অগ্রগতি দেখা"
+          }
+        },
+        {
+          "id": "test",
+          "state": "hot",
+          "sub": {
+            "en": "final test",
+            "bn": "শেষ পরীক্ষা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "clean",
+          "to": "train",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "clean",
+          "to": "val",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "clean",
+          "to": "test",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "three parts",
+          "bn": "তিন ভাগ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Leakage",
+        "title": "Split leakage",
+        "body": [
+          "Split leakage is when the same or nearly the same examples land in both train and test.",
+          "It makes your test results look better than they really are. Use group-aware splits, for example by source document."
+        ]
+      },
+      "bn": {
+        "short": "লিকেজ",
+        "title": "স্প্লিট লিকেজ",
+        "body": [
+          "স্প্লিট লিকেজ হলো একই বা প্রায় একই উদাহরণ ট্রেন আর টেস্ট দুই দিকেই চলে যাওয়া।",
+          "এতে টেস্টের ফল আসলের চেয়ে ভালো দেখায়। গ্রুপ-সচেতন স্প্লিট ব্যবহার করুন, যেমন সোর্স ডকুমেন্ট ধরে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "clean",
+          "state": "hot",
+          "sub": {
+            "en": "group-aware splits",
+            "bn": "গ্রুপ-সচেতন স্প্লিট"
+          },
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "train",
+          "state": "warn",
+          "sub": {
+            "en": "near-duplicates",
+            "bn": "প্রায় একই"
+          }
+        },
+        {
+          "id": "test",
+          "state": "warn",
+          "sub": {
+            "en": "near-duplicates",
+            "bn": "প্রায় একই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "clean",
+          "to": "train",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "clean",
+          "to": "test",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "looks better than real",
+          "bn": "আসলের চেয়ে ভালো দেখায়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Imbalance",
+        "title": "Class imbalance",
+        "body": [
+          "Class imbalance is when some kinds of label have far more examples than others.",
+          "This can skew training, so spot it before training starts."
+        ]
+      },
+      "bn": {
+        "short": "ইমব্যালান্স",
+        "title": "ক্লাস ইমব্যালান্স",
+        "body": [
+          "ক্লাস ইমব্যালান্স হলো যখন কিছু ধরনের লেবেলের উদাহরণ অন্যগুলোর চেয়ে অনেক বেশি থাকে।",
+          "এতে ট্রেইনিং একদিকে ঝুঁকে যেতে পারে, তাই ট্রেইনিংয়ের আগেই এটা ধরুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "warn",
+          "sub": {
+            "en": "far more examples",
+            "bn": "উদাহরণ অনেক বেশি"
+          }
+        },
+        {
+          "id": "model",
+          "state": "warn",
+          "sub": {
+            "en": "skewed",
+            "bn": "একদিকে ঝোঁকা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A small set of clean, correctly labeled examples often beats a much larger noisy one."
+        ],
+        "points": [
+          "A fine-tuned model cannot be better than the data it is shown.",
+          "A small set of clean, correctly labeled examples often beats a much larger noisy one.",
+          "Auditing your data pays off more than tuning hyperparameters.",
+          "Split data so similar examples do not leak across splits."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "অল্প কিছু পরিষ্কার, সঠিক লেবেলের উদাহরণ প্রায়ই অনেক বড় এলোমেলো ডেটাসেটের চেয়ে ভালো।"
+        ],
+        "points": [
+          "ফাইন-টিউন করা মডেল তাকে দেখানো ডেটার চেয়ে ভালো হতে পারে না।",
+          "অল্প কিছু পরিষ্কার, সঠিক লেবেলের উদাহরণ প্রায়ই অনেক বড় এলোমেলো ডেটাসেটের চেয়ে ভালো।",
+          "হাইপারপ্যারামিটার ঠিক করার চেয়ে ডেটা যাচাই করায় বেশি লাভ হয়।",
+          "ডেটা এমনভাবে ভাগ করুন, যাতে একই ধরনের উদাহরণ দুই ভাগে ফাঁস না হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "pandas",
+          "state": "hot"
+        },
+        {
+          "id": "clean",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "pandas",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pandas",
+          "to": "clean",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

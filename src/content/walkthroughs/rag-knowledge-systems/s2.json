@@ -1,0 +1,639 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "কুয়েরি"
+      },
+      "x": 90,
+      "y": 162
+    },
+    {
+      "id": "items",
+      "kind": "database",
+      "label": {
+        "en": "Stored vectors",
+        "bn": "জমা-রাখা ভেক্টর"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "ls1",
+      "kind": "storage",
+      "label": {
+        "en": "List",
+        "bn": "লিস্ট"
+      },
+      "x": 330,
+      "y": 75
+    },
+    {
+      "id": "ls2",
+      "kind": "storage",
+      "label": {
+        "en": "List",
+        "bn": "লিস্ট"
+      },
+      "x": 330,
+      "y": 162
+    },
+    {
+      "id": "ls3",
+      "kind": "storage",
+      "label": {
+        "en": "List",
+        "bn": "লিস্ট"
+      },
+      "x": 330,
+      "y": 250
+    },
+    {
+      "id": "top",
+      "kind": "service",
+      "label": {
+        "en": "Sparse top layer",
+        "bn": "ফাঁকা উপরের স্তর"
+      },
+      "x": 340,
+      "y": 60
+    },
+    {
+      "id": "mid",
+      "kind": "service",
+      "label": {
+        "en": "Denser layers",
+        "bn": "ঘন স্তর"
+      },
+      "x": 340,
+      "y": 162
+    },
+    {
+      "id": "low",
+      "kind": "service",
+      "label": {
+        "en": "Bottom layer",
+        "bn": "নিচের স্তর"
+      },
+      "x": 340,
+      "y": 262
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Embedding model",
+        "bn": "এমবেডিং মডেল"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "l2",
+      "kind": "tool",
+      "label": {
+        "en": "L2",
+        "bn": "L2"
+      },
+      "x": 400,
+      "y": 75
+    },
+    {
+      "id": "cos",
+      "kind": "tool",
+      "label": {
+        "en": "Cosine",
+        "bn": "কোসাইন"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "dot",
+      "kind": "tool",
+      "label": {
+        "en": "Dot product",
+        "bn": "ডট প্রোডাক্ট"
+      },
+      "x": 400,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Checks",
+      "bn": "দেখে"
+    },
+    {
+      "en": "Result",
+      "bn": "ফল"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "ANN",
+        "title": "Find the closest without checking all",
+        "body": [
+          "A vector database finds the stored items closest to your query without checking every one.",
+          "It uses an approximate nearest neighbour (ANN) index, a fast shortcut that can miss the very best match."
+        ]
+      },
+      "bn": {
+        "short": "ANN",
+        "title": "সব না দেখে সবচেয়ে কাছেরটা খোঁজা",
+        "body": [
+          "ভেক্টর ডেটাবেস সব আইটেম না দেখেই কুয়েরির সবচেয়ে কাছের জমা-রাখা আইটেমগুলো খুঁজে দেয়।",
+          "এজন্য সে অ্যাপ্রক্সিমেট নিয়ারেস্ট নেইবার (ANN) ইনডেক্স ব্যবহার করে, যা দ্রুত শর্টকাট, তবে সেরা মিলটা মাঝে মাঝে ফসকে যেতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "items",
+          "state": "hot",
+          "sub": {
+            "en": "ANN index",
+            "bn": "ANN ইনডেক্স"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "items",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "not every one",
+          "bn": "সব নয়"
+        },
+        {
+          "en": "very close",
+          "bn": "খুব কাছাকাছি"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Flat",
+        "title": "Flat search checks every vector",
+        "body": [
+          "Flat search checks every vector one by one.",
+          "It is exact and low on memory, and it suits small collections. It is slow on big ones."
+        ]
+      },
+      "bn": {
+        "short": "ফ্ল্যাট",
+        "title": "ফ্ল্যাট সার্চ প্রতিটি ভেক্টর দেখে",
+        "body": [
+          "ফ্ল্যাট সার্চ প্রতিটি ভেক্টর একে একে মেলায়।",
+          "এটা নির্ভুল ও কম মেমরির, আর ছোট কালেকশনের জন্য উপযুক্ত। বড় কালেকশনে ধীর।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "items",
+          "state": "hot",
+          "sub": {
+            "en": "every vector",
+            "bn": "প্রতিটি ভেক্টর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "items",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "every vector",
+          "bn": "প্রতিটি ভেক্টর"
+        },
+        {
+          "en": "exact",
+          "bn": "নির্ভুল"
+        },
+        {
+          "en": "slow when big",
+          "bn": "বড় হলে ধীর"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "IVF",
+        "title": "IVF searches only some lists",
+        "body": [
+          "IVF, the inverted file index, splits vectors into lists.",
+          "It searches only some of them."
+        ]
+      },
+      "bn": {
+        "short": "IVF",
+        "title": "IVF শুধু কয়েকটি লিস্টে খোঁজে",
+        "body": [
+          "IVF (inverted file index) ভেক্টরকে লিস্টে ভাগ করে।",
+          "আর শুধু কয়েকটি লিস্টে খোঁজে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "ls1",
+          "state": "dim",
+          "sub": {
+            "en": "not searched",
+            "bn": "খোঁজা হয় না"
+          }
+        },
+        {
+          "id": "ls2",
+          "state": "hot",
+          "sub": {
+            "en": "searched",
+            "bn": "খোঁজা হয়"
+          }
+        },
+        {
+          "id": "ls3",
+          "state": "hot",
+          "sub": {
+            "en": "searched",
+            "bn": "খোঁজা হয়"
+          }
+        },
+        {
+          "id": "items",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "ls1",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "q",
+          "to": "ls2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "q",
+          "to": "ls3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "some lists",
+          "bn": "কয়েকটি লিস্ট"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "HNSW",
+        "title": "HNSW walks a layered graph",
+        "body": [
+          "HNSW, the hierarchical navigable small world, is a layered graph of nearby vectors.",
+          "Search starts with long hops on a sparse top layer, then refines on denser layers. Its cost grows logarithmically."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Logarithmic means the cost grows very slowly as the collection grows."
+        }
+      },
+      "bn": {
+        "short": "HNSW",
+        "title": "HNSW স্তরে স্তরে গ্রাফ বেয়ে যায়",
+        "body": [
+          "HNSW (hierarchical navigable small world) কাছের ভেক্টরদের স্তরে স্তরে সাজানো গ্রাফ।",
+          "ফাঁকা উপরের স্তরে লম্বা লাফে শুরু, তারপর ঘন স্তরে সূক্ষ্ম খোঁজ। এর খরচ লগারিদমিক হারে বাড়ে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "লগারিদমিক মানে কালেকশন বড় হলেও খরচ খুব ধীরে বাড়ে।"
+        }
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "top",
+          "state": "hot",
+          "sub": {
+            "en": "long hops",
+            "bn": "লম্বা লাফ"
+          }
+        },
+        {
+          "id": "mid",
+          "state": "hot",
+          "sub": {
+            "en": "refine",
+            "bn": "সূক্ষ্ম খোঁজ"
+          }
+        },
+        {
+          "id": "low",
+          "state": "hot",
+          "sub": {
+            "en": "every vector",
+            "bn": "প্রতিটি ভেক্টর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "top",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "top",
+          "to": "mid",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mid",
+          "to": "low",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "a layered graph",
+          "bn": "স্তরে স্তরে গ্রাফ"
+        },
+        null,
+        {
+          "en": "logarithmic",
+          "bn": "লগারিদমিক"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Recall",
+        "title": "The shortcut can miss",
+        "body": [
+          "Recall is what share of the truly best matches the search manages to find.",
+          "An ANN index is approximate, so it can occasionally miss the very best match."
+        ]
+      },
+      "bn": {
+        "short": "রিকল",
+        "title": "শর্টকাট ফসকাতে পারে",
+        "body": [
+          "রিকল হলো সত্যিকারের সেরা মিলগুলোর কত অংশ সার্চ খুঁজে পায়।",
+          "ANN ইনডেক্স আনুমানিক, তাই সে মাঝে মাঝে সেরা মিলটা ফসকে ফেলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "items",
+          "state": "warn",
+          "sub": {
+            "en": "can miss the best",
+            "bn": "সেরাটা ফসকাতে পারে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "items",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "can miss the best",
+          "bn": "সেরাটা ফসকাতে পারে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Metrics",
+        "title": "Three ways to measure close",
+        "body": [
+          "A distance metric is the rule for measuring how close two vectors are, such as L2, cosine or dot product.",
+          "L2 measures the straight-line gap, cosine measures only the angle, and the dot product mixes angle with vector length."
+        ]
+      },
+      "bn": {
+        "short": "মেট্রিক",
+        "title": "কাছে মাপার তিনটি উপায়",
+        "body": [
+          "ডিস্ট্যান্স মেট্রিক হলো দুটি ভেক্টর কতটা কাছে তা মাপার নিয়ম, যেমন L2, কোসাইন বা ডট প্রোডাক্ট।",
+          "L2 সরলরেখার দূরত্ব মাপে, কোসাইন শুধু কোণ মাপে, আর ডট প্রোডাক্ট কোণ ও দৈর্ঘ্য দুটোই ধরে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "l2",
+          "state": "hot",
+          "sub": {
+            "en": "straight-line gap",
+            "bn": "সরলরেখার দূরত্ব"
+          }
+        },
+        {
+          "id": "cos",
+          "state": "hot",
+          "sub": {
+            "en": "angle only",
+            "bn": "শুধু কোণ"
+          }
+        },
+        {
+          "id": "dot",
+          "state": "hot",
+          "sub": {
+            "en": "angle and length",
+            "bn": "কোণ আর দৈর্ঘ্য"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Match",
+        "title": "Match the metric to your model",
+        "body": [
+          "Match the distance metric to the one your embedding model was trained for.",
+          "For unit-length vectors, vectors scaled to length 1, cosine and dot product rank results the same way."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "If you measure closeness the wrong way, the nearest result may not be the one you wanted."
+        }
+      },
+      "bn": {
+        "short": "মেলানো",
+        "title": "মেট্রিক মডেলের সাথে মেলান",
+        "body": [
+          "এমবেডিং মডেল যে মেট্রিকের জন্য ট্রেন হয়েছে, সেই ডিস্ট্যান্স মেট্রিকই বাছুন।",
+          "ইউনিট-লেংথ ভেক্টর (দৈর্ঘ্য ১ করে নেওয়া ভেক্টর) হলে কোসাইন আর ডট প্রোডাক্ট একই র‍্যাংকিং দেয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "কাছে মাপার ভুল উপায় নিলে সবচেয়ে কাছের ফলটা আপনার চাওয়া ফল নাও হতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "trained for one",
+            "bn": "একটির জন্য ট্রেন"
+          }
+        },
+        {
+          "id": "l2",
+          "state": "dim"
+        },
+        {
+          "id": "cos",
+          "state": "hot",
+          "sub": {
+            "en": "same ranking",
+            "bn": "একই র‍্যাংকিং"
+          }
+        },
+        {
+          "id": "dot",
+          "state": "hot",
+          "sub": {
+            "en": "same ranking",
+            "bn": "একই র‍্যাংকিং"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "cos",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "dot",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A vector database finds the closest stored vectors without comparing against every row, using an approximate index."
+        ],
+        "points": [
+          "Flat search is exact and low on memory, and it suits small collections.",
+          "IVF searches only some lists; HNSW walks a layered graph whose cost grows logarithmically.",
+          "Match the distance metric to the one your embedding model was trained for.",
+          "For unit-length vectors, cosine and dot product rank results the same way."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ভেক্টর ডেটাবেস প্রতিটি সারি না মিলিয়েই কাছের জমা-রাখা ভেক্টর খোঁজে, আনুমানিক ইনডেক্স দিয়ে।"
+        ],
+        "points": [
+          "ফ্ল্যাট সার্চ নির্ভুল ও কম মেমরির, আর ছোট কালেকশনের জন্য উপযুক্ত।",
+          "IVF শুধু কয়েকটি লিস্টে খোঁজে; HNSW স্তরে স্তরে গ্রাফ বেয়ে যায়, আর তার খরচ লগারিদমিক হারে বাড়ে।",
+          "এমবেডিং মডেল যে মেট্রিকের জন্য ট্রেন হয়েছে, সেই ডিস্ট্যান্স মেট্রিকই বাছুন।",
+          "ইউনিট-লেংথ ভেক্টর হলে কোসাইন আর ডট প্রোডাক্ট একই র‍্যাংকিং দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q"
+        },
+        {
+          "id": "items"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "items",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
