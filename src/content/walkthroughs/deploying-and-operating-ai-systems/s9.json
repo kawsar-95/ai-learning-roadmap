@@ -1,0 +1,660 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "app",
+      "kind": "user",
+      "label": {
+        "en": "Your app",
+        "bn": "আপনার অ্যাপ"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "api",
+      "kind": "service",
+      "label": {
+        "en": "Hosted model API",
+        "bn": "হোস্টেড মডেল API"
+      },
+      "x": 340,
+      "y": 60
+    },
+    {
+      "id": "plat",
+      "kind": "service",
+      "label": {
+        "en": "Managed platform",
+        "bn": "ম্যানেজড প্ল্যাটফর্ম"
+      },
+      "x": 340,
+      "y": 162
+    },
+    {
+      "id": "gpu",
+      "kind": "server",
+      "label": {
+        "en": "Rented GPUs",
+        "bn": "ভাড়া করা GPU"
+      },
+      "x": 340,
+      "y": 265
+    },
+    {
+      "id": "iam",
+      "kind": "shield",
+      "label": {
+        "en": "IAM role",
+        "bn": "IAM রোল"
+      },
+      "x": 610,
+      "y": 162
+    },
+    {
+      "id": "bucket",
+      "kind": "storage",
+      "label": {
+        "en": "Bucket",
+        "bn": "বাকেট"
+      },
+      "x": 610,
+      "y": 60
+    },
+    {
+      "id": "vdb",
+      "kind": "database",
+      "label": {
+        "en": "Vector database",
+        "bn": "ভেক্টর ডেটাবেস"
+      },
+      "x": 610,
+      "y": 265
+    },
+    {
+      "id": "quota",
+      "kind": "clock",
+      "label": {
+        "en": "Quota per minute",
+        "bn": "প্রতি মিনিটের কোটা"
+      },
+      "x": 610,
+      "y": 162
+    },
+    {
+      "id": "out",
+      "kind": "browser",
+      "label": {
+        "en": "Outside the cloud",
+        "bn": "ক্লাউডের বাইরে"
+      },
+      "x": 610,
+      "y": 60
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Start",
+      "bn": "শুরু"
+    },
+    {
+      "en": "Control",
+      "bn": "নিয়ন্ত্রণ"
+    },
+    {
+      "en": "Work",
+      "bn": "কাজ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Levels",
+        "title": "Three levels of renting",
+        "body": [
+          "With AI, you can rent at three levels: a hosted model API, a managed platform, or rented GPUs.",
+          "Each level is a trade between a fast start and more control."
+        ]
+      },
+      "bn": {
+        "short": "স্তর",
+        "title": "ভাড়ার তিন স্তর",
+        "body": [
+          "AI-এর জন্য তিন স্তরে ভাড়া নেওয়া যায়: হোস্টেড মডেল API, ম্যানেজড প্ল্যাটফর্ম, বা ভাড়া করা GPU।",
+          "প্রতিটি স্তরে দ্রুত শুরু আর বেশি নিয়ন্ত্রণের মধ্যে একটা বেছে নিতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot"
+        },
+        {
+          "id": "plat",
+          "state": "hot"
+        },
+        {
+          "id": "gpu",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "plat",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Hosted",
+        "title": "Hosted model API",
+        "body": [
+          "It is the model company's own service. You send prompts and data.",
+          "It is the fastest start, but you depend on their limits and prices."
+        ]
+      },
+      "bn": {
+        "short": "হোস্টেড",
+        "title": "হোস্টেড মডেল API",
+        "body": [
+          "এটা মডেল কোম্পানির নিজের সার্ভিস। আপনি প্রম্পট আর ডেটা পাঠান।",
+          "এটা সবচেয়ে দ্রুত শুরু, কিন্তু আপনি তাদের সীমা আর দামের ওপর নির্ভর করেন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "prompts and data",
+            "bn": "প্রম্পট আর ডেটা"
+          }
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "fastest start",
+            "bn": "সবচেয়ে দ্রুত শুরু"
+          }
+        },
+        {
+          "id": "plat",
+          "state": "dim"
+        },
+        {
+          "id": "gpu",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "fastest",
+          "bn": "সবচেয়ে দ্রুত"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Managed",
+        "title": "Managed platform",
+        "body": [
+          "A managed platform runs models behind your own cloud account's identity, private networking and billing.",
+          "You manage access, quotas, networking and cost."
+        ]
+      },
+      "bn": {
+        "short": "ম্যানেজড",
+        "title": "ম্যানেজড প্ল্যাটফর্ম",
+        "body": [
+          "ম্যানেজড প্ল্যাটফর্ম আপনার ক্লাউড অ্যাকাউন্টের পরিচয়, প্রাইভেট নেটওয়ার্ক আর বিলিংয়ের ভেতরে মডেল চালায়।",
+          "আপনি অ্যাক্সেস, কোটা, নেটওয়ার্কিং আর খরচ সামলান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "plat",
+          "state": "hot",
+          "sub": {
+            "en": "your account's identity",
+            "bn": "আপনার অ্যাকাউন্টের পরিচয়"
+          }
+        },
+        {
+          "id": "api",
+          "state": "dim"
+        },
+        {
+          "id": "gpu",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "plat",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "GPUs",
+        "title": "Rented GPUs",
+        "body": [
+          "Rented GPUs are virtual machines or Kubernetes nodes with GPUs.",
+          "You manage the whole serving stack: the most control and the most work."
+        ]
+      },
+      "bn": {
+        "short": "GPU",
+        "title": "ভাড়া করা GPU",
+        "body": [
+          "ভাড়া করা GPU মানে GPU সহ ভার্চুয়াল মেশিন বা Kubernetes নোড।",
+          "আপনি পুরো সার্ভিং স্ট্যাক সামলান: নিয়ন্ত্রণ সবচেয়ে বেশি, কাজও সবচেয়ে বেশি।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "whole serving stack",
+            "bn": "পুরো সার্ভিং স্ট্যাক"
+          }
+        },
+        {
+          "id": "api",
+          "state": "dim"
+        },
+        {
+          "id": "plat",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "gpu",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "most",
+          "bn": "সবচেয়ে বেশি"
+        },
+        {
+          "en": "most",
+          "bn": "সবচেয়ে বেশি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "IAM",
+        "title": "Identity and access management",
+        "body": [
+          "IAM decides who and what may call a model or read a storage bucket.",
+          "Give each service its own role with the least access it needs."
+        ]
+      },
+      "bn": {
+        "short": "IAM",
+        "title": "আইডেন্টিটি অ্যান্ড অ্যাক্সেস ম্যানেজমেন্ট",
+        "body": [
+          "IAM ঠিক করে কে বা কোন সার্ভিস মডেল কল করতে বা স্টোরেজ বাকেট পড়তে পারবে।",
+          "প্রতিটি সার্ভিসকে নিজের রোল দিন, ততটুকু অ্যাক্সেস সহ যতটুকু লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "plat",
+          "state": "hot",
+          "sub": {
+            "en": "its own role",
+            "bn": "নিজের রোল"
+          }
+        },
+        {
+          "id": "iam",
+          "state": "hot",
+          "sub": {
+            "en": "least access",
+            "bn": "ন্যূনতম অ্যাক্সেস"
+          }
+        },
+        {
+          "id": "bucket",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "plat",
+          "to": "iam",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "iam",
+          "to": "bucket",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Region",
+        "title": "Region: where the machines are",
+        "body": [
+          "A region is the place where the cloud's machines are. It affects speed, data rules and which models you can use.",
+          "Keep the model, the vector database and the app in one region when you can."
+        ]
+      },
+      "bn": {
+        "short": "রিজিয়ন",
+        "title": "রিজিয়ন: মেশিনগুলো যেখানে",
+        "body": [
+          "রিজিয়ন হলো ক্লাউডের মেশিনগুলো যেখানে আছে সেই জায়গা। এটা গতি, ডেটা রাখার আইন আর কোন মডেল পাওয়া যাবে তাতে প্রভাব ফেলে।",
+          "পারলে মডেল, ভেক্টর ডেটাবেস আর অ্যাপ এক রিজিয়নে রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "one region",
+            "bn": "এক রিজিয়ন"
+          }
+        },
+        {
+          "id": "plat",
+          "state": "hot",
+          "sub": {
+            "en": "one region",
+            "bn": "এক রিজিয়ন"
+          }
+        },
+        {
+          "id": "vdb",
+          "state": "hot",
+          "sub": {
+            "en": "one region",
+            "bn": "এক রিজিয়ন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "plat",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "plat",
+          "to": "vdb",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Quota",
+        "title": "Quota: a cap per minute",
+        "body": [
+          "A quota is a cap on how many requests or tokens you can use per minute in a region.",
+          "Ask for a quota increase before a launch, not during it."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Ask before the launch."
+        }
+      },
+      "bn": {
+        "short": "কোটা",
+        "title": "কোটা: প্রতি মিনিটের সীমা",
+        "body": [
+          "কোটা হলো কোনো রিজিয়নে প্রতি মিনিটে কত রিকোয়েস্ট বা টোকেন ব্যবহার করা যাবে, তার সীমা।",
+          "লঞ্চের আগে কোটা বাড়ানোর অনুরোধ করুন, লঞ্চের সময় নয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "লঞ্চের আগেই অনুরোধ করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "plat",
+          "state": "hot"
+        },
+        {
+          "id": "quota",
+          "state": "warn",
+          "sub": {
+            "en": "cap",
+            "bn": "সীমা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "plat",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "plat",
+          "to": "quota",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Egress",
+        "title": "Egress: data that leaves is billed",
+        "body": [
+          "Egress is data that leaves the cloud. The cloud bills you for it."
+        ]
+      },
+      "bn": {
+        "short": "ইগ্রেস",
+        "title": "ইগ্রেস: বাইরে যাওয়া ডেটার বিল",
+        "body": [
+          "ইগ্রেস হলো ক্লাউডের বাইরে যাওয়া ডেটা। এর জন্য ক্লাউড আপনাকে বিল করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "plat",
+          "state": "hot"
+        },
+        {
+          "id": "out",
+          "state": "warn",
+          "sub": {
+            "en": "billed",
+            "bn": "বিল হয়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "plat",
+          "to": "out",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A hosted API starts fastest. Rented GPUs give the most control and the most work."
+        ],
+        "points": [
+          "Give each service its own role with the least access it needs.",
+          "Ask for a quota increase before a launch, not during it.",
+          "Keep the model, the vector database and the app in one region when you can."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "হোস্টেড API সবচেয়ে দ্রুত শুরু হয়। ভাড়া করা GPU-তে নিয়ন্ত্রণ সবচেয়ে বেশি, কাজও সবচেয়ে বেশি।"
+        ],
+        "points": [
+          "প্রতিটি সার্ভিসকে নিজের রোল দিন, ততটুকু অ্যাক্সেস সহ যতটুকু লাগে।",
+          "লঞ্চের আগে কোটা বাড়ানোর অনুরোধ করুন, লঞ্চের সময় নয়।",
+          "পারলে মডেল, ভেক্টর ডেটাবেস আর অ্যাপ এক রিজিয়নে রাখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "fastest start",
+            "bn": "সবচেয়ে দ্রুত শুরু"
+          }
+        },
+        {
+          "id": "plat",
+          "state": "hot"
+        },
+        {
+          "id": "gpu",
+          "state": "hot",
+          "sub": {
+            "en": "most control",
+            "bn": "সবচেয়ে বেশি নিয়ন্ত্রণ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "api",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "plat",
+          "flow": "to"
+        },
+        {
+          "from": "app",
+          "to": "gpu",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        {
+          "en": "fastest",
+          "bn": "সবচেয়ে দ্রুত"
+        },
+        {
+          "en": "most",
+          "bn": "সবচেয়ে বেশি"
+        },
+        {
+          "en": "most",
+          "bn": "সবচেয়ে বেশি"
+        }
+      ]
+    }
+  ]
+}

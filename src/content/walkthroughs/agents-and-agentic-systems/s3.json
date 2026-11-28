@@ -1,0 +1,537 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "single",
+      "kind": "model",
+      "label": {
+        "en": "Single agent",
+        "bn": "সিঙ্গেল এজেন্ট"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "tools",
+      "kind": "tool",
+      "label": {
+        "en": "One set of tools",
+        "bn": "একসেট টুল"
+      },
+      "x": 400,
+      "y": 75
+    },
+    {
+      "id": "trace",
+      "kind": "file",
+      "label": {
+        "en": "One trace",
+        "bn": "একটি ট্রেস"
+      },
+      "x": 400,
+      "y": 250
+    },
+    {
+      "id": "orch",
+      "kind": "service",
+      "label": {
+        "en": "Orchestrator",
+        "bn": "অর্কেস্ট্রেটর"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "res",
+      "kind": "model",
+      "label": {
+        "en": "Researcher",
+        "bn": "গবেষক"
+      },
+      "x": 400,
+      "y": 75
+    },
+    {
+      "id": "wri",
+      "kind": "model",
+      "label": {
+        "en": "Writer",
+        "bn": "লেখক"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "cri",
+      "kind": "model",
+      "label": {
+        "en": "Critic",
+        "bn": "সমালোচক"
+      },
+      "x": 400,
+      "y": 250
+    },
+    {
+      "id": "pad",
+      "kind": "file",
+      "label": {
+        "en": "Shared scratchpad",
+        "bn": "শেয়ার্ড স্ক্র্যাচপ্যাড"
+      },
+      "x": 640,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Debugging",
+      "bn": "ডিবাগিং"
+    },
+    {
+      "en": "Token cost",
+      "bn": "টোকেন খরচ"
+    },
+    {
+      "en": "Best when",
+      "bn": "কখন ভালো"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Single",
+        "title": "A single agent: one loop",
+        "body": [
+          "A single agent is one LLM in one loop with one set of tools.",
+          "You debug by reading one trace."
+        ]
+      },
+      "bn": {
+        "short": "সিঙ্গেল",
+        "title": "সিঙ্গেল এজেন্ট: একটি লুপ",
+        "body": [
+          "সিঙ্গেল এজেন্ট মানে একটি লুপে একটি LLM, একসেট টুলসহ।",
+          "একটি ট্রেস পড়েই ডিবাগ করা যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "single",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        },
+        {
+          "id": "trace",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "single",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "single",
+          "to": "trace",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one trace",
+          "bn": "একটি ট্রেস"
+        },
+        {
+          "en": "about 4×",
+          "bn": "প্রায় ৪ গুণ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Multi",
+        "title": "Several agents on one task",
+        "body": [
+          "A multi-agent setup has several agents, each with its own prompt and tools, working together on one task.",
+          "Debugging means matching N traces."
+        ]
+      },
+      "bn": {
+        "short": "মাল্টি",
+        "title": "একটি কাজে একাধিক এজেন্ট",
+        "body": [
+          "মাল্টি-এজেন্টে একাধিক এজেন্ট থাকে, প্রত্যেকের নিজের প্রম্পট ও টুল, একটি কাজে একসাথে চলে।",
+          "ডিবাগে N-টি ট্রেস মেলাতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "orch",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot",
+          "sub": {
+            "en": "own prompt, own tools",
+            "bn": "নিজের প্রম্পট ও টুল"
+          }
+        },
+        {
+          "id": "wri",
+          "state": "hot",
+          "sub": {
+            "en": "own prompt, own tools",
+            "bn": "নিজের প্রম্পট ও টুল"
+          }
+        },
+        {
+          "id": "cri",
+          "state": "hot",
+          "sub": {
+            "en": "own prompt, own tools",
+            "bn": "নিজের প্রম্পট ও টুল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "orch",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "wri",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "cri",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "N traces",
+          "bn": "N-টি ট্রেস"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Team",
+        "title": "An orchestrator and its workers",
+        "body": [
+          "The orchestrator hands out work to the others and puts their results together.",
+          "A worker is a specialised agent, such as a researcher, writer, critic, or coder, that does one part of the job."
+        ]
+      },
+      "bn": {
+        "short": "দল",
+        "title": "অর্কেস্ট্রেটর আর তার ওয়ার্কার",
+        "body": [
+          "অর্কেস্ট্রেটর অন্যদের কাজ ভাগ করে দেয় এবং তাদের ফল জোড়া লাগায়।",
+          "ওয়ার্কার বিশেষায়িত এজেন্ট, যেমন গবেষক, লেখক, সমালোচক বা কোডার, যে কাজের একটি অংশ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "orch",
+          "state": "hot",
+          "sub": {
+            "en": "hands out work",
+            "bn": "কাজ ভাগ করে"
+          }
+        },
+        {
+          "id": "res",
+          "state": "hot",
+          "sub": {
+            "en": "one part",
+            "bn": "একটি অংশ"
+          }
+        },
+        {
+          "id": "wri",
+          "state": "hot",
+          "sub": {
+            "en": "one part",
+            "bn": "একটি অংশ"
+          }
+        },
+        {
+          "id": "cri",
+          "state": "hot",
+          "sub": {
+            "en": "one part",
+            "bn": "একটি অংশ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "orch",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "wri",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "orch",
+          "to": "cri",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Talk",
+        "title": "How the agents talk",
+        "body": [
+          "With message passing, the orchestrator sends messages in a fixed format to the workers.",
+          "With a shared scratchpad, also called a blackboard, all agents read from and write to one shared file or in-memory dict."
+        ]
+      },
+      "bn": {
+        "short": "যোগাযোগ",
+        "title": "এজেন্টরা কীভাবে কথা বলে",
+        "body": [
+          "মেসেজ পাসিংয়ে অর্কেস্ট্রেটর ওয়ার্কারদের কাছে নির্দিষ্ট ফরম্যাটে মেসেজ পাঠায়।",
+          "শেয়ার্ড স্ক্র্যাচপ্যাডে (blackboard) সব এজেন্ট একটি শেয়ার করা ফাইল বা ইন-মেমরি ডিক্ট থেকে পড়ে ও লেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "orch",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        },
+        {
+          "id": "wri",
+          "state": "hot"
+        },
+        {
+          "id": "pad",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "orch",
+          "to": "res",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "message",
+            "bn": "মেসেজ"
+          }
+        },
+        {
+          "from": "orch",
+          "to": "wri",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "res",
+          "to": "pad",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "wri",
+          "to": "pad",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "A team uses far more tokens",
+        "body": [
+          "Multi-agent systems use far more tokens.",
+          "Anthropic measured about 15× a chat, against about 4× for a single agent."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Debugging a single agent means reading one trace. Multi-agent means matching N traces."
+        }
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "দলে অনেক বেশি টোকেন লাগে",
+        "body": [
+          "মাল্টি-এজেন্টে অনেক বেশি টোকেন লাগে।",
+          "Anthropic-এর হিসাবে চ্যাটের প্রায় ১৫ গুণ, আর সিঙ্গেল এজেন্টের প্রায় ৪ গুণ।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সিঙ্গেল এজেন্ট ডিবাগে একটি ট্রেস পড়তে হয়। মাল্টি-এজেন্টে N-টি ট্রেস মেলাতে হয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "single",
+          "state": "hot",
+          "sub": {
+            "en": "about 4×",
+            "bn": "প্রায় ৪ গুণ"
+          },
+          "x": 200,
+          "y": 162
+        },
+        {
+          "id": "orch",
+          "state": "warn",
+          "sub": {
+            "en": "about 15× a chat",
+            "bn": "চ্যাটের প্রায় ১৫ গুণ"
+          },
+          "x": 560,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        {
+          "en": "about 15× a chat",
+          "bn": "চ্যাটের প্রায় ১৫ গুণ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "When",
+        "title": "When to use which",
+        "body": [
+          "As a rule of thumb, use a single agent for 5 tools or fewer in one domain.",
+          "Use multi-agent for distinct roles and high stakes."
+        ]
+      },
+      "bn": {
+        "short": "কখন",
+        "title": "কখন কোনটা",
+        "body": [
+          "সাধারণ নিয়ম: একটি ডোমেইনে ৫টি বা কম টুলে সিঙ্গেল এজেন্ট নিন।",
+          "আলাদা ভূমিকা আর বড় ঝুঁকিতে মাল্টি-এজেন্ট নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "single",
+          "state": "hot",
+          "sub": {
+            "en": "5 tools or fewer",
+            "bn": "৫টি বা কম টুল"
+          },
+          "x": 200,
+          "y": 162
+        },
+        {
+          "id": "orch",
+          "state": "hot",
+          "sub": {
+            "en": "distinct roles",
+            "bn": "আলাদা ভূমিকা"
+          },
+          "x": 560,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        {
+          "en": "5 tools or fewer",
+          "bn": "৫টি বা কম টুল"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "One well-tuned agent often does the job, and a team of agents costs more."
+        ],
+        "points": [
+          "Do not build a multi-agent system just because it sounds advanced.",
+          "Debugging a single agent means reading one trace. Multi-agent means matching N traces."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "একটি ভালোভাবে টিউন করা এজেন্টই প্রায়ই কাজ করে দেয়, আর এজেন্টের দলে খরচ বেশি।"
+        ],
+        "points": [
+          "শুধু উন্নত শোনায় বলে মাল্টি-এজেন্ট সিস্টেম বানাবেন না।",
+          "সিঙ্গেল এজেন্ট ডিবাগে একটি ট্রেস পড়তে হয়। মাল্টি-এজেন্টে N-টি ট্রেস মেলাতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "single",
+          "state": "hot",
+          "x": 200,
+          "y": 162
+        },
+        {
+          "id": "orch",
+          "state": "dim",
+          "x": 560,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

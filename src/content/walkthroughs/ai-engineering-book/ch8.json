@@ -1,0 +1,589 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "file",
+      "label": {
+        "en": "Training data",
+        "bn": "ট্রেনিং ডেটা"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "quality",
+      "kind": "shield",
+      "label": {
+        "en": "Quality",
+        "bn": "মান"
+      },
+      "x": 320,
+      "y": 162
+    },
+    {
+      "id": "coverage",
+      "kind": "chart",
+      "label": {
+        "en": "Coverage",
+        "bn": "কভারেজ"
+      },
+      "x": 520,
+      "y": 70
+    },
+    {
+      "id": "quantity",
+      "kind": "storage",
+      "label": {
+        "en": "Quantity",
+        "bn": "পরিমাণ"
+      },
+      "x": 520,
+      "y": 254
+    },
+    {
+      "id": "plot",
+      "kind": "chart",
+      "label": {
+        "en": "Plot the results",
+        "bn": "ফল প্লট"
+      },
+      "x": 480,
+      "y": 162
+    },
+    {
+      "id": "synth",
+      "kind": "model",
+      "label": {
+        "en": "Data synthesis",
+        "bn": "ডেটা সিন্থেসিস"
+      },
+      "x": 400,
+      "y": 162
+    },
+    {
+      "id": "checks",
+      "kind": "tool",
+      "label": {
+        "en": "Checks",
+        "bn": "যাচাই"
+      },
+      "x": 640,
+      "y": 162
+    },
+    {
+      "id": "teacher",
+      "kind": "model",
+      "label": {
+        "en": "Teacher model",
+        "bn": "teacher মডেল"
+      },
+      "x": 160,
+      "y": 162
+    },
+    {
+      "id": "student",
+      "kind": "model",
+      "label": {
+        "en": "Student model",
+        "bn": "student মডেল"
+      },
+      "x": 600,
+      "y": 162
+    },
+    {
+      "id": "process",
+      "kind": "tool",
+      "label": {
+        "en": "Process",
+        "bn": "প্রসেস"
+      },
+      "x": 400,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Quality",
+      "bn": "মান"
+    },
+    {
+      "en": "Quantity",
+      "bn": "পরিমাণ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Bad data",
+        "title": "Bad data cannot be fixed",
+        "body": [
+          "No amount of compute or model skill can fix bad data.",
+          "Dataset engineering means building data that is good, covers real use, and is big enough, within your budget."
+        ]
+      },
+      "bn": {
+        "short": "খারাপ ডেটা",
+        "title": "খারাপ ডেটা ঠিক করা যায় না",
+        "body": [
+          "কোনো কম্পিউট বা দক্ষতা দিয়েই খারাপ ডেটা ঠিক করা যায় না।",
+          "ডেটাসেট ইঞ্জিনিয়ারিং মানে বাজেটের মধ্যে এমন ডেটা বানানো, যা ভালোমানের, বাস্তব ব্যবহারের সব দিক ছোঁয় আর যথেষ্ট বড়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "warn",
+          "sub": {
+            "en": "bad data",
+            "bn": "খারাপ ডেটা"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Three",
+        "title": "Quality, coverage, quantity",
+        "body": [
+          "The same three questions decide whether a dataset is good: is it high quality, does it have good coverage, and is there enough of it?",
+          "Coverage means your data spans the inputs the model will see in real use. It is also called data diversity."
+        ]
+      },
+      "bn": {
+        "short": "তিন প্রশ্ন",
+        "title": "মান, কভারেজ, পরিমাণ",
+        "body": [
+          "একই তিনটি প্রশ্ন ঠিক করে ডেটাসেট ভালো কি না: মান ভালো কি না, কভারেজ ভালো কি না, আর যথেষ্ট পরিমাণ আছে কি না।",
+          "কভারেজ মানে বাস্তবে মডেল যত ধরনের ইনপুট পাবে, আপনার ডেটা তা ছোঁয়। একে data diversity-ও বলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "quality",
+          "state": "hot",
+          "sub": {
+            "en": "high quality?",
+            "bn": "ভালো মান?"
+          }
+        },
+        {
+          "id": "coverage",
+          "state": "hot",
+          "sub": {
+            "en": "good coverage?",
+            "bn": "ভালো কভারেজ?"
+          }
+        },
+        {
+          "id": "quantity",
+          "state": "hot",
+          "sub": {
+            "en": "enough of it?",
+            "bn": "যথেষ্ট?"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "quality",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "quality",
+          "to": "coverage",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "quality",
+          "to": "quantity",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "high quality?",
+          "bn": "ভালো মান?"
+        },
+        {
+          "en": "enough of it?",
+          "bn": "যথেষ্ট?"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Quality",
+        "title": "Careful beats messy",
+        "body": [
+          "A few thousand careful examples can match or beat hundreds of thousands of messy ones.",
+          "Good data beats more data, almost every time."
+        ]
+      },
+      "bn": {
+        "short": "মান",
+        "title": "যত্নের ডেটা এলোমেলোকে হারায়",
+        "body": [
+          "কয়েক হাজার যত্নে লেখা উদাহরণ কয়েক লাখ এলোমেলো উদাহরণের সমান বা তার চেয়ে ভালো ফল দিতে পারে।",
+          "ভালো ডেটা বেশি ডেটাকে প্রায় সব সময় হারায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "quality",
+          "state": "hot",
+          "sub": {
+            "en": "a few thousand careful",
+            "bn": "কয়েক হাজার যত্নের"
+          }
+        },
+        {
+          "id": "quantity",
+          "state": "dim",
+          "sub": {
+            "en": "hundreds of thousands messy",
+            "bn": "কয়েক লাখ এলোমেলো"
+          }
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "quality",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "quantity",
+          "to": "model",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "careful",
+          "bn": "যত্নের"
+        },
+        {
+          "en": "messy",
+          "bn": "এলোমেলো"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "How much",
+        "title": "Plot size against results",
+        "body": [
+          "To judge how much data you need, finetune on 25%, 50%, and 100% of it and plot the results.",
+          "A steep slope means more data will keep helping; a flat one means you're near the ceiling."
+        ]
+      },
+      "bn": {
+        "short": "কত ডেটা",
+        "title": "আকারের সাথে ফল প্লট করুন",
+        "body": [
+          "কত ডেটা লাগবে বুঝতে ডেটার ২৫%, ৫০% আর ১০০% দিয়ে ফাইন-টিউন করে ফল প্লট করুন।",
+          "খাড়া ঢালের মানে আরও ডেটা কাজে দেবে; সমতল ঢালের মানে আপনি সীমার কাছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "25%, 50%, 100%",
+            "bn": "২৫%, ৫০%, ১০০%"
+          }
+        },
+        {
+          "id": "plot",
+          "state": "hot",
+          "sub": {
+            "en": "steep or flat",
+            "bn": "খাড়া না সমতল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "plot",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "how much data",
+          "bn": "কত ডেটা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Synthesis",
+        "title": "Make data that mimics real data",
+        "body": [
+          "Data synthesis makes data that mimics real data without being built from one specific real example.",
+          "It can be made with rules, simulation, or an AI model. Reverse instruction starts from good existing text and asks the model to write the instruction that would have produced it."
+        ]
+      },
+      "bn": {
+        "short": "সিন্থেসিস",
+        "title": "আসল ডেটার মতো ডেটা বানান",
+        "body": [
+          "ডেটা সিন্থেসিস কোনো একটি নির্দিষ্ট আসল উদাহরণ থেকে তৈরি না করে আসল ডেটার মতো ডেটা বানায়।",
+          "এটা নিয়ম, সিমুলেশন বা একটি AI মডেল দিয়ে বানানো যায়। রিভার্স ইনস্ট্রাকশনে ভালো লেখা নিয়ে শুরু করে মডেলকে সেই লেখা তৈরি করতে পারে এমন ইনস্ট্রাকশন লিখতে বলা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "dim",
+          "sub": {
+            "en": "real data",
+            "bn": "আসল ডেটা"
+          }
+        },
+        {
+          "id": "synth",
+          "state": "hot",
+          "sub": {
+            "en": "rules, simulation, AI",
+            "bn": "নিয়ম, সিমুলেশন, AI"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "synth",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Check",
+        "title": "Synthetic data needs checking",
+        "body": [
+          "Synthetic data still needs checking: run code tests, use an AI judge, or filter with simple rules.",
+          "Model collapse is when a model gets worse over generations, trained again and again on AI-made data."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Training again and again on AI-made data makes rare patterns fade."
+        }
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "synthetic ডেটা যাচাই করতে হয়",
+        "body": [
+          "synthetic ডেটাও যাচাই করতে হয়: কোড টেস্ট চালান, AI judge ব্যবহার করুন, বা সহজ নিয়মে ছেঁকে নিন।",
+          "মডেল কোলাপ্স হলো বারবার AI-র বানানো ডেটায় ট্রেনিং করালে মডেল প্রজন্মের পর প্রজন্মে খারাপ হওয়া।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "বারবার AI-র বানানো ডেটায় ট্রেনিং করালে বিরল প্যাটার্ন মিলিয়ে যায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "synth",
+          "state": "warn",
+          "sub": {
+            "en": "AI-made data",
+            "bn": "AI-র বানানো ডেটা"
+          }
+        },
+        {
+          "id": "checks",
+          "state": "hot",
+          "sub": {
+            "en": "tests, AI judge, rules",
+            "bn": "টেস্ট, AI judge, নিয়ম"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "synth",
+          "to": "checks",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Distill",
+        "title": "A student imitates a teacher",
+        "body": [
+          "Model distillation trains a small student model to imitate a large teacher model.",
+          "It is usually done on data the teacher made."
+        ]
+      },
+      "bn": {
+        "short": "ডিস্টিলেশন",
+        "title": "student শেখে teacher-এর নকল করে",
+        "body": [
+          "মডেল ডিস্টিলেশনে একটি ছোট student মডেলকে বড় teacher মডেলের নকল করতে শেখানো হয়।",
+          "এটা সাধারণত teacher-এর বানানো ডেটা দিয়ে করা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "teacher",
+          "state": "hot",
+          "sub": {
+            "en": "large",
+            "bn": "বড়"
+          }
+        },
+        {
+          "id": "student",
+          "state": "hot",
+          "sub": {
+            "en": "small",
+            "bn": "ছোট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "teacher",
+          "to": "student",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "data the teacher made",
+            "bn": "teacher-এর বানানো ডেটা"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Prepare",
+        "title": "Process the data before training",
+        "body": [
+          "Before training, inspect, deduplicate, clean, and format the data to match what the target model expects.",
+          "Deduplication removes exact and near-duplicate examples from the data."
+        ],
+        "points": [
+          "Four steps: inspect, deduplicate, clean, format."
+        ]
+      },
+      "bn": {
+        "short": "প্রস্তুতি",
+        "title": "ট্রেনিংয়ের আগে ডেটা প্রসেস করুন",
+        "body": [
+          "ট্রেনিংয়ের আগে ডেটা inspect, deduplicate, clean আর format করুন, যাতে টার্গেট মডেলের চাহিদার সাথে মেলে।",
+          "ডিডুপ্লিকেশন হুবহু এক বা প্রায় একই রকম উদাহরণ ডেটা থেকে সরিয়ে ফেলে।"
+        ],
+        "points": [
+          "চারটি ধাপ: inspect, deduplicate, clean, format।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "raw data",
+            "bn": "কাঁচা ডেটা"
+          }
+        },
+        {
+          "id": "process",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot",
+          "sub": {
+            "en": "what the model expects",
+            "bn": "মডেল যা চায়"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "process",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "process",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

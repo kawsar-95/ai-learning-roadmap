@@ -1,0 +1,618 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "env",
+      "kind": "service",
+      "label": {
+        "en": "Environment",
+        "bn": "পরিবেশ"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "agent",
+      "kind": "model",
+      "label": {
+        "en": "Agent",
+        "bn": "এজেন্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tools",
+      "kind": "tool",
+      "label": {
+        "en": "Tools",
+        "bn": "টুল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "know",
+      "kind": "database",
+      "label": {
+        "en": "Knowledge augmentation",
+        "bn": "জ্ঞান বাড়ানো"
+      },
+      "x": 130,
+      "y": 75
+    },
+    {
+      "id": "cap",
+      "kind": "tool",
+      "label": {
+        "en": "Capability extension",
+        "bn": "সক্ষমতা বাড়ানো"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "write",
+      "kind": "tool",
+      "label": {
+        "en": "Write action",
+        "bn": "রাইট অ্যাকশন"
+      },
+      "x": 130,
+      "y": 250
+    },
+    {
+      "id": "decl",
+      "kind": "file",
+      "label": {
+        "en": "Declared tool",
+        "bn": "ঘোষণা করা টুল"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "plan",
+      "kind": "file",
+      "label": {
+        "en": "Plan",
+        "bn": "প্ল্যান"
+      },
+      "x": 130,
+      "y": 162
+    },
+    {
+      "id": "check",
+      "kind": "shield",
+      "label": {
+        "en": "Validate",
+        "bn": "যাচাই"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "refl",
+      "kind": "chart",
+      "label": {
+        "en": "Reflection",
+        "bn": "রিফ্লেকশন"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "stm",
+      "kind": "cache",
+      "label": {
+        "en": "Short-term memory",
+        "bn": "শর্ট-টার্ম মেমরি"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "ltm",
+      "kind": "storage",
+      "label": {
+        "en": "Long-term memory",
+        "bn": "লং-টার্ম মেমরি"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Accuracy per step",
+      "bn": "প্রতি ধাপে নির্ভুলতা"
+    },
+    {
+      "en": "After 10 steps",
+      "bn": "১০ ধাপ পরে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Agent",
+        "title": "An agent senses and acts",
+        "body": [
+          "An agent is anything that perceives an environment and acts on it, using a set of tools.",
+          "Errors compound across steps: 95% accuracy per step drops to about 60% after 10 steps."
+        ]
+      },
+      "bn": {
+        "short": "এজেন্ট",
+        "title": "এজেন্ট বোঝে আর কাজ করে",
+        "body": [
+          "এজেন্ট হলো যা কোনো পরিবেশ বুঝতে পারে এবং একগুচ্ছ টুল দিয়ে সেখানে কাজ করে।",
+          "ভুল ধাপে ধাপে জমে: প্রতি ধাপে ৯৫% নির্ভুলতা ১০ ধাপ পরে প্রায় ৬০% হয়ে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "env",
+          "state": "hot"
+        },
+        {
+          "id": "agent",
+          "state": "hot"
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "env",
+          "to": "agent",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        "95%",
+        {
+          "en": "about 60%",
+          "bn": "প্রায় ৬০%"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Tools",
+        "title": "Three kinds of tools",
+        "body": [
+          "Knowledge augmentation tools are retrievers, web search and internal APIs. Capability extension tools are calculators, code interpreters and translators.",
+          "Write actions change something, like sending an email, instead of only reading data."
+        ]
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "তিন ধরনের টুল",
+        "body": [
+          "জ্ঞান বাড়ানোর টুল হলো রিট্রিভার, ওয়েব সার্চ আর ইন্টারনাল API। সক্ষমতা বাড়ানোর টুল হলো ক্যালকুলেটর, কোড ইন্টারপ্রেটার আর অনুবাদক।",
+          "রাইট অ্যাকশন শুধু ডেটা পড়ে না, কিছু বদলায়, যেমন ইমেইল পাঠানো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "know",
+          "state": "hot"
+        },
+        {
+          "id": "cap",
+          "state": "hot"
+        },
+        {
+          "id": "write",
+          "state": "warn"
+        },
+        {
+          "id": "tools",
+          "state": "hot",
+          "x": 380
+        }
+      ],
+      "links": [
+        {
+          "from": "know",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cap",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "write",
+          "to": "tools",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Calling",
+        "title": "Function calling",
+        "body": [
+          "Invoking a tool through a model API is called function calling.",
+          "The tool is declared with a name, parameters and description, and the model decides when and how to call it."
+        ]
+      },
+      "bn": {
+        "short": "কলিং",
+        "title": "ফাংশন কলিং",
+        "body": [
+          "মডেল API দিয়ে টুল ব্যবহার করাকে বলে ফাংশন কলিং।",
+          "টুলটি নাম, প্যারামিটার আর বর্ণনাসহ ঘোষণা করা হয়, আর মডেল ঠিক করে কখন ও কীভাবে ডাকবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "decl",
+          "state": "hot",
+          "sub": {
+            "en": "declared",
+            "bn": "ঘোষণা করা"
+          }
+        },
+        {
+          "id": "agent",
+          "state": "hot",
+          "sub": {
+            "en": "decides when",
+            "bn": "কখন ঠিক করে"
+          }
+        },
+        {
+          "id": "tools",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "decl",
+          "to": "agent",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "agent",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Plan",
+        "title": "Plan, validate, then execute",
+        "body": [
+          "A plan is the sequence of actions meant to achieve a goal. Good practice decouples planning from execution.",
+          "Generate a plan, validate it with heuristics or an AI judge, and only then execute it, so a bad plan never burns time and money."
+        ]
+      },
+      "bn": {
+        "short": "প্ল্যান",
+        "title": "প্ল্যান, যাচাই, তারপর চালানো",
+        "body": [
+          "প্ল্যান হলো লক্ষ্যে পৌঁছানোর কাজের ধারা। ভালো অভ্যাস হলো প্ল্যান করা আর চালানোকে আলাদা রাখা।",
+          "প্ল্যান বানান, heuristic বা AI জাজ দিয়ে যাচাই করুন, তারপরই চালান, যাতে ভুল প্ল্যানে সময় ও টাকা নষ্ট না হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "plan",
+          "state": "hot"
+        },
+        {
+          "id": "check",
+          "state": "hot",
+          "sub": {
+            "en": "AI judge",
+            "bn": "AI জাজ"
+          }
+        },
+        {
+          "id": "tools",
+          "state": "hot",
+          "sub": {
+            "en": "only then",
+            "bn": "তারপরই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "plan",
+          "to": "check",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "check",
+          "to": "tools",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Reflection",
+        "title": "Reflection looks it over",
+        "body": [
+          "In reflection, the agent or a separate evaluator critiques the plan or the outcome.",
+          "It is not mandatory, but it sharply improves reliability."
+        ]
+      },
+      "bn": {
+        "short": "রিফ্লেকশন",
+        "title": "রিফ্লেকশন দেখে নেয়",
+        "body": [
+          "রিফ্লেকশনে এজেন্ট নিজে বা আলাদা মূল্যায়নকারী প্ল্যান বা ফলের সমালোচনা করে।",
+          "এটা বাধ্যতামূলক নয়, কিন্তু নির্ভরযোগ্যতা অনেক বাড়ায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "plan",
+          "state": "hot"
+        },
+        {
+          "id": "refl",
+          "state": "hot",
+          "sub": {
+            "en": "not mandatory",
+            "bn": "বাধ্যতামূলক নয়"
+          }
+        },
+        {
+          "id": "tools",
+          "state": "hot",
+          "sub": {
+            "en": "outcome",
+            "bn": "ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "plan",
+          "to": "refl",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tools",
+          "to": "refl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Failures",
+        "title": "How agents fail",
+        "body": [
+          "Agents fail in ways beyond ordinary model errors: planning failures, tool failures and poor efficiency.",
+          "Evaluation means tracking how often each failure mode occurs and comparing against a baseline."
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "Always log every tool call and its output. It is the single most useful habit for debugging an agent."
+        }
+      },
+      "bn": {
+        "short": "ব্যর্থতা",
+        "title": "এজেন্ট কীভাবে ব্যর্থ হয়",
+        "body": [
+          "সাধারণ মডেল-ভুলের বাইরেও এজেন্ট ব্যর্থ হয়: প্ল্যানের ব্যর্থতা, টুলের ব্যর্থতা আর দক্ষতার অভাবে।",
+          "মূল্যায়ন মানে প্রতিটি ব্যর্থতা কতবার ঘটে তা ট্র্যাক করা আর বেসলাইনের সঙ্গে তুলনা করা।"
+        ],
+        "note": {
+          "kind": "insight",
+          "html": "প্রতিটি টুল কল আর তার আউটপুট সবসময় লগ করুন। এজেন্ট কেন ভুল করল তা ডিবাগ করতে এটাই সবচেয়ে কাজের অভ্যাস।"
+        }
+      },
+      "show": [
+        {
+          "id": "plan",
+          "state": "warn",
+          "sub": {
+            "en": "wrong parameters",
+            "bn": "ভুল প্যারামিটার"
+          }
+        },
+        {
+          "id": "agent",
+          "state": "warn",
+          "sub": {
+            "en": "too many steps",
+            "bn": "অনেক ধাপ"
+          }
+        },
+        {
+          "id": "tools",
+          "state": "warn",
+          "sub": {
+            "en": "wrong result",
+            "bn": "ভুল ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "plan",
+          "to": "agent",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "agent",
+          "to": "tools",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Memory",
+        "title": "Short-term and long-term memory",
+        "body": [
+          "Short-term memory is the context window: fast but limited, and reset between tasks. Long-term memory is external storage that persists across sessions.",
+          "What overflows from short-term memory is commonly pushed into long-term storage with a simple FIFO strategy."
+        ]
+      },
+      "bn": {
+        "short": "মেমরি",
+        "title": "শর্ট-টার্ম আর লং-টার্ম মেমরি",
+        "body": [
+          "শর্ট-টার্ম মেমরি হলো কনটেক্সট উইন্ডো: দ্রুত কিন্তু সীমিত, কাজ শেষে মুছে যায়। লং-টার্ম মেমরি বাইরের স্টোরেজ, যা সেশন পেরিয়েও থাকে।",
+          "শর্ট-টার্ম মেমরি থেকে যা উপচে পড়ে তা সাধারণত সহজ FIFO কৌশলে লং-টার্ম স্টোরেজে ঠেলে দেওয়া হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "stm",
+          "state": "hot",
+          "sub": {
+            "en": "fast but limited",
+            "bn": "দ্রুত কিন্তু সীমিত"
+          }
+        },
+        {
+          "id": "ltm",
+          "state": "hot",
+          "sub": {
+            "en": "persists",
+            "bn": "থেকে যায়"
+          }
+        },
+        {
+          "id": "agent",
+          "state": "hot",
+          "x": 130
+        }
+      ],
+      "links": [
+        {
+          "from": "agent",
+          "to": "stm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "stm",
+          "to": "ltm",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "FIFO",
+            "bn": "FIFO"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "An agent does more than talk: it uses tools and takes steps to get a job done."
+        ],
+        "points": [
+          "Errors add up across steps: 95% accuracy per step drops to about 60% after 10 steps.",
+          "Make a plan, validate it, and only then run it, so a bad plan wastes nothing.",
+          "Agents fail through invalid tools, wrong parameters, missed constraints, costly plans, or tools that give wrong results or are missing.",
+          "Log every tool call and its output. It is the best habit for debugging an agent."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "এজেন্ট শুধু কথা বলে না: কাজ শেষ করতে টুল ব্যবহার করে আর ধাপে ধাপে এগোয়।"
+        ],
+        "points": [
+          "ভুল ধাপে ধাপে জমে: প্রতি ধাপে ৯৫% নির্ভুলতা ১০ ধাপ পরে প্রায় ৬০% হয়ে যায়।",
+          "আগে প্ল্যান বানান, যাচাই করুন, তারপর চালান, যাতে ভুল প্ল্যানে কিছু নষ্ট না হয়।",
+          "এজেন্ট ব্যর্থ হয় অবৈধ টুল, ভুল প্যারামিটার, শর্ত মিস, অতিরিক্ত খরচের প্ল্যান, বা ভুল ফল দেওয়া কিংবা না-থাকা টুলের কারণে।",
+          "প্রতিটি টুল কল আর তার আউটপুট লগ করুন। ডিবাগের জন্য এটাই সবচেয়ে কাজের অভ্যাস।"
+        ]
+      },
+      "show": [
+        {
+          "id": "plan"
+        },
+        {
+          "id": "check"
+        },
+        {
+          "id": "tools"
+        }
+      ],
+      "links": [
+        {
+          "from": "plan",
+          "to": "check",
+          "flow": "to"
+        },
+        {
+          "from": "check",
+          "to": "tools",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

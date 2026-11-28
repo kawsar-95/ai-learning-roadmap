@@ -1,0 +1,696 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "data",
+      "kind": "database",
+      "label": {
+        "en": "Collect data",
+        "bn": "ডেটা সংগ্রহ"
+      },
+      "x": 115,
+      "y": 90
+    },
+    {
+      "id": "train",
+      "kind": "model",
+      "label": {
+        "en": "Train",
+        "bn": "ট্রেনিং"
+      },
+      "x": 290,
+      "y": 90
+    },
+    {
+      "id": "eval",
+      "kind": "chart",
+      "label": {
+        "en": "Evaluate",
+        "bn": "ইভ্যালুয়েশন"
+      },
+      "x": 460,
+      "y": 90
+    },
+    {
+      "id": "reg",
+      "kind": "storage",
+      "label": {
+        "en": "Model registry",
+        "bn": "মডেল রেজিস্ট্রি"
+      },
+      "x": 650,
+      "y": 90
+    },
+    {
+      "id": "deploy",
+      "kind": "server",
+      "label": {
+        "en": "Deploy",
+        "bn": "ডিপ্লয়"
+      },
+      "x": 640,
+      "y": 250
+    },
+    {
+      "id": "mon",
+      "kind": "chart",
+      "label": {
+        "en": "Monitor",
+        "bn": "মনিটর"
+      },
+      "x": 440,
+      "y": 250
+    },
+    {
+      "id": "track",
+      "kind": "file",
+      "label": {
+        "en": "Experiment tracking",
+        "bn": "এক্সপেরিমেন্ট ট্র্যাকিং"
+      },
+      "x": 290,
+      "y": 250
+    },
+    {
+      "id": "feat",
+      "kind": "cache",
+      "label": {
+        "en": "Feature store",
+        "bn": "ফিচার স্টোর"
+      },
+      "x": 115,
+      "y": 250
+    },
+    {
+      "id": "hosted",
+      "kind": "model",
+      "label": {
+        "en": "Hosted model",
+        "bn": "হোস্টেড মডেল"
+      },
+      "x": 150,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Code",
+      "bn": "কোড"
+    },
+    {
+      "en": "Data",
+      "bn": "ডেটা"
+    },
+    {
+      "en": "Model",
+      "bn": "মডেল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Why",
+        "title": "A model can get worse alone",
+        "body": [
+          "A model can get worse even when nobody changes the code, because its data keeps changing.",
+          "MLOps applies DevOps habits to keep such models tracked, deployed and watched."
+        ]
+      },
+      "bn": {
+        "short": "কেন",
+        "title": "মডেল নিজে থেকেই খারাপ হতে পারে",
+        "body": [
+          "কোড কেউ না বদলালেও মডেল খারাপ হতে পারে, কারণ তার ডেটা বদলাতে থাকে।",
+          "MLOps এমন মডেলকে ট্র্যাক, ডিপ্লয় আর পর্যবেক্ষণে রাখতে DevOps-এর অভ্যাস কাজে লাগায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "warn",
+          "sub": {
+            "en": "keeps changing",
+            "bn": "বদলাতে থাকে"
+          }
+        },
+        {
+          "id": "train",
+          "state": "hot",
+          "sub": {
+            "en": "worse",
+            "bn": "খারাপ"
+          }
+        },
+        {
+          "id": "eval",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "train",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "train",
+          "to": "eval",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "keeps changing",
+          "bn": "বদলাতে থাকে"
+        },
+        {
+          "en": "worse",
+          "bn": "খারাপ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Loop",
+        "title": "The loop",
+        "body": [
+          "The loop is: collect data, train, evaluate, register the model, deploy, monitor, and retrain.",
+          "Each step is automated, so a new model reaches production the same way every time."
+        ]
+      },
+      "bn": {
+        "short": "চক্র",
+        "title": "চক্র",
+        "body": [
+          "চক্রটা হলো: ডেটা সংগ্রহ, ট্রেনিং, ইভ্যালুয়েশন, রেজিস্ট্রিতে রাখা, ডিপ্লয়, মনিটর, আর আবার ট্রেনিং।",
+          "প্রতিটি ধাপ অটোমেট করা, যাতে নতুন মডেল প্রতিবার একই পথে প্রোডাকশনে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "train",
+          "state": "hot"
+        },
+        {
+          "id": "eval",
+          "state": "hot"
+        },
+        {
+          "id": "reg",
+          "state": "hot"
+        },
+        {
+          "id": "deploy",
+          "state": "hot"
+        },
+        {
+          "id": "mon",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "train",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "train",
+          "to": "eval",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eval",
+          "to": "reg",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "reg",
+          "to": "deploy",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "deploy",
+          "to": "mon",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "mon",
+          "to": "train",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "retrain",
+            "bn": "আবার ট্রেনিং"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Track",
+        "title": "Track runs, register models",
+        "body": [
+          "Experiment tracking records the parameters, metrics and files of every training run.",
+          "A model registry versions each trained model and marks which one is in staging or production."
+        ]
+      },
+      "bn": {
+        "short": "ট্র্যাক",
+        "title": "রান ট্র্যাক, মডেল রেজিস্টার",
+        "body": [
+          "এক্সপেরিমেন্ট ট্র্যাকিং প্রতিটি ট্রেনিং রানের প্যারামিটার, মেট্রিক আর ফাইল লিখে রাখে।",
+          "মডেল রেজিস্ট্রি প্রতিটি ট্রেন করা মডেলের ভার্সন রাখে আর চিহ্নিত করে কোনটা স্টেজিং বা প্রোডাকশনে আছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "train",
+          "state": "hot"
+        },
+        {
+          "id": "track",
+          "state": "hot",
+          "sub": {
+            "en": "every run",
+            "bn": "প্রতিটি রান"
+          }
+        },
+        {
+          "id": "eval",
+          "state": "hot"
+        },
+        {
+          "id": "reg",
+          "state": "hot",
+          "sub": {
+            "en": "versions",
+            "bn": "ভার্সন"
+          }
+        },
+        {
+          "id": "deploy",
+          "state": "hot",
+          "sub": {
+            "en": "staging or production",
+            "bn": "স্টেজিং বা প্রোডাকশন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "train",
+          "to": "track",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eval",
+          "to": "reg",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "reg",
+          "to": "deploy",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Orchestrate",
+        "title": "Orchestration runs the steps",
+        "body": [
+          "Orchestration runs the steps in order.",
+          "It runs them on a schedule or when new data arrives."
+        ]
+      },
+      "bn": {
+        "short": "অর্কেস্ট্রেশন",
+        "title": "অর্কেস্ট্রেশন ধাপ চালায়",
+        "body": [
+          "অর্কেস্ট্রেশন ধাপগুলো ক্রমে চালায়।",
+          "নির্দিষ্ট সময়ে বা নতুন ডেটা এলে চালায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot",
+          "sub": {
+            "en": "new data arrives",
+            "bn": "নতুন ডেটা এলে"
+          }
+        },
+        {
+          "id": "train",
+          "state": "hot",
+          "sub": {
+            "en": "in order",
+            "bn": "ক্রমে"
+          }
+        },
+        {
+          "id": "eval",
+          "state": "hot",
+          "sub": {
+            "en": "in order",
+            "bn": "ক্রমে"
+          }
+        },
+        {
+          "id": "reg",
+          "state": "hot",
+          "sub": {
+            "en": "in order",
+            "bn": "ক্রমে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "train",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "train",
+          "to": "eval",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "eval",
+          "to": "reg",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Features",
+        "title": "The same features everywhere",
+        "body": [
+          "A feature store gives the same input values, called features, in training and in production."
+        ]
+      },
+      "bn": {
+        "short": "ফিচার",
+        "title": "সবখানে একই ফিচার",
+        "body": [
+          "ফিচার স্টোর ট্রেনিংয়ে আর প্রোডাকশনে একই ইনপুট মান, মানে ফিচার, দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "feat",
+          "state": "hot",
+          "sub": {
+            "en": "same features",
+            "bn": "একই ফিচার"
+          }
+        },
+        {
+          "id": "train",
+          "state": "hot",
+          "sub": {
+            "en": "in training",
+            "bn": "ট্রেনিংয়ে"
+          }
+        },
+        {
+          "id": "deploy",
+          "state": "hot",
+          "sub": {
+            "en": "in production",
+            "bn": "প্রোডাকশনে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "feat",
+          "to": "train",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "feat",
+          "to": "deploy",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Drift",
+        "title": "Data drift and concept drift",
+        "body": [
+          "Data drift means the inputs no longer look like the data the model was trained on. Concept drift means the right answer for the same input has changed.",
+          "Watch the statistics of the inputs and, when true labels arrive later, the live accuracy."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A model can get worse without any code change."
+        }
+      },
+      "bn": {
+        "short": "ড্রিফট",
+        "title": "ডেটা ড্রিফট আর কনসেপ্ট ড্রিফট",
+        "body": [
+          "ডেটা ড্রিফট মানে ইনপুট আর মডেলের ট্রেনিং ডেটার মতো দেখতে নেই। কনসেপ্ট ড্রিফট মানে একই ইনপুটের সঠিক উত্তর বদলে গেছে।",
+          "ইনপুটের পরিসংখ্যান দেখুন, আর আসল লেবেল পরে এলে লাইভ accuracy দেখুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "কোড না বদলেও মডেল খারাপ হতে পারে।"
+        }
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "warn",
+          "sub": {
+            "en": "data drift",
+            "bn": "ডেটা ড্রিফট"
+          }
+        },
+        {
+          "id": "deploy",
+          "state": "hot",
+          "sub": {
+            "en": "concept drift",
+            "bn": "কনসেপ্ট ড্রিফট"
+          }
+        },
+        {
+          "id": "mon",
+          "state": "hot",
+          "sub": {
+            "en": "live accuracy",
+            "bn": "লাইভ accuracy"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "deploy",
+          "to": "mon",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "keeps changing",
+          "bn": "বদলাতে থাকে"
+        },
+        {
+          "en": "worse",
+          "bn": "খারাপ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Hosted",
+        "title": "Hosted model: no retraining loop",
+        "body": [
+          "If you only call a hosted model, there is no retraining loop.",
+          "This section matters when you fine-tune or serve your own."
+        ]
+      },
+      "bn": {
+        "short": "হোস্টেড",
+        "title": "হোস্টেড মডেল: রিট্রেনিং চক্র নেই",
+        "body": [
+          "শুধু হোস্টেড মডেল কল করলে রিট্রেনিং চক্র নেই।",
+          "নিজে ফাইন-টিউন বা সার্ভ করলে এই সেকশন কাজে লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "hosted",
+          "state": "hot",
+          "sub": {
+            "en": "you do not train it",
+            "bn": "আপনি ট্রেন করেন না"
+          }
+        },
+        {
+          "id": "train",
+          "state": "dim"
+        },
+        {
+          "id": "mon",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "hosted",
+          "to": "train",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A model can break while nobody touches the code, because its data keeps changing."
+        ],
+        "points": [
+          "The loop is: collect data, train, evaluate, register, deploy, monitor, and retrain.",
+          "Automate each step, so a new model reaches production the same way every time.",
+          "Watch the statistics of the inputs and, when true labels arrive later, the live accuracy."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কোড কেউ না ছুঁলেও মডেল খারাপ হতে পারে, কারণ তার ডেটা বদলাতে থাকে।"
+        ],
+        "points": [
+          "চক্রটা হলো: ডেটা সংগ্রহ, ট্রেনিং, ইভ্যালুয়েশন, রেজিস্ট্রিতে রাখা, ডিপ্লয়, মনিটর, আর আবার ট্রেনিং।",
+          "প্রতিটি ধাপ অটোমেট করুন, যাতে নতুন মডেল প্রতিবার একই পথে প্রোডাকশনে যায়।",
+          "ইনপুটের পরিসংখ্যান দেখুন, আর আসল লেবেল পরে এলে লাইভ accuracy দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "data",
+          "state": "hot"
+        },
+        {
+          "id": "train",
+          "state": "hot"
+        },
+        {
+          "id": "eval",
+          "state": "hot"
+        },
+        {
+          "id": "reg",
+          "state": "hot"
+        },
+        {
+          "id": "deploy",
+          "state": "hot"
+        },
+        {
+          "id": "mon",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "data",
+          "to": "train",
+          "flow": "to"
+        },
+        {
+          "from": "train",
+          "to": "eval",
+          "flow": "to"
+        },
+        {
+          "from": "eval",
+          "to": "reg",
+          "flow": "to"
+        },
+        {
+          "from": "reg",
+          "to": "deploy",
+          "flow": "to"
+        },
+        {
+          "from": "deploy",
+          "to": "mon",
+          "flow": "to"
+        },
+        {
+          "from": "mon",
+          "to": "train",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

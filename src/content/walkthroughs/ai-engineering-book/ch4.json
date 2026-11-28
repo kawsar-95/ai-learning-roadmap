@@ -1,0 +1,615 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "checks",
+      "kind": "file",
+      "label": {
+        "en": "Your checks",
+        "bn": "আপনার যাচাই"
+      },
+      "x": 140,
+      "y": 162
+    },
+    {
+      "id": "app",
+      "kind": "service",
+      "label": {
+        "en": "AI application",
+        "bn": "AI অ্যাপ্লিকেশন"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "output",
+      "kind": "file",
+      "label": {
+        "en": "Output",
+        "bn": "আউটপুট"
+      },
+      "x": 140,
+      "y": 162
+    },
+    {
+      "id": "ctx",
+      "kind": "file",
+      "label": {
+        "en": "Given context",
+        "bn": "দেওয়া কনটেক্সট"
+      },
+      "x": 470,
+      "y": 70
+    },
+    {
+      "id": "world",
+      "kind": "database",
+      "label": {
+        "en": "Real world",
+        "bn": "বাস্তব দুনিয়া"
+      },
+      "x": 470,
+      "y": 254
+    },
+    {
+      "id": "api",
+      "kind": "service",
+      "label": {
+        "en": "Commercial model API",
+        "bn": "কমার্শিয়াল মডেল API"
+      },
+      "x": 560,
+      "y": 80
+    },
+    {
+      "id": "host",
+      "kind": "server",
+      "label": {
+        "en": "Open-weight model",
+        "bn": "ওপেন-ওয়েট মডেল"
+      },
+      "x": 560,
+      "y": 244
+    },
+    {
+      "id": "hard",
+      "kind": "shield",
+      "label": {
+        "en": "Hard attributes",
+        "bn": "হার্ড অ্যাট্রিবিউট"
+      },
+      "x": 150,
+      "y": 80
+    },
+    {
+      "id": "bench",
+      "kind": "chart",
+      "label": {
+        "en": "Public benchmarks",
+        "bn": "পাবলিক বেঞ্চমার্ক"
+      },
+      "x": 500,
+      "y": 80
+    },
+    {
+      "id": "pipe",
+      "kind": "tool",
+      "label": {
+        "en": "Your evaluation pipeline",
+        "bn": "আপনার ইভ্যালুয়েশন পাইপলাইন"
+      },
+      "x": 430,
+      "y": 250
+    },
+    {
+      "id": "prod",
+      "kind": "server",
+      "label": {
+        "en": "Production",
+        "bn": "প্রোডাকশন"
+      },
+      "x": 665,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Best model",
+      "bn": "সেরা মডেল"
+    },
+    {
+      "en": "Benchmark score",
+      "bn": "বেঞ্চমার্ক স্কোর"
+    },
+    {
+      "en": "Monitoring",
+      "bn": "নজরদারি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Checks first",
+        "title": "Write the checks before the system",
+        "body": [
+          "An application should start with a list of evaluation criteria before any heavy building begins.",
+          "This is evaluation-driven development, similar to test-driven development: write the checks before writing the system."
+        ]
+      },
+      "bn": {
+        "short": "আগে যাচাই",
+        "title": "সিস্টেমের আগে যাচাই লিখুন",
+        "body": [
+          "যেকোনো ভারী বানানো শুরুর আগে অ্যাপ্লিকেশনকে ইভ্যালুয়েশন মানদণ্ডের একটি তালিকা দিয়ে শুরু করা উচিত।",
+          "একে বলে ইভ্যালুয়েশন-ড্রিভেন ডেভেলপমেন্ট, যা টেস্ট-ড্রিভেন ডেভেলপমেন্টের মতো: সিস্টেম লেখার আগে যাচাই লিখে ফেলুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "checks",
+          "state": "hot",
+          "sub": {
+            "en": "first",
+            "bn": "আগে"
+          }
+        },
+        {
+          "id": "app",
+          "state": "dim",
+          "sub": {
+            "en": "then build",
+            "bn": "তারপর বানান"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "checks",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Four buckets",
+        "title": "Four kinds of criteria",
+        "body": [
+          "The criteria usually fall into four buckets. They are domain-specific capability, generation capability, instruction-following capability, and cost and latency.",
+          "Each one is a question about your application."
+        ],
+        "points": [
+          "Domain-specific capability: does the model know enough about the task's subject?",
+          "Generation capability: is the output coherent, factually consistent, and safe?",
+          "Instruction-following capability: does the model do what it was told?",
+          "Cost and latency: can the application afford this model's price and speed?"
+        ]
+      },
+      "bn": {
+        "short": "চার ভাগ",
+        "title": "চার ধরনের মানদণ্ড",
+        "body": [
+          "মানদণ্ড সাধারণত চার ভাগে পড়ে। ডোমেইন-নির্দিষ্ট সক্ষমতা, জেনারেশন সক্ষমতা, ইনস্ট্রাকশন-ফলো করার সক্ষমতা, আর খরচ ও লেটেন্সি।",
+          "প্রতিটাই আপনার অ্যাপ্লিকেশন নিয়ে একটি প্রশ্ন।"
+        ],
+        "points": [
+          "ডোমেইন-নির্দিষ্ট সক্ষমতা: কাজের বিষয়টা মডেল যথেষ্ট জানে কিনা?",
+          "জেনারেশন সক্ষমতা: আউটপুট সুসংগত, তথ্যে সঙ্গতিপূর্ণ আর নিরাপদ কিনা?",
+          "ইনস্ট্রাকশন-ফলো করার সক্ষমতা: মডেল যা বলা হয়েছে তা করছে কিনা?",
+          "খরচ ও লেটেন্সি: এই মডেলের দাম আর গতি অ্যাপ্লিকেশন সামলাতে পারবে কিনা?"
+        ]
+      },
+      "show": [
+        {
+          "id": "checks",
+          "state": "hot"
+        },
+        {
+          "id": "app",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "checks",
+          "to": "app",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Consistency",
+        "title": "Factual consistency: against what?",
+        "body": [
+          "Factual consistency asks whether the output matches the given context or the real world.",
+          "Local consistency checks against an explicitly provided context. Global consistency checks against open or world knowledge."
+        ],
+        "points": [
+          "Asking an AI judge directly",
+          "Self-verification: generate several answers and see if they agree",
+          "Knowledge-augmented verification: check each claim against a search engine",
+          "Textual entailment models"
+        ]
+      },
+      "bn": {
+        "short": "সঙ্গতি",
+        "title": "ফ্যাকচুয়াল কনসিস্টেন্সি: কিসের সাথে?",
+        "body": [
+          "ফ্যাকচুয়াল কনসিস্টেন্সি দেখে আউটপুট দেওয়া কনটেক্সটের সাথে বা বাস্তব দুনিয়ার সাথে মেলে কিনা।",
+          "লোকাল কনসিস্টেন্সি স্পষ্টভাবে দেওয়া কনটেক্সটের সাথে মেলায়। গ্লোবাল কনসিস্টেন্সি উন্মুক্ত বা বিশ্বজ্ঞানের সাথে মেলায়।"
+        ],
+        "points": [
+          "AI জাজকে সরাসরি জিজ্ঞেস করা",
+          "সেলফ-ভেরিফিকেশন: কয়েকটি উত্তর বানিয়ে দেখা সেগুলো মেলে কিনা",
+          "নলেজ-অগমেন্টেড ভেরিফিকেশন: প্রতিটি দাবি সার্চ ইঞ্জিনে যাচাই করা",
+          "টেক্সচুয়াল এন্টেইলমেন্ট মডেল"
+        ]
+      },
+      "show": [
+        {
+          "id": "output",
+          "state": "hot"
+        },
+        {
+          "id": "ctx",
+          "state": "hot",
+          "sub": {
+            "en": "local: summarization, RAG",
+            "bn": "লোকাল: summarization, RAG"
+          }
+        },
+        {
+          "id": "world",
+          "state": "hot",
+          "sub": {
+            "en": "global: chatbots",
+            "bn": "গ্লোবাল: চ্যাটবট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "output",
+          "to": "ctx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "output",
+          "to": "world",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Build or buy",
+        "title": "A model API or self-hosting",
+        "body": [
+          "A central recurring decision is whether to call a commercial model API or host an open source (strictly: open-weight) model yourself.",
+          "The trade-off spans several axes, such as data privacy, raw performance, control, and the ability to deploy on-device."
+        ]
+      },
+      "bn": {
+        "short": "কিনব না বানাব",
+        "title": "মডেল API নাকি নিজে হোস্টিং",
+        "body": [
+          "একটি বারবার আসা বড় সিদ্ধান্ত হলো কমার্শিয়াল মডেল API ডাকবেন, নাকি একটি ওপেন সোর্স (সঠিকভাবে বললে ওপেন-ওয়েট) মডেল নিজে হোস্ট করবেন।",
+          "এই ট্রেড-অফ কয়েকটি দিকে ছড়ানো, যেমন ডেটা প্রাইভেসি, সরাসরি পারফরম্যান্স, নিয়ন্ত্রণ, আর অন-ডিভাইসে ডিপ্লয় করার সুযোগ।"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot"
+        },
+        {
+          "id": "api",
+          "state": "hot",
+          "sub": {
+            "en": "a third party",
+            "bn": "তৃতীয় পক্ষ"
+          }
+        },
+        {
+          "id": "host",
+          "state": "hot",
+          "sub": {
+            "en": "in-house",
+            "bn": "নিজেদের হাতে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "api",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "app",
+          "to": "host",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Workflow",
+        "title": "Four steps to choose a model",
+        "body": [
+          "Choosing a model is really choosing the best model for a specific application, not the best model overall.",
+          "The workflow has four iterative steps: filter by hard attributes, narrow with public benchmarks, run your own experiments, and keep monitoring in production."
+        ]
+      },
+      "bn": {
+        "short": "ধাপ",
+        "title": "মডেল বাছাইয়ের চার ধাপ",
+        "body": [
+          "মডেল বাছা মানে আসলে একটি নির্দিষ্ট অ্যাপ্লিকেশনের জন্য সেরা মডেল বাছা, পুরো দুনিয়ার সেরা মডেল নয়।",
+          "ওয়ার্কফ্লোতে চারটি পুনরাবৃত্তিমূলক ধাপ: হার্ড অ্যাট্রিবিউট দিয়ে ফিল্টার, পাবলিক বেঞ্চমার্ক দিয়ে ছোট করা, নিজের পরীক্ষা চালানো, আর প্রোডাকশনে নজর রাখা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "hard",
+          "state": "hot",
+          "sub": {
+            "en": "license, privacy",
+            "bn": "লাইসেন্স, প্রাইভেসি"
+          }
+        },
+        {
+          "id": "bench",
+          "state": "hot"
+        },
+        {
+          "id": "pipe",
+          "state": "hot"
+        },
+        {
+          "id": "prod",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "hard",
+          "to": "bench",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "bench",
+          "to": "pipe",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pipe",
+          "to": "prod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "for your application",
+          "bn": "আপনার অ্যাপ্লিকেশনের জন্য"
+        },
+        null,
+        {
+          "en": "keep monitoring",
+          "bn": "নজর রাখা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Benchmarks",
+        "title": "A benchmark score is a filter",
+        "body": [
+          "Public leaderboards are useful for filtering out clearly weak models.",
+          "Data contamination means a model saw benchmark questions during training, which inflates scores without reflecting real capability."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A public benchmark score is a useful filter, never a guarantee."
+        }
+      },
+      "bn": {
+        "short": "বেঞ্চমার্ক",
+        "title": "বেঞ্চমার্ক স্কোর একটি ফিল্টার",
+        "body": [
+          "পাবলিক লিডারবোর্ড স্পষ্টভাবে দুর্বল মডেল বাদ দিতে কাজে লাগে।",
+          "ডেটা কন্টামিনেশন মানে ট্রেনিংয়ের সময় মডেল বেঞ্চমার্কের প্রশ্ন দেখে ফেলেছে, ফলে আসল দক্ষতা ছাড়াই স্কোর ফুলে যায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "পাবলিক বেঞ্চমার্কের স্কোর কাজের ফিল্টার, কিন্তু কখনোই গ্যারান্টি নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "bench",
+          "state": "warn",
+          "sub": {
+            "en": "data contamination",
+            "bn": "ডেটা কন্টামিনেশন"
+          }
+        },
+        {
+          "id": "pipe",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "bench",
+          "to": "pipe",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "useful filter, never a guarantee",
+          "bn": "কাজের ফিল্টার, গ্যারান্টি নয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pipeline",
+        "title": "Build your own pipeline",
+        "body": [
+          "Evaluate all components in a system, create an evaluation guideline, and define evaluation methods and data.",
+          "The pipeline itself needs evaluating too."
+        ],
+        "points": [
+          "Does it give the right signal: do better outputs score higher?",
+          "Are repeated runs reproducible?",
+          "Are its metrics overly correlated?",
+          "How much cost and latency does it add?"
+        ]
+      },
+      "bn": {
+        "short": "পাইপলাইন",
+        "title": "নিজের পাইপলাইন বানান",
+        "body": [
+          "সিস্টেমের সব অংশ মূল্যায়ন করুন, একটি ইভ্যালুয়েশন গাইডলাইন বানান, আর ইভ্যালুয়েশন পদ্ধতি ও ডেটা ঠিক করুন।",
+          "পাইপলাইনটাকেও মূল্যায়ন করা দরকার।"
+        ],
+        "points": [
+          "এটা সঠিক সংকেত দেয় কিনা: ভালো আউটপুট বেশি স্কোর পায় কিনা?",
+          "বারবার চালালে ফল পুনরুৎপাদনযোগ্য কিনা?",
+          "এর মেট্রিকগুলো অতিরিক্ত পরস্পর-সম্পর্কিত কিনা?",
+          "এটা কতটা খরচ আর লেটেন্সি যোগ করে?"
+        ]
+      },
+      "show": [
+        {
+          "id": "app",
+          "state": "hot",
+          "sub": {
+            "en": "every part",
+            "bn": "প্রতিটি অংশ"
+          },
+          "x": 130,
+          "y": 250
+        },
+        {
+          "id": "pipe",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "app",
+          "to": "pipe",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Pick the best model for your own application, not the best model overall. A public benchmark score is a useful filter, never a guarantee.",
+          "Build your own evaluation pipeline, and score every part of the system, not only the final output. Keep monitoring the model in production, and evaluate the pipeline itself too."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "পুরো দুনিয়ার সেরা মডেল নয়, আপনার নিজের অ্যাপ্লিকেশনের জন্য সেরা মডেল বাছুন। পাবলিক বেঞ্চমার্কের স্কোর কাজের ফিল্টার, কিন্তু কখনোই গ্যারান্টি নয়।",
+          "নিজের ইভ্যালুয়েশন পাইপলাইন বানান, আর শুধু শেষ আউটপুট নয়, সিস্টেমের প্রতিটি অংশ মূল্যায়ন করুন। প্রোডাকশনে মডেলকে নজরে রাখুন, আর পাইপলাইনটাকেও মূল্যায়ন করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "hard",
+          "state": "dim"
+        },
+        {
+          "id": "bench",
+          "state": "dim"
+        },
+        {
+          "id": "pipe",
+          "state": "hot"
+        },
+        {
+          "id": "prod",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "hard",
+          "to": "bench",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "bench",
+          "to": "pipe",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "pipe",
+          "to": "prod",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,600 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "py",
+      "kind": "tool",
+      "label": {
+        "en": "Python",
+        "bn": "Python"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "tests",
+      "kind": "tool",
+      "label": {
+        "en": "Tests",
+        "bn": "টেস্ট"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "yaml",
+      "kind": "file",
+      "label": {
+        "en": "YAML settings",
+        "bn": "YAML সেটিংস"
+      },
+      "x": 380,
+      "y": 262
+    },
+    {
+      "id": "dep",
+      "kind": "service",
+      "label": {
+        "en": "Deployment tool",
+        "bn": "ডিপ্লয়মেন্ট টুল"
+      },
+      "x": 650,
+      "y": 262
+    },
+    {
+      "id": "pa",
+      "kind": "service",
+      "label": {
+        "en": "Project",
+        "bn": "প্রজেক্ট"
+      },
+      "x": 110,
+      "y": 70
+    },
+    {
+      "id": "pb",
+      "kind": "service",
+      "label": {
+        "en": "Other project",
+        "bn": "অন্য প্রজেক্ট"
+      },
+      "x": 110,
+      "y": 254
+    },
+    {
+      "id": "va",
+      "kind": "storage",
+      "label": {
+        "en": "Virtual environment",
+        "bn": "ভার্চুয়াল এনভায়রনমেন্ট"
+      },
+      "x": 480,
+      "y": 70
+    },
+    {
+      "id": "vb",
+      "kind": "storage",
+      "label": {
+        "en": "Virtual environment",
+        "bn": "ভার্চুয়াল এনভায়রনমেন্ট"
+      },
+      "x": 480,
+      "y": 254
+    },
+    {
+      "id": "lock",
+      "kind": "file",
+      "label": {
+        "en": "Lock file",
+        "bn": "লক ফাইল"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "uv",
+      "kind": "tool",
+      "label": {
+        "en": "uv",
+        "bn": "uv"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "lint",
+      "kind": "shield",
+      "label": {
+        "en": "yamllint",
+        "bn": "yamllint"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Habit",
+      "bn": "অভ্যাস"
+    },
+    {
+      "en": "Checked by",
+      "bn": "যাচাই করে"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Glue",
+        "title": "Python ties, YAML configures",
+        "body": [
+          "Python ties the pieces of an AI system together: it calls the model, runs the tests and moves data around.",
+          "YAML is the settings sheet that most deployment tools read."
+        ]
+      },
+      "bn": {
+        "short": "জোড়া",
+        "title": "Python জোড়ে, YAML কনফিগ করে",
+        "body": [
+          "Python AI সিস্টেমের অংশগুলো জোড়া লাগায়: মডেল ডাকে, টেস্ট চালায়, ডেটা সরায়।",
+          "YAML হলো সেটিংস শিট, যা বেশিরভাগ ডিপ্লয়মেন্ট টুল পড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "py",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "tests",
+          "state": "hot"
+        },
+        {
+          "id": "yaml",
+          "state": "hot"
+        },
+        {
+          "id": "dep",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "py",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "py",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "yaml",
+          "to": "dep",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Venv",
+        "title": "One environment per project",
+        "body": [
+          "Install a project's packages into its own virtual environment.",
+          "Then two projects do not fight over versions."
+        ]
+      },
+      "bn": {
+        "short": "ভার্চুয়াল এনভায়রনমেন্ট",
+        "title": "প্রতি প্রজেক্টে একটি এনভায়রনমেন্ট",
+        "body": [
+          "প্রতিটি প্রজেক্টের প্যাকেজ নিজের ভার্চুয়াল এনভায়রনমেন্টে বসান।",
+          "তাহলে দুই প্রজেক্টের ভার্সন মেশে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pa",
+          "state": "hot"
+        },
+        {
+          "id": "va",
+          "state": "hot",
+          "sub": {
+            "en": "its own packages",
+            "bn": "নিজের প্যাকেজ"
+          }
+        },
+        {
+          "id": "pb",
+          "state": "hot"
+        },
+        {
+          "id": "vb",
+          "state": "hot",
+          "sub": {
+            "en": "its own packages",
+            "bn": "নিজের প্যাকেজ"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "pa",
+          "to": "va",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pb",
+          "to": "vb",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "own virtual environment",
+          "bn": "আলাদা ভার্চুয়াল এনভায়রনমেন্ট"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Lock",
+        "title": "Pin versions in a lock file",
+        "body": [
+          "Pin the versions in a lock file, so a build next month installs what you installed today.",
+          "A newer tool, uv, does the same job as pip and venv, but faster, and writes a lock file."
+        ]
+      },
+      "bn": {
+        "short": "লক",
+        "title": "লক ফাইলে ভার্সন পিন",
+        "body": [
+          "ভার্সন লক ফাইলে পিন করুন, তাই এক মাস পরের বিল্ডেও আজকের জিনিসই ইনস্টল হয়।",
+          "uv একটি নতুন টুল, যা pip আর venv-এর কাজই আরও দ্রুত করে এবং একটি লক ফাইল লেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "uv",
+          "state": "hot",
+          "sub": {
+            "en": "faster",
+            "bn": "আরও দ্রুত"
+          },
+          "x": 150,
+          "y": 162
+        },
+        {
+          "id": "lock",
+          "state": "hot",
+          "sub": {
+            "en": "exact versions",
+            "bn": "নির্দিষ্ট ভার্সন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "uv",
+          "to": "lock",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "pin versions in a lock file",
+          "bn": "লক ফাইলে ভার্সন পিন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Spaces",
+        "title": "YAML is indentation",
+        "body": [
+          "In YAML, structure comes from indentation with spaces. Tabs are not allowed.",
+          "A mapping is <code>key: value</code>. A list item starts with <code>- </code>."
+        ]
+      },
+      "bn": {
+        "short": "স্পেস",
+        "title": "YAML মানে ইন্ডেন্টেশন",
+        "body": [
+          "YAML-এ কাঠামো আসে স্পেস দিয়ে ইন্ডেন্টেশন থেকে। ট্যাব চলে না।",
+          "ম্যাপিং হলো <code>key: value</code>। লিস্টের আইটেম শুরু হয় <code>- </code> দিয়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "yaml",
+          "state": "hot",
+          "sub": {
+            "en": "spaces, not tabs",
+            "bn": "স্পেস, ট্যাব নয়"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "dep",
+          "state": "dim",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "yaml",
+          "to": "dep",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "indent with spaces",
+          "bn": "স্পেস দিয়ে ইন্ডেন্ট"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Quote",
+        "title": "Quote what could be misread",
+        "body": [
+          "Quote a string that could be read as something else, such as <code>\"no\"</code>, <code>\"on\"</code> or <code>\"1.10\"</code>.",
+          "Many tools still follow YAML 1.1, where unquoted no, yes, on and off are booleans."
+        ]
+      },
+      "bn": {
+        "short": "কোটেশন",
+        "title": "ভুল পড়া হতে পারে এমন মান কোট করুন",
+        "body": [
+          "যে স্ট্রিং অন্যভাবে পড়া হতে পারে তা কোটেশনে রাখুন, যেমন <code>\"no\"</code>, <code>\"on\"</code> বা <code>\"1.10\"</code>।",
+          "অনেক টুল এখনও YAML 1.1 মানে, যেখানে কোটেশন ছাড়া no, yes, on আর off বুলিয়ান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "yaml",
+          "state": "hot",
+          "sub": {
+            "en": "quote it",
+            "bn": "কোটেশনে রাখুন"
+          },
+          "x": 150,
+          "y": 162
+        },
+        {
+          "id": "dep",
+          "state": "warn",
+          "sub": {
+            "en": "may read a boolean",
+            "bn": "বুলিয়ান পড়তে পারে"
+          },
+          "x": 610,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "yaml",
+          "to": "dep",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "quote the value",
+          "bn": "মান কোটেশনে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Anchors",
+        "title": "Anchors, aliases and comments",
+        "body": [
+          "Anchors and aliases (<code>&amp;name</code>, <code>*name</code>) reuse a block. Keep them rare, because they make a file hard to read.",
+          "Comments start with <code>#</code>. Use them to say why a setting has its value."
+        ]
+      },
+      "bn": {
+        "short": "অ্যাংকর",
+        "title": "অ্যাংকর, অ্যালিয়াস আর মন্তব্য",
+        "body": [
+          "অ্যাংকর আর অ্যালিয়াস (<code>&amp;name</code>, <code>*name</code>) একটি ব্লক আবার ব্যবহার করে। কম ব্যবহার করুন, কারণ ফাইল পড়া কঠিন হয়ে যায়।",
+          "মন্তব্য শুরু হয় <code>#</code> দিয়ে। কোনো সেটিংয়ের মান কেন তা বলতে এগুলো ব্যবহার করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "yaml",
+          "state": "hot",
+          "sub": {
+            "en": "reuse a block, rarely",
+            "bn": "ব্লক আবার ব্যবহার, কম"
+          },
+          "x": 380,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        {
+          "en": "keep anchors rare",
+          "bn": "অ্যাংকর কম রাখুন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Lint",
+        "title": "One space can move a key",
+        "body": [
+          "Indentation is the syntax. One misplaced space moves a key under a different parent, and the file still parses.",
+          "Run a linter such as yamllint, and read what the tool actually loaded."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A linter is a checker that reads your YAML file and flags mistakes."
+        }
+      },
+      "bn": {
+        "short": "লিন্ট",
+        "title": "একটা স্পেসই কী সরিয়ে দিতে পারে",
+        "body": [
+          "ইন্ডেন্টেশনই সিনট্যাক্স। একটা ভুল জায়গার স্পেস কোনো কী অন্য প্যারেন্টের নিচে সরিয়ে দেয়, তবু ফাইল পার্স হয়।",
+          "yamllint-এর মতো লিন্টার চালান, আর দেখুন টুল আসলে কী লোড করেছে।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "লিন্টার এমন চেকার, যা আপনার YAML ফাইল পড়ে ভুল ধরিয়ে দেয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "yaml",
+          "state": "warn",
+          "sub": {
+            "en": "still parses",
+            "bn": "তবু পার্স হয়"
+          },
+          "x": 130,
+          "y": 162
+        },
+        {
+          "id": "lint",
+          "state": "hot",
+          "sub": {
+            "en": "flags mistakes",
+            "bn": "ভুল ধরিয়ে দেয়"
+          },
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "dep",
+          "state": "hot",
+          "sub": {
+            "en": "what it loaded",
+            "bn": "যা লোড করেছে"
+          },
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "yaml",
+          "to": "lint",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lint",
+          "to": "dep",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "run a linter",
+          "bn": "লিন্টার চালান"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Give each project its own packages, and let a checker read your settings before the real tool does."
+        ],
+        "points": [
+          "Install each project's packages in its own virtual environment, and pin versions in a lock file.",
+          "YAML uses spaces for indentation. Tabs are not allowed.",
+          "Quote values that could be misread: <code>1.10</code> becomes a number, and in YAML 1.1 no and on are booleans.",
+          "One misplaced space can move a key, yet the file parses; run a linter and check what the tool loaded."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "প্রতিটি প্রজেক্টকে আলাদা প্যাকেজ দিন, আর আসল টুলের আগে একটা চেকারকে সেটিংস পড়তে দিন।"
+        ],
+        "points": [
+          "প্রতিটি প্রজেক্টের প্যাকেজ আলাদা ভার্চুয়াল এনভায়রনমেন্টে বসান, আর ভার্সন লক ফাইলে পিন করুন।",
+          "YAML-এ ইন্ডেন্টেশন হয় স্পেস দিয়ে। ট্যাব চলে না।",
+          "যে মান ভুলভাবে পড়া হতে পারে তা কোটেশনে রাখুন: <code>1.10</code> সংখ্যা হয়ে যায়, আর YAML 1.1-এ no ও on বুলিয়ান।",
+          "একটা ভুল জায়গার স্পেস কোনো কী সরিয়ে দিতে পারে, তবু ফাইল পার্স হয়; লিন্টার চালান আর দেখুন টুল আসলে কী লোড করেছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "va",
+          "state": "hot",
+          "x": 140,
+          "y": 162
+        },
+        {
+          "id": "lock",
+          "state": "hot",
+          "x": 380,
+          "y": 162
+        },
+        {
+          "id": "lint",
+          "state": "hot",
+          "x": 650,
+          "y": 162
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null
+      ]
+    }
+  ]
+}

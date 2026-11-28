@@ -1,0 +1,598 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "root",
+      "kind": "model",
+      "label": {
+        "en": "Model output",
+        "bn": "মডেলের আউটপুট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "ppl",
+      "kind": "chart",
+      "label": {
+        "en": "Perplexity",
+        "bn": "পারপ্লেক্সিটি"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "tests",
+      "kind": "tool",
+      "label": {
+        "en": "Test cases",
+        "bn": "টেস্ট কেস"
+      },
+      "x": 380,
+      "y": 70
+    },
+    {
+      "id": "passk",
+      "kind": "chart",
+      "label": {
+        "en": "pass@k",
+        "bn": "pass@k"
+      },
+      "x": 650,
+      "y": 70
+    },
+    {
+      "id": "ref",
+      "kind": "file",
+      "label": {
+        "en": "Reference answer",
+        "bn": "রেফারেন্স উত্তর"
+      },
+      "x": 380,
+      "y": 254
+    },
+    {
+      "id": "lex",
+      "kind": "tool",
+      "label": {
+        "en": "Word overlap",
+        "bn": "শব্দের মিল"
+      },
+      "x": 650,
+      "y": 254
+    },
+    {
+      "id": "emb",
+      "kind": "note",
+      "label": {
+        "en": "Embedding",
+        "bn": "এমবেডিং"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "cos",
+      "kind": "chart",
+      "label": {
+        "en": "Cosine similarity",
+        "bn": "কোসাইন সিমিলারিটি"
+      },
+      "x": 650,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Perplexity",
+      "bn": "পারপ্লেক্সিটি"
+    },
+    {
+      "en": "Tests",
+      "bn": "টেস্ট"
+    },
+    {
+      "en": "Similarity",
+      "bn": "সিমিলারিটি"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Open-ended",
+        "title": "Open-ended answers are hard to check",
+        "body": [
+          "Foundation models are open-ended: a single prompt can have countless acceptable answers.",
+          "There is no fixed list of correct outputs to compare against."
+        ]
+      },
+      "bn": {
+        "short": "খোলা ধরন",
+        "title": "খোলা ধরনের উত্তর যাচাই করা কঠিন",
+        "body": [
+          "ফাউন্ডেশন মডেল খোলা ধরনের: একটা প্রম্পটের অসংখ্য গ্রহণযোগ্য উত্তর থাকতে পারে।",
+          "তুলনা করার মতো সঠিক আউটপুটের কোনো নির্দিষ্ট তালিকা নেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot",
+          "sub": {
+            "en": "many answers",
+            "bn": "অসংখ্য উত্তর"
+          }
+        },
+        {
+          "id": "ref",
+          "state": "warn",
+          "sub": {
+            "en": "no fixed list",
+            "bn": "নির্দিষ্ট তালিকা নেই"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "ref",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Perplexity",
+        "title": "Perplexity: how unsure is the model",
+        "body": [
+          "Perplexity is the exponential of cross entropy. The more uncertain a model is about the next token, the higher its perplexity.",
+          "Lower perplexity means better prediction."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Perplexity is less reliable as a quality signal after post-training (SFT/RLHF)."
+        }
+      },
+      "bn": {
+        "short": "পারপ্লেক্সিটি",
+        "title": "পারপ্লেক্সিটি: মডেল কতটা অনিশ্চিত",
+        "body": [
+          "পারপ্লেক্সিটি ক্রস এন্ট্রপির এক্সপোনেনশিয়াল। পরের টোকেন নিয়ে মডেল যত অনিশ্চিত, পারপ্লেক্সিটি তত বেশি।",
+          "পারপ্লেক্সিটি কম মানে ভালো অনুমান।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "পোস্ট-ট্রেনিংয়ের (SFT/RLHF) পর পারপ্লেক্সিটি মানের সংকেত হিসেবে কম নির্ভরযোগ্য।"
+        }
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot"
+        },
+        {
+          "id": "ppl",
+          "state": "hot",
+          "sub": {
+            "en": "more unsure, higher",
+            "bn": "যত অনিশ্চিত, তত বেশি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "ppl",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "Higher when unsure",
+          "bn": "অনিশ্চিত হলে বেশি"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Run tests",
+        "title": "Run the code against tests",
+        "body": [
+          "Functional correctness checks whether a system actually does what it was asked to do. It is easiest to automate for tasks with testable outcomes, such as code generation.",
+          "The generated code is run against test cases. The result is right or wrong, with no interpretation needed."
+        ]
+      },
+      "bn": {
+        "short": "টেস্ট চালান",
+        "title": "কোড টেস্টের বিপরীতে চালান",
+        "body": [
+          "ফাংশনাল করেক্টনেস দেখে সিস্টেম সত্যিই যা করতে বলা হয়েছে তা করছে কি না। কোড জেনারেশনের মতো টেস্ট করা যায় এমন কাজে এটা স্বয়ংক্রিয় করা সবচেয়ে সহজ।",
+          "বানানো কোড টেস্ট কেসের বিপরীতে চালানো হয়। ফলাফল ঠিক বা ভুল, ব্যাখ্যার দরকার নেই।"
+        ]
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot",
+          "sub": {
+            "en": "generated code",
+            "bn": "বানানো কোড"
+          }
+        },
+        {
+          "id": "tests",
+          "state": "hot",
+          "sub": {
+            "en": "right or wrong",
+            "bn": "ঠিক বা ভুল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "right or wrong",
+          "bn": "ঠিক বা ভুল"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "pass@k",
+        "title": "pass@k scores the tests",
+        "body": [
+          "A model's score, such as pass@k, reflects how often at least one of k generated samples passes all tests.",
+          "Benchmarks like HumanEval and MBPP use this approach."
+        ]
+      },
+      "bn": {
+        "short": "pass@k",
+        "title": "pass@k টেস্টের স্কোর দেয়",
+        "body": [
+          "মডেলের স্কোর, যেমন pass@k, বলে বানানো k সংখ্যক নমুনার অন্তত একটা কতবার সব টেস্ট পাস করে।",
+          "HumanEval আর MBPP-এর মতো বেঞ্চমার্ক এই পদ্ধতি ব্যবহার করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "dim"
+        },
+        {
+          "id": "tests",
+          "state": "hot"
+        },
+        {
+          "id": "passk",
+          "state": "hot",
+          "sub": {
+            "en": "all tests",
+            "bn": "সব টেস্ট"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "tests",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "tests",
+          "to": "passk",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "at least one of k passes",
+          "bn": "k-এর অন্তত একটা পাস"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Word overlap",
+        "title": "No tests? Compare with references",
+        "body": [
+          "When functional correctness can't be automated, you can compare a generated response against reference (ground-truth) responses.",
+          "Lexical similarity is token overlap, measured with metrics like BLEU and ROUGE."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Lexical similarity depends heavily on having a comprehensive, correct set of references."
+        }
+      },
+      "bn": {
+        "short": "শব্দের মিল",
+        "title": "টেস্ট নেই? রেফারেন্সের সাথে মেলান",
+        "body": [
+          "ফাংশনাল করেক্টনেস স্বয়ংক্রিয় করা না গেলে বানানো উত্তরকে রেফারেন্স (ground-truth) উত্তরের সাথে মেলানো যায়।",
+          "লেক্সিক্যাল সিমিলারিটি হলো টোকেনের মিল, যা BLEU আর ROUGE-এর মতো মেট্রিক দিয়ে মাপা হয়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "লেক্সিক্যাল সিমিলারিটি অনেকটাই নির্ভর করে পূর্ণাঙ্গ ও সঠিক রেফারেন্সের সেটের ওপর।"
+        }
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot"
+        },
+        {
+          "id": "ref",
+          "state": "hot"
+        },
+        {
+          "id": "lex",
+          "state": "hot",
+          "sub": {
+            "en": "BLEU, ROUGE",
+            "bn": "BLEU, ROUGE"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "ref",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ref",
+          "to": "lex",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Embeddings",
+        "title": "Compare meaning with embeddings",
+        "body": [
+          "An embedding is a numerical vector that tries to capture the meaning of a piece of data. Good embeddings place similar inputs closer together.",
+          "Semantic similarity compares them by cosine similarity."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Semantic similarity depends on the quality of the underlying embedding model."
+        }
+      },
+      "bn": {
+        "short": "এমবেডিং",
+        "title": "এমবেডিং দিয়ে অর্থ মেলান",
+        "body": [
+          "এমবেডিং হলো ডেটার অর্থ ধরার চেষ্টা করা সংখ্যার ভেক্টর। ভালো এমবেডিং কাছাকাছি অর্থের ইনপুট কাছাকাছি রাখে।",
+          "সেমান্টিক সিমিলারিটি সেগুলোকে কোসাইন সিমিলারিটি দিয়ে মেলায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সেমান্টিক সিমিলারিটি নির্ভর করে এমবেডিং মডেলের মানের ওপর।"
+        }
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot"
+        },
+        {
+          "id": "emb",
+          "state": "hot",
+          "sub": {
+            "en": "captures meaning",
+            "bn": "অর্থ ধরে"
+          }
+        },
+        {
+          "id": "cos",
+          "state": "hot",
+          "sub": {
+            "en": "closer",
+            "bn": "কাছাকাছি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "emb",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "emb",
+          "to": "cos",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "closer is more similar",
+          "bn": "যত কাছে, তত মিল"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Miss phrasing",
+        "title": "Exact match misses valid phrasings",
+        "body": [
+          "Exact match fails whenever there is more than one valid phrasing.",
+          "So a valid answer in different words can be missed."
+        ]
+      },
+      "bn": {
+        "short": "অন্য বাক্য",
+        "title": "এক্সাক্ট ম্যাচ অন্য সঠিক বাক্য ধরে না",
+        "body": [
+          "একাধিক সঠিক বাক্য থাকলেই এক্সাক্ট ম্যাচ ব্যর্থ হয়।",
+          "তাই অন্য শব্দে লেখা সঠিক উত্তর ধরা না-ও পড়তে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot",
+          "sub": {
+            "en": "other words",
+            "bn": "অন্য শব্দ"
+          }
+        },
+        {
+          "id": "ref",
+          "state": "hot"
+        },
+        {
+          "id": "lex",
+          "state": "warn",
+          "sub": {
+            "en": "misses it",
+            "bn": "ধরতে পারে না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "ref",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ref",
+          "to": "lex",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "When you can, run generated code against tests.",
+          "Otherwise, compare with reference answers."
+        ],
+        "points": [
+          "Each comparison method has a weakness: exact match misses other valid phrasings, and semantic similarity depends on the embedding model."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "পারলে বানানো কোড টেস্ট দিয়ে চালান।",
+          "না পারলে রেফারেন্স উত্তরের সাথে মেলান।"
+        ],
+        "points": [
+          "প্রতিটি তুলনার পদ্ধতির দুর্বলতা আছে: এক্সাক্ট ম্যাচ অন্য সঠিক বাক্য ধরে না, আর সেমান্টিক সিমিলারিটি এমবেডিং মডেলের ওপর নির্ভর করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "root",
+          "state": "hot"
+        },
+        {
+          "id": "tests",
+          "state": "hot",
+          "sub": {
+            "en": "run against tests",
+            "bn": "টেস্ট দিয়ে চালান"
+          }
+        },
+        {
+          "id": "passk",
+          "state": "hot"
+        },
+        {
+          "id": "ref",
+          "state": "hot",
+          "sub": {
+            "en": "otherwise compare",
+            "bn": "না পারলে মেলান"
+          }
+        },
+        {
+          "id": "lex",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "root",
+          "to": "tests",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tests",
+          "to": "passk",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "root",
+          "to": "ref",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ref",
+          "to": "lex",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

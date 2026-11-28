@@ -1,0 +1,550 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "long",
+      "kind": "file",
+      "label": {
+        "en": "Long prompt",
+        "bn": "লম্বা প্রম্পট"
+      },
+      "x": 110,
+      "y": 162
+    },
+    {
+      "id": "lingua",
+      "kind": "tool",
+      "label": {
+        "en": "LLMLingua",
+        "bn": "LLMLingua"
+      },
+      "x": 380,
+      "y": 162
+    },
+    {
+      "id": "short",
+      "kind": "file",
+      "label": {
+        "en": "Fewer tokens",
+        "bn": "কম টোকেন"
+      },
+      "x": 650,
+      "y": 162
+    },
+    {
+      "id": "chunks",
+      "kind": "file",
+      "label": {
+        "en": "Chunks",
+        "bn": "চাঙ্ক"
+      },
+      "x": 100,
+      "y": 162
+    },
+    {
+      "id": "rerank",
+      "kind": "model",
+      "label": {
+        "en": "Cross-encoder",
+        "bn": "ক্রস-এনকোডার"
+      },
+      "x": 290,
+      "y": 162
+    },
+    {
+      "id": "top",
+      "kind": "file",
+      "label": {
+        "en": "Top 5",
+        "bn": "সেরা ৫টি"
+      },
+      "x": 480,
+      "y": 162
+    },
+    {
+      "id": "dedup",
+      "kind": "tool",
+      "label": {
+        "en": "Deduplication",
+        "bn": "ডিডুপ্লিকেশন"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "knap",
+      "kind": "note",
+      "label": {
+        "en": "Token budget",
+        "bn": "টোকেন বাজেট"
+      },
+      "x": 380,
+      "y": 262
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Tokens",
+      "bn": "টোকেন"
+    },
+    {
+      "en": "Information",
+      "bn": "তথ্য"
+    },
+    {
+      "en": "Chunks",
+      "bn": "চাঙ্ক"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Goal",
+        "title": "Same information, fewer tokens",
+        "body": [
+          "Long prompts cost money and time.",
+          "Compression shortens text while keeping the meaning as much as possible, and pruning drops the parts that do not matter."
+        ]
+      },
+      "bn": {
+        "short": "লক্ষ্য",
+        "title": "একই তথ্য, কম টোকেন",
+        "body": [
+          "লম্বা প্রম্পটে টাকা আর সময় দুটোই লাগে।",
+          "কমপ্রেশন অর্থ যথাসম্ভব রেখে লেখা ছোট করে, আর প্রুনিং অপ্রয়োজনীয় অংশ বাদ দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "long",
+          "state": "hot"
+        },
+        {
+          "id": "short",
+          "state": "hot",
+          "sub": {
+            "en": "same information",
+            "bn": "একই তথ্য"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "long",
+          "to": "short",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "fewer",
+          "bn": "কম"
+        },
+        {
+          "en": "same",
+          "bn": "একই"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Compress",
+        "title": "Compression shortens the text",
+        "body": [
+          "Compression makes text shorter by removing repeated or empty parts, while keeping as much of the meaning as possible.",
+          "LLMLingua is one method. It can shrink prompts by up to 20×."
+        ]
+      },
+      "bn": {
+        "short": "কমপ্রেশন",
+        "title": "কমপ্রেশন লেখা ছোট করে",
+        "body": [
+          "কমপ্রেশন পুনরাবৃত্তি বা ফাঁপা অংশ সরিয়ে লেখা ছোট করে, অর্থ যথাসম্ভব ঠিক রেখে।",
+          "LLMLingua একটি পদ্ধতি। এতে প্রম্পট ২০× পর্যন্ত ছোট হতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "long",
+          "state": "hot"
+        },
+        {
+          "id": "lingua",
+          "state": "hot"
+        },
+        {
+          "id": "short",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "long",
+          "to": "lingua",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lingua",
+          "to": "short",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "up to 20×",
+          "bn": "২০× পর্যন্ত"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Low info",
+        "title": "Drop what adds little",
+        "body": [
+          "LLMLingua cuts low-information tokens from a prompt.",
+          "Self-information, or perplexity, measures how surprising a phrase is. Phrases that add little new information can be dropped."
+        ]
+      },
+      "bn": {
+        "short": "কম-তথ্য",
+        "title": "যা কম জানায় তা বাদ",
+        "body": [
+          "LLMLingua প্রম্পট থেকে কম-তথ্যের টোকেন কেটে দেয়।",
+          "সেলফ-ইনফরমেশন (পারপ্লেক্সিটি) মাপে একটি বাক্যাংশ কতটা নতুন বা চমকপ্রদ। যা নতুন কিছু জানায় না, সেটা বাদ দেওয়া যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "long",
+          "state": "hot",
+          "sub": {
+            "en": "surprising or not",
+            "bn": "নতুন কি না"
+          }
+        },
+        {
+          "id": "lingua",
+          "state": "hot",
+          "sub": {
+            "en": "low-information",
+            "bn": "কম-তথ্য"
+          }
+        },
+        {
+          "id": "short",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "long",
+          "to": "lingua",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lingua",
+          "to": "short",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pruning",
+        "title": "Pruning deletes what does not matter",
+        "body": [
+          "Pruning deletes the parts that do not matter for the current task, like cutting dead branches off a tree.",
+          "Compression shrinks everything; pruning removes only what is not relevant."
+        ]
+      },
+      "bn": {
+        "short": "প্রুনিং",
+        "title": "প্রুনিং অপ্রয়োজনীয় অংশ মুছে ফেলে",
+        "body": [
+          "প্রুনিং বর্তমান কাজে যে অংশ লাগে না তা বাদ দেয়, গাছের মরা ডাল ছাঁটার মতো।",
+          "কমপ্রেশন সবকিছু ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "chunks",
+          "state": "hot"
+        },
+        {
+          "id": "top",
+          "state": "hot",
+          "sub": {
+            "en": "only what is relevant",
+            "bn": "শুধু প্রাসঙ্গিক"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "chunks",
+          "to": "top",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Recipe",
+        "title": "A good recipe: retrieve, re-rank, prune, compress",
+        "body": [
+          "A good recipe: retrieve 20 chunks, re-rank, prune to the top 5, then compress if still over budget.",
+          "A cross-encoder reads the question and a chunk together and scores their match. It is used to re-rank."
+        ]
+      },
+      "bn": {
+        "short": "পদ্ধতি",
+        "title": "ভালো পদ্ধতি: রিট্রিভ, রিরেংক, প্রুন, কমপ্রেস",
+        "body": [
+          "ভালো পদ্ধতি: ২০টি চাঙ্ক রিট্রিভ করুন, রিরেংক করুন, সেরা ৫টিতে প্রুন করুন, তখনও বেশি হলে কমপ্রেস করুন।",
+          "ক্রস-এনকোডার প্রশ্ন আর একটি চাঙ্ক একসাথে পড়ে, দুটো কতটা মেলে তার স্কোর দেয়। রিরেংক করতে এটি লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "chunks",
+          "state": "hot",
+          "sub": {
+            "en": "retrieve",
+            "bn": "রিট্রিভ"
+          },
+          "x": 110,
+          "y": 70
+        },
+        {
+          "id": "rerank",
+          "state": "hot",
+          "sub": {
+            "en": "re-rank",
+            "bn": "রিরেংক"
+          },
+          "x": 380,
+          "y": 70
+        },
+        {
+          "id": "top",
+          "state": "hot",
+          "sub": {
+            "en": "prune",
+            "bn": "প্রুন"
+          },
+          "x": 640,
+          "y": 70
+        },
+        {
+          "id": "lingua",
+          "state": "hot",
+          "sub": {
+            "en": "compress",
+            "bn": "কমপ্রেস"
+          },
+          "x": 640,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "chunks",
+          "to": "rerank",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rerank",
+          "to": "top",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "top",
+          "to": "lingua",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "top 5",
+          "bn": "সেরা ৫টি"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Duplicates",
+        "title": "Near-copies and the token limit",
+        "body": [
+          "Deduplication finds near-copies of the same text and keeps only one (cosine > 0.95).",
+          "A token-budget knapsack adds chunks in order of relevance until the token limit is full, then stops."
+        ]
+      },
+      "bn": {
+        "short": "ডুপ্লিকেট",
+        "title": "প্রায় একই কপি আর টোকেনের সীমা",
+        "body": [
+          "ডিডুপ্লিকেশন একই লেখার প্রায় হুবহু কপি খুঁজে শুধু একটি রাখে (কসাইন > ০.৯৫)।",
+          "টোকেন-বাজেট ন্যাপস্যাক প্রাসঙ্গিকতার ক্রমে চাঙ্ক নিতে থাকে, টোকেনের সীমা ভরলে থামে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "chunks",
+          "state": "hot",
+          "x": 110,
+          "y": 162
+        },
+        {
+          "id": "dedup",
+          "state": "hot",
+          "sub": {
+            "en": "keep one",
+            "bn": "একটি রাখা"
+          }
+        },
+        {
+          "id": "knap",
+          "state": "hot",
+          "sub": {
+            "en": "in order of relevance",
+            "bn": "প্রাসঙ্গিকতার ক্রমে"
+          }
+        },
+        {
+          "id": "top",
+          "state": "hot",
+          "x": 640,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "chunks",
+          "to": "dedup",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "chunks",
+          "to": "knap",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "dedup",
+          "to": "top",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "knap",
+          "to": "top",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Compression shrinks everything; pruning removes only what is not relevant. They work well together."
+        ],
+        "points": [
+          "Pruning keeps information density, or useful facts per token.",
+          "Compression reduces absolute size."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "কমপ্রেশন সবকিছু ছোট করে; প্রুনিং শুধু অপ্রাসঙ্গিক অংশ কাটে। দুটো একসাথে ভালো কাজ করে।"
+        ],
+        "points": [
+          "প্রুনিং তথ্যের ঘনত্ব, মানে প্রতি টোকেনে কাজের তথ্য, ধরে রাখে।",
+          "কমপ্রেশন মোট আকার কমায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "chunks",
+          "x": 110,
+          "y": 70
+        },
+        {
+          "id": "rerank",
+          "x": 380,
+          "y": 70
+        },
+        {
+          "id": "top",
+          "x": 640,
+          "y": 70
+        },
+        {
+          "id": "lingua",
+          "x": 640,
+          "y": 250
+        }
+      ],
+      "links": [
+        {
+          "from": "chunks",
+          "to": "rerank",
+          "flow": "to"
+        },
+        {
+          "from": "rerank",
+          "to": "top",
+          "flow": "to"
+        },
+        {
+          "from": "top",
+          "to": "lingua",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 110,
+      "y": 50
+    },
+    {
+      "id": "work",
+      "kind": "note",
+      "label": {
+        "en": "Working",
+        "bn": "ওয়ার্কিং"
+      },
+      "x": 380,
+      "y": 50
+    },
+    {
+      "id": "short",
+      "kind": "database",
+      "label": {
+        "en": "Short-term",
+        "bn": "শর্ট-টার্ম"
+      },
+      "x": 650,
+      "y": 50
+    },
+    {
+      "id": "long",
+      "kind": "database",
+      "label": {
+        "en": "Long-term",
+        "bn": "লং-টার্ম"
+      },
+      "x": 650,
+      "y": 160
+    },
+    {
+      "id": "epi",
+      "kind": "database",
+      "label": {
+        "en": "Episodic",
+        "bn": "এপিসোডিক"
+      },
+      "x": 650,
+      "y": 270
+    },
+    {
+      "id": "ext",
+      "kind": "storage",
+      "label": {
+        "en": "External",
+        "bn": "এক্সটার্নাল"
+      },
+      "x": 380,
+      "y": 270
+    },
+    {
+      "id": "tool",
+      "kind": "tool",
+      "label": {
+        "en": "recall_storage.search",
+        "bn": "recall_storage.search"
+      },
+      "x": 380,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Size",
+      "bn": "আকার"
+    },
+    {
+      "en": "Seen",
+      "bn": "দেখা হয়"
+    },
+    {
+      "en": "Updates",
+      "bn": "আপডেট"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Working",
+        "title": "Working memory: the current prompt",
+        "body": [
+          "Working memory is the current prompt: system, tools, retrieved text, and the current request.",
+          "It is small, rebuilt every call, and always in focus."
+        ]
+      },
+      "bn": {
+        "short": "ওয়ার্কিং",
+        "title": "ওয়ার্কিং মেমরি: বর্তমান প্রম্পট",
+        "body": [
+          "ওয়ার্কিং মেমরি হলো বর্তমান প্রম্পট: সিস্টেম, টুল, খুঁজে আনা লেখা আর বর্তমান অনুরোধ।",
+          "এটা ছোট, প্রতি কলে নতুন, আর সবসময় মনোযোগে থাকে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "work",
+          "state": "hot",
+          "sub": {
+            "en": "always in focus",
+            "bn": "সবসময় মনোযোগে"
+          }
+        },
+        {
+          "id": "short",
+          "state": "dim"
+        },
+        {
+          "id": "long",
+          "state": "dim"
+        },
+        {
+          "id": "epi",
+          "state": "dim"
+        },
+        {
+          "id": "ext",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "work",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "small",
+          "bn": "ছোট"
+        },
+        {
+          "en": "always",
+          "bn": "সবসময়"
+        },
+        {
+          "en": "every call",
+          "bn": "প্রতি কলে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Short-term",
+        "title": "Short-term memory: this session",
+        "body": [
+          "Short-term memory holds the recent turns, tool results, and decisions of this session.",
+          "It lives in a session store, and older turns become short summaries."
+        ]
+      },
+      "bn": {
+        "short": "শর্ট-টার্ম",
+        "title": "শর্ট-টার্ম মেমরি: এই সেশন",
+        "body": [
+          "শর্ট-টার্ম মেমরিতে থাকে এই সেশনের সাম্প্রতিক টার্ন, টুলের ফল আর সিদ্ধান্ত।",
+          "এটা সেশন স্টোরে থাকে, আর পুরোনো টার্ন ছোট সারসংক্ষেপ হয়ে যায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "work",
+          "state": "dim"
+        },
+        {
+          "id": "short",
+          "state": "hot",
+          "sub": {
+            "en": "session store",
+            "bn": "সেশন স্টোর"
+          }
+        },
+        {
+          "id": "long",
+          "state": "dim"
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "work",
+          "to": "short",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "each turn",
+          "bn": "প্রতি টার্নে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Long-term",
+        "title": "Long-term memory: preferences and facts",
+        "body": [
+          "Long-term memory holds user preferences, known facts, and project context.",
+          "It updates slowly, when explicit facts are extracted."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "A vector store is a database that keeps the meaning of each text as a list of numbers, so related texts can be found."
+        }
+      },
+      "bn": {
+        "short": "লং-টার্ম",
+        "title": "লং-টার্ম মেমরি: পছন্দ আর তথ্য",
+        "body": [
+          "লং-টার্ম মেমরিতে থাকে ইউজারের পছন্দ, জানা তথ্য আর প্রজেক্টের প্রসঙ্গ।",
+          "স্পষ্ট তথ্য বের করা হলে তবেই এটা ধীরে আপডেট হয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "ভেক্টর স্টোর এমন ডেটাবেস, যেখানে প্রতিটি লেখার অর্থ সংখ্যার তালিকা হিসেবে রাখা হয়, যাতে সম্পর্কিত লেখা খুঁজে পাওয়া যায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "short",
+          "state": "dim"
+        },
+        {
+          "id": "long",
+          "state": "hot",
+          "sub": {
+            "en": "vector store",
+            "bn": "ভেক্টর স্টোর"
+          }
+        },
+        {
+          "id": "epi",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "short",
+          "to": "long",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "slow",
+          "bn": "ধীরে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Episodic",
+        "title": "Episodic memory: lessons from past sessions",
+        "body": [
+          "Episodic memory holds short memories distilled from past sessions: lessons learned and what worked.",
+          "It is written at the end of a session or when triggered."
+        ]
+      },
+      "bn": {
+        "short": "এপিসোডিক",
+        "title": "এপিসোডিক মেমরি: আগের সেশনের শিক্ষা",
+        "body": [
+          "এপিসোডিক মেমরিতে থাকে আগের সেশন থেকে ছেঁকে নেওয়া ছোট স্মৃতি: কী শেখা গেল, কী কাজ করল।",
+          "এটা সেশন শেষে বা ট্রিগার হলে লেখা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "long",
+          "state": "dim"
+        },
+        {
+          "id": "epi",
+          "state": "hot",
+          "sub": {
+            "en": "lessons learned",
+            "bn": "কী শেখা গেল"
+          }
+        },
+        {
+          "id": "ext",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "long",
+          "to": "epi",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "end of session",
+          "bn": "সেশন শেষে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Evict",
+        "title": "MemGPT: the model moves things out",
+        "body": [
+          "MemGPT is a 2023 idea (Packer et al.): the model itself decides what to move out of its prompt and what to bring back.",
+          "Evict means moving information from working memory to external storage."
+        ]
+      },
+      "bn": {
+        "short": "ইভিক্ট",
+        "title": "MemGPT: মডেল নিজেই সরায়",
+        "body": [
+          "MemGPT ২০২৩ সালের একটি ধারণা (Packer et al.): মডেল নিজেই ঠিক করে প্রম্পট থেকে কী সরাবে আর কী ফিরিয়ে আনবে।",
+          "ইভিক্ট মানে তথ্য ওয়ার্কিং মেমরি থেকে বাইরের স্টোরেজে সরানো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "work",
+          "state": "hot",
+          "x": 90,
+          "y": 162
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "tool call",
+            "bn": "টুল কল"
+          }
+        },
+        {
+          "id": "ext",
+          "state": "hot",
+          "x": 670,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "work",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "evict",
+            "bn": "ইভিক্ট"
+          }
+        },
+        {
+          "from": "tool",
+          "to": "ext",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Page in",
+        "title": "Page in: bring it back when needed",
+        "body": [
+          "Paging in means bringing information back when needed.",
+          "The model uses tool calls like recall_storage.search to do it. External storage is retrieved on demand."
+        ]
+      },
+      "bn": {
+        "short": "পেজ ইন",
+        "title": "পেজ ইন: দরকারে ফিরিয়ে আনা",
+        "body": [
+          "পেজ ইন মানে দরকারে তথ্য ফিরিয়ে আনা।",
+          "মডেল এর জন্য recall_storage.search-এর মতো টুল কল ব্যবহার করে। এক্সটার্নাল স্টোরেজ শুধু প্রয়োজনে আনা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ext",
+          "state": "hot",
+          "x": 670,
+          "y": 162
+        },
+        {
+          "id": "tool",
+          "state": "hot",
+          "sub": {
+            "en": "tool call",
+            "bn": "টুল কল"
+          }
+        },
+        {
+          "id": "work",
+          "state": "hot",
+          "x": 90,
+          "y": 162
+        }
+      ],
+      "links": [
+        {
+          "from": "ext",
+          "to": "tool",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "tool",
+          "to": "work",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "page in",
+            "bn": "পেজ ইন"
+          }
+        }
+      ],
+      "values": [
+        {
+          "en": "unbounded",
+          "bn": "সীমাহীন"
+        },
+        {
+          "en": "only when retrieved",
+          "bn": "শুধু প্রয়োজনে আনা"
+        },
+        {
+          "en": "on demand",
+          "bn": "প্রয়োজনে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Stale",
+        "title": "Memories can go stale",
+        "body": [
+          "Long-term memories can go stale or contradict the user.",
+          "Tag each with a timestamp and a confidence score."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Ask the user to confirm doubtful old memories, or favor newer memories when retrieving."
+        }
+      },
+      "bn": {
+        "short": "পুরোনো",
+        "title": "মেমরি পুরোনো হতে পারে",
+        "body": [
+          "লং-টার্ম মেমরি পুরোনো বা ইউজারের কথার সাথে স্ববিরোধী হতে পারে।",
+          "প্রতিটিতে টাইমস্ট্যাম্প ও কনফিডেন্স স্কোর রাখুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সন্দেহজনক পুরোনো মেমরি ইউজারকে দিয়ে নিশ্চিত করান, অথবা রিট্রিভালের সময় নতুন মেমরিকে বেশি ওজন দিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "long",
+          "state": "warn",
+          "sub": {
+            "en": "timestamp",
+            "bn": "টাইমস্ট্যাম্প"
+          }
+        },
+        {
+          "id": "model",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "long",
+          "to": "model",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "The layers are working, short-term, long-term, and episodic memory, plus external storage for everything else."
+        ],
+        "points": [
+          "Closer to the model means smaller but always seen.",
+          "Farther means unbounded but fetched only on demand."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "স্তরগুলো হলো ওয়ার্কিং, শর্ট-টার্ম, লং-টার্ম ও এপিসোডিক মেমরি, আর বাকি সবকিছুর জন্য এক্সটার্নাল স্টোরেজ।"
+        ],
+        "points": [
+          "মডেলের যত কাছে, স্তর তত ছোট কিন্তু সবসময় দেখা।",
+          "যত দূরে, তত সীমাহীন কিন্তু শুধু প্রয়োজনে আনা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model"
+        },
+        {
+          "id": "work"
+        },
+        {
+          "id": "short"
+        },
+        {
+          "id": "long"
+        },
+        {
+          "id": "epi"
+        },
+        {
+          "id": "ext"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "work",
+          "flow": "to"
+        },
+        {
+          "from": "work",
+          "to": "short",
+          "flow": "to"
+        },
+        {
+          "from": "short",
+          "to": "long",
+          "flow": "to"
+        },
+        {
+          "from": "long",
+          "to": "epi",
+          "flow": "to"
+        },
+        {
+          "from": "epi",
+          "to": "ext",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
