@@ -87,7 +87,7 @@ SECTIONS = [
             h("Encrypt the wire: TLS"),
             p("On a café's Wi-Fi, plain HTTP can be read and changed by anyone on the network. TLS encrypts the connection and authenticates the server with a certificate, so the client knows it is talking to the real site [[rfc8446]]. Serve everything over HTTPS."),
             h("Certificates expire"),
-            p("A certificate that expires at 3 a.m. takes the site down as surely as a crash. Automate renewal. Let's Encrypt issues certificates that last ninety days, partly to push everyone towards automation [[le-90-days]]. Alert well before any certificate expires."),
+            p("A certificate that expires at 3 a.m. takes the site down as surely as a crash. Automate renewal. Let's Encrypt issues certificates that last ninety days today (shortening to 64 days in February 2027 and 45 days by 2028), partly to push everyone towards automation [[le-90-days]]. Alert well before any certificate expires."),
             h("Encrypt inside the data center too"),
             p("A network perimeter is not a guarantee. An attacker who gets inside should not be able to read the traffic between services. Zero trust architecture drops the assumption that anything inside the network can be trusted [[nist-zero-trust]]. In practice, services authenticate each other and encrypt their traffic with mutual TLS, often through a service mesh (section 29)."),
             h("Encrypt at rest, keep the keys elsewhere"),
@@ -100,7 +100,7 @@ SECTIONS = [
             h("Tokenize card numbers"),
             p("If you store card numbers, every system that touches them falls under the card industry's security rules. Tokenization replaces each card number (the PAN) with a token that is useless on its own, while a separate, hardened vault keeps the mapping. Systems that see only tokens can then fall outside much of that scope [[pci-token]]."),
             h("End-to-end encryption"),
-            p("With end-to-end encryption only the users' devices hold the keys, so even the server cannot read the messages. The Signal Protocol uses the X3DH key agreement and the Double Ratchet algorithm for this [[signal-docs]]. The trade-off is that the server cannot search, scan or recover message content for the user."),
+            p("With end-to-end encryption only the users' devices hold the keys, so even the server cannot read the messages. The Signal Protocol uses a key agreement (X3DH, now extended to the post-quantum PQXDH) and the Double Ratchet algorithm for this [[signal-docs]]. The trade-off is that the server cannot search, scan or recover message content for the user."),
         ],
         [
             p("Sending a postcard lets every postman read it. Sending a sealed, tamper-proof envelope is TLS. Keeping envelopes sealed even inside your own office building is encryption inside the data center."),
@@ -108,7 +108,7 @@ SECTIONS = [
             analogy("<strong>Envelopes and safes.</strong> The sealed envelope is TLS, the safe is encryption at rest, the key kept elsewhere is the KMS, and the cloakroom ticket is tokenization."),
         ],
         [
-            p("ক্যাফের Wi-Fi-তে সাধারণ HTTP নেটওয়ার্কের যে কেউ পড়তে আর বদলাতে পারে। TLS connection এনক্রিপ্ট করে, আর certificate দিয়ে প্রমাণ করে আপনি আসল সাইটের সাথেই কথা বলছেন। Certificate-এর মেয়াদ শেষ হলে সাইট বন্ধ হয়ে যায়, তাই নবায়ন স্বয়ংক্রিয় করুন; Let's Encrypt ৯০ দিনের certificate দেয়, অংশত এই কারণেই। ভেতরের নেটওয়ার্ককেও অন্ধভাবে বিশ্বাস করবেন না (zero trust): সার্ভিসগুলোর মধ্যেও mutual TLS ব্যবহার করুন।"),
+            p("ক্যাফের Wi-Fi-তে সাধারণ HTTP নেটওয়ার্কের যে কেউ পড়তে আর বদলাতে পারে। TLS connection এনক্রিপ্ট করে, আর certificate দিয়ে প্রমাণ করে আপনি আসল সাইটের সাথেই কথা বলছেন। Certificate-এর মেয়াদ শেষ হলে সাইট বন্ধ হয়ে যায়, তাই নবায়ন স্বয়ংক্রিয় করুন; Let's Encrypt এখন ৯০ দিনের certificate দেয় (২০২৭-এর ফেব্রুয়ারিতে ৬৪ দিন, ২০২৮-এর মধ্যে ৪৫ দিন হবে), অংশত এই কারণেই। ভেতরের নেটওয়ার্ককেও অন্ধভাবে বিশ্বাস করবেন না (zero trust): সার্ভিসগুলোর মধ্যেও mutual TLS ব্যবহার করুন।"),
             p("চুরি হওয়া ডিস্ক বা backup যেন পড়া না যায়, সেজন্য ডেটা এনক্রিপ্ট করে রাখুন, আর key রাখুন আলাদা key management service (KMS)-এ। Envelope encryption-এ একটা data key ডেটা এনক্রিপ্ট করে, আর KMS-এর key সেই data key-কে এনক্রিপ্ট করে। Key নিয়মিত বদলান (rotation); পুরোনো ভার্সন রাখা হয়, যাতে আগের ডেটা খোলা যায়।"),
             p("Git-এ commit করা পাসওয়ার্ড পরের ভার্সনে মুছলেও ইতিহাসে থেকে যায়; ফাঁস হলে আগে সেটা বদলান। সিক্রেট রাখুন secrets manager-এ, চালুর সময় ঢোকান, আর সম্ভব হলে Vault-এর মতো টুল দিয়ে স্বল্পমেয়াদি credential দিন। কার্ড নম্বর নিজে না রেখে token রাখুন (tokenization)। আর end-to-end encryption-এ শুধু ব্যবহারকারীদের ডিভাইসে key থাকে, তাই সার্ভারও message পড়তে পারে না; Signal Protocol এভাবে কাজ করে।"),
             analogy("<strong>খাম আর সিন্দুক:</strong> সিল করা খাম হলো TLS, সিন্দুক হলো encryption at rest, অন্য জায়গায় রাখা চাবি হলো KMS, আর ক্লোকরুমের টোকেন হলো tokenization।"),

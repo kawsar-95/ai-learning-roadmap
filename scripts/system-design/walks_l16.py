@@ -130,8 +130,8 @@ STEPS = [
 
     st(("CAP", "CAP"),
        ("What CAP actually says", "CAP আসলে কী বলে"),
-       [("The CAP theorem: when a network partition happens, a replicated system cannot be both consistent, with every read seeing the latest write, and available, with every request getting a non-error answer. Gilbert and Lynch proved it.",
-         "CAP theorem: network partition ঘটলে একটা replicated সিস্টেম একসাথে consistent, যেখানে প্রতিটি read সর্বশেষ write দেখে, আর available, যেখানে প্রতিটি request error-ছাড়া উত্তর পায়, হতে পারে না। Gilbert আর Lynch এটা প্রমাণ করেছিলেন।"),
+       [("The CAP theorem: when a network partition happens, a replicated system cannot be both consistent, with every read seeing the latest write, and available, with every request receiving a response. Gilbert and Lynch proved it.",
+         "CAP theorem: network partition ঘটলে একটা replicated সিস্টেম একসাথে consistent, যেখানে প্রতিটি read সর্বশেষ write দেখে, আর available, যেখানে প্রতিটি request উত্তর পায়, হতে পারে না। Gilbert আর Lynch এটা প্রমাণ করেছিলেন।"),
         ("Brewer, who proposed the idea, later wrote that “2 of 3” is misleading. Partitions are rare, so most of the time you can have both. The real decisions are how to behave during a partition and how to recover afterwards.",
          "ধারণাটার প্রস্তাবক Brewer পরে লিখেছিলেন, “৩-এর ২টি” কথাটা বিভ্রান্তিকর। Partition বিরল, তাই বেশিরভাগ সময় দুটোই পাওয়া যায়। আসল সিদ্ধান্ত হলো partition-এর সময় কীভাবে চলবে আর পরে কীভাবে সেরে উঠবে।")],
        [sh("n-p", "warn", ("link between copies fails", "কপির মাঝের link ভাঙে")), sh("n-c", "hot", ("sees the latest write", "সর্বশেষ write দেখে")),

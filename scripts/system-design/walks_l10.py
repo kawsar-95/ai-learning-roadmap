@@ -114,7 +114,7 @@ STEPS = [
              "Put the column you always filter on first.",
              "যে column ধরে সবসময় filter করেন, সেটা প্রথমে রাখুন।"),
        changes=[("~", "Index on (country, city)", "Index: (country, city)"),
-                ("+", "A city-only query falls back to a scan", "শুধু city-র query স্ক্যানে ফিরে যায়")]),
+                ("+", "A city-only query usually falls back to a scan", "শুধু city-র query সাধারণত স্ক্যানে ফিরে যায়")]),
 
     st(("Wildcards", "Wildcard"),
        ("Case: queries the index cannot help", "ঘটনা: যে query-তে index কাজে আসে না"),

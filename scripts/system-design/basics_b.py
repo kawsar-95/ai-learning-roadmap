@@ -32,7 +32,7 @@ BASICS = {
         "A <strong>message queue</strong> sits between a request and slow work. The web server puts a job on the queue and answers at once, and workers do the job at their own pace, so a traffic spike becomes a backlog instead of an outage.",
         [
             ("Producer and consumer", "The producer puts messages on the queue; the consumer, or worker, takes them off and does the work."),
-            ("Acknowledge", "The consumer's signal that it finished a message. Messages never acknowledged are delivered again."),
+            ("Acknowledge", "The consumer's signal that it finished a message. Messages not acknowledged when the consumer fails are delivered again."),
             ("At-least-once delivery", "Every message arrives, but some may arrive twice, so consumers must handle repeats."),
             ("Dead-letter queue", "A side queue for messages that keep failing, so people can inspect them."),
         ],

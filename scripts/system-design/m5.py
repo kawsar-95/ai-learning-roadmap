@@ -20,7 +20,7 @@ SECTIONS = [
             h("Single points of failure"),
             p("Draw the path of a request and mark every box that exists only once: the load balancer, the database, the network link, the region. Each one is a single point of failure (SPOF). Redundancy means two or more of each, plus a way to switch between them."),
             h("Copies that fail together"),
-            p("Two servers in the same rack share power and a network switch, so they can fail together. Cloud providers group data centers into availability zones that do not share points of failure such as generators and cooling equipment, and that are supplied by different power substations [[aws-az]]. Copies in different zones survive the loss of one building. When a zone goes dark, health checks route traffic to the others, and a database standby in another zone takes over."),
+            p("Two servers in the same rack share power and a network switch, so they can fail together. AWS designs its availability zones so that generators and cooling equipment are not shared and the zones are supplied by different power substations [[aws-az]]. Copies in different zones survive the loss of one building. When a zone goes dark, health checks route traffic to the others, and a database standby in another zone takes over."),
             h("How fast, and how much lost?"),
             ul(
                 "<strong>Recovery time objective (RTO):</strong> the longest acceptable time from a failure to restored service.",
@@ -107,7 +107,7 @@ class TokenBucket:
             h("One slow service takes down another"),
             p("Checkout calls a recommendations service that has become slow, and each call now holds a checkout thread for 30 seconds. Soon every thread is waiting, and checkout stops answering, although nothing is wrong with checkout itself. Slowness spreads up the chain."),
             h("Set a timeout, have a fallback"),
-            p("Every network call needs a timeout. Choose it from the dependency's measured latency, for example its p99.9, rather than from a round default [[aws-timeouts]]. When a call times out, use a fallback if you have one: a cached answer, a default, or the page without recommendations."),
+            p("Every network call needs a timeout. Choose it from the dependency's measured latency, for example its p99.9 [[aws-timeouts]], rather than from a round default. When a call times out, use a fallback if you have one: a cached answer, a default, or the page without recommendations."),
             h("Retries, and the retry storm"),
             p("Many failures are brief, so one retry often succeeds. But retries add load at the worst moment, and retries at several layers multiply [[aws-timeouts]]. If each of three layers tries three times, one user request can become 27 calls to the service at the bottom. Retry at one layer, cap the attempts, and stop retrying when most calls fail."),
             h("Back off, with jitter"),
@@ -129,7 +129,7 @@ def call_with_retries(call, attempts=4, base=0.1, cap=2.0):
             p("A payment can succeed on the server while its response is lost on the way back. Retrying it blindly would charge the customer again. So the client sends an idempotency key, a unique value per operation, with every attempt. The server stores the result under that key and returns the stored result for a repeat. Stripe accepts it in the <code>Idempotency-Key</code> header [[stripe-idem]]."),
             h("Deadlines and bulkheads"),
             ul(
-                "<strong>Pass the deadline along.</strong> If the user's request has 2 seconds left, a call three services deep should not wait 10. gRPC propagates a deadline to downstream calls, so the work stops once nobody is waiting for it [[grpc-deadlines]].",
+                "<strong>Pass the deadline along.</strong> If the user's request has 2 seconds left, a call three services deep should not wait 10. gRPC can propagate a deadline to downstream calls (on by default in Java and Go, to be enabled in C++), and a server should stop its work once the call is cancelled [[grpc-deadlines]].",
                 "<strong>Bulkheads.</strong> Give each dependency its own pool of threads or connections. A slow recommendations service can then use up only its own pool, not the one checkout needs for payments [[azure-bulkhead]].",
             ),
         ],

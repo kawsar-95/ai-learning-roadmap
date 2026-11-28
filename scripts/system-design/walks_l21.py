@@ -105,8 +105,8 @@ STEPS = [
 
     st(("Acks", "Ack"),
        ("Acknowledge when done", "শেষ হলে acknowledge করুন"),
-       [("A job is only hidden while a worker has it. When the worker finishes, it sends an acknowledgement and the queue deletes the job. With RabbitMQ, messages delivered but never acknowledged are delivered again; Amazon SQS hides a received message for a visibility timeout, and it reappears if the consumer does not delete it in time.",
-         "Worker যতক্ষণ job ধরে আছে, ততক্ষণ সেটা শুধু লুকানো থাকে। Worker শেষ করলে একটা acknowledgement পাঠায় আর queue job মুছে দেয়। RabbitMQ-তে যে message পৌঁছেছে কিন্তু কখনো acknowledge হয়নি, সেটা আবার পাঠানো হয়; Amazon SQS একটা পাওয়া message-কে visibility timeout পর্যন্ত লুকিয়ে রাখে, আর consumer সময়মতো না মুছলে সেটা আবার দেখা দেয়।"),
+       [("A job is only hidden while a worker has it. When the worker finishes, it sends an acknowledgement and the queue deletes the job. With RabbitMQ, a message that was not acknowledged is requeued when the consumer's channel or connection closes; Amazon SQS hides a received message for a visibility timeout, and it reappears if the consumer does not delete it in time.",
+         "Worker যতক্ষণ job ধরে আছে, ততক্ষণ সেটা শুধু লুকানো থাকে। Worker শেষ করলে একটা acknowledgement পাঠায় আর queue job মুছে দেয়। RabbitMQ-তে যে message acknowledge হয়নি, consumer-এর channel বা connection বন্ধ হলে সেটা আবার queue-তে ফেরে; Amazon SQS একটা পাওয়া message-কে visibility timeout পর্যন্ত লুকিয়ে রাখে, আর consumer সময়মতো না মুছলে সেটা আবার দেখা দেয়।"),
         ("So a message can arrive more than once: at-least-once delivery. Consumers must be idempotent, because doing the same job twice must have the same effect as doing it once.",
          "তাই একটা message একাধিকবার আসতে পারে: at-least-once delivery। Consumer-কে idempotent হতে হবে, কারণ একই job দুবার করলে ফল একবার করার সমান হতে হবে।")],
        [sh("creator", "hot", ("video ready", "ভিডিও তৈরি")), sh("q", "hot", ("hides, deletes", "লুকায়, মোছে")), sh("workers", "hot", ("sends an ack", "ack পাঠায়"))],

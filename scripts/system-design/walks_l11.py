@@ -158,8 +158,8 @@ STEPS = [
 
     st(("Find a key", "Key খোঁজা"),
        ("Case: where is my key?", "ঘটনা: আমার key কোথায়?"),
-       [("A read checks the memtable first, then the SSTables from newest to oldest. A key that was written long ago, or one that does not exist, could cost a search of every file.",
-         "Read আগে memtable দেখে, তারপর SSTable-গুলো নতুন থেকে পুরোনোর ক্রমে। অনেক আগে লেখা কোনো key বা যে key-ই নেই, তার জন্য প্রতিটি ফাইল খুঁজতে হতে পারে।"),
+       [("A read checks the memtable first, then the SSTables, with the newest data winning. A key that was written long ago, or one that does not exist, could cost a search of every file.",
+         "Read আগে memtable দেখে, তারপর SSTable-গুলো, যেখানে নতুন ডেটাই প্রাধান্য পায়। অনেক আগে লেখা কোনো key বা যে key-ই নেই, তার জন্য প্রতিটি ফাইল খুঁজতে হতে পারে।"),
         ("A Bloom filter per file says “definitely not in this file” without touching the disk, so a lookup usually has to read only a few files.",
          "প্রতিটি ফাইলের একটা Bloom filter বলে দেয় “এই ফাইলে নিশ্চিতভাবে নেই”, disk না ছুঁয়েই, তাই একটা lookup-কে সাধারণত পড়তে হয় মাত্র কয়েকটা ফাইল।")],
        [sh("app", sub=("read", "পড়া")), sh("mem", sub=("memtable", "memtable")), sh("sst1", sub=("Bloom: no", "Bloom: না")),
