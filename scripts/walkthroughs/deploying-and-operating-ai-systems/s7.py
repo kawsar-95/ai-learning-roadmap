@@ -64,7 +64,7 @@ STEPS = [
                 ("+", "Run a small evaluation set against the prompt, the model version and the retrieval settings. Fail the build when the score drops below a baseline.",
                  "প্রম্পট, মডেল ভার্সন আর রিট্রিভাল সেটিংসের ওপর একটা ছোট ইভ্যাল সেট চালানো; স্কোর বেসলাইনের নিচে নামলে বিল্ড ফেল করানো।"),
                 ("+", "Deploy to staging, check it, then promote it.",
-                 "staging-এ ডিপ্লয় করে দেখে নিয়ে প্রোডাকশনে তোলা।")]),
+                 "staging-এ ডিপ্লয় করে, দেখে নিয়ে, তারপর প্রমোট করা।")]),
 
     st(("Gate", "গেট"),
        ("Fail below the baseline", "বেসলাইনের নিচে ফেল"),

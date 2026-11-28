@@ -7,8 +7,8 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   3 Record    Body, "Token, cost, and latency tracking": "Every request must record: input tokens, output tokens, model, cost ..., latency ..., and cache hit. Tag with user_id, feature, experiment. This data is the substrate for every other LLMOps question".
   4 Version   Body, "Prompt and agent versioning": "Prompts are code ... store in git, version them, review them via PR, deploy via CI. Each prompt version gets a stable ID; every trace carries the prompt ID."
   5 A/B test  Body, "A/B testing prompts and models in production": "Route traffic between two prompt versions (or two models) by user_id hash. Measure: cost, latency, evals run on the output, user feedback. Stop the experiment when one variant wins on the metric you chose".
-  6 Replay    Body, "Replay and debugging": "pull the trace, see every prompt and every model reply, identify the failure, and replay the exact request against a different model or prompt to verify the fix."
-  7 Drift     Body, "Drift detection": "run a small fraction of production traffic (1–5%) through both the old and new model, compare evals, alert on delta. Arize Phoenix and Braintrust automate this."
+  6 Replay    Body, "Replay and debugging": "pull the trace, see every prompt and every model reply, identify the failure, and replay the exact request against a different model or prompt to verify the fix. Langfuse and LangSmith let you open a logged call in a playground and re-run it with another model or prompt."
+  7 Drift     Body, "Drift detection": "When a vendor's model alias starts pointing to a newer snapshot ..., your outputs can drift in ways your offline evals won't catch. Pin dated model IDs. The fix: run a small fraction of production traffic (1–5%) through both the old and new model, compare evals, alert on delta. Tools such as Braintrust (online scoring with alerts) and Arize Phoenix (embedding drift) cover parts of this."
   8 Feedback  Body, "Feedback loops": "Capture thumbs-up / thumbs-down ... and feed the failures into your eval dataset. After three months you'll have a thousand real failures that's worth more than ten thousand synthetic ones."
   9 Remember  The four "remember" points of the Start here box.
 """
@@ -98,8 +98,8 @@ STEPS = [
        ("Replay and debugging", "রিপ্লে আর ডিবাগিং"),
        [("When a user complains, pull the trace, see every prompt and every model reply, and identify the failure.",
          "ইউজার অভিযোগ করলে ট্রেস টেনে এনে প্রতিটি প্রম্পট ও প্রতিটি মডেল উত্তর দেখুন, আর ব্যর্থতা চিহ্নিত করুন।"),
-        ("Then replay the exact request against a different model or prompt to verify the fix. Langfuse, Helicone, and LangSmith all give you a replay button.",
-         "তারপর সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে রিপ্লে করে ফিক্স যাচাই করুন। Langfuse, Helicone আর LangSmith সবই রিপ্লে বোতাম দেয়।")],
+        ("Then replay the exact request against a different model or prompt to verify the fix. Langfuse and LangSmith let you open a logged call in a playground and re-run it with another model or prompt.",
+         "তারপর সেই হুবহু রিকোয়েস্ট ভিন্ন মডেল বা প্রম্পটে রিপ্লে করে ফিক্স যাচাই করুন। Langfuse আর LangSmith-এ লগ করা কল প্লেগ্রাউন্ডে খুলে অন্য মডেল বা প্রম্পট দিয়ে আবার চালানো যায়।")],
        [sh("user", "warn", ("complains", "অভিযোগ করে")), sh("store", "hot", ("pull the trace", "ট্রেস টানুন"), x=380),
         sh("other", "hot", ("same request", "একই রিকোয়েস্ট"), y=162)],
        [ln("user", "store", "to", state="hot"), ln("store", "other", "to", state="hot")],
@@ -107,10 +107,10 @@ STEPS = [
 
     st(("Drift", "ড্রিফট"),
        ("Drift detection", "ড্রিফট ডিটেকশন"),
-       [("When OpenAI swaps GPT-4 for GPT-4-0613, or Anthropic bumps the weights of a “same-named” model, your outputs drift in ways your offline evals won't catch.",
-         "OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic “একই নামের” মডেলের ওয়েটস আপডেট করলে আপনার আউটপুট এমনভাবে ড্রিফট করে, যা আপনার অফলাইন ইভ্যাল ধরতে পারে না।"),
-        ("The fix: run a small fraction of production traffic (1–5%) through both the old and the new model, compare evals, and alert on delta. Arize Phoenix and Braintrust automate this.",
-         "সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়েই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন। Arize Phoenix আর Braintrust এটি স্বয়ংক্রিয় করে।")],
+       [("When a vendor's model alias starts pointing to a newer snapshot (for example an unpinned alias that moves to a new dated version), your outputs can drift in ways your offline evals won't catch. Pin dated model IDs.",
+         "ভেন্ডরের কোনো মডেল অ্যালিয়াস নতুন স্ন্যাপশটের দিকে ঘুরে গেলে (যেমন পিন না করা অ্যালিয়াস নতুন ডেটেড ভার্সনে চলে যায়), আপনার আউটপুট এমনভাবে ড্রিফট করতে পারে যা অফলাইন ইভ্যাল ধরতে পারে না। ডেটেড মডেল ID পিন করুন।"),
+        ("The fix: run a small fraction of production traffic (1–5%) through both the old and the new model, compare evals, and alert on delta. Tools such as Braintrust (online scoring with alerts) and Arize Phoenix (embedding drift) cover parts of this.",
+         "সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) পুরোনো ও নতুন দুই মডেলের মধ্য দিয়েই চালান, ইভ্যাল তুলনা করুন, আর পার্থক্য হলে সতর্কতা দিন। Braintrust (সতর্কতাসহ অনলাইন স্কোরিং) আর Arize Phoenix (এমবেডিং ড্রিফট) এর কিছু অংশ কভার করে।")],
        [sh("user", "hot", ("live traffic", "লাইভ ট্র্যাফিক")), sh("model", "hot", ("old", "পুরোনো"), x=380, y=75),
         sh("other", "hot", ("new", "নতুন"), x=380), sh("evals", "hot", ("compare, then alert", "তুলনা, তারপর সতর্ক"))],
        [ln("user", "model", "to", state="hot"), ln("user", "other", "to", state="hot"),

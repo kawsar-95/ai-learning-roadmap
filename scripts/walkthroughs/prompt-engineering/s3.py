@@ -7,14 +7,14 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   2 Steps     Start here: Chain-of-Thought (CoT) ("Making the model write its reasoning steps before the final answer. The extra tokens give the hard part more computation.").
               Body: "Q: 17×24 → A: 17×20=340, 17×4=68, 340+68=408"; "forcing the model to emit intermediate tokens allocates more computation to the hard part".
   3 Phrase    Start here: Zero-shot CoT ("Adding the phrase Let's think step by step to the prompt, with no examples at all."); "Showing worked steps, or adding Let's think step by step, improves math, logic, and multi-step answers."
-  4 Vote      Start here: Self-consistency ("Asking for N separate reasoning chains and taking the answer that most of them give."); Body: "Self-consistency: sample N independent CoT chains, take the majority answer. ~+10% on GSM8K."
+  4 Vote      Start here: Self-consistency ("Asking for N separate reasoning chains and taking the answer that most of them give."); Body: "Self-consistency: sample N independent CoT chains, take the majority answer. ~+18 points on GSM8K (+17.9%)."
   5 Act       Start here: ReAct ("Reason plus act. The model loops: a thought, an action like a search, then an observation of the result.").
               Body, the ReAct trace: "Thought 1: I need the current weather in Dhaka to answer." and "Action 1: get_weather("Dhaka")".
   6 Observe   The trace: "Obs 1: "32°C, partly cloudy, humidity 78%"", "Thought 2: Now I can answer the user's question directly.", "finish("It's 32°C and humid in Dhaka right now.")".
-              Start here: "ReAct loops think, act, observe. It is the pattern behind every modern AI agent."
+              Start here: "ReAct loops think, act, observe. It is the basis of many AI agent designs."
   7 Reflect   Start here: Reflexion ("After each try, the model writes down what went wrong in memory, so the next try learns from it.");
-              "On a task benchmark, Reflexion scored ~91% where plain ReAct scored ~40%."
-  8 Cost      "A reasoning trace can be 10–50× longer than a direct answer. Use it only for hard tasks."; the callout: "Use it only when the task justifies it: math, planning, debugging, multi-hop reasoning. For extraction or simple Q&A, direct answers are faster and cheaper."
+              "On the HumanEval coding benchmark, Reflexion reached 91% pass@1, against 80% for GPT-4."
+  8 Cost      "A reasoning trace can be many times longer than a direct answer. Use it only for hard tasks."; the callout: "Use it only when the task justifies it: math, planning, debugging, multi-hop reasoning. For extraction or simple Q&A, direct answers are faster and cheaper."
               Layman's voice: "all three techniques cost way more tokens (and therefore money and time)".
   9 Remember  The four "remember" points of the Start here box.
 """
@@ -32,8 +32,8 @@ NODES = [
 
 METRICS = [
     ("17 × 24", "১৭ × ২৪"),
-    ("ReAct score", "ReAct স্কোর"),
-    ("Reflexion score", "Reflexion স্কোর"),
+    ("Reflexion HumanEval", "Reflexion HumanEval"),
+    ("GPT-4 baseline", "GPT-4 বেসলাইন"),
     ("Trace vs direct answer", "ট্রেস বনাম সরাসরি উত্তর"),
 ]
 
@@ -83,12 +83,12 @@ STEPS = [
        ("Self-consistency: take the majority answer", "সেলফ-কনসিস্টেন্সি: বেশিরভাগের উত্তর নেওয়া"),
        [("Self-consistency asks for N separate reasoning chains and takes the answer that most of them give.",
          "সেলফ-কনসিস্টেন্সি N-টা আলাদা যুক্তির চেইন চায় আর যে উত্তরটা বেশিরভাগ চেইনে আসে সেটা নেয়।"),
-        ("On GSM8K this gives about +10%.",
-         "GSM8K-তে এতে প্রায় +১০% পাওয়া যায়।")],
+        ("On GSM8K this gives about +18 points (+17.9%).",
+         "GSM8K-তে এতে প্রায় +১৮ পয়েন্ট (+১৭.৯%) পাওয়া যায়।")],
        [sh("model", "hot"), sh("steps", "hot", ("N separate chains", "N-টা আলাদা চেইন")), sh("vote", "hot"), sh("answer", "hot")],
        [ln("model", "steps", "to", state="hot"), ln("steps", "vote", "to", state="hot"), ln("vote", "answer", "to", state="hot")],
        [None, None, None, None],
-       changes=[("+", "About +10% on GSM8K", "GSM8K-তে প্রায় +১০%")]),
+       changes=[("+", "About +18 points on GSM8K (+17.9%)", "GSM8K-তে প্রায় +১৮ পয়েন্ট (+১৭.৯%)")]),
 
     st(("Act", "অ্যাকশন"),
        ("ReAct: think, then act", "ReAct: আগে ভাবা, তারপর করা"),
@@ -98,7 +98,7 @@ STEPS = [
          "ভাবনা ১: উত্তর দিতে ঢাকার এখনকার আবহাওয়া দরকার। অ্যাকশন ১: <code>get_weather(\"Dhaka\")</code>।")],
        [sh("model", "hot", ("Thought 1", "ভাবনা ১")), sh("tool", "hot", ("location: Dhaka", "location: Dhaka"))],
        [ln("model", "tool", "to", state="hot", label=("Action 1", "অ্যাকশন ১"))],
-       [None, "~40%", None, None],
+       [None, None, None, None],
        changes=[("+", "The model asked a tool for the weather", "মডেল একটা টুলের কাছে আবহাওয়া চাইল")]),
 
     st(("Observe", "পর্যবেক্ষণ"),
@@ -109,31 +109,31 @@ STEPS = [
          "মডেল উত্তর দিয়ে শেষ করে: ঢাকায় এখন ৩২°C আর আর্দ্র আবহাওয়া।")],
        [sh("tool", "hot", ("32°C, partly cloudy", "৩২°C, আংশিক মেঘলা")), sh("model", "hot", ("Thought 2", "ভাবনা ২")), sh("answer", "hot", ("finish", "finish"))],
        [ln("tool", "model", "to", state="hot", label=("Observation 1", "পর্যবেক্ষণ ১")), ln("model", "answer", "to", state="hot", label=("finish", "finish"))],
-       [None, "~40%", None, None],
+       [None, None, None, None],
        note=("insight",
-             "ReAct loops think, act, observe. It is the pattern behind every modern AI agent.",
-             "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।")),
+             "ReAct loops think, act, observe. It is the basis of many AI agent designs.",
+             "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের অনেক AI এজেন্টের পেছনে এই প্যাটার্ন।")),
 
     st(("Reflect", "রিফ্লেকশন"),
        ("Reflexion: write down what went wrong", "রিফ্লেকশন: কোথায় ভুল হলো তা লিখে রাখা"),
        [("After each try, the model writes down what went wrong in memory. The next try learns from it.",
          "প্রতিটি চেষ্টার পর মডেল কোথায় ভুল হলো তা মেমরিতে লিখে রাখে, যাতে পরের চেষ্টা সেখান থেকে শেখে।"),
-        ("On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%.",
-         "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।")],
+        ("On the HumanEval coding benchmark, Reflexion reached 91% pass@1, against 80% for GPT-4.",
+         "HumanEval কোডিং বেঞ্চমার্কে Reflexion ৯১% pass@1 পেয়েছে, আর GPT-4 পেয়েছে ৮০%।")],
        [sh("model", "hot", ("reflects", "ভেবে দেখে")), sh("memory", "hot", ("what went wrong", "কোথায় ভুল হলো")), sh("tool", "dim")],
        [ln("model", "memory", "both", state="hot", label=("reflection", "রিফ্লেকশন")), ln("model", "tool", "to", state="dim")],
-       [None, "~40%", "~91%", None],
+       [None, ("91%", "৯১%"), ("80%", "৮০%"), None],
        changes=[("+", "The next try starts from what went wrong", "পরের চেষ্টা শুরু হয় ভুলের শিক্ষা থেকে")]),
 
     st(("Cost", "খরচ"),
        ("Thinking costs tokens", "ভাবনার খরচ আছে"),
-       [("A reasoning trace can be 10–50× longer than a direct answer. All three patterns cost more tokens, and so more money and time.",
-         "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। তিনটি প্যাটার্নেই টোকেন বেশি লাগে, তাই খরচ আর সময়ও বেশি।"),
+       [("A reasoning trace can be many times longer than a direct answer. All three patterns cost more tokens, and so more money and time.",
+         "রিজনিং ট্রেস সরাসরি উত্তরের অনেক গুণ লম্বা হতে পারে। তিনটি প্যাটার্নেই টোকেন বেশি লাগে, তাই খরচ আর সময়ও বেশি।"),
         ("Use them for hard tasks: math, planning, debugging, multi-hop reasoning. For extraction or simple Q&amp;A, a direct answer is faster and cheaper.",
          "কঠিন কাজেই এগুলো ব্যবহার করুন: অঙ্ক, প্ল্যানিং, ডিবাগিং, মাল্টি-হপ রিজনিং। এক্সট্রাকশন বা সহজ Q&amp;A-তে সরাসরি উত্তরই দ্রুত ও সস্তা।")],
-       [sh("user"), sh("model"), sh("steps", "warn", ("10–50× longer", "১০–৫০ গুণ লম্বা")), sh("answer")],
+       [sh("user"), sh("model"), sh("steps", "warn", ("many times longer", "অনেক গুণ লম্বা")), sh("answer")],
        [ln("user", "model", "to"), ln("model", "steps", "to", state="warn"), ln("steps", "answer", "to", state="warn")],
-       [None, None, None, "10–50×"],
+       [None, None, None, ("many times", "অনেক গুণ")],
        note=("warn",
              "Use it only when the task justifies it. For simple questions, a direct answer is faster and cheaper.",
              "কাজটা দাবি করলে তবেই ব্যবহার করুন। সহজ প্রশ্নে সরাসরি উত্তরই দ্রুত ও সস্তা।")),
@@ -147,12 +147,12 @@ STEPS = [
        [None, None, None, None],
        points=[("Showing worked steps, or adding Let's think step by step, improves math, logic, and multi-step answers.",
                 "কাজের ধাপ দেখালে বা Let's think step by step যোগ করলে অঙ্ক, যুক্তি আর মাল্টি-স্টেপ উত্তর ভালো হয়।"),
-               ("ReAct loops think, act, observe. It is the pattern behind every modern AI agent.",
-                "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের প্রতিটি AI এজেন্টের পেছনে এই প্যাটার্ন।"),
-               ("On a task benchmark, Reflexion scored about 91% where plain ReAct scored about 40%.",
-                "একটা টাস্ক বেঞ্চমার্কে Reflexion প্রায় ৯১% পেয়েছে, যেখানে সাধারণ ReAct পেয়েছে প্রায় ৪০%।"),
-               ("A reasoning trace can be 10–50× longer than a direct answer. Use it only for hard tasks.",
-                "রিজনিং ট্রেস সরাসরি উত্তরের ১০–৫০ গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।")]),
+               ("ReAct loops think, act, observe. It is the basis of many AI agent designs.",
+                "ReAct-এ ভাবা, করা, দেখা চক্রাকারে চলে। আজকের অনেক AI এজেন্টের পেছনে এই প্যাটার্ন।"),
+               ("On the HumanEval coding benchmark, Reflexion reached 91% pass@1, against 80% for GPT-4.",
+                "HumanEval কোডিং বেঞ্চমার্কে Reflexion ৯১% pass@1 পেয়েছে, আর GPT-4 পেয়েছে ৮০%।"),
+               ("A reasoning trace can be many times longer than a direct answer. Use it only for hard tasks.",
+                "রিজনিং ট্রেস সরাসরি উত্তরের অনেক গুণ লম্বা হতে পারে। শুধু কঠিন কাজে ব্যবহার করুন।")]),
 ]
 
 WALK = walk(760, 320, NODES, METRICS, CAPTION, STEPS)

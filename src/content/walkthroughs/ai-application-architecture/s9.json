@@ -185,7 +185,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "SSE (Server-Sent Events): the simplest; works through any HTTP proxy; one-way (server to client)"
+            "html": "SSE (Server-Sent Events): the simplest; it is plain HTTP, so it usually passes through proxies (some legacy proxies drop long-lived connections); one-way (server to client)"
           },
           {
             "sign": "+",
@@ -206,7 +206,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "SSE (Server-Sent Events): সবচেয়ে সহজ; যেকোনো HTTP প্রক্সির মধ্য দিয়ে কাজ করে; একমুখী (সার্ভার থেকে ক্লায়েন্ট)"
+            "html": "SSE (Server-Sent Events): সবচেয়ে সহজ; এটি সাধারণ HTTP, তাই সাধারণত প্রক্সির মধ্য দিয়ে কাজ করে (কিছু পুরনো প্রক্সি দীর্ঘ কানেকশন কেটে দেয়); একমুখী (সার্ভার থেকে ক্লায়েন্ট)"
           },
           {
             "sign": "+",
@@ -507,7 +507,7 @@
         "short": "Fallbacks",
         "title": "Fallback chains across providers",
         "body": [
-          "OpenAI 503s? Route to Anthropic. Anthropic 429s? Route to Together. Use a degraded prompt per provider, such as “you have no tool use; just answer”.",
+          "OpenAI 503s? Route to Anthropic. Anthropic 429s? Route to Together. With degraded prompts per provider (“you have no tool use; just answer”).",
           "LiteLLM and Portkey do this out of the box; a model gateway is essentially a fallback router plus cost tracking."
         ]
       },
@@ -593,7 +593,7 @@
         "title": "Feature flags for prompts and models",
         "body": [
           "Treat every prompt and every model as a flag. Roll out “use GPT-5 for premium users only” to 1%, then 10%, then 100%.",
-          "Roll back instantly when evals regress. LaunchDarkly, Statsig, PostHog, or a simple DB column will do."
+          "Roll back instantly when evals regress. LaunchDarkly, Statsig, PostHog, or a simple DB column: pick one and use it for prompts."
         ]
       },
       "bn": {
@@ -601,7 +601,7 @@
         "title": "প্রম্পট আর মডেলের ফিচার ফ্ল্যাগ",
         "body": [
           "প্রতিটি প্রম্পট ও প্রতিটি মডেলকে ফ্ল্যাগ হিসেবে দেখুন। “শুধু প্রিমিয়াম ইউজারদের জন্য GPT-5 ব্যবহার করুন” ১%, তারপর ১০%, তারপর ১০০%-এ রোল আউট করুন।",
-          "ইভ্যাল রিগ্রেস করলে তাৎক্ষণিকভাবে রোল ব্যাক করুন। LaunchDarkly, Statsig, PostHog বা একটি সাধারণ DB কলামই চলবে।"
+          "ইভ্যাল রিগ্রেস করলে তাৎক্ষণিকভাবে রোল ব্যাক করুন। LaunchDarkly, Statsig, PostHog বা একটি সাধারণ DB কলাম: একটি বেছে নিন এবং প্রম্পটের জন্য ব্যবহার করুন।"
         ]
       },
       "show": [
@@ -658,7 +658,7 @@
         "short": "API rules",
         "title": "Rules for an AI API",
         "body": [
-          "Five rules distinguish an AI API from a normal REST API:"
+          "Five rules that distinguish an AI API from a normal REST API:"
         ],
         "changes": [
           {

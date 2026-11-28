@@ -460,7 +460,7 @@
         "title": "A small k favors the top",
         "body": [
           "In the formula, k is a constant. A small k gives the top ranks much more weight.",
-          "At k = 60, a rank-10 hit keeps 87% of a rank-1 hit's weight. At k = 2, it keeps only 25%."
+          "At k = 60, a rank-10 hit keeps 87% of a rank-1 hit's weight. At an illustrative k = 2 (ranks counted from 1), it keeps only 25%."
         ],
         "changes": [
           {
@@ -469,7 +469,7 @@
           },
           {
             "sign": "-",
-            "html": "k = 2: rank 10 keeps only 25%"
+            "html": "Illustrative k = 2: rank 10 keeps only 25%"
           }
         ]
       },
@@ -478,7 +478,7 @@
         "title": "ছোট k ওপরের র‍্যাংককে বেশি গুরুত্ব দেয়",
         "body": [
           "সূত্রে k একটি ধ্রুবক। k ছোট হলে উপরের র‍্যাংক অনেক বেশি গুরুত্ব পায়।",
-          "k = ৬০-এ র‍্যাংক ১০ পায় র‍্যাংক ১-এর প্রায় ৮৭%; k = ২-এ মাত্র ২৫%।"
+          "k = ৬০-এ র‍্যাংক ১০ পায় র‍্যাংক ১-এর প্রায় ৮৭%; উদাহরণ হিসেবে k = ২ (র‍্যাংক ১ থেকে গুনলে) হলে মাত্র ২৫%।"
         ],
         "changes": [
           {
@@ -487,7 +487,7 @@
           },
           {
             "sign": "-",
-            "html": "k = ২: র‍্যাংক ১০ পায় মাত্র ২৫%"
+            "html": "উদাহরণ k = ২: র‍্যাংক ১০ পায় মাত্র ২৫%"
           }
         ]
       },

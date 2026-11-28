@@ -11,7 +11,7 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   4 Schema    Remember: "A plain request to summarise the chat gives mush. Use a structured schema instead."; the schema keys user_goal, decisions_made, open_questions, key_facts_learned, entities, user_preferences, tool_results_to_remember.
   5 Levels    Start here: Hierarchical summarisation ("a summary of the oldest turns, a medium-detail summary of the middle turns, and recent turns word for word."); callout: "preserves both long-arc continuity and recent detail".
   6 Loss      Start here: Lossy compression ("Making something smaller by losing some detail, like shrinking a photo. Decisions, exact numbers, and quotes vanish first.").
-              Bangla voice: "সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
+              SVG note: "compression ratio typically 5–20×; information loss is the cost"; Bangla: "কমপ্রেশন রেশিও কাজভেদে আলাদা, তবে এর মূল্য হলো তথ্য হারানো।"
   7 Slot      Start here: Structured slot ("A separate place for key facts, kept outside the summary so they survive summarising."); layman's voice: "If something matters a lot, pull it out separately before you summarise".
   8 Index     Remember: "Treat the summary as an index, not the source of truth. Keep full transcripts for high-stakes chats."; body: "When a detail matters, retrieve from the original log."
   9 Remember  The four "remember" points of the Start here box.
@@ -103,11 +103,11 @@ STEPS = [
        ("Summaries lose detail", "সারসংক্ষেপে তথ্য হারায়"),
        [("Summarisation is lossy compression, like shrinking a photo. Decisions, exact numbers and quoted text are the first things to disappear.",
          "সামারাইজেশন লসি কমপ্রেশন, ছবি ছোট করার মতো। সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়।"),
-        ("The compression ratio is usually 5–20×, but the price is lost detail.",
-         "সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।")],
+        ("The compression ratio varies by task, but the price is lost detail.",
+         "কমপ্রেশন রেশিও কাজভেদে আলাদা, তবে এর মূল্য হলো তথ্য হারানো।")],
        [sh("summary", "warn", ("details lost", "খুঁটিনাটি হারায়")), sh("window", "hot")],
        [ln("summary", "window", "to", state="warn")],
-       [None, "5–20×", None],
+       [None, ("varies by task", "কাজভেদে আলাদা"), None],
        note=("warn",
              "Decisions, exact numbers and quoted text vanish first.",
              "সিদ্ধান্ত, নির্দিষ্ট সংখ্যা আর উদ্ধৃতি সবার আগে হারায়।")),

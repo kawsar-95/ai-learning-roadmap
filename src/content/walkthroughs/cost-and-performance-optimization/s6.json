@@ -271,7 +271,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "Semantic cache: if a near-identical prompt was answered recently (cosine above 0.95), return the cached answer."
+            "html": "Semantic cache: if a near-identical prompt was answered recently (for example cosine above 0.95; the threshold is your choice), return the cached answer. Libraries such as GPTCache provide this."
           },
           {
             "sign": "+",
@@ -279,7 +279,7 @@
           },
           {
             "sign": "+",
-            "html": "Prompt cache: provider-level, it reuses the KV of the system prompt across calls, with an 80–90% discount on the cached prefix."
+            "html": "Prompt cache: provider-level (Anthropic cache_control, OpenAI automatic prompt caching, reported as cached_tokens), it reuses the KV of the system prompt across calls. Cached reads cost about 10% of the base input price on most models (90% off); newer Claude models are cheaper still (0.05×). Writes to the cache cost more (1.25× on Anthropic's 5-minute cache)."
           }
         ]
       },
@@ -292,7 +292,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "সেম্যান্টিক ক্যাশ: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হলে (কোসাইন ০.৯৫-এর বেশি) জমানো উত্তর ফেরত দিন।"
+            "html": "সেম্যান্টিক ক্যাশ: প্রায় একই প্রম্পটের উত্তর সম্প্রতি দেওয়া হলে (যেমন কোসাইন ০.৯৫-এর বেশি; সীমাটা আপনার ঠিক করা) জমানো উত্তর ফেরত দিন। GPTCache-এর মতো লাইব্রেরি এটি দেয়।"
           },
           {
             "sign": "+",
@@ -300,7 +300,7 @@
           },
           {
             "sign": "+",
-            "html": "প্রম্পট ক্যাশ: প্রোভাইডার-স্তরের; কলের পর কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে, ক্যাশ করা প্রিফিক্সে ৮০–৯০% ছাড়।"
+            "html": "প্রম্পট ক্যাশ: প্রোভাইডার-স্তরের (Anthropic <code>cache_control</code>, OpenAI-র স্বয়ংক্রিয় প্রম্পট ক্যাশিং, যা <code>cached_tokens</code> নামে দেখায়); কলের পর কলে সিস্টেম প্রম্পটের KV আবার ব্যবহার করে। বেশিরভাগ মডেলে ক্যাশ রিডের দাম বেস ইনপুট দামের প্রায় ১০% (৯০% ছাড়); নতুন Claude মডেলে আরও কম (০.০৫×)। ক্যাশে লেখার খরচ বেশি (Anthropic-এর ৫ মিনিটের ক্যাশে ১.২৫×)।"
           }
         ]
       },
@@ -414,7 +414,7 @@
         ],
         "note": {
           "kind": "insight",
-          "html": "DeepSeek-R1's “distilled Qwen” line showed that a well-distilled 7B beats an un-distilled 12B on reasoning benchmarks."
+          "html": "DeepSeek-R1's “distilled Qwen” line showed that reasoning patterns from a large model can be used to improve the reasoning of much smaller models."
         }
       },
       "bn": {
@@ -426,7 +426,7 @@
         ],
         "note": {
           "kind": "insight",
-          "html": "DeepSeek-R1-এর “distilled Qwen” লাইন দেখিয়েছে, ভালোভাবে ডিস্টিল করা একটি 7B রিজনিং বেঞ্চমার্কে ডিস্টিল না করা 12B-কে ছাড়িয়ে যায়।"
+          "html": "DeepSeek-R1-এর “distilled Qwen” লাইন দেখিয়েছে, বড় মডেলের রিজনিং-ধাঁচ দিয়ে অনেক ছোট মডেলের রিজনিং উন্নত করা যায়।"
         }
       },
       "show": [
@@ -467,7 +467,7 @@
         "short": "Compress",
         "title": "Prompt compression",
         "body": [
-          "Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens: often 5–20× compression with under 3% quality loss.",
+          "Tools like LLMLingua remove stopwords, paraphrase verbose passages, and drop low-information tokens: up to 20× compression with little performance loss.",
           "This is particularly powerful for long RAG contexts, where most chunks are filler."
         ]
       },
@@ -475,7 +475,7 @@
         "short": "কম্প্রেস",
         "title": "প্রম্পট কম্প্রেশন",
         "body": [
-          "LLMLingua-র মতো টুল স্টপওয়ার্ড বাদ দেয়, বিস্তারিত অংশ সংক্ষেপে বলে, আর কম তথ্যের টোকেন ফেলে দেয়: প্রায়ই ৫–২০× কম্প্রেশন, মান কমে ৩%-এরও কম।",
+          "LLMLingua-র মতো টুল স্টপওয়ার্ড বাদ দেয়, বিস্তারিত অংশ সংক্ষেপে বলে, আর কম তথ্যের টোকেন ফেলে দেয়: ২০× পর্যন্ত কম্প্রেশন, কার্যক্ষমতার ক্ষতি সামান্য।",
           "লম্বা RAG কনটেক্সটে এটি বিশেষভাবে কাজের, যেখানে বেশিরভাগ অংশই ফিলার।"
         ]
       },
@@ -523,12 +523,12 @@
       "values": [
         null,
         {
-          "en": "under 3% loss",
-          "bn": "৩%-এরও কম ক্ষতি"
+          "en": "little loss",
+          "bn": "সামান্য ক্ষতি"
         },
         {
-          "en": "5–20× smaller",
-          "bn": "৫–২০× ছোট"
+          "en": "up to 20× smaller",
+          "bn": "২০× পর্যন্ত ছোট"
         }
       ]
     },
@@ -600,22 +600,22 @@
         "short": "Gateway",
         "title": "A model gateway",
         "body": [
-          "A model gateway sits between your app and every LLM provider. It gives you one API for OpenAI, Anthropic, Together, and your own vLLM, plus per-key rate limits, cost tracking, retries, fallbacks, and semantic caching out of the box."
+          "A model gateway sits between your app and every LLM provider. It gives you one API for OpenAI, Anthropic, Together, and your own vLLM, plus per-key rate limits, cost tracking, retries, and fallbacks."
         ],
         "note": {
           "kind": "tip",
-          "html": "The three major options are LiteLLM (a Python proxy), Portkey (a production-grade SaaS), and OpenRouter (a consumer-grade aggregator)."
+          "html": "Examples are LiteLLM, Portkey, and OpenRouter. LiteLLM, for one, gives one API for 100+ providers, per-key budgets and rate limits, cost tracking, retries, and fallbacks."
         }
       },
       "bn": {
         "short": "গেটওয়ে",
         "title": "মডেল গেটওয়ে",
         "body": [
-          "মডেল গেটওয়ে আপনার অ্যাপ আর প্রতিটি LLM প্রোভাইডারের মাঝে বসে। এটি দেয় OpenAI, Anthropic, Together আর আপনার নিজের vLLM-এর জন্য একটি API, সঙ্গে প্রতি-কী রেট লিমিট, খরচের হিসাব, রিট্রাই, ফলব্যাক আর রেডিমেড সেম্যান্টিক ক্যাশিং।"
+          "মডেল গেটওয়ে আপনার অ্যাপ আর প্রতিটি LLM প্রোভাইডারের মাঝে বসে। এটি দেয় OpenAI, Anthropic, Together আর আপনার নিজের vLLM-এর জন্য একটি API, সঙ্গে প্রতি-কী রেট লিমিট, খরচের হিসাব, রিট্রাই আর ফলব্যাক।"
         ],
         "note": {
           "kind": "tip",
-          "html": "তিনটি প্রধান বিকল্প হলো LiteLLM (Python প্রক্সি), Portkey (প্রোডাকশন-মানের SaaS) আর OpenRouter (কনজিউমার-মানের অ্যাগ্রিগেটর)।"
+          "html": "উদাহরণ: LiteLLM, Portkey আর OpenRouter। LiteLLM একটি API-তে ১০০+ প্রোভাইডার, প্রতি-কী বাজেট ও রেট লিমিট, খরচের হিসাব, রিট্রাই আর ফলব্যাক দেয়।"
         }
       },
       "show": [

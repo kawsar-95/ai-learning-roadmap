@@ -97,7 +97,7 @@
         "short": "Text",
         "title": "A model does not read words",
         "body": [
-          "You send a model some text: “Tokenization is the silent tax on every LLM call.” That is 8 words.",
+          "You send a model some text: “Tokenization is the silent tax on every LLM call.” That is 9 words.",
           "But the model does not read whole words. It reads tokens, small pieces of text."
         ],
         "note": {
@@ -109,7 +109,7 @@
         "short": "লেখা",
         "title": "মডেল শব্দ পড়ে না",
         "body": [
-          "আপনি মডেলকে একটি লেখা পাঠান: “Tokenization is the silent tax on every LLM call.” এতে ৮টি শব্দ আছে।",
+          "আপনি মডেলকে একটি লেখা পাঠান: “Tokenization is the silent tax on every LLM call.” এতে ৯টি শব্দ আছে।",
           "কিন্তু মডেল পুরো শব্দ পড়ে না। সে পড়ে টোকেন, মানে লেখার ছোট ছোট টুকরো।"
         ],
         "note": {
@@ -122,8 +122,8 @@
           "id": "text",
           "state": "hot",
           "sub": {
-            "en": "8 words",
-            "bn": "৮টি শব্দ"
+            "en": "9 words",
+            "bn": "৯টি শব্দ"
           }
         },
         {
@@ -138,7 +138,7 @@
         }
       ],
       "values": [
-        "8",
+        "9",
         null,
         null
       ]
@@ -148,7 +148,7 @@
         "short": "Tokens",
         "title": "The tokenizer cuts the text into tokens",
         "body": [
-          "Before the model reads anything, a tokenizer cuts the text into tokens. It uses a fixed list of tokens, the vocabulary. Here, the 8 words become 11 tokens.",
+          "Before the model reads anything, a tokenizer cuts the text into tokens. It uses a fixed list of tokens, the vocabulary. Here, the 9 words become 12 tokens.",
           "The list is built with Byte-Pair Encoding. It keeps joining the pairs of pieces that appear side by side most often, until the list holds 32k to 200k tokens."
         ],
         "note": {
@@ -158,7 +158,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "The 8 words become 11 tokens."
+            "html": "The 9 words become 12 tokens."
           }
         ]
       },
@@ -166,7 +166,7 @@
         "short": "টোকেন",
         "title": "টোকেনাইজার লেখাকে টোকেনে কাটে",
         "body": [
-          "মডেল কিছু পড়ার আগে টোকেনাইজার লেখাকে টোকেনে কেটে নেয়। সে টোকেনের একটি নির্দিষ্ট তালিকা ব্যবহার করে, যার নাম ভোকাবুলারি। এখানে ৮টি শব্দ হয়ে যায় ১১টি টোকেন।",
+          "মডেল কিছু পড়ার আগে টোকেনাইজার লেখাকে টোকেনে কেটে নেয়। সে টোকেনের একটি নির্দিষ্ট তালিকা ব্যবহার করে, যার নাম ভোকাবুলারি। এখানে ৯টি শব্দ হয়ে যায় ১২টি টোকেন।",
           "তালিকাটা বানানো হয় Byte-Pair Encoding (BPE) দিয়ে। যে জোড়া টুকরো সবচেয়ে বেশি পাশাপাশি আসে, সেগুলোকে বারবার জুড়ে দেওয়া হয়, যতক্ষণ না তালিকায় ৩২k থেকে ২০০k টোকেন হয়।"
         ],
         "note": {
@@ -176,7 +176,7 @@
         "changes": [
           {
             "sign": "+",
-            "html": "৮টি শব্দ হয়ে গেল ১১টি টোকেন।"
+            "html": "৯টি শব্দ হয়ে গেল ১২টি টোকেন।"
           }
         ]
       },
@@ -185,16 +185,16 @@
           "id": "text",
           "state": "dim",
           "sub": {
-            "en": "8 words",
-            "bn": "৮টি শব্দ"
+            "en": "9 words",
+            "bn": "৯টি শব্দ"
           }
         },
         {
           "id": "tok",
           "state": "hot",
           "sub": {
-            "en": "11 tokens",
-            "bn": "১১টি টোকেন"
+            "en": "12 tokens",
+            "bn": "১২টি টোকেন"
           }
         },
         {
@@ -219,8 +219,8 @@
         }
       ],
       "values": [
-        "8",
-        "11",
+        "9",
+        "12",
         null
       ]
     },
@@ -246,16 +246,16 @@
           "id": "tok",
           "state": "dim",
           "sub": {
-            "en": "11 tokens",
-            "bn": "১১টি টোকেন"
+            "en": "12 tokens",
+            "bn": "১২টি টোকেন"
           }
         },
         {
           "id": "model",
           "state": "hot",
           "sub": {
-            "en": "reads 11 tokens",
-            "bn": "১১টি টোকেন পড়ছে"
+            "en": "reads 12 tokens",
+            "bn": "১২টি টোকেন পড়ছে"
           }
         }
       ],
@@ -268,8 +268,8 @@
         }
       ],
       "values": [
-        "8",
-        "11",
+        "9",
+        "12",
         null
       ]
     },
@@ -320,8 +320,8 @@
         }
       ],
       "values": [
-        "8",
-        "11",
+        "9",
+        "12",
         null
       ]
     },
@@ -331,12 +331,12 @@
         "title": "You pay for tokens",
         "body": [
           "APIs charge per token, not per word or per character. The cost of the input is the number of tokens × the price of one token.",
-          "In this section's example, 11 input tokens at $0.15 per million tokens cost $0.00000165."
+          "In this section's example, 12 input tokens at $0.15 per million tokens cost $0.0000018."
         ],
         "changes": [
           {
             "sign": "+",
-            "html": "The input costs $0.00000165."
+            "html": "The input costs $0.0000018."
           }
         ]
       },
@@ -345,12 +345,12 @@
         "title": "টোকেন ধরে দাম দিতে হয়",
         "body": [
           "API দাম ধরে টোকেন অনুযায়ী, শব্দ বা অক্ষর অনুযায়ী নয়। ইনপুটের খরচ হলো টোকেনের সংখ্যা × এক টোকেনের দাম।",
-          "এই সেকশনের উদাহরণে প্রতি ১ মিলিয়ন ইনপুট টোকেনে ০.১৫ ডলার ধরলে ১১ টোকেনের খরচ ০.০০০০০১৬৫ ডলার।"
+          "এই সেকশনের উদাহরণে প্রতি ১ মিলিয়ন ইনপুট টোকেনে ০.১৫ ডলার ধরলে ১২ টোকেনের খরচ ০.০০০০০১৮ ডলার।"
         ],
         "changes": [
           {
             "sign": "+",
-            "html": "ইনপুটের খরচ হলো ০.০০০০০১৬৫ ডলার।"
+            "html": "ইনপুটের খরচ হলো ০.০০০০০১৮ ডলার।"
           }
         ]
       },
@@ -363,8 +363,8 @@
           "id": "bill",
           "state": "hot",
           "sub": {
-            "en": "$0.00000165",
-            "bn": "$০.০০০০০১৬৫"
+            "en": "$0.0000018",
+            "bn": "$০.০০০০০১৮"
           }
         }
       ],
@@ -381,9 +381,9 @@
         }
       ],
       "values": [
-        "8",
-        "11",
-        "$0.00000165"
+        "9",
+        "12",
+        "$0.0000018"
       ]
     },
     {
@@ -478,7 +478,7 @@
       "values": [
         null,
         "800 → 200",
-        "$0.00012 → $0.00003"
+        "75% less"
       ]
     },
     {
@@ -487,7 +487,7 @@
         "title": "A repeated start can be cached",
         "body": [
           "Often the start of a prompt is the same from one call to the next. Prompt caching reuses the work done on that start.",
-          "It cuts the cost of that part by about 80–90%."
+          "It can cut the cost of that part by up to about 90%, depending on the provider."
         ],
         "note": {
           "kind": "insight",
@@ -499,7 +499,7 @@
         "title": "বারবার আসা শুরুর অংশ ক্যাশ করা যায়",
         "body": [
           "অনেক সময় প্রম্পটের শুরুর অংশ এক কল থেকে আরেক কলে একই থাকে। প্রম্পট ক্যাশিং সেই অংশের জন্য করা কাজ আবার ব্যবহার করে।",
-          "এতে সেই অংশের খরচ প্রায় ৮০–৯০% কমে।"
+          "এতে প্রোভাইডারভেদে সেই অংশের খরচ সর্বোচ্চ প্রায় ৯০% পর্যন্ত কমতে পারে।"
         ],
         "note": {
           "kind": "insight",
@@ -523,8 +523,8 @@
           "id": "cache",
           "state": "hot",
           "sub": {
-            "en": "80–90% cheaper",
-            "bn": "৮০–৯০% সস্তা"
+            "en": "up to 90% off",
+            "bn": "৯০% পর্যন্ত কম"
           }
         },
         {
@@ -565,7 +565,7 @@
       "values": [
         null,
         "200",
-        "$0.00003"
+        null
       ]
     },
     {
@@ -637,7 +637,7 @@
       "values": [
         null,
         "200",
-        "$0.00003"
+        null
       ]
     }
   ]

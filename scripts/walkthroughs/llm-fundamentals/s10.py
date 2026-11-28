@@ -6,14 +6,14 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
                 The table: Math, physics, formal proofs: Standard "poor", Reasoning "best".
   2 Think first Start here: "A reasoning model thinks before it answers. It writes out its working steps first, which helps on hard problems like math and code".
                 Thinking tokens ("The model's working notes, written before the final answer"), Chain of thought ("like showing your working in a math test").
-  3 Cost        Start here: thinking tokens "count as tokens too". Panel Costs: "Reasoning models can use 5–50× more tokens per query". Callout: "5–50× more expensive and slower".
-  4 Wait        Panel Latency: "TTFT is often slower (longer prefill). Streaming the thinking tokens can help UX." Start here: TTFT ("How long it takes until the model's first output appears").
+  3 Cost        Start here: thinking tokens "count as tokens too". Panel Costs: "Reasoning models can use many times more tokens per query, depending on the task and thinking budget". Callout: "They can cost many times more and are slower".
+  4 Wait        Panel Latency: "TTFT is often slower because the model writes thinking tokens before the answer. Streaming the thinking tokens can help UX." Start here: TTFT ("How long it takes until the model's first output appears").
   5 Budget      Start here: Thinking budget ("A cap on how many thinking tokens the model may use, to control cost and waiting time"). Panel Costs: "set it to your latency/cost ceiling".
                 The code: budget_tokens 10000. Layman's voice: "For easy questions it finishes early. For hard ones, it uses the full budget."
   6 Where       Start here: "Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions." The table: "overkill", "Reasoning models waste tokens".
                 Callout: "Don't reach for reasoning models by reflex."
   7 Training    Start here: Reinforcement learning ("Training by reward: the model tries, gets a score, and learns to do more of what scored well"), Distillation.
-                Body: "reinforcement learning on chain-of-thought traces ... the model learns to think longer on hard problems". Panel Distillation: "DeepSeek-R1 distilled into Qwen 1.5B–32B".
+                Body: "o1 is trained with large-scale reinforcement learning to reason using chain of thought". Panel Distillation: "DeepSeek-R1 distilled into Qwen 1.5B–32B".
   8 Remember    The three "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -36,9 +36,11 @@ METRICS = [
     ("Hard math answers", "কঠিন গণিতের উত্তর"),
 ]
 
-CAPTION = ("Typical ranges from this section. They depend on the task.", "এই সেকশনের সাধারণ সীমা। কাজ অনুযায়ী বদলায়।")
+CAPTION = ("Rough comparisons from this section. They depend on the task.", "এই সেকশন থেকে মোটামুটি তুলনা। কাজ অনুযায়ী বদলায়।")
 
 SHORT = ("short", "কম")
+FEWER = ("fewer", "কম")
+MANY = ("many times more", "অনেক গুণ বেশি")
 LONGER = ("longer", "বেশি")
 POOR = ("poor", "দুর্বল")
 BEST = ("best", "সেরা")
@@ -54,7 +56,7 @@ STEPS = [
        [sh("user", "hot", sub=("hard problem", "কঠিন সমস্যা")), sh("std", "hot", sub=("answers right away", "সাথে সাথে উত্তর")),
         sh("ans", "warn", sub=("may be wrong", "ভুল হতে পারে"))],
        [ln("user", "std", "to", state="hot"), ln("std", "ans", "to", 700, "warn")],
-       ["1×", SHORT, POOR]),
+       [FEWER, SHORT, POOR]),
 
     st(("Think first", "আগে ভাবে"),
        ("A reasoning model thinks first", "রিজনিং মডেল আগে ভাবে"),
@@ -65,7 +67,7 @@ STEPS = [
        [sh("user", sub=("hard problem", "কঠিন সমস্যা")), sh("rsn", "hot", sub=("thinks first", "আগে ভাবে")), sh("think", "hot"),
         sh("ans", "hot", sub=("final answer", "চূড়ান্ত উত্তর"))],
        [ln("user", "rsn", "to"), ln("rsn", "think", "to", 1800, "hot"), ln("think", "ans", "to", 1200, "hot")],
-       ["5–50×", LONGER, BEST],
+       [MANY, LONGER, BEST],
        note=("insight",
              "Thinking tokens are the model's working notes, like showing your working in a math test.",
              "থিংকিং টোকেন হলো মডেলের খসড়া নোট, যেমন অঙ্ক পরীক্ষায় পুরো কাজ দেখিয়ে লেখা।"),
@@ -76,23 +78,23 @@ STEPS = [
        ("Thinking costs tokens", "ভাবতেও টোকেন লাগে"),
        [("Thinking tokens count as tokens too, so you pay for them and wait for them.",
          "থিংকিং টোকেনও টোকেন হিসেবে গোনা হয়, তাই এগুলোর জন্যও টাকা দিতে হয়, সময়ও লাগে।"),
-        ("A reasoning model can use 5–50 times more tokens for one query. That is why it costs more.",
-         "একটি প্রশ্নে রিজনিং মডেল ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে। তাই খরচও বেশি।")],
-       [sh("rsn", "dim"), sh("think", "hot", sub=("count as tokens", "এগুলোও টোকেন")), sh("bill", "warn", sub=("5–50× more", "৫–৫০ গুণ বেশি"))],
+        ("A reasoning model can use many times more tokens for one query, depending on the task and the thinking budget. That is why it costs more.",
+         "একটি প্রশ্নে রিজনিং মডেল অনেক গুণ বেশি টোকেন খরচ করতে পারে, কাজ আর থিংকিং বাজেটের ওপর নির্ভর করে। তাই খরচও বেশি।")],
+       [sh("rsn", "dim"), sh("think", "hot", sub=("count as tokens", "এগুলোও টোকেন")), sh("bill", "warn", sub=("many times more", "অনেক গুণ বেশি"))],
        [ln("rsn", "think", "to", state="dim"), ln("think", "bill", "to", state="warn")],
-       ["5–50×", LONGER, BEST],
+       [MANY, LONGER, BEST],
        changes=[("+", "Every thinking token is billed", "প্রতিটি থিংকিং টোকেনের দাম দিতে হয়")]),
 
     st(("Wait", "অপেক্ষা"),
        ("The first output comes later", "প্রথম আউটপুট আসে দেরিতে"),
-       [("Thinking also changes the wait. TTFT, the time until the first output appears, is often slower, because the prefill is longer.",
-         "ভাবার ফলে অপেক্ষার সময়ও বদলায়। TTFT, মানে প্রথম আউটপুট দেখা দিতে যে সময় লাগে, তা প্রায়ই বেশি হয়, কারণ প্রিফিল লম্বা হয়।"),
+       [("Thinking also changes the wait. TTFT, the time until the first output appears, is often slower, because the model writes thinking tokens before the answer.",
+         "ভাবার ফলে অপেক্ষার সময়ও বদলায়। TTFT, মানে প্রথম আউটপুট দেখা দিতে যে সময় লাগে, তা প্রায়ই বেশি হয়, কারণ মডেল উত্তরের আগে থিংকিং টোকেন লেখে।"),
         ("Streaming the thinking tokens as they are written can help the user experience.",
          "থিংকিং টোকেন লেখা হওয়ার সঙ্গে সঙ্গে স্ট্রিম করলে ব্যবহারকারীর অভিজ্ঞতা ভালো হয়।")],
        [sh("user", "dim"), sh("rsn", "hot"), sh("think", sub=("can be streamed", "স্ট্রিম করা যায়")),
         sh("clock", "warn", sub=("often slower", "প্রায়ই ধীর"))],
        [ln("user", "rsn", "to", state="dim"), ln("rsn", "think", "to"), ln("rsn", "clock", "to", state="warn")],
-       ["5–50×", LONGER, BEST],
+       [MANY, LONGER, BEST],
        changes=[("~", "The first output appears later", "প্রথম আউটপুট দেরিতে আসে")]),
 
     st(("Budget", "বাজেট"),
@@ -128,8 +130,8 @@ STEPS = [
        ("How a model learns to think", "মডেল কীভাবে ভাবতে শেখে"),
        [("A reasoning model is trained by reward, called reinforcement learning: it tries, gets a score, and learns to do more of what scored well.",
          "রিজনিং মডেলকে ট্রেন করা হয় পুরস্কার দিয়ে, যাকে রিইনফোর্সমেন্ট লার্নিং বলে: মডেল চেষ্টা করে, স্কোর পায়, আর যেটায় ভালো স্কোর আসে সেটা বেশি করতে শেখে।"),
-        ("Trained this way on chains of thought, step-by-step lines of reasoning, a model learns to think longer on hard problems.",
-         "চেইন অফ থটের ওপর, মানে ধাপে ধাপে যুক্তির ওপর, এভাবে ট্রেন করলে মডেল কঠিন সমস্যায় বেশি সময় ধরে ভাবতে শেখে।")],
+        ("Reasoning models are trained with large-scale reinforcement learning to reason using chain of thought, a step-by-step line of reasoning.",
+         "রিজনিং মডেলকে বড় মাপের রিইনফোর্সমেন্ট লার্নিং দিয়ে ট্রেন করা হয়, যাতে সে চেইন অফ থট, মানে ধাপে ধাপে যুক্তি, ব্যবহার করে ভাবতে শেখে।")],
        [sh("rsn", "hot"), sh("reward", "hot", sub=("a score", "একটি স্কোর"))],
        [ln("rsn", "reward", "both", 1400, "hot")],
        [CAPPED, LONGER, BEST],
@@ -146,8 +148,8 @@ STEPS = [
        [CAPPED, LONGER, BEST],
        points=[("Use reasoning models for math, hard coding, and planning, not for chat, summaries, or simple questions.",
                 "গণিত, কঠিন কোডিং আর পরিকল্পনায় রিজনিং মডেল ব্যবহার করুন; চ্যাট, সারাংশ বা সহজ প্রশ্নে নয়।"),
-               ("They can use 5–50 times more tokens, so set a thinking budget.",
-                "এরা ৫–৫০ গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।"),
+               ("They can use many times more tokens, so set a thinking budget.",
+                "এরা অনেক গুণ বেশি টোকেন খরচ করতে পারে, তাই থিংকিং বাজেট ঠিক করে দিন।"),
                ("For most chat, extraction, and RAG, a standard model with careful prompting wins.",
                 "বেশিরভাগ চ্যাট, এক্সট্র্যাকশন আর RAG-এ ভালো প্রম্পটিংসহ সাধারণ মডেলই সবচেয়ে ভালো কাজ করে।")]),
 ]

@@ -4,15 +4,15 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
 
   1 Window    Start here: "A model can only hold so much text at once. Context window budgeting means deciding in advance how much room each part gets, because every part competes for the same space."
               Context window ("The fixed amount of text a model can read at once. Everything you send, and the answer, must fit inside."); the diagram caption: "A 200K-token window".
-  2 System    Start here: System prompt ("The standing instructions at the start: the persona, the output format, and the hard rules."); body: "floor of ~1–2K tokens ... Larger prompts cost more per call AND dilute attention."
+  2 System    Start here: System prompt ("The standing instructions at the start: the persona, the output format, and the hard rules."); body: "about 1–2K tokens (rule of thumb) ... Larger prompts cost more per call AND dilute attention."
               Bangla voice: "২০০K টোকেনের একটি উইন্ডোতে সাধারণ ভাগ হতে পারে: সিস্টেম ≈ ৮%, টুল ≈ ৭%, রিট্রিভাল ≈ ৪০%, হিস্ট্রি ≈ ৩০%, বর্তমান টার্ন ≈ ১৫%" and "এটি এজেন্টিক RAG অ্যাপের জন্য একটি সাধারণ উদাহরণ, সব ক্ষেত্রে এক নয়".
-  3 Tools     Start here: Tool definitions ("Include only the tools the current step might need."); body: "floor of ~1–3K tokens ... load specialised tools lazily".
+  3 Tools     Start here: Tool definitions ("Include only the tools the current step might need."); body: "about 1–3K tokens (rule of thumb) ... load specialised tools lazily".
   4 Retrieval Start here: Retrieval ("Cap the number of pieces, and prefer quality over quantity."); body: "budget = window − system − tools − current turn − reserved output".
               Layman's voice: "If you're running over budget, shrink the retrieval first — not the system prompt."
   5 History   Body: "History: shrink aggressively. Use summarization (§2) or selective replay to keep it bounded."
   6 Turn      Sub-title: "the user's actual request"; the five shares of the Bangla voice (8, 7, 40, 30 and 15 %).
   7 Reserve   Start here: Output reservation ("Setting aside tokens for the answer before you fill the window. Without it, the answer gets cut off and fails silently."); body: "Forcing truncation produces silent failures."
-  8 Middle    Start here: Lost in the Middle ("models recall the start and end of a long prompt well, but do close to random in the middle"); remember: "Put the most important information at the start or the end of the prompt, not the middle."
+  8 Middle    Start here: Lost in the Middle ("models often do best on the start and end of a long prompt, and much worse in the middle"); remember: "Put the most important information at the start or the end of the prompt, not the middle."
   9 Remember  The four "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -30,7 +30,7 @@ NODES = [
 METRICS = [
     ("Window", "উইন্ডো"),
     ("Share", "ভাগ"),
-    ("Floor", "সর্বনিম্ন"),
+    ("Rule of thumb", "অভিজ্ঞতালব্ধ নিয়ম"),
     ("Answer", "উত্তর"),
 ]
 
@@ -61,8 +61,8 @@ STEPS = [
 
     st(("System", "সিস্টেম"),
        ("The system prompt: standing instructions", "সিস্টেম প্রম্পট: স্থায়ী নির্দেশ"),
-       [("The system prompt holds the standing instructions: the persona, the output format, and the hard rules. It needs a floor of about 1–2K tokens.",
-         "সিস্টেম প্রম্পটে থাকে স্থায়ী নির্দেশ: পারসোনা, আউটপুটের কাঠামো আর কড়া নিয়ম। এতে কমপক্ষে ~১–২K টোকেন লাগে।"),
+       [("The system prompt holds the standing instructions: the persona, the output format, and the hard rules. By a rule of thumb (no source), it needs about 1–2K tokens.",
+         "সিস্টেম প্রম্পটে থাকে স্থায়ী নির্দেশ: পারসোনা, আউটপুটের কাঠামো আর কড়া নিয়ম। অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): এতে প্রায় ~১–২K টোকেন লাগে।"),
         ("Larger prompts cost more per call and dilute attention. In the example it takes about 8% of the window.",
          "বেশি বড় করলে খরচ বাড়ে এবং মডেলের মনোযোগ পাতলা হয়ে যায়। উদাহরণে এটা উইন্ডোর প্রায় ৮%।")],
        [sh("system", "hot", ("≈ 8%", "≈ ৮%")), sh("window", "hot", W)],
@@ -72,8 +72,8 @@ STEPS = [
 
     st(("Tools", "টুল"),
        ("Tool definitions: only what this step needs", "টুল ডেফিনিশন: শুধু যা এই ধাপে লাগে"),
-       [("Tool definitions describe the tools the model may call. They need a floor of about 1–3K tokens.",
-         "টুল ডেফিনিশনে থাকে মডেল কোন টুল ডাকতে পারে তার বর্ণনা। এতে ~১–৩K টোকেন লাগে।"),
+       [("Tool definitions describe the tools the model may call. By a rule of thumb (no source), they need about 1–3K tokens.",
+         "টুল ডেফিনিশনে থাকে মডেল কোন টুল ডাকতে পারে তার বর্ণনা। অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): এতে প্রায় ~১–৩K টোকেন লাগে।"),
         ("Include only the tools the current step might need, and load specialised tools lazily. In the example it is about 7%.",
          "শুধু সেই টুলই রাখুন, যা এই ধাপে লাগতে পারে; বিশেষ টুল দরকারের সময় লোড করুন। উদাহরণে প্রায় ৭%।")],
        [sh("system", "dim"), sh("tools", "hot", ("≈ 7%", "≈ ৭%")), sh("window", "hot", W)],
@@ -131,8 +131,8 @@ STEPS = [
 
     st(("Middle", "মাঝখান"),
        ("Lost in the Middle: where you put it matters", "Lost in the Middle: কোথায় রাখছেন, সেটাও জরুরি"),
-       [("Models recall the start and end of a long prompt well, but do close to random in the middle.",
-         "লম্বা প্রম্পটের শুরু আর শেষের তথ্য মডেল ভালো মনে রাখে, কিন্তু মাঝখানের তথ্যে ফল প্রায় র‍্যান্ডমের কাছাকাছি।"),
+       [("Models often do best on the start and end of a long prompt, and much worse in the middle.",
+         "লম্বা প্রম্পটের শুরু আর শেষের তথ্যে মডেল প্রায়ই সবচেয়ে ভালো করে, আর মাঝখানের তথ্যে ফল উল্লেখযোগ্যভাবে খারাপ হয়।"),
         ("So put the most important information at the start or the end of the prompt, not in the middle.",
          "তাই যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।")],
        [sh("system", "dim"), sh("tools", "dim"), sh("retr", "dim"), sh("history", "dim"), sh("turn", "dim"),
@@ -147,8 +147,8 @@ STEPS = [
        [sh("system"), sh("tools"), sh("retr"), sh("history"), sh("turn"), sh("window"), sh("answer")],
        feeds() + [ln("window", "answer", "to")],
        [None, None, None, None],
-       points=[("A system prompt needs a floor of ~1–2K tokens. Tool definitions need ~1–3K.",
-                "সিস্টেম প্রম্পটে কমপক্ষে ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।"),
+       points=[("Rule of thumb (no source): a system prompt needs about 1–2K tokens, and tool definitions about 1–3K.",
+                "অভিজ্ঞতালব্ধ নিয়ম (সোর্স নেই): সিস্টেম প্রম্পটে প্রায় ~১–২K টোকেন লাগে। টুল ডেফিনিশনে লাগে ~১–৩K।"),
                ("Put the most important information at the start or the end of the prompt, not the middle.",
                 "যা সবচেয়ে জরুরি, তা প্রম্পটের শুরুতে বা শেষে রাখুন, মাঝখানে নয়।"),
                ("Keep history small and cap retrieval chunks. Quality beats quantity.",

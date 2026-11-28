@@ -480,7 +480,7 @@
         "title": "Summaries lose detail",
         "body": [
           "Summarisation is lossy compression, like shrinking a photo. Decisions, exact numbers and quoted text are the first things to disappear.",
-          "The compression ratio is usually 5–20×, but the price is lost detail."
+          "The compression ratio varies by task, but the price is lost detail."
         ],
         "note": {
           "kind": "warn",
@@ -492,7 +492,7 @@
         "title": "সারসংক্ষেপে তথ্য হারায়",
         "body": [
           "সামারাইজেশন লসি কমপ্রেশন, ছবি ছোট করার মতো। সিদ্ধান্ত, নির্দিষ্ট সংখ্যা ও উদ্ধৃতি সবার আগে হারায়।",
-          "সাধারণত কমপ্রেশন রেশিও ৫–২০×, তবে এর মূল্য হলো তথ্য হারানো।"
+          "কমপ্রেশন রেশিও কাজভেদে আলাদা, তবে এর মূল্য হলো তথ্য হারানো।"
         ],
         "note": {
           "kind": "warn",
@@ -523,7 +523,10 @@
       ],
       "values": [
         null,
-        "5–20×",
+        {
+          "en": "varies by task",
+          "bn": "কাজভেদে আলাদা"
+        },
         null
       ]
     },

@@ -5,9 +5,9 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   1 Quantize  Body: "Quantization reduces the precision of model weights from 16-bit to 8- or 4-bit. It trades a small amount of quality for 2–4× less GPU memory and proportionally faster inference."
   2 Formats   Body, "The common formats": GGUF, AWQ, GPTQ, INT8 / FP8, INT4 / NF4, each with the line the section gives it.
   3 KV cache  Body: "The KV cache holds the attention keys and values already computed for earlier tokens, so the model does not recompute them for each new token." "Paged KV cache: instead of one contiguous buffer per request, KV cache memory is allocated in pages (à la OS virtual memory). vLLM's PagedAttention removes the wasted-memory problem of naive serving."
-  4 Prefix    Body: "Prefix caching: if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's prompt_caching and OpenAI's cached_prompt save 80–90% of cost on the cached portion."
-  5 Speculate Body: "A tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. Net throughput +2–3× for free, no quality loss."
-  6 Batching  Body: "Naive serving processes one request at a time per GPU. Continuous batching (vLLM, TGI, SGLang) interleaves tokens from many requests so the GPU is never idle waiting for one slow request. This alone typically delivers 5–20× higher throughput. Add max_num_seqs, max_model_len, and CUDA-graph capture for the next 2×."
+  4 Prefix    Body: "Prefix caching: if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's cache_control and OpenAI's automatic prompt caching cut the cost of the cached portion. Anthropic cache reads cost 0.1× the base input price (0.05× on some newer models; writes cost 1.25×). OpenAI discounts cached input by up to 90%, depending on model."
+  5 Speculate Body: "A tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. In Leviathan et al., this gave 2–3× faster decoding on T5-XXL with identical outputs. Gains depend on the model and how often the draft is accepted."
+  6 Batching  Body: "Naive serving processes one request at a time per GPU. Continuous batching (vLLM, TGI, SGLang) interleaves tokens from many requests so the GPU is never idle waiting for one slow request. It is a core technique in vLLM; the vLLM paper reports 2–4× higher throughput than FasterTransformer and Orca, which already use it. Add max_num_seqs, max_model_len, and CUDA-graph capture for the next 2×."
   7 Metrics   Table, "Latency vs throughput (TTFT, TPS)": TTFT, TPS, Throughput and p99 latency, each with what it is and what moves it.
   8 Remember  Start here: "Quantization shrinks the model, caching skips repeated work, and batching keeps the GPU busy."; and the four "remember" points.
 """
@@ -85,32 +85,32 @@ STEPS = [
        ("Prefix caching", "প্রিফিক্স ক্যাশিং"),
        [("If many requests share a long system prompt, the server hashes the prefix and reuses the cached KV.",
          "অনেক রিকোয়েস্ট একই দীর্ঘ সিস্টেম প্রম্পট শেয়ার করলে সার্ভার প্রিফিক্স হ্যাশ করে আর ক্যাশ করা KV আবার ব্যবহার করে।"),
-        ("Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part.",
-         "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।")],
+        ("Anthropic's cache_control and OpenAI's automatic prompt caching cut the cost of the cached portion. Anthropic cache reads cost 0.1× the base input price (0.05× on some newer models; writes cost 1.25×). OpenAI discounts cached input by up to 90%, depending on model.",
+         "Anthropic-এর cache_control আর OpenAI-র অটোমেটিক প্রম্পট ক্যাশিং ক্যাশ করা অংশের খরচ কমায়। Anthropic-এর ক্যাশ রিডের খরচ বেস ইনপুট দামের ০.১× (কিছু নতুন মডেলে ০.০৫×; রাইটে ১.২৫×)। OpenAI ক্যাশ করা ইনপুটে মডেলভেদে সর্বোচ্চ ৯০% ছাড় দেয়।")],
        [sh("r1", "hot", ("same system prompt", "একই সিস্টেম প্রম্পট")), sh("r2", "hot", ("same system prompt", "একই সিস্টেম প্রম্পট")),
         sh("r3", "hot", ("same system prompt", "একই সিস্টেম প্রম্পট")), sh("kv", "hot", ("shared prefix", "শেয়ার করা প্রিফিক্স"))],
        [ln("r1", "kv", "to", state="hot"), ln("r2", "kv", "to", state="hot"), ln("r3", "kv", "to", state="hot")],
-       [None, ("80–90% less", "৮০–৯০% কম"), None, None]),
+       [None, ("up to 90% less", "সর্বোচ্চ ৯০% কম"), None, None]),
 
     st(("Speculate", "অনুমান"),
        ("Speculative decoding", "স্পেকুলেটিভ ডিকোডিং"),
        [("A tiny draft model proposes the next 5–10 tokens, and the big model verifies them in parallel.",
          "একটি ছোট ড্রাফট মডেল পরবর্তী ৫–১০ টোকেন প্রস্তাব করে; বড় মডেল সেগুলো সমান্তরালে যাচাই করে।"),
-        ("Net throughput is 2–3× higher for free, with no quality loss.",
-         "নিট থ্রুপুট বিনা খরচে ২–৩× বেশি হয়, মান একটুও কমে না।")],
+        ("In Leviathan et al., this gave 2–3× faster decoding on T5-XXL with identical outputs. Gains depend on the model and how often the draft is accepted.",
+         "Leviathan et al.-এ এতে T5-XXL-এ একই আউটপুটে ডিকোডিং ২–৩× দ্রুত হয়েছে। লাভ নির্ভর করে মডেলের ওপর আর ড্রাফট কতবার গৃহীত হয় তার ওপর।")],
        [sh("draft", "hot", ("guesses ahead", "আগে আন্দাজ করে")), sh("big", "hot", ("checks them all", "সব একসাথে যাচাই করে")), sh("next", "hot")],
        [ln("draft", "big", "to", state="hot"), ln("big", "next", "to", state="hot")],
-       [None, None, ("+2–3×", "+২–৩×"), ("no loss", "কমে না")]),
+       [None, None, ("2–3× faster", "২–৩× দ্রুত"), ("identical output", "একই আউটপুট")]),
 
     st(("Batching", "ব্যাচিং"),
        ("Continuous batching", "কন্টিনিউয়াস ব্যাচিং"),
        [("Naive serving processes one request at a time per GPU. Continuous batching, in vLLM, TGI and SGLang, interleaves tokens from many requests so the GPU is never idle waiting for one slow request.",
          "নেইভ সার্ভিং GPU-তে একবারে একটি রিকোয়েস্ট প্রক্রিয়া করে। কন্টিনিউয়াস ব্যাচিং (vLLM, TGI, SGLang) অনেক রিকোয়েস্টের টোকেন মিলিয়ে চালায়, যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো বসে না থাকে।"),
-        ("This alone typically gives 5–20× higher throughput. Adding <code>max_num_seqs</code>, <code>max_model_len</code> and CUDA-graph capture gives the next 2×.",
-         "এটাই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়। <code>max_num_seqs</code>, <code>max_model_len</code> আর CUDA-graph ক্যাপচার যোগ করলে আরও ২× পাওয়া যায়।")],
+        ("It is a core technique in vLLM; the vLLM paper reports 2–4× higher throughput than FasterTransformer and Orca, which already use it. Adding <code>max_num_seqs</code>, <code>max_model_len</code> and CUDA-graph capture gives the next 2×.",
+         "এটি vLLM-এর একটি মূল কৌশল; vLLM পেপার FasterTransformer ও Orca-র চেয়ে ২–৪× বেশি থ্রুপুট জানায়, যারা আগে থেকেই এটি ব্যবহার করে। <code>max_num_seqs</code>, <code>max_model_len</code> আর CUDA-graph ক্যাপচার যোগ করলে আরও ২× পাওয়া যায়।")],
        [sh("r1", "hot"), sh("r2", "hot"), sh("r3", "hot"), sh("batch", "hot", ("mixed tokens", "মেশানো টোকেন")), sh("gpu", "hot", ("never idle", "কখনো বসে থাকে না"))],
        [ln("r1", "batch", "to", state="hot"), ln("r2", "batch", "to", state="hot"), ln("r3", "batch", "to", state="hot"), ln("batch", "gpu", "to", state="hot")],
-       [None, None, ("5–20×", "৫–২০×"), None]),
+       [None, None, ("2–4×", "২–৪×"), None]),
 
     st(("Metrics", "মেট্রিক"),
        ("Latency versus throughput", "ল্যাটেন্সি বনাম থ্রুপুট"),
@@ -137,12 +137,12 @@ STEPS = [
        [None, None, None, None],
        points=[("Quantization cuts GPU memory by 2–4× for a small loss in quality.",
                 "কোয়ান্টাইজেশন সামান্য মান কমিয়ে GPU মেমরি ২–৪× কমায়।"),
-               ("Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part.",
-                "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।"),
-               ("Speculative decoding makes throughput 2–3× higher with no quality loss.",
-                "স্পেকুলেটিভ ডিকোডিং মান না কমিয়ে থ্রুপুট ২–৩× বেশি করে।"),
-               ("Continuous batching alone typically gives 5–20× higher throughput.",
-                "শুধু কন্টিনিউয়াস ব্যাচিংই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়।")]),
+               ("Anthropic's and OpenAI's prompt caching cut the cost of the cached part, by up to 90%.",
+                "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে খরচ সর্বোচ্চ ৯০% পর্যন্ত কমায়।"),
+               ("Speculative decoding gave 2–3× faster decoding with identical outputs on T5-XXL; gains depend on the model.",
+                "স্পেকুলেটিভ ডিকোডিং T5-XXL-এ একই আউটপুটে ডিকোডিং ২–৩× দ্রুত করেছে; লাভ মডেলের ওপর নির্ভর করে।"),
+               ("Continuous batching is a core technique in vLLM, which reports 2–4× higher throughput than FasterTransformer and Orca.",
+                "কন্টিনিউয়াস ব্যাচিং vLLM-এর একটি মূল কৌশল; vLLM FasterTransformer ও Orca-র চেয়ে ২–৪× বেশি থ্রুপুট জানায়।")]),
 ]
 
 WALK = walk(760, 320, NODES, METRICS, CAPTION, STEPS)

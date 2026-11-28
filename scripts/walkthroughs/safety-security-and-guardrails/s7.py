@@ -4,12 +4,12 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
 
   1 Surface     Start here: "An AI app can be attacked in new ways: through the prompt, the tool calls, and the output. Safety is the work of limiting those risks."; sub-title: "the prompt is now user-influenced input, the tool calls are now an exfiltration channel, and the rendered output is now a script-execution context."
   2 Injection   Body, "Prompt injection": "Prompt injection is when user-controlled text hijacks the model's behaviour. Direct: the user types ... Indirect: the user plants malicious text in a document the model will read ... Indirect injection is the harder one because the user doesn't even need to interact with your system."
-  3 Jailbreak   Body, "Jailbreak resistance": "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training ... a moving target: red-teams find new ones monthly. Defences: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable."
+  3 Jailbreak   Body, "Jailbreak resistance": "Jailbreaks are creative rewrites of forbidden prompts that slip past safety training ... a moving target: red-teams keep finding new ones. Defences: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable."
   4 Exfiltrate  Body, "Data exfiltration via tool calls and rendered links": "a prompt-injected output can call a tool with attacker-chosen arguments ... or render a Markdown image whose src URL encodes the user's session. The OWASP LLM Top 10 ranks prompt injection, the cause of this attack, #1 in 2025."
   5 Screens     Body, "Content moderation" and "PII redaction in inputs and outputs": a table of moderation tools; "Before sending user text to the model (and before rendering the model's reply), run a PII detector".
   6 Rails       Body, "Guardrail frameworks" and "Output validation against schemas": NeMo Guardrails, Guardrails AI; "Never trust an LLM to emit valid JSON. Parse with a strict schema (Pydantic, Zod); on failure, retry once, then refuse. Treat malformed output as a security event, not just a bug."
   7 Limits      Body, "Rate limiting and abuse prevention": "Per-user token budgets per day, per-IP request limits, jailbreak-attempt counters, cost-based alarms. Without these, a single user ... can burn budget or trigger a bill spike."
-  8 Audit log   Body, "Audit logging for compliance": "Log every prompt, every model output, every tool call, every approval decision, every redacted PII. SOC 2, HIPAA, and EU AI Act conformance all require this."
+  8 Audit log   Body, "Audit logging for compliance": "Log every prompt, every model output, every tool call, every approval decision, every redacted PII item. Frameworks such as SOC 2 and HIPAA expect audit trails, and the EU AI Act requires automatic event logging for high-risk AI systems (Art. 12). Treat your LLM as a regulated component."
   9 Remember    The five "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -52,7 +52,7 @@ STEPS = [
 
     st(("Injection", "ইনজেকশন"),
        ("Prompt injection", "প্রম্পট ইনজেকশন"),
-       [("Prompt injection is when user-controlled text hijacks the model's behavior. Direct: the user types the attack. Indirect: the user plants malicious text in a document the model will read.",
+       [("Prompt injection is when user-controlled text hijacks the model's behaviour. Direct: the user types the attack. Indirect: the user plants malicious text in a document the model will read.",
          "প্রম্পট ইনজেকশন হলো ইউজারের নিয়ন্ত্রণে থাকা টেক্সট মডেলের আচরণ দখল করে নেওয়া। প্রত্যক্ষ: ইউজার নিজেই আক্রমণ টাইপ করে। পরোক্ষ: ইউজার মডেলের পড়া ডকুমেন্টে ক্ষতিকর টেক্সট রোপণ করে।")],
        [sh("user", "warn", ("attacker", "আক্রমণকারী")), sh("doc", "warn", ("planted text", "রোপণ করা টেক্সট")), sh("model", "hot")],
        [ln("user", "model", "to", state="warn"), ln("user", "doc", "to", state="warn"), ln("doc", "model", "to", state="warn")],
@@ -63,8 +63,8 @@ STEPS = [
 
     st(("Jailbreak", "জেইলব্রেক"),
        ("Jailbreaks", "জেইলব্রেক"),
-       [("Jailbreaks are creative rewrites of forbidden prompts that slip past safety training. They're a moving target: red teams find new ones monthly.",
-         "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়। এগুলো একটি চলমান লক্ষ্য: রেড-টিম প্রতি মাসে নতুন জেইলব্রেক খুঁজে পায়।"),
+       [("Jailbreaks are creative rewrites of forbidden prompts that slip past safety training. They're a moving target: red-teams keep finding new ones.",
+         "জেইলব্রেক হলো নিষিদ্ধ প্রম্পটের এমন সৃজনশীল পুনর্লিখন, যা সেফটি ট্রেনিংয়ের পাশ কাটিয়ে যায়। এগুলো একটি চলমান লক্ষ্য: রেড-টিম নতুন জেইলব্রেক খুঁজে পেতেই থাকে।"),
         ("Defenses: Constitutional AI fine-tuning, output classifiers, robust system prompts, and accepting that 100% safety is unachievable.",
          "প্রতিরক্ষা: Constitutional AI ফাইন-টিউনিং, আউটপুট ক্লাসিফায়ার, মজবুত সিস্টেম প্রম্পট। ১০০% সেফটি অর্জনযোগ্য নয়, এটি মেনে নিন।")],
        [sh("user", "warn", ("creative rewrite", "সৃজনশীল পুনর্লিখন")), sh("model", "hot", ("safety training", "সেফটি ট্রেনিং")),
@@ -126,15 +126,15 @@ STEPS = [
 
     st(("Audit log", "অডিট লগ"),
        ("Audit logging", "অডিট লগিং"),
-       [("Log every prompt, every model output, every tool call, every approval decision, and every redacted PII.",
-         "প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত আর প্রতিটি রিড্যাক্ট করা PII লগ করুন।")],
+       [("Log every prompt, every model output, every tool call, every approval decision, and every redacted PII item.",
+         "প্রতিটি প্রম্পট, প্রতিটি মডেল আউটপুট, প্রতিটি টুল কল, প্রতিটি অনুমোদনের সিদ্ধান্ত আর প্রতিটি রিড্যাক্ট করা PII আইটেম লগ করুন।")],
        [sh("user", "hot", ("every prompt", "প্রতিটি প্রম্পট"), None, 110, 75), sh("model", "hot", ("every output", "প্রতিটি আউটপুট"), None, 110, 162),
         sh("tool", "hot", ("every call", "প্রতিটি কল"), None, 110, 250), sh("log", "hot")],
        [ln("user", "log", "to", state="hot"), ln("model", "log", "to", state="hot"), ln("tool", "log", "to", state="hot")],
        [None, None, None],
        note=("insight",
-             "SOC 2, HIPAA, and EU AI Act conformance all require this. Treat your LLM as a regulated component.",
-             "SOC ২, HIPAA, EU AI Act-এর সম্মতি সবকিছুর জন্য এটি দরকার। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।")),
+             "Frameworks such as SOC 2 and HIPAA expect audit trails, and the EU AI Act requires automatic event logging for high-risk AI systems (Art. 12). Treat your LLM as a regulated component.",
+             "SOC 2 ও HIPAA-এর মতো ফ্রেমওয়ার্ক অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমে স্বয়ংক্রিয় ইভেন্ট লগিং বাধ্যতামূলক করে (Art. 12)। আপনার LLM-কে একটি রেগুলেটেড কম্পোনেন্ট হিসেবে দেখুন।")),
 
     st(("Remember", "মনে রাখুন"),
        ("What to remember", "যা মনে রাখবেন"),
@@ -151,8 +151,8 @@ STEPS = [
                 "১০০% সেফটি অর্জনযোগ্য নয়, এটা মেনে নিন। জেইলব্রেক একটি চলমান লক্ষ্য।"),
                ("Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
                 "LLM-এর ভ্যালিড JSON দেওয়ার ওপর কখনো ভরসা করবেন না। কড়া স্কিমা দিয়ে পার্স করুন; ব্যর্থ হলে একবার রিট্রাই করুন, তারপর রিফিউজ করুন।"),
-               ("Log every prompt, output, and tool call. SOC 2, HIPAA, and the EU AI Act require it.",
-                "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC ২, HIPAA আর EU AI Act-এ এটা দরকার।")]),
+               ("Log every prompt, output, and tool call. SOC 2 and HIPAA expect audit trails; the EU AI Act requires logging for high-risk AI.",
+                "প্রতিটি প্রম্পট, আউটপুট আর টুল কল লগ করুন। SOC 2 ও HIPAA অডিট ট্রেইল আশা করে, আর EU AI Act হাই-রিস্ক AI সিস্টেমে ইভেন্ট লগিং বাধ্যতামূলক করে।")]),
 ]
 
 WALK = walk(760, 320, NODES, METRICS, CAPTION, STEPS)

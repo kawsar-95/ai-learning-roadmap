@@ -5,7 +5,7 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   1 Ladder    Start here: "Most production agents need at least one step where a person approves an action. The riskier the action, the more human approval it needs."; body, the risk ladder: "Read-only: search, fetch, query. Auto-approve." "Local-write: edit a file the agent owns. Auto-approve with a soft cap."
   2 Per call  Body: "External-write: send an email, post to Slack. Approve per call." "Money: refund, charge, payout. Approve per call, plus a daily cap."
   3 Two       Body: "Destructive: delete a record. Two-person rule."; Two-person rule ("Two people must agree before a destructive action, such as deleting a record, can happen.").
-  4 Checkpoint Body: "Every durable framework exposes a "wait for human" primitive. In LangGraph it's interrupt; in Temporal it's wait_for_signal; in Restate it's await call().ack()."; the code: interrupt({to, subject, body}); if not approved, "User rejected email send."; else the email is sent.
+  4 Checkpoint Body: "Every durable framework exposes a "wait for human" primitive. In LangGraph it's interrupt; in Temporal you send a Signal and block with workflow.wait_condition() (Python); in Restate it's an awakeable (a durable promise the approver resolves)."; the code: interrupt({to, subject, body}); if not approved, "User rejected email send."; else the email is sent.
   5 UI        Warning callout: "The hard part is the UI, not the protocol. ... The framework gives you a clean "interrupt" primitive, but you still have to build the inbox, the diff view, the approve/reject buttons, the audit log, the SLA (service-level agreement), the mobile notifications. Budget at least 30% of agent project time for the human-facing surface."
   6 No answer Body, "Asynchronous approvals": "Soft timeout + default reject: if no response in 24 hours, the workflow terminates." "Soft timeout + default approve with rollback: if no response, the action proceeds but is logged and reversible." "Hard timeout + escalate: at 24 hours, route to a backup approver."
   7 Remember  Risk ladder ("The higher the step, the stricter the approval."); and the four "remember" points of the Start here box.
@@ -69,8 +69,8 @@ STEPS = [
 
     st(("Checkpoint", "চেকপয়েন্ট"),
        ("The checkpoint primitive", "চেকপয়েন্ট প্রিমিটিভ"),
-       [("Every durable framework has a “wait for human” primitive. In LangGraph it is <code>interrupt</code>, in Temporal <code>wait_for_signal</code>, and in Restate <code>await call().ack()</code>.",
-         "প্রতিটি ডিউরেবল ফ্রেমওয়ার্কে “মানুষের জন্য অপেক্ষা” করার একটি প্রিমিটিভ থাকে। LangGraph-এ এটি <code>interrupt</code>, Temporal-এ <code>wait_for_signal</code>, আর Restate-এ <code>await call().ack()</code>।"),
+       [("Every durable framework has a “wait for human” primitive. In LangGraph it is <code>interrupt</code>. In Temporal you send a Signal and block with <code>workflow.wait_condition()</code> (Python). In Restate it is an awakeable, a durable promise the approver resolves.",
+         "প্রতিটি ডিউরেবল ফ্রেমওয়ার্কে “মানুষের জন্য অপেক্ষা” করার একটি প্রিমিটিভ থাকে। LangGraph-এ এটি <code>interrupt</code>। Temporal-এ আপনি একটি Signal পাঠান আর <code>workflow.wait_condition()</code> (Python) দিয়ে অপেক্ষা করেন। Restate-এ এটি একটি awakeable, অর্থাৎ একটি ডিউরেবল প্রমিস, যা অনুমোদনকারী পূরণ করে।"),
         ("In the section's example, the email step calls <code>interrupt</code> with the recipient, subject and body. If the answer is not approved, it returns “User rejected email send.” Otherwise it sends the email.",
          "সেকশনের উদাহরণে ইমেইল ধাপ প্রাপক, বিষয় আর বডিসহ <code>interrupt</code> ডাকে। অনুমোদন না এলে সে “User rejected email send.” ফেরত দেয়। অনুমোদন এলে ইমেইল পাঠায়।")],
        [sh("agent", "hot"), sh("gate", "hot", ("waits for a human", "মানুষের জন্য অপেক্ষা")), sh("human", "hot", ("approves or rejects", "অনুমোদন বা বাতিল"))],

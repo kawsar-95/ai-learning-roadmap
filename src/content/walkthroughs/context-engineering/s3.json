@@ -198,7 +198,7 @@
         "title": "The unchanged start is the prefix",
         "body": [
           "The prefix is the first part of a prompt. If it is identical across calls, the provider can reuse its earlier work.",
-          "Prompt caching can cut 80–90% of the input bill for apps with stable instructions and long fetched documents, but only if that start stays exactly the same."
+          "Prompt caching can cut most of the input cost (cached reads are 0.1× on Anthropic) for apps with stable instructions and long fetched documents, but only if that start stays exactly the same."
         ],
         "changes": [
           {
@@ -212,7 +212,7 @@
         "title": "না-বদলানো শুরুর অংশই প্রিফিক্স",
         "body": [
           "প্রিফিক্স হলো প্রম্পটের শুরুর অংশ। কলের পর কলে হুবহু এক থাকলে প্রোভাইডার আগের কাজ আবার ব্যবহার করতে পারে।",
-          "স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে প্রম্পট ক্যাশিং ইনপুট বিলের ৮০–৯০% কমাতে পারে, তবে শুরুর অংশ হুবহু একই থাকতে হবে।"
+          "স্থির নির্দেশ আর খুঁজে আনা লম্বা ডকুমেন্ট আছে এমন অ্যাপে প্রম্পট ক্যাশিং ইনপুট খরচের বেশিরভাগ কমাতে পারে (Anthropic-এ ক্যাশ রিড ০.১×), তবে শুরুর অংশ হুবহু একই থাকতে হবে।"
         ],
         "changes": [
           {
@@ -462,7 +462,7 @@
         "title": "The next call hits the cache",
         "body": [
           "A cache hit is a call whose start matches the cache, so the saved work is reused. In Anthropic's API, <code>response.usage.cache_read_input_tokens</code> above 0 means a hit.",
-          "The cache entry lives for a TTL, a time to live. For Anthropic it is 5 minutes, and a hit starts the time again."
+          "The cache entry lives for a TTL, a time to live. For Anthropic it is 5 minutes by default (1 hour is optional at a higher write price), and a hit starts the time again."
         ],
         "changes": [
           {
@@ -476,7 +476,7 @@
         "title": "পরের কল ক্যাশ ধরে ফেলে",
         "body": [
           "ক্যাশ হিট হলো যে কলে প্রম্পটের শুরু ক্যাশের সাথে মেলে, তাই আগের কাজ আবার ব্যবহার হয়। Anthropic-এর API-তে <code>response.usage.cache_read_input_tokens</code> ০-এর বেশি হলে হিট।",
-          "ক্যাশ কতক্ষণ থাকে তা TTL, মানে time to live। Anthropic-এ ৫ মিনিট, আর হিট হলে সময় নতুন করে শুরু হয়।"
+          "ক্যাশ কতক্ষণ থাকে তা TTL, মানে time to live। Anthropic-এ ডিফল্ট ৫ মিনিট (বেশি লেখার দামে ঐচ্ছিকভাবে ১ ঘণ্টা), আর হিট হলে সময় নতুন করে শুরু হয়।"
         ],
         "changes": [
           {

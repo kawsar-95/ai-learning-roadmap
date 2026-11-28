@@ -6,7 +6,7 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   2 Two parts   Body, "RAG architecture": "A RAG system has two parts. A retriever finds relevant chunks of data in an external memory (documents, tables, chat history). A generator writes a response using what was retrieved. Long documents are split into smaller chunks so that only the most relevant pieces are fed into the model, keeping the prompt short and focused."
   3 Keywords    Body, "Retrieval algorithms", and its table: "Term-based retrieval (lexical search) matches keywords; algorithms such as TF-IDF ... and BM25 score documents by how often and how distinctively a term appears." Table, term-based column: "Fast to index and query", "Strong out of the box, exact keyword matches", "Cheap", "Misses semantic similarity".
   4 Meaning     Same part: "Embedding-based retrieval (semantic search) compares the meaning of the query and the documents using vector embeddings. The embeddings are stored and searched in a vector database ..." Table, embedding column: "Slower; needs embedding generation and vector search", "Captures meaning, handles paraphrased queries", "Can be expensive at scale", "Can blur exact codes/names into fuzzy meaning".
-  5 Hybrid      Same part: "Because each approach has blind spots, production systems often combine them. Running a cheap retriever first and reranking with a more precise one is called hybrid search. Reciprocal rank fusion can merge rankings from multiple retrievers into one list."
+  5 Hybrid      Same part: "Because each approach has blind spots, production systems often combine them. Combining term-based and embedding-based retrieval, then merging their ranked lists, is called hybrid search. A cheap first-pass retriever followed by a more precise reranker is a separate pattern, reranking. Reciprocal rank fusion can merge rankings from multiple retrievers into one list."
   6 Optimize    Body, "Retrieval optimization": the four bullets (chunking strategy, reranking, query rewriting, contextual retrieval), and the remember point "Better chunking, reranking, query rewriting, and contextual retrieval all improve what the model receives."
   7 Beyond text Body, "RAG beyond text": "RAG is not limited to plain text. Multimodal RAG retrieves images, audio, or video alongside text using a shared multimodal embedding model such as CLIP."
   8 Tables      Same part: "RAG with tabular data works differently. Instead of embedding rows, the system translates the question into a SQL query (text-to-SQL), runs it against the database, and feeds the result back to the generator."
@@ -92,12 +92,12 @@ STEPS = [
        ("Combine them", "দুটোকে মেলান"),
        [("Because each approach has blind spots, production systems often combine them.",
          "প্রতিটি পদ্ধতির অন্ধ জায়গা আছে, তাই প্রোডাকশন সিস্টেমে প্রায়ই দুটোকে মেলানো হয়।"),
-        ("Running a cheap retriever first and reranking with a more precise one is called hybrid search. Reciprocal rank fusion can merge rankings from multiple retrievers into one list.",
-         "আগে একটি সস্তা রিট্রিভার চালিয়ে তারপর আরও নির্ভুল একটি দিয়ে আবার সাজানোকে বলে হাইব্রিড সার্চ। Reciprocal rank fusion অনেক রিট্রিভারের র‍্যাংকিং মিলিয়ে একটি তালিকা বানাতে পারে।")],
-       [sh("query"), sh("keyword", "hot", ("cheap, first", "সস্তা, আগে"), y=75), sh("vectors", "hot", ("another retriever", "আরেকটি রিট্রিভার"), y=250),
-        sh("rerank", "hot", ("one merged list", "একটি মেলানো তালিকা"))],
+        ("Combining term-based and embedding-based retrieval, then merging their ranked lists, is called hybrid search. A cheap first-pass retriever followed by a more precise reranker is a separate pattern, reranking. Reciprocal rank fusion can merge rankings from multiple retrievers into one list.",
+         "টার্ম-ভিত্তিক আর এমবেডিং-ভিত্তিক রিট্রিভাল মিলিয়ে, তাদের র‍্যাংক করা তালিকা এক করাকে বলে হাইব্রিড সার্চ। আগে একটি সস্তা রিট্রিভার, তারপর আরও নির্ভুল একটি রির‍্যাঙ্কার, এটি আলাদা একটি পদ্ধতি, রির‍্যাঙ্কিং। Reciprocal rank fusion অনেক রিট্রিভারের র‍্যাংকিং মিলিয়ে একটি তালিকা বানাতে পারে।")],
+       [sh("query"), sh("keyword", "hot", ("term-based", "টার্ম-ভিত্তিক"), y=75), sh("vectors", "hot", ("embedding-based", "এমবেডিং-ভিত্তিক"), y=250),
+        sh("retriever", "hot", ("merged list", "মেলানো তালিকা"), x=630)],
        [ln("query", "keyword", "to"), ln("query", "vectors", "to"),
-        ln("keyword", "rerank", "to", state="hot", label=("ranking", "র‍্যাংকিং")), ln("vectors", "rerank", "to", state="hot", label=("ranking", "র‍্যাংকিং"))],
+        ln("keyword", "retriever", "to", state="hot"), ln("vectors", "retriever", "to", state="hot")],
        [None, None, None]),
 
     st(("Optimize", "উন্নতি"),

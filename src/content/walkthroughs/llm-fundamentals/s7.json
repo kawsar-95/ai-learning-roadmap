@@ -92,7 +92,7 @@
         ],
         "note": {
           "kind": "tip",
-          "html": "Tool names and descriptions go into the prompt as you write them. Give them the care you give a prompt."
+          "html": "Tool names and descriptions are turned into part of the prompt by the API. Give them the care you give a prompt."
         },
         "changes": [
           {
@@ -110,7 +110,7 @@
         ],
         "note": {
           "kind": "tip",
-          "html": "টুলের নাম আর বর্ণনা যেমন লিখবেন, প্রম্পটে হুবহু তেমনই বসে যায়। প্রম্পটের মতো যত্ন নিয়ে সেগুলো লিখুন।"
+          "html": "API টুলের নাম আর বর্ণনাকে প্রম্পটের অংশ বানিয়ে নেয়। প্রম্পটের মতো যত্ন নিয়ে সেগুলো লিখুন।"
         },
         "changes": [
           {

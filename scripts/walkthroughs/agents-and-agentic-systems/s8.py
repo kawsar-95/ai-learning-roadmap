@@ -7,7 +7,7 @@ Every English text sits next to its Bangla text. Every claim restates the sectio
   3 Fallback  Body, "Layer 2: fallback": "When the failure is not transient (the API is permanently down, the JSON schema is rejected because the model can't follow it, the function raised a domain-specific error), retrying the same call is pointless. Fall back to a different tool or model: use a smaller model with a simpler schema, use a different vendor, or skip the tool and let the model answer from its own knowledge."
   4 Reflect   Body, "Layer 3: reflect": "When the failure was caused by a reasoning error (the model called the right tool with the wrong arguments, or made a logical mistake), neither retry nor fallback fixes the root cause. Feed the failure back into the model and ask it to revise. Reflexion is the formal version of this."
   5 Bound     Danger callout: "Unbounded retry is a footgun. A poisoned input that always returns the same transient-looking error will burn your entire budget in a tight retry loop. Always set a hard cap on retries, a wall-clock timeout, and a circuit breaker that opens after N consecutive failures of the same type."
-  6 Breaker   Body, "Circuit breakers": "After 5 consecutive failures of the same kind, the breaker opens: all calls for the next 60 seconds fail fast with a "service unavailable" error, no retries. After 60 seconds, the breaker half-opens: one test call. If it succeeds, the breaker closes. If it fails, the timer resets."
+  6 Breaker   Body, "Circuit breakers": "After N consecutive failures of the same kind (say 5), the breaker opens: all calls for a timeout (say 60 seconds) fail fast with a "service unavailable" error, no retries. After the timeout, the breaker half-opens: one test call. If it succeeds, the breaker closes. If it fails, it opens again."
   7 Remember  The four "remember" points of the Start here box.
 """
 from kit import walk, node, sh, ln, st
@@ -91,13 +91,13 @@ STEPS = [
 
     st(("Breaker", "ব্রেকার"),
        ("The circuit breaker", "সার্কিট ব্রেকার"),
-       [("A circuit breaker protects against a service that is failing in a way that looks transient but is not. After 5 consecutive failures of the same kind, it opens: for the next 60 seconds every call fails fast with “service unavailable”, with no retries.",
-         "সার্কিট ব্রেকার এমন সার্ভিস থেকে বাঁচায়, যে ক্ষণস্থায়ী দেখালেও আসলে তা নয়। একই ধরনের পরপর ৫ বার ব্যর্থ হলে সেটি খুলে যায়: পরের ৬০ সেকেন্ড প্রতিটি কল “service unavailable” ত্রুটিতে সঙ্গে সঙ্গে ব্যর্থ হয়, কোনো রিট্রাই ছাড়াই।"),
-        ("After 60 seconds it half-opens and lets one test call through. If that call succeeds, the breaker closes. If it fails, the timer resets.",
-         "৬০ সেকেন্ড পর এটি অর্ধেক খোলে আর একটি পরীক্ষামূলক কল যেতে দেয়। কলটি সফল হলে ব্রেকার বন্ধ হয়। ব্যর্থ হলে টাইমার আবার শুরু হয়।")],
+       [("A circuit breaker protects against a service that is failing in a way that looks transient but is not. After N consecutive failures of the same kind (say 5), it opens: for a timeout (say 60 seconds) every call fails fast with “service unavailable”, with no retries.",
+         "সার্কিট ব্রেকার এমন সার্ভিস থেকে বাঁচায়, যে ক্ষণস্থায়ী দেখালেও আসলে তা নয়। একই ধরনের পরপর N বার (যেমন ৫) ব্যর্থ হলে সেটি খুলে যায়: একটি নির্দিষ্ট সময় (যেমন ৬০ সেকেন্ড) প্রতিটি কল “service unavailable” ত্রুটিতে সঙ্গে সঙ্গে ব্যর্থ হয়, কোনো রিট্রাই ছাড়াই।"),
+        ("After the timeout it half-opens and lets one test call through. If that call succeeds, the breaker closes. If it fails, it opens again.",
+         "সময় পেরোলে এটি অর্ধেক খোলে আর একটি পরীক্ষামূলক কল যেতে দেয়। কলটি সফল হলে ব্রেকার বন্ধ হয়। ব্যর্থ হলে এটি আবার খুলে যায়।")],
        [sh("agent", "hot"), sh("breaker", "warn", ("open: fails fast", "খোলা: সঙ্গে সঙ্গে ব্যর্থ")), sh("svc", "dim", ("not called", "ডাকা হয় না"))],
        [ln("agent", "breaker", "to", state="hot"), ln("breaker", "svc", "to", state="dim")],
-       [None, None, ("5 failures", "৫ বার ব্যর্থ"), ("60 s", "৬০ সে")]),
+       [None, None, ("N failures (say 5)", "N বার (যেমন ৫)"), ("say 60 s", "যেমন ৬০ সে")]),
 
     st(("Remember", "মনে রাখুন"),
        ("What to remember", "যা মনে রাখবেন"),

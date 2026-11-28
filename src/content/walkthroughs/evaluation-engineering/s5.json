@@ -224,7 +224,7 @@
         "title": "A judge picks the better answer",
         "body": [
           "Many qualities, such as “does this answer sound helpful?”, can't be checked with regex. The trick is to use a strong LLM as a judge.",
-          "Pairwise comparison shows the judge A and B and asks which is better. It beats absolute scoring, because relative judgements are easier than absolute ones."
+          "Pairwise comparison shows the judge A and B and asks which is better. It can pick up subtle differences, but cost grows with the number of pairs and the judge can show position bias; swap the order to check."
         ]
       },
       "bn": {
@@ -232,7 +232,7 @@
         "title": "জাজ ভালো উত্তরটি বেছে নেয়",
         "body": [
           "“এই উত্তর কি সহায়ক শোনায়?” এমন অনেক গুণ regex দিয়ে যাচাই করা যায় না। কৌশল হলো একটি শক্তিশালী LLM-কে জাজ বানানো।",
-          "পেয়ারওয়াইজ তুলনায় জাজকে A ও B দেখিয়ে জিজ্ঞেস করা হয় কোনটি ভালো। এটি পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।"
+          "পেয়ারওয়াইজ তুলনায় জাজকে A ও B দেখিয়ে জিজ্ঞেস করা হয় কোনটি ভালো। এটি দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে, তবে জোড়ার সংখ্যা বাড়লে খরচ বাড়ে, আর জাজের পজিশন বায়াস দেখা দিতে পারে; ক্রম অদলবদল করে যাচাই করুন।"
         ]
       },
       "show": [
@@ -307,7 +307,7 @@
         ],
         "note": {
           "kind": "tip",
-          "html": "Use a different, often stronger, model as the judge than the one being evaluated, rotate judge prompts, and periodically sanity-check the judge against human labels."
+          "html": "Avoid judging a model with itself (judges can favour their own answers), swap answer positions, and periodically check the judge against human labels."
         }
       },
       "bn": {
@@ -318,7 +318,7 @@
         ],
         "note": {
           "kind": "tip",
-          "html": "যে মডেল মূল্যায়ন হচ্ছে তার চেয়ে ভিন্ন (প্রায়ই আরও শক্তিশালী) মডেলকে জাজ বানান, জাজ প্রম্পট ঘোরান, আর মাঝে মাঝে মানুষের লেবেলের সঙ্গে জাজকে মিলিয়ে দেখুন।"
+          "html": "একটি মডেলকে তার নিজের দিয়ে জাজ করাবেন না (জাজ নিজের উত্তরকে বেশি পছন্দ করতে পারে), উত্তরের অবস্থান অদলবদল করুন, আর মাঝে মাঝে মানুষের লেবেলের সঙ্গে জাজকে মিলিয়ে দেখুন।"
         }
       },
       "show": [
@@ -377,7 +377,7 @@
         "short": "RAG",
         "title": "Four numbers for a RAG system",
         "body": [
-          "The Ragas framework standardized four metrics that every RAG system should track:"
+          "The Ragas paper defines three reference-free metrics (faithfulness, answer relevance, context relevance). The Ragas library also offers context precision and context recall. These four metrics are worth tracking in every RAG system:"
         ],
         "changes": [
           {
@@ -402,7 +402,7 @@
         "short": "RAG",
         "title": "RAG সিস্টেমের চারটি সংখ্যা",
         "body": [
-          "Ragas ফ্রেমওয়ার্ক চারটি মেট্রিক প্রমিত করেছে, যা প্রতিটি RAG সিস্টেমের ট্র্যাক করা উচিত:"
+          "Ragas পেপার তিনটি রেফারেন্স-ছাড়া মেট্রিক সংজ্ঞায়িত করেছে (ফেইথফুলনেস, আনসার রিলেভেন্স, কনটেক্সট রিলেভেন্স)। Ragas লাইব্রেরি কনটেক্সট প্রিসিশন আর কনটেক্সট রিকলও দেয়। প্রতিটি RAG সিস্টেমে এই চারটি মেট্রিক ট্র্যাক করা উচিত:"
         ],
         "changes": [
           {
@@ -627,7 +627,7 @@
         "short": "Online",
         "title": "Online evals on live traffic",
         "body": [
-          "Sample 1–5% of live requests, run cheap judges (heuristics, regex, a small LLM), and record the eval score alongside the trace.",
+          "Sample a small share of live requests (for example 1–5%), run cheap judges (heuristics, regex, a small LLM), and record the eval score alongside the trace.",
           "This catches real failures your offline set misses: distribution shifts, prompt-template copy-paste errors, and fresh prompt injections."
         ]
       },
@@ -635,7 +635,7 @@
         "short": "অনলাইন",
         "title": "লাইভ ট্র্যাফিকে অনলাইন ইভ্যাল",
         "body": [
-          "লাইভ রিকোয়েস্টের ১–৫% স্যাম্পল করুন, সস্তা জাজ (হিউরিস্টিক, regex, ছোট LLM) চালান, আর ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন।",
+          "লাইভ রিকোয়েস্টের একটি ছোট অংশ (যেমন ১–৫%) স্যাম্পল করুন, সস্তা জাজ (হিউরিস্টিক, regex, ছোট LLM) চালান, আর ইভ্যাল স্কোর ট্রেসের সাথে রেকর্ড করুন।",
           "এটি আপনার অফলাইন সেট মিস করা বাস্তব ব্যর্থতা ধরে: ডিস্ট্রিবিউশন শিফট, প্রম্পট-টেমপ্লেট কপি-পেস্ট এরর, নতুন প্রম্পট ইনজেকশন।"
         ]
       },
@@ -694,7 +694,7 @@
         "short": "Red team",
         "title": "Red teaming",
         "body": [
-          "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them monthly, and track the failure rate."
+          "Build a set of attacks: prompt injection, jailbreaks, PII elicitation, hallucination bait. Run them on a regular schedule, for example monthly. Track the failure rate."
         ],
         "note": {
           "kind": "warn",
@@ -705,7 +705,7 @@
         "short": "রেড টিম",
         "title": "রেড টিমিং",
         "body": [
-          "আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। মাসে একবার চালান, আর ব্যর্থতার হার ট্র্যাক করুন।"
+          "আক্রমণের একটি সেট তৈরি করুন: প্রম্পট ইনজেকশন, জেইলব্রেক, PII এলিসিটেশন, হ্যালুসিনেশন বেইট। নিয়মিত চালান, যেমন মাসে একবার।  ব্যর্থতার হার ট্র্যাক করুন।"
         ],
         "note": {
           "kind": "warn",
@@ -767,11 +767,11 @@
         "short": "Remember",
         "title": "What to remember",
         "body": [
-          "Evaluation engineering turns “the model feels worse today” into numbers, then turns the numbers into a CI signal that gates every prompt or model change."
+          "Evaluation engineering turns the feeling that a model got worse into numbers. Those numbers then act as a signal in CI that checks every prompt or model change before it ships."
         ],
         "points": [
           "Build a golden dataset, grow it from real failures, and block the release if accuracy drops below the threshold.",
-          "Pairwise judging beats absolute scoring, because relative judgements are easier than absolute ones.",
+          "Pairwise judging can pick up subtle differences between two answers, but watch for position bias: swap the order to check.",
           "For agents, check how the answer was reached, not only whether the final answer is right.",
           "Always check synthetic questions for contamination (questions that copy the training data), or you test memorization instead of capability."
         ]
@@ -780,11 +780,11 @@
         "short": "মনে রাখুন",
         "title": "যা মনে রাখবেন",
         "body": [
-          "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং “মডেল আজ খারাপ লাগছে” কথাটাকে সংখ্যায় বদলায়। তারপর সেই সংখ্যাকে CI-র সিগন্যাল বানায়, যা প্রতিটা প্রম্পট বা মডেল বদলানোর আগে পরীক্ষা করে।"
+          "ইভ্যালুয়েশন ইঞ্জিনিয়ারিং মডেল খারাপ হয়েছে এমন অনুভূতিকে সংখ্যায় বদলে দেয়। সেই সংখ্যা CI-তে সংকেতের কাজ করে, আর প্রতিটি প্রম্পট বা মডেল পরিবর্তন শিপ হওয়ার আগে যাচাই করে।"
         ],
         "points": [
           "গোল্ডেন ডেটাসেট বানান, বাস্তব ব্যর্থতা থেকে বাড়ান, আর অ্যাকুরেসি (accuracy) সীমার নিচে নামলে রিলিজ আটকে দিন।",
-          "পেয়ারওয়াইজ বিচার পরম স্কোরের চেয়ে ভালো, কারণ আপেক্ষিক বিচার পরম বিচারের চেয়ে সহজ।",
+          "পেয়ারওয়াইজ বিচার দুই উত্তরের সূক্ষ্ম পার্থক্য ধরতে পারে, তবে পজিশন বায়াস থেকে সাবধান: ক্রম অদলবদল করে যাচাই করুন।",
           "এজেন্টের ক্ষেত্রে শুধু চূড়ান্ত উত্তর নয়, উত্তরে কীভাবে পৌঁছেছে সেটাও দেখুন।",
           "সিনথেটিক প্রশ্নে কন্টামিনেশন (contamination) (ট্রেনিং ডেটার নকল প্রশ্ন) সবসময় যাচাই করুন, নইলে সক্ষমতার বদলে মুখস্থ বিদ্যার পরীক্ষা হয়ে যায়।"
         ]
