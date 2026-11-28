@@ -1,0 +1,710 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Query",
+        "bn": "কুয়েরি"
+      },
+      "x": 100,
+      "y": 80
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 300,
+      "y": 80
+    },
+    {
+      "id": "fake",
+      "kind": "note",
+      "label": {
+        "en": "Made-up text",
+        "bn": "বানানো লেখা"
+      },
+      "x": 520,
+      "y": 80
+    },
+    {
+      "id": "enc",
+      "kind": "tool",
+      "label": {
+        "en": "Contriever",
+        "bn": "Contriever"
+      },
+      "x": 520,
+      "y": 250
+    },
+    {
+      "id": "ret",
+      "kind": "tool",
+      "label": {
+        "en": "Search",
+        "bn": "খোঁজা"
+      },
+      "x": 300,
+      "y": 250
+    },
+    {
+      "id": "docs",
+      "kind": "file",
+      "label": {
+        "en": "Real documents",
+        "bn": "আসল নথি"
+      },
+      "x": 110,
+      "y": 250
+    },
+    {
+      "id": "broad",
+      "kind": "note",
+      "label": {
+        "en": "Broader question",
+        "bn": "বড় প্রশ্ন"
+      },
+      "x": 520,
+      "y": 80
+    },
+    {
+      "id": "bm25",
+      "kind": "tool",
+      "label": {
+        "en": "BM25",
+        "bn": "BM25"
+      },
+      "x": 520,
+      "y": 250
+    },
+    {
+      "id": "dense",
+      "kind": "tool",
+      "label": {
+        "en": "Dense search",
+        "bn": "ডেন্স সার্চ"
+      },
+      "x": 300,
+      "y": 250
+    },
+    {
+      "id": "vars",
+      "kind": "queue",
+      "label": {
+        "en": "Query variants",
+        "bn": "কুয়েরি ভ্যারিয়েন্ট"
+      },
+      "x": 300,
+      "y": 80
+    },
+    {
+      "id": "fuse",
+      "kind": "chart",
+      "label": {
+        "en": "Merge by rank",
+        "bn": "র‍্যাংক ধরে মেলানো"
+      },
+      "x": 520,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Extra cost",
+      "bn": "বাড়তি খরচ"
+    },
+    {
+      "en": "BM25 gain",
+      "bn": "BM25-এ লাভ"
+    },
+    {
+      "en": "Dense gain",
+      "bn": "ডেন্সে লাভ"
+    },
+    {
+      "en": "Drift",
+      "bn": "সরে যাওয়া"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর হিসাব সেকশনের নিজস্ব।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Problem",
+        "title": "Short questions, different words",
+        "body": [
+          "People write short, vague questions, but documents are written differently."
+        ]
+      },
+      "bn": {
+        "short": "সমস্যা",
+        "title": "ছোট প্রশ্ন, আলাদা শব্দ",
+        "body": [
+          "ব্যবহারকারীর প্রশ্ন ছোট ও অস্পষ্ট হয়, উত্তরের নথির মতো নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "short, vague",
+            "bn": "ছোট, অস্পষ্ট"
+          }
+        },
+        {
+          "id": "docs",
+          "state": "warn",
+          "sub": {
+            "en": "written differently",
+            "bn": "অন্যভাবে লেখা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "docs",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rewrite",
+        "title": "A step before the search",
+        "body": [
+          "Query transformation rewrites or widens the question before the search.",
+          "The price is one extra LLM call."
+        ]
+      },
+      "bn": {
+        "short": "রিরাইট",
+        "title": "খোঁজার আগে একটি ধাপ",
+        "body": [
+          "কুয়েরি ট্রান্সফরমেশন খোঁজার আগে প্রশ্ন নতুন করে লেখে বা বাড়ায়।",
+          "এর দাম একটি বাড়তি LLM কল।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "one extra call",
+            "bn": "একটি বাড়তি কল"
+          }
+        },
+        {
+          "id": "ret",
+          "state": "hot"
+        },
+        {
+          "id": "docs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "docs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one extra LLM call",
+          "bn": "একটি বাড়তি LLM কল"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "HyDE",
+        "title": "HyDE: search with a made-up answer",
+        "body": [
+          "An LLM writes a made-up answer. The system searches using that answer's meaning, not the query's.",
+          "Contriever turns the made-up answer into numbers. It is expected to filter out the invented details."
+        ]
+      },
+      "bn": {
+        "short": "HyDE",
+        "title": "HyDE: বানানো উত্তর দিয়ে খোঁজা",
+        "body": [
+          "LLM প্রশ্নের একটি বানানো উত্তর লেখে। সেই উত্তরের অর্থ ধরে খোঁজা হয়, প্রশ্নের নয়।",
+          "Contriever বানানো উত্তরকে সংখ্যায় বদলায়। আশা করা হয়, এটি বানানো খুঁটিনাটি ছেঁটে ফেলে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "dim"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "fake",
+          "state": "warn",
+          "sub": {
+            "en": "false details",
+            "bn": "ভুল তথ্য"
+          }
+        },
+        {
+          "id": "enc",
+          "state": "hot"
+        },
+        {
+          "id": "ret",
+          "state": "hot"
+        },
+        {
+          "id": "docs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "llm",
+          "to": "fake",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "fake",
+          "to": "enc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "enc",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "docs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        {
+          "en": "false details",
+          "bn": "ভুল তথ্য"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Rewriter",
+        "title": "Rewrite-Retrieve-Read",
+        "body": [
+          "It adds a rewriting step before retrieval.",
+          "The rewriter can be a prompted LLM or a small trainable T5 model."
+        ]
+      },
+      "bn": {
+        "short": "রিরাইটার",
+        "title": "Rewrite-Retrieve-Read পদ্ধতি",
+        "body": [
+          "খোঁজার আগে একটি নতুন করে লেখার ধাপ বসায়।",
+          "রিরাইটার হতে পারে প্রম্পট করা LLM বা প্রশিক্ষণযোগ্য ছোট T5 মডেল।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "prompted or T5",
+            "bn": "প্রম্পট বা T5"
+          }
+        },
+        {
+          "id": "ret",
+          "state": "hot"
+        },
+        {
+          "id": "docs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "docs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Step-back",
+        "title": "Step-back prompting",
+        "body": [
+          "First ask a broader, higher-level question, then reason to the answer.",
+          "It is a reasoning method, not only a retrieval trick."
+        ]
+      },
+      "bn": {
+        "short": "স্টেপ-ব্যাক",
+        "title": "স্টেপ-ব্যাক প্রম্পটিং",
+        "body": [
+          "আগে একটি বড় ও সাধারণ প্রশ্ন করা, তারপর যুক্তি দিয়ে উত্তরে যাওয়া।",
+          "এটি রিজনিং পদ্ধতি, শুধু খোঁজার কৌশল নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "then reasons",
+            "bn": "তারপর যুক্তি"
+          }
+        },
+        {
+          "id": "broad",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "broad",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Query2doc",
+        "title": "Query2doc: join a made-up passage",
+        "body": [
+          "An LLM writes a made-up passage that is joined to the query. It helps keyword scoring (BM25) far more than embedding search.",
+          "On in-domain sets, Query2doc gains 3–15% for BM25 but only 0.4–4% for dense retrievers."
+        ]
+      },
+      "bn": {
+        "short": "Query2doc",
+        "title": "Query2doc: বানানো লেখা জোড়া",
+        "body": [
+          "LLM একটি বানানো লেখা তৈরি করে, যা মূল কুয়েরির সাথে জোড়া হয়। এটি এমবেডিং সার্চের তুলনায় কীওয়ার্ড স্কোর (BM25)-কে অনেক বেশি সাহায্য করে।",
+          "ইন-ডোমেইন সেটে Query2doc BM25-এ ৩–১৫% লাভ দেয়, কিন্তু ডেন্স রিট্রিভারে মাত্র ০.৪–৪%।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "fake",
+          "state": "hot",
+          "sub": {
+            "en": "joined to query",
+            "bn": "কুয়েরিতে জোড়া"
+          }
+        },
+        {
+          "id": "bm25",
+          "state": "hot",
+          "sub": {
+            "en": "3–15%",
+            "bn": "৩–১৫%"
+          }
+        },
+        {
+          "id": "dense",
+          "state": "dim",
+          "sub": {
+            "en": "0.4–4%",
+            "bn": "০.৪–৪%"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "fake",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "fake",
+          "to": "bm25",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "fake",
+          "to": "dense",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "3–15%",
+          "bn": "৩–১৫%"
+        },
+        {
+          "en": "0.4–4%",
+          "bn": "০.৪–৪%"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Fusion",
+        "title": "RAG-Fusion: several variants",
+        "body": [
+          "RAG-Fusion writes several query variants and searches with each.",
+          "It merges the lists by each document's rank before the LLM answers."
+        ]
+      },
+      "bn": {
+        "short": "ফিউশন",
+        "title": "RAG-Fusion: কয়েকটি ভ্যারিয়েন্ট",
+        "body": [
+          "RAG-Fusion প্রশ্নের কয়েকটি ভ্যারিয়েন্ট বানায়, প্রতিটি দিয়ে খোঁজে।",
+          "তারপর LLM উত্তর দেওয়ার আগে র‍্যাংক ধরে তালিকাগুলো মেলায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "vars",
+          "state": "hot",
+          "sub": {
+            "en": "several",
+            "bn": "কয়েকটি"
+          }
+        },
+        {
+          "id": "ret",
+          "state": "hot",
+          "sub": {
+            "en": "one each",
+            "bn": "প্রতিটির জন্য"
+          }
+        },
+        {
+          "id": "fuse",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "vars",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vars",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "fuse",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Keep the original query among the search strings, and measure on your own queries."
+        ],
+        "points": [
+          "Every rewrite adds one extra LLM call, so delay and cost grow before the first search.",
+          "Generated variants can drift from what the user meant. HyDE's made-up text may hold false details.",
+          "On in-domain sets, Query2doc gains 3–15% for BM25 but only 0.4–4% for dense retrievers.",
+          "Keep the original query among the search strings, and measure on your own queries."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "মূল কুয়েরি সার্চের তালিকায় রাখুন, আর নিজের কুয়েরিতে মেপে দেখুন।"
+        ],
+        "points": [
+          "প্রতিটি রিরাইটে একটি বাড়তি LLM কল লাগে, তাই প্রথম সার্চের আগেই দেরি আর খরচ বাড়ে।",
+          "তৈরি ভ্যারিয়েন্ট ব্যবহারকারীর উদ্দেশ্য থেকে সরে যেতে পারে। HyDE-এর বানানো লেখায় ভুল তথ্য থাকতে পারে।",
+          "ইন-ডোমেইন সেটে Query2doc BM25-এ ৩–১৫% লাভ দেয়, কিন্তু ডেন্স রিট্রিভারে মাত্র ০.৪–৪%।",
+          "মূল কুয়েরি সার্চের তালিকায় রাখুন, আর নিজের কুয়েরিতে মেপে দেখুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "keep original",
+            "bn": "মূলটা রাখুন"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "warn",
+          "sub": {
+            "en": "one extra call",
+            "bn": "একটি বাড়তি কল"
+          }
+        },
+        {
+          "id": "ret",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "llm",
+          "to": "ret",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "one extra LLM call",
+          "bn": "একটি বাড়তি LLM কল"
+        },
+        null,
+        null,
+        {
+          "en": "may drift",
+          "bn": "সরে যেতে পারে"
+        }
+      ]
+    }
+  ]
+}

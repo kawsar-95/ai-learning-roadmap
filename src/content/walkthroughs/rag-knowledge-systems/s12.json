@@ -1,0 +1,607 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 80,
+      "y": 162
+    },
+    {
+      "id": "lead",
+      "kind": "model",
+      "label": {
+        "en": "Lead agent",
+        "bn": "লিড এজেন্ট"
+      },
+      "x": 255,
+      "y": 162
+    },
+    {
+      "id": "fs",
+      "kind": "tool",
+      "label": {
+        "en": "file_search",
+        "bn": "file_search"
+      },
+      "x": 630,
+      "y": 162
+    },
+    {
+      "id": "sub1",
+      "kind": "service",
+      "label": {
+        "en": "Subagent",
+        "bn": "সাবএজেন্ট"
+      },
+      "x": 450,
+      "y": 60
+    },
+    {
+      "id": "sub2",
+      "kind": "service",
+      "label": {
+        "en": "Subagent",
+        "bn": "সাবএজেন্ট"
+      },
+      "x": 450,
+      "y": 162
+    },
+    {
+      "id": "sub3",
+      "kind": "service",
+      "label": {
+        "en": "Subagent",
+        "bn": "সাবএজেন্ট"
+      },
+      "x": 450,
+      "y": 260
+    },
+    {
+      "id": "limit",
+      "kind": "clock",
+      "label": {
+        "en": "Step limit",
+        "bn": "ধাপের সীমা"
+      },
+      "x": 450,
+      "y": 162
+    },
+    {
+      "id": "tok",
+      "kind": "chart",
+      "label": {
+        "en": "Token use",
+        "bn": "টোকেন খরচ"
+      },
+      "x": 615,
+      "y": 162
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Who decides",
+      "bn": "কে ঠিক করে"
+    },
+    {
+      "en": "Token use",
+      "bn": "টোকেন খরচ"
+    },
+    {
+      "en": "Step limit",
+      "bn": "ধাপের সীমা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and multiples are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর গুণিতক সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Agentic",
+        "title": "The model steers the search",
+        "body": [
+          "Agentic retrieval lets the model decide whether to retrieve, what to search for, whether the results are good enough, and when to stop.",
+          "The price is more LLM calls, more latency and a harder system to debug."
+        ]
+      },
+      "bn": {
+        "short": "এজেন্টিক",
+        "title": "মডেল নিজেই সার্চ চালায়",
+        "body": [
+          "এজেন্টিক রিট্রিভালে মডেল নিজেই ঠিক করে রিট্রিভ করবে কি না, কী খুঁজবে, ফল যথেষ্ট ভালো কি না, আর কখন থামবে।",
+          "দাম হলো বেশি LLM কল, বেশি ল্যাটেন্সি আর ডিবাগে কঠিন সিস্টেম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "decides",
+            "bn": "ঠিক করে"
+          }
+        },
+        {
+          "id": "fs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "lead",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "fs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "the model",
+          "bn": "মডেল"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Workflow",
+        "title": "Workflow: the steps are fixed",
+        "body": [
+          "In a workflow, the LLM and tools follow steps that your code fixed in advance."
+        ]
+      },
+      "bn": {
+        "short": "ওয়ার্কফ্লো",
+        "title": "ওয়ার্কফ্লো: ধাপ আগে থেকে ঠিক করা",
+        "body": [
+          "ওয়ার্কফ্লোতে LLM আর টুল এমন ধাপে চলে, যা আপনার কোড আগে থেকেই ঠিক করে রেখেছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "fixed in advance",
+            "bn": "আগে থেকে ঠিক করা"
+          }
+        },
+        {
+          "id": "fs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "lead",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "fs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "your code",
+          "bn": "আপনার কোড"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Agent",
+        "title": "Agent: the model directs itself",
+        "body": [
+          "In an agent, the LLM directs its own steps and its own use of tools.",
+          "OpenAI's file_search is a hosted search tool: the model chooses when to call it, and it searches by meaning and by keywords."
+        ]
+      },
+      "bn": {
+        "short": "এজেন্ট",
+        "title": "এজেন্ট: মডেল নিজেই চালায়",
+        "body": [
+          "এজেন্টে LLM নিজের ধাপ আর নিজের টুল ব্যবহার নিজেই ঠিক করে।",
+          "OpenAI-এর file_search একটি হোস্টেড সার্চ টুল: মডেল নিজে ঠিক করে কখন ডাকবে; এটি অর্থ আর কিওয়ার্ড দুই ভাবেই খোঁজে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "chooses when",
+            "bn": "কখন ডাকবে"
+          }
+        },
+        {
+          "id": "fs",
+          "state": "hot",
+          "sub": {
+            "en": "meaning + keywords",
+            "bn": "অর্থ + কিওয়ার্ড"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lead",
+          "to": "fs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "the LLM",
+          "bn": "LLM"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Subagents",
+        "title": "A lead agent and subagents",
+        "body": [
+          "A lead agent plans, spawns and merges. It starts subagents that search iteratively.",
+          "Several subagents can search at the same time."
+        ]
+      },
+      "bn": {
+        "short": "সাবএজেন্ট",
+        "title": "লিড এজেন্ট আর সাবএজেন্ট",
+        "body": [
+          "লিড এজেন্ট পরিকল্পনা করে, সাবএজেন্ট চালু করে আর ফল মেলায়। সাবএজেন্টরা বারবার খোঁজে।",
+          "কয়েকটি সাবএজেন্ট একসাথে খুঁজতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "plans, merges",
+            "bn": "পরিকল্পনা, মেলানো"
+          }
+        },
+        {
+          "id": "sub1",
+          "state": "hot",
+          "sub": {
+            "en": "search + read",
+            "bn": "খোঁজা + পড়া"
+          }
+        },
+        {
+          "id": "sub2",
+          "state": "hot",
+          "sub": {
+            "en": "search + read",
+            "bn": "খোঁজা + পড়া"
+          }
+        },
+        {
+          "id": "sub3",
+          "state": "hot",
+          "sub": {
+            "en": "search + read",
+            "bn": "খোঁজা + পড়া"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lead",
+          "to": "sub1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "sub2",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "sub3",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "lead agent",
+          "bn": "লিড এজেন্ট"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "Tokens multiply",
+        "body": [
+          "Anthropic reports that its agents used about 4x the tokens of chat, and its multi-agent system about 15x.",
+          "Agentic systems multiply tokens and latency, so track cost per answered question."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "The Anthropic numbers come from the vendor's own internal evaluation, not an independent benchmark."
+        }
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "টোকেন কয়েক গুণ বাড়ে",
+        "body": [
+          "Anthropic-এর রিপোর্টে তাদের এজেন্ট চ্যাটের প্রায় ৪x টোকেন খরচ করেছে, আর তাদের মাল্টি-এজেন্ট সিস্টেম প্রায় ১৫x।",
+          "এজেন্টিক সিস্টেমে টোকেন আর ল্যাটেন্সি কয়েক গুণ বাড়ে, তাই প্রতিটি উত্তরের খরচ মাপুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Anthropic-এর সংখ্যাগুলো তাদের নিজেদের অভ্যন্তরীণ মূল্যায়ন থেকে, কোনো স্বাধীন বেঞ্চমার্ক থেকে নয়।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "chat: 1x",
+            "bn": "চ্যাট: ১x"
+          }
+        },
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "agent: about 4x",
+            "bn": "এজেন্ট: প্রায় ৪x"
+          }
+        },
+        {
+          "id": "tok",
+          "state": "warn",
+          "sub": {
+            "en": "multi-agent: about 15x",
+            "bn": "মাল্টি-এজেন্ট: প্রায় ১৫x"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "lead",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "tok",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "about 4x, about 15x",
+          "bn": "প্রায় ৪x, প্রায় ১৫x"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Step limit",
+        "title": "Every loop needs a hard limit",
+        "body": [
+          "Loops need a hard step limit and a stopping rule, or a confused model keeps searching.",
+          "A step limit is a hard cap on how many rounds a loop may run. A stopping rule says when to stop."
+        ]
+      },
+      "bn": {
+        "short": "ধাপের সীমা",
+        "title": "প্রতিটি লুপে কড়া সীমা চাই",
+        "body": [
+          "লুপে কড়া ধাপের সীমা আর থামার শর্ত লাগে, নইলে বিভ্রান্ত মডেল খুঁজতেই থাকে।",
+          "ধাপের সীমা মানে লুপ সর্বোচ্চ কত রাউন্ড চলবে তার কড়া সীমা। থামার শর্ত বলে কখন থামতে হবে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "lead",
+          "state": "hot"
+        },
+        {
+          "id": "limit",
+          "state": "hot",
+          "sub": {
+            "en": "hard cap",
+            "bn": "কড়া সীমা"
+          }
+        },
+        {
+          "id": "fs",
+          "state": "warn",
+          "sub": {
+            "en": "keeps searching",
+            "bn": "খুঁজতেই থাকে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "lead",
+          "to": "limit",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "limit",
+          "to": "fs",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "hard cap and stopping rule",
+          "bn": "কড়া সীমা আর থামার শর্ত"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Start simple",
+        "title": "Start with one search",
+        "body": [
+          "One well-tuned LLM call with retrieval is often enough.",
+          "Add iteration only for questions that fail single-step retrieval."
+        ]
+      },
+      "bn": {
+        "short": "সহজ শুরু",
+        "title": "এক সার্চ দিয়ে শুরু করুন",
+        "body": [
+          "রিট্রিভাল সহ একটি ভালোভাবে সাজানো LLM কলই প্রায়ই যথেষ্ট।",
+          "শুধু যেসব প্রশ্নে এক ধাপের রিট্রিভাল ব্যর্থ হয়, সেগুলোতে পুনরাবৃত্তি যোগ করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "lead",
+          "state": "hot",
+          "sub": {
+            "en": "one call",
+            "bn": "একটি কল"
+          }
+        },
+        {
+          "id": "fs",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "lead",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "lead",
+          "to": "fs",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "The model can steer the search, but every extra round costs calls, time and tokens."
+        ],
+        "points": [
+          "Start simple. One well-tuned LLM call with retrieval is often enough.",
+          "Anthropic reports that its agents used about 4x the tokens of chat, and its multi-agent system about 15x.",
+          "Give every loop a hard step limit and a stopping rule, or a confused model keeps searching.",
+          "Track cost per answered question, because agentic systems multiply tokens and latency."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "মডেল সার্চ চালাতে পারে, কিন্তু প্রতিটি বাড়তি রাউন্ডে কল, সময় আর টোকেন খরচ হয়।"
+        ],
+        "points": [
+          "সহজ থেকে শুরু করুন। রিট্রিভাল সহ একটি ভালোভাবে সাজানো LLM কলই প্রায়ই যথেষ্ট।",
+          "Anthropic-এর রিপোর্টে তাদের এজেন্ট চ্যাটের প্রায় ৪x টোকেন খরচ করেছে, আর তাদের মাল্টি-এজেন্ট সিস্টেম প্রায় ১৫x।",
+          "প্রতিটি লুপে কড়া ধাপের সীমা আর থামার শর্ত দিন, নইলে বিভ্রান্ত মডেল খুঁজতেই থাকে।",
+          "প্রতিটি উত্তরের খরচ মাপুন, কারণ এজেন্টিক সিস্টেমে টোকেন আর ল্যাটেন্সি কয়েক গুণ বাড়ে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "lead"
+        },
+        {
+          "id": "limit"
+        },
+        {
+          "id": "fs"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "lead",
+          "flow": "to"
+        },
+        {
+          "from": "lead",
+          "to": "limit",
+          "flow": "to"
+        },
+        {
+          "from": "limit",
+          "to": "fs",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

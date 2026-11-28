@@ -1,0 +1,630 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "src",
+      "kind": "file",
+      "label": {
+        "en": "Chart or table",
+        "bn": "চার্ট বা টেবিল"
+      },
+      "x": 90,
+      "y": 160
+    },
+    {
+      "id": "txt",
+      "kind": "note",
+      "label": {
+        "en": "Text-only search",
+        "bn": "শুধু টেক্সট-সার্চ"
+      },
+      "x": 470,
+      "y": 60
+    },
+    {
+      "id": "clip",
+      "kind": "model",
+      "label": {
+        "en": "Embedder",
+        "bn": "এমবেডার"
+      },
+      "x": 270,
+      "y": 60
+    },
+    {
+      "id": "summ",
+      "kind": "model",
+      "label": {
+        "en": "LLM summary",
+        "bn": "LLM সারসংক্ষেপ"
+      },
+      "x": 270,
+      "y": 160
+    },
+    {
+      "id": "pages",
+      "kind": "model",
+      "label": {
+        "en": "ColPali",
+        "bn": "ColPali"
+      },
+      "x": 270,
+      "y": 260
+    },
+    {
+      "id": "idx",
+      "kind": "database",
+      "label": {
+        "en": "Index",
+        "bn": "ইনডেক্স"
+      },
+      "x": 450,
+      "y": 160
+    },
+    {
+      "id": "raw",
+      "kind": "storage",
+      "label": {
+        "en": "Raw object",
+        "bn": "কাঁচা জিনিস"
+      },
+      "x": 450,
+      "y": 260
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "Answering model",
+        "bn": "উত্তর-দেওয়া মডেল"
+      },
+      "x": 650,
+      "y": 160
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Searched",
+      "bn": "যেটায় খোঁজা হয়"
+    },
+    {
+      "en": "Answers from",
+      "bn": "উত্তর আসে"
+    },
+    {
+      "en": "Learned from",
+      "bn": "যা থেকে শেখা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Blind",
+        "title": "Text-only search goes blind",
+        "body": [
+          "Text-only search cannot answer when the answer sits in a chart, a scanned table, or a slide.",
+          "Multimodal RAG keeps those things searchable."
+        ]
+      },
+      "bn": {
+        "short": "অন্ধ",
+        "title": "শুধু টেক্সট-সার্চ অন্ধ হয়ে যায়",
+        "body": [
+          "উত্তর যখন চার্ট, স্ক্যান করা টেবিল বা স্লাইডে থাকে, তখন শুধু টেক্সট-সার্চ কাজ করে না।",
+          "মাল্টিমোডাল RAG সেগুলোকেও সার্চযোগ্য রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "warn"
+        },
+        {
+          "id": "txt",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "txt",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Three",
+        "title": "Three ways to keep them searchable",
+        "body": [
+          "Turn them into text, embed images directly, or search page images."
+        ]
+      },
+      "bn": {
+        "short": "তিনটি",
+        "title": "সার্চযোগ্য রাখার তিনটি উপায়",
+        "body": [
+          "সেগুলোকে টেক্সটে বদলানো, ছবি সরাসরি এমবেড করা, বা পাতার ছবি খোঁজা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "hot"
+        },
+        {
+          "id": "clip",
+          "state": "hot"
+        },
+        {
+          "id": "summ",
+          "state": "hot"
+        },
+        {
+          "id": "pages",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "clip",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "src",
+          "to": "summ",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "src",
+          "to": "pages",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Embed",
+        "title": "Embed images directly",
+        "body": [
+          "A multimodal embedder such as CLIP puts images and text into one shared vector space.",
+          "CLIP learned from 400M image-text pairs. A multimodal LLM answers from the raw images."
+        ]
+      },
+      "bn": {
+        "short": "এমবেড",
+        "title": "ছবি সরাসরি এমবেড",
+        "body": [
+          "CLIP-এর মতো মাল্টিমোডাল এমবেডার ছবি আর টেক্সটকে একই ভেক্টর স্পেসে আনে।",
+          "CLIP ৪০ কোটি ছবি-টেক্সট জোড়া থেকে শিখেছে। মাল্টিমোডাল LLM কাঁচা ছবি থেকে উত্তর দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "hot"
+        },
+        {
+          "id": "clip",
+          "state": "hot"
+        },
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "clip",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "clip",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "images and text",
+          "bn": "ছবি আর টেক্সট"
+        },
+        {
+          "en": "raw images",
+          "bn": "কাঁচা ছবি"
+        },
+        {
+          "en": "400M image-text pairs",
+          "bn": "৪০ কোটি ছবি-টেক্সট জোড়া"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Summary",
+        "title": "Summarize to text",
+        "body": [
+          "An LLM summary describes the image or table in text, and you embed the summary with ordinary text embeddings.",
+          "A text LLM answers from the summaries."
+        ]
+      },
+      "bn": {
+        "short": "সারসংক্ষেপ",
+        "title": "টেক্সটে সারসংক্ষেপ",
+        "body": [
+          "LLM সারসংক্ষেপ ছবি বা টেবিলের কথা টেক্সটে বলে, আর সেই সারসংক্ষেপ সাধারণ টেক্সট এমবেডিং দিয়ে এমবেড করা হয়।",
+          "টেক্সট LLM সারসংক্ষেপ থেকে উত্তর দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "hot"
+        },
+        {
+          "id": "summ",
+          "state": "hot"
+        },
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "summ",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "summ",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "summary",
+          "bn": "সারসংক্ষেপ"
+        },
+        {
+          "en": "summaries",
+          "bn": "সারসংক্ষেপ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Keep raw",
+        "title": "Search the summary, keep the raw object",
+        "body": [
+          "A multi-vector retriever separates the item that gets searched, a summary, from the one the model answers from, the raw image or table.",
+          "Of the two summary designs, prefer the one keeping the raw object, so the answering model sees the original."
+        ]
+      },
+      "bn": {
+        "short": "মূল রাখুন",
+        "title": "সারসংক্ষেপে খুঁজুন, মূল জিনিস রাখুন",
+        "body": [
+          "মাল্টি-ভেক্টর রিট্রিভার যেটার মধ্যে খোঁজা হয়, মানে সারসংক্ষেপ, আর যা থেকে মডেল উত্তর দেয়, মানে কাঁচা ছবি বা টেবিল, এ দুটোকে আলাদা রাখে।",
+          "সারসংক্ষেপের দুটি নকশার মধ্যে যেটি মূল জিনিস রাখে সেটি বাছুন, তাহলে উত্তর-দেওয়া মডেল মূলটি দেখতে পায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "summ",
+          "state": "hot"
+        },
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "raw",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "summ",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "raw",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "raw",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "summary",
+          "bn": "সারসংক্ষেপ"
+        },
+        {
+          "en": "raw object",
+          "bn": "কাঁচা জিনিস"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pages",
+        "title": "Search page images",
+        "body": [
+          "ColPali makes many vectors straight from a page image, so it skips text extraction.",
+          "Late interaction compares each query token with one vector for each small patch of the page, keeps each token's best match, then adds them up."
+        ]
+      },
+      "bn": {
+        "short": "পাতা",
+        "title": "পাতার ছবি খুঁজুন",
+        "body": [
+          "ColPali পাতার ছবি থেকেই সরাসরি অনেক ভেক্টর বানায়, তাই টেক্সট এক্সট্র্যাকশন লাগে না।",
+          "লেট ইন্টারঅ্যাকশন প্রশ্নের প্রতিটি টোকেনকে পাতার প্রতিটি ছোট অংশের একটি করে ভেক্টরের সাথে মেলায়, প্রতিটি টোকেনের সেরা মিলটি রাখে, তারপর যোগ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "hot"
+        },
+        {
+          "id": "pages",
+          "state": "hot"
+        },
+        {
+          "id": "idx",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "pages",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "pages",
+          "to": "idx",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "idx",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "many vectors per page",
+          "bn": "প্রতি পাতায় অনেক ভেক্টর"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Lost",
+        "title": "A summary can lose a number",
+        "body": [
+          "Summaries can hide detail. If a summary leaves out a number, no query can find it.",
+          "Keeping the raw object means the answering model still sees the original."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "If the summary leaves out a number, no query can find it."
+        }
+      },
+      "bn": {
+        "short": "হারানো",
+        "title": "সারসংক্ষেপে সংখ্যা হারাতে পারে",
+        "body": [
+          "সারসংক্ষেপ খুঁটিনাটি লুকিয়ে ফেলতে পারে। সারসংক্ষেপে কোনো সংখ্যা বাদ পড়লে কোনো প্রশ্নেই তা মেলে না।",
+          "মূল জিনিস রাখলে উত্তর-দেওয়া মডেল তবুও মূলটি দেখতে পায়।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সারসংক্ষেপে কোনো সংখ্যা বাদ পড়লে কোনো প্রশ্নেই তা মেলে না।"
+        }
+      },
+      "show": [
+        {
+          "id": "src",
+          "state": "hot"
+        },
+        {
+          "id": "summ",
+          "state": "warn"
+        },
+        {
+          "id": "idx",
+          "state": "warn"
+        },
+        {
+          "id": "raw",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "summ",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "summ",
+          "to": "idx",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "idx",
+          "to": "raw",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "summary",
+          "bn": "সারসংক্ষেপ"
+        },
+        {
+          "en": "raw object",
+          "bn": "কাঁচা জিনিস"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Three designs keep charts, tables and slides searchable."
+        ],
+        "points": [
+          "Of the two summary designs, prefer the one keeping the raw object.",
+          "ColPali stores many vectors per page, so measure index size.",
+          "Its gains come from the authors' benchmark, so test on your own documents."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "তিনটি নকশা চার্ট, টেবিল আর স্লাইডকে সার্চযোগ্য রাখে।"
+        ],
+        "points": [
+          "সারসংক্ষেপের দুটি নকশার মধ্যে যেটি মূল জিনিস রাখে সেটি বাছুন।",
+          "ColPali প্রতি পাতায় অনেক ভেক্টর রাখে, তাই ইনডেক্সের আকার মাপুন।",
+          "এর ফলাফল লেখকদের নিজেদের বেঞ্চমার্কে, তাই নিজের নথিতে পরীক্ষা করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "src"
+        },
+        {
+          "id": "clip"
+        },
+        {
+          "id": "summ"
+        },
+        {
+          "id": "pages"
+        },
+        {
+          "id": "idx"
+        },
+        {
+          "id": "raw"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "src",
+          "to": "clip",
+          "flow": "to"
+        },
+        {
+          "from": "src",
+          "to": "summ",
+          "flow": "to"
+        },
+        {
+          "from": "src",
+          "to": "pages",
+          "flow": "to"
+        },
+        {
+          "from": "summ",
+          "to": "idx",
+          "flow": "to"
+        },
+        {
+          "from": "idx",
+          "to": "raw",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

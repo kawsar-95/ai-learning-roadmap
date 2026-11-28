@@ -1,0 +1,614 @@
+{
+  "width": 760,
+  "height": 400,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 115,
+      "y": 60
+    },
+    {
+      "id": "vec",
+      "kind": "cache",
+      "label": {
+        "en": "Vector search",
+        "bn": "ভেক্টর সার্চ"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "docs",
+      "kind": "file",
+      "label": {
+        "en": "Documents",
+        "bn": "ডকুমেন্ট"
+      },
+      "x": 100,
+      "y": 190
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 350,
+      "y": 190
+    },
+    {
+      "id": "graph",
+      "kind": "database",
+      "label": {
+        "en": "Entity graph",
+        "bn": "এন্টিটি গ্রাফ"
+      },
+      "x": 625,
+      "y": 190
+    },
+    {
+      "id": "comm",
+      "kind": "note",
+      "label": {
+        "en": "Communities",
+        "bn": "কমিউনিটি"
+      },
+      "x": 625,
+      "y": 320
+    },
+    {
+      "id": "ans",
+      "kind": "note",
+      "label": {
+        "en": "Merged answer",
+        "bn": "মেলানো উত্তর"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "nbr",
+      "kind": "note",
+      "label": {
+        "en": "Neighbours",
+        "bn": "প্রতিবেশী"
+      },
+      "x": 625,
+      "y": 60
+    },
+    {
+      "id": "light",
+      "kind": "tool",
+      "label": {
+        "en": "LightRAG",
+        "bn": "LightRAG"
+      },
+      "x": 625,
+      "y": 60
+    },
+    {
+      "id": "hippo",
+      "kind": "tool",
+      "label": {
+        "en": "HippoRAG",
+        "bn": "HippoRAG"
+      },
+      "x": 625,
+      "y": 190
+    },
+    {
+      "id": "neo",
+      "kind": "tool",
+      "label": {
+        "en": "Neo4j",
+        "bn": "Neo4j"
+      },
+      "x": 625,
+      "y": 320
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Built when",
+      "bn": "কখন বানানো"
+    },
+    {
+      "en": "Main cost",
+      "bn": "মূল খরচ"
+    },
+    {
+      "en": "Simple lookups",
+      "bn": "সাধারণ খোঁজ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Gap",
+        "title": "Big questions have no single chunk",
+        "body": [
+          "Vector search returns chunks that look like the query.",
+          "It struggles with global questions such as the main themes in a dataset, which no single chunk answers."
+        ]
+      },
+      "bn": {
+        "short": "ফাঁক",
+        "title": "বড় প্রশ্নের উত্তর কোনো একটি টুকরোয় নেই",
+        "body": [
+          "ভেক্টর সার্চ প্রশ্নের মতো দেখতে লেখার টুকরো আনে।",
+          "ডেটাসেটের প্রধান থিমের মতো গ্লোবাল প্রশ্নে সে হোঁচট খায়, কারণ উত্তর কোনো একটি টুকরোয় থাকে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "main themes?",
+            "bn": "প্রধান থিম?"
+          }
+        },
+        {
+          "id": "vec",
+          "state": "warn",
+          "sub": {
+            "en": "no single chunk answers",
+            "bn": "কোনো একটি টুকরো উত্তর দেয় না"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "vec",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Graph",
+        "title": "An LLM builds a graph of entities",
+        "body": [
+          "An LLM builds an entity knowledge graph: a map of entities, such as people or companies, and how they relate.",
+          "The documented pipeline segments documents into TextUnits, then extracts entities, relationships and claims."
+        ]
+      },
+      "bn": {
+        "short": "গ্রাফ",
+        "title": "LLM এন্টিটির গ্রাফ বানায়",
+        "body": [
+          "LLM একটি এন্টিটি নলেজ গ্রাফ বানায়: এন্টিটির, যেমন মানুষ বা কোম্পানির, মানচিত্র, আর তাদের মধ্যে সম্পর্ক।",
+          "ডকুমেন্টেড পাইপলাইনে ডকুমেন্ট TextUnit-এ ভাগ হয়, তারপর এন্টিটি, সম্পর্ক ও দাবি বের করা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "docs",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "entities, relationships, claims",
+            "bn": "এন্টিটি, সম্পর্ক, দাবি"
+          }
+        },
+        {
+          "id": "graph",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "docs",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "graph",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "index time",
+          "bn": "ইনডেক্সের সময়"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Community",
+        "title": "Group the graph, summarize each group",
+        "body": [
+          "Leiden hierarchical clustering groups closely connected points in the graph, layer by layer.",
+          "Each group is a community, and GraphRAG writes a summary for each one before any question arrives."
+        ]
+      },
+      "bn": {
+        "short": "কমিউনিটি",
+        "title": "গ্রাফ ভাগ করুন, প্রতিটির সারসংক্ষেপ লিখুন",
+        "body": [
+          "Leiden হায়ারার্কিক্যাল ক্লাস্টারিং গ্রাফে ঘনিষ্ঠভাবে যুক্ত পয়েন্টদের স্তরে স্তরে দলে ভাগ করে।",
+          "প্রতিটি দল একটি কমিউনিটি, আর প্রশ্ন আসার আগেই GraphRAG প্রতিটির সারসংক্ষেপ লিখে রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "graph",
+          "state": "hot"
+        },
+        {
+          "id": "comm",
+          "state": "hot",
+          "sub": {
+            "en": "summary written first",
+            "bn": "সারসংক্ষেপ আগে লেখা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "graph",
+          "to": "comm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Global",
+        "title": "Global search: answer from summaries",
+        "body": [
+          "Global search reasons over the community summaries.",
+          "At query time, GraphRAG merges partial answers from those summaries."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "This is the answer that no single chunk holds."
+        }
+      },
+      "bn": {
+        "short": "গ্লোবাল",
+        "title": "গ্লোবাল সার্চ: সারসংক্ষেপ থেকে উত্তর",
+        "body": [
+          "গ্লোবাল সার্চ কমিউনিটি সারসংক্ষেপ থেকে ভাবে।",
+          "প্রশ্নের সময় GraphRAG সেই সারসংক্ষেপগুলোর আংশিক উত্তর মিলিয়ে দেয়।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "এই উত্তর কোনো একটি টুকরোয় থাকে না।"
+        }
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "sub": {
+            "en": "main themes?",
+            "bn": "প্রধান থিম?"
+          },
+          "x": 115,
+          "y": 190
+        },
+        {
+          "id": "comm",
+          "state": "hot",
+          "sub": {
+            "en": "partial answers",
+            "bn": "আংশিক উত্তর"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "comm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "comm",
+          "to": "ans",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Local",
+        "title": "Local search: start from matched entities",
+        "body": [
+          "Local search starts from matched entities and expands to their neighbours.",
+          "That suits a multi-hop question, which needs several linked facts about connected entities."
+        ]
+      },
+      "bn": {
+        "short": "লোকাল",
+        "title": "লোকাল সার্চ: মিলে যাওয়া এন্টিটি থেকে শুরু",
+        "body": [
+          "লোকাল সার্চ মিলে যাওয়া এন্টিটি থেকে শুরু করে প্রতিবেশীতে ছড়ায়।",
+          "মাল্টি-হপ প্রশ্নে এটা কাজে লাগে, যেখানে সংযুক্ত এন্টিটির কয়েকটি জোড়া তথ্য লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot",
+          "x": 115,
+          "y": 190
+        },
+        {
+          "id": "graph",
+          "state": "hot",
+          "sub": {
+            "en": "matched entities",
+            "bn": "মিলে যাওয়া এন্টিটি"
+          }
+        },
+        {
+          "id": "nbr",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "graph",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "graph",
+          "to": "nbr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Lighter",
+        "title": "Lighter variants and Neo4j",
+        "body": [
+          "Lighter variants (LightRAG, HippoRAG) and graph-database tooling (Neo4j) target the same gap.",
+          "They have different cost profiles."
+        ]
+      },
+      "bn": {
+        "short": "হালকা",
+        "title": "হালকা রূপ আর Neo4j",
+        "body": [
+          "হালকা রূপ (LightRAG, HippoRAG) আর গ্রাফ-ডেটাবেস টুলিং (Neo4j) একই ফাঁক পূরণ করতে চায়।",
+          "তাদের খরচের ধরন আলাদা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "graph",
+          "state": "dim",
+          "x": 130,
+          "y": 190
+        },
+        {
+          "id": "light",
+          "state": "hot"
+        },
+        {
+          "id": "hippo",
+          "state": "hot",
+          "sub": {
+            "en": "Personalized PageRank",
+            "bn": "Personalized PageRank"
+          }
+        },
+        {
+          "id": "neo",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "graph",
+          "to": "light",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "graph",
+          "to": "hippo",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "graph",
+          "to": "neo",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "different cost profiles",
+          "bn": "আলাদা খরচের ধরন"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cost",
+        "title": "The cost is paid at index time",
+        "body": [
+          "The main cost is LLM extraction and summarization at index time. Microsoft warns it can be expensive.",
+          "Start on a small slice of the corpus, and compare against a plain hybrid baseline."
+        ]
+      },
+      "bn": {
+        "short": "খরচ",
+        "title": "খরচ দিতে হয় ইনডেক্সের সময়",
+        "body": [
+          "মূল খরচ ইনডেক্সের সময়ের LLM এক্সট্র্যাকশন ও সামারাইজেশন। Microsoft নিজেই বলেছে তা ব্যয়বহুল হতে পারে।",
+          "কর্পাসের ছোট অংশ দিয়ে শুরু করুন, আর সাধারণ হাইব্রিড বেসলাইনের সাথে তুলনা করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "docs",
+          "state": "warn",
+          "sub": {
+            "en": "small slice first",
+            "bn": "ছোট অংশ আগে"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "warn",
+          "sub": {
+            "en": "expensive",
+            "bn": "ব্যয়বহুল"
+          }
+        },
+        {
+          "id": "comm",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "docs",
+          "to": "llm",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "llm",
+          "to": "comm",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "LLM extraction and summaries",
+          "bn": "LLM এক্সট্র্যাকশন ও সারসংক্ষেপ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "Graph papers report their gains on whole-corpus and multi-hop questions.",
+          "For simple lookups, a plain vector or hybrid pipeline is the natural default."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Missed or merged entities hurt everything after, and summaries go stale when documents change unless you re-index."
+        }
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "গ্রাফ নিয়ে পেপারগুলো পুরো কর্পাস আর মাল্টি-হপ প্রশ্নে তাদের উন্নতির কথা জানায়।",
+          "সাধারণ তথ্য খোঁজায় ভেক্টর বা হাইব্রিড পাইপলাইনই স্বাভাবিক ডিফল্ট।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "এন্টিটি মিস বা গুলিয়ে গেলে পরের সব কাজ নষ্ট হয়, আর ডকুমেন্ট বদলালে রি-ইনডেক্স না করলে সারসংক্ষেপ পুরোনো হয়ে যায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "vec",
+          "state": "hot",
+          "sub": {
+            "en": "simple lookups",
+            "bn": "সাধারণ খোঁজ"
+          }
+        },
+        {
+          "id": "graph",
+          "state": "warn",
+          "sub": {
+            "en": "missed or merged entities",
+            "bn": "এন্টিটি মিস বা গুলিয়ে যাওয়া"
+          }
+        },
+        {
+          "id": "comm",
+          "state": "warn",
+          "sub": {
+            "en": "stale unless re-indexed",
+            "bn": "রি-ইনডেক্স না করলে পুরোনো"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "graph",
+          "to": "comm",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "plain vector or hybrid",
+          "bn": "ভেক্টর বা হাইব্রিড"
+        }
+      ]
+    }
+  ]
+}

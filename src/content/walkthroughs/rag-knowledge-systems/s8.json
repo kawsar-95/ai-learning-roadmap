@@ -1,0 +1,665 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 75,
+      "y": 162
+    },
+    {
+      "id": "db",
+      "kind": "database",
+      "label": {
+        "en": "Vector search",
+        "bn": "ভেক্টর সার্চ"
+      },
+      "x": 235,
+      "y": 162
+    },
+    {
+      "id": "rule",
+      "kind": "key",
+      "label": {
+        "en": "Metadata filter",
+        "bn": "মেটাডেটা ফিল্টার"
+      },
+      "x": 430,
+      "y": 162
+    },
+    {
+      "id": "res",
+      "kind": "chart",
+      "label": {
+        "en": "Results",
+        "bn": "ফল"
+      },
+      "x": 620,
+      "y": 162
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 620,
+      "y": 260
+    },
+    {
+      "id": "chunk",
+      "kind": "file",
+      "label": {
+        "en": "Text with labels",
+        "bn": "লেবেলসহ লেখা"
+      },
+      "x": 235,
+      "y": 260
+    },
+    {
+      "id": "m1",
+      "kind": "database",
+      "label": {
+        "en": "Match",
+        "bn": "মিল"
+      },
+      "x": 150,
+      "y": 110
+    },
+    {
+      "id": "m2",
+      "kind": "database",
+      "label": {
+        "en": "Match",
+        "bn": "মিল"
+      },
+      "x": 610,
+      "y": 110
+    },
+    {
+      "id": "f1",
+      "kind": "shield",
+      "label": {
+        "en": "Filtered out",
+        "bn": "বাদ পড়া"
+      },
+      "x": 380,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Asked",
+      "bn": "চাওয়া হয়েছে"
+    },
+    {
+      "en": "Returned",
+      "bn": "ফেরত এসেছে"
+    },
+    {
+      "en": "Graph links",
+      "bn": "গ্রাফের লিংক"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Mixed",
+        "title": "Meaning plus a hard rule",
+        "body": [
+          "Real questions mix meaning with hard rules, like a year or a rating.",
+          "Vector similarity alone cannot enforce a rule like a year after 2000."
+        ]
+      },
+      "bn": {
+        "short": "মেশানো",
+        "title": "অর্থের সাথে কঠিন শর্ত",
+        "body": [
+          "বাস্তব প্রশ্নে অর্থের সাথে কঠিন শর্তও থাকে, যেমন সাল বা রেটিং।",
+          "শুধু ভেক্টর সিমিলারিটি দিয়ে ২০০০ সালের পরের মতো শর্ত মানানো যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "meaning only",
+            "bn": "শুধু অর্থ"
+          }
+        },
+        {
+          "id": "rule",
+          "state": "warn",
+          "sub": {
+            "en": "year after 2000",
+            "bn": "২০০০ সালের পরের"
+          },
+          "x": 235,
+          "y": 60
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rule",
+          "to": "db",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Metadata",
+        "title": "Labels on each piece of text",
+        "body": [
+          "Each piece of text carries labels, called metadata, such as year or customer type.",
+          "A metadata filter uses them to keep only the right pieces."
+        ]
+      },
+      "bn": {
+        "short": "মেটাডেটা",
+        "title": "প্রতিটি লেখার টুকরোয় লেবেল",
+        "body": [
+          "প্রতিটি লেখার টুকরোর সাথে লেবেল থাকে, যাকে মেটাডেটা বলে, যেমন সাল বা গ্রাহকের ধরন।",
+          "মেটাডেটা ফিল্টার সেগুলো দিয়ে শুধু সঠিক টুকরো রাখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "chunk",
+          "state": "hot",
+          "sub": {
+            "en": "labels",
+            "bn": "লেবেল"
+          }
+        },
+        {
+          "id": "db",
+          "state": "hot"
+        },
+        {
+          "id": "rule",
+          "state": "hot",
+          "x": 235,
+          "y": 60
+        }
+      ],
+      "links": [
+        {
+          "from": "chunk",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rule",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Post-filter",
+        "title": "Post-filter: search, then filter",
+        "body": [
+          "Post-filtering searches first, then throws away results that do not match.",
+          "A strict filter can leave fewer results than you asked for."
+        ]
+      },
+      "bn": {
+        "short": "পোস্ট-ফিল্টার",
+        "title": "পোস্ট-ফিল্টার: আগে সার্চ, পরে ফিল্টার",
+        "body": [
+          "পোস্ট-ফিল্টার আগে সার্চ করে, পরে না-মেলা ফল বাদ দেয়।",
+          "কড়া ফিল্টারে চাওয়ার চেয়ে কম ফল থাকতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "search first",
+            "bn": "আগে সার্চ"
+          }
+        },
+        {
+          "id": "rule",
+          "state": "hot",
+          "sub": {
+            "en": "filter after",
+            "bn": "পরে ফিল্টার"
+          }
+        },
+        {
+          "id": "res",
+          "state": "warn",
+          "sub": {
+            "en": "fewer than k",
+            "bn": "k-এর চেয়ে কম"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "db",
+          "to": "rule",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rule",
+          "to": "res",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "k",
+          "bn": "k"
+        },
+        {
+          "en": "fewer than k",
+          "bn": "k-এর চেয়ে কম"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Too few",
+        "title": "Too few results, or none",
+        "body": [
+          "Post-filtering can return fewer results than you asked for (k), or none. Then the LLM answers from nothing.",
+          "Check the number of results, not only the scores."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A downstream LLM that gets no results then answers from nothing."
+        }
+      },
+      "bn": {
+        "short": "খুব কম",
+        "title": "খুব কম ফল, এমনকি শূন্য",
+        "body": [
+          "পোস্ট-ফিল্টারে যতগুলো ফল চেয়েছেন (k) তার চেয়ে কম আসতে পারে, এমনকি শূন্য। তখন LLM ফাঁকা থেকে উত্তর বানায়।",
+          "শুধু স্কোর নয়, কয়টি ফল এল তাও দেখুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "পরের ধাপের LLM কোনো ফল না পেলে ফাঁকা থেকে উত্তর বানায়।"
+        }
+      },
+      "show": [
+        {
+          "id": "db",
+          "state": "dim"
+        },
+        {
+          "id": "res",
+          "state": "warn",
+          "sub": {
+            "en": "fewer, or none",
+            "bn": "কম, বা শূন্য"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "warn",
+          "sub": {
+            "en": "from nothing",
+            "bn": "ফাঁকা থেকে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "db",
+          "to": "res",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "res",
+          "to": "llm",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "k",
+          "bn": "k"
+        },
+        {
+          "en": "fewer, or none",
+          "bn": "কম, বা শূন্য"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Pre-filter",
+        "title": "Pre-filter: filter, then search",
+        "body": [
+          "Pre-filtering keeps only matching points before the search runs.",
+          "Qdrant says it then compares the query with every matching point: exact, but costly at scale."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Exact, but costly at scale."
+        }
+      },
+      "bn": {
+        "short": "প্রি-ফিল্টার",
+        "title": "প্রি-ফিল্টার: আগে ফিল্টার, পরে সার্চ",
+        "body": [
+          "প্রি-ফিল্টার সার্চের আগেই শুধু মিলে যাওয়া পয়েন্ট রাখে।",
+          "Qdrant বলছে, এতে কুয়েরি প্রতিটি মিলে যাওয়া পয়েন্টের সাথে তুলনা করা হয়: ফল নির্ভুল, কিন্তু বড় স্কেলে খরচ বেশি।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "নির্ভুল, কিন্তু বড় স্কেলে খরচ বেশি।"
+        }
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "rule",
+          "state": "hot",
+          "sub": {
+            "en": "filter first",
+            "bn": "আগে ফিল্টার"
+          },
+          "x": 235,
+          "y": 60
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "every match",
+            "bn": "প্রতিটি মিল"
+          }
+        },
+        {
+          "id": "res",
+          "state": "hot",
+          "sub": {
+            "en": "k results",
+            "bn": "k-টি ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rule",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "db",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "k",
+          "bn": "k"
+        },
+        {
+          "en": "k results",
+          "bn": "k-টি ফল"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Broken",
+        "title": "A strict filter breaks the graph",
+        "body": [
+          "A strict filter can leave so few points that the paths between them break.",
+          "Every neighbour of a match is filtered out, so the search cannot hop between matches."
+        ]
+      },
+      "bn": {
+        "short": "ভাঙা",
+        "title": "কড়া ফিল্টার গ্রাফ ভাঙে",
+        "body": [
+          "কড়া ফিল্টারে এত কম পয়েন্ট থাকতে পারে যে তাদের মধ্যকার পথ ভেঙে যায়।",
+          "মিলে যাওয়া পয়েন্টের প্রতিটি প্রতিবেশী বাদ পড়ে, তাই সার্চ এক মিল থেকে আরেক মিলে যেতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "m1",
+          "state": "hot"
+        },
+        {
+          "id": "f1",
+          "state": "dim"
+        },
+        {
+          "id": "m2",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "m1",
+          "to": "f1",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "f1",
+          "to": "m2",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "broken",
+          "bn": "ভাঙা"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Repair",
+        "title": "Engines repair the links",
+        "body": [
+          "Qdrant's filterable HNSW adds extra links between the points that are left after filtering.",
+          "ACORN repairs the graph's connections at query time. Weaviate uses it by default from v1.34+."
+        ]
+      },
+      "bn": {
+        "short": "মেরামত",
+        "title": "ইঞ্জিন লিংক মেরামত করে",
+        "body": [
+          "Qdrant-এর ফিল্টারেবল HNSW ফিল্টারের পরে যে পয়েন্টগুলো থাকে, তাদের মধ্যে বাড়তি লিংক বসায়।",
+          "ACORN কুয়েরির সময় গ্রাফের সংযোগ মেরামত করে। Weaviate v1.34+ থেকে এটি ডিফল্ট রেখেছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "m1",
+          "state": "hot"
+        },
+        {
+          "id": "f1",
+          "state": "dim"
+        },
+        {
+          "id": "m2",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "m1",
+          "to": "f1",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "f1",
+          "to": "m2",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "m1",
+          "to": "m2",
+          "flow": "to",
+          "state": "hot",
+          "label": {
+            "en": "extra link",
+            "bn": "বাড়তি লিংক"
+          }
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "restored",
+          "bn": "ফিরে এসেছে"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Filter on metadata, and check how many results came back."
+        ],
+        "points": [
+          "Vector similarity alone cannot enforce a hard rule like a year after 2000, so you filter on metadata.",
+          "Post-filtering can return fewer results than you asked for (k), or none, and then the LLM answers from nothing.",
+          "Check the number of results, not only the scores.",
+          "Index the fields you filter on. Without an index, filtering forces scans or fallbacks."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "মেটাডেটা দিয়ে ফিল্টার করুন, আর কয়টি ফল এল তা দেখুন।"
+        ],
+        "points": [
+          "শুধু ভেক্টর সিমিলারিটি দিয়ে ২০০০ সালের পরের মতো কঠিন শর্ত মানানো যায় না, তাই মেটাডেটা দিয়ে ফিল্টার করতে হয়।",
+          "পোস্ট-ফিল্টারে যতগুলো ফল চেয়েছেন (k) তার চেয়ে কম আসতে পারে, এমনকি শূন্য, আর তখন LLM ফাঁকা থেকে উত্তর বানায়।",
+          "শুধু স্কোর নয়, কয়টি ফল এল তাও দেখুন।",
+          "যে ফিল্ডে ফিল্টার দেবেন তার ইনডেক্স রাখুন। ইনডেক্স না থাকলে স্ক্যান বা ফলব্যাকে নামতে হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q"
+        },
+        {
+          "id": "db"
+        },
+        {
+          "id": "rule"
+        },
+        {
+          "id": "res"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "db",
+          "flow": "to"
+        },
+        {
+          "from": "db",
+          "to": "rule",
+          "flow": "to"
+        },
+        {
+          "from": "rule",
+          "to": "res",
+          "flow": "to"
+        },
+        {
+          "from": "res",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

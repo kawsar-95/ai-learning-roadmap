@@ -36,7 +36,18 @@ import ragKnowledgeSystemsS18 from "./rag-knowledge-systems/s18.json";
 import ragKnowledgeSystemsS2 from "./rag-knowledge-systems/s2.json";
 import ragKnowledgeSystemsS16 from "./rag-knowledge-systems/s16.json";
 import ragKnowledgeSystemsS3 from "./rag-knowledge-systems/s3.json";
+import ragKnowledgeSystemsS4 from "./rag-knowledge-systems/s4.json";
+import ragKnowledgeSystemsS17 from "./rag-knowledge-systems/s17.json";
+import ragKnowledgeSystemsS5 from "./rag-knowledge-systems/s5.json";
+import ragKnowledgeSystemsS12 from "./rag-knowledge-systems/s12.json";
 import ragKnowledgeSystemsS7 from "./rag-knowledge-systems/s7.json";
+import ragKnowledgeSystemsS13 from "./rag-knowledge-systems/s13.json";
+import ragKnowledgeSystemsS8 from "./rag-knowledge-systems/s8.json";
+import ragKnowledgeSystemsS14 from "./rag-knowledge-systems/s14.json";
+import ragKnowledgeSystemsS6 from "./rag-knowledge-systems/s6.json";
+import ragKnowledgeSystemsS9 from "./rag-knowledge-systems/s9.json";
+import ragKnowledgeSystemsS15 from "./rag-knowledge-systems/s15.json";
+import ragKnowledgeSystemsS10 from "./rag-knowledge-systems/s10.json";
 import agentsAndAgenticSystemsS1 from "./agents-and-agentic-systems/s1.json";
 import agentsAndAgenticSystemsS2 from "./agents-and-agentic-systems/s2.json";
 import agentsAndAgenticSystemsS3 from "./agents-and-agentic-systems/s3.json";
@@ -47,6 +58,7 @@ import agentsAndAgenticSystemsS7 from "./agents-and-agentic-systems/s7.json";
 import agentsAndAgenticSystemsS8 from "./agents-and-agentic-systems/s8.json";
 import agentsAndAgenticSystemsS9 from "./agents-and-agentic-systems/s9.json";
 import agentsAndAgenticSystemsS10 from "./agents-and-agentic-systems/s10.json";
+import toolUseAndIntegrationsS2 from "./tool-use-and-integrations/s2.json";
 import toolUseAndIntegrationsS3 from "./tool-use-and-integrations/s3.json";
 import inferenceS3 from "./inference/s3.json";
 import inferenceS5 from "./inference/s5.json";
@@ -137,7 +149,18 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s2: ragKnowledgeSystemsS2,
     s16: ragKnowledgeSystemsS16,
     s3: ragKnowledgeSystemsS3,
+    s4: ragKnowledgeSystemsS4,
+    s17: ragKnowledgeSystemsS17,
+    s5: ragKnowledgeSystemsS5,
+    s12: ragKnowledgeSystemsS12,
     s7: ragKnowledgeSystemsS7,
+    s13: ragKnowledgeSystemsS13,
+    s8: ragKnowledgeSystemsS8,
+    s14: ragKnowledgeSystemsS14,
+    s6: ragKnowledgeSystemsS6,
+    s9: ragKnowledgeSystemsS9,
+    s15: ragKnowledgeSystemsS15,
+    s10: ragKnowledgeSystemsS10,
   },
   "agents-and-agentic-systems": {
     s1: agentsAndAgenticSystemsS1,
@@ -152,6 +175,7 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
     s10: agentsAndAgenticSystemsS10,
   },
   "tool-use-and-integrations": {
+    s2: toolUseAndIntegrationsS2,
     s3: toolUseAndIntegrationsS3,
   },
   "inference": {
