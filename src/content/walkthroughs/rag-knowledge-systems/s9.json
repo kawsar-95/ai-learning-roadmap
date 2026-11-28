@@ -1,0 +1,571 @@
+{
+  "width": 760,
+  "height": 400,
+  "nodes": [
+    {
+      "id": "file",
+      "kind": "file",
+      "label": {
+        "en": "PDF / scan",
+        "bn": "PDF / স্ক্যান"
+      },
+      "x": 115,
+      "y": 60
+    },
+    {
+      "id": "layout",
+      "kind": "service",
+      "label": {
+        "en": "Layout analysis",
+        "bn": "লেআউট বোঝা"
+      },
+      "x": 380,
+      "y": 60
+    },
+    {
+      "id": "ocr",
+      "kind": "service",
+      "label": {
+        "en": "OCR + tables",
+        "bn": "OCR ও টেবিল"
+      },
+      "x": 645,
+      "y": 60
+    },
+    {
+      "id": "md",
+      "kind": "file",
+      "label": {
+        "en": "Markdown / JSON",
+        "bn": "Markdown / JSON"
+      },
+      "x": 645,
+      "y": 190
+    },
+    {
+      "id": "chunk",
+      "kind": "tool",
+      "label": {
+        "en": "Chunker",
+        "bn": "চাঙ্কার"
+      },
+      "x": 380,
+      "y": 190
+    },
+    {
+      "id": "ans",
+      "kind": "note",
+      "label": {
+        "en": "Answers",
+        "bn": "উত্তর"
+      },
+      "x": 115,
+      "y": 190
+    },
+    {
+      "id": "docling",
+      "kind": "tool",
+      "label": {
+        "en": "Docling",
+        "bn": "Docling"
+      },
+      "x": 130,
+      "y": 330
+    },
+    {
+      "id": "unst",
+      "kind": "tool",
+      "label": {
+        "en": "Unstructured",
+        "bn": "Unstructured"
+      },
+      "x": 380,
+      "y": 330
+    },
+    {
+      "id": "llama",
+      "kind": "tool",
+      "label": {
+        "en": "LlamaParse",
+        "bn": "LlamaParse"
+      },
+      "x": 630,
+      "y": 330
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Stage",
+      "bn": "ধাপ"
+    },
+    {
+      "en": "Output",
+      "bn": "ফল"
+    },
+    {
+      "en": "Comparison",
+      "bn": "তুলনা"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Files",
+        "title": "Files are not clean strings",
+        "body": [
+          "A RAG system is only as good as the text it indexes.",
+          "Most enterprise knowledge sits in PDFs, scans, slide decks and spreadsheets, not clean strings."
+        ]
+      },
+      "bn": {
+        "short": "ফাইল",
+        "title": "ফাইল পরিষ্কার স্ট্রিং নয়",
+        "body": [
+          "RAG সিস্টেম ততটাই ভালো, যতটা ভালো টেক্সট সে ইনডেক্স করে।",
+          "বেশির ভাগ এন্টারপ্রাইজ জ্ঞান থাকে PDF, স্ক্যান, স্লাইড ও স্প্রেডশিটে, পরিষ্কার স্ট্রিংয়ে নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot",
+          "sub": {
+            "en": "PDFs, scans, slides",
+            "bn": "PDF, স্ক্যান, স্লাইড"
+          }
+        },
+        {
+          "id": "chunk",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "chunk",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "read the file",
+          "bn": "ফাইল পড়া"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Layout",
+        "title": "Find the layout and reading order",
+        "body": [
+          "A parser first works out the page layout and the reading order.",
+          "That means where headings, text and tables sit, and the order in which a person would read them."
+        ]
+      },
+      "bn": {
+        "short": "লেআউট",
+        "title": "লেআউট আর পড়ার ক্রম বোঝা",
+        "body": [
+          "পার্সার আগে পাতার লেআউট আর পড়ার ক্রম বোঝে।",
+          "মানে হেডিং, লেখা আর টেবিল কোথায় আছে, আর একজন মানুষ কোন ক্রমে সেগুলো পড়বে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "layout",
+          "state": "hot",
+          "sub": {
+            "en": "regions, reading order",
+            "bn": "অংশ, পড়ার ক্রম"
+          }
+        },
+        {
+          "id": "docling",
+          "state": "hot",
+          "sub": {
+            "en": "DocLayNet",
+            "bn": "DocLayNet"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "layout",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "docling",
+          "to": "layout",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "layout analysis",
+          "bn": "লেআউট বোঝা"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "OCR",
+        "title": "Recover the text and the tables",
+        "body": [
+          "Next the parser recovers the text, using OCR for scanned pages, and the structure of tables.",
+          "OCR means reading the text from a picture of a page, such as a scan."
+        ]
+      },
+      "bn": {
+        "short": "OCR",
+        "title": "লেখা আর টেবিল বের করা",
+        "body": [
+          "তারপর পার্সার লেখা বের করে, স্ক্যান করা পাতায় OCR দিয়ে, আর টেবিলের স্ট্রাকচারও বের করে।",
+          "OCR মানে পাতার ছবি, যেমন স্ক্যান, থেকে লেখা পড়ে নেওয়া।"
+        ]
+      },
+      "show": [
+        {
+          "id": "layout",
+          "state": "dim"
+        },
+        {
+          "id": "ocr",
+          "state": "hot",
+          "sub": {
+            "en": "text, cell structure",
+            "bn": "লেখা, ঘরের স্ট্রাকচার"
+          }
+        },
+        {
+          "id": "docling",
+          "state": "hot",
+          "sub": {
+            "en": "TableFormer",
+            "bn": "TableFormer"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "layout",
+          "to": "ocr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "docling",
+          "to": "ocr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "OCR + tables",
+          "bn": "OCR ও টেবিল"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Output",
+        "title": "Write Markdown or JSON, then chunk",
+        "body": [
+          "The parser writes structured Markdown or JSON, and only then is the result chunked.",
+          "The chunker is the tool that splits parsed text into smaller pieces for search."
+        ]
+      },
+      "bn": {
+        "short": "ফল",
+        "title": "Markdown বা JSON লিখে তারপর চাঙ্ক",
+        "body": [
+          "পার্সার স্ট্রাকচার্ড Markdown বা JSON লেখে, আর তারপরই ফল চাঙ্কে ভাগ হয়।",
+          "চাঙ্কার সেই টুল, যা পার্স করা টেক্সটকে সার্চের জন্য ছোট টুকরোয় ভাগ করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ocr",
+          "state": "dim"
+        },
+        {
+          "id": "md",
+          "state": "hot",
+          "sub": {
+            "en": "typed elements",
+            "bn": "ধরনসহ এলিমেন্ট"
+          }
+        },
+        {
+          "id": "chunk",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ocr",
+          "to": "md",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "md",
+          "to": "chunk",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "Markdown or JSON",
+          "bn": "Markdown বা JSON"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Three",
+        "title": "Three parsers side by side",
+        "body": [
+          "Docling, Unstructured and LlamaParse differ in where they run, which files they read, and how they treat tables and scans.",
+          "The comparison comes from each project's own documentation or paper. It is not a benchmark."
+        ]
+      },
+      "bn": {
+        "short": "তিন পার্সার",
+        "title": "পাশাপাশি তিনটি পার্সার",
+        "body": [
+          "Docling, Unstructured ও LlamaParse আলাদা হয় কোথায় চলে, কোন ফাইল পড়ে, আর টেবিল ও স্ক্যান কীভাবে সামলায় তাতে।",
+          "তুলনাটি প্রতিটি প্রজেক্টের নিজস্ব ডকুমেন্টেশন বা পেপার থেকে নেওয়া। এটি বেঞ্চমার্ক নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "docling",
+          "state": "hot",
+          "sub": {
+            "en": "IBM Research, MIT-licensed",
+            "bn": "IBM Research, MIT-লাইসেন্সড"
+          }
+        },
+        {
+          "id": "unst",
+          "state": "hot",
+          "sub": {
+            "en": "open source",
+            "bn": "ওপেন সোর্স"
+          }
+        },
+        {
+          "id": "llama",
+          "state": "hot",
+          "sub": {
+            "en": "LlamaIndex",
+            "bn": "LlamaIndex"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        {
+          "en": "not a benchmark",
+          "bn": "বেঞ্চমার্ক নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Strategy",
+        "title": "Unstructured picks a strategy",
+        "body": [
+          "In Unstructured, a strategy setting picks how a PDF is read: auto, fast, hi_res or ocr_only.",
+          "hi_res uses a layout model, and ocr_only is for scans."
+        ]
+      },
+      "bn": {
+        "short": "স্ট্র্যাটেজি",
+        "title": "Unstructured একটি স্ট্র্যাটেজি বেছে নেয়",
+        "body": [
+          "Unstructured-এ স্ট্র্যাটেজি সেটিং ঠিক করে PDF কীভাবে পড়া হবে: auto, fast, hi_res বা ocr_only।",
+          "hi_res লেআউট মডেল ব্যবহার করে, আর ocr_only স্ক্যানের জন্য।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "unst",
+          "state": "hot",
+          "sub": {
+            "en": "auto, fast, hi_res, ocr_only",
+            "bn": "auto, fast, hi_res, ocr_only"
+          }
+        },
+        {
+          "id": "md",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "unst",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "unst",
+          "to": "md",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Garbled",
+        "title": "Garbled text means garbled answers",
+        "body": [
+          "Everything after parsing builds on the parser's output, so garbled text means garbled answers.",
+          "Think of a student copying a textbook into notes: the friend sees only the notes."
+        ]
+      },
+      "bn": {
+        "short": "গুলিয়ে যাওয়া",
+        "title": "গুলিয়ে যাওয়া টেক্সট মানে গুলিয়ে যাওয়া উত্তর",
+        "body": [
+          "পার্সিংয়ের পরের সব কাজ পার্সারের ফলের ওপর দাঁড়ায়, তাই গুলিয়ে যাওয়া টেক্সট মানে গুলিয়ে যাওয়া উত্তর।",
+          "ভাবুন একজন ছাত্র পাঠ্যবই থেকে নোট টুকছে: বন্ধু শুধু নোটই দেখে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "md",
+          "state": "warn",
+          "sub": {
+            "en": "garbled",
+            "bn": "গুলিয়ে যাওয়া"
+          }
+        },
+        {
+          "id": "chunk",
+          "state": "warn"
+        },
+        {
+          "id": "ans",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "md",
+          "to": "chunk",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "chunk",
+          "to": "ans",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "garbled",
+          "bn": "গুলিয়ে যাওয়া"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "A parsing pipeline turns PDFs, scans and slides into clean, structured text before that text is split into pieces."
+        ],
+        "points": [
+          "Everything after parsing builds on the parser's output, so garbled text means garbled answers.",
+          "Docling, Unstructured and LlamaParse differ in where they run, which files they read, and how they treat tables and scans.",
+          "In Unstructured, hi_res uses a layout model, and ocr_only is for scans."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "পার্সিং পাইপলাইন PDF, স্ক্যান ও স্লাইডকে পরিষ্কার, সাজানো টেক্সটে বদলায়, তারপর সেই টেক্সট টুকরো করা হয়।"
+        ],
+        "points": [
+          "পার্সিংয়ের পরের সব কাজ পার্সারের ফলের ওপর দাঁড়ায়, তাই গুলিয়ে যাওয়া টেক্সট মানে গুলিয়ে যাওয়া উত্তর।",
+          "Docling, Unstructured ও LlamaParse আলাদা হয় কোথায় চলে, কোন ফাইল পড়ে, আর টেবিল ও স্ক্যান কীভাবে সামলায় তাতে।",
+          "Unstructured-এ hi_res লেআউট মডেল ব্যবহার করে, আর ocr_only স্ক্যানের জন্য।"
+        ]
+      },
+      "show": [
+        {
+          "id": "file",
+          "state": "hot"
+        },
+        {
+          "id": "md",
+          "state": "hot"
+        },
+        {
+          "id": "chunk",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "file",
+          "to": "md",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "md",
+          "to": "chunk",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,569 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "pdf",
+      "kind": "file",
+      "label": {
+        "en": "PDF file",
+        "bn": "PDF ফাইল"
+      },
+      "x": 75,
+      "y": 160
+    },
+    {
+      "id": "auto",
+      "kind": "service",
+      "label": {
+        "en": "strategy=auto",
+        "bn": "strategy=auto"
+      },
+      "x": 235,
+      "y": 160
+    },
+    {
+      "id": "fast",
+      "kind": "tool",
+      "label": {
+        "en": "fast",
+        "bn": "fast"
+      },
+      "x": 420,
+      "y": 60
+    },
+    {
+      "id": "hires",
+      "kind": "tool",
+      "label": {
+        "en": "hi_res",
+        "bn": "hi_res"
+      },
+      "x": 420,
+      "y": 160
+    },
+    {
+      "id": "ocr",
+      "kind": "tool",
+      "label": {
+        "en": "ocr_only",
+        "bn": "ocr_only"
+      },
+      "x": 420,
+      "y": 260
+    },
+    {
+      "id": "check",
+      "kind": "shield",
+      "label": {
+        "en": "Empty check",
+        "bn": "খালি কি না দেখা"
+      },
+      "x": 600,
+      "y": 260
+    },
+    {
+      "id": "out",
+      "kind": "file",
+      "label": {
+        "en": "Typed elements",
+        "bn": "টাইপ-ঠিক-করা অংশ"
+      },
+      "x": 655,
+      "y": 130
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Strategy",
+      "bn": "স্ট্র্যাটেজি"
+    },
+    {
+      "en": "Needs",
+      "bn": "যা লাগে"
+    },
+    {
+      "en": "Result",
+      "bn": "ফল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Choose",
+        "title": "Pick the strategy by file type",
+        "body": [
+          "Which strategy fits depends on the file: text-only, tables, or a scan.",
+          "auto is the default and picks for you."
+        ]
+      },
+      "bn": {
+        "short": "বাছুন",
+        "title": "ফাইলের ধরন দেখে স্ট্র্যাটেজি বাছুন",
+        "body": [
+          "কোন স্ট্র্যাটেজি ঠিক, তা ফাইলের ওপর নির্ভর করে: শুধু টেক্সট, টেবিল, নাকি স্ক্যান।",
+          "auto ডিফল্ট, সে আপনার জন্য বেছে নেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf",
+          "state": "hot"
+        },
+        {
+          "id": "auto",
+          "state": "hot"
+        },
+        {
+          "id": "fast",
+          "state": "hot"
+        },
+        {
+          "id": "hires",
+          "state": "hot"
+        },
+        {
+          "id": "ocr",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "auto",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "auto",
+          "to": "fast",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "auto",
+          "to": "hires",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "auto",
+          "to": "ocr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "auto",
+          "bn": "auto"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Fast",
+        "title": "fast reads only the text layer",
+        "body": [
+          "fast only reads the selectable text layer already in the PDF.",
+          "So it needs a text layer."
+        ]
+      },
+      "bn": {
+        "short": "fast",
+        "title": "fast শুধু টেক্সট লেয়ার পড়ে",
+        "body": [
+          "fast শুধু PDF-এ আগে থেকে থাকা, সিলেক্ট করা যায় এমন টেক্সট লেয়ার পড়ে।",
+          "তাই এর টেক্সট লেয়ার লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf",
+          "state": "dim"
+        },
+        {
+          "id": "auto",
+          "state": "dim"
+        },
+        {
+          "id": "fast",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "auto",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "auto",
+          "to": "fast",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "fast",
+          "bn": "fast"
+        },
+        {
+          "en": "text layer",
+          "bn": "টেক্সট লেয়ার"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "hi_res",
+        "title": "hi_res is for files with tables",
+        "body": [
+          "hi_res is the Unstructured strategy for files with tables. The auto setting chooses it when tables are needed.",
+          "It struggles with multi-column pages, per the Unstructured docs."
+        ]
+      },
+      "bn": {
+        "short": "hi_res",
+        "title": "টেবিলওয়ালা ফাইলের জন্য hi_res",
+        "body": [
+          "hi_res টেবিলওয়ালা ফাইলের জন্য Unstructured-এর স্ট্র্যাটেজি। টেবিল দরকার হলে auto সেটিং এটি বেছে নেয়।",
+          "Unstructured ডকুমেন্টেশন অনুযায়ী মাল্টি-কলাম পাতায় এর সমস্যা হয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "auto",
+          "state": "dim"
+        },
+        {
+          "id": "hires",
+          "state": "hot"
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "auto",
+          "to": "hires",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "hires",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "hi_res",
+          "bn": "hi_res"
+        },
+        {
+          "en": "tables",
+          "bn": "টেবিল"
+        },
+        {
+          "en": "typed elements",
+          "bn": "টাইপ-ঠিক-করা অংশ"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Scan",
+        "title": "A scan has no text layer",
+        "body": [
+          "A plain scan has no text layer, so fast has nothing to read. ocr_only reads text from the picture of the page, so it can handle scans.",
+          "For a scanned PDF use auto or ocr_only. OCR needs Tesseract."
+        ]
+      },
+      "bn": {
+        "short": "স্ক্যান",
+        "title": "স্ক্যানে টেক্সট লেয়ার নেই",
+        "body": [
+          "সাধারণ স্ক্যানে টেক্সট লেয়ার থাকে না, তাই fast-এর পড়ার মতো কিছু থাকে না। ocr_only পাতার ছবি থেকে লেখা পড়ে, তাই স্ক্যানও সামলাতে পারে।",
+          "স্ক্যান করা PDF-এ auto বা ocr_only ব্যবহার করুন। OCR-এর জন্য Tesseract লাগে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf",
+          "state": "warn"
+        },
+        {
+          "id": "auto",
+          "state": "dim"
+        },
+        {
+          "id": "fast",
+          "state": "warn"
+        },
+        {
+          "id": "ocr",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "auto",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "auto",
+          "to": "fast",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "auto",
+          "to": "ocr",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "ocr_only",
+          "bn": "ocr_only"
+        },
+        {
+          "en": "Tesseract",
+          "bn": "Tesseract"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Check",
+        "title": "Plan an OCR fallback",
+        "body": [
+          "Check that the result is not empty.",
+          "If the result is empty, re-run with ocr_only or a parser that reads page layout."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "Always plan an OCR fallback, and check the parser output before you use it."
+        }
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "OCR বিকল্প রাখুন",
+        "body": [
+          "ফল খালি কি না দেখে নিন।",
+          "ফল ফাঁকা হলে ocr_only বা পাতার লেআউট পড়তে পারে এমন পার্সার দিয়ে আবার চালান।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "সবসময় OCR বিকল্প রাখুন, আর ব্যবহারের আগে পার্সারের আউটপুট দেখে নিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "fast",
+          "state": "warn"
+        },
+        {
+          "id": "ocr",
+          "state": "hot"
+        },
+        {
+          "id": "check",
+          "state": "hot"
+        },
+        {
+          "id": "out",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "fast",
+          "to": "ocr",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "ocr",
+          "to": "check",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "check",
+          "to": "out",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "ocr_only",
+          "bn": "ocr_only"
+        },
+        null,
+        {
+          "en": "not empty",
+          "bn": "খালি নয়"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Columns",
+        "title": "Check multi-column pages by eye",
+        "body": [
+          "Check multi-column documents by eye, and test parsers on your own documents.",
+          "With mixed columns the words come out in the wrong order, so the AI may answer with a wrong number."
+        ]
+      },
+      "bn": {
+        "short": "কলাম",
+        "title": "মাল্টি-কলাম পাতা চোখে দেখুন",
+        "body": [
+          "একাধিক কলামের নথি চোখে দেখে নিন, আর নিজের নথিতে পার্সার পরীক্ষা করুন।",
+          "কলাম মিশে গেলে শব্দগুলো ভুল অর্ডারে আসে, তাই AI ভুল সংখ্যা বলতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf",
+          "state": "hot"
+        },
+        {
+          "id": "hires",
+          "state": "warn"
+        },
+        {
+          "id": "out",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "hires",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "hires",
+          "to": "out",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "check by eye",
+          "bn": "চোখে দেখুন"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Pick the strategy by file type: text-only, tables, or a scan."
+        ],
+        "points": [
+          "fast needs a text layer, so for a scanned PDF use auto or ocr_only and check the result is not empty.",
+          "Plan an OCR fallback: if the result is empty, re-run with ocr_only or a parser that reads page layout.",
+          "Check multi-column documents by eye, and test parsers on your own documents."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "ফাইলের ধরন দেখে স্ট্র্যাটেজি বাছুন: শুধু টেক্সট, টেবিল, নাকি স্ক্যান।"
+        ],
+        "points": [
+          "fast-এর টেক্সট লেয়ার লাগে, তাই স্ক্যান করা PDF-এ auto বা ocr_only ব্যবহার করুন এবং ফল খালি কি না দেখে নিন।",
+          "OCR বিকল্প রাখুন: ফল ফাঁকা হলে ocr_only বা পাতার লেআউট পড়তে পারে এমন পার্সার দিয়ে আবার চালান।",
+          "একাধিক কলামের নথি চোখে দেখে নিন, আর নিজের নথিতে পার্সার পরীক্ষা করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "pdf"
+        },
+        {
+          "id": "auto"
+        },
+        {
+          "id": "fast"
+        },
+        {
+          "id": "hires"
+        },
+        {
+          "id": "ocr"
+        },
+        {
+          "id": "check"
+        },
+        {
+          "id": "out"
+        }
+      ],
+      "links": [
+        {
+          "from": "pdf",
+          "to": "auto",
+          "flow": "to"
+        },
+        {
+          "from": "auto",
+          "to": "fast",
+          "flow": "to"
+        },
+        {
+          "from": "auto",
+          "to": "hires",
+          "flow": "to"
+        },
+        {
+          "from": "auto",
+          "to": "ocr",
+          "flow": "to"
+        },
+        {
+          "from": "ocr",
+          "to": "check",
+          "flow": "to"
+        },
+        {
+          "from": "check",
+          "to": "out",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

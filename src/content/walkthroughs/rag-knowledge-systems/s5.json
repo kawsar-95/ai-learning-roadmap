@@ -1,0 +1,643 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 80,
+      "y": 160
+    },
+    {
+      "id": "ret",
+      "kind": "tool",
+      "label": {
+        "en": "Search",
+        "bn": "খোঁজা"
+      },
+      "x": 280,
+      "y": 80
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 500,
+      "y": 80
+    },
+    {
+      "id": "nq",
+      "kind": "note",
+      "label": {
+        "en": "Next query",
+        "bn": "পরের কুয়েরি"
+      },
+      "x": 390,
+      "y": 245
+    },
+    {
+      "id": "ans",
+      "kind": "file",
+      "label": {
+        "en": "Final answer",
+        "bn": "চূড়ান্ত উত্তর"
+      },
+      "x": 665,
+      "y": 160
+    },
+    {
+      "id": "act",
+      "kind": "tool",
+      "label": {
+        "en": "Wikipedia lookup",
+        "bn": "Wikipedia লুকআপ"
+      },
+      "x": 500,
+      "y": 245
+    },
+    {
+      "id": "ev",
+      "kind": "service",
+      "label": {
+        "en": "Evaluator",
+        "bn": "ইভ্যালুয়েটর"
+      },
+      "x": 470,
+      "y": 160
+    },
+    {
+      "id": "web",
+      "kind": "tool",
+      "label": {
+        "en": "Web search",
+        "bn": "ওয়েব সার্চ"
+      },
+      "x": 470,
+      "y": 255
+    },
+    {
+      "id": "cls",
+      "kind": "service",
+      "label": {
+        "en": "Classifier",
+        "bn": "ক্লাসিফায়ার"
+      },
+      "x": 280,
+      "y": 160
+    },
+    {
+      "id": "none",
+      "kind": "model",
+      "label": {
+        "en": "No retrieval",
+        "bn": "রিট্রিভাল-ছাড়া"
+      },
+      "x": 540,
+      "y": 65
+    },
+    {
+      "id": "single",
+      "kind": "tool",
+      "label": {
+        "en": "One-step retrieval",
+        "bn": "এক-ধাপ রিট্রিভাল"
+      },
+      "x": 540,
+      "y": 160
+    },
+    {
+      "id": "iter",
+      "kind": "queue",
+      "label": {
+        "en": "Repeated retrieval",
+        "bn": "বহু-ধাপ রিট্রিভাল"
+      },
+      "x": 540,
+      "y": 255
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Retrieval gain",
+      "bn": "রিট্রিভালে উন্নতি"
+    },
+    {
+      "en": "QA gain",
+      "bn": "QA-তে উন্নতি"
+    },
+    {
+      "en": "Factual errors",
+      "bn": "তথ্যের ভুল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels and figures are the section's own.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেল আর হিসাব সেকশনের নিজস্ব।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Multi-hop",
+        "title": "The second search depends on the first",
+        "body": [
+          "Some questions need more than one search, because the second search depends on what the first one found.",
+          "Multi-hop retrieval lets a model search, think, and search again."
+        ]
+      },
+      "bn": {
+        "short": "মাল্টি-হপ",
+        "title": "দ্বিতীয় খোঁজ নির্ভর করে প্রথমের ওপর",
+        "body": [
+          "কিছু প্রশ্নের উত্তর পেতে একবার খোঁজা যথেষ্ট নয়, কারণ দ্বিতীয় খোঁজ নির্ভর করে প্রথম খোঁজের ফলাফলের ওপর।",
+          "মাল্টি-হপ রিট্রিভাল-এ মডেল খোঁজে, ভাবে, আবার খোঁজে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "ret",
+          "state": "hot",
+          "sub": {
+            "en": "first search",
+            "bn": "প্রথম খোঁজ"
+          }
+        },
+        {
+          "id": "nq",
+          "state": "hot",
+          "sub": {
+            "en": "depends on the first",
+            "bn": "প্রথমের ওপর নির্ভর"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "nq",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "IRCoT",
+        "title": "IRCoT: each sentence is the next query",
+        "body": [
+          "IRCoT alternates searching with chain-of-thought (CoT) steps. Each reasoning sentence becomes the query for the next search.",
+          "The paper reports retrieval gains of 11-21 points and QA gains of up to 15 F1."
+        ]
+      },
+      "bn": {
+        "short": "IRCoT",
+        "title": "IRCoT: প্রতিটি বাক্য পরের কুয়েরি",
+        "body": [
+          "IRCoT খোঁজা আর CoT-এর ধাপ পালা করে চালায়। প্রতিটি যুক্তির বাক্য পরের খোঁজের কুয়েরি হয়।",
+          "পেপারে রিট্রিভালে ১১-২১ পয়েন্ট ও QA-তে সর্বোচ্চ ১৫ F1 উন্নতির কথা আছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "ret",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "next CoT sentence",
+            "bn": "পরের CoT বাক্য"
+          }
+        },
+        {
+          "id": "nq",
+          "state": "hot",
+          "sub": {
+            "en": "last sentence",
+            "bn": "শেষ বাক্য"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ret",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "nq",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "nq",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "ans",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "11-21 points",
+          "bn": "১১-২১ পয়েন্ট"
+        },
+        {
+          "en": "up to 15 F1",
+          "bn": "সর্বোচ্চ ১৫ F1"
+        },
+        {
+          "en": "up to 50% fewer",
+          "bn": "সর্বোচ্চ ৫০% কম"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "ReAct",
+        "title": "ReAct: reasoning mixed with actions",
+        "body": [
+          "ReAct mixes reasoning steps with actions such as Wikipedia lookups.",
+          "It reduced hallucination in QA and fact verification."
+        ]
+      },
+      "bn": {
+        "short": "ReAct",
+        "title": "ReAct: যুক্তির সাথে অ্যাকশন",
+        "body": [
+          "ReAct যুক্তির ধাপের সাথে Wikipedia লুকআপের মতো অ্যাকশন মিশিয়ে চলে।",
+          "এটি QA আর ফ্যাক্ট ভেরিফিকেশনে হ্যালুসিনেশন কমিয়েছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "reasoning step",
+            "bn": "যুক্তির ধাপ"
+          }
+        },
+        {
+          "id": "act",
+          "state": "hot",
+          "sub": {
+            "en": "action",
+            "bn": "অ্যাকশন"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "act",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Self-RAG",
+        "title": "Self-RAG: the model decides",
+        "body": [
+          "Self-RAG lets the model decide when to retrieve and check its own output.",
+          "Reflection tokens are special tokens that let it critique the passages it found and its own output."
+        ]
+      },
+      "bn": {
+        "short": "Self-RAG",
+        "title": "Self-RAG: মডেল নিজে ঠিক করে",
+        "body": [
+          "Self-RAG-এ মডেল নিজেই ঠিক করে কখন রিট্রিভ করবে, আর নিজের উত্তর যাচাই করে।",
+          "রিফ্লেকশন টোকেন বিশেষ টোকেন, যা দিয়ে মডেল পাওয়া লেখাগুলো আর নিজের উত্তর যাচাই করে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "reflection tokens",
+            "bn": "রিফ্লেকশন টোকেন"
+          }
+        },
+        {
+          "id": "ret",
+          "state": "hot",
+          "sub": {
+            "en": "when it decides",
+            "bn": "যখন ঠিক করে"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "hot",
+          "sub": {
+            "en": "checked",
+            "bn": "যাচাই করা"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "ret",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "ans",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "CRAG",
+        "title": "CRAG: evaluate, then correct",
+        "body": [
+          "In CRAG (Corrective RAG), a small evaluator rates how good the retrieval is.",
+          "If it is poor, the system searches the web."
+        ]
+      },
+      "bn": {
+        "short": "CRAG",
+        "title": "CRAG: যাচাই করে সংশোধন",
+        "body": [
+          "CRAG-এ (Corrective RAG) একটি ছোট ইভ্যালুয়েটর রিট্রিভাল কতটা ভালো তা মাপে।",
+          "খারাপ হলে সিস্টেম ওয়েবে খোঁজে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "ret",
+          "state": "hot",
+          "sub": {
+            "en": "from the corpus",
+            "bn": "কর্পাস থেকে"
+          }
+        },
+        {
+          "id": "ev",
+          "state": "hot",
+          "sub": {
+            "en": "rates retrieval",
+            "bn": "রিট্রিভাল মাপে"
+          }
+        },
+        {
+          "id": "web",
+          "state": "warn",
+          "sub": {
+            "en": "if poor",
+            "bn": "খারাপ হলে"
+          }
+        },
+        {
+          "id": "ans",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "ret",
+          "to": "ev",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ev",
+          "to": "web",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "ev",
+          "to": "ans",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "web",
+          "to": "ans",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Adaptive",
+        "title": "Adaptive-RAG: route by difficulty",
+        "body": [
+          "In Adaptive-RAG, a small classifier guesses how hard a question is.",
+          "Then it picks no retrieval, one-step retrieval, or repeated retrieval."
+        ]
+      },
+      "bn": {
+        "short": "Adaptive",
+        "title": "Adaptive-RAG: কঠিনতা অনুযায়ী পথ",
+        "body": [
+          "Adaptive-RAG-এ একটি ছোট ক্লাসিফায়ার প্রশ্ন কতটা কঠিন তা আন্দাজ করে।",
+          "তারপর রিট্রিভাল-ছাড়া, এক-ধাপ বা বহু-ধাপের পথ বেছে দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "cls",
+          "state": "hot",
+          "sub": {
+            "en": "guesses difficulty",
+            "bn": "কঠিনতা আন্দাজ"
+          }
+        },
+        {
+          "id": "none",
+          "state": "hot"
+        },
+        {
+          "id": "single",
+          "state": "hot"
+        },
+        {
+          "id": "iter",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "cls",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cls",
+          "to": "none",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cls",
+          "to": "single",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "cls",
+          "to": "iter",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Each pattern decides what to search next, and whether to search at all."
+        ],
+        "points": [
+          "In IRCoT, each reasoning sentence becomes the next query. The paper reports retrieval gains of 11-21 points.",
+          "Self-RAG lets the model decide when to retrieve and check its own output.",
+          "CRAG falls back to web search when retrieval from the corpus is not good enough.",
+          "Adaptive-RAG sends each query down a path that matches how complex it is."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "প্রতিটি পদ্ধতি ঠিক করে পরে কী খুঁজবে, আর আদৌ খুঁজবে কি না।"
+        ],
+        "points": [
+          "IRCoT-তে প্রতিটি যুক্তির বাক্য পরের কুয়েরি হয়। পেপারে রিট্রিভালে ১১-২১ পয়েন্ট উন্নতির কথা আছে।",
+          "Self-RAG-এ মডেল নিজেই ঠিক করে কখন রিট্রিভ করবে, আর নিজের উত্তর যাচাই করে।",
+          "কর্পাস থেকে রিট্রিভাল যথেষ্ট ভালো না হলে CRAG ওয়েব সার্চে ফিরে যায়।",
+          "Adaptive-RAG প্রতিটি প্রশ্নকে তার জটিলতা অনুযায়ী আলাদা পথে পাঠায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "nq",
+          "state": "hot",
+          "sub": {
+            "en": "IRCoT",
+            "bn": "IRCoT"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "Self-RAG",
+            "bn": "Self-RAG"
+          }
+        },
+        {
+          "id": "ev",
+          "state": "hot",
+          "sub": {
+            "en": "CRAG",
+            "bn": "CRAG"
+          }
+        },
+        {
+          "id": "cls",
+          "state": "hot",
+          "sub": {
+            "en": "Adaptive-RAG",
+            "bn": "Adaptive-RAG"
+          }
+        }
+      ],
+      "links": [],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

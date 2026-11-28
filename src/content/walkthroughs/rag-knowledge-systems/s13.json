@@ -1,0 +1,619 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 90,
+      "y": 75
+    },
+    {
+      "id": "corpus",
+      "kind": "database",
+      "label": {
+        "en": "Whole corpus",
+        "bn": "পুরো কর্পাস"
+      },
+      "x": 260,
+      "y": 250
+    },
+    {
+      "id": "s1",
+      "kind": "service",
+      "label": {
+        "en": "Cheap search",
+        "bn": "সস্তা খোঁজ"
+      },
+      "x": 260,
+      "y": 75
+    },
+    {
+      "id": "n",
+      "kind": "queue",
+      "label": {
+        "en": "Top N",
+        "bn": "টপ N"
+      },
+      "x": 430,
+      "y": 75
+    },
+    {
+      "id": "rr",
+      "kind": "model",
+      "label": {
+        "en": "Reranker",
+        "bn": "রিরেংকার"
+      },
+      "x": 600,
+      "y": 75
+    },
+    {
+      "id": "k",
+      "kind": "queue",
+      "label": {
+        "en": "Top k",
+        "bn": "টপ k"
+      },
+      "x": 600,
+      "y": 250
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 430,
+      "y": 250
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Reranker passes",
+      "bn": "রিরেংকারের পাস"
+    },
+    {
+      "en": "Cost",
+      "bn": "খরচ"
+    },
+    {
+      "en": "Right passage",
+      "bn": "সঠিক প্যাসেজ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Funnel",
+        "title": "A two-stage funnel",
+        "body": [
+          "A good setup works in two stages: a cheap search over everything, then a reranker on only the survivors.",
+          "The top k go to the LLM."
+        ]
+      },
+      "bn": {
+        "short": "ফানেল",
+        "title": "দুই ধাপের ফানেল",
+        "body": [
+          "ভালো সেটআপ দুই ধাপে চলে: আগে সব কিছুর ওপর সস্তা খোঁজ, তারপর শুধু টিকে থাকাগুলোর ওপর রিরেংকার।",
+          "সেরা k-টি যায় LLM-এর কাছে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "s1",
+          "state": "hot"
+        },
+        {
+          "id": "n",
+          "state": "hot"
+        },
+        {
+          "id": "rr",
+          "state": "hot"
+        },
+        {
+          "id": "k",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "s1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "s1",
+          "to": "n",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rr",
+          "to": "k",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "k",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Cheap",
+        "title": "Stage 1: a cheap search",
+        "body": [
+          "A cheap first search runs over the whole corpus, using ANN, BM25 or hybrid search.",
+          "It is cheap per document because the index is precomputed, and it is tuned for recall."
+        ]
+      },
+      "bn": {
+        "short": "সস্তা",
+        "title": "প্রথম ধাপ: সস্তা খোঁজ",
+        "body": [
+          "পুরো কর্পাসে সস্তা প্রথম খোঁজ চলে, ANN, BM25 বা হাইব্রিড সার্চ দিয়ে।",
+          "প্রতি ডকুমেন্টে এটি সস্তা, কারণ ইনডেক্স আগেই তৈরি, আর এটি রিকলের জন্য সাজানো।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "corpus",
+          "state": "hot",
+          "sub": {
+            "en": "whole corpus",
+            "bn": "পুরো কর্পাস"
+          }
+        },
+        {
+          "id": "s1",
+          "state": "hot",
+          "sub": {
+            "en": "recall",
+            "bn": "রিকল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "s1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "corpus",
+          "to": "s1",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Top N",
+        "title": "The N survivors",
+        "body": [
+          "The N survivors go on to the reranker. How many to retrieve (N) and how many to keep (k) is an engineering choice.",
+          "Tune both against your own evaluation set."
+        ]
+      },
+      "bn": {
+        "short": "টপ N",
+        "title": "টিকে থাকা N-টি",
+        "body": [
+          "টিকে থাকা N-টি রিরেংকারের কাছে যায়। কয়টি আনবেন (N) আর কয়টি রাখবেন (k), তা ইঞ্জিনিয়ারিংয়ের সিদ্ধান্ত।",
+          "দুটোই নিজের ইভ্যালুয়েশন সেটে ঠিক করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "s1",
+          "state": "dim"
+        },
+        {
+          "id": "n",
+          "state": "hot",
+          "sub": {
+            "en": "survivors",
+            "bn": "টিকে থাকা"
+          }
+        },
+        {
+          "id": "rr",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "s1",
+          "to": "n",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Rerank",
+        "title": "Stage 2: the cross-encoder",
+        "body": [
+          "A cross-encoder reads the question and one document together. It makes one pass per pair, so its cost grows in line with N.",
+          "This stage is tuned for precision."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Hosted options include Cohere Rerank and Voyage rerankers. Open weights include BAAI's BGE rerankers."
+        }
+      },
+      "bn": {
+        "short": "রিরেংক",
+        "title": "দ্বিতীয় ধাপ: ক্রস-এনকোডার",
+        "body": [
+          "ক্রস-এনকোডার প্রশ্ন আর একটি ডকুমেন্ট একসাথে পড়ে। প্রতি জোড়ায় একবার চলে, তাই খরচ N-এর সাথে সমান তালে বাড়ে।",
+          "এই ধাপ প্রিসিশনের জন্য সাজানো।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "হোস্টেড অপশনের মধ্যে আছে Cohere Rerank আর Voyage রিরেংকার। ওপেন ওয়েটের মধ্যে আছে BAAI-এর BGE রিরেংকার।"
+        }
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "dim"
+        },
+        {
+          "id": "n",
+          "state": "hot"
+        },
+        {
+          "id": "rr",
+          "state": "hot",
+          "sub": {
+            "en": "per pair",
+            "bn": "প্রতি জোড়ায়"
+          }
+        },
+        {
+          "id": "k",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rr",
+          "to": "k",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "one per pair",
+          "bn": "প্রতি জোড়ায় একটি"
+        },
+        {
+          "en": "grows with N",
+          "bn": "N-এর সাথে বাড়ে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Top k",
+        "title": "Top k go to the LLM",
+        "body": [
+          "The LLM sees only what survives: fewer, better chunks.",
+          "That means less noise in the prompt."
+        ]
+      },
+      "bn": {
+        "short": "টপ k",
+        "title": "টপ k যায় LLM-এর কাছে",
+        "body": [
+          "LLM শুধু টিকে থাকাগুলোই দেখে: কম, কিন্তু ভালো চাঙ্ক।",
+          "অর্থাৎ প্রম্পটে গোলমাল কম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rr",
+          "state": "dim"
+        },
+        {
+          "id": "k",
+          "state": "hot",
+          "sub": {
+            "en": "better chunks",
+            "bn": "ভালো চাঙ্ক"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot",
+          "sub": {
+            "en": "less noise",
+            "bn": "গোলমাল কম"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rr",
+          "to": "k",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "k",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Double N",
+        "title": "Doubling N doubles the cost",
+        "body": [
+          "Doubling N roughly doubles reranking latency and cost.",
+          "So tune N on your own evaluation set."
+        ]
+      },
+      "bn": {
+        "short": "N দ্বিগুণ",
+        "title": "N দ্বিগুণ করলে খরচ দ্বিগুণ",
+        "body": [
+          "N দ্বিগুণ করলে রিরেংকিংয়ের ল্যাটেন্সি আর খরচ প্রায় দ্বিগুণ হয়।",
+          "তাই নিজের ইভ্যালুয়েশন সেটে N ঠিক করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "n",
+          "state": "warn",
+          "sub": {
+            "en": "N doubled",
+            "bn": "N দ্বিগুণ"
+          }
+        },
+        {
+          "id": "rr",
+          "state": "warn",
+          "sub": {
+            "en": "grows with N",
+            "bn": "N-এর সাথে বাড়ে"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "roughly doubles",
+          "bn": "প্রায় দ্বিগুণ"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Missed",
+        "title": "A missed passage stays missed",
+        "body": [
+          "A reranker can only re-order what stage 1 returned.",
+          "If the right passage is not in the top N, no reranker can recover it."
+        ]
+      },
+      "bn": {
+        "short": "বাদ পড়া",
+        "title": "বাদ পড়া প্যাসেজ বাদই থাকে",
+        "body": [
+          "রিরেংকার শুধু প্রথম ধাপের আনা ফলই নতুন করে সাজায়।",
+          "সঠিক প্যাসেজ টপ N-এ না থাকলে কোনো রিরেংকার তা ফেরাতে পারে না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "corpus",
+          "state": "warn",
+          "sub": {
+            "en": "right passage",
+            "bn": "সঠিক প্যাসেজ"
+          }
+        },
+        {
+          "id": "s1",
+          "state": "dim"
+        },
+        {
+          "id": "n",
+          "state": "warn",
+          "sub": {
+            "en": "not in N",
+            "bn": "N-এ নেই"
+          }
+        },
+        {
+          "id": "rr",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "corpus",
+          "to": "s1",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "s1",
+          "to": "n",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "not in N",
+          "bn": "N-এ নেই"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "A cheap search narrows the corpus, a reranker re-orders only the survivors, and the top k go to the LLM."
+        ],
+        "points": [
+          "Tune N and k on your own evaluation set; doubling N roughly doubles reranking latency and cost.",
+          "A reranker can only re-order what stage 1 returned. It cannot recover a missing passage.",
+          "Rerank chunks, not whole files, because token limits cut long documents.",
+          "Scores from different rerankers share no common scale, so pick score thresholds per model and per corpus."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "সস্তা খোঁজ কর্পাস ছোট করে, রিরেংকার শুধু টিকে থাকাগুলো সাজায়, আর সেরা k যায় LLM-এর কাছে।"
+        ],
+        "points": [
+          "নিজের ইভ্যালুয়েশন সেটে N আর k ঠিক করুন; N দ্বিগুণ করলে রিরেংকিংয়ের ল্যাটেন্সি আর খরচ প্রায় দ্বিগুণ হয়।",
+          "রিরেংকার শুধু প্রথম ধাপের আনা ফলই নতুন করে সাজায়। যে অংশ আসেনি, তা ফেরাতে পারে না।",
+          "পুরো ফাইলের বদলে চাঙ্ক রিরেংক করুন, কারণ টোকেন সীমায় লম্বা ডকুমেন্ট কাটা পড়ে।",
+          "আলাদা রিরেংকারের স্কোর একই স্কেলে নয়, তাই থ্রেশহোল্ড মডেল আর কর্পাস ধরে ঠিক করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "s1"
+        },
+        {
+          "id": "n"
+        },
+        {
+          "id": "rr"
+        },
+        {
+          "id": "k"
+        },
+        {
+          "id": "llm"
+        }
+      ],
+      "links": [
+        {
+          "from": "s1",
+          "to": "n",
+          "flow": "to"
+        },
+        {
+          "from": "n",
+          "to": "rr",
+          "flow": "to"
+        },
+        {
+          "from": "rr",
+          "to": "k",
+          "flow": "to"
+        },
+        {
+          "from": "k",
+          "to": "llm",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

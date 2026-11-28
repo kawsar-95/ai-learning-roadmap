@@ -1,0 +1,839 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "q",
+      "kind": "user",
+      "label": {
+        "en": "Question",
+        "bn": "প্রশ্ন"
+      },
+      "x": 68,
+      "y": 160
+    },
+    {
+      "id": "vars",
+      "kind": "model",
+      "label": {
+        "en": "Variants",
+        "bn": "ভ্যারিয়েন্ট"
+      },
+      "x": 215,
+      "y": 160
+    },
+    {
+      "id": "v1",
+      "kind": "queue",
+      "label": {
+        "en": "List 1",
+        "bn": "তালিকা ১"
+      },
+      "x": 345,
+      "y": 90
+    },
+    {
+      "id": "v2",
+      "kind": "queue",
+      "label": {
+        "en": "List 2",
+        "bn": "তালিকা ২"
+      },
+      "x": 345,
+      "y": 230
+    },
+    {
+      "id": "rrf",
+      "kind": "chart",
+      "label": {
+        "en": "RRF",
+        "bn": "RRF"
+      },
+      "x": 480,
+      "y": 160
+    },
+    {
+      "id": "k",
+      "kind": "note",
+      "label": {
+        "en": "k",
+        "bn": "k"
+      },
+      "x": 480,
+      "y": 50
+    },
+    {
+      "id": "k60",
+      "kind": "note",
+      "label": {
+        "en": "Paper, Elasticsearch",
+        "bn": "পেপার, Elasticsearch"
+      },
+      "x": 300,
+      "y": 90
+    },
+    {
+      "id": "kq",
+      "kind": "note",
+      "label": {
+        "en": "Qdrant's docs",
+        "bn": "Qdrant-এর ডকস"
+      },
+      "x": 300,
+      "y": 230
+    },
+    {
+      "id": "doc-b",
+      "kind": "file",
+      "label": {
+        "en": "Doc B",
+        "bn": "ডকুমেন্ট B"
+      },
+      "x": 680,
+      "y": 45
+    },
+    {
+      "id": "doc-a",
+      "kind": "file",
+      "label": {
+        "en": "Doc A",
+        "bn": "ডকুমেন্ট A"
+      },
+      "x": 680,
+      "y": 120
+    },
+    {
+      "id": "doc-d",
+      "kind": "file",
+      "label": {
+        "en": "Doc D",
+        "bn": "ডকুমেন্ট D"
+      },
+      "x": 680,
+      "y": 195
+    },
+    {
+      "id": "doc-c",
+      "kind": "file",
+      "label": {
+        "en": "Doc C",
+        "bn": "ডকুমেন্ট C"
+      },
+      "x": 680,
+      "y": 270
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Doc B",
+      "bn": "ডকুমেন্ট B"
+    },
+    {
+      "en": "Doc A",
+      "bn": "ডকুমেন্ট A"
+    },
+    {
+      "en": "Doc D",
+      "bn": "ডকুমেন্ট D"
+    },
+    {
+      "en": "Doc C",
+      "bn": "ডকুমেন্ট C"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative numbers computed from the RRF formula, not a benchmark.",
+    "bn": "RRF সূত্র থেকে হিসাব করা উদাহরণের সংখ্যা, বেঞ্চমার্ক নয়।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Variants",
+        "title": "Search with several versions",
+        "body": [
+          "Search with several versions of the question. Each version, a query variant, gets its own search.",
+          "Then merge the ranked lists."
+        ]
+      },
+      "bn": {
+        "short": "ভ্যারিয়েন্ট",
+        "title": "কয়েকটি রূপ দিয়ে খোঁজা",
+        "body": [
+          "প্রশ্নের কয়েকটি রূপ দিয়ে খুঁজুন। প্রতিটি রূপ, মানে কুয়েরি ভ্যারিয়েন্ট, দিয়ে আলাদা সার্চ চলে।",
+          "তারপর র‍্যাংক করা তালিকাগুলো মেলান।"
+        ]
+      },
+      "show": [
+        {
+          "id": "q",
+          "state": "hot"
+        },
+        {
+          "id": "vars",
+          "state": "hot"
+        },
+        {
+          "id": "v1",
+          "state": "hot"
+        },
+        {
+          "id": "v2",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "q",
+          "to": "vars",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vars",
+          "to": "v1",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "vars",
+          "to": "v2",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Lists",
+        "title": "Two ranked lists",
+        "body": [
+          "Variant 1 ranks Doc A first, Doc B second and Doc C third.",
+          "Variant 2 ranks Doc B first, Doc D second and Doc A third."
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "Variant 1 list: rank 1 Doc A, rank 2 Doc B, rank 3 Doc C"
+          },
+          {
+            "sign": "+",
+            "html": "Variant 2 list: rank 1 Doc B, rank 2 Doc D, rank 3 Doc A"
+          }
+        ]
+      },
+      "bn": {
+        "short": "তালিকা",
+        "title": "দুটি র‍্যাংক করা তালিকা",
+        "body": [
+          "ভ্যারিয়েন্ট ১ ডকুমেন্ট A-কে এক নম্বরে, B-কে দুই নম্বরে আর C-কে তিন নম্বরে রাখে।",
+          "ভ্যারিয়েন্ট ২ ডকুমেন্ট B-কে এক নম্বরে, D-কে দুই নম্বরে আর A-কে তিন নম্বরে রাখে।"
+        ],
+        "changes": [
+          {
+            "sign": "+",
+            "html": "ভ্যারিয়েন্ট ১ তালিকা: র‍্যাংক ১ ডকুমেন্ট A, র‍্যাংক ২ ডকুমেন্ট B, র‍্যাংক ৩ ডকুমেন্ট C"
+          },
+          {
+            "sign": "+",
+            "html": "ভ্যারিয়েন্ট ২ তালিকা: র‍্যাংক ১ ডকুমেন্ট B, র‍্যাংক ২ ডকুমেন্ট D, র‍্যাংক ৩ ডকুমেন্ট A"
+          }
+        ]
+      },
+      "show": [
+        {
+          "id": "v1",
+          "state": "hot",
+          "sub": {
+            "en": "A, B, C",
+            "bn": "A, B, C"
+          }
+        },
+        {
+          "id": "v2",
+          "state": "hot",
+          "sub": {
+            "en": "B, D, A",
+            "bn": "B, D, A"
+          }
+        },
+        {
+          "id": "rrf",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "v1",
+          "to": "rrf",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "v2",
+          "to": "rrf",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Formula",
+        "title": "Reciprocal rank fusion",
+        "body": [
+          "RRF is a merge method. A document gets 1/(k + rank) points from each list, and the points add up.",
+          "k is a number in the RRF formula."
+        ]
+      },
+      "bn": {
+        "short": "সূত্র",
+        "title": "রেসিপ্রোকাল র‍্যাংক ফিউশন",
+        "body": [
+          "RRF মেলানোর পদ্ধতি। প্রতিটি তালিকা থেকে ডকুমেন্ট পায় 1/(k + rank) পয়েন্ট, তারপর সব যোগ হয়।",
+          "k হলো RRF সূত্রের একটি সংখ্যা।"
+        ]
+      },
+      "show": [
+        {
+          "id": "v1",
+          "state": "hot"
+        },
+        {
+          "id": "v2",
+          "state": "hot"
+        },
+        {
+          "id": "rrf",
+          "state": "hot",
+          "sub": {
+            "en": "adds up",
+            "bn": "যোগ হয়"
+          }
+        },
+        {
+          "id": "k",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "v1",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "v2",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "k",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Doc B",
+        "title": "Score Doc B",
+        "body": [
+          "With k = 60, Doc B gets 1/62 from variant 1 and 1/61 from variant 2.",
+          "The sum is 0.03252."
+        ]
+      },
+      "bn": {
+        "short": "ডকুমেন্ট B",
+        "title": "ডকুমেন্ট B-এর স্কোর",
+        "body": [
+          "k = ৬০ ধরলে ডকুমেন্ট B ভ্যারিয়েন্ট ১ থেকে পায় ১/৬২ আর ভ্যারিয়েন্ট ২ থেকে ১/৬১।",
+          "যোগফল ০.০৩২৫২।"
+        ]
+      },
+      "show": [
+        {
+          "id": "v1",
+          "state": "hot"
+        },
+        {
+          "id": "v2",
+          "state": "hot"
+        },
+        {
+          "id": "rrf",
+          "state": "hot"
+        },
+        {
+          "id": "k",
+          "state": "hot",
+          "sub": {
+            "en": "k = 60",
+            "bn": "k = ৬০"
+          }
+        },
+        {
+          "id": "doc-b",
+          "state": "hot",
+          "sub": {
+            "en": "0.03252",
+            "bn": "০.০৩২৫২"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "v1",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "v2",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "k",
+          "to": "rrf",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-b",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "1/62 + 1/61 = 0.03252",
+          "bn": "১/৬২ + ১/৬১ = ০.০৩২৫২"
+        },
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Doc A",
+        "title": "Score Doc A",
+        "body": [
+          "Doc A gets 1/61 from variant 1 and 1/63 from variant 2.",
+          "The sum is 0.03227."
+        ]
+      },
+      "bn": {
+        "short": "ডকুমেন্ট A",
+        "title": "ডকুমেন্ট A-এর স্কোর",
+        "body": [
+          "ডকুমেন্ট A ভ্যারিয়েন্ট ১ থেকে পায় ১/৬১ আর ভ্যারিয়েন্ট ২ থেকে ১/৬৩।",
+          "যোগফল ০.০৩২২৭।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rrf",
+          "state": "hot"
+        },
+        {
+          "id": "k",
+          "state": "dim",
+          "sub": {
+            "en": "k = 60",
+            "bn": "k = ৬০"
+          }
+        },
+        {
+          "id": "doc-b",
+          "state": "dim",
+          "sub": {
+            "en": "0.03252",
+            "bn": "০.০৩২৫২"
+          }
+        },
+        {
+          "id": "doc-a",
+          "state": "hot",
+          "sub": {
+            "en": "0.03227",
+            "bn": "০.০৩২২৭"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "k",
+          "to": "rrf",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-b",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-a",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "1/62 + 1/61 = 0.03252",
+          "bn": "১/৬২ + ১/৬১ = ০.০৩২৫২"
+        },
+        {
+          "en": "1/61 + 1/63 = 0.03227",
+          "bn": "১/৬১ + ১/৬৩ = ০.০৩২২৭"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Doc D, C",
+        "title": "Score Doc D and Doc C",
+        "body": [
+          "Doc D appears in one list, so it gets 1/62 = 0.01613.",
+          "Doc C also appears in one list, so it gets 1/63 = 0.01587."
+        ]
+      },
+      "bn": {
+        "short": "ডকুমেন্ট D, C",
+        "title": "ডকুমেন্ট D আর C-এর স্কোর",
+        "body": [
+          "ডকুমেন্ট D একটি তালিকায় আছে, তাই পায় ১/৬২ = ০.০১৬১৩।",
+          "ডকুমেন্ট C-ও একটি তালিকায় আছে, তাই পায় ১/৬৩ = ০.০১৫৮৭।"
+        ]
+      },
+      "show": [
+        {
+          "id": "rrf",
+          "state": "hot"
+        },
+        {
+          "id": "doc-b",
+          "state": "dim"
+        },
+        {
+          "id": "doc-a",
+          "state": "dim"
+        },
+        {
+          "id": "doc-d",
+          "state": "hot",
+          "sub": {
+            "en": "0.01613",
+            "bn": "০.০১৬১৩"
+          }
+        },
+        {
+          "id": "doc-c",
+          "state": "hot",
+          "sub": {
+            "en": "0.01587",
+            "bn": "০.০১৫৮৭"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rrf",
+          "to": "doc-d",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-c",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "1/62 + 1/61 = 0.03252",
+          "bn": "১/৬২ + ১/৬১ = ০.০৩২৫২"
+        },
+        {
+          "en": "1/61 + 1/63 = 0.03227",
+          "bn": "১/৬১ + ১/৬৩ = ০.০৩২২৭"
+        },
+        {
+          "en": "1/62 = 0.01613",
+          "bn": "১/৬২ = ০.০১৬১৩"
+        },
+        {
+          "en": "1/63 = 0.01587",
+          "bn": "১/৬৩ = ০.০১৫৮৭"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Winner",
+        "title": "Doc B wins",
+        "body": [
+          "Doc B wins: high in both lists beats rank 1 in only one list.",
+          "Documents ranked well in several lists rise. Agreement across lists decides the order."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Illustrative numbers computed from the RRF formula."
+        }
+      },
+      "bn": {
+        "short": "বিজয়ী",
+        "title": "ডকুমেন্ট B জেতে",
+        "body": [
+          "ডকুমেন্ট B জেতে: দুই তালিকাতেই ওপরের দিকে থাকা একটিতে এক নম্বরে থাকাকে হারায়।",
+          "যে ডকুমেন্ট অনেক তালিকায় ভালো র‍্যাংক পায়, সে ওপরে ওঠে। তালিকাগুলোর মিলই ক্রম ঠিক করে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "সংখ্যাগুলো RRF সূত্র থেকে হিসাব করা উদাহরণ।"
+        }
+      },
+      "show": [
+        {
+          "id": "rrf",
+          "state": "hot"
+        },
+        {
+          "id": "doc-b",
+          "state": "hot",
+          "sub": {
+            "en": "1.",
+            "bn": "১."
+          }
+        },
+        {
+          "id": "doc-a",
+          "state": "hot",
+          "sub": {
+            "en": "2.",
+            "bn": "২."
+          }
+        },
+        {
+          "id": "doc-d",
+          "state": "dim",
+          "sub": {
+            "en": "3.",
+            "bn": "৩."
+          }
+        },
+        {
+          "id": "doc-c",
+          "state": "dim",
+          "sub": {
+            "en": "4.",
+            "bn": "৪."
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "rrf",
+          "to": "doc-b",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-a",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-d",
+          "flow": "to",
+          "state": "dim"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-c",
+          "flow": "to",
+          "state": "dim"
+        }
+      ],
+      "values": [
+        {
+          "en": "1/62 + 1/61 = 0.03252",
+          "bn": "১/৬২ + ১/৬১ = ০.০৩২৫২"
+        },
+        {
+          "en": "1/61 + 1/63 = 0.03227",
+          "bn": "১/৬১ + ১/৬৩ = ০.০৩২২৭"
+        },
+        {
+          "en": "1/62 = 0.01613",
+          "bn": "১/৬২ = ০.০১৬১৩"
+        },
+        {
+          "en": "1/63 = 0.01587",
+          "bn": "১/৬৩ = ০.০১৫৮৭"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Check k",
+        "title": "The default k differs",
+        "body": [
+          "Defaults for k differ: 60 in the paper and Elasticsearch, 2 in Qdrant's docs. Check yours first.",
+          "Qdrant also counts ranks from 0, so its k is not directly comparable to a k used with ranks from 1."
+        ]
+      },
+      "bn": {
+        "short": "k দেখুন",
+        "title": "k-এর ডিফল্ট আলাদা",
+        "body": [
+          "k-এর ডিফল্ট আলাদা: পেপার ও Elasticsearch-এ ৬০, Qdrant-এর ডকসে ২। আগে নিজেরটা দেখে নিন।",
+          "Qdrant র‍্যাংকও ০ থেকে গোনে, তাই এর k ১ থেকে গোনা র‍্যাংকের k-এর সাথে সরাসরি তুলনীয় নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "k60",
+          "state": "hot",
+          "sub": {
+            "en": "k = 60",
+            "bn": "k = ৬০"
+          }
+        },
+        {
+          "id": "kq",
+          "state": "warn",
+          "sub": {
+            "en": "k = 2",
+            "bn": "k = ২"
+          }
+        },
+        {
+          "id": "rrf",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "k60",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "kq",
+          "to": "rrf",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "RRF adds up 1/(k + rank) over all the lists, and agreement across lists decides the order."
+        ],
+        "points": [
+          "A document's score is the sum of 1/(k + rank) over all the lists.",
+          "Documents ranked well in several lists rise. Agreement across lists decides the order.",
+          "Defaults for k differ: 60 in the paper and Elasticsearch, 2 in Qdrant's docs. Check yours first."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "RRF সব তালিকা জুড়ে 1/(k + rank) যোগ করে, আর তালিকাগুলোর মিলই ক্রম ঠিক করে।"
+        ],
+        "points": [
+          "একটি ডকুমেন্টের স্কোর হলো সব তালিকা জুড়ে 1/(k + rank)-এর যোগফল।",
+          "যে ডকুমেন্ট অনেক তালিকায় ভালো র‍্যাংক পায়, সে ওপরে ওঠে। তালিকাগুলোর মিলই ক্রম ঠিক করে।",
+          "k-এর ডিফল্ট আলাদা: পেপার ও Elasticsearch-এ ৬০, Qdrant-এর ডকসে ২। আগে নিজেরটা দেখে নিন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "v1",
+          "state": "hot"
+        },
+        {
+          "id": "v2",
+          "state": "hot"
+        },
+        {
+          "id": "rrf",
+          "state": "hot"
+        },
+        {
+          "id": "doc-b",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "v1",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "v2",
+          "to": "rrf",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "rrf",
+          "to": "doc-b",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

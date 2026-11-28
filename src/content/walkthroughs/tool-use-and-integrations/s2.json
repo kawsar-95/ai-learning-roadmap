@@ -1,0 +1,532 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "User",
+        "bn": "ইউজার"
+      },
+      "x": 70,
+      "y": 160
+    },
+    {
+      "id": "model",
+      "kind": "model",
+      "label": {
+        "en": "Model",
+        "bn": "মডেল"
+      },
+      "x": 240,
+      "y": 160
+    },
+    {
+      "id": "tw",
+      "kind": "tool",
+      "label": {
+        "en": "Weather, Tokyo",
+        "bn": "টোকিওর আবহাওয়া"
+      },
+      "x": 450,
+      "y": 60
+    },
+    {
+      "id": "t1",
+      "kind": "tool",
+      "label": {
+        "en": "search_documents",
+        "bn": "search_documents"
+      },
+      "x": 450,
+      "y": 160
+    },
+    {
+      "id": "tx",
+      "kind": "tool",
+      "label": {
+        "en": "Exchange rate",
+        "bn": "এক্সচেঞ্জ রেট"
+      },
+      "x": 450,
+      "y": 260
+    },
+    {
+      "id": "svc",
+      "kind": "service",
+      "label": {
+        "en": "Your API",
+        "bn": "আপনার API"
+      },
+      "x": 660,
+      "y": 160
+    },
+    {
+      "id": "res",
+      "kind": "note",
+      "label": {
+        "en": "Tool result",
+        "bn": "টুলের ফলাফল"
+      },
+      "x": 660,
+      "y": 260
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Tools in prompt",
+      "bn": "প্রম্পটে টুল"
+    },
+    {
+      "en": "Total wait",
+      "bn": "মোট অপেক্ষা"
+    },
+    {
+      "en": "Result",
+      "bn": "ফলাফল"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Tool",
+        "title": "A tool lets the model act",
+        "body": [
+          "A model can only write text until you give it tools: ways to call an API, run code, or read a file.",
+          "A tool is a function the model is allowed to call."
+        ]
+      },
+      "bn": {
+        "short": "টুল",
+        "title": "টুল পেলে মডেল কাজ করতে পারে",
+        "body": [
+          "টুল না দিলে মডেল শুধু লেখা তৈরি করতে পারে। টুল পেলে সে API কল করতে, কোড চালাতে বা ফাইল পড়তে পারে।",
+          "টুল হলো এমন ফাংশন, যা মডেল কল করতে পারে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "t1",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "t1",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Describe",
+        "title": "The description is what the model reads",
+        "body": [
+          "A tool is a JSON Schema plus a short description that the model reads before deciding to call it.",
+          "Write each description to say what it does, when to use it, and what it returns."
+        ]
+      },
+      "bn": {
+        "short": "বর্ণনা",
+        "title": "মডেল যা পড়ে, সেটাই ডেসক্রিপশন",
+        "body": [
+          "টুল হলো JSON Schema আর একটি ছোট ডেসক্রিপশন, যা মডেল কল করার আগে পড়ে।",
+          "প্রতিটি টুলের ডেসক্রিপশনে লিখুন সে কী করে, কখন ব্যবহার করবেন আর কী ফেরত দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "t1",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "t1",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Schema",
+        "title": "Keep the schema tight",
+        "body": [
+          "Use a tight schema with clear types and enums. Avoid any.",
+          "An enum is a short fixed list of allowed values, and the model must pick one. The model hallucinates less when the schema is tight."
+        ]
+      },
+      "bn": {
+        "short": "স্কিমা",
+        "title": "স্কিমা আঁটসাঁট রাখুন",
+        "body": [
+          "স্পষ্ট টাইপ আর এনাম দিয়ে স্কিমা আঁটসাঁট রাখুন। any এড়িয়ে চলুন।",
+          "এনাম হলো অনুমোদিত মানের ছোট নির্দিষ্ট তালিকা, মডেলকে তার একটি বাছতে হয়। স্কিমা আঁটসাঁট হলে মডেল কম ভুল বানায়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "t1",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "t1",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Wrapper",
+        "title": "Wrap each API as a tool",
+        "body": [
+          "Every internal API becomes a tool: wrap each endpoint with a function.",
+          "It describes its purpose in one sentence, accepts a typed input, and returns the result or an {error, retryable} envelope."
+        ]
+      },
+      "bn": {
+        "short": "র‍্যাপার",
+        "title": "প্রতিটি API-কে টুল বানান",
+        "body": [
+          "প্রতিটি ইন্টারনাল API হয়ে যায় একটি টুল: প্রতিটি এন্ডপয়েন্ট একটি ফাংশনে মুড়ে দিন।",
+          "সে এক বাক্যে উদ্দেশ্য বর্ণনা করে, টাইপ করা ইনপুট নেয়, আর ফলাফল অথবা {error, retryable} এনভেলপ ফেরত দেয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "t1",
+          "state": "hot"
+        },
+        {
+          "id": "svc",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "t1",
+          "to": "svc",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "svc",
+          "to": "res",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "result or error",
+          "bn": "ফলাফল বা এরর"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Parallel",
+        "title": "Independent calls in one turn",
+        "body": [
+          "Make independent tool calls in one turn, so they run at the same time.",
+          "The total wait is the slowest call, not the sum."
+        ]
+      },
+      "bn": {
+        "short": "প্যারালাল",
+        "title": "স্বাধীন কল এক টার্নে",
+        "body": [
+          "একে অপরের ওপর নির্ভর করে না এমন টুল কল এক টার্নে দিন, যাতে সেগুলো একসাথে চলে।",
+          "মোট অপেক্ষা হলো সবচেয়ে ধীর কলের সময়, সবগুলোর যোগফল নয়।"
+        ]
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "tw",
+          "state": "hot"
+        },
+        {
+          "id": "tx",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "tw",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "model",
+          "to": "tx",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "slowest call, not the sum",
+          "bn": "সবচেয়ে ধীর কল, যোগফল নয়"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Result",
+        "title": "The result is prompt content",
+        "body": [
+          "Tool output is prompt content: the model re-reads it as part of its next turn.",
+          "Trim it, format it for reading, and add a summary when the result is not obvious."
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "A 10,000-row SQL result will blow your context window. Return the top N, summarise the rest."
+        }
+      },
+      "bn": {
+        "short": "ফলাফল",
+        "title": "ফলাফল প্রম্পটেরই অংশ",
+        "body": [
+          "টুলের আউটপুট প্রম্পটেরই অংশ: মডেল পরের টার্নে সেটা আবার পড়ে।",
+          "ছাঁটুন, পড়ার মতো ফরম্যাট করুন, আর ফলাফল অস্পষ্ট হলে সারমর্ম যোগ করুন।"
+        ],
+        "note": {
+          "kind": "warn",
+          "html": "১০,০০০ রো-এর SQL ফলাফল কনটেক্সট উইন্ডো উড়িয়ে দেবে। শীর্ষ N ফেরত দিন, বাকিটা সারমর্ম করুন।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "hot"
+        },
+        {
+          "id": "res",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "res",
+          "to": "model",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "trim, then summarise",
+          "bn": "ছাঁটুন, তারপর সারমর্ম"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Too many",
+        "title": "Too many tools make choosing harder",
+        "body": [
+          "OpenAI suggests keeping fewer than about 20 tools available at once.",
+          "Many tools can make it harder for the model to pick the right one."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Split into sub-agents by domain, use a router, or defer tools with tool search."
+        }
+      },
+      "bn": {
+        "short": "অনেক টুল",
+        "title": "অনেক টুলে বাছা কঠিন হয়",
+        "body": [
+          "OpenAI পরামর্শ দেয় একসাথে প্রায় ২০-এর কম টুল রাখতে।",
+          "অনেক টুল থাকলে মডেলের ঠিক টুল বাছা কঠিন হতে পারে।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "ডোমেইন অনুযায়ী সাব-এজেন্টে ভাগ করুন, রাউটার ব্যবহার করুন, বা টুল সার্চ দিয়ে টুল পিছিয়ে দিন।"
+        }
+      },
+      "show": [
+        {
+          "id": "model",
+          "state": "warn"
+        },
+        {
+          "id": "tw",
+          "state": "warn"
+        },
+        {
+          "id": "t1",
+          "state": "warn"
+        },
+        {
+          "id": "tx",
+          "state": "warn"
+        }
+      ],
+      "links": [
+        {
+          "from": "model",
+          "to": "tw",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "model",
+          "to": "t1",
+          "flow": "to",
+          "state": "warn"
+        },
+        {
+          "from": "model",
+          "to": "tx",
+          "flow": "to",
+          "state": "warn"
+        }
+      ],
+      "values": [
+        {
+          "en": "fewer than about 20",
+          "bn": "প্রায় ২০-এর কম"
+        },
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "What to remember",
+        "body": [
+          "Clear descriptions and good tool design make the difference between a demo and a real system."
+        ],
+        "points": [
+          "Write each tool description to say what it does, when to use it, and what it returns.",
+          "Use a tight schema with clear types and enums. Avoid any.",
+          "Keep fewer than about 20 tools available at once.",
+          "Make independent tool calls in one turn so they run at the same time.",
+          "Tool output is prompt content: trim it, format it for reading, add a summary when the result is not obvious."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "যা মনে রাখবেন",
+        "body": [
+          "স্পষ্ট টুল ডেসক্রিপশন আর ভালো টুল ডিজাইনই ডেমো আর আসল সিস্টেমের পার্থক্য গড়ে।"
+        ],
+        "points": [
+          "প্রতিটি টুলের ডেসক্রিপশনে লিখুন সে কী করে, কখন ব্যবহার করবেন আর কী ফেরত দেয়।",
+          "স্পষ্ট টাইপ আর এনাম দিয়ে স্কিমা আঁটসাঁট রাখুন। any এড়িয়ে চলুন।",
+          "একসাথে প্রায় ২০-এর কম টুল রাখুন।",
+          "একে অপরের ওপর নির্ভর করে না এমন টুল কল এক টার্নে দিন, যাতে সেগুলো একসাথে চলে।",
+          "টুলের আউটপুট প্রম্পটেরই অংশ: ছাঁটুন, পড়ার মতো ফরম্যাট করুন, আর ফলাফল অস্পষ্ট হলে সারমর্ম যোগ করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user"
+        },
+        {
+          "id": "model"
+        },
+        {
+          "id": "svc"
+        },
+        {
+          "id": "res"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "model",
+          "flow": "to"
+        },
+        {
+          "from": "model",
+          "to": "svc",
+          "flow": "to"
+        },
+        {
+          "from": "svc",
+          "to": "res",
+          "flow": "to"
+        },
+        {
+          "from": "res",
+          "to": "model",
+          "flow": "to"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "width": 760,
+  "height": 320,
+  "nodes": [
+    {
+      "id": "user",
+      "kind": "user",
+      "label": {
+        "en": "Plain sentence",
+        "bn": "সাধারণ বাক্য"
+      },
+      "x": 115,
+      "y": 162
+    },
+    {
+      "id": "llm",
+      "kind": "model",
+      "label": {
+        "en": "LLM",
+        "bn": "LLM"
+      },
+      "x": 300,
+      "y": 162
+    },
+    {
+      "id": "schema",
+      "kind": "file",
+      "label": {
+        "en": "Schema",
+        "bn": "স্কিমা"
+      },
+      "x": 300,
+      "y": 50
+    },
+    {
+      "id": "query",
+      "kind": "note",
+      "label": {
+        "en": "Search query",
+        "bn": "সার্চ কুয়েরি"
+      },
+      "x": 460,
+      "y": 95
+    },
+    {
+      "id": "filter",
+      "kind": "note",
+      "label": {
+        "en": "Metadata filter",
+        "bn": "মেটাডেটা ফিল্টার"
+      },
+      "x": 460,
+      "y": 230
+    },
+    {
+      "id": "check",
+      "kind": "shield",
+      "label": {
+        "en": "Schema check",
+        "bn": "স্কিমা যাচাই"
+      },
+      "x": 640,
+      "y": 230
+    },
+    {
+      "id": "db",
+      "kind": "database",
+      "label": {
+        "en": "Database",
+        "bn": "ডেটাবেস"
+      },
+      "x": 640,
+      "y": 95
+    },
+    {
+      "id": "sql",
+      "kind": "service",
+      "label": {
+        "en": "text-to-SQL",
+        "bn": "টেক্সট-টু-SQL"
+      },
+      "x": 460,
+      "y": 162
+    },
+    {
+      "id": "ro",
+      "kind": "shield",
+      "label": {
+        "en": "Read-only login",
+        "bn": "রিড-অনলি লগইন"
+      },
+      "x": 610,
+      "y": 270
+    }
+  ],
+  "metrics": [
+    {
+      "en": "Search",
+      "bn": "সার্চ"
+    },
+    {
+      "en": "Filter",
+      "bn": "ফিল্টার"
+    },
+    {
+      "en": "Exact work",
+      "bn": "নির্ভুল কাজ"
+    }
+  ],
+  "caption": {
+    "en": "Illustrative, not a benchmark: the labels are the section's own words.",
+    "bn": "উদাহরণমাত্র, বেঞ্চমার্ক নয়: লেবেলগুলো সেকশনের নিজের কথা।"
+  },
+  "steps": [
+    {
+      "en": {
+        "short": "Sentence",
+        "title": "Users type sentences, not filters",
+        "body": [
+          "Users type plain sentences, not filter code.",
+          "In self-querying, an LLM turns the sentence into a search plus a filter."
+        ]
+      },
+      "bn": {
+        "short": "বাক্য",
+        "title": "ব্যবহারকারী বাক্য লেখে, ফিল্টার নয়",
+        "body": [
+          "ব্যবহারকারী সাধারণ বাক্য লেখে, ফিল্টার কোড নয়।",
+          "সেলফ-কুয়েরিতে LLM সেই বাক্যকে একটি সার্চ আর একটি ফিল্টারে ভাঙে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot"
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Schema",
+        "title": "Tell the LLM the schema",
+        "body": [
+          "The LLM must be told the available fields, their types, and the allowed operators.",
+          "For a database, the schema is its tables and columns."
+        ]
+      },
+      "bn": {
+        "short": "স্কিমা",
+        "title": "LLM-কে স্কিমা জানান",
+        "body": [
+          "LLM-কে জানাতে হয় কোন ফিল্ড আছে, তাদের ধরন কী, আর কোন অপারেটর চলবে।",
+          "ডেটাবেসের ক্ষেত্রে স্কিমা হলো তার টেবিল ও কলাম।"
+        ]
+      },
+      "show": [
+        {
+          "id": "schema",
+          "state": "hot",
+          "sub": {
+            "en": "fields, types, operators",
+            "bn": "ফিল্ড, ধরন, অপারেটর"
+          }
+        },
+        {
+          "id": "llm",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "schema",
+          "to": "llm",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Split",
+        "title": "A search plus a filter",
+        "body": [
+          "The LLM parses the request into a semantic query plus a structured metadata filter. It then runs both.",
+          "A metadata filter is a rule on the labels stored with each piece of text, such as year above 2000."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Elastic's example: \"science fiction movies released after 2000 with rating above 8\"."
+        }
+      },
+      "bn": {
+        "short": "ভাগ",
+        "title": "একটি সার্চ আর একটি ফিল্টার",
+        "body": [
+          "LLM অনুরোধটিকে একটি সার্চ কুয়েরি আর একটি স্ট্রাকচার্ড মেটাডেটা ফিল্টারে ভাগ করে, তারপর দুটোই চালায়।",
+          "মেটাডেটা ফিল্টার হলো প্রতিটি লেখার টুকরোর সাথে রাখা লেবেলের ওপর শর্ত, যেমন সাল ২০০০-এর বেশি।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Elastic-এর উদাহরণ: \"science fiction movies released after 2000 with rating above 8\"।"
+        }
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "filter",
+          "state": "hot",
+          "sub": {
+            "en": "year above 2000",
+            "bn": "সাল ২০০০-এর বেশি"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "query",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "llm",
+          "to": "filter",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "a semantic query",
+          "bn": "সেমান্টিক কুয়েরি"
+        },
+        {
+          "en": "a metadata filter",
+          "bn": "মেটাডেটা ফিল্টার"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Validate",
+        "title": "Check the filter first",
+        "body": [
+          "Validate the LLM's output against the schema before it reaches the database."
+        ]
+      },
+      "bn": {
+        "short": "যাচাই",
+        "title": "আগে ফিল্টার যাচাই করুন",
+        "body": [
+          "LLM-এর লেখা ফিল্টার ডেটাবেসে যাওয়ার আগে স্কিমার সাথে মিলিয়ে যাচাই করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "filter",
+          "state": "hot"
+        },
+        {
+          "id": "check",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "dim"
+        }
+      ],
+      "links": [
+        {
+          "from": "filter",
+          "to": "check",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "check",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        {
+          "en": "checked against the schema",
+          "bn": "স্কিমার সাথে যাচাই করা"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Elastic",
+        "title": "In Elasticsearch, the filter goes inside knn",
+        "body": [
+          "In Elasticsearch, put the filter inside knn.",
+          "Then the number of results you asked for (k) comes back."
+        ]
+      },
+      "bn": {
+        "short": "Elasticsearch",
+        "title": "Elasticsearch-এ ফিল্টার থাকে knn-এর ভেতরে",
+        "body": [
+          "Elasticsearch-এ ফিল্টার knn-এর ভেতরে দিন।",
+          "তাহলে যতগুলো ফল চেয়েছেন (k), ততগুলোই আসে।"
+        ]
+      },
+      "show": [
+        {
+          "id": "query",
+          "state": "hot"
+        },
+        {
+          "id": "filter",
+          "state": "hot",
+          "sub": {
+            "en": "inside knn",
+            "bn": "knn-এর ভেতরে"
+          }
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "k results",
+            "bn": "k সংখ্যক ফল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "query",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "filter",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        {
+          "en": "inside knn",
+          "bn": "knn-এর ভেতরে"
+        },
+        {
+          "en": "inside knn",
+          "bn": "knn-এর ভেতরে"
+        },
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Counts",
+        "title": "Counts and sums go to a database",
+        "body": [
+          "Counts, sums and joins are exact computations, not similarity problems. Use text-to-SQL, not similarity search.",
+          "Spider is the standard test for text-to-SQL: 10,181 questions over 200 databases."
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "Its test databases have schemas the model never saw."
+        }
+      },
+      "bn": {
+        "short": "গণনা",
+        "title": "গণনা আর যোগফল যায় ডেটাবেসে",
+        "body": [
+          "গণনা, যোগফল, জয়েন নির্ভুল হিসাব। এতে টেক্সট-টু-SQL লাগে, সিমিলারিটি সার্চ নয়।",
+          "Spider টেক্সট-টু-SQL-এর প্রচলিত পরীক্ষা: ২০০টি ডেটাবেসে ১০,১৮১টি প্রশ্ন।"
+        ],
+        "note": {
+          "kind": "tip",
+          "html": "এর টেস্ট ডেটাবেসের স্কিমা মডেল আগে দেখেনি।"
+        }
+      },
+      "show": [
+        {
+          "id": "user",
+          "state": "hot",
+          "sub": {
+            "en": "counts, sums, joins",
+            "bn": "গণনা, যোগফল, জয়েন"
+          }
+        },
+        {
+          "id": "sql",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot",
+          "sub": {
+            "en": "exact",
+            "bn": "নির্ভুল"
+          }
+        }
+      ],
+      "links": [
+        {
+          "from": "user",
+          "to": "sql",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "sql",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        {
+          "en": "exact",
+          "bn": "নির্ভুল"
+        }
+      ]
+    },
+    {
+      "en": {
+        "short": "Safe SQL",
+        "title": "Check the SQL it writes",
+        "body": [
+          "Give the model the schema, and check generated SQL: read-only credentials, allow-listed tables, row limits.",
+          "Log every query. Read-only credentials are a login that can read data but cannot change it."
+        ]
+      },
+      "bn": {
+        "short": "নিরাপদ SQL",
+        "title": "যে SQL লেখে তা যাচাই করুন",
+        "body": [
+          "মডেলকে স্কিমা দিন, আর বানানো SQL যাচাই করুন: রিড-অনলি অধিকার, অনুমোদিত টেবিল, সারির সীমা।",
+          "প্রতিটি কুয়েরি লগ করুন। রিড-অনলি অধিকার মানে এমন লগইন, যা দিয়ে ডেটা পড়া যায় কিন্তু বদলানো যায় না।"
+        ]
+      },
+      "show": [
+        {
+          "id": "sql",
+          "state": "hot"
+        },
+        {
+          "id": "ro",
+          "state": "hot",
+          "sub": {
+            "en": "read, not change",
+            "bn": "পড়া যায়, বদলানো যায় না"
+          }
+        },
+        {
+          "id": "db",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "sql",
+          "to": "ro",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "ro",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "en": {
+        "short": "Remember",
+        "title": "Remember",
+        "body": [
+          "An LLM can write the filter or the query, so check it before it runs."
+        ],
+        "points": [
+          "Check the filter the LLM writes against the schema before it reaches the database.",
+          "Counts, sums and joins are exact computations. Use text-to-SQL, not similarity search.",
+          "In Elasticsearch, put the filter inside knn so the number of results you asked for (k) comes back.",
+          "Check generated SQL: read-only credentials, allow-listed tables, row limits. Log every query."
+        ]
+      },
+      "bn": {
+        "short": "মনে রাখুন",
+        "title": "মনে রাখুন",
+        "body": [
+          "LLM ফিল্টার বা কুয়েরি লিখতে পারে, তাই চালানোর আগে যাচাই করুন।"
+        ],
+        "points": [
+          "LLM-এর লেখা ফিল্টার ডেটাবেসে যাওয়ার আগে স্কিমার সাথে মিলিয়ে যাচাই করুন।",
+          "গণনা, যোগফল, জয়েন নির্ভুল হিসাব। এতে টেক্সট-টু-SQL লাগে, সিমিলারিটি সার্চ নয়।",
+          "Elasticsearch-এ ফিল্টার knn-এর ভেতরে দিলে যতগুলো ফল চেয়েছেন (k), ততগুলোই আসে।",
+          "বানানো SQL যাচাই করুন: রিড-অনলি অধিকার, অনুমোদিত টেবিল, সারির সীমা। প্রতিটি কুয়েরি লগ করুন।"
+        ]
+      },
+      "show": [
+        {
+          "id": "llm",
+          "state": "hot"
+        },
+        {
+          "id": "check",
+          "state": "hot"
+        },
+        {
+          "id": "db",
+          "state": "hot"
+        }
+      ],
+      "links": [
+        {
+          "from": "llm",
+          "to": "check",
+          "flow": "to",
+          "state": "hot"
+        },
+        {
+          "from": "check",
+          "to": "db",
+          "flow": "to",
+          "state": "hot"
+        }
+      ],
+      "values": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}
