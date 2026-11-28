@@ -191,7 +191,7 @@ export function findWalkthrough(topics: readonly WithWalkthroughs[], slug: strin
 }
 
 /** The Parts that draw their walk-throughs in the isometric look (where a walk-through fits it). Parts are added one at a time. */
-export const ISO_PARTS: ReadonlySet<string> = new Set(["system-design"]);
+export const ISO_PARTS: ReadonlySet<string> = new Set(["system-design", "llm-fundamentals"]);
 
 /** The scales an isometric object may be drawn at, from the biggest down. */
 export const ISO_SCALES = [1, 0.8, 0.65] as const;
@@ -241,7 +241,8 @@ export function isoScale(w: Walkthrough): number | null {
           for (let j = i + 1; j < rects.length; j++) {
             const a = rects[i];
             const b = rects[j];
-            if (Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2) fits = false;
+            // Keep 8 units of air between two objects, so a name never touches the next pill.
+            if (Math.abs(a.x - b.x) < (a.w + b.w) / 2 + 8 && Math.abs(a.y - b.y) < (a.h + b.h) / 2 + 8) fits = false;
           }
         }
         if (!fits) break;
