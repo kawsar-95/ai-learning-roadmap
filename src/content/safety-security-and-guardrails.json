@@ -58,7 +58,7 @@
             "Prompt injection, ranked #1 in the OWASP LLM Top 10 for 2025, can make tools or Markdown leak user data.",
             "Accept that 100% safety is unachievable. Jailbreaks are a moving target.",
             "Never trust an LLM to emit valid JSON. Parse with a strict schema; if it fails, retry once, then refuse.",
-            "Log every prompt, output, and tool call. SOC 2 and HIPAA expect audit trails, and the EU AI Act requires event logging for high-risk AI systems."
+            "Log every prompt, output, and tool call. SOC 2 and HIPAA expect audit trails; the EU AI Act requires logging for high-risk AI."
           ]
         },
         "bn": {

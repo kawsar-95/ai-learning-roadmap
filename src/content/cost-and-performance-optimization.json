@@ -30,7 +30,7 @@
             },
             {
               "term": "Prompt cache",
-              "meaning": "The provider reuses its work on the start of your prompt, like the system prompt, across calls. That part gets a big discount: cached reads cost about 10% of the base input price on most models."
+              "meaning": "The provider reuses its work on the start of your prompt across calls. Cached reads cost about 10% of the base input price on most models."
             },
             {
               "term": "Batch API",

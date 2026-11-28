@@ -75,7 +75,7 @@ STEPS = [
          "প্রবৃদ্ধি চলতেই থাকে, তাই বারবার আপগ্রেড করতে হয়। কিন্তু মেশিন একটা সীমার বেশি বড় হয় না। এখানে সবচেয়ে বড়টা সামলায় সেকেন্ডে প্রায় ৩,০০০টি রিকোয়েস্ট, আর লোড এখন ৩,৫০০।"),
         ("Each upgrade also means a restart, and the biggest machines cost much more for each unit of capacity.",
          "প্রতিটি আপগ্রেডে restart লাগে, আর সবচেয়ে বড় মেশিনগুলোয় প্রতি ইউনিট capacity-র দাম অনেক বেশি।")],
-       [sh("users", "warn", LOAD35), sh("app", "warn", ("96 vCPU (max)", "৯৬ vCPU (সর্বোচ্চ)"))],
+       [sh("users", "warn", LOAD35), sh("app", "warn", ("40 vCPU (max)", "৪০ vCPU (সর্বোচ্চ)"))],
        [ln("users", "app", "both", 2000, "warn")],
        ["3,500", "3,000", "4 s", "14%", "$4,800"],
        note=("warn",

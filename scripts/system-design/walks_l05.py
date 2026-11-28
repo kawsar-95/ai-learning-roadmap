@@ -105,8 +105,8 @@ STEPS = [
 
     st(("Health checks", "Health check"),
        ("Health checks route around failure", "Health check ব্যর্থ সার্ভারকে এড়িয়ে চলে"),
-       [("Every few seconds the LB asks each server a question, such as <code>GET /health</code>. A server that fails several checks in a row is taken out of the pool, and it goes back in when it recovers.",
-         "কয়েক সেকেন্ড পরপর LB প্রতিটি সার্ভারকে একটা প্রশ্ন করে, যেমন <code>GET /health</code>। পরপর কয়েকটা check-এ ব্যর্থ হলে সার্ভারটাকে pool থেকে সরানো হয়, আর সুস্থ হলে ফিরিয়ে আনা হয়।"),
+       [("At a regular interval the LB asks each server a question, such as <code>GET /health</code>. A server that fails a set number of checks in a row is taken out of the pool, and it goes back in when it recovers.",
+         "নির্দিষ্ট বিরতিতে LB প্রতিটি সার্ভারকে একটা প্রশ্ন করে, যেমন <code>GET /health</code>। পরপর নির্দিষ্ট সংখ্যক check-এ ব্যর্থ হলে সার্ভারটাকে pool থেকে সরানো হয়, আর সুস্থ হলে ফিরিয়ে আনা হয়।"),
         ("Server C just crashed and users did not notice. A and B now take 150 requests a second each, about 75% busy.",
          "সার্ভার C এইমাত্র বিকল হয়েছে, আর ব্যবহারকারীরা টেরও পায়নি। A আর B এখন সেকেন্ডে ১৫০টি করে রিকোয়েস্ট সামলায়, প্রায় ৭৫% ব্যস্ত।")],
        [sh("users", sub=U300), sh("lb", "hot", ("checks health", "health দেখে")),

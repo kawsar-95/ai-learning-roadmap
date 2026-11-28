@@ -56,7 +56,7 @@ SECTIONS = [
             h("A spike becomes a backlog"),
             p("When ten times the usual uploads arrive, the queue grows instead of the web servers falling over. Workers drain it at a steady rate, and you add workers to drain it faster. Watch two numbers: the queue depth and the age of the oldest message."),
             h("A worker dies mid-job"),
-            p("A message must not vanish just because a worker took it. With RabbitMQ, a consumer acknowledges a message after it finishes the work, and messages that were delivered but never acknowledged are delivered again [[rabbit-confirms]]. Amazon SQS hides a received message for a visibility timeout, and the message reappears if the consumer does not delete it in time [[sqs-visibility]]."),
+            p("A message must not vanish just because a worker took it. With RabbitMQ, a consumer acknowledges a message after it finishes the work, and a delivery that was not acknowledged is requeued when the consumer's channel or connection closes, for example when the worker crashes [[rabbit-confirms]]. Amazon SQS hides a received message for a visibility timeout, and the message reappears if the consumer does not delete it in time [[sqs-visibility]]."),
             p("So a message can arrive more than once. This is at-least-once delivery [[sqs-visibility]], and it means consumers must be idempotent: doing the same job twice must have the same effect as doing it once."),
             h("Poison messages"),
             p("A message that always makes the worker fail would be retried forever. After a set number of receives (<code>maxReceiveCount</code> in SQS), move it to a dead-letter queue, where people can inspect it [[sqs-dlq]]."),

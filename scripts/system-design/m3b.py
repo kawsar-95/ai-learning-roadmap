@@ -18,7 +18,7 @@ SECTIONS = [
             p("A time-ordered id starts with a timestamp, so new ids sort after old ones and inserts go to the end of the index."),
             ul(
                 "<strong>UUIDv7</strong> starts with a 48-bit Unix timestamp in milliseconds, followed by random bits [[rfc9562]].",
-                "<strong>Snowflake</strong>, built at Twitter, packs the id into 64 bits: one unused sign bit, then 41 bits of milliseconds since a custom epoch, a 10-bit machine id and a 12-bit sequence number [[snowflake]]. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted).",
+                "<strong>Snowflake</strong>, built at Twitter, packs the id into a 64-bit integer: a 41-bit millisecond timestamp since a custom epoch, a 10-bit machine id and a 12-bit sequence number, 63 bits in all [[snowflake]]. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted).",
             ),
             table(
                 ["Bits", "Snowflake field"],
@@ -66,7 +66,7 @@ SECTIONS = [
                 "<strong>Choose consistency.</strong> The side that cannot reach the other refuses writes, and reads that might be stale. Its users see errors until the link heals.",
                 "<strong>Choose availability.</strong> Both sides keep accepting reads and writes. Users stay served, but the copies drift apart and must be merged later.",
             ),
-            p("Gilbert and Lynch proved this trade-off as the CAP theorem: during a partition, a system cannot be both consistent, with every read seeing the latest write, and available, with every request getting a non-error answer [[gilbert-lynch]]."),
+            p("Gilbert and Lynch proved this trade-off as the CAP theorem: during a partition, a system cannot be both consistent, with every read seeing the latest write, and available, with every request receiving a response [[gilbert-lynch]]."),
             h("Healing and conflicts"),
             p("When the link returns, the copies exchange the writes they missed and converge. This is eventual consistency. If both sides changed the same record, there is a conflict. \"Last write wins\" by timestamp is simple, but it silently drops a write, and clocks on different machines disagree. Lamport showed how to order events by what happened before what, without trusting clocks [[lamport-clocks]]. Dynamo tracks versions with vector clocks and hands concurrent versions to the application to merge [[dynamo]]."),
             h("What CAP really says"),
@@ -119,7 +119,7 @@ SECTIONS = [
             h("The leader that paused"),
             p("A process can freeze for seconds, for example in a garbage-collection pause, while its lease as leader runs out and a new leader takes over. When it wakes, it may still write as if it were in charge. The fix is a fencing token: a number that grows with every new lease and goes with each write, so that the storage rejects writes with an older token [[kleppmann-locks]]."),
             h("What it costs, and where you meet it"),
-            p("Every committed write needs a round trip to a majority, so consensus adds latency, and a cluster spread across regions pays long round trips. Few teams write consensus code themselves. They use systems built on it: Kubernetes, for example, keeps all of its cluster data in etcd [[k8s-components]], which uses Raft."),
+            p("Every committed write needs a round trip to a majority, so consensus adds latency, and a cluster spread across regions pays long round trips. Few teams write consensus code themselves. They use systems built on it: Kubernetes, for example, keeps all of its API server data in etcd [[k8s-components]], which uses Raft."),
         ],
         [
             p("A committee must pick one chair and keep one set of minutes, and members can only pass notes, some of which get lost. They agree on a rule: nobody becomes chair without votes from more than half the members, and no decision counts until more than half have written it down."),
@@ -199,7 +199,7 @@ WHERE id = 42 AND seats_left > 0;
                 "For video, adaptive streaming such as HTTP Live Streaming (HLS) lists the same video at several bit rates, and the player switches between them as the bandwidth changes [[rfc8216]].",
             ),
             h("Keep files and rows in step"),
-            p("A row can point to a file whose upload never finished, and a file can exist with no row. Give each row a status such as <code>pending</code> or <code>ready</code>, mark it ready only once the upload is confirmed, and run a cleanup job for the leftovers on both sides. A lifecycle rule can also abort incomplete multipart uploads after a few days [[s3-lifecycle]]."),
+            p("A row can point to a file whose upload never finished, and a file can exist with no row. Give each row a status such as <code>pending</code> or <code>ready</code>, mark it ready only once the upload is confirmed, and run a cleanup job for the leftovers on both sides. A lifecycle rule can also abort incomplete multipart uploads after a few days."),
             h("Cheaper storage for old files"),
             p("Most files are read often when they are new and rarely later. Lifecycle rules move objects to cheaper storage classes after a set time, and delete them when they expire [[s3-lifecycle]]."),
             h("The bucket anyone can list"),

@@ -52,8 +52,8 @@ PATH = [ln("user", "gw", "to", 1100), ln("gw", "co", "to", 1100), ln("co", "pay"
 STEPS = [
     st(("It’s slow", "ধীর লাগছে"),
        ("“Checkout is slow.” Where?", "“Checkout ধীর।” কোথায়?"),
-       [("Support tickets pile up: checkout takes about a second, where it used to take a tenth of that. A checkout request passes the gateway, the checkout service, payments, inventory, two databases and a cache.",
-         "Support ticket জমছে: checkout লাগছে প্রায় এক সেকেন্ড, যেখানে আগে লাগত তার দশ ভাগের এক ভাগ। একটা checkout request পার হয় gateway, checkout সার্ভিস, payments, inventory, দুটো database আর একটা cache।"),
+       [("Support tickets pile up: checkout takes about a second, where it used to take about an eighth of that. A checkout request passes the gateway, the checkout service, payments, inventory, two databases and a cache.",
+         "Support ticket জমছে: checkout লাগছে প্রায় এক সেকেন্ড, যেখানে আগে লাগত তার আট ভাগের এক ভাগ। একটা checkout request পার হয় gateway, checkout সার্ভিস, payments, inventory, দুটো database আর একটা cache।"),
         ("A vague complaint gives no hint which of them is slow. Observability is the ability to answer such questions from the data the system already emits, without shipping new code.",
          "একটা অস্পষ্ট অভিযোগ ইঙ্গিতও দেয় না এদের কোনটা ধীর। Observability হলো এমন প্রশ্নের উত্তর দেওয়ার ক্ষমতা, সিস্টেম যে ডেটা আগে থেকেই বের করে তা থেকে, নতুন কোড না ছেড়েই।")],
        [sh("user", "warn", ("tickets", "ticket")), sh("gw", badge="?"), sh("co", badge="?"), sh("pay", badge="?"), sh("inv", badge="?"), sh("cache", badge="?"), sh("db1", badge="?"), sh("db2", badge="?")],
