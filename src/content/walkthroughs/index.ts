@@ -6,6 +6,7 @@ import llmFundamentalsS9 from "./llm-fundamentals/s9.json";
 import llmFundamentalsS10 from "./llm-fundamentals/s10.json";
 import promptEngineeringS3 from "./prompt-engineering/s3.json";
 import fineTuningRoadmapS2 from "./fine-tuning-roadmap/s2.json";
+import fineTuningRoadmapS3 from "./fine-tuning-roadmap/s3.json";
 import contextEngineeringS1 from "./context-engineering/s1.json";
 import contextEngineeringS2 from "./context-engineering/s2.json";
 import contextEngineeringS3 from "./context-engineering/s3.json";
@@ -45,6 +46,7 @@ export const WALKTHROUGH_FILES: Record<string, Record<string, unknown>> = {
   },
   "fine-tuning-roadmap": {
     s2: fineTuningRoadmapS2,
+    s3: fineTuningRoadmapS3,
   },
   "context-engineering": {
     s1: contextEngineeringS1,
