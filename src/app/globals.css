@@ -490,20 +490,10 @@ html {
   stroke: var(--wk-ink);
   stroke-width: 2px;
 }
-/* The isometric tile under each icon: a top face and two shaded sides, all from the role color. */
-.wk-tile > path {
-  stroke: var(--wk-ink);
-  stroke-width: 1.5px;
-  stroke-linejoin: round;
-}
-.wk-tile-top {
+.wk-disc {
   fill: var(--role);
-}
-.wk-tile-left {
-  fill: color-mix(in srgb, var(--role) 62%, var(--wk-ink));
-}
-.wk-tile-right {
-  fill: color-mix(in srgb, var(--role) 80%, var(--wk-ink));
+  stroke: var(--wk-ink);
+  stroke-width: 1.75px;
 }
 .wk-icon {
   color: var(--wk-ink);
@@ -516,8 +506,8 @@ html {
   fill: var(--wk-red);
   stroke-width: 2.5px;
 }
-.wk-node[data-state="hot"] .wk-tile-top,
-.wk-node[data-state="warn"] .wk-tile-top {
+.wk-node[data-state="hot"] .wk-disc,
+.wk-node[data-state="warn"] .wk-disc {
   fill: var(--wk-paper);
 }
 .wk-node[data-role="note"] .wk-box {
@@ -860,4 +850,102 @@ a[data-online-only] { opacity: 0.55; }
 /* Noto Sans Bengali has no italic. Without this the browser slants the glyphs. */
 :lang(bn) {
   font-synthesis-style: none;
+}
+
+/* The isometric look (walk-throughs that ask for it): a solid object on a floor tile. */
+.iso-floor {
+  fill: var(--wk-paper);
+}
+.iso-floor,
+.iso-side-l,
+.iso-side-r,
+.iso-side-m,
+.iso-top,
+.iso-screen {
+  stroke: var(--wk-ink);
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+}
+.iso-node .iso-side-l {
+  fill: color-mix(in srgb, var(--role) 55%, var(--wk-ink));
+}
+.iso-node .iso-side-r {
+  fill: color-mix(in srgb, var(--role) 72%, var(--wk-ink));
+}
+.iso-node .iso-side-m {
+  fill: color-mix(in srgb, var(--role) 82%, var(--wk-ink));
+}
+.iso-node .iso-top {
+  fill: var(--role);
+}
+.iso-node > g > g:first-child .iso-side-l,
+.iso-node > g > g:first-child .iso-side-r {
+  fill: color-mix(in srgb, var(--wk-paper) 80%, var(--wk-ink));
+}
+.iso-screen {
+  fill: color-mix(in srgb, var(--wk-ink) 85%, var(--wk-paper));
+}
+.iso-screen-glow {
+  fill: var(--role);
+  opacity: 0.9;
+}
+.iso-band,
+.iso-mark {
+  fill: none;
+  stroke: var(--wk-ink);
+  stroke-width: 1.4px;
+  stroke-linecap: round;
+  opacity: 0.8;
+}
+.iso-led {
+  stroke: var(--wk-back);
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+.iso-node {
+  transition:
+    translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.7s,
+    filter 0.5s;
+}
+.iso-node[data-state="hot"] {
+  filter: drop-shadow(0 0 7px var(--role));
+}
+.iso-node[data-state="warn"] {
+  filter: drop-shadow(0 0 8px var(--wk-red-dot));
+}
+.iso-node[data-state="warn"] .iso-top {
+  fill: var(--wk-red);
+}
+.iso-pill rect {
+  fill: var(--wk-paper);
+  stroke: var(--wk-ink);
+  stroke-width: 1.4px;
+}
+.iso-pill text {
+  font: 600 11.5px var(--wk-mono);
+  fill: var(--wk-ink);
+  text-anchor: middle;
+}
+.iso-pill[data-kind="hot"] rect {
+  fill: var(--wk-badge);
+}
+.iso-pill[data-kind="hot"] text {
+  fill: var(--wk-on-badge);
+}
+.iso-pill[data-kind="warn"] rect {
+  fill: var(--wk-red);
+  stroke: var(--wk-red);
+}
+.iso-pill[data-kind="warn"] text {
+  fill: #fff;
+}
+.iso-badge rect {
+  fill: var(--wk-paper);
+  stroke: var(--wk-ink);
+  stroke-width: 1.5px;
+}
+.iso-badge {
+  color: var(--wk-ink);
 }

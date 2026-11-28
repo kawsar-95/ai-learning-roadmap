@@ -189,3 +189,66 @@ export function findWalkthrough(topics: readonly WithWalkthroughs[], slug: strin
   const id = file.slice(0, -".json".length);
   return topics.find((t) => t.slug === slug)?.sections.find((s) => s.id === id)?.walkthrough;
 }
+
+/** The Parts that draw their walk-throughs in the isometric look (where a walk-through fits it). Parts are added one at a time. */
+export const ISO_PARTS: ReadonlySet<string> = new Set(["system-design"]);
+
+/** The scales an isometric object may be drawn at, from the biggest down. */
+export const ISO_SCALES = [1, 0.8, 0.65] as const;
+
+/** Where an isometric object's name and second line sit, from the centre of its box, at a scale. */
+export function isoPillY(scale: number): { name: number; sub: number } {
+  return { name: Math.round(30 * scale + 18), sub: -Math.round(30 * scale + 16) };
+}
+
+const isoPillW = (text: string) => Math.max(34, [...text].length * 6.6 + 18);
+
+/**
+ * The room an isometric object takes at a scale: the floor tile, the name under it and the second
+ * line over it. A box of kind `note` is drawn flat, so it keeps its own box.
+ */
+function isoFootprint(box: Box, kind: WalkNodeKind, texts: string[], scale: number): Box {
+  if (kind === "note") return box;
+  const pills = isoPillY(scale);
+  const half = Math.max(42 * scale, ...texts.map((t) => isoPillW(t) / 2));
+  const top = box.y + (texts.length > 1 ? pills.sub - 10 : -34 * scale - 4);
+  const bottom = box.y + pills.name + 10;
+  return { x: box.x, y: (top + bottom) / 2, w: half * 2, h: bottom - top };
+}
+
+/**
+ * The biggest scale at which every step of a walk-through, in both languages, draws its isometric objects
+ * inside the diagram and clear of each other; null when none does (the walk-through then keeps the flat boxes).
+ */
+export function isoScale(w: Walkthrough): number | null {
+  const byId = new Map(w.nodes.map((n) => [n.id, n]));
+  for (const scale of ISO_SCALES) {
+    let fits = true;
+    for (const lang of ["en", "bn"] as const) {
+      const widths = nodeWidths(w, lang);
+      for (const step of w.steps) {
+        const rects = step.show.flatMap((s) => {
+          const n = byId.get(s.id);
+          if (!n) return [];
+          const box = { x: s.x ?? n.x, y: s.y ?? n.y, w: widths.get(n.id) ?? 112, h: NODE_H };
+          const texts = [n.label[lang], ...(s.sub ? [s.sub[lang]] : [])];
+          return [isoFootprint(box, n.kind, texts, scale)];
+        });
+        for (const r of rects) {
+          if (r.y - r.h / 2 < 0 || r.y + r.h / 2 > w.height || r.x - r.w / 2 < -8 || r.x + r.w / 2 > w.width + 8) fits = false;
+        }
+        for (let i = 0; i < rects.length && fits; i++) {
+          for (let j = i + 1; j < rects.length; j++) {
+            const a = rects[i];
+            const b = rects[j];
+            if (Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2) fits = false;
+          }
+        }
+        if (!fits) break;
+      }
+      if (!fits) break;
+    }
+    if (fits) return scale;
+  }
+  return null;
+}
