@@ -45,11 +45,11 @@
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5);
 
   /* The walk-through diagram: ink and paper, a hard shadow, and a color for each kind of box. */
-  --wk-ink: #ece6d8;
-  --wk-paper: #1d2128;
-  --wk-canvas: #12151a;
-  --wk-shadow: #4b4b4b;
-  --wk-soft: color-mix(in srgb, #ece6d8 24%, transparent);
+  --wk-ink: #e6edf3;
+  --wk-paper: #161b22;
+  --wk-canvas: #0d1117;
+  --wk-shadow: #010409;
+  --wk-soft: color-mix(in srgb, #e6edf3 24%, transparent);
   --wk-out: #ffa24d;
   --wk-out-ink: #05070a;
   --wk-back: #3fd07a;
@@ -58,14 +58,14 @@
   --wk-red-dot: #ff7a66;
   --wk-badge: #e8b923;
   --wk-on-badge: #1a1d1f;
-  --wk-people: #6c5b17;
-  --wk-compute: #2b5688;
-  --wk-memory: #25623f;
-  --wk-data: #54438a;
-  --wk-queue: #8f4c22;
-  --wk-guard: #8a3556;
-  --wk-model: #00696f;
-  --wk-measure: #383d45;
+  --wk-people: #8a7420;
+  --wk-compute: #2f6db5;
+  --wk-memory: #2c7a4f;
+  --wk-data: #6a55b0;
+  --wk-queue: #b0602b;
+  --wk-guard: #a8426b;
+  --wk-model: #0a8a91;
+  --wk-measure: #2d333b;
 }
 
 :root[data-theme="light"] {
@@ -95,11 +95,11 @@
   --shadow-md: 0 4px 12px rgba(20, 20, 20, 0.06), 0 8px 24px rgba(20, 20, 20, 0.06);
   --shadow-lg: 0 12px 40px rgba(20, 20, 20, 0.1);
 
-  --wk-ink: #1a1d1f;
-  --wk-paper: #fffdf8;
-  --wk-canvas: #f6efe3;
-  --wk-shadow: #1a1d1f;
-  --wk-soft: color-mix(in srgb, #1a1d1f 24%, transparent);
+  --wk-ink: #172033;
+  --wk-paper: #ffffff;
+  --wk-canvas: #eef2f8;
+  --wk-shadow: #b8c2d4;
+  --wk-soft: color-mix(in srgb, #172033 24%, transparent);
   --wk-out: #ff9433;
   --wk-out-ink: #1a1d1f;
   --wk-back: #35c46b;
@@ -108,14 +108,14 @@
   --wk-red-dot: #f4604f;
   --wk-badge: #ffd54a;
   --wk-on-badge: #1a1d1f;
-  --wk-people: #f7dd85;
-  --wk-compute: #a9cef6;
-  --wk-memory: #a8ddb6;
-  --wk-data: #d0c2f1;
-  --wk-queue: #f8bb88;
-  --wk-guard: #f5aac4;
-  --wk-model: #76e2e9;
-  --wk-measure: #ece3d1;
+  --wk-people: #fde68a;
+  --wk-compute: #bfdbfe;
+  --wk-memory: #bbf7d0;
+  --wk-data: #ddd6fe;
+  --wk-queue: #fed7aa;
+  --wk-guard: #fbcfe8;
+  --wk-model: #a5f3fc;
+  --wk-measure: #e5e9f0;
 }
 
 /* The font variables (--font-crimson, --font-inter, --font-mono-jb,
@@ -445,9 +445,9 @@ html {
   transform-box: fill-box;
   transform-origin: 50% 50%;
   transition:
-    translate 0.42s cubic-bezier(0.2, 0.7, 0.2, 1),
-    scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 0.42s;
+    translate 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.7s;
 }
 .wk-node[data-state="off"] {
   scale: 0.8;

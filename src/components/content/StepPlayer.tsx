@@ -26,6 +26,8 @@ import { Inline } from "./Inline";
 const BOX_R = 14;
 const NOTE_R = 10;
 const DOT_R = 5.5;
+/** How much slower a dot travels than its walk-through asks: the dots read better at an easy pace. */
+const DOT_PACE = 1.6;
 const SIGN = { "+": "+", "-": "−", "~": "~" } as const;
 
 /** A 20 × 20 line icon for each kind of box. */
@@ -364,7 +366,7 @@ function SceneLink({
   const forward = `M${x1} ${y1} L${x2} ${y2}`;
   const backward = `M${x2} ${y2} L${x1} ${y1}`;
   const state = link.state ?? "plain";
-  const ms = link.ms ?? 1400;
+  const ms = (link.ms ?? 1400) * DOT_PACE;
   const flow = link.flow;
   const label = link.label?.[lang];
   return (
