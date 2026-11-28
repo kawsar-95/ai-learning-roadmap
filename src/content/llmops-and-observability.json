@@ -113,7 +113,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An LLM <strong>trace</strong> is a tree of <em>spans</em>: the user request, the system prompt assembly, the LLM call, every tool invocation, the result. The four leading tracing tools in 2025:"
+          "html": "An LLM <strong>trace</strong> is a tree of <em>spans</em>: the user request, the system prompt assembly, the LLM call, every tool invocation, the result. Five popular tracing tools:"
         },
         {
           "type": "table",
@@ -132,7 +132,7 @@
             ],
             [
               "<strong>Helicone</strong>",
-              "Drop-in proxy that captures everything with one env-var change"
+              "Drop-in proxy: change the base URL (plus an auth header) and it captures every request. In maintenance mode since its March 2026 acquisition by Mintlify; check its status before adopting it"
             ],
             [
               "<strong>Arize Phoenix</strong>",
@@ -188,7 +188,7 @@
         },
         {
           "type": "paragraph",
-          "html": "When a user complains, you should be able to pull the trace, see every prompt and every model reply, identify the failure, and <strong>replay</strong> the exact request against a different model or prompt to verify the fix. Langfuse, Helicone, and LangSmith all give you a replay button."
+          "html": "When a user complains, you should be able to pull the trace, see every prompt and every model reply, identify the failure, and <strong>replay</strong> the exact request against a different model or prompt to verify the fix. Langfuse and LangSmith let you open a logged call in a playground and re-run it with another model or prompt."
         },
         {
           "type": "heading",
@@ -198,7 +198,7 @@
         },
         {
           "type": "paragraph",
-          "html": "When OpenAI swaps GPT-4 for GPT-4-0613 or Anthropic bumps the weights of a \"same-named\" model, your outputs drift in ways your offline evals won't catch. The fix: run a small fraction of production traffic (1–5%) through both the old and new model, compare evals, alert on delta. Arize Phoenix and Braintrust automate this."
+          "html": "When a vendor's model alias starts pointing to a newer snapshot (for example an unpinned alias that moves to a new dated version), your outputs can drift in ways your offline evals won't catch. Pin dated model IDs. The fix: run a small fraction of production traffic (1–5%) through both the old and new model, compare evals, alert on delta. Tools such as Braintrust (online scoring with alerts) and Arize Phoenix (embedding drift) cover parts of this."
         },
         {
           "type": "heading",
@@ -265,7 +265,7 @@
           "items": [
             "Langfuse (ওপেন-সোর্স, OpenTelemetry-নেটিভ, সেলফ-হোস্ট করা যায়);",
             "LangSmith (LangChain ইন্টিগ্রেশন);",
-            "Helicone (একটি এনভায়রনমেন্ট ভ্যারিয়েবল দিয়ে সব ক্যাপচার);",
+            "Helicone (বেস URL বদলালেই সব রিকোয়েস্ট ক্যাপচার; ২০২৬-এর মার্চে Mintlify-এর অধিগ্রহণের পর মেইনটেন্যান্স মোডে, তাই ব্যবহারের আগে অবস্থা দেখে নিন);",
             "Arize Phoenix (ইভ্যালুয়েশন-ফার্স্ট);",
             "Braintrust (ইভ্যাল + ট্রেস এক জায়গায়)।"
           ]
@@ -297,7 +297,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<strong>ড্রিফট ডিটেকশন (চুপচাপ আচরণের বদল):</strong> OpenAI GPT-4-কে GPT-4-0613 দিয়ে প্রতিস্থাপন করলে বা Anthropic \"একই নামের\" মডেলের ওয়েটস আপডেট করলে, আপনার আউটপুটগুলো আপনার অফলাইন ইভ্যাল ধরতে পারবে না এমনভাবে ড্রিফট করে। সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) একই সাথে পুরোনো ও নতুন মডেলের মধ্য দিয়ে চালান, ইভ্যাল তুলনা করুন, ডেল্টাতে সতর্কতা দিন। Arize Phoenix ও Braintrust এটি স্বয়ংক্রিয় করে।"
+          "html": "<strong>ড্রিফট ডিটেকশন (চুপচাপ আচরণের বদল):</strong> ভেন্ডরের কোনো মডেল অ্যালিয়াস নতুন স্ন্যাপশটের দিকে ঘুরে গেলে (যেমন পিন না করা অ্যালিয়াস নতুন ডেটেড ভার্সনে চলে যায়), আপনার আউটপুট এমনভাবে ড্রিফট করতে পারে যা অফলাইন ইভ্যাল ধরতে পারে না। ডেটেড মডেল ID পিন করুন। সমাধান: প্রোডাকশন ট্র্যাফিকের একটি ছোট অংশ (১–৫%) একই সাথে পুরোনো ও নতুন মডেলের মধ্য দিয়ে চালান, ইভ্যাল তুলনা করুন, ডেল্টাতে সতর্কতা দিন। Braintrust (সতর্কতাসহ অনলাইন স্কোরিং) আর Arize Phoenix (এমবেডিং ড্রিফট) এর কিছু অংশ কভার করে।"
         },
         {
           "type": "paragraph",
@@ -645,8 +645,8 @@
     },
     {
       "n": 7,
-      "url": "https://temporal.io/blog/temporal-for-llm-agents",
-      "text": "Temporal — \"Durable Execution for LLM Agents\""
+      "url": "https://temporal.io/blog/building-an-agentic-system-thats-actually-production-ready",
+      "text": "Temporal — \"Building an agentic system that's actually production-ready\""
     },
     {
       "n": 8,

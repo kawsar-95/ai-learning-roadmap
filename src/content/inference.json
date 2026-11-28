@@ -163,7 +163,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "The throughput champion. PagedAttention + continuous batching typically deliver 10–24× the throughput of naive Hugging Face.<a class=\"cite\" href=\"#src13\">[13]</a> Python API + OpenAI-compatible HTTP server."
+                  "html": "The throughput champion. PagedAttention + continuous batching improved throughput 2–4× over FasterTransformer and Orca at the same latency in the vLLM paper.<a class=\"cite\" href=\"#src13\">[13]</a> Python API + OpenAI-compatible HTTP server."
                 }
               ]
             },
@@ -172,7 +172,7 @@
               "blocks": [
                 {
                   "type": "paragraph",
-                  "html": "Hugging Face's Rust+Python server. Polished, supports the HF model hub natively, slightly lower raw TPS than vLLM."
+                  "html": "Hugging Face's Rust+Python server. It supports the HF model hub natively. TGI is now in maintenance mode; Hugging Face recommends vLLM or SGLang for new deployments."
                 }
               ]
             },
@@ -237,7 +237,7 @@
           "ordered": false,
           "items": [
             "<em>vLLM</em>: fastest for big loads.",
-            "<em>TGI</em>: easy, and from Hugging Face.",
+            "<em>TGI</em>: from Hugging Face, now in maintenance mode.",
             "<em>SGLang</em>: best when you reuse the same prompt a lot.",
             "<em>Ollama</em>: a one-liner for your laptop.",
             "<em>llama.cpp</em>: runs on phones and Raspberry Pis."
@@ -266,8 +266,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>vLLM</strong> — থ্রুপুট চ্যাম্পিয়ন; PagedAttention + কন্টিনিউয়াস ব্যাচিং সাধারণত ১০–২৪× উচ্চতর থ্রুপুট দেয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>",
-            "<strong>TGI</strong> — Hugging Face-এর Rust+Python সার্ভার।",
+            "<strong>vLLM</strong> — থ্রুপুট চ্যাম্পিয়ন; vLLM paper-এ PagedAttention + কন্টিনিউয়াস ব্যাচিং একই ল্যাটেন্সিতে FasterTransformer ও Orca-র চেয়ে ২–৪× থ্রুপুট বাড়িয়েছে।<a class=\"cite\" href=\"#src13\">[১৩]</a>",
+            "<strong>TGI</strong> — Hugging Face-এর Rust+Python সার্ভার। TGI এখন maintenance mode-এ; নতুন ডিপ্লয়মেন্টের জন্য Hugging Face vLLM বা SGLang সুপারিশ করে।",
             "<strong>SGLang</strong> — স্ট্রাকচার্ড আউটপুট ও মাল্টি-কল প্রোগ্রামের জন্য অপ্টিমাইজড; RadixAttention প্রিফিক্স ক্যাশিং।<a class=\"cite\" href=\"#src14\">[১৪]</a>",
             "<strong>Ollama</strong> — লোকাল ল্যাপটপ ও ছোট সার্ভারের জন্য এক-লাইনের CLI।",
             "<strong>llama.cpp</strong> — CPU-first, GGUF-native, ফোন ও Raspberry Pi-তেও চলে।<a class=\"cite\" href=\"#src15\">[১৫]</a>",
@@ -520,12 +520,12 @@
             [
               "<strong>Groq</strong>",
               "Ultra-low latency LPU hardware (Language Processing Unit, Groq's own chip)",
-              "Llama, Mixtral, Whisper"
+              "Llama, GPT-OSS, Qwen, Whisper"
             ],
             [
               "<strong>Cerebras</strong>",
               "Fast inference on wafer-scale chips",
-              "Llama, Qwen"
+              "GPT-OSS, Qwen"
             ],
             [
               "<strong>Replicate</strong>",
@@ -639,9 +639,9 @@
           ],
           "remember": [
             "Quantization cuts GPU memory by 2–4× for a small loss in quality.",
-            "Anthropic's and OpenAI's prompt caching save 80–90% of the cost on the cached part.",
-            "Speculative decoding makes throughput 2–3× higher with no quality loss.",
-            "Continuous batching alone typically gives 5–20× higher throughput."
+            "Anthropic's and OpenAI's prompt caching cut the cost of the cached part, by up to 90%.",
+            "Speculative decoding gave 2–3× faster decoding with identical outputs on T5-XXL; gains depend on the model.",
+            "Continuous batching is a core technique in vLLM, which reports 2–4× higher throughput than FasterTransformer and Orca."
           ]
         },
         "bn": {
@@ -682,9 +682,9 @@
           ],
           "remember": [
             "কোয়ান্টাইজেশন সামান্য মান কমিয়ে GPU মেমরি ২–৪× কমায়।",
-            "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।",
-            "স্পেকুলেটিভ ডিকোডিং মান না কমিয়ে থ্রুপুট ২–৩× বেশি করে।",
-            "শুধু কন্টিনিউয়াস ব্যাচিংই সাধারণত ৫–২০× বেশি থ্রুপুট দেয়।"
+            "Anthropic আর OpenAI-র প্রম্পট ক্যাশিং ক্যাশ করা অংশে খরচ সর্বোচ্চ ৯০% পর্যন্ত কমায়।",
+            "স্পেকুলেটিভ ডিকোডিং T5-XXL-এ একই আউটপুটে ডিকোডিং ২–৩× দ্রুত করেছে; লাভ মডেলের ওপর নির্ভর করে।",
+            "কন্টিনিউয়াস ব্যাচিং vLLM-এর একটি মূল কৌশল; vLLM FasterTransformer ও Orca-র চেয়ে ২–৪× বেশি থ্রুপুট জানায়।"
           ]
         }
       },
@@ -709,7 +709,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>GGUF</strong> — llama.cpp's format: a single file that runs on CPU, GPU or both. It is the de facto standard for open-weight local inference.<a class=\"cite\" href=\"#src15\">[15]</a>",
+            "<strong>GGUF</strong> — llama.cpp's format: a single file that runs on CPU, GPU or both. It is widely used for open-weight local inference.<a class=\"cite\" href=\"#src15\">[15]</a>",
             "<strong>AWQ</strong> — Activation-aware Weight Quantization. 4-bit with near-FP16 quality (close to the unquantized original); popular for vLLM/SGLang.<a class=\"cite\" href=\"#src16\">[16]</a>",
             "<strong>GPTQ</strong> — a post-training quantization method; older, still common for GPU serving.",
             "<strong>INT8 / FP8</strong> (eight-bit integer or eight-bit floating point) — minimal-quality-loss quantisation on H100s; native hardware support.",
@@ -737,7 +737,7 @@
           "ordered": false,
           "items": [
             "<strong>Paged KV cache:</strong> instead of one contiguous buffer per request, KV cache memory is allocated in pages (à la OS virtual memory). vLLM's PagedAttention removes the wasted-memory problem of naive serving.<a class=\"cite\" href=\"#src13\">[13]</a>",
-            "<strong>Prefix caching:</strong> if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's <code>prompt_caching</code> and OpenAI's <code>cached_prompt</code> save 80–90% of cost on the cached portion.<a class=\"cite\" href=\"#src17\">[17]</a>"
+            "<strong>Prefix caching:</strong> if many requests share a long system prompt, the server hashes the prefix and reuses the cached KV. Anthropic's <code>cache_control</code> and OpenAI's automatic prompt caching cut the cost of the cached portion. Anthropic cache reads cost 0.1× the base input price (0.05× on some newer models; writes cost 1.25×). OpenAI discounts cached input by up to 90%, depending on model.<a class=\"cite\" href=\"#src17\">[17]</a>"
           ]
         },
         {
@@ -748,7 +748,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The third idea speeds up generation itself. A tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. Net throughput +2–3× for free, no quality loss."
+          "html": "The third idea speeds up generation itself. A tiny draft model proposes the next 5–10 tokens; the big model verifies them in parallel. In Leviathan et al., this gave 2–3× faster decoding on T5-XXL with identical outputs. Gains depend on the model and how often the draft is accepted."
         },
         {
           "type": "heading",
@@ -758,7 +758,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Naive serving processes one request at a time per GPU. <strong>Continuous batching</strong> (vLLM, TGI, SGLang) interleaves tokens from many requests so the GPU is never idle waiting for one slow request. This alone typically delivers 5–20× higher throughput.<a class=\"cite\" href=\"#src13\">[13]</a> Add <code>max_num_seqs</code>, <code>max_model_len</code>, and CUDA-graph capture for the next 2×."
+          "html": "Naive serving processes one request at a time per GPU. <strong>Continuous batching</strong> (vLLM, TGI, SGLang) interleaves tokens from many requests so the GPU is never idle waiting for one slow request. It is a core technique in vLLM; the vLLM paper reports 2–4× higher throughput than FasterTransformer and Orca, which already use it.<a class=\"cite\" href=\"#src13\">[13]</a> Add <code>max_num_seqs</code>, <code>max_model_len</code>, and CUDA-graph capture for the next 2×."
         },
         {
           "type": "heading",
@@ -800,7 +800,7 @@
       "layman": [
         {
           "type": "paragraph",
-          "html": "<strong>Quantisation = \"shrinking the AI without ruining it.\"</strong> A full-size AI model takes 16 GB of memory. Quantise it to 4-bit and it takes 4 GB — losing maybe 1% of quality. For most apps you don't notice. This is why your phone can now run a chat AI offline."
+          "html": "<strong>Quantisation = \"shrinking the AI without ruining it.\"</strong> A full-size AI model takes 16 GB of memory. Quantise it to 4-bit and it takes 4 GB — losing a small amount of quality. For most apps you don't notice. This is why your phone can now run a chat AI offline."
         },
         {
           "type": "paragraph",
@@ -808,7 +808,7 @@
         },
         {
           "type": "paragraph",
-          "html": "• <strong>KV cache</strong> — the AI remembers what it already computed instead of redoing the math. Like a calculator that holds the previous answer.<br>\n       • <strong>Prefix caching</strong> — if 1,000 users all start with the same system prompt (\"You are a customer-service agent for Acme Inc…\"), the AI computes that once and reuses it. Saves 80%+ on the cached part.<br>\n       • <strong>Speculative decoding</strong> — a tiny draft model guesses the next word, the big model checks. Both run at once. Net speedup 2–3× with zero quality loss."
+          "html": "• <strong>KV cache</strong> — the AI remembers what it already computed instead of redoing the math. Like a calculator that holds the previous answer.<br>\n       • <strong>Prefix caching</strong> — if 1,000 users all start with the same system prompt (\"You are a customer-service agent for Acme Inc…\"), the AI computes that once and reuses it. Can save up to 90% on the cached part.<br>\n       • <strong>Speculative decoding</strong> — a tiny draft model guesses the next word, the big model checks. Both run at once. In one published test the speedup was 2–3× with identical output."
         },
         {
           "type": "paragraph",
@@ -853,13 +853,13 @@
           "ordered": false,
           "items": [
             "<strong>পেজড KV ক্যাশ:</strong> প্রতিটি রিকোয়েস্টের জন্য একটি কন্টিগুয়াস বাফারের বদলে KV ক্যাশ মেমরি পেজে (OS ভার্চুয়াল মেমরির মতো) বরাদ্দ করা হয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>",
-            "<strong>প্রিফিক্স ক্যাশিং:</strong> অনেক রিকোয়েস্ট একই দীর্ঘ সিস্টেম প্রম্পট শেয়ার করলে সার্ভার প্রিফিক্স হ্যাশ করে KV পুনরায় ব্যবহার করে। Anthropic-এর <code>prompt_caching</code> ও OpenAI-র <code>cached_prompt</code> ক্যাশ করা অংশে ৮০–৯০% খরচ বাঁচায়।<a class=\"cite\" href=\"#src17\">[১৭]</a>",
-            "<strong>স্পেকুলেটিভ ডিকোডিং:</strong> একটি ছোট ড্রাফট মডেল পরবর্তী ৫–১০ টোকেন প্রস্তাব করে; বড় মডেল সেগুলো সমান্তরালে যাচাই করে। গুণমান না কমিয়ে থ্রুপুট ২–৩×।"
+            "<strong>প্রিফিক্স ক্যাশিং:</strong> অনেক রিকোয়েস্ট একই দীর্ঘ সিস্টেম প্রম্পট শেয়ার করলে সার্ভার প্রিফিক্স হ্যাশ করে KV পুনরায় ব্যবহার করে। Anthropic-এর <code>cache_control</code> ও OpenAI-র স্বয়ংক্রিয় প্রম্পট ক্যাশিং ক্যাশ করা অংশের খরচ কমায়। Anthropic-এ ক্যাশ রিডের দাম বেস ইনপুট দামের ০.১× (কিছু নতুন মডেলে ০.০৫×; রাইটে ১.২৫×)। OpenAI মডেলভেদে ক্যাশ করা ইনপুটে সর্বোচ্চ ৯০% ছাড় দেয়।<a class=\"cite\" href=\"#src17\">[১৭]</a>",
+            "<strong>স্পেকুলেটিভ ডিকোডিং:</strong> একটি ছোট ড্রাফট মডেল পরবর্তী ৫–১০ টোকেন প্রস্তাব করে; বড় মডেল সেগুলো সমান্তরালে যাচাই করে। Leviathan et al.-এর T5-XXL পরীক্ষায় একই আউটপুটে ডিকোডিং ২–৩× দ্রুত; লাভ মডেল আর ড্রাফট গ্রহণের হারের ওপর নির্ভর করে।"
           ]
         },
         {
           "type": "paragraph",
-          "html": "<strong>কন্টিনিউয়াস ব্যাচিং:</strong> নেইভ সার্ভিং GPU-তে একবারে একটি রিকোয়েস্ট প্রক্রিয়া করে। কন্টিনিউয়াস ব্যাচিং (vLLM, TGI, SGLang) অনেক রিকোয়েস্টের টোকেন আন্তঃপ্রবিষ্ট করে যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো নিষ্ক্রিয় না হয়। এটাই এককভাবে ৫–২০× বেশি থ্রুপুট দেয়।<a class=\"cite\" href=\"#src13\">[১৩]</a>"
+          "html": "<strong>কন্টিনিউয়াস ব্যাচিং:</strong> নেইভ সার্ভিং GPU-তে একবারে একটি রিকোয়েস্ট প্রক্রিয়া করে। কন্টিনিউয়াস ব্যাচিং (vLLM, TGI, SGLang) অনেক রিকোয়েস্টের টোকেন আন্তঃপ্রবিষ্ট করে যাতে একটি ধীর রিকোয়েস্টের জন্য GPU কখনো নিষ্ক্রিয় না হয়। এটি vLLM-এর একটি মূল কৌশল; vLLM paper জানায় FasterTransformer ও Orca-র (যেগুলো আগেই এটা ব্যবহার করে) চেয়ে ২–৪× বেশি থ্রুপুট।<a class=\"cite\" href=\"#src13\">[১৩]</a>"
         },
         {
           "type": "paragraph",
@@ -1001,7 +1001,7 @@
                 "example": "The date, time, and name change in every request. The cache only works when the start of the prompt is exactly the same, so the server must work from zero each time. Fix: put the 3,000 fixed tokens first, then add the date, time, and name at the end:\n[fixed system prompt]\nToday is {date}. The user's name is {name}."
               }
             ],
-            "learned": "The server does heavy work on the start of your prompt and stores it. This stored work is the <strong>KV cache</strong>. With <strong>prefix caching</strong>, a new request that starts with the same text reuses it, and you pay about 90% less for that part. But the match must be exact from the first character. One changing line at the top breaks it.",
+            "learned": "The server does heavy work on the start of your prompt and stores it. This stored work is the <strong>KV cache</strong>. With <strong>prefix caching</strong>, a new request that starts with the same text reuses it, and you can pay up to 90% less for that part. But the match must be exact from the first character. One changing line at the top breaks it.",
             "done": "You have a daily cost of 31 USD and 4 USD, and a new prompt with the fixed text first.",
             "check": {
               "question": "Why must the shared part of the prompt come first?",
@@ -1028,7 +1028,7 @@
                 "example": "তারিখ, সময় আর নাম প্রতিটা request-এ বদলায়। Prompt-এর শুরু হুবহু এক থাকলেই শুধু cache কাজ করে, তাই server-কে প্রতিবার শূন্য থেকে কাজ করতে হয়। সমাধান: আগে 3,000 token-এর স্থির অংশ রাখো, তারপর শেষে তারিখ, সময় আর নাম যোগ করো:\n[fixed system prompt]\nToday is {date}. The user's name is {name}."
               }
             ],
-            "learned": "সার্ভার আপনার প্রম্পটের শুরুর অংশে অনেক কাজ করে আর সেটা জমিয়ে রাখে। এই জমানো কাজের নাম <strong>KV ক্যাশ</strong>। <strong>প্রিফিক্স ক্যাশিং</strong> থাকলে একই লেখা দিয়ে শুরু হওয়া নতুন রিকোয়েস্ট সেটা আবার ব্যবহার করে, আর ওই অংশের জন্য আপনি প্রায় ৯০% কম দেন। কিন্তু মিল হতে হবে প্রথম অক্ষর থেকে হুবহু। উপরের একটা বদলানো লাইনই এটা ভেঙে দেয়।",
+            "learned": "সার্ভার আপনার প্রম্পটের শুরুর অংশে অনেক কাজ করে আর সেটা জমিয়ে রাখে। এই জমানো কাজের নাম <strong>KV ক্যাশ</strong>। <strong>প্রিফিক্স ক্যাশিং</strong> থাকলে একই লেখা দিয়ে শুরু হওয়া নতুন রিকোয়েস্ট সেটা আবার ব্যবহার করে, আর ওই অংশের জন্য আপনি সর্বোচ্চ ৯০% কম দেন। কিন্তু মিল হতে হবে প্রথম অক্ষর থেকে হুবহু। উপরের একটা বদলানো লাইনই এটা ভেঙে দেয়।",
             "done": "আপনার কাছে দিনের খরচ ৩১ USD আর ৪ USD আছে, আর স্থির লেখা আগে রাখা একটা নতুন প্রম্পট আছে।",
             "check": {
               "question": "প্রম্পটের সবার জন্য এক রকম অংশ কেন আগে রাখতে হয়?",
@@ -1129,8 +1129,8 @@
     },
     {
       "n": 7,
-      "url": "https://temporal.io/blog/temporal-for-llm-agents",
-      "text": "Temporal — \"Durable Execution for LLM Agents\""
+      "url": "https://temporal.io/blog/building-an-agentic-system-thats-actually-production-ready",
+      "text": "Temporal — \"Building an agentic system that's actually production-ready\""
     },
     {
       "n": 8,
@@ -1284,7 +1284,7 @@
           "TGI",
           "llama.cpp"
         ],
-        "why": "vLLM is described as the throughput champion. Its PagedAttention and continuous batching typically deliver 10-24x the throughput of naive Hugging Face."
+        "why": "vLLM is described as the throughput champion. In the vLLM paper, PagedAttention and continuous batching improved throughput 2-4x over FasterTransformer and Orca at the same latency."
       },
       "bn": {
         "q": "PagedAttention আর কন্টিনিউয়াস ব্যাচিংয়ের কারণে এই পার্ট কোন ইনফারেন্স সার্ভারকে থ্রুপুট চ্যাম্পিয়ন বলেছে?",
@@ -1294,7 +1294,7 @@
           "TGI",
           "llama.cpp"
         ],
-        "why": "vLLM-কে থ্রুপুট চ্যাম্পিয়ন বলা হয়েছে। এর PagedAttention আর কন্টিনিউয়াস ব্যাচিং সাধারণত নেইভ Hugging Face-এর চেয়ে 10-24 গুণ বেশি থ্রুপুট দেয়।"
+        "why": "vLLM-কে থ্রুপুট চ্যাম্পিয়ন বলা হয়েছে। vLLM paper-এ এর PagedAttention আর কন্টিনিউয়াস ব্যাচিং একই ল্যাটেন্সিতে FasterTransformer ও Orca-র চেয়ে 2-4 গুণ থ্রুপুট বাড়িয়েছে।"
       }
     },
     {

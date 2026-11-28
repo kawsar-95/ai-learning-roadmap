@@ -1066,7 +1066,7 @@
           "ordered": false,
           "items": [
             "<strong>A slow query.</strong> If the database spends 900 ms scanning a whole table, nothing else matters. Fix the query first (section 10, Indexes).",
-            "<strong>A distant user.</strong> A packet from California to the Netherlands and back takes about 150 ms <a class=\"cite\" href=\"#src5\">[5]</a>. At that RTT the three round trips above cost 450 ms in the network alone, however fast the server is. Moving content closer to users helps (section 8, Content Delivery)."
+            "<strong>A distant user.</strong> A packet from the US to Europe and back takes about 150 ms <a class=\"cite\" href=\"#src5\">[5]</a>. At that RTT the three round trips above cost 450 ms in the network alone, however fast the server is. Moving content closer to users helps (section 8, Content Delivery)."
           ]
         },
         {
@@ -2357,7 +2357,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A packet from California to the Netherlands and back takes about 150 ms <a class=\"cite\" href=\"#src5\">[5]</a>. No server upgrade changes that, so a user far away pays it on every round trip."
+          "html": "A packet from the US to Europe and back takes about 150 ms <a class=\"cite\" href=\"#src5\">[5]</a>. No server upgrade changes that, so a user far away pays it on every round trip."
         },
         {
           "type": "heading",
@@ -3544,7 +3544,7 @@
               "20 ms"
             ],
             [
-              "Packet from California to the Netherlands and back",
+              "Packet from the US to Europe and back",
               "150 ms"
             ]
           ]
@@ -3594,7 +3594,7 @@
         },
         {
           "type": "paragraph",
-          "html": "একটা সার্ভার যদি সেকেন্ডে ৫০০ রিকোয়েস্ট সামলায়, peak-এ লাগবে প্রায় ১০টি, সাথে কিছু বাড়তি। প্রতিটি রেসিপি ২ KB হলে দিনে ১০ GB, বছরে প্রায় ৩.৬ TB, আর তিনটি কপি রাখলে তার তিন গুণ। কিছু সংখ্যা মনে রাখুন: মেমরি থেকে পড়া প্রায় ১০০ ns, ডিস্ক seek প্রায় ৮ ms, ক্যালিফোর্নিয়া থেকে নেদারল্যান্ডসে গিয়ে ফিরে আসা প্রায় ১৫০ ms। জোর দিয়ে round করুন আর একক (unit) লিখুন।"
+          "html": "একটা সার্ভার যদি সেকেন্ডে ৫০০ রিকোয়েস্ট সামলায়, peak-এ লাগবে প্রায় ১০টি, সাথে কিছু বাড়তি। প্রতিটি রেসিপি ২ KB হলে দিনে ১০ GB, বছরে প্রায় ৩.৬ TB, আর তিনটি কপি রাখলে তার তিন গুণ। কিছু সংখ্যা মনে রাখুন: মেমরি থেকে পড়া প্রায় ১০০ ns, ডিস্ক seek প্রায় ৮ ms, যুক্তরাষ্ট্র থেকে ইউরোপে গিয়ে ফিরে আসা প্রায় ১৫০ ms। জোর দিয়ে round করুন আর একক (unit) লিখুন।"
         },
         {
           "type": "analogy",
@@ -4073,8 +4073,8 @@
                 "id": "app",
                 "state": "warn",
                 "sub": {
-                  "en": "96 vCPU (max)",
-                  "bn": "৯৬ vCPU (সর্বোচ্চ)"
+                  "en": "40 vCPU (max)",
+                  "bn": "৪০ vCPU (সর্বোচ্চ)"
                 }
               }
             ],
@@ -5826,7 +5826,7 @@
               "short": "Health checks",
               "title": "Health checks route around failure",
               "body": [
-                "Every few seconds the LB asks each server a question, such as <code>GET /health</code>. A server that fails several checks in a row is taken out of the pool, and it goes back in when it recovers.",
+                "At a regular interval the LB asks each server a question, such as <code>GET /health</code>. A server that fails a set number of checks in a row is taken out of the pool, and it goes back in when it recovers.",
                 "Server C just crashed and users did not notice. A and B now take 150 requests a second each, about 75% busy."
               ],
               "note": {
@@ -5852,7 +5852,7 @@
               "short": "Health check",
               "title": "Health check ব্যর্থ সার্ভারকে এড়িয়ে চলে",
               "body": [
-                "কয়েক সেকেন্ড পরপর LB প্রতিটি সার্ভারকে একটা প্রশ্ন করে, যেমন <code>GET /health</code>। পরপর কয়েকটা check-এ ব্যর্থ হলে সার্ভারটাকে pool থেকে সরানো হয়, আর সুস্থ হলে ফিরিয়ে আনা হয়।",
+                "নির্দিষ্ট বিরতিতে LB প্রতিটি সার্ভারকে একটা প্রশ্ন করে, যেমন <code>GET /health</code>। পরপর নির্দিষ্ট সংখ্যক check-এ ব্যর্থ হলে সার্ভারটাকে pool থেকে সরানো হয়, আর সুস্থ হলে ফিরিয়ে আনা হয়।",
                 "সার্ভার C এইমাত্র বিকল হয়েছে, আর ব্যবহারকারীরা টেরও পায়নি। A আর B এখন সেকেন্ডে ১৫০টি করে রিকোয়েস্ট সামলায়, প্রায় ৭৫% ব্যস্ত।"
               ],
               "note": {
@@ -6750,7 +6750,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An LB must stop sending traffic to a dead server. An <strong>active</strong> check calls a health endpoint on each server every few seconds and takes a server out after several failures <a class=\"cite\" href=\"#src12\">[12]</a>. A <strong>passive</strong> check watches real traffic: NGINX marks a server unavailable after <code>max_fails</code> failed attempts within <code>fail_timeout</code> <a class=\"cite\" href=\"#src11\">[11]</a>."
+          "html": "An LB must stop sending traffic to a dead server. An <strong>active</strong> check calls a health endpoint on each server at a set interval and takes a server out after a set number of consecutive failures. On an AWS Application Load Balancer the defaults are every 30 seconds and 2 failures <a class=\"cite\" href=\"#src12\">[12]</a>. A <strong>passive</strong> check watches real traffic: NGINX marks a server unavailable after <code>max_fails</code> failed attempts within <code>fail_timeout</code> <a class=\"cite\" href=\"#src11\">[11]</a>."
         },
         {
           "type": "heading",
@@ -8255,7 +8255,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A load balancer can pin each user to one server, by a cookie or by hashing the client address <a class=\"cite\" href=\"#src11\">[11]</a>. It works until that server dies, or is removed when the pool shrinks: every session on it is gone. Load also becomes uneven, because some users stay much longer than others. The Twelve-Factor App calls sticky sessions a violation and asks for processes that are stateless and share nothing <a class=\"cite\" href=\"#src16\">[16]</a>."
+          "html": "A load balancer can pin each user to one server, by hashing the client address <a class=\"cite\" href=\"#src11\">[11]</a>, or by a cookie. It works until that server dies, or is removed when the pool shrinks: every session on it is gone. Load also becomes uneven, because some users stay much longer than others. The Twelve-Factor App calls sticky sessions a violation and asks for processes that are stateless and share nothing <a class=\"cite\" href=\"#src16\">[16]</a>."
         },
         {
           "type": "heading",
@@ -11118,7 +11118,7 @@
               "title": "Origin shield: one more layer",
               "body": [
                 "A real CDN has hundreds of edges. When a new file goes viral, each edge misses once, so hundreds of requests for the same file reach your origin at the same moment.",
-                "An origin shield is one more cache layer between the edges and the origin. The misses of many edges become one request."
+                "An origin shield is one more cache layer between the edges and the origin. The misses of many edges are merged into far fewer requests."
               ],
               "note": {
                 "kind": "tip",
@@ -11131,7 +11131,7 @@
                 },
                 {
                   "sign": "~",
-                  "html": "The origin sees one fetch for each file"
+                  "html": "The origin sees far fewer fetches"
                 }
               ]
             },
@@ -11140,7 +11140,7 @@
               "title": "Origin shield: আরও একটা স্তর",
               "body": [
                 "আসল CDN-এ শত শত edge থাকে। নতুন একটা ফাইল ভাইরাল হলে প্রতিটি edge একবার miss করে, ফলে একই ফাইলের জন্য শত শত রিকোয়েস্ট একই মুহূর্তে আপনার origin-এ পৌঁছায়।",
-                "Origin shield হলো edge আর origin-এর মাঝখানে আরও একটা cache স্তর। অনেক edge-এর miss মিলে হয়ে যায় একটাই রিকোয়েস্ট।"
+                "Origin shield হলো edge আর origin-এর মাঝখানে আরও একটা cache স্তর। অনেক edge-এর miss মিলে হয়ে যায় অনেক কম রিকোয়েস্ট।"
               ],
               "note": {
                 "kind": "tip",
@@ -11153,7 +11153,7 @@
                 },
                 {
                   "sign": "~",
-                  "html": "Origin প্রতিটি ফাইলের জন্য একটাই fetch দেখে"
+                  "html": "Origin অনেক কম fetch দেখে"
                 }
               ]
             },
@@ -11388,7 +11388,7 @@
         },
         {
           "type": "paragraph",
-          "html": "With hundreds of edges, a new file can cause hundreds of misses at the origin. An origin shield is one more cache layer between the edges and the origin, so the misses of many edges become one request to the origin <a class=\"cite\" href=\"#src25\">[25]</a>."
+          "html": "With hundreds of edges, a new file can cause hundreds of misses at the origin. An origin shield is one more cache layer between the edges and the origin, so the misses of many edges are merged into far fewer requests to the origin <a class=\"cite\" href=\"#src25\">[25]</a>."
         },
         {
           "type": "table",
@@ -13353,7 +13353,7 @@
                 },
                 {
                   "sign": "+",
-                  "html": "A city-only query falls back to a scan"
+                  "html": "A city-only query usually falls back to a scan"
                 }
               ]
             },
@@ -13375,7 +13375,7 @@
                 },
                 {
                   "sign": "+",
-                  "html": "শুধু city-র query স্ক্যানে ফিরে যায়"
+                  "html": "শুধু city-র query সাধারণত স্ক্যানে ফিরে যায়"
                 }
               ]
             },
@@ -13939,7 +13939,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Each insert, update and delete must also update every index on the table, and each index takes disk space. Indexes add this overhead to the whole database, so keep the ones your queries use and drop the rest <a class=\"cite\" href=\"#src31\">[31]</a>."
+          "html": "Every change to the table must also keep each index synchronized, which adds overhead to data manipulation operations <a class=\"cite\" href=\"#src31\">[31]</a>. Keep the indexes your queries use and drop the seldom-used ones."
         },
         {
           "type": "heading",
@@ -13949,7 +13949,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An index on <code>(country, city)</code> is sorted by country first, then by city. It serves <code>WHERE country = 'BD'</code> and <code>WHERE country = 'BD' AND city = 'Dhaka'</code>. It helps little with <code>WHERE city = 'Dhaka'</code> alone, because a multicolumn B-tree index is most efficient when the query constrains its leading (leftmost) columns <a class=\"cite\" href=\"#src32\">[32]</a>."
+          "html": "An index on <code>(country, city)</code> is sorted by country first, then by city. It serves <code>WHERE country = 'BD'</code> and <code>WHERE country = 'BD' AND city = 'Dhaka'</code>. It usually helps little with <code>WHERE city = 'Dhaka'</code> alone, because a multicolumn B-tree index is most efficient when the query constrains its leading (leftmost) columns <a class=\"cite\" href=\"#src32\">[32]</a>. Newer PostgreSQL versions can sometimes use skip scan when the leading column has few distinct values."
         },
         {
           "type": "heading",
@@ -14027,7 +14027,7 @@
         },
         {
           "type": "paragraph",
-          "html": "কয়েক কলামের ইনডেক্সে ক্রম গুরুত্বপূর্ণ: <code>(country, city)</code> ইনডেক্স country দিয়ে খুঁজলে কাজে লাগে, কিন্তু শুধু city দিয়ে খুঁজলে প্রায় লাগে না। শুরুতে wildcard (<code>LIKE '%son'</code>), কলামের ওপর function, বা বেশিরভাগ সারিতে একই মান থাকলে ইনডেক্স সাহায্য করে না। <code>EXPLAIN</code> দেখায় ডেটাবেস কোন plan নিল, আর <code>EXPLAIN ANALYZE</code> দেখায় আসল সময়। Query-র দরকারি সব কলাম ইনডেক্সেই থাকলে টেবিলে না গিয়েই উত্তর মেলে; একে covering index বলে।"
+          "html": "কয়েক কলামের ইনডেক্সে ক্রম গুরুত্বপূর্ণ: <code>(country, city)</code> ইনডেক্স country দিয়ে খুঁজলে কাজে লাগে, কিন্তু শুধু city দিয়ে খুঁজলে সাধারণত প্রায় লাগে না। শুরুতে wildcard (<code>LIKE '%son'</code>), কলামের ওপর function, বা বেশিরভাগ সারিতে একই মান থাকলে ইনডেক্স সাহায্য করে না। <code>EXPLAIN</code> দেখায় ডেটাবেস কোন plan নিল, আর <code>EXPLAIN ANALYZE</code> দেখায় আসল সময়। Query-র দরকারি সব কলাম ইনডেক্সেই থাকলে টেবিলে না গিয়েই উত্তর মেলে; একে covering index বলে।"
         },
         {
           "type": "analogy",
@@ -15100,7 +15100,7 @@
               "short": "Find a key",
               "title": "Case: where is my key?",
               "body": [
-                "A read checks the memtable first, then the SSTables from newest to oldest. A key that was written long ago, or one that does not exist, could cost a search of every file.",
+                "A read checks the memtable first, then the SSTables, with the newest data winning. A key that was written long ago, or one that does not exist, could cost a search of every file.",
                 "A Bloom filter per file says “definitely not in this file” without touching the disk, so a lookup usually has to read only a few files."
               ],
               "note": {
@@ -15126,7 +15126,7 @@
               "short": "Key খোঁজা",
               "title": "ঘটনা: আমার key কোথায়?",
               "body": [
-                "Read আগে memtable দেখে, তারপর SSTable-গুলো নতুন থেকে পুরোনোর ক্রমে। অনেক আগে লেখা কোনো key বা যে key-ই নেই, তার জন্য প্রতিটি ফাইল খুঁজতে হতে পারে।",
+                "Read আগে memtable দেখে, তারপর SSTable-গুলো, যেখানে নতুন ডেটাই প্রাধান্য পায়। অনেক আগে লেখা কোনো key বা যে key-ই নেই, তার জন্য প্রতিটি ফাইল খুঁজতে হতে পারে।",
                 "প্রতিটি ফাইলের একটা Bloom filter বলে দেয় “এই ফাইলে নিশ্চিতভাবে নেই”, disk না ছুঁয়েই, তাই একটা lookup-কে সাধারণত পড়তে হয় মাত্র কয়েকটা ফাইল।"
               ],
               "note": {
@@ -15613,7 +15613,7 @@
           "items": [
             "A write goes to the log and to a sorted table in memory, the memtable.",
             "When the memtable is full, it is written to disk as an immutable sorted file, an SSTable.",
-            "A read checks the memtable, then the SSTables from newest to oldest. A Bloom filter per file skips the files that cannot hold the key.",
+            "A read checks the memtable and the SSTables as a merged view, with the newest data winning. Optionally, a Bloom filter per file skips the files that cannot hold the key.",
             "In the background, compaction merges SSTables and drops overwritten and deleted values."
           ]
         },
@@ -18730,7 +18730,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "html": "<strong>Shard late, and choose the key with care.</strong> Sharding brings cross-shard queries, harder transactions and harder operations. Use indexes, caching and read replicas first. A bad shard key is very expensive to change later."
+              "html": "<strong>Shard late, and choose the key with care.</strong> Sharding brings cross-shard queries, harder transactions and harder operations. Use indexes, caching and read replicas first. A bad shard key is hard to fix later: changing it means refining the key or resharding the collection."
             }
           ]
         }
@@ -20308,7 +20308,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Consistent hashing maps both servers and keys onto the same circle of hash values <a class=\"cite\" href=\"#src49\">[49]</a>. A key belongs to the first server found by walking clockwise from the key's position."
+          "html": "Consistent hashing maps both servers and keys onto the same range of hash values, joined into a circle <a class=\"cite\" href=\"#src49\">[49]</a>. A key belongs to the first server found by walking clockwise from the key's position <a class=\"cite\" href=\"#src50\">[50]</a>."
         },
         {
           "type": "heading",
@@ -21988,7 +21988,7 @@
           "ordered": false,
           "items": [
             "<strong>UUIDv7</strong> starts with a 48-bit Unix timestamp in milliseconds, followed by random bits <a class=\"cite\" href=\"#src52\">[52]</a>.",
-            "<strong>Snowflake</strong>, built at Twitter, packs the id into 64 bits: one unused sign bit, then 41 bits of milliseconds since a custom epoch, a 10-bit machine id and a 12-bit sequence number <a class=\"cite\" href=\"#src53\">[53]</a>. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted)."
+            "<strong>Snowflake</strong>, built at Twitter, packs the id into a 64-bit integer: a 41-bit millisecond timestamp since a custom epoch, a 10-bit machine id and a 12-bit sequence number, 63 bits in all <a class=\"cite\" href=\"#src53\">[53]</a>. One machine can make 4,096 ids in each millisecond, and the ids are roughly ordered by time (k-sorted)."
           ]
         },
         {
@@ -23039,7 +23039,7 @@
               "short": "CAP",
               "title": "What CAP actually says",
               "body": [
-                "The CAP theorem: when a network partition happens, a replicated system cannot be both consistent, with every read seeing the latest write, and available, with every request getting a non-error answer. Gilbert and Lynch proved it.",
+                "The CAP theorem: when a network partition happens, a replicated system cannot be both consistent, with every read seeing the latest write, and available, with every request receiving a response. Gilbert and Lynch proved it.",
                 "Brewer, who proposed the idea, later wrote that “2 of 3” is misleading. Partitions are rare, so most of the time you can have both. The real decisions are how to behave during a partition and how to recover afterwards."
               ],
               "note": {
@@ -23051,7 +23051,7 @@
               "short": "CAP",
               "title": "CAP আসলে কী বলে",
               "body": [
-                "CAP theorem: network partition ঘটলে একটা replicated সিস্টেম একসাথে consistent, যেখানে প্রতিটি read সর্বশেষ write দেখে, আর available, যেখানে প্রতিটি request error-ছাড়া উত্তর পায়, হতে পারে না। Gilbert আর Lynch এটা প্রমাণ করেছিলেন।",
+                "CAP theorem: network partition ঘটলে একটা replicated সিস্টেম একসাথে consistent, যেখানে প্রতিটি read সর্বশেষ write দেখে, আর available, যেখানে প্রতিটি request উত্তর পায়, হতে পারে না। Gilbert আর Lynch এটা প্রমাণ করেছিলেন।",
                 "ধারণাটার প্রস্তাবক Brewer পরে লিখেছিলেন, “৩-এর ২টি” কথাটা বিভ্রান্তিকর। Partition বিরল, তাই বেশিরভাগ সময় দুটোই পাওয়া যায়। আসল সিদ্ধান্ত হলো partition-এর সময় কীভাবে চলবে আর পরে কীভাবে সেরে উঠবে।"
               ],
               "note": {
@@ -23527,7 +23527,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Gilbert and Lynch proved this trade-off as the CAP theorem: during a partition, a system cannot be both consistent, with every read seeing the latest write, and available, with every request getting a non-error answer <a class=\"cite\" href=\"#src54\">[54]</a>."
+          "html": "Gilbert and Lynch proved this trade-off as the CAP theorem: during a partition, a system cannot be both consistent, with every read seeing the latest write, and available, with every request receiving a response <a class=\"cite\" href=\"#src54\">[54]</a>."
         },
         {
           "type": "heading",
@@ -24849,7 +24849,7 @@
               "short": "In practice",
               "title": "You use it far more than you write it",
               "body": [
-                "Few teams write consensus code themselves. They use systems built on it: Kubernetes keeps all of its cluster data in etcd, which uses Raft.",
+                "Few teams write consensus code themselves. They use systems built on it: Kubernetes keeps all of its API server data in etcd, which uses Raft.",
                 "You run a small consensus cluster, and keep only the critical facts in it: who the leader is, who holds a lock, the configuration. The bulk of your data lives elsewhere."
               ],
               "note": {
@@ -24861,7 +24861,7 @@
               "short": "বাস্তবে",
               "title": "আপনি এটা লেখার চেয়ে অনেক বেশি ব্যবহার করেন",
               "body": [
-                "কম দলই নিজেরা consensus-এর কোড লেখে। তারা এর ওপর বানানো সিস্টেম ব্যবহার করে: Kubernetes তার cluster-এর সব ডেটা রাখে etcd-তে, যা Raft ব্যবহার করে।",
+                "কম দলই নিজেরা consensus-এর কোড লেখে। তারা এর ওপর বানানো সিস্টেম ব্যবহার করে: Kubernetes তার API server-এর সব ডেটা রাখে etcd-তে, যা Raft ব্যবহার করে।",
                 "আপনি চালান একটা ছোট consensus cluster, আর তাতে রাখেন শুধু জরুরি তথ্য: কে leader, কার হাতে lock, কনফিগারেশন। আপনার ডেটার বেশিরভাগ থাকে অন্য জায়গায়।"
               ],
               "note": {
@@ -24888,8 +24888,8 @@
               {
                 "id": "k8s",
                 "sub": {
-                  "en": "all cluster data",
-                  "bn": "cluster-এর সব ডেটা"
+                  "en": "all API server data",
+                  "bn": "API server-এর সব ডেটা"
                 }
               }
             ],
@@ -25099,7 +25099,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every committed write needs a round trip to a majority, so consensus adds latency, and a cluster spread across regions pays long round trips. Few teams write consensus code themselves. They use systems built on it: Kubernetes, for example, keeps all of its cluster data in etcd <a class=\"cite\" href=\"#src61\">[61]</a>, which uses Raft."
+          "html": "Every committed write needs a round trip to a majority, so consensus adds latency, and a cluster spread across regions pays long round trips. Few teams write consensus code themselves. They use systems built on it: Kubernetes, for example, keeps all of its API server data in etcd <a class=\"cite\" href=\"#src61\">[61]</a>, which uses Raft."
         }
       ],
       "layman": [
@@ -28631,7 +28631,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A row can point to a file whose upload never finished, and a file can exist with no row. Give each row a status such as <code>pending</code> or <code>ready</code>, mark it ready only once the upload is confirmed, and run a cleanup job for the leftovers on both sides. A lifecycle rule can also abort incomplete multipart uploads after a few days <a class=\"cite\" href=\"#src70\">[70]</a>."
+          "html": "A row can point to a file whose upload never finished, and a file can exist with no row. Give each row a status such as <code>pending</code> or <code>ready</code>, mark it ready only once the upload is confirmed, and run a cleanup job for the leftovers on both sides. A lifecycle rule can also abort incomplete multipart uploads after a few days."
         },
         {
           "type": "heading",
@@ -30077,7 +30077,7 @@
             },
             {
               "term": "Acknowledge",
-              "meaning": "The consumer's signal that it finished a message. Messages never acknowledged are delivered again."
+              "meaning": "The consumer's signal that it finished a message. Messages not acknowledged when the consumer fails are delivered again."
             },
             {
               "term": "At-least-once delivery",
@@ -30781,7 +30781,7 @@
               "short": "Acks",
               "title": "Acknowledge when done",
               "body": [
-                "A job is only hidden while a worker has it. When the worker finishes, it sends an acknowledgement and the queue deletes the job. With RabbitMQ, messages delivered but never acknowledged are delivered again; Amazon SQS hides a received message for a visibility timeout, and it reappears if the consumer does not delete it in time.",
+                "A job is only hidden while a worker has it. When the worker finishes, it sends an acknowledgement and the queue deletes the job. With RabbitMQ, a message that was not acknowledged is requeued when the consumer's channel or connection closes; Amazon SQS hides a received message for a visibility timeout, and it reappears if the consumer does not delete it in time.",
                 "So a message can arrive more than once: at-least-once delivery. Consumers must be idempotent, because doing the same job twice must have the same effect as doing it once."
               ],
               "note": {
@@ -30807,7 +30807,7 @@
               "short": "Ack",
               "title": "শেষ হলে acknowledge করুন",
               "body": [
-                "Worker যতক্ষণ job ধরে আছে, ততক্ষণ সেটা শুধু লুকানো থাকে। Worker শেষ করলে একটা acknowledgement পাঠায় আর queue job মুছে দেয়। RabbitMQ-তে যে message পৌঁছেছে কিন্তু কখনো acknowledge হয়নি, সেটা আবার পাঠানো হয়; Amazon SQS একটা পাওয়া message-কে visibility timeout পর্যন্ত লুকিয়ে রাখে, আর consumer সময়মতো না মুছলে সেটা আবার দেখা দেয়।",
+                "Worker যতক্ষণ job ধরে আছে, ততক্ষণ সেটা শুধু লুকানো থাকে। Worker শেষ করলে একটা acknowledgement পাঠায় আর queue job মুছে দেয়। RabbitMQ-তে যে message acknowledge হয়নি, consumer-এর channel বা connection বন্ধ হলে সেটা আবার queue-তে ফেরে; Amazon SQS একটা পাওয়া message-কে visibility timeout পর্যন্ত লুকিয়ে রাখে, আর consumer সময়মতো না মুছলে সেটা আবার দেখা দেয়।",
                 "তাই একটা message একাধিকবার আসতে পারে: at-least-once delivery। Consumer-কে idempotent হতে হবে, কারণ একই job দুবার করলে ফল একবার করার সমান হতে হবে।"
               ],
               "note": {
@@ -31465,7 +31465,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A message must not vanish just because a worker took it. With RabbitMQ, a consumer acknowledges a message after it finishes the work, and messages that were delivered but never acknowledged are delivered again <a class=\"cite\" href=\"#src79\">[79]</a>. Amazon SQS hides a received message for a visibility timeout, and the message reappears if the consumer does not delete it in time <a class=\"cite\" href=\"#src80\">[80]</a>."
+          "html": "A message must not vanish just because a worker took it. With RabbitMQ, a consumer acknowledges a message after it finishes the work, and a delivery that was not acknowledged is requeued when the consumer's channel or connection closes, for example when the worker crashes <a class=\"cite\" href=\"#src79\">[79]</a>. Amazon SQS hides a received message for a visibility timeout, and the message reappears if the consumer does not delete it in time <a class=\"cite\" href=\"#src80\">[80]</a>."
         },
         {
           "type": "paragraph",
@@ -33685,7 +33685,7 @@
               ],
               "note": {
                 "kind": "tip",
-                "html": "SSE is plain HTTP, so it passes through most proxies and reconnects on its own."
+                "html": "SSE is plain HTTP and the browser's EventSource reconnects on its own, but a proxy that buffers responses can stall the stream."
               },
               "changes": [
                 {
@@ -33711,7 +33711,7 @@
               ],
               "note": {
                 "kind": "tip",
-                "html": "SSE সাধারণ HTTP, তাই বেশিরভাগ proxy পার হয় আর নিজে থেকেই আবার যুক্ত হয়।"
+                "html": "SSE সাধারণ HTTP আর browser-এর EventSource নিজে থেকেই আবার যুক্ত হয়, কিন্তু response জমিয়ে রাখা proxy stream আটকে দিতে পারে।"
               },
               "changes": [
                 {
@@ -35241,7 +35241,7 @@
               "short": "Zones",
               "title": "Spread across availability zones",
               "body": [
-                "Cloud providers split a region into availability zones: separate data centers that do not share generators or cooling equipment and are supplied by different power substations. Put one of each part in zone A and its twin in zone B.",
+                "Cloud providers split a region into availability zones: separate data centers that are designed not to share generators or cooling equipment and to be supplied by different power substations. Put one of each part in zone A and its twin in zone B.",
                 "Now losing a building takes out half the copies, not all of them. If the zones fail independently, both are down together about one time in a million, which brings the stack to about 99.9996%: roughly 2 minutes a year."
               ],
               "note": {
@@ -35267,7 +35267,7 @@
               "short": "Zone",
               "title": "Availability zone জুড়ে ছড়িয়ে দিন",
               "body": [
-                "Cloud provider একটা region-কে ভাগ করে availability zone-এ: আলাদা data center, যারা generator বা cooling equipment ভাগ করে না এবং ভিন্ন power substation থেকে বিদ্যুৎ পায়। প্রতিটি অংশের একটা কপি zone A-তে রাখুন আর তার জুড়ি zone B-তে।",
+                "Cloud provider একটা region-কে ভাগ করে availability zone-এ: আলাদা data center, যেগুলো generator বা cooling equipment ভাগ না করার এবং ভিন্ন power substation থেকে বিদ্যুৎ পাওয়ার নকশায় বানানো। প্রতিটি অংশের একটা কপি zone A-তে রাখুন আর তার জুড়ি zone B-তে।",
                 "এখন একটা ভবন হারালে অর্ধেক copy যায়, সব নয়। Zone দুটো স্বতন্ত্রভাবে ব্যর্থ হলে দুটো একসাথে বন্ধ থাকে প্রায় দশ লাখে একবার, ফলে stack দাঁড়ায় প্রায় ৯৯.৯৯৯৬%-এ: বছরে মোটামুটি ২ মিনিট।"
               ],
               "note": {
@@ -36101,7 +36101,7 @@
               "title": "Beyond zones: multiple regions",
               "body": [
                 "Zones protect against a building failing. A whole region can still fail or be cut off, for example by a regional network failure or a problem in the cloud's control plane.",
-                "Running in two regions protects against that, but it costs more, and the data must be replicated over a long distance: about 90 ms round trip between far-apart regions. That brings back the trade-offs of the CAP lesson: wait for the far copy and every write is slower, or do not wait and risk losing the latest writes."
+                "Running in two regions protects against that, but it costs more, and the data must be replicated over a long distance: for example about 90 ms round trip between far-apart regions. That brings back the trade-offs of the CAP lesson: wait for the far copy and every write is slower, or do not wait and risk losing the latest writes."
               ],
               "note": {
                 "kind": "insight",
@@ -36127,7 +36127,7 @@
               "title": "Zone-এর বাইরে: একাধিক region",
               "body": [
                 "Zone রক্ষা করে একটা ভবন ব্যর্থ হওয়া থেকে। তবু একটা গোটা region ব্যর্থ বা বিচ্ছিন্ন হতে পারে, যেমন কোনো আঞ্চলিক network ব্যর্থতা বা cloud-এর control plane-এর সমস্যায়।",
-                "দুটো region-এ চালালে তা থেকে রক্ষা মেলে, কিন্তু খরচ বেশি, আর ডেটা অনেক দূরত্বে replicate করতে হয়: দূরের দুটো region-এর মধ্যে round trip প্রায় ৯০ ms। এতে ফিরে আসে CAP পাঠের লাভ-ক্ষতি: দূরের copy-র জন্য অপেক্ষা করলে প্রতিটি write ধীর হয়, অপেক্ষা না করলে সর্বশেষ write হারানোর ঝুঁকি।"
+                "দুটো region-এ চালালে তা থেকে রক্ষা মেলে, কিন্তু খরচ বেশি, আর ডেটা অনেক দূরত্বে replicate করতে হয়: দূরের দুটো region-এর মধ্যে round trip, ধরুন, প্রায় ৯০ ms। এতে ফিরে আসে CAP পাঠের লাভ-ক্ষতি: দূরের copy-র জন্য অপেক্ষা করলে প্রতিটি write ধীর হয়, অপেক্ষা না করলে সর্বশেষ write হারানোর ঝুঁকি।"
               ],
               "note": {
                 "kind": "insight",
@@ -36424,7 +36424,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Two servers in the same rack share power and a network switch, so they can fail together. Cloud providers group data centers into availability zones that do not share points of failure such as generators and cooling equipment, and that are supplied by different power substations <a class=\"cite\" href=\"#src92\">[92]</a>. Copies in different zones survive the loss of one building. When a zone goes dark, health checks route traffic to the others, and a database standby in another zone takes over."
+          "html": "Two servers in the same rack share power and a network switch, so they can fail together. AWS designs its availability zones so that generators and cooling equipment are not shared and the zones are supplied by different power substations <a class=\"cite\" href=\"#src92\">[92]</a>. Copies in different zones survive the loss of one building. When a zone goes dark, health checks route traffic to the others, and a database standby in another zone takes over."
         },
         {
           "type": "heading",
@@ -39741,7 +39741,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Every network call needs a timeout. Choose it from the dependency's measured latency, for example its p99.9, rather than from a round default <a class=\"cite\" href=\"#src100\">[100]</a>. When a call times out, use a fallback if you have one: a cached answer, a default, or the page without recommendations."
+          "html": "Every network call needs a timeout. Choose it from the dependency's measured latency, for example its p99.9 <a class=\"cite\" href=\"#src100\">[100]</a>, rather than from a round default. When a call times out, use a fallback if you have one: a cached answer, a default, or the page without recommendations."
         },
         {
           "type": "heading",
@@ -39799,7 +39799,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Pass the deadline along.</strong> If the user's request has 2 seconds left, a call three services deep should not wait 10. gRPC propagates a deadline to downstream calls, so the work stops once nobody is waiting for it <a class=\"cite\" href=\"#src104\">[104]</a>.",
+            "<strong>Pass the deadline along.</strong> If the user's request has 2 seconds left, a call three services deep should not wait 10. gRPC can propagate a deadline to downstream calls (on by default in Java and Go, to be enabled in C++), and a server should stop its work once the call is cancelled <a class=\"cite\" href=\"#src104\">[104]</a>.",
             "<strong>Bulkheads.</strong> Give each dependency its own pool of threads or connections. A slow recommendations service can then use up only its own pool, not the one checkout needs for payments <a class=\"cite\" href=\"#src105\">[105]</a>."
           ]
         }
@@ -40242,7 +40242,7 @@
               "short": "It’s slow",
               "title": "“Checkout is slow.” Where?",
               "body": [
-                "Support tickets pile up: checkout takes about a second, where it used to take a tenth of that. A checkout request passes the gateway, the checkout service, payments, inventory, two databases and a cache.",
+                "Support tickets pile up: checkout takes about a second, where it used to take about an eighth of that. A checkout request passes the gateway, the checkout service, payments, inventory, two databases and a cache.",
                 "A vague complaint gives no hint which of them is slow. Observability is the ability to answer such questions from the data the system already emits, without shipping new code."
               ],
               "note": {
@@ -40254,7 +40254,7 @@
               "short": "ধীর লাগছে",
               "title": "“Checkout ধীর।” কোথায়?",
               "body": [
-                "Support ticket জমছে: checkout লাগছে প্রায় এক সেকেন্ড, যেখানে আগে লাগত তার দশ ভাগের এক ভাগ। একটা checkout request পার হয় gateway, checkout সার্ভিস, payments, inventory, দুটো database আর একটা cache।",
+                "Support ticket জমছে: checkout লাগছে প্রায় এক সেকেন্ড, যেখানে আগে লাগত তার আট ভাগের এক ভাগ। একটা checkout request পার হয় gateway, checkout সার্ভিস, payments, inventory, দুটো database আর একটা cache।",
                 "একটা অস্পষ্ট অভিযোগ ইঙ্গিতও দেয় না এদের কোনটা ধীর। Observability হলো এমন প্রশ্নের উত্তর দেওয়ার ক্ষমতা, সিস্টেম যে ডেটা আগে থেকেই বের করে তা থেকে, নতুন কোড না ছেড়েই।"
               ],
               "note": {
@@ -43403,7 +43403,7 @@
         },
         {
           "type": "paragraph",
-          "html": "An order-history page needs orders, products and sellers, which three services now own. Calling all three for every page view is slow and fragile. Instead, keep a local, read-only copy of the data the page needs, updated from the other services' events. This is the read model of the CQRS pattern <a class=\"cite\" href=\"#src115\">[115]</a>."
+          "html": "An order-history page needs orders, products and sellers, which three services now own. Calling all three for every page view is slow and fragile. Instead, keep a local, read-only copy of the data the page needs, updated from the other services' events. This is the view database of the CQRS pattern <a class=\"cite\" href=\"#src115\">[115]</a>, often called the read model."
         },
         {
           "type": "heading",
@@ -43423,7 +43423,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Do not rewrite a monolith in one go. Put a routing layer in front of it, move one capability at a time into a new service, and route that capability's traffic there. The old system shrinks until it can be removed, like a tree overgrown by a strangler fig <a class=\"cite\" href=\"#src117\">[117]</a>."
+          "html": "Do not rewrite a monolith in one go. The old system shrinks until it can be removed, like a tree overgrown by a strangler fig <a class=\"cite\" href=\"#src117\">[117]</a>. In practice, put a routing layer in front of it, move one capability at a time into a new service, and route that capability's traffic there."
         },
         {
           "type": "table",
@@ -45483,7 +45483,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Outside clients should not need to know your internal services. An API gateway is the single entry point: it routes each request to the right service and handles shared concerns such as authentication and rate limiting. A variant, backends for frontends, gives each kind of client its own gateway <a class=\"cite\" href=\"#src125\">[125]</a>."
+          "html": "Outside clients should not need to know your internal services. An API gateway is the single entry point: it routes each request to the right service and handles shared concerns such as authentication. A variant, backends for frontends, gives each kind of client its own gateway <a class=\"cite\" href=\"#src125\">[125]</a>."
         }
       ],
       "layman": [
@@ -46085,7 +46085,7 @@
               ],
               "note": {
                 "kind": "warn",
-                "html": "Locks held while waiting for a dead coordinator are the worst kind: nobody can release them safely. Many services and message brokers do not support 2PC at all."
+                "html": "Locks held while waiting for a dead coordinator are the worst kind: nobody can release them safely. In a microservices design, 2PC is often not an option."
               },
               "changes": [
                 {
@@ -46111,7 +46111,7 @@
               ],
               "note": {
                 "kind": "warn",
-                "html": "বন্ধ coordinator-এর জন্য অপেক্ষার সময় ধরে-রাখা lock সবচেয়ে খারাপ ধরনের: কেউই নিরাপদে তা ছাড়তে পারে না। অনেক সার্ভিস আর message broker 2PC-কে মোটেই সমর্থন করে না।"
+                "html": "বন্ধ coordinator-এর জন্য অপেক্ষার সময় ধরে-রাখা lock সবচেয়ে খারাপ ধরনের: কেউই নিরাপদে তা ছাড়তে পারে না। microservices ডিজাইনে 2PC প্রায়ই বিকল্প নয়।"
               },
               "changes": [
                 {
@@ -47178,7 +47178,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Two-phase commit (2PC) uses a coordinator. In the first phase it asks every participant to prepare, a promise that it can commit. In the second phase it tells all of them to commit, or all of them to abort. The weakness is the coordinator: if it fails after the participants have prepared, the protocol can block, and nobody knows the outcome until the coordinator is repaired <a class=\"cite\" href=\"#src126\">[126]</a>. Meanwhile the participants hold their locks. Many services and message brokers do not support 2PC at all."
+          "html": "Two-phase commit (2PC) uses a coordinator. In the first phase it asks every participant to prepare, a promise that it can commit. In the second phase it tells all of them to commit, or all of them to abort. The weakness is the coordinator: if it fails after the participants have prepared, the protocol can block, and nobody knows the outcome until the coordinator is repaired <a class=\"cite\" href=\"#src126\">[126]</a>. Meanwhile the participants hold their locks. In a microservices design, 2PC is often not an option."
         },
         {
           "type": "heading",
@@ -47200,8 +47200,8 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "<strong>Orchestration.</strong> An orchestrator tells each service what to do next and decides when to compensate. The flow lives in one place and is easy to follow <a class=\"cite\" href=\"#src128\">[128]</a>.",
-            "<strong>Choreography.</strong> There is no central controller. Each service listens for events and publishes its own, and the flow comes from these reactions. It is loosely coupled, but harder to follow as the steps grow <a class=\"cite\" href=\"#src128\">[128]</a>."
+            "<strong>Orchestration.</strong> An orchestrator tells each service what to do next and decides when to compensate <a class=\"cite\" href=\"#src128\">[128]</a>. The flow lives in one place and is easy to follow.",
+            "<strong>Choreography.</strong> There is no central controller. Each service listens for events and publishes its own, and the flow comes from these reactions <a class=\"cite\" href=\"#src128\">[128]</a>. It is loosely coupled, but harder to follow as the steps grow."
           ]
         },
         {
@@ -49540,7 +49540,7 @@
               ],
               "points": [
                 "Keep heavy analytics <strong>off the production database</strong>.",
-                "<strong>Batch</strong>: process large, finished datasets cheaply. Results are hours old.",
+                "<strong>Batch</strong>: process large, finished datasets cheaply. Results are up to a day old.",
                 "<strong>Stream</strong>: process events as they arrive. Results are seconds old, but you must handle late, duplicate and backed-up events.",
                 "<strong>Map, shuffle, reduce</strong>: watch for <strong>skew</strong>, and use combiners and salting.",
                 "Scale a stream with <strong>partitions</strong>, and alert on <strong>lag</strong>.",
@@ -49555,7 +49555,7 @@
               ],
               "points": [
                 "ভারী analytics রাখুন <strong>production database-এর বাইরে</strong>।",
-                "<strong>Batch</strong>: বড়, শেষ-হওয়া dataset সস্তায় প্রক্রিয়া করুন। ফলাফল কয়েক ঘণ্টার পুরোনো।",
+                "<strong>Batch</strong>: বড়, শেষ-হওয়া dataset সস্তায় প্রক্রিয়া করুন। ফলাফল এক দিন পর্যন্ত পুরোনো।",
                 "<strong>Stream</strong>: event আসতেই প্রক্রিয়া করুন। ফলাফল কয়েক সেকেন্ডের পুরোনো, কিন্তু দেরিতে আসা, দ্বিতীয়বার আসা আর জমে-যাওয়া event সামলাতে হয়।",
                 "<strong>Map, shuffle, reduce</strong>: <strong>skew</strong>-এর দিকে নজর রাখুন, আর ব্যবহার করুন combiner ও salting।",
                 "Stream scale করুন <strong>partition</strong> দিয়ে, আর alert দিন <strong>lag</strong>-এ।",
@@ -54348,7 +54348,7 @@
               "title": "Case: the certificate expired at 3 a.m.",
               "body": [
                 "Certificates have an expiry date. This one was renewed by hand once a year, by someone who has since left the company. At 03:00 it expires, and every browser shows a full-page security warning instead of the site.",
-                "Traffic falls from 5,000 requests a second to almost nothing, and the on-call engineer needs 90 minutes to find who owned the certificate and how to renew it: 5,000 × 5,400 s is 27 million failed requests. Let's Encrypt certificates last only 90 days, partly to push everyone towards automating renewal, and an alert should fire well before any certificate expires."
+                "Traffic falls from 5,000 requests a second to almost nothing, and the on-call engineer needs 90 minutes to find who owned the certificate and how to renew it: 5,000 × 5,400 s is 27 million failed requests. Let's Encrypt certificates last 90 days today (shortening to 64 days in February 2027 and 45 days by 2028), partly to push everyone towards automating renewal, and an alert should fire well before any certificate expires."
               ],
               "note": {
                 "kind": "warn",
@@ -54378,7 +54378,7 @@
               "title": "ঘটনা: certificate-এর মেয়াদ ফুরাল রাত ৩টায়",
               "body": [
                 "Certificate-এর একটা মেয়াদ থাকে। এটা বছরে একবার হাতে নবায়ন করা হতো, এমন একজনের হাতে যিনি এখন কোম্পানি ছেড়ে গেছেন। রাত ৩টায় মেয়াদ ফুরায়, আর প্রতিটি ব্রাউজার সাইটের বদলে পুরো-পেজের একটা নিরাপত্তা-সতর্কবার্তা দেখায়।",
-                "Traffic সেকেন্ডে ৫,০০০ request থেকে নেমে যায় প্রায় শূন্যে, আর certificate কার ছিল ও কীভাবে নবায়ন করতে হয় তা খুঁজে বের করতে on-call ইঞ্জিনিয়ারের লাগে ৯০ মিনিট: ৫,০০০ × ৫,৪০০ s মানে ২.৭ কোটি ব্যর্থ request। Let's Encrypt-এর certificate টেকে মাত্র ৯০ দিন, আংশিকভাবে নবায়ন স্বয়ংক্রিয় করতে সবাইকে ঠেলে দিতে, আর কোনো certificate-এর মেয়াদ ফুরানোর অনেক আগে alert বাজা উচিত।"
+                "Traffic সেকেন্ডে ৫,০০০ request থেকে নেমে যায় প্রায় শূন্যে, আর certificate কার ছিল ও কীভাবে নবায়ন করতে হয় তা খুঁজে বের করতে on-call ইঞ্জিনিয়ারের লাগে ৯০ মিনিট: ৫,০০০ × ৫,৪০০ s মানে ২.৭ কোটি ব্যর্থ request। Let's Encrypt-এর certificate এখন টেকে ৯০ দিন (২০২৭-এর ফেব্রুয়ারিতে ৬৪ দিন আর ২০২৮-এর মধ্যে ৪৫ দিনে নামবে), আংশিকভাবে নবায়ন স্বয়ংক্রিয় করতে সবাইকে ঠেলে দিতে, আর কোনো certificate-এর মেয়াদ ফুরানোর অনেক আগে alert বাজা উচিত।"
               ],
               "note": {
                 "kind": "warn",
@@ -55390,7 +55390,7 @@
               "title": "End-to-end: even the server can't read it",
               "body": [
                 "For private messages you can go further. With end-to-end encryption, Alice's phone encrypts each message with keys that only the devices hold. The chat server relays ciphertext it cannot open, and only Bob's phone, which holds the private key, can read it.",
-                "The Signal Protocol uses the X3DH key agreement and the Double Ratchet algorithm for this. The trade-off: since the server cannot read the messages, it cannot search, scan or recover them for the user."
+                "The Signal Protocol uses a key agreement (X3DH, now extended to the post-quantum PQXDH) and the Double Ratchet algorithm for this. The trade-off: since the server cannot read the messages, it cannot search, scan or recover them for the user."
               ],
               "note": {
                 "kind": "insight",
@@ -55416,7 +55416,7 @@
               "title": "প্রান্ত থেকে প্রান্তে: server-ও পড়তে পারে না",
               "body": [
                 "ব্যক্তিগত বার্তার জন্য আরও এগোনো যায়। End-to-end encryption-এ Alice-এর ফোন প্রতিটি বার্তা এনক্রিপ্ট করে এমন key দিয়ে, যা শুধু ডিভাইসগুলোর কাছে থাকে। Chat server বয়ে নিয়ে যায় এমন ciphertext যা সে খুলতে পারে না, আর শুধু Bob-এর ফোন, যার কাছে private key আছে, তা পড়তে পারে।",
-                "Signal Protocol এর জন্য ব্যবহার করে X3DH key agreement আর Double Ratchet algorithm। বিনিময়: server বার্তা পড়তে পারে না বলে ব্যবহারকারীর জন্য সেগুলো খুঁজতে, স্ক্যান করতে বা উদ্ধার করতে পারে না।"
+                "Signal Protocol এর জন্য ব্যবহার করে একটা key agreement (X3DH, এখন post-quantum PQXDH-এ বিস্তৃত) আর Double Ratchet algorithm। বিনিময়: server বার্তা পড়তে পারে না বলে ব্যবহারকারীর জন্য সেগুলো খুঁজতে, স্ক্যান করতে বা উদ্ধার করতে পারে না।"
               ],
               "note": {
                 "kind": "insight",
@@ -55604,7 +55604,7 @@
         },
         {
           "type": "paragraph",
-          "html": "A certificate that expires at 3 a.m. takes the site down as surely as a crash. Automate renewal. Let's Encrypt issues certificates that last ninety days, partly to push everyone towards automation <a class=\"cite\" href=\"#src153\">[153]</a>. Alert well before any certificate expires."
+          "html": "A certificate that expires at 3 a.m. takes the site down as surely as a crash. Automate renewal. Let's Encrypt issues certificates that last ninety days today (shortening to 64 days in February 2027 and 45 days by 2028), partly to push everyone towards automation <a class=\"cite\" href=\"#src153\">[153]</a>. Alert well before any certificate expires."
         },
         {
           "type": "heading",
@@ -55668,7 +55668,7 @@
         },
         {
           "type": "paragraph",
-          "html": "With end-to-end encryption only the users' devices hold the keys, so even the server cannot read the messages. The Signal Protocol uses the X3DH key agreement and the Double Ratchet algorithm for this <a class=\"cite\" href=\"#src161\">[161]</a>. The trade-off is that the server cannot search, scan or recover message content for the user."
+          "html": "With end-to-end encryption only the users' devices hold the keys, so even the server cannot read the messages. The Signal Protocol uses a key agreement (X3DH, now extended to the post-quantum PQXDH) and the Double Ratchet algorithm for this <a class=\"cite\" href=\"#src161\">[161]</a>. The trade-off is that the server cannot search, scan or recover message content for the user."
         }
       ],
       "layman": [
@@ -55693,7 +55693,7 @@
       "bangla": [
         {
           "type": "paragraph",
-          "html": "ক্যাফের Wi-Fi-তে সাধারণ HTTP নেটওয়ার্কের যে কেউ পড়তে আর বদলাতে পারে। TLS connection এনক্রিপ্ট করে, আর certificate দিয়ে প্রমাণ করে আপনি আসল সাইটের সাথেই কথা বলছেন। Certificate-এর মেয়াদ শেষ হলে সাইট বন্ধ হয়ে যায়, তাই নবায়ন স্বয়ংক্রিয় করুন; Let's Encrypt ৯০ দিনের certificate দেয়, অংশত এই কারণেই। ভেতরের নেটওয়ার্ককেও অন্ধভাবে বিশ্বাস করবেন না (zero trust): সার্ভিসগুলোর মধ্যেও mutual TLS ব্যবহার করুন।"
+          "html": "ক্যাফের Wi-Fi-তে সাধারণ HTTP নেটওয়ার্কের যে কেউ পড়তে আর বদলাতে পারে। TLS connection এনক্রিপ্ট করে, আর certificate দিয়ে প্রমাণ করে আপনি আসল সাইটের সাথেই কথা বলছেন। Certificate-এর মেয়াদ শেষ হলে সাইট বন্ধ হয়ে যায়, তাই নবায়ন স্বয়ংক্রিয় করুন; Let's Encrypt এখন ৯০ দিনের certificate দেয় (২০২৭-এর ফেব্রুয়ারিতে ৬৪ দিন, ২০২৮-এর মধ্যে ৪৫ দিন হবে), অংশত এই কারণেই। ভেতরের নেটওয়ার্ককেও অন্ধভাবে বিশ্বাস করবেন না (zero trust): সার্ভিসগুলোর মধ্যেও mutual TLS ব্যবহার করুন।"
         },
         {
           "type": "paragraph",
@@ -57676,7 +57676,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Checkout cannot run without its neighbours, so tests swap them for test doubles. Fowler lists five kinds <a class=\"cite\" href=\"#src162\">[162]</a>:"
+          "html": "Checkout cannot run without its neighbours, so tests swap them for test doubles. Fowler, following Meszaros's vocabulary, lists five kinds <a class=\"cite\" href=\"#src162\">[162]</a>:"
         },
         {
           "type": "list",
@@ -57711,7 +57711,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Checkout depends on the inventory service, which another team deploys on its own schedule. If they rename <code>in_stock</code> to <code>available</code>, checkout's stub never notices. With consumer-driven contract tests, the consumer writes tests for all the data it needs from an interface and publishes them, and the providing team runs them <a class=\"cite\" href=\"#src163\">[163]</a>. Fowler's article describes these expectations being enforced automatically with each build <a class=\"cite\" href=\"#src116\">[116]</a>, so a breaking change fails in the provider's build before it ships. Pact is a common tool for writing them <a class=\"cite\" href=\"#src163\">[163]</a>."
+          "html": "Checkout depends on the inventory service, which another team deploys on its own schedule. If they rename <code>in_stock</code> to <code>available</code>, checkout's stub never notices. With consumer-driven contract tests, the consumer writes tests for all the data it needs from an interface and publishes them, and the providing team runs them <a class=\"cite\" href=\"#src163\">[163]</a>. Robinson's article, hosted on Fowler's site, describes these expectations being enforced automatically with each build <a class=\"cite\" href=\"#src116\">[116]</a>, so a breaking change fails in the provider's build before it ships. Pact is a common tool for writing them <a class=\"cite\" href=\"#src163\">[163]</a>."
         },
         {
           "type": "heading",
@@ -59678,7 +59678,7 @@
         },
         {
           "type": "paragraph",
-          "html": "Blue-green deployment keeps two production environments, as identical as possible. Blue is live. The new version is deployed to green and tested there, then the router switches all incoming requests to green. If anything goes wrong, you switch the router back to blue, which is still running, untouched <a class=\"cite\" href=\"#src170\">[170]</a>. The cost is double capacity during a release; a rolling deploy (section 5) is cheaper but slower to undo."
+          "html": "Blue-green deployment keeps two production environments, as identical as possible. Blue is live. The new version is deployed to green and tested there, then the router switches all incoming requests to green. If anything goes wrong, you switch the router back to blue, which is idle but still in place <a class=\"cite\" href=\"#src170\">[170]</a>. The cost is double capacity during a release; a rolling deploy (section 5) is cheaper but slower to undo."
         },
         {
           "type": "heading",
@@ -62893,11 +62893,11 @@
               "title": "Which redirect: 301 or 302?",
               "body": [
                 "<code>301 Moved Permanently</code> says the resource has a new permanent address, and a 301 response is heuristically cacheable. Browsers can remember it, so the next click may never reach you. That is the cheapest request there is, but you can no longer count that click, change the destination, or expire the link for that user. If 100 opens come from 20 browsers, you see only 20.",
-                "<code>302 Found</code> says the resource is temporarily elsewhere, and the client keeps using the original address. Every click comes back to you: more load, but you keep control and analytics. Most shorteners choose 302 and let their own cache absorb the cost."
+                "<code>302 Found</code> says the resource is temporarily elsewhere, and the client keeps using the original address. Every click comes back to you: more load, but you keep control and analytics. A shortener that counts every click needs 302, so it chooses 302 and lets its own cache absorb the cost."
               ],
               "note": {
                 "kind": "insight",
-                "html": "301 is cheaper and blind. 302 costs more load but keeps every click visible, which is why most shorteners choose it and let their cache pay for it."
+                "html": "301 is cheaper and blind. 302 costs more load but keeps every click visible, which is why a shortener that counts clicks chooses it and lets its cache pay for it."
               },
               "changes": [
                 {
@@ -62923,11 +62923,11 @@
               "title": "কোন redirect: ৩০১ না ৩০২?",
               "body": [
                 "<code>301 Moved Permanently</code> বলে রিসোর্সের একটা নতুন স্থায়ী ঠিকানা হয়েছে, আর <code>301</code> উত্তর heuristically cache করা যায়। ব্রাউজার সেটা মনে রাখতে পারে, তাই পরের click আপনার কাছে নাও পৌঁছাতে পারে। এটাই সবচেয়ে সস্তা request, কিন্তু সেই click আর গোনা, গন্তব্য বদলানো বা ওই ব্যবহারকারীর জন্য লিংকের মেয়াদ শেষ করা যায় না। ২০টি ব্রাউজার থেকে ১০০ বার খোলা হলে আপনি দেখেন মাত্র ২০।",
-                "<code>302 Found</code> বলে রিসোর্স সাময়িকভাবে অন্যত্র, আর client আসল ঠিকানাই ব্যবহার করতে থাকে। প্রতিটি click আপনার কাছে ফিরে আসে: বেশি load, কিন্তু নিয়ন্ত্রণ আর analytics আপনার হাতে। বেশিরভাগ শর্টেনার <code>302</code> বাছে আর খরচটা নিজেদের cache-কে শুষে নিতে দেয়।"
+                "<code>302 Found</code> বলে রিসোর্স সাময়িকভাবে অন্যত্র, আর client আসল ঠিকানাই ব্যবহার করতে থাকে। প্রতিটি click আপনার কাছে ফিরে আসে: বেশি load, কিন্তু নিয়ন্ত্রণ আর analytics আপনার হাতে। যে শর্টেনার প্রতিটি click গুনতে চায় সে <code>302</code> বাছে আর খরচটা নিজেদের cache-কে শুষে নিতে দেয়।"
               ],
               "note": {
                 "kind": "insight",
-                "html": "<code>301</code> সস্তা আর অন্ধ। <code>302</code>-তে load বেশি কিন্তু প্রতিটি click দেখা যায়, তাই বেশিরভাগ শর্টেনার সেটাই বাছে আর খরচটা তাদের cache-কে বহন করতে দেয়।"
+                "html": "<code>301</code> সস্তা আর অন্ধ। <code>302</code>-তে load বেশি কিন্তু প্রতিটি click দেখা যায়, তাই click-গোনা শর্টেনার সেটাই বাছে আর খরচটা তাদের cache-কে বহন করতে দেয়।"
               },
               "changes": [
                 {
@@ -63638,7 +63638,7 @@
         },
         {
           "type": "paragraph",
-          "html": "<code>302 Found</code> says the resource is temporarily under a different URI, and the client ought to keep using the original URI for future requests <a class=\"cite\" href=\"#src64\">[64]</a>. Every click comes back to you: more load, but you keep control and analytics. Most shorteners choose 302 and let their own cache absorb the cost."
+          "html": "<code>302 Found</code> says the resource is temporarily under a different URI, and the client ought to keep using the original URI for future requests <a class=\"cite\" href=\"#src64\">[64]</a>. Every click comes back to you: more load, but you keep control and analytics. A shortener that counts every click needs 302, so it chooses 302 and lets its own cache absorb the cost."
         },
         {
           "type": "heading",
@@ -63755,7 +63755,7 @@
         },
         {
           "type": "paragraph",
-          "html": "লিংক তৈরির পর আর বদলায় না, তাই ক্যাশ আদর্শ; “এমন কোড নেই” উত্তরটাও ক্যাশ করুন। <code>301</code> স্থায়ী redirect, ব্রাউজার মনে রাখে, তাই পরের ক্লিক আপনার কাছে আসে না, গোনাও যায় না; <code>302</code> অস্থায়ী, প্রতিটি ক্লিক আপনার কাছে ফেরে, তাই বেশিরভাগ শর্টেনার 302 বেছে নেয়। ৩ TB ডেটা কোডের hash দিয়ে ভাগ করে key-value store-এ রাখুন, প্রতিটি ভাগের তিনটি কপি আলাদা zone-এ। ক্লিক গুনতে প্রতিটি redirect-এ ডেটাবেসে write না করে একটা ইভেন্ট stream-এ পাঠান। আর স্প্যামারদের ঠেকাতে লিংক তৈরিতে rate limit দিন, গন্তব্য URL Safe Browsing-এর মতো তালিকার সাথে মিলিয়ে দেখুন, আর লিংকের মেয়াদ রাখুন।"
+          "html": "লিংক তৈরির পর আর বদলায় না, তাই ক্যাশ আদর্শ; “এমন কোড নেই” উত্তরটাও ক্যাশ করুন। <code>301</code> স্থায়ী redirect, ব্রাউজার মনে রাখে, তাই পরের ক্লিক আপনার কাছে আসে না, গোনাও যায় না; <code>302</code> অস্থায়ী, প্রতিটি ক্লিক আপনার কাছে ফেরে, তাই click-গোনা শর্টেনার 302 বেছে নেয়। ৩ TB ডেটা কোডের hash দিয়ে ভাগ করে key-value store-এ রাখুন, প্রতিটি ভাগের তিনটি কপি আলাদা zone-এ। ক্লিক গুনতে প্রতিটি redirect-এ ডেটাবেসে write না করে একটা ইভেন্ট stream-এ পাঠান। আর স্প্যামারদের ঠেকাতে লিংক তৈরিতে rate limit দিন, গন্তব্য URL Safe Browsing-এর মতো তালিকার সাথে মিলিয়ে দেখুন, আর লিংকের মেয়াদ রাখুন।"
         },
         {
           "type": "analogy",
@@ -68237,7 +68237,7 @@
         },
         {
           "type": "paragraph",
-          "html": "The store is write-heavy and is always read the same way: the latest messages of one conversation. Discord, for example, stores messages in Cassandra with the primary key <code>(channel_id, message_id)</code>, where the channel is the partition key and the message id is a chronologically sortable Snowflake id, so loading a channel is one range scan <a class=\"cite\" href=\"#src181\">[181]</a>."
+          "html": "The store is write-heavy and is always read the same way: the latest messages of one conversation. Discord, for example, first modelled messages in Cassandra with the primary key <code>(channel_id, message_id)</code>, where the channel is the partition key and the message id is a chronologically sortable Snowflake id, so loading a channel was one range scan; it later added a time bucket to the partition key, <code>((channel_id, bucket), message_id)</code> <a class=\"cite\" href=\"#src181\">[181]</a>."
         },
         {
           "type": "heading",
